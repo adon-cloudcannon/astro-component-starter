@@ -4,7 +4,6 @@
   --button-primary-fontColor: var(--gray-0);
   --button-primary-borderColor: transparent;
   --button-primary-outlineColor: unset;
-
   --button-primary-hover-backgroundColor: var(--blue-8);
   --button-primary-hover-fontColor: var(--gray-0);
   --button-primary-hover-borderColor: transparent;
@@ -15,7 +14,6 @@
   --button-secondary-borderColor: transparent;
   --button-secondary-outlineColor: var(--element-body-color);
   --button-secondary-outlineBorderColor: var(--gray-7);
-
   --button-secondary-hover-backgroundColor: var(--gray-7);
   --button-secondary-hover-fontColor: var(--element-body-color);
   --button-secondary-hover-borderColor: transparent;
@@ -25,7 +23,6 @@
   --button-ghost-fontColor: var(--element-body-color);
   --button-ghost-borderColor: transparent;
   --button-ghost-outlineColor: unset;
-
   --button-ghost-hover-backgroundColor: var(--gray-8);
   --button-ghost-hover-fontColor: var(--element-body-color);
   --button-ghost-hover-borderColor: transparent;
@@ -35,7 +32,6 @@
   --button-contrast-fontColor: var(--gray-12);
   --button-contrast-borderColor: transparent;
   --button-contrast-outlineColor: unset;
-
   --button-contrast-hover-backgroundColor: var(--gray-3);
   --button-contrast-hover-fontColor: var(--gray-12);
   --button-contrast-hover-borderColor: transparent;

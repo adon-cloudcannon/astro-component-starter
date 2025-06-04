@@ -1,5 +1,5 @@
-@import "themes/_light.css";
-@import "themes/_dark.css";
+@import url("themes/_light.css");
+@import url("themes/_dark.css");
 
 :root {
   --section-background-color: var(--element-body-backgroundColor);

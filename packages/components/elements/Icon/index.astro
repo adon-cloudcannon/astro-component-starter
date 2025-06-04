@@ -12,7 +12,7 @@ const classString = clsx(
   buttonIcon && "button-icon",
   `size-${size}`,
   className,
-  flipRtl && "flipRtl",
+  flipRtl && "flip-rtl"
 );
 ---
 
@@ -25,9 +25,4 @@ const classString = clsx(
   @import "./styles.css";
 </style>
 
-<AstroIcon
-  name={name}
-  class:list={classString}
-  style={customStyle}
-  aria-label={label}
-/>
+<AstroIcon name={name} class:list={classString} style={customStyle} aria-label={label} />

@@ -8,7 +8,6 @@
   --carousel-button-hover-arrow-color: var(--gray-1);
   --carousel-button-border: transparent;
   --carousel-button-hover-border: transparent;
-
   --carousel-indicator-bg: var(--gray-7);
   --carousel-indicator-active-bg: var(--gray-2);
 
@@ -96,7 +95,7 @@
 
   /* Elements */
   --element-code-backgroundColor: var(--gray-9);
-  --element-selection-backgroundColor: rgba(52, 177, 144, 0.4);
+  --element-selection-backgroundColor: rgb(52 177 144 / 40%);
   --element-body-backgroundColor: var(--gray-12);
   --element-body-fontColor: var(--gray-2);
   --element-table-head-backgroundColor: var(--gray-8);

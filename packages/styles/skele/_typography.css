@@ -21,7 +21,6 @@ h6 {
     font-weight: bold;
     background: var(--element-heading-emphasis-backgroundColor);
     background-clip: text;
-    -webkit-background-clip: text;
     color: transparent;
     font-style: normal;
 

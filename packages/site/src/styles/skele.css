@@ -1,6 +1,6 @@
-@import "./skele/_variables.css";
-@import "./skele/_theme.css";
-@import "./skele/_reset.css";
-@import "./skele/_container.css";
-@import "./skele/_typography.css";
-@import "./skele/_elements.css";
+@import url("./skele/_variables.css");
+@import url("./skele/_theme.css");
+@import url("./skele/_reset.css");
+@import url("./skele/_container.css");
+@import url("./skele/_typography.css");
+@import url("./skele/_elements.css");

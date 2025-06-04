@@ -10,7 +10,7 @@
   color: var(--icon-default-color);
 }
 
-.flipRtl {
+.flip-rtl {
   transform: scaleX(-1);
 }
 
@@ -28,7 +28,7 @@ svg {
 }
 
 .fill {
-  fill: currentColor;
+  fill: currentcolor;
 }
 
 .size-none {
@@ -90,29 +90,35 @@ svg {
 
 .font-color {
   background-color: var(--icon-muted-color);
-  border-color: currentColor;
-  color: currentColor;
+  border-color: currentcolor;
+  color: currentcolor;
 }
+
 .font-color.background-contrast {
-  background-color: currentColor;
+  background-color: currentcolor;
 }
+
 .font-color.fill {
-  fill: currentColor;
+  fill: currentcolor;
 }
+
 .font-color:not(.fill) svg {
-  stroke: currentColor;
+  stroke: currentcolor;
 }
 
 .gray.background {
   background-color: var(--icon-gray-backgroundColor);
   border-color: var(--icon-gray-color);
 }
+
 .gray.background-contrast {
   background-color: var(--icon-gray-color);
 }
+
 .gray.fill {
   fill: var(--icon-gray-color);
 }
+
 .gray:not(.fill) svg {
   stroke: var(--icon-gray-color);
 }
@@ -121,12 +127,15 @@ svg {
   background-color: var(--icon-red-backgroundColor);
   border-color: var(--icon-red-color);
 }
+
 .red.background-contrast {
   background-color: var(--icon-red-color);
 }
+
 .red.fill {
   fill: var(--icon-red-color);
 }
+
 .red:not(.fill) svg {
   stroke: var(--icon-red-color);
 }
@@ -135,12 +144,15 @@ svg {
   background-color: var(--icon-orange-backgroundColor);
   border-color: var(--icon-orange-color);
 }
+
 .orange.background-contrast {
   background-color: var(--icon-orange-color);
 }
+
 .orange.fill {
   fill: var(--icon-orange-color);
 }
+
 .orange:not(.fill) svg {
   stroke: var(--icon-orange-color);
 }
@@ -149,12 +161,15 @@ svg {
   background-color: var(--icon-yellow-backgroundColor);
   border-color: var(--icon-yellow-color);
 }
+
 .yellow.background-contrast {
   background-color: var(--icon-yellow-color);
 }
+
 .yellow.fill {
   fill: var(--icon-yellow-color);
 }
+
 .yellow:not(.fill) svg {
   stroke: var(--icon-yellow-color);
 }
@@ -163,12 +178,15 @@ svg {
   background-color: var(--icon-green-backgroundColor);
   border-color: var(--icon-green-color);
 }
+
 .green.background-contrast {
   background-color: var(--icon-green-color);
 }
+
 .green.fill {
   fill: var(--icon-green-color);
 }
+
 .green:not(.fill) svg {
   stroke: var(--icon-green-color);
 }
@@ -177,12 +195,15 @@ svg {
   background-color: var(--icon-cyan-backgroundColor);
   border-color: var(--icon-cyan-color);
 }
+
 .cyan.background-contrast {
   background-color: var(--icon-cyan-color);
 }
+
 .cyan.fill {
   fill: var(--icon-cyan-color);
 }
+
 .cyan:not(.fill) svg {
   stroke: var(--icon-cyan-color);
 }
@@ -191,12 +212,15 @@ svg {
   background-color: var(--icon-blue-backgroundColor);
   border-color: var(--icon-blue-color);
 }
+
 .blue.background-contrast {
   background-color: var(--icon-blue-color);
 }
+
 .blue.fill {
   fill: var(--icon-blue-color);
 }
+
 .blue:not(.fill) svg {
   stroke: var(--icon-blue-color);
 }
@@ -205,12 +229,15 @@ svg {
   background-color: var(--icon-purple-backgroundColor);
   border-color: var(--icon-purple-color);
 }
+
 .purple.background-contrast {
   background-color: var(--icon-purple-color);
 }
+
 .purple.fill {
   fill: var(--icon-purple-color);
 }
+
 .purple:not(.fill) svg {
   stroke: var(--icon-purple-color);
 }
@@ -219,12 +246,15 @@ svg {
   background-color: var(--icon-pink-backgroundColor);
   border-color: var(--icon-pink-color);
 }
+
 .pink.background-contrast {
   background-color: var(--icon-pink-color);
 }
+
 .pink.fill {
   fill: var(--icon-pink-color);
 }
+
 .pink:not(.fill) svg {
   stroke: var(--icon-pink-color);
 }
@@ -232,6 +262,7 @@ svg {
 .background-contrast:not(.fill) svg {
   stroke: var(--icon-subtle-color);
 }
+
 .background-contrast.fill svg {
   fill: var(--icon-subtle-color);
 }
