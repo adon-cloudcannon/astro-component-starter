@@ -1,8 +1,6 @@
 ---
 import { navSchema } from "./schema";
-import "./sidebar.pcss";
-import "./theme.dark.pcss";
-import "./theme.light.pcss";
+import "./theme.pcss";
 
 const props = navSchema.parse(Astro.props);
 
@@ -14,9 +12,10 @@ const ariaProps = props.ariaLabel ? { "aria-label": props.ariaLabel } : {};
 </style>
 
 <nav
-  class:list={["nav", `nav-layout-${props.layout}`, props.className]}
+  class:list={["nav", props.layout, props.className]}
   role="navigation"
   id={props.id}
+  data-layout={props.layout}
   {...ariaProps}
 >
   <div class="inner">

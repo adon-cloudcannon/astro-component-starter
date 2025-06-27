@@ -7,6 +7,11 @@ const props = navListSchema.parse(Astro.props);
   @import "./styles.pcss";
 </style>
 
-<ul class:list={["nav-list", props.className]} id={props.id} style={props.customStyle} role="menu">
+<ul
+  class:list={["nav-list", props.layout, props.className]}
+  id={props.id}
+  style={props.customStyle}
+  role="menu"
+>
   <slot />
 </ul>

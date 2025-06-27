@@ -7,8 +7,6 @@ const hasChildren = Astro.slots.has("default");
 const dropdownId = `dropdown-toggle-${crypto.randomUUID()}`;
 const contentId = `dropdown-content-${crypto.randomUUID()}`;
 const isCurrentPage = props.href === Astro.url.pathname;
-
-import "./global.pcss";
 ---
 
 <style>
@@ -16,7 +14,7 @@ import "./global.pcss";
 </style>
 
 <li
-  class:list={["nav-item", props.className, hasChildren ? "has-children" : null]}
+  class:list={["nav-item", props.layout, props.className, hasChildren ? "has-children" : null]}
   id={props.id}
   style={props.customStyle}
 >
@@ -39,9 +37,11 @@ import "./global.pcss";
           aria-controls={contentId}
           tabindex="0"
         >
-          <Icon name="hero/chevron-right" size="none" aria-hidden="true" />
           {props.label}
           <slot name="label" />
+          <span class="nav-item-icon">
+            <Icon name="hero/chevron-right" size="none" aria-hidden="true" />
+          </span>
         </label>
         <div id={contentId} role="region" aria-label={`${props.label} submenu`}>
           <slot />
@@ -56,4 +56,4 @@ import "./global.pcss";
   }
 </li>
 
-<script src="./nav-item.ts"></script>
+<!-- <script src="./nav-item.ts"></script> -->

@@ -5,6 +5,8 @@ import NavList from "@skele/components/navigation/NavList/index.astro";
 import { getCollection } from "astro:content";
 import navData from "../data/nav.json";
 
+const layout = "sidebar";
+
 const allComponents = await getCollection("components");
 
 const componentsByCategory: Record<string, Array<{ name: string; path: string }>> = {};
@@ -13,7 +15,6 @@ allComponents.forEach((component) => {
   const slug = component.slug.replace(/^components\//, "").replace(/\/index$/, "");
   const parts = slug.split("/").filter(Boolean);
 
-  // Skip example files (they contain "examples" in the path)
   if (slug.includes("/examples/")) {
     return;
   }
@@ -54,7 +55,7 @@ const populatedNavData = navData.map((section) => {
 });
 ---
 
-<Nav layout="sidebar">
+<Nav layout={layout}>
   <img
     src="/assets/images/skele-light.svg"
     alt="Logo"
@@ -63,19 +64,23 @@ const populatedNavData = navData.map((section) => {
     slot="brand"
     style="margin-bottom: var(--spacing-md); margin-inline-start: var(--spacing-lg);"
   />
-  <NavList slot="menu">
+  <NavList slot="menu" layout={layout}>
     {
       populatedNavData.map((section) =>
         section.items ? (
-          <NavItem label={section.group} defaultOpen={(section as any).defaultOpen || false}>
-            <NavList>
+          <NavItem
+            label={section.group}
+            defaultOpen={(section as any).defaultOpen || false}
+            layout={layout}
+          >
+            <NavList layout={layout}>
               {section.items.map((item) => (
-                <NavItem href={item.path} label={item.name} />
+                <NavItem href={item.path} label={item.name} layout={layout} />
               ))}
             </NavList>
           </NavItem>
         ) : (
-          <NavItem href={section.path} label={section.name} />
+          <NavItem href={section.path} label={section.name} layout={layout} />
         )
       )
     }

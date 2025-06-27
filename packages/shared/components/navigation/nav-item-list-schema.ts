@@ -10,12 +10,14 @@ const navItemBase = z.object({
   customStyle: z.string().optional(),
   id: z.string().optional(),
   defaultOpen: z.boolean().optional(),
+  layout: z.enum(["bar", "sidebar"]).optional(),
 });
 
 const navListBase = z.object({
   className: z.string().optional(),
   customStyle: z.string().optional(),
   id: z.string().optional(),
+  layout: z.enum(["bar", "sidebar"]).optional(),
 });
 
 type NavItem = z.infer<typeof navItemBase> & {
