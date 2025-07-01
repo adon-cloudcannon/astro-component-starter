@@ -6,11 +6,6 @@ const props = iconSchema.parse(Astro.props);
 const { buttonIcon = false } = Astro.props;
 ---
 
-<style is:global>
-  @import "./theme.light.pcss";
-  @import "./theme.dark.pcss";
-</style>
-
 <style>
   @import "./styles.pcss";
 </style>
@@ -22,7 +17,7 @@ const { buttonIcon = false } = Astro.props;
     buttonIcon && "button-icon",
     `size-${props.size}`,
     props.flipRtl && "flip-rtl",
-    props.className
+    props.className,
   ]}
   style={props.customStyle}
   aria-label={props.label}

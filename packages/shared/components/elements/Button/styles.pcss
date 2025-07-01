@@ -1,3 +1,5 @@
+@import "./theme.pcss";
+
 button:disabled {
   cursor: not-allowed;
   opacity: 0.6;
@@ -22,6 +24,21 @@ button:disabled {
   color: var(--button-ghost-fontColor);
   background-color: var(--button-ghost-backgroundColor);
   text-transform: var(--button-textTransform);
+  gap: 0.5em;
+
+  &.icon-only {
+    padding: var(--button-icon-padding);
+  }
+}
+
+.button[data-icon-position="after"] {
+  .button-icon {
+    order: 2;
+  }
+
+  .label {
+    order: 1;
+  }
 }
 
 .button:hover,
@@ -33,14 +50,16 @@ button:disabled {
   cursor: pointer;
 }
 
-.full {
-  width: 100%;
-  display: flex;
-}
+.layout {
+  &-full {
+    width: 100%;
+    display: flex;
+  }
 
-.skinny {
-  padding-top: 0.2rem;
-  padding-bottom: 0.2rem;
+  &-skinny {
+    padding-top: 0.2rem;
+    padding-bottom: 0.2rem;
+  }
 }
 
 .fade {

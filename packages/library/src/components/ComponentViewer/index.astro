@@ -1,7 +1,7 @@
 ---
 const { component_examples = [], title = "" } = Astro.props;
 
-import Button from "@skele/shared/components/elements/Button/index.astro";
+import Button from "@skele/components/elements/Button/index.astro";
 
 function getBodyPadding(spacing: string): string {
   switch (spacing) {
@@ -16,13 +16,25 @@ function getBodyPadding(spacing: string): string {
   }
 }
 
-function formatPropsYaml(props: Record<string, any>): string {
-  if (props && Object.keys(props).length > 0) {
-    const yaml = Object.entries(props)
+function formatBlocksYaml(blocks: any): string {
+  if (Array.isArray(blocks) && blocks.length > 0) {
+    const yaml = blocks
+      .map((block, idx) => {
+        const blockYaml = Object.entries(block)
+          .map(([key, val]) => `  ${key}: ${val}`)
+          .join("\n");
+
+        return `- # Block ${idx + 1}\n${blockYaml}`;
+      })
+      .join("\n");
+
+    return `\nblocks:\n${yaml}`;
+  } else if (blocks && typeof blocks === "object" && Object.keys(blocks).length > 0) {
+    const yaml = Object.entries(blocks)
       .map(([key, val]) => `  ${key}: ${val}`)
       .join("\n");
 
-    return `\nprops:\n${yaml}`;
+    return `\nblocks:\n${yaml}`;
   } else {
     return "";
   }
@@ -77,19 +89,25 @@ async function loadComponent(componentName: string) {
         const Component = example.data.component
           ? await loadComponent(example.data.component)
           : null;
-        const props = example.data.props || {};
+        const blocks = example.data.blocks || {};
 
         return (
           <>
             <div id={exampleId} class:list={[`preview`, `${idx === 0 ? "active" : ""}`]}>
               <div class="container" style={bodyPadding}>
-                {Component && <Component {...props} />}
+                {Component && Array.isArray(blocks) ? (
+                  blocks.map((block: any, blockIdx: number) => (
+                    <Component key={blockIdx} {...block} />
+                  ))
+                ) : (
+                  <Component {...blocks} />
+                )}
               </div>
             </div>
 
             <div class="code" id={`code-${exampleId}`}>
               <pre>
-                <code class="language-yaml">{formatPropsYaml(example.data.props)}</code>
+                <code class="language-yaml">{formatBlocksYaml(example.data.blocks)}</code>
               </pre>
             </div>
           </>
@@ -121,8 +139,9 @@ async function loadComponent(componentName: string) {
             <Button
               type="ghost"
               label="View Code"
-              size="sm"
-              icon={{ name: "hero/code-bracket", display: "icon_only" }}
+              size="lg"
+              icon={{ name: "hero/code-bracket" }}
+              hideText={true}
             />
           </div>
         </nav>

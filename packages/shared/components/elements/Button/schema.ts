@@ -17,14 +17,14 @@ export const buttonSchema = z
           .enum(["before", "after"])
           .meta({ description: "The position of the icon relative to the label." })
           .default("before"),
-
-        display: z
-          .enum(["icon_only", "all"])
-          .meta({ description: "The display mode of the icon." })
-          .default("all"),
       })
       .optional()
       .meta({ description: "The icon to display on the button." }),
+
+    hideText: z
+      .boolean()
+      .meta({ description: "Whether to hide the button text and show only the icon." })
+      .default(false),
 
     type: z
       .enum(["primary", "secondary", "ghost", "contrast", "fade"])

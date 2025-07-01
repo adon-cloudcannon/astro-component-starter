@@ -2,11 +2,7 @@
   "name": "skele",
   "type": "module",
   "private": true,
-  "workspaces": [
-    "packages/site",
-    "packages/library",
-    "packages/shared"
-  ],
+  "workspaces": ["packages/site", "packages/library", "packages/shared"],
   "scripts": {
     "dev:site": "pnpm --filter site dev",
     "dev:library": "pnpm --filter library dev",
@@ -48,6 +44,7 @@
     "astro-eslint-parser": "^1.2.2",
     "astro-icon": "^1.1.5",
     "autoprefixer": "^10.4.21",
+    "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
     "glob": "^11.0.2",
     "postcss": "^8.5.3",

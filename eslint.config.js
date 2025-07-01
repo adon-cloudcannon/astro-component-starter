@@ -47,7 +47,7 @@ export default [
     rules: {
       ...typescriptEslint.configs.recommended.rules,
       "@typescript-eslint/no-unused-vars": "warn",
-      "@typescript-eslint/no-explicit-any": "warn",
+      "@typescript-eslint/no-explicit-any": "off",
       "@typescript-eslint/no-non-null-assertion": "warn",
       // Removed rules that require type information for now
     },

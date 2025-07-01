@@ -1,10 +1,12 @@
+@import "./theme.pcss";
+
 .icon {
   all: unset;
   display: inline-block;
   line-height: 0;
   width: 1.1em;
   height: 1.1em;
-  border-radius: var(--radius-sm, 0.25rem);
+  border-radius: var(--radius-sm);
   border: 1px solid transparent;
   box-sizing: border-box;
   color: var(--icon-default-color);
@@ -29,11 +31,6 @@ svg {
 
 .fill {
   fill: currentcolor;
-}
-
-.size-none {
-  width: 1em;
-  height: 1em;
 }
 
 .size-xs {
@@ -62,30 +59,6 @@ svg {
 
 .size-3xl {
   font-size: 6rem;
-}
-
-.button-icon {
-  padding: 0.2em;
-  min-width: 2.15em;
-  min-height: 2.15em;
-  width: 2.15em;
-}
-
-.button-icon svg {
-  height: 1.3em;
-}
-
-.button-icon svg:first-child,
-.button-icon svg:last-child {
-  margin-inline: 0;
-}
-
-.button-icon svg:first-child {
-  margin-inline-end: 0.5em;
-}
-
-.button-icon svg:last-child {
-  margin-inline-start: 0.5em;
 }
 
 .font-color {

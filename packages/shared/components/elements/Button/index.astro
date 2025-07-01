@@ -1,9 +1,11 @@
 ---
 import clsx from "clsx";
-import Icon from "../Icon/icon.astro";
+import { getRestProps } from "../../utils";
+import Icon from "../Icon/index.astro";
 import { buttonSchema } from "./schema";
 
 const props = buttonSchema.parse(Astro.props);
+const restProps = getRestProps(Astro.props, buttonSchema);
 
 const Tag = props.link ? "a" : "button";
 
@@ -11,18 +13,19 @@ const classNames = clsx(
   "button",
   `text-${props.size}`,
   `type-${props.type}`,
-  props.layout === "skinny" && "skinny",
+  props.layout !== "normal" && `layout-${props.layout}`,
   props.outline && "outline",
-  props.icon?.display === "icon_only" && "icon-only",
+  props.hideText && "icon-only",
   props.disabled && "disabled",
   props.className
 );
 
-import "./theme.pcss";
-
 const actions = props.link
   ? { href: props.link, role: "button" }
   : { type: "button", disabled: props.disabled };
+
+// Set up data attribute for CSS-based icon positioning
+const iconData = props.icon?.position ? { "data-icon-position": props.icon.position } : {};
 ---
 
 <style>
@@ -31,6 +34,8 @@ const actions = props.link
 
 <Tag
   {...actions}
+  {...restProps}
+  {...iconData}
   class:list={classNames}
   style={props.customStyle}
   id={props.id}
@@ -39,23 +44,7 @@ const actions = props.link
   aria-controls={props.aria?.controls}
   aria-expanded={props.aria?.expanded}
 >
-  {
-    props.icon?.name && props.icon?.position === "before" && (
-      <Icon name={props.icon.name} buttonIcon size="none" />
-    )
-  }
+  {props.icon?.name && <Icon name={props.icon.name} buttonIcon size="none" class="button-icon" />}
 
-  {
-    props.label && (
-      <span class:list={props.icon?.display === "icon_only" ? "sr-only" : "label"}>
-        {props.label}
-      </span>
-    )
-  }
-
-  {
-    props.icon?.name && props.icon?.position === "after" && (
-      <Icon name={props.icon.name} buttonIcon size="none" />
-    )
-  }
+  {props.label && <span class:list={props.hideText ? "sr-only" : "label"}>{props.label}</span>}
 </Tag>
