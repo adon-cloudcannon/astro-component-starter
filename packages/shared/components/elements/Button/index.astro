@@ -13,7 +13,7 @@ const classNames = clsx(
   "button",
   `text-${props.size}`,
   `type-${props.type}`,
-  props.layout !== "normal" && `layout-${props.layout}`,
+  `layout-${props.layout}`,
   props.outline && "outline",
   props.hideText && "icon-only",
   props.disabled && "disabled",
@@ -23,9 +23,6 @@ const classNames = clsx(
 const actions = props.link
   ? { href: props.link, role: "button" }
   : { type: "button", disabled: props.disabled };
-
-// Set up data attribute for CSS-based icon positioning
-const iconData = props.icon?.position ? { "data-icon-position": props.icon.position } : {};
 ---
 
 <style>
@@ -35,7 +32,7 @@ const iconData = props.icon?.position ? { "data-icon-position": props.icon.posit
 <Tag
   {...actions}
   {...restProps}
-  {...iconData}
+  data-icon-position={props.icon?.position}
   class:list={classNames}
   style={props.customStyle}
   id={props.id}
