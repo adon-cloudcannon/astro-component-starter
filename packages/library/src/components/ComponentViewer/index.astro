@@ -1,7 +1,10 @@
 ---
-const { component_examples = [], title = "" } = Astro.props;
+const { component_examples = [], title = "", size = "" } = Astro.props;
 
 import Button from "@skele/components/elements/Button/index.astro";
+import { Code } from "astro:components";
+// @ts-ignore
+import yaml from "js-yaml";
 
 function getBodyPadding(spacing: string): string {
   switch (spacing) {
@@ -17,25 +20,17 @@ function getBodyPadding(spacing: string): string {
 }
 
 function formatBlocksYaml(blocks: any): string {
-  if (Array.isArray(blocks) && blocks.length > 0) {
-    const yaml = blocks
-      .map((block, idx) => {
-        const blockYaml = Object.entries(block)
-          .map(([key, val]) => `  ${key}: ${val}`)
-          .join("\n");
+  if (!blocks) return "";
 
-        return `- # Block ${idx + 1}\n${blockYaml}`;
-      })
-      .join("\n");
-
-    return `\nblocks:\n${yaml}`;
-  } else if (blocks && typeof blocks === "object" && Object.keys(blocks).length > 0) {
-    const yaml = Object.entries(blocks)
-      .map(([key, val]) => `  ${key}: ${val}`)
-      .join("\n");
-
-    return `\nblocks:\n${yaml}`;
-  } else {
+  try {
+    return yaml.dump(blocks, {
+      indent: 2,
+      lineWidth: -1,
+      noRefs: true,
+      sortKeys: false,
+    });
+  } catch (error) {
+    console.error("Error formatting YAML:", error);
     return "";
   }
 }
@@ -78,7 +73,9 @@ async function loadComponent(componentName: string) {
   @import "styles.pcss";
 </style>
 
-<div class="component-viewer">
+<script src="./script.ts"></script>
+
+<div class:list={["component-viewer", size && `size-${size}`]}>
   <div class="previews">
     {
       component_examples.map(async (example: any, idx: number) => {
@@ -106,46 +103,58 @@ async function loadComponent(componentName: string) {
             </div>
 
             <div class="code" id={`code-${exampleId}`}>
-              <pre>
-                <code class="language-yaml">{formatBlocksYaml(example.data.blocks)}</code>
-              </pre>
+              <Code
+                lang="yaml"
+                code={formatBlocksYaml(example.data.blocks)}
+                style="height: 100%; padding: var(--space-sm);"
+              />
             </div>
           </>
         );
       })
     }
-
-    {
-      component_examples.length > 0 && (
-        <nav class="controls">
-          <div>
-            {component_examples.length > 1 && (
-              <>
-                <label for={`${title.toLowerCase().replace(/\s+/g, "-")}-examples`} class="sr-only">
-                  Examples:
-                </label>
-                <select class="select" id={`${title.toLowerCase().replace(/\s+/g, "-")}-examples`}>
-                  {component_examples.map((example: any, idx: number) => {
-                    const exampleName = example.data.title;
-                    const exampleId = `component-${exampleName.toLowerCase().replace(/\s+/g, "-")}-${idx}`;
-
-                    return <option value={exampleId}>{exampleName}</option>;
-                  })}
-                </select>
-              </>
-            )}
-          </div>
-          <div>
-            <Button
-              type="ghost"
-              label="View Code"
-              size="lg"
-              icon={{ name: "hero/code-bracket" }}
-              hideText={true}
-            />
-          </div>
-        </nav>
-      )
-    }
   </div>
+
+  {
+    component_examples.length > 0 && (
+      <nav class="controls">
+        <div>
+          {component_examples.length > 1 && (
+            <>
+              <label for={`${title.toLowerCase().replace(/\s+/g, "-")}-examples`} class="sr-only">
+                Examples:
+              </label>
+              <select class="select" id={`${title.toLowerCase().replace(/\s+/g, "-")}-examples`}>
+                {component_examples.map((example: any, idx: number) => {
+                  const exampleName = example.data.title;
+                  const exampleId = `component-${exampleName.toLowerCase().replace(/\s+/g, "-")}-${idx}`;
+
+                  return <option value={exampleId}>{exampleName}</option>;
+                })}
+              </select>
+            </>
+          )}
+        </div>
+        <div>
+          <Button
+            type="ghost"
+            label="View Code"
+            size="lg"
+            icon={{ name: "hero/code-bracket" }}
+            hideText={true}
+            data-action="view-code"
+          />
+          <Button
+            type="ghost"
+            label="View Component"
+            size="lg"
+            icon={{ name: "hero/computer-desktop" }}
+            hideText={true}
+            data-action="view-component"
+            className="hide"
+          />
+        </div>
+      </nav>
+    )
+  }
 </div>

@@ -15,18 +15,28 @@ const processedExamples = frontmatterExamples.map((exampleConfig: any) => {
   );
 
   return {
-    title: exampleConfig.name,
+    title: exampleConfig.title,
     examples: matchingExamples,
     size: exampleConfig.size,
   };
 });
+
+const primarySize = frontmatter.primary_size || "md";
 ---
 
 <LibraryLayout frontmatter={frontmatter}>
   <h1>{meta.title}</h1>
   <p>{meta.description}</p>
 
-  {primaryExample && <ComponentViewer component_examples={[primaryExample]} title={meta.title} />}
+  {
+    primaryExample && (
+      <ComponentViewer
+        component_examples={[primaryExample]}
+        title={meta.title}
+        size={primarySize}
+      />
+    )
+  }
 
   <h2>Properties</h2>
   <ComponentProperties shape={schema?.shape} />

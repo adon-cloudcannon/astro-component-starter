@@ -1,6 +1,15 @@
 .component-viewer {
   border: 1px solid var(--border-subtle-borderColor);
   border-radius: var(--radius-xs);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  overflow: hidden;
+}
+
+.previews {
+  height: 100%;
+  overflow-y: auto;
 }
 
 .preview {
@@ -9,10 +18,26 @@
 
 .preview.active {
   display: block;
+  overflow-y: auto;
 }
 
 .code {
   display: none;
+  height: 100%;
+}
+
+.size {
+  &-sm {
+    height: 10rem;
+  }
+
+  &-md {
+    height: 15rem;
+  }
+
+  &-lg {
+    height: 20rem;
+  }
 }
 
 .controls {

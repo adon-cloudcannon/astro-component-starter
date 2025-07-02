@@ -16,32 +16,18 @@ const classNames = clsx(
   `layout-${props.layout}`,
   props.outline && "outline",
   props.hideText && "icon-only",
-  props.disabled && "disabled",
   props.className
 );
 
-const actions = props.link
-  ? { href: props.link, role: "button" }
-  : { type: "button", disabled: props.disabled };
+const actions = props.link ? { href: props.link, role: "button" } : { type: "button" };
 ---
 
 <style>
   @import "./styles.pcss";
 </style>
 
-<Tag
-  {...actions}
-  {...restProps}
-  data-icon-position={props.icon?.position}
-  class:list={classNames}
-  style={props.customStyle}
-  id={props.id}
-  aria-label={props.aria?.label}
-  aria-describedby={props.aria?.describedBy}
-  aria-controls={props.aria?.controls}
-  aria-expanded={props.aria?.expanded}
->
-  {props.icon?.name && <Icon name={props.icon.name} buttonIcon size="none" class="button-icon" />}
+<Tag {...actions} {...restProps} data-icon-position={props.iconPosition} class:list={classNames}>
+  {props.iconName && <Icon name={props.iconName} buttonIcon size="none" class="button-icon" />}
 
   {props.label && <span class:list={props.hideText ? "sr-only" : "label"}>{props.label}</span>}
 </Tag>

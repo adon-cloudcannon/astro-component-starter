@@ -16,7 +16,9 @@ export const collections = {
       name: z.string().optional(),
       spacing: z.string().optional(),
       component: z.string().optional(),
+      component_path: z.string().optional(),
       blocks: z.union([z.record(z.any()), z.array(z.record(z.any()))]).optional(),
+      primary_size: z.string().optional(),
       examples: z
         .array(
           z.object({

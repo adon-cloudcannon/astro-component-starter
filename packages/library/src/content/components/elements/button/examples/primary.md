@@ -8,5 +8,4 @@ blocks:
   type: "primary"
   size: "md"
   label: "Try it now!"
-  onclick: "console.log('clicked')"
 ---
