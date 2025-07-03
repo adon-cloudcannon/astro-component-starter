@@ -1,5 +1,5 @@
 ---
-const { component_examples = [], title = "", size = "" } = Astro.props;
+const { component_examples = [], title = "", size = "", componentKey = "" } = Astro.props;
 
 import Button from "@skele/components/elements/Button/index.astro";
 import { Code } from "astro:components";
@@ -50,6 +50,13 @@ Object.entries(componentModules).forEach(([filePath, module]) => {
   }
 });
 
+function inferComponentName(componentKey: string): string {
+  const parts = componentKey.split("/");
+  const componentName = parts[parts.length - 1];
+
+  return componentName.charAt(0).toUpperCase() + componentName.slice(1);
+}
+
 async function loadComponent(componentName: string) {
   try {
     const module = componentMap[componentName];
@@ -75,7 +82,7 @@ async function loadComponent(componentName: string) {
 
 <script src="./script.ts"></script>
 
-<div class:list={["component-viewer", size && `size-${size}`]}>
+<div class:list={["component-viewer", size && `viewer-size-${size}`]}>
   <div class="previews">
     {
       component_examples.map(async (example: any, idx: number) => {
@@ -83,9 +90,9 @@ async function loadComponent(componentName: string) {
         const exampleName = example.data.title;
         const exampleId = `component-${exampleName.toLowerCase().replace(/\s+/g, "-")}-${idx}`;
 
-        const Component = example.data.component
-          ? await loadComponent(example.data.component)
-          : null;
+        const componentName =
+          example.data.component || (componentKey ? inferComponentName(componentKey) : null);
+        const Component = componentName ? await loadComponent(componentName) : null;
         const blocks = example.data.blocks || {};
 
         return (

@@ -4,6 +4,12 @@ component_path: "elements/Button"
 primary_size: sm
 examples:
   - title: Sizes
-    slugs: secondary
+    slugs: sizes
+    size: sm
+  - title: Variants
+    slugs: variants
+    size: sm
+  - title: Icons
+    slugs: icons
     size: sm
 ---

@@ -12,7 +12,6 @@ export const collections = {
   components: defineCollection({
     schema: z.object({
       title: z.string().optional(),
-      description: z.string().optional(),
       name: z.string().optional(),
       spacing: z.string().optional(),
       component: z.string().optional(),

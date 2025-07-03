@@ -3,7 +3,7 @@ import ComponentProperties from "../components/ComponentProperties/index.astro";
 import ComponentViewer from "../components/ComponentViewer/index.astro";
 import LibraryLayout from "./LibraryLayout.astro";
 
-const { frontmatter, schema, examples = [] } = Astro.props;
+const { frontmatter, schema, examples = [], componentKey = "" } = Astro.props;
 const meta = schema?.meta?.();
 
 const primaryExample = examples.find((example: any) => example.slug.includes("/primary"));
@@ -34,6 +34,7 @@ const primarySize = frontmatter.primary_size || "md";
         component_examples={[primaryExample]}
         title={meta.title}
         size={primarySize}
+        componentKey={componentKey}
       />
     )
   }
@@ -52,6 +53,7 @@ const primarySize = frontmatter.primary_size || "md";
             component_examples={exampleGroup.examples}
             title={exampleGroup.title}
             size={exampleGroup.size}
+            componentKey={componentKey}
           />
         )}
       </>

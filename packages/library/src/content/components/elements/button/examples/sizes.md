@@ -1,21 +1,17 @@
 ---
-title: "Secondary Button"
-description: "A secondary button example"
+title: "Sizes"
 spacing: "all"
-component: "Button"
 blocks:
   - _bookshop_name: "elements/button"
-    type: primary
+    variant: primary
     size: sm
     label: "Small"
   - _bookshop_name: "elements/button"
-    type: primary
+    variant: primary
     size: md
     label: "Medium"
   - _bookshop_name: "elements/button"
-    type: primary
+    variant: primary
     size: lg
     label: "Large"
 ---
-
-This is a secondary button example with larger size.

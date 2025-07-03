@@ -21,21 +21,12 @@ export const buttonSchema = z
       .meta({ description: "Whether to hide the button text and show only the icon." })
       .default(false),
 
-    type: z
-      .enum(["primary", "secondary", "ghost", "contrast", "fade"])
+    variant: z
+      .enum(["primary", "secondary", "tertiary", "ghost"])
       .meta({ description: "The presentation of button." })
       .default("ghost"),
 
-    outline: z
-      .boolean()
-      .meta({ description: "Whether the button should have an outline." })
-      .default(false),
-
     size: z.enum(["sm", "md", "lg"]).meta({ description: "The size of the button." }).default("md"),
-    layout: z
-      .enum(["full", "skinny", "normal"])
-      .meta({ description: "The layout of the button." })
-      .default("normal"),
 
     className: z
       .string()

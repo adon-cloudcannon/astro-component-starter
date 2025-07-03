@@ -59,6 +59,11 @@ const examples = await getCollection("components", ({ slug }) => {
 });
 ---
 
-<ComponentLayout frontmatter={frontmatter} schema={schema} examples={examples}>
+<ComponentLayout
+  frontmatter={frontmatter}
+  schema={schema}
+  examples={examples}
+  componentKey={componentKey}
+>
   <Content />
 </ComponentLayout>

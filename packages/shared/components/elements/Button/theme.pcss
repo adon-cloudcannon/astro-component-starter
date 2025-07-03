@@ -1,94 +1,67 @@
-:global(:root) {
-  --button-paddingX: var(--space-em-sm);
-  --button-paddingY: var(--space-em-sm);
-  --button-icon-padding: var(--space-em-xs);
-  --button-borderRadius: var(--radius-xs);
-  --button-borderWidth: 1px;
-  --button-textTransform: none;
-}
-
 :global([data-theme="light"]) {
   /* Primary */
-  --button-primary-backgroundColor: var(--gray-8);
-  --button-primary-fontColor: var(--gray-1);
-  --button-primary-borderColor: transparent;
-  --button-primary-outlineColor: unset;
-  --button-primary-hover-backgroundColor: var(--gray-10);
-  --button-primary-hover-fontColor: var(--gray-1);
-  --button-primary-hover-borderColor: transparent;
+  --button-primary-bg: var(--color-brand);
+  --button-primary-text: var(--color-text-inverse);
+  --button-primary-border: transparent;
+  --button-primary-hover-bg: var(--color-brand-muted);
+  --button-primary-hover-text: var(--color-text-inverse);
+  --button-primary-hover-border: transparent;
 
   /* Secondary */
-  --button-secondary-backgroundColor: var(--gray-4);
-  --button-secondary-fontColor: var(--element-body-color);
-  --button-secondary-borderColor: transparent;
-  --button-secondary-outlineColor: var(--element-body-color);
-  --button-secondary-outlineBorderColor: var(--gray-4);
-  --button-secondary-hover-backgroundColor: var(--gray-5);
-  --button-secondary-hover-fontColor: var(--element-body-color);
-  --button-secondary-hover-borderColor: transparent;
+  --button-secondary-bg: var(--gray-4);
+  --button-secondary-text: var(--color-text-strong);
+  --button-secondary-border: transparent;
+  --button-secondary-hover-bg: var(--gray-5);
+  --button-secondary-hover-text: var(--color-text-strong);
+  --button-secondary-hover-border: transparent;
+
+  /* Tertiary */
+  --button-tertiary-bg: transparent;
+  --button-tertiary-text: var(--color-text-strong);
+  --button-tertiary-border: var(--color-border-strong);
+  --button-tertiary-hover-bg: rgba(0, 0, 0, 0.1);
+  --button-tertiary-hover-text: var(--color-text-strong);
+  --button-tertiary-hover-border: var(--color-border-strong);
 
   /* Ghost */
-  --button-ghost-backgroundColor: transparent;
-  --button-ghost-fontColor: var(--element-body-color);
-  --button-ghost-borderColor: transparent;
-  --button-ghost-outlineColor: unset;
-  --button-ghost-hover-backgroundColor: var(--gray-2);
-  --button-ghost-hover-fontColor: var(--element-body-color);
-  --button-ghost-hover-borderColor: transparent;
-
-  /* Contrast */
-  --button-contrast-backgroundColor: var(--gray-12);
-  --button-contrast-fontColor: var(--gray-1);
-  --button-contrast-borderColor: transparent;
-  --button-contrast-outlineColor: unset;
-  --button-contrast-hover-backgroundColor: var(--gray-8);
-  --button-contrast-hover-fontColor: var(--gray-1);
-  --button-contrast-hover-borderColor: transparent;
-
-  /* Outline */
-  --button-outline-fontColor: var(--gray-9);
-  --button-outline-hover-backgroundColor: var(--gray-2);
+  --button-ghost-bg: transparent;
+  --button-ghost-text: var(--color-text-strong);
+  --button-ghost-border: transparent;
+  --button-ghost-hover-bg: var(--gray-2);
+  --button-ghost-hover-text: var(--color-text-strong);
+  --button-ghost-hover-border: transparent;
 }
 
 :global([data-theme="dark"]) {
   /* Primary */
-  --button-primary-backgroundColor: var(--gray-6);
-  --button-primary-fontColor: var(--gray-0);
-  --button-primary-borderColor: transparent;
-  --button-primary-outlineColor: unset;
-  --button-primary-hover-backgroundColor: var(--gray-8);
-  --button-primary-hover-fontColor: var(--gray-0);
-  --button-primary-hover-borderColor: transparent;
+  --button-primary-bg: var(--color-brand);
+  --button-primary-text: var(--color-text-inverse);
+  --button-primary-border: transparent;
+  --button-primary-hover-bg: var(--color-brand-muted);
+  --button-primary-hover-text: var(--color-text-inverse);
+  --button-primary-hover-border: transparent;
 
   /* Secondary */
-  --button-secondary-backgroundColor: var(--gray-6);
-  --button-secondary-fontColor: var(--element-body-color);
-  --button-secondary-borderColor: transparent;
-  --button-secondary-outlineColor: var(--element-body-color);
-  --button-secondary-outlineBorderColor: var(--gray-7);
-  --button-secondary-hover-backgroundColor: var(--gray-7);
-  --button-secondary-hover-fontColor: var(--element-body-color);
-  --button-secondary-hover-borderColor: transparent;
+  --button-secondary-bg: var(--gray-7);
+  --button-secondary-text: var(--color-text);
+  --button-secondary-border: transparent;
+  --button-secondary-hover-bg: var(--gray-6);
+  --button-secondary-hover-text: var(--color-text);
+  --button-secondary-hover-border: transparent;
+
+  /* Tertiary */
+  --button-tertiary-bg: transparent;
+  --button-tertiary-text: var(--color-text);
+  --button-tertiary-border: var(--color-border);
+  --button-tertiary-hover-bg: rgba(255, 255, 255, 0.1);
+  --button-tertiary-hover-text: var(--color-text);
+  --button-tertiary-hover-border: var(--color-border);
 
   /* Ghost */
-  --button-ghost-backgroundColor: transparent;
-  --button-ghost-fontColor: var(--element-body-color);
-  --button-ghost-borderColor: transparent;
-  --button-ghost-outlineColor: unset;
-  --button-ghost-hover-backgroundColor: var(--gray-8);
-  --button-ghost-hover-fontColor: var(--element-body-color);
-  --button-ghost-hover-borderColor: transparent;
-
-  /* Contrast */
-  --button-contrast-backgroundColor: var(--gray-1);
-  --button-contrast-fontColor: var(--gray-12);
-  --button-contrast-borderColor: transparent;
-  --button-contrast-outlineColor: unset;
-  --button-contrast-hover-backgroundColor: var(--gray-3);
-  --button-contrast-hover-fontColor: var(--gray-12);
-  --button-contrast-hover-borderColor: transparent;
-
-  /* Outline */
-  --button-outline-fontColor: var(--gray-3);
-  --button-outline-hover-backgroundColor: var(--gray-8);
+  --button-ghost-bg: transparent;
+  --button-ghost-text: var(--color-text);
+  --button-ghost-border: transparent;
+  --button-ghost-hover-bg: var(--gray-8);
+  --button-ghost-hover-text: var(--color-text);
+  --button-ghost-hover-border: transparent;
 }

@@ -11,10 +11,8 @@ const Tag = props.link ? "a" : "button";
 
 const classNames = clsx(
   "button",
-  `text-${props.size}`,
-  `type-${props.type}`,
-  `layout-${props.layout}`,
-  props.outline && "outline",
+  `size-${props.size}`,
+  `variant-${props.variant}`,
   props.hideText && "icon-only",
   props.className
 );
