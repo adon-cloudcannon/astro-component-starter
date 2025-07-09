@@ -1,11 +1,12 @@
 ---
-import { z } from "zod/v4";
 import "../styles/skele.pcss";
-const baseLayoutSchema = z.object({
-  title: z.string().default("Skele Site"),
-});
 
-const props = baseLayoutSchema.parse(Astro.props);
+export interface Props {
+  title: string;
+  content_blocks?: any;
+}
+
+const props = Astro.props;
 ---
 
 <!doctype html>
@@ -19,6 +20,8 @@ const props = baseLayoutSchema.parse(Astro.props);
     <slot name="head" />
   </head>
   <body>
-    <slot />
+    <main>
+      <slot />
+    </main>
   </body>
 </html>
