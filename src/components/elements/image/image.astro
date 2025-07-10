@@ -1,9 +1,9 @@
 ---
 import clsx from "clsx";
 import { getProviderForUrl } from "unpic";
-import AstroImage from "./AstroImage.astro";
+import AstroImage from "./astro-image.astro";
 import { ImageSchema } from "./schema";
-import UnpicImage from "./UnpicImage.astro";
+import UnpicImage from "./unpic-image.astro";
 
 const { src, alt, class: className, ...restProps } = ImageSchema.parse(Astro.props);
 
