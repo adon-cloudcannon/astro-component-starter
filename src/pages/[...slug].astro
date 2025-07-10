@@ -1,6 +1,6 @@
 ---
 import { getCollection, type CollectionEntry } from "astro:content";
-import Component from "../utils/renderBlock.astro";
+import Page from "../layouts/Page.astro";
 
 export interface Props {
   page: CollectionEntry<"pages">;
@@ -16,6 +16,8 @@ export async function getStaticPaths() {
 }
 
 const { page } = Astro.props;
+
+console.log(Page, page);
 ---
 
-<Component bookshop:live frontmatter={page.data} />
+<Page bookshop:live frontmatter={page.data} />
