@@ -1,14 +1,31 @@
 ---
 import clsx from "clsx";
+import Icon from "../icon/icon.astro";
 // @ts-ignore
 import MarkdownIt from "markdown-it";
 
-const { text, level, size, align, className, _bookshop_name, ...restProps } = Astro.props;
+const {
+  text,
+  level,
+  size,
+  align,
+  iconName,
+  iconPosition,
+  className,
+  _bookshop_name,
+  ...restProps
+} = Astro.props;
 
 const md = MarkdownIt({ html: true });
 const MarkdownText = text ? md.renderInline(text) : "";
 
-const classNames = clsx("heading", `size-${size}`, `align-${align}`, className);
+const classNames = clsx(
+  "heading",
+  `size-${size}`,
+  `align-${align}`,
+  iconPosition === "after" && "icon-after",
+  className
+);
 
 const Tag = level;
 const elementProps = {
@@ -17,6 +34,7 @@ const elementProps = {
 ---
 
 <Tag {...elementProps as any} class:list={classNames}>
+  {iconName && iconName.trim() && <Icon name={iconName} size="none" class="heading-icon" />}
   {MarkdownText}
 </Tag>
 
@@ -32,6 +50,9 @@ const elementProps = {
       font-weight: bold;
       margin-bottom: 0.5em;
       margin-top: 0.8em;
+      align-items: center;
+      display: flex;
+      gap: 0.25em;
 
       em {
         font-weight: bold;
@@ -45,6 +66,10 @@ const elementProps = {
           color: var(--element__body__font-color);
           background: var(--element__selection__background-color);
         }
+      }
+
+      &.icon-after {
+        flex-direction: row-reverse;
       }
     }
 
