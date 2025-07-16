@@ -1,3 +1,4 @@
+import { glob } from "astro/loaders";
 import { defineCollection, z } from "astro:content";
 
 const pageSchema = z.object({
@@ -38,17 +39,17 @@ const pagesCollection = defineCollection({
 });
 
 const docsPagesCollection = defineCollection({
-  type: "content",
+  loader: glob({ pattern: "**/*.md", base: "./src/skele-docs/content/pages" }),
   schema: docsPageSchema,
 });
 
 const docsComponentsCollection = defineCollection({
-  type: "content",
+  loader: glob({ pattern: "**/*.md", base: "./src/skele-docs/content/components" }),
   schema: docsComponentSchema,
 });
 
 export const collections = {
   pages: pagesCollection,
-  "docs/pages": docsPagesCollection,
-  "docs/components": docsComponentsCollection,
+  "docs-pages": docsPagesCollection,
+  "docs-components": docsComponentsCollection,
 };

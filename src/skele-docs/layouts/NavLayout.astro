@@ -7,12 +7,12 @@ import navData from "../data/nav.json";
 
 const layout = "sidebar";
 
-const allComponents = await getCollection("docs/components");
+const allComponents = await getCollection("docs-components");
 
 const componentsByCategory: Record<string, Array<{ name: string; path: string }>> = {};
 
 allComponents.forEach((component: any) => {
-  const slug = component.slug.replace(/^components\//, "").replace(/\/index$/, "");
+  const slug = component.id.replace(/^components\//, "").replace(/\/index$/, "");
   const parts = slug.split("/").filter(Boolean);
 
   if (

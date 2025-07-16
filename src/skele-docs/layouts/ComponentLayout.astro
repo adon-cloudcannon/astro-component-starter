@@ -8,25 +8,25 @@ const meta = schema?.meta?.() || {
   description: "No description available",
 };
 
-const primaryExample = examples.find((example: any) => example.slug.includes("/primary"));
+const primaryExample = examples.find(
+  (example: any) => example && example.id && example.id.includes("/primary")
+);
 
 const frontmatterExamples = frontmatter.examples || [];
 
 const processedExamples = frontmatterExamples.map((exampleConfig: any) => {
   const matchingExamples = examples.filter((example: any) =>
-    exampleConfig.slugs.some((slug: string) => example.slug.endsWith(`/${slug}`))
+    exampleConfig.slugs.some(
+      (slug: string) => example && example.id && example.id.endsWith(`/${slug}`)
+    )
   );
 
+  // Sort examples to match the order in slugs array
   const sortedExamples = matchingExamples.sort((a: any, b: any) => {
-    const aIndex = exampleConfig.slugs.findIndex((slug: string) => a.slug.endsWith(`/${slug}`));
-    const bIndex = exampleConfig.slugs.findIndex((slug: string) => b.slug.endsWith(`/${slug}`));
-
-    if (aIndex === bIndex) {
-      return 0;
-    }
-
-    if (aIndex === -1) return 1;
-    if (bIndex === -1) return -1;
+    const aSlug = a.id.split("/").pop();
+    const bSlug = b.id.split("/").pop();
+    const aIndex = exampleConfig.slugs.indexOf(aSlug);
+    const bIndex = exampleConfig.slugs.indexOf(bSlug);
 
     return aIndex - bIndex;
   });

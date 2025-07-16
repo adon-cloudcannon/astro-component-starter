@@ -1,21 +1,21 @@
 ---
-import { getCollection } from "astro:content";
+import { getCollection, render } from "astro:content";
 import LibraryLayout from "../../skele-docs/layouts/LibraryLayout.astro";
 
 export async function getStaticPaths() {
-  const pages = await getCollection("docs/pages");
+  const pages = await getCollection("docs-pages");
 
   const paths: Array<{ params: { slug: string }; props: { page: any } }> = [];
 
   pages.forEach((page) => {
-    if (page.slug === "index") {
+    if (page.id === "index") {
       paths.push({
         params: { slug: "" },
         props: { page },
       });
     } else {
       paths.push({
-        params: { slug: page.slug },
+        params: { slug: page.id },
         props: { page },
       });
     }
@@ -25,7 +25,7 @@ export async function getStaticPaths() {
 }
 
 const { page } = Astro.props;
-const { Content } = await page.render();
+const { Content } = await render(page);
 ---
 
 <LibraryLayout frontmatter={page.data}>

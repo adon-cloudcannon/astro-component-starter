@@ -1,5 +1,5 @@
 ---
-import { getCollection } from "astro:content";
+import { getCollection, render } from "astro:content";
 import ComponentLayout from "../../../skele-docs/layouts/ComponentLayout.astro";
 // @ts-ignore
 import { existsSync, readFileSync } from "fs";
@@ -10,69 +10,77 @@ export async function getStaticPaths() {
     eager: true,
   });
 
-  const components = await getCollection("docs/components");
+  try {
+    const components = await getCollection("docs-components");
 
-  const componentEntries = components.filter((entry) => {
-    // Exclude files that are in examples directories
-    return !entry.slug.includes("/examples/");
-  });
+    if (!components || components.length === 0) {
+      return [];
+    }
 
-  return componentEntries.map((entry) => {
-    const slug = entry.slug.replace(/^components\//, "").replace(/\/index$/, "");
-    const parts = slug.split("/").filter(Boolean);
-    const componentKey = parts.slice(-2).join("/");
+    const componentEntries = components.filter((entry) => {
+      return entry && entry.id && !entry.id.includes("/examples/");
+    });
 
-    let schema = null;
-    let bookshopData = null;
+    return componentEntries.map((entry) => {
+      const slug = entry.id.replace(/^components\//, "").replace(/\/index$/, "");
+      const parts = slug.split("/").filter(Boolean);
+      const componentKey = parts.slice(-2).join("/");
 
-    // Convert kebab-case to camelCase for path matching
-    const camelCaseKey = componentKey
-      .split("-")
-      .map((part, index) => {
-        if (index === 0) {
+      let schema = null;
+      let bookshopData = null;
+
+      // Convert kebab-case to camelCase for path matching
+      const camelCaseKey = componentKey
+        .split("-")
+        .map((part, index) => {
+          if (index === 0) {
+            return part.charAt(0).toUpperCase() + part.slice(1);
+          }
           return part.charAt(0).toUpperCase() + part.slice(1);
+        })
+        .join("");
+
+      for (const [path, mod] of Object.entries(schemaFiles)) {
+        if (path.toLowerCase().includes(`/${camelCaseKey.toLowerCase()}/`)) {
+          const module = mod as { [key: string]: { meta?: () => { description?: string } } };
+          const schemaName = Object.keys(module).find((key) => key.endsWith("Schema"));
+
+          if (schemaName) {
+            schema = module[schemaName];
+          }
+          break;
         }
-        return part.charAt(0).toUpperCase() + part.slice(1);
-      })
-      .join("");
+      }
 
-    for (const [path, mod] of Object.entries(schemaFiles)) {
-      if (path.toLowerCase().includes(`/${camelCaseKey.toLowerCase()}/`)) {
-        const module = mod as { [key: string]: { meta?: () => { description?: string } } };
-        const schemaName = Object.keys(module).find((key) => key.endsWith("Schema"));
+      const lastPart = componentKey.split("/").pop();
+      const bookshopPath = `src/components/${componentKey}/${lastPart}.bookshop.yml`;
 
-        if (schemaName) {
-          schema = module[schemaName];
+      if (existsSync(bookshopPath)) {
+        try {
+          const content = readFileSync(bookshopPath, "utf8");
+
+          bookshopData = yaml.load(content);
+        } catch (error) {
+          console.error(`Error parsing bookshop file ${bookshopPath}:`, error);
         }
-        break;
       }
-    }
 
-    const lastPart = componentKey.split("/").pop();
-    const bookshopPath = `src/components/${componentKey}/${lastPart}.bookshop.yml`;
-
-    if (existsSync(bookshopPath)) {
-      try {
-        const content = readFileSync(bookshopPath, "utf8");
-
-        bookshopData = yaml.load(content);
-      } catch (error) {
-        console.error(`Error parsing bookshop file ${bookshopPath}:`, error);
-      }
-    }
-
-    return {
-      params: { slug: componentKey },
-      props: { page: entry, schema, bookshopData },
-    };
-  });
+      return {
+        params: { slug: componentKey },
+        props: { page: entry, schema, bookshopData },
+      };
+    });
+  } catch (error) {
+    console.error("Error loading docs-components collection:", error);
+    return [];
+  }
 }
 
 const { page, schema, bookshopData } = Astro.props;
-const { Content } = await page.render();
+const { Content } = await render(page);
 const frontmatter = page.data;
 
-const slugParts = page.slug
+const slugParts = page.id
   .replace(/^components\//, "")
   .replace(/\/index$/, "")
   .split("/")
@@ -82,9 +90,15 @@ const componentKey = slugParts.slice(-2).join("/");
 
 const searchPattern = `${componentKey}/examples/`.toLowerCase();
 
-const examples = await getCollection("docs/components", ({ slug }) => {
-  return slug.toLowerCase().startsWith(searchPattern);
-});
+let examples = [];
+
+try {
+  examples = await getCollection("docs-components", ({ id }) => {
+    return id && id.toLowerCase().startsWith(searchPattern);
+  });
+} catch (error) {
+  console.error("Error loading examples:", error);
+}
 ---
 
 <ComponentLayout
