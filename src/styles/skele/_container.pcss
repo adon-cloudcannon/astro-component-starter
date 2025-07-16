@@ -1,22 +1,24 @@
-.nav-wrapper {
-  position: relative;
-  z-index: var(--layer-3);
+@layer base {
+  .nav-wrapper {
+    position: relative;
+    z-index: var(--layer-3);
 
-  &-desktop {
-    display: block;
+    &-desktop {
+      display: block;
+    }
+
+    &-mobile {
+      display: none;
+    }
   }
 
-  &-mobile {
-    display: none;
-  }
-}
+  @media (width <= 850px) {
+    .nav-wrapper-desktop {
+      display: none;
+    }
 
-@media (width <= 850px) {
-  .nav-wrapper-desktop {
-    display: none;
-  }
-
-  .nav-wrapper-mobile {
-    display: block;
+    .nav-wrapper-mobile {
+      display: block;
+    }
   }
 }

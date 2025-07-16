@@ -1,29 +1,31 @@
-*,
-*::before,
-*::after {
-  box-sizing: border-box;
-}
+@layer base {
+  *,
+  *::before,
+  *::after {
+    box-sizing: border-box;
+  }
 
-body {
-  -webkit-font-smoothing: antialiased;
-  line-height: 1.5;
-}
+  body {
+    -webkit-font-smoothing: antialiased;
+    line-height: 1.5;
+  }
 
-img,
-picture,
-video,
-canvas,
-svg {
-  max-width: 100%;
-}
+  img,
+  picture,
+  video,
+  canvas,
+  svg {
+    max-width: 100%;
+  }
 
-input,
-button,
-textarea,
-select {
-  font: inherit;
-}
+  input,
+  button,
+  textarea,
+  select {
+    font: inherit;
+  }
 
-pre {
-  margin: 0;
+  pre {
+    margin: 0;
+  }
 }

@@ -1,94 +1,96 @@
 @import url("elements/_forms.pcss");
 
-html,
-body {
-  margin: 0;
-  overflow-x: hidden;
-  padding: 0;
-  width: 100%;
-}
-
-body {
-  background-color: var(--element-body-backgroundColor);
-  color: var(--element-body-fontColor);
-  min-height: 100vh;
-}
-
-a {
-  color: var(--element-link-fontColor);
-
-  &:hover {
-    color: var(--element-link-hover-fontColor);
+@layer base {
+  html,
+  body {
+    margin: 0;
+    overflow-x: hidden;
+    padding: 0;
+    width: 100%;
   }
-}
 
-main {
-  width: 100%;
-}
-
-code[class*="language-"],
-pre[class*="language-"] {
-  border-radius: var(--radius-2);
-  font-size: var(--font-size-0);
-}
-
-p,
-ul,
-ol {
-  code {
-    background: var(--element-code-backgroundColor);
-    border-radius: 0.25rem;
-    padding: 0.1rem 0.2rem;
+  body {
+    background-color: var(--element-body-backgroundColor);
+    color: var(--element-body-fontColor);
+    min-height: 100vh;
   }
-}
 
-table {
-  border-spacing: 0;
-  table-layout: auto;
-  width: 100%;
+  a {
+    color: var(--element-link-fontColor);
 
-  thead th {
-    background: var(--element-table-head-backgroundColor);
-    border: 1px solid var(--element-table-row-borderColor);
-    border-bottom-width: 0;
-    border-right-width: 0;
-    padding: 0.5rem;
-    text-align: left;
-
-    &:first-child {
-      border-top-left-radius: var(--radius-2);
-    }
-
-    &:last-child {
-      border-right-width: 1px;
-      border-top-right-radius: var(--radius-2);
+    &:hover {
+      color: var(--element-link-hover-fontColor);
     }
   }
 
-  tbody tr {
-    td {
+  main {
+    width: 100%;
+  }
+
+  code[class*="language-"],
+  pre[class*="language-"] {
+    border-radius: var(--radius-2);
+    font-size: var(--font-size-0);
+  }
+
+  p,
+  ul,
+  ol {
+    code {
+      background: var(--element-code-backgroundColor);
+      border-radius: 0.25rem;
+      padding: 0.1rem 0.2rem;
+    }
+  }
+
+  table {
+    border-spacing: 0;
+    table-layout: auto;
+    width: 100%;
+
+    thead th {
+      background: var(--element-table-head-backgroundColor);
       border: 1px solid var(--element-table-row-borderColor);
       border-bottom-width: 0;
       border-right-width: 0;
       padding: 0.5rem;
-      vertical-align: top;
+      text-align: left;
+
+      &:first-child {
+        border-top-left-radius: var(--radius-2);
+      }
 
       &:last-child {
         border-right-width: 1px;
+        border-top-right-radius: var(--radius-2);
       }
     }
 
-    &:last-child {
+    tbody tr {
       td {
-        border-bottom-width: 1px;
+        border: 1px solid var(--element-table-row-borderColor);
+        border-bottom-width: 0;
+        border-right-width: 0;
+        padding: 0.5rem;
+        vertical-align: top;
+
+        &:last-child {
+          border-right-width: 1px;
+        }
       }
 
-      td:first-child {
-        border-bottom-left-radius: var(--radius-2);
-      }
+      &:last-child {
+        td {
+          border-bottom-width: 1px;
+        }
 
-      td:last-child {
-        border-bottom-right-radius: var(--radius-2);
+        td:first-child {
+          border-bottom-left-radius: var(--radius-2);
+        }
+
+        td:last-child {
+          border-bottom-right-radius: var(--radius-2);
+        }
       }
     }
   }
