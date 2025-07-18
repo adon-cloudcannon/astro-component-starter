@@ -9,7 +9,7 @@ spec:
 blueprint:
   src:
   title:
-  aspect_ratio: golden
+  aspect_ratio: landscape
 
 preview:
 
@@ -25,5 +25,4 @@ _inputs:
         - landscape
         - portrait
         - widescreen
-        - ultrawide
         - golden

@@ -8,7 +8,6 @@ examples:
       - ratio-landscape
       - ratio-portrait
       - ratio-widescreen
-      - ratio-ultrawide
       - ratio-golden
     size: lg
 ---
