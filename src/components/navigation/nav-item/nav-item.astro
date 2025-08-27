@@ -31,7 +31,6 @@ const isCurrentPage = href === Astro.url.pathname;
           for={dropdownId}
           class="nav-item-trigger"
           role="button"
-          aria-expanded={defaultOpen ? "true" : "false"}
           aria-controls={contentId}
           tabindex="0"
         >
@@ -41,7 +40,13 @@ const isCurrentPage = href === Astro.url.pathname;
             <Icon name="chevron-right" size="none" aria-hidden="true" />
           </span>
         </label>
-        <div id={contentId} class="nav-item-content" role="region" aria-label={`${text} submenu`}>
+        <div
+          id={contentId}
+          class="nav-item-content"
+          role="region"
+          aria-label={`${text} submenu`}
+          aria-hidden={!defaultOpen}
+        >
           <slot />
           <RenderBlock contentBlocks={navBlocks} />
         </div>
@@ -63,37 +68,63 @@ const isCurrentPage = href === Astro.url.pathname;
     navRoot.querySelectorAll(".nav-item-toggle").forEach((toggle) => {
       if (toggle instanceof HTMLInputElement) {
         toggle.checked = false;
-        const label = document.querySelector(`label[for="${toggle.id}"]`);
-        if (label) {
-          label.setAttribute("aria-expanded", "false");
-        }
+        updateAriaStates(toggle, false);
       }
     });
+  }
+
+  function updateAriaStates(toggle: HTMLInputElement, isExpanded: boolean) {
+    const content = document.getElementById(toggle.getAttribute("aria-controls") || "");
+
+    if (content) {
+      content.setAttribute("aria-hidden", (!isExpanded).toString());
+    }
   }
 
   function setupDropdowns() {
     document.querySelectorAll(".nav-item-toggle").forEach((toggle) => {
       toggle.addEventListener("change", (e) => {
         const target = e.target as HTMLInputElement;
-        const label = document.querySelector(`label[for="${target.id}"]`);
         const navItem = target.closest(".nav-item") as HTMLElement;
 
-        if (label) {
-          label.setAttribute("aria-expanded", String(target.checked));
-        }
+        updateAriaStates(target, target.checked);
 
         if (target.checked) {
           closeAllDropdownsInParent(navItem);
           target.checked = true;
-          label?.setAttribute("aria-expanded", "true");
+          updateAriaStates(target, true);
+        }
+      });
+    });
+
+    // Add keyboard support for labels
+    document.querySelectorAll(".nav-item-trigger").forEach((trigger) => {
+      trigger.addEventListener("keydown", (e) => {
+        const keyEvent = e as KeyboardEvent;
+        if (keyEvent.key === "Enter" || keyEvent.key === " ") {
+          e.preventDefault();
+          const checkbox = document.getElementById(
+            trigger.getAttribute("for") || ""
+          ) as HTMLInputElement;
+          if (checkbox) {
+            checkbox.checked = !checkbox.checked;
+            checkbox.dispatchEvent(new Event("change"));
+          }
         }
       });
     });
   }
 
-  if (document.readyState === "loading") {
-    document.addEventListener("DOMContentLoaded", setupDropdowns);
-  } else {
-    setupDropdowns();
+  function initializeAriaStates() {
+    document.querySelectorAll(".nav-item-toggle").forEach((toggle) => {
+      if (toggle instanceof HTMLInputElement) {
+        updateAriaStates(toggle, toggle.checked);
+      }
+    });
   }
+
+  document.addEventListener("DOMContentLoaded", () => {
+    setupDropdowns();
+    initializeAriaStates();
+  });
 </script>

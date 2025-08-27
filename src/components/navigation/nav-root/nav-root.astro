@@ -11,13 +11,15 @@ const navId = `nav-${crypto.randomUUID()}`;
   variant === "mobile" && (
     <>
       <input type="checkbox" id={`nav-toggle-${navId}`} class="nav-toggle" autocomplete="off" />
-      <label
-        for={`nav-toggle-${navId}`}
-        class="nav-hamburger"
-        aria-label="Toggle navigation menu"
-        aria-expanded="false"
-      >
-        <Button variant="tertiary" size="lg" iconName="bars-3" />
+      <label for={`nav-toggle-${navId}`} class="nav-hamburger" aria-label="Toggle navigation menu">
+        <Button
+          variant="tertiary"
+          size="none"
+          element="span"
+          iconName="bars-3"
+          hideText="true"
+          class="mobile-nav-button"
+        />
       </label>
     </>
   )
@@ -35,7 +37,14 @@ const navId = `nav-${crypto.randomUUID()}`;
           <slot name="logo" />
         </div>
         <label for={`nav-toggle-${navId}`} class="nav-close" aria-label="Close navigation menu">
-          <Button variant="tertiary" size="lg" iconName="x-mark" />
+          <Button
+            variant="tertiary"
+            size="none"
+            element="span"
+            iconName="x-mark"
+            hideText="true"
+            class="mobile-nav-button"
+          />
         </label>
       </div>
     )
@@ -74,7 +83,6 @@ const navId = `nav-${crypto.randomUUID()}`;
     if (nav && hamburger) {
       const isExpanded = toggle.checked;
 
-      hamburger.setAttribute("aria-expanded", isExpanded.toString());
       nav.setAttribute("aria-hidden", (!isExpanded).toString());
 
       if (isExpanded) {
@@ -82,7 +90,7 @@ const navId = `nav-${crypto.randomUUID()}`;
         // Focus first focusable element when opening
         const firstFocusable = nav.querySelector(
           'a, button, input, select, textarea, [tabindex]:not([tabindex="-1"])'
-        ) as HTMLElement;
+        );
         if (firstFocusable) firstFocusable.focus();
       } else {
         document.body.style.overflow = "";

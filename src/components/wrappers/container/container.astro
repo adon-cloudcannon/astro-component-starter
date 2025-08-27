@@ -20,6 +20,7 @@ const {
   alt = "",
   positionVertical = "top",
   positionHorizontal = "center",
+  priority = false,
 } = backgroundImage || {};
 
 const htmlAttributes = Object.fromEntries(
@@ -37,6 +38,7 @@ const htmlAttributes = Object.fromEntries(
         ]}
         src={source}
         alt={alt}
+        priority={priority}
       />
     )
   }

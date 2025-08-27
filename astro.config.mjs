@@ -1,3 +1,4 @@
+import sitemap from "@astrojs/sitemap";
 import bookshop from "@bookshop/astro-bookshop";
 import postcssGlobalData from "@csstools/postcss-global-data";
 import icon from "astro-icon";
@@ -14,6 +15,7 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
 // https://astro.build/config
 export default defineConfig({
+  site: "https://example.com",
   devToolbar: {
     enabled: false,
   },
@@ -27,6 +29,9 @@ export default defineConfig({
     bookshop(),
     icon({
       iconDir: path.resolve(__dirname, "src/icons"),
+    }),
+    sitemap({
+      filter: (page) => !page.includes("/component-library"),
     }),
   ],
   vite: {

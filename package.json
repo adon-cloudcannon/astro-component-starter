@@ -27,6 +27,7 @@
     "format:fix": "prettier --write ."
   },
   "dependencies": {
+    "@astrojs/sitemap": "^3.5.1",
     "@bookshop/astro-bookshop": "3.16.3",
     "@bookshop/astro-engine": "3.16.3",
     "@bookshop/generate": "3.16.3",
