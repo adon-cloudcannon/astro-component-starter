@@ -1,15 +1,15 @@
 {
   "defaultSeo": {
-    "titleFormat": "{title} | Skele Astro",
+    "titleFormat": "{title} | Component Starter",
     "description": "",
     "image": "/assets/images/skele-light.svg",
-    "siteName": "Skele Astro",
+    "siteName": "CloudCannon Component Starter",
     "twitterHandle": "@yourusername"
   },
   "organization": {
     "@context": "https://schema.org",
     "@type": "Organization",
-    "name": "Skele Astro",
+    "name": "CloudCannon Component Starter",
     "url": "https://example.com",
     "logo": "https://example.com/assets/images/skele-light.svg",
     "description": "",
