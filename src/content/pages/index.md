@@ -90,12 +90,29 @@ pageBlocks:
         align: start
         size: md
       - _bookshop_name: primitives/smart-image
-        src:
         alt:
         rounded: false
         aspectRatio:
         positionVertical: center
         positionHorizontal: center
+        src:
+      - _bookshop_name: primitives/spacer
+        size: xl
+      - _bookshop_name: primitives/testimonial
+        text: >-
+          **A** *testimonial* from a <s>happy</s> <a
+          href="https://cloudcannon.com/documentation/articles/configure-your-card-previews/#template-strings-in-previews"
+          title="A title" target="_blank"
+          rel="noopener">customer<sub>TM</sub></a>
+        authorName: Test Richardson
+        authorDescription: A developer at CludCunnon
+        horizontalAlignment: start
+      - _bookshop_name: primitives/video
+        videoType: youtube
+        videoId:
+        videoSrc:
+        videoPoster:
+        title:
     maxContentWidth: 2xl
     paddingHorizontal: lg
     paddingVertical: lg
