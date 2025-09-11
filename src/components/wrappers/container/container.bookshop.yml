@@ -96,6 +96,17 @@ _inputs:
   backgroundImage:
     comment: Background image configuration for the container.
     type: object
+    options:
+      preview:
+        icon: image
+        text:
+          - key: alt
+          - Background Image
+        subtext:
+          - key: source
+          - Background Image
+        image:
+          - key: source
   backgroundImage.source:
     comment: URL or path to the background image.
     type: image
