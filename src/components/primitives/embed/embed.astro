@@ -1,6 +1,6 @@
 ---
 const {
-  src,
+  source,
   title = "Embedded Content",
   aspectRatio = "landscape",
   class: className,
@@ -14,7 +14,7 @@ const htmlAttributes = Object.fromEntries(
 
 <iframe
   class:list={["embed", `ratio-${aspectRatio}`, className]}
-  src={src}
+  src={source}
   frameborder="0"
   allowfullscreen="true"
   allowtransparency="true"

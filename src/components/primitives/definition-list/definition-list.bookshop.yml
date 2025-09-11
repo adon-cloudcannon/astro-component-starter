@@ -23,13 +23,12 @@ _inputs:
     type: select
     options:
       values:
-        - value: start
+        - id: start
           name: Start
-        - value: center
+        - id: center
           name: Center
-        - value: end
+        - id: end
           name: End
-      value_key: value
 
 _structures:
   item:

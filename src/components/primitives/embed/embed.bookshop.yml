@@ -9,22 +9,36 @@ spec:
   tags: []
 
 blueprint:
-  src:
+  source:
   title:
   aspectRatio: landscape
 
 preview:
 
 _inputs:
-  src:
-    comment: The url source for the iframe
+  source:
+    type: url
+    comment: The url source for the iframe.
+    options:
+      disable_upload_file: true
+      disable_direct_input: false
+      disable_upload_file_in_file_browser: true
+      hide_link_to_file: true
+      hide_link_to_page: false
+      hide_link_to_email_address: true
+      hide_link_to_telephone: true
   aspectRatio:
-    comment: The aspect ratio of the embed
+    comment: The aspect ratio of the embed.
     type: select
     options:
       values:
-        - square
-        - landscape
-        - portrait
-        - widescreen
-        - golden
+        - id: square
+          name: Square
+        - id: landscape
+          name: Landscape
+        - id: portrait
+          name: Portrait
+        - id: widescreen
+          name: Widescreen
+        - id: golden
+          name: Golden

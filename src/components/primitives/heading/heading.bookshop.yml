@@ -24,6 +24,24 @@ _inputs:
   text:
     comment: The text content of the heading.
     type: markdown
+    options:
+      bold: false
+      copyformatting: false
+      italic: true
+      link: true
+      redo: true
+      removeformat: true
+      strike: true
+      subscript: true
+      superscript: true
+      underline: true
+      undo: true
+      blockquote: false
+      bulletedlist: false
+      format: p
+      image: false
+      numberedlist: false
+      snippet: false
 
   type:
     comment: The heading type/level.
@@ -43,24 +61,39 @@ _inputs:
     type: select
     options:
       values:
-        - xs
-        - s
-        - m
-        - l
-        - xl
-        - 2xl
-        - 3xl
-        - 4xl
-        - 5xl
-        - 6xl
+        - id: none
+          name: None
+        - id: xs
+          name: Extra Small
+        - id: sm
+          name: Small
+        - id: md
+          name: Medium
+        - id: lg
+          name: Large
+        - id: xl
+          name: Extra Large
+        - id: 2xl
+          name: 2xl
+        - id: 3xl
+          name: 3xl
+        - id: 4xl
+          name: 4xl
+        - id: 5xl
+          name: 5xl
+        - id: 6xl
+          name: 6xl
   align:
     comment: The alignment of the text.
     type: select
     options:
       values:
-        - start
-        - center
-        - end
+        - id: start
+          name: Start
+        - id: center
+          name: Center
+        - id: end
+          name: End
   iconName:
     comment: The name of the icon to display.
     type: select
@@ -71,5 +104,7 @@ _inputs:
     type: select
     options:
       values:
-        - before
-        - after
+        - id: before
+          name: Before
+        - id: after
+          name: After

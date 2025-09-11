@@ -21,19 +21,19 @@ _inputs:
     type: select
     options:
       values:
-        - name: None
-          id: none
-        - name: Extra Small
-          id: xs
-        - name: Small
-          id: sm
-        - name: Medium
-          id: md
-        - name: Large
-          id: lg
-        - name: Extra Large
-          id: xl
-        - name: 2xl
-          id: 2xl
-        - name: 3xl
-          id: 3xl
+        - id: none
+          name: None
+        - id: xs
+          name: Extra Small
+        - id: sm
+          name: Small
+        - id: md
+          name: Medium
+        - id: lg
+          name: Large
+        - id: xl
+          name: Extra Large
+        - id: 2xl
+          name: 2xl
+        - id: 3xl
+          name: 3xl

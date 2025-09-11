@@ -33,11 +33,10 @@ _inputs:
     type: select
     options:
       values:
-        - name: Before
-          value: before
-        - name: After
-          value: after
-      value_key: value
+        - id: before
+          name: Before
+        - id: after
+          name: After
     comment: The position of the icon relative to the text.
   hideText:
     type: switch
@@ -46,27 +45,25 @@ _inputs:
     type: select
     options:
       values:
-        - name: Primary
-          value: primary
-        - name: Secondary
-          value: secondary
-        - name: Tertiary
-          value: tertiary
-        - name: Ghost
-          value: ghost
-        - name: Text
-          value: text
-      value_key: value
+        - id: primary
+          name: Primary
+        - id: secondary
+          name: Secondary
+        - id: tertiary
+          name: Tertiary
+        - id: ghost
+          name: Ghost
+        - id: text
+          name: Text
     comment: The presentation of button.
   size:
     type: select
     options:
       values:
-        - name: Small
-          value: sm
-        - name: Medium
-          value: md
-        - name: Large
-          value: lg
-      value_key: value
+        - id: sm
+          name: Small
+        - id: md
+          name: Medium
+        - id: lg
+          name: Large
     comment: The size of the button.
