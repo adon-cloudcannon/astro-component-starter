@@ -12,12 +12,21 @@ let shouldRender = true;
 const isRemoteUrl =
   typeof source === "string" && (source.startsWith("http://") || source.startsWith("https://"));
 
-const imageFiles = import.meta.glob("/src/assets/images/**/*", {
+const imageFiles = import.meta.glob("/src/assets/**/*", {
   import: "default",
 }) as Record<string, any>;
 
-if (typeof source === "string" && source.startsWith("/images/")) {
-  const assetPath = source.replace("/images/", "");
+if (
+  typeof source === "string" &&
+  (source.startsWith("/images/") || source.startsWith("/component-library/images/"))
+) {
+  let assetPath;
+
+  if (source.startsWith("/component-library/images/")) {
+    assetPath = source.replace("/component-library/images/", "component-library/images/");
+  } else {
+    assetPath = source.replace("/images/", "");
+  }
 
   const imageKey = Object.keys(imageFiles).find((key) => key.endsWith(assetPath));
 

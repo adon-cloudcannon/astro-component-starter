@@ -3,7 +3,7 @@ title: "Position Bottom Right"
 spacing: "all"
 blocks:
   _bookshop_name: "elements/smart-image"
-  source: /images/component-library/quiet-street.jpg
+  source: /component-library/images/quiet-street.jpg
   alt: "Quiet Street"
   aspectRatio: square
   positionVertical: bottom

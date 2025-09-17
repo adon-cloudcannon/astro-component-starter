@@ -6,7 +6,7 @@ blocks:
     type: native
     id:
     src: /assets/component-library/videos/glass.mp4
-    poster: /src/assets/images/component-library/video-placeholder.jpg
+    poster: /assets/component-library/images/video-placeholder.jpg
     title: Glass pour
     style: "max-width: 600px"
 ---

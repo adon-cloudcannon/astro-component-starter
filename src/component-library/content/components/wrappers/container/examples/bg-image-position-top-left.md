@@ -6,7 +6,7 @@ blocks:
   paddingVertical: 2xl
   paddingHorizontal: md
   backgroundImage:
-    source: /images/component-library/dunedin-cliff.jpg
+    source: /component-library/images/dunedin-cliff.jpg
     alt: "Dunedin cliffside"
     positionVertical: top
     positionHorizontal: left
