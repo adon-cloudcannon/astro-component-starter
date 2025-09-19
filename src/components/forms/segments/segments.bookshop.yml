@@ -83,6 +83,6 @@ _structures:
             - check_box
           text: Segment Option
           subtext:
-            - key: title
-            - key: name
-            - Enter a name for the input group.
+            - key: label
+            - key: value
+            - Enter a value for the input group.

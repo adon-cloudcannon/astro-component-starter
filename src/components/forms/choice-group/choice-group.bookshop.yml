@@ -76,6 +76,6 @@ _structures:
           icon: check_box
           text: Choice Group
           subtext:
-            - key: title
-            - key: name
-            - Enter a name for the input group.
+            - key: label
+            - key: value
+            - Enter a value for the input group.
