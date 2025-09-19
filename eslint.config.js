@@ -130,13 +130,41 @@ export default [
         },
         {
           pathPattern: "^_inputs\\..*\\.options$",
-          order: ["values", "structures", "preview"], // Common options keys
+          order: [
+            "values",
+            "structures",
+            "preview",
+            "paths",
+            "resize_style",
+            "expandable",
+            "image_size_attributes",
+            "prevent_resize_existing_files",
+            "disable_upload_file",
+            "disable_direct_input",
+            "disable_upload_file_in_file_browser",
+            "required",
+            "required_message",
+            "min_items",
+            "min_items_message",
+            "max_items",
+            "max_items_message",
+            "unique_on",
+            "unique_on_message",
+          ], // Common preview options keys
+        },
+        {
+          pathPattern: "^_inputs\\..*\\.options.preview$",
+          order: ["icon", "text", "subtext", "image", "gallery"], // Preview options keys
+        },
+        {
+          pathPattern: "^_inputs\\..*\\.options.preview.gallery$",
+          order: ["text", "icon", "icon_color", "icon_background_color", "image", "fit"], // Gallery preview options keys
         },
       ],
       "yml/quotes": ["error", { prefer: "double", avoidEscape: false }],
       "yml/no-empty-document": "off",
-      "yml/no-empty-mapping-value": "off", // Bookshop uses empty values for defaults
-      "yml/no-empty-sequence-entry": "off", // Bookshop uses empty arrays for defaults
+      "yml/no-empty-mapping-value": "off",
+      "yml/no-empty-sequence-entry": "off",
     },
   },
 
