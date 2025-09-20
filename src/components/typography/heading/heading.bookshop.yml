@@ -42,7 +42,7 @@ _inputs:
       numberedlist: false
       snippet: false
   type:
-    comment: The heading type/level.
+    comment: The heading type or level.
     type: select
     options:
       values:

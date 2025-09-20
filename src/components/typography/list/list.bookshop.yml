@@ -4,7 +4,7 @@ spec:
     - firstContentBlocks
     - secondContentBlocks
   label: List
-  description: Displays items in a list with icons as markers
+  description: Displays items in a list with icons as markers. (For traditional bulleted or numbered lists, use rich text instead.)
   icon: list
   tags:
 
@@ -32,8 +32,10 @@ _inputs:
           name: Horizontal
         - id: vertical
           name: Vertical
+    comment: The direction in which list items are arranged.
   horizontalAlignment:
     type: select
+    comment: The alignment of the list items.
     options:
       values:
         - id: start
@@ -43,7 +45,7 @@ _inputs:
         - id: end
           name: End
   size:
-    comment: Controls the size of the icon and text
+    comment: Controls the size of the icon and text.
     type: select
     options:
       values:
