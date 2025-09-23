@@ -14,13 +14,7 @@ const htmlAttributes = Object.fromEntries(
 ---
 
 <section class:list={["blog-block", className]} {...htmlAttributes}>
-  <Grid
-    minItemWidth={280}
-    maxItemWidth={400}
-    verticalAlignment="stretch"
-    horizontalAlignment="center"
-    equalWidth={true}
-  >
+  <Grid minItemWidth={280} layout="tiles">
     {
       blogPosts.map((post) => (
         <GridItem>
@@ -30,6 +24,7 @@ const htmlAttributes = Object.fromEntries(
             rounded={true}
             border={true}
             link={post.url || post.slug || "#"}
+            title={post.title || "Untitled Post"}
           >
             <div slot="header">
               <SmartImage

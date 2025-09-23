@@ -1,44 +1,46 @@
 ---
-title: Horizontal Alignment - Center
+title: Flow Layout
 spacing:
 blocks:
   _bookshop_name: "wrappers/grid"
-  minItemWidth: 200
-  maxItemWidth: 250
-  horizontalAlignment: "center"
-  equalWidth: true
+  layout: flow
+  minItemWidth: 0
+  maxItemWidth: 320
   items:
     - contentBlocks:
         - _bookshop_name: "wrappers/card"
-          backgroundColor: "surface"
           paddingHorizontal: md
           paddingVertical: md
+          rounded: true
+          border: true
           contentBlocks:
             - _bookshop_name: "typography/heading"
-              text: "Item 1"
+              text: "Short"
               level: h3
             - _bookshop_name: "typography/simple-text"
-              text: "This is a grid item with sample content."
+              text: "Short content."
     - contentBlocks:
         - _bookshop_name: "wrappers/card"
-          backgroundColor: "accent"
           paddingHorizontal: md
           paddingVertical: md
+          rounded: true
+          border: true
           contentBlocks:
             - _bookshop_name: "typography/heading"
-              text: "Item 2"
+              text: "Medium"
               level: h3
             - _bookshop_name: "typography/simple-text"
-              text: "This is a grid item with sample content."
+              text: "This card is a little longer."
     - contentBlocks:
         - _bookshop_name: "wrappers/card"
-          backgroundColor: "highlight"
           paddingHorizontal: md
           paddingVertical: md
+          rounded: true
+          border: true
           contentBlocks:
             - _bookshop_name: "typography/heading"
-              text: "Item 3"
+              text: "Much Longer Card"
               level: h3
             - _bookshop_name: "typography/simple-text"
-              text: "This is a grid item with sample content."
+              text: "This card demonstrates how the Flow layout handles longer content."
 ---

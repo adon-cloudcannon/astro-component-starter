@@ -34,10 +34,4 @@ blocks:
       imageSource: /component-library/images/sunset.jpg
       imageAlt: "Sunset over Dunedin"
       url: "/blog/dunedin-sunsets"
-    - title: "The Story of Dunedin's Castle"
-      excerpt: "Uncover the fascinating history behind Dunedin's most iconic buildings, including the legendary Larnach Castle and its intriguing past."
-      date: "2024-01-03"
-      imageSource: /component-library/images/castle.jpg
-      imageAlt: "Larnach Castle in Dunedin"
-      url: "/blog/dunedin-castle-history"
 ---

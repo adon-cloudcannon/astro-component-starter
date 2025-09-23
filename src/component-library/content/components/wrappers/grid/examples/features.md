@@ -1,52 +1,58 @@
 ---
-title: Non equal width items
+title: Features Layout
 spacing:
 blocks:
   _bookshop_name: "wrappers/grid"
-  equalWidth: false
+  layout: features
+  minItemWidth: 350
+  maxItemWidth: 350
   items:
     - contentBlocks:
         - _bookshop_name: "wrappers/card"
-          backgroundColor: "surface"
           paddingHorizontal: md
           paddingVertical: md
+          rounded: true
+          border: true
           contentBlocks:
             - _bookshop_name: "typography/heading"
-              text: "Short"
+              text: "Feature One"
               level: h3
             - _bookshop_name: "typography/simple-text"
-              text: "Short content."
+              text: "The features layout sizes items within the min/max width provided."
     - contentBlocks:
         - _bookshop_name: "wrappers/card"
-          backgroundColor: "accent"
           paddingHorizontal: md
           paddingVertical: md
+          rounded: true
+          border: true
           contentBlocks:
             - _bookshop_name: "typography/heading"
-              text: "Medium Length Content"
+              text: "Feature Two"
               level: h3
             - _bookshop_name: "typography/simple-text"
-              text: "This item has medium length content that determines its natural width."
+              text: "Items are centered if there is extra whitespace."
     - contentBlocks:
         - _bookshop_name: "wrappers/card"
-          backgroundColor: "highlight"
           paddingHorizontal: md
           paddingVertical: md
+          rounded: true
+          border: true
           contentBlocks:
             - _bookshop_name: "typography/heading"
-              text: "Longer Content Title"
+              text: "Feature Three"
               level: h3
             - _bookshop_name: "typography/simple-text"
-              text: "This item has significantly more content and will be wider."
+              text: "You can ensure all items are always equal in a features layout by giving it the same value for min and max width."
     - contentBlocks:
         - _bookshop_name: "wrappers/card"
-          backgroundColor: "surface"
           paddingHorizontal: md
           paddingVertical: md
+          rounded: true
+          border: true
           contentBlocks:
             - _bookshop_name: "typography/heading"
-              text: "Tiny"
+              text: "Feature Four"
               level: h3
             - _bookshop_name: "typography/simple-text"
-              text: "Small."
+              text: "You can make it more flexible by using different min/max widths, but keep in mind the last row might be larger if there's an uneven number of items."
 ---
