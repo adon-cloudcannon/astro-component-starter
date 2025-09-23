@@ -17,6 +17,7 @@ preview:
 _inputs:
   items:
     type: array
+    label: List Items
     options:
       structures: _structures.item
   horizontalAlignment:
@@ -34,7 +35,6 @@ _structures:
   item:
     values:
       - label: Definition List Item
-        icon: list
         value:
           _component: definition-list-item
           title:
@@ -43,6 +43,16 @@ _structures:
           title:
             type: text
             comment: A bolded title for the list item.
+            options:
+              required: true
+              required_message: List item must contain a title.
           text:
             type: textarea
             comment: The text content of the list item.
+        preview:
+          icon: list
+          text:
+            - key: title
+            - Definition List Item
+          subtext:
+            - key: text

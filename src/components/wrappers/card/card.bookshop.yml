@@ -53,7 +53,7 @@ _inputs:
     type: select
     comment: Horizontal padding applied to the card content.
     options:
-      values: &sizing_options
+      values:
         - id: xs
           name: Extra Small
         - id: sm
@@ -70,7 +70,19 @@ _inputs:
     type: select
     comment: Vertical padding applied to the card content.
     options:
-      values: *sizing_options
+      values:
+        - id: xs
+          name: Extra Small
+        - id: sm
+          name: Small
+        - id: md
+          name: Medium
+        - id: lg
+          name: Large
+        - id: xl
+          name: Extra Large
+        - id: 2xl
+          name: 2XL
   colorScheme:
     type: select
     comment: Color scheme theme for the card.

@@ -60,7 +60,7 @@ _inputs:
     type: select
     comment: Horizontal padding applied to the container content.
     options:
-      values: &sizing_options
+      values:
         - id: none
           name: None
         - id: xs
@@ -87,7 +87,29 @@ _inputs:
     type: select
     comment: Vertical padding applied to the container content.
     options:
-      values: *sizing_options
+      values:
+        - id: none
+          name: None
+        - id: xs
+          name: Extra Small
+        - id: sm
+          name: Small
+        - id: md
+          name: Medium
+        - id: lg
+          name: Large
+        - id: xl
+          name: Extra Large
+        - id: 2xl
+          name: 2xl
+        - id: 3xl
+          name: 3xl
+        - id: 4xl
+          name: 4xl
+        - id: 5xl
+          name: 5xl
+        - id: 6xl
+          name: 6xl
   colorScheme:
     type: select
     comment: Color scheme theme for the container.
