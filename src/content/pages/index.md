@@ -156,7 +156,7 @@ pageBlocks:
               - _bookshop_name: elements/smart-video
                 externalVideoHost: true
                 videoHost: youtube
-                id: 5dXw2jaj2so
+                id: GOejI6c0CMQ
                 title: CC tutorial
                 source:
                 poster:
