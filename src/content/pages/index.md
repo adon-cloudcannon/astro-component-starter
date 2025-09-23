@@ -12,44 +12,30 @@ pageBlocks:
         align: center
         iconName:
         iconPosition:
-      - _bookshop_name: wrappers/card
-        label: ''
-        contentBlocks:
-          - _bookshop_name: typography/counter
-            number: 100
-            prefix: $
-            suffix: USD
-            horizontalAlignment: start
-        headerContentBlocks:
-          - _bookshop_name: typography/heading
-            text: This is interesting
-            type: h3
-            size: xl
-            align: start
-            iconName: arrow-down
-            iconPosition: before
-        footerContentBlocks: []
-        paddingHorizontal: xl
-        paddingVertical: xl
-        colorScheme: contrast
-        backgroundColor: highlight
-        backgroundImage:
-          source: ''
-          alt: ''
-          positionVertical: top
-          positionHorizontal: center
-        link: ''
-        rounded: false
-        border: false
-      - _bookshop_name: typography/definition-list
+      - _bookshop_name: wrappers/split
+        firstColumnContentBlocks: []
+        secondColumnContentBlocks: []
+        distributionMode: half
+        fixedWidth:
+        verticalAlignment: top
+        reverse: false
+      - _bookshop_name: wrappers/grid
+        minItemWidth: 200
+        maxItemWidth: 320
+        verticalAlignment: start
+        horizontalAlignment: center
+        equalWidth: true
+        items: []
+      - _bookshop_name: wrappers/content-selector
         items:
-          - _component: definition-list-item
-            title: >-
-              12345678901234567890123456 123456789012
-              345678901234567890123456789078901234567890123456789012
-              345678901234567890
-            text: werwerwerwerwerwerwerwer
-        horizontalAlignment: start
+        navigationPosition: start
+      - _bookshop_name: wrappers/carousel
+        label: ''
+        slides: []
+        autoPlay: false
+        autoScroll: false
+        slideWidthPercent: 100
+        minSlideWidth: 0
       - _bookshop_name: wrappers/button-group
         buttonBlocks:
           - _bookshop_name: elements/button
@@ -69,6 +55,94 @@ pageBlocks:
             size: lg
         direction: row
         align: center
+      - _bookshop_name: typography/counter
+        number: 100
+        prefix:
+        suffix:
+        horizontalAlignment: start
+      - _bookshop_name: elements/smart-video
+        externalVideoHost: false
+        videoHost: youtube
+        id:
+        title:
+        source: /assets/videos/glass.mp4
+        poster: /assets/images/video-placeholder.jpg
+      - _bookshop_name: wrappers/card
+        label: ''
+        contentBlocks:
+          - _bookshop_name: typography/counter
+            number: 100
+            prefix: $
+            suffix: USD
+            horizontalAlignment: start
+          - _bookshop_name: typography/simple-text
+            text: akljshdkajshdkjahsdkjahsd
+            align: start
+            size: md
+        headerContentBlocks:
+          - _bookshop_name: typography/heading
+            text: This is interesting
+            type: h3
+            size: xl
+            align: start
+            iconName: arrow-down
+            iconPosition: before
+        footerContentBlocks: []
+        paddingHorizontal: xl
+        paddingVertical: xl
+        colorScheme: contrast
+        backgroundColor: highlight
+        backgroundImage:
+          source: ''
+          alt: ''
+          positionVertical: top
+          positionHorizontal: center
+        link: ''
+        rounded: true
+        border: false
+      - _bookshop_name: typography/definition-list
+        items:
+          - _component: definition-list-item
+            title: >-
+              12345678901234567890123456 123456789012
+              345678901234567890123456789078901234567890123456789012
+              345678901234567890
+            text: werwerwerwerwerwerwerwer
+        horizontalAlignment: start
+      - _bookshop_name: wrappers/accordion
+        items:
+          - title: Testing media
+            contentBlocks:
+              - _bookshop_name: elements/smart-image
+                source: /component-library/images/dunedin-cliff.jpg
+                alt: Dunedin coastline
+                rounded: true
+                aspectRatio: landscape
+                positionVertical: center
+                positionHorizontal: center
+              - _bookshop_name: elements/smart-video
+                externalVideoHost: true
+                videoHost: youtube
+                id: GOejI6c0CMQ
+                title: CC tutorial
+                source:
+                poster:
+              - _bookshop_name: elements/smart-video
+                externalVideoHost: false
+                videoHost: youtube
+                id:
+                title:
+                source: /assets/videos/glass.mp4
+                poster: /assets/images/video-placeholder.jpg
+              - _bookshop_name: elements/smart-video
+                externalVideoHost: true
+                videoHost: vimeo
+                id: '1054665455'
+                title: A vimeo test vid
+                source:
+                poster:
+        openFirst: false
+        singleOpen: false
       - _bookshop_name: forms/form
         action:
         formBlocks:
@@ -179,45 +253,11 @@ pageBlocks:
             required: false
             placeholder: Hello, I'm writing here because...
             value:
-      - _bookshop_name: wrappers/accordion
-        items:
-          - title: Testing media
-            contentBlocks:
-              - _bookshop_name: elements/smart-image
-                source: /component-library/images/dunedin-cliff.jpg
-                alt: Dunedin coastline
-                rounded: true
-                aspectRatio: landscape
-                positionVertical: center
-                positionHorizontal: center
-              - _bookshop_name: elements/smart-video
-                externalVideoHost: true
-                videoHost: youtube
-                id: GOejI6c0CMQ
-                title: CC tutorial
-                source:
-                poster:
-              - _bookshop_name: elements/smart-video
-                externalVideoHost: false
-                videoHost: youtube
-                id:
-                title:
-                source: /assets/videos/glass.mp4
-                poster: /assets/images/video-placeholder.jpg
-              - _bookshop_name: elements/smart-video
-                externalVideoHost: true
-                videoHost: vimeo
-                id: '1054665455'
-                title: A vimeo test vid
-                source:
-                poster:
-        openFirst: false
-        singleOpen: false
     maxContentWidth: 2xl
     paddingHorizontal: lg
     paddingVertical: lg
-    colorScheme:
-    backgroundColor:
+    colorScheme: default
+    backgroundColor: highlight
     backgroundImage:
       source: ''
       alt: ''
