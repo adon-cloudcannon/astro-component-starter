@@ -19,7 +19,7 @@ blueprint:
   text:
   authorName:
   authorDescription:
-  horizontalAlignment: start
+  alignX: start
 
 # Overrides any fields in the blueprint when viewing this component in the component browser
 preview:
@@ -47,7 +47,7 @@ _inputs:
   authorDescription:
     comment: The role or company of the person.
     type: textarea
-  horizontalAlignment:
+  alignX:
     comment: The alignment of the testimonial.
     type: select
     options:

@@ -10,19 +10,19 @@ spec:
   preview:
     text: Divider
     subtext:
-      - key: padding
+      - key: paddingVertical
       - Add a padding value
     icon: horizontal_rule
 
 blueprint:
-  padding:
+  paddingVertical:
 
 # Overrides any fields in the blueprint when viewing this component in the component browser
 preview:
 
 # Any extra CloudCannon inputs configuration to apply to the blueprint
 _inputs:
-  padding:
+  paddingVertical:
     comment: The space on the top and bottom of the horizontal line.
     type: select
     options:

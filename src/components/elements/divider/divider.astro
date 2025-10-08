@@ -1,5 +1,5 @@
 ---
-const { padding = "md", class: className, ...rest } = Astro.props;
+const { paddingVertical = "md", class: className, ...rest } = Astro.props;
 
 const htmlAttributes = Object.fromEntries(
   Object.entries(rest).filter(([key]) => key !== "_bookshop_name")
@@ -7,7 +7,7 @@ const htmlAttributes = Object.fromEntries(
 ---
 
 <div
-  class:list={["divider", className, `padding-y-${padding}`]}
+  class:list={["divider", className, `padding-y-${paddingVertical}`]}
   {...htmlAttributes}
   aria-hidden="true"
 >

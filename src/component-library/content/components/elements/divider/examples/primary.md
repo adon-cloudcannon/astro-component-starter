@@ -5,7 +5,7 @@ blocks:
   - _bookshop_name: "typography/rich-text"
     text: "There is a **divider** below this text."
   - _bookshop_name: "elements/divider"
-    padding: "md"
+    paddingVertical: "md"
   - _bookshop_name: "typography/rich-text"
     text: "There is a **divider** above this text."
 ---

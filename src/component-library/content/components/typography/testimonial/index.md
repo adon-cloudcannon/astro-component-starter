@@ -11,7 +11,7 @@ examples:
       - alignment-center
       - alignment-end
     size: sm
-    title: Horizontal Alignment
+    title: AlignX
   - slugs:
       - author-description
     size: sm
