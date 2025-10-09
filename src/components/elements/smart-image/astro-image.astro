@@ -14,13 +14,14 @@ const isRemoteUrl =
 
 const imageFiles = import.meta.glob("/src/assets/images/**/*", {
   import: "default",
+  eager: true,
 }) as Record<string, any>;
 
-if (typeof source === "string" && source.startsWith("/assets/")) {
+if (typeof source === "string" && source.startsWith("/src/")) {
   const imageKey = Object.keys(imageFiles).find((key) => key.endsWith(source));
 
   if (imageKey && imageFiles[imageKey]) {
-    imageSrc = await imageFiles[imageKey]();
+    imageSrc = imageFiles[imageKey];
 
     if (!imageWidth) imageWidth = imageSrc.width;
     if (!imageHeight) imageHeight = imageSrc.height;

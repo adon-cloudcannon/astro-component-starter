@@ -32,7 +32,7 @@ _inputs:
     options:
       paths:
         uploads: src/assets/images
-        static: src/assets
+        static: ""
   alt:
     type: textarea
     comment: Alternative text for accessibility.

@@ -8,22 +8,22 @@ blocks:
   slides:
     - contentBlocks:
         - _bookshop_name: "elements/smart-image"
-          source: /assets/images/component-library/quiet-street.jpg
+          source: /src/assets/images/component-library/quiet-street.jpg
           alt: "Quiet Street"
     - contentBlocks:
         - _bookshop_name: "elements/smart-image"
-          source: /assets/images/component-library/sunset.jpg
+          source: /src/assets/images/component-library/sunset.jpg
           alt: "Sunset"
     - contentBlocks:
         - _bookshop_name: "elements/smart-image"
-          source: /assets/images/component-library/sheep.jpg
+          source: /src/assets/images/component-library/sheep.jpg
           alt: "Sheep"
     - contentBlocks:
         - _bookshop_name: "elements/smart-image"
-          source: /assets/images/component-library/castle.jpg
+          source: /src/assets/images/component-library/castle.jpg
           alt: "Castle"
     - contentBlocks:
         - _bookshop_name: "elements/smart-image"
-          source: /assets/images/component-library/dunedin-cliff.jpg
+          source: /src/assets/images/component-library/dunedin-cliff.jpg
           alt: "Dunedin Cliff"
 ---
