@@ -1,5 +1,5 @@
 import sitemap from "@astrojs/sitemap";
-import bookshop from "@bookshop/astro-bookshop";
+import editableRegions from "@cloudcannon/editable-regions/astro-integration";
 import postcssGlobalData from "@csstools/postcss-global-data";
 import icon from "astro-icon";
 import { defineConfig } from "astro/config";
@@ -10,6 +10,7 @@ import postcssCustomMedia from "postcss-custom-media";
 import postcssEach from "postcss-each";
 import postcssImport from "postcss-import";
 import postcssNested from "postcss-nested";
+
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
@@ -26,7 +27,7 @@ export default defineConfig({
     domains: ["picsum.photos"],
   },
   integrations: [
-    bookshop(),
+    editableRegions(),
     icon({
       iconDir: path.resolve(__dirname, "src/icons"),
     }),
