@@ -6,7 +6,7 @@ blocks:
   backgroundColor: accent
   paddingHorizontal: sm
   paddingVertical: sm
-  cardBlocks:
+  contentBlocks:
     - _bookshop_name: "typography/heading"
       text: "Accent Card"
       level: h3

@@ -3,7 +3,7 @@ title: Flexible Fixed Mode
 spacing:
 blocks:
   _bookshop_name: "wrappers/split"
-  firstColumnBlocks:
+  firstColumnContentBlocks:
     - _bookshop_name: "wrappers/container"
       backgroundColor: "accent"
       contentBlocks:
@@ -12,7 +12,7 @@ blocks:
             ## Flexible column
 
             This column takes up the remaining space.
-  secondColumnBlocks:
+  secondColumnContentBlocks:
     - _bookshop_name: "wrappers/container"
       backgroundColor: "highlight"
       contentBlocks:

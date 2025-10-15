@@ -6,7 +6,7 @@ blocks:
   backgroundColor:
   paddingHorizontal: sm
   paddingVertical: sm
-  cardBlocks:
+  contentBlocks:
     - _bookshop_name: "typography/heading"
       text: "No Background Card"
       level: h3

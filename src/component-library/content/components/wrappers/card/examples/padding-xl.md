@@ -6,7 +6,7 @@ blocks:
   paddingHorizontal: xl
   paddingVertical: xl
   backgroundColor: surface
-  cardBlocks:
+  contentBlocks:
     - _bookshop_name: "typography/heading"
       text: "XL Padding"
       level: h3

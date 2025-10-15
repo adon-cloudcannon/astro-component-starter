@@ -9,9 +9,9 @@ spec:
 
 blueprint:
   label:
-  cardBlocks: []
-  headerCardBlocks: []
-  footerCardBlocks: []
+  contentBlocks: []
+  headerContentBlocks: []
+  footerContentBlocks: []
   paddingHorizontal: sm
   paddingVertical: sm
   colorScheme: "default"
@@ -33,17 +33,17 @@ _inputs:
   label:
     type: text
     comment: Optional label for the card to help identify it in the editor.
-  cardBlocks:
+  contentBlocks:
     type: array
     comment: Array of content blocks to render within the card.
     options:
       structures: _structures.cardBlocks
-  headerCardBlocks:
+  headerContentBlocks:
     type: array
     comment: Array of content blocks to render in the card header.
     options:
       structures: _structures.cardBlocks
-  footerCardBlocks:
+  footerContentBlocks:
     type: array
     comment: Array of content blocks to render in the card footer.
     options:

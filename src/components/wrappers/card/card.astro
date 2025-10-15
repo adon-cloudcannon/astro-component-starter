@@ -5,8 +5,8 @@ import Component from "@components/utils/renderBlock.astro";
 const {
   label,
   cardBlocks,
-  headerCardBlocks,
-  footerCardBlocks,
+  headerContentBlocks,
+  footerContentBlocks,
   paddingHorizontal,
   paddingVertical,
   colorScheme,
@@ -73,9 +73,9 @@ const Tag = link ? "a" : "div";
   }
 
   {
-    (headerCardBlocks || Astro.slots.has("header")) && (
+    (headerContentBlocks || Astro.slots.has("header")) && (
       <div class="header-content">
-        <Component contentBlocks={headerCardBlocks} />
+        <Component contentBlocks={headerContentBlocks} />
         <slot name="header" />
       </div>
     )
@@ -95,9 +95,9 @@ const Tag = link ? "a" : "div";
   </div>
 
   {
-    (footerCardBlocks || Astro.slots.has("footer")) && (
+    (footerContentBlocks || Astro.slots.has("footer")) && (
       <div class="footer-content">
-        <Component contentBlocks={footerCardBlocks} />
+        <Component contentBlocks={footerContentBlocks} />
         <slot name="footer" />
       </div>
     )

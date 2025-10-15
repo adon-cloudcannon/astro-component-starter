@@ -6,7 +6,7 @@ blocks:
   backgroundColor: base
   paddingHorizontal: sm
   paddingVertical: sm
-  cardBlocks:
+  contentBlocks:
     - _bookshop_name: "typography/heading"
       text: "Base Card"
       level: h3

@@ -3,7 +3,7 @@ title: Half
 spacing:
 blocks:
   _bookshop_name: "wrappers/split"
-  firstColumnBlocks:
+  firstColumnContentBlocks:
     - _bookshop_name: "wrappers/container"
       backgroundColor: "accent"
       contentBlocks:
@@ -12,7 +12,7 @@ blocks:
             ## Half column
 
             This column takes up 50% of the available space.
-  secondColumnBlocks:
+  secondColumnContentBlocks:
     - _bookshop_name: "wrappers/container"
       backgroundColor: "highlight"
       contentBlocks:

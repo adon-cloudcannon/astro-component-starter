@@ -7,7 +7,7 @@ blocks:
   rounded: false
   paddingHorizontal: sm
   paddingVertical: sm
-  cardBlocks:
+  contentBlocks:
     - _bookshop_name: "typography/heading"
       text: "Square Card"
       level: h3

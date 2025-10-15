@@ -10,7 +10,7 @@ blocks:
     alt: "Dunedin cliffside"
     positionVertical: top
     positionHorizontal: left
-  cardBlocks:
+  contentBlocks:
     - _bookshop_name: "typography/heading"
       text: "Top Left Position"
       level: h3

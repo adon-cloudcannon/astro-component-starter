@@ -3,7 +3,7 @@ title: Bottom Alignment
 spacing:
 blocks:
   _bookshop_name: "wrappers/split"
-  firstColumnBlocks:
+  firstColumnContentBlocks:
     - _bookshop_name: "wrappers/container"
       backgroundColor: "accent"
       contentBlocks:
@@ -16,7 +16,7 @@ blocks:
             Here's even more text to help illustrate the point we're trying to make with this demonstration.
 
             And here's even more text to really drive the point home.
-  secondColumnBlocks:
+  secondColumnContentBlocks:
     - _bookshop_name: "wrappers/container"
       backgroundColor: "highlight"
       contentBlocks:

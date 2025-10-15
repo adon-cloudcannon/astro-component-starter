@@ -6,7 +6,7 @@ blocks:
   paddingHorizontal: sm
   paddingVertical: sm
   backgroundColor: surface
-  cardBlocks:
+  contentBlocks:
     - _bookshop_name: "typography/heading"
       text: "sm padding"
       level: h3

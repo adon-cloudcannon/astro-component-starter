@@ -8,8 +8,8 @@ spec:
 
 blueprint:
   label: ""
-  firstColumnBlocks: []
-  secondColumnBlocks: []
+  firstColumnContentBlocks: []
+  secondColumnContentBlocks: []
   distributionMode: half
   fixedWidth: null
   minSplitWidth: 0
@@ -24,12 +24,12 @@ _inputs:
   label:
     comment: Optional label for the split to help identify it in the editor.
     type: text
-  firstColumnBlocks:
+  firstColumnContentBlocks:
     type: array
     comment: Array of content blocks to render in the first column.
     options:
       structures: _structures.splitBlocks
-  secondColumnBlocks:
+  secondColumnContentBlocks:
     type: array
     comment: Array of content blocks to render in the second column.
     options:

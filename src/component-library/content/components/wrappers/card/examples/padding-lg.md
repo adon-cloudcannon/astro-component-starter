@@ -6,7 +6,7 @@ blocks:
   paddingHorizontal: lg
   paddingVertical: lg
   backgroundColor: surface
-  cardBlocks:
+  contentBlocks:
     - _bookshop_name: "typography/heading"
       text: "lg Padding"
       level: h3

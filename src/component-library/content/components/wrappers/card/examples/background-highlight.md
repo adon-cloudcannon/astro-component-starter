@@ -6,7 +6,7 @@ blocks:
   backgroundColor: highlight
   paddingHorizontal: sm
   paddingVertical: sm
-  cardBlocks:
+  contentBlocks:
     - _bookshop_name: "typography/heading"
       text: "Highlight Card"
       level: h3
