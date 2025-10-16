@@ -39,8 +39,8 @@ _inputs:
           name: YouTube
         - id: vimeo
           name: Vimeo
-        - id: self-hosted
-          name: Self Hosted
+        - id: local-source
+          name: Local Source
   title:
     type: text
     comment: Used for externally hosted videos - The video title provides accessibility information for assistive technologies (like screen readers) and can display a tooltip when a user hovers over the video.

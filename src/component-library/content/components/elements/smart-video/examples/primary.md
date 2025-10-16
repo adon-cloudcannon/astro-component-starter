@@ -4,8 +4,10 @@ spacing: "all"
 blocks:
   - _bookshop_name: "elements/smart-video"
     video:
-      _type: youtube
+      type: youtube
       id: dsTXcSeAZq8
       title: Astro in 100 Seconds
+      source: ""
+      poster: ""
       style: "max-width: 600px"
 ---
