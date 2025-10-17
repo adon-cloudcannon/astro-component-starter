@@ -5,7 +5,7 @@
     "install_command": "npm install",
     "build_command": "npm run build",
     "output_path": "dist",
-    "preserved_paths": "node_modules",
+    "preserved_paths": "node_modules,.astro",
     "preserveOutput": true,
     "includeGit": true,
     "environment_variables": [],
