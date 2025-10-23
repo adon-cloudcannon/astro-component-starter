@@ -8,11 +8,11 @@ value:
   _component: wrappers/container/container
   label: ""
   contentBlocks: []
-  maxContentWidth: md
+  maxContentWidth: 2xl
   paddingHorizontal: md
   paddingVertical: md
   colorScheme: default
-  backgroundColor: null
+  backgroundColor: base
   backgroundImage:
     source: ""
     alt: ""
