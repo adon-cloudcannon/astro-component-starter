@@ -14,7 +14,7 @@ value:
   source: ""
   alt: ""
   rounded: false
-  aspectRatio: null
+  aspectRatio: none
   positionVertical: center
   positionHorizontal: center
 preview:
@@ -48,6 +48,8 @@ _inputs:
     comment: Set a fixed aspect ratio for the image.
     options:
       values:
+        - id: none
+          name: None
         - id: square
           name: Square (1:1)
         - id: landscape
