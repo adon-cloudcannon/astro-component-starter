@@ -58,9 +58,6 @@ _structures:
           title:
             type: text
             comment: A bolded title for the list item.
-            options:
-              required: true
-              required_message: List item must contain a title.
           text:
             type: textarea
             comment: The text content of the list item.
