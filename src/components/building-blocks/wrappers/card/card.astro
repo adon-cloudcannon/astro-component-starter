@@ -1,6 +1,6 @@
 ---
-import Image from "@core-elements/image/image.astro";
 import Component from "@components/utils/renderBlock.astro";
+import Image from "@core-elements/image/image.astro";
 
 const {
   label,
@@ -95,8 +95,13 @@ const Tag = link ? "a" : "div";
         maxContentWidth && `max-width-${maxContentWidth}`,
       ]}
     >
-      <slot />
-      <Component contentSections={contentSections} propName="contentSections" />
+      {
+        contentSections ? (
+          <Component contentSections={contentSections} propName="contentSections" />
+        ) : (
+          <slot />
+        )
+      }
     </div>
   </div>
 
