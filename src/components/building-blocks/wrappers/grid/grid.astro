@@ -10,6 +10,9 @@ const {
   items = [],
   label,
   gap = "md",
+  "data-editable": dataEditable = "array",
+  "data-prop": dataProp = "items",
+  "data-component-key": dataComponentKey = "_component",
   ...rest
 } = Astro.props;
 
@@ -39,9 +42,9 @@ const gridStyles = [
 ---
 
 <div
-  data-editable="array"
-  data-prop="items"
-  data-component-key="_component"
+  data-editable={dataEditable}
+  data-prop={dataProp}
+  data-component-key={dataComponentKey}
   data-id-key="_component"
   class:list={["grid", `layout-${layout}`, className]}
   style={gridStyles}
