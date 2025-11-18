@@ -786,38 +786,6 @@ _structures:
           path:
             type: text
             comment: The URL/path for the navigation item.
-  linkItems:
-    id_key: _component
-    style: modal
-    values:
-      - label: Navigation Link
-        icon: link
-        value:
-          name: ''
-          path: ''
-        _inputs:
-          name:
-            type: text
-            comment: Display text for the navigation link.
-          path:
-            type: text
-            comment: URL path for the navigation link.
-  socialItems:
-    id_key: _component
-    style: modal
-    values:
-      - label: Social Link
-        icon: share
-        value:
-          icon: ''
-          link: ''
-        _inputs:
-          icon:
-            type: text
-            comment: Icon name for the social media platform.
-          link:
-            type: text
-            comment: URL link to the social media profile.
   pageSections:
     id_key: _component
     style: modal
@@ -1481,6 +1449,38 @@ _structures:
           rounded:
             type: switch
             comment: Whether to apply rounded corners to the custom section.
+  linkItems:
+    id_key: _component
+    style: modal
+    values:
+      - label: Navigation Link
+        icon: link
+        value:
+          name: ''
+          path: ''
+        _inputs:
+          name:
+            type: text
+            comment: Display text for the navigation link.
+          path:
+            type: text
+            comment: URL path for the navigation link.
+  socialItems:
+    id_key: _component
+    style: modal
+    values:
+      - label: Social Link
+        icon: share
+        value:
+          icon: ''
+          link: ''
+        _inputs:
+          icon:
+            type: text
+            comment: Icon name for the social media platform.
+          link:
+            type: text
+            comment: URL link to the social media profile.
   featureSplitItems:
     id_key: _component
     style: modal
@@ -2039,42 +2039,6 @@ _structures:
             type: switch
             comment: Whether to apply a border to the card.
       - &ref_4
-        label: Accordion
-        icon: expand_all
-        description: Interactive component for showing and hiding content panels.
-        value:
-          _component: building-blocks/wrappers/accordion
-          label: null
-          items: []
-          openFirst: false
-          singleOpen: false
-        preview:
-          text:
-            - key: label
-            - Accordion
-          subtext:
-            - template: An accordion containing {items|array_length} {"item"|pluralize=items}
-            - Add items to the accordion
-        picker_preview:
-          text: Accordion
-          subtext: Interactive component for showing and hiding content panels.
-          icon: expand_all
-        _inputs:
-          label:
-            comment: Optional label for the accordion to help identify it in the editor.
-            type: text
-          items:
-            comment: The items to display in the accordion.
-            type: array
-            options:
-              structures: _structures.accordionItems
-          openFirst:
-            comment: Whether the first item will be open by default.
-            type: switch
-          singleOpen:
-            comment: Whether only one item can be open at a time within this accordion.
-            type: switch
-      - &ref_5
         label: Button Group
         icon: rectangle
         description: Arranges buttons side by side with consistent spacing.
@@ -2124,6 +2088,42 @@ _structures:
                   name: Center
                 - id: end
                   name: End
+      - &ref_5
+        label: Accordion
+        icon: expand_all
+        description: Interactive component for showing and hiding content panels.
+        value:
+          _component: building-blocks/wrappers/accordion
+          label: null
+          items: []
+          openFirst: false
+          singleOpen: false
+        preview:
+          text:
+            - key: label
+            - Accordion
+          subtext:
+            - template: An accordion containing {items|array_length} {"item"|pluralize=items}
+            - Add items to the accordion
+        picker_preview:
+          text: Accordion
+          subtext: Interactive component for showing and hiding content panels.
+          icon: expand_all
+        _inputs:
+          label:
+            comment: Optional label for the accordion to help identify it in the editor.
+            type: text
+          items:
+            comment: The items to display in the accordion.
+            type: array
+            options:
+              structures: _structures.accordionItems
+          openFirst:
+            comment: Whether the first item will be open by default.
+            type: switch
+          singleOpen:
+            comment: Whether only one item can be open at a time within this accordion.
+            type: switch
       - &ref_6
         label: Form
         icon: checklist_rtl
@@ -3050,26 +3050,6 @@ _structures:
       - *ref_17
       - *ref_18
       - *ref_19
-  accordionItems:
-    id_key: _component
-    style: modal
-    values:
-      - label: Item
-        icon: place_item
-        value:
-          _component: building-blocks/wrappers/accordion/accordion-item
-          title: null
-          contentSections: null
-        _inputs:
-          title:
-            comment: The title of the accordion item.
-            type: text
-          contentSections:
-            type: array
-            options:
-              structures: _structures.accordionSections
-          _component:
-            hidden: true
   cardSections:
     id_key: _component
     style: modal
@@ -3094,7 +3074,7 @@ _structures:
     id_key: _component
     style: modal
     values:
-      - *ref_5
+      - *ref_4
       - *ref_6
       - *ref_7
       - *ref_8
@@ -3109,6 +3089,26 @@ _structures:
       - *ref_17
       - *ref_18
       - *ref_19
+  accordionItems:
+    id_key: _component
+    style: modal
+    values:
+      - label: Item
+        icon: place_item
+        value:
+          _component: building-blocks/wrappers/accordion/accordion-item
+          title: null
+          contentSections: null
+        _inputs:
+          title:
+            comment: The title of the accordion item.
+            type: text
+          contentSections:
+            type: array
+            options:
+              structures: _structures.accordionSections
+          _component:
+            hidden: true
   formBlocks:
     id_key: _component
     style: modal
@@ -3402,44 +3402,6 @@ _structures:
           value:
             type: text
             comment: The value to be stored in the hidden field.
-      - label: File Upload
-        icon: upload
-        description: Form field for uploading files.
-        value:
-          _component: building-blocks/forms/file-upload
-          label: null
-          name: null
-          required: false
-          accept: null
-          multiple: false
-        preview:
-          subtext:
-            - key: label
-            - key: name
-            - Enter a name for the file upload form field.
-        picker_preview:
-          text: File Upload
-          subtext: Form field for uploading files.
-          icon: upload
-        _inputs:
-          label:
-            type: text
-            comment: The label text for the file upload field.
-          name:
-            type: text
-            comment: A unique name attribute for the file upload field.
-            options:
-              required: true
-              required_message: Only form elements with a name will have their values passed when submitting a form.
-          required:
-            type: switch
-            comment: Whether the field is required.
-          accept:
-            type: text
-            comment: Comma-separated list of accepted file types (eg. '.jpg,.png,.pdf').
-          multiple:
-            type: switch
-            comment: Whether multiple files can be selected.
       - label: Date
         icon: calendar
         description: Form field for selecting a date.
@@ -3479,6 +3441,44 @@ _structures:
           max:
             type: date
             comment: The maximum date allowed (ISO8601 format).
+      - label: File Upload
+        icon: upload
+        description: Form field for uploading files.
+        value:
+          _component: building-blocks/forms/file-upload
+          label: null
+          name: null
+          required: false
+          accept: null
+          multiple: false
+        preview:
+          subtext:
+            - key: label
+            - key: name
+            - Enter a name for the file upload form field.
+        picker_preview:
+          text: File Upload
+          subtext: Form field for uploading files.
+          icon: upload
+        _inputs:
+          label:
+            type: text
+            comment: The label text for the file upload field.
+          name:
+            type: text
+            comment: A unique name attribute for the file upload field.
+            options:
+              required: true
+              required_message: Only form elements with a name will have their values passed when submitting a form.
+          required:
+            type: switch
+            comment: Whether the field is required.
+          accept:
+            type: text
+            comment: Comma-separated list of accepted file types (eg. '.jpg,.png,.pdf').
+          multiple:
+            type: switch
+            comment: Whether multiple files can be selected.
       - label: Choice Group
         icon: check_box
         description: Form field for selecting one or more options.
