@@ -2,7 +2,7 @@
 import CustomSection from "@builders/custom-section/custom-section.astro";
 import Heading from "@core-elements/heading/heading.astro";
 import SimpleText from "@core-elements/simple-text/simple-text.astro";
-import FeatureItem from "@features/feature-grid/feature-item.astro";
+import TeamItem from "@features/team-grid/team-item.astro";
 import GridItem from "@wrappers/grid/grid-item.astro";
 import Grid from "@wrappers/grid/grid.astro";
 
@@ -10,7 +10,7 @@ const {
   eyebrow = "",
   heading = "",
   subtext = "",
-  features = [],
+  teamMembers = [],
   colorScheme,
   backgroundColor,
   class: className,
@@ -18,7 +18,7 @@ const {
 ---
 
 <CustomSection
-  class:list={["feature-grid", className]}
+  class:list={["team-grid", className]}
   maxContentWidth="2xl"
   paddingHorizontal="lg"
   paddingVertical="lg"
@@ -34,31 +34,32 @@ const {
   }
   {
     heading && (
-      <Heading level="h2" size="lg" alignX="center">
+      <Heading level="h2" size="lg" alignX="center" style="margin-bottom: var(--spacing-sm);">
         {heading}
       </Heading>
     )
   }
   {
     subtext && (
-      <SimpleText class="feature-grid-subtext" size="md" alignX="center">
+      <SimpleText class="team-grid-subtext" size="md" alignX="center" style="margin-top: 0;">
         {subtext}
       </SimpleText>
     )
   }
   {
-    features?.length > 0 && (
+    teamMembers?.length > 0 && (
       <Grid
-        gap="lg"
-        minItemWidth="360"
-        maxItemWidth="360"
-        style="margin-top: var(--spacing-2xl)"
-        data-prop="features"
+        gap="md"
+        minItemWidth={260}
+        maxItemWidth={400}
+        style="margin-top: var(--spacing-xl)"
+        data-prop="teamMembers"
+        layout="start"
       >
-        {features.map((feature, index) => (
+        {teamMembers.map((member, index) => (
           <GridItem>
-            <editable-array-item data-component={feature._component}>
-              <FeatureItem {...feature} class="feature-grid-item" data-index={index} />
+            <editable-array-item data-component="page-sections/features/team-grid/team-item">
+              <TeamItem {...member} class="team-grid-item" data-index={index} />
             </editable-array-item>
           </GridItem>
         ))}

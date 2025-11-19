@@ -22,32 +22,14 @@ const htmlAttributes = Object.fromEntries(
   .grid-item {
     container-type: inline-size;
 
-    > :global(editable-array-item:first-child) > :global(*:first-child),
-    > :global(:not(editable-array-item):first-child) {
+    :global(editable-array-item:only-child) > :global(*:only-child),
+    > :global(:not(editable-array):only-child) {
+      height: 100%;
+    }
+
+    :global(editable-array-item:first-child) > :global(*:first-child),
+    > :global(:not(editable-array):first-child) {
       margin-top: 0 !important;
-    }
-
-    &.layout-start {
-      height: 100%;
-
-      > :global(editable-array) > :global(editable-array-item:only-child) > :global(*),
-      > :global(:not(editable-array):only-child) {
-        height: 100%;
-      }
-    }
-
-    &.layout-center {
-      height: 100%;
-      width: 100%;
-
-      > :global(editable-array) > :global(editable-array-item:only-child) > :global(*),
-      > :global(:not(editable-array):only-child) {
-        height: 100%;
-      }
-
-      > :global(editable-array) > :global(editable-array-item) {
-        height: 100%;
-      }
     }
   }
 </style>

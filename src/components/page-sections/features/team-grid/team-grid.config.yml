@@ -1,0 +1,104 @@
+label: Team Grid
+icon: people
+description: "Responsive grid layout for showcasing team members."
+structures:
+  - pageSections
+value:
+  _component: page-sections/features/team-grid
+  eyebrow: "Our team"
+  heading: "Meet the team"
+  subtext: "Get to know the people behind our work."
+  teamMembers: []
+  colorScheme:
+  backgroundColor: base
+preview:
+  text:
+    - key: heading
+    - Team Grid
+  subtext:
+    - template: Displays {teamMembers|array_length} {"team member"|pluralize=teamMembers}
+    - Add team members to the grid
+picker_preview:
+  text: Team Grid
+  subtext: "Grid of team member cards with photos and bios."
+  icon: people
+_inputs:
+  eyebrow:
+    type: text
+    comment: Optional eyebrow text shown above the heading.
+  heading:
+    type: text
+    comment: Main heading for the team grid.
+  subtext:
+    type: textarea
+    comment: Supporting copy beneath the heading.
+  teamMembers:
+    type: array
+    label: Team Members
+    comment: Team member cards rendered in the grid.
+    options:
+      structures: _structures.teamGridItems
+  colorScheme:
+    type: select
+    comment: Color scheme theme applied to the section wrapper.
+    options:
+      values:
+        - id: default
+          name: Default
+        - id: contrast
+          name: Contrast
+  backgroundColor:
+    type: select
+    comment: Background color used behind the grid.
+    options:
+      values:
+        - id: none
+          name: None
+        - id: base
+          name: Base
+        - id: surface
+          name: Surface
+        - id: accent
+          name: Accent
+        - id: highlight
+          name: Highlight
+_structures:
+  teamGridItems:
+    values:
+      - label: Team Member
+        icon: person
+        value:
+          name: "Team member name"
+          role: "Job title"
+          bio: "Brief bio or description of the team member."
+          imageSource: "/src/assets/images/component-library/profile.jpg"
+          imageAlt: "Team member photo"
+        preview:
+          text:
+            - key: name
+            - Team Member
+          subtext:
+            - key: role
+            - Job title
+          image:
+            - key: imageSource
+        _inputs:
+          name:
+            type: text
+            comment: Full name of the team member.
+          role:
+            type: text
+            comment: Job title or role of the team member.
+          bio:
+            type: textarea
+            comment: Brief biography or description of the team member.
+          imageSource:
+            type: image
+            comment: Photo of the team member.
+            options:
+              paths:
+                uploads: src/assets/images
+                static: ""
+          imageAlt:
+            type: text
+            comment: Alt text describing the team member photo.

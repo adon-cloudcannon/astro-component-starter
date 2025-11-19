@@ -80,8 +80,11 @@ const Tag = link ? "a" : "div";
   {
     (beforeContentSections || Astro.slots.has("before")) && (
       <div class="before-content">
-        <Component contentSections={beforeContentSections} propName="beforeContentSections" />
-        <slot name="before" />
+        {beforeContentSections ? (
+          <Component contentSections={beforeContentSections} propName="beforeContentSections" />
+        ) : (
+          <slot name="before" />
+        )}
       </div>
     )
   }
@@ -108,8 +111,11 @@ const Tag = link ? "a" : "div";
   {
     (afterContentSections || Astro.slots.has("after")) && (
       <div class="after-content">
-        <Component contentSections={afterContentSections} propName="afterContentSections" />
-        <slot name="after" />
+        {afterContentSections ? (
+          <Component contentSections={afterContentSections} propName="afterContentSections" />
+        ) : (
+          <slot name="after" />
+        )}
       </div>
     )
   }
@@ -233,8 +239,17 @@ const Tag = link ? "a" : "div";
     }
 
     > .before-content,
-    .after-content,
-    .outer-content {
+    > .after-content {
+      position: relative;
+      z-index: var(--layer-2);
+
+      > :global(editable-array) > :global(editable-array-item:first-child) > :global(*:first-child),
+      > :global(:not(editable-array):first-child) {
+        margin-top: 0 !important;
+      }
+    }
+
+    > .outer-content {
       position: relative;
       z-index: var(--layer-2);
     }
