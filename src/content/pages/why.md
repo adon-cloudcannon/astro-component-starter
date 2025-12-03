@@ -5,10 +5,7 @@ pageSections:
   - _component: page-sections/heroes/hero-split
     eyebrow:
     heading: Why build another Astro component library?
-    subtitle: >-
-      Building with a static-first mentality means keeping everything fast and
-      easy to manage. Build websites with small, predictable pieces and only the
-      essentials so everything stays fast and easy to manage.
+    subtitle: "I’m a big fan of the static web. And I love what the Astro team is making!  For the last couple of years I’ve been watching agencies and dev teams rebuild the same patterns in every project — carousels, page hero sections, accordions — often starting from scratch each time.  So with help from a bunch of people at CloudCannon I’ve built a component library for Astro that outputs static HTML and CSS, for the fastest delivery possible —\_all unbranded and adaptable for any project. "
     imageSource: /src/assets/images/component-library/sunset.jpg
     imageAlt: Sunset
     imageAspectRatio: portrait
@@ -24,7 +21,7 @@ pageSections:
     slides:
       - _component: page-sections/features/feature-slider/feature-slider-item
         eyebrow: Speed
-        title: High Performance
+        title: High performance
         description: >-
           Great performance starts with what you choose not to load. The
           component starter keeps everything lean with simple HTML, CSS, and
@@ -35,7 +32,7 @@ pageSections:
         minSplitWidth: 0
       - _component: page-sections/features/feature-slider/feature-slider-item
         eyebrow: Simplicity
-        title: Easy Maintenance
+        title: Easy maintenance
         description: >-
           Maintaining a site is easier when the pieces stay small and
           predictable. With the component starter, you build on top of highly
@@ -46,7 +43,7 @@ pageSections:
         minSplitWidth: 0
       - _component: page-sections/features/feature-slider/feature-slider-item
         eyebrow: Collaboration
-        title: Team Friendly
+        title: Team friendly
         description: >-
           Teams move faster when everything feels obvious. Clear names, simple
           patterns, and consistent structure mean anyone can open the project
@@ -57,7 +54,7 @@ pageSections:
         minSplitWidth: 300
       - _component: page-sections/features/feature-slider/feature-slider-item
         eyebrow: Future
-        title: Long-Term Stability
+        title: Long-term stability
         description: >-
           This stack isn't chasing trends, and it won't age out. It's built to
           last. You're using the same basics the web has relied on from the
@@ -127,12 +124,11 @@ pageSections:
     heading: Frequently Asked Questions
     headingLevel: h2
     headingSize: lg
-    label: About FAQ
     singleOpen: true
     openFirst: false
     items:
       - _component: building-blocks/wrappers/accordion/accordion-item
-        title: How does the component starter work?
+        title: How does the component library work?
         contentSections:
           - _component: building-blocks/core-elements/simple-text
             text: >-
@@ -141,7 +137,7 @@ pageSections:
               happening and you stay in control.
             size: md
       - _component: building-blocks/wrappers/accordion/accordion-item
-        title: What's included in the component starter?
+        title: What's included in the component lirbary?
         contentSections:
           - _component: building-blocks/core-elements/simple-text
             text: >-
@@ -150,7 +146,7 @@ pageSections:
               need to build great pages.
             size: md
       - _component: building-blocks/wrappers/accordion/accordion-item
-        title: How is the component starter so fast?
+        title: How is the component library so fast?
         contentSections:
           - _component: building-blocks/core-elements/simple-text
             text: >-
@@ -159,7 +155,7 @@ pageSections:
               stays quick without extra work.
             size: md
       - _component: building-blocks/wrappers/accordion/accordion-item
-        title: How can I make the component starter my own?
+        title: How can I make the component library my own?
         contentSections:
           - _component: building-blocks/core-elements/simple-text
             text: >-
@@ -172,6 +168,7 @@ pageSections:
     paddingVertical: 4xl
     colorScheme: contrast
     backgroundColor: surface
+    label: About FAQ
   - _component: page-sections/ctas/cta-form
     heading: Get in touch
     subtext: Have questions? We'd love to hear from you.
