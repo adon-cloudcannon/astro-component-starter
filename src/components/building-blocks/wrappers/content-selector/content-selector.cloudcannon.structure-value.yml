@@ -38,8 +38,8 @@ _structures:
         icon: place_item
         value:
           _component: building-blocks/wrappers/content-selector/content-selector-item
-          title: null
-          contentSections: null
+          title: Section Title
+          contentSections: []
         preview:
           text:
             - key: title

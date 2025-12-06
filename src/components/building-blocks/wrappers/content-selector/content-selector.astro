@@ -8,6 +8,7 @@ const {
   class: className,
   label,
   editable = true,
+  "data-prop": customDataProp = "items",
   ...restProps
 } = Astro.props;
 
@@ -31,7 +32,7 @@ const uniqueId = crypto.randomUUID();
 const arrayDataAttributes = editable
   ? {
       "data-editable": "array",
-      "data-prop": "items",
+      "data-prop": customDataProp,
       "data-component-key": "_component",
       "data-id-key": "_component",
     }
