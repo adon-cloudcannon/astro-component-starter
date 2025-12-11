@@ -55,4 +55,3 @@ background:
 priority:
   type: switch
   comment: Load the image with high priority (eager loading for above-the-fold images).
-

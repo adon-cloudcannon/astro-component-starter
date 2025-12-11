@@ -4,11 +4,14 @@ description: Lists items with icons as markers.
 value:
   _component: building-blocks/core-elements/list
   items:
-    - text: List item 1
+    - _component: building-blocks/core-elements/list-item
+      text: List item 1
       iconName: check
-    - text: List item 2
+    - _component: building-blocks/core-elements/list-item
+      text: List item 2
       iconName: lock-closed
-    - text: List item 3
+    - _component: building-blocks/core-elements/list-item
+      text: List item 3
       iconName: briefcase
   direction: vertical
   alignX: start
@@ -27,7 +30,8 @@ _structures:
     values:
       - label: List Item
         value:
-          text: ""
+          _component: building-blocks/core-elements/list-item
+          text: "List item"
           iconName: ""
           iconColor: default
         preview:

@@ -7,6 +7,7 @@ const {
   alignX = "start",
   size = "md",
   class: className,
+  "data-prop": customDataProp = "items",
   editable = true,
   ...restProps
 } = Astro.props;
@@ -14,18 +15,35 @@ const {
 const htmlAttributes = Object.fromEntries(
   Object.entries(restProps).filter(([key]) => key !== "_component")
 );
+
+const arrayDataAttributes = editable
+  ? {
+      "data-editable": "array",
+      "data-prop": customDataProp,
+      "data-component-key": "_component",
+      "data-id-key": "_component",
+    }
+  : {};
 ---
 
 <ul
   class:list={["list", `size-${size}`, `direction-${direction}`, `alignment-${alignX}`, className]}
   role="list"
+  {...arrayDataAttributes}
   {...htmlAttributes}
 >
   {
-      items?.length > 0 ? (
-      items.map((item: any) => {
-        return <ListItem text={item.text} iconName={item.iconName} iconColor={item.iconColor} editable={editable} />;
-      })
+    items && items.length > 0 ? (
+      items.map((item: any) => (
+        <editable-array-item data-component="building-blocks/core-elements/list/list-item">
+          <ListItem
+            text={item.text}
+            iconName={item.iconName}
+            iconColor={item.iconColor}
+            editable={editable}
+          />
+        </editable-array-item>
+      ))
     ) : (
       <slot />
     )
