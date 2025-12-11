@@ -33,10 +33,15 @@ const arrayDataAttributes = editable
   {...htmlAttributes}
 >
   {
-    items && items.length > 0 ? (
+    items ? (
       items.map((item: any) => (
         <editable-array-item data-component="building-blocks/core-elements/list/list-item">
-          <ListItem {...item} editable={editable} />
+          <ListItem
+            text={item.text}
+            iconName={item.iconName}
+            iconColor={item.iconColor}
+            editable={editable}
+          />
         </editable-array-item>
       ))
     ) : (

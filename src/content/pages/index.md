@@ -12,7 +12,7 @@ pageSections:
       - _component: building-blocks/core-elements/button
         text: Explore Components
         link: /component-library/
-        iconName: ''
+        iconName: ""
         iconPosition: before
         hideText: false
         variant: primary
@@ -20,7 +20,7 @@ pageSections:
       - _component: building-blocks/core-elements/button
         text: View Guidelines
         link: /component-library/guidelines
-        iconName: ''
+        iconName: ""
         iconPosition: before
         hideText: false
         variant: secondary
@@ -127,7 +127,7 @@ pageSections:
       - _component: building-blocks/core-elements/button
         text: Explore Components
         link: /component-library/
-        iconName: ''
+        iconName: ""
         iconPosition: before
         hideText: false
         variant: primary
@@ -135,7 +135,7 @@ pageSections:
       - _component: building-blocks/core-elements/button
         text: View Guidelines
         link: /component-library/guidelines
-        iconName: ''
+        iconName: ""
         iconPosition: before
         hideText: false
         variant: tertiary
@@ -144,25 +144,25 @@ pageSections:
     backgroundColor: surface
     rounded: false
   - _component: page-sections/builders/custom-section
-    label: ''
+    label: ""
     contentSections:
       - _component: building-blocks/core-elements/list
         items:
-          - _component: building-blocks/core-elements/list-item
+          - _component: building-blocks/core-elements/list/list-item
             text: List item 3
             iconName: briefcase
             iconColor: default
-          - _component: building-blocks/core-elements/list-item
+          - _component: building-blocks/core-elements/list/list-item
             text: List item 1
             iconName: archive-box-arrow-down
             iconColor: default
-          - _component: building-blocks/core-elements/list-item
+          - _component: building-blocks/core-elements/list/list-item
             text: List item 2
             iconName: lock-closed
             iconColor: default
-          - _component: building-blocks/core-elements/list-item
+          - _component: building-blocks/core-elements/list/list-item
             text: List item
-            iconName: ''
+            iconName: ""
             iconColor: default
         direction: vertical
         alignX: start
@@ -173,8 +173,8 @@ pageSections:
     colorScheme:
     backgroundColor: base
     backgroundImage:
-      source: ''
-      alt: ''
+      source: ""
+      alt: ""
       positionVertical: top
       positionHorizontal: center
     rounded: false
