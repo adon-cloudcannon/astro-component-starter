@@ -4,7 +4,7 @@ title: Why
 pageSections:
   - _component: page-sections/heroes/hero-split
     eyebrow:
-    heading: Why build another Astro component starter?
+    heading: Why build an Astro component starter?
     subtext: >-
       At CloudCannon, we're big fans of the static web. And we love what the
       Astro team is building!
@@ -12,8 +12,8 @@ pageSections:
 
       As more and more <a href="https://cloudcannon.com/partner-program/"
       target="_blank" rel="noopener">partner agencies</a> are building client
-      sites with CloudCannon, we wanted to help out by providing a component
-      library for Astro that outputs static HTML and CSS, for the fastest
+      sites with CloudCannon, we wanted to help out by providing the foundations
+      for Astro components that output static HTML and CSS, for the fastest
       delivery possible —&nbsp;all unbranded and adaptable for any project.
     imageSource: /src/assets/images/component-library/sunset.jpg
     imageAlt: Sunset
