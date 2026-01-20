@@ -12,7 +12,7 @@ pageSections:
     buttonSections:
       - _component: building-blocks/core-elements/button
         text: STREAM NOW
-        link: ''
+        link: '/poser/'
         iconName: ''
         iconPosition: before
         hideText: false
@@ -20,7 +20,7 @@ pageSections:
         size: lg
       - _component: building-blocks/core-elements/button
         text: ALBUM INFO
-        link: ''
+        link: '/releases/'
         iconName:
         iconPosition: after
         hideText: false
