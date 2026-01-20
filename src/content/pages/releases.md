@@ -1,27 +1,21 @@
 ---
 _schema: default
-title: Why
+title: Releases
 pageSections:
   - _component: page-sections/heroes/hero-split
     eyebrow:
-    heading: Why build an Astro component starter?
+    heading: POSER
     subtext: >-
-      At CloudCannon, we're big fans of the static web. And we love what the
-      Astro team is building!
-
-
-      As more and more <a href="https://cloudcannon.com/partner-program/"
-      target="_blank" rel="noopener">partner agencies</a> are building client
-      sites with CloudCannon, we wanted to help out by providing the foundations
-      for Astro components that output static HTML and CSS, for the fastest
-      delivery possible —&nbsp;all unbranded and adaptable for any project.
-    imageSource: /src/assets/images/component-library/sunset.jpg
+      1\. POSER<br>2\. LOVESICK<br>3\. TANGLED IN YOU<br>4\. NEVER YOURS TO
+      BREAK<br>5\. LOVE LETTERS (XOXO)<br>6\. REBEL ANTHEM (WHATEVER I
+      WANT)<br>7\. NA NA NA NA NA NA NA<br>8\. NEVER AGAIN<br>9\. BREAK MY FALL
+    imageSource: /src/assets/images/poser-upscayl-3x-ultrasharp.png
     imageAlt: Sunset
-    imageAspectRatio: portrait
+    imageAspectRatio: square
     buttonSections: []
     reverse: true
-    colorScheme: default
-    backgroundColor: base
+    colorScheme: contrast
+    backgroundColor: surface
     paddingVertical: 4xl
   - _component: page-sections/info-blocks/faq-section
     heading: Frequently asked questions
@@ -69,7 +63,7 @@ pageSections:
     colorScheme: default
     backgroundColor: none
   - _component: page-sections/builders/custom-section
-    label: ""
+    label: ''
     contentSections:
       - _component: building-blocks/core-elements/spacer
         size: md
@@ -91,8 +85,8 @@ pageSections:
     colorScheme: contrast
     backgroundColor: surface
     backgroundImage:
-      source: ""
-      alt: ""
+      source: ''
+      alt: ''
       positionVertical: top
       positionHorizontal: center
     rounded: false
@@ -170,7 +164,7 @@ pageSections:
     subtext: We're a group of stock photography faces that fill out this team grid.
     teamMembers:
       - _component: page-sections/people/team-grid/team-item
-        name: "Alex Smith "
+        name: 'Alex Smith '
         role: Lead Developer
         bio: >-
           As a fictional representation of a real employee, I exist solely to
