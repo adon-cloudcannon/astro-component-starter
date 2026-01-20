@@ -6,13 +6,13 @@ pageSections:
     eyebrow: STEPH STEPHENS
     heading: POSER
     subtext: DEBUT ALBUM OUT NOW
-    imageSource: /src/assets/images/poser.jpg
+    imageSource: /src/assets/images/poser-album-cover.png
     imageAlt: Hero image
     imageAspectRatio: square
     buttonSections:
       - _component: building-blocks/core-elements/button
         text: STREAM NOW
-        link: '/poser/'
+        link: /poser/
         iconName: ''
         iconPosition: before
         hideText: false
@@ -20,7 +20,7 @@ pageSections:
         size: lg
       - _component: building-blocks/core-elements/button
         text: ALBUM INFO
-        link: '/releases/'
+        link: /releases/
         iconName:
         iconPosition: after
         hideText: false
@@ -54,5 +54,29 @@ pageSections:
         size: md
     colorScheme: contrast
     backgroundColor: surface
+    rounded: false
+  - _component: page-sections/builders/custom-section
+    label: ''
+    contentSections:
+      - _component: building-blocks/core-elements/embed
+        html: >-
+          <iframe width="560" height="315"
+          src="https://www.youtube.com/embed/IZT6R8PPBqI?si=tONhH_KBpG2MtMvm"
+          title="YouTube video player" frameborder="0" allow="accelerometer;
+          autoplay; clipboard-write; encrypted-media; gyroscope;
+          picture-in-picture; web-share"
+          referrerpolicy="strict-origin-when-cross-origin"
+          allowfullscreen></iframe>
+        aspectRatio: widescreen
+    maxContentWidth: 2xl
+    paddingHorizontal: md
+    paddingVertical: md
+    colorScheme: contrast
+    backgroundColor: base
+    backgroundImage:
+      source: ''
+      alt: ''
+      positionVertical: top
+      positionHorizontal: center
     rounded: false
 ---
