@@ -8,26 +8,20 @@
       "children": []
     },
     {
-      "name": "Why",
-      "path": "/why/",
+      "name": "Releases",
+      "path": "/releases/",
       "children": []
     },
     {
       "name": "Blog",
       "path": "/blog/",
       "children": []
+    },
+    {
+      "name": "Poser",
+      "path": "/poser/",
+      "children": []
     }
   ],
-  "buttonSections": [
-    {
-      "_component": "building-blocks/core-elements/button",
-      "text": "Search",
-      "link": "/search/",
-      "iconName": "magnifying-glass",
-      "iconPosition": "before",
-      "hideText": true,
-      "variant": "ghost",
-      "size": "lg"
-    }
-  ]
+  "buttonSections": []
 }
