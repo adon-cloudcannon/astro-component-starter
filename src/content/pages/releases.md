@@ -54,8 +54,12 @@ pageSections:
             items:
               - _component: >-
                   building-blocks/core-elements/definition-list/definition-list-item
-                title: ''
-                text: ''
+                title: 1. POSER
+                text: '2:03'
+              - _component: >-
+                  building-blocks/core-elements/definition-list/definition-list-item
+                title: 2. LOVESICK
+                text: '2:40'
             alignX: start
         distributionMode: half
         fixedWidth:
