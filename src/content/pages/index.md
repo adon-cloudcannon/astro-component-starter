@@ -4,10 +4,8 @@ title: Astro Component Starter
 pageSections:
   - _component: page-sections/heroes/hero-center
     eyebrow:
-    heading: The Astro Component Starter for building any site
-    subtext: >-
-      Built on web fundamentals. Easy to customize, fast to use, and simple to
-      maintain.
+    heading: POSER
+    subtext:
     buttonSections:
       - _component: building-blocks/core-elements/button
         text: Explore Components
@@ -16,14 +14,6 @@ pageSections:
         iconPosition: before
         hideText: false
         variant: primary
-        size: md
-      - _component: building-blocks/core-elements/button
-        text: View in GitHub
-        link: https://github.com/CloudCannon/astro-component-starter
-        iconName: ''
-        iconPosition: before
-        hideText: false
-        variant: secondary
         size: md
     colorScheme: contrast
     backgroundColor: base
