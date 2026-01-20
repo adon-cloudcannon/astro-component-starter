@@ -35,4 +35,40 @@ pageSections:
     colorScheme: default
     backgroundColor: base
     paddingVertical: 4xl
+  - _component: page-sections/builders/custom-section
+    label: ''
+    contentSections:
+      - _component: building-blocks/wrappers/split
+        label: ''
+        firstColumnContentSections:
+          - _component: building-blocks/core-elements/image
+            source: /src/assets/images/poser-album-cover.png
+            alt: ''
+            rounded: false
+            aspectRatio: none
+            positionVertical: center
+            positionHorizontal: center
+            priority: false
+        secondColumnContentSections:
+          - _component: building-blocks/core-elements/definition-list
+            items: []
+            alignX: start
+        distributionMode: half
+        fixedWidth:
+        minSplitWidth: 760
+        verticalAlignment: center
+        reverse: false
+        reverseOrderOnMobile: false
+        gap: lg
+    maxContentWidth: 2xl
+    paddingHorizontal: md
+    paddingVertical: md
+    colorScheme:
+    backgroundColor: base
+    backgroundImage:
+      source: ''
+      alt: ''
+      positionVertical: top
+      positionHorizontal: center
+    rounded: false
 ---
