@@ -28,7 +28,7 @@ pageSections:
         size: lg
     reverse: false
     colorScheme: contrast
-    backgroundColor: base
+    backgroundColor: surface
   - _component: page-sections/features/feature-split
     eyebrow: Built for Astro
     heading: Fast, modern, and easy to work with
