@@ -25,7 +25,7 @@ pageSections:
         hideText: false
         variant: secondary
         size: md
-    colorScheme: default
+    colorScheme: contrast
     backgroundColor: base
   - _component: page-sections/features/feature-split
     eyebrow: Built for Astro
