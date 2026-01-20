@@ -44,7 +44,7 @@ const {
       <SimpleText class="eyebrow" data-prop="eyebrow">
         {eyebrow}
       </SimpleText>
-      <Heading level="h1" size="2xl" data-prop="heading">{heading}</Heading>
+      <Heading level="h1" size="2xl" data-prop="heading" class="hero-heading">{heading}</Heading>
       <Text class="subtext" data-prop="subtext" text={subtext} />
       <ButtonGroup class="buttons-container" buttonSections={buttonSections} />
     </Fragment>
@@ -65,8 +65,12 @@ const {
 </CustomSection>
 
 <style>
-  :global(.eyebrow) {
+  :global(.eyebrow), :global(.subtext) {
     letter-spacing: 0;
     font-size: var(--font-size-2xl);
+  }
+
+  :global(.hero-heading){
+    margin:0;
   }
 </style>
