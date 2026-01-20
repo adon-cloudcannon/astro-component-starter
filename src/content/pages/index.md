@@ -29,32 +29,6 @@ pageSections:
     reverse: true
     colorScheme: contrast
     backgroundColor: surface
-  - _component: page-sections/ctas/cta-center
-    heading: Ready to start building?
-    subtext: >-
-      Browse the complete Astro Component Starter and see live examples of every
-      component in action. All components are ready to use in CloudCannon and
-      are fully customizable.
-    buttonSections:
-      - _component: building-blocks/core-elements/button
-        text: Explore Components
-        link: /component-library/
-        iconName: ''
-        iconPosition: before
-        hideText: false
-        variant: primary
-        size: md
-      - _component: building-blocks/core-elements/button
-        text: View in GitHub
-        link: https://github.com/CloudCannon/astro-component-starter
-        iconName: ''
-        iconPosition: before
-        hideText: false
-        variant: tertiary
-        size: md
-    colorScheme: contrast
-    backgroundColor: surface
-    rounded: false
   - _component: page-sections/builders/custom-section
     label: ''
     contentSections:
@@ -68,9 +42,9 @@ pageSections:
           referrerpolicy="strict-origin-when-cross-origin"
           allowfullscreen></iframe>
         aspectRatio: widescreen
-    maxContentWidth: 2xl
+    maxContentWidth: lg
     paddingHorizontal: md
-    paddingVertical: md
+    paddingVertical: 3xl
     colorScheme: contrast
     backgroundColor: base
     backgroundImage:
