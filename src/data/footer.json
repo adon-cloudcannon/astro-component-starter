@@ -7,12 +7,16 @@
       "path": "/"
     },
     {
-      "name": "Why",
-      "path": "/why/"
+      "name": "Releases",
+      "path": "/releases/"
     },
     {
       "name": "Blog",
       "path": "/blog/"
+    },
+    {
+      "name": "Poser",
+      "path": "/poser/"
     }
   ],
   "socials": [
