@@ -2,19 +2,31 @@
 _schema: default
 title: Astro Component Starter
 pageSections:
-  - _component: page-sections/heroes/hero-center
+  - _component: page-sections/heroes/hero-split
     eyebrow:
     heading: POSER
     subtext:
+    imageSource: /src/assets/images/poser.jpg
+    imageAlt: Hero image
+    imageAspectRatio: square
     buttonSections:
       - _component: building-blocks/core-elements/button
-        text: Explore Components
-        link: /component-library/
+        text: STREAM NOW
+        link: ''
         iconName: ''
         iconPosition: before
         hideText: false
         variant: primary
-        size: md
+        size: lg
+      - _component: building-blocks/core-elements/button
+        text: ALBUM INFO
+        link: ''
+        iconName:
+        iconPosition: after
+        hideText: false
+        variant: secondary
+        size: lg
+    reverse: false
     colorScheme: contrast
     backgroundColor: base
   - _component: page-sections/features/feature-split

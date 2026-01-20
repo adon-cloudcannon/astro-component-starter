@@ -12,6 +12,25 @@ pageSections:
     buttonSections: []
     colorScheme: default
     backgroundColor: base
+  - _component: page-sections/heroes/hero-split
+    eyebrow:
+    heading:
+    subtext:
+    imageSource: /src/assets/images/component-library/dunedin-cliff.jpg
+    imageAlt: Hero image
+    imageAspectRatio: none
+    buttonSections:
+      - _component: building-blocks/core-elements/button
+        text:
+        link: ''
+        iconName: ''
+        iconPosition: before
+        hideText: false
+        variant: primary
+        size: md
+    reverse: false
+    colorScheme:
+    backgroundColor: base
 description: >-
   Read our latest articles and insights on web development, design, and
   technology.
