@@ -44,14 +44,18 @@ pageSections:
           - _component: building-blocks/core-elements/image
             source: /src/assets/images/poser-album-cover.png
             alt: ''
-            rounded: false
-            aspectRatio: none
+            rounded: true
+            aspectRatio: square
             positionVertical: center
             positionHorizontal: center
             priority: false
         secondColumnContentSections:
           - _component: building-blocks/core-elements/definition-list
-            items: []
+            items:
+              - _component: >-
+                  building-blocks/core-elements/definition-list/definition-list-item
+                title: ''
+                text: ''
             alignX: start
         distributionMode: half
         fixedWidth:
