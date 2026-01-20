@@ -2,6 +2,20 @@
 _schema: default
 title: Astro Component Starter
 pageSections:
+  - _component: page-sections/builders/custom-section
+    label: ''
+    contentSections: []
+    maxContentWidth: 2xl
+    paddingHorizontal: md
+    paddingVertical: md
+    colorScheme: contrast
+    backgroundColor: surface
+    backgroundImage:
+      source: /src/assets/images/poser-upscayl-3x-ultrasharp.png
+      alt: ''
+      positionVertical: top
+      positionHorizontal: center
+    rounded: false
   - _component: page-sections/heroes/hero-split
     eyebrow: STEPH STEPHENS
     heading: POSER
