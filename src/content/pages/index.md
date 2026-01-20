@@ -3,9 +3,9 @@ _schema: default
 title: Astro Component Starter
 pageSections:
   - _component: page-sections/heroes/hero-split
-    eyebrow:
+    eyebrow: STEPH STEPHENS
     heading: POSER
-    subtext:
+    subtext: DEBUT ALBUM OUT NOW
     imageSource: /src/assets/images/poser.jpg
     imageAlt: Hero image
     imageAspectRatio: square
