@@ -97,7 +97,7 @@ pageSections:
                   alt:
                   positionVertical: top
                   positionHorizontal: center
-                link: https://soundcloud.com/stephstephens
+                link: https://soundcloud.com/stephstephens/sets/poser
                 rounded: false
                 border: false
                 showBeforeAfter: false
@@ -124,7 +124,7 @@ pageSections:
                   alt:
                   positionVertical: top
                   positionHorizontal: center
-                link: https://music.apple.com/ca/artist/steph-stephens/1869494095
+                link: https://music.apple.com/ca/album/poser/1869494094
                 rounded: false
                 border: false
                 showBeforeAfter: false
