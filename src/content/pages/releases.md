@@ -5,6 +5,13 @@ pageSections:
   - _component: page-sections/builders/custom-section
     label: ''
     contentSections:
+      - _component: building-blocks/core-elements/heading
+        text: DEBUT ALBUM - POSER - AVAILABLE NOW
+        level: h1
+        size: default
+        alignX: center
+        iconName:
+        iconPosition: before
       - _component: building-blocks/wrappers/split
         label: ''
         firstColumnContentSections:
@@ -63,6 +70,67 @@ pageSections:
         reverse: false
         reverseOrderOnMobile: false
         gap: lg
+      - _component: building-blocks/wrappers/grid
+        label: ''
+        layout: center
+        minItemWidth: 10
+        maxItemWidth: 50
+        items:
+          - _component: building-blocks/wrappers/grid/grid-item
+            contentSections:
+              - _component: building-blocks/wrappers/card
+                label:
+                contentSections:
+                  - _component: building-blocks/core-elements/icon
+                    name: social/apple
+                    size: 3xl
+                    color: default
+                    background: false
+                    alignX: center
+                maxContentWidth: lg
+                paddingHorizontal: sm
+                paddingVertical: sm
+                colorScheme:
+                backgroundColor: surface
+                backgroundImage:
+                  source:
+                  alt:
+                  positionVertical: top
+                  positionHorizontal: center
+                link: https://music.apple.com/ca/artist/steph-stephens/1869494095
+                rounded: false
+                border: false
+                showBeforeAfter: false
+                beforeContentSections: []
+                afterContentSections: []
+          - _component: building-blocks/wrappers/grid/grid-item
+            contentSections:
+              - _component: building-blocks/wrappers/card
+                label:
+                contentSections:
+                  - _component: building-blocks/core-elements/icon
+                    name: social/apple
+                    size: 3xl
+                    color: default
+                    background: false
+                    alignX: center
+                maxContentWidth: lg
+                paddingHorizontal: sm
+                paddingVertical: sm
+                colorScheme:
+                backgroundColor: surface
+                backgroundImage:
+                  source:
+                  alt:
+                  positionVertical: top
+                  positionHorizontal: center
+                link: https://music.apple.com/ca/artist/steph-stephens/1869494095
+                rounded: false
+                border: false
+                showBeforeAfter: false
+                beforeContentSections: []
+                afterContentSections: []
+        gap: md
     maxContentWidth: 2xl
     paddingHorizontal: md
     paddingVertical: 3xl
