@@ -35,6 +35,10 @@
     {
       "icon": "social/amazon-music",
       "link": "https://music.amazon.ca/artists/B0GH5PK3B3/steph-stephens"
+    },
+    {
+      "icon": "social/youtube",
+      "link": "https://www.youtube.com/@StephStephens"
     }
   ],
   "footerText": "© 2026 All rights reserved."
