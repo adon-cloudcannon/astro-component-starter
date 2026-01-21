@@ -659,6 +659,8 @@ _select_data:
       name: Signal Slash
     - id: slash
       name: Slash
+    - id: social/apple
+      name: social/Apple Music
     - id: social/bluesky
       name: Social/bluesky
     - id: social/discord
