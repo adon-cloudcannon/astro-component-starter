@@ -689,6 +689,8 @@ _select_data:
       name: Social/reddit
     - id: social/soundcloud
       name: social/SoundCloud
+    - id: social/threads
+      name: social/Threads
     - id: social/tiktok
       name: Social/tiktok
     - id: social/twitch
