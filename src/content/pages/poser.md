@@ -18,15 +18,10 @@ pageSections:
         contentSections:
           - _component: building-blocks/core-elements/list
             items:
-              - _component: building-blocks/core-elements/list/list-item
-                text: STREAM ON SOUNDCLOUD
+              - _component: building-blocks/core-elements/list-item
+                text: List item
                 iconName: social/soundcloud
-              - _component: building-blocks/core-elements/list/list-item
-                text: List item 2
-                iconName: lock-closed
-              - _component: building-blocks/core-elements/list/list-item
-                text: List item 3
-                iconName: briefcase
+                iconColor: default
             direction: vertical
             alignX: start
             size: 2xl
