@@ -39,6 +39,10 @@
     {
       "icon": "social/youtube",
       "link": "https://www.youtube.com/@StephStephens"
+    },
+    {
+      "icon": "social/threads",
+      "link": "https://www.threads.com/@steph.stephens.poser"
     }
   ],
   "footerText": "© 2026 All rights reserved."
