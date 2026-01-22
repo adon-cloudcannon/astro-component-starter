@@ -26,7 +26,7 @@ pageSections:
             alignX: start
             size: 2xl
         maxContentWidth:
-        paddingHorizontal: sm
+        paddingHorizontal: md
         paddingVertical: sm
         colorScheme: contrast
         backgroundColor: base
@@ -54,7 +54,7 @@ pageSections:
             alignX: start
             size: 2xl
         maxContentWidth:
-        paddingHorizontal: sm
+        paddingHorizontal: md
         paddingVertical: sm
         colorScheme: contrast
         backgroundColor: base
