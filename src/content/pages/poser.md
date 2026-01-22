@@ -13,6 +13,39 @@ pageSections:
         positionVertical: center
         positionHorizontal: center
         priority: false
+      - _component: building-blocks/wrappers/card
+        label:
+        contentSections:
+          - _component: building-blocks/core-elements/list
+            items:
+              - _component: building-blocks/core-elements/list/list-item
+                text: List item 1
+                iconName: check
+              - _component: building-blocks/core-elements/list/list-item
+                text: List item 2
+                iconName: lock-closed
+              - _component: building-blocks/core-elements/list/list-item
+                text: List item 3
+                iconName: briefcase
+            direction: vertical
+            alignX: start
+            size: md
+        maxContentWidth:
+        paddingHorizontal: sm
+        paddingVertical: sm
+        colorScheme:
+        backgroundColor: base
+        backgroundImage:
+          source:
+          alt:
+          positionVertical: top
+          positionHorizontal: center
+        link:
+        rounded: false
+        border: false
+        showBeforeAfter: false
+        beforeContentSections: []
+        afterContentSections: []
     maxContentWidth: xs
     paddingHorizontal: md
     paddingVertical: md
