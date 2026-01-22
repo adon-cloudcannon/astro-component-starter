@@ -19,8 +19,12 @@ pageSections:
           - _component: building-blocks/core-elements/list
             items:
               - _component: building-blocks/core-elements/list-item
-                text: List item
+                text: STREAM ON SOUNDCLOUD
                 iconName: social/soundcloud
+                iconColor: default
+              - _component: building-blocks/core-elements/list-item
+                text: STREAM ON APPLE MUSIC
+                iconName: social/apple
                 iconColor: default
             direction: vertical
             alignX: start
