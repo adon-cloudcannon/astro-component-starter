@@ -69,6 +69,34 @@ pageSections:
         showBeforeAfter: false
         beforeContentSections: []
         afterContentSections: []
+      - _component: building-blocks/wrappers/card
+        label:
+        contentSections:
+          - _component: building-blocks/core-elements/list
+            items:
+              - _component: building-blocks/core-elements/list-item
+                text: STREAM ON AMAZON MUSIC
+                iconName: social/amazon-music
+                iconColor: default
+            direction: vertical
+            alignX: start
+            size: 2xl
+        maxContentWidth:
+        paddingHorizontal: md
+        paddingVertical: sm
+        colorScheme: contrast
+        backgroundColor: base
+        backgroundImage:
+          source:
+          alt:
+          positionVertical: top
+          positionHorizontal: center
+        link: https://music.amazon.ca/albums/B0GH5Z5FBN
+        rounded: false
+        border: false
+        showBeforeAfter: false
+        beforeContentSections: []
+        afterContentSections: []
     maxContentWidth: xs
     paddingHorizontal: md
     paddingVertical: 3xl
