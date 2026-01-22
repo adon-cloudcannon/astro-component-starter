@@ -24,6 +24,34 @@ pageSections:
                 label:
                 contentSections:
                   - _component: building-blocks/core-elements/icon
+                    name: social/spotify
+                    size: 3xl
+                    color: default
+                    background: false
+                    alignX: center
+                maxContentWidth: lg
+                paddingHorizontal: sm
+                paddingVertical: sm
+                colorScheme:
+                backgroundColor: surface
+                backgroundImage:
+                  source:
+                  alt:
+                  positionVertical: top
+                  positionHorizontal: center
+                link: >-
+                  https://open.spotify.com/album/27qa4dN1FKElFa0WfvZ2LN?si=AOHbLisUR-epjqn32uDYQw
+                rounded: false
+                border: false
+                showBeforeAfter: false
+                beforeContentSections: []
+                afterContentSections: []
+          - _component: building-blocks/wrappers/grid/grid-item
+            contentSections:
+              - _component: building-blocks/wrappers/card
+                label:
+                contentSections:
+                  - _component: building-blocks/core-elements/icon
                     name: social/soundcloud
                     size: 3xl
                     color: default
