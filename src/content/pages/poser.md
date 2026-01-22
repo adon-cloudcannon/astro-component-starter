@@ -19,14 +19,8 @@ pageSections:
           - _component: building-blocks/core-elements/list
             items:
               - _component: building-blocks/core-elements/list-item
-                text: >-
-                  <a href="https://soundcloud.com/stephstephens/sets/poser"
-                  target="_blank" rel="noopener">STREAM ON SOUNDCLOUD</a>
+                text: STREAM ON SOUNDCLOUD
                 iconName: social/soundcloud
-                iconColor: default
-              - _component: building-blocks/core-elements/list-item
-                text: STREAM ON APPLE MUSIC
-                iconName: social/apple
                 iconColor: default
             direction: vertical
             alignX: start
@@ -34,14 +28,14 @@ pageSections:
         maxContentWidth:
         paddingHorizontal: sm
         paddingVertical: sm
-        colorScheme:
+        colorScheme: contrast
         backgroundColor: base
         backgroundImage:
           source:
           alt:
           positionVertical: top
           positionHorizontal: center
-        link:
+        link: https://soundcloud.com/stephstephens/sets/poser
         rounded: false
         border: false
         showBeforeAfter: false
