@@ -35,7 +35,7 @@ const {
         <Text class="footer-legal-text" text={footerText || ""} data-prop="" />
       </div>
       <div class="content-container">
-        <ButtonGroup alignX="end">
+        <ButtonGroup alignX="center">
           {
             socials.map((social: any) => (
               <Button
@@ -84,6 +84,9 @@ const {
 
       .content-container {
         flex: 1;
+        width:100%;
+        display: flex;
+        justify-content:center;
       }
     }
 
