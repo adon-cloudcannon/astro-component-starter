@@ -19,8 +19,8 @@ pageSections:
           - _component: building-blocks/core-elements/list
             items:
               - _component: building-blocks/core-elements/list/list-item
-                text: List item 1
-                iconName: check
+                text: STREAM ON SOUNDCLOUD
+                iconName: social/SoundCloud
               - _component: building-blocks/core-elements/list/list-item
                 text: List item 2
                 iconName: lock-closed
@@ -29,7 +29,7 @@ pageSections:
                 iconName: briefcase
             direction: vertical
             alignX: start
-            size: md
+            size: 2xl
         maxContentWidth:
         paddingHorizontal: sm
         paddingVertical: sm
