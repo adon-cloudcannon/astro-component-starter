@@ -20,7 +20,7 @@ pageSections:
             items:
               - _component: building-blocks/core-elements/list/list-item
                 text: STREAM ON SOUNDCLOUD
-                iconName: social/SoundCloud
+                iconName: social/soundcloud
               - _component: building-blocks/core-elements/list/list-item
                 text: List item 2
                 iconName: lock-closed
