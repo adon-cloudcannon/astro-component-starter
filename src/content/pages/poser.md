@@ -19,7 +19,9 @@ pageSections:
           - _component: building-blocks/core-elements/list
             items:
               - _component: building-blocks/core-elements/list-item
-                text: STREAM ON SOUNDCLOUD
+                text: >-
+                  <a href="https://soundcloud.com/stephstephens/sets/poser"
+                  target="_blank" rel="noopener">STREAM ON SOUNDCLOUD</a>
                 iconName: social/soundcloud
                 iconColor: default
               - _component: building-blocks/core-elements/list-item
