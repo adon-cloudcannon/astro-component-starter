@@ -85,71 +85,71 @@ const authorDescriptionDataAttributes =
 <style lang="pcss">
   @layer components {
     .testimonial {
-    display: flex;
-    background: var(--color-bg);
-    flex-direction: column;
-    gap: var(--spacing-em-sm);
-    margin: 0;
-    margin-top: var(--spacing-lg);
-    border: 1px solid var(--color-border);
-    border-radius: var(--radius-md);
-    padding: var(--spacing-md);
-
-    &.alignment-center {
-      align-items: center;
-      justify-content: center;
-      text-align: center;
-    }
-    > .quote {
-      margin: 0;
-
-      :global(*) {
-        font-size: var(--font-size-2xl);
-      }
-
-      :global(*:first-child) {
-        margin-top: 0;
-      }
-
-      :global(*:last-child) {
-        margin-bottom: 0;
-      }
-
-      :global(*:first-child::before) {
-        content: "\201C";
-      }
-
-      :global(*:last-child::after) {
-        content: "\201D";
-      }
-    }
-
-    > .author {
       display: flex;
-      align-items: center;
-      gap: var(--spacing-md);
-      margin-top: var(--spacing-md);
+      background: var(--color-bg);
+      flex-direction: column;
+      gap: var(--spacing-em-sm);
+      margin: 0;
+      margin-top: var(--spacing-lg);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-md);
+      padding: var(--spacing-md);
 
-      > .author-content {
-        font-style: normal;
-        text-align: start;
+      &.alignment-center {
+        align-items: center;
+        justify-content: center;
+        text-align: center;
       }
+      > .quote {
+        margin: 0;
 
-      > .author-image {
-        aspect-ratio: var(--ratio-square);
-        width: 80px;
-        height: 80px;
-
-        :global(picture) {
-          border-radius: var(--radius-full);
-          overflow: hidden;
+        :global(*) {
+          font-size: var(--font-size-2xl);
         }
 
-        :global(img) {
-          height: 100%;
+        :global(*:first-child) {
+          margin-top: 0;
+        }
+
+        :global(*:last-child) {
+          margin-bottom: 0;
+        }
+
+        :global(*:first-child::before) {
+          content: "\201C";
+        }
+
+        :global(*:last-child::after) {
+          content: "\201D";
+        }
+      }
+
+      > .author {
+        display: flex;
+        align-items: center;
+        gap: var(--spacing-md);
+        margin-top: var(--spacing-md);
+
+        > .author-content {
+          font-style: normal;
+          text-align: start;
+        }
+
+        > .author-image {
+          aspect-ratio: var(--ratio-square);
+          width: 80px;
+          height: 80px;
+
+          :global(picture) {
+            border-radius: var(--radius-full);
+            overflow: hidden;
+          }
+
+          :global(img) {
+            height: 100%;
+          }
         }
       }
     }
-  }
   }
 </style>

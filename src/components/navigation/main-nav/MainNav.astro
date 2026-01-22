@@ -56,49 +56,49 @@ const mobileNavData = [
 <style lang="pcss">
   @layer components {
     .main-nav {
-    z-index: var(--layer-2);
-    :global(.desktop-main-nav.bar),
-    :global(.desktop-button-group.button-group) {
-      @container (max-width: 768px) {
-        display: none;
+      z-index: var(--layer-2);
+      :global(.desktop-main-nav.bar),
+      :global(.desktop-button-group.button-group) {
+        @container (max-width: 768px) {
+          display: none;
+        }
+      }
+
+      :global(.nav-hamburger.mobile-button) {
+        @container (min-width: 769px) {
+          display: none;
+        }
+      }
+
+      > :global(.outer-content) > :global(.content) {
+        align-items: center;
+        container-type: inline-size;
+        display: flex;
+        flex-wrap: wrap;
+        gap: var(--spacing-md);
+
+        > a > :global(.image img) {
+          height: 1.8em;
+          max-width: min(20em, 100%);
+          width: auto;
+        }
+
+        :global(.button-group) {
+          margin-top: 0;
+        }
+      }
+
+      > :global(.outer-content) > :global(.content) > .nav-end {
+        align-items: center;
+        display: flex;
+        justify-content: flex-end;
+        margin-left: auto;
+        flex-shrink: 0;
+
+        > :global(.button-group) {
+          container-type: normal;
+        }
       }
     }
-
-    :global(.nav-hamburger.mobile-button) {
-      @container (min-width: 769px) {
-        display: none;
-      }
-    }
-
-    > :global(.outer-content) > :global(.content) {
-      align-items: center;
-      container-type: inline-size;
-      display: flex;
-      flex-wrap: wrap;
-      gap: var(--spacing-md);
-
-      > a > :global(.image img) {
-        height: 1.8em;
-        max-width: min(20em, 100%);
-        width: auto;
-      }
-
-      :global(.button-group) {
-        margin-top: 0;
-      }
-    }
-
-    > :global(.outer-content) > :global(.content) > .nav-end {
-      align-items: center;
-      display: flex;
-      justify-content: flex-end;
-      margin-left: auto;
-      flex-shrink: 0;
-
-      > :global(.button-group) {
-        container-type: normal;
-      }
-    }
-  }
   }
 </style>

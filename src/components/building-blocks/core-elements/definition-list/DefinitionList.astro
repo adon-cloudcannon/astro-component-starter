@@ -45,58 +45,58 @@ const arrayDataAttributes = editable
 <style lang="pcss">
   @layer components {
     .definition-list {
-    display: grid;
-    gap: var(--spacing-em-sm) var(--spacing-em-md);
-    grid-template-columns: auto 1fr;
-    margin: 0;
-    margin-top: var(--spacing-lg);
-
-    > :global(editable-array-item) {
       display: grid;
       gap: var(--spacing-em-sm) var(--spacing-em-md);
-      grid-column: 1 / -1;
       grid-template-columns: auto 1fr;
-    }
-
-    &.alignment-center {
-      align-items: center;
-      grid-template-columns: 1fr 1fr;
-      justify-content: center;
+      margin: 0;
+      margin-top: var(--spacing-lg);
 
       > :global(editable-array-item) {
+        display: grid;
+        gap: var(--spacing-em-sm) var(--spacing-em-md);
+        grid-column: 1 / -1;
+        grid-template-columns: auto 1fr;
+      }
+
+      &.alignment-center {
+        align-items: center;
         grid-template-columns: 1fr 1fr;
+        justify-content: center;
+
+        > :global(editable-array-item) {
+          grid-template-columns: 1fr 1fr;
+        }
+
+        > :global(editable-array-item) > :global(.title),
+        > .title {
+          text-align: end;
+        }
       }
 
-      > :global(editable-array-item) > :global(.title),
-      > .title {
-        text-align: end;
-      }
-    }
-
-    &.alignment-end {
-      align-items: end;
-      grid-template-columns: auto auto;
-      justify-content: end;
-
-      > :global(editable-array-item) {
+      &.alignment-end {
+        align-items: end;
         grid-template-columns: auto auto;
-      }
+        justify-content: end;
 
-      > :global(editable-array-item) > :global(.title),
-      > .title {
-        text-align: start;
+        > :global(editable-array-item) {
+          grid-template-columns: auto auto;
+        }
+
+        > :global(editable-array-item) > :global(.title),
+        > .title {
+          text-align: start;
+        }
+
+        > :global(editable-array-item) > :global(.content),
+        > .content {
+          text-align: end;
+        }
       }
 
       > :global(editable-array-item) > :global(.content),
       > .content {
-        text-align: end;
+        margin: 0;
       }
     }
-
-    > :global(editable-array-item) > :global(.content),
-    > .content {
-      margin: 0;
-    }
-  }
   }
 </style>

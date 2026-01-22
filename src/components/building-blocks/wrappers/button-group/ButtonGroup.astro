@@ -57,65 +57,65 @@ if (!hasButtonSections && !hasSlotContent) return;
 <style lang="pcss">
   @layer components {
     .button-group {
-    position: relative;
-    margin-top: var(--spacing-lg);
-    container-type: inline-size;
-    width: 100%;
+      position: relative;
+      margin-top: var(--spacing-lg);
+      container-type: inline-size;
+      width: 100%;
 
-    &, :global(> editable-array) {
-      align-items: center;
-      display: flex;
-      flex-wrap: wrap;
-      gap: var(--spacing-sm);
-    }
-
-    &.column {
       &, :global(> editable-array) {
-        flex-direction: column;
+        align-items: center;
+        display: flex;
+        flex-wrap: wrap;
+        gap: var(--spacing-sm);
       }
 
-      &.align-start {
+      &.column {
         &, :global(> editable-array) {
-          align-items: flex-start;
+          flex-direction: column;
+        }
+
+        &.align-start {
+          &, :global(> editable-array) {
+            align-items: flex-start;
+          }
+        }
+
+        &.align-center {
+          &, :global(> editable-array) {
+            align-items: center;
+          }
+        }
+
+        &.align-end {
+          &, :global(> editable-array) {
+            align-items: flex-end;
+          }
+        }
+      }
+
+      &.row {
+        &, :global(> editable-array) {
+          flex-direction: row;
         }
       }
 
       &.align-center {
         &, :global(> editable-array) {
-          align-items: center;
+          justify-content: center;
         }
       }
 
       &.align-end {
         &, :global(> editable-array) {
-          align-items: flex-end;
+          justify-content: flex-end;
+        }
+      }
+
+      &.align-start {
+        &, :global(> editable-array) {
+          justify-content: flex-start;
         }
       }
     }
-
-    &.row {
-      &, :global(> editable-array) {
-        flex-direction: row;
-      }
-    }
-
-    &.align-center {
-      &, :global(> editable-array) {
-        justify-content: center;
-      }
-    }
-
-    &.align-end {
-      &, :global(> editable-array) {
-        justify-content: flex-end;
-      }
-    }
-
-    &.align-start {
-      &, :global(> editable-array) {
-        justify-content: flex-start;
-      }
-    }
-  }
   }
 </style>

@@ -94,109 +94,109 @@ const positionClass = `position-${positionVertical}-${positionHorizontal}`;
 <style lang="pcss">
   @layer components {
     .image {
-    display: block;
-    overflow: hidden;
-    margin-top: var(--spacing-lg);
+      display: block;
+      overflow: hidden;
+      margin-top: var(--spacing-lg);
 
-    &.ratio-square {
-      aspect-ratio: var(--ratio-square);
-    }
+      &.ratio-square {
+        aspect-ratio: var(--ratio-square);
+      }
 
-    &.ratio-landscape {
-      aspect-ratio: var(--ratio-landscape);
-    }
+      &.ratio-landscape {
+        aspect-ratio: var(--ratio-landscape);
+      }
 
-    &.ratio-portrait {
-      aspect-ratio: var(--ratio-portrait);
-    }
+      &.ratio-portrait {
+        aspect-ratio: var(--ratio-portrait);
+      }
 
-    &.ratio-widescreen {
-      aspect-ratio: var(--ratio-widescreen);
-    }
+      &.ratio-widescreen {
+        aspect-ratio: var(--ratio-widescreen);
+      }
 
-    &.ratio-horizontal-strip {
-      aspect-ratio: var(--ratio-horizontal-strip);
-    }
+      &.ratio-horizontal-strip {
+        aspect-ratio: var(--ratio-horizontal-strip);
+      }
 
-    &.ratio {
+      &.ratio {
+        :global(picture) {
+          height: 100%;
+        }
+
+        :global(img) {
+          height: 100%;
+          object-fit: cover;
+          object-position: center center;
+        }
+      }
+
+      &.background {
+        inset: 0;
+        position: absolute;
+        margin-top: 0;
+
+        > :global(picture) {
+          height: 100%;
+        }
+
+        > :global(picture) > :global(img) {
+          height: 100%;
+          object-fit: cover;
+          width: 100%;
+        }
+      }
+
       :global(picture) {
-        height: 100%;
+        display: block;
+        margin-block: auto;
+        width: 100%;
       }
 
       :global(img) {
-        height: 100%;
-        object-fit: cover;
-        object-position: center center;
-      }
-    }
-
-    &.background {
-      inset: 0;
-      position: absolute;
-      margin-top: 0;
-
-      > :global(picture) {
-        height: 100%;
-      }
-
-      > :global(picture) > :global(img) {
-        height: 100%;
-        object-fit: cover;
+        display: block;
+        height: auto;
         width: 100%;
       }
-    }
 
-    :global(picture) {
-      display: block;
-      margin-block: auto;
-      width: 100%;
-    }
+      &.position-center-center :global(img) {
+        object-position: center center;
+      }
 
-    :global(img) {
-      display: block;
-      height: auto;
-      width: 100%;
-    }
+      &.position-top-center :global(img) {
+        object-position: center top;
+      }
 
-    &.position-center-center :global(img) {
-      object-position: center center;
-    }
+      &.position-bottom-center :global(img) {
+        object-position: center bottom;
+      }
 
-    &.position-top-center :global(img) {
-      object-position: center top;
-    }
+      &.position-center-left :global(img) {
+        object-position: left center;
+      }
 
-    &.position-bottom-center :global(img) {
-      object-position: center bottom;
-    }
+      &.position-center-right :global(img) {
+        object-position: right center;
+      }
 
-    &.position-center-left :global(img) {
-      object-position: left center;
-    }
+      &.position-top-left :global(img) {
+        object-position: left top;
+      }
 
-    &.position-center-right :global(img) {
-      object-position: right center;
-    }
+      &.position-top-right :global(img) {
+        object-position: right top;
+      }
 
-    &.position-top-left :global(img) {
-      object-position: left top;
-    }
+      &.position-bottom-left :global(img) {
+        object-position: left bottom;
+      }
 
-    &.position-top-right :global(img) {
-      object-position: right top;
-    }
+      &.position-bottom-right :global(img) {
+        object-position: right bottom;
+      }
 
-    &.position-bottom-left :global(img) {
-      object-position: left bottom;
+      &.rounded {
+        border-radius: var(--radius-lg);
+      }
     }
-
-    &.position-bottom-right :global(img) {
-      object-position: right bottom;
-    }
-
-    &.rounded {
-      border-radius: var(--radius-lg);
-    }
-  }
   }
 </style>

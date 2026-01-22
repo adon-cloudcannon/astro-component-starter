@@ -59,52 +59,52 @@ if (!hasItems && !hasSlotContent) return;
 <style lang="pcss">
   @layer components {
     .list {
-    display: flex;
-    flex-direction: column;
-    gap: var(--spacing-em-sm);
-    list-style: none;
-    margin: 0;
-    margin-top: var(--spacing-lg);
-    padding: 0;
-
-    &.direction-horizontal {
-      flex-flow: row wrap;
+      display: flex;
+      flex-direction: column;
       gap: var(--spacing-em-sm);
-    }
+      list-style: none;
+      margin: 0;
+      margin-top: var(--spacing-lg);
+      padding: 0;
 
-    &.alignment-end {
-      align-items: flex-end;
-      justify-content: flex-end;
-    }
+      &.direction-horizontal {
+        flex-flow: row wrap;
+        gap: var(--spacing-em-sm);
+      }
 
-    &.alignment-center {
-      align-items: center;
-      justify-content: center;
-    }
+      &.alignment-end {
+        align-items: flex-end;
+        justify-content: flex-end;
+      }
 
-    &.size-xs {
-      font-size: var(--font-size-xs);
-    }
+      &.alignment-center {
+        align-items: center;
+        justify-content: center;
+      }
 
-    &.size-sm {
-      font-size: var(--font-size-sm);
-    }
+      &.size-xs {
+        font-size: var(--font-size-xs);
+      }
 
-    &.size-md {
-      font-size: var(--font-size-md);
-    }
+      &.size-sm {
+        font-size: var(--font-size-sm);
+      }
 
-    &.size-lg {
-      font-size: var(--font-size-lg);
-    }
+      &.size-md {
+        font-size: var(--font-size-md);
+      }
 
-    &.size-xl {
-      font-size: var(--font-size-xl);
-    }
+      &.size-lg {
+        font-size: var(--font-size-lg);
+      }
 
-    &.size-2xl {
-      font-size: var(--font-size-2xl);
+      &.size-xl {
+        font-size: var(--font-size-xl);
+      }
+
+      &.size-2xl {
+        font-size: var(--font-size-2xl);
+      }
     }
-  }
   }
 </style>
