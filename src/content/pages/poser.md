@@ -71,7 +71,7 @@ pageSections:
         afterContentSections: []
     maxContentWidth: xs
     paddingHorizontal: md
-    paddingVertical: md
+    paddingVertical: 3xl
     colorScheme: contrast
     backgroundColor: surface
     backgroundImage:
