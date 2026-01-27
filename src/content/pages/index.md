@@ -15,7 +15,6 @@ pageSections:
         link: /poser/
         iconName: ''
         iconPosition: before
-        hideText: false
         variant: primary
         size: lg
       - _component: building-blocks/core-elements/button
