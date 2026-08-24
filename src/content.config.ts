@@ -90,24 +90,8 @@ const docsComponentsCollection = defineCollection({
   schema: docsComponentSchema,
 });
 
-const blogPostSchema = z.object({
-  title: z.string(),
-  description: z.string(),
-  date: z.coerce.date(),
-  author: z.string().default("Anonymous"),
-  image: z.string().optional(),
-  tags: z.array(z.string()).default([]),
-  keywords: z.array(z.string()).optional(),
-});
-
-const blogCollection = defineCollection({
-  loader: glob({ pattern: "**/*.mdx", base: "./src/content/blog" }),
-  schema: blogPostSchema,
-});
-
 export const collections = {
   pages: pagesCollection,
   "docs-pages": docsPagesCollection,
   "docs-components": docsComponentsCollection,
-  blog: blogCollection,
 };

@@ -1,0 +1,33 @@
+eyebrow:
+  type: text
+  comment: Small stencilled label above the heading.
+heading:
+  type: text
+  comment: Section heading. Leave the intro fields empty to start straight into the collage.
+subtext:
+  type: markdown
+  comment: Short intro paragraph.
+  options:
+    blockquote: false
+    bold: true
+    format:
+    italic: true
+    link: true
+    strike: false
+    subscript: false
+    superscript: false
+    underline: false
+    bulletedlist: false
+    numberedlist: false
+items:
+  type: array
+  comment: Tiles in the collage. Sizes are set per tile, and the grid backfills gaps automatically.
+  options:
+    structures: _structures.collageItems
+minRowHeight:
+  type: number
+  comment: Height in pixels of one grid row. Tile heights are multiples of this.
+  options:
+    min: 60
+    max: 320
+    step: 10

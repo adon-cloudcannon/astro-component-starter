@@ -1,0 +1,353 @@
+---
+import CustomSection from "@builders/custom-section/CustomSection.astro";
+import Image from "@core-elements/image/Image.astro";
+import SimpleText from "@core-elements/simple-text/SimpleText.astro";
+import Text from "@core-elements/text/Text.astro";
+import Video from "@core-elements/video/Video.astro";
+
+type CollageItem = {
+  type?: "image" | "video" | "slab" | "sticker";
+  imageSource?: string;
+  imageAlt?: string;
+  videoId?: string;
+  videoTitle?: string;
+  text?: string;
+  caption?: string;
+  link?: string;
+  /** Width in a 12-column grid. */
+  colSpan?: number;
+  /** Height in row units (each row is minRowHeight tall). */
+  rowSpan?: number;
+};
+
+const {
+  eyebrow = "",
+  heading = "",
+  subtext = "",
+  items = [] as CollageItem[],
+  minRowHeight = 130,
+  sectionLabel,
+  maxContentWidth = "3xl",
+  paddingHorizontal = "lg",
+  paddingVertical = "4xl",
+  colorScheme = "inherit",
+  backgroundColor,
+  background,
+  class: className,
+  useDefaultEditableBinding = false,
+  _component,
+  ...htmlAttributes
+} = Astro.props;
+
+const collageItems = (items as CollageItem[]).filter(Boolean);
+
+// Rotations are picked by position, not at random, so the layout is identical on every
+// build and nothing jumps between server render and hydration.
+const TILTS = [-3, 2.5, -1.5, 3, -2, 1.5, -3.5, 2];
+const tiltFor = (index: number) => TILTS[index % TILTS.length];
+---
+
+<CustomSection
+  class:list={["media-collage", className]}
+  label={sectionLabel}
+  maxContentWidth={maxContentWidth}
+  paddingHorizontal={paddingHorizontal}
+  paddingVertical={paddingVertical}
+  colorScheme={colorScheme}
+  backgroundColor={backgroundColor}
+  background={background}
+  useDefaultEditableBinding={useDefaultEditableBinding}
+  {...htmlAttributes}
+>
+  {
+    (eyebrow || heading || subtext) && (
+      <div class="media-collage-intro">
+        <SimpleText
+          class="eyebrow"
+          data-prop="eyebrow"
+          text={eyebrow}
+        />
+        <h2
+          class="media-collage-title"
+          data-editable="text"
+          data-prop="heading"
+        >
+          {heading}
+        </h2>
+        <Text
+          class="subtext media-collage-subtext"
+          data-prop="subtext"
+          text={subtext}
+        />
+      </div>
+    )
+  }
+
+  <div
+    class="media-collage-grid"
+    style={`--collage-row-height: ${minRowHeight}px`}
+    data-editable="array"
+    data-prop="items"
+  >
+    {
+      collageItems.map((item, index) => {
+        const type = item.type ?? "image";
+        const style = [
+          `--col-span: ${Math.min(Math.max(Number(item.colSpan) || 4, 1), 12)}`,
+          `--row-span: ${Math.min(Math.max(Number(item.rowSpan) || 2, 1), 6)}`,
+          `--tilt: ${tiltFor(index)}deg`,
+        ].join("; ");
+
+        return (
+          <div
+            class:list={["media-collage-cell", `is-${type}`]}
+            style={style}
+            data-editable="array-item"
+          >
+            {type === "video" && item.videoId && (
+              /* `posterquality` matters: lite-youtube defaults to hqdefault, which is a
+                 4:3 centre-crop of the frame — it lops the title text off the side of
+                 these audio-visualiser thumbnails. maxresdefault is the full 16:9. */
+              <Video
+                type="youtube"
+                videoId={item.videoId}
+                title={item.videoTitle}
+                class="media-collage-video"
+                posterquality="maxresdefault"
+              />
+            )}
+
+            {type === "image" && item.imageSource && (
+              <figure class="media-collage-figure">
+                <Image
+                  class="media-collage-image"
+                  source={item.imageSource}
+                  alt={item.imageAlt}
+                  sizes="(max-width: 700px) 50vw, 33vw"
+                  widths={[400, 800]}
+                />
+                {item.caption && (
+                  <figcaption class="media-collage-caption">{item.caption}</figcaption>
+                )}
+              </figure>
+            )}
+
+            {type === "slab" && (
+              <div class="media-collage-slab">
+                <span class="media-collage-slab-text">{item.text}</span>
+                {item.caption && <span class="media-collage-slab-caption">{item.caption}</span>}
+              </div>
+            )}
+
+            {type === "sticker" && (
+              <div class="media-collage-sticker">
+                <span>{item.text}</span>
+              </div>
+            )}
+          </div>
+        );
+      })
+    }
+  </div>
+</CustomSection>
+
+<style is:global>
+  @layer page-sections {
+    .media-collage {
+      .media-collage-intro {
+        margin-bottom: var(--spacing-2xl);
+        padding-inline: var(--spacing-lg);
+      }
+
+      .media-collage-subtext {
+        max-width: 52ch;
+      }
+
+      /* Fluid rather than stepped: Amatic is condensed enough that a fixed 3xl
+         still runs past a 375px screen, and the body clips it silently. */
+      .media-collage-title {
+        font-size: clamp(2.75rem, 11vw, var(--font-size-heading-3xl));
+        margin-block: var(--spacing-xs) var(--spacing-md);
+      }
+
+      /* Dense auto-flow is what makes this read as a pinboard rather than a table:
+         short items backfill the gaps tall ones leave behind. */
+      .media-collage-grid {
+        display: grid;
+        gap: var(--spacing-lg);
+        grid-auto-flow: dense;
+        grid-auto-rows: var(--collage-row-height, 130px);
+        grid-template-columns: repeat(12, 1fr);
+        /* Rotated tiles throw their corners past the grid box — this is the room
+           they need so nothing clips against the edge of the viewport. */
+        padding-inline: var(--spacing-lg);
+      }
+
+      .media-collage-cell {
+        grid-column: span var(--col-span, 4);
+        grid-row: span var(--row-span, 2);
+        min-width: 0;
+        position: relative;
+        rotate: var(--tilt, 0deg);
+        transition:
+          rotate var(--animation-normal) ease-out,
+          scale var(--animation-normal) ease-out;
+        z-index: var(--layer-0);
+
+        /* Straighten and lift on hover — the one place the chaos resolves. */
+        &:hover,
+        &:focus-within {
+          rotate: 0deg;
+          scale: 1.03;
+          z-index: var(--layer-2);
+        }
+
+        > * {
+          height: 100%;
+          margin-top: 0;
+        }
+      }
+
+      .media-collage-figure {
+        background: var(--gray-11);
+        border: 3px solid var(--gray-0);
+        box-shadow: 8px 8px 0 rgba(255, 31, 143, 0.9);
+        display: flex;
+        flex-direction: column;
+        margin: 0;
+        overflow: hidden;
+      }
+
+      /* Image renders .image > .image-inner > picture > img. Every level needs an
+         explicit height or the img falls back to its intrinsic size and the figure
+         clips it instead of cropping it — leaving dead space under short tiles. */
+      .media-collage-image {
+        flex: 1;
+        margin-top: 0;
+        min-height: 0;
+
+        .image-inner,
+        picture,
+        img {
+          height: 100%;
+          object-fit: cover;
+          width: 100%;
+        }
+      }
+
+      .media-collage-caption {
+        background: var(--gray-0);
+        color: var(--gray-12);
+        font-family: var(--font-headings);
+        font-size: var(--font-size-lg);
+        letter-spacing: 0.04em;
+        line-height: 1;
+        padding: 0.35em 0.6em;
+        text-transform: uppercase;
+      }
+
+      .media-collage-video {
+        border: 3px solid var(--pink-hot);
+        height: 100%;
+        margin-top: 0;
+        width: 100%;
+      }
+
+      /* lite-youtube hard-codes a 16:9 :host aspect-ratio, which would push the player
+         out of its tile. Releasing that to `auto` lets the tile drive the size instead —
+         video spans are chosen to land near 16:9 anyway, so the poster barely crops. */
+      .media-collage-cell.is-video lite-youtube {
+        --lite-youtube-aspect-ratio: auto;
+
+        height: 100%;
+        max-width: none;
+        width: 100%;
+      }
+
+      /* A word set huge on a pink block — the collage's punctuation. */
+      .media-collage-slab {
+        align-items: center;
+        background: var(--pink-hot);
+        color: var(--gray-12);
+        display: flex;
+        flex-direction: column;
+        gap: 0.2em;
+        height: 100%;
+        justify-content: center;
+        padding: var(--spacing-md);
+        text-align: center;
+      }
+
+      .media-collage-slab-text {
+        font-family: var(--font-headings);
+        font-size: var(--font-size-heading-lg);
+        font-weight: var(--font-weight-bold);
+        line-height: 0.9;
+        text-transform: uppercase;
+      }
+
+      .media-collage-slab-caption {
+        font-size: var(--font-size-xs);
+        letter-spacing: var(--tracking-label);
+        text-transform: uppercase;
+      }
+
+      /* A cut-out sticker: solid disc so it sits on the board rather than
+         disappearing into the black, with the dashed rule as the die line. */
+      /* A cut-out sticker: solid disc so it sits on the board rather than disappearing
+         into the black, with the dashed rule standing in for the die line. It stays a
+         circle by taking its width from its height, whatever shape the tile is. */
+      /* Size the container so the disc can measure both of its axes: without this it
+         takes width from the tile and height from aspect-ratio and comes out an ellipse. */
+      .media-collage-cell.is-sticker {
+        align-items: center;
+        container-type: size;
+        display: flex;
+        justify-content: center;
+
+        > * {
+          height: auto;
+        }
+      }
+
+      .media-collage-sticker {
+        align-items: center;
+        aspect-ratio: 1;
+        background: var(--gray-11);
+        border: 3px dashed var(--pink-hot);
+        border-radius: 50%;
+        color: var(--pink-bright);
+        display: flex;
+        font-family: var(--font-headings);
+        font-size: var(--font-size-heading-md);
+        font-weight: var(--font-weight-bold);
+        justify-content: center;
+        line-height: 0.9;
+        padding: var(--spacing-md);
+        text-align: center;
+        text-transform: uppercase;
+        width: min(100cqw, 100cqh);
+      }
+
+      /* Below the fold of a phone the collage gives up on chaos and behaves:
+         two columns, no rotation, nothing clipped off the edge. */
+      @media (width < 700px) {
+        .media-collage-grid {
+          gap: var(--spacing-md);
+          grid-template-columns: repeat(6, 1fr);
+        }
+
+        .media-collage-cell {
+          grid-column: span 3;
+          grid-row: span 2;
+          rotate: 0deg;
+        }
+
+        .media-collage-cell.is-video,
+        .media-collage-cell.is-slab {
+          grid-column: span 6;
+        }
+      }
+    }
+  }
+</style>

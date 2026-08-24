@@ -1,0 +1,20 @@
+marqueeItems:
+  style: inline
+  values:
+    - label: Marquee Phrase
+      icon: campaign
+      description: A short phrase in the scrolling band.
+      value:
+        text: ""
+      preview:
+        text:
+          - key: text
+          - Marquee Phrase
+      picker_preview:
+        text: Marquee Phrase
+        subtext: A short phrase in the scrolling band.
+        icon: campaign
+      _inputs:
+        text:
+          type: text
+          comment: Keep it to a few words — it has to read while moving.

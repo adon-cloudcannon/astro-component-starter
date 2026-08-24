@@ -1,38 +1,50 @@
 {
-  "logoSource": "/src/assets/images/component-docs/acs-logo.svg",
-  "logoAlternateSource": "/src/assets/images/component-docs/acs-logo-dark.svg",
-  "logoAlt": "Astro Component Starter",
+  "logoText": "Steph Stephens",
+  "logoAlt": "Steph Stephens",
   "links": [
     {
       "name": "Home",
       "path": "/"
     },
     {
-      "name": "Why",
-      "path": "/why/"
+      "name": "Music",
+      "path": "/music/"
     },
     {
-      "name": "Components",
-      "path": "/component-docs/"
+      "name": "Media",
+      "path": "/media/"
     },
     {
-      "name": "Blog",
-      "path": "/blog/"
+      "name": "Contact",
+      "path": "/contact/"
     }
   ],
   "socials": [
     {
-      "icon": "social/github",
-      "link": "https://github.com"
+      "icon": "social/soundcloud",
+      "link": "https://soundcloud.com/stephstephens",
+      "label": "Listen on SoundCloud"
     },
     {
-      "icon": "social/x",
-      "link": "https://x.com"
+      "icon": "social/spotify",
+      "link": "https://open.spotify.com/artist/5d1D5NNYFbqUqm1XmnYg05",
+      "label": "Listen on Spotify"
     },
     {
-      "icon": "social/linkedin",
-      "link": "https://linkedin.com"
+      "icon": "social/apple-music",
+      "link": "https://music.apple.com/ca/artist/steph-stephens/1869494095",
+      "label": "Listen on Apple Music"
+    },
+    {
+      "icon": "social/youtube",
+      "link": "https://youtube.com/@stephstephens",
+      "label": "Watch on YouTube"
+    },
+    {
+      "icon": "social/instagram",
+      "link": "https://www.instagram.com/steph.stephens.poser/",
+      "label": "Follow on Instagram"
     }
   ],
-  "footerText": "© 2026 All rights reserved."
+  "footerText": "© 2026 Steph Stephens. London, Ontario. Made loud."
 }

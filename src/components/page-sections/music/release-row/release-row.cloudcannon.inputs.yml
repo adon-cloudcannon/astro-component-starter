@@ -1,0 +1,50 @@
+eyebrow:
+  type: text
+  comment: Release type and year, e.g. "Album · 2025".
+heading:
+  type: text
+  comment: Release title.
+subtext:
+  type: markdown
+  comment: A sentence or two about the release.
+  options:
+    blockquote: false
+    bold: true
+    format:
+    italic: true
+    link: true
+    strike: false
+    subscript: false
+    superscript: false
+    underline: false
+    bulletedlist: false
+    numberedlist: false
+meta:
+  type: text
+  comment: Small pink line under the artwork, e.g. "9 tracks · 2025".
+coverSource:
+  type: image
+  comment: Square release artwork.
+  options:
+    paths:
+      uploads: src/assets/images
+      static: ""
+    resize_style: contain
+    width: 1200
+    height: 1200
+coverAlt:
+  type: text
+  comment: Alt text for the artwork.
+tracks:
+  type: array
+  comment: The tracklist. Numbers are generated automatically from the order.
+  options:
+    structures: _structures.trackList
+buttonSections:
+  type: array
+  comment: Buttons under the tracklist. See the Button component documentation for more information.
+  options:
+    structures: _structures.buttonSections
+reverse:
+  type: switch
+  comment: Put the artwork on the right instead of the left. Alternate this down the page.

@@ -1,0 +1,324 @@
+/* ---------------------------------------------------------------------------
+   Steph Stephens — the brand layer.
+
+   Everything here is site chrome and texture that sits on top of the starter's
+   neutral components: grain, tape, stickers, marquees, glitch. Kept in one file
+   so the whole "punk" personality can be read, tuned, or torn out in one place.
+   --------------------------------------------------------------------------- */
+
+@layer base {
+  :root {
+    /* One SVG noise tile reused by the page grain and by any .grain surface. */
+    --grain-tile: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='160' height='160' filter='url(%23n)' opacity='0.42'/%3E%3C/svg%3E");
+    --tape-stripe: repeating-linear-gradient(
+      -45deg,
+      rgba(255, 255, 255, 0.16) 0 6px,
+      rgba(255, 255, 255, 0.04) 6px 12px
+    );
+  }
+
+  /* Grain sits above everything but eats no clicks. It is what stops flat black
+     from reading as "unstyled div" and makes the page feel printed. */
+  body::after {
+    background-image: var(--grain-tile);
+    content: "";
+    inset: 0;
+    mix-blend-mode: overlay;
+    opacity: 0.55;
+    pointer-events: none;
+    position: fixed;
+    z-index: var(--layer-8);
+  }
+
+  body {
+    background-color: var(--color-bg);
+    background-image:
+      radial-gradient(circle at 12% -10%, rgba(255, 31, 143, 0.16), transparent 45%),
+      radial-gradient(circle at 92% 8%, rgba(255, 31, 143, 0.08), transparent 40%);
+    background-repeat: no-repeat;
+  }
+
+  ::selection {
+    background: var(--pink-hot);
+    color: var(--gray-12);
+  }
+
+  :where(:root) {
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
+      letter-spacing: var(--tracking-display);
+      line-height: 0.94;
+      text-transform: uppercase;
+    }
+
+    h4,
+    h5,
+    h6 {
+      font-weight: var(--font-weight-bold);
+    }
+
+    /* Amatic caps sit high in the box; pull the following text up a touch. */
+    h1,
+    h2,
+    h3 {
+      margin-bottom: 0.32em;
+    }
+
+    a {
+      text-underline-offset: 0.18em;
+    }
+  }
+
+  /* Eyebrows become stencilled catalogue numbers rather than polite grey labels.
+     The inner <p> has to be named explicitly: the base `p` colour rule beats anything
+     inherited from the wrapper, so styling only `.eyebrow` leaves the text grey. */
+  .eyebrow,
+  .eyebrow p {
+    color: var(--pink-hot);
+    font-family: var(--font-headings);
+    font-size: var(--font-size-2xl);
+    font-weight: var(--font-weight-bold);
+    letter-spacing: var(--tracking-label);
+    line-height: 1;
+  }
+
+  .subtext,
+  .subtext p,
+  .subtext li {
+    color: var(--color-text-muted);
+  }
+
+  :focus-visible {
+    outline: 3px solid var(--pink-hot);
+    outline-offset: 3px;
+  }
+
+  * {
+    scrollbar-color: var(--pink-hot) var(--gray-11);
+  }
+
+  ::-webkit-scrollbar {
+    height: 10px;
+    width: 10px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: var(--gray-11);
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: var(--pink-hot);
+    border: 2px solid var(--gray-11);
+  }
+}
+
+@layer base {
+  @keyframes punk-marquee {
+    from {
+      transform: translateX(0);
+    }
+
+    to {
+      transform: translateX(-50%);
+    }
+  }
+
+  @keyframes punk-jitter {
+    0%,
+    100% {
+      transform: translate(0, 0) rotate(0deg);
+    }
+
+    25% {
+      transform: translate(-1px, 1px) rotate(-0.4deg);
+    }
+
+    50% {
+      transform: translate(1px, -1px) rotate(0.4deg);
+    }
+
+    75% {
+      transform: translate(1px, 1px) rotate(-0.2deg);
+    }
+  }
+
+  @keyframes punk-flicker {
+    0%,
+    93%,
+    100% {
+      opacity: 1;
+    }
+
+    94% {
+      opacity: 0.35;
+    }
+
+    96% {
+      opacity: 1;
+    }
+
+    97% {
+      opacity: 0.5;
+    }
+  }
+}
+
+@layer utils {
+  /* --- Texture -------------------------------------------------------- */
+
+  .grain {
+    position: relative;
+
+    &::after {
+      background-image: var(--grain-tile);
+      content: "";
+      inset: 0;
+      mix-blend-mode: overlay;
+      opacity: 0.5;
+      pointer-events: none;
+      position: absolute;
+    }
+  }
+
+  .halftone {
+    background-image: radial-gradient(var(--pink-veil) 1px, transparent 1px);
+    background-size: 7px 7px;
+  }
+
+  /* --- Layout attitude ------------------------------------------------ */
+
+  .tilt-left {
+    rotate: -2.5deg;
+  }
+
+  .tilt-right {
+    rotate: 2deg;
+  }
+
+  .tilt-hard {
+    rotate: -5deg;
+  }
+
+  /* --- Stickers and tape ---------------------------------------------- */
+
+  /* A hot pink offset slab behind an element. The classic photocopied-flyer trick:
+     no blur, no softness, just a hard second copy shoved down and right. */
+  .sticker {
+    box-shadow: 6px 6px 0 var(--pink-hot);
+    position: relative;
+    transition: box-shadow var(--animation-normal) ease-out;
+
+    &:hover {
+      box-shadow: 10px 10px 0 var(--pink-hot);
+    }
+  }
+
+  .sticker-white {
+    box-shadow: 6px 6px 0 var(--gray-0);
+  }
+
+  /* Strip of masking tape across the top-left corner of a photo. */
+  .taped {
+    position: relative;
+
+    &::before {
+      background: var(--gray-1);
+      background-image: var(--tape-stripe);
+      content: "";
+      height: 1.5rem;
+      left: -2.1rem;
+      opacity: 0.85;
+      position: absolute;
+      rotate: -38deg;
+      top: 0.1rem;
+      width: 6.5rem;
+      z-index: var(--layer-2);
+    }
+  }
+
+  .taped-right::before {
+    left: auto;
+    right: -1.6rem;
+    rotate: 38deg;
+  }
+
+  /* --- Type effects ---------------------------------------------------- */
+
+  /* Two offset colour copies behind the text, revealed harder on hover. Pure CSS,
+     no duplicated DOM, degrades to plain text if text-shadow is unsupported. */
+  .glitch {
+    position: relative;
+    text-shadow:
+      2px 0 0 var(--pink-hot),
+      -2px 0 0 rgba(255, 255, 255, 0.35);
+    transition: text-shadow var(--animation-fast) linear;
+
+    &:hover {
+      animation: punk-jitter 220ms steps(2) infinite;
+      text-shadow:
+        5px 0 0 var(--pink-hot),
+        -5px 0 0 rgba(255, 255, 255, 0.55);
+    }
+  }
+
+  .outline-type {
+    color: transparent;
+    -webkit-text-stroke: 2px var(--gray-0);
+  }
+
+  .outline-type-pink {
+    color: transparent;
+    -webkit-text-stroke: 2px var(--pink-hot);
+  }
+
+  .flicker {
+    animation: punk-flicker 6s linear infinite;
+  }
+
+  .highlighter {
+    background: var(--pink-hot);
+    box-decoration-break: clone;
+    color: var(--gray-12);
+    padding: 0 0.18em;
+  }
+
+  /* --- Marquee ---------------------------------------------------------- */
+
+  .marquee {
+    overflow: hidden;
+    width: 100%;
+
+    > .marquee-track {
+      animation: punk-marquee var(--marquee-duration, 26s) linear infinite;
+      display: flex;
+      gap: 0;
+      white-space: nowrap;
+      width: max-content;
+    }
+
+    &:hover > .marquee-track {
+      animation-play-state: paused;
+    }
+  }
+
+  .marquee-reverse > .marquee-track {
+    animation-direction: reverse;
+  }
+}
+
+/* Everything above is decoration. If the visitor asked for less motion, the page
+   still works — it just stops moving. */
+@media (prefers-reduced-motion: reduce) {
+  .marquee > .marquee-track {
+    animation: none;
+    transform: none;
+  }
+
+  .glitch:hover {
+    animation: none;
+  }
+}

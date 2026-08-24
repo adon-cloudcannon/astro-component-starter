@@ -18,6 +18,8 @@ const {
   logoSource,
   logoAlternateSource,
   logoAlt = "logo",
+  /** Renders a display-type wordmark instead of an image. Takes precedence over logoSource. */
+  logoText = "",
   navData = [],
   buttonSections = [] as NavButton[],
   themeToggle = false,
@@ -47,15 +49,27 @@ const mobileNavData = [
 >
   <a
     href="/"
-    class="main-nav-logo-link"
+    class:list={["main-nav-logo-link", logoText && "is-wordmark"]}
   >
-    <Image
-      source={logoSource}
-      alternateSource={logoAlternateSource}
-      class="main-nav-logo"
-      alt={logoAlt}
-      useDefaultEditableBinding={false}
-    />
+    {
+      logoText ? (
+        <span class="main-nav-wordmark">
+          {logoText}
+          <span
+            class="main-nav-wordmark-dot"
+            aria-hidden="true"
+          />
+        </span>
+      ) : (
+        <Image
+          source={logoSource}
+          alternateSource={logoAlternateSource}
+          class="main-nav-logo"
+          alt={logoAlt}
+          useDefaultEditableBinding={false}
+        />
+      )
+    }
   </a>
   <div class="nav-end">
     <Bar
@@ -79,11 +93,53 @@ const mobileNavData = [
     navData={mobileNavData}
     class="mobile-main-nav"
     useDefaultEditableBinding={false}
-  />
+  >
+    {
+      logoText && (
+        <span
+          slot="logo"
+          class="main-nav-wordmark"
+        >
+          {logoText}
+          <span
+            class="main-nav-wordmark-dot"
+            aria-hidden="true"
+          />
+        </span>
+      )
+    }
+  </Mobile>
 </CustomSection>
 
 <style is:global>
   @layer page-sections {
+    /* Text wordmark used in place of a logo image, in both the desktop bar and the
+       mobile drawer header — so it lives outside .main-nav's nesting. */
+    .main-nav-wordmark {
+      color: var(--color-text-strong);
+      display: inline-block;
+      font-family: var(--font-headings);
+      font-size: var(--font-size-heading-sm);
+      font-weight: var(--font-weight-bold);
+      letter-spacing: 0.02em;
+      line-height: 1;
+      position: relative;
+      text-transform: uppercase;
+      transition: rotate var(--animation-normal) ease-out;
+      white-space: nowrap;
+    }
+
+    /* The full stop after the name, in pink, doing the work a logo would. */
+    .main-nav-wordmark > .main-nav-wordmark-dot {
+      background: var(--pink-hot);
+      border-radius: 50%;
+      display: inline-block;
+      height: 0.42em;
+      margin-left: 0.14em;
+      vertical-align: baseline;
+      width: 0.42em;
+    }
+
     .main-nav {
       background-color: var(--color-bg);
       padding-block: 0;
@@ -118,6 +174,16 @@ const mobileNavData = [
           flex: 0 1 min(11rem, 100%);
           min-width: 0;
           width: min(11rem, 100%);
+        }
+
+        > .main-nav-logo-link.is-wordmark {
+          flex: 0 0 auto;
+          text-decoration: none;
+          width: auto;
+        }
+
+        > .main-nav-logo-link:hover > .main-nav-wordmark {
+          rotate: -2deg;
         }
 
         > .main-nav-logo-link > .main-nav-logo {

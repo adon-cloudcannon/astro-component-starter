@@ -1,0 +1,29 @@
+label: Marquee Band
+icon: campaign
+description: Full-bleed scrolling ticker of short, shouty phrases.
+value:
+  _component: page-sections/info-blocks/marquee-band
+  sectionLabel: ""
+  items:
+    - text: New album out now
+    - text: Poser
+    - text: Turn it up
+  separator: ★
+  variant: pink
+  speed: normal
+  direction: left
+preview:
+  text:
+    - Marquee Band
+  subtext:
+    - key: items[0].text
+  icon: campaign
+picker_preview:
+  text: Marquee Band
+  subtext: Full-bleed scrolling ticker of short, shouty phrases.
+_inputs_from_glob:
+  - /src/components/page-sections/info-blocks/marquee-band/marquee-band.cloudcannon.inputs.yml
+_inputs:
+  sectionLabel:
+    type: text
+    comment: Optional label to identify the section in the editor. When set and no HTML id is provided, an id is derived from this value.

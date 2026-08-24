@@ -1,0 +1,211 @@
+---
+import CustomSection from "@builders/custom-section/CustomSection.astro";
+import Icon from "@core-elements/icon/Icon.astro";
+import SimpleText from "@core-elements/simple-text/SimpleText.astro";
+import Text from "@core-elements/text/Text.astro";
+
+type WallLink = { label?: string; handle?: string; link?: string; iconName?: string };
+
+const {
+  eyebrow = "",
+  heading = "",
+  subtext = "",
+  links = [] as WallLink[],
+  sectionLabel,
+  maxContentWidth = "2xl",
+  paddingHorizontal = "lg",
+  paddingVertical = "4xl",
+  colorScheme = "inherit",
+  backgroundColor,
+  background,
+  class: className,
+  useDefaultEditableBinding = false,
+  _component,
+  ...htmlAttributes
+} = Astro.props;
+
+const wallLinks = (links as WallLink[]).filter((entry) => entry?.label?.trim());
+const isExternal = (href = "") => /^https?:\/\//.test(href);
+---
+
+<CustomSection
+  class:list={["link-wall", className]}
+  label={sectionLabel}
+  maxContentWidth={maxContentWidth}
+  paddingHorizontal={paddingHorizontal}
+  paddingVertical={paddingVertical}
+  colorScheme={colorScheme}
+  backgroundColor={backgroundColor}
+  background={background}
+  useDefaultEditableBinding={useDefaultEditableBinding}
+  {...htmlAttributes}
+>
+  <div class="link-wall-intro">
+    <SimpleText
+      class="eyebrow"
+      data-prop="eyebrow"
+      text={eyebrow}
+    />
+    <h2
+      class="link-wall-title"
+      data-editable="text"
+      data-prop="heading"
+    >
+      {heading}
+    </h2>
+    <Text
+      class="subtext link-wall-subtext"
+      data-prop="subtext"
+      text={subtext}
+    />
+  </div>
+
+  {
+    wallLinks.length > 0 && (
+      <ul
+        class="link-wall-list"
+        data-editable="array"
+        data-prop="links"
+      >
+        {wallLinks.map((entry) => (
+          <li
+            class="link-wall-row"
+            data-editable="array-item"
+          >
+            <a
+              class="link-wall-anchor"
+              href={entry.link}
+              {...(isExternal(entry.link) ? { target: "_blank", rel: "noopener noreferrer" } : {})}
+            >
+              <Icon
+                name={entry.iconName}
+                size="none"
+                class="link-wall-icon"
+                aria-hidden="true"
+              />
+              <span class="link-wall-label">{entry.label}</span>
+              {entry.handle && <span class="link-wall-handle">{entry.handle}</span>}
+              <Icon
+                name="arrow-long-right"
+                size="none"
+                class="link-wall-arrow"
+                aria-hidden="true"
+              />
+            </a>
+          </li>
+        ))}
+      </ul>
+    )
+  }
+</CustomSection>
+
+<style is:global>
+  @layer page-sections {
+    .link-wall {
+      .link-wall-intro {
+        max-width: 52ch;
+
+        > *:first-child {
+          margin-top: 0;
+        }
+      }
+
+      .link-wall-title {
+        font-size: clamp(2.75rem, 11vw, var(--font-size-heading-3xl));
+        margin-block: var(--spacing-xs) var(--spacing-md);
+      }
+
+      .link-wall-list {
+        border-top: 2px solid var(--pink-hot);
+        list-style: none;
+        margin: var(--spacing-2xl) 0 0;
+        padding: 0;
+      }
+
+      .link-wall-row {
+        border-bottom: 2px solid var(--pink-hot);
+      }
+
+      /* Each row is a full-bleed target that floods pink from the left. The arrow
+         only travels once the row is lit, so the motion reads as a consequence. */
+      .link-wall-anchor {
+        align-items: center;
+        background-image: linear-gradient(var(--pink-hot), var(--pink-hot));
+        background-position: left center;
+        background-repeat: no-repeat;
+        background-size: 0% 100%;
+        color: var(--color-text-strong);
+        display: flex;
+        gap: var(--spacing-md);
+        padding: var(--spacing-md) var(--spacing-md);
+        text-decoration: none;
+        transition:
+          background-size var(--animation-normal) ease-out,
+          color var(--animation-normal) ease-out;
+
+        &:hover,
+        &:focus-visible {
+          background-size: 100% 100%;
+          color: var(--gray-12);
+        }
+
+        &:hover .link-wall-arrow,
+        &:focus-visible .link-wall-arrow {
+          opacity: 1;
+          translate: 0 0;
+        }
+      }
+
+      .link-wall-icon {
+        color: var(--pink-hot);
+        flex-shrink: 0;
+        font-size: var(--font-size-2xl);
+        transition: color var(--animation-normal) ease-out;
+      }
+
+      .link-wall-anchor:hover .link-wall-icon,
+      .link-wall-anchor:focus-visible .link-wall-icon {
+        color: var(--gray-12);
+      }
+
+      .link-wall-label {
+        font-family: var(--font-headings);
+        font-size: var(--font-size-heading-md);
+        font-weight: var(--font-weight-bold);
+        letter-spacing: 0.02em;
+        line-height: 1;
+        text-transform: uppercase;
+      }
+
+      .link-wall-handle {
+        color: inherit;
+        font-size: var(--font-size-sm);
+        margin-left: auto;
+        opacity: 0.7;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+      }
+
+      .link-wall-arrow {
+        flex-shrink: 0;
+        font-size: var(--font-size-2xl);
+        opacity: 0;
+        transition:
+          opacity var(--animation-normal) ease-out,
+          translate var(--animation-normal) ease-out;
+        translate: -0.5rem 0;
+      }
+
+      @media (width < 600px) {
+        .link-wall-handle {
+          display: none;
+        }
+
+        .link-wall-label {
+          font-size: var(--font-size-heading-sm);
+        }
+      }
+    }
+  }
+</style>

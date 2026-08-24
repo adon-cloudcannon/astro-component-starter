@@ -15,6 +15,8 @@ const {
   logoSource,
   logoAlternateSource,
   logoAlt,
+  /** Renders a display-type wordmark instead of an image. Takes precedence over logoSource. */
+  logoText = "",
   useDefaultEditableBinding: _useDefaultEditableBinding = false,
   _component,
   ...htmlAttributes
@@ -33,13 +35,30 @@ const {
   >
     <div class="footer-content">
       <div class="content-container">
-        <Image
-          source={logoSource}
-          alternateSource={logoAlternateSource}
-          alt={logoAlt}
-          class="footer-logo"
-          useDefaultEditableBinding={false}
-        />
+        {
+          logoText ? (
+            <a
+              href="/"
+              class="footer-wordmark-link"
+            >
+              <span class="main-nav-wordmark">
+                {logoText}
+                <span
+                  class="main-nav-wordmark-dot"
+                  aria-hidden="true"
+                />
+              </span>
+            </a>
+          ) : (
+            <Image
+              source={logoSource}
+              alternateSource={logoAlternateSource}
+              alt={logoAlt}
+              class="footer-logo"
+              useDefaultEditableBinding={false}
+            />
+          )
+        }
       </div>
       <div class="content-container">
         <Bar
@@ -89,7 +108,20 @@ const {
 <style is:global>
   @layer page-sections {
     .footer {
+      border-top: 2px solid var(--pink-hot);
       container-type: inline-size;
+
+      .footer-wordmark-link {
+        text-decoration: none;
+
+        > .main-nav-wordmark {
+          font-size: var(--font-size-heading-md);
+        }
+
+        &:hover > .main-nav-wordmark {
+          rotate: -2deg;
+        }
+      }
 
       .button-group {
         &.align-end {

@@ -1,0 +1,45 @@
+eyebrow:
+  type: text
+  comment: Small stencilled label above the name.
+heading:
+  type: text
+  comment: First line of the display title, set solid.
+headingOutline:
+  type: text
+  comment: Second line of the display title, knocked out to a pink outline. Leave empty for a single-line title.
+subtext:
+  type: markdown
+  comment: Short paragraph under the title.
+  options:
+    blockquote: false
+    bold: true
+    format:
+    italic: true
+    link: true
+    strike: false
+    subscript: false
+    superscript: false
+    underline: false
+    bulletedlist: false
+    numberedlist: false
+buttonSections:
+  type: array
+  comment: Call-to-action buttons. See the Button component documentation for more information.
+  options:
+    structures: _structures.buttonSections
+coverSource:
+  type: image
+  comment: Square artwork shown taped up beside the title.
+  options:
+    paths:
+      uploads: src/assets/images
+      static: ""
+    resize_style: contain
+    width: 1000
+    height: 1000
+coverAlt:
+  type: text
+  comment: Alt text for the artwork.
+badgeText:
+  type: text
+  comment: Text for the round sticker over the artwork corner. Leave empty to hide it.

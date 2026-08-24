@@ -1,0 +1,182 @@
+collageItems:
+  id_key: type
+  style: modal
+  values:
+    - label: Photo
+      icon: photo_camera
+      description: A photo tile with an optional caption strip.
+      value:
+        type: image
+        imageSource: ""
+        imageAlt: ""
+        caption: ""
+        colSpan: 4
+        rowSpan: 3
+      preview:
+        text:
+          - key: caption
+          - Photo
+        image:
+          - key: imageSource
+        icon: photo_camera
+      picker_preview:
+        text: Photo
+        subtext: A photo tile with an optional caption strip.
+        icon: photo_camera
+      _inputs:
+        type:
+          type: hidden
+        imageSource:
+          type: image
+          comment: The photo.
+          options:
+            paths:
+              uploads: src/assets/images
+              static: ""
+            resize_style: contain
+            width: 1200
+            height: 1200
+        imageAlt:
+          type: text
+          comment: Alt text for the photo.
+        caption:
+          type: text
+          comment: Optional caption printed on a bone strip under the photo.
+        colSpan:
+          type: number
+          comment: Width in columns, out of 12.
+          options:
+            min: 1
+            max: 12
+            step: 1
+        rowSpan:
+          type: number
+          comment: Height in grid rows.
+          options:
+            min: 1
+            max: 6
+            step: 1
+
+    - label: Video
+      icon: play_circle
+      description: A YouTube video tile, loaded only when clicked.
+      value:
+        type: video
+        videoId: ""
+        videoTitle: ""
+        colSpan: 6
+        rowSpan: 3
+      preview:
+        text:
+          - key: videoTitle
+          - Video
+        subtext:
+          - key: videoId
+        icon: play_circle
+      picker_preview:
+        text: Video
+        subtext: A YouTube video tile, loaded only when clicked.
+        icon: play_circle
+      _inputs:
+        type:
+          type: hidden
+        videoId:
+          type: text
+          comment: The YouTube video ID — the part after `watch?v=`.
+        videoTitle:
+          type: text
+          comment: Video title, used as the accessible label.
+        colSpan:
+          type: number
+          comment: Width in columns, out of 12.
+          options:
+            min: 1
+            max: 12
+            step: 1
+        rowSpan:
+          type: number
+          comment: Height in grid rows.
+          options:
+            min: 1
+            max: 6
+            step: 1
+
+    - label: Type Slab
+      icon: title
+      description: A word set huge on a hot pink block.
+      value:
+        type: slab
+        text: ""
+        caption: ""
+        colSpan: 3
+        rowSpan: 2
+      preview:
+        text:
+          - key: text
+          - Type Slab
+        icon: title
+      picker_preview:
+        text: Type Slab
+        subtext: A word set huge on a hot pink block.
+        icon: title
+      _inputs:
+        type:
+          type: hidden
+        text:
+          type: text
+          comment: The word or short phrase.
+        caption:
+          type: text
+          comment: Optional small line under it.
+        colSpan:
+          type: number
+          comment: Width in columns, out of 12.
+          options:
+            min: 1
+            max: 12
+            step: 1
+        rowSpan:
+          type: number
+          comment: Height in grid rows.
+          options:
+            min: 1
+            max: 6
+            step: 1
+
+    - label: Sticker
+      icon: album
+      description: A dashed circle with a few words in it.
+      value:
+        type: sticker
+        text: ""
+        colSpan: 2
+        rowSpan: 2
+      preview:
+        text:
+          - key: text
+          - Sticker
+        icon: album
+      picker_preview:
+        text: Sticker
+        subtext: A dashed circle with a few words in it.
+        icon: album
+      _inputs:
+        type:
+          type: hidden
+        text:
+          type: text
+          comment: A few words, no more.
+        colSpan:
+          type: number
+          comment: Width in columns, out of 12.
+          options:
+            min: 1
+            max: 12
+            step: 1
+        rowSpan:
+          type: number
+          comment: Height in grid rows.
+          options:
+            min: 1
+            max: 6
+            step: 1

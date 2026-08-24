@@ -1,0 +1,123 @@
+---
+import { slugifyLabel } from "@components/utils/slugify";
+
+type MarqueeItem = { text?: string } | string;
+
+const {
+  items = [] as MarqueeItem[],
+  separator = "★",
+  variant = "pink",
+  speed = "normal",
+  direction = "left",
+  sectionLabel,
+  class: className,
+  useDefaultEditableBinding: _useDefaultEditableBinding = false,
+  _component,
+  ...htmlAttributes
+} = Astro.props;
+
+if (!htmlAttributes.id && sectionLabel) {
+  htmlAttributes.id = slugifyLabel(sectionLabel);
+}
+
+const entries = (items as MarqueeItem[])
+  .map((item) => (typeof item === "string" ? item : (item?.text ?? "")))
+  .filter((text) => text.trim().length > 0);
+
+if (!_component && entries.length === 0) return;
+
+const durations: Record<string, string> = {
+  slow: "48s",
+  normal: "30s",
+  fast: "18s",
+};
+
+// The track holds four identical runs of the list, and the animation translates it
+// -50% — i.e. exactly two runs — so the loop has no visible seam. Four rather than two
+// because a short phrase list has to out-measure a wide viewport to avoid a gap.
+const runs = [0, 1, 2, 3];
+---
+
+<section
+  class:list={["marquee-band", `variant-${variant}`, className]}
+  aria-hidden="true"
+  {...htmlAttributes}
+>
+  <div
+    class:list={["marquee", direction === "right" && "marquee-reverse"]}
+    style={`--marquee-duration: ${durations[speed] ?? durations.normal}`}
+  >
+    <div class="marquee-track">
+      {
+        runs.map(() => (
+          <div class="marquee-run">
+            {entries.map((text) => (
+              <span class="marquee-item">
+                <span class="marquee-text">{text}</span>
+                <span class="marquee-sep">{separator}</span>
+              </span>
+            ))}
+          </div>
+        ))
+      }
+    </div>
+  </div>
+</section>
+
+<style is:global>
+  @layer page-sections {
+    .marquee-band {
+      border-block: 2px solid var(--pink-hot);
+      overflow: hidden;
+      width: 100%;
+
+      .marquee-run {
+        display: flex;
+        flex-shrink: 0;
+      }
+
+      .marquee-item {
+        align-items: center;
+        display: inline-flex;
+        font-family: var(--font-headings);
+        font-size: var(--font-size-heading-sm);
+        font-weight: var(--font-weight-bold);
+        gap: var(--spacing-lg);
+        letter-spacing: 0.04em;
+        line-height: 1;
+        padding-block: 0.34em;
+        padding-inline: var(--spacing-lg) 0;
+        text-transform: uppercase;
+      }
+
+      .marquee-sep {
+        font-size: 0.7em;
+        opacity: 0.75;
+      }
+
+      &.variant-pink {
+        background: var(--pink-hot);
+        color: var(--gray-12);
+      }
+
+      &.variant-bone {
+        background: var(--gray-0);
+        color: var(--gray-12);
+      }
+
+      /* Knocked-out type on black — reads as a strip of gaffer tape on a flight case. */
+      &.variant-outline {
+        background: var(--color-bg);
+        color: transparent;
+
+        .marquee-text {
+          -webkit-text-stroke: 1.5px var(--gray-0);
+        }
+
+        .marquee-sep {
+          color: var(--pink-hot);
+        }
+      }
+    }
+  }
+</style>

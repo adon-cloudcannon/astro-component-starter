@@ -1,0 +1,43 @@
+wallLinks:
+  style: modal
+  values:
+    - label: Wall Link
+      icon: link
+      description: One full-width row in a Link Wall.
+      value:
+        label: ""
+        handle: ""
+        link: ""
+        iconName: ""
+      preview:
+        text:
+          - key: label
+          - Wall Link
+        subtext:
+          - key: handle
+          - key: link
+          - Add a URL
+      picker_preview:
+        text: Wall Link
+        subtext: One full-width row in a Link Wall.
+        icon: link
+      _inputs:
+        label:
+          type: text
+          comment: The big display label, e.g. "Instagram".
+        handle:
+          type: text
+          comment: Small text on the right, e.g. a handle or address.
+        link:
+          type: url
+          comment: Where the row goes. External URLs open in a new tab.
+        iconName:
+          type: select
+          comment: Icon shown at the start of the row. Sourced from [Heroicons](https://heroicons.com/) plus the social set.
+          options:
+            values: _select_data.icons
+            preview:
+              text:
+                - key: name
+              image:
+                - template: src/icons/{id}.svg

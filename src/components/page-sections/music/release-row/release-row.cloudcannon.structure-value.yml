@@ -1,0 +1,56 @@
+label: Release Row
+icon: album
+description: Album artwork on one side, numbered tracklist on the other. Alternate the side down the page.
+value:
+  _component: page-sections/music/release-row
+  sectionLabel: ""
+  eyebrow: Album · 2025
+  heading: Release title
+  subtext: A sentence or two about the record.
+  meta: 9 tracks · 2025
+  coverSource: /src/assets/images/steph/album-poser.jpg
+  coverAlt: Release artwork
+  tracks:
+    - title: Track one
+      link: ""
+      note: ""
+  buttonSections:
+    - _component: building-blocks/core-elements/button
+      text: Play the album
+      hideText: false
+      link: ""
+      iconName: ""
+      iconColor: default
+      iconPosition: before
+      variant: primary
+      size: md
+  reverse: false
+  maxContentWidth: 2xl
+  paddingHorizontal: lg
+  paddingVertical: 4xl
+  colorScheme: inherit
+  backgroundColor: base
+  background:
+    type: image
+    positionVertical: center
+    positionHorizontal: center
+    priority: false
+    imageSource: ""
+    imageAlt: ""
+    videoSource: null
+    overlay: 0
+preview:
+  text:
+    - key: heading
+    - Release Row
+  subtext:
+    - key: eyebrow
+  image:
+    - key: coverSource
+  icon: album
+picker_preview:
+  text: Release Row
+  subtext: Album artwork on one side, numbered tracklist on the other.
+_inputs_from_glob:
+  - /src/components/page-sections/music/release-row/release-row.cloudcannon.inputs.yml
+  - /src/components/page-sections/_shared/section-wrapper.cloudcannon.inputs.yml

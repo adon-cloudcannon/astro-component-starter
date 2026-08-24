@@ -1,17 +1,27 @@
 :where(:root) {
-  --gray-0: #fff;
-  --gray-1: #eaeaea;
-  --gray-2: #d4d4d4;
-  --gray-3: #bfbfbf;
-  --gray-4: #aaa;
-  --gray-5: #949494;
-  --gray-6: #7f7f7f;
-  --gray-7: #6a6a6a;
-  --gray-8: #555;
-  --gray-9: #404040;
-  --gray-10: #2a2a2a;
-  --gray-11: #151515;
-  --gray-12: #000;
+  /* Steph Stephens: the greyscale ramp runs black -> bone, not black -> pure white.
+     Nothing on this site is #fff; the off-white keeps it feeling like print, not UI. */
+  --gray-0: #fffdfa;
+  --gray-1: #f4f0ea;
+  --gray-2: #d8d2ca;
+  --gray-3: #b9b2ab;
+  --gray-4: #9a938d;
+  --gray-5: #7c756f;
+  --gray-6: #625b57;
+  --gray-7: #4a4348;
+  --gray-8: #35303a;
+  --gray-9: #241f29;
+  --gray-10: #17131c;
+  --gray-11: #0d0a11;
+  --gray-12: #050308;
+
+  /* Hot pink, the only accent. Three stops so it can shout, sit, or whisper. */
+  --pink-hot: #ff1f8f;
+  --pink-bright: #ff4da6;
+  --pink-soft: #ff8cc6;
+  --pink-deep: #c2005f;
+  --pink-ghost: rgba(255, 31, 143, 0.14);
+  --pink-veil: rgba(255, 31, 143, 0.35);
 
   --blue-light: #e8f4fd;
   --blue-dark: #3b82f6;
@@ -31,8 +41,10 @@
   --purple-light: #f3e8ff;
   --purple-dark: #a855f7;
 
-  --pink-light: #fde8f2;
-  --pink-dark: #ec4899;
+  /* The icon-colour tokens used by Icon/FeatureGrid all resolve to the one accent so a
+     stray "blue" pick in the editor can never break the palette. */
+  --pink-light: var(--pink-soft);
+  --pink-dark: var(--pink-hot);
 
   --cyan-light: #e8fffe;
   --cyan-dark: #06b6d4;

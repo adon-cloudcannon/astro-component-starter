@@ -30,77 +30,6 @@ collections_config:
         comment: Optional meta keywords for this page.
       keywords[*]:
         type: text
-  blog:
-    path: src/content/blog
-    glob:
-      - "**/*.mdx"
-    url: /blog/[full_slug]/
-    disable_url: false
-    icon: article
-    _enabled_editors:
-      - content
-      - visual
-    add_options:
-      - name: Add New Blog Post
-        schema: default
-        icon: article
-    schemas:
-      default:
-        name: New Blog Post
-        path: .cloudcannon/schemas/blog-post.mdx
-        remove_extra_inputs: false
-    create:
-      path: "[relative_base_path]/{filename|slugify|lowercase}.mdx"
-    new_preview_url: /blog/
-    paths:
-      uploads: src/assets/images
-    _inputs:
-      title:
-        type: text
-        comment: The title of the blog post.
-      description:
-        type: text
-        comment: A brief description of the blog post.
-      date:
-        type: date
-        comment: The publication date.
-      author:
-        type: text
-        comment: The author of the blog post.
-      image:
-        type: image
-        comment: Optional image path for the blog post.
-        options:
-          paths:
-            uploads: src/assets/images
-          resize_style: contain
-          width: 1920
-          height: 1280
-      tags:
-        type: array
-        comment: Tags relevant to this post's content.
-      tags[*]:
-        type: text
-      keywords:
-        type: array
-        comment: Optional meta keywords for this post.
-      keywords[*]:
-        type: text
-    _editables:
-      content:
-        format: p h2 h3 h4 h5 h6
-        bold: true
-        italic: true
-        link: true
-        bulletedlist: true
-        numberedlist: true
-        blockquote: true
-        code: true
-        horizontalrule: true
-        snippet: true
-        undo: true
-        redo: true
-        removeformat: true
   data:
     path: src/data
     glob:
@@ -123,9 +52,9 @@ collections_config:
           url:
             comment: Production site URL used for canonical links and structured data.
           description:
-            comment: Default meta description used when a page or blog post does not provide its own description.
+            comment: Default meta description used when a page does not provide its own description.
           logoSource:
-            comment: Default image used for social sharing metadata when a page or blog post does not provide its own image.
+            comment: Default image used for social sharing metadata when a page does not provide its own image.
           titleFormat:
             comment: Browser title template. Include {title} where the page title should appear.
     _inputs:
@@ -157,7 +86,6 @@ collection_groups:
   - heading: Content
     collections:
       - pages
-      - blog
   - heading: Data
     collections:
       - data
@@ -745,6 +673,8 @@ _select_data:
       name: Signal Slash
     - id: slash
       name: Slash
+    - id: social/apple-music
+      name: Social/apple-music
     - id: social/bluesky
       name: Social/bluesky
     - id: social/discord
@@ -769,6 +699,10 @@ _select_data:
       name: Social/pinterest
     - id: social/reddit
       name: Social/reddit
+    - id: social/soundcloud
+      name: Social/soundcloud
+    - id: social/spotify
+      name: Social/spotify
     - id: social/tiktok
       name: Social/tiktok
     - id: social/twitch

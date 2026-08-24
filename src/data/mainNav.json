@@ -1,8 +1,7 @@
 {
-  "logoSource": "/src/assets/images/component-docs/acs-logo.svg",
-  "logoAlternateSource": "/src/assets/images/component-docs/acs-logo-dark.svg",
-  "logoAlt": "Astro Component Starter",
-  "themeToggle": true,
+  "logoText": "Steph Stephens",
+  "logoAlt": "Steph Stephens",
+  "themeToggle": false,
   "navData": [
     {
       "name": "Home",
@@ -10,31 +9,31 @@
       "children": []
     },
     {
-      "name": "Why",
-      "path": "/why/",
+      "name": "Music",
+      "path": "/music/",
       "children": []
     },
     {
-      "name": "Components",
-      "path": "/component-docs/",
+      "name": "Media",
+      "path": "/media/",
       "children": []
     },
     {
-      "name": "Blog",
-      "path": "/blog/",
+      "name": "Contact",
+      "path": "/contact/",
       "children": []
     }
   ],
   "buttonSections": [
     {
       "_component": "building-blocks/core-elements/button",
-      "text": "Search",
-      "hideText": true,
-      "link": "/search/",
-      "iconName": "magnifying-glass",
+      "text": "Listen",
+      "hideText": false,
+      "link": "https://soundcloud.com/stephstephens",
+      "iconName": "social/soundcloud",
       "iconPosition": "before",
-      "variant": "ghost",
-      "size": "lg"
+      "variant": "primary",
+      "size": "md"
     }
   ]
 }

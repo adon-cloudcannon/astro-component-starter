@@ -1,0 +1,26 @@
+eyebrow:
+  type: text
+  comment: Small stencilled label above the heading.
+heading:
+  type: text
+  comment: Section heading.
+subtext:
+  type: markdown
+  comment: Short intro paragraph above the rows.
+  options:
+    blockquote: false
+    bold: true
+    format:
+    italic: true
+    link: true
+    strike: false
+    subscript: false
+    superscript: false
+    underline: false
+    bulletedlist: false
+    numberedlist: false
+links:
+  type: array
+  comment: One full-width row per destination.
+  options:
+    structures: _structures.wallLinks

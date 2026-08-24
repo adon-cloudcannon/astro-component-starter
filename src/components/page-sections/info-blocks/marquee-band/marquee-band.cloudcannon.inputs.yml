@@ -1,0 +1,39 @@
+items:
+  type: array
+  comment: Phrases that scroll across the band. Keep them short and shouty.
+  options:
+    structures: _structures.marqueeItems
+separator:
+  type: text
+  comment: Character placed between each phrase. Try ★, ✦, ✕ or //.
+variant:
+  type: select
+  comment: Colour treatment for the band.
+  options:
+    values:
+      - id: pink
+        name: Hot pink fill
+      - id: bone
+        name: Bone fill
+      - id: outline
+        name: Outlined type on black
+speed:
+  type: select
+  comment: How fast the band scrolls. Hovering always pauses it.
+  options:
+    values:
+      - id: slow
+        name: Slow
+      - id: normal
+        name: Normal
+      - id: fast
+        name: Fast
+direction:
+  type: select
+  comment: Scroll direction.
+  options:
+    values:
+      - id: left
+        name: Right to left
+      - id: right
+        name: Left to right

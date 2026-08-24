@@ -1,0 +1,41 @@
+label: Link Wall
+icon: link
+description: Stack of full-width rows that flood hot pink on hover. Good for socials and streaming.
+value:
+  _component: page-sections/ctas/link-wall
+  sectionLabel: ""
+  eyebrow: Eyebrow text
+  heading: Section heading
+  subtext: ""
+  links:
+    - label: Instagram
+      handle: "@handle"
+      link: ""
+      iconName: social/instagram
+  maxContentWidth: 2xl
+  paddingHorizontal: lg
+  paddingVertical: 4xl
+  colorScheme: inherit
+  backgroundColor: base
+  background:
+    type: image
+    positionVertical: center
+    positionHorizontal: center
+    priority: false
+    imageSource: ""
+    imageAlt: ""
+    videoSource: null
+    overlay: 0
+preview:
+  text:
+    - key: heading
+    - Link Wall
+  subtext:
+    - Full-width link rows
+  icon: link
+picker_preview:
+  text: Link Wall
+  subtext: Stack of full-width rows that flood hot pink on hover.
+_inputs_from_glob:
+  - /src/components/page-sections/ctas/link-wall/link-wall.cloudcannon.inputs.yml
+  - /src/components/page-sections/_shared/section-wrapper.cloudcannon.inputs.yml

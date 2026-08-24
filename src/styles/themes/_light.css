@@ -1,48 +1,49 @@
-/* Light theme */
+/* Light theme — "bubblegum". The site never toggles into this globally (the theme toggle is off),
+   but a section can opt in with colorScheme: light for a flash of inverted, photocopied brightness. */
 [data-theme="light"] {
   color-scheme: light;
 
-  --color-brand: var(--gray-12);
-  --color-brand-muted: var(--gray-9);
-  --color-brand-subtle: var(--gray-7);
+  --color-brand: var(--pink-hot);
+  --color-brand-muted: var(--pink-deep);
+  --color-brand-subtle: var(--pink-soft);
   --color-brand-on: var(--gray-0);
 
   --color-text: var(--gray-10);
   --color-text-strong: var(--gray-12);
-  --color-text-muted: var(--gray-8);
+  --color-text-muted: var(--gray-7);
   --color-text-on-muted: var(--gray-12);
   --color-text-on-brand: var(--gray-0);
   --color-text-inverse: var(--gray-0);
-  --color-link: blue;
-  --color-link-hover: darkblue;
+  --color-link: var(--pink-deep);
+  --color-link-hover: var(--gray-12);
 
   --color-bg: var(--gray-0);
   --color-bg-surface: var(--gray-1);
+  --color-bg-accent: var(--pink-soft);
   --color-bg-muted: var(--gray-2);
-  --color-bg-accent: #d5fdff;
-  --color-bg-highlight: #fff9d6;
+  --color-bg-highlight: var(--pink-hot);
   --color-bg-brand: var(--color-brand);
   --color-bg-brand-muted: var(--color-brand-muted);
   --color-bg-inverse: var(--gray-12);
 
-  --color-border: var(--gray-4);
+  --color-border: var(--gray-3);
   --color-border-inputs: var(--gray-7);
-  --color-border-strong: var(--gray-10);
-  --color-border-subtle: var(--gray-1);
+  --color-border-strong: var(--gray-12);
+  --color-border-subtle: var(--gray-2);
 
-  --color-state-hover: rgba(0, 0, 0, 0.04);
-  --color-state-active: rgba(0, 0, 0, 0.08);
-  --color-overlay: rgba(0, 0, 0, 0.5);
+  --color-state-hover: rgba(255, 31, 143, 0.14);
+  --color-state-active: rgba(255, 31, 143, 0.26);
+  --color-overlay: rgba(5, 3, 8, 0.6);
 
-  --color-focus-ring: rgba(0, 87, 255, 0.4);
+  --color-focus-ring: var(--pink-hot);
 
-  --color-danger: #dc2626;
-  --color-danger-hover: #b91c1c;
-  --color-danger-bg-subtle: #fef2f2;
-  --color-danger-border-subtle: #fca5a5;
-  --color-info: #2563eb;
-  --color-info-bg-subtle: #eff6ff;
-  --color-info-border-subtle: #bfdbfe;
+  --color-danger: #d10000;
+  --color-danger-hover: #a10000;
+  --color-danger-bg-subtle: #ffecec;
+  --color-danger-border-subtle: #ffb3b3;
+  --color-info: var(--pink-deep);
+  --color-info-bg-subtle: var(--pink-ghost);
+  --color-info-border-subtle: var(--pink-veil);
   --color-success: #16a34a;
   --color-success-bg-subtle: #dcfce7;
   --color-error: var(--color-danger);

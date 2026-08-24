@@ -1,0 +1,36 @@
+trackList:
+  style: modal
+  values:
+    - label: Track
+      icon: music_note
+      description: One track in a release tracklist.
+      value:
+        title: ""
+        link: ""
+        note: ""
+      preview:
+        text:
+          - key: title
+          - Track
+        subtext:
+          - key: note
+          - key: link
+          - No link
+      picker_preview:
+        text: Track
+        subtext: One track in a release tracklist.
+        icon: music_note
+      _inputs:
+        title:
+          type: text
+          comment: Track title.
+        link:
+          type: url
+          comment: Optional link to the track. Adds a play affordance to the row.
+          options:
+            hide_link_to_file: true
+            hide_link_to_email_address: true
+            hide_link_to_telephone: true
+        note:
+          type: text
+          comment: Optional small note beside the title, e.g. "single" or a runtime.

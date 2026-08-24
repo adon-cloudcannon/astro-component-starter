@@ -1,0 +1,44 @@
+label: Media Collage
+icon: dashboard
+description: Deliberately off-kilter pinboard of videos, photos and type slabs at mixed sizes.
+value:
+  _component: page-sections/media/media-collage
+  sectionLabel: ""
+  eyebrow: Eyebrow text
+  heading: Section heading
+  subtext: ""
+  items:
+    - type: image
+      imageSource: /src/assets/images/steph/avatar.jpg
+      imageAlt: Photo
+      caption: ""
+      colSpan: 4
+      rowSpan: 3
+  minRowHeight: 130
+  maxContentWidth: 3xl
+  paddingHorizontal: lg
+  paddingVertical: 4xl
+  colorScheme: inherit
+  backgroundColor: base
+  background:
+    type: image
+    positionVertical: center
+    positionHorizontal: center
+    priority: false
+    imageSource: ""
+    imageAlt: ""
+    videoSource: null
+    overlay: 0
+preview:
+  text:
+    - key: heading
+    - Media Collage
+  subtext:
+    - Chaotic media grid
+  icon: dashboard
+picker_preview:
+  text: Media Collage
+  subtext: Deliberately off-kilter pinboard of videos, photos and type slabs.
+_inputs_from_glob:
+  - /src/components/page-sections/media/media-collage/media-collage.cloudcannon.inputs.yml
+  - /src/components/page-sections/_shared/section-wrapper.cloudcannon.inputs.yml

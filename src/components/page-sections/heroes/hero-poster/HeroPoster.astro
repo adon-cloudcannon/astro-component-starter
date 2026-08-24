@@ -1,0 +1,238 @@
+---
+import CustomSection from "@builders/custom-section/CustomSection.astro";
+import Image from "@core-elements/image/Image.astro";
+import SimpleText from "@core-elements/simple-text/SimpleText.astro";
+import Text from "@core-elements/text/Text.astro";
+import ButtonGroup from "@wrappers/button-group/ButtonGroup.astro";
+import Split from "@wrappers/split/Split.astro";
+
+const {
+  eyebrow = "",
+  /** First line of the name — set solid in bone. */
+  heading = "",
+  /** Second line — knocked out to a pink outline so the two lines fight each other. */
+  headingOutline = "",
+  subtext = "",
+  buttonSections = [],
+  coverSource = "",
+  coverAlt = "",
+  /** Rotated sticker slapped over the corner of the cover. Leave empty to hide it. */
+  badgeText = "",
+  sectionLabel,
+  maxContentWidth = "2xl",
+  paddingHorizontal = "lg",
+  paddingVertical = "5xl",
+  colorScheme = "inherit",
+  backgroundColor,
+  background,
+  class: className,
+  useDefaultEditableBinding = false,
+  _component,
+  ...htmlAttributes
+} = Astro.props;
+---
+
+<CustomSection
+  class:list={["hero-poster", className]}
+  label={sectionLabel}
+  maxContentWidth={maxContentWidth}
+  paddingHorizontal={paddingHorizontal}
+  paddingVertical={paddingVertical}
+  colorScheme={colorScheme}
+  backgroundColor={backgroundColor}
+  background={background}
+  useDefaultEditableBinding={useDefaultEditableBinding}
+  {...htmlAttributes}
+>
+  <Split
+    class="hero-poster-split"
+    distributionMode="two-thirds-third"
+    alignmentVertical="center"
+    gap="2xl"
+    minSplitWidth={860}
+    reverseOrderOnMobile={false}
+  >
+    <Fragment slot="first">
+      <div class="hero-poster-copy">
+        <SimpleText
+          class="eyebrow"
+          data-prop="eyebrow"
+          text={eyebrow}
+        />
+        <h1 class="hero-poster-title">
+          {
+            heading && (
+              <span
+                class="hero-poster-line solid glitch"
+                data-editable="text"
+                data-prop="heading"
+              >
+                {heading}
+              </span>
+            )
+          }
+          {
+            headingOutline && (
+              <span
+                class="hero-poster-line hollow"
+                data-editable="text"
+                data-prop="headingOutline"
+              >
+                {headingOutline}
+              </span>
+            )
+          }
+        </h1>
+        <Text
+          class="subtext hero-poster-subtext"
+          data-prop="subtext"
+          text={subtext}
+        />
+        <ButtonGroup
+          class="hero-poster-buttons"
+          buttonSections={buttonSections}
+          data-children-prop="buttonSections"
+        />
+      </div>
+    </Fragment>
+    <Fragment slot="second">
+      <div class="hero-poster-cover">
+        <Image
+          class="hero-poster-cover-image taped"
+          source={coverSource}
+          alt={coverAlt}
+          aspectRatio="square"
+          priority={true}
+          sizes="(max-width: 860px) 90vw, 420px"
+          widths={[420, 840]}
+          data-prop-src="coverSource"
+          data-prop-alt="coverAlt"
+        />
+        {
+          badgeText && (
+            <span
+              class="hero-poster-badge"
+              data-editable="text"
+              data-prop="badgeText"
+            >
+              {badgeText}
+            </span>
+          )
+        }
+      </div>
+    </Fragment>
+  </Split>
+</CustomSection>
+
+<style is:global>
+  @layer page-sections {
+    .hero-poster {
+      overflow: hidden;
+      position: relative;
+
+      /* Faint dot screen over the whole hero, like an enlarged newsprint photo. */
+      > .outer-content::before {
+        background-image: radial-gradient(rgba(255, 31, 143, 0.22) 1px, transparent 1px);
+        background-size: 9px 9px;
+        content: "";
+        inset: 0;
+        pointer-events: none;
+        position: absolute;
+        z-index: var(--layer-1);
+      }
+
+      .hero-poster-split {
+        margin-top: 0;
+      }
+
+      .hero-poster-copy > *:first-child {
+        margin-top: 0;
+      }
+
+      /* Sized off the viewport rather than the type scale: this is the one place on
+         the site where the name should be as big as the page will physically allow. */
+      .hero-poster-title {
+        font-size: clamp(4.5rem, 13.5vw, 15rem);
+        line-height: 0.78;
+        margin-block: var(--spacing-md) var(--spacing-lg);
+      }
+
+      .hero-poster-line {
+        display: block;
+      }
+
+      .hero-poster-line.solid {
+        color: var(--gray-0);
+      }
+
+      /* Outlined line, nudged right so the two lines look hand-set rather than aligned. */
+      .hero-poster-line.hollow {
+        -webkit-text-stroke: 3px var(--pink-hot);
+        color: transparent;
+        margin-left: 0.08em;
+      }
+
+      .hero-poster-subtext {
+        max-width: 46ch;
+
+        p {
+          font-size: var(--font-size-lg);
+        }
+      }
+
+      .hero-poster-buttons {
+        margin-top: var(--spacing-xl);
+      }
+
+      .hero-poster-cover {
+        position: relative;
+        rotate: 3deg;
+        transition: rotate var(--animation-slow) ease-out;
+
+        &:hover {
+          rotate: -1.5deg;
+        }
+      }
+
+      .hero-poster-cover-image {
+        border: 3px solid var(--gray-0);
+        box-shadow: 14px 14px 0 var(--pink-hot);
+        margin-top: 0;
+      }
+
+      /* Circular "OUT NOW" sticker, hanging off the bottom-left corner of the sleeve. */
+      .hero-poster-badge {
+        align-items: center;
+        aspect-ratio: 1;
+        background: var(--pink-hot);
+        border-radius: 50%;
+        bottom: -1.4rem;
+        color: var(--gray-12);
+        display: flex;
+        font-family: var(--font-headings);
+        font-size: var(--font-size-heading-sm);
+        font-weight: var(--font-weight-bold);
+        justify-content: center;
+        left: -1.6rem;
+        line-height: 0.9;
+        padding: 0.9em;
+        rotate: -14deg;
+        text-align: center;
+        text-transform: uppercase;
+        width: 7.5rem;
+        z-index: var(--layer-2);
+      }
+
+      @media (width < 860px) {
+        .hero-poster-line.hollow {
+          -webkit-text-stroke-width: 2px;
+        }
+
+        .hero-poster-cover {
+          margin-top: var(--spacing-2xl);
+          max-width: 22rem;
+        }
+      }
+    }
+  }
+</style>

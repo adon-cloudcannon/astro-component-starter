@@ -1,0 +1,287 @@
+---
+import CustomSection from "@builders/custom-section/CustomSection.astro";
+import Icon from "@core-elements/icon/Icon.astro";
+import Image from "@core-elements/image/Image.astro";
+import SimpleText from "@core-elements/simple-text/SimpleText.astro";
+import Text from "@core-elements/text/Text.astro";
+import ButtonGroup from "@wrappers/button-group/ButtonGroup.astro";
+import Split from "@wrappers/split/Split.astro";
+
+type Track = { title?: string; link?: string; note?: string };
+
+const {
+  eyebrow = "",
+  heading = "",
+  subtext = "",
+  meta = "",
+  tracks = [] as Track[],
+  buttonSections = [],
+  coverSource = "",
+  coverAlt = "",
+  /** Flips the artwork to the other side — alternate this down the page. */
+  reverse = false,
+  sectionLabel,
+  maxContentWidth = "2xl",
+  paddingHorizontal = "lg",
+  paddingVertical = "4xl",
+  colorScheme = "inherit",
+  backgroundColor,
+  background,
+  class: className,
+  useDefaultEditableBinding = false,
+  _component,
+  ...htmlAttributes
+} = Astro.props;
+
+const trackList = (tracks as Track[]).filter((track) => track?.title?.trim());
+---
+
+<CustomSection
+  class:list={["release-row", reverse && "is-reversed", className]}
+  label={sectionLabel}
+  maxContentWidth={maxContentWidth}
+  paddingHorizontal={paddingHorizontal}
+  paddingVertical={paddingVertical}
+  colorScheme={colorScheme}
+  backgroundColor={backgroundColor}
+  background={background}
+  useDefaultEditableBinding={useDefaultEditableBinding}
+  {...htmlAttributes}
+>
+  <Split
+    class="release-row-split"
+    distributionMode="half"
+    alignmentVertical="center"
+    gap="3xl"
+    minSplitWidth={800}
+    reverse={reverse}
+    reverseOrderOnMobile={false}
+  >
+    <Fragment slot="first">
+      <div class="release-row-cover">
+        <Image
+          class="release-row-cover-image"
+          source={coverSource}
+          alt={coverAlt}
+          aspectRatio="square"
+          sizes="(max-width: 800px) 92vw, 560px"
+          widths={[560, 1120]}
+          data-prop-src="coverSource"
+          data-prop-alt="coverAlt"
+        />
+        <SimpleText
+          class="release-row-meta"
+          size="sm"
+          data-prop="meta"
+          text={meta}
+        />
+      </div>
+    </Fragment>
+    <Fragment slot="second">
+      <div class="release-row-body">
+        <SimpleText
+          class="eyebrow"
+          data-prop="eyebrow"
+          text={eyebrow}
+        />
+        <h2
+          class="release-row-title"
+          data-editable="text"
+          data-prop="heading"
+        >
+          {heading}
+        </h2>
+        <Text
+          class="subtext release-row-subtext"
+          data-prop="subtext"
+          text={subtext}
+        />
+        {
+          trackList.length > 0 && (
+            <ol class="release-row-tracks">
+              {trackList.map((track, index) => {
+                const Tag = track.link ? "a" : "span";
+                const linkProps = track.link
+                  ? { href: track.link, target: "_blank", rel: "noopener noreferrer" }
+                  : {};
+
+                return (
+                  <li class="release-row-track">
+                    <Tag
+                      class="release-row-track-inner"
+                      {...linkProps}
+                    >
+                      <span class="release-row-track-number">
+                        {String(index + 1).padStart(2, "0")}
+                      </span>
+                      <span class="release-row-track-title">{track.title}</span>
+                      {track.note && <span class="release-row-track-note">{track.note}</span>}
+                      {track.link && (
+                        <Icon
+                          name="play"
+                          size="none"
+                          class="release-row-track-icon"
+                          aria-hidden="true"
+                        />
+                      )}
+                    </Tag>
+                  </li>
+                );
+              })}
+            </ol>
+          )
+        }
+        <ButtonGroup
+          class="release-row-buttons"
+          buttonSections={buttonSections}
+          data-children-prop="buttonSections"
+        />
+      </div>
+    </Fragment>
+  </Split>
+</CustomSection>
+
+<style is:global>
+  @layer page-sections {
+    .release-row {
+      overflow: hidden;
+
+      .release-row-split {
+        margin-top: 0;
+      }
+
+      .release-row-body > *:first-child {
+        margin-top: 0;
+      }
+
+      /* The sleeve: hard pink drop, thick bone border, leaning into the page. */
+      .release-row-cover {
+        position: relative;
+        rotate: -2.5deg;
+        transition: rotate var(--animation-slow) ease-out;
+
+        &:hover {
+          rotate: 0deg;
+        }
+      }
+
+      .release-row-cover-image {
+        border: 3px solid var(--gray-0);
+        box-shadow: 16px 16px 0 var(--pink-hot);
+        margin-top: 0;
+      }
+
+      .release-row-meta {
+        margin-top: var(--spacing-xl);
+      }
+
+      .release-row-meta p {
+        color: var(--pink-hot);
+        font-family: var(--font-headings);
+        font-size: var(--font-size-xl);
+        font-weight: var(--font-weight-bold);
+        letter-spacing: var(--tracking-label);
+        text-transform: uppercase;
+      }
+
+      .release-row-title {
+        font-size: clamp(2.75rem, 11vw, var(--font-size-heading-3xl));
+        margin-block: var(--spacing-xs) var(--spacing-md);
+      }
+
+      .release-row-subtext {
+        max-width: 48ch;
+      }
+
+      .release-row-tracks {
+        border-top: 2px solid var(--color-border);
+        list-style: none;
+        margin: var(--spacing-xl) 0 0;
+        padding: 0;
+      }
+
+      .release-row-track {
+        border-bottom: 1px solid var(--color-border);
+      }
+
+      /* Rows fill pink from the left on hover; the number flips to black to stay legible. */
+      .release-row-track-inner {
+        align-items: baseline;
+        background-image: linear-gradient(var(--pink-hot), var(--pink-hot));
+        background-position: left center;
+        background-repeat: no-repeat;
+        background-size: 0% 100%;
+        color: var(--color-text-strong);
+        display: flex;
+        gap: var(--spacing-md);
+        padding: 0.55rem var(--spacing-md);
+        text-decoration: none;
+        transition:
+          background-size var(--animation-normal) ease-out,
+          color var(--animation-normal) ease-out;
+      }
+
+      a.release-row-track-inner:hover,
+      a.release-row-track-inner:focus-visible {
+        background-size: 100% 100%;
+        color: var(--gray-12);
+      }
+
+      .release-row-track-number {
+        color: var(--pink-hot);
+        flex-shrink: 0;
+        font-family: var(--font-headings);
+        font-size: var(--font-size-3xl);
+        font-weight: var(--font-weight-bold);
+        line-height: 1;
+        min-width: 2ch;
+        transition: color var(--animation-normal) ease-out;
+      }
+
+      a.release-row-track-inner:hover .release-row-track-number,
+      a.release-row-track-inner:focus-visible .release-row-track-number {
+        color: var(--gray-12);
+      }
+
+      .release-row-track-title {
+        font-family: var(--font-headings);
+        font-size: var(--font-size-3xl);
+        font-weight: var(--font-weight-bold);
+        letter-spacing: 0.02em;
+        line-height: 1;
+        text-transform: uppercase;
+      }
+
+      .release-row-track-note {
+        color: var(--color-text-muted);
+        font-size: var(--font-size-sm);
+      }
+
+      .release-row-track-icon {
+        margin-left: auto;
+        opacity: 0;
+        transition: opacity var(--animation-normal) ease-out;
+      }
+
+      a.release-row-track-inner:hover .release-row-track-icon,
+      a.release-row-track-inner:focus-visible .release-row-track-icon {
+        opacity: 1;
+      }
+
+      .release-row-buttons {
+        margin-top: var(--spacing-xl);
+      }
+
+      @media (width < 800px) {
+        .release-row-cover {
+          margin-inline: auto;
+          max-width: 26rem;
+        }
+
+        .release-row-title {
+          font-size: var(--font-size-heading-2xl);
+        }
+      }
+    }
+  }
+</style>

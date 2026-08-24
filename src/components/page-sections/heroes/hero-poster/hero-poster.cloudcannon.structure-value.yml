@@ -1,0 +1,49 @@
+label: Hero Poster
+icon: hero
+description: Gig-poster hero — two-line display title, taped-up artwork and a round sticker.
+value:
+  _component: page-sections/heroes/hero-poster
+  sectionLabel: ""
+  eyebrow: Eyebrow text
+  heading: First line
+  headingOutline: Second line
+  subtext: Short punchy paragraph that sets up the release.
+  buttonSections:
+    - _component: building-blocks/core-elements/button
+      text: Listen now
+      hideText: false
+      link: ""
+      iconName: ""
+      iconColor: default
+      iconPosition: before
+      variant: primary
+      size: lg
+  coverSource: /src/assets/images/steph/album-poser.jpg
+  coverAlt: Album artwork
+  badgeText: Out now
+  maxContentWidth: 2xl
+  paddingHorizontal: lg
+  paddingVertical: 5xl
+  colorScheme: inherit
+  backgroundColor: base
+  background:
+    type: image
+    positionVertical: center
+    positionHorizontal: center
+    priority: true
+    imageSource: ""
+    imageAlt: ""
+    videoSource: null
+    overlay: 0
+preview:
+  text:
+    - Hero Poster
+  subtext:
+    - key: heading
+  icon: hero
+picker_preview:
+  text: Hero Poster
+  subtext: Gig-poster hero — two-line display title, taped-up artwork and a round sticker.
+_inputs_from_glob:
+  - /src/components/page-sections/heroes/hero-poster/hero-poster.cloudcannon.inputs.yml
+  - /src/components/page-sections/_shared/section-wrapper.cloudcannon.inputs.yml
