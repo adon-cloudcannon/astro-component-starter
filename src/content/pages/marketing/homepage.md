@@ -149,7 +149,7 @@ pageSections:
                     height: 145
                     alt: ''
                   - _component: building-blocks/core-elements/heading
-                    text: Complete Context
+                    text: Complete context
                     level: h4
                     size: xs
                     alignmentHorizontal: center
@@ -215,8 +215,8 @@ pageSections:
               - contentSections:
                   - _component: building-blocks/core-elements/image
                     source: /src/assets/images/marketing/low-maintenence.png
-                    width: 119
-                    height: 126
+                    width: 121
+                    height: 128
                     alt: ''
                   - _component: building-blocks/core-elements/heading
                     text: Upgrade when ready
@@ -229,9 +229,9 @@ pageSections:
                     alignmentHorizontal: center
               - contentSections:
                   - _component: building-blocks/core-elements/image
-                    source: /src/assets/images/marketing/cloudcannon-testing-speed-1.png
+                    source: /src/assets/images/marketing/smaller-surface-1.png
                     width: 157
-                    height: 134
+                    height: 144
                     alt: ''
                   - _component: building-blocks/core-elements/heading
                     text: Smaller surface
@@ -245,8 +245,8 @@ pageSections:
               - contentSections:
                   - _component: building-blocks/core-elements/image
                     source: /src/assets/images/marketing/hosting.png
-                    width: 142
-                    height: 108
+                    width: 148
+                    height: 116
                     alt: ''
                   - _component: building-blocks/core-elements/heading
                     text: Off your plate
@@ -283,6 +283,11 @@ pageSections:
             gap: lg
             items:
               - contentSections:
+                  - _component: building-blocks/core-elements/image
+                    source: /src/assets/images/marketing/speedometer-1.png
+                    width: 164
+                    height: 117
+                    alt: ''
                   - _component: building-blocks/core-elements/heading
                     text: Scale changes nothing
                     level: h4
@@ -293,6 +298,11 @@ pageSections:
                     size: sm
                     alignmentHorizontal: center
               - contentSections:
+                  - _component: building-blocks/core-elements/image
+                    source: /src/assets/images/marketing/globe-1.png
+                    width: 131
+                    height: 109
+                    alt: ''
                   - _component: building-blocks/core-elements/heading
                     text: Any distance
                     level: h4
@@ -303,6 +313,11 @@ pageSections:
                     size: sm
                     alignmentHorizontal: center
               - contentSections:
+                  - _component: building-blocks/core-elements/image
+                    source: /src/assets/images/marketing/ranking-1.png
+                    width: 150
+                    height: 151
+                    alt: ''
                   - _component: building-blocks/core-elements/heading
                     text: Ranks higher
                     level: h4

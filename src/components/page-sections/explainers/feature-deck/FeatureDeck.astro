@@ -143,9 +143,21 @@ const {
         }
       }
 
+      /* The design does not show these whole. Seven of the nine deck
+         illustrations are FILL fills, which is object-fit: cover on the box
+         they are drawn in, and the last two are a stretch with a crop matrix.
+         Shown whole instead, a file that is half empty space reads tiny beside
+         one that is all ink, which is what made these look so uneven. The box
+         comes from the width and height attributes, so neither is set to auto
+         here. */
       .scroll-deck-card .grid .image img {
+        /* auto on both, so the width and height attributes are the box the
+           crop happens in. Image sets its own img to width: 100%, which is
+           what kept every illustration at its column's width. */
         block-size: auto;
+        inline-size: auto;
         max-inline-size: 100%;
+        object-fit: cover;
       }
     }
   }

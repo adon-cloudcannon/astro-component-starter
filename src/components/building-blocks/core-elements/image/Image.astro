@@ -187,9 +187,20 @@ if (hasAlternate) {
           max-width: 100%;
           width: fit-content;
 
+          /* The <picture> is width: 100% too, so sizing only the img leaves
+             it stretched inside a full-width picture and nothing changes. */
+          picture {
+            width: auto;
+          }
+
           img {
+            /* auto on both, so the width and height attributes are the box.
+               Leaving width at the inherited 100% makes fit-content on the
+               wrapper follow the container right back, and the size the
+               caller asked for never applies. */
             height: auto;
             max-width: 100%;
+            width: auto;
           }
         }
 
