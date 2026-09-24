@@ -22,6 +22,15 @@ value:
       iconPosition: before
       variant: primary
       size: md
+  note:
+    - text: No credit card
+      iconName: check
+      iconColor: default
+      link:
+    - text: 14-day free trial
+      iconName: check
+      iconColor: default
+      link:
   reverse: false
   imageRounded: true
   maxContentWidth: xl
@@ -72,6 +81,7 @@ groups:
       - imageRounded
       - imageBleed
       - buttonSections
+      - note
       - reverse
   - heading: Section settings
     comment: Width, spacing, color scheme, and background for this section.

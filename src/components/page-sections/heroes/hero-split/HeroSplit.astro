@@ -2,6 +2,7 @@
 import CustomSection from "@builders/custom-section/CustomSection.astro";
 import Heading from "@core-elements/heading/Heading.astro";
 import Image from "@core-elements/image/Image.astro";
+import List from "@core-elements/list/List.astro";
 import SimpleText from "@core-elements/simple-text/SimpleText.astro";
 import Text from "@core-elements/text/Text.astro";
 import ButtonGroup from "@wrappers/button-group/ButtonGroup.astro";
@@ -17,6 +18,7 @@ const {
   imageAspectRatio = "none",
   imageBleed = false,
   buttonSections = [],
+  note = [],
   reverse = false,
   imageRounded = true,
   sectionLabel,
@@ -84,6 +86,15 @@ const imagePositionVertical = imageBleed ? "top" : "center";
         class="buttons-container"
         buttonSections={buttonSections}
         data-children-prop="buttonSections"
+      />
+      <List
+        class="note"
+        items={note}
+        listType="icon"
+        direction="horizontal"
+        size="xs"
+        spaceBefore="tight"
+        data-children-prop="note"
       />
     </Fragment>
     <Fragment slot="second">

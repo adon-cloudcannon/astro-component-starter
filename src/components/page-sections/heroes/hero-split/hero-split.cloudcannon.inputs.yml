@@ -69,6 +69,11 @@ reverse:
 imageRounded:
   type: switch
   comment: Rounds the image's corners.
+note:
+  type: array
+  comment: Small print beneath the buttons, such as trial or pricing reassurances.
+  options:
+    structures: _structures.listItems
 
 # --- section wrapper inputs (CustomSection) ---
 # Configures the CustomSection wrapper, not this section's own content. Inline

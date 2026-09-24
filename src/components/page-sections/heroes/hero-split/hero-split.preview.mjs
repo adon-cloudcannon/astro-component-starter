@@ -12,8 +12,8 @@ import {
 
 const B = band(960);
 
-// The archetype: eyebrow, display heading, three copy lines and a button pair on
-// the left, a landscape photo on the right.
+// The archetype: eyebrow, display heading, three copy lines, a button pair and a
+// line of small print on the left, a landscape photo on the right.
 export default preview({
   width: B.w,
   draw: [
@@ -23,6 +23,8 @@ export default preview({
 
     pill(B.left, 269, 141, 44, { label: 60 }),
     pill(320, 269, 160, 44, { variant: "ghost", label: 60 }),
+
+    bar(B.left, 337, 188, "body", { fill: glyph }),
 
     media(632, 0, 488, 400),
     sun(974, 128, 24),
