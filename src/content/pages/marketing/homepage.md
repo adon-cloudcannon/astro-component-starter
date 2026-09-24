@@ -37,14 +37,24 @@ pageSections:
     logos:
       - image: /src/assets/images/marketing/logos/twitch.png
         alt: Twitch
+        width: 75
+        height: 17
       - image: /src/assets/images/marketing/logos/hnry.png
         alt: Hnry
+        width: 87
+        height: 31
       - image: /src/assets/images/marketing/logos/Ocupop.png
         alt: Ocupop
+        width: 137
+        height: 37
       - image: /src/assets/images/marketing/logos/DX.png
         alt: DX Developer Experience Insights Platform
+        width: 52
+        height: 30
       - image: /src/assets/images/marketing/logos/Papercut.png
         alt: Papercut
+        width: 100
+        height: 31
     headingPlacement: inline
     heading: BUILT BY DEVS. RUN BY EDITORS.
   - _component: building-blocks/wrappers/content-selector

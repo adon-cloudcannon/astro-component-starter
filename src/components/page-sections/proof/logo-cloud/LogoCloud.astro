@@ -5,7 +5,15 @@ import SimpleText from "@core-elements/simple-text/SimpleText.astro";
 import Carousel from "@wrappers/carousel/Carousel.astro";
 import CarouselSlide from "@wrappers/carousel/CarouselSlide.astro";
 
-type LogoProps = { image?: string; alt?: string; url?: string };
+type LogoProps = {
+  image?: string;
+  alt?: string;
+  url?: string;
+  /* The size the mark is drawn at. A 2x export is twice this, and
+     without it the file's own size is what gets drawn. */
+  width?: number;
+  height?: number;
+};
 
 const {
   heading = "",
@@ -79,6 +87,8 @@ const {
                 <Image
                   source={logo.image}
                   alt={logo.alt}
+                  width={logo.width}
+                  height={logo.height}
                   widths={[320]}
                   sizes="320px"
                   data-prop-src="image"
@@ -112,6 +122,8 @@ const {
                 <Image
                   source={logo.image}
                   alt={logo.alt}
+                  width={logo.width}
+                  height={logo.height}
                   widths={[320]}
                   sizes="320px"
                   data-prop-src="image"
@@ -196,6 +208,13 @@ const {
            at the size it was drawn, which is what keeps a short wide wordmark
            from towering over a square monogram just because they share a line.
            Anything larger scales down to fit. */
+        /* The marks are held to one line rather than drawn at the size the
+           design draws them. Their width and height reach the element
+           correctly, but Image's own .image-inner is width: 100%, so the mark
+           fills whatever the flex item gives it and its drawn size never gets
+           a say. Undoing that means changing Image for every caller, so the
+           line stays for now. The cost is a short wide wordmark reading larger
+           than it should: Twitch is drawn 75x17 and renders 141x32. */
         img {
           height: auto;
           max-height: var(--logo-cloud-logo-height, var(--spacing-xl));
