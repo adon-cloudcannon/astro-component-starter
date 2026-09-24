@@ -1,0 +1,86 @@
+---
+/**
+ * A stack of feature cards that pin and stack as the page scrolls.
+ *
+ * The design draws these as separate panels sitting almost on top of each
+ * other, each offset a few pixels from the last, which is a designer's way of
+ * showing a deck rather than three sections. Read as three sections they came
+ * out as three full-width features one after another.
+ *
+ * Thin on purpose: ScrollDeck already does the pinning, the stacking and the
+ * rail, and its cards are ordinary content blocks, so this only gives the deck
+ * a section to live in with its background and padding.
+ */
+import CustomSection from "@builders/custom-section/CustomSection.astro";
+import ScrollDeck from "@wrappers/scroll-deck/ScrollDeck.astro";
+import Heading from "@core-elements/heading/Heading.astro";
+import Text from "@core-elements/text/Text.astro";
+import SimpleText from "@core-elements/simple-text/SimpleText.astro";
+
+const {
+  eyebrow = "",
+  heading = "",
+  headingLevel = "h2",
+  headingSize = "lg",
+  subtext = "",
+  cards = [],
+  stickyOffset = "md",
+  cardColorScheme = "light",
+  showRail = true,
+  sectionLabel,
+  maxContentWidth = "xl",
+  paddingHorizontal = "gutter",
+  paddingVertical = "4xl",
+  colorScheme = "inherit",
+  lockColorScheme = false,
+  backgroundColor = "base",
+  background,
+  class: className,
+  useDefaultEditableBinding = false,
+  _component,
+  "data-children-prop": childrenDataProp,
+  ...htmlAttributes
+} = Astro.props;
+---
+
+<CustomSection
+  label={sectionLabel}
+  maxContentWidth={maxContentWidth}
+  paddingHorizontal={paddingHorizontal}
+  paddingVertical={paddingVertical}
+  colorScheme={colorScheme}
+  lockColorScheme={lockColorScheme}
+  backgroundColor={backgroundColor}
+  background={background}
+  class:list={["feature-deck", className]}
+  useDefaultEditableBinding={useDefaultEditableBinding}
+  {...htmlAttributes}
+>
+  <SimpleText
+    class="eyebrow"
+    size="sm"
+    data-prop="eyebrow"
+    text={eyebrow}
+  />
+  <Heading
+    level={headingLevel}
+    size={headingSize}
+    data-prop="heading"
+  >
+    {heading}
+  </Heading>
+  <Text
+    class="subtext"
+    data-prop="subtext"
+    text={subtext}
+  />
+
+  <ScrollDeck
+    cards={cards}
+    stickyOffset={stickyOffset}
+    cardColorScheme={cardColorScheme}
+    showRail={showRail}
+    label={sectionLabel || heading || "Features"}
+    data-children-prop="cards"
+  />
+</CustomSection>

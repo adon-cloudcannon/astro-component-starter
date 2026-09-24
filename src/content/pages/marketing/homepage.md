@@ -1,5 +1,5 @@
 ---
-# Generated from the Figma mapping. 0 of 11 blocks are
+# Generated from the Figma mapping. 0 of 9 blocks are
 # confirmed decisions; the rest are proposals to review on the page.
 _schema: default
 title: Homepage
@@ -119,28 +119,110 @@ pageSections:
         variant: text
         iconName: arrow-right
         iconPosition: after
-  - _component: page-sections/explainers/feature-split
-    eyebrow: AI-READY
-    heading: The stack AI already knows
-    subtext: Code, content, and config live together in Git. The whole project, in plain files.
-    imageSource: /src/assets/images/marketing/context-1.png
+  - _component: page-sections/explainers/feature-deck
     backgroundColor: surface
     headingSize: lg
-    buttonSections:
-      - _component: building-blocks/core-elements/button
-        variant: primary
-        text: Why Git makes AI better
-  - _component: page-sections/explainers/feature-split
-    subtext: LOW MAINTENANCE
-    imageSource: /src/assets/images/marketing/low-maintenence.png
-    buttonSections:
-      - _component: building-blocks/core-elements/button
-        variant: primary
-        text: Why 3am stays quiet
-  - _component: page-sections/explainers/feature-grid
-    eyebrow: HIGH PERFORMANCE
-    subtext: Pages are pre-built and served from a CDN, so sites load fast anywhere in the world.
-    backgroundColor: surface
+    cards:
+      - _component: building-blocks/wrappers/scroll-deck/scroll-deck-card
+        label: The stack AI already knows
+        contentSections:
+          - _component: building-blocks/core-elements/simple-text
+            text: AI-READY
+          - _component: building-blocks/core-elements/heading
+            text: The stack AI already knows
+            level: h3
+            size: lg
+          - _component: building-blocks/core-elements/text
+            text: Code, content, and config live together in Git. The whole project, in plain files.
+          - _component: building-blocks/core-elements/heading
+            text: Complete Context
+            level: h4
+            size: xs
+          - _component: building-blocks/core-elements/text
+            text: Agents see your content, not just your code
+          - _component: building-blocks/core-elements/text
+            text: Agents work on the repo like any other contributor
+          - _component: building-blocks/core-elements/heading
+            text: Familiar workflow
+            level: h4
+            size: xs
+          - _component: building-blocks/core-elements/heading
+            text: No learning curve
+            level: h4
+            size: xs
+          - _component: building-blocks/core-elements/text
+            text: No proprietary API for an agent to learn first
+          - _component: building-blocks/wrappers/button-group
+            buttonSections:
+              - _component: building-blocks/core-elements/button
+                variant: primary
+                text: Why Git makes AI better
+      - _component: building-blocks/wrappers/scroll-deck/scroll-deck-card
+        label: No forced upgrades or surprise migrations
+        contentSections:
+          - _component: building-blocks/core-elements/simple-text
+            text: LOW MAINTENANCE
+          - _component: building-blocks/core-elements/heading
+            text: Your sites just run
+            level: h3
+            size: lg
+          - _component: building-blocks/core-elements/text
+            text: Upgrade when ready
+          - _component: building-blocks/core-elements/text
+            text: Forget update queues, plugin conflicts, and things breaking while you sleep.
+          - _component: building-blocks/core-elements/text
+            text: No forced upgrades or surprise migrations
+          - _component: building-blocks/core-elements/heading
+            text: Smaller surface
+            level: h4
+            size: xs
+          - _component: building-blocks/core-elements/text
+            text: No admin panel sitting on your live site
+          - _component: building-blocks/core-elements/heading
+            text: Off your plate
+            level: h4
+            size: xs
+          - _component: building-blocks/core-elements/text
+            text: No server or database to look after
+          - _component: building-blocks/wrappers/button-group
+            buttonSections:
+              - _component: building-blocks/core-elements/button
+                variant: primary
+                text: Why 3am stays quiet
+      - _component: building-blocks/wrappers/scroll-deck/scroll-deck-card
+        label: Scale changes nothing
+        contentSections:
+          - _component: building-blocks/core-elements/simple-text
+            text: HIGH PERFORMANCE
+          - _component: building-blocks/core-elements/heading
+            text: Fast everywhere
+            level: h3
+            size: lg
+          - _component: building-blocks/core-elements/text
+            text: Pages are pre-built and served from a CDN, so sites load fast anywhere in the world.
+          - _component: building-blocks/core-elements/heading
+            text: Scale changes nothing
+            level: h4
+            size: xs
+          - _component: building-blocks/core-elements/text
+            text: Same speed at ten visitors or ten million
+          - _component: building-blocks/core-elements/heading
+            text: Any distance
+            level: h4
+            size: xs
+          - _component: building-blocks/core-elements/text
+            text: Just as fast on the other side of the world
+          - _component: building-blocks/core-elements/heading
+            text: Ranks higher
+            level: h4
+            size: xs
+          - _component: building-blocks/core-elements/text
+            text: Fast pages rank better, so you start ahead
+          - _component: building-blocks/wrappers/button-group
+            buttonSections:
+              - _component: building-blocks/core-elements/button
+                variant: primary
+                text: How sites stay fast
   - _component: page-sections/proof/testimonial-section
     backgroundColor: base
     colorScheme: dark
