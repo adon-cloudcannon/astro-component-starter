@@ -8,6 +8,7 @@ pageSections:
   - _component: page-sections/heroes/hero-split
     heading: Visual editing that commits to your repo
     subtext: Code, content, and config all sit in one repo as plain files, so agents get the full picture.
+    imageSource: /src/assets/images/marketing/hero-visualediting-01-1.png
     buttonSections:
       - _component: building-blocks/core-elements/button
         variant: primary
@@ -104,10 +105,12 @@ pageSections:
     subtext: >-
       Make changes on a branch and share a hosted preview with whoever needs to see it first.
       Publish once it's approved, or schedule it to go live later.
+    imageSource: /src/assets/images/marketing/card-image-3.jpg
   - _component: page-sections/explainers/feature-split
     eyebrow: For ENTERPRISE
     heading: Every change accounted for
     subtext: Set the permissions once, then let teams work with every change recorded in your own repo.
+    imageSource: /src/assets/images/marketing/screenshot-2026-08-18-at-14-16-52-1.png
     buttonSections:
       - _component: building-blocks/core-elements/button
         variant: text

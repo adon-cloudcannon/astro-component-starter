@@ -10,6 +10,7 @@ pageSections:
     subtext: >-
       Skip the forced updates, security patches, and midnight outages. Your site keeps running while
       your team spends time building what's next.
+    imageSource: /src/assets/images/marketing/hero-lowmaintenance-01-1.png
     buttonSections:
       - _component: building-blocks/core-elements/button
         variant: primary
@@ -29,10 +30,12 @@ pageSections:
     subtext: >-
       At CloudCannon the editing interface sits as a layer on top of your site. Your team gets
       somewhere to work, your site stays as a set of static files, and neithe
+    imageSource: /src/assets/images/marketing/503d6ebb-7e4a-471e-ae1a-6c22a3591d09-1.jpg
   - _component: page-sections/proof/testimonial-section
   - _component: page-sections/explainers/feature-split
     heading: We don’t think a website should need this much looking after
     subtext: 'With a static site and Git you won’t need to worry about:'
+    imageSource: /src/assets/images/marketing/orange-scribbles-1.png
   - _component: page-sections/conversion/cta-center
     heading: Maintenance that doesn’t multiply
     subtext: >-
@@ -77,6 +80,7 @@ pageSections:
         text: Book a demo
   - _component: page-sections/conversion/cta-split
     heading: Wanna learn more about our product?
+    imageSource: /src/assets/images/marketing/cta.png
     buttonSections:
       - _component: building-blocks/core-elements/button
         variant: text

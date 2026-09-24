@@ -10,6 +10,7 @@ pageSections:
     subtext: >-
       Here, agencies spend less time on maintenance and more time on billable work, with websites
       your clients love to edit.
+    imageSource: /src/assets/images/marketing/cloudcannon-hero-portfolio-01-1.png
     buttonSections:
       - _component: building-blocks/core-elements/button
         variant: primary
@@ -26,6 +27,7 @@ pageSections:
     subtext: >-
       Build with the static site generator you already use. Define components once and reuse them
       across every client site.
+    imageSource: /src/assets/images/marketing/hero-background-feature-2.jpg
   - _component: page-sections/builders/custom-section
   - _component: building-blocks/wrappers/content-selector
     items:

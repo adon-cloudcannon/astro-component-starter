@@ -10,6 +10,7 @@ pageSections:
     subtext: >-
       Publish your best content with visual editing, custom components, and a flexible review
       process for your whole team.
+    imageSource: /src/assets/images/marketing/screenshot-2026-08-19-at-12-59-24-1.png
     buttonSections:
       - _component: building-blocks/core-elements/button
         variant: primary
@@ -57,9 +58,11 @@ pageSections:
   - _component: page-sections/explainers/feature-split
     heading: Built for the work
     subtext: Define roles and groups to match your organization structure.
+    imageSource: /src/assets/images/marketing/layer-28-1.png
   - _component: page-sections/conversion/cta-split
     heading: Take a peek under the hood
     subtext: >-
       Git underneath, a visual editor on top, with code and content running on one engine. Start
       free in minutes, or book a demo and we’ll walk you through the real t
+    imageSource: /src/assets/images/marketing/cloudcannon-truck-closed-1.png
 ---

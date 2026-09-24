@@ -10,6 +10,8 @@ pageSections:
     subtext: >-
       Welcome to the Git-based CMS that doesn't fight your workflow. Your site lives in Git, your
       team edits visually, and everything stays in sync.
+    imageSource: /src/assets/images/marketing/image.png
+    imageAlt: A person reaching up to edit content blocks, with their dog
     buttonSections:
       - _component: building-blocks/core-elements/button
         variant: primary

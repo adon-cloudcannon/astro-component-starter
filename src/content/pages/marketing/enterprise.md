@@ -10,6 +10,7 @@ pageSections:
     subtext: >-
       CloudCannon lets you have a high-impact web presence without the maintenance burden. Static
       architecture keeps things fast, secure, and quiet.
+    imageSource: /src/assets/images/marketing/screenshot-2026-08-18-at-14-16-52-1.png
     buttonSections:
       - _component: building-blocks/core-elements/button
         variant: primary
@@ -26,13 +27,16 @@ pageSections:
     subtext: >-
       PaperCut moved 4,000 pages and 110 editors onto CloudCannon, and lifted their performance
       score from 14 to 90+.
+    imageSource: /src/assets/images/marketing/rectangle-1269.png
   - _component: page-sections/explainers/feature-split
     heading: Built for how large teams actually work
     subtext: Benefit from more uptime, faster sites, better SEO, enterprise- grade security, and more.
+    imageSource: /src/assets/images/marketing/container.png
   - _component: page-sections/builders/custom-section
   - _component: page-sections/builders/custom-section
   - _component: page-sections/conversion/cta-split
     subtext: >-
       Git underneath, a visual editor on top, with code and content running on one engine. Start
       free in minutes, or book a demo and we’ll walk you through the real t
+    imageSource: /src/assets/images/marketing/container.png
 ---

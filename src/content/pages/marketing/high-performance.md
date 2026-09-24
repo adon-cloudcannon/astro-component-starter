@@ -10,6 +10,7 @@ pageSections:
     subtext: >-
       Pre-rendered pages, global delivery, and structured content that search engines love. Speed is
       built into the architecture, not bolted on.
+    imageSource: /src/assets/images/marketing/screenshot-2026-08-15-at-15-52-30-1.png
     buttonSections:
       - _component: building-blocks/core-elements/button
         variant: primary
@@ -30,6 +31,7 @@ pageSections:
     subtext: >-
       Nothing gets assembled while a visitor waits. Your site is built when you push, then served as
       finished files from wherever is closest to the person reading it.
+    imageSource: /src/assets/images/marketing/rectangle-1165.png
     buttonSections:
       - _component: building-blocks/core-elements/button
         variant: primary

@@ -10,6 +10,7 @@ pageSections:
     subtext: >-
       Connect CloudCannon to your repo and keep working locally. Editors manage content visually,
       and everyone's changes sync automatically.
+    imageSource: /src/assets/images/marketing/hero-developers-01-1.png
     buttonSections:
       - _component: building-blocks/core-elements/button
         variant: primary
@@ -24,6 +25,7 @@ pageSections:
   - _component: page-sections/explainers/feature-split
     eyebrow: How it works
     subtext: STEP 01
+    imageSource: /src/assets/images/marketing/build-with-your-favorite-tools.png
   - _component: page-sections/proof/testimonial-section
   - _component: page-sections/conversion/cta-center
     heading: The tool you’ve been looking for
@@ -34,14 +36,17 @@ pageSections:
     subtext: >-
       Content lives in the repository along with the complete history of every change. If you ever
       leave CloudCannon, you leave with everything: your content, your co
+    imageSource: /src/assets/images/marketing/rectangle-1165-3.png
   - _component: page-sections/explainers/feature-split
     heading: Open-source ecosystem
     subtext: >-
       We won’t upsell tools that don’t need to exist, and we’ll often point to open source instead.
       These are ours, and they work on any static site.
+    imageSource: /src/assets/images/marketing/orange-scribbles-1-3.png
   - _component: page-sections/conversion/cta-split
     heading: We’re here to help
     subtext: >-
       We're a small team with a lot of knowledge, so you'll talk to someone who knows what they're
       talking about and can give you hands-on help whatever the problem.
+    imageSource: /src/assets/images/marketing/container.png
 ---
