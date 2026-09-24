@@ -1,0 +1,133 @@
+eyebrow:
+  type: text
+  comment: Short label above the heading.
+heading:
+  type: text
+  comment: The section's title.
+headingLevel:
+  type: select
+  comment: Heading level for the title. Use h1 once per page, on the first section.
+  options:
+    values:
+      - h1
+      - h2
+      - h3
+headingSize:
+  type: select
+  comment: Size of the title, independent of its level.
+  options:
+    values:
+      - id: 2xl
+        name: Header 1
+      - id: xl
+        name: Header 2
+      - id: lg
+        name: Header 3
+      - id: md
+        name: Header 4
+      - id: sm
+        name: Header 5
+      - id: xs
+        name: Header 6
+subtext:
+  type: markdown
+  comment: Supporting copy beneath the heading.
+  options:
+    blockquote: false
+    bold: true
+    italic: true
+    link: true
+stories:
+  type: array
+  comment: >-
+    One card per customer story. Each carries its own accent colour, which the
+    figure takes as well, so a row reads as a set rather than a repeat.
+buttonSections:
+  type: array
+  comment: Call-to-action buttons below the row.
+
+# --- section wrapper inputs
+sectionLabel:
+  type: text
+  comment: Accessible name for the section, used by screen readers.
+maxContentWidth:
+  type: select
+  comment: Maximum width of the section's content.
+  options:
+    values:
+      - id: none
+        name: None
+      - id: md
+        name: Medium
+      - id: lg
+        name: Large
+      - id: xl
+        name: Extra Large
+      - id: 2xl
+        name: 2xl
+paddingHorizontal:
+  type: select
+  comment: Horizontal padding around the content.
+  options:
+    values:
+      - id: none
+        name: None
+      - id: gutter
+        name: Page gutter
+      - id: md
+        name: Medium
+      - id: lg
+        name: Large
+      - id: xl
+        name: Extra Large
+paddingVertical:
+  type: select
+  comment: Vertical padding around the content.
+  options:
+    values:
+      - id: none
+        name: None
+      - id: 2xl
+        name: 2xl
+      - id: 3xl
+        name: 3xl
+      - id: 4xl
+        name: 4xl
+      - id: 5xl
+        name: 5xl
+colorScheme:
+  type: select
+  comment: Colour scheme for this section.
+  options:
+    values:
+      - id: inherit
+        name: Inherit
+      - id: light
+        name: Light
+      - id: dark
+        name: Dark
+lockColorScheme:
+  type: switch
+  comment: Keeps this section's scheme when the rest of the page changes.
+backgroundColor:
+  type: select
+  comment: Background color for the section.
+  options:
+    values:
+      - id: none
+        name: None
+      - id: base
+        name: Base
+      - id: surface
+        name: Surface
+      - id: muted
+        name: Muted
+      - id: accent
+        name: Accent
+      - id: brand
+        name: Brand
+      - id: highlight
+        name: Highlight
+background:
+  type: object
+  comment: Background image, video or pattern for the section.

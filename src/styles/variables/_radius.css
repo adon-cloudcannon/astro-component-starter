@@ -4,6 +4,10 @@
   --radius-sm: 8px;
   --radius-md: 12px;
   --radius-lg: 16px;
+  /* The design rounds every card to 18, which the ladder above steps straight
+     over on its way from 16 to 24. Around forty cards use it, so it is named
+     rather than rounded to a neighbour. */
+  --radius-card: 18px;
   --radius-xl: 24px;
   --radius-2xl: 32px;
   --radius-3xl: 48px;

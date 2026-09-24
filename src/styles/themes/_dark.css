@@ -10,7 +10,7 @@
   --color-text-strong: var(--white);
   --color-text-muted: var(--gray-400);
   --color-text-on-muted: var(--light-sand);
-  --color-text-on-brand: var(--black);
+  --color-text-on-brand: var(--white);
   --color-text-inverse: var(--black);
   --color-link: var(--harbour);
   --color-link-hover: var(--pacific-200);
@@ -20,7 +20,10 @@
   --color-bg-muted: var(--gray-900);
   --color-bg-accent: var(--pacific-800);
   --color-bg-highlight: var(--golden-900);
-  --color-bg-brand: var(--color-brand);
+  /* The pill keeps its Pacific on dark, where --color-brand lightens to
+     Harbour for text. The design does both: a Pacific fill with a white label,
+     and links lifted to a lighter blue beside it. */
+  --color-bg-brand: var(--pacific);
   --color-bg-brand-muted: var(--color-brand-muted);
   --color-bg-inverse: var(--light-sand);
 

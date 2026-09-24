@@ -24,6 +24,7 @@ const {
   // inputs are shown in the editor. Rendering itself is driven by content presence, below.
   showBeforeAfter: _showBeforeAfter = false,
   rounded = false,
+  accentColor = "none",
   border = false,
   spaceBefore = "default",
   class: className,
@@ -163,7 +164,11 @@ const usesAfterContentSections = !hasAfterSlot && afterContentSections;
       </div>
     )}
 
-    <div class="card-outer-content">
+    <div
+      class="card-outer-content"
+      style={accentColor !== "none" ? { "--card-accent": `var(--${accentColor})` } : undefined}
+    >
+
       <div
         class:list={[
           "card-content",
@@ -175,6 +180,12 @@ const usesAfterContentSections = !hasAfterSlot && afterContentSections;
         ]}
         {...arrayDataAttributes}
       >
+        {accentColor !== "none" && (
+          <span
+            aria-hidden="true"
+            class="card-accent"
+          />
+        )}
         <slot>
           {contentSections && (
             <Component
@@ -292,7 +303,17 @@ const usesAfterContentSections = !hasAfterSlot && afterContentSections;
           box-shadow var(--animation-normal) var(--ease-default);
 
         &.rounded {
-          border-radius: var(--radius-md);
+          border-radius: var(--radius-card);
+        }
+
+        /* The design marks each card with a short rule in its own colour, and
+           the figure inside picks the same colour up from --card-accent. */
+        .card-accent {
+          background-color: var(--card-accent, transparent);
+          block-size: 4px;
+          border-radius: var(--radius-full);
+          display: block;
+          inline-size: 44px;
         }
 
         &.border {
@@ -311,7 +332,7 @@ const usesAfterContentSections = !hasAfterSlot && afterContentSections;
           }
 
           &.rounded {
-            clip-path: inset(0 round var(--radius-md));
+            clip-path: inset(0 round var(--radius-card));
           }
         }
 

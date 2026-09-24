@@ -1,0 +1,219 @@
+---
+/**
+ * A row of customer story cards that slides.
+ *
+ * The design uses this to carry proof: a heading and a line of copy, then a
+ * row of cards each marked with its own colour, showing a client's logo, the
+ * figure they moved, what it means, and a link to the story. The last card
+ * runs off the edge of the page on purpose, which is how a reader knows there
+ * are more.
+ *
+ * Built rather than composed from card-collection, which lays out a grid or a
+ * masonry and has nowhere to put the accent or the figure. The card itself is
+ * the shared part: the same shape, at the same 18px radius, appears around
+ * forty times across the site in light and dark, so it stays in Card and this
+ * section only arranges them.
+ */
+import CustomSection from "@builders/custom-section/CustomSection.astro";
+import Carousel from "@wrappers/carousel/Carousel.astro";
+import CarouselSlide from "@wrappers/carousel/CarouselSlide.astro";
+import Card from "@wrappers/card/Card.astro";
+import Heading from "@core-elements/heading/Heading.astro";
+import Text from "@core-elements/text/Text.astro";
+import SimpleText from "@core-elements/simple-text/SimpleText.astro";
+import Image from "@core-elements/image/Image.astro";
+import ButtonGroup from "@wrappers/button-group/ButtonGroup.astro";
+
+type StoryProps = {
+  accentColor?: string;
+  logoSource?: string;
+  logoAlt?: string;
+  figure?: string;
+  label?: string;
+  linkText?: string;
+  link?: string;
+};
+
+const {
+  eyebrow = "",
+  heading = "",
+  headingLevel = "h2",
+  headingSize = "lg",
+  subtext = "",
+  stories = [],
+  buttonSections = [],
+  sectionLabel,
+  maxContentWidth = "xl",
+  paddingHorizontal = "gutter",
+  paddingVertical = "4xl",
+  colorScheme = "inherit",
+  lockColorScheme = false,
+  backgroundColor = "base",
+  background,
+  class: className,
+  useDefaultEditableBinding = false,
+  _component,
+  "data-children-prop": childrenDataProp,
+  ...htmlAttributes
+} = Astro.props;
+---
+
+<CustomSection
+  label={sectionLabel}
+  maxContentWidth={maxContentWidth}
+  paddingHorizontal={paddingHorizontal}
+  paddingVertical={paddingVertical}
+  colorScheme={colorScheme}
+  lockColorScheme={lockColorScheme}
+  backgroundColor={backgroundColor}
+  background={background}
+  class:list={["story-carousel", className]}
+  useDefaultEditableBinding={useDefaultEditableBinding}
+  {...htmlAttributes}
+>
+  <SimpleText
+    class="eyebrow"
+    size="sm"
+    alignmentHorizontal="center"
+    data-prop="eyebrow"
+    text={eyebrow}
+  />
+  <Heading
+    level={headingLevel}
+    size={headingSize}
+    alignmentHorizontal="center"
+    data-prop="heading"
+  >
+    {heading}
+  </Heading>
+  <Text
+    class="subtext"
+    alignmentHorizontal="center"
+    data-prop="subtext"
+    text={subtext}
+  />
+
+  {stories?.length > 0 && (
+    <Carousel
+      class="story-slides"
+      label={sectionLabel || heading || "Customer stories"}
+      slideWidthPercent={25}
+      minSlideWidth={280}
+      gap="lg"
+      alignmentHorizontal="start"
+      showIndicators={false}
+      data-children-prop="stories"
+    >
+      {stories.map((story: StoryProps) => (
+        <CarouselSlide data-editable="array-item">
+          <Card
+            accentColor={story.accentColor || "none"}
+            backgroundColor="surface"
+            border={true}
+            rounded={true}
+            paddingHorizontal="lg"
+            paddingVertical="lg"
+            link={story.link}
+          >
+            {story.logoSource && (
+              <Image
+                class="story-logo"
+                source={story.logoSource}
+                alt={story.logoAlt}
+                data-prop-src="logoSource"
+                data-prop-alt="logoAlt"
+              />
+            )}
+            <span
+              class="story-figure"
+              data-prop="figure"
+            >
+              {story.figure}
+            </span>
+            <SimpleText
+              class="story-label"
+              size="sm"
+              data-prop="label"
+              text={story.label}
+            />
+            {story.linkText && (
+              <SimpleText
+                class="story-link"
+                size="sm"
+                data-prop="linkText"
+                text={story.linkText}
+              />
+            )}
+          </Card>
+        </CarouselSlide>
+      ))}
+    </Carousel>
+  )}
+
+  <ButtonGroup
+    class="story-actions"
+    buttonSections={buttonSections}
+    direction="row"
+    alignmentHorizontal="center"
+    data-children-prop="buttonSections"
+  />
+</CustomSection>
+
+<style is:global>
+  @layer page-sections {
+    .story-carousel {
+      /* The cards are a fixed shape in the design, 300 wide by 380 tall, and
+         the row is meant to run past the edge rather than fit. */
+      .story-slides .card {
+        block-size: 100%;
+      }
+
+      .story-logo img {
+        block-size: auto;
+        max-block-size: 2rem;
+        max-inline-size: 60%;
+        object-fit: contain;
+        width: auto;
+      }
+
+      /* The figure carries the card's own accent, which is the one thing that
+         tells these cards apart at a glance. */
+      .story-figure {
+        color: var(--card-accent, var(--color-text-strong));
+        display: block;
+        font-size: var(--font-size-heading-xl);
+        font-weight: var(--font-weight-heading-xl);
+        letter-spacing: var(--letter-spacing-heading-xl);
+        line-height: 1.1;
+        /* Pushed to the foot of the card, so the figures line up across a row
+           whose logos are all different heights. Set through --space-before
+           because the flow layer writes margin-block-start from it, and a
+           plain margin here loses to that. */
+        --space-before: auto;
+      }
+
+      .story-slides .card-content {
+        display: flex;
+        flex-direction: column;
+        min-block-size: 380px;
+      }
+
+      .story-label {
+        color: var(--color-text-muted);
+      }
+
+      /* A rule above the link, the way the design separates it from the copy.
+         The colour has to reach the inner span too: SimpleText sets its own,
+         so colouring only the wrapper leaves the text as it was. */
+      .story-link {
+        border-block-start: var(--border-width-sm) solid var(--color-border);
+        padding-block-start: var(--spacing-md);
+
+        &,
+        :where(.simple-text-content, .simple-text-inner, p, span) {
+          color: var(--color-brand);
+        }
+      }
+    }
+  }
+</style>

@@ -1,0 +1,120 @@
+label: Story carousel
+icon: view_carousel
+description: Sliding row of customer story cards, each in its own accent colour.
+value:
+  _component: page-sections/proof/story-carousel
+  sectionLabel: ""
+  eyebrow: ""
+  heading: Grow your sites, not your headcount.
+  headingLevel: h2
+  headingSize: lg
+  subtext: From fast-moving startups to multi-site agencies, teams ship more.
+  stories:
+    - accentColor: golden
+      logoSource: ""
+      logoAlt: ""
+      figure: 8x
+      label: faster content builds
+      linkText: Read story
+      link: ""
+    - accentColor: harbour
+      logoSource: ""
+      logoAlt: ""
+      figure: 15+
+      label: marketing sites
+      linkText: Read story
+      link: ""
+    - accentColor: peachy
+      logoSource: ""
+      logoAlt: ""
+      figure: 400%
+      label: increase in leads generated
+      linkText: Read story
+      link: ""
+    - accentColor: moss-350
+      logoSource: ""
+      logoAlt: ""
+      figure: 100x
+      label: publishing velocity
+      linkText: Read story
+      link: ""
+  buttonSections:
+    - _component: building-blocks/core-elements/button
+      text: See how others did it
+      variant: primary
+  maxContentWidth: xl
+  paddingHorizontal: gutter
+  paddingVertical: 4xl
+  colorScheme: inherit
+  lockColorScheme: false
+  backgroundColor: base
+  background:
+    type: image
+    imageSource: ""
+_inputs:
+  stories:
+    type: array
+    options:
+      structures: _structures.story_card
+  buttonSections:
+    type: array
+    options:
+      structures: _structures.buttons
+_structures:
+  story_card:
+    values:
+      - label: Story card
+        icon: bar_chart
+        value:
+          accentColor: golden
+          logoSource: ""
+          logoAlt: ""
+          figure: 8x
+          label: faster content builds
+          linkText: Read story
+          link: ""
+        _inputs:
+          accentColor:
+            type: select
+            comment: >-
+              Drives both the rule at the top of the card and the figure below
+              it, so one choice colours the whole card.
+            options:
+              values:
+                - id: golden
+                  name: Golden
+                - id: harbour
+                  name: Harbour
+                - id: peachy
+                  name: Peachy
+                - id: moss-350
+                  name: Moss
+                - id: pacific
+                  name: Pacific
+                - id: sunset
+                  name: Sunset
+                - id: blush
+                  name: Blush
+          logoSource:
+            type: image
+            comment: The client's logo.
+          logoAlt:
+            type: text
+            comment: Alt text for the logo.
+          figure:
+            type: text
+            comment: The number this story turns on, such as 8x or 400%.
+          label:
+            type: text
+            comment: What the figure measures.
+          linkText:
+            type: text
+            comment: Text for the link at the foot of the card.
+          link:
+            type: url
+            comment: Where the card links to.
+_editables:
+  content:
+    bold: true
+    italic: true
+    link: true
