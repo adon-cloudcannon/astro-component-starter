@@ -11,6 +11,11 @@ pageSections:
       Pre-rendered pages, global delivery, and structured content that search engines love. Speed is
       built into the architecture, not bolted on.
     imageSource: /src/assets/images/marketing/screenshot-2026-08-15-at-15-52-30-1.png
+    background:
+      type: pattern
+      imageSource: /src/assets/images/marketing/patterns/sand-grid.png
+      patternSize: natural
+      mask: none
     buttonSections:
       - _component: building-blocks/core-elements/button
         variant: primary

@@ -11,6 +11,11 @@ pageSections:
       Connect CloudCannon to your repo and keep working locally. Editors manage content visually,
       and everyone's changes sync automatically.
     imageSource: /src/assets/images/marketing/hero-developers-01-1.png
+    background:
+      type: pattern
+      imageSource: /src/assets/images/marketing/patterns/sand-grid.png
+      patternSize: natural
+      mask: none
     buttonSections:
       - _component: building-blocks/core-elements/button
         variant: primary

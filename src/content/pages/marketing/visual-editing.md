@@ -9,6 +9,11 @@ pageSections:
     heading: Visual editing that commits to your repo
     subtext: Code, content, and config all sit in one repo as plain files, so agents get the full picture.
     imageSource: /src/assets/images/marketing/hero-visualediting-01-1.png
+    background:
+      type: pattern
+      imageSource: /src/assets/images/marketing/patterns/sand-grid.png
+      patternSize: natural
+      mask: none
     buttonSections:
       - _component: building-blocks/core-elements/button
         variant: primary
