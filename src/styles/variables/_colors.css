@@ -113,4 +113,142 @@
   --color-overlay-media: color-mix(in srgb, var(--color-media-scrim) 50%, transparent);
   --color-overlay-media-strong: color-mix(in srgb, var(--color-media-scrim) 80%, transparent);
   --color-overlay-media-opaque: color-mix(in srgb, var(--color-media-scrim) 95%, transparent);
+
+/* >>> design system colours: generated, do not edit by hand */
+
+  /* Named brand colours. */
+  --blush: #e7b0b9;
+  --light-sand: #fffcf3;
+  --peachy: #f39b7b;
+  --golden: #ffaa00;
+  --harbour: #a6c1fa;
+  --pacific: #034ad8;
+  --midnight: #333333;
+  --sand: #fbf6e9;
+  --kiwi: #7c3442;
+  --moss: #687e00;
+  --sunset: #d85a2c;
+  --black: #1d1b17;
+  --earth: #6b6157;
+  --dark-sand: #ebe1c9;
+  --white: #ffffff;
+
+  /* Semantic palette, each with its tint. */
+  --disabled: #919191;
+  --disabled-tint: #efefef;
+  --notice: #c18100;
+  --notice-tint: #f6ecd9;
+  --negative: #d85a2c;
+  --negative-tint: #f9e6df;
+  --positive: #687e00;
+  --positive-tint: #e8ecd9;
+  --informative: #034ad8;
+  --informative-tint: #d9e4f9;
+
+  /* golden ramp, 19 steps. */
+  --golden-50: #fff7e6;
+  --golden-100: #ffeecc;
+  --golden-150: #ffe6b3;
+  --golden-200: #ffdd99;
+  --golden-250: #ffd580;
+  --golden-300: #ffcc66;
+  --golden-350: #ffc44d;
+  --golden-400: #ffbb33;
+  --golden-450: #ffb31a;
+  --golden-500: #ffaa00;
+  --golden-550: #e69900;
+  --golden-600: #cc8800;
+  --golden-650: #b37700;
+  --golden-700: #996600;
+  --golden-750: #805500;
+  --golden-800: #664400;
+  --golden-850: #4d3300;
+  --golden-900: #332200;
+  --golden-950: #1a1100;
+
+  /* gray ramp, 19 steps. */
+  --gray-50: #f8f8f7;
+  --gray-100: #f1f0ef;
+  --gray-150: #eae9e6;
+  --gray-200: #e3e1de;
+  --gray-250: #dcdad6;
+  --gray-300: #d4d2ce;
+  --gray-350: #cdcbc6;
+  --gray-400: #c6c3bd;
+  --gray-450: #bfbcb5;
+  --gray-500: #b8b4ad;
+  --gray-550: #a6a29c;
+  --gray-600: #93908a;
+  --gray-650: #817e79;
+  --gray-700: #6e6c68;
+  --gray-750: #5c5a57;
+  --gray-800: #4a4845;
+  --gray-850: #373634;
+  --gray-900: #252423;
+  --gray-950: #121211;
+
+  /* moss ramp, 19 steps. */
+  --moss-50: #f0f2e6;
+  --moss-100: #e1e5cc;
+  --moss-150: #d2d8b3;
+  --moss-200: #c3cb99;
+  --moss-250: #b4bf80;
+  --moss-300: #a4b266;
+  --moss-350: #95a54d;
+  --moss-400: #869833;
+  --moss-450: #778b1a;
+  --moss-500: #687e00;
+  --moss-550: #5e7100;
+  --moss-600: #536500;
+  --moss-650: #495800;
+  --moss-700: #3e4c00;
+  --moss-750: #343f00;
+  --moss-800: #2a3200;
+  --moss-850: #1f2600;
+  --moss-900: #151900;
+  --moss-950: #0a0d00;
+
+  /* pacific ramp, 19 steps. */
+  --pacific-50: #e6edfb;
+  --pacific-100: #cddbf7;
+  --pacific-150: #b3c9f3;
+  --pacific-200: #9ab7ef;
+  --pacific-250: #81a5ec;
+  --pacific-300: #6892e8;
+  --pacific-350: #4f80e4;
+  --pacific-400: #356ee0;
+  --pacific-450: #1c5cdc;
+  --pacific-500: #034ad8;
+  --pacific-550: #0343c2;
+  --pacific-600: #023bad;
+  --pacific-650: #023497;
+  --pacific-700: #022c82;
+  --pacific-750: #02256c;
+  --pacific-800: #011e56;
+  --pacific-850: #011641;
+  --pacific-900: #010f2b;
+  --pacific-950: #000716;
+
+  /* sunset ramp, 19 steps. */
+  --sunset-50: #fbefea;
+  --sunset-100: #f7ded5;
+  --sunset-150: #f3cec0;
+  --sunset-200: #efbdab;
+  --sunset-250: #ecad96;
+  --sunset-300: #e89c80;
+  --sunset-350: #e48c6b;
+  --sunset-400: #e07b56;
+  --sunset-450: #dc6b41;
+  --sunset-500: #d85a2c;
+  --sunset-550: #c25128;
+  --sunset-600: #ad4823;
+  --sunset-650: #973f1f;
+  --sunset-700: #82361a;
+  --sunset-750: #6c2d16;
+  --sunset-800: #562412;
+  --sunset-850: #411b0d;
+  --sunset-900: #2b1209;
+  --sunset-950: #160904;
+
+/* <<< design system colours */
 }
