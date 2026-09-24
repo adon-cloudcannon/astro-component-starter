@@ -24,7 +24,7 @@ value:
       imageSource: /src/assets/images/component-docs/quiet-street.jpg
       imageAlt: A quiet residential street
   maxContentWidth: xl
-  paddingHorizontal: lg
+  paddingHorizontal: gutter
   paddingVertical: 4xl
   colorScheme: inherit
   lockColorScheme: false

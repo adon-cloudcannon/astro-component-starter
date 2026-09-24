@@ -24,8 +24,8 @@ value:
       bio: David creates beautiful, user-centered designs that solve real problems.
       imageSource: /src/assets/images/component-docs/profile2.jpg
       imageAlt: David Kim
-  maxContentWidth: 2xl
-  paddingHorizontal: lg
+  maxContentWidth: xl
+  paddingHorizontal: gutter
   paddingVertical: 4xl
   colorScheme: inherit
   lockColorScheme: false

@@ -176,15 +176,18 @@ const arrayDataAttributes =
 
         > .content {
           --section-inline-size: 100cqi;
-          --section-bleed: calc(
-            (
-                var(--section-inline-size) -
-                  min(
-                    var(--section-max-width, var(--section-inline-size)),
-                    var(--section-inline-size)
-                  )
-              ) /
-              2 + var(--section-pad-x, 0px)
+          /* Distance from the container edge to the content edge. Above the
+             content width that is the centring margin; below it the element is
+             full width and the gutter is all there is. */
+          --section-bleed: max(
+            calc(
+              (
+                  var(--section-inline-size) -
+                    var(--section-max-width, var(--section-inline-size))
+                ) /
+                2
+            ),
+            var(--section-pad-x, 0px)
           );
 
           container-type: inline-size;
@@ -200,43 +203,57 @@ const arrayDataAttributes =
           &.max-width-xs {
             --section-max-width: var(--content-width-xs);
 
-            max-width: var(--content-width-xs);
+            max-width: calc(
+              var(--content-width-xs) + var(--section-pad-x, 0px) * 2
+            );
           }
 
           &.max-width-sm {
             --section-max-width: var(--content-width-sm);
 
-            max-width: var(--content-width-sm);
+            max-width: calc(
+              var(--content-width-sm) + var(--section-pad-x, 0px) * 2
+            );
           }
 
           &.max-width-md {
             --section-max-width: var(--content-width-md);
 
-            max-width: var(--content-width-md);
+            max-width: calc(
+              var(--content-width-md) + var(--section-pad-x, 0px) * 2
+            );
           }
 
           &.max-width-lg {
             --section-max-width: var(--content-width-lg);
 
-            max-width: var(--content-width-lg);
+            max-width: calc(
+              var(--content-width-lg) + var(--section-pad-x, 0px) * 2
+            );
           }
 
           &.max-width-xl {
             --section-max-width: var(--content-width-xl);
 
-            max-width: var(--content-width-xl);
+            max-width: calc(
+              var(--content-width-xl) + var(--section-pad-x, 0px) * 2
+            );
           }
 
           &.max-width-2xl {
             --section-max-width: var(--content-width-2xl);
 
-            max-width: var(--content-width-2xl);
+            max-width: calc(
+              var(--content-width-2xl) + var(--section-pad-x, 0px) * 2
+            );
           }
 
           &.max-width-3xl {
             --section-max-width: var(--content-width-3xl);
 
-            max-width: var(--content-width-3xl);
+            max-width: calc(
+              var(--content-width-3xl) + var(--section-pad-x, 0px) * 2
+            );
           }
 
           &.pad-x-xs {
@@ -277,6 +294,10 @@ const arrayDataAttributes =
 
           &.pad-x-6xl {
             --section-pad-x: var(--spacing-6xl);
+          }
+
+          &.pad-x-gutter {
+            --section-pad-x: var(--spacing-gutter);
           }
         }
 

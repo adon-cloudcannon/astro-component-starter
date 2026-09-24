@@ -41,8 +41,8 @@ value:
           size: sm
   orientation: horizontal
   imageAspectRatio: landscape
-  maxContentWidth: 2xl
-  paddingHorizontal: lg
+  maxContentWidth: xl
+  paddingHorizontal: gutter
   paddingVertical: 4xl
   colorScheme: inherit
   lockColorScheme: false

@@ -56,8 +56,8 @@ value:
         - Priority email
         - Dedicated manager
   striped: true
-  maxContentWidth: 2xl
-  paddingHorizontal: lg
+  maxContentWidth: xl
+  paddingHorizontal: gutter
   paddingVertical: 4xl
   colorScheme: inherit
   lockColorScheme: false

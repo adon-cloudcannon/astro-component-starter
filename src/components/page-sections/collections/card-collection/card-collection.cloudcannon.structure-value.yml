@@ -61,8 +61,8 @@ value:
   columns: 3
   gap: lg
   aspectRatio: landscape
-  maxContentWidth: 2xl
-  paddingHorizontal: lg
+  maxContentWidth: xl
+  paddingHorizontal: gutter
   paddingVertical: 4xl
   colorScheme: inherit
   lockColorScheme: false

@@ -23,7 +23,7 @@ value:
           text: You own the repository and the content. We stay on call for the first month.
           size: md
   maxContentWidth: xl
-  paddingHorizontal: lg
+  paddingHorizontal: gutter
   paddingVertical: 4xl
   colorScheme: inherit
   lockColorScheme: false

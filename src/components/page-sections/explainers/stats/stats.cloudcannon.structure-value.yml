@@ -30,8 +30,8 @@ value:
       label: Support score
       sublabel: Out of 5
   dividers: true
-  maxContentWidth: 2xl
-  paddingHorizontal: lg
+  maxContentWidth: xl
+  paddingHorizontal: gutter
   paddingVertical: 4xl
   colorScheme: inherit
   lockColorScheme: false

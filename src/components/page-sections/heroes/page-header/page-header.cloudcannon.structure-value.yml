@@ -10,8 +10,8 @@ value:
   subtext: A short introduction to the page, one or two lines long.
   showBreadcrumbs: true
   alignmentHorizontal: start
-  maxContentWidth: 2xl
-  paddingHorizontal: lg
+  maxContentWidth: xl
+  paddingHorizontal: gutter
   paddingVertical: 2xl
   colorScheme: inherit
   lockColorScheme: false

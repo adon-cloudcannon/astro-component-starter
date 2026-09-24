@@ -6,8 +6,8 @@
   --color-brand-subtle: var(--pacific-150);
   --color-brand-on: var(--white);
 
-  --color-text: var(--black);
-  --color-text-strong: var(--black);
+  --color-text: var(--earth);
+  --color-text-strong: var(--midnight);
   --color-text-muted: var(--earth);
   --color-text-on-muted: var(--black);
   --color-text-on-brand: var(--white);

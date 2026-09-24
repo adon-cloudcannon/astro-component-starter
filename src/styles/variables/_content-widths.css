@@ -3,7 +3,11 @@
   --content-width-sm: 480px;
   --content-width-md: 640px;
   --content-width-lg: 768px;
-  --content-width-xl: 1024px;
+  /* The design's content column, measured rather than assumed: 109 containers
+     in the file are exactly 1040 wide, inset 120 from each edge of the 1280
+     desktop frame. Gutters are added on top of this by the section's own
+     padding, so the column measures 1040 whatever padding step is picked. */
+  --content-width-xl: 1040px;
   --content-width-2xl: 1280px;
   --content-width-3xl: 1536px;
 }

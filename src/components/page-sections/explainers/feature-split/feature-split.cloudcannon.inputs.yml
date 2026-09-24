@@ -105,6 +105,8 @@ paddingHorizontal:
     values:
       - id: none
         name: None
+      - id: gutter
+        name: Page gutter
       - id: xs
         name: Extra Small
       - id: sm

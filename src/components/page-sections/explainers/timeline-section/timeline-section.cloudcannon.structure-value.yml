@@ -19,8 +19,8 @@ value:
     - date: "2025"
       title: New markets
       body: Took on the first clients outside the country.
-  maxContentWidth: 2xl
-  paddingHorizontal: lg
+  maxContentWidth: xl
+  paddingHorizontal: gutter
   paddingVertical: 4xl
   colorScheme: inherit
   lockColorScheme: false

@@ -58,6 +58,10 @@
     padding-inline: var(--spacing-6xl);
   }
 
+  .uses-spacing-utils.pad-x-gutter {
+    padding-inline: var(--spacing-gutter);
+  }
+
   /* Vertical padding */
   .uses-spacing-utils.pad-y-xs {
     padding-block: var(--spacing-xs);

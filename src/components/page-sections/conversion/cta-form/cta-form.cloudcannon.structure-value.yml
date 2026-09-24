@@ -29,8 +29,8 @@ value:
   imageSource: /src/assets/images/component-docs/dunedin-cliff.jpg
   imageAlt: Sea cliffs above a bay
   reverse: false
-  maxContentWidth: 2xl
-  paddingHorizontal: lg
+  maxContentWidth: xl
+  paddingHorizontal: gutter
   paddingVertical: 4xl
   colorScheme: inherit
   lockColorScheme: false

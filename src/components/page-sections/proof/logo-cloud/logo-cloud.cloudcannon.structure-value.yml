@@ -23,8 +23,8 @@ value:
       url: ""
   grayscale: true
   scrolling: false
-  maxContentWidth: 2xl
-  paddingHorizontal: lg
+  maxContentWidth: xl
+  paddingHorizontal: gutter
   paddingVertical: 2xl
   colorScheme: inherit
   lockColorScheme: false

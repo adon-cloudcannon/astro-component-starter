@@ -12,8 +12,8 @@ value:
   tag: ""
   showViewAllButton: true
   viewAllLabel: View all posts
-  maxContentWidth: 2xl
-  paddingHorizontal: lg
+  maxContentWidth: xl
+  paddingHorizontal: gutter
   paddingVertical: 4xl
   colorScheme: inherit
   lockColorScheme: false

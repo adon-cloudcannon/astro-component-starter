@@ -5,7 +5,7 @@ value:
   _component: page-sections/builders/custom-section
   label: ""
   contentSections: []
-  maxContentWidth: 2xl
+  maxContentWidth: xl
   paddingHorizontal: md
   paddingVertical: 4xl
   colorScheme: inherit

@@ -22,6 +22,12 @@
   --spacing-em-5xl: 6em;
   --spacing-em-6xl: 7em;
 
+  /* The page gutter: how far content sits from the viewport edge once the
+     content column no longer fits. Measured off the design's 402px mobile
+     frames, where body text starts 28px in. Deliberately not a step on the
+     scale above, which goes 24 then 32. */
+  --spacing-gutter: 1.75rem;
+
   /* The only vocabulary for space between document siblings — content never
      references the raw scale for rhythm (see styles/utils/_flow.css). */
   --space-before-none: 0;

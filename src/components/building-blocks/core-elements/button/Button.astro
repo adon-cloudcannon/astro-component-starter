@@ -147,6 +147,12 @@ if (!_component && !hasText && !hasSlotContent && !hasIcon) return;
   @layer components {
     .button {
       --button-icon-gap: 0.15em;
+      /* Measured off the design's Pill Button: 190x50 around a 16px/600 label
+         on a 21px line, so 26px each side and 14px top and bottom. Kept in em
+         so a button at another size keeps the same proportions. */
+      --button-padding-block: 0.875em;
+      --button-padding-inline: 1.625em;
+      --button-line-height: 1.3;
 
       display: inline-flex;
       max-width: 100%;
@@ -164,8 +170,9 @@ if (!_component && !hasText && !hasSlotContent && !hasIcon) return;
         font-weight: var(--font-weight-semibold);
         gap: var(--button-icon-gap);
         justify-content: center;
-        padding-block: var(--spacing-em-sm);
-        padding-inline: var(--spacing-em-sm);
+        line-height: var(--button-line-height);
+        padding-block: var(--button-padding-block);
+        padding-inline: var(--button-padding-inline);
         text-align: center;
         text-decoration: none;
         transition-duration: var(--animation-normal);
@@ -256,7 +263,8 @@ if (!_component && !hasText && !hasSlotContent && !hasIcon) return;
           color: var(--color-brand);
           font-size: var(--font-size-lg);
           font-weight: var(--font-weight-semibold);
-          padding: 0;
+          padding-block: var(--button-padding-block);
+          padding-inline: 0;
 
           &:hover,
           &:focus {

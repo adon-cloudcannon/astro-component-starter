@@ -45,8 +45,8 @@ value:
       text: Send message
       variant: primary
   mapEmbedUrl: ""
-  maxContentWidth: 2xl
-  paddingHorizontal: lg
+  maxContentWidth: xl
+  paddingHorizontal: gutter
   paddingVertical: 4xl
   colorScheme: inherit
   lockColorScheme: false

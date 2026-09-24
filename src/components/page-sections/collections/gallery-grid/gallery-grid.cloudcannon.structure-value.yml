@@ -31,7 +31,7 @@ value:
   lightbox: true
   showThumbnails: false
   maxContentWidth: xl
-  paddingHorizontal: lg
+  paddingHorizontal: gutter
   paddingVertical: 4xl
   colorScheme: inherit
   lockColorScheme: false

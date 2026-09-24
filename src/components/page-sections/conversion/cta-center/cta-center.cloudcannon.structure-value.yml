@@ -18,7 +18,7 @@ value:
       variant: primary
       size: md
   maxContentWidth: lg
-  paddingHorizontal: lg
+  paddingHorizontal: gutter
   paddingVertical: 4xl
   colorScheme: inherit
   lockColorScheme: false

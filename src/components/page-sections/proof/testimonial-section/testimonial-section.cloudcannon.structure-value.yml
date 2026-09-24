@@ -9,7 +9,7 @@ value:
   authorDescription: CEO, Tech Innovations
   authorImage: /src/assets/images/component-docs/profile.jpg
   maxContentWidth: xl
-  paddingHorizontal: lg
+  paddingHorizontal: gutter
   paddingVertical: sm
   colorScheme: inherit
   lockColorScheme: false
