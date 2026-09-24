@@ -74,6 +74,12 @@ imageAspectRatio:
         name: Portrait (3:4)
       - id: widescreen
         name: Widescreen (16:9)
+imageOverflow:
+  type: number
+  comment: >-
+    How far the image may spill past its column, in pixels, measured from the
+    design. Capped at the page edge, so it can never reach further than a full
+    bleed. Leave at 0 to keep the image inside its column.
 imageBleed:
   type: switch
   comment: Runs the image to the page edge. Landscape or Square aspect ratios work best.

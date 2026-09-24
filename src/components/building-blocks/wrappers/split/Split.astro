@@ -240,12 +240,20 @@ const splitId = `${minSplitWidth}${reverseOrderOnMobile ? "-reverse" : ""}`;
       }
     }
 
+    /* --split-bleed-limit caps the spill. Unset, a bleed runs to the page
+       edge as before; set, the pane spills by that much and stops, which is
+       how the design draws an illustration wider than its column without
+       reaching the edge. Either way --section-bleed is the ceiling. */
     .split[data-bleed="inline-end"] > .split-inner > .pane.second {
-      margin-inline-end: calc(-1 * var(--section-bleed, 0px));
+      margin-inline-end: calc(
+        -1 * min(var(--section-bleed, 0px), var(--split-bleed-limit, var(--section-bleed, 0px)))
+      );
     }
 
     .split[data-bleed="inline-start"] > .split-inner > .pane.first {
-      margin-inline-start: calc(-1 * var(--section-bleed, 0px));
+      margin-inline-start: calc(
+        -1 * min(var(--section-bleed, 0px), var(--split-bleed-limit, var(--section-bleed, 0px)))
+      );
     }
 
     .split[data-bleed="inline-end"] > .split-inner > .pane.second .image > .image-inner.rounded {

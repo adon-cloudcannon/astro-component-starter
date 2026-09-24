@@ -12,6 +12,7 @@ pageSections:
       you grow your portfolio.
     imageSource: /src/assets/images/marketing/screenshot-2026-08-17-at-12-00-53-1.png
     headingSize: xl
+    imageOverflow: 59
     background:
       type: pattern
       imageSource: /src/assets/images/marketing/patterns/sand-grid.png

@@ -12,6 +12,7 @@ pageSections:
       architecture keeps things fast, secure, and quiet.
     imageSource: /src/assets/images/marketing/screenshot-2026-08-18-at-14-16-52-1.png
     headingSize: xl
+    imageOverflow: 151
     background:
       type: pattern
       imageSource: /src/assets/images/marketing/patterns/sand-grid.png

@@ -10,6 +10,7 @@ pageSections:
     subtext: Code, content, and config all sit in one repo as plain files, so agents get the full picture.
     imageSource: /src/assets/images/marketing/hero-visualediting-01-1.png
     headingSize: xl
+    imageOverflow: 15
     background:
       type: pattern
       imageSource: /src/assets/images/marketing/patterns/sand-grid.png

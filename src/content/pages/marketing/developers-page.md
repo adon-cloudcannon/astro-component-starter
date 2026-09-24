@@ -12,6 +12,7 @@ pageSections:
       and everyone's changes sync automatically.
     imageSource: /src/assets/images/marketing/hero-developers-01-1.png
     headingSize: xl
+    imageOverflow: 217
     background:
       type: pattern
       imageSource: /src/assets/images/marketing/patterns/sand-grid.png

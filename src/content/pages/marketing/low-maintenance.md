@@ -12,6 +12,7 @@ pageSections:
       your team spends time building what's next.
     imageSource: /src/assets/images/marketing/hero-lowmaintenance-01-1.png
     headingSize: xl
+    imageOverflow: 107
     background:
       type: pattern
       imageSource: /src/assets/images/marketing/patterns/sand-grid.png

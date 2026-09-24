@@ -12,6 +12,7 @@ pageSections:
       process for your whole team.
     imageSource: /src/assets/images/marketing/screenshot-2026-08-19-at-12-59-24-1.png
     headingSize: xl
+    imageOverflow: 83
     background:
       type: pattern
       imageSource: /src/assets/images/marketing/patterns/sand-grid.png

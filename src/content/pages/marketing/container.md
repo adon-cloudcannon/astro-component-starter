@@ -13,6 +13,7 @@ pageSections:
     imageSource: /src/assets/images/marketing/image.png
     imageAlt: A person reaching up to edit content blocks, with their dog
     headingSize: 2xl
+    imageOverflow: 70
     background:
       type: pattern
       imageSource: /src/assets/images/marketing/patterns/sand-grid.png

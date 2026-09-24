@@ -12,6 +12,7 @@ pageSections:
       version is recoverable, access it with any tool.
     imageSource: /src/assets/images/marketing/hero-gitbasedcms-01-1.png
     headingSize: xl
+    imageOverflow: 119
     background:
       type: pattern
       imageSource: /src/assets/images/marketing/patterns/sand-grid.png

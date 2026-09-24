@@ -18,6 +18,7 @@ const {
   imageAlt = "",
   imageAspectRatio = "none",
   imageBleed = false,
+  imageOverflow = 0,
   // The design's hero images run from 38% to 73% of the content column, because
   // they are drawn oversized and overlap the text rather than sitting beside
   // it. No single ratio reproduces all of them; half is the closest one, and
@@ -42,7 +43,14 @@ const {
   ...htmlAttributes
 } = Astro.props;
 
-const bleedSide = imageBleed ? (reverse ? "inline-start" : "inline-end") : undefined;
+// The design draws hero illustrations wider than their half of the column and
+// lets them spill toward the page edge, by anything from 5px to 217px. That is
+// a property of the drawing, so it is measured per section rather than guessed
+// at: imageOverflow carries it, and imageBleed remains the all-the-way case.
+const overflow = Number(imageOverflow) || 0;
+const bleedSide =
+  imageBleed || overflow > 0 ? (reverse ? "inline-start" : "inline-end") : undefined;
+const bleedLimit = !imageBleed && overflow > 0 ? `${overflow}px` : undefined;
 const imagePositionHorizontal = imageBleed ? (reverse ? "right" : "left") : "center";
 const imagePositionVertical = imageBleed ? "top" : "center";
 ---
@@ -63,6 +71,7 @@ const imagePositionVertical = imageBleed ? "top" : "center";
   <Split
     distributionMode={distributionMode}
     data-bleed={bleedSide}
+    style={bleedLimit ? { "--split-bleed-limit": bleedLimit } : undefined}
     alignmentVertical="center"
     reverse={reverse}
     minSplitWidth={800}
