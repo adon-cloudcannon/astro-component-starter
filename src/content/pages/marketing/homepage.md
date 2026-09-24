@@ -65,60 +65,60 @@ pageSections:
         aspect: 90 / 28
     headingPlacement: inline
     heading: BUILT BY DEVS. RUN BY EDITORS.
-  - _component: building-blocks/wrappers/content-selector
-    items:
-      - text: >-
-          CloudCannon keeps your website’s code, content and config in Git and gives content teams a
-          visual interface to edit it.
-        iconName: check
-        iconColor: default
-      - text: Learn more
-        iconName: check
-        iconColor: default
-      - text: →
-        iconName: check
-        iconColor: default
-      - text: B
-        iconName: check
-        iconColor: default
-      - text: I
-        iconName: check
-        iconColor: default
-      - text: U
-        iconName: check
-        iconColor: default
-      - text: >-
-          Update content in a clear focused editor. Format text, add links and images, then publish
-          straight to Git
-        iconName: check
-        iconColor: default
-      - text: 
-        iconName: check
-        iconColor: default
-      - text: 
-        iconName: check
-        iconColor: default
-      - text: 
-        iconName: check
-        iconColor: default
-  - _component: page-sections/explainers/feature-split
-    eyebrow: EDITORS
+  - _component: page-sections/conversion/cta-center
+    heading: Your content team edits. You stop getting pinged.
+    subtext: >-
+      CloudCannon keeps your website’s code, content and config in Git and gives content teams a
+      visual interface to edit it.
+    headingSize: lg
+    buttonSections:
+      - _component: building-blocks/core-elements/button
+        variant: primary
+        text: Learn about our visual editor
+  - _component: page-sections/explainers/workflow-split
     heading: Two workflows. One source of truth.
     subtext: >-
       Editors edit visually, developers stay in code — and every change lands in the same Git
       repository.
-    imageSource: /src/assets/images/marketing/kiwi-1.png
     headingSize: lg
+    panels:
+      - accentColor: pacific
+        imageSource: /src/assets/images/marketing/kiwi-1.png
+        imageAlt: ''
+        eyebrow: EDITORS
+        heading: Work visually
+        items:
+          - text: Make changes visually on the page
+            iconName: check
+            iconColor: default
+          - text: Build new pages from existing components
+            iconName: check
+            iconColor: default
+          - text: Draft, review and share for approval before publishing
+            iconName: check
+            iconColor: default
+        linkText: Learn more
+      - accentColor: sunset
+        imageSource: /src/assets/images/marketing/kiwi-2.png
+        imageAlt: ''
+        eyebrow: DEVELOPERS
+        heading: Stay in code
+        items:
+          - text: Build with any static site generator
+            iconName: check
+            iconColor: default
+          - text: Build components and easily set what’s editable
+            iconName: check
+            iconColor: default
+          - text: Commit and deploy straight from Git
+            iconName: check
+            iconColor: default
     buttonSections:
       - _component: building-blocks/core-elements/button
         variant: text
         iconName: arrow-right
         iconPosition: after
         text: Learn more
-      - _component: building-blocks/core-elements/button
-        variant: text
-        iconName: arrow-right
-        iconPosition: after
   - _component: page-sections/explainers/feature-deck
     backgroundColor: base
     headingSize: lg

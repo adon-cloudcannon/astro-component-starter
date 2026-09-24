@@ -1,0 +1,111 @@
+eyebrow:
+  type: text
+  comment: Short label above the heading.
+heading:
+  type: text
+  comment: The section's title.
+headingLevel:
+  type: select
+  comment: Heading level for the title.
+  options:
+    values:
+      - h1
+      - h2
+      - h3
+headingSize:
+  type: select
+  comment: Size of the title, independent of its level.
+  options:
+    values:
+      - id: xl
+        name: Header 2
+      - id: lg
+        name: Header 3
+      - id: md
+        name: Header 4
+subtext:
+  type: markdown
+  comment: Supporting copy beneath the heading.
+buttonSections:
+  type: array
+  comment: A link or button under the heading.
+panels:
+  type: array
+  comment: >-
+    One panel per way of working, side by side. Each carries its own accent
+    colour, which colours its list markers and its link, so a reader can tell
+    the columns apart before reading them.
+centreImageSource:
+  type: image
+  comment: The thing both panels share, shown between them.
+centreImageAlt:
+  type: text
+  comment: Alt text for the middle image.
+
+# --- section wrapper inputs
+sectionLabel:
+  type: text
+  comment: Accessible name for the section, used by screen readers.
+maxContentWidth:
+  type: select
+  comment: Maximum width of the section's content.
+  options:
+    values:
+      - id: lg
+        name: Large
+      - id: xl
+        name: Extra Large
+      - id: 2xl
+        name: 2xl
+paddingHorizontal:
+  type: select
+  comment: Horizontal padding around the content.
+  options:
+    values:
+      - id: none
+        name: None
+      - id: gutter
+        name: Page gutter
+      - id: lg
+        name: Large
+paddingVertical:
+  type: select
+  comment: Vertical padding around the content.
+  options:
+    values:
+      - id: 2xl
+        name: 2xl
+      - id: 3xl
+        name: 3xl
+      - id: 4xl
+        name: 4xl
+colorScheme:
+  type: select
+  comment: Colour scheme for this section.
+  options:
+    values:
+      - id: inherit
+        name: Inherit
+      - id: light
+        name: Light
+      - id: dark
+        name: Dark
+lockColorScheme:
+  type: switch
+  comment: Keeps this section's scheme when the rest of the page changes.
+backgroundColor:
+  type: select
+  comment: Background color for the section.
+  options:
+    values:
+      - id: none
+        name: None
+      - id: base
+        name: Base
+      - id: surface
+        name: Surface
+      - id: muted
+        name: Muted
+background:
+  type: object
+  comment: Background image, video or pattern for the section.

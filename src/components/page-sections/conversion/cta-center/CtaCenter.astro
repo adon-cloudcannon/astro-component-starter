@@ -11,7 +11,7 @@ const {
   subtext = "",
   buttonSections = [],
   sectionLabel,
-  maxContentWidth = "lg",
+  maxContentWidth = "xl",
   paddingHorizontal = "gutter",
   paddingVertical = "4xl",
   colorScheme = "inherit",
@@ -56,3 +56,16 @@ const {
     data-children-prop="buttonSections"
   />
 </CustomSection>
+
+<style is:global>
+  @layer page-sections {
+    .cta-center {
+      /* The heading takes the whole column and the line under it is held to
+         the design's measure, rather than both sharing one width. */
+      .subtext {
+        margin-inline: auto;
+        max-inline-size: var(--content-width-measure);
+      }
+    }
+  }
+</style>

@@ -1,0 +1,229 @@
+---
+/**
+ * Two ways of working, either side of the thing they share.
+ *
+ * The design uses this to show that two audiences reach the same place: a
+ * panel each, in their own colour, with an illustration above and a list of
+ * what that audience does, and between them a picture of the common ground.
+ * On the homepage that is editors and developers either side of a Git repo.
+ *
+ * The panels carry the accent, so a reader can tell which column is which
+ * before reading a word of it, the same way the story cards do. The middle is
+ * an image rather than a third panel, because what sits there is a drawing.
+ */
+import CustomSection from "@builders/custom-section/CustomSection.astro";
+import Card from "@wrappers/card/Card.astro";
+import Heading from "@core-elements/heading/Heading.astro";
+import Text from "@core-elements/text/Text.astro";
+import SimpleText from "@core-elements/simple-text/SimpleText.astro";
+import Image from "@core-elements/image/Image.astro";
+import List from "@core-elements/list/List.astro";
+import ButtonGroup from "@wrappers/button-group/ButtonGroup.astro";
+
+type PanelProps = {
+  accentColor?: string;
+  imageSource?: string;
+  imageAlt?: string;
+  eyebrow?: string;
+  heading?: string;
+  items?: { text?: string }[];
+  linkText?: string;
+  link?: string;
+};
+
+const {
+  eyebrow = "",
+  heading = "",
+  headingLevel = "h2",
+  headingSize = "lg",
+  subtext = "",
+  buttonSections = [],
+  panels = [],
+  centreImageSource = "",
+  centreImageAlt = "",
+  sectionLabel,
+  maxContentWidth = "xl",
+  paddingHorizontal = "gutter",
+  paddingVertical = "4xl",
+  colorScheme = "inherit",
+  lockColorScheme = false,
+  backgroundColor = "base",
+  background,
+  class: className,
+  useDefaultEditableBinding = false,
+  _component,
+  "data-children-prop": childrenDataProp,
+  ...htmlAttributes
+} = Astro.props;
+
+const panelList: PanelProps[] = Array.isArray(panels) ? panels : [];
+---
+
+<CustomSection
+  label={sectionLabel}
+  maxContentWidth={maxContentWidth}
+  paddingHorizontal={paddingHorizontal}
+  paddingVertical={paddingVertical}
+  colorScheme={colorScheme}
+  lockColorScheme={lockColorScheme}
+  backgroundColor={backgroundColor}
+  background={background}
+  class:list={["workflow-split", className]}
+  useDefaultEditableBinding={useDefaultEditableBinding}
+  {...htmlAttributes}
+>
+  <SimpleText
+    class="eyebrow"
+    size="sm"
+    alignmentHorizontal="center"
+    data-prop="eyebrow"
+    text={eyebrow}
+  />
+  <Heading
+    level={headingLevel}
+    size={headingSize}
+    alignmentHorizontal="center"
+    data-prop="heading"
+  >
+    {heading}
+  </Heading>
+  <Text
+    class="subtext"
+    alignmentHorizontal="center"
+    data-prop="subtext"
+    text={subtext}
+  />
+  <ButtonGroup
+    class="workflow-actions"
+    buttonSections={buttonSections}
+    direction="row"
+    alignmentHorizontal="center"
+    data-children-prop="buttonSections"
+  />
+
+  <div
+    class="workflow-columns"
+    data-editable="array"
+    data-prop={childrenDataProp ?? (useDefaultEditableBinding ? "panels" : undefined)}
+  >
+    {panelList.map((panel, index) => (
+      <Fragment>
+        <div
+          class="workflow-panel"
+          data-editable="array-item"
+        >
+          {panel.imageSource && (
+            <Image
+              class="workflow-illustration"
+              source={panel.imageSource}
+              alt={panel.imageAlt}
+              data-prop-src="imageSource"
+              data-prop-alt="imageAlt"
+            />
+          )}
+          <Card
+            accentColor={panel.accentColor || "none"}
+            backgroundColor="surface"
+            rounded={true}
+            paddingHorizontal="lg"
+            paddingVertical="lg"
+          >
+            <SimpleText
+              class="eyebrow"
+              size="sm"
+              data-prop="eyebrow"
+              text={panel.eyebrow}
+            />
+            <Heading
+              level="h3"
+              size="xs"
+              data-prop="heading"
+            >
+              {panel.heading}
+            </Heading>
+            <List
+              class="workflow-points"
+              items={panel.items}
+              listType="icon"
+              size="md"
+              data-children-prop="items"
+            />
+            {panel.linkText && (
+              <SimpleText
+                class="workflow-link"
+                size="sm"
+                data-prop="linkText"
+                text={panel.linkText}
+              />
+            )}
+          </Card>
+        </div>
+
+        {/* The common ground goes between the first pair, which is where the
+            design puts it. */}
+        {index === 0 && centreImageSource && (
+          <Image
+            class="workflow-centre"
+            source={centreImageSource}
+            alt={centreImageAlt}
+            data-prop-src="centreImageSource"
+            data-prop-alt="centreImageAlt"
+          />
+        )}
+      </Fragment>
+    ))}
+  </div>
+</CustomSection>
+
+<style is:global>
+  @layer page-sections {
+    .workflow-split {
+      /* Same as the rest of the centred headers: the heading takes the column
+         and its line of copy is held to the design's measure. */
+      .subtext {
+        margin-inline: auto;
+        max-inline-size: var(--content-width-measure);
+      }
+
+      .workflow-columns {
+        align-items: center;
+        display: grid;
+        gap: var(--spacing-xl);
+        grid-template-columns: repeat(auto-fit, minmax(min(18rem, 100%), 1fr));
+      }
+
+      /* A panel is its illustration and its card, stacked, so the cards sit on
+         one line however tall the drawings above them are. */
+      .workflow-panel {
+        display: grid;
+        grid-template-rows: auto 1fr;
+      }
+
+      .workflow-illustration {
+        justify-self: center;
+      }
+
+      /* Each list marker takes the panel's own colour, which is the thing that
+         tells the two columns apart at a glance. */
+      .workflow-points .icon {
+        color: var(--card-accent, var(--color-brand));
+      }
+
+      .workflow-link,
+      .workflow-link :where(.simple-text-content, .simple-text-inner, p, span) {
+        color: var(--card-accent, var(--color-brand));
+      }
+    }
+  }
+
+  /* Flat, because rules nested this deep get dropped (see CLAUDE.md). */
+  @layer page-sections {
+    .workflow-split .workflow-illustration img,
+    .workflow-split .workflow-centre img {
+      block-size: auto;
+      inline-size: auto;
+      max-block-size: 10rem;
+      max-inline-size: 100%;
+    }
+  }
+</style>
