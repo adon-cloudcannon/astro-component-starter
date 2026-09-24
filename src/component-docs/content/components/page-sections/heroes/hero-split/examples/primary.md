@@ -20,4 +20,9 @@ blocks:
       variant: 'secondary'
       size: 'md'
       link: '/learn'
+  note:
+    - text: 'Free entry'
+      iconName: 'check'
+    - text: 'Open year-round'
+      iconName: 'check'
 ---
