@@ -11,6 +11,7 @@ pageSections:
       Publish your best content with visual editing, custom components, and a flexible review
       process for your whole team.
     imageSource: /src/assets/images/marketing/screenshot-2026-08-19-at-12-59-24-1.png
+    headingSize: xl
     background:
       type: pattern
       imageSource: /src/assets/images/marketing/patterns/sand-grid.png

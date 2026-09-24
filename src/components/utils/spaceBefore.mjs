@@ -1,4 +1,4 @@
-const ROLES = new Set(["none", "tight", "loose"]);
+const ROLES = new Set(["none", "tight", "snug", "loose"]);
 
 // `default` (or unset) leaves the block's CSS type default in charge.
 export function spaceBeforeAttr(spaceBefore) {

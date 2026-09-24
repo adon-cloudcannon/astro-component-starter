@@ -12,6 +12,7 @@ pageSections:
       team edits visually, and everything stays in sync.
     imageSource: /src/assets/images/marketing/image.png
     imageAlt: A person reaching up to edit content blocks, with their dog
+    headingSize: 2xl
     background:
       type: pattern
       imageSource: /src/assets/images/marketing/patterns/sand-grid.png

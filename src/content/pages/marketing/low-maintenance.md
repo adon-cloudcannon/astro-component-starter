@@ -11,6 +11,7 @@ pageSections:
       Skip the forced updates, security patches, and midnight outages. Your site keeps running while
       your team spends time building what's next.
     imageSource: /src/assets/images/marketing/hero-lowmaintenance-01-1.png
+    headingSize: xl
     background:
       type: pattern
       imageSource: /src/assets/images/marketing/patterns/sand-grid.png

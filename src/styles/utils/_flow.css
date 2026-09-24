@@ -74,6 +74,11 @@
     --space-before: var(--space-before-tight);
   }
 
+  [data-space-before="snug"],
+  .stackable:has(> [data-space-before="snug"]) {
+    --space-before: var(--space-before-snug);
+  }
+
   [data-space-before="loose"],
   .stackable:has(> [data-space-before="loose"]) {
     --space-before: var(--space-before-loose);

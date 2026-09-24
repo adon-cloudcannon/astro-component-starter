@@ -12,11 +12,18 @@ const {
   eyebrow = "",
   heading = "",
   headingLevel = "h1",
+  headingSize = "2xl",
   subtext = "",
   imageSource = "",
   imageAlt = "",
   imageAspectRatio = "none",
   imageBleed = false,
+  // The design's hero images run from 38% to 73% of the content column, because
+  // they are drawn oversized and overlap the text rather than sitting beside
+  // it. No single ratio reproduces all of them; half is the closest one, and
+  // sits on the cluster four of the ten pages fall in. Pages whose illustration
+  // is drawn past the frame edge are what imageBleed is for.
+  distributionMode = "half",
   buttonSections = [],
   note = [],
   reverse = false,
@@ -54,8 +61,7 @@ const imagePositionVertical = imageBleed ? "top" : "center";
   {...htmlAttributes}
 >
   <Split
-    distributionMode={imageBleed ? "half" : "flexible-fixed"}
-    fixedWidth="400"
+    distributionMode={distributionMode}
     data-bleed={bleedSide}
     alignmentVertical="center"
     reverse={reverse}
@@ -72,7 +78,7 @@ const imagePositionVertical = imageBleed ? "top" : "center";
       />
       <Heading
         level={headingLevel}
-        size="2xl"
+        size={headingSize}
         data-prop="heading"
       >
         {heading}
@@ -94,7 +100,7 @@ const imagePositionVertical = imageBleed ? "top" : "center";
         listType="icon"
         direction="horizontal"
         size="sm"
-        spaceBefore="tight"
+        spaceBefore="snug"
         data-children-prop="note"
       />
     </Fragment>

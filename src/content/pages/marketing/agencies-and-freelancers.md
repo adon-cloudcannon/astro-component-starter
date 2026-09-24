@@ -11,6 +11,7 @@ pageSections:
       Here, agencies spend less time on maintenance and more time on billable work, with websites
       your clients love to edit.
     imageSource: /src/assets/images/marketing/cloudcannon-hero-portfolio-01-1.png
+    headingSize: xl
     background:
       type: pattern
       imageSource: /src/assets/images/marketing/patterns/sand-grid.png

@@ -33,5 +33,6 @@
   --space-before-none: 0;
   --space-before-tight: var(--spacing-sm);
   --space-before-default: var(--spacing-lg);
+  --space-before-snug: 1.25rem;
   --space-before-loose: var(--spacing-2xl);
 }

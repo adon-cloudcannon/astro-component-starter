@@ -11,6 +11,7 @@ pageSections:
       CloudCannon lets you have a high-impact web presence without the maintenance burden. Static
       architecture keeps things fast, secure, and quiet.
     imageSource: /src/assets/images/marketing/screenshot-2026-08-18-at-14-16-52-1.png
+    headingSize: xl
     background:
       type: pattern
       imageSource: /src/assets/images/marketing/patterns/sand-grid.png

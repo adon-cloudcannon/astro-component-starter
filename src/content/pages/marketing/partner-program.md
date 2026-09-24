@@ -11,6 +11,7 @@ pageSections:
       Welcome to a Partner Program that rewards good work. Get better margins and less overhead as
       you grow your portfolio.
     imageSource: /src/assets/images/marketing/screenshot-2026-08-17-at-12-00-53-1.png
+    headingSize: xl
     background:
       type: pattern
       imageSource: /src/assets/images/marketing/patterns/sand-grid.png
