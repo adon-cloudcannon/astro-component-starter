@@ -175,6 +175,21 @@ if (hasAlternate) {
         position: absolute;
       }
 
+      /* Flat rather than nested inside `.intrinsic` above. Nested this deep
+         the processor drops them: the built stylesheet carried `&.intrinsic`
+         with its own declarations and nothing underneath, which is why an
+         image given a width kept coming out at its container's. */
+      > .image-inner.intrinsic picture {
+        width: auto;
+      }
+
+      > .image-inner.intrinsic img {
+        /* auto on both, so the width and height attributes are the box. */
+        height: auto;
+        max-width: 100%;
+        width: auto;
+      }
+
       > .image-inner {
         overflow: hidden;
         width: 100%;
@@ -186,22 +201,6 @@ if (hasAlternate) {
           margin-inline: auto;
           max-width: 100%;
           width: fit-content;
-
-          /* The <picture> is width: 100% too, so sizing only the img leaves
-             it stretched inside a full-width picture and nothing changes. */
-          picture {
-            width: auto;
-          }
-
-          img {
-            /* auto on both, so the width and height attributes are the box.
-               Leaving width at the inherited 100% makes fit-content on the
-               wrapper follow the container right back, and the size the
-               caller asked for never applies. */
-            height: auto;
-            max-width: 100%;
-            width: auto;
-          }
         }
 
         &.ratio-square {

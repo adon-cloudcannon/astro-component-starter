@@ -122,42 +122,28 @@ const {
         align-content: start;
       }
 
-      /* The illustrations are drawn at different heights but their titles sit
-         on one line, so they share a block and hang from its foot. */
+      /* Every column gives its illustration the same block, so the headings
+         below them land on one line whatever shape the art is. The image sits
+         at the top of that block and the copy underneath grows down. */
       .scroll-deck-card .grid .image {
-        align-items: end;
-        /* A minimum, not a height. Fixed, anything drawn taller than the block
-           gets clipped by Image's own overflow: hidden. */
+        align-items: start;
+        block-size: 10rem;
         display: flex;
         justify-content: center;
         margin-inline: auto;
         max-inline-size: 100%;
-        min-block-size: 10rem;
-
-        /* Image's own inner is width: 100%, so an illustration stretches to
-           its column and the width it was drawn at never gets a say. */
-        > .image-inner {
-          inline-size: fit-content;
-          margin-inline: auto;
-          max-inline-size: 100%;
-        }
       }
 
-      /* The design does not show these whole. Seven of the nine deck
-         illustrations are FILL fills, which is object-fit: cover on the box
-         they are drawn in, and the last two are a stretch with a crop matrix.
-         Shown whole instead, a file that is half empty space reads tiny beside
-         one that is all ink, which is what made these look so uneven. The box
-         comes from the width and height attributes, so neither is set to auto
-         here. */
+      /* auto on both with the block capped: a replaced element scales itself
+         to fit, so each illustration keeps its shape inside the shared box. */
       .scroll-deck-card .grid .image img {
-        /* auto on both, so the width and height attributes are the box the
-           crop happens in. Image sets its own img to width: 100%, which is
-           what kept every illustration at its column's width. */
         block-size: auto;
         inline-size: auto;
+        /* The same 10rem, written out rather than as 100%. A percentage
+           resolves against <picture>, whose height is auto, so it is ignored
+           and the illustration overflows the block it was given. */
+        max-block-size: 10rem;
         max-inline-size: 100%;
-        object-fit: cover;
       }
     }
   }
