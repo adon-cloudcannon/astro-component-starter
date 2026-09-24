@@ -120,7 +120,7 @@ pageSections:
         iconName: arrow-right
         iconPosition: after
   - _component: page-sections/explainers/feature-deck
-    backgroundColor: surface
+    backgroundColor: base
     headingSize: lg
     cards:
       - _component: building-blocks/wrappers/scroll-deck/scroll-deck-card
@@ -132,27 +132,52 @@ pageSections:
             text: The stack AI already knows
             level: h3
             size: lg
+            alignmentHorizontal: center
           - _component: building-blocks/core-elements/text
             text: Code, content, and config live together in Git. The whole project, in plain files.
-          - _component: building-blocks/core-elements/heading
-            text: Complete Context
-            level: h4
-            size: xs
-          - _component: building-blocks/core-elements/text
-            text: Agents see your content, not just your code
-          - _component: building-blocks/core-elements/text
-            text: Agents work on the repo like any other contributor
-          - _component: building-blocks/core-elements/heading
-            text: Familiar workflow
-            level: h4
-            size: xs
-          - _component: building-blocks/core-elements/heading
-            text: No learning curve
-            level: h4
-            size: xs
-          - _component: building-blocks/core-elements/text
-            text: No proprietary API for an agent to learn first
+            alignmentHorizontal: center
+          - _component: building-blocks/wrappers/grid
+            columns: '3'
+            gap: lg
+            items:
+              - contentSections:
+                  - _component: building-blocks/core-elements/image
+                    imageSource: /src/assets/images/marketing/context-1.png
+                  - _component: building-blocks/core-elements/heading
+                    text: Complete Context
+                    level: h4
+                    size: xs
+                    alignmentHorizontal: center
+                  - _component: building-blocks/core-elements/text
+                    text: Agents see your content, not just your code
+                    size: sm
+                    alignmentHorizontal: center
+              - contentSections:
+                  - _component: building-blocks/core-elements/image
+                    imageSource: /src/assets/images/marketing/ai-2-1.png
+                  - _component: building-blocks/core-elements/heading
+                    text: Familiar workflow
+                    level: h4
+                    size: xs
+                    alignmentHorizontal: center
+                  - _component: building-blocks/core-elements/text
+                    text: Agents work on the repo like any other contributor
+                    size: sm
+                    alignmentHorizontal: center
+              - contentSections:
+                  - _component: building-blocks/core-elements/image
+                    imageSource: /src/assets/images/marketing/api-1.png
+                  - _component: building-blocks/core-elements/heading
+                    text: No learning curve
+                    level: h4
+                    size: xs
+                    alignmentHorizontal: center
+                  - _component: building-blocks/core-elements/text
+                    text: No proprietary API for an agent to learn first
+                    size: sm
+                    alignmentHorizontal: center
           - _component: building-blocks/wrappers/button-group
+            alignmentHorizontal: center
             buttonSections:
               - _component: building-blocks/core-elements/button
                 variant: primary
@@ -166,25 +191,47 @@ pageSections:
             text: Your sites just run
             level: h3
             size: lg
+            alignmentHorizontal: center
           - _component: building-blocks/core-elements/text
             text: Upgrade when ready
-          - _component: building-blocks/core-elements/text
-            text: Forget update queues, plugin conflicts, and things breaking while you sleep.
-          - _component: building-blocks/core-elements/text
-            text: No forced upgrades or surprise migrations
-          - _component: building-blocks/core-elements/heading
-            text: Smaller surface
-            level: h4
-            size: xs
-          - _component: building-blocks/core-elements/text
-            text: No admin panel sitting on your live site
-          - _component: building-blocks/core-elements/heading
-            text: Off your plate
-            level: h4
-            size: xs
-          - _component: building-blocks/core-elements/text
-            text: No server or database to look after
+            alignmentHorizontal: center
+          - _component: building-blocks/wrappers/grid
+            columns: '3'
+            gap: lg
+            items:
+              - contentSections:
+                  - _component: building-blocks/core-elements/image
+                    imageSource: /src/assets/images/marketing/low-maintenence.png
+                  - _component: building-blocks/core-elements/text
+                    text: No forced upgrades or surprise migrations
+                    size: sm
+                    alignmentHorizontal: center
+              - contentSections:
+                  - _component: building-blocks/core-elements/image
+                    imageSource: /src/assets/images/marketing/cloudcannon-testing-speed-1.png
+                  - _component: building-blocks/core-elements/heading
+                    text: Smaller surface
+                    level: h4
+                    size: xs
+                    alignmentHorizontal: center
+                  - _component: building-blocks/core-elements/text
+                    text: Forget update queues, plugin conflicts, and things breaking while you sleep.
+                    size: sm
+                    alignmentHorizontal: center
+              - contentSections:
+                  - _component: building-blocks/core-elements/image
+                    imageSource: /src/assets/images/marketing/hosting.png
+                  - _component: building-blocks/core-elements/heading
+                    text: Off your plate
+                    level: h4
+                    size: xs
+                    alignmentHorizontal: center
+                  - _component: building-blocks/core-elements/text
+                    text: No server or database to look after
+                    size: sm
+                    alignmentHorizontal: center
           - _component: building-blocks/wrappers/button-group
+            alignmentHorizontal: center
             buttonSections:
               - _component: building-blocks/core-elements/button
                 variant: primary
@@ -198,31 +245,58 @@ pageSections:
             text: Fast everywhere
             level: h3
             size: lg
+            alignmentHorizontal: center
           - _component: building-blocks/core-elements/text
             text: Pages are pre-built and served from a CDN, so sites load fast anywhere in the world.
-          - _component: building-blocks/core-elements/heading
-            text: Scale changes nothing
-            level: h4
-            size: xs
-          - _component: building-blocks/core-elements/text
-            text: Same speed at ten visitors or ten million
-          - _component: building-blocks/core-elements/heading
-            text: Any distance
-            level: h4
-            size: xs
-          - _component: building-blocks/core-elements/text
-            text: Just as fast on the other side of the world
-          - _component: building-blocks/core-elements/heading
-            text: Ranks higher
-            level: h4
-            size: xs
-          - _component: building-blocks/core-elements/text
-            text: Fast pages rank better, so you start ahead
+            alignmentHorizontal: center
+          - _component: building-blocks/wrappers/grid
+            columns: '3'
+            gap: lg
+            items:
+              - contentSections:
+                  - _component: building-blocks/core-elements/heading
+                    text: Scale changes nothing
+                    level: h4
+                    size: xs
+                    alignmentHorizontal: center
+                  - _component: building-blocks/core-elements/text
+                    text: Same speed at ten visitors or ten million
+                    size: sm
+                    alignmentHorizontal: center
+              - contentSections:
+                  - _component: building-blocks/core-elements/heading
+                    text: Any distance
+                    level: h4
+                    size: xs
+                    alignmentHorizontal: center
+                  - _component: building-blocks/core-elements/text
+                    text: Just as fast on the other side of the world
+                    size: sm
+                    alignmentHorizontal: center
+              - contentSections:
+                  - _component: building-blocks/core-elements/heading
+                    text: Ranks higher
+                    level: h4
+                    size: xs
+                    alignmentHorizontal: center
+                  - _component: building-blocks/core-elements/text
+                    text: Fast pages rank better, so you start ahead
+                    size: sm
+                    alignmentHorizontal: center
           - _component: building-blocks/wrappers/button-group
+            alignmentHorizontal: center
             buttonSections:
               - _component: building-blocks/core-elements/button
                 variant: primary
                 text: How sites stay fast
+    colorScheme: dark
+    lockColorScheme: true
+    cardColorScheme: light
+    background:
+      type: pattern
+      imageSource: /src/assets/images/marketing/patterns/dark-grid.png
+      patternSize: natural
+      mask: none
   - _component: page-sections/proof/testimonial-section
     backgroundColor: base
     colorScheme: dark

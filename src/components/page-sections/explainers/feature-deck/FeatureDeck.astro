@@ -84,3 +84,36 @@ const {
     data-children-prop="cards"
   />
 </CustomSection>
+
+<style is:global>
+  @layer page-sections {
+    .feature-deck {
+      /* The design centres a 936 card in the 1040 column and stacks the rest
+         behind it. The measure goes on the track, not the card: a card is a
+         grid item, and a max-width there lets it shrink to its own content
+         instead, which collapsed the whole thing to 66px. */
+      .scroll-deck-track {
+        /* justify-self, not margin auto: the deck's layout is a grid, and an
+           auto margin on a grid item shrinks it to its own content instead of
+           centring it at width. That collapsed the whole deck to 66px. */
+        inline-size: 100%;
+        justify-self: center;
+        max-inline-size: 936px;
+      }
+
+      /* Everything on a card is centred except the illustrations, which are
+         centred anyway by their column. */
+      .scroll-deck-card .card-content {
+        text-align: center;
+      }
+
+      /* The three columns beneath the intro: an illustration over a title and
+         a line, each column centred on itself. */
+      .scroll-deck-card .grid .image img {
+        margin-inline: auto;
+        max-block-size: 10rem;
+        width: auto;
+      }
+    }
+  }
+</style>
