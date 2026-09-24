@@ -6,6 +6,7 @@ import Accordion from "@wrappers/accordion/Accordion.astro";
 const {
   heading = "Frequently Asked Questions",
   headingLevel = "h2",
+  headingSize = "lg",
   items = [],
   label = "About FAQ",
   sectionLabel,
@@ -38,7 +39,7 @@ const {
 >
   <Heading
     level={headingLevel}
-    size="lg"
+    size={headingSize}
     alignmentHorizontal="center"
     text={heading}
     data-prop="heading"

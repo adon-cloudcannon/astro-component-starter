@@ -1,6 +1,23 @@
 heading:
   type: text
   comment: Main heading for the section.
+headingSize:
+  type: select
+  comment: Size of the title, independent of its level.
+  options:
+    values:
+      - id: 2xl
+        name: Header 1
+      - id: xl
+        name: Header 2
+      - id: lg
+        name: Header 3
+      - id: md
+        name: Header 4
+      - id: sm
+        name: Header 5
+      - id: xs
+        name: Header 6
 headingLevel:
   type: select
   comment: Heading level for the title. Use h1 once per page, on the first section.
@@ -135,6 +152,21 @@ colorScheme:
         name: Light
       - id: dark
         name: Dark
+imageAspectRatio:
+  type: select
+  comment: Crops the image to a fixed shape. None keeps its own proportions.
+  options:
+    values:
+      - id: none
+        name: None
+      - id: square
+        name: Square
+      - id: landscape
+        name: Landscape
+      - id: portrait
+        name: Portrait
+      - id: widescreen
+        name: Widescreen
 lockColorScheme:
   type: switch
   label: Lock color scheme

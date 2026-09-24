@@ -59,6 +59,10 @@ pageSections:
       Build with the static site generator you already use. Define components once and reuse them
       across every client site.
     imageSource: /src/assets/images/marketing/hero-background-feature-2.jpg
+    buttonSections:
+      - _component: building-blocks/core-elements/button
+        variant: primary
+        text: How we’re ready for AI
   - _component: page-sections/builders/custom-section
   - _component: building-blocks/wrappers/content-selector
     items:
@@ -88,49 +92,10 @@ pageSections:
       - text: Label
         iconName: check
         iconColor: default
-      - text: 
-        iconName: check
-        iconColor: default
       - text: Label
         iconName: check
         iconColor: default
-      - text: 
-        iconName: check
-        iconColor: default
       - text: Label
-        iconName: check
-        iconColor: default
-      - text: 
-        iconName: check
-        iconColor: default
-      - text: Label
-        iconName: check
-        iconColor: default
-      - text: 
-        iconName: check
-        iconColor: default
-      - text: Label
-        iconName: check
-        iconColor: default
-      - text: 
-        iconName: check
-        iconColor: default
-      - text: Label
-        iconName: check
-        iconColor: default
-      - text: 
-        iconName: check
-        iconColor: default
-      - text: Label
-        iconName: check
-        iconColor: default
-      - text: 
-        iconName: check
-        iconColor: default
-      - text: Label
-        iconName: check
-        iconColor: default
-      - text: 
         iconName: check
         iconColor: default
       - text: Heading
@@ -139,4 +104,5 @@ pageSections:
   - _component: page-sections/conversion/pricing-tiers
     heading: Join a Partner Program that rewards good work
     subtext: As you bring in new clients, you’ll gain points and more benefits.
+    headingSize: lg
 ---

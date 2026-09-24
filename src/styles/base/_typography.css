@@ -25,16 +25,19 @@
 
     h1 {
       font-size: var(--font-size-heading-2xl);
+      letter-spacing: var(--letter-spacing-heading-2xl);
       line-height: var(--line-height-heading-2xl);
     }
 
     h2 {
       font-size: var(--font-size-heading-xl);
+      letter-spacing: var(--letter-spacing-heading-xl);
       line-height: var(--line-height-heading-xl);
     }
 
     h3 {
       font-size: var(--font-size-heading-lg);
+      letter-spacing: var(--letter-spacing-heading-lg);
       line-height: var(--line-height-heading-lg);
     }
 
@@ -46,16 +49,19 @@
 
     h4 {
       font-size: var(--font-size-heading-md);
+      letter-spacing: var(--letter-spacing-heading-md);
       line-height: var(--line-height-heading-md);
     }
 
     h5 {
       font-size: var(--font-size-heading-sm);
+      letter-spacing: var(--letter-spacing-heading-sm);
       line-height: var(--line-height-heading-sm);
     }
 
     h6 {
       font-size: var(--font-size-heading-xs);
+      letter-spacing: var(--letter-spacing-heading-xs);
       line-height: var(--line-height-heading-xs);
     }
 

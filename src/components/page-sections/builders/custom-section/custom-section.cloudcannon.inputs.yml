@@ -113,6 +113,8 @@ backgroundColor:
         name: Muted
       - id: accent
         name: Accent
+      - id: brand
+        name: Brand
       - id: highlight
         name: Highlight
 rounded:

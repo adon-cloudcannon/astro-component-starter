@@ -33,26 +33,18 @@ pageSections:
         iconColor: default
   - _component: page-sections/conversion/cta-center
     heading: High speed whether you have 10 visitors or 10 million
+    headingSize: lg
   - _component: page-sections/explainers/feature-split
     eyebrow: Editing
     subtext: >-
       Nothing gets assembled while a visitor waits. Your site is built when you push, then served as
       finished files from wherever is closest to the person reading it.
     imageSource: /src/assets/images/marketing/rectangle-1165.png
-    buttonSections:
-      - _component: building-blocks/core-elements/button
-        variant: primary
-        text: Publish Update
-      - _component: building-blocks/core-elements/button
-        variant: primary
-        text: Publish Update
-      - _component: building-blocks/core-elements/button
-        variant: primary
-        text: Publish Update
   - _component: page-sections/proof/testimonial-section
   - _component: page-sections/conversion/cta-center
     heading: See how fast your site could be
     subtext: LOREM IPSUM
+    headingSize: lg
     buttonSections:
       - _component: building-blocks/core-elements/button
         variant: text

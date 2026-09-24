@@ -145,36 +145,50 @@ if (!_component && !hasText && !hasSlotContent) return;
           }
         }
 
-        /* Each size takes its own line height too. The ramp tightens as headings
-           grow, so a size override alone leaves an h1 rendering an h2's font on
-           an h1's much tighter line. */
+        /* A size override takes the whole style with it: weight and tracking
+           as well as the line. In this design a style is a bundle, so Header 3
+           is 46px AND bold AND tracked -1.15. Overriding the size alone left a
+           section heading at Header 3's size in Header 2's weight, with no
+           tracking at all. */
         &.size-xs {
           font-size: var(--font-size-heading-xs);
+          font-weight: var(--font-weight-heading-xs);
+          letter-spacing: var(--letter-spacing-heading-xs);
           line-height: var(--line-height-heading-xs);
         }
 
         &.size-sm {
           font-size: var(--font-size-heading-sm);
+          font-weight: var(--font-weight-heading-sm);
+          letter-spacing: var(--letter-spacing-heading-sm);
           line-height: var(--line-height-heading-sm);
         }
 
         &.size-md {
           font-size: var(--font-size-heading-md);
+          font-weight: var(--font-weight-heading-md);
+          letter-spacing: var(--letter-spacing-heading-md);
           line-height: var(--line-height-heading-md);
         }
 
         &.size-lg {
           font-size: var(--font-size-heading-lg);
+          font-weight: var(--font-weight-heading-lg);
+          letter-spacing: var(--letter-spacing-heading-lg);
           line-height: var(--line-height-heading-lg);
         }
 
         &.size-xl {
           font-size: var(--font-size-heading-xl);
+          font-weight: var(--font-weight-heading-xl);
+          letter-spacing: var(--letter-spacing-heading-xl);
           line-height: var(--line-height-heading-xl);
         }
 
         &.size-2xl {
           font-size: var(--font-size-heading-2xl);
+          font-weight: var(--font-weight-heading-2xl);
+          letter-spacing: var(--letter-spacing-heading-2xl);
           line-height: var(--line-height-heading-2xl);
         }
 

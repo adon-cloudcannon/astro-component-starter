@@ -67,6 +67,20 @@
   --font-size-sm: 0.9063rem; /* Body 5, 14.5px */
   --font-size-xs: 0.8125rem; /* Eyebrow, 13px */
 
+  /* The rest of each heading style, so a slot carries all of it. */
+  --font-weight-heading-2xl: 600; /* Header 1, Red Hat Display SemiBold */
+  --font-weight-heading-xl: 600; /* Header 2, Red Hat Display SemiBold */
+  --font-weight-heading-lg: 700; /* Header 3, Red Hat Display Bold */
+  --font-weight-heading-md: 500; /* Header 4, Red Hat Display Medium */
+  --font-weight-heading-sm: 600; /* Header 5, Red Hat Display SemiBold */
+  --font-weight-heading-xs: 700; /* Header 6, Red Hat Display Bold */
+  --letter-spacing-heading-2xl: -0.02em; /* Header 1, -1.8px */
+  --letter-spacing-heading-xl: -0.0277em; /* Header 2, -1.8px */
+  --letter-spacing-heading-lg: -0.025em; /* Header 3, -1.15px */
+  --letter-spacing-heading-md: -0.015em; /* Header 4, -0.63px */
+  --letter-spacing-heading-sm: 0em; /* Header 5, 0px */
+  --letter-spacing-heading-xs: -0.01em; /* Header 6, -0.2px */
+
   @media (width < 640px) {
     /* The starter's own desktop-to-mobile ratios, on the new sizes. */
     --font-size-heading-2xl: 4.5rem;

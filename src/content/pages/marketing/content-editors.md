@@ -33,15 +33,24 @@ pageSections:
         iconColor: default
   - _component: page-sections/builders/custom-section
   - _component: page-sections/conversion/cta-split
+    buttonSections:
+      - _component: building-blocks/core-elements/button
+        variant: primary
+        text: Read case study
   - _component: page-sections/conversion/cta-split
     subtext: >-
       “You can have lots of concurrent pieces of work: a solutions page, a new case study layout,
-      new terms and conditions, a legal section, all on different branches
+      new terms and conditions, a legal section, all on different branches with different agents
+      working on them in isolation, without corrupting your main site.”
+    buttonSections:
+      - _component: building-blocks/core-elements/button
+        variant: primary
+        text: Read case study
   - _component: building-blocks/wrappers/content-selector
     items:
       - text: >-
           Every piece of work happens on its own branched site, so a new blog post, a landing page
-          redesign, and a navigation update can all run at once without anyone tr
+          redesign, and a navigation update can all run at once without anyone treading on toes.
         iconName: check
         iconColor: default
       - text: Build component
@@ -66,10 +75,22 @@ pageSections:
     heading: Built for the work
     subtext: Define roles and groups to match your organization structure.
     imageSource: /src/assets/images/marketing/layer-28-1.png
+    headingSize: lg
   - _component: page-sections/conversion/cta-split
     heading: Take a peek under the hood
     subtext: >-
       Git underneath, a visual editor on top, with code and content running on one engine. Start
-      free in minutes, or book a demo and we’ll walk you through the real t
+      free in minutes, or book a demo and we’ll walk you through the real thing.
     imageSource: /src/assets/images/marketing/cloudcannon-truck-closed-1.png
+    backgroundColor: brand
+    headingSize: lg
+    buttonSections:
+      - _component: building-blocks/core-elements/button
+        variant: primary
+        text: Start your free trial
+      - _component: building-blocks/core-elements/button
+        variant: text
+        iconName: arrow-right
+        iconPosition: after
+        text: Book a demo
 ---

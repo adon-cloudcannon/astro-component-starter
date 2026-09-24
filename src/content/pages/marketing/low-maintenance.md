@@ -60,24 +60,31 @@ pageSections:
     heading: Give editors a CMS, keep a static site
     subtext: >-
       At CloudCannon the editing interface sits as a layer on top of your site. Your team gets
-      somewhere to work, your site stays as a set of static files, and neithe
+      somewhere to work, your site stays as a set of static files, and neither one needs looking
+      after.
     imageSource: /src/assets/images/marketing/503d6ebb-7e4a-471e-ae1a-6c22a3591d09-1.jpg
+    headingSize: lg
+    buttonSections:
+      - _component: building-blocks/core-elements/button
+        variant: primary
+        text: Why should you cheese?
   - _component: page-sections/proof/testimonial-section
   - _component: page-sections/explainers/feature-split
     heading: We don’t think a website should need this much looking after
     subtext: 'With a static site and Git you won’t need to worry about:'
     imageSource: /src/assets/images/marketing/orange-scribbles-1.png
+    headingSize: lg
   - _component: page-sections/conversion/cta-center
     heading: Maintenance that doesn’t multiply
     subtext: >-
       Whether it's three client sites or three hundred, another site is another repo. The
       maintenance doesn't come with it.
+    backgroundColor: base
     colorScheme: dark
+    lockColorScheme: true
+    headingSize: lg
   - _component: building-blocks/wrappers/content-selector
     items:
-      - text: JS
-        iconName: check
-        iconColor: default
       - text: 
         iconName: check
         iconColor: default
@@ -85,22 +92,17 @@ pageSections:
         iconName: check
         iconColor: default
       - text: 
-        iconName: check
-        iconColor: default
-      - text: 
-        iconName: check
-        iconColor: default
-      - text: 
-        iconName: check
-        iconColor: default
-      - text: 
         iconName: check
         iconColor: default
   - _component: page-sections/conversion/cta-split
+    buttonSections:
+      - _component: building-blocks/core-elements/button
+        variant: primary
+        text: Read case study
   - _component: page-sections/conversion/cta-center
     subtext: >-
       Git underneath, a visual editor on top, with code and content running on one engine. Start
-      free in minutes, or book a demo and we’ll walk you through the real t
+      free in minutes, or book a demo and we’ll walk you through the real thing.
     buttonSections:
       - _component: building-blocks/core-elements/button
         variant: primary
@@ -113,6 +115,7 @@ pageSections:
   - _component: page-sections/conversion/cta-split
     heading: Wanna learn more about our product?
     imageSource: /src/assets/images/marketing/cta.png
+    headingSize: lg
     buttonSections:
       - _component: building-blocks/core-elements/button
         variant: text

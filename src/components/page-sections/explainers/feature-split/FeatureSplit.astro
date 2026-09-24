@@ -11,6 +11,7 @@ const {
   eyebrow = "",
   heading = "",
   headingLevel = "h2",
+  headingSize = "lg",
   subtext = "",
   buttonSections = [],
   imageSource = "",
@@ -72,14 +73,14 @@ const imagePositionVertical = imageBleed ? "top" : "center";
       />
       <Heading
         level={headingLevel}
-        size="lg"
+        size={headingSize}
         data-prop="heading"
       >
         {heading}
       </Heading>
       <Text
         class="subtext"
-        size="md"
+        size="lg"
         data-prop="subtext"
         text={subtext}
       />

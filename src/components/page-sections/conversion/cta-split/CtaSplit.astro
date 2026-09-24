@@ -9,6 +9,7 @@ import Split from "@wrappers/split/Split.astro";
 const {
   heading = "",
   headingLevel = "h2",
+  headingSize = "xl",
   subtext = "",
   buttonSections = [],
   imageSource = "",
@@ -20,6 +21,10 @@ const {
   paddingVertical = "4xl",
   colorScheme = "inherit",
   lockColorScheme = false,
+  // Was hardcoded to landscape, which crops anything that is not 4:3. The
+  // design places these at their own proportions: the truck is 915x427, so a
+  // 4:3 frame cuts a third of it away.
+  imageAspectRatio = "none",
   backgroundColor = "base",
   background,
   class: className,
@@ -52,7 +57,7 @@ const {
     <Fragment slot="first">
       <Heading
         level={headingLevel}
-        size="xl"
+        size={headingSize}
         data-prop="heading"
       >
         {heading}
@@ -73,7 +78,7 @@ const {
         source={imageSource}
         rounded={true}
         alt={imageAlt}
-        aspectRatio="landscape"
+        aspectRatio={imageAspectRatio}
         data-prop-src="imageSource"
         data-prop-alt="imageAlt"
       />

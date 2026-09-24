@@ -34,47 +34,38 @@ pageSections:
   - _component: page-sections/conversion/cta-center
     heading: Ready, set, code
     subtext: AI agents working on the site have complete context
+    backgroundColor: base
     colorScheme: dark
+    lockColorScheme: true
+    headingSize: lg
   - _component: page-sections/explainers/feature-grid
-    subtext: page.tsx
+    backgroundColor: base
     colorScheme: dark
-    features:
-      - text: importImagefrom'next/image';
-        iconName: check
-        iconColor: default
-      - text: importLinkfrom'next/link';
-        iconName: check
-        iconColor: default
-      - text: import{ArrowRight}from'lucide-react';
-        iconName: check
-        iconColor: default
-      - text: exportdefaultfunctionPage() {
-        iconName: check
-        iconColor: default
-      - text: return(
-        iconName: check
-        iconColor: default
-      - text: <mainclassName="main-h-screen bg-white">
-        iconName: check
-        iconColor: default
-      - text: <sectionclassName="max-auto max-w-7xl px-6 pt-24 pb-20 lg:px-8">
-        iconName: check
-        iconColor: default
-      - text: <divclassName="max-w-3xl">
-        iconName: check
-        iconColor: default
+    lockColorScheme: true
   - _component: page-sections/conversion/cta-split
     subtext: >-
       “You can have lots of concurrent pieces of work: a solutions page, a new case study layout,
-      new terms and conditions, a legal section, all on different branches
+      new terms and conditions, a legal section, all on different branches with different agents
+      working on them in isolation, without corrupting your main site.”
+    buttonSections:
+      - _component: building-blocks/core-elements/button
+        variant: primary
+        text: Read case study
   - _component: page-sections/conversion/cta-split
     heading: We've already taught agents how to use CloudCannon
     subtext: >-
       Our agent skills are open source. Point your agent at them and it can help to migrate an
-      existing site onto CloudCannon, write the config, and set up visual edi
+      existing site onto CloudCannon, write the config, and set up visual editing, without you
+      needing to explain how any of it works first.
+    headingSize: lg
+    buttonSections:
+      - _component: building-blocks/core-elements/button
+        variant: primary
+        text: Get skills repo
   - _component: page-sections/conversion/cta-center
     heading: Give AI the full picture
     subtext: LOREM IPSUM
+    headingSize: lg
     buttonSections:
       - _component: building-blocks/core-elements/button
         variant: primary

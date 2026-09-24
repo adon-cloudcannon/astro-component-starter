@@ -84,11 +84,6 @@ pageSections:
           straight to Git
         iconName: check
         iconColor: default
-      - text: >-
-          <section class="hero"> <div class="hero__heading-container"> <img src="assets/arrow.png"
-          alt="" role="presentation"> <h1>{{ .heading | markdownify }}</h1> <p>{{
-        iconName: check
-        iconColor: default
       - text: 
         iconName: check
         iconColor: default
@@ -96,15 +91,6 @@ pageSections:
         iconName: check
         iconColor: default
       - text: 
-        iconName: check
-        iconColor: default
-      - text: 
-        iconName: check
-        iconColor: default
-      - text: 
-        iconName: check
-        iconColor: default
-      - text: 
         iconName: check
         iconColor: default
   - _component: page-sections/explainers/feature-split
@@ -114,6 +100,7 @@ pageSections:
       Editors edit visually, developers stay in code — and every change lands in the same Git
       repository.
     imageSource: /src/assets/images/marketing/kiwi-1.png
+    headingSize: lg
     buttonSections:
       - _component: building-blocks/core-elements/button
         variant: text
@@ -130,25 +117,40 @@ pageSections:
     subtext: Code, content, and config live together in Git. The whole project, in plain files.
     imageSource: /src/assets/images/marketing/context-1.png
     backgroundColor: surface
+    headingSize: lg
+    buttonSections:
+      - _component: building-blocks/core-elements/button
+        variant: primary
+        text: Why Git makes AI better
   - _component: page-sections/explainers/feature-split
     subtext: LOW MAINTENANCE
     imageSource: /src/assets/images/marketing/low-maintenence.png
+    buttonSections:
+      - _component: building-blocks/core-elements/button
+        variant: primary
+        text: Why 3am stays quiet
   - _component: page-sections/explainers/feature-grid
     eyebrow: HIGH PERFORMANCE
     subtext: Pages are pre-built and served from a CDN, so sites load fast anywhere in the world.
     backgroundColor: surface
   - _component: page-sections/proof/testimonial-section
+    backgroundColor: base
     colorScheme: dark
+    lockColorScheme: true
   - _component: page-sections/builders/custom-section
+    backgroundColor: base
     colorScheme: dark
+    lockColorScheme: true
   - _component: page-sections/explainers/feature-split
     eyebrow: Who we are
     heading: Made for the work, not for the upsell
     subtext: >-
       We’re a tight-knit team based in Dunedin, New Zealand, working with web teams all over the
-      world. We started CloudCannon because every CMS we tried gave editors
+      world. We started CloudCannon because every CMS we tried gave editors a better experience by
+      giving developers a worse one. So we built a CMS that works for both.
     imageSource: /src/assets/images/marketing/container.png
     backgroundColor: surface
+    headingSize: lg
     buttonSections:
       - _component: building-blocks/core-elements/button
         variant: text
@@ -159,6 +161,17 @@ pageSections:
     heading: Take a peek under the hood
     subtext: >-
       Git underneath, a visual editor on top, with code and content running on one engine. Start
-      free in minutes, or book a demo and we’ll walk you through the real t
+      free in minutes, or book a demo and we’ll walk you through the real thing.
     imageSource: /src/assets/images/marketing/cloudcannon-truck-closed-1.png
+    backgroundColor: brand
+    headingSize: lg
+    buttonSections:
+      - _component: building-blocks/core-elements/button
+        variant: primary
+        text: Start your free trial
+      - _component: building-blocks/core-elements/button
+        variant: text
+        iconName: arrow-right
+        iconPosition: after
+        text: Book a demo
 ---

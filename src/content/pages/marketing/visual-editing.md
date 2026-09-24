@@ -41,6 +41,7 @@ pageSections:
   - _component: page-sections/conversion/cta-center
     heading: Here, you don’t need to wait to make changes
     subtext: When something on the site needs updating, the person who noticed can just fix it.
+    headingSize: lg
   - _component: building-blocks/wrappers/content-selector
     items:
       - text: >-
@@ -63,49 +64,10 @@ pageSections:
       - text: Label
         iconName: check
         iconColor: default
-      - text: 
-        iconName: check
-        iconColor: default
       - text: Label
         iconName: check
         iconColor: default
-      - text: 
-        iconName: check
-        iconColor: default
       - text: Label
-        iconName: check
-        iconColor: default
-      - text: 
-        iconName: check
-        iconColor: default
-      - text: Label
-        iconName: check
-        iconColor: default
-      - text: 
-        iconName: check
-        iconColor: default
-      - text: Label
-        iconName: check
-        iconColor: default
-      - text: 
-        iconName: check
-        iconColor: default
-      - text: Label
-        iconName: check
-        iconColor: default
-      - text: 
-        iconName: check
-        iconColor: default
-      - text: Label
-        iconName: check
-        iconColor: default
-      - text: 
-        iconName: check
-        iconColor: default
-      - text: Label
-        iconName: check
-        iconColor: default
-      - text: 
         iconName: check
         iconColor: default
   - _component: page-sections/explainers/feature-split
@@ -114,11 +76,17 @@ pageSections:
       Make changes on a branch and share a hosted preview with whoever needs to see it first.
       Publish once it's approved, or schedule it to go live later.
     imageSource: /src/assets/images/marketing/card-image-3.jpg
+    headingSize: lg
+    buttonSections:
+      - _component: building-blocks/core-elements/button
+        variant: primary
+        text: Publish
   - _component: page-sections/explainers/feature-split
     eyebrow: For ENTERPRISE
     heading: Every change accounted for
     subtext: Set the permissions once, then let teams work with every change recorded in your own repo.
     imageSource: /src/assets/images/marketing/screenshot-2026-08-18-at-14-16-52-1.png
+    headingSize: lg
     buttonSections:
       - _component: building-blocks/core-elements/button
         variant: text

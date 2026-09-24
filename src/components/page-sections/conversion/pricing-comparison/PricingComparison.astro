@@ -19,6 +19,7 @@ const {
   eyebrow = "",
   heading = "",
   headingLevel = "h2",
+  headingSize = "lg",
   subtext = "",
   plans = [],
   rows = [],
@@ -88,7 +89,7 @@ const hasTable = planList.length > 0 && rows?.length > 0;
   />
   <Heading
     level={headingLevel}
-    size="lg"
+    size={headingSize}
     alignmentHorizontal="center"
     data-prop="heading"
   >

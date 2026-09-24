@@ -7,6 +7,7 @@ import ButtonGroup from "@wrappers/button-group/ButtonGroup.astro";
 const {
   heading = "",
   headingLevel = "h2",
+  headingSize = "xl",
   subtext = "",
   buttonSections = [],
   sectionLabel,
@@ -39,7 +40,7 @@ const {
 >
   <Heading
     level={headingLevel}
-    size="xl"
+    size={headingSize}
     alignmentHorizontal="center"
     data-prop="heading"
     text={heading}

@@ -58,3 +58,7 @@ siteready-report.*
 
 # CSS parity comparison build
 .css-baseline/
+
+# Dev-only render check (scripts/render-check.mjs in the mapping repo)
+public/_expectations.json
+public/_render-check.js

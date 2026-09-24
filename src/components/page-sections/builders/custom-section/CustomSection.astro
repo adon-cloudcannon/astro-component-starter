@@ -301,6 +301,38 @@ const arrayDataAttributes =
           }
         }
 
+        /* Text on a brand band. Deliberately not a colour scheme: a scheme
+           re-themes the band as well as the text, and under dark
+           --color-brand is Harbour, so asking for Pacific got a pale blue
+           band instead. --color-text-on-brand already flips with the theme,
+           so this stays right in both. */
+        /* On the content only, never on the wrapper: .bg-brand is a sibling
+           that reads --color-brand for its own fill, so rebinding it higher up
+           repaints the band with the text colour. --color-brand goes with them
+           because a text button and a link both draw in it, and Pacific on a
+           Pacific band is invisible, which is how the second button in the
+           homepage's closing CTA disappeared. */
+        &:has(> .bg-brand) > .content {
+          --color-text: var(--color-text-on-brand);
+          --color-text-muted: var(--color-text-on-brand);
+          --color-text-strong: var(--color-text-on-brand);
+
+          /* A text button draws in --color-brand, which is the band it is
+             sitting on, so it came out invisible. Set here rather than by
+             rebinding --color-brand, because --color-bg-brand was already
+             substituted from it at the root and would not follow. */
+          .button-inner.variant-text {
+            color: var(--color-text-on-brand);
+          }
+
+          /* The design inverts the pill on a brand band: light fill, dark
+             label, which is the one pairing that reads on the colour. */
+          .button-inner.variant-primary {
+            background-color: var(--color-text-on-brand);
+            color: var(--color-text-on-muted);
+          }
+        }
+
         > .background-overlay {
           inset: 0;
           position: absolute;
@@ -395,6 +427,13 @@ const arrayDataAttributes =
 
         > .bg-accent {
           background-color: var(--color-bg-accent);
+        }
+
+        /* The design bands three CTAs in the brand colour. The accent slot
+           holds Harbour, a far lighter blue, so this is its own slot rather
+           than a retarget. */
+        > .bg-brand {
+          background-color: var(--color-bg-brand);
         }
 
         > .bg-highlight {
