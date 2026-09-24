@@ -10,7 +10,7 @@ pageSections:
     subtext: >-
       Pre-rendered pages, global delivery, and structured content that search engines love. Speed is
       built into the architecture, not bolted on.
-    imageSource: /src/assets/images/marketing/screenshot-2026-08-15-at-15-52-30-1.png
+    imageSource: /src/assets/images/marketing/screenshot-2026-08-15-at-15-52-30-1-3806-70839.png
     headingSize: xl
     imageOverflow: 5
     background:

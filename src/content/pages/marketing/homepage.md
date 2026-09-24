@@ -10,7 +10,7 @@ pageSections:
     subtext: >-
       Welcome to the Git-based CMS that doesn't fight your workflow. Your site lives in Git, your
       team edits visually, and everything stays in sync.
-    imageSource: /src/assets/images/marketing/image.png
+    imageSource: /src/assets/images/marketing/image-3806-69902.png
     imageAlt: A person reaching up to edit content blocks, with their dog
     headingSize: 2xl
     imageOverflow: 29
@@ -214,7 +214,7 @@ pageSections:
             items:
               - contentSections:
                   - _component: building-blocks/core-elements/image
-                    source: /src/assets/images/marketing/low-maintenence.png
+                    source: /src/assets/images/marketing/low-maintenence-I3806-70250-3743-54479.png
                     width: 121
                     height: 128
                     alt: ''
@@ -299,7 +299,7 @@ pageSections:
                     alignmentHorizontal: center
               - contentSections:
                   - _component: building-blocks/core-elements/image
-                    source: /src/assets/images/marketing/globe-1.png
+                    source: /src/assets/images/marketing/globe-1-I3806-70251-3743-54504.png
                     width: 131
                     height: 109
                     alt: ''
@@ -400,7 +400,7 @@ pageSections:
       We’re a tight-knit team based in Dunedin, New Zealand, working with web teams all over the
       world. We started CloudCannon because every CMS we tried gave editors a better experience by
       giving developers a worse one. So we built a CMS that works for both.
-    imageSource: /src/assets/images/marketing/container.png
+    imageSource: /src/assets/images/marketing/container-3806-69465.png
     backgroundColor: surface
     headingSize: lg
     buttonSections:

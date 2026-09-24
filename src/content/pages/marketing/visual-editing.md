@@ -85,7 +85,7 @@ pageSections:
     eyebrow: For ENTERPRISE
     heading: Every change accounted for
     subtext: Set the permissions once, then let teams work with every change recorded in your own repo.
-    imageSource: /src/assets/images/marketing/screenshot-2026-08-18-at-14-16-52-1.png
+    imageSource: /src/assets/images/marketing/screenshot-2026-08-18-at-14-16-52-1-3806-72940.png
     headingSize: lg
     buttonSections:
       - _component: building-blocks/core-elements/button

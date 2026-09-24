@@ -64,7 +64,7 @@ pageSections:
     eyebrow: THE PROGRAM
     heading: What is the Partner Program?
     subtext: 'The requirements are simple: anyone building SSG-based websites for clients is eligible.'
-    imageSource: /src/assets/images/marketing/screenshot-2026-08-19-at-8-56-26-pm-1.png
+    imageSource: /src/assets/images/marketing/screenshot-2026-08-19-at-8-56-26-pm-1-3806-72514.png
     headingSize: lg
     buttonSections:
       - _component: building-blocks/core-elements/button
@@ -103,7 +103,7 @@ pageSections:
     headingSize: lg
   - _component: page-sections/explainers/feature-split
     subtext: We’ll work with you to craft a plan that fits your particular client’s needs.
-    imageSource: /src/assets/images/marketing/keatuatara-03-1.png
+    imageSource: /src/assets/images/marketing/keatuatara-03-1-3806-72612.png
     buttonSections:
       - _component: building-blocks/core-elements/button
         variant: primary
@@ -113,7 +113,7 @@ pageSections:
     headingSize: lg
   - _component: page-sections/conversion/cta-form
     subtext: Complete the Partner Program application below
-    imageSource: /src/assets/images/marketing/screenshot-2026-08-17-at-10-32-02-pm-1.png
+    imageSource: /src/assets/images/marketing/screenshot-2026-08-17-at-10-32-02-pm-1-3806-72701.png
   - _component: page-sections/conversion/cta-center
     heading: Keen to collaborate?
     backgroundColor: base

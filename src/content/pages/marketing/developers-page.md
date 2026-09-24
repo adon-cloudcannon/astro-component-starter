@@ -31,7 +31,7 @@ pageSections:
     backgroundColor: surface
   - _component: page-sections/builders/custom-section
   - _component: page-sections/explainers/feature-split
-    imageSource: /src/assets/images/marketing/build-with-your-favorite-tools.png
+    imageSource: /src/assets/images/marketing/build-with-your-favorite-tools-3806-74574.png
   - _component: page-sections/proof/testimonial-section
   - _component: page-sections/conversion/cta-center
     heading: The tool you’ve been looking for
@@ -64,7 +64,7 @@ pageSections:
     subtext: >-
       We're a small team with a lot of knowledge, so you'll talk to someone who knows what they're
       talking about and can give you hands-on help whatever the problem.
-    imageSource: /src/assets/images/marketing/container.png
+    imageSource: /src/assets/images/marketing/container-3806-72981.png
     headingSize: lg
     buttonSections:
       - _component: building-blocks/core-elements/button

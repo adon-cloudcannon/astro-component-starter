@@ -99,7 +99,7 @@ pageSections:
     subtext: >-
       Git underneath, a visual editor on top, with code and content running on one engine. Start
       free in minutes, or book a demo and we’ll walk you through the real thing.
-    imageSource: /src/assets/images/marketing/container.png
+    imageSource: /src/assets/images/marketing/container-3806-73607.png
     buttonSections:
       - _component: building-blocks/core-elements/button
         variant: primary

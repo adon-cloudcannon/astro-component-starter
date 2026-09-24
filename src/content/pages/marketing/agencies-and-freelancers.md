@@ -66,7 +66,7 @@ pageSections:
     subtext: >-
       Build with the static site generator you already use. Define components once and reuse them
       across every client site.
-    imageSource: /src/assets/images/marketing/hero-background-feature-2.jpg
+    imageSource: /src/assets/images/marketing/hero-background-feature-2-3806-72010.png
     buttonSections:
       - _component: building-blocks/core-elements/button
         variant: primary

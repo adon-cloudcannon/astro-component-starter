@@ -74,7 +74,7 @@ pageSections:
   - _component: page-sections/explainers/feature-split
     heading: Built for the work
     subtext: Define roles and groups to match your organization structure.
-    imageSource: /src/assets/images/marketing/layer-28-1.png
+    imageSource: /src/assets/images/marketing/layer-28-1-3806-71328.png
     headingSize: lg
   - _component: page-sections/conversion/cta-split
     heading: Take a peek under the hood

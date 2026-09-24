@@ -8,7 +8,7 @@ pageSections:
   - _component: page-sections/heroes/hero-split
     heading: The CMS your AI tools can actually read
     subtext: Code, content, and config all sit in one repo as plain files, so agents get the full picture.
-    imageSource: /src/assets/images/marketing/screenshot-2026-08-15-at-15-46-59-1.png
+    imageSource: /src/assets/images/marketing/screenshot-2026-08-15-at-15-46-59-1-3806-68971.png
     headingSize: xl
     imageOverflow: 42
     background:
