@@ -110,6 +110,11 @@ if (hasAlternate) {
     data-space-before={spaceBeforeAttr(spaceBefore)}
     class:list={[
       "image-inner",
+      // An image told what size to be should be that size. Without this the
+      // inner is width: 100% and the image stretches to whatever holds it,
+      // which is why a 119px illustration filled a 274px column and a logo
+      // drawn at 75x17 came out at 141x32.
+      width && !effectiveAspectRatio && !background && "intrinsic",
       effectiveAspectRatio && "ratio",
       effectiveAspectRatio && `ratio-${effectiveAspectRatio}`,
       positionClass,
@@ -173,6 +178,20 @@ if (hasAlternate) {
       > .image-inner {
         overflow: hidden;
         width: 100%;
+
+        /* Given a width, the image keeps it and centres in whatever holds it,
+           rather than being stretched to fill. Capped so a narrow container
+           still wins. */
+        &.intrinsic {
+          margin-inline: auto;
+          max-width: 100%;
+          width: fit-content;
+
+          img {
+            height: auto;
+            max-width: 100%;
+          }
+        }
 
         &.ratio-square {
           aspect-ratio: var(--ratio-square);

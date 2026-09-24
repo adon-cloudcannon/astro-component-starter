@@ -145,6 +145,8 @@ pageSections:
               - contentSections:
                   - _component: building-blocks/core-elements/image
                     source: /src/assets/images/marketing/context-1.png
+                    width: 175
+                    height: 145
                     alt: ''
                   - _component: building-blocks/core-elements/heading
                     text: Complete Context
@@ -158,6 +160,8 @@ pageSections:
               - contentSections:
                   - _component: building-blocks/core-elements/image
                     source: /src/assets/images/marketing/ai-2-1.png
+                    width: 213
+                    height: 141
                     alt: ''
                   - _component: building-blocks/core-elements/heading
                     text: Familiar workflow
@@ -171,6 +175,8 @@ pageSections:
               - contentSections:
                   - _component: building-blocks/core-elements/image
                     source: /src/assets/images/marketing/api-1.png
+                    width: 177
+                    height: 160
                     alt: ''
                   - _component: building-blocks/core-elements/heading
                     text: No learning curve
@@ -200,7 +206,7 @@ pageSections:
             size: lg
             alignmentHorizontal: center
           - _component: building-blocks/core-elements/text
-            text: Upgrade when ready
+            text: Forget update queues, plugin conflicts, and things breaking while you sleep.
             alignmentHorizontal: center
           - _component: building-blocks/wrappers/grid
             columns: '3'
@@ -209,7 +215,14 @@ pageSections:
               - contentSections:
                   - _component: building-blocks/core-elements/image
                     source: /src/assets/images/marketing/low-maintenence.png
+                    width: 119
+                    height: 126
                     alt: ''
+                  - _component: building-blocks/core-elements/heading
+                    text: Upgrade when ready
+                    level: h4
+                    size: xs
+                    alignmentHorizontal: center
                   - _component: building-blocks/core-elements/text
                     text: No forced upgrades or surprise migrations
                     size: sm
@@ -217,6 +230,8 @@ pageSections:
               - contentSections:
                   - _component: building-blocks/core-elements/image
                     source: /src/assets/images/marketing/cloudcannon-testing-speed-1.png
+                    width: 157
+                    height: 134
                     alt: ''
                   - _component: building-blocks/core-elements/heading
                     text: Smaller surface
@@ -224,12 +239,14 @@ pageSections:
                     size: xs
                     alignmentHorizontal: center
                   - _component: building-blocks/core-elements/text
-                    text: Forget update queues, plugin conflicts, and things breaking while you sleep.
+                    text: No admin panel sitting on your live site
                     size: sm
                     alignmentHorizontal: center
               - contentSections:
                   - _component: building-blocks/core-elements/image
                     source: /src/assets/images/marketing/hosting.png
+                    width: 142
+                    height: 108
                     alt: ''
                   - _component: building-blocks/core-elements/heading
                     text: Off your plate

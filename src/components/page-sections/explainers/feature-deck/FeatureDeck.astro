@@ -110,11 +110,42 @@ const {
       }
 
       /* The three columns beneath the intro: an illustration over a title and
-         a line, each column centred on itself. */
-      .scroll-deck-card .grid .image img {
+         a line, each column centred on itself.
+
+         No height cap. The illustrations carry the size the design draws them,
+         which is not one height, and a cap above that size upscales the file
+         Astro generated for it and the mark goes soft. */
+      /* Columns start together. Left to itself the grid centres each one on
+         its own content, so a short illustration drags its whole column down
+         and the titles come out on three different lines. */
+      .scroll-deck-card .grid > * {
+        align-content: start;
+      }
+
+      /* The illustrations are drawn at different heights but their titles sit
+         on one line, so they share a block and hang from its foot. */
+      .scroll-deck-card .grid .image {
+        align-items: end;
+        /* A minimum, not a height. Fixed, anything drawn taller than the block
+           gets clipped by Image's own overflow: hidden. */
+        display: flex;
+        justify-content: center;
         margin-inline: auto;
-        max-block-size: 10rem;
-        width: auto;
+        max-inline-size: 100%;
+        min-block-size: 10rem;
+
+        /* Image's own inner is width: 100%, so an illustration stretches to
+           its column and the width it was drawn at never gets a say. */
+        > .image-inner {
+          inline-size: fit-content;
+          margin-inline: auto;
+          max-inline-size: 100%;
+        }
+      }
+
+      .scroll-deck-card .grid .image img {
+        block-size: auto;
+        max-inline-size: 100%;
       }
     }
   }
