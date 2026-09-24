@@ -21,6 +21,30 @@ pageSections:
         text: Book a demo
   - _component: page-sections/proof/logo-cloud
   - _component: building-blocks/wrappers/content-selector
+    items:
+      - text: >-
+          A Git-based CMS stores your content as files in a Git repository instead of in a database.
+          Your team edits through a visual interface, and every change is commi
+        iconName: check
+        iconColor: default
+      - text: Build component
+        iconName: check
+        iconColor: default
+      - text: Edit
+        iconName: check
+        iconColor: default
+      - text: Merge
+        iconName: check
+        iconColor: default
+      - text: Publish
+        iconName: check
+        iconColor: default
+      - text: Education
+        iconName: check
+        iconColor: default
+      - text: T
+        iconName: check
+        iconColor: default
   - _component: page-sections/conversion/cta-split
     subtext: >-
       “Having that flexibility of having everything live in a Git repository is pretty amazing. We
@@ -39,6 +63,36 @@ pageSections:
       maintenance doesn't come with it.
   - _component: page-sections/builders/custom-section
   - _component: building-blocks/wrappers/content-selector
+    items:
+      - text: >-
+          Your content gets the same treatment: branches, commits, reviews, and a history you can
+          walk back through. You keep building locally, with the SSG and tooling y
+        iconName: check
+        iconColor: default
+      - text: main
+        iconName: check
+        iconColor: default
+      - text: 
+        iconName: check
+        iconColor: default
+      - text: 
+        iconName: check
+        iconColor: default
+      - text: 
+        iconName: check
+        iconColor: default
+      - text: Label
+        iconName: check
+        iconColor: default
+      - text: 
+        iconName: check
+        iconColor: default
+      - text: Label
+        iconName: check
+        iconColor: default
+      - text: 
+        iconName: check
+        iconColor: default
   - _component: page-sections/proof/testimonial-section
   - _component: page-sections/explainers/feature-split
     eyebrow: your-project

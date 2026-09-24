@@ -19,6 +19,10 @@ pageSections:
         iconName: arrow-right
         iconPosition: after
         text: Book a demo
+    note:
+      - text: No credit card · 14-day free trial · No lock-in
+        iconName: check
+        iconColor: default
   - _component: page-sections/conversion/cta-center
     heading: High speed whether you have 10 visitors or 10 million
   - _component: page-sections/explainers/feature-split

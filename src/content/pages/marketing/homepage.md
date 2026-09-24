@@ -19,8 +19,61 @@ pageSections:
         iconName: arrow-right
         iconPosition: after
         text: Book a demo
+    note:
+      - text: No credit card · 14-day free trial · No lock-in
+        iconName: check
+        iconColor: default
   - _component: page-sections/proof/logo-cloud
   - _component: building-blocks/wrappers/content-selector
+    items:
+      - text: >-
+          CloudCannon keeps your website’s code, content and config in Git and gives content teams a
+          visual interface to edit it.
+        iconName: check
+        iconColor: default
+      - text: Learn more
+        iconName: check
+        iconColor: default
+      - text: →
+        iconName: check
+        iconColor: default
+      - text: B
+        iconName: check
+        iconColor: default
+      - text: I
+        iconName: check
+        iconColor: default
+      - text: U
+        iconName: check
+        iconColor: default
+      - text: >-
+          Update content in a clear focused editor. Format text, add links and images, then publish
+          straight to Git
+        iconName: check
+        iconColor: default
+      - text: >-
+          <section class="hero"> <div class="hero__heading-container"> <img src="assets/arrow.png"
+          alt="" role="presentation"> <h1>{{ .heading | markdownify }}</h1> <p>{{
+        iconName: check
+        iconColor: default
+      - text: 
+        iconName: check
+        iconColor: default
+      - text: 
+        iconName: check
+        iconColor: default
+      - text: 
+        iconName: check
+        iconColor: default
+      - text: 
+        iconName: check
+        iconColor: default
+      - text: 
+        iconName: check
+        iconColor: default
+      - text: 
+        iconName: check
+        iconColor: default
   - _component: page-sections/explainers/feature-split
     eyebrow: EDITORS
     heading: Two workflows. One source of truth.

@@ -28,6 +28,81 @@ pageSections:
       across every client site.
   - _component: page-sections/builders/custom-section
   - _component: building-blocks/wrappers/content-selector
+    items:
+      - text: >-
+          Build with the static site generator you already use. Define components once and reuse
+          them across every client site.
+        iconName: check
+        iconColor: default
+      - text: 
+        iconName: check
+        iconColor: default
+      - text: HTML
+        iconName: check
+        iconColor: default
+      - text: 
+        iconName: check
+        iconColor: default
+      - text: CSS
+        iconName: check
+        iconColor: default
+      - text: 
+        iconName: check
+        iconColor: default
+      - text: JavaScript
+        iconName: check
+        iconColor: default
+      - text: Label
+        iconName: check
+        iconColor: default
+      - text: 
+        iconName: check
+        iconColor: default
+      - text: Label
+        iconName: check
+        iconColor: default
+      - text: 
+        iconName: check
+        iconColor: default
+      - text: Label
+        iconName: check
+        iconColor: default
+      - text: 
+        iconName: check
+        iconColor: default
+      - text: Label
+        iconName: check
+        iconColor: default
+      - text: 
+        iconName: check
+        iconColor: default
+      - text: Label
+        iconName: check
+        iconColor: default
+      - text: 
+        iconName: check
+        iconColor: default
+      - text: Label
+        iconName: check
+        iconColor: default
+      - text: 
+        iconName: check
+        iconColor: default
+      - text: Label
+        iconName: check
+        iconColor: default
+      - text: 
+        iconName: check
+        iconColor: default
+      - text: Label
+        iconName: check
+        iconColor: default
+      - text: 
+        iconName: check
+        iconColor: default
+      - text: Heading
+        iconName: check
+        iconColor: default
   - _component: page-sections/conversion/pricing-tiers
     heading: Join a Partner Program that rewards good work
     subtext: As you bring in new clients, you’ll gain points and more benefits.

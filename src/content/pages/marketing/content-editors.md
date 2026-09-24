@@ -19,6 +19,10 @@ pageSections:
         iconName: arrow-right
         iconPosition: after
         text: Book a demo
+    note:
+      - text: No credit card · 14-day free trial · No lock-in
+        iconName: check
+        iconColor: default
   - _component: page-sections/builders/custom-section
   - _component: page-sections/conversion/cta-split
   - _component: page-sections/conversion/cta-split
@@ -26,6 +30,30 @@ pageSections:
       “You can have lots of concurrent pieces of work: a solutions page, a new case study layout,
       new terms and conditions, a legal section, all on different branches
   - _component: building-blocks/wrappers/content-selector
+    items:
+      - text: >-
+          Every piece of work happens on its own branched site, so a new blog post, a landing page
+          redesign, and a navigation update can all run at once without anyone tr
+        iconName: check
+        iconColor: default
+      - text: Build component
+        iconName: check
+        iconColor: default
+      - text: Edit
+        iconName: check
+        iconColor: default
+      - text: Merge
+        iconName: check
+        iconColor: default
+      - text: Publish
+        iconName: check
+        iconColor: default
+      - text: Education
+        iconName: check
+        iconColor: default
+      - text: T
+        iconName: check
+        iconColor: default
   - _component: page-sections/explainers/feature-split
     heading: Built for the work
     subtext: Define roles and groups to match your organization structure.

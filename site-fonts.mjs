@@ -12,7 +12,7 @@ import { fontProviders } from "astro/config";
 
 export const siteFonts = [
   {
-    name: "Inter",
+    name: "Red Hat Display",
     cssVariable: "--font-body",
     provider: fontProviders.fontsource(),
     weights: ["100 900"],
@@ -20,10 +20,20 @@ export const siteFonts = [
     subsets: ["latin"],
   },
   {
-    name: "Raleway",
+    name: "Red Hat Display",
     cssVariable: "--font-headings",
     provider: fontProviders.fontsource(),
     weights: ["100 900"],
+    styles: ["normal"],
+    subsets: ["latin"],
+  },
+  {
+    // Fragment Mono carries the eyebrow and the smaller subtitles. It is not a
+    // variable font, and the design system only uses its regular weight.
+    name: "Fragment Mono",
+    cssVariable: "--font-mono",
+    provider: fontProviders.fontsource(),
+    weights: ["400"],
     styles: ["normal"],
     subsets: ["latin"],
   },

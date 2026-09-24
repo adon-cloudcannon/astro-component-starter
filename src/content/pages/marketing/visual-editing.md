@@ -17,6 +17,10 @@ pageSections:
         iconName: arrow-right
         iconPosition: after
         text: Book a demo
+    note:
+      - text: No credit card · 14-day free trial · No lock-in
+        iconName: check
+        iconColor: default
   - _component: page-sections/builders/custom-section
   - _component: page-sections/conversion/cta-split
     buttonSections:
@@ -29,6 +33,72 @@ pageSections:
     heading: Here, you don’t need to wait to make changes
     subtext: When something on the site needs updating, the person who noticed can just fix it.
   - _component: building-blocks/wrappers/content-selector
+    items:
+      - text: >-
+          CloudCannon loads your site in the Visual Editor, so content teams change words and images
+          right where they see them, exactly as visitors will.
+        iconName: check
+        iconColor: default
+      - text: Ship and iterate
+        iconName: check
+        iconColor: default
+      - text: 
+        iconName: check
+        iconColor: default
+      - text: 
+        iconName: check
+        iconColor: default
+      - text: 
+        iconName: check
+        iconColor: default
+      - text: Label
+        iconName: check
+        iconColor: default
+      - text: 
+        iconName: check
+        iconColor: default
+      - text: Label
+        iconName: check
+        iconColor: default
+      - text: 
+        iconName: check
+        iconColor: default
+      - text: Label
+        iconName: check
+        iconColor: default
+      - text: 
+        iconName: check
+        iconColor: default
+      - text: Label
+        iconName: check
+        iconColor: default
+      - text: 
+        iconName: check
+        iconColor: default
+      - text: Label
+        iconName: check
+        iconColor: default
+      - text: 
+        iconName: check
+        iconColor: default
+      - text: Label
+        iconName: check
+        iconColor: default
+      - text: 
+        iconName: check
+        iconColor: default
+      - text: Label
+        iconName: check
+        iconColor: default
+      - text: 
+        iconName: check
+        iconColor: default
+      - text: Label
+        iconName: check
+        iconColor: default
+      - text: 
+        iconName: check
+        iconColor: default
   - _component: page-sections/explainers/feature-split
     heading: Publish when you’re ready
     subtext: >-

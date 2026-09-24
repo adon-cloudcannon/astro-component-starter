@@ -17,12 +17,41 @@ pageSections:
         iconName: arrow-right
         iconPosition: after
         text: Book a demo
+    note:
+      - text: No credit card · 14-day free trial · No lock-in
+        iconName: check
+        iconColor: default
   - _component: page-sections/proof/logo-cloud
   - _component: page-sections/conversion/cta-center
     heading: Ready, set, code
     subtext: AI agents working on the site have complete context
   - _component: page-sections/explainers/feature-grid
     subtext: page.tsx
+    features:
+      - text: importImagefrom'next/image';
+        iconName: check
+        iconColor: default
+      - text: importLinkfrom'next/link';
+        iconName: check
+        iconColor: default
+      - text: import{ArrowRight}from'lucide-react';
+        iconName: check
+        iconColor: default
+      - text: exportdefaultfunctionPage() {
+        iconName: check
+        iconColor: default
+      - text: return(
+        iconName: check
+        iconColor: default
+      - text: <mainclassName="main-h-screen bg-white">
+        iconName: check
+        iconColor: default
+      - text: <sectionclassName="max-auto max-w-7xl px-6 pt-24 pb-20 lg:px-8">
+        iconName: check
+        iconColor: default
+      - text: <divclassName="max-w-3xl">
+        iconName: check
+        iconColor: default
   - _component: page-sections/conversion/cta-split
     subtext: >-
       “You can have lots of concurrent pieces of work: a solutions page, a new case study layout,

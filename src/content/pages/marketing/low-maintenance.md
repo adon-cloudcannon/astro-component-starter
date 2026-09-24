@@ -19,6 +19,10 @@ pageSections:
         iconName: arrow-right
         iconPosition: after
         text: Book a demo
+    note:
+      - text: No credit card · 14-day free trial · No lock-in
+        iconName: check
+        iconColor: default
   - _component: page-sections/proof/logo-cloud
   - _component: page-sections/explainers/feature-split
     heading: Give editors a CMS, keep a static site
@@ -35,6 +39,28 @@ pageSections:
       Whether it's three client sites or three hundred, another site is another repo. The
       maintenance doesn't come with it.
   - _component: building-blocks/wrappers/content-selector
+    items:
+      - text: JS
+        iconName: check
+        iconColor: default
+      - text: 
+        iconName: check
+        iconColor: default
+      - text: 
+        iconName: check
+        iconColor: default
+      - text: 
+        iconName: check
+        iconColor: default
+      - text: 
+        iconName: check
+        iconColor: default
+      - text: 
+        iconName: check
+        iconColor: default
+      - text: 
+        iconName: check
+        iconColor: default
   - _component: page-sections/conversion/cta-split
   - _component: page-sections/conversion/cta-center
     subtext: >-
