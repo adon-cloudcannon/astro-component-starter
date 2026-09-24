@@ -191,37 +191,37 @@ pageSections:
           Semantic HTML, lean CSS, and JavaScript only when it's needed.
           Boring by design, which is exactly why it works.
         iconName: cube
-        iconColor: blue
+        iconColor: pacific
       - title: Built for speed
         description: >-
           Static-rendered, minimal payloads, zero waste. Built to be extremely
           fast from the first byte.
         iconName: bolt
-        iconColor: yellow
+        iconColor: golden
       - title: Everything just fits
         description: >-
           Small, predictable components that snap together cleanly, so bigger
           pieces never become a maintenance mess.
         iconName: puzzle-piece
-        iconColor: green
+        iconColor: moss
       - title: Controlled editing
         description: >-
           Enough freedom for editors to move fast. Enough structure for
           developers to sleep at night.
         iconName: pencil
-        iconColor: purple
+        iconColor: kiwi
       - title: Adaptable
         description: >-
           Deliberately plain styling that takes on your design without a
           fight.
         iconName: paint-brush
-        iconColor: pink
+        iconColor: blush
       - title: AI ready
         description: >-
           Everything is a file in the repo, so agents build with full context.
           Skills for the common jobs come included.
         iconName: sparkles
-        iconColor: cyan
+        iconColor: harbour
     colorScheme: inherit
     backgroundColor: surface
     background:

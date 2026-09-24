@@ -8,7 +8,7 @@ blocks:
     - title: Getting Started
       subtext: Quick setup guide
       iconName: rocket-launch
-      iconColor: blue
+      iconColor: pacific
       contentSections:
         - _component: building-blocks/core-elements/text
           text: Follow these steps to get up and running quickly.
@@ -17,7 +17,7 @@ blocks:
     - title: Features
       subtext: What's included
       iconName: sparkles
-      iconColor: purple
+      iconColor: kiwi
       contentSections:
         - _component: building-blocks/core-elements/text
           text: Explore everything included out of the box.
@@ -26,7 +26,7 @@ blocks:
     - title: Support
       subtext: Get help
       iconName: lifebuoy
-      iconColor: green
+      iconColor: moss
       contentSections:
         - _component: building-blocks/core-elements/text
           text: Reach out to our team for assistance.

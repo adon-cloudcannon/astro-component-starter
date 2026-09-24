@@ -156,7 +156,8 @@ if (!_component && !hasText && !hasSlotContent && !hasIcon) return;
         align-items: center;
         background-color: var(--color-bg-surface);
         border: var(--border-width-sm) solid var(--color-border);
-        border-radius: var(--radius-xs);
+        /* The design system draws every button as a pill. */
+        border-radius: var(--radius-full);
         color: var(--color-text-strong);
         display: inline-flex;
         flex-shrink: 0;

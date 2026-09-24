@@ -44,17 +44,17 @@
   --color-focus-ring: var(--pacific);
 
   --color-danger: var(--negative);
-  --color-danger-hover: var(--red-800);
+  --color-danger-hover: var(--sunset-800);
   --color-danger-bg-subtle: var(--negative-tint);
-  --color-danger-border-subtle: var(--red-300);
+  --color-danger-border-subtle: var(--sunset-300);
   --color-info: var(--informative);
   --color-info-bg-subtle: var(--informative-tint);
-  --color-info-border-subtle: var(--blue-200);
+  --color-info-border-subtle: var(--pacific-200);
   --color-success: var(--positive);
   --color-success-bg-subtle: var(--positive-tint);
-  --color-success-border-subtle: var(--green-300);
+  --color-success-border-subtle: var(--moss-300);
   --color-warning: var(--notice);
   --color-warning-bg-subtle: var(--notice-tint);
-  --color-warning-border-subtle: var(--yellow-300);
+  --color-warning-border-subtle: var(--golden-300);
   --color-error: var(--negative);
 }

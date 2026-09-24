@@ -13,17 +13,17 @@ value:
     - title: Fast
       description: Static HTML and CSS, so a page renders before any JavaScript runs.
       iconName: bolt
-      iconColor: yellow
+      iconColor: golden
       iconBackground: true
     - title: Brandable
       description: Color, type, and spacing come from one token file you set once.
       iconName: swatch
-      iconColor: blue
+      iconColor: pacific
       iconBackground: true
     - title: Editable
       description: Anyone on the team can update a page without opening the code.
       iconName: pencil-square
-      iconColor: green
+      iconColor: moss
       iconBackground: true
   maxContentWidth: 2xl
   paddingHorizontal: lg
@@ -70,7 +70,7 @@ _structures:
           title: Feature title
           description: Feature description placeholder text that will be replaced with actual content.
           iconName: bolt
-          iconColor: yellow
+          iconColor: golden
           iconBackground: true
         preview:
           text:
@@ -116,22 +116,22 @@ _structures:
               values:
                 - id: default
                   name: Default
-                - id: blue
-                  name: Blue
-                - id: green
-                  name: Green
-                - id: yellow
-                  name: Yellow
-                - id: orange
-                  name: Orange
-                - id: red
-                  name: Red
-                - id: purple
-                  name: Purple
-                - id: pink
-                  name: Pink
-                - id: cyan
-                  name: Cyan
+                - id: pacific
+                  name: Pacific
+                - id: moss
+                  name: Moss
+                - id: golden
+                  name: Golden
+                - id: peachy
+                  name: Peachy
+                - id: sunset
+                  name: Sunset
+                - id: kiwi
+                  name: Kiwi
+                - id: blush
+                  name: Blush
+                - id: harbour
+                  name: Harbour
           iconBackground:
             type: switch
             comment: Draw a tinted plate behind the icon.

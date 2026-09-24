@@ -22,22 +22,22 @@ iconColor:
     values:
       - id: default
         name: Default
-      - id: blue
-        name: Blue
-      - id: green
-        name: Green
-      - id: yellow
-        name: Yellow
-      - id: orange
-        name: Orange
-      - id: red
-        name: Red
-      - id: purple
-        name: Purple
-      - id: pink
-        name: Pink
-      - id: cyan
-        name: Cyan
+      - id: pacific
+        name: Pacific
+      - id: moss
+        name: Moss
+      - id: golden
+        name: Golden
+      - id: peachy
+        name: Peachy
+      - id: sunset
+        name: Sunset
+      - id: kiwi
+        name: Kiwi
+      - id: blush
+        name: Blush
+      - id: harbour
+        name: Harbour
 iconPosition:
   type: select
   comment: The position of the icon relative to the text.

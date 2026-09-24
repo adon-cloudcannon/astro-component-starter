@@ -44,17 +44,17 @@
   --color-focus-ring: var(--harbour);
 
   --color-danger: var(--negative);
-  --color-danger-hover: var(--red-500);
+  --color-danger-hover: var(--sunset-500);
   --color-danger-bg-subtle: var(--negative-tint);
-  --color-danger-border-subtle: color-mix(in srgb, var(--red-500) 40%, transparent);
+  --color-danger-border-subtle: color-mix(in srgb, var(--sunset-500) 40%, transparent);
   --color-info: var(--informative);
   --color-info-bg-subtle: var(--informative-tint);
-  --color-info-border-subtle: color-mix(in srgb, var(--blue-500) 40%, transparent);
+  --color-info-border-subtle: color-mix(in srgb, var(--pacific-500) 40%, transparent);
   --color-success: var(--positive);
   --color-success-bg-subtle: var(--positive-tint);
-  --color-success-border-subtle: color-mix(in srgb, var(--green-500) 40%, transparent);
+  --color-success-border-subtle: color-mix(in srgb, var(--moss-500) 40%, transparent);
   --color-warning: var(--notice);
   --color-warning-bg-subtle: var(--notice-tint);
-  --color-warning-border-subtle: color-mix(in srgb, var(--yellow-500) 40%, transparent);
+  --color-warning-border-subtle: color-mix(in srgb, var(--golden-500) 40%, transparent);
   --color-error: var(--negative);
 }

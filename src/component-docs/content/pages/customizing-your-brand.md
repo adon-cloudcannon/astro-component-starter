@@ -34,7 +34,7 @@ Open `src/styles/themes/_light.css`. This is where you define the look of your s
 
 These are **semantic** color variables. They describe purpose, not specific colors. Every component in the starter references these variables, so changes here propagate everywhere automatically.
 
-**Try it now:** Change `--color-brand` to a blue (`var(--blue-500)`) or drop in your own hex value. Save, and watch buttons, headings, and accents shift across your entire site.
+**Try it now:** Change `--color-brand` to a blue (`var(--pacific-500)`) or drop in your own hex value. Save, and watch buttons, headings, and accents shift across your entire site.
 
 The key variables to update first:
 
@@ -110,8 +110,8 @@ The theme files reference raw color values defined in `src/styles/variables/_col
   --black: #000;
   --gray-50: #eaeaea;
   --gray-950: #151515;
-  --blue-100: #dbeafe;
-  --blue-500: #3b82f6;
+  --pacific-100: #dbeafe;
+  --pacific-500: #3b82f6;
   /* ... */
 }
 ```

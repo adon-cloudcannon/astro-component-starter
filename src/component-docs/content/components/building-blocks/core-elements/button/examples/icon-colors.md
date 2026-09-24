@@ -11,42 +11,42 @@ blocks:
       variant: tertiary
     - _component: 'building-blocks/core-elements/button'
       iconName: bell
-      iconColor: blue
+      iconColor: pacific
       text: 'Blue'
       variant: tertiary
     - _component: 'building-blocks/core-elements/button'
       iconName: swatch
-      iconColor: cyan
+      iconColor: harbour
       text: 'Cyan'
       variant: tertiary
     - _component: 'building-blocks/core-elements/button'
       iconName: check-circle
-      iconColor: green
+      iconColor: moss
       text: 'Green'
       variant: tertiary
     - _component: 'building-blocks/core-elements/button'
       iconName: bolt
-      iconColor: yellow
+      iconColor: golden
       text: 'Yellow'
       variant: tertiary
     - _component: 'building-blocks/core-elements/button'
       iconName: fire
-      iconColor: orange
+      iconColor: peachy
       text: 'Orange'
       variant: tertiary
     - _component: 'building-blocks/core-elements/button'
       iconName: heart
-      iconColor: red
+      iconColor: sunset
       text: 'Red'
       variant: tertiary
     - _component: 'building-blocks/core-elements/button'
       iconName: star
-      iconColor: purple
+      iconColor: kiwi
       text: 'Purple'
       variant: tertiary
     - _component: 'building-blocks/core-elements/button'
       iconName: sparkles
-      iconColor: pink
+      iconColor: blush
       text: 'Pink'
       variant: tertiary
 ---

@@ -11,21 +11,21 @@ blocks:
     - title: 'Automation'
       description: 'Trigger downstream tools when tasks close so work keeps moving without manual pings.'
       iconName: 'sparkles'
-      iconColor: purple
+      iconColor: kiwi
       iconBackground: true
     - title: 'Dashboards'
       description: 'Pull status from every project into a single adaptive view for leadership.'
       iconName: 'chart-bar-square'
-      iconColor: blue
+      iconColor: pacific
       iconBackground: true
     - title: 'Permissions'
       description: 'Use roles to decide exactly who can edit briefs, roadmaps, and approvals.'
       iconName: 'shield-check'
-      iconColor: green
+      iconColor: moss
       iconBackground: true
     - title: 'Timelines'
       description: 'Keep stakeholders aligned with always-on launch calendars and reminders.'
       iconName: 'calendar-days'
-      iconColor: orange
+      iconColor: peachy
       iconBackground: true
 ---

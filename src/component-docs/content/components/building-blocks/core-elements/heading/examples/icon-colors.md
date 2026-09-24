@@ -6,15 +6,15 @@ blocks:
     text: Blue icon heading
     level: h3
     iconName: information-circle
-    iconColor: blue
+    iconColor: pacific
   - _component: 'building-blocks/core-elements/heading'
     text: Green icon heading
     level: h3
     iconName: check-circle
-    iconColor: green
+    iconColor: moss
   - _component: 'building-blocks/core-elements/heading'
     text: Red icon heading
     level: h3
     iconName: exclamation-triangle
-    iconColor: red
+    iconColor: sunset
 ---

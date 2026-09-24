@@ -9,28 +9,28 @@ blocks:
       iconColor: default
     - text: Blue color icon
       iconName: hand-thumb-up
-      iconColor: blue
+      iconColor: pacific
     - text: Green color icon
       iconName: hand-thumb-up
-      iconColor: green
+      iconColor: moss
     - text: Yellow color icon
       iconName: hand-thumb-up
-      iconColor: yellow
+      iconColor: golden
     - text: Orange color icon
       iconName: hand-thumb-up
-      iconColor: orange
+      iconColor: peachy
     - text: Red color icon
       iconName: hand-thumb-up
-      iconColor: red
+      iconColor: sunset
     - text: Purple color icon
       iconName: hand-thumb-up
-      iconColor: purple
+      iconColor: kiwi
     - text: Pink color icon
       iconName: hand-thumb-up
-      iconColor: pink
+      iconColor: blush
     - text: Cyan color icon
       iconName: hand-thumb-up
-      iconColor: cyan
+      iconColor: harbour
   direction: vertical
   alignmentHorizontal: start
   size: md

@@ -6,15 +6,15 @@ blocks:
   items:
     - text: Same-site path (table of contents, cross-page links)
       iconName: link
-      iconColor: green
+      iconColor: moss
       link: /component-docs/
     - text: External URL (e.g. a third-party service)
       iconName: arrow-top-right-on-square
-      iconColor: green
+      iconColor: moss
       link: 'https://example.com/'
     - text: Plain row with no link
       iconName: minus
-      iconColor: green
+      iconColor: moss
   direction: vertical
   alignmentHorizontal: start
   size: md
