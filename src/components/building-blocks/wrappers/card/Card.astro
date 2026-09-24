@@ -439,6 +439,12 @@ const usesAfterContentSections = !hasAfterSlot && afterContentSections;
           background-color: var(--color-bg-surface);
         }
 
+        /* The token existed with no way for a card to ask for it. The design's
+           dark story cards sit on it exactly: #252423, which is --gray-900. */
+        > .bg-muted {
+          background-color: var(--color-bg-muted);
+        }
+
         > .bg-accent {
           background-color: var(--color-bg-accent);
         }

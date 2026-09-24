@@ -29,7 +29,7 @@
 
   --color-bg-code: color-mix(in srgb, var(--white) 8%, transparent);
 
-  --color-border: var(--gray-800);
+  --color-border: var(--gray-850);
   --color-border-inputs: var(--gray-700);
   --color-border-strong: var(--gray-500);
   --color-border-subtle: var(--gray-900);

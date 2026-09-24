@@ -150,6 +150,9 @@ pageSections:
         label: faster content builds
         linkText: Read story
       - accentColor: harbour
+        logoSource: /src/assets/images/marketing/logos/twitch.svg
+        logoAlt: Twitch
+        logoMonochrome: true
         figure: 15+
         label: marketing sites on CloudCannon
         linkText: Read story

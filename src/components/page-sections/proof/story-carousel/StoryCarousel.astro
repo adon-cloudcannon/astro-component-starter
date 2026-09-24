@@ -27,6 +27,8 @@ import ButtonGroup from "@wrappers/button-group/ButtonGroup.astro";
 type StoryProps = {
   accentColor?: string;
   logoSource?: string;
+  /* Draw the mark in the surrounding text colour rather than its own. */
+  logoMonochrome?: boolean;
   logoAlt?: string;
   figure?: string;
   label?: string;
@@ -108,22 +110,32 @@ const {
         <CarouselSlide data-editable="array-item">
           <Card
             accentColor={story.accentColor || "none"}
-            backgroundColor="surface"
+            backgroundColor="muted"
             border={true}
             rounded={true}
             paddingHorizontal="lg"
             paddingVertical="lg"
             link={story.link}
           >
-            {story.logoSource && (
-              <Image
-                class="story-logo"
-                source={story.logoSource}
-                alt={story.logoAlt}
-                data-prop-src="logoSource"
-                data-prop-alt="logoAlt"
-              />
-            )}
+            {story.logoSource &&
+              (story.logoMonochrome ? (
+                <span
+                  class="story-logo logo-mark"
+                  role="img"
+                  aria-label={story.logoAlt}
+                  style={{ "--logo-mark-source": `url("${story.logoSource}")` }}
+                  data-prop-src="logoSource"
+                  data-prop-alt="logoAlt"
+                />
+              ) : (
+                <Image
+                  class="story-logo"
+                  source={story.logoSource}
+                  alt={story.logoAlt}
+                  data-prop-src="logoSource"
+                  data-prop-alt="logoAlt"
+                />
+              ))}
             <span
               class="story-figure"
               data-prop="figure"
@@ -168,12 +180,22 @@ const {
         block-size: 100%;
       }
 
-      .story-logo img {
-        block-size: auto;
-        max-block-size: 2rem;
+      .story-logo {
+        block-size: 1.75rem;
+        inline-size: 100%;
         max-inline-size: 60%;
-        object-fit: contain;
-        width: auto;
+
+        img {
+          block-size: auto;
+          max-block-size: 100%;
+          object-fit: contain;
+          width: auto;
+        }
+      }
+
+      /* A masked mark has no intrinsic size, so the box is the size. */
+      .story-logo.logo-mark {
+        mask-position: left center;
       }
 
       /* The figure carries the card's own accent, which is the one thing that

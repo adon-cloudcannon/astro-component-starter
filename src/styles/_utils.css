@@ -4,6 +4,27 @@
 
 @layer utils {
   /**
+   * A single-colour logo that takes the colour around it.
+   *
+   * The design draws each client mark once and recolours it per context: Earth
+   * on the cream strip, white on a dark story card. An <img> cannot do that,
+   * and the exported SVGs have their fill baked in, so the shape is used as a
+   * mask and the colour comes from `currentColor`. One asset, right in both
+   * places.
+   *
+   * Single-colour marks only, which is what the design uses. A logo that needs
+   * its own colours is an ordinary image.
+   */
+  .logo-mark {
+    background-color: currentColor;
+    display: block;
+    mask-image: var(--logo-mark-source);
+    mask-position: center;
+    mask-repeat: no-repeat;
+    mask-size: contain;
+  }
+
+  /**
    * Grow a small control's tap target to the 44px WCAG 2.5.8 minimum without
    * growing what you can see — a centred, invisible overlay. Use it on any
    * icon-only control (Button's `hideText`, the theme toggle, a close button):
