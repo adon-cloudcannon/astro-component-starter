@@ -34,26 +34,34 @@ pageSections:
   - _component: page-sections/proof/logo-cloud
     backgroundColor: surface
     logos:
-      - image: /src/assets/images/marketing/logos/twitch.png
+      - image: /src/assets/images/marketing/logos/twitch.svg
         alt: Twitch
         width: 75
         height: 17
-      - image: /src/assets/images/marketing/logos/hnry.png
+        monochrome: true
+        aspect: 126 / 28
+      - image: /src/assets/images/marketing/logos/hnry.svg
         alt: Hnry
         width: 87
         height: 31
+        monochrome: true
+        aspect: 78 / 28
       - image: /src/assets/images/marketing/logos/Ocupop.png
         alt: Ocupop
         width: 137
         height: 37
-      - image: /src/assets/images/marketing/logos/DX.png
+      - image: /src/assets/images/marketing/logos/DX.svg
         alt: DX Developer Experience Insights Platform
         width: 52
         height: 30
-      - image: /src/assets/images/marketing/logos/Papercut.png
+        monochrome: true
+        aspect: 49 / 28
+      - image: /src/assets/images/marketing/logos/Papercut.svg
         alt: Papercut
         width: 100
         height: 31
+        monochrome: true
+        aspect: 90 / 28
     headingPlacement: inline
     heading: BUILT BY DEVS. RUN BY EDITORS.
   - _component: page-sections/explainers/feature-split

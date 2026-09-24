@@ -323,6 +323,12 @@ const arrayDataAttributes =
              substituted from it at the root and would not follow. */
           .button-inner.variant-text {
             color: var(--color-text-on-brand);
+
+            /* The arrow goes with it. Off a brand band it is the only part
+               drawn in the brand colour, which here is the band itself. */
+            .icon {
+              color: var(--color-text-on-brand);
+            }
           }
 
           /* The design inverts the pill on a brand band: light fill, dark

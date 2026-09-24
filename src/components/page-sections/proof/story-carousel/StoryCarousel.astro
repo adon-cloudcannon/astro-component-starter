@@ -29,6 +29,8 @@ type StoryProps = {
   logoSource?: string;
   /* Draw the mark in the surrounding text colour rather than its own. */
   logoMonochrome?: boolean;
+  /* The file's own width/height, since a mask has no intrinsic size. */
+  logoAspect?: string;
   logoAlt?: string;
   figure?: string;
   label?: string;
@@ -99,8 +101,13 @@ const {
     <Carousel
       class="story-slides"
       label={sectionLabel || heading || "Customer stories"}
+      {/* The design draws these at a fixed 300 with 20 between, four across a
+          1040 column and the fourth running off the edge. The carousel spends
+          its gap as padding on the slide, so the slide is the card plus the
+          gap: 324 for a 300 card. The slide takes the larger of the
+          percentage and the minimum, and 25% of the column is 260. */}
       slideWidthPercent={25}
-      minSlideWidth={280}
+      minSlideWidth={324}
       gap="lg"
       alignmentHorizontal="start"
       showIndicators={false}
@@ -123,7 +130,10 @@ const {
                   class="story-logo logo-mark"
                   role="img"
                   aria-label={story.logoAlt}
-                  style={{ "--logo-mark-source": `url("${story.logoSource}")` }}
+                  style={{
+                    "--logo-mark-source": `url("${story.logoSource}")`,
+                    ...(story.logoAspect ? { "--logo-mark-aspect": story.logoAspect } : {}),
+                  }}
                   data-prop-src="logoSource"
                   data-prop-alt="logoAlt"
                 />
@@ -175,15 +185,32 @@ const {
   @layer page-sections {
     .story-carousel {
       /* The cards are a fixed shape in the design, 300 wide by 380 tall, and
-         the row is meant to run past the edge rather than fit. */
-      .story-slides .card {
+         the row is meant to run past the edge rather than fit. Without this
+         the slides shrink to share the track and the cards come out narrow. */
+      .story-slides .slide {
+        flex-shrink: 0;
+      }
+
+      /* The slide is the 300 the design draws; the card fills it rather than
+         sitting inside the slide's own padding at 276. Spacing between cards
+         is the carousel's gap. */
+      .story-slides .slide__content {
         block-size: 100%;
       }
 
-      .story-logo {
-        block-size: 1.75rem;
+      .story-slides .card {
+        block-size: 100%;
         inline-size: 100%;
-        max-inline-size: 60%;
+      }
+
+      .story-logo {
+        /* start, not stretch: the card content is a flex column, so a mark
+           left to stretch fills the card and its ratio never gets to set the
+           width. Every mark then comes out the same size. */
+        align-self: start;
+        block-size: 1.75rem;
+        inline-size: auto;
+        max-inline-size: 70%;
 
         img {
           block-size: auto;
@@ -193,8 +220,11 @@ const {
         }
       }
 
-      /* A masked mark has no intrinsic size, so the box is the size. */
+      /* A masked mark has no intrinsic size, so its shape comes from the
+         ratio the file declares. Without it every mark stretches to one box
+         and a wide wordmark ends up the same width as a square monogram. */
       .story-logo.logo-mark {
+        aspect-ratio: var(--logo-mark-aspect, 4 / 1);
         mask-position: left center;
       }
 

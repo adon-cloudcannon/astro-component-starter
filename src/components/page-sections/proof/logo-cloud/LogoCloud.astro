@@ -9,6 +9,10 @@ type LogoProps = {
   image?: string;
   alt?: string;
   url?: string;
+  /* Draw the mark as a mask in the surrounding colour rather than as an image.
+     The exported marks have their fill baked in, so an image of one is white
+     on a cream strip. */
+  monochrome?: boolean;
   /* The size the mark is drawn at. A 2x export is twice this, and
      without it the file's own size is what gets drawn. */
   width?: number;
@@ -84,16 +88,31 @@ const {
                 class="logo-cloud-logo"
                 {...wrapperProps}
               >
-                <Image
-                  source={logo.image}
-                  alt={logo.alt}
-                  width={logo.width}
-                  height={logo.height}
-                  widths={[320]}
-                  sizes="320px"
-                  data-prop-src="image"
-                  data-prop-alt="alt"
-                />
+                {logo.monochrome ? (
+                  <span
+                    class="logo-mark"
+                    role="img"
+                    aria-label={logo.alt}
+                    style={{
+                      "--logo-mark-source": `url("${logo.image}")`,
+                      ...(logo.width ? { inlineSize: `${logo.width}px` } : {}),
+                      ...(logo.height ? { blockSize: `${logo.height}px` } : {}),
+                    }}
+                    data-prop-src="image"
+                    data-prop-alt="alt"
+                  />
+                ) : (
+                  <Image
+                    source={logo.image}
+                    alt={logo.alt}
+                    width={logo.width}
+                    height={logo.height}
+                    widths={[320]}
+                    sizes="320px"
+                    data-prop-src="image"
+                    data-prop-alt="alt"
+                  />
+                )}
               </LogoWrapper>
             </CarouselSlide>
           );
@@ -119,16 +138,31 @@ const {
                 class="logo-cloud-logo"
                 {...wrapperProps}
               >
-                <Image
-                  source={logo.image}
-                  alt={logo.alt}
-                  width={logo.width}
-                  height={logo.height}
-                  widths={[320]}
-                  sizes="320px"
-                  data-prop-src="image"
-                  data-prop-alt="alt"
-                />
+                {logo.monochrome ? (
+                  <span
+                    class="logo-mark"
+                    role="img"
+                    aria-label={logo.alt}
+                    style={{
+                      "--logo-mark-source": `url("${logo.image}")`,
+                      ...(logo.width ? { inlineSize: `${logo.width}px` } : {}),
+                      ...(logo.height ? { blockSize: `${logo.height}px` } : {}),
+                    }}
+                    data-prop-src="image"
+                    data-prop-alt="alt"
+                  />
+                ) : (
+                  <Image
+                    source={logo.image}
+                    alt={logo.alt}
+                    width={logo.width}
+                    height={logo.height}
+                    widths={[320]}
+                    sizes="320px"
+                    data-prop-src="image"
+                    data-prop-alt="alt"
+                  />
+                )}
               </LogoWrapper>
             </li>
           );
@@ -153,6 +187,13 @@ const {
       .logo-cloud-item {
         display: flex;
         justify-content: center;
+      }
+
+      /* The strip's label is an eyebrow by treatment but not by colour: the
+         design draws it in Earth, where a section eyebrow is Sunset. It also
+         colours the masked marks beside it, which take currentColor. */
+      > .outer-content > .content > .eyebrow {
+        --color-accent-text: var(--color-text-muted);
       }
 
       /* The design runs the label and the marks along one line rather than
@@ -221,6 +262,14 @@ const {
           max-width: 100%;
           object-fit: contain;
           width: auto;
+        }
+
+        /* A masked mark carries its drawn size inline and takes the strip's
+           own colour, which is what a bitmap of a white logo could not do.
+           The cap still applies, for a mark declared larger than the line. */
+        > .logo-mark {
+          max-block-size: var(--logo-cloud-logo-height, var(--spacing-xl));
+          max-inline-size: 100%;
         }
       }
 

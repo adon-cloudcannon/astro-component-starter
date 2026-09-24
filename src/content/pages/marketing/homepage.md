@@ -35,26 +35,34 @@ pageSections:
   - _component: page-sections/proof/logo-cloud
     backgroundColor: surface
     logos:
-      - image: /src/assets/images/marketing/logos/twitch.png
+      - image: /src/assets/images/marketing/logos/twitch.svg
         alt: Twitch
         width: 75
         height: 17
-      - image: /src/assets/images/marketing/logos/hnry.png
+        monochrome: true
+        aspect: 126 / 28
+      - image: /src/assets/images/marketing/logos/hnry.svg
         alt: Hnry
         width: 87
         height: 31
+        monochrome: true
+        aspect: 78 / 28
       - image: /src/assets/images/marketing/logos/Ocupop.png
         alt: Ocupop
         width: 137
         height: 37
-      - image: /src/assets/images/marketing/logos/DX.png
+      - image: /src/assets/images/marketing/logos/DX.svg
         alt: DX Developer Experience Insights Platform
         width: 52
         height: 30
-      - image: /src/assets/images/marketing/logos/Papercut.png
+        monochrome: true
+        aspect: 49 / 28
+      - image: /src/assets/images/marketing/logos/Papercut.svg
         alt: Papercut
         width: 100
         height: 31
+        monochrome: true
+        aspect: 90 / 28
     headingPlacement: inline
     heading: BUILT BY DEVS. RUN BY EDITORS.
   - _component: building-blocks/wrappers/content-selector
@@ -146,6 +154,10 @@ pageSections:
     headingSize: lg
     stories:
       - accentColor: golden
+        logoSource: /src/assets/images/marketing/logos/hnry.svg
+        logoAlt: Hnry
+        logoMonochrome: true
+        logoAspect: 78 / 28
         figure: 8x
         label: faster content builds
         linkText: Read story
@@ -153,14 +165,23 @@ pageSections:
         logoSource: /src/assets/images/marketing/logos/twitch.svg
         logoAlt: Twitch
         logoMonochrome: true
+        logoAspect: 126 / 28
         figure: 15+
         label: marketing sites on CloudCannon
         linkText: Read story
       - accentColor: peachy
+        logoSource: /src/assets/images/marketing/logos/DX.svg
+        logoAlt: DX Developer Experience Insights Platform
+        logoMonochrome: true
+        logoAspect: 49 / 28
         figure: 400%
         label: increase in leads generated
         linkText: Read story
       - accentColor: moss-350
+        logoSource: /src/assets/images/marketing/logos/Papercut.svg
+        logoAlt: PaperCut
+        logoMonochrome: true
+        logoAspect: 90 / 28
         figure: 100x
         label: publishing velocity
         linkText: Read story

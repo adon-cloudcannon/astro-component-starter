@@ -117,7 +117,11 @@
      80 nodes at 13px with 2.6px of letter-spacing, which is the 0.2em below,
      and the nine logo strips at 17px with 2.86px, near enough the same. */
   .eyebrow {
-    color: var(--color-text-muted);
+    /* Sunset, which is what the design sets an eyebrow in: 23 of them on light
+       sections against nothing else in double figures. The logo strip's label
+       rides the same class and stays muted, since the design draws that one in
+       Earth. */
+    color: var(--color-accent-text, var(--sunset));
     font-family: var(--font-mono);
     font-weight: var(--font-weight-normal);
     letter-spacing: 0.2em;

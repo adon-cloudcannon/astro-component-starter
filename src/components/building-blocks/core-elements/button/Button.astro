@@ -203,6 +203,10 @@ if (!_component && !hasText && !hasSlotContent && !hasIcon) return;
           flex-direction: row-reverse;
         }
 
+        &.variant-text .icon {
+          color: var(--color-brand);
+        }
+
         &.variant-primary {
           background-color: var(--color-bg-brand);
           border-color: transparent;
@@ -260,7 +264,10 @@ if (!_component && !hasText && !hasSlotContent && !hasIcon) return;
         &.variant-text {
           background-color: transparent;
           border-color: transparent;
-          color: var(--color-brand);
+          /* The label is the page's own text colour and only the arrow is the
+             brand: 16 of the design's 25 arrow buttons are drawn that way, and
+             the rest match because they sit on a colour where both have to. */
+          color: var(--color-text-strong);
           font-size: var(--font-size-lg);
           font-weight: var(--font-weight-semibold);
           padding-block: var(--button-padding-block);
