@@ -43,7 +43,7 @@ const {
 >
   <SimpleText
     class="eyebrow"
-    size="sm"
+    size="md"
     alignmentHorizontal={headingPlacement === "inline" ? "start" : "center"}
     data-prop="heading"
     text={heading}
@@ -152,7 +152,10 @@ const {
         align-items: center;
         display: flex;
         flex-wrap: wrap;
-        gap: var(--spacing-xl) var(--spacing-2xl);
+        /* The design leaves 24px between the label and the first mark, and
+           space-between opens the rest out from there. A wider minimum tips
+           the row over the column and wraps it. */
+        gap: var(--spacing-lg);
 
         > * {
           --space-before: 0px;
@@ -170,7 +173,7 @@ const {
         > .logo-cloud-grid {
           display: flex;
           flex-wrap: wrap;
-          gap: var(--spacing-lg) var(--spacing-2xl);
+          gap: var(--spacing-lg);
           grid-template-columns: none;
           justify-content: space-between;
         }

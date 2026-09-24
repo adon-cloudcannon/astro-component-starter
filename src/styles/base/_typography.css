@@ -107,15 +107,20 @@
     }
   }
 
+  /* The design sets every eyebrow in Fragment Mono, uppercase, widely tracked:
+     80 nodes at 13px with 2.6px of letter-spacing, which is the 0.2em below,
+     and the nine logo strips at 17px with 2.86px, near enough the same. */
   .eyebrow {
     color: var(--color-text-muted);
+    font-family: var(--font-mono);
     font-weight: var(--font-weight-normal);
-    letter-spacing: 0.08em;
+    letter-spacing: 0.2em;
     text-transform: uppercase;
   }
 
   .eyebrow :where(.simple-text-content, .simple-text-inner, p, span) {
     color: inherit;
+    font-family: inherit;
     font-size: inherit;
     font-weight: inherit;
     letter-spacing: inherit;
