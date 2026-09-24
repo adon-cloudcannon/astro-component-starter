@@ -28,6 +28,7 @@ pageSections:
         iconPosition: after
         text: Book a demo
   - _component: page-sections/proof/logo-cloud
+    backgroundColor: surface
   - _component: page-sections/builders/custom-section
   - _component: page-sections/explainers/feature-split
     eyebrow: How it works

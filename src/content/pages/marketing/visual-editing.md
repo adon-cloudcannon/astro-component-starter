@@ -31,6 +31,7 @@ pageSections:
         iconColor: default
   - _component: page-sections/builders/custom-section
   - _component: page-sections/conversion/cta-split
+    backgroundColor: surface
     buttonSections:
       - _component: building-blocks/core-elements/button
         variant: text

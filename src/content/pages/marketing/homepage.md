@@ -33,6 +33,20 @@ pageSections:
         iconName: check
         iconColor: default
   - _component: page-sections/proof/logo-cloud
+    backgroundColor: surface
+    logos:
+      - image: /src/assets/images/marketing/logos/twitch.png
+        alt: Twitch
+      - image: /src/assets/images/marketing/logos/hnry.png
+        alt: Hnry
+      - image: /src/assets/images/marketing/logos/Ocupop.png
+        alt: Ocupop
+      - image: /src/assets/images/marketing/logos/DX.png
+        alt: DX Developer Experience Insights Platform
+      - image: /src/assets/images/marketing/logos/Papercut.png
+        alt: Papercut
+    headingPlacement: inline
+    heading: BUILT BY DEVS. RUN BY EDITORS.
   - _component: building-blocks/wrappers/content-selector
     items:
       - text: >-
@@ -105,14 +119,18 @@ pageSections:
     heading: The stack AI already knows
     subtext: Code, content, and config live together in Git. The whole project, in plain files.
     imageSource: /src/assets/images/marketing/context-1.png
+    backgroundColor: surface
   - _component: page-sections/explainers/feature-split
     subtext: LOW MAINTENANCE
     imageSource: /src/assets/images/marketing/low-maintenence.png
   - _component: page-sections/explainers/feature-grid
     eyebrow: HIGH PERFORMANCE
     subtext: Pages are pre-built and served from a CDN, so sites load fast anywhere in the world.
+    backgroundColor: surface
   - _component: page-sections/proof/testimonial-section
+    colorScheme: dark
   - _component: page-sections/builders/custom-section
+    colorScheme: dark
   - _component: page-sections/explainers/feature-split
     eyebrow: Who we are
     heading: Made for the work, not for the upsell
@@ -120,6 +138,7 @@ pageSections:
       We’re a tight-knit team based in Dunedin, New Zealand, working with web teams all over the
       world. We started CloudCannon because every CMS we tried gave editors
     imageSource: /src/assets/images/marketing/container.png
+    backgroundColor: surface
     buttonSections:
       - _component: building-blocks/core-elements/button
         variant: text

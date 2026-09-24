@@ -7,6 +7,17 @@ logos:
   comment: Client logos shown in the strip.
   options:
     structures: _structures.logoCloudLogos
+headingPlacement:
+  type: select
+  comment: >-
+    Where the label sits. Above stacks it over the marks; inline runs it along
+    the same line, to their left, which is how the design draws the strip.
+  options:
+    values:
+      - id: above
+        name: Above the logos
+      - id: inline
+        name: Inline, to the left
 grayscale:
   type: switch
   comment: Render logos in muted grayscale. Linked logos restore color on hover.

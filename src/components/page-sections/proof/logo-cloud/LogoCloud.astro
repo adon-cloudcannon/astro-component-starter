@@ -11,6 +11,7 @@ const {
   heading = "",
   logos = [],
   grayscale = true,
+  headingPlacement = "above",
   scrolling = false,
   sectionLabel,
   maxContentWidth = "xl",
@@ -28,7 +29,7 @@ const {
 ---
 
 <CustomSection
-  class:list={["logo-cloud", className]}
+  class:list={["logo-cloud", headingPlacement === "inline" && "heading-inline", className]}
   label={sectionLabel}
   maxContentWidth={maxContentWidth}
   paddingHorizontal={paddingHorizontal}
@@ -43,7 +44,7 @@ const {
   <SimpleText
     class="eyebrow"
     size="sm"
-    alignmentHorizontal="center"
+    alignmentHorizontal={headingPlacement === "inline" ? "start" : "center"}
     data-prop="heading"
     text={heading}
   />
@@ -142,6 +143,39 @@ const {
         justify-content: center;
       }
 
+      /* The design runs the label and the marks along one line rather than
+         stacking them, with the label on the left. Zeroing --space-before on
+         the children is what turns the flow column into a row: the flow rule
+         reads that property, and setting it on .content itself loses to
+         utils, which resets it there. */
+      &.heading-inline > .outer-content > .content {
+        align-items: center;
+        display: flex;
+        flex-wrap: wrap;
+        gap: var(--spacing-xl) var(--spacing-2xl);
+
+        > * {
+          --space-before: 0px;
+        }
+
+        > .eyebrow {
+          flex: 0 0 auto;
+        }
+
+        > .logo-cloud-grid,
+        > .logo-cloud-marquee {
+          flex: 1 1 auto;
+        }
+
+        > .logo-cloud-grid {
+          display: flex;
+          flex-wrap: wrap;
+          gap: var(--spacing-lg) var(--spacing-2xl);
+          grid-template-columns: none;
+          justify-content: space-between;
+        }
+      }
+
       /* Marquee mode: the carousel replaces the grid, so it inherits the
          grid's top spacing and its slides carry the item centring. */
       .logo-cloud-marquee {
@@ -154,10 +188,14 @@ const {
       .logo-cloud-logo {
         display: block;
 
-        /* Editor-uploaded logos come in arbitrary aspect ratios — constrain by
-           height so the strip keeps an even optical line. */
+        /* Editor-uploaded logos come in arbitrary aspect ratios, so the height
+           is capped rather than set. A mark drawn at or below the cap renders
+           at the size it was drawn, which is what keeps a short wide wordmark
+           from towering over a square monogram just because they share a line.
+           Anything larger scales down to fit. */
         img {
-          height: var(--spacing-2xl);
+          height: auto;
+          max-height: var(--logo-cloud-logo-height, var(--spacing-xl));
           max-width: 100%;
           object-fit: contain;
           width: auto;

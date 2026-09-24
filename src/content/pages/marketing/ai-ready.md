@@ -30,11 +30,14 @@ pageSections:
         iconName: check
         iconColor: default
   - _component: page-sections/proof/logo-cloud
+    backgroundColor: surface
   - _component: page-sections/conversion/cta-center
     heading: Ready, set, code
     subtext: AI agents working on the site have complete context
+    colorScheme: dark
   - _component: page-sections/explainers/feature-grid
     subtext: page.tsx
+    colorScheme: dark
     features:
       - text: importImagefrom'next/image';
         iconName: check

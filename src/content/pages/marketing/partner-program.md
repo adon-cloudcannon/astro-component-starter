@@ -28,6 +28,20 @@ pageSections:
         iconPosition: after
         text: Book a demo
   - _component: page-sections/proof/logo-cloud
+    backgroundColor: surface
+    logos:
+      - image: /src/assets/images/marketing/logos/twitch.png
+        alt: Twitch
+      - image: /src/assets/images/marketing/logos/hnry.png
+        alt: Hnry
+      - image: /src/assets/images/marketing/logos/Ocupop.png
+        alt: Ocupop
+      - image: /src/assets/images/marketing/logos/DX.png
+        alt: DX Developer Experience Insights Platform
+      - image: /src/assets/images/marketing/logos/Papercut.png
+        alt: Papercut
+    headingPlacement: inline
+    heading: 20,000+ sites shipped
   - _component: page-sections/explainers/feature-split
     eyebrow: THE PROGRAM
     heading: What is the Partner Program?
@@ -40,6 +54,7 @@ pageSections:
   - _component: page-sections/conversion/pricing-tiers
     heading: What are the perks?
     subtext: Track site health, errors, usage and billing for every client from one place.
+    colorScheme: dark
   - _component: page-sections/conversion/pricing-tiers
     eyebrow: PARTNER TIERS
     heading: Climb as your portfolio grows
@@ -47,6 +62,7 @@ pageSections:
   - _component: page-sections/conversion/pricing-tiers
     heading: Pricing plans designed for your clients
     subtext: Handle billing yourself or pass it on to clients, whatever fits the workflow.
+    backgroundColor: surface
   - _component: page-sections/explainers/feature-split
     subtext: We’ll work with you to craft a plan that fits your particular client’s needs.
     imageSource: /src/assets/images/marketing/keatuatara-03-1.png
@@ -57,6 +73,7 @@ pageSections:
     imageSource: /src/assets/images/marketing/screenshot-2026-08-17-at-10-32-02-pm-1.png
   - _component: page-sections/conversion/cta-center
     heading: Keen to collaborate?
+    colorScheme: dark
     buttonSections:
       - _component: building-blocks/core-elements/button
         variant: text

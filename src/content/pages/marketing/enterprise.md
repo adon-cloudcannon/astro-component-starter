@@ -28,6 +28,7 @@ pageSections:
         iconPosition: after
         text: Book a demo
   - _component: page-sections/proof/logo-cloud
+    backgroundColor: surface
   - _component: page-sections/explainers/feature-split
     eyebrow: SUCCESS STORY
     heading: Publishing took up to five weeks. Now it takes minutes.
@@ -40,6 +41,7 @@ pageSections:
     subtext: Benefit from more uptime, faster sites, better SEO, enterprise- grade security, and more.
     imageSource: /src/assets/images/marketing/container.png
   - _component: page-sections/builders/custom-section
+    colorScheme: dark
   - _component: page-sections/builders/custom-section
   - _component: page-sections/conversion/cta-split
     subtext: >-

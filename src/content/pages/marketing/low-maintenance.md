@@ -32,6 +32,20 @@ pageSections:
         iconName: check
         iconColor: default
   - _component: page-sections/proof/logo-cloud
+    backgroundColor: surface
+    logos:
+      - image: /src/assets/images/marketing/logos/twitch.png
+        alt: Twitch
+      - image: /src/assets/images/marketing/logos/hnry.png
+        alt: Hnry
+      - image: /src/assets/images/marketing/logos/Ocupop.png
+        alt: Ocupop
+      - image: /src/assets/images/marketing/logos/DX.png
+        alt: DX Developer Experience Insights Platform
+      - image: /src/assets/images/marketing/logos/Papercut.png
+        alt: Papercut
+    headingPlacement: inline
+    heading: BUILT BY DEVS. RUN BY EDITORS.
   - _component: page-sections/explainers/feature-split
     heading: Give editors a CMS, keep a static site
     subtext: >-
@@ -48,6 +62,7 @@ pageSections:
     subtext: >-
       Whether it's three client sites or three hundred, another site is another repo. The
       maintenance doesn't come with it.
+    colorScheme: dark
   - _component: building-blocks/wrappers/content-selector
     items:
       - text: JS

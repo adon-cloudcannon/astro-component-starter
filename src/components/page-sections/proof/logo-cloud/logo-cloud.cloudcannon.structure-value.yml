@@ -21,6 +21,7 @@ value:
     - image: /src/assets/images/component-docs/logo-umbra.svg
       alt: Umbra
       url: ""
+  headingPlacement: above
   grayscale: true
   scrolling: false
   maxContentWidth: xl
@@ -97,6 +98,7 @@ groups:
       - heading
       - logos
       - grayscale
+      - headingPlacement
       - scrolling
   - heading: Section settings
     comment: Width, spacing, color scheme, and background for this section.

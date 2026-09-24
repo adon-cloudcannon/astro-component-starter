@@ -109,6 +109,8 @@ backgroundColor:
         name: Base
       - id: surface
         name: Surface
+      - id: muted
+        name: Muted
       - id: accent
         name: Accent
       - id: highlight

@@ -28,6 +28,20 @@ pageSections:
         iconPosition: after
         text: Book a demo
   - _component: page-sections/proof/logo-cloud
+    backgroundColor: surface
+    logos:
+      - image: /src/assets/images/marketing/logos/twitch.png
+        alt: Twitch
+      - image: /src/assets/images/marketing/logos/hnry.png
+        alt: Hnry
+      - image: /src/assets/images/marketing/logos/Ocupop.png
+        alt: Ocupop
+      - image: /src/assets/images/marketing/logos/DX.png
+        alt: DX Developer Experience Insights Platform
+      - image: /src/assets/images/marketing/logos/Papercut.png
+        alt: Papercut
+    headingPlacement: inline
+    heading: PARTNERS TO BE PROUD OF
   - _component: page-sections/proof/testimonial-section
   - _component: page-sections/builders/custom-section
   - _component: page-sections/explainers/feature-split
