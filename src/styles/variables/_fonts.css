@@ -23,6 +23,7 @@
   --font-size-heading-5xl: 6.375rem;
 
   --font-weight-normal: 400;
+  --font-weight-medium: 500;
   --font-weight-semibold: 600;
   --font-weight-bold: 700;
 
@@ -46,4 +47,36 @@
     --font-size-heading-3xl: 3.75rem;
     --font-size-heading-4xl: 4.25rem;
   }
+
+/* >>> design system type scale: generated, do not edit by hand */
+
+  /* Headings. Each slot takes the design heading matching how the slot is
+     used, not where it sits in the ramp. */
+  --font-size-heading-2xl: 5.625rem; /* Header 1, 90px */
+  --font-size-heading-xl: 4.0625rem; /* Header 2, 65px */
+  --font-size-heading-lg: 2.875rem; /* Header 3, 46px */
+  --font-size-heading-md: 2.625rem; /* Header 4, 42px */
+  --font-size-heading-sm: 1.8188rem; /* Header 5, 29.1px */
+  --font-size-heading-xs: 1.25rem; /* Header 6, 20px */
+
+  /* Body sizes the design states. */
+  --font-size-2xl: 1.6875rem; /* Body 1, 27px */
+  --font-size-xl: 1.375rem; /* Subtitle 1, 22px */
+  --font-size-lg: 1.1875rem; /* Body 3, 19px */
+  --font-size-md: 1rem; /* Body 4, 16px */
+  --font-size-sm: 0.9063rem; /* Body 5, 14.5px */
+  --font-size-xs: 0.8125rem; /* Eyebrow, 13px */
+
+  @media (width < 640px) {
+    /* The starter's own desktop-to-mobile ratios, on the new sizes. */
+    --font-size-heading-2xl: 4.5rem;
+    --font-size-heading-xl: 3.356rem;
+    --font-size-heading-lg: 2.3958rem;
+    --font-size-heading-md: 2.25rem;
+    --font-size-heading-sm: 1.6534rem;
+    --font-size-heading-xs: 1.1111rem;
+  }
+
+/* <<< design system type scale */
+
 }

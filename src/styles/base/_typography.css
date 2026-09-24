@@ -25,7 +25,7 @@
 
     h1 {
       font-size: var(--font-size-heading-2xl);
-      line-height: var(--line-height-tight);
+      line-height: var(--line-height-heading-2xl);
     }
 
     h2 {
@@ -143,3 +143,14 @@
     max-width: 42rem;
   }
 }
+
+/* >>> design system heading weights: generated, do not edit by hand */
+
+  h1 { font-weight: 600; } /* Header 1, SemiBold */
+  h2 { font-weight: 600; } /* Header 2, SemiBold */
+  h3 { font-weight: 700; } /* Header 3, Bold */
+  h4 { font-weight: 500; } /* Header 4, Medium */
+  h5 { font-weight: 600; } /* Header 5, SemiBold */
+  h6 { font-weight: 700; } /* Header 6, Bold */
+
+/* <<< design system heading weights */
