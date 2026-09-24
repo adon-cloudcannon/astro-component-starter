@@ -137,10 +137,33 @@ pageSections:
     backgroundColor: base
     colorScheme: dark
     lockColorScheme: true
-  - _component: page-sections/builders/custom-section
+  - _component: page-sections/explainers/stats
+    heading: Grow your sites, not your headcount.
+    subtext: From fast-moving startups to multi-site agencies, teams ship more with CloudCannon.
     backgroundColor: base
     colorScheme: dark
     lockColorScheme: true
+    headingSize: lg
+    stats:
+      - number: '8'
+        suffix: x
+        label: faster content builds
+        sublabel: Read story
+      - number: '15'
+        suffix: +
+        label: marketing sites on CloudCannon
+        sublabel: Read story
+      - number: '400'
+        suffix: '%'
+        label: increase in leads generated
+        sublabel: Read story
+      - number: '100'
+        suffix: x
+        label: publishing velocity
+        sublabel: Read story
+      - number: '90'
+        label: average Lighthouse score
+        sublabel: Read story
   - _component: page-sections/explainers/feature-split
     eyebrow: Who we are
     heading: Made for the work, not for the upsell
