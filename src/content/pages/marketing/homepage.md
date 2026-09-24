@@ -127,7 +127,9 @@ pageSections:
         label: The stack AI already knows
         contentSections:
           - _component: building-blocks/core-elements/simple-text
+            class: eyebrow
             text: AI-READY
+            alignmentHorizontal: center
           - _component: building-blocks/core-elements/heading
             text: The stack AI already knows
             level: h3
@@ -142,7 +144,8 @@ pageSections:
             items:
               - contentSections:
                   - _component: building-blocks/core-elements/image
-                    imageSource: /src/assets/images/marketing/context-1.png
+                    source: /src/assets/images/marketing/context-1.png
+                    alt: ''
                   - _component: building-blocks/core-elements/heading
                     text: Complete Context
                     level: h4
@@ -154,7 +157,8 @@ pageSections:
                     alignmentHorizontal: center
               - contentSections:
                   - _component: building-blocks/core-elements/image
-                    imageSource: /src/assets/images/marketing/ai-2-1.png
+                    source: /src/assets/images/marketing/ai-2-1.png
+                    alt: ''
                   - _component: building-blocks/core-elements/heading
                     text: Familiar workflow
                     level: h4
@@ -166,7 +170,8 @@ pageSections:
                     alignmentHorizontal: center
               - contentSections:
                   - _component: building-blocks/core-elements/image
-                    imageSource: /src/assets/images/marketing/api-1.png
+                    source: /src/assets/images/marketing/api-1.png
+                    alt: ''
                   - _component: building-blocks/core-elements/heading
                     text: No learning curve
                     level: h4
@@ -186,7 +191,9 @@ pageSections:
         label: No forced upgrades or surprise migrations
         contentSections:
           - _component: building-blocks/core-elements/simple-text
+            class: eyebrow
             text: LOW MAINTENANCE
+            alignmentHorizontal: center
           - _component: building-blocks/core-elements/heading
             text: Your sites just run
             level: h3
@@ -201,14 +208,16 @@ pageSections:
             items:
               - contentSections:
                   - _component: building-blocks/core-elements/image
-                    imageSource: /src/assets/images/marketing/low-maintenence.png
+                    source: /src/assets/images/marketing/low-maintenence.png
+                    alt: ''
                   - _component: building-blocks/core-elements/text
                     text: No forced upgrades or surprise migrations
                     size: sm
                     alignmentHorizontal: center
               - contentSections:
                   - _component: building-blocks/core-elements/image
-                    imageSource: /src/assets/images/marketing/cloudcannon-testing-speed-1.png
+                    source: /src/assets/images/marketing/cloudcannon-testing-speed-1.png
+                    alt: ''
                   - _component: building-blocks/core-elements/heading
                     text: Smaller surface
                     level: h4
@@ -220,7 +229,8 @@ pageSections:
                     alignmentHorizontal: center
               - contentSections:
                   - _component: building-blocks/core-elements/image
-                    imageSource: /src/assets/images/marketing/hosting.png
+                    source: /src/assets/images/marketing/hosting.png
+                    alt: ''
                   - _component: building-blocks/core-elements/heading
                     text: Off your plate
                     level: h4
@@ -240,7 +250,9 @@ pageSections:
         label: Scale changes nothing
         contentSections:
           - _component: building-blocks/core-elements/simple-text
+            class: eyebrow
             text: HIGH PERFORMANCE
+            alignmentHorizontal: center
           - _component: building-blocks/core-elements/heading
             text: Fast everywhere
             level: h3

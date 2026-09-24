@@ -21,6 +21,12 @@ stickyOffset:
         name: Medium
       - id: lg
         name: Large
+      - id: xl
+        name: Extra Large
+      - id: 2xl
+        name: 2xl
+      - id: 3xl
+        name: 3xl
 cardColorScheme:
   type: select
   label: Card color scheme

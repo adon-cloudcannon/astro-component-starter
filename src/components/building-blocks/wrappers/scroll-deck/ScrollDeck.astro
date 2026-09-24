@@ -129,6 +129,21 @@ if (!_component && !hasCards && !hasSlotContent) return;
         --deck-offset: var(--spacing-lg);
       }
 
+      /* The scale stopped at 24px, which pins a card right under the nav. A
+         tall card wants to sit nearer the middle of the screen as it holds,
+         and 24 is nowhere near enough room for that. */
+      &:has(> .scroll-deck-layout.offset-xl) {
+        --deck-offset: var(--spacing-xl);
+      }
+
+      &:has(> .scroll-deck-layout.offset-2xl) {
+        --deck-offset: var(--spacing-2xl);
+      }
+
+      &:has(> .scroll-deck-layout.offset-3xl) {
+        --deck-offset: var(--spacing-3xl);
+      }
+
       position: relative;
       > .scroll-deck-layout {
         display: grid;
