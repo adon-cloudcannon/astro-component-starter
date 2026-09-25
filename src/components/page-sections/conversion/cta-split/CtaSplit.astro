@@ -11,10 +11,32 @@ const {
   headingLevel = "h2",
   headingSize = "xl",
   subtext = "",
+  // Body 3 at 19 or Subtitle 1 at 22 in the design; `md` keeps the 16 every
+  // section rendered before either was carried through.
+  subtextSize = "md",
   buttonSections = [],
   imageSource = "",
   imageAlt = "",
   reverse = false,
+  /**
+   * A card behind the picture.
+   *
+   * The design draws the person as a cut-out on a textured panel: two images,
+   * not one. Taken as a single picture the generator picked the panel and blew
+   * it up to fill the column, which is a large yellow rectangle and no person.
+   */
+  imageBackdrop = "",
+  imageBackdropAlt = "",
+  /**
+   * How far past the content column the drawing runs.
+   *
+   * The design draws the truck 915 wide starting at 580, so it leaves the
+   * 1040 column by 335 and the frame cuts it off at its own edge. Boxed into
+   * the column it reads as a small picture with air around it. Measured per
+   * section, like the heroes: `imageBleed` remains the all-the-way case.
+   */
+  imageBleed = false,
+  imageOverflow = 0,
   sectionLabel,
   maxContentWidth = "xl",
   paddingHorizontal = "gutter",
@@ -27,15 +49,21 @@ const {
   imageAspectRatio = "none",
   backgroundColor = "base",
   background,
+  haze = false,
   class: className,
   useDefaultEditableBinding = false,
   _component,
   ...htmlAttributes
 } = Astro.props;
+
+const overflow = Number(imageOverflow) || 0;
+const bleedSide =
+  imageBleed || overflow > 0 ? (reverse ? "inline-start" : "inline-end") : undefined;
+const bleedLimit = !imageBleed && overflow > 0 ? `${overflow}px` : undefined;
 ---
 
 <CustomSection
-  class:list={["cta-split", className]}
+  class:list={["cta-split", { "picture-first": reverse }, className]}
   label={sectionLabel}
   maxContentWidth={maxContentWidth}
   paddingHorizontal={paddingHorizontal}
@@ -44,12 +72,22 @@ const {
   lockColorScheme={lockColorScheme}
   backgroundColor={backgroundColor}
   background={background}
+  haze={haze}
   useDefaultEditableBinding={useDefaultEditableBinding}
   {...htmlAttributes}
 >
+  {/* Split flips the distribution when it reverses, so the fixed column stays
+      on the same side of the page while the content swaps across it. That is
+      right when the fixed column is the copy, and wrong here: reversed, the
+      picture went into the flexible column and the copy into the fixed 400,
+      which pushed the heading 119 further right than the design draws it.
+      Asking for the opposite mode lands it back on fixed-flexible, so the
+      fixed width travels with the picture. */}
   <Split
-    distributionMode="fixed-flexible"
+    distributionMode={reverse ? "flexible-fixed" : "fixed-flexible"}
     fixedWidth="400"
+    data-bleed={bleedSide}
+    style={bleedLimit ? { "--split-bleed-limit": bleedLimit } : undefined}
     alignmentVertical="center"
     reverse={reverse}
     minSplitWidth={640}
@@ -63,6 +101,7 @@ const {
         {heading}
       </Heading>
       <Text
+        size={subtextSize}
         data-prop="subtext"
         text={subtext}
       />
@@ -74,14 +113,85 @@ const {
       />
     </Fragment>
     <Fragment slot="second">
-      <Image
-        source={imageSource}
-        rounded={true}
-        alt={imageAlt}
-        aspectRatio={imageAspectRatio}
-        data-prop-src="imageSource"
-        data-prop-alt="imageAlt"
-      />
+      {imageBackdrop ? (
+        <div class="cta-split-portrait">
+          <Image
+            class="cta-split-backdrop"
+            source={imageBackdrop}
+            alt={imageBackdropAlt}
+            rounded={true}
+            aspectRatio="square"
+            data-prop-src="imageBackdrop"
+            data-prop-alt="imageBackdropAlt"
+          />
+          <Image
+            class="cta-split-subject"
+            source={imageSource}
+            alt={imageAlt}
+            data-prop-src="imageSource"
+            data-prop-alt="imageAlt"
+          />
+        </div>
+      ) : (
+        <Image
+          source={imageSource}
+          rounded={true}
+          alt={imageAlt}
+          aspectRatio={imageAspectRatio}
+          data-prop-src="imageSource"
+          data-prop-alt="imageAlt"
+        />
+      )}
     </Fragment>
   </Split>
 </CustomSection>
+
+<style is:global>
+  /* A cut-out on a card. The design draws the panel 366 square with the person
+     filling it and sitting on its bottom edge, so the subject is placed rather
+     than laid out: stacked in flow it pushed the panel to twice the height.
+
+     Flat, because rules nested deeper than a couple of levels get dropped (see
+     CLAUDE.md). */
+  @layer page-sections {
+    .cta-split .cta-split-portrait {
+      max-inline-size: 22.875rem;
+      position: relative;
+    }
+
+    .cta-split .cta-split-subject {
+      --space-before: 0;
+      inset-block-end: 0;
+      inset-inline: 0;
+      margin: 0;
+      position: absolute;
+    }
+
+    .cta-split .cta-split-subject img {
+      block-size: auto;
+      inline-size: 100%;
+      object-fit: contain;
+    }
+
+    .cta-split .cta-split-backdrop img {
+      block-size: 100%;
+      inline-size: 100%;
+      object-fit: cover;
+    }
+  }
+</style>
+
+<style is:global>
+  /* The design puts 121 between the picture column and the copy: the portrait
+     sits at 122 in a 400 column and the heading starts at 641. The spacing
+     utilities stop at 64, so this is set directly rather than rounded down to
+     half what the design draws.
+
+     Flat, because rules nested deeper than a couple of levels get dropped (see
+     CLAUDE.md). */
+  @layer overrides {
+    .cta-split.picture-first .split-inner {
+      column-gap: 7.5625rem;
+    }
+  }
+</style>

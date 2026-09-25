@@ -134,6 +134,7 @@ pageSections:
     imageSource: /src/assets/images/marketing/cloudcannon-truck-closed-1.png
     backgroundColor: brand
     headingSize: lg
+    imageOverflow: 336
     buttonSections:
       - _component: building-blocks/core-elements/button
         variant: primary

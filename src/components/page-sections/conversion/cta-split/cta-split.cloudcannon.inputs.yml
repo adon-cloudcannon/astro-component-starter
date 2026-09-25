@@ -51,6 +51,11 @@ imageSource:
     resize_style: contain
     width: 1920
     height: 1280
+imageOverflow:
+  type: number
+  comment: >-
+    How far past the content column the drawing runs, in pixels. It is capped
+    at the page edge, so a large number means "all the way".
 imageAlt:
   type: text
   comment: Alt text describing the image.
@@ -186,3 +191,10 @@ backgroundColor:
         name: Accent
       - id: highlight
         name: Highlight
+
+haze:
+  type: switch
+  comment: >-
+    Pools the section's own background colour behind the content and blurs it,
+    so a heading stays readable where an illustration or a pattern runs
+    underneath.
