@@ -48,8 +48,49 @@ pageSections:
       finished files from wherever is closest to the person reading it.
     subtextSize: lg
     headingSize: sm
-  - _component: page-sections/proof/testimonial-section
-    authorImage: /src/assets/images/marketing/ellipse-287-2.png
+  - _component: page-sections/proof/testimonial-bento
+    testimonials:
+      - text: |-
+          Within the first few weeks after CloudCannon migrated the
+          site, we’d already **moved from the 4th page of Google to
+          the first page.** And we hadn’t even added fresh content to
+          it yet.
+        authorName: Roy Gabriel
+        authorDescription: Vice President Operations, Gabriel Maggio Construction
+        linkText: Read case study
+        accentColor: sunset
+        size: wide
+      - logo: /src/assets/images/marketing/logos/twitch.svg
+        logoMonochrome: true
+        logoAlt: Twitch
+        text: >-
+          CloudCannon is the ideal CMS for us — editors can update their content easily, and it’s
+          saved back to our Git repo, so we never feel locked in.
+        authorName: Cayvon Morady
+        authorDescription: Senior Technical Program Manager, Twitch
+        linkText: Read case study
+        size: standard
+      - company: Firebrand
+        text: When we show the Visual Editor during our meetings, their eyes light up.
+        authorName: Alex Murray
+        authorDescription: Digital Design Director, Firebrand
+        linkText: Read case study
+        size: standard
+      - logo: /src/assets/images/marketing/logos/DX.svg
+        logoMonochrome: true
+        logoAlt: ''
+        text: |-
+          **400% increase in leads. $150,000 saved.** That is the
+          equivalent of a full-time developer’s salary.
+        authorName: Abi Noda
+        authorDescription: CEO, DX
+        linkText: Read case study
+        accentColor: golden
+        size: wide
+    columns: 3
+    eyebrow: SUCCESS STORIES
+    heading: What clients are saying
+    headingSize: md
     backgroundColor: base
     colorScheme: dark
     lockColorScheme: true
