@@ -1,5 +1,5 @@
 ---
-# Generated from the Figma mapping. 1 of 5 blocks are
+# Generated from the Figma mapping. 2 of 5 blocks are
 # confirmed decisions; the rest are proposals to review on the page.
 _schema: default
 title: High Performance
