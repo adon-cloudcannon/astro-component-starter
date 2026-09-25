@@ -1,8 +1,10 @@
 ---
 import Heading from "@core-elements/heading/Heading.astro";
 import Icon from "@core-elements/icon/Icon.astro";
+import SimpleText from "@core-elements/simple-text/SimpleText.astro";
 import Text from "@core-elements/text/Text.astro";
 import Card from "@wrappers/card/Card.astro";
+import Image from "@core-elements/image/Image.astro";
 import GridItem from "@wrappers/grid/GridItem.astro";
 
 const {
@@ -12,11 +14,39 @@ const {
   iconName = "",
   iconColor = "default",
   iconBackground = true,
+  backgroundColor = "base",
+  /**
+   * A drawing instead of an icon, above the title rather than beside it.
+   * The design uses this shape wherever the card is about a capability rather
+   * than a setting — six of them under "Fits the way you already build" — and
+   * an icon in its place reads as a form row.
+   */
+  imageSource = "",
+  imageAlt = "",
+  /**
+   * A card that points somewhere else: a label for who it is for, a heading
+   * big enough to read as a destination, and a link out. The design uses it
+   * two-up at the foot of a page — "For agencies" / "For enterprise" — where
+   * the other shapes here are one point among several.
+   */
+  eyebrow = "",
+  linkText = "",
+  link = "",
+  /**
+   * Left alone, the shape decides. `lg` is the 46 the design sets here: this
+   * project overrides the starter's heading scale, where the same name is 65,
+   * so the size has to be read off the page rather than off the token file.
+   */
+  titleSize,
+  alignmentHorizontal = "start",
   class: className,
   useDefaultEditableBinding: _useDefaultEditableBinding = false,
   _component,
   ...htmlAttributes
 } = Astro.props;
+
+const signpost = Boolean(eyebrow || linkText);
+const headingSize = titleSize ?? (signpost ? "lg" : imageSource ? "sm" : "md");
 ---
 
 <GridItem
@@ -24,27 +54,48 @@ const {
   {...htmlAttributes}
 >
   <Card
-    class:list={["feature-item", className]}
-    paddingHorizontal="lg"
-    paddingVertical="lg"
+    class:list={["feature-item", `align-${alignmentHorizontal}`, signpost && "is-signpost", className]}
+    paddingHorizontal={signpost ? "2xl" : "lg"}
+    paddingVertical={signpost ? "2xl" : "lg"}
     rounded
     border
-    backgroundColor="base"
+    backgroundColor={backgroundColor}
   >
-    <div class="feature-item-heading">
-      <Icon
-        class="feature-icon"
-        name={iconName}
-        size="lg"
-        color={iconColor}
-        background={iconBackground}
-        alignmentHorizontal="start"
+    {imageSource && (
+      <Image
+        class="feature-illustration"
+        source={imageSource}
+        alt={imageAlt}
+        data-prop-src="imageSource"
+        data-prop-alt="imageAlt"
       />
+    )}
+    {signpost && imageSource && <div class="feature-rule"></div>}
+    {eyebrow && (
+      <SimpleText
+        class="eyebrow feature-eyebrow"
+        alignmentHorizontal={alignmentHorizontal}
+        data-prop="eyebrow"
+        text={eyebrow}
+        size="sm"
+      />
+    )}
+    <div class="feature-item-heading">
+      {!imageSource && !signpost && (
+        <Icon
+          class="feature-icon"
+          name={iconName}
+          size="lg"
+          color={iconColor}
+          background={iconBackground}
+          alignmentHorizontal="start"
+        />
+      )}
       <Heading
         class="feature-title"
         level={headingLevel}
-        size="md"
-        alignmentHorizontal="start"
+        size={headingSize}
+        alignmentHorizontal={alignmentHorizontal}
         data-prop="title"
       >
         {title}
@@ -52,10 +103,17 @@ const {
     </div>
     <Text
       class="feature-description"
-      alignmentHorizontal="start"
+      alignmentHorizontal={alignmentHorizontal}
+      size={signpost ? "lg" : "md"}
       data-prop="description"
       text={description}
     />
+    {linkText && (
+      <a class="feature-link" href={link} data-editable="text" data-prop="linkText">
+        {linkText}
+        <span aria-hidden="true">&#8594;</span>
+      </a>
+    )}
   </Card>
 </GridItem>
 
@@ -78,6 +136,132 @@ const {
     }
 
     .feature-description {
+    }
+  }
+
+  /* A card built around a drawing: the picture on top, then the title and the
+     line under it, all centred. The design draws 380x334 with the art about
+     halfway up, so the illustration takes the room it needs and the copy sits
+     under it.
+
+     Flat, because rules nested deeper than a couple of levels get dropped (see
+     CLAUDE.md). */
+  @layer page-sections {
+    .feature-item.align-center .feature-item-heading {
+      justify-content: center;
+    }
+
+    .feature-item.align-center .feature-title {
+      flex: 0 1 auto;
+    }
+
+    /* Centring the wrapper is not enough: Image puts an `.image-inner` inside
+       it that takes the full width, and the picture sits at its start. The
+       titles were dead centre while the drawings above them sat 60 to 98 left,
+       which reads as six cards each knocked askew. */
+    .feature-item .feature-illustration,
+    .feature-item .feature-illustration .image-inner {
+      display: flex;
+      justify-content: center;
+    }
+
+    .feature-item .feature-illustration img {
+      display: block;
+      margin-inline: auto;
+    }
+
+    .feature-item .feature-illustration img {
+      block-size: auto;
+      inline-size: auto;
+      max-block-size: 8.75rem;
+      max-inline-size: 100%;
+    }
+  }
+
+  /* The signpost card: a picture across the top, a rule under it, then who it
+     is for, where it goes and a way in. The design draws 503x714 on a 1280
+     page, padded 48, with the art sitting nearer the top than the padding
+     would put it.
+
+     Flat, because rules nested deeper than a couple of levels get dropped (see
+     CLAUDE.md). */
+  @layer page-sections {
+    .feature-item.is-signpost {
+      --feature-art-height: 21rem;
+      border-color: var(--dark-sand);
+    }
+
+    /* Every gap here is set as --space-before, not as a margin.
+       margin-block-start written from a page-sections rule loses outright: the
+       flow layer sits in `utils`, which out-ranks this one, and writes the same
+       property from --space-before. The first pass set all five gaps as plain
+       margins and not one of them applied — what shipped was flow's own
+       default, which put the eyebrow 9px under the rule and the body 9px under
+       the heading (see CLAUDE.md). */
+
+    /* A block of fixed height, not a picture of whatever size it happens to
+       be. The design's two drawings are 305 and 319 tall and both cards put
+       the rule under them at the same height; sized to their own art the rules
+       came out 26 apart and the cards read as misaligned.
+
+       It also runs wider than the copy column, out to within a few pixels of
+       the card's edge: one drawing is inset well inside the padding and the
+       other bleeds past it, so the column is the wrong frame for both. */
+    .feature-item.is-signpost .feature-illustration {
+      align-items: center;
+      block-size: var(--feature-art-height);
+      margin-block-start: -1.5rem;
+      margin-inline: -2.75rem;
+    }
+
+    .feature-item.is-signpost .feature-illustration .image-inner {
+      align-items: center;
+      block-size: 100%;
+    }
+
+    /* A length, not a percentage. Image wraps the picture in a <picture>,
+       whose own height is auto, so `block-size: 100%` resolved against nothing
+       and the drawing fell back to the served file's size — two thirds of what
+       the design draws, with air around it (see CLAUDE.md). */
+    .feature-item.is-signpost .feature-illustration img {
+      block-size: var(--feature-art-height);
+      inline-size: auto;
+      max-block-size: none;
+      max-inline-size: 100%;
+      object-fit: contain;
+    }
+
+    .feature-item.is-signpost .feature-rule {
+      background-color: var(--dark-sand);
+      block-size: var(--border-width-sm, 1px);
+      --space-before: 1.5rem;
+    }
+
+    .feature-item.is-signpost .feature-eyebrow {
+      --space-before: 2rem;
+    }
+
+    .feature-item.is-signpost .feature-item-heading {
+      --space-before: 0.875rem;
+    }
+
+    .feature-item.is-signpost .feature-description {
+      --space-before: 1.25rem;
+    }
+
+    /* Same text link the testimonials use: Sunset, with the arrow beside the
+       label rather than inside it. */
+    .feature-item.is-signpost .feature-link {
+      align-items: center;
+      color: var(--sunset);
+      display: inline-flex;
+      --space-before: 0.75rem;
+      gap: 0.5rem;
+      text-decoration: none;
+    }
+
+    .feature-item.is-signpost .feature-link:hover {
+      text-decoration: underline;
     }
   }
 </style>

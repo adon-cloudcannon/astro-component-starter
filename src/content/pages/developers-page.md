@@ -1,0 +1,206 @@
+---
+# Generated from the Figma mapping. 1 of 10 blocks are
+# confirmed decisions; the rest are proposals to review on the page.
+_schema: default
+title: Developers Page
+description: A CMS that uses Git, just like you do
+pageSections:
+  - _component: page-sections/heroes/hero-split
+    heading: A CMS that uses Git, just like you do
+    subtext: >-
+      Connect CloudCannon to your repo and keep working locally. Editors manage content visually,
+      and everyone's changes sync automatically.
+    subtextSize: xl
+    imageSource: /src/assets/images/marketing/hero-developers-01-1.png
+    headingSize: xl
+    imageOverflow: 217
+    background:
+      type: pattern
+      imageSource: /src/assets/images/marketing/patterns/dark-grid.png
+      patternSize: natural
+      mask: fade
+    backgroundColor: base
+    colorScheme: dark
+    lockColorScheme: true
+    buttonSections:
+      - _component: building-blocks/core-elements/button
+        variant: primary
+        text: Start your free trial
+      - _component: building-blocks/core-elements/button
+        variant: text
+        iconName: arrow-right
+        iconPosition: after
+        text: Book a demo
+  - _component: page-sections/proof/logo-cloud
+    backgroundColor: surface
+  - _component: page-sections/conversion/cta-center
+    eyebrow: INTERACTIVE DEMO
+    heading: Here’s how to set up visual editing in minutes
+    subtext: >-
+      This demo walks you through the process of adding Editable Regions to your code, so your
+      editors can visually change text, structured data, and images. Save your changes to proceed
+      through the demo.
+    subtextSize: lg
+    imageSource: /src/assets/images/marketing/screenshot-2026-08-11-at-17-25-56-1.png
+    headingSize: lg
+  - _component: page-sections/explainers/step-selector
+    items:
+      - title: Build with your favorite tools
+        subtext: STEP 01
+        contentSections:
+          - _component: building-blocks/core-elements/text
+            text: >-
+              Choose from the most popular static site generators: Astro, Hugo, Eleventy, Next.js,
+              Jekyll, SvelteKit, and more.
+          - _component: building-blocks/core-elements/image
+            source: /src/assets/images/marketing/build-with-your-favorite-tools-3806-74574.png
+            alt: ''
+      - title: Set up the editing environment
+        subtext: STEP 02
+        contentSections: []
+      - title: Stay in sync
+        subtext: STEP 03
+        contentSections: []
+    eyebrow: How it works
+    heading: Your stack, plus an editing layer
+    headingSize: lg
+    backgroundColor: base
+    colorScheme: dark
+    lockColorScheme: true
+  - _component: page-sections/proof/testimonial-bento
+    testimonials:
+      - text: |-
+          Within the first few weeks after CloudCannon migrated the
+          site, we’d already **moved from the 4th page of Google to
+          the first page.** And we hadn’t even added fresh content to
+          it yet.
+        authorName: Roy Gabriel
+        authorDescription: Vice President Operations, Gabriel Maggio Construction
+        linkText: Read case study
+        accentColor: sunset
+        size: wide
+      - logo: /src/assets/images/marketing/logos/twitch.svg
+        logoMonochrome: true
+        logoAlt: Twitch
+        text: >-
+          CloudCannon is the ideal CMS for us — editors can update their content easily, and it’s
+          saved back to our Git repo, so we never feel locked in.
+        authorName: Cayvon Morady
+        authorDescription: Senior Technical Program Manager, Twitch
+        linkText: Read case study
+        size: standard
+      - company: Firebrand
+        text: When we show the Visual Editor during our meetings, their eyes light up.
+        authorName: Alex Murray
+        authorDescription: Digital Design Director, Firebrand
+        linkText: Read case study
+        size: standard
+      - logo: /src/assets/images/marketing/logos/DX.svg
+        logoMonochrome: true
+        logoAlt: ''
+        text: |-
+          **400% increase in leads. $150,000 saved.** That is the
+          equivalent of a full-time developer’s salary.
+        authorName: Abi Noda
+        authorDescription: CEO, DX
+        linkText: Read case study
+        accentColor: golden
+        size: wide
+    columns: 3
+    eyebrow: SUCCESS STORIES
+    heading: What clients are saying
+    headingSize: md
+    backgroundColor: base
+    colorScheme: dark
+    lockColorScheme: true
+    background:
+      type: pattern
+      imageSource: /src/assets/images/marketing/patterns/dark-grid.png
+      patternSize: natural
+      mask: fade
+  - _component: page-sections/conversion/cta-center
+    heading: The tool you’ve been looking for
+    headingSize: lg
+  - _component: page-sections/explainers/feature-split
+    heading: Bring your own AI tooling
+    subtext: >-
+      Projects are local-first and Git-based, so the tools already in use just work. Open the repo
+      in any IDE and the agent has full project context: code, content, config, the lot.
+    subtextSize: lg
+    headingSize: sm
+    buttonSections:
+      - _component: building-blocks/core-elements/button
+        variant: text
+        iconName: arrow-right
+        iconPosition: after
+        text: Learn more
+      - _component: building-blocks/core-elements/button
+        variant: text
+        iconName: arrow-right
+        iconPosition: after
+        text: Cursor
+      - _component: building-blocks/core-elements/button
+        variant: text
+        iconName: arrow-right
+        iconPosition: after
+        text: GitHub Copilot
+      - _component: building-blocks/core-elements/button
+        variant: text
+        iconName: arrow-right
+        iconPosition: after
+        text: Claude Code
+      - _component: building-blocks/core-elements/button
+        variant: text
+        iconName: arrow-right
+        iconPosition: after
+        text: Your own model
+  - _component: page-sections/conversion/cta-center
+    heading: Own your content, always
+    subtext: >-
+      Content lives in the repository along with the complete history of every change. If you ever
+      leave CloudCannon, you leave with everything: your content, your code, your commits.
+    subtextSize: lg
+    imageSource: /src/assets/images/marketing/ribbon-01-1.png
+    headingSize: lg
+    buttonSections:
+      - _component: building-blocks/core-elements/button
+        variant: primary
+        text: Get skills repo
+  - _component: page-sections/explainers/feature-split
+    heading: Open-source ecosystem
+    subtext: >-
+      We won’t upsell tools that don’t need to exist, and we’ll often point to open source instead.
+      These are ours, and they work on any static site.
+    subtextSize: xl
+    headingSize: lg
+    background:
+      type: pattern
+      imageSource: /src/assets/images/marketing/patterns/sand-grid.png
+      patternSize: natural
+      mask: none
+    haze:
+      - x: 0.1923
+        rx: 399px
+        'y': 49.4%
+        ry: 49.9%
+    buttonSections:
+      - _component: building-blocks/core-elements/button
+        variant: primary
+        text: Explore open-source tools
+  - _component: page-sections/conversion/cta-split
+    heading: We’re here to help
+    subtext: >-
+      We're a small team with a lot of knowledge, so you'll talk to someone who knows what they're
+      talking about and can give you hands-on help whatever the problem.
+    subtextSize: lg
+    headingSize: lg
+    buttonSections:
+      - _component: building-blocks/core-elements/button
+        variant: primary
+        text: Start your free trial
+      - _component: building-blocks/core-elements/button
+        variant: text
+        iconName: arrow-right
+        iconPosition: after
+        text: Book a demo
+---

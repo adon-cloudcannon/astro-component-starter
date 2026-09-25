@@ -44,6 +44,17 @@ subtext:
     underline: false
     bulletedlist: false
     numberedlist: false
+subtextSize:
+  type: select
+  comment: Body 3 at 19 or Subtitle 1 at 22 in the design; regular is 16.
+  options:
+    values:
+      - id: md
+        name: Regular
+      - id: lg
+        name: Large
+      - id: xl
+        name: Extra large
 alignmentHorizontal:
   type: select
   comment: Alignment for the heading and supporting text.
@@ -53,6 +64,15 @@ alignmentHorizontal:
         name: Start
       - id: center
         name: Center
+columns:
+  type: select
+  comment: Three small cards across, or two large ones with their own art.
+  options:
+    values:
+      - id: 3
+        name: Three across
+      - id: 2
+        name: Two across
 features:
   type: array
   label: Features
@@ -168,3 +188,10 @@ backgroundColor:
         name: Accent
       - id: highlight
         name: Highlight
+
+haze:
+  type: switch
+  comment: >-
+    Pools the section's own background colour behind the content and blurs it,
+    so a heading stays readable where an illustration or a pattern runs
+    underneath.

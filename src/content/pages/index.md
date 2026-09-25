@@ -1,308 +1,501 @@
 ---
+# Generated from the Figma mapping. 1 of 9 blocks are
+# confirmed decisions; the rest are proposals to review on the page.
 _schema: default
-title: Home
-description: >-
-  A library of brandable page sections for Astro, visually editable in
-  CloudCannon. Clone it, swap the design tokens, and ship a static site.
+title: Homepage
+description: Build freely. Edit easily.
 pageSections:
-  - _component: page-sections/heroes/hero-center
-    eyebrow: Astro + CloudCannon
-    heading: Components already built. Pages anyone can edit.
+  - _component: page-sections/heroes/hero-split
+    heading: Build freely. Edit easily.
     subtext: >-
-      Built on web fundamentals. Yours to brand, simple to maintain, and fast
-      by default.
+      Welcome to the Git-based CMS that doesn't fight your workflow. Your site lives in Git, your
+      team edits visually, and everything stays in sync.
+    subtextSize: xl
+    imageSource: /src/assets/images/marketing/image-3806-69902.png
+    imageAlt: A person reaching up to edit content blocks, with their dog
+    headingSize: 2xl
+    imageOverflow: 29
+    background:
+      type: pattern
+      imageSource: /src/assets/images/marketing/patterns/sand-grid.png
+      patternSize: natural
+      mask: none
+    haze:
+      - x: 0.1492
+        rx: 682px
+        'y': 45.6%
+        ry: 63.4%
     buttonSections:
       - _component: building-blocks/core-elements/button
-        text: Get started
-        hideText: false
-        link: /start/
-        iconName: ''
-        iconColor: default
-        iconPosition: before
         variant: primary
-        size: md
+        text: Start your free trial
       - _component: building-blocks/core-elements/button
-        text: Browse components
-        hideText: false
-        link: /component-docs/
-        iconName: ''
+        variant: text
+        iconName: arrow-right
+        iconPosition: after
+        text: Book a demo
+    note:
+      - text: No credit card · 14-day free trial · No lock-in
+        iconName: check
         iconColor: default
-        iconPosition: before
-        variant: secondary
-        size: md
-    colorScheme: inherit
-    backgroundColor: base
-    background:
-      type: pattern
-      patternSize: natural
-      imageSource: /src/assets/images/component-docs/pattern-plus.svg
-      mask: frame
-      overlay: 0
-  - _component: page-sections/explainers/feature-split
-    eyebrow: Visual editing
-    heading: Edit on the page. Commit to the repo.
-    subtext: >-
-      Click a heading and type, drag sections into a new order, or add new
-      ones from the library. Every edit lands in the same Markdown files
-      developers see in git.
-    buttonSections:
-      - _component: building-blocks/core-elements/button
-        text: See how editing works
-        hideText: false
-        link: /component-docs/editing-a-page/
-        iconName: ''
-        iconColor: default
-        iconPosition: before
-        variant: secondary
-        size: md
-    imageSource: /src/assets/images/component-docs/website-edit-commit.svg
-    imageAlt: >-
-      A heading being edited on a webpage, with the change arriving as a
-      highlighted line and a commit in a Markdown file
-    imageAspectRatio: none
-    imageRounded: false
-    reverse: true
-    colorScheme: inherit
-    backgroundColor: base
-  - _component: page-sections/explainers/stats
-    eyebrow: What's in the box
-    heading: Big library. Tiny payload.
-    subtext: Every component renders to static HTML and CSS.
-    stats:
-      - number: 24
-        prefix: ''
-        suffix: ''
-        label: Page sections
-        sublabel: Heroes to pricing tables
-      - number: 47
-        prefix: ''
-        suffix: ''
-        label: Building blocks
-        sublabel: Buttons to bento boxes
-      - number: 343
-        prefix: ''
-        suffix: ''
-        label: Icons
-        sublabel: Ready in the picker
-      - number: 0
-        prefix: ''
-        suffix: ' KB'
-        label: Runtime JavaScript
-        sublabel: On most sections
-    dividers: true
-    colorScheme: inherit
+  - _component: page-sections/proof/logo-cloud
     backgroundColor: surface
-    background:
-      type: pattern
-      patternSize: natural
-      imageSource: /src/assets/images/component-docs/pattern-dot-grid.svg
-      mask: frame
-      overlay: 0
-  - _component: page-sections/explainers/feature-split
-    eyebrow: Page building
-    heading: Pages are lists of sections
-    subtext: >-
-      Stack sections in a Markdown file and you have a page. They all draw
-      from the same design tokens, so a page assembled in an afternoon still
-      reads as one site. This page is eight of them.
-    buttonSections:
-      - _component: building-blocks/core-elements/button
-        text: Browse the full library
-        hideText: false
-        link: /component-docs/
-        iconName: ''
-        iconColor: default
-        iconPosition: before
-        variant: secondary
-        size: md
-    imageSource: /src/assets/images/component-docs/website-page-building.svg
-    imageAlt: >-
-      A section card being dragged from a component library into a dashed drop
-      slot on a page assembled from stacked sections
-    imageAspectRatio: none
-    imageRounded: false
-    reverse: false
-    colorScheme: inherit
-    backgroundColor: base
-  - _component: page-sections/collections/card-collection
-    eyebrow: Examples
-    heading: See it put together
-    subtext: >-
-      Four template pages built from the same library. Copy one as a starting
-      point, or [browse the full set](/examples/).
-    items:
-      - image: /src/assets/images/component-docs/website-example-pricing.svg
-        imageAlt: Three pricing plan cards with a highlighted middle tier
-        link: /examples/pricing/
-        contentSections:
-          - _component: building-blocks/core-elements/heading
-            text: Pricing
-            level: h3
-            size: xs
-          - _component: building-blocks/core-elements/simple-text
-            text: Plan cards, a comparison table, and billing FAQ.
-            size: sm
-      - image: /src/assets/images/component-docs/website-example-about.svg
-        imageAlt: An about page with a hero, a timeline, and a team card
-        link: /examples/about/
-        contentSections:
-          - _component: building-blocks/core-elements/heading
-            text: About
-            level: h3
-            size: xs
-          - _component: building-blocks/core-elements/simple-text
-            text: Story, timeline, team, and latest posts from the demo blog.
-            size: sm
-      - image: /src/assets/images/component-docs/website-example-services.svg
-        imageAlt: Service cards above process steps and a customer quote
-        link: /examples/services/
-        contentSections:
-          - _component: building-blocks/core-elements/heading
-            text: Services
-            level: h3
-            size: xs
-          - _component: building-blocks/core-elements/simple-text
-            text: Service cards, a process, client marks, and a wall of quotes.
-            size: sm
-      - image: /src/assets/images/component-docs/website-example-portfolio.svg
-        imageAlt: A masonry image gallery with a featured tile and caption
-        link: /examples/portfolio/
-        contentSections:
-          - _component: building-blocks/core-elements/heading
-            text: Portfolio
-            level: h3
-            size: xs
-          - _component: building-blocks/core-elements/simple-text
-            text: Image gallery, featured-project slider, and a contact split.
-            size: sm
-    layout: grid
-    columns: 4
-    gap: lg
-    aspectRatio: landscape
-    colorScheme: inherit
-    backgroundColor: base
-  - _component: page-sections/explainers/feature-grid
-    eyebrow: Principles
-    heading: Choices that age well
-    subtext: No trends. No noise. Just reliability.
-    features:
-      - title: Web fundamentals
-        description: >-
-          Semantic HTML, lean CSS, and JavaScript only when it's needed.
-          Boring by design, which is exactly why it works.
-        iconName: cube
-        iconColor: pacific
-      - title: Built for speed
-        description: >-
-          Static-rendered, minimal payloads, zero waste. Built to be extremely
-          fast from the first byte.
-        iconName: bolt
-        iconColor: golden
-      - title: Everything just fits
-        description: >-
-          Small, predictable components that snap together cleanly, so bigger
-          pieces never become a maintenance mess.
-        iconName: puzzle-piece
-        iconColor: moss
-      - title: Controlled editing
-        description: >-
-          Enough freedom for editors to move fast. Enough structure for
-          developers to sleep at night.
-        iconName: pencil
-        iconColor: kiwi
-      - title: Adaptable
-        description: >-
-          Deliberately plain styling that takes on your design without a
-          fight.
-        iconName: paint-brush
-        iconColor: blush
-      - title: AI ready
-        description: >-
-          Everything is a file in the repo, so agents build with full context.
-          Skills for the common jobs come included.
-        iconName: sparkles
-        iconColor: harbour
-    colorScheme: inherit
-    backgroundColor: surface
-    background:
-      type: pattern
-      patternSize: natural
-      imageSource: /src/assets/images/component-docs/pattern-dot-grid.svg
-      mask: frame
-      overlay: 0
-    alignmentHorizontal: center
-  - _component: page-sections/explainers/steps-section
-    eyebrow: How it works
-    heading: Clone, rebrand, assemble, ship
-    subtext: Four steps from a blank folder to a live site.
-    items:
-      - contentSections:
-          - _component: building-blocks/core-elements/heading
-            text: Clone
-            level: h3
-            size: xs
-          - _component: building-blocks/core-elements/text
-            text: 'One command scaffolds a working site: `npx create-astro-component-starter my-site`.'
-            size: sm
-      - contentSections:
-          - _component: building-blocks/core-elements/heading
-            text: Rebrand
-            level: h3
-            size: xs
-          - _component: building-blocks/core-elements/text
-            text: Change `--color-brand` in one token file. Every component follows.
-            size: sm
-      - contentSections:
-          - _component: building-blocks/core-elements/heading
-            text: Assemble
-            level: h3
-            size: xs
-          - _component: building-blocks/core-elements/text
-            text: "Add `- _component: page-sections/heroes/hero-center` to a page. That's a section."
-            size: sm
-      - contentSections:
-          - _component: building-blocks/core-elements/heading
-            text: Ship
-            level: h3
-            size: xs
-          - _component: building-blocks/core-elements/text
-            text: Run `npm run build` and deploy `dist/` to any host. Nothing to patch, nothing to babysit.
-            size: sm
-    orientation: horizontal
-    imageAspectRatio: landscape
-    colorScheme: inherit
-    backgroundColor: base
+    logos:
+      - image: /src/assets/images/marketing/logos/twitch.svg
+        alt: Twitch
+        width: 75
+        height: 17
+        monochrome: true
+        aspect: 126 / 28
+      - image: /src/assets/images/marketing/logos/hnry.svg
+        alt: Hnry
+        width: 87
+        height: 31
+        monochrome: true
+        aspect: 78 / 28
+      - image: /src/assets/images/marketing/logos/Ocupop.png
+        alt: Ocupop
+        width: 137
+        height: 37
+      - image: /src/assets/images/marketing/logos/DX.svg
+        alt: DX Developer Experience Insights Platform
+        width: 52
+        height: 30
+        monochrome: true
+        aspect: 49 / 28
+      - image: /src/assets/images/marketing/logos/Papercut.svg
+        alt: Papercut
+        width: 100
+        height: 31
+        monochrome: true
+        aspect: 90 / 28
+    headingPlacement: inline
+    heading: BUILT BY DEVS. RUN BY EDITORS.
   - _component: page-sections/conversion/cta-center
-    heading: Every file is yours
+    heading: Your content team edits. You stop getting pinged.
     subtext: >-
-      Built at CloudCannon, MIT licensed, and the clone is the whole site:
-      pages, blog, docs, and every component.
+      CloudCannon keeps your website’s code, content and config in Git and gives content teams a
+      visual interface to edit it.
+    subtextSize: lg
+    imageSource: /src/assets/images/marketing/food-bank-volunteers-produce-1-3806-69798.png
+    headingSize: lg
     buttonSections:
       - _component: building-blocks/core-elements/button
-        text: Get started
-        hideText: false
-        link: /start/
-        iconName: ''
-        iconColor: default
-        iconPosition: before
         variant: primary
-        size: md
+        text: Learn about our visual editor
+  - _component: page-sections/explainers/workflow-split
+    heading: Two workflows. One source of truth.
+    subtext: >-
+      Editors edit visually, developers stay in code — and every change lands in the same Git
+      repository.
+    subtextSize: lg
+    headingSize: lg
+    panels:
+      - accentColor: pacific
+        imageSource: /src/assets/images/marketing/kiwi-1.png
+        imageAlt: ''
+        imageOverlap: 23
+        eyebrow: EDITORS
+        heading: Work visually
+        items:
+          - text: Make changes visually on the page
+            iconName: check
+            iconColor: default
+          - text: Build new pages from existing components
+            iconName: check
+            iconColor: default
+          - text: Draft, review and share for approval before publishing
+            iconName: check
+            iconColor: default
+        linkText: Learn more
+      - accentColor: sunset
+        imageSource: /src/assets/images/marketing/kiwi-2.png
+        imageAlt: ''
+        imageOverlap: 10
+        eyebrow: DEVELOPERS
+        heading: Stay in code
+        items:
+          - text: Build with any static site generator
+            iconName: check
+            iconColor: default
+          - text: Build components and easily set what’s editable
+            iconName: check
+            iconColor: default
+          - text: Commit and deploy straight from Git
+            iconName: check
+            iconColor: default
+        linkText: Learn more
+    background:
+      type: pattern
+      imageSource: /src/assets/images/marketing/patterns/sand-pegboard.png
+      patternSize: natural
+      mask: fade
+    haze:
+      - x: 0.5086
+        rx: 844px
+        'y': 19%
+        ry: 31.5%
+    buttonSections:
       - _component: building-blocks/core-elements/button
-        text: View on GitHub
-        hideText: false
-        link: https://github.com/CloudCannon/astro-component-starter
-        iconName: ''
-        iconColor: default
-        iconPosition: before
-        variant: tertiary
-        size: md
+        variant: text
+        iconName: arrow-right
+        iconPosition: after
+        text: Learn about Git-based CMS
+  - _component: page-sections/explainers/feature-deck
+    subtextSize: lg
+    backgroundColor: base
+    headingSize: lg
+    cards:
+      - _component: building-blocks/wrappers/scroll-deck/scroll-deck-card
+        label: The stack AI already knows
+        contentSections:
+          - _component: building-blocks/core-elements/simple-text
+            class: eyebrow
+            text: AI-READY
+            alignmentHorizontal: center
+          - _component: building-blocks/core-elements/heading
+            text: The stack AI already knows
+            level: h3
+            size: lg
+            alignmentHorizontal: center
+          - _component: building-blocks/core-elements/text
+            text: Code, content, and config live together in Git. The whole project, in plain files.
+            alignmentHorizontal: center
+          - _component: building-blocks/wrappers/grid
+            columns: '3'
+            gap: lg
+            items:
+              - contentSections:
+                  - _component: building-blocks/core-elements/image
+                    source: /src/assets/images/marketing/context-1.png
+                    width: 175
+                    height: 145
+                    alt: ''
+                  - _component: building-blocks/core-elements/heading
+                    text: Complete context
+                    level: h4
+                    size: xs
+                    alignmentHorizontal: center
+                  - _component: building-blocks/core-elements/text
+                    text: Agents see your content, not just your code
+                    size: sm
+                    alignmentHorizontal: center
+              - contentSections:
+                  - _component: building-blocks/core-elements/image
+                    source: /src/assets/images/marketing/ai-2-1.png
+                    width: 213
+                    height: 141
+                    alt: ''
+                  - _component: building-blocks/core-elements/heading
+                    text: Familiar workflow
+                    level: h4
+                    size: xs
+                    alignmentHorizontal: center
+                  - _component: building-blocks/core-elements/text
+                    text: Agents work on the repo like any other contributor
+                    size: sm
+                    alignmentHorizontal: center
+              - contentSections:
+                  - _component: building-blocks/core-elements/image
+                    source: /src/assets/images/marketing/api-1.png
+                    width: 177
+                    height: 160
+                    alt: ''
+                  - _component: building-blocks/core-elements/heading
+                    text: No learning curve
+                    level: h4
+                    size: xs
+                    alignmentHorizontal: center
+                  - _component: building-blocks/core-elements/text
+                    text: No proprietary API for an agent to learn first
+                    size: sm
+                    alignmentHorizontal: center
+          - _component: building-blocks/wrappers/button-group
+            alignmentHorizontal: center
+            buttonSections:
+              - _component: building-blocks/core-elements/button
+                variant: primary
+                text: Why Git makes AI better
+      - _component: building-blocks/wrappers/scroll-deck/scroll-deck-card
+        label: No forced upgrades or surprise migrations
+        contentSections:
+          - _component: building-blocks/core-elements/simple-text
+            class: eyebrow
+            text: LOW MAINTENANCE
+            alignmentHorizontal: center
+          - _component: building-blocks/core-elements/heading
+            text: Your sites just run
+            level: h3
+            size: lg
+            alignmentHorizontal: center
+          - _component: building-blocks/core-elements/text
+            text: Forget update queues, plugin conflicts, and things breaking while you sleep.
+            alignmentHorizontal: center
+          - _component: building-blocks/wrappers/grid
+            columns: '3'
+            gap: lg
+            items:
+              - contentSections:
+                  - _component: building-blocks/core-elements/image
+                    source: /src/assets/images/marketing/low-maintenence-I3806-70250-3743-54479.png
+                    width: 121
+                    height: 128
+                    alt: ''
+                  - _component: building-blocks/core-elements/heading
+                    text: Upgrade when ready
+                    level: h4
+                    size: xs
+                    alignmentHorizontal: center
+                  - _component: building-blocks/core-elements/text
+                    text: No forced upgrades or surprise migrations
+                    size: sm
+                    alignmentHorizontal: center
+              - contentSections:
+                  - _component: building-blocks/core-elements/image
+                    source: /src/assets/images/marketing/smaller-surface-1.png
+                    width: 157
+                    height: 144
+                    alt: ''
+                  - _component: building-blocks/core-elements/heading
+                    text: Smaller surface
+                    level: h4
+                    size: xs
+                    alignmentHorizontal: center
+                  - _component: building-blocks/core-elements/text
+                    text: No admin panel sitting on your live site
+                    size: sm
+                    alignmentHorizontal: center
+              - contentSections:
+                  - _component: building-blocks/core-elements/image
+                    source: /src/assets/images/marketing/hosting.png
+                    width: 148
+                    height: 116
+                    alt: ''
+                  - _component: building-blocks/core-elements/heading
+                    text: Off your plate
+                    level: h4
+                    size: xs
+                    alignmentHorizontal: center
+                  - _component: building-blocks/core-elements/text
+                    text: No server or database to look after
+                    size: sm
+                    alignmentHorizontal: center
+          - _component: building-blocks/wrappers/button-group
+            alignmentHorizontal: center
+            buttonSections:
+              - _component: building-blocks/core-elements/button
+                variant: primary
+                text: Why 3am stays quiet
+      - _component: building-blocks/wrappers/scroll-deck/scroll-deck-card
+        label: Scale changes nothing
+        contentSections:
+          - _component: building-blocks/core-elements/simple-text
+            class: eyebrow
+            text: HIGH PERFORMANCE
+            alignmentHorizontal: center
+          - _component: building-blocks/core-elements/heading
+            text: Fast everywhere
+            level: h3
+            size: lg
+            alignmentHorizontal: center
+          - _component: building-blocks/core-elements/text
+            text: Pages are pre-built and served from a CDN, so sites load fast anywhere in the world.
+            alignmentHorizontal: center
+          - _component: building-blocks/wrappers/grid
+            columns: '3'
+            gap: lg
+            items:
+              - contentSections:
+                  - _component: building-blocks/core-elements/image
+                    source: /src/assets/images/marketing/speedometer-1.png
+                    width: 164
+                    height: 117
+                    alt: ''
+                  - _component: building-blocks/core-elements/heading
+                    text: Scale changes nothing
+                    level: h4
+                    size: xs
+                    alignmentHorizontal: center
+                  - _component: building-blocks/core-elements/text
+                    text: Same speed at ten visitors or ten million
+                    size: sm
+                    alignmentHorizontal: center
+              - contentSections:
+                  - _component: building-blocks/core-elements/image
+                    source: /src/assets/images/marketing/globe-1-I3806-70251-3743-54504.png
+                    width: 131
+                    height: 109
+                    alt: ''
+                  - _component: building-blocks/core-elements/heading
+                    text: Any distance
+                    level: h4
+                    size: xs
+                    alignmentHorizontal: center
+                  - _component: building-blocks/core-elements/text
+                    text: Just as fast on the other side of the world
+                    size: sm
+                    alignmentHorizontal: center
+              - contentSections:
+                  - _component: building-blocks/core-elements/image
+                    source: /src/assets/images/marketing/ranking-1.png
+                    width: 150
+                    height: 151
+                    alt: ''
+                  - _component: building-blocks/core-elements/heading
+                    text: Ranks higher
+                    level: h4
+                    size: xs
+                    alignmentHorizontal: center
+                  - _component: building-blocks/core-elements/text
+                    text: Fast pages rank better, so you start ahead
+                    size: sm
+                    alignmentHorizontal: center
+          - _component: building-blocks/wrappers/button-group
+            alignmentHorizontal: center
+            buttonSections:
+              - _component: building-blocks/core-elements/button
+                variant: primary
+                text: How sites stay fast
     colorScheme: dark
     lockColorScheme: true
-    backgroundColor: surface
+    cardColorScheme: light
     background:
       type: pattern
+      imageSource: /src/assets/images/marketing/patterns/dark-grid.png
       patternSize: natural
-      imageSource: /src/assets/images/component-docs/pattern-grid.svg
-      mask: frame
-      overlay: 0
+      mask: fade
+  - _component: page-sections/proof/testimonial-section
+    text: I almost forgot that website maintenance was a thing.
+    authorName: Sindre Gusdal
+    authorDescription: General Manager · Absoluttweb
+    layout: split
+    markPosition: start
+    markStyle: plain
+    company: Absoluttweb
+    authorImage: /src/assets/images/marketing/ellipse-287.jpg
+    backgroundColor: base
+    colorScheme: dark
+    lockColorScheme: true
+  - _component: page-sections/proof/story-carousel
+    heading: Grow your sites, not your headcount.
+    subtext: From fast-moving startups to multi-site agencies, teams ship more with CloudCannon.
+    subtextSize: lg
+    backgroundColor: base
+    colorScheme: dark
+    lockColorScheme: true
+    headingSize: lg
+    stories:
+      - accentColor: golden
+        logoSource: /src/assets/images/marketing/logos/hnry.svg
+        logoAlt: Hnry
+        logoMonochrome: true
+        logoAspect: 78 / 28
+        figure: 8x
+        label: faster content builds
+        linkText: Read story
+      - accentColor: harbour
+        logoSource: /src/assets/images/marketing/logos/twitch.svg
+        logoAlt: Twitch
+        logoMonochrome: true
+        logoAspect: 126 / 28
+        figure: 15+
+        label: marketing sites on CloudCannon
+        linkText: Read story
+      - accentColor: peachy
+        logoSource: /src/assets/images/marketing/logos/DX.svg
+        logoAlt: DX Developer Experience Insights Platform
+        logoMonochrome: true
+        logoAspect: 49 / 28
+        figure: 400%
+        label: increase in leads generated
+        linkText: Read story
+      - accentColor: moss-350
+        logoSource: /src/assets/images/marketing/logos/Papercut.svg
+        logoAlt: PaperCut
+        logoMonochrome: true
+        logoAspect: 90 / 28
+        figure: 100x
+        label: publishing velocity
+        linkText: Read story
+      - accentColor: golden
+        figure: '90'
+        label: average Lighthouse score
+        linkText: Read story
+    background:
+      type: pattern
+      imageSource: /src/assets/images/marketing/patterns/dark-grid.png
+      patternSize: natural
+      mask: fade
+    buttonSections:
+      - _component: building-blocks/core-elements/button
+        variant: primary
+        text: See how others did it
+  - _component: page-sections/proof/team-grid
+    paddingVertical: none
+    members:
+      - _component: building-blocks/wrappers/team-member
+        name: George Phillips
+        role: Co-founder & CTO
+        imageSource: /src/assets/images/marketing/george-profile-1.png
+        imageAlt: George Phillips, Co-founder & CTO at CloudCannon
+        backgroundImage: /src/assets/images/marketing/container-2-3806-69465-1.png
+      - _component: building-blocks/wrappers/team-member
+        name: Mike Neumegen
+        role: Co-founder & CEO
+        imageSource: >-
+          /src/assets/images/marketing/screenshot-2026-06-09-at-7-38-38-pm-background-r-3806-69478.png
+        imageAlt: Mike Neumegen, Co-founder & CEO at CloudCannon
+        backgroundImage: /src/assets/images/marketing/container-3.png
+      - _component: building-blocks/wrappers/team-member
+        name: Olivia Nicholson
+        role: Head of Content
+        imageSource: /src/assets/images/marketing/container-5-3806-69485-2.png
+        imageAlt: Olivia Nicholson, Head of Content at CloudCannon
+        backgroundImage: /src/assets/images/marketing/container-4-3806-69485-1.png
+      - _component: building-blocks/wrappers/team-member
+        name: Sam Whitfield
+        role: Product Design
+        imageSource: /src/assets/images/marketing/container-7-3806-69515-2.png
+        imageAlt: Sam Whitfield, Product Design at CloudCannon
+        backgroundImage: /src/assets/images/marketing/container-6-3806-69515-1.png
+      - _component: building-blocks/wrappers/team-member
+        name: Tom Richardson
+        role: Solutions Architect
+        imageSource: /src/assets/images/marketing/container-9-3806-69524-1.png
+        imageAlt: Tom Richardson, Solutions Architect at CloudCannon
+        backgroundImage: /src/assets/images/marketing/container-8-3806-69524.png
+      - _component: building-blocks/wrappers/team-member
+        name: Chris Wingate
+        role: CRO
+        imageSource: /src/assets/images/marketing/chris-profile-1.png
+        imageAlt: Chris Wingate, CRO at CloudCannon
+        backgroundImage: /src/assets/images/marketing/container-2-3806-69533-1.png
+    eyebrow: Who we are
+    heading: Made for the work, not for the upsell
+    linkText: Meet the team
+    subtext: >-
+      We’re a tight-knit team based in Dunedin, New Zealand, working with web teams all over the
+      world. We started CloudCannon because every CMS we tried gave editors a better experience by
+      giving developers a worse one. So we built a CMS that works for both.
+    subtextSize: lg
+    backgroundColor: surface
+    headingSize: lg
+  - _component: page-sections/conversion/cta-split
+    heading: Take a peek under the hood
+    subtext: >-
+      Git underneath, a visual editor on top, with code and content running on one engine. Start
+      free in minutes, or book a demo and we’ll walk you through the real thing.
+    subtextSize: lg
+    imageSource: /src/assets/images/marketing/cloudcannon-truck-closed-1.png
+    backgroundColor: brand
+    headingSize: lg
+    buttonSections:
+      - _component: building-blocks/core-elements/button
+        variant: primary
+        text: Start your free trial
+      - _component: building-blocks/core-elements/button
+        variant: text
+        iconName: arrow-right
+        iconPosition: after
+        text: Book a demo
 ---

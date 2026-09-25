@@ -10,6 +10,7 @@ pageSections:
     subtext: >-
       Welcome to the Git-based CMS that doesn't fight your workflow. Your site lives in Git, your
       team edits visually, and everything stays in sync.
+    subtextSize: xl
     imageSource: /src/assets/images/marketing/image-3806-74415.png
     imageAlt: A person reaching up to edit content blocks, with their dog
     headingSize: 2xl
@@ -19,6 +20,11 @@ pageSections:
       imageSource: /src/assets/images/marketing/patterns/sand-grid.png
       patternSize: natural
       mask: none
+    haze:
+      - x: 0.2538
+        rx: 941px
+        'y': 39.1%
+        ry: 53.8%
     buttonSections:
       - _component: building-blocks/core-elements/button
         variant: primary

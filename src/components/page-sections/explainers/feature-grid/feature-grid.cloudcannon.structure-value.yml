@@ -8,7 +8,9 @@ value:
   heading: Three things worth knowing
   headingLevel: h2
   subtext: One line that frames the points below.
+  subtextSize: md
   alignmentHorizontal: center
+  columns: 3
   features:
     - title: Fast
       description: Static HTML and CSS, so a page renders before any JavaScript runs.
@@ -81,6 +83,11 @@ _structures:
           image:
             - template: src/icons/{iconName}.svg
         _inputs:
+          eyebrow:
+            type: text
+            comment: >-
+              Short label above the title. Setting one turns the card into a
+              signpost: bigger title, a rule under the art, and a link out.
           title:
             type: text
             comment: Name of the feature.
@@ -135,13 +142,27 @@ _structures:
           iconBackground:
             type: switch
             comment: Draw a tinted plate behind the icon.
+          imageSource:
+            type: image
+            comment: A drawing above the title, in place of the icon.
+          imageAlt:
+            type: text
+            comment: Alternative text for the drawing.
+          linkText:
+            type: text
+            comment: Label for the link out of the card. Leave empty for no link.
+          link:
+            type: url
+            comment: Where the card's link goes.
 groups:
   - heading: Content
     inputs:
       - eyebrow
       - heading
       - subtext
+      - subtextSize
       - alignmentHorizontal
+      - columns
       - features
   - heading: Section settings
     comment: Width, spacing, color scheme, and background for this section.

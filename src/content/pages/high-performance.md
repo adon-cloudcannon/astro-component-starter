@@ -10,6 +10,7 @@ pageSections:
     subtext: >-
       Pre-rendered pages, global delivery, and structured content that search engines love. Speed is
       built into the architecture, not bolted on.
+    subtextSize: xl
     imageSource: /src/assets/images/marketing/screenshot-2026-08-15-at-15-52-30-1-3806-70839.png
     headingSize: xl
     imageOverflow: 5
@@ -18,6 +19,11 @@ pageSections:
       imageSource: /src/assets/images/marketing/patterns/sand-grid.png
       patternSize: natural
       mask: none
+    haze:
+      - x: 0.2305
+        rx: 378px
+        'y': 51.8%
+        ry: 50.6%
     buttonSections:
       - _component: building-blocks/core-elements/button
         variant: primary
@@ -36,14 +42,27 @@ pageSections:
     headingSize: lg
   - _component: page-sections/explainers/feature-split
     eyebrow: Editing
+    heading: Your pages are built before anyone asks for them
     subtext: >-
       Nothing gets assembled while a visitor waits. Your site is built when you push, then served as
       finished files from wherever is closest to the person reading it.
-    imageSource: /src/assets/images/marketing/rectangle-1165.png
+    subtextSize: lg
+    headingSize: sm
   - _component: page-sections/proof/testimonial-section
+    authorImage: /src/assets/images/marketing/ellipse-287-2.png
+    backgroundColor: base
+    colorScheme: dark
+    lockColorScheme: true
+    background:
+      type: pattern
+      imageSource: /src/assets/images/marketing/patterns/dark-grid.png
+      patternSize: natural
+      mask: fade
   - _component: page-sections/conversion/cta-center
     heading: See how fast your site could be
-    subtext: LOREM IPSUM
+    subtext: See how CloudCannon's static-first approach delivers the speed boost your business needs.
+    subtextSize: lg
+    imageSource: /src/assets/images/marketing/motorcycle-01-1.png
     headingSize: lg
     buttonSections:
       - _component: building-blocks/core-elements/button

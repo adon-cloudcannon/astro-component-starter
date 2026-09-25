@@ -10,6 +10,7 @@ pageSections:
     subtext: >-
       Here, agencies spend less time on maintenance and more time on billable work, with websites
       your clients love to edit.
+    subtextSize: xl
     imageSource: /src/assets/images/marketing/cloudcannon-hero-portfolio-01-1.png
     headingSize: xl
     imageOverflow: 63
@@ -18,6 +19,11 @@ pageSections:
       imageSource: /src/assets/images/marketing/patterns/sand-grid.png
       patternSize: natural
       mask: none
+    haze:
+      - x: 0.2206
+        rx: 499px
+        'y': 48.3%
+        ry: 68%
     buttonSections:
       - _component: building-blocks/core-elements/button
         variant: primary
@@ -61,18 +67,48 @@ pageSections:
     headingPlacement: inline
     heading: PARTNERS TO BE PROUD OF
   - _component: page-sections/proof/testimonial-section
+    text: Our clients can build entirely new landing pages in just minutes
+    authorName: Sindre Gusdal
+    authorDescription: General Manager, Absoluttweb
+    layout: split
+    markPosition: start
+    markStyle: card
+    company: Absoluttweb
+    authorImage: /src/assets/images/marketing/ellipse-287.jpg
+    logoSource: /src/assets/images/marketing/ellipse-287-3.jpg
+    background:
+      type: pattern
+      imageSource: /src/assets/images/marketing/patterns/sand-pegboard.png
+      patternSize: natural
+      mask: fade
+    haze:
+      - x: 0.4951
+        rx: 531px
+        'y': 27.6%
+        ry: 36.2%
   - _component: page-sections/builders/custom-section
   - _component: page-sections/explainers/feature-split
     subtext: >-
       Build with the static site generator you already use. Define components once and reuse them
       across every client site.
-    imageSource: /src/assets/images/marketing/hero-background-feature-2-3806-72010.png
+    subtextSize: lg
+    imageSource: /src/assets/images/marketing/hero-background-feature-2.jpg
     buttonSections:
       - _component: building-blocks/core-elements/button
-        variant: primary
+        variant: text
+        iconName: arrow-right
+        iconPosition: after
         text: How we’re ready for AI
   - _component: page-sections/builders/custom-section
+    background:
+      type: pattern
+      imageSource: /src/assets/images/marketing/patterns/sand-grid.png
+      patternSize: natural
+      mask: none
   - _component: building-blocks/wrappers/content-selector
+    backgroundColor: base
+    colorScheme: dark
+    lockColorScheme: true
     items:
       - text: >-
           Build with the static site generator you already use. Define components once and reuse
@@ -109,8 +145,18 @@ pageSections:
       - text: Heading
         iconName: check
         iconColor: default
+      - text: Description
+        iconName: check
+        iconColor: default
+      - text: Ship and iterate
+        iconName: check
+        iconColor: default
+      - text: Build a website with no compromises, from development team to content team.
+        iconName: check
+        iconColor: default
   - _component: page-sections/conversion/pricing-tiers
     heading: Join a Partner Program that rewards good work
     subtext: As you bring in new clients, you’ll gain points and more benefits.
+    subtextSize: lg
     headingSize: lg
 ---

@@ -10,14 +10,21 @@ pageSections:
     subtext: >-
       Welcome to a Partner Program that rewards good work. Get better margins and less overhead as
       you grow your portfolio.
+    subtextSize: xl
     imageSource: /src/assets/images/marketing/screenshot-2026-08-17-at-12-00-53-1.png
     headingSize: xl
     imageOverflow: 59
+    reverse: true
     background:
       type: pattern
-      imageSource: /src/assets/images/marketing/patterns/sand-grid.png
+      imageSource: /src/assets/images/marketing/patterns/sand-dotted.png
       patternSize: natural
       mask: none
+    haze:
+      - x: 0.6662
+        rx: 512px
+        'y': 40.1%
+        ry: 73.6%
     buttonSections:
       - _component: building-blocks/core-elements/button
         variant: primary
@@ -63,8 +70,11 @@ pageSections:
   - _component: page-sections/explainers/feature-split
     eyebrow: THE PROGRAM
     heading: What is the Partner Program?
-    subtext: 'The requirements are simple: anyone building SSG-based websites for clients is eligible.'
-    imageSource: /src/assets/images/marketing/screenshot-2026-08-19-at-8-56-26-pm-1-3806-72514.png
+    subtext: >-
+      We want to reward good work. Every new client you bring on earns points, and the more you
+      have, the more benefits you unlock.
+    subtextSize: lg
+    imageSource: /src/assets/images/marketing/image-59.png
     headingSize: lg
     buttonSections:
       - _component: building-blocks/core-elements/button
@@ -77,16 +87,37 @@ pageSections:
         text: Create organization
   - _component: page-sections/conversion/pricing-tiers
     heading: What is the Partner Program?
-    subtext: 'The requirements are simple: anyone building SSG-based websites for clients is eligible.'
+    subtext: >-
+      We want to reward good work. Every new client you bring on earns points, and the more you
+      have, the more benefits you unlock.
+    subtextSize: lg
     headingSize: lg
   - _component: page-sections/conversion/cta-split
+    heading: New client sites shipped in 60 minutes instead of days.
+    headingSize: md
+    backgroundColor: base
+    colorScheme: dark
+    lockColorScheme: true
+    background:
+      type: pattern
+      imageSource: /src/assets/images/marketing/patterns/dark-grid.png
+      patternSize: natural
+      mask: fade
+    haze:
+      - x: 0.4791
+        rx: 933px
+        'y': 49.8%
+        ry: 74.8%
     buttonSections:
       - _component: building-blocks/core-elements/button
-        variant: primary
+        variant: text
+        iconName: arrow-right
+        iconPosition: after
         text: Read case study
   - _component: page-sections/conversion/pricing-tiers
     heading: What are the perks?
     subtext: Track site health, errors, usage and billing for every client from one place.
+    subtextSize: lg
     backgroundColor: base
     colorScheme: dark
     lockColorScheme: true
@@ -94,16 +125,23 @@ pageSections:
   - _component: page-sections/conversion/pricing-tiers
     eyebrow: PARTNER TIERS
     heading: Climb as your portfolio grows
-    subtext: 0-19 points
+    subtext: >-
+      Bring on new clients, move up the tiers, and unlock bigger discounts, dedicated support, and
+      more exposure to new leads.
+    subtextSize: lg
     headingSize: lg
   - _component: page-sections/conversion/pricing-tiers
     heading: Pricing plans designed for your clients
     subtext: Handle billing yourself or pass it on to clients, whatever fits the workflow.
+    subtextSize: lg
     backgroundColor: surface
     headingSize: lg
   - _component: page-sections/explainers/feature-split
+    heading: Enterprise
     subtext: We’ll work with you to craft a plan that fits your particular client’s needs.
+    subtextSize: lg
     imageSource: /src/assets/images/marketing/keatuatara-03-1-3806-72612.png
+    headingSize: md
     buttonSections:
       - _component: building-blocks/core-elements/button
         variant: primary
@@ -111,8 +149,23 @@ pageSections:
   - _component: page-sections/conversion/cta-center
     heading: Become a CloudCannon Partner
     headingSize: lg
+    background:
+      type: pattern
+      imageSource: /src/assets/images/marketing/patterns/sand-grid.png
+      patternSize: natural
+      mask: none
+    haze:
+      - x: 0.5
+        rx: 152px
+        'y': 55.9%
+        ry: 235.3%
+      - x: 0.5
+        rx: 99px
+        'y': 54.4%
+        ry: 142.3%
   - _component: page-sections/conversion/cta-form
     subtext: Complete the Partner Program application below
+    subtextSize: lg
     imageSource: /src/assets/images/marketing/screenshot-2026-08-17-at-10-32-02-pm-1-3806-72701.png
   - _component: page-sections/conversion/cta-center
     heading: Keen to collaborate?

@@ -1,5 +1,5 @@
 ---
-# Generated from the Figma mapping. 0 of 7 blocks are
+# Generated from the Figma mapping. 1 of 7 blocks are
 # confirmed decisions; the rest are proposals to review on the page.
 _schema: default
 title: Enterprise
@@ -10,6 +10,7 @@ pageSections:
     subtext: >-
       CloudCannon lets you have a high-impact web presence without the maintenance burden. Static
       architecture keeps things fast, secure, and quiet.
+    subtextSize: xl
     imageSource: /src/assets/images/marketing/screenshot-2026-08-18-at-14-16-52-1.png
     headingSize: xl
     imageOverflow: 151
@@ -18,6 +19,11 @@ pageSections:
       imageSource: /src/assets/images/marketing/patterns/sand-grid.png
       patternSize: natural
       mask: none
+    haze:
+      - x: 0.1123
+        rx: 666px
+        'y': 47.9%
+        ry: 72%
     buttonSections:
       - _component: building-blocks/core-elements/button
         variant: primary
@@ -29,14 +35,23 @@ pageSections:
         text: Book a demo
   - _component: page-sections/proof/logo-cloud
     backgroundColor: surface
-  - _component: page-sections/explainers/feature-split
+  - _component: page-sections/conversion/cta-center
     eyebrow: SUCCESS STORY
     heading: Publishing took up to five weeks. Now it takes minutes.
     subtext: >-
       PaperCut moved 4,000 pages and 110 editors onto CloudCannon, and lifted their performance
       score from 14 to 90+.
-    imageSource: /src/assets/images/marketing/rectangle-1269.png
+    subtextSize: lg
+    imageSource: /src/assets/images/marketing/image-48.png
     headingSize: lg
+    backgroundColor: base
+    colorScheme: dark
+    lockColorScheme: true
+    background:
+      type: pattern
+      imageSource: /src/assets/images/marketing/patterns/dark-grid.png
+      patternSize: natural
+      mask: fade
     buttonSections:
       - _component: building-blocks/core-elements/button
         variant: primary
@@ -44,11 +59,12 @@ pageSections:
   - _component: page-sections/explainers/feature-split
     heading: Built for how large teams actually work
     subtext: Benefit from more uptime, faster sites, better SEO, enterprise- grade security, and more.
-    imageSource: /src/assets/images/marketing/container.png
+    subtextSize: lg
     headingSize: lg
   - _component: page-sections/proof/story-carousel
     heading: Grow your sites, not your headcount.
     subtext: From fast-moving startups to multi-site agencies, teams ship more with CloudCannon.
+    subtextSize: lg
     backgroundColor: base
     colorScheme: dark
     lockColorScheme: true
@@ -90,16 +106,33 @@ pageSections:
         figure: '90'
         label: average Lighthouse score
         linkText: Read story
+    background:
+      type: pattern
+      imageSource: /src/assets/images/marketing/patterns/dark-grid.png
+      patternSize: natural
+      mask: fade
     buttonSections:
       - _component: building-blocks/core-elements/button
         variant: primary
         text: See how others did it
   - _component: page-sections/builders/custom-section
-  - _component: page-sections/conversion/cta-split
+  - _component: page-sections/conversion/cta-team-member
+    member:
+      _component: building-blocks/wrappers/team-member
+      name: Olivia Nicholson
+      role: Head of Content
+      imageSource: /src/assets/images/marketing/container-5-3806-73607-2.png
+      imageAlt: Olivia Nicholson, Head of Content at CloudCannon
+      backgroundColor: pacific
+      backgroundImage: /src/assets/images/marketing/container-4-3806-73607-1.png
+      propSource: /src/assets/images/marketing/phone-01-1.png
+      propAlt: ''
+    heading: Real humans on support, always
     subtext: >-
       Git underneath, a visual editor on top, with code and content running on one engine. Start
       free in minutes, or book a demo and we’ll walk you through the real thing.
-    imageSource: /src/assets/images/marketing/container-3806-73607.png
+    subtextSize: lg
+    headingSize: lg
     buttonSections:
       - _component: building-blocks/core-elements/button
         variant: primary

@@ -15,7 +15,16 @@ const {
   headingLevel = "h2",
   headingSize = "lg",
   subtext = "",
+  // The design sets a section's supporting line in one of two styles, Body 3
+  // at 19 or Subtitle 1 at 22. `md` is the 16 every section rendered before
+  // either was carried through, so nothing moves unless the design named it.
+  subtextSize = "md",
   features = [],
+  /**
+   * The design runs these three across when they are one point each, and two
+   * across when each card is a destination of its own with its own art.
+   */
+  columns = 3,
   sectionLabel,
   maxContentWidth = "xl",
   paddingHorizontal = "gutter",
@@ -24,6 +33,7 @@ const {
   lockColorScheme = false,
   backgroundColor = "base",
   background,
+  haze = false,
   alignmentHorizontal = "center",
   class: className,
   useDefaultEditableBinding = false,
@@ -32,6 +42,13 @@ const {
 } = Astro.props;
 
 const itemHeadingLevel = nextHeadingLevel(headingLevel);
+
+/**
+ * The cards sit a shade off the band they are on. The design paints them
+ * `--sand` on a `--light-sand` page, which is `surface` against `base`; an
+ * icon-only grid keeps the flat card it has always had.
+ */
+const cardColor = alignmentHorizontal === "center" ? "surface" : "base";
 ---
 
 <CustomSection
@@ -44,6 +61,7 @@ const itemHeadingLevel = nextHeadingLevel(headingLevel);
   lockColorScheme={lockColorScheme}
   backgroundColor={backgroundColor}
   background={background}
+  haze={haze}
   useDefaultEditableBinding={useDefaultEditableBinding}
   {...htmlAttributes}
 >
@@ -65,19 +83,22 @@ const itemHeadingLevel = nextHeadingLevel(headingLevel);
   <Text
     class="feature-grid-subtext"
     alignmentHorizontal={alignmentHorizontal}
+    size={subtextSize}
     data-prop="subtext"
     text={subtext}
   />
   <Grid
     gap="lg"
-    columns={3}
-    class="feature-grid-grid"
+    columns={columns}
+    class:list={["feature-grid-grid", `feature-grid-${columns}-up`]}
     data-children-prop="features"
   >
     {features?.map((feature: FeatureProps) => (
       <FeatureItem
         data-id="page-sections/explainers/feature-grid/feature-item"
         data-editable="array-item"
+        alignmentHorizontal={alignmentHorizontal}
+        backgroundColor={cardColor}
         {...feature}
         headingLevel={itemHeadingLevel}
       />
@@ -87,5 +108,37 @@ const itemHeadingLevel = nextHeadingLevel(headingLevel);
 
 <style is:global>
   @layer page-sections {
+  }
+
+  /* A row of picture cards runs wider than the column the copy sits in: the
+     design's other content width, 1180. Redefining the token rather than
+     fighting CustomSection's own rule, which a page section cannot
+     out-specify (see CLAUDE.md).
+
+     Only the centred, illustrated variant. An icon grid keeps the column. */
+  @layer page-sections {
+    .feature-grid:has(.feature-item.align-center) {
+      --content-width-xl: var(--content-width-wide);
+    }
+
+    /* On `.grid-inner`, which is the element that is actually the grid. Set on
+       the wrapper this did nothing at all: Grid writes --grid-spacing inline
+       on the inner div, and an inline custom property beats one inherited
+       from the parent. */
+    .feature-grid .feature-grid-grid > .grid-inner {
+      gap: 1.09375rem;
+    }
+
+    /* Two large cards sit further apart than three small ones: 503 and 509
+       with 42 between them, in the 1040 column. */
+    .feature-grid .feature-grid-2-up > .grid-inner {
+      gap: 2.625rem;
+    }
+
+    /* The rule around the card is the sand one, not the generic grey: the
+       design draws #EBE1C9, which is --dark-sand. */
+    .feature-grid .feature-item.align-center .card-inner {
+      border-color: var(--dark-sand);
+    }
   }
 </style>
