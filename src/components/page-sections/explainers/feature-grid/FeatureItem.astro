@@ -24,6 +24,15 @@ const {
   imageSource = "",
   imageAlt = "",
   /**
+   * How tall the design draws this particular drawing.
+   *
+   * Each one gets its own box — 151 to 195 across the two grids that use this
+   * card — and the files are served at about three times that, so with only a
+   * shared cap every drawing rendered at exactly the cap and a 180 came out
+   * 140. Left unset the old cap still applies.
+   */
+  imageHeight,
+  /**
    * A card that points somewhere else: a label for who it is for, a heading
    * big enough to read as a destination, and a link out. The design uses it
    * two-up at the foot of a page — "For agencies" / "For enterprise" — where
@@ -55,6 +64,7 @@ const headingSize = titleSize ?? (signpost ? "lg" : imageSource ? "sm" : "md");
 >
   <Card
     class:list={["feature-item", `align-${alignmentHorizontal}`, signpost && "is-signpost", className]}
+    style={imageHeight ? `--feature-image-height: ${Number(imageHeight)}px` : undefined}
     paddingHorizontal={signpost ? "2xl" : "lg"}
     paddingVertical={signpost ? "2xl" : "lg"}
     rounded
@@ -165,6 +175,19 @@ const headingSize = titleSize ?? (signpost ? "lg" : imageSource ? "sm" : "md");
       justify-content: center;
     }
 
+    /* The art hangs from the foot of a box as tall as the tallest drawing in
+       the row, so every title in the row starts on the same line. The design
+       draws 180, 151 and 162 side by side and still keeps them level. */
+    .feature-item.align-center .feature-illustration {
+      align-items: end;
+      block-size: var(--feature-art-row, auto);
+    }
+
+    .feature-item.align-center .feature-illustration .image-inner {
+      align-items: end;
+      block-size: 100%;
+    }
+
     .feature-item .feature-illustration img {
       display: block;
       margin-inline: auto;
@@ -173,7 +196,7 @@ const headingSize = titleSize ?? (signpost ? "lg" : imageSource ? "sm" : "md");
     .feature-item .feature-illustration img {
       block-size: auto;
       inline-size: auto;
-      max-block-size: 8.75rem;
+      max-block-size: var(--feature-image-height, 8.75rem);
       max-inline-size: 100%;
     }
   }

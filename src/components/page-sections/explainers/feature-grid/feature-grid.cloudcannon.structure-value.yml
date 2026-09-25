@@ -148,6 +148,11 @@ _structures:
           imageAlt:
             type: text
             comment: Alternative text for the drawing.
+          imageHeight:
+            type: number
+            comment: >-
+              How tall to draw the illustration, in pixels. The design gives each one its own
+              box. Leave empty for the default.
           linkText:
             type: text
             comment: Label for the link out of the card. Leave empty for no link.

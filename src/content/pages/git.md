@@ -203,26 +203,32 @@ pageSections:
       - title: Git providers
         description: Connect to GitHub, GitLab, or Bitbucket
         imageSource: /src/assets/images/marketing/git-plug-1.png
+        imageHeight: 169
         imageAlt: ''
       - title: Framework support
         description: Keep the static site generator and tooling you already use
         imageSource: /src/assets/images/marketing/cloudcannon-testing-speed-1.png
+        imageHeight: 160
         imageAlt: ''
       - title: Branch previews
         description: Share a hosted preview from any branch before publishing
         imageSource: /src/assets/images/marketing/api-1.png
+        imageHeight: 176
         imageAlt: ''
       - title: Two workflows
         description: Run local development while everyone else edits visual
         imageSource: /src/assets/images/marketing/context-1.png
+        imageHeight: 175
         imageAlt: ''
       - title: Portfolio scale
         description: Run one site or a whole enterprise portfolio
         imageSource: /src/assets/images/marketing/low-maintenence-3806-74347.png
+        imageHeight: 160
         imageAlt: ''
       - title: Enterprise controls
         description: Meet requirements with the user permissions SAML and SOC2
         imageSource: /src/assets/images/marketing/layer-29-1-3806-74351.png
+        imageHeight: 195
         imageAlt: ''
     heading: Fits the way you already build
     subtext: Connect your repo, keep your tooling, and add a visual editor on top.

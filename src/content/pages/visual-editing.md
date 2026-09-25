@@ -128,6 +128,7 @@ pageSections:
         linkText: Learn more
         link: ''
         imageSource: /src/assets/images/marketing/screenshot-2026-08-19-at-12-59-24-1.png
+        imageHeight: 296
         imageAlt: ''
       - eyebrow: For ENTERPRISE
         title: Every change accounted for
@@ -135,6 +136,7 @@ pageSections:
         linkText: Learn more
         link: ''
         imageSource: /src/assets/images/marketing/screenshot-2026-08-18-at-14-16-52-1-3806-72940.png
+        imageHeight: 319
         imageAlt: ''
     columns: 2
     alignmentHorizontal: start

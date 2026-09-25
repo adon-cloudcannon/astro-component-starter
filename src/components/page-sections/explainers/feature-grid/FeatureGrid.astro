@@ -49,6 +49,16 @@ const itemHeadingLevel = nextHeadingLevel(headingLevel);
  * icon-only grid keeps the flat card it has always had.
  */
 const cardColor = alignmentHorizontal === "center" ? "surface" : "base";
+
+/**
+ * The tallest drawing in the row.
+ *
+ * Each card's art is drawn at its own height — 180, 151 and 162 on Content
+ * Editors — and the design still lands all three titles on the same line, so
+ * the art sits in a shared box and hangs from its foot. Sized to each drawing
+ * the titles stepped up and down across the row.
+ */
+const artRow = Math.max(0, ...features.map((feature: FeatureProps) => Number(feature.imageHeight) || 0));
 ---
 
 <CustomSection
@@ -90,6 +100,7 @@ const cardColor = alignmentHorizontal === "center" ? "surface" : "base";
   <Grid
     gap="lg"
     columns={columns}
+    style={artRow ? `--feature-art-row: ${artRow}px` : undefined}
     class:list={["feature-grid-grid", `feature-grid-${columns}-up`]}
     data-children-prop="features"
   >

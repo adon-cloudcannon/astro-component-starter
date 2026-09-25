@@ -104,10 +104,26 @@ pageSections:
       - text: T
         iconName: check
         iconColor: default
-  - _component: page-sections/explainers/feature-split
+  - _component: page-sections/explainers/feature-grid
+    features:
+      - title: Custom permissions
+        description: Define roles and groups to match your organization structure.
+        imageSource: /src/assets/images/marketing/layer-28-1-3806-71328.png
+        imageHeight: 180
+        imageAlt: ''
+      - title: Asset management
+        description: Centralize, control and access approved and optimized assets.
+        imageSource: /src/assets/images/marketing/layer-25-1-3806-71332.png
+        imageHeight: 151
+        imageAlt: ''
+      - title: Multilingual
+        description: Localization and i18n support for worldwide content.
+        imageSource: /src/assets/images/marketing/layer-26-1-3806-71336.png
+        imageHeight: 162
+        imageAlt: ''
+    columns: 3
+    alignmentHorizontal: center
     heading: Built for the work
-    subtext: Define roles and groups to match your organization structure.
-    subtextSize: lg
     headingSize: lg
   - _component: page-sections/conversion/cta-split
     heading: Take a peek under the hood
