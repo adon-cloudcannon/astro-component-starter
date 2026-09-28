@@ -295,6 +295,75 @@ pageSections:
         'y': 54.4%
         ry: 36%
   - _component: page-sections/conversion/cta-form
+    formAction: /partner-program/
+    imageSource: ''
+    formBlocks:
+      - _component: building-blocks/forms/input
+        label: First name
+        name: first-name
+        type: text
+        required: true
+        autocomplete: given-name
+        class: cta-form-half
+      - _component: building-blocks/forms/input
+        label: Last name
+        name: last-name
+        type: text
+        required: true
+        autocomplete: family-name
+        class: cta-form-half
+      - _component: building-blocks/forms/input
+        label: Business Email
+        name: email
+        type: email
+        required: true
+        autocomplete: email
+      - _component: building-blocks/forms/input
+        label: Company website
+        name: website
+        type: url
+        required: true
+        autocomplete: url
+      - _component: building-blocks/forms/choice-group
+        title: What static site generator(s) do you use?
+        name: generators
+        multiple: true
+        required: true
+        options:
+          - label: Astro
+            value: astro
+          - label: Docusaurus
+            value: docusaurus
+          - label: Eleventy
+            value: eleventy
+          - label: Gatsby
+            value: gatsby
+          - label: Hugo
+            value: hugo
+          - label: Jekyll
+            value: jekyll
+          - label: Next.js
+            value: nextjs
+          - label: Nuxt.js
+            value: nuxtjs
+          - label: MkDocs
+            value: mkdocs
+          - label: SvelteKit
+            value: sveltekit
+          - label: Other
+            value: other
+      - _component: building-blocks/forms/textarea
+        label: What goals would you like to achieve by using CloudCannon?
+        name: goals
+        required: true
+        rows: 4
+      - _component: building-blocks/forms/select
+        label: How did you hear about CloudCannon?
+        name: referral
+        required: true
+        placeholder: Please Select
+      - _component: building-blocks/forms/submit
+        text: Submit
     steps:
       - contentSections:
           - _component: building-blocks/core-elements/simple-text
@@ -312,7 +381,6 @@ pageSections:
           - _component: building-blocks/core-elements/simple-text
             text: Once approved, access the Lite plan and Bronze benefits. Start launching!
             size: lg
-    imageSource: /src/assets/images/marketing/screenshot-2026-08-17-at-10-32-02-pm-1-3806-72701.png
   - _component: page-sections/conversion/cta-center
     heading: Keen to collaborate?
     backgroundColor: base

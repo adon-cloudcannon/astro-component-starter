@@ -75,16 +75,53 @@ const {
       data-children-prop="steps"
     />
   )}
-  <Split
-    distributionMode="fixed-flexible"
-    fixedWidth="400"
-    alignmentVertical="center"
-    reverse={reverse}
-    minSplitWidth={640}
-  >
-    <Fragment slot="first">
-      {/* `lg`, not the `xl` the other CTAs use: this one shares its row with a
-          form, so the heading has half the width to fill. */}
+  {imageSource ? (
+    <Split
+      distributionMode="fixed-flexible"
+      fixedWidth="400"
+      alignmentVertical="center"
+      reverse={reverse}
+      minSplitWidth={640}
+    >
+      <Fragment slot="first">
+        {/* `lg`, not the `xl` the other CTAs use: this one shares its row with
+            a form, so the heading has half the width to fill. */}
+        <Heading
+          level={headingLevel}
+          size={headingSize}
+          data-prop="heading"
+        >
+          {heading}
+        </Heading>
+        <Text
+          style={subtextWidth ? `max-inline-size: ${Number(subtextWidth)}px; margin-inline: auto; justify-self: center` : undefined}
+          size={subtextSize}
+          data-prop="subtext"
+          text={subtext}
+        />
+        <Form
+          action={formAction}
+          data-children-prop="formBlocks"
+          formBlocks={formBlocks}
+        />
+      </Fragment>
+      <Fragment slot="second">
+        <Image
+          source={imageSource}
+          rounded={true}
+          alt={imageAlt}
+          aspectRatio="landscape"
+          data-prop-src="imageSource"
+          data-prop-alt="imageAlt"
+        />
+      </Fragment>
+    </Split>
+  ) : (
+    /* No picture beside it: the design draws the application as one card on
+       the band, 960 wide and centred, with the form inside it. Split with an
+       empty second pane left the form in a 400 column with half the band
+       blank. */
+    <div class="cta-form-card">
       <Heading
         level={headingLevel}
         size={headingSize}
@@ -93,7 +130,8 @@ const {
         {heading}
       </Heading>
       <Text
-        style={subtextWidth ? `max-inline-size: ${Number(subtextWidth)}px; margin-inline: auto; justify-self: center` : undefined}        size={subtextSize}
+        style={subtextWidth ? `max-inline-size: ${Number(subtextWidth)}px` : undefined}
+        size={subtextSize}
         data-prop="subtext"
         text={subtext}
       />
@@ -102,18 +140,8 @@ const {
         data-children-prop="formBlocks"
         formBlocks={formBlocks}
       />
-    </Fragment>
-    <Fragment slot="second">
-      <Image
-        source={imageSource}
-        rounded={true}
-        alt={imageAlt}
-        aspectRatio="landscape"
-        data-prop-src="imageSource"
-        data-prop-alt="imageAlt"
-      />
-    </Fragment>
-  </Split>
+    </div>
+  )}
 </CustomSection>
 
 <style is:global>
@@ -226,6 +254,43 @@ const {
     .cta-form .cta-form-steps .step-content .simple-text,
     .cta-form .cta-form-steps .step-content .simple-text-content {
       text-align: center;
+    }
+  }
+
+  /* The application card, measured off 3806:72624: 960 wide, white, 18 radius,
+     padded 64. Its fields run the card's full width apart from the two names,
+     which the design draws 404 each side by side.
+
+     Flat, because rules nested deeper than a couple of levels get dropped (see
+     CLAUDE.md). */
+  @layer page-sections {
+    .cta-form .cta-form-card {
+      background-color: var(--white, #ffffff);
+      border-radius: 1.125rem;
+      margin-inline: auto;
+      max-inline-size: 60rem;
+      padding: var(--spacing-3xl);
+    }
+
+    /* On .form-fields, which is the element that actually holds them: the
+       <form> has a single child wrapper, so a grid on it had one item. */
+    .cta-form .cta-form-card .form-fields {
+      display: grid;
+      gap: var(--spacing-lg);
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .cta-form .cta-form-card .form-fields > * {
+      /* The flow layer puts a space-before on every child after the first,
+         which is right for a stack and wrong inside a grid (see CLAUDE.md). */
+      --space-before: 0;
+      grid-column: span 2;
+      margin-block: 0;
+    }
+
+    /* Namespaced: a bare `half` is already on a hero split's inner div. */
+    .cta-form .cta-form-card .form-fields > .cta-form-half {
+      grid-column: span 1;
     }
   }
 </style>
