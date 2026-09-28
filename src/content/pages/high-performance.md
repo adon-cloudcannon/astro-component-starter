@@ -105,6 +105,11 @@ pageSections:
     subtextSize: lg
     imageSource: /src/assets/images/marketing/motorcycle-01-1.png
     headingSize: lg
+    background:
+      type: pattern
+      imageSource: /src/assets/images/marketing/patterns/sand-dotted.png
+      patternSize: natural
+      mask: none
     buttonSections:
       - _component: building-blocks/core-elements/button
         variant: text

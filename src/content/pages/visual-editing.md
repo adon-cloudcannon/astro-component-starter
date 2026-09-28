@@ -59,6 +59,16 @@ pageSections:
     subtextSize: xl
     subtextWidth: 580
     headingSize: lg
+    background:
+      type: pattern
+      imageSource: /src/assets/images/marketing/patterns/sand-grid.png
+      patternSize: natural
+      mask: none
+    haze:
+      - x: 0.5357
+        rx: 735px
+        'y': 92.4%
+        ry: 132.5%
   - _component: building-blocks/wrappers/content-selector
     items:
       - text: >-
