@@ -202,6 +202,8 @@ pageSections:
       Bring on new clients, move up the tiers, and unlock bigger discounts, dedicated support, and
       more exposure to new leads.
     subtextSize: lg
+    subtextWidth: 580
+    alignmentHorizontal: start
     headingSize: lg
   - _component: page-sections/conversion/pricing-tiers
     tiers:
@@ -262,6 +264,7 @@ pageSections:
     subtextSize: lg
     backgroundColor: surface
     subtextWidth: 446
+    alignmentHorizontal: center
     headingSize: lg
   - _component: page-sections/explainers/feature-split
     backgroundColor: surface

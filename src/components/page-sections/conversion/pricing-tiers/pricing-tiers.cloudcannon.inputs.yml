@@ -44,6 +44,15 @@ subtext:
     underline: false
     bulletedlist: false
     numberedlist: false
+alignmentHorizontal:
+  type: select
+  comment: Whether the header is centred over the tiers or runs from the left.
+  options:
+    values:
+      - id: center
+        name: Center
+      - id: start
+        name: Start
 subtextSize:
   type: select
   comment: Body 3 at 19 or Subtitle 1 at 22 in the design; regular is 16.

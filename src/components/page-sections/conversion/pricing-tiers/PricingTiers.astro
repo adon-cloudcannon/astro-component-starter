@@ -35,6 +35,14 @@ const {
   annualBadge = "",
   defaultInterval = "monthly",
   tiers = [],
+  /**
+   * How the header sits over the tiers.
+   *
+   * The design does both: "Pricing plans" is centred and "Climb as your
+   * portfolio grows" runs from the column's left edge, with the same eyebrow,
+   * heading and measured line either way.
+   */
+  alignmentHorizontal = "center",
   sectionLabel,
   maxContentWidth = "xl",
   paddingHorizontal = "gutter",
@@ -74,7 +82,7 @@ const annualSelected = defaultInterval === "annual";
   {...htmlAttributes}
 >
   <SimpleText
-    alignmentHorizontal="center"
+    alignmentHorizontal={alignmentHorizontal}
     class="eyebrow"
     data-prop="eyebrow"
     text={eyebrow}
@@ -83,15 +91,19 @@ const annualSelected = defaultInterval === "annual";
   <Heading
     level={headingLevel}
     size={headingSize}
-    alignmentHorizontal="center"
+    alignmentHorizontal={alignmentHorizontal}
     data-prop="heading"
   >
     {heading}
   </Heading>
   <Text
     class="pricing-tiers-subtext"
-    alignmentHorizontal="center"
-    style={subtextWidth ? `max-inline-size: ${Number(subtextWidth)}px; margin-inline: auto; justify-self: center` : undefined}    size={subtextSize}
+    alignmentHorizontal={alignmentHorizontal}
+    style={subtextWidth
+      ? `max-inline-size: ${Number(subtextWidth)}px;${
+          alignmentHorizontal === "center" ? " margin-inline: auto; justify-self: center" : ""
+        }`
+      : undefined}    size={subtextSize}
     data-prop="subtext"
     text={subtext}
   />
@@ -176,11 +188,25 @@ const annualSelected = defaultInterval === "annual";
 
   @layer page-sections {
     /* Four tiers want the file's other column, 1180, and step up to the right:
-       the design draws them 274, 328, 399 and 454 tall on one baseline. A page
-       section cannot out-specify CustomSection's width rule, so the token it
-       reads is redefined instead (the MainNav pattern, see CLAUDE.md). */
-    .pricing-tiers:has(.pricing-tiers-wide) {
-      --content-width-xl: var(--content-width-wide);
+       the design draws them 274, 328, 399 and 454 tall on one baseline.
+
+       Only the row. Widening the section took the header out with it, and the
+       design keeps that in the 1040 column — the eyebrow, heading and line all
+       start at 125 while the cards run 52 to 1226. So the row breaks out of
+       the column by half the difference instead. */
+    .pricing-tiers .pricing-tiers-wide {
+      /* `inline-size: auto` as well as the margins: Grid sets width: 100%,
+         which resolves against the 1040 column, so negative margins alone slid
+         the row left instead of widening it. */
+      inline-size: auto;
+      margin-inline: calc((var(--content-width-xl) - var(--content-width-wide)) / 2);
+    }
+
+    /* 11 between them, not the 24 three cards take: the design draws 285-wide
+       cards at 52, 348, 645 and 941. */
+    .pricing-tiers .pricing-tiers-wide > .grid-inner {
+      gap: 0.6875rem;
+      max-inline-size: none;
     }
 
     .pricing-tiers .pricing-tiers-wide > .grid-inner {

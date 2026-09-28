@@ -87,6 +87,7 @@ pageSections:
     backgroundColor: base
     colorScheme: dark
     lockColorScheme: true
+    alignmentHorizontal: start
     headingSize: sm
   - _component: page-sections/proof/testimonial-section
     text: >-

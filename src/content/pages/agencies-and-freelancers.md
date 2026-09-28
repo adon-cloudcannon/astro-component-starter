@@ -179,5 +179,6 @@ pageSections:
     heading: Join a Partner Program that rewards good work
     subtext: As you bring in new clients, you’ll gain points and more benefits.
     subtextSize: lg
+    alignmentHorizontal: center
     headingSize: lg
 ---

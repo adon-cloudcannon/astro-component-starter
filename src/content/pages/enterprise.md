@@ -124,6 +124,7 @@ pageSections:
     subtext: Benefit from more uptime, faster sites, better SEO, enterprise- grade security, and more.
     subtextSize: lg
     subtextWidth: 580
+    alignmentHorizontal: center
     cardHeight: 334
     headingSize: lg
   - _component: page-sections/proof/story-carousel
@@ -247,6 +248,7 @@ pageSections:
       Git underneath, a visual editor on top, with code and content running on one engine. Start
       free in minutes, or book a demo and we’ll walk you through the real thing.
     subtextSize: lg
+    subtextWidth: 489
     headingSize: lg
     buttonSections:
       - _component: building-blocks/core-elements/button

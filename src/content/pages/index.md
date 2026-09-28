@@ -483,6 +483,7 @@ pageSections:
       giving developers a worse one. So we built a CMS that works for both.
     subtextSize: lg
     backgroundColor: surface
+    subtextWidth: 460
     headingSize: lg
   - _component: page-sections/conversion/cta-split
     heading: Take a peek under the hood

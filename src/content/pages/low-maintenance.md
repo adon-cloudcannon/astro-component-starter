@@ -146,7 +146,6 @@ pageSections:
     backgroundColor: base
     colorScheme: dark
     lockColorScheme: true
-    subtextWidth: 5
   - _component: page-sections/proof/testimonial-section
     company: Absoluttweb
     text: Absoluttweb went from days per new client site to around an hour.
@@ -186,6 +185,7 @@ pageSections:
       Git underneath, a visual editor on top, with code and content running on one engine. Start
       free in minutes, or book a demo and we’ll walk you through the real thing.
     subtextSize: lg
+    subtextWidth: 489
     headingSize: lg
     buttonSections:
       - _component: building-blocks/core-elements/button
