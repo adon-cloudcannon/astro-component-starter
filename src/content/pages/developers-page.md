@@ -1,5 +1,5 @@
 ---
-# Generated from the Figma mapping. 1 of 10 blocks are
+# Generated from the Figma mapping. 2 of 10 blocks are
 # confirmed decisions; the rest are proposals to review on the page.
 _schema: default
 title: Developers Page
@@ -225,12 +225,23 @@ pageSections:
       - _component: building-blocks/core-elements/button
         variant: primary
         text: Explore open-source tools
-  - _component: page-sections/conversion/cta-split
+  - _component: page-sections/conversion/cta-team-member
+    member:
+      _component: building-blocks/wrappers/team-member
+      name: Olivia Nicholson
+      role: Head of Content
+      imageSource: /src/assets/images/marketing/container-5-3806-72981-2.png
+      imageAlt: Olivia Nicholson, Head of Content at CloudCannon
+      backgroundColor: pacific
+      backgroundImage: /src/assets/images/marketing/container-4-3806-72981-1.png
+      propSource: /src/assets/images/marketing/phone-01-1.png
+      propAlt: ''
     heading: We’re here to help
     subtext: >-
       We're a small team with a lot of knowledge, so you'll talk to someone who knows what they're
       talking about and can give you hands-on help whatever the problem.
     subtextSize: lg
+    subtextWidth: 489
     headingSize: lg
     buttonSections:
       - _component: building-blocks/core-elements/button
