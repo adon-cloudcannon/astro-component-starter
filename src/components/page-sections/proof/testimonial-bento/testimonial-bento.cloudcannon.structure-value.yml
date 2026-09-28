@@ -189,6 +189,7 @@ groups:
       - heading
       - subtext
       - subtextSize
+      - subtextWidth
       - testimonials
       - columns
   - heading: Section settings

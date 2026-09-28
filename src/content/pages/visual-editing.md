@@ -57,6 +57,7 @@ pageSections:
     heading: Here, you don’t need to wait to make changes
     subtext: When something on the site needs updating, the person who noticed can just fix it.
     subtextSize: xl
+    subtextWidth: 580
     headingSize: lg
   - _component: building-blocks/wrappers/content-selector
     items:
@@ -108,6 +109,7 @@ pageSections:
     subtextSize: lg
     imageSource: /src/assets/images/marketing/rectangle-856-3806-72794.png
     backgroundColor: surface
+    subtextWidth: 646
     headingSize: lg
   - _component: page-sections/explainers/feature-split
     heading: Publish when you’re ready

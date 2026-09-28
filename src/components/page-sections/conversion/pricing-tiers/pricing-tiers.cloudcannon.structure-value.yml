@@ -201,6 +201,7 @@ groups:
       - heading
       - subtext
       - subtextSize
+      - subtextWidth
       - showAnnualPricing
       - monthlyLabel
       - annualLabel

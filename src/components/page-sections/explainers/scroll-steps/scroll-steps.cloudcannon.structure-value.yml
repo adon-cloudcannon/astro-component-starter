@@ -51,6 +51,7 @@ groups:
       - heading
       - subtext
       - subtextSize
+      - subtextWidth
       - steps
   - heading: Layout
     inputs:

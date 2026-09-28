@@ -23,6 +23,13 @@ const {
   headingSize = "lg",
   subtext = "",
   subtextSize = "lg",
+  /**
+   * The measure the design sets the supporting line in, in pixels.
+   *
+   * Not the column it sits in: a centred subtext is drawn at about 580 in the
+   * 1040 column, and run the full width it reads as a different block.
+   */
+  subtextWidth,
   buttonSections = [],
   member = {},
   /** The card on the end side, with the copy leading. */
@@ -72,7 +79,7 @@ const {
     />
     <Text
       class="subtext"
-      size={subtextSize}
+      style={subtextWidth ? `max-inline-size: ${Number(subtextWidth)}px; margin-inline: auto; justify-self: center` : undefined}      size={subtextSize}
       alignmentHorizontal="start"
       data-prop="subtext"
       text={subtext}

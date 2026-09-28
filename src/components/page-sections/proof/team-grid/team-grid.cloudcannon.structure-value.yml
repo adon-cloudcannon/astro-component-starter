@@ -76,6 +76,7 @@ groups:
       - headingLevel
       - headingSize
       - subtextSize
+      - subtextWidth
       - maxContentWidth
       - paddingHorizontal
       - paddingVertical

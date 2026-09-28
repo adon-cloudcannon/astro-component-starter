@@ -28,6 +28,13 @@ const {
   // Body 3 at 19 or Subtitle 1 at 22 in the design; `md` keeps the 16 every
   // section rendered before either was carried through.
   subtextSize = "md",
+  /**
+   * The measure the design sets the supporting line in, in pixels.
+   *
+   * Not the column it sits in: a centred subtext is drawn at about 580 in the
+   * 1040 column, and run the full width it reads as a different block.
+   */
+  subtextWidth,
   items = [],
   sectionLabel,
   maxContentWidth = "xl",
@@ -76,7 +83,7 @@ const {
   <Text
     class="subtext"
     data-prop="subtext"
-    size={subtextSize}    text={subtext}
+    style={subtextWidth ? `max-inline-size: ${Number(subtextWidth)}px; margin-inline: auto; justify-self: center` : undefined}    size={subtextSize}    text={subtext}
   />
 
   <ContentSelector

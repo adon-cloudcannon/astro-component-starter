@@ -42,6 +42,7 @@ pageSections:
       through the demo.
     subtextSize: lg
     imageSource: /src/assets/images/marketing/screenshot-2026-08-11-at-17-25-56-1.png
+    subtextWidth: 612
     headingSize: lg
   - _component: page-sections/explainers/step-selector
     items:
@@ -161,6 +162,7 @@ pageSections:
       leave CloudCannon, you leave with everything: your content, your code, your commits.
     subtextSize: lg
     imageSource: /src/assets/images/marketing/ribbon-01-1.png
+    subtextWidth: 816
     headingSize: lg
     buttonSections:
       - _component: building-blocks/core-elements/button

@@ -44,6 +44,7 @@ pageSections:
     colorScheme: dark
     lockColorScheme: true
     subtextSize: lg
+    subtextWidth: 580
     headingSize: lg
     background:
       type: pattern

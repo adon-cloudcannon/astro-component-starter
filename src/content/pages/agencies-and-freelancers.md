@@ -94,6 +94,7 @@ pageSections:
       Grow your portfolio, not your overhead. Ship faster, hand over confidently, and get on with
       what’s next.
     subtextSize: xl
+    subtextWidth: 602
     headingSize: lg
     background:
       type: pattern
@@ -112,6 +113,7 @@ pageSections:
       across every client site.
     subtextSize: lg
     imageSource: /src/assets/images/marketing/hero-background-feature-2.jpg
+    subtextWidth: 527
     buttonSections:
       - _component: building-blocks/core-elements/button
         variant: text

@@ -62,6 +62,7 @@ groups:
       - heading
       - subtext
       - subtextSize
+      - subtextWidth
       - buttonSections
   - heading: Section settings
     comment: Width, spacing, color scheme, and background for this section.

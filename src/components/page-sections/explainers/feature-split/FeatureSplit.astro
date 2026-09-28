@@ -16,6 +16,13 @@ const {
   // The design sets this in Body 3 at 19 or Subtitle 1 at 22; the default
   // keeps the 16 every section used before either was carried through.
   subtextSize = "lg",
+  /**
+   * The measure the design sets the supporting line in, in pixels.
+   *
+   * Not the column it sits in: a centred subtext is drawn at about 580 in the
+   * 1040 column, and run the full width it reads as a different block.
+   */
+  subtextWidth,
   buttonSections = [],
   imageSource = "",
   imageAlt = "",
@@ -85,7 +92,7 @@ const imagePositionVertical = imageBleed ? "top" : "center";
       </Heading>
       <Text
         class="subtext"
-        size={subtextSize}
+        style={subtextWidth ? `max-inline-size: ${Number(subtextWidth)}px; margin-inline: auto; justify-self: center` : undefined}        size={subtextSize}
         data-prop="subtext"
         text={subtext}
       />

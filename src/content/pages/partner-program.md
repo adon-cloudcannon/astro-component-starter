@@ -121,6 +121,7 @@ pageSections:
     backgroundColor: base
     colorScheme: dark
     lockColorScheme: true
+    subtextWidth: 320
     headingSize: lg
   - _component: page-sections/conversion/pricing-tiers
     eyebrow: PARTNER TIERS
@@ -135,6 +136,7 @@ pageSections:
     subtext: Handle billing yourself or pass it on to clients, whatever fits the workflow.
     subtextSize: lg
     backgroundColor: surface
+    subtextWidth: 446
     headingSize: lg
   - _component: page-sections/explainers/feature-split
     heading: Enterprise
@@ -167,6 +169,7 @@ pageSections:
     subtext: Complete the Partner Program application below
     subtextSize: lg
     imageSource: /src/assets/images/marketing/screenshot-2026-08-17-at-10-32-02-pm-1-3806-72701.png
+    subtextWidth: 201
   - _component: page-sections/conversion/cta-center
     heading: Keen to collaborate?
     backgroundColor: base

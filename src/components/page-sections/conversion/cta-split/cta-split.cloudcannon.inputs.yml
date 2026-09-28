@@ -52,6 +52,11 @@ subtextSize:
         name: Large
       - id: xl
         name: Extra large
+subtextWidth:
+  type: number
+  comment: >-
+    Measure for the supporting line, in pixels. The design sets a centred one
+    at about 580 rather than the full column. Leave empty for the full width.
 imageSource:
   type: image
   comment: Image shown beside the copy.

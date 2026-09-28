@@ -78,6 +78,7 @@ pageSections:
       visual interface to edit it.
     subtextSize: lg
     imageSource: /src/assets/images/marketing/food-bank-volunteers-produce-1-3806-69798.png
+    subtextWidth: 580
     headingSize: lg
     buttonSections:
       - _component: building-blocks/core-elements/button
@@ -89,6 +90,7 @@ pageSections:
       Editors edit visually, developers stay in code — and every change lands in the same Git
       repository.
     subtextSize: lg
+    subtextWidth: 580
     headingSize: lg
     panels:
       - accentColor: pacific
@@ -144,6 +146,7 @@ pageSections:
   - _component: page-sections/explainers/feature-deck
     subtextSize: lg
     backgroundColor: base
+    subtextWidth: 480
     headingSize: lg
     cards:
       - _component: building-blocks/wrappers/scroll-deck/scroll-deck-card
@@ -383,6 +386,7 @@ pageSections:
     backgroundColor: base
     colorScheme: dark
     lockColorScheme: true
+    subtextWidth: 560
     headingSize: lg
     stories:
       - accentColor: golden

@@ -74,6 +74,7 @@ pageSections:
       other work. The site builds from those files using whatever static site generator you already
       use.
     subtextSize: lg
+    subtextWidth: 808
     headingSize: lg
   - _component: page-sections/proof/testimonial-section
     text: >-
@@ -110,6 +111,7 @@ pageSections:
     colorScheme: dark
     lockColorScheme: true
     subtextSize: lg
+    subtextWidth: 580
     headingSize: lg
   - _component: page-sections/explainers/timeline-section
     layout: rail
@@ -192,6 +194,7 @@ pageSections:
       you're stuck.
     subtextSize: lg
     imageSource: /src/assets/images/marketing/ribbon-01-1.png
+    subtextWidth: 579
     headingSize: lg
     buttonSections:
       - _component: building-blocks/core-elements/button
@@ -233,6 +236,7 @@ pageSections:
     heading: Fits the way you already build
     subtext: Connect your repo, keep your tooling, and add a visual editor on top.
     subtextSize: lg
+    subtextWidth: 580
     headingSize: lg
   - _component: page-sections/conversion/cta-split
     heading: Take a peek under the hood

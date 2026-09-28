@@ -42,6 +42,7 @@ pageSections:
     heading: Here’s what you’re working with
     subtext: Click a heading and change it. See what’s possible with the Visual Editor.
     subtextSize: lg
+    subtextWidth: 612
     headingSize: lg
   - _component: page-sections/proof/testimonial-section
     text: When we show clients the Visual Editor during our meetings, their eyes light up.

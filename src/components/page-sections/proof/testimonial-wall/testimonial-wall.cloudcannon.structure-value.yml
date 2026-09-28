@@ -119,6 +119,7 @@ groups:
       - heading
       - subtext
       - subtextSize
+      - subtextWidth
       - testimonials
       - columns
       - layout

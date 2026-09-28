@@ -166,6 +166,7 @@ groups:
       - heading
       - subtext
       - subtextSize
+      - subtextWidth
       - alignmentHorizontal
       - columns
       - features

@@ -54,6 +54,7 @@ groups:
       - heading
       - subtext
       - subtextSize
+      - subtextWidth
       - showBreadcrumbs
       - alignmentHorizontal
   - heading: Section settings

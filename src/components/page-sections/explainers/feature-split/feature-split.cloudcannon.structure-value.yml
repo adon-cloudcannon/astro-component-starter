@@ -58,6 +58,7 @@ groups:
       - heading
       - subtext
       - subtextSize
+      - subtextWidth
       - buttonSections
       - imageSource
       - imageAlt

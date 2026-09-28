@@ -43,6 +43,7 @@ pageSections:
       score from 14 to 90+.
     subtextSize: lg
     imageSource: /src/assets/images/marketing/image-48.png
+    subtextWidth: 573
     headingSize: lg
     backgroundColor: base
     colorScheme: dark
@@ -91,6 +92,7 @@ pageSections:
     heading: Built for how large teams actually work
     subtext: Benefit from more uptime, faster sites, better SEO, enterprise- grade security, and more.
     subtextSize: lg
+    subtextWidth: 580
     headingSize: lg
   - _component: page-sections/proof/story-carousel
     heading: Grow your sites, not your headcount.
@@ -99,6 +101,7 @@ pageSections:
     backgroundColor: base
     colorScheme: dark
     lockColorScheme: true
+    subtextWidth: 560
     headingSize: lg
     stories:
       - accentColor: golden

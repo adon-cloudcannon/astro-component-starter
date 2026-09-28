@@ -124,6 +124,7 @@ groups:
       - heading
       - subtext
       - subtextSize
+      - subtextWidth
       - layout
       - entries
   - heading: Section settings

@@ -77,6 +77,7 @@ pageSections:
       somewhere to work, your site stays as a set of static files, and neither one needs looking
       after.
     subtextSize: lg
+    subtextWidth: 816
     headingSize: lg
     buttonSections:
       - _component: building-blocks/core-elements/button
@@ -117,6 +118,7 @@ pageSections:
     colorScheme: dark
     lockColorScheme: true
     subtextSize: lg
+    subtextWidth: 580
     headingSize: lg
     background:
       type: pattern
@@ -144,6 +146,7 @@ pageSections:
     backgroundColor: base
     colorScheme: dark
     lockColorScheme: true
+    subtextWidth: 5
   - _component: page-sections/proof/testimonial-section
     company: Absoluttweb
     text: Absoluttweb went from days per new client site to around an hour.
