@@ -38,3 +38,7 @@ _inputs:
     type: array
     options:
       structures: _structures.scroll_deck_card
+_inputs_from_glob:
+  - /src/components/page-sections/explainers/feature-deck/feature-deck.cloudcannon.inputs.yml
+  - /.cloudcannon/inputs/background.yml
+  - /.cloudcannon/inputs/haze.yml

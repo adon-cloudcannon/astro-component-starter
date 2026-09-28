@@ -11,3 +11,7 @@ _inputs:
   $:
     preview:
       icon: tab
+_inputs_from_glob:
+  - /src/components/page-sections/explainers/step-selector/step-selector.cloudcannon.inputs.yml
+  - /.cloudcannon/inputs/background.yml
+  - /.cloudcannon/inputs/haze.yml

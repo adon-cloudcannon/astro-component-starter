@@ -66,6 +66,7 @@ picker_preview:
 _inputs_from_glob:
   - /src/components/page-sections/explainers/stats/stats.cloudcannon.inputs.yml
   - /.cloudcannon/inputs/background.yml
+  - /.cloudcannon/inputs/haze.yml
 _structures:
   statsItems:
     values:
@@ -120,3 +121,4 @@ groups:
       - lockColorScheme
       - backgroundColor
       - background
+      - haze

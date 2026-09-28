@@ -60,6 +60,7 @@ picker_preview:
 _inputs_from_glob:
   - /src/components/page-sections/proof/logo-cloud/logo-cloud.cloudcannon.inputs.yml
   - /.cloudcannon/inputs/background.yml
+  - /.cloudcannon/inputs/haze.yml
 _structures:
   logoCloudLogos:
     values:
@@ -112,3 +113,4 @@ groups:
       - lockColorScheme
       - backgroundColor
       - background
+      - haze

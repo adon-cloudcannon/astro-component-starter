@@ -99,3 +99,7 @@ _structures:
           link:
             type: url
             comment: Where the panel links to.
+_inputs_from_glob:
+  - /src/components/page-sections/explainers/workflow-split/workflow-split.cloudcannon.inputs.yml
+  - /.cloudcannon/inputs/background.yml
+  - /.cloudcannon/inputs/haze.yml

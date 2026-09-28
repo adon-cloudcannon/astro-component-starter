@@ -99,6 +99,11 @@ pageSections:
     backgroundColor: base
     colorScheme: dark
     lockColorScheme: true
+    background:
+      type: pattern
+      imageSource: /src/assets/images/marketing/patterns/dark-grid.png
+      patternSize: natural
+      mask: fade
   - _component: page-sections/proof/testimonial-bento
     testimonials:
       - text: |-

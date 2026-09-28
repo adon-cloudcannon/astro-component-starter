@@ -126,6 +126,11 @@ pageSections:
       imageSource: /src/assets/images/marketing/patterns/sand-grid.png
       patternSize: natural
       mask: none
+    haze:
+      - x: 0.2342
+        rx: 453px
+        'y': 45.2%
+        ry: 45.6%
   - _component: building-blocks/wrappers/content-selector
     backgroundColor: base
     colorScheme: dark

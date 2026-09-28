@@ -66,6 +66,7 @@ picker_preview:
 _inputs_from_glob:
   - /src/components/page-sections/collections/gallery-grid/gallery-grid.cloudcannon.inputs.yml
   - /.cloudcannon/inputs/background.yml
+  - /.cloudcannon/inputs/haze.yml
 _structures:
   galleryImages:
     values:
@@ -122,3 +123,4 @@ groups:
       - lockColorScheme
       - backgroundColor
       - background
+      - haze

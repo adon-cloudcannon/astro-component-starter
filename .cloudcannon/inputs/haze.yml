@@ -1,0 +1,49 @@
+# Shared by every page section that can carry a haze, via a second
+# _inputs_from_glob entry.
+#
+# An array, not a switch. The design measures a pool per section — its centre
+# and both radii — and the generator writes them as objects, so a boolean
+# cannot round-trip what is in the files: toggling one would replace the
+# measured geometry with `true` and drop every pool back to the default centre.
+# An empty item is that default, which is what `true` used to mean.
+haze:
+  type: array
+  label: Haze
+  comment: >-
+    Pools the section's own background colour behind the content and blurs it,
+    so a heading stays readable where an illustration or a pattern runs
+    underneath. Most sections have one; a few have two. Leave empty for none.
+  options:
+    structures:
+      values:
+        - label: Haze pool
+          icon: blur_on
+          value:
+            x: 0.5
+            'y': 50%
+            rx: 50%
+            ry: 80%
+          preview:
+            icon: blur_on
+            text:
+              - Haze pool
+            subtext:
+              - key: rx
+          _inputs:
+            x:
+              type: number
+              comment: >-
+                Centre across the content column, 0 to 1. Measured against the
+                column rather than the band, so it stays behind the heading on
+                a wider window.
+            'y':
+              type: text
+              comment: Centre down the band, as a percentage. E.g. 50%.
+            rx:
+              type: text
+              comment: >-
+                Horizontal radius, as a length or a percentage. E.g. 735px.
+                A radial gradient's size rejects calc(), so keep it simple.
+            ry:
+              type: text
+              comment: Vertical radius, as a length or a percentage. E.g. 80%.

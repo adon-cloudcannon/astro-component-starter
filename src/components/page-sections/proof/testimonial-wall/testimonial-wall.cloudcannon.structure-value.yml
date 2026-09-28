@@ -67,6 +67,7 @@ picker_preview:
 _inputs_from_glob:
   - /src/components/page-sections/proof/testimonial-wall/testimonial-wall.cloudcannon.inputs.yml
   - /.cloudcannon/inputs/background.yml
+  - /.cloudcannon/inputs/haze.yml
 _structures:
   testimonialWallItems:
     values:
@@ -136,3 +137,4 @@ groups:
       - lockColorScheme
       - backgroundColor
       - background
+      - haze

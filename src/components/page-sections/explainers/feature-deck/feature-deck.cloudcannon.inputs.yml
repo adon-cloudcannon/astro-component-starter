@@ -147,9 +147,3 @@ background:
   type: object
   comment: Background image, video or pattern for the section.
 
-haze:
-  type: switch
-  comment: >-
-    Pools the section's own background colour behind the content and blurs it,
-    so a heading stays readable where an illustration or a pattern runs
-    underneath.

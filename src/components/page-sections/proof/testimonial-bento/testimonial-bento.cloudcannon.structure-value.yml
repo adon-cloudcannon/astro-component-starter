@@ -71,6 +71,7 @@ picker_preview:
 _inputs_from_glob:
   - /src/components/page-sections/proof/testimonial-bento/testimonial-bento.cloudcannon.inputs.yml
   - /.cloudcannon/inputs/background.yml
+  - /.cloudcannon/inputs/haze.yml
 _structures:
   testimonialBentoItems:
     values:
@@ -205,3 +206,4 @@ groups:
       - lockColorScheme
       - backgroundColor
       - background
+      - haze

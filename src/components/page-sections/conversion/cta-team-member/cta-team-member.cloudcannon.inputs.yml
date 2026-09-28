@@ -163,9 +163,3 @@ backgroundColor:
       - id: highlight
         name: Highlight
 
-haze:
-  type: switch
-  comment: >-
-    Pools the section's own background colour behind the content and blurs it,
-    so a heading stays readable where an illustration or a pattern runs
-    underneath.

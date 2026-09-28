@@ -119,3 +119,7 @@ _editables:
     bold: true
     italic: true
     link: true
+_inputs_from_glob:
+  - /src/components/page-sections/proof/story-carousel/story-carousel.cloudcannon.inputs.yml
+  - /.cloudcannon/inputs/background.yml
+  - /.cloudcannon/inputs/haze.yml

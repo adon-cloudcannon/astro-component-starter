@@ -51,6 +51,7 @@ picker_preview:
 _inputs_from_glob:
   - /src/components/page-sections/explainers/feature-split/feature-split.cloudcannon.inputs.yml
   - /.cloudcannon/inputs/background.yml
+  - /.cloudcannon/inputs/haze.yml
 groups:
   - heading: Content
     inputs:
@@ -79,3 +80,4 @@ groups:
       - lockColorScheme
       - backgroundColor
       - background
+      - haze

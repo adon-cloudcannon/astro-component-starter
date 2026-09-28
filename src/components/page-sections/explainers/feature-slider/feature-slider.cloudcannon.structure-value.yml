@@ -99,6 +99,7 @@ _structures:
 _inputs_from_glob:
   - /src/components/page-sections/explainers/feature-slider/feature-slider.cloudcannon.inputs.yml
   - /.cloudcannon/inputs/background.yml
+  - /.cloudcannon/inputs/haze.yml
 groups:
   - heading: Content
     inputs:
@@ -115,3 +116,4 @@ groups:
       - lockColorScheme
       - backgroundColor
       - background
+      - haze

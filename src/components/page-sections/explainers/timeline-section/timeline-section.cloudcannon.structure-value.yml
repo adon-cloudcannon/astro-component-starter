@@ -55,6 +55,7 @@ picker_preview:
 _inputs_from_glob:
   - /src/components/page-sections/explainers/timeline-section/timeline-section.cloudcannon.inputs.yml
   - /.cloudcannon/inputs/background.yml
+  - /.cloudcannon/inputs/haze.yml
 _structures:
   explainerTimelineEntries:
     values:
@@ -140,3 +141,4 @@ groups:
       - lockColorScheme
       - backgroundColor
       - background
+      - haze

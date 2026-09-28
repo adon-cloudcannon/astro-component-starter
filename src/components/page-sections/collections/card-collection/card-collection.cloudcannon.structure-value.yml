@@ -98,6 +98,7 @@ picker_preview:
 _inputs_from_glob:
   - /src/components/page-sections/collections/card-collection/card-collection.cloudcannon.inputs.yml
   - /.cloudcannon/inputs/background.yml
+  - /.cloudcannon/inputs/haze.yml
 _structures:
   cardCollectionItems:
     values:
@@ -165,3 +166,4 @@ groups:
       - lockColorScheme
       - backgroundColor
       - background
+      - haze

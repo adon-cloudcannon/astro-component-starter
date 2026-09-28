@@ -58,6 +58,7 @@ picker_preview:
 _inputs_from_glob:
   - /src/components/page-sections/explainers/faq-section/faq-section.cloudcannon.inputs.yml
   - /.cloudcannon/inputs/background.yml
+  - /.cloudcannon/inputs/haze.yml
 _structures:
   faqItems:
     values:
@@ -106,3 +107,4 @@ groups:
       - lockColorScheme
       - backgroundColor
       - background
+      - haze

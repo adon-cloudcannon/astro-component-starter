@@ -81,6 +81,7 @@ picker_preview:
 _inputs_from_glob:
   - /src/components/page-sections/conversion/contact-split/contact-split.cloudcannon.inputs.yml
   - /.cloudcannon/inputs/background.yml
+  - /.cloudcannon/inputs/haze.yml
 _structures:
   contactDetails:
     values:
@@ -142,3 +143,4 @@ groups:
       - lockColorScheme
       - backgroundColor
       - background
+      - haze
