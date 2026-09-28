@@ -239,7 +239,6 @@ pageSections:
         priceSuffix: /month (USD)
         pricePosition: bottom
         badgeText: Recommended
-        highlight: true
         height: 454
       - name: Team
         description: For client teams with advanced workflows

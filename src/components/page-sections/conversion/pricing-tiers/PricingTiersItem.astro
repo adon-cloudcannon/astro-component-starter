@@ -66,7 +66,10 @@ const priceRows = [
     class:list={["pricing-tier", highlight && "highlight", `price-${pricePosition}`, className]}
     style={height ? `--pricing-tier-height: ${Number(height)}px` : undefined}
   >
-    {highlight && badgeText && (
+    {/* Not gated on `highlight`: the design badges the recommended plan and
+        rules all three cards the same, where highlight also draws a heavier
+        ring around the card. */}
+    {badgeText && (
       <Badge
         class="pricing-tier-badge"
         variant="neutral"
@@ -297,6 +300,12 @@ const priceRows = [
      Flat, because rules nested deeper than a couple of levels get dropped (see
      CLAUDE.md). */
   @layer page-sections {
+    /* The sand rule, like every other card on these pages: the design draws
+       #EBE1C9 where the generic border token is a neutral grey. */
+    .pricing-tier {
+      border-color: var(--dark-sand);
+    }
+
     .pricing-tier .pricing-tier-badge {
       inset-block-start: 2.3125rem;
       inset-inline-end: 2rem;
