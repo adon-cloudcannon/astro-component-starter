@@ -37,7 +37,12 @@ pageSections:
       - text: No credit card · 14-day free trial · No lock-in
         iconName: check
         iconColor: default
-  - _component: page-sections/builders/custom-section
+  - _component: page-sections/conversion/cta-center
+    eyebrow: INTERACTIVE DEMO
+    heading: Here’s what you’re working with
+    subtext: Click a heading and change it. See what’s possible with the Visual Editor.
+    subtextSize: lg
+    headingSize: lg
   - _component: page-sections/proof/testimonial-section
     text: When we show clients the Visual Editor during our meetings, their eyes light up.
     authorName: Alex Murray
