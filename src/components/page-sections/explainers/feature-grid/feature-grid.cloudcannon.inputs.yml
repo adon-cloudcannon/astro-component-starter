@@ -78,6 +78,11 @@ columns:
         name: Three across
       - id: 2
         name: Two across
+cardHeight:
+  type: number
+  comment: >-
+    How tall to draw every card, in pixels. The design sets one height across
+    the section. Leave empty to follow the copy.
 features:
   type: array
   label: Features

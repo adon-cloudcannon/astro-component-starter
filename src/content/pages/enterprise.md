@@ -93,6 +93,7 @@ pageSections:
     subtext: Benefit from more uptime, faster sites, better SEO, enterprise- grade security, and more.
     subtextSize: lg
     subtextWidth: 580
+    cardHeight: 334
     headingSize: lg
   - _component: page-sections/proof/story-carousel
     heading: Grow your sites, not your headcount.
@@ -149,7 +150,46 @@ pageSections:
       - _component: building-blocks/core-elements/button
         variant: primary
         text: See how others did it
-  - _component: page-sections/builders/custom-section
+  - _component: page-sections/explainers/feature-grid
+    features:
+      - title: Onboarding services
+        description: >-
+          We’ll guide you through onboarding, with migration help, training, and best-practice
+          advice from our engineers.
+        accentColor: golden
+        imageAlt: ''
+      - title: Uptime SLA
+        description: We'll keep you online and operational for when it matters most.
+        accentColor: peachy
+        imageAlt: ''
+      - title: Priority support
+        description: >-
+          Your questions go to the top of the queue, with our support team and engineers in a
+          dedicated Slack channel.
+        accentColor: sunset
+        imageAlt: ''
+      - title: Custom permissions
+        description: Fine-grained control over user groups and permissions.
+        accentColor: harbour
+        imageAlt: ''
+      - title: Custom edge logic
+        description: Dynamic functionality, from geotargeting to A/B testing, with custom edge rules.
+        accentColor: pacific
+        imageAlt: ''
+      - title: Professional services
+        description: Get access to the CloudCannon Enterprise Success Team
+        accentColor: moss
+        imageAlt: ''
+    columns: 3
+    alignmentHorizontal: center
+    heading: Custom plans for enterprise needs
+    subtext: >-
+      To support the large scale and speed your enterprise needs, we'll tailor your plan to your
+      exact specifications so you can enjoy the features that are right for you.
+    subtextSize: lg
+    subtextWidth: 672
+    cardHeight: 247
+    headingSize: lg
   - _component: page-sections/conversion/cta-team-member
     member:
       _component: building-blocks/wrappers/team-member

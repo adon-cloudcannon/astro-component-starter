@@ -32,6 +32,14 @@ const {
    * across when each card is a destination of its own with its own art.
    */
   columns = 3,
+  /**
+   * How tall the design draws these cards, in pixels.
+   *
+   * A set height, not one that follows the copy: every grid in the file draws
+   * one height across the whole section — 247 on "Custom plans", 334 on the
+   * three illustrated ones — while the lines inside run from one to three.
+   */
+  cardHeight,
   sectionLabel,
   maxContentWidth = "xl",
   paddingHorizontal = "gutter",
@@ -107,7 +115,12 @@ const artRow = Math.max(0, ...features.map((feature: FeatureProps) => Number(fea
   <Grid
     gap="lg"
     columns={columns}
-    style={artRow ? `--feature-art-row: ${artRow}px` : undefined}
+    style={[
+      artRow ? `--feature-art-row: ${artRow}px` : null,
+      cardHeight ? `--feature-card-height: ${Number(cardHeight)}px` : null,
+    ]
+      .filter(Boolean)
+      .join("; ") || undefined}
     class:list={["feature-grid-grid", `feature-grid-${columns}-up`]}
     data-children-prop="features"
   >
@@ -147,6 +160,13 @@ const artRow = Math.max(0, ...features.map((feature: FeatureProps) => Number(fea
       gap: 1.09375rem;
     }
 
+    /* Two rows of cards are one height in the design, not one height per row:
+       "Custom plans" draws all six at 247 while their copy runs from one line
+       to three. */
+    .feature-grid .feature-grid-grid > .grid-inner {
+      grid-auto-rows: 1fr;
+    }
+
     /* Two large cards sit further apart than three small ones: 503 and 509
        with 42 between them, in the 1040 column. */
     .feature-grid .feature-grid-2-up > .grid-inner {
@@ -155,7 +175,10 @@ const artRow = Math.max(0, ...features.map((feature: FeatureProps) => Number(fea
 
     /* The rule around the card is the sand one, not the generic grey: the
        design draws #EBE1C9, which is --dark-sand. */
-    .feature-grid .feature-item.align-center .card-inner {
+    /* :not(.has-accent), because an accented card rules itself in its own
+       colour. Equal specificity between the two would otherwise be settled by
+       whichever stylesheet Astro emitted last, which it settled the wrong way. */
+    .feature-grid .feature-item.align-center:not(.has-accent) .card-inner {
       border-color: var(--dark-sand);
     }
   }

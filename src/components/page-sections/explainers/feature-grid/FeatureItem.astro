@@ -14,6 +14,14 @@ const {
   iconName = "",
   iconColor = "default",
   iconBackground = true,
+  /**
+   * The colour of the card's rule.
+   *
+   * Enterprise's "Custom plans" keeps its accent there and nowhere else — one
+   * palette colour per card — and draws it solid, where Card's own accented
+   * border is the same colour at 18%.
+   */
+  accentColor = "none",
   backgroundColor = "base",
   /**
    * A drawing instead of an icon, above the title rather than beside it.
@@ -55,7 +63,10 @@ const {
 } = Astro.props;
 
 const signpost = Boolean(eyebrow || linkText);
-const headingSize = titleSize ?? (signpost ? "lg" : imageSource ? "sm" : "md");
+// A card with neither a drawing nor an icon is plain copy, and the design sets
+// its title at the same 29 as the illustrated ones rather than the larger size
+// an icon card takes.
+const headingSize = titleSize ?? (signpost ? "lg" : imageSource || !iconName ? "sm" : "md");
 ---
 
 <GridItem
@@ -63,7 +74,14 @@ const headingSize = titleSize ?? (signpost ? "lg" : imageSource ? "sm" : "md");
   {...htmlAttributes}
 >
   <Card
-    class:list={["feature-item", `align-${alignmentHorizontal}`, signpost && "is-signpost", className]}
+    class:list={[
+      "feature-item",
+      `align-${alignmentHorizontal}`,
+      signpost && "is-signpost",
+      accentColor !== "none" && "has-accent",
+      className,
+    ]}
+    accentColor={accentColor}
     style={imageHeight ? `--feature-image-height: ${Number(imageHeight)}px` : undefined}
     paddingHorizontal={signpost ? "2xl" : "lg"}
     paddingVertical={signpost ? "2xl" : "lg"}
@@ -91,7 +109,7 @@ const headingSize = titleSize ?? (signpost ? "lg" : imageSource ? "sm" : "md");
       />
     )}
     <div class="feature-item-heading">
-      {!imageSource && !signpost && (
+      {!imageSource && !signpost && iconName && (
         <Icon
           class="feature-icon"
           name={iconName}
@@ -209,6 +227,32 @@ const headingSize = titleSize ?? (signpost ? "lg" : imageSource ? "sm" : "md");
      Flat, because rules nested deeper than a couple of levels get dropped (see
      CLAUDE.md). */
   @layer page-sections {
+    /* The design draws this rule solid, one palette colour per card; Card's
+       own accented border is the same colour at 18%, which reads as no accent
+       at all from a step back. */
+    .feature-grid .feature-item.has-accent .card-inner {
+      border-color: var(--card-accent);
+    }
+
+    /* A set height, not one that follows the copy. */
+    .feature-item .card-inner {
+      min-block-size: var(--feature-card-height, auto);
+    }
+
+    /* With a set height the copy would hang from the top of it. The design
+       centres it in the card, which is what makes six cards of one height with
+       one to three lines in them read as a set. */
+    .feature-item.align-center .card-outer-content,
+    .feature-item.align-center .card-content {
+      block-size: 100%;
+    }
+
+    .feature-item.align-center .card-content {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
     .feature-item.is-signpost {
       --feature-art-height: 21rem;
       border-color: var(--dark-sand);

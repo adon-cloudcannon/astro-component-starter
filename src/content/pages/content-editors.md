@@ -111,20 +111,24 @@ pageSections:
         description: Define roles and groups to match your organization structure.
         imageSource: /src/assets/images/marketing/layer-28-1-3806-71328.png
         imageHeight: 180
+        accentColor: peachy
         imageAlt: ''
       - title: Asset management
         description: Centralize, control and access approved and optimized assets.
         imageSource: /src/assets/images/marketing/layer-25-1-3806-71332.png
         imageHeight: 151
+        accentColor: peachy
         imageAlt: ''
       - title: Multilingual
         description: Localization and i18n support for worldwide content.
         imageSource: /src/assets/images/marketing/layer-26-1-3806-71336.png
         imageHeight: 162
+        accentColor: peachy
         imageAlt: ''
     columns: 3
     alignmentHorizontal: center
     heading: Built for the work
+    cardHeight: 334
     headingSize: lg
   - _component: page-sections/conversion/cta-split
     heading: Take a peek under the hood

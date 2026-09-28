@@ -142,6 +142,25 @@ _structures:
           iconBackground:
             type: switch
             comment: Draw a tinted plate behind the icon.
+          accentColor:
+            type: select
+            comment: Colour of the card's rule. The design gives each card its own.
+            options:
+              values:
+                - id: none
+                  name: None
+                - id: pacific
+                  name: Pacific
+                - id: moss
+                  name: Moss
+                - id: golden
+                  name: Golden
+                - id: peachy
+                  name: Peachy
+                - id: sunset
+                  name: Sunset
+                - id: harbour
+                  name: Harbour
           imageSource:
             type: image
             comment: A drawing above the title, in place of the icon.

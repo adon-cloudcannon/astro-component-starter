@@ -237,6 +237,7 @@ pageSections:
     subtext: Connect your repo, keep your tooling, and add a visual editor on top.
     subtextSize: lg
     subtextWidth: 580
+    cardHeight: 334
     headingSize: lg
   - _component: page-sections/conversion/cta-split
     heading: Take a peek under the hood
