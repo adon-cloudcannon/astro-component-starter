@@ -145,7 +145,7 @@ pageSections:
       type: pattern
       imageSource: /src/assets/images/marketing/patterns/dark-grid.png
       patternSize: natural
-      mask: fade
+      mask: top
     buttonSections:
       - _component: building-blocks/core-elements/button
         variant: primary
@@ -194,7 +194,7 @@ pageSections:
       type: pattern
       imageSource: /src/assets/images/marketing/patterns/sand-grid.png
       patternSize: natural
-      mask: none
+      mask: bottom
     haze:
       - x: 0.4889
         rx: 366px

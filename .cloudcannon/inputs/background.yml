@@ -149,6 +149,8 @@ background.mask:
         name: Fade the top
       - id: bottom
         name: Fade the bottom
+      - id: fade
+        name: Fade the bottom, softly
       - id: left
         name: Fade the left
       - id: right

@@ -429,7 +429,7 @@ pageSections:
       type: pattern
       imageSource: /src/assets/images/marketing/patterns/dark-grid.png
       patternSize: natural
-      mask: fade
+      mask: top
     buttonSections:
       - _component: building-blocks/core-elements/button
         variant: primary
