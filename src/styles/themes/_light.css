@@ -28,20 +28,27 @@
 
   /* The ink a background pattern is drawn in.
 
-     A grid rule is a tint of the band it sits on, not a colour of its own: it
-     goes darker on a light band and lighter on a dark one. Taken from
-     --color-bg-inverse at 5% — the token that is already the opposite of the
-     band, black on cream and cream on black — it lands within 10/255 of every
-     grid the design draws:
-     #F5EEDE on light sand, #E5D9BB on dark sand, #282725 on black. Nothing
-     has to be told which band it is on. That is the whole reason
-     the pattern stopped being a picture: an opaque tile bakes one band colour
-     in, so the same grid needed a second file for dark and would have needed a
-     third for dark sand.
+     A grid rule is a tint of the band it sits on, not a colour of its own, so
+     it goes darker on a light band and lighter on a dark one and the two
+     themes only have to disagree about what the tint is made of.
+
+     Here it is Golden 750 at 8.3%, which is not a guess: the rule the design
+     draws on cream runs #FFFCF3 -> #F5EEDE, and that direction extended to a
+     solid lands on #8B5A00, one step off Golden 750. At 8.3% it reproduces all
+     three channels within 1. A neutral black at the same *luminance* measured
+     right and read faint, because the design's rule contrasts in hue as well
+     as in brightness and grey only does one of the two.
+
+     Checked on the other light band too: on the dark sand under AI Ready's
+     "Give AI the full picture" it comes out #E2D5B8 against a design that
+     draws #E5D9BB, a touch stronger than the design makes it there. The design
+     is not consistent between the two — its rule on cream is a 13.7 luminance
+     drop and on dark sand 8.0 — so one ink cannot match both, and this matches
+     the five cream bands and runs slightly strong on the one.
 
      Dots are the other kind. They are a palette colour rather than a tint, so
-     they get their own token. */
-  --pattern-ink: color-mix(in srgb, var(--color-bg-inverse) 5%, transparent);
+     they get their own token and no alpha. */
+  --pattern-ink: color-mix(in srgb, var(--golden-750) 8.3%, transparent);
   --pattern-ink-dots: var(--golden-200);
 
   --color-border: var(--gray-300);

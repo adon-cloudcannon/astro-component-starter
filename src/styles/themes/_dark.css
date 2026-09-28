@@ -29,13 +29,14 @@
 
   --color-bg-code: color-mix(in srgb, var(--white) 8%, transparent);
 
-  /* See the note in _light.css. The grid ink is the same expression, and only
-     reads differently because --color-bg-inverse has flipped.
+  /* See the note in _light.css. The grid ink is the same expression, and is the band's own cream rather than
+     a warm brown, because on black the rule lifts instead of sinking: the
+     design runs #1D1B17 -> #282725, which is --color-bg-inverse at 5.5%.
 
      The dots are not: on cream the design draws them in Golden 200 flat, and
      on black in Golden itself at 13%, which comes out the dark amber #3A2D15
      the AI Ready case-study bands carry. */
-  --pattern-ink: color-mix(in srgb, var(--color-bg-inverse) 5%, transparent);
+  --pattern-ink: color-mix(in srgb, var(--color-bg-inverse) 5.5%, transparent);
   --pattern-ink-dots: color-mix(in srgb, var(--golden) 13%, transparent);
 
   --color-border: var(--gray-850);
