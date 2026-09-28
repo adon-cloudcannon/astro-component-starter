@@ -3,6 +3,7 @@ import CustomSection from "@builders/custom-section/CustomSection.astro";
 import Heading from "@core-elements/heading/Heading.astro";
 import SimpleText from "@core-elements/simple-text/SimpleText.astro";
 import Text from "@core-elements/text/Text.astro";
+import Grid from "@wrappers/grid/Grid.astro";
 import Masonry from "@wrappers/masonry/Masonry.astro";
 import TestimonialWallItem from "./TestimonialWallItem.astro";
 
@@ -16,6 +17,14 @@ const {
   subtext = "",
   testimonials = [],
   columns = 3,
+  /**
+   * Staggered, or an even row.
+   *
+   * Masonry is the shipped behaviour and stays the default. The design draws
+   * the Agencies wall as three cards of one height, top and bottom aligned,
+   * which a stagger reads as three cards knocked out of line.
+   */
+  layout = "masonry",
   sectionLabel,
   maxContentWidth = "xl",
   paddingHorizontal = "gutter",
@@ -24,6 +33,7 @@ const {
   lockColorScheme = false,
   backgroundColor = "base",
   background,
+  haze = false,
   class: className,
   useDefaultEditableBinding = false,
   _component,
@@ -41,6 +51,7 @@ const {
   lockColorScheme={lockColorScheme}
   backgroundColor={backgroundColor}
   background={background}
+  haze={haze}
   useDefaultEditableBinding={useDefaultEditableBinding}
   {...htmlAttributes}
 >
@@ -67,21 +78,66 @@ const {
   />
 
   {testimonials?.length > 0 && (
-    /* Quotes are uneven by nature, so the wall is a Masonry — the wrapper's
-         JS enhancement keeps reading order while packing the columns. */
-    <Masonry
-      class="testimonial-wall-masonry"
-      columns={columns}
-      gap="md"
-      data-children-prop="testimonials"
-    >
-      {testimonials?.map((testimonial: TestimonialProps) => (
-        <TestimonialWallItem
-          data-editable="array-item"
-          data-id="page-sections/proof/testimonial-wall/testimonial-wall-item"
-          {...testimonial}
-        />
-      ))}
-    </Masonry>
+    /* Quotes are uneven by nature, so the wall is a Masonry by default — the
+         wrapper's JS enhancement keeps reading order while packing the
+         columns. A row is for where the design draws one height. */
+    layout === "row" ? (
+      <Grid
+        class="testimonial-wall-row"
+        columns={columns}
+        gap="md"
+        data-children-prop="testimonials"
+      >
+        {testimonials?.map((testimonial: TestimonialProps) => (
+          <TestimonialWallItem
+            data-editable="array-item"
+            data-id="page-sections/proof/testimonial-wall/testimonial-wall-item"
+            {...testimonial}
+          />
+        ))}
+      </Grid>
+    ) : (
+      <Masonry
+        class="testimonial-wall-masonry"
+        columns={columns}
+        gap="md"
+        data-children-prop="testimonials"
+      >
+        {testimonials?.map((testimonial: TestimonialProps) => (
+          <TestimonialWallItem
+            data-editable="array-item"
+            data-id="page-sections/proof/testimonial-wall/testimonial-wall-item"
+            {...testimonial}
+          />
+        ))}
+      </Masonry>
+    )
   )}
 </CustomSection>
+
+<style is:global>
+  /* An even row: three cards of one height, top and bottom aligned, with the
+     attribution hanging from the foot of each. The design draws them that way
+     and sizes each quote to suit, so a stagger reads as three cards knocked
+     out of line.
+
+     Flat, because rules nested deeper than a couple of levels get dropped
+     (see CLAUDE.md). */
+  @layer page-sections {
+    .testimonial-wall .testimonial-wall-row .masonry-item,
+    .testimonial-wall .testimonial-wall-row .masonry-item-content,
+    .testimonial-wall .testimonial-wall-row .testimonial-wall-item {
+      block-size: 100%;
+    }
+
+    .testimonial-wall .testimonial-wall-row .testimonial-inner {
+      block-size: 100%;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .testimonial-wall .testimonial-wall-row .author {
+      margin-block-start: auto;
+    }
+  }
+</style>

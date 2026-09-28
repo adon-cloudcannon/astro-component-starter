@@ -7,6 +7,21 @@ const {
   authorName = "",
   authorDescription = "",
   authorImage = "",
+  /**
+   * Whether this one reads as a quotation.
+   *
+   * Per card, not per section: the design marks one of the three on Agencies
+   * and leaves the other two bare, and Testimonial adds a pair regardless.
+   */
+  quoted = true,
+  /**
+   * How big the design sets this card's quote, in pixels.
+   *
+   * It is not one size. The design runs 27, 19 and 27 side by side, sizing the
+   * type so three cards of different lengths come out the same height, which
+   * is a judgement no rule here can make for itself.
+   */
+  quoteSize,
   class: className,
   _component,
   useDefaultEditableBinding: _useDefaultEditableBinding = false,
@@ -19,7 +34,8 @@ const {
       itself — the wall only supplies the layout and the start alignment that
       suits a column of quotes. */}
   <Testimonial
-    class:list={["testimonial-wall-item", className]}
+    class:list={["testimonial-wall-item", { "not-quoted": !quoted }, className]}
+    style={quoteSize ? `--testimonial-wall-quote: ${Number(quoteSize)}px` : undefined}
     text={text}
     authorName={authorName}
     authorDescription={authorDescription}
@@ -39,6 +55,19 @@ const {
       /* Card height stays content-driven on purpose — it feeds the masonry
          span measurement. */
       margin-top: 0;
+    }
+
+    /* Flat, because rules nested deeper than a couple of levels get dropped
+       (see CLAUDE.md). The marks are drawn by Testimonial as ::before and
+       ::after on the quote's first and last child. */
+    .testimonial-wall-item.not-quoted .quote > *:first-child::before,
+    .testimonial-wall-item.not-quoted .quote > *:last-child::after {
+      content: none;
+    }
+
+    .testimonial-wall-item .quote,
+    .testimonial-wall-item .quote :is(p, blockquote) {
+      font-size: var(--testimonial-wall-quote, inherit);
     }
   }
 </style>

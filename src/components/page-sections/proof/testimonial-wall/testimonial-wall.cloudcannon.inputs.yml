@@ -32,6 +32,15 @@ headingLevel:
 subtext:
   type: markdown
   comment: Supporting copy beneath the heading.
+layout:
+  type: select
+  comment: Staggered columns, or an even row of cards that share one height.
+  options:
+    values:
+      - id: masonry
+        name: Staggered
+      - id: row
+        name: Even row
 testimonials:
   type: array
   label: Testimonials
@@ -154,3 +163,10 @@ backgroundColor:
         name: Accent
       - id: highlight
         name: Highlight
+
+haze:
+  type: switch
+  comment: >-
+    Pools the section's own background colour behind the content and blurs it,
+    so a heading stays readable where an illustration or a pattern runs
+    underneath.

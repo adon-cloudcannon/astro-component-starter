@@ -94,6 +94,17 @@ _structures:
           authorDescription:
             type: text
             comment: Their role and company. Leave empty to hide.
+          quoted:
+            type: switch
+            comment: >-
+              Draw quotation marks around it. Off for a line that is a statement
+              rather than something said.
+          quoteSize:
+            type: number
+            comment: >-
+              Size of this card's quote, in pixels. The design varies it per card so
+              cards of different lengths come out the same height. Leave empty for the
+              default.
           authorImage:
             type: image
             comment: Optional headshot. Falls back to the author's initials.
@@ -109,6 +120,7 @@ groups:
       - subtext
       - testimonials
       - columns
+      - layout
   - heading: Section settings
     comment: Width, spacing, color scheme, and background for this section.
     collapsed: true

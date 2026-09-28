@@ -66,16 +66,35 @@ pageSections:
         aspect: 90 / 28
     headingPlacement: inline
     heading: PARTNERS TO BE PROUD OF
-  - _component: page-sections/proof/testimonial-section
-    text: Our clients can build entirely new landing pages in just minutes
-    authorName: Sindre Gusdal
-    authorDescription: General Manager, Absoluttweb
-    layout: split
-    markPosition: start
-    markStyle: card
-    company: Absoluttweb
-    authorImage: /src/assets/images/marketing/ellipse-287.jpg
-    logoSource: /src/assets/images/marketing/ellipse-287-3.jpg
+  - _component: page-sections/proof/testimonial-wall
+    layout: row
+    testimonials:
+      - text: Absoluttweb can deploy a client website in just 1 hour
+        quoted: false
+        quoteSize: 27
+        authorName: Sindre Gusdal
+        authorDescription: General Manager, Absoluttweb
+        authorImage: /src/assets/images/marketing/ellipse-287.jpg
+      - text: >-
+          I was looking for a company that understood that or got that and were willing to work on
+          top of what we had — and around what we had.
+        quoted: false
+        quoteSize: 19
+        authorName: Grayson Campbell
+        authorDescription: Digital Lead, PaperCut
+        authorImage: /src/assets/images/marketing/ellipse-287-3.jpg
+      - text: Our clients can build entirely new landing pages in just minutes
+        quoted: true
+        quoteSize: 27
+        authorName: Person McPerson
+        authorDescription: Digital Design Director, Croissant & Baguette
+    eyebrow: SUCCESS STORIES
+    heading: Here to help you succeed
+    subtext: >-
+      Grow your portfolio, not your overhead. Ship faster, hand over confidently, and get on with
+      what’s next.
+    subtextSize: xl
+    headingSize: lg
     background:
       type: pattern
       imageSource: /src/assets/images/marketing/patterns/sand-pegboard.png
