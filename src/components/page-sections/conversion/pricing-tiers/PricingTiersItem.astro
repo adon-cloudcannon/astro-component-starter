@@ -69,7 +69,7 @@ const priceRows = [
     {highlight && badgeText && (
       <Badge
         class="pricing-tier-badge"
-        variant="brand"
+        variant="neutral"
         size="sm"
         text={badgeText}
         data-prop="badgeText"
@@ -127,7 +127,7 @@ const priceRows = [
             data-editable="array-item"
           >
             <Icon
-              name={feature.included === false ? "minus" : "check"}
+              name={feature.included === false ? "minus-circle" : "check-circle"}
               size="sm"
             />
             <span
@@ -286,5 +286,92 @@ const priceRows = [
     .pricing-tier.price-bottom .pricing-tier-button {
       order: 3;
     }
+  }
+
+  /* The design's own pricing card, measured off 3806:72337. The shipped card
+     is close but not it: the badge is a brand-filled pill hung off the top-left
+     corner where the design sets a pale Harbour one inside the card level with
+     the name, the name and figure come out larger and heavier, the lines are
+     set tighter, and the ticks are bare checks rather than circled ones.
+
+     Flat, because rules nested deeper than a couple of levels get dropped (see
+     CLAUDE.md). */
+  @layer page-sections {
+    .pricing-tier .pricing-tier-badge {
+      inset-block-start: 2.3125rem;
+      inset-inline-end: 2rem;
+      inset-inline-start: auto;
+    }
+
+    /* On .badge-inner, which is the element that is actually drawn: the
+       background, the border and the radius all live there, so painting the
+       wrapper left the shipped surface and its grey edge showing underneath
+       (see CLAUDE.md on measuring the leaf). */
+    .pricing-tier .pricing-tier-badge > .badge-inner {
+      background-color: var(--harbour);
+      border-color: transparent;
+      color: var(--pacific);
+      font-size: 0.625rem;
+      font-weight: var(--font-weight-semibold, 600);
+      letter-spacing: 0;
+      line-height: 1.3;
+      padding-block: 0.3125rem;
+      padding-inline: 0.6875rem;
+      text-transform: none;
+    }
+
+    .pricing-tier .pricing-tier-name,
+    .pricing-tier .pricing-tier-name .heading-inner {
+      color: var(--black);
+      font-size: 1.8125rem;
+      font-weight: var(--font-weight-semibold, 600);
+      line-height: 1.27;
+    }
+
+    .pricing-tier .pricing-tier-description .simple-text-content {
+      color: var(--black);
+      font-size: var(--font-size-lg);
+      line-height: 1.37;
+    }
+
+    /* 34 of leading and nothing between the rows: the design steps these every
+       34px exactly, and a gap on top of the line box pushed them to 39. */
+    .pricing-tier .pricing-tier-features {
+      gap: 0;
+    }
+
+    /* The tick sits on the middle of its line, not on the first baseline: the
+       shipped card nudges it down with a top margin, which reads as hanging
+       under the text on a line this tall. */
+    .pricing-tier .pricing-tier-feature {
+      align-items: center;
+      color: var(--black);
+      line-height: 2.34;
+    }
+
+    .pricing-tier .pricing-tier-feature .icon {
+      block-size: 1.25rem;
+      /* The design's own grey, which is not one of the text tokens: --color-text
+         is #6B6157 and these are drawn #393939. */
+      color: #393939;
+      inline-size: 1.25rem;
+      margin-block-start: 0;
+    }
+
+    /* Through .pricing-tier-price, or the shipped rule for the figure ties on
+       specificity and wins on source order — it sets heading-lg, which is 46
+       where the design draws 42. */
+    .pricing-tier .pricing-tier-price > .pricing-tier-amount {
+      color: var(--black);
+      font-size: 2.625rem;
+      font-weight: var(--font-weight-semibold, 600);
+    }
+
+    .pricing-tier .pricing-tier-price > .pricing-tier-suffix {
+      color: var(--black);
+      font-size: var(--font-size-lg);
+    }
+
+
   }
 </style>
