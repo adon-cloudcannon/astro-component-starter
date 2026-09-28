@@ -134,19 +134,41 @@ const {
 
     .cta-form .cta-form-steps .step-marker {
       /* Its own background, so it masks the rule running behind it — which is
-         how the design draws one continuous dashed line under four rings. */
+         how the design draws one continuous dashed line under four rings.
+         Fragment Mono at 18.7, not the heading face: the numbers are set in
+         the same mono the eyebrows use. */
       background-color: var(--light-sand);
       border: var(--border-width-sm) solid #333333;
       color: #333333;
-      font-size: 1.1875rem;
+      font-family: var(--font-mono);
+      font-size: 1.16875rem;
+      font-weight: var(--font-weight-regular, 400);
       position: relative;
       z-index: var(--layer-1);
     }
 
+    /* The columns touch, so the rule runs unbroken from the first ring to the
+       last — the design draws one 859px vector across all four, not a segment
+       per step. The captions carry their own gutter instead. */
+    .cta-form .cta-form-steps .steps-list.orientation-horizontal {
+      column-gap: 0;
+    }
+
+    .cta-form .cta-form-steps .step-content {
+      padding-inline: var(--spacing-lg);
+    }
+
+    /* Drawn as a gradient rather than a dashed border, because `dashed` takes
+       its pattern from the browser: the design sets 4 on, 4 off. */
     .cta-form .cta-form-steps .step-band::after {
       background-color: transparent;
-      block-size: 0;
-      border-block-start: var(--border-width-sm) dashed #333333;
+      background-image: repeating-linear-gradient(
+        to right,
+        #333333 0 4px,
+        transparent 4px 8px
+      );
+      block-size: var(--border-width-sm);
+      border: 0;
       inset-inline: 0;
     }
 
