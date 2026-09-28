@@ -283,18 +283,32 @@ pageSections:
       mask: none
     haze:
       - x: 0.5
-        rx: 152px
+        rx: 640px
         'y': 55.9%
-        ry: 235.3%
+        ry: 55.9%
       - x: 0.5
-        rx: 99px
+        rx: 387px
         'y': 54.4%
-        ry: 142.3%
+        ry: 36%
   - _component: page-sections/conversion/cta-form
-    subtext: Complete the Partner Program application below
-    subtextSize: lg
+    steps:
+      - contentSections:
+          - _component: building-blocks/core-elements/simple-text
+            text: Complete the Partner Program application below
+            size: sm
+      - contentSections:
+          - _component: building-blocks/core-elements/simple-text
+            text: Sign up for CloudCannon and start your free trial
+            size: sm
+      - contentSections:
+          - _component: building-blocks/core-elements/simple-text
+            text: Wait to hear from us on your application
+            size: sm
+      - contentSections:
+          - _component: building-blocks/core-elements/simple-text
+            text: Once approved, access the Lite plan and Bronze benefits. Start launching!
+            size: sm
     imageSource: /src/assets/images/marketing/screenshot-2026-08-17-at-10-32-02-pm-1-3806-72701.png
-    subtextWidth: 201
   - _component: page-sections/conversion/cta-center
     heading: Keen to collaborate?
     backgroundColor: base

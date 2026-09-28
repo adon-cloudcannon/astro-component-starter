@@ -5,6 +5,7 @@ import Image from "@core-elements/image/Image.astro";
 import Text from "@core-elements/text/Text.astro";
 import Form from "@forms/form/Form.astro";
 import Split from "@wrappers/split/Split.astro";
+import Steps from "@wrappers/steps/Steps.astro";
 
 const {
   heading = "",
@@ -22,6 +23,14 @@ const {
    * 1040 column, and run the full width it reads as a different block.
    */
   subtextWidth,
+  /**
+   * A numbered strip above the form.
+   *
+   * The design draws the Partner Program application as four steps over the
+   * card — circled numbers joined by a dashed rule, a caption under each — and
+   * they are part of this section rather than a band of their own.
+   */
+  steps = [],
   formAction = "./",
   formBlocks = [],
   imageSource = "",
@@ -57,6 +66,14 @@ const {
   useDefaultEditableBinding={useDefaultEditableBinding}
   {...htmlAttributes}
 >
+  {steps?.length > 0 && (
+    <Steps
+      class="cta-form-steps"
+      orientation="horizontal"
+      items={steps}
+      data-children-prop="steps"
+    />
+  )}
   <Split
     distributionMode="fixed-flexible"
     fixedWidth="400"
@@ -97,3 +114,58 @@ const {
     </Fragment>
   </Split>
 </CustomSection>
+
+<style is:global>
+  /* The design's strip, measured off 3806:72624: a 28px ring with the number
+     inside it, a 1px dashed rule running between the rings, and the caption
+     centred under each. The shipped marker is a filled brand disc at the start
+     of its column with a solid rail beside it.
+
+     Flat, because rules nested deeper than a couple of levels get dropped (see
+     CLAUDE.md). */
+  @layer page-sections {
+    .cta-form .cta-form-steps {
+      margin-block-end: var(--spacing-4xl);
+    }
+
+    .cta-form .cta-form-steps .step-band {
+      justify-content: center;
+    }
+
+    .cta-form .cta-form-steps .step-marker {
+      /* Its own background, so it masks the rule running behind it — which is
+         how the design draws one continuous dashed line under four rings. */
+      background-color: var(--light-sand);
+      border: var(--border-width-sm) solid #333333;
+      color: #333333;
+      font-size: 1.1875rem;
+      position: relative;
+      z-index: var(--layer-1);
+    }
+
+    .cta-form .cta-form-steps .step-band::after {
+      background-color: transparent;
+      block-size: 0;
+      border-block-start: var(--border-width-sm) dashed #333333;
+      inset-inline: 0;
+    }
+
+    /* The rule runs between the first ring and the last, not past them. */
+    .cta-form .cta-form-steps .step:first-of-type .step-band::after {
+      inset-inline-start: 50%;
+    }
+
+    .cta-form .cta-form-steps .step:last-of-type .step-band::after {
+      inset-inline-end: 50%;
+    }
+
+    /* Through to the leaf: SimpleText writes its own alignment on
+       .simple-text-content, so centring the wrapper left the line where it
+       was (see CLAUDE.md on measuring the element that is drawn). */
+    .cta-form .cta-form-steps .step-content,
+    .cta-form .cta-form-steps .step-content .simple-text,
+    .cta-form .cta-form-steps .step-content .simple-text-content {
+      text-align: center;
+    }
+  }
+</style>
