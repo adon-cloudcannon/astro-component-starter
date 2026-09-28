@@ -80,31 +80,15 @@ pageSections:
         rx: 933px
         'y': 49.8%
         ry: 74.8%
-  - _component: building-blocks/wrappers/content-selector
-    items:
-      - text: >-
-          Every piece of work happens on its own branched site, so a new blog post, a landing page
-          redesign, and a navigation update can all run at once without anyone treading on toes.
-        iconName: check
-        iconColor: default
-      - text: Build component
-        iconName: check
-        iconColor: default
-      - text: Edit
-        iconName: check
-        iconColor: default
-      - text: Merge
-        iconName: check
-        iconColor: default
-      - text: Publish
-        iconName: check
-        iconColor: default
-      - text: Education
-        iconName: check
-        iconColor: default
-      - text: T
-        iconName: check
-        iconColor: default
+  - _component: page-sections/conversion/cta-center
+    background: ''
+    heading: Room for everyone to work at once
+    subtext: >-
+      Every piece of work happens on its own branched site, so a new blog post, a landing page
+      redesign, and a navigation update can all run at once without anyone treading on toes.
+    subtextSize: lg
+    subtextWidth: 612
+    headingSize: lg
   - _component: page-sections/explainers/feature-grid
     features:
       - title: Custom permissions
