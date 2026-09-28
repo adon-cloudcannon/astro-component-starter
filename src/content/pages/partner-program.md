@@ -264,6 +264,7 @@ pageSections:
     subtextWidth: 446
     headingSize: lg
   - _component: page-sections/explainers/feature-split
+    backgroundColor: surface
     heading: Enterprise
     subtext: We’ll work with you to craft a plan that fits your particular client’s needs.
     subtextSize: lg
