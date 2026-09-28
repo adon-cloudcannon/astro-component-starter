@@ -299,19 +299,19 @@ pageSections:
       - contentSections:
           - _component: building-blocks/core-elements/simple-text
             text: Complete the Partner Program application below
-            size: sm
+            size: lg
       - contentSections:
           - _component: building-blocks/core-elements/simple-text
             text: Sign up for CloudCannon and start your free trial
-            size: sm
+            size: lg
       - contentSections:
           - _component: building-blocks/core-elements/simple-text
             text: Wait to hear from us on your application
-            size: sm
+            size: lg
       - contentSections:
           - _component: building-blocks/core-elements/simple-text
             text: Once approved, access the Lite plan and Bronze benefits. Start launching!
-            size: sm
+            size: lg
     imageSource: /src/assets/images/marketing/screenshot-2026-08-17-at-10-32-02-pm-1-3806-72701.png
   - _component: page-sections/conversion/cta-center
     heading: Keen to collaborate?

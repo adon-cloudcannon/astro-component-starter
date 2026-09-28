@@ -159,6 +159,27 @@ const {
       padding-inline: var(--spacing-lg);
     }
 
+    /* Steps pins .simple-text-content to --font-size-sm, which beats the size
+       the prop asks for — the design sets these captions in Body 3 at 19 and
+       they rendered 14.5 with `size: lg` sitting in the data (see CLAUDE.md on
+       a block's own CSS pinning its size prop). Handed back to the class the
+       prop writes, so it is the prop that decides. */
+    .cta-form .cta-form-steps .step-content .simple-text-content.size-xs {
+      font-size: var(--font-size-xs);
+    }
+
+    .cta-form .cta-form-steps .step-content .simple-text-content.size-md {
+      font-size: var(--font-size-md);
+    }
+
+    .cta-form .cta-form-steps .step-content .simple-text-content.size-lg {
+      font-size: var(--font-size-lg);
+    }
+
+    .cta-form .cta-form-steps .step-content .simple-text-content.size-xl {
+      font-size: var(--font-size-xl);
+    }
+
     /* One line behind the whole strip, not a segment per column. Drawn per
        column each one restarts the dash pattern at its own edge, so the dashes
        double up where two meet — the design draws a single vector across all
