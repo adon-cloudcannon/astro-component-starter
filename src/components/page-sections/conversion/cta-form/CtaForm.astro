@@ -287,18 +287,29 @@ const {
       line-height: 1.357;
     }
 
-    .cta-form .cta-form-card input:not([type="checkbox"]):not([type="radio"]),
-    .cta-form .cta-form-card textarea,
-    .cta-form .cta-form-card select {
+    /* On `.field-shell`, which is the element that is actually drawn: an input
+       and a select each sit inside one, padded 8 either side, and it carries
+       the background and the border. Painting the field itself left an 8px
+       gutter of the shell's own lighter colour down each side and the shell's
+       grey rule around the outside — which reads as the input being two
+       colours (see CLAUDE.md on styling the leaf). The textarea has no shell
+       and is painted directly. */
+    .cta-form .cta-form-card .field-shell,
+    .cta-form .cta-form-card textarea {
       background-color: var(--sand);
       border-color: var(--dark-sand);
       border-radius: var(--radius-xs);
       color: var(--black);
     }
 
-    .cta-form .cta-form-card input:not([type="checkbox"]):not([type="radio"]),
-    .cta-form .cta-form-card select {
+    .cta-form .cta-form-card .field-shell {
       block-size: 2.75rem;
+    }
+
+    .cta-form .cta-form-card .field-shell .field {
+      background-color: transparent;
+      border: 0;
+      color: var(--black);
     }
 
     .cta-form .cta-form-card textarea {
