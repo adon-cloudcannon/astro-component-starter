@@ -118,6 +118,7 @@ groups:
       - eyebrow
       - heading
       - subtext
+      - subtextSize
       - testimonials
       - columns
       - layout

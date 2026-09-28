@@ -1,0 +1,163 @@
+---
+/**
+ * A call to action with a real person beside it.
+ *
+ * The design draws this three times — Tom on Low Maintenance, Olivia on
+ * Enterprise, another on Developers — always the same shape: the team member
+ * card on one side, a heading, a line of copy and two buttons on the other.
+ * Built as a split CTA it has no idea what a name badge is, and the panel
+ * behind the person came through as the picture.
+ *
+ * The card is its own block, so the same person can appear in the team grid
+ * on the homepage without this section knowing about it.
+ */
+import CustomSection from "@builders/custom-section/CustomSection.astro";
+import Heading from "@core-elements/heading/Heading.astro";
+import Text from "@core-elements/text/Text.astro";
+import ButtonGroup from "@wrappers/button-group/ButtonGroup.astro";
+import TeamMember from "@wrappers/team-member/TeamMember.astro";
+
+const {
+  heading = "",
+  headingLevel = "h2",
+  headingSize = "lg",
+  subtext = "",
+  subtextSize = "lg",
+  buttonSections = [],
+  member = {},
+  /** The card on the end side, with the copy leading. */
+  reverse = false,
+  sectionLabel,
+  maxContentWidth = "xl",
+  paddingHorizontal = "gutter",
+  paddingVertical = "4xl",
+  colorScheme = "inherit",
+  lockColorScheme = false,
+  backgroundColor = "base",
+  background,
+  haze = false,
+  class: className,
+  useDefaultEditableBinding = false,
+  _component,
+  ...htmlAttributes
+} = Astro.props;
+---
+
+<CustomSection
+  class:list={["cta-team-member", { "member-end": reverse }, className]}
+  label={sectionLabel}
+  maxContentWidth={maxContentWidth}
+  paddingHorizontal={paddingHorizontal}
+  paddingVertical={paddingVertical}
+  colorScheme={colorScheme}
+  lockColorScheme={lockColorScheme}
+  backgroundColor={backgroundColor}
+  background={background}
+  haze={haze}
+  useDefaultEditableBinding={useDefaultEditableBinding}
+  {...htmlAttributes}
+>
+  <TeamMember
+    class="cta-team-member-card"
+    {...member}
+  />
+
+  <div class="cta-team-member-copy">
+    <Heading
+      level={headingLevel}
+      size={headingSize}
+      alignmentHorizontal="start"
+      data-prop="heading"
+      text={heading}
+    />
+    <Text
+      class="subtext"
+      size={subtextSize}
+      alignmentHorizontal="start"
+      data-prop="subtext"
+      text={subtext}
+    />
+    <ButtonGroup
+      buttonSections={buttonSections}
+      direction="row"
+      alignmentHorizontal="start"
+      data-children-prop="buttonSections"
+    />
+  </div>
+</CustomSection>
+
+<style is:global>
+  /* 410 of card, 147 of air, 543 of copy: 1100 against the 1040 column, so the
+     card runs a little wider than the text does. Measured off 3806:73591.
+
+     Flat, because rules nested deeper than a couple of levels get dropped (see
+     CLAUDE.md). */
+  @layer page-sections {
+    .cta-team-member .content {
+      align-items: center;
+      display: grid;
+      grid-template-columns: minmax(0, 410fr) minmax(0, 543fr);
+    }
+
+    /* The flow layer writes margin-block-start from --space-before, so a plain
+       margin loses to it. Both children sit in their own cell. */
+    .cta-team-member .content > * {
+      --space-before: 0;
+      margin-block: 0;
+    }
+
+    .cta-team-member.member-end .cta-team-member-card {
+      grid-column: 2;
+      grid-row: 1;
+    }
+
+    .cta-team-member.member-end .cta-team-member-copy {
+      grid-column: 1;
+      grid-row: 1;
+    }
+
+    /* A flex column with its own gaps. `--space-before` is only read by the
+       flow layer, and this column is not a flow container, so setting it here
+       wrote nothing at all: heading, copy and buttons sat flush against each
+       other with every margin at 0. */
+    .cta-team-member .cta-team-member-copy {
+      display: flex;
+      flex-direction: column;
+      gap: var(--spacing-lg);
+    }
+
+    .cta-team-member .cta-team-member-copy > * {
+      --space-before: 0;
+      margin-block: 0;
+    }
+
+    /* The buttons sit further from the copy than the copy does from the
+       heading: 40 against 24 in the design. */
+    .cta-team-member .cta-team-member-copy > .button-group {
+      margin-block-start: var(--spacing-md);
+    }
+  }
+
+  /* The gap the utilities cannot reach: the design puts 147 between them. */
+  @layer overrides {
+    .cta-team-member .content {
+      column-gap: 9.1875rem;
+    }
+  }
+
+  /* Stacked on a narrow screen, card first whichever side it was on. */
+  @layer page-sections {
+    @media (width < 48rem) {
+      .cta-team-member .content {
+        grid-template-columns: minmax(0, 1fr);
+        row-gap: var(--spacing-2xl);
+      }
+
+      .cta-team-member.member-end .cta-team-member-card,
+      .cta-team-member.member-end .cta-team-member-copy {
+        grid-column: 1;
+        grid-row: auto;
+      }
+    }
+  }
+</style>

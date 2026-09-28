@@ -77,10 +77,16 @@ _structures:
       - label: Testimonial
         icon: format_quote
         value:
+          company: ""
+          logo: ""
+          logoAlt: ""
           text: ""
           authorName: ""
           authorDescription: ""
           authorImage: ""
+          linkText: ""
+          link: ""
+          accentColor: ""
           size: standard
           tone: base
         preview:
@@ -91,9 +97,48 @@ _structures:
             - key: text
           icon: format_quote
         _inputs:
+          company:
+            type: text
+            comment: Who said it, shown above the quote where there is no logo.
+          logo:
+            type: image
+            comment: The customer's wordmark, shown instead of their name.
+          logoAlt:
+            type: text
+            comment: Alt text for the logo.
+          accentColor:
+            type: select
+            comment: >-
+              The card's colour. It does three jobs at once: the emphasised
+              words in the quote take it, the card's border shows in it on
+              hover, and the link turns to it on hover.
+            options:
+              values:
+                - id: ""
+                  name: None
+                - id: sunset
+                  name: Sunset (orange)
+                - id: golden
+                  name: Golden (yellow)
+                - id: pacific
+                  name: Pacific (blue)
+                - id: moss
+                  name: Moss (green)
+                - id: peachy
+                  name: Peachy
+                - id: harbour
+                  name: Harbour (pale blue)
+          linkText:
+            type: text
+            comment: Label for the link at the foot of the card, e.g. "Read case study".
+          link:
+            type: url
+            comment: Where that link goes.
           text:
             type: markdown
-            comment: The quote itself.
+            comment: >-
+              The quote itself. Bold picks words out in the card's accent
+              colour, which is how the design highlights a result.
           authorName:
             type: text
             comment: Who said it.
@@ -143,6 +188,7 @@ groups:
       - eyebrow
       - heading
       - subtext
+      - subtextSize
       - testimonials
       - columns
   - heading: Section settings

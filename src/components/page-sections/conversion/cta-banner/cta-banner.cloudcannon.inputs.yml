@@ -1,0 +1,149 @@
+heading:
+  type: text
+  comment: The banner's heading.
+headingSize:
+  type: select
+  comment: Size of the heading, independent of its level.
+  options:
+    values:
+      - id: 2xl
+        name: Header 1
+      - id: xl
+        name: Header 2
+      - id: lg
+        name: Header 3
+      - id: md
+        name: Header 4
+      - id: sm
+        name: Header 5
+      - id: xs
+        name: Header 6
+headingLevel:
+  type: select
+  options:
+    values:
+      - h2
+      - h3
+linkText:
+  type: text
+  comment: The link under the heading. Leave empty to hide it.
+link:
+  type: url
+  comment: Where the link points.
+imageSource:
+  type: image
+  comment: A drawing in the bottom-right corner, hanging over the foot of the band.
+imageAlt:
+  type: text
+  comment: Alt text for the drawing.
+sectionLabel:
+  type: text
+  comment: Names the section in the editor and sets its anchor id.
+maxContentWidth:
+  type: select
+  comment: Maximum width of the content.
+  options:
+    values:
+      - id: none
+        name: None
+      - id: xs
+        name: Extra Small
+      - id: sm
+        name: Small
+      - id: md
+        name: Medium
+      - id: lg
+        name: Large
+      - id: xl
+        name: Extra Large
+      - id: 2xl
+        name: 2xl
+      - id: 3xl
+        name: 3xl
+paddingHorizontal:
+  type: select
+  comment: Horizontal padding around the content.
+  options:
+    values:
+      - id: none
+        name: None
+      - id: gutter
+        name: Page gutter
+      - id: xs
+        name: Extra Small
+      - id: sm
+        name: Small
+      - id: md
+        name: Medium
+      - id: lg
+        name: Large
+      - id: xl
+        name: Extra Large
+      - id: 2xl
+        name: 2xl
+      - id: 3xl
+        name: 3xl
+paddingVertical:
+  type: select
+  comment: Vertical padding around the content.
+  options:
+    values:
+      - id: none
+        name: None
+      - id: xs
+        name: Extra Small
+      - id: sm
+        name: Small
+      - id: md
+        name: Medium
+      - id: lg
+        name: Large
+      - id: xl
+        name: Extra Large
+      - id: 2xl
+        name: 2xl
+      - id: 3xl
+        name: 3xl
+      - id: 4xl
+        name: 4xl
+      - id: 5xl
+        name: 5xl
+      - id: 6xl
+        name: 6xl
+colorScheme:
+  type: select
+  comment: Light or dark scheme for the section. Inherit follows the page.
+  options:
+    values:
+      - id: inherit
+        name: Inherit
+      - id: light
+        name: Light
+      - id: dark
+        name: Dark
+lockColorScheme:
+  type: switch
+  label: Lock color scheme
+  comment: Ignores the site theme toggle. Only applies when Color Scheme is Light or Dark.
+backgroundColor:
+  type: select
+  comment: Background color for the section.
+  options:
+    values:
+      - id: none
+        name: None
+      - id: base
+        name: Base
+      - id: surface
+        name: Surface
+      - id: accent
+        name: Accent
+      - id: highlight
+        name: Highlight
+
+haze:
+  type: switch
+  comment: >-
+    Pools the section's own background colour behind the content and blurs it,
+    so a heading stays readable where an illustration or a pattern runs
+    underneath.

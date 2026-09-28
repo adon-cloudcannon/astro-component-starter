@@ -1,15 +1,37 @@
 ---
+import Image from "@core-elements/image/Image.astro";
 import CustomSection from "@builders/custom-section/CustomSection.astro";
 import Heading from "@core-elements/heading/Heading.astro";
+import SimpleText from "@core-elements/simple-text/SimpleText.astro";
 import Text from "@core-elements/text/Text.astro";
 import ButtonGroup from "@wrappers/button-group/ButtonGroup.astro";
 
 const {
+  /**
+   * The small label above the heading. The design draws one on several of
+   * these — "HOW IT WORKS" over "Here's the whole setup" — and with nowhere to
+   * put it the mapping bound it to `sectionLabel`, which names the section in
+   * the editor and renders nothing.
+   */
+  eyebrow = "",
   heading = "",
   headingLevel = "h2",
   headingSize = "xl",
   subtext = "",
+  // The design sets a section's supporting line in one of two styles, Body 3
+  // at 19 or Subtitle 1 at 22. `md` is the 16 every section rendered before
+  // either was carried through, so nothing moves unless the design named it.
+  subtextSize = "md",
   buttonSections = [],
+  /**
+   * A picture beneath the call to action, full width. The design uses this
+   * shape in three places — "Own your content, always", "Your content is
+   * yours", "Publishing took up to five weeks" — each a centred heading and
+   * button over a wide illustration. Read as a split, they put the picture
+   * beside the text and the heading on the left.
+   */
+  imageSource = "",
+  imageAlt = "",
   sectionLabel,
   maxContentWidth = "xl",
   paddingHorizontal = "gutter",
@@ -18,6 +40,7 @@ const {
   lockColorScheme = false,
   backgroundColor = "base",
   background,
+  haze = false,
   class: className,
   useDefaultEditableBinding = false,
   _component,
@@ -35,9 +58,17 @@ const {
   lockColorScheme={lockColorScheme}
   backgroundColor={backgroundColor}
   background={background}
+  haze={haze}
   useDefaultEditableBinding={useDefaultEditableBinding}
   {...htmlAttributes}
 >
+  <SimpleText
+    class="eyebrow"
+    size="sm"
+    alignmentHorizontal="center"
+    data-prop="eyebrow"
+    text={eyebrow}
+  />
   <Heading
     level={headingLevel}
     size={headingSize}
@@ -46,6 +77,8 @@ const {
     text={heading}
   />
   <Text
+    class="subtext"
+    size={subtextSize}
     alignmentHorizontal="center"
     data-prop="subtext"
     text={subtext}
@@ -55,17 +88,47 @@ const {
     alignmentHorizontal="center"
     data-children-prop="buttonSections"
   />
+  {imageSource && (
+    <Image
+      class="cta-center-image"
+      source={imageSource}
+      alt={imageAlt}
+      rounded={true}
+      sizes="100vw"
+      widths={[640, 1280, 1920]}
+      width={1280}
+      data-prop-src="imageSource"
+      data-prop-alt="imageAlt"
+    />
+  )}
 </CustomSection>
 
 <style is:global>
   @layer page-sections {
+    /* Full width of the column, under the copy. */
+    .cta-center .cta-center-image {
+      inline-size: 100%;
+      margin-block-start: var(--spacing-2xl);
+    }
+
+    .cta-center .cta-center-image img {
+      block-size: auto;
+      inline-size: 100%;
+    }
+  }
+</style>
+
+<style is:global>
+  @layer page-sections {
+    /* The heading takes the whole column and the line under it is held to the
+       design's measure, rather than both sharing one width. Flat, because a
+       rule nested deeper than this gets dropped (see CLAUDE.md). */
+    .cta-center .subtext {
+      margin-inline: auto;
+      max-inline-size: var(--content-width-measure);
+    }
+
     .cta-center {
-      /* The heading takes the whole column and the line under it is held to
-         the design's measure, rather than both sharing one width. */
-      .subtext {
-        margin-inline: auto;
-        max-inline-size: var(--content-width-measure);
-      }
     }
   }
 </style>

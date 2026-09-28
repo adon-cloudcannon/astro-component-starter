@@ -1,0 +1,245 @@
+---
+/**
+ * Numbered steps as tabs, with the selected step's content beneath.
+ *
+ * The design shows all three steps at once along the top — STEP 01, 02, 03,
+ * each with its title, a progress rule running through them and the current
+ * one lit — and swaps the panel below as you move between them. Read from its
+ * text alone it looks like a list of steps, and read as a carousel it grows
+ * prev/next buttons the design does not have. It is a selector: every step
+ * visible, one panel showing.
+ *
+ * Thin on purpose. ContentSelector already does the tabs, the panels and the
+ * keyboard handling, and `navigationPosition="top"` is the arrangement the
+ * design draws; this gives it a band, a heading and the section's padding.
+ */
+import CustomSection from "@builders/custom-section/CustomSection.astro";
+import ContentSelector from "@wrappers/content-selector/ContentSelector.astro";
+import Heading from "@core-elements/heading/Heading.astro";
+import Text from "@core-elements/text/Text.astro";
+import SimpleText from "@core-elements/simple-text/SimpleText.astro";
+
+const {
+  eyebrow = "",
+  heading = "",
+  headingLevel = "h2",
+  headingSize = "lg",
+  subtext = "",
+  // Body 3 at 19 or Subtitle 1 at 22 in the design; `md` keeps the 16 every
+  // section rendered before either was carried through.
+  subtextSize = "md",
+  items = [],
+  sectionLabel,
+  maxContentWidth = "xl",
+  paddingHorizontal = "gutter",
+  paddingVertical = "4xl",
+  colorScheme = "inherit",
+  lockColorScheme = false,
+  backgroundColor = "base",
+  background,
+  haze = false,
+  class: className,
+  useDefaultEditableBinding = false,
+  _component,
+  "data-children-prop": childrenDataProp,
+  ...htmlAttributes
+} = Astro.props;
+---
+
+<CustomSection
+  label={sectionLabel}
+  maxContentWidth={maxContentWidth}
+  paddingHorizontal={paddingHorizontal}
+  paddingVertical={paddingVertical}
+  colorScheme={colorScheme}
+  lockColorScheme={lockColorScheme}
+  backgroundColor={backgroundColor}
+  background={background}
+  haze={haze}
+  class:list={["step-selector", className]}
+  useDefaultEditableBinding={useDefaultEditableBinding}
+  {...htmlAttributes}
+>
+  <SimpleText
+    class="eyebrow"
+    size="sm"
+    data-prop="eyebrow"
+    text={eyebrow}
+  />
+  <Heading
+    level={headingLevel}
+    size={headingSize}
+    data-prop="heading"
+  >
+    {heading}
+  </Heading>
+  <Text
+    class="subtext"
+    data-prop="subtext"
+    size={subtextSize}    text={subtext}
+  />
+
+  <ContentSelector
+    class="step-selector-tabs"
+    items={items}
+    navigationPosition="top"
+    label={sectionLabel || heading || "Steps"}
+    style={{ "--step-count": String((items as unknown[])?.length || 1) }}
+    data-children-prop={childrenDataProp ?? (useDefaultEditableBinding ? "items" : undefined)}
+  />
+</CustomSection>
+
+<style is:global>
+  /* The design spreads the steps across the whole column — three tabs at 400
+     of a 1280 frame — where ContentSelector centres them on their own width.
+     That centring is deliberate and other tab strips want it, so this is an
+     override here rather than a change to the shared block. The count comes
+     from the component, since CSS cannot count grid children. */
+  @layer page-sections {
+    .step-selector .content-selector-items.nav-top {
+      /* The block's own shape, with the two centring tracks collapsed and the
+         tab tracks given equal shares. It places tab n in column n + 1, so
+         the leading spacer has to stay a track or every tab lands one column
+         to the right — which overlapped the last two on top of each other. */
+      grid-template-columns: 0 repeat(var(--step-count, 3), minmax(0, 1fr)) 0;
+    }
+
+    /* No bleed. The design's first tab sits at exactly the heading's x, so the
+       strip starts where every other section on the page starts and the three
+       tabs take a third each. Bled wider it hung 80px off the left of the
+       column and the section stopped lining up with its neighbours. */
+
+    /* Room between the section's heading and the strip, so the tabs read as
+       their own thing rather than as a line under the title.
+
+       Set on the token, not as a margin: the flow layer writes
+       margin-block-start from --space-before, and a plain margin loses to it.
+       Zeroing the token and adding a margin removed the spacing altogether. */
+    .step-selector .content-selector {
+      --space-before: var(--spacing-2xl);
+    }
+
+    /* The block draws a rail along the bottom of the tab row in
+       --color-bg-muted, which on a dark band is a pale line under the steps.
+       The design has no line there — what it has is a rule along the *top* of
+       each tab, Sunset on the current one. I had these the wrong way round. */
+    /* Every source of the pale underline, gone. The block draws it three
+       ways — a rail across the tab row, a segment under each tab, and a
+       bottom border on the last one — so killing the rail alone kept bringing
+       it back. The design has no line below these tabs at all; what marks the
+       current step is the Sunset rule above it and the filled panel. */
+    .step-selector .content-selector-items.nav-top::before,
+    .step-selector .content-selector-items.nav-top::after,
+    .step-selector .content-selector-tab::before,
+    .step-selector .content-selector-tab::after,
+    .step-selector .content-selector-tab[aria-selected="true"]::before,
+    .step-selector .content-selector-tablist::before,
+    .step-selector .content-selector-tablist::after {
+      content: none;
+    }
+
+    .step-selector .content-selector-tab,
+    .step-selector .content-selector-item:last-of-type .content-selector-tab {
+      border-block-end: 0;
+    }
+
+    /* 2px along the top: #34322E, and Sunset on the step you are on. The
+       current tab is also a filled panel. */
+    /* The tab fills its third. The tablists are equal thirds already, but the
+       tab inside each one was sizing to its own text — 263, 283 and 137px —
+       so the filled panel and its rule stopped wherever the words did. */
+    /* Every tab is as tall as the tallest. Left to its content, "Stay in
+       sync" is one line where the others are two, so its filled panel came up
+       short against theirs. */
+    .step-selector .content-selector-tablist {
+      block-size: 100%;
+      display: block;
+      inline-size: 100%;
+    }
+
+    .step-selector .content-selector-items.nav-top > * {
+      align-self: stretch;
+    }
+
+    .step-selector .content-selector-tab {
+      /* A flex column, so the label and title sit at the top of a tab that has
+         been stretched to match its neighbours. `align-content: start` on the
+         block container computed correctly and did nothing, and "Stay in
+         sync" — the one tab with a single-line title — kept its content
+         centred 11px below the others. */
+      align-items: stretch;
+      block-size: 100%;
+      border-block-start: 2px solid #34322e;
+      box-sizing: border-box;
+      display: flex;
+      flex-direction: column;
+      inline-size: 100%;
+      justify-content: flex-start;
+      padding: var(--spacing-md) var(--spacing-lg);
+    }
+
+    .step-selector .content-selector-tab[aria-selected="true"] {
+      background: #232120;
+      border-block-start-color: var(--sunset);
+    }
+
+    /* Not an even split: the design gives the picture 667 of the row and
+       leaves the copy about 450, so the art takes the larger share. */
+    .step-selector .content-selector-panel-content {
+      /* The copy sits at the top of the pane, not centred against the art. */
+      align-items: start;
+      display: grid;
+      gap: var(--spacing-2xl);
+      grid-template-columns: minmax(0, 2fr) minmax(0, 3fr);
+      /* Clear of the tab strip. Butted up against it the panel read as part
+         of the tabs rather than as what they select. */
+      padding-block-start: var(--spacing-3xl);
+    }
+
+    /* A rule between the two halves, which the design draws. */
+    /* The panel carries `flow`, which puts a space-before margin on every
+       child after the first — so the image column, and the rule down its
+       side, started 24px below the copy. They are columns beside each other,
+       not stacked content. */
+    .step-selector .content-selector-panel-content > * {
+      --space-before: 0;
+      margin-block: 0;
+    }
+
+    /* The rule runs the height of the panel, so the copy's first line starts
+       level with the top of it. Centred, the rule began lower than the text
+       and the two read as unrelated. */
+    .step-selector .content-selector-panel-content > .image {
+      align-self: stretch;
+      border-inline-start: var(--border-width-sm) solid #34322e;
+      display: flex;
+      padding-inline-start: var(--spacing-2xl);
+    }
+
+    /* Centred inside its half, not shrunk to fit. `justify-self: center` on
+       the grid item sized it to its own content and the logo grid came out
+       about a third of the width it should be; the column stretches and the
+       picture centres within it instead. */
+    .step-selector .content-selector-panel-content > .image img {
+      display: block;
+      inline-size: 100%;
+      /* Centred in the half both ways, while the rule beside it stays full
+         height. */
+      margin: auto;
+      max-inline-size: 41.6875rem;
+    }
+
+    @media (width < 60rem) {
+      .step-selector .content-selector-panel-content {
+        grid-template-columns: minmax(0, 1fr);
+      }
+    }
+
+    /* 18px on 29 of leading, which is what the design sets this copy at. */
+    .step-selector .content-selector-panel-content > *:not(.image) {
+      font-size: 1.125rem;
+      line-height: 1.6;
+      max-inline-size: var(--content-width-measure);
+    }
+  }
+</style>

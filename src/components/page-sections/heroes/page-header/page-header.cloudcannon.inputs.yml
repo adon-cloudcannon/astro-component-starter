@@ -15,6 +15,17 @@ headingLevel:
 subtext:
   type: markdown
   comment: One or two lines introducing the page.
+subtextSize:
+  type: select
+  comment: Body 3 at 19 or Subtitle 1 at 22 in the design; regular is 16.
+  options:
+    values:
+      - id: md
+        name: Regular
+      - id: lg
+        name: Large
+      - id: xl
+        name: Extra large
 showBreadcrumbs:
   type: switch
   comment: Shows a breadcrumb trail above the title, built from the URL. Hidden on the home page.
@@ -136,3 +147,10 @@ backgroundColor:
         name: Accent
       - id: highlight
         name: Highlight
+
+haze:
+  type: switch
+  comment: >-
+    Pools the section's own background colour behind the content and blurs it,
+    so a heading stays readable where an illustration or a pattern runs
+    underneath.

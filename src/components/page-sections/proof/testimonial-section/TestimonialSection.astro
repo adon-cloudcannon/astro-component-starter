@@ -1,51 +1,438 @@
 ---
 import CustomSection from "@builders/custom-section/CustomSection.astro";
 import Testimonial from "@core-elements/testimonial/Testimonial.astro";
+import Image from "@core-elements/image/Image.astro";
 
 const {
   text = "",
   authorName = "",
   authorDescription = "",
   authorImage = "",
+  layout = "centered",
+  markPosition = "start",
+  markStyle = "card",
+  // Not everything said is a quotation: a result line carries no marks in the
+  // design, and Testimonial adds a pair unconditionally.
+  quoted = true,
+  // Header 5 for a quote, Header 4 for a result. Measured, not guessed: the
+  // quotes are set at 29.1 and the one result at 42.
+  quoteSize = "sm",
+  linkText = "",
+  link = "",
+  company = "",
+  logoSource = "",
+  logoAlt = "",
+  accentColor = "none",
   sectionLabel,
   maxContentWidth = "xl",
   paddingHorizontal = "gutter",
-  // `sm`, not the sections' usual `4xl`: Testimonial draws its own padded card,
-  // so the section only contributes the gutter around it.
-  paddingVertical = "sm",
+  // `sm` centred, because Testimonial draws its own padded card and the
+  // section only contributes the gutter around it. Split there is no card, so
+  // the band carries the padding itself: the design puts the mark 99 below the
+  // top and 95 above the foot, which is 5xl.
+  paddingVertical,
   colorScheme = "inherit",
   lockColorScheme = false,
   backgroundColor = "surface",
   background,
+  haze = false,
   class: className,
   useDefaultEditableBinding = false,
   _component,
   ...htmlAttributes
 } = Astro.props;
+
+/**
+ * Split: the customer's mark in a card on one side, the quote on the other.
+ *
+ * The design draws the big single quotes this way — a pale card carrying the
+ * wordmark, and beside it the quote left-aligned with the author under it. The
+ * centred form is the same content with nothing to the side of it.
+ *
+ * The mark is usually type rather than a file: these are customers' own faces,
+ * which is exactly why the extractor calls them chrome. Set as text it takes
+ * the site's display face, which is a fudge the design will forgive sooner
+ * than an empty card.
+ */
+/**
+ * One component, four switches.
+ *
+ * The design draws this shape seven ways across the site and they differ only
+ * in which side the mark sits, whether it has a card round it, and whether
+ * there is an author or a link at all. Adon's call, and the right one: a quote
+ * with no attribution and a logo on the right is the same block as a quote
+ * with an avatar and a logo on the left.
+ *
+ *   markPosition  start  the mark leads, the quote follows (six of seven)
+ *                 end    the statement leads and the mark closes
+ *   markStyle     card   a panel a shade off the band, light or dark
+ *                 plain  the mark bare, with the author under it
+ *
+ * `split-plain` is still read as a layout so an older page keeps rendering.
+ */
+const isPlain = layout === "split-plain" || markStyle === "plain";
+const isSplit = layout === "split" || layout === "split-plain";
+const atEnd = markPosition === "end";
+const bandPadding = paddingVertical ?? (isSplit ? "5xl" : "sm");
+const hasMark = Boolean(company || logoSource);
+const accentStyle =
+  accentColor && accentColor !== "none"
+    ? { "--testimonial-accent": `var(--${accentColor})` }
+    : undefined;
 ---
 
 <CustomSection
   {...htmlAttributes}
-  class:list={["testimonial-section", className]}
+  class:list={[
+    "testimonial-section",
+    { "is-split": isSplit, "mark-plain": isSplit && isPlain, "mark-end": isSplit && atEnd },
+    isSplit ? `quote-${quoteSize}` : null,
+    { "not-quoted": !quoted },
+    className,
+  ]}
   label={sectionLabel}
   maxContentWidth={maxContentWidth}
   paddingHorizontal={paddingHorizontal}
-  paddingVertical={paddingVertical}
+  paddingVertical={bandPadding}
   colorScheme={colorScheme}
   lockColorScheme={lockColorScheme}
   backgroundColor={backgroundColor}
   background={background}
+  haze={haze}
   useDefaultEditableBinding={useDefaultEditableBinding}
+  style={accentStyle}
 >
+  {isSplit && (hasMark || isPlain) && (
+    <div class="testimonial-mark">
+      {logoSource ? (
+        <Image
+          source={logoSource}
+          alt={logoAlt || company}
+          data-prop-src="logoSource"
+          data-prop-alt="logoAlt"
+        />
+      ) : (
+        <span
+          class="testimonial-wordmark"
+          data-editable="text"
+          data-prop="company"
+        >
+          {company}
+        </span>
+      )}
+
+      {isPlain && (authorName || authorDescription) && (
+        <div class="testimonial-mark-author">
+          {authorImage && (
+            <Image
+              class="testimonial-mark-avatar"
+              source={authorImage}
+              alt={authorName}
+              data-prop-src="authorImage"
+            />
+          )}
+          <div>
+            {authorName && (
+              <strong
+                class="name"
+                data-editable="text"
+                data-prop="authorName"
+              >
+                {authorName}
+              </strong>
+            )}
+            {authorDescription && (
+              <span
+                class="description"
+                data-editable="text"
+                data-prop="authorDescription"
+              >
+                {authorDescription}
+              </span>
+            )}
+          </div>
+        </div>
+      )}
+    </div>
+  )}
+
   <Testimonial
     text={text}
-    authorName={authorName}
-    authorDescription={authorDescription}
-    authorImage={authorImage}
-    alignmentHorizontal="center"
+    authorName={isPlain ? "" : authorName}
+    authorDescription={isPlain ? "" : authorDescription}
+    authorImage={isPlain ? "" : authorImage}
+    alignmentHorizontal={isSplit ? "start" : "center"}
     data-prop="text"
     data-prop-author-name="authorName"
     data-prop-author-description="authorDescription"
     data-prop-author-image="authorImage"
   />
+
+  {isSplit && linkText && (
+    <a
+      class="testimonial-link"
+      href={link}
+      data-editable="text"
+      data-prop="linkText"
+    >
+      {linkText}
+      <span aria-hidden="true">&#8594;</span>
+    </a>
+  )}
 </CustomSection>
+
+<style is:global>
+  /* The mark card and the quote, side by side. The design draws 315 / 578 with
+     a wide gap between them, which is roughly a third against two thirds.
+
+     Flat, because rules nested deeper than a couple of levels get dropped (see
+     CLAUDE.md). */
+  @layer page-sections {
+    /* Column gap only. `gap` is both axes, so the 80 meant for the space
+       between the mark and the quote also went between the quote's row and
+       the "Read case study" row, dropping the link 133 below the author where
+       the design puts it about 30. */
+    .testimonial-section.is-split .content {
+      align-items: center;
+      column-gap: var(--spacing-4xl);
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(0, 2fr);
+      row-gap: 0;
+    }
+
+    /* The mark closes rather than leads: the statement takes the wide column on
+       the start side and the panel the narrow one at the end. The design draws
+       505 of copy against a 316 panel, which is nearer 3:2 than the 1:2 the
+       leading mark gets. */
+    .testimonial-section.is-split.mark-end .content {
+      grid-template-columns: minmax(0, 505fr) minmax(0, 316fr);
+    }
+
+    /* Placed, not ordered. `order: 2` reorders auto-placement rather than
+       moving the item, so the mark dropped into a second row under the link
+       and the band came out 766 tall against the design's 502. */
+    .testimonial-section.is-split.mark-end .testimonial-mark {
+      grid-column: 2;
+      grid-row: 1 / span 2;
+    }
+
+    .testimonial-section.is-split.mark-end .quote,
+    .testimonial-section.is-split.mark-end .testimonial-inner {
+      grid-column: 1;
+      grid-row: 1;
+    }
+
+    .testimonial-section.is-split.mark-end .testimonial-link {
+      grid-column: 1;
+      grid-row: 2;
+    }
+
+    /* 505 of copy, 219 of air, a 316 panel: 1040 exactly. Column gap only —
+       set as `gap` the 219 went between the rows too and pushed the band from
+       502 to 600. */
+    .testimonial-section.is-split.mark-end .content {
+      column-gap: 13.6875rem;
+      row-gap: var(--spacing-xl);
+    }
+
+    /* A card a shade off the band, whichever way the band goes: --sand on the
+       cream pages, #252423 on the dark ones. Light wants `surface` and dark
+       wants `muted` — in the light theme `muted` is --dark-sand, which is two
+       steps off the page rather than one (see CLAUDE.md on the dark cards). */
+    .testimonial-section.is-split .testimonial-mark {
+      background-color: var(--color-bg-surface);
+    }
+
+    /* CustomSection puts `data-theme` on its inner `.outer-content`, not on the
+       section it is given classes on, so the card has to be reached through
+       that rather than off the section itself. */
+    .testimonial-section.is-split [data-theme="dark"] .testimonial-mark,
+    .testimonial-section.is-split[data-theme="dark"] .testimonial-mark {
+      background-color: var(--color-bg-muted);
+    }
+
+    /* No mark to show — the customer's logo is a vector still to be exported
+       and their name is not recoverable from the role line — so the quote
+       takes the whole column rather than sitting in the right-hand two thirds
+       with a hole beside it. */
+    .testimonial-section.is-split:not(:has(.testimonial-mark)) .content {
+      grid-template-columns: minmax(0, 1fr);
+    }
+
+    .testimonial-section.is-split:not(:has(.testimonial-mark)) .testimonial-link {
+      grid-column: 1;
+    }
+
+    /* The flow layer writes margin-block-start from --space-before, so a plain
+       margin loses to it. Both children sit in their own grid cell and need
+       neither. */
+    .testimonial-section.is-split .content > * {
+      --space-before: 0;
+      margin-block: 0;
+    }
+
+    /* 316 x 281 in the design, not a square. */
+    .testimonial-section.is-split .testimonial-mark {
+      align-items: center;
+      aspect-ratio: 316 / 281;
+      border: var(--border-width-sm) solid var(--color-border);
+      border-radius: var(--radius-lg);
+      display: flex;
+      justify-content: center;
+      padding: var(--spacing-xl);
+    }
+
+    .testimonial-section.is-split .testimonial-wordmark {
+      font-family: var(--font-display, var(--font-heading));
+      font-size: var(--font-size-2xl);
+      font-weight: var(--font-weight-bold);
+      line-height: 1.1;
+      text-align: center;
+      text-wrap: balance;
+    }
+
+    .testimonial-section.is-split .testimonial-mark img {
+      block-size: auto;
+      inline-size: auto;
+      max-block-size: 7.5rem;
+      max-inline-size: 100%;
+    }
+
+    /* The quote's own card padding is the centred form's; split, the card is
+       the mark beside it and the quote sits plain on the band. */
+    .testimonial-section.is-split .testimonial-inner {
+      background-color: transparent;
+      border: 0;
+      padding: 0;
+    }
+
+    /* A band given to one quote sets it at Header 5, not body size. Read off
+       3806:74227: 29.1 over 37.4, semibold, no tracking.
+
+       On the `<p>`, not the `<blockquote>`. Set on the blockquote alone the
+       paragraph inside kept its own 27 over 43.2 and nothing moved, which
+       measured as applied because the measurement was taken on the wrong
+       element. */
+    .testimonial-section.is-split .quote,
+    .testimonial-section.is-split .quote :is(p, blockquote) {
+      font-size: var(--font-size-heading-sm);
+      font-weight: var(--font-weight-semibold);
+      line-height: 1.285;
+    }
+
+    .testimonial-section.is-split.quote-md .quote,
+    .testimonial-section.is-split.quote-md .quote :is(p, blockquote) {
+      font-size: var(--font-size-heading-md);
+      font-weight: var(--font-weight-medium);
+      line-height: 1.31;
+    }
+
+    /* A result rather than a quotation: no marks around it. */
+    .testimonial-section.not-quoted .quote > *:first-child::before,
+    .testimonial-section.not-quoted .quote > *:last-child::after {
+      content: none;
+    }
+
+    /* `.name` and `.description`, which is what Testimonial writes —
+       `.author-name` matched nothing and the line stayed at body size.
+       3806:74225 is 20 over 23.6, bold, tracked -0.2. */
+    .testimonial-section.is-split .author .name {
+      font-size: 1.25rem;
+      letter-spacing: -0.01em;
+      line-height: 1.18;
+    }
+
+    /* The role is the eyebrow face, not the body one: 3806:74226 is Fragment
+       Mono 13 over 16. */
+    .testimonial-section.is-split .author .description {
+      font-family: var(--font-mono);
+      font-size: 0.8125rem;
+      line-height: 1.23;
+    }
+
+    /* The design colours the emphasised run of the quote, and it is the
+       customer's own colour rather than the page's. */
+    .testimonial-section .quote :is(strong, b) {
+      color: var(--testimonial-accent, var(--color-brand));
+      font-weight: inherit;
+    }
+  }
+
+  /* The dark variant: no card, the mark at the top of its column and the
+     author at the foot of it, with the quote and its link opposite.
+
+     Flat, because rules nested deeper than a couple of levels get dropped
+     (see CLAUDE.md). */
+  @layer page-sections {
+    .testimonial-section.mark-plain .content {
+      align-items: stretch;
+    }
+
+    .testimonial-section.mark-plain .testimonial-mark {
+      align-items: flex-start;
+      aspect-ratio: auto;
+      background-color: transparent;
+      border: 0;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      padding: 0;
+    }
+
+    .testimonial-section.mark-plain .testimonial-wordmark {
+      text-align: start;
+    }
+
+    .testimonial-section .testimonial-mark-author {
+      align-items: center;
+      display: flex;
+      gap: var(--spacing-md);
+      margin-block-start: var(--spacing-3xl);
+    }
+
+    .testimonial-section .testimonial-mark-author .name {
+      display: block;
+      font-size: var(--font-size-heading-xs);
+      line-height: 1.18;
+    }
+
+    .testimonial-section .testimonial-mark-author .description {
+      color: var(--color-text-muted);
+      display: block;
+      font-family: var(--font-mono);
+      font-size: 0.8125rem;
+      line-height: 1.23;
+    }
+
+    .testimonial-section .testimonial-mark-author img {
+      block-size: 3rem;
+      border-radius: var(--radius-full);
+      inline-size: 3rem;
+      object-fit: cover;
+    }
+
+    /* "Read case study" sits under the quote, in the accent. */
+    .testimonial-section .testimonial-link {
+      align-items: center;
+      color: var(--sunset);
+      display: inline-flex;
+      gap: 0.5rem;
+      grid-column: 2;
+      justify-self: start;
+      margin-block-start: var(--spacing-lg);
+      text-decoration: none;
+    }
+
+    .testimonial-section .testimonial-link:hover {
+      text-decoration: underline;
+    }
+  }
+
+  @layer page-sections {
+    @media (width < 48rem) {
+      .testimonial-section.is-split .content {
+        grid-template-columns: minmax(0, 1fr);
+      }
+    }
+  }
+</style>

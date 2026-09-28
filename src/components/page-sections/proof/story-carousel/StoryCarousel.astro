@@ -44,6 +44,10 @@ const {
   headingLevel = "h2",
   headingSize = "lg",
   subtext = "",
+  // The design sets a section's supporting line in one of two styles, Body 3
+  // at 19 or Subtitle 1 at 22. `md` is the 16 every section rendered before
+  // either was carried through, so nothing moves unless the design named it.
+  subtextSize = "md",
   stories = [],
   buttonSections = [],
   sectionLabel,
@@ -54,6 +58,7 @@ const {
   lockColorScheme = false,
   backgroundColor = "base",
   background,
+  haze = false,
   class: className,
   useDefaultEditableBinding = false,
   _component,
@@ -71,6 +76,7 @@ const {
   lockColorScheme={lockColorScheme}
   backgroundColor={backgroundColor}
   background={background}
+  haze={haze}
   class:list={["story-carousel", className]}
   useDefaultEditableBinding={useDefaultEditableBinding}
   {...htmlAttributes}
@@ -92,6 +98,7 @@ const {
   </Heading>
   <Text
     class="subtext"
+    size={subtextSize}
     alignmentHorizontal="center"
     data-prop="subtext"
     text={subtext}
@@ -117,6 +124,7 @@ const {
         <CarouselSlide data-editable="array-item">
           <Card
             accentColor={story.accentColor || "none"}
+            accentRule={true}
             backgroundColor="muted"
             border={true}
             rounded={true}

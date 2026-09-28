@@ -18,6 +18,10 @@ const {
   headingLevel = "h2",
   headingSize = "lg",
   subtext = "",
+  // The design sets a section's supporting line in one of two styles, Body 3
+  // at 19 or Subtitle 1 at 22. `md` is the 16 every section rendered before
+  // either was carried through, so nothing moves unless the design named it.
+  subtextSize = "md",
   showAnnualPricing = false,
   monthlyLabel = "Monthly",
   annualLabel = "Annual",
@@ -32,6 +36,7 @@ const {
   lockColorScheme = false,
   backgroundColor = "base",
   background,
+  haze = false,
   class: className,
   useDefaultEditableBinding = false,
   _component,
@@ -57,6 +62,7 @@ const annualSelected = defaultInterval === "annual";
   lockColorScheme={lockColorScheme}
   backgroundColor={backgroundColor}
   background={background}
+  haze={haze}
   useDefaultEditableBinding={useDefaultEditableBinding}
   {...htmlAttributes}
 >
@@ -78,6 +84,7 @@ const annualSelected = defaultInterval === "annual";
   <Text
     class="pricing-tiers-subtext"
     alignmentHorizontal="center"
+    size={subtextSize}
     data-prop="subtext"
     text={subtext}
   />

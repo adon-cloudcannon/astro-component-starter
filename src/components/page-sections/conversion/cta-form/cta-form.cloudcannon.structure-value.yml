@@ -7,6 +7,7 @@ value:
   heading: Get in touch
   headingLevel: h2
   subtext: Fill out the form below and we'll get back to you as soon as possible.
+  subtextSize: md
   formAction: ./
   formBlocks:
     - _component: building-blocks/forms/input
@@ -70,6 +71,7 @@ groups:
     inputs:
       - heading
       - subtext
+      - subtextSize
       - formAction
       - formBlocks
       - imageSource

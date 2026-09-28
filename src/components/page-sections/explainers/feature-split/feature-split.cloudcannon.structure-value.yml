@@ -57,6 +57,7 @@ groups:
       - eyebrow
       - heading
       - subtext
+      - subtextSize
       - buttonSections
       - imageSource
       - imageAlt

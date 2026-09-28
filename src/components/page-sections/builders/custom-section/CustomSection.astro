@@ -16,6 +16,13 @@ const {
   lockColorScheme = false,
   backgroundColor = "base",
   background,
+  /**
+   * A soft pool of the band's own colour behind the content, so a heading
+   * stays readable where an illustration or a pattern runs underneath. The
+   * design uses it in fourteen places and leaves it off where the band is
+   * plain — the Developers hero has none.
+   */
+  haze = false,
   rounded = false,
   useDefaultEditableBinding = false,
   class: className,
@@ -37,6 +44,11 @@ const {
   patternSize = "natural",
   mask = bgType === "pattern" ? "frame" : "none",
 } = background || {};
+
+// One layer per pool. A section can carry several: the AI Ready hero pools
+// behind its heading and again behind its illustration, and `true` on its own
+// still means one centred pool.
+const hazePools = haze === true ? [{}] : Array.isArray(haze) ? haze : haze ? [haze] : [];
 
 const usesFixedBackground = bgType === "image" && fixed && !!imageSource;
 const patternImageUrl =
@@ -109,6 +121,19 @@ const arrayDataAttributes =
     {backgroundColor && (
       <div class:list={["background", backgroundColor && `bg-${backgroundColor}`]} />
     )}
+    {hazePools.map((pool) => (
+      <div
+        class="background-haze"
+        aria-hidden="true"
+        style={{
+          ...(pool?.x !== undefined ? { "--haze-x": String(pool.x) } : {}),
+          ...(pool?.rx ? { "--haze-rx": pool.rx } : {}),
+          ...(pool?.y ? { "--haze-y": pool.y } : {}),
+          ...(pool?.ry ? { "--haze-ry": pool.ry } : {}),
+          ...(maxContentWidth ? { "--haze-track": `min(100%, var(--content-width-${maxContentWidth}))` } : {}),
+        }}
+      />
+    ))}
 
     <div
       class:list={[
@@ -354,6 +379,63 @@ const arrayDataAttributes =
           z-index: var(--layer-1);
         }
 
+        /* Pooled behind the heading and blurred, which is what keeps the text
+           readable where art or a pattern runs under it. The design draws the
+           same shape every time: opaque at the centre, 80% at 38%, 55% at 60%,
+           gone by 78%, under a 20px blur.
+
+           Above the image and the pattern, below the content. The colour is
+           --color-bg rather than a fixed cream, so a band that locks itself
+           dark hazes in #1D1B17 the way the design has it. */
+        > .background-haze {
+          /* Measured against the content column, not the band. The design's
+             numbers are shares of a 1280 frame, but the text a pool sits
+             behind is in the 1040 column, so on a wider window the column
+             moves right while a band-relative percentage stays put and the
+             pool slides off to the left of the heading.
+
+             The layer itself stays full-bleed, because the pool spills past
+             the column — the homepage hero's starts 198px outside it — and a
+             gradient is only painted within its own box.
+
+             The radius is a length, not a calc: a radial-gradient's *size*
+             rejects math functions where its position accepts them, and a
+             calc there makes the whole declaration invalid, so the pool
+             disappears rather than degrading. */
+          background-image: radial-gradient(
+            ellipse var(--haze-rx, 50%) var(--haze-ry, 80%) at
+              calc(
+                50% - var(--haze-track, 100%) / 2 + var(--haze-track, 100%) *
+                  var(--haze-x, 0.5)
+              )
+              var(--haze-y, 50%),
+            var(--haze-color, var(--color-bg)) 0%,
+            color-mix(in srgb, var(--haze-color, var(--color-bg)) 80%, transparent) 38%,
+            color-mix(in srgb, var(--haze-color, var(--color-bg)) 55%, transparent) 60%,
+            transparent 78%
+          );
+          filter: blur(20px);
+          /* Clipped to its own band. A blur paints outside the box it is on,
+             and a pool whose vertical radius is larger than the section — the
+             homepage team wall's reaches 237% of it — is still at full
+             strength when it meets the edge, so the blur smeared a bar of
+             colour into the sections above and below. clip-path runs after
+             filter, so this cuts the blurred result rather than the source. */
+          clip-path: inset(0);
+          inset: 0;
+          pointer-events: none;
+          position: absolute;
+          /* The same layer as the pattern and the content, which both sit at
+             --layer-1. All three tie, so DOM order decides, and this is
+             written between them: above the pattern, below the content.
+
+             Neither neighbour works. Left at `auto` it drops under the
+             pattern and does nothing at all, since the pool is the same cream
+             as the band and only shows by hiding the grid. At --layer-2 it
+             clears the content and fogs the heading and the illustration. */
+          z-index: var(--layer-1);
+        }
+
         > .background-pattern {
           background-position: top left;
           background-repeat: repeat;
@@ -399,6 +481,15 @@ const arrayDataAttributes =
 
         &.background-mask-top {
           --bg-mask: linear-gradient(to top, #000 30%, transparent 85%);
+        }
+
+        /* Full at the top edge and gone before the bottom. The design's
+           pegboard thins out down the band rather than holding one strength,
+           and measuring it off the export gives a straight ramp reaching
+           nothing at about 92%. `bottom` below holds full to 30% first, which
+           is too strong through the middle. */
+        &.background-mask-fade {
+          --bg-mask: linear-gradient(to bottom, #000, transparent 92%);
         }
 
         &.background-mask-bottom {

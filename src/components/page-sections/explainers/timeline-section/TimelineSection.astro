@@ -11,6 +11,9 @@ const {
   headingLevel = "h2",
   headingSize = "lg",
   subtext = "",
+  // Body 3 at 19 or Subtitle 1 at 22 in the design; `md` keeps the 16 every
+  // section rendered before either was carried through.
+  subtextSize = "md",
   entries = [],
   layout = "vertical",
   sectionLabel,
@@ -21,18 +24,29 @@ const {
   lockColorScheme = false,
   backgroundColor = "base",
   background,
+  haze = false,
   class: className,
   useDefaultEditableBinding = false,
   _component,
   ...htmlAttributes
 } = Astro.props;
 
+/**
+ * A section whose heading is the band above it renders no header at all.
+ *
+ * Left in, the empty heading is still a sibling, so the flow layer gives the
+ * timeline after it a space-before it has not earned: 48px of nothing under a
+ * section that already carries its own padding. Where the design puts about
+ * 100 between the copy and the first step, this put 208.
+ */
+const hasHeader = Boolean(eyebrow || heading || subtext);
+
 const gutter =
   paddingHorizontal && paddingHorizontal !== "none" ? `var(--spacing-${paddingHorizontal})` : "0px";
 ---
 
 <CustomSection
-  class:list={["timeline-section", className]}
+  class:list={["timeline-section", { "no-header": !hasHeader }, className]}
   label={sectionLabel}
   maxContentWidth={maxContentWidth}
   paddingHorizontal={paddingHorizontal}
@@ -41,30 +55,35 @@ const gutter =
   lockColorScheme={lockColorScheme}
   backgroundColor={backgroundColor}
   background={background}
+  haze={haze}
   useDefaultEditableBinding={useDefaultEditableBinding}
   {...htmlAttributes}
 >
-  <SimpleText
-    alignmentHorizontal="center"
-    class="eyebrow"
-    data-prop="eyebrow"
-    text={eyebrow}
-    size="sm"
-  />
-  <Heading
-    level={headingLevel}
-    size={headingSize}
-    alignmentHorizontal="center"
-    data-prop="heading"
-  >
-    {heading}
-  </Heading>
-  <Text
-    class="section-subtext timeline-section-subtext"
-    alignmentHorizontal="center"
-    data-prop="subtext"
-    text={subtext}
-  />
+  {hasHeader && (
+    <Fragment>
+      <SimpleText
+        alignmentHorizontal="center"
+        class="eyebrow"
+        data-prop="eyebrow"
+        text={eyebrow}
+        size="sm"
+      />
+      <Heading
+        level={headingLevel}
+        size={headingSize}
+        alignmentHorizontal="center"
+        data-prop="heading"
+      >
+        {heading}
+      </Heading>
+      <Text
+        class="section-subtext timeline-section-subtext"
+        alignmentHorizontal="center"
+        data-prop="subtext"
+        size={subtextSize}        text={subtext}
+      />
+    </Fragment>
+  )}
   <Timeline
     entries={entries}
     spaceBefore="loose"
@@ -78,6 +97,28 @@ const gutter =
   @layer page-sections {
     .timeline-section {
       min-width: 0;
+    }
+  }
+</style>
+
+<style is:global>
+  /* A rail whose heading is the band above it carries no space of its own over
+     its first entry: the gap under the copy is the whole gap.
+
+     Measured in the file, not eyeballed. The subtext (3806:74049) ends at
+     2679 and the first marker disc (3806:74098) starts at 2761, so the design
+     draws 82 — which is what the band above contributes on its own. The two
+     frames even overlap by 11. Two abutting bands at the usual 4xl gave 160,
+     and shrinking both ends took the foot of the band down to 32 where the
+     design has 113, so this is the top alone.
+
+     In `overrides`, not `page-sections`: the padding comes from a `pad-y-4xl`
+     spacing utility, and `utils` out-ranks `page-sections` in the layer order.
+     Flat, because rules nested deeper than a couple of levels get dropped
+     (see CLAUDE.md). */
+  @layer overrides {
+    .timeline-section.no-header .content {
+      padding-block-start: 0;
     }
   }
 </style>

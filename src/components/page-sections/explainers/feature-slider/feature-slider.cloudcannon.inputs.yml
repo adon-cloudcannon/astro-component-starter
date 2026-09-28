@@ -1,3 +1,21 @@
+eyebrow:
+  type: text
+  comment: Small label above the heading.
+heading:
+  type: text
+  comment: The section's heading.
+headingLevel:
+  type: select
+  options:
+    values:
+      - h2
+      - h3
+headingSize:
+  type: text
+  comment: Heading size slot.
+subtext:
+  type: markdown
+  comment: Supporting copy beneath the heading.
 slides:
   type: array
   label: Slides
@@ -113,3 +131,10 @@ backgroundColor:
         name: Accent
       - id: highlight
         name: Highlight
+
+haze:
+  type: switch
+  comment: >-
+    Pools the section's own background colour behind the content and blurs it,
+    so a heading stays readable where an illustration or a pattern runs
+    underneath.

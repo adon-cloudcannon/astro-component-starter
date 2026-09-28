@@ -66,6 +66,7 @@ _structures:
           title: Entry title
           body: ""
           iconName: ""
+          accentColor: ""
         preview:
           text:
             - key: title
@@ -85,10 +86,30 @@ _structures:
           body:
             type: textarea
             comment: Optional supporting copy. Title-only entries are valid.
+          accentColor:
+            type: select
+            label: Marker color
+            comment: Fills the marker in Split and Rail layouts. Leave blank for the section's own color.
+            options:
+              values:
+                - id: ""
+                  name: Default
+                - id: moss
+                  name: Moss
+                - id: pacific
+                  name: Pacific
+                - id: sunset
+                  name: Sunset
+                - id: golden
+                  name: Golden
+                - id: peachy
+                  name: Peachy
+                - id: harbour
+                  name: Harbour
           iconName:
             type: select
-            label: Split icon
-            comment: Optional icon shown in Split layout. Leave blank for a dot.
+            label: Marker icon
+            comment: Optional icon shown in Split and Rail layouts. Leave blank for a dot.
             options:
               values: data.icons
               preview:
@@ -102,6 +123,7 @@ groups:
       - eyebrow
       - heading
       - subtext
+      - subtextSize
       - layout
       - entries
   - heading: Section settings

@@ -13,6 +13,9 @@ const {
   headingLevel = "h2",
   headingSize = "lg",
   subtext = "",
+  // Body 3 at 19 or Subtitle 1 at 22 in the design; `md` keeps the 16 every
+  // section rendered before either was carried through.
+  subtextSize = "md",
   testimonials = [],
   columns = "3",
   sectionLabel,
@@ -23,13 +26,16 @@ const {
   lockColorScheme = false,
   backgroundColor = "base",
   background,
+  haze = false,
   class: className,
   useDefaultEditableBinding = false,
   _component,
   ...htmlAttributes
 } = Astro.props;
 
-const columnCount = String(columns) === "4" ? "4" : "3";
+// The design's developer-page bento is two across, two down, so two is a real
+// option rather than something that falls back to three.
+const columnCount = ["2", "4"].includes(String(columns)) ? String(columns) : "3";
 ---
 
 <CustomSection
@@ -42,6 +48,7 @@ const columnCount = String(columns) === "4" ? "4" : "3";
   lockColorScheme={lockColorScheme}
   backgroundColor={backgroundColor}
   background={background}
+  haze={haze}
   useDefaultEditableBinding={useDefaultEditableBinding}
   {...htmlAttributes}
 >
@@ -64,7 +71,7 @@ const columnCount = String(columns) === "4" ? "4" : "3";
     class="section-subtext testimonial-bento-subtext"
     alignmentHorizontal="center"
     data-prop="subtext"
-    text={subtext}
+    size={subtextSize}    text={subtext}
   />
 
   {testimonials?.length > 0 && (
@@ -102,6 +109,10 @@ const columnCount = String(columns) === "4" ? "4" : "3";
         gap: var(--spacing-md);
         grid-auto-flow: dense;
         grid-template-columns: repeat(3, minmax(0, 1fr));
+
+        &[data-columns="2"] {
+          grid-template-columns: repeat(2, minmax(0, 1fr));
+        }
 
         &[data-columns="4"] {
           grid-template-columns: repeat(4, minmax(0, 1fr));

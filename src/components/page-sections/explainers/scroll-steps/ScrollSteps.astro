@@ -1,0 +1,128 @@
+---
+/**
+ * Steps that advance as the page scrolls, with the picture changing beside
+ * them and a bar showing how far through you are.
+ *
+ * The design draws this as copy on one side, a mockup on the other, and a
+ * progress rule along the foot of the band. Read as a tabbed selector it grows
+ * controls the design has none of; read as a plain split it loses every step
+ * but the first. The bar at the bottom is the tell — it fills as you scroll
+ * rather than on a click.
+ *
+ * Thin: ScrollStepper does the scroll binding, the pinning and the bar, so
+ * this gives it a band, a heading and the section's padding.
+ */
+import CustomSection from "@builders/custom-section/CustomSection.astro";
+import ScrollStepper from "@wrappers/scroll-stepper/ScrollStepper.astro";
+import Heading from "@core-elements/heading/Heading.astro";
+import Text from "@core-elements/text/Text.astro";
+import SimpleText from "@core-elements/simple-text/SimpleText.astro";
+
+const {
+  eyebrow = "",
+  heading = "",
+  headingLevel = "h2",
+  headingSize = "lg",
+  subtext = "",
+  // The design sets a section's supporting line in one of two styles, Body 3
+  // at 19 or Subtitle 1 at 22. `md` is the 16 every section rendered before
+  // either was carried through, so nothing moves unless the design named it.
+  subtextSize = "md",
+  steps = [],
+  reverse = false,
+  mediaWidth = "half",
+  progressStyle = "bar",
+  sectionLabel,
+  maxContentWidth = "xl",
+  paddingHorizontal = "gutter",
+  paddingVertical = "4xl",
+  colorScheme = "inherit",
+  lockColorScheme = false,
+  backgroundColor = "base",
+  background,
+  haze = false,
+  class: className,
+  useDefaultEditableBinding = false,
+  _component,
+  "data-children-prop": childrenDataProp,
+  ...htmlAttributes
+} = Astro.props;
+
+const hasHeader = Boolean(eyebrow || heading || subtext);
+---
+
+<CustomSection
+  label={sectionLabel}
+  maxContentWidth={maxContentWidth}
+  paddingHorizontal={paddingHorizontal}
+  paddingVertical={paddingVertical}
+  colorScheme={colorScheme}
+  lockColorScheme={lockColorScheme}
+  backgroundColor={backgroundColor}
+  background={background}
+  haze={haze}
+  class:list={["scroll-steps", className]}
+  useDefaultEditableBinding={useDefaultEditableBinding}
+  {...htmlAttributes}
+>
+  {hasHeader && (
+    <Fragment>
+      <SimpleText
+        class="eyebrow"
+        size="sm"
+        data-prop="eyebrow"
+        text={eyebrow}
+      />
+      <Heading
+        level={headingLevel}
+        size={headingSize}
+        data-prop="heading"
+      >
+        {heading}
+      </Heading>
+      <Text
+        class="subtext"
+        size={subtextSize}
+        data-prop="subtext"
+        text={subtext}
+      />
+    </Fragment>
+  )}
+
+  <ScrollStepper
+    steps={steps}
+    reverse={reverse}
+    mediaWidth={mediaWidth}
+    progressStyle={progressStyle}
+    data-children-prop={childrenDataProp ?? (useDefaultEditableBinding ? "steps" : undefined)}
+  />
+</CustomSection>
+
+<style is:global>
+  /* The step's link is set in Sunset, the same colour as its label above it,
+     which is how the design marks a step out from the band it sits on. The
+     arrow button's usual pairing — base label, brand arrow — is for buttons
+     sitting on the page's own colour, and this band is not that.
+
+     Flat, because rules nested deeper than a couple of levels get dropped (see
+     CLAUDE.md). */
+  @layer page-sections {
+    .scroll-steps .variant-text .button-inner,
+    .scroll-steps .variant-text .icon {
+      color: var(--sunset);
+    }
+
+    /* A link, not a control: no pill padding around it. */
+    .scroll-steps .variant-text .button-inner {
+      padding-inline: 0;
+    }
+  }
+
+  /* The copy column sits at the top of the band rather than centred against
+     the picture beside it, which is where the design puts it. */
+  @layer page-sections {
+    .scroll-steps .scroll-stepper-steps {
+      align-self: start;
+    }
+  }
+</style>

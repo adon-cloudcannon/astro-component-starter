@@ -32,6 +32,17 @@ headingLevel:
 subtext:
   type: markdown
   comment: Supporting copy beneath the heading.
+subtextSize:
+  type: select
+  comment: Body 3 at 19 or Subtitle 1 at 22 in the design; regular is 16.
+  options:
+    values:
+      - id: md
+        name: Regular
+      - id: lg
+        name: Large
+      - id: xl
+        name: Extra large
 layout:
   type: select
   comment: Staggered columns, or an even row of cards that share one height.

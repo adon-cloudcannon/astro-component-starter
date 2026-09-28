@@ -8,6 +8,7 @@ value:
   heading: Simple pricing that scales with you
   headingLevel: h2
   subtext: Every plan includes global CDN hosting and automatic SSL.
+  subtextSize: md
   showAnnualPricing: false
   monthlyLabel: Monthly
   annualLabel: Annual
@@ -199,6 +200,7 @@ groups:
       - eyebrow
       - heading
       - subtext
+      - subtextSize
       - showAnnualPricing
       - monthlyLabel
       - annualLabel

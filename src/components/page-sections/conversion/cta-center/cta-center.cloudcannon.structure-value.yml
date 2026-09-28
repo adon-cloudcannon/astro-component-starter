@@ -3,10 +3,12 @@ icon: call_to_action
 description: Centered call to action with a headline, supporting text, and buttons.
 value:
   _component: page-sections/conversion/cta-center
+  eyebrow: ""
   sectionLabel: ""
   heading: Ready to get started?
   headingLevel: h2
   subtext: One line that makes the next step obvious.
+  subtextSize: md
   buttonSections:
     - _component: building-blocks/core-elements/button
       text: Get started
@@ -56,8 +58,10 @@ _inputs_from_glob:
 groups:
   - heading: Content
     inputs:
+      - eyebrow
       - heading
       - subtext
+      - subtextSize
       - buttonSections
   - heading: Section settings
     comment: Width, spacing, color scheme, and background for this section.

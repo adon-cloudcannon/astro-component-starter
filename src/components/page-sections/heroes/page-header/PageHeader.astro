@@ -11,6 +11,9 @@ const {
   heading = "",
   headingLevel = "h1",
   subtext = "",
+  // Body 3 at 19 or Subtitle 1 at 22 in the design; `md` keeps the 16 every
+  // section rendered before either was carried through.
+  subtextSize = "md",
   showBreadcrumbs = true,
   alignmentHorizontal = "start",
   sectionLabel,
@@ -21,6 +24,7 @@ const {
   lockColorScheme = false,
   backgroundColor = "base",
   background,
+  haze = false,
   class: className,
   useDefaultEditableBinding = false,
   _component,
@@ -49,6 +53,7 @@ const trail = showBreadcrumbs && pathname ? trailFromPathname(pathname, heading)
   lockColorScheme={lockColorScheme}
   backgroundColor={backgroundColor}
   background={background}
+  haze={haze}
   useDefaultEditableBinding={useDefaultEditableBinding}
   {...htmlAttributes}
 >
@@ -78,7 +83,7 @@ const trail = showBreadcrumbs && pathname ? trailFromPathname(pathname, heading)
     class="page-header-subtext"
     alignmentHorizontal={alignmentHorizontal}
     data-prop="subtext"
-    text={subtext}
+    size={subtextSize}    text={subtext}
   />
 </CustomSection>
 

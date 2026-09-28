@@ -1,3 +1,41 @@
+layout:
+  type: select
+  comment: Centred on its own, or split with the customer's mark beside it.
+  options:
+    values:
+      - id: centered
+        name: Centered
+      - id: split
+        name: Split
+company:
+  type: text
+  comment: The customer's name, set as a wordmark in the card. Ignored when a logo is set.
+logoSource:
+  type: image
+  comment: The customer's logo, shown in the card instead of their name.
+logoAlt:
+  type: text
+  comment: Alt text for the logo.
+accentColor:
+  type: select
+  label: Emphasis color
+  comment: Colors the emphasised run of the quote.
+  options:
+    values:
+      - id: none
+        name: Default
+      - id: moss
+        name: Moss
+      - id: pacific
+        name: Pacific
+      - id: sunset
+        name: Sunset
+      - id: golden
+        name: Golden
+      - id: peachy
+        name: Peachy
+      - id: harbour
+        name: Harbour
 text:
   type: markdown
   comment: The testimonial quote text.
@@ -138,3 +176,10 @@ backgroundColor:
         name: Accent
       - id: highlight
         name: Highlight
+
+haze:
+  type: switch
+  comment: >-
+    Pools the section's own background colour behind the content and blurs it,
+    so a heading stays readable where an illustration or a pattern runs
+    underneath.

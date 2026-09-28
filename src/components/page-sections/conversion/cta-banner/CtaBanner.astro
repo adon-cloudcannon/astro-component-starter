@@ -1,0 +1,149 @@
+---
+/**
+ * A short, full-width band: a heading, a link, and a drawing in the corner.
+ *
+ * Neither of the CTAs already here fits it. The centred one stacks its parts
+ * down the middle of the column and the split one gives the picture half the
+ * band; this is a strip about a fifth as tall as either, with the copy hard
+ * left and the artwork bleeding off the bottom-right corner rather than
+ * sitting in a column of its own.
+ *
+ * Read off 3806:70514: 1281x217, the heading at 46/49.7 in white, the link
+ * beneath it, and "Ferns_Rocks" hanging 7 over the top edge and 10 under the
+ * bottom one.
+ */
+import CustomSection from "@builders/custom-section/CustomSection.astro";
+import Heading from "@core-elements/heading/Heading.astro";
+import Image from "@core-elements/image/Image.astro";
+import Button from "@core-elements/button/Button.astro";
+
+const {
+  heading = "",
+  headingLevel = "h2",
+  headingSize = "lg",
+  linkText = "",
+  link = "",
+  imageSource = "",
+  imageAlt = "",
+  sectionLabel,
+  maxContentWidth = "xl",
+  paddingHorizontal = "gutter",
+  paddingVertical = "2xl",
+  colorScheme = "inherit",
+  lockColorScheme = true,
+  backgroundColor = "brand",
+  background,
+  haze = false,
+  class: className,
+  useDefaultEditableBinding = false,
+  _component,
+  ...htmlAttributes
+} = Astro.props;
+---
+
+<CustomSection
+  class:list={["cta-banner", className]}
+  label={sectionLabel}
+  maxContentWidth={maxContentWidth}
+  paddingHorizontal={paddingHorizontal}
+  paddingVertical={paddingVertical}
+  colorScheme={colorScheme}
+  lockColorScheme={lockColorScheme}
+  backgroundColor={backgroundColor}
+  background={background}
+  haze={haze}
+  useDefaultEditableBinding={useDefaultEditableBinding}
+  {...htmlAttributes}
+>
+  <Heading
+    level={headingLevel}
+    size={headingSize}
+    alignmentHorizontal="start"
+    data-prop="heading"
+    text={heading}
+  />
+  {linkText && (
+    <Button
+      class="cta-banner-link"
+      variant="text"
+      iconName="arrow-right"
+      iconPosition="after"
+      text={linkText}
+      link={link}
+      data-prop="linkText"
+    />
+  )}
+  {imageSource && (
+    <Image
+      class="cta-banner-art"
+      source={imageSource}
+      alt={imageAlt}
+      data-prop-src="imageSource"
+      data-prop-alt="imageAlt"
+    />
+  )}
+</CustomSection>
+
+<style is:global>
+  /* The band clips nothing horizontally but the drawing runs past its bottom
+     edge, so the section itself cannot hide overflow.
+
+     Flat, because rules nested deeper than a couple of levels get dropped (see
+     CLAUDE.md). */
+  @layer page-sections {
+    .cta-banner {
+      position: relative;
+    }
+
+    /* The drawing pins to the band, not to the column, so `.content` stays
+       static: positioned, it became the containing block and the art sat a
+       gutter's width in from the edge. The copy is lifted instead. */
+    .cta-banner .heading,
+    .cta-banner .cta-banner-link {
+      position: relative;
+      z-index: var(--layer-1);
+    }
+
+    /* The copy sits tight: 46 over a link, in a band 217 tall. */
+    .cta-banner .cta-banner-link {
+      --space-before: var(--spacing-md);
+    }
+
+    .cta-banner .cta-banner-link .button-inner {
+      padding-inline: 0;
+    }
+
+    /* Bottom-right, hanging over the foot of the band by about 10. The design
+       draws it 263 wide against 1281, so it is a corner flourish rather than a
+       column: it takes its own size and is pinned, not laid out. */
+    .cta-banner .cta-banner-art {
+      --space-before: 0;
+      inset-block-end: -0.625rem;
+      /* Out to the edge of the window. CustomSection positions `.content` for
+         its own background layer, so that is the containing block whatever
+         this component does, and `inset-inline-end: 0` left the drawing a
+         gutter short of the band's corner. This reaches past the column by
+         exactly the gutter, whatever the gutter happens to be. */
+      inset-inline-end: calc(50% - 50vw);
+      margin: 0;
+      position: absolute;
+      z-index: 0;
+    }
+
+    .cta-banner .cta-banner-art img {
+      block-size: auto;
+      inline-size: auto;
+      max-block-size: 14.1875rem;
+      max-inline-size: 100%;
+    }
+  }
+
+  /* Narrow: the drawing would sit under the copy, so it goes. */
+  @layer page-sections {
+    @media (width < 48rem) {
+      .cta-banner .cta-banner-art {
+        display: none;
+      }
+    }
+  }
+</style>

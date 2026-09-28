@@ -44,9 +44,20 @@ subtext:
     underline: false
     bulletedlist: false
     numberedlist: false
+subtextSize:
+  type: select
+  comment: Body 3 at 19 or Subtitle 1 at 22 in the design; regular is 16.
+  options:
+    values:
+      - id: md
+        name: Regular
+      - id: lg
+        name: Large
+      - id: xl
+        name: Extra large
 layout:
   type: select
-  comment: Vertical list, alternating split story, or a horizontal row that scrolls.
+  comment: Vertical list, a rail down one side, an alternating split story, or a horizontal row that scrolls.
   options:
     values:
       - id: vertical
@@ -55,6 +66,8 @@ layout:
         name: Horizontal
       - id: split
         name: Split
+      - id: rail
+        name: Rail
 entries:
   type: array
   label: Entries
@@ -170,3 +183,10 @@ backgroundColor:
         name: Accent
       - id: highlight
         name: Highlight
+
+haze:
+  type: switch
+  comment: >-
+    Pools the section's own background colour behind the content and blurs it,
+    so a heading stays readable where an illustration or a pattern runs
+    underneath.

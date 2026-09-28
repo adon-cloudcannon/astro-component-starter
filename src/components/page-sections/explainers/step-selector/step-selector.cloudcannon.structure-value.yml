@@ -1,0 +1,13 @@
+label: Step Selector
+description: Numbered steps as tabs, with the selected step's content beneath.
+value:
+  _component: page-sections/explainers/step-selector
+  eyebrow: ""
+  heading: ""
+  subtext: ""
+  items: []
+  backgroundColor: base
+_inputs:
+  $:
+    preview:
+      icon: tab

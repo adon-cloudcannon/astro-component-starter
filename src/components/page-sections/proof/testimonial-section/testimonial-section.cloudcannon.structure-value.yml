@@ -8,6 +8,11 @@ value:
   authorName: Richard Johnson
   authorDescription: CEO, Tech Innovations
   authorImage: /src/assets/images/component-docs/profile.jpg
+  layout: centered
+  company: ""
+  logoSource: ""
+  logoAlt: ""
+  accentColor: none
   maxContentWidth: xl
   paddingHorizontal: gutter
   paddingVertical: sm
@@ -51,6 +56,11 @@ groups:
       - authorName
       - authorDescription
       - authorImage
+      - layout
+      - company
+      - logoSource
+      - logoAlt
+      - accentColor
   - heading: Section settings
     comment: Width, spacing, color scheme, and background for this section.
     collapsed: true

@@ -1,5 +1,6 @@
 ---
 import Testimonial from "@core-elements/testimonial/Testimonial.astro";
+import Image from "@core-elements/image/Image.astro";
 
 /**
  * One cell of TestimonialBento. Size and tone live on the inner Testimonial,
@@ -13,6 +14,20 @@ const {
   authorImage = "",
   size = "standard",
   tone = "base",
+  /** Who said it, above the quote: a wordmark where there is one, else a name. */
+  company = "",
+  logo = "",
+  logoAlt = "",
+  /** Draw the mark as a mask, so a one-colour file takes the card's colour. */
+  logoMonochrome = false,
+  linkText = "",
+  link = "",
+  /**
+   * The card's own colour, as a palette name. It does three jobs the design
+   * ties together: the emphasised words in the quote take it, the card's
+   * border shows in it on hover, and the link turns to it on hover.
+   */
+  accentColor = "",
   class: className,
   _component,
   useDefaultEditableBinding: _useDefaultEditableBinding = false,
@@ -22,8 +37,44 @@ const {
 
 <div
   class:list={["testimonial-bento-item", className]}
+  style={
+    accentColor
+      ? {
+          // A palette name or a raw colour. The design uses the customer's own
+          // brand colour here, which is not in our palette.
+          "--testimonial-accent": accentColor.startsWith("#")
+            ? accentColor
+            : `var(--${accentColor})`,
+        }
+      : undefined
+  }
   {...htmlAttributes}
 >
+  {/* Always rendered, empty or not: without it a card with no wordmark started
+      its quote higher than its neighbours and the row looked ragged. */}
+  <div class="testimonial-bento-logo">
+    {logo || company ? (
+      logo ? (
+        logoMonochrome ? (
+          <span
+            class="testimonial-bento-mark"
+            role="img"
+            aria-label={logoAlt || company}
+            style={{ "--mark": `url("${logo}")` }}
+          />
+        ) : (
+          <Image
+            source={logo}
+            alt={logoAlt || company}
+            data-prop-src="logo"
+            data-prop-alt="logoAlt"
+          />
+        )
+      ) : (
+        <span data-prop="company">{company}</span>
+      )
+    ) : null}
+  </div>
   <Testimonial
     class="testimonial-bento-card"
     data-size={size}
@@ -40,9 +91,124 @@ const {
     data-prop-author-description="authorDescription"
     data-prop-author-image="authorImage"
   />
+  {linkText && (
+    <a
+      class="testimonial-bento-link"
+      href={link || undefined}
+      data-prop="linkText"
+    >
+      {linkText}
+      <span aria-hidden="true">&rarr;</span>
+    </a>
+  )}
 </div>
 
 <style is:global>
+  /* Flat, because rules nested deeper get dropped (see CLAUDE.md). The card's
+     accent does three jobs the design ties together: it colours the emphasised
+     words in the quote, it shows the border on hover, and it takes the link
+     on hover. One colour per card, so the whole thing moves together. */
+  @layer page-sections {
+    /* The card surface belongs to the item, not the Testimonial inside it.
+       The quote, the author, the logo above them and the link below are four
+       parts of one card, and while the surface sat on .testimonial-inner the
+       logo and the link were painted outside the box — a company name floating
+       above the card and a link hanging under it. */
+    .testimonial-bento-item {
+      /* #1B1A18 with a #D9D9D9 rule at 8%, which is what the design's variant
+         draws — within two points of --black on every channel. The card is
+         barely lighter than the band it sits on, so it is the rule that makes
+         it a card, not the fill. An earlier read took #252423 from the other
+         variant and the cards floated too far off the background. */
+      background: var(--black);
+      border: var(--border-width-sm) solid
+        color-mix(in srgb, var(--gray-200, #d9d9d9) 8%, transparent);
+      border-radius: var(--radius-card);
+      overflow: hidden;
+      transition: border-color var(--animation-normal) var(--ease-in-out);
+    }
+
+    /* The Testimonial keeps its padding and loses its box: the card is the
+       item, and an inner border drew a second rectangle around the quote and
+       author while the logo and link sat outside it. */
+    .testimonial-bento-item > .testimonial-bento-card > .testimonial-inner {
+      background: none;
+      border: 0;
+      border-radius: 0;
+    }
+
+    .testimonial-bento-item:hover {
+      border-color: var(--testimonial-accent, var(--color-border));
+    }
+
+    /* The quote's padding is the card's, so the logo and link line up with it. */
+    .testimonial-bento-item > .testimonial-bento-card > .testimonial-inner {
+      padding-block-start: var(--spacing-sm);
+    }
+
+    /* The design's leading, which is tighter than the component's default:
+       1.45 on a quote against 1.60, and 1.32 on the author's name against
+       1.50. At 19 and 23px that is a visible amount of air. */
+    .testimonial-bento-item .quote > * {
+      font-size: 1.1875rem;
+      line-height: 1.45;
+    }
+
+    .testimonial-bento-item .author {
+      line-height: 1.32;
+    }
+
+    /* The quote only. Unscoped it caught the author's name, which the
+       Testimonial sets in a <strong>, so every card signed itself in the
+       customer's brand colour. */
+    .testimonial-bento-item .quote strong {
+      color: var(--testimonial-accent, inherit);
+      font-weight: inherit;
+    }
+
+    /* Bold, which is what the design sets these at: Twitch at 19 and Firebrand
+       at 20, both weight 700. */
+    .testimonial-bento-logo {
+      align-items: center;
+      display: flex;
+      font-size: var(--font-size-lg);
+      font-weight: var(--font-weight-bold);
+      min-block-size: 2rem;
+      padding: var(--spacing-lg) var(--spacing-lg) 0;
+    }
+
+    .testimonial-bento-logo img {
+      block-size: 1.75rem;
+      inline-size: auto;
+    }
+
+    /* The mark as a mask, so a dark-on-light file reads on a dark card. */
+    .testimonial-bento-mark {
+      background: currentcolor;
+      block-size: 1.75rem;
+      display: block;
+      inline-size: 7rem;
+      mask-image: var(--mark);
+      mask-position: left center;
+      mask-repeat: no-repeat;
+      mask-size: contain;
+    }
+
+    .testimonial-bento-link {
+      color: var(--color-text-muted);
+      display: inline-flex;
+      gap: var(--spacing-xs);
+      font-size: var(--font-size-sm);
+      padding: 0 var(--spacing-lg) var(--spacing-lg);
+      text-decoration: none;
+      transition: color var(--animation-normal) var(--ease-in-out);
+    }
+
+    .testimonial-bento-item:hover .testimonial-bento-link {
+      color: var(--testimonial-accent, var(--color-text));
+    }
+  }
+
   @layer page-sections {
     .testimonial-bento-item {
       display: grid;
@@ -94,11 +260,15 @@ const {
           }
         }
 
-        &[data-size="featured"] > .testimonial-inner {
+        /* A wide card carries the bigger quote too. The design sizes the type
+           to the card — 23 and 24px on the wide ones against 19 on the
+           narrow — so the two travel together. */
+        &[data-size="featured"] > .testimonial-inner,
+        &[data-size="wide"] > .testimonial-inner {
           padding: var(--spacing-xl);
 
           > .quote > * {
-            font-size: var(--font-size-2xl);
+            font-size: 1.4375rem;
           }
         }
 

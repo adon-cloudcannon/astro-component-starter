@@ -1,0 +1,90 @@
+label: Team Member CTA
+icon: record_voice_over
+description: A call to action with a member of the team beside it.
+value:
+  _component: page-sections/conversion/cta-team-member
+  sectionLabel: ""
+  heading: ""
+  headingLevel: h2
+  headingSize: lg
+  subtext: ""
+  subtextSize: lg
+  member:
+    _component: building-blocks/wrappers/team-member
+    name: ""
+    role: ""
+    imageSource: ""
+    imageAlt: ""
+    backgroundColor: sunset
+    backgroundImage: ""
+    propSource: ""
+    propAlt: ""
+  buttonSections: []
+  reverse: false
+  maxContentWidth: xl
+  paddingHorizontal: gutter
+  paddingVertical: 4xl
+  colorScheme: inherit
+  lockColorScheme: false
+  backgroundColor: base
+  background:
+    type: image
+    imageSource: ""
+    imageAlt: ""
+    positionVertical: top
+    positionHorizontal: center
+    fixed: false
+    priority: false
+    mask: none
+    overlay: 0
+preview:
+  text:
+    - key: heading
+    - Team Member CTA
+  icon: record_voice_over
+picker_preview:
+  text: Team Member CTA
+  subtext: A call to action with a member of the team beside it.
+  icon: record_voice_over
+_inputs_from_glob:
+  - /src/components/page-sections/conversion/cta-team-member/cta-team-member.cloudcannon.inputs.yml
+  - /.cloudcannon/inputs/background.yml
+_structures:
+  teamMember:
+    values:
+      - label: Team member
+        icon: person
+        value:
+          _component: building-blocks/wrappers/team-member
+          name: ""
+          role: ""
+          imageSource: ""
+          imageAlt: ""
+          backgroundColor: sunset
+          backgroundImage: ""
+          propSource: ""
+          propAlt: ""
+        _inputs_from_glob:
+          - /src/components/building-blocks/wrappers/team-member/team-member.cloudcannon.inputs.yml
+groups:
+  - heading: Content
+    inputs:
+      - heading
+      - subtext
+      - member
+      - buttonSections
+      - reverse
+  - heading: Section settings
+    collapsed: true
+    inputs:
+      - sectionLabel
+      - headingLevel
+      - headingSize
+      - subtextSize
+      - maxContentWidth
+      - paddingHorizontal
+      - paddingVertical
+      - colorScheme
+      - lockColorScheme
+      - backgroundColor
+      - background

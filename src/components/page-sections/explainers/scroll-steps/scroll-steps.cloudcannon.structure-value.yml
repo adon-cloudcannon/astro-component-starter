@@ -1,0 +1,73 @@
+label: Scroll Steps
+icon: view_day
+description: Steps that advance as the page scrolls, with the picture beside them changing.
+value:
+  _component: page-sections/explainers/scroll-steps
+  sectionLabel: ""
+  eyebrow: ""
+  heading: ""
+  headingLevel: h2
+  headingSize: lg
+  subtext: ""
+  subtextSize: md
+  steps: []
+  reverse: false
+  mediaWidth: half
+  progressStyle: bar
+  maxContentWidth: xl
+  paddingHorizontal: gutter
+  paddingVertical: 4xl
+  colorScheme: inherit
+  lockColorScheme: false
+  backgroundColor: base
+  background:
+    type: image
+    imageSource: ""
+    imageAlt: ""
+    positionVertical: top
+    positionHorizontal: center
+    fixed: false
+    priority: false
+    mask: none
+    overlay: 0
+preview:
+  text:
+    - key: heading
+    - Scroll Steps
+  subtext:
+    - key: eyebrow
+  icon: view_day
+picker_preview:
+  text: Scroll Steps
+  subtext: Copy on one side, a picture on the other, advancing as the page scrolls.
+  icon: view_day
+_inputs_from_glob:
+  - /src/components/page-sections/explainers/scroll-steps/scroll-steps.cloudcannon.inputs.yml
+  - /.cloudcannon/inputs/background.yml
+groups:
+  - heading: Content
+    inputs:
+      - eyebrow
+      - heading
+      - subtext
+      - subtextSize
+      - steps
+  - heading: Layout
+    inputs:
+      - reverse
+      - mediaWidth
+      - progressStyle
+  - heading: Section settings
+    comment: Width, spacing, color scheme, and background for this section.
+    collapsed: true
+    inputs:
+      - sectionLabel
+      - headingLevel
+      - headingSize
+      - maxContentWidth
+      - paddingHorizontal
+      - paddingVertical
+      - colorScheme
+      - lockColorScheme
+      - backgroundColor
+      - background

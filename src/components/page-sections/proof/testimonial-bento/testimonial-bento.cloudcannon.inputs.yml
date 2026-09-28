@@ -32,6 +32,17 @@ headingLevel:
 subtext:
   type: markdown
   comment: Supporting copy beneath the heading.
+subtextSize:
+  type: select
+  comment: Body 3 at 19 or Subtitle 1 at 22 in the design; regular is 16.
+  options:
+    values:
+      - id: md
+        name: Regular
+      - id: lg
+        name: Large
+      - id: xl
+        name: Extra large
 testimonials:
   type: array
   label: Testimonials
@@ -43,6 +54,8 @@ columns:
   comment: Number of columns on wide screens. Narrow containers drop to two, then one.
   options:
     values:
+      - id: "2"
+        name: 2 Columns
       - id: "3"
         name: 3 Columns
       - id: "4"
@@ -156,3 +169,10 @@ backgroundColor:
         name: Accent
       - id: highlight
         name: Highlight
+
+haze:
+  type: switch
+  comment: >-
+    Pools the section's own background colour behind the content and blurs it,
+    so a heading stays readable where an illustration or a pattern runs
+    underneath.

@@ -9,6 +9,7 @@ value:
   headingLevel: h2
   headingSize: lg
   subtext: Editors edit visually, developers stay in code.
+  subtextSize: md
   buttonSections: []
   panels:
     - accentColor: pacific

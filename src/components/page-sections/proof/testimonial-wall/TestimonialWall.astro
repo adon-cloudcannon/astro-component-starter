@@ -15,6 +15,9 @@ const {
   headingLevel = "h2",
   headingSize = "lg",
   subtext = "",
+  // Body 3 at 19 or Subtitle 1 at 22 in the design; `md` keeps the 16 every
+  // section rendered before either was carried through.
+  subtextSize = "md",
   testimonials = [],
   columns = 3,
   /**
@@ -74,7 +77,7 @@ const {
     class="section-subtext testimonial-wall-subtext"
     alignmentHorizontal="center"
     data-prop="subtext"
-    text={subtext}
+    size={subtextSize}    text={subtext}
   />
 
   {testimonials?.length > 0 && (
@@ -124,6 +127,18 @@ const {
      Flat, because rules nested deeper than a couple of levels get dropped
      (see CLAUDE.md). */
   @layer page-sections {
+    /* A card a shade off the band, not the same cream as the page. The design
+       paints #FBF6E9 with a #EBE1C9 rule — --sand on --light-sand, which is
+       `surface` against `base` — where Testimonial's own chrome is the page
+       colour with the generic grey border. Same correction the illustrated
+       feature cards needed. 16 is the nearest radius token to the 16 and 18
+       the three cards are drawn at. */
+    .testimonial-wall .testimonial-inner {
+      background-color: var(--color-bg-surface);
+      border-color: var(--dark-sand);
+      border-radius: var(--radius-lg);
+    }
+
     .testimonial-wall .testimonial-wall-row .masonry-item,
     .testimonial-wall .testimonial-wall-row .masonry-item-content,
     .testimonial-wall .testimonial-wall-row .testimonial-wall-item {

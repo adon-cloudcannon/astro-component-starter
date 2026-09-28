@@ -18,6 +18,7 @@ import Text from "@core-elements/text/Text.astro";
 import SimpleText from "@core-elements/simple-text/SimpleText.astro";
 import Image from "@core-elements/image/Image.astro";
 import List from "@core-elements/list/List.astro";
+import Button from "@core-elements/button/Button.astro";
 import ButtonGroup from "@wrappers/button-group/ButtonGroup.astro";
 
 type PanelProps = {
@@ -29,6 +30,7 @@ type PanelProps = {
   items?: { text?: string }[];
   linkText?: string;
   link?: string;
+  imageOverlap?: number;
 };
 
 const {
@@ -37,6 +39,10 @@ const {
   headingLevel = "h2",
   headingSize = "lg",
   subtext = "",
+  // The design sets a section's supporting line in one of two styles, Body 3
+  // at 19 or Subtitle 1 at 22. `md` is the 16 every section rendered before
+  // either was carried through, so nothing moves unless the design named it.
+  subtextSize = "md",
   buttonSections = [],
   panels = [],
   centreImageSource = "",
@@ -49,6 +55,7 @@ const {
   lockColorScheme = false,
   backgroundColor = "base",
   background,
+  haze = false,
   class: className,
   useDefaultEditableBinding = false,
   _component,
@@ -68,6 +75,7 @@ const panelList: PanelProps[] = Array.isArray(panels) ? panels : [];
   lockColorScheme={lockColorScheme}
   backgroundColor={backgroundColor}
   background={background}
+  haze={haze}
   class:list={["workflow-split", className]}
   useDefaultEditableBinding={useDefaultEditableBinding}
   {...htmlAttributes}
@@ -89,6 +97,7 @@ const panelList: PanelProps[] = Array.isArray(panels) ? panels : [];
   </Heading>
   <Text
     class="subtext"
+    size={subtextSize}
     alignmentHorizontal="center"
     data-prop="subtext"
     text={subtext}
@@ -117,13 +126,15 @@ const panelList: PanelProps[] = Array.isArray(panels) ? panels : [];
               class="workflow-illustration"
               source={panel.imageSource}
               alt={panel.imageAlt}
+              style={panel.imageOverlap ? { "--illustration-overlap": `${panel.imageOverlap}px` } : undefined}
               data-prop-src="imageSource"
               data-prop-alt="imageAlt"
             />
           )}
           <Card
             accentColor={panel.accentColor || "none"}
-            backgroundColor="surface"
+            backgroundColor="accent-tint"
+            border={true}
             rounded={true}
             paddingHorizontal="lg"
             paddingVertical="lg"
@@ -149,27 +160,35 @@ const panelList: PanelProps[] = Array.isArray(panels) ? panels : [];
               data-children-prop="items"
             />
             {panel.linkText && (
-              <SimpleText
+              <Button
                 class="workflow-link"
-                size="sm"
-                data-prop="linkText"
+                variant="text"
+                iconName="arrow-right"
+                iconPosition="after"
                 text={panel.linkText}
+                link={panel.link}
+                data-prop="linkText"
               />
             )}
           </Card>
         </div>
 
         {/* The common ground goes between the first pair, which is where the
-            design puts it. */}
-        {index === 0 && centreImageSource && (
-          <Image
-            class="workflow-centre"
-            source={centreImageSource}
-            alt={centreImageAlt}
-            data-prop-src="centreImageSource"
-            data-prop-alt="centreImageAlt"
-          />
-        )}
+            design puts it. The cell is held even when there is no art for it
+            yet: without it the second panel slides into the middle column and
+            the row reads as two columns of the wrong width. */}
+        {index === 0 &&
+          (centreImageSource ? (
+            <Image
+              class="workflow-centre"
+              source={centreImageSource}
+              alt={centreImageAlt}
+              data-prop-src="centreImageSource"
+              data-prop-alt="centreImageAlt"
+            />
+          ) : (
+            <div class="workflow-centre-empty" aria-hidden="true"></div>
+          ))}
       </Fragment>
     ))}
   </div>
@@ -185,11 +204,15 @@ const panelList: PanelProps[] = Array.isArray(panels) ? panels : [];
         max-inline-size: var(--content-width-measure);
       }
 
+      /* Three columns, not two and a maybe. The design draws 323 / 330 / 323
+         with 64 between them, so equal thirds land within a few pixels. auto-fit
+         collapsed the middle to nothing while its art is still to be exported,
+         which stretched the two cards to 504. */
       .workflow-columns {
-        align-items: center;
+        align-items: end;
         display: grid;
-        gap: var(--spacing-xl);
-        grid-template-columns: repeat(auto-fit, minmax(min(18rem, 100%), 1fr));
+        gap: 4rem;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
       }
 
       /* A panel is its illustration and its card, stacked, so the cards sit on
@@ -199,20 +222,73 @@ const panelList: PanelProps[] = Array.isArray(panels) ? panels : [];
         grid-template-rows: auto 1fr;
       }
 
+      /* The drawing sits on the card's top edge and dips into it: 24px on the
+         left panel, 10px on the right, which is what the design draws. It is
+         the illustration that moves, not the card, so the cards stay level
+         with each other and with the panel between them.
+
+         The negative margin shrinks what the image contributes to its grid
+         track, which is what pulls the card up under it. */
       .workflow-illustration {
         justify-self: center;
+        margin-block-end: calc(-1 * var(--illustration-overlap, 0px));
       }
 
-      /* Each list marker takes the panel's own colour, which is the thing that
-         tells the two columns apart at a glance. */
-      .workflow-points .icon {
-        color: var(--card-accent, var(--color-brand));
+    }
+  }
+
+  /* Flat, because rules nested deeper than this get dropped (see CLAUDE.md).
+     The panel's accent colours its eyebrow, its tick markers and its link, so
+     one choice marks the whole column. The eyebrow needs saying explicitly:
+     left alone it takes Sunset, which is right for a section eyebrow and wrong
+     for the blue column. */
+  @layer page-sections {
+    .workflow-split .workflow-panel .eyebrow,
+    .workflow-split .workflow-panel .eyebrow :where(.simple-text-content, .simple-text-inner, p, span),
+    .workflow-split .workflow-points .icon,
+    .workflow-split .workflow-link .button-inner,
+    .workflow-split .workflow-link .icon {
+      color: var(--card-accent, var(--color-brand));
+    }
+
+    /* A link, not a control: no pill padding around it. */
+    .workflow-split .workflow-link .button-inner {
+      padding-inline: 0;
+    }
+  }
+
+  /* The row is 1104 wide against a 1040 column, so it reaches 32px past the
+     column on each side. Only where the gutter can afford it. */
+  @layer page-sections {
+    @media (width >= 75rem) {
+      .workflow-split .workflow-columns {
+        margin-inline: -2rem;
+      }
+    }
+  }
+
+  /* One column on a narrow screen, where three would leave nothing readable.
+     The drawings stop dipping into their cards at that width: the overhang is
+     a wide-screen flourish, and stacked it reads as a mistake. */
+  @layer page-sections {
+    @media (width < 60rem) {
+      .workflow-split .workflow-columns {
+        grid-template-columns: minmax(0, 1fr);
       }
 
-      .workflow-link,
-      .workflow-link :where(.simple-text-content, .simple-text-inner, p, span) {
-        color: var(--card-accent, var(--color-brand));
+      .workflow-split .workflow-illustration {
+        margin-block-end: 0;
       }
+    }
+  }
+
+  /* The card is the later grid item, so by default it paints over the drawing
+     and the overhang disappears under it. Grid items only take part in z-order
+     once they are positioned, which is why a bare z-index does nothing here. */
+  @layer page-sections {
+    .workflow-split .workflow-illustration {
+      position: relative;
+      z-index: 1;
     }
   }
 
@@ -222,7 +298,7 @@ const panelList: PanelProps[] = Array.isArray(panels) ? panels : [];
     .workflow-split .workflow-centre img {
       block-size: auto;
       inline-size: auto;
-      max-block-size: 10rem;
+      max-block-size: 9.375rem;
       max-inline-size: 100%;
     }
   }

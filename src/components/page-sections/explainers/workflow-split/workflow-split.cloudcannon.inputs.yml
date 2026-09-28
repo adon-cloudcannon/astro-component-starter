@@ -26,6 +26,17 @@ headingSize:
 subtext:
   type: markdown
   comment: Supporting copy beneath the heading.
+subtextSize:
+  type: select
+  comment: Body 3 at 19 or Subtitle 1 at 22 in the design; regular is 16.
+  options:
+    values:
+      - id: md
+        name: Regular
+      - id: lg
+        name: Large
+      - id: xl
+        name: Extra large
 buttonSections:
   type: array
   comment: A link or button under the heading.
@@ -33,8 +44,9 @@ panels:
   type: array
   comment: >-
     One panel per way of working, side by side. Each carries its own accent
-    colour, which colours its list markers and its link, so a reader can tell
-    the columns apart before reading them.
+    colour, which colours its list markers, its rule and its link, so a reader
+    can tell the columns apart before reading them. A panel's imageOverlap is
+    how far its drawing dips into the card below it, in pixels.
 centreImageSource:
   type: image
   comment: The thing both panels share, shown between them.
@@ -109,3 +121,10 @@ backgroundColor:
 background:
   type: object
   comment: Background image, video or pattern for the section.
+
+haze:
+  type: switch
+  comment: >-
+    Pools the section's own background colour behind the content and blurs it,
+    so a heading stays readable where an illustration or a pattern runs
+    underneath.

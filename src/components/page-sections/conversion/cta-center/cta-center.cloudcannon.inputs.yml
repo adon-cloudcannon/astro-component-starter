@@ -1,3 +1,6 @@
+eyebrow:
+  type: text
+  comment: Short label above the heading.
 heading:
   type: text
   comment: Main heading for the section.
@@ -41,6 +44,17 @@ subtext:
     underline: false
     bulletedlist: false
     numberedlist: false
+subtextSize:
+  type: select
+  comment: Body 3 at 19 or Subtitle 1 at 22 in the design; regular is 16.
+  options:
+    values:
+      - id: md
+        name: Regular
+      - id: lg
+        name: Large
+      - id: xl
+        name: Extra large
 buttonSections:
   type: array
   comment: Call-to-action buttons.
@@ -155,3 +169,17 @@ backgroundColor:
         name: Accent
       - id: highlight
         name: Highlight
+
+haze:
+  type: switch
+  comment: >-
+    Pools the section's own background colour behind the content and blurs it,
+    so a heading stays readable where an illustration or a pattern runs
+    underneath.
+
+imageSource:
+  type: image
+  comment: A picture beneath the call to action, running the width of the column.
+imageAlt:
+  type: text
+  comment: Alt text for that picture.

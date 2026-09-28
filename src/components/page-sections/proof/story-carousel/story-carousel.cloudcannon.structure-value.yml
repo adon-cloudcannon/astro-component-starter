@@ -9,6 +9,7 @@ value:
   headingLevel: h2
   headingSize: lg
   subtext: From fast-moving startups to multi-site agencies, teams ship more.
+  subtextSize: md
   stories:
     - accentColor: golden
       logoSource: ""

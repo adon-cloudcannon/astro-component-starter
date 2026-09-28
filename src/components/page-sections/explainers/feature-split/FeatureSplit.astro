@@ -13,6 +13,9 @@ const {
   headingLevel = "h2",
   headingSize = "lg",
   subtext = "",
+  // The design sets this in Body 3 at 19 or Subtitle 1 at 22; the default
+  // keeps the 16 every section used before either was carried through.
+  subtextSize = "lg",
   buttonSections = [],
   imageSource = "",
   imageAlt = "",
@@ -28,6 +31,7 @@ const {
   lockColorScheme = false,
   backgroundColor = "base",
   background,
+  haze = false,
   class: className,
   useDefaultEditableBinding = false,
   _component,
@@ -50,6 +54,7 @@ const imagePositionVertical = imageBleed ? "top" : "center";
   lockColorScheme={lockColorScheme}
   backgroundColor={backgroundColor}
   background={background}
+  haze={haze}
   useDefaultEditableBinding={useDefaultEditableBinding}
   {...htmlAttributes}
 >
@@ -80,7 +85,7 @@ const imagePositionVertical = imageBleed ? "top" : "center";
       </Heading>
       <Text
         class="subtext"
-        size="lg"
+        size={subtextSize}
         data-prop="subtext"
         text={subtext}
       />

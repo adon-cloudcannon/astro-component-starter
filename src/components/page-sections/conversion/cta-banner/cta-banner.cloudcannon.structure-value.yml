@@ -1,0 +1,62 @@
+label: CTA Banner
+icon: campaign
+description: A short full-width band with a heading, a link, and a drawing in the corner.
+value:
+  _component: page-sections/conversion/cta-banner
+  sectionLabel: ""
+  heading: ""
+  headingLevel: h2
+  headingSize: lg
+  linkText: ""
+  link: ""
+  imageSource: ""
+  imageAlt: ""
+  maxContentWidth: xl
+  paddingHorizontal: gutter
+  paddingVertical: 2xl
+  colorScheme: inherit
+  lockColorScheme: true
+  backgroundColor: brand
+  background:
+    type: image
+    imageSource: ""
+    imageAlt: ""
+    positionVertical: top
+    positionHorizontal: center
+    fixed: false
+    priority: false
+    mask: none
+    overlay: 0
+preview:
+  text:
+    - key: heading
+    - CTA Banner
+  icon: campaign
+picker_preview:
+  text: CTA Banner
+  subtext: A short band with a heading, a link, and a corner drawing.
+  icon: campaign
+_inputs_from_glob:
+  - /src/components/page-sections/conversion/cta-banner/cta-banner.cloudcannon.inputs.yml
+  - /.cloudcannon/inputs/background.yml
+groups:
+  - heading: Content
+    inputs:
+      - heading
+      - linkText
+      - link
+      - imageSource
+      - imageAlt
+  - heading: Section settings
+    collapsed: true
+    inputs:
+      - sectionLabel
+      - headingLevel
+      - headingSize
+      - maxContentWidth
+      - paddingHorizontal
+      - paddingVertical
+      - colorScheme
+      - lockColorScheme
+      - backgroundColor
+      - background

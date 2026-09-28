@@ -1,4 +1,7 @@
 ---
+import SimpleText from "@core-elements/simple-text/SimpleText.astro";
+import Text from "@core-elements/text/Text.astro";
+import Heading from "@core-elements/heading/Heading.astro";
 import CustomSection from "@builders/custom-section/CustomSection.astro";
 import FeatureSliderItem from "@explainers/feature-slider/FeatureSliderItem.astro";
 import Carousel from "@wrappers/carousel/Carousel.astro";
@@ -6,6 +9,11 @@ import Carousel from "@wrappers/carousel/Carousel.astro";
 type SlideProps = Record<string, unknown>;
 
 const {
+  eyebrow = "",
+  heading = "",
+  headingLevel = "h2",
+  headingSize = "lg",
+  subtext = "",
   sectionLabel,
   maxContentWidth = "xl",
   paddingHorizontal = "gutter",
@@ -14,6 +22,7 @@ const {
   lockColorScheme = false,
   backgroundColor = "base",
   background,
+  haze = false,
   class: className,
   slides = [],
   useDefaultEditableBinding = false,
@@ -32,9 +41,33 @@ const {
   lockColorScheme={lockColorScheme}
   backgroundColor={backgroundColor}
   background={background}
+  haze={haze}
   useDefaultEditableBinding={useDefaultEditableBinding}
   {...htmlAttributes}
 >
+  {(eyebrow || heading || subtext) && (
+    <Fragment>
+      <SimpleText
+        class="eyebrow"
+        size="sm"
+        data-prop="eyebrow"
+        text={eyebrow}
+      />
+      <Heading
+        level={headingLevel}
+        size={headingSize}
+        data-prop="heading"
+      >
+        {heading}
+      </Heading>
+      <Text
+        class="subtext"
+        data-prop="subtext"
+        text={subtext}
+      />
+    </Fragment>
+  )}
+
   <Carousel
     label={sectionLabel || "Feature slider"}
     slideWidthPercent={100}

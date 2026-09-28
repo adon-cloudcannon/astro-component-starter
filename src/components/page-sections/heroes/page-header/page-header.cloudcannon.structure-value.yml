@@ -53,6 +53,7 @@ groups:
       - eyebrow
       - heading
       - subtext
+      - subtextSize
       - showBreadcrumbs
       - alignmentHorizontal
   - heading: Section settings

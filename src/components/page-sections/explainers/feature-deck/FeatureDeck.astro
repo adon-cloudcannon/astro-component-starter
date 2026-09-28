@@ -23,6 +23,9 @@ const {
   headingLevel = "h2",
   headingSize = "lg",
   subtext = "",
+  // Body 3 at 19 or Subtitle 1 at 22 in the design; `md` keeps the 16 every
+  // section rendered before either was carried through.
+  subtextSize = "md",
   cards = [],
   // A deck card is tall, and the design holds it nearer the middle of the
   // screen than the top. The shipped default pins it right under the nav.
@@ -37,6 +40,7 @@ const {
   lockColorScheme = false,
   backgroundColor = "base",
   background,
+  haze = false,
   class: className,
   useDefaultEditableBinding = false,
   _component,
@@ -54,6 +58,7 @@ const {
   lockColorScheme={lockColorScheme}
   backgroundColor={backgroundColor}
   background={background}
+  haze={haze}
   class:list={["feature-deck", className]}
   useDefaultEditableBinding={useDefaultEditableBinding}
   {...htmlAttributes}
@@ -74,7 +79,7 @@ const {
   <Text
     class="subtext"
     data-prop="subtext"
-    text={subtext}
+    size={subtextSize}    text={subtext}
   />
 
   <ScrollDeck
