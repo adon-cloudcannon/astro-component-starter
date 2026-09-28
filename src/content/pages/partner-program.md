@@ -147,6 +147,55 @@ pageSections:
     cardHeight: 334
     headingSize: lg
   - _component: page-sections/conversion/pricing-tiers
+    tiers:
+      - name: Bronze
+        description: 0-19 points
+        features:
+          - text: Partner dashboard
+            included: true
+          - text: Partner users
+            included: true
+          - text: Extended trial periods
+            included: true
+          - text: Free onboarding and training
+            included: true
+        height: 274
+      - name: Silver
+        description: 20-99 points
+        features:
+          - text: Bronze benefits
+            included: true
+          - text: 10% off all plans
+            included: true
+          - text: Expert listing
+            included: true
+          - text: Roadmap visibility
+            included: true
+          - text: Priority support
+            included: true
+        height: 328
+      - name: Gold
+        description: 100-199 points
+        features:
+          - text: Bronze and Silver benefits
+            included: true
+          - text: 15% off all plans
+            included: true
+          - text: Referrals
+            included: true
+          - text: Marketing opportunities
+            included: true
+          - text: Beta testing
+            included: true
+        height: 399
+      - name: Platinum
+        description: 200+ points
+        features:
+          - text: Bronze, Silver, and Gold benefits
+            included: true
+          - text: 20% off all plans
+            included: true
+        height: 454
     eyebrow: PARTNER TIERS
     heading: Climb as your portfolio grows
     subtext: >-
@@ -155,6 +204,60 @@ pageSections:
     subtextSize: lg
     headingSize: lg
   - _component: page-sections/conversion/pricing-tiers
+    tiers:
+      - name: Lite
+        description: A pay-as-you-go plan for smaller clients
+        features:
+          - text: Unlimited sites
+            included: true
+          - text: 1 user
+            included: true
+          - text: 20GB bandwidth
+            included: true
+          - text: 1 custom domain
+            included: true
+          - text: Default permissions
+            included: true
+        price: $10
+        priceSuffix: /month (USD)
+        pricePosition: bottom
+        height: 454
+      - name: Standard
+        description: Core editing features for most clients
+        features:
+          - text: Unlimited sites
+            included: true
+          - text: 3 users
+            included: true
+          - text: 110GB bandwidth
+            included: true
+          - text: 5 custom domains
+            included: true
+          - text: Default permissions
+            included: true
+        price: $55
+        priceSuffix: /month (USD)
+        pricePosition: bottom
+        badgeText: Recommended
+        highlight: true
+        height: 454
+      - name: Team
+        description: For client teams with advanced workflows
+        features:
+          - text: Unlimited sites
+            included: true
+          - text: 15 users
+            included: true
+          - text: 700GB bandwidth
+            included: true
+          - text: 10 custom domains
+            included: true
+          - text: Custom permissions
+            included: true
+        price: $350
+        priceSuffix: /month (USD)
+        pricePosition: bottom
+        height: 454
     heading: Pricing plans designed for your clients
     subtext: Handle billing yourself or pass it on to clients, whatever fits the workflow.
     subtextSize: lg

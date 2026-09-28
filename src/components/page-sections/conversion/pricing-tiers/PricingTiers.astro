@@ -122,8 +122,8 @@ const annualSelected = defaultInterval === "annual";
   )}
   <Grid
     gap="lg"
-    minItemWidth={272}
-    class="pricing-tiers-grid"
+    minItemWidth={tiers.length >= 4 ? 240 : 272}
+    class:list={["pricing-tiers-grid", tiers.length >= 4 && "pricing-tiers-wide"]}
     spaceBefore="loose"
     data-children-prop="tiers"
   >
@@ -171,6 +171,20 @@ const annualSelected = defaultInterval === "annual";
         color: var(--color-success);
         font-weight: var(--font-weight-semibold);
       }
+    }
+  }
+
+  @layer page-sections {
+    /* Four tiers want the file's other column, 1180, and step up to the right:
+       the design draws them 274, 328, 399 and 454 tall on one baseline. A page
+       section cannot out-specify CustomSection's width rule, so the token it
+       reads is redefined instead (the MainNav pattern, see CLAUDE.md). */
+    .pricing-tiers:has(.pricing-tiers-wide) {
+      --content-width-xl: var(--content-width-wide);
+    }
+
+    .pricing-tiers .pricing-tiers-wide > .grid-inner {
+      align-items: end;
     }
   }
 </style>

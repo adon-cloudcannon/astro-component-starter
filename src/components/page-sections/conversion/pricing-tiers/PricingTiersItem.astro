@@ -22,6 +22,16 @@ const {
   buttonLink = "",
   highlight = false,
   badgeText = "",
+  /**
+   * Where the figure sits relative to what is included.
+   *
+   * The design puts it at the foot of the card, after the list, and the
+   * shipped order is the other way round. Measured per section rather than
+   * switched globally.
+   */
+  pricePosition = "top",
+  /** The height the design draws this card at, in pixels. */
+  height,
   showAnnualPricing = false,
   class: className,
   _component,
@@ -52,7 +62,10 @@ const priceRows = [
 ---
 
 <GridItem {...htmlAttributes}>
-  <article class:list={["pricing-tier", highlight && "highlight", className]}>
+  <article
+    class:list={["pricing-tier", highlight && "highlight", `price-${pricePosition}`, className]}
+    style={height ? `--pricing-tier-height: ${Number(height)}px` : undefined}
+  >
     {highlight && badgeText && (
       <Badge
         class="pricing-tier-badge"
@@ -76,7 +89,7 @@ const priceRows = [
       data-prop="description"
       text={description}
     />
-    {priceRows.map((row) => (
+    {priceRows.filter((row) => isNonEmptyString(row.amount)).map((row) => (
       <p
         class:list={[
           "pricing-tier-price",
@@ -242,6 +255,36 @@ const priceRows = [
       .pricing-tier .pricing-tier-price-annual {
         display: flex;
       }
+    }
+  }
+
+  /* The design's own card: a set height, the figure at the foot after the list,
+     and the row hanging from its baseline so four cards of rising height step
+     up rather than sitting in a line.
+
+     Flat, because rules nested deeper than a couple of levels get dropped (see
+     CLAUDE.md). */
+  @layer page-sections {
+    .pricing-tier {
+      min-block-size: var(--pricing-tier-height, auto);
+    }
+
+    .pricing-tier.price-bottom {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .pricing-tier.price-bottom .pricing-tier-features {
+      order: 1;
+    }
+
+    .pricing-tier.price-bottom .pricing-tier-price {
+      margin-block-start: auto;
+      order: 2;
+    }
+
+    .pricing-tier.price-bottom .pricing-tier-button {
+      order: 3;
     }
   }
 </style>
