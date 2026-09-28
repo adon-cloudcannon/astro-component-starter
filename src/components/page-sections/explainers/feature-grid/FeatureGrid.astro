@@ -63,7 +63,16 @@ const itemHeadingLevel = nextHeadingLevel(headingLevel);
  * `--sand` on a `--light-sand` page, which is `surface` against `base`; an
  * icon-only grid keeps the flat card it has always had.
  */
-const cardColor = alignmentHorizontal === "center" ? "surface" : "base";
+/**
+ * A card a shade off the band, whichever way the band goes.
+ *
+ * On the cream pages that is --sand against --light-sand, which is `surface`
+ * against `base`. On a dark band `surface` is #333333 and the design draws
+ * #252423, which is `muted`: two steps off on the light theme and one step off
+ * here (see CLAUDE.md on the dark cards).
+ */
+const cardColor =
+  colorScheme === "dark" ? "muted" : alignmentHorizontal === "center" ? "surface" : "base";
 
 /**
  * The tallest drawing in the row.
@@ -177,9 +186,18 @@ const artRow = Math.max(0, ...features.map((feature: FeatureProps) => Number(fea
        design draws #EBE1C9, which is --dark-sand. */
     /* :not(.has-accent), because an accented card rules itself in its own
        colour. Equal specificity between the two would otherwise be settled by
-       whichever stylesheet Astro emitted last, which it settled the wrong way. */
+       whichever stylesheet Astro emitted last, which it settled the wrong way.
+
+       The sand rule is for the cream bands. A dark band draws its own edge —
+       #333333 on the perks cards — and the cream one on it reads as a border
+       nobody asked for. CustomSection puts data-theme on its inner
+       .outer-content, not on the section the classes are on. */
     .feature-grid .feature-item.align-center:not(.has-accent) .card-inner {
       border-color: var(--dark-sand);
+    }
+
+    .feature-grid [data-theme="dark"] .feature-item.align-center:not(.has-accent) .card-inner {
+      border-color: var(--color-border);
     }
   }
 </style>

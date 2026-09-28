@@ -1,5 +1,5 @@
 ---
-# Generated from the Figma mapping. 1 of 12 blocks are
+# Generated from the Figma mapping. 1 of 11 blocks are
 # confirmed decisions; the rest are proposals to review on the page.
 _schema: default
 title: Partner Program
@@ -74,7 +74,6 @@ pageSections:
       We want to reward good work. Every new client you bring on earns points, and the more you
       have, the more benefits you unlock.
     subtextSize: lg
-    imageSource: /src/assets/images/marketing/image-59.png
     headingSize: lg
     buttonSections:
       - _component: building-blocks/core-elements/button
@@ -85,13 +84,6 @@ pageSections:
         iconName: arrow-right
         iconPosition: after
         text: Create organization
-  - _component: page-sections/conversion/pricing-tiers
-    heading: What is the Partner Program?
-    subtext: >-
-      We want to reward good work. Every new client you bring on earns points, and the more you
-      have, the more benefits you unlock.
-    subtextSize: lg
-    headingSize: lg
   - _component: page-sections/conversion/cta-split
     heading: New client sites shipped in 60 minutes instead of days.
     headingSize: md
@@ -114,14 +106,45 @@ pageSections:
         iconName: arrow-right
         iconPosition: after
         text: Read case study
-  - _component: page-sections/conversion/pricing-tiers
+  - _component: page-sections/explainers/feature-grid
+    features:
+      - title: Partner dashboard
+        description: Track site health, errors, usage and billing for every client from one place.
+        imageSource: /src/assets/images/marketing/partner-dashboard-1.png
+        imageHeight: 153
+        imageAlt: ''
+      - title: Extended trial periods
+        description: Trial sites stay free until your client goes live.
+        imageSource: /src/assets/images/marketing/extended-trial-1.png
+        imageHeight: 171
+        imageAlt: ''
+      - title: Discounts
+        description: Up to 20% off all plans as you climb the Partner tiers.
+        imageSource: /src/assets/images/marketing/money-3806-72278.png
+        imageHeight: 138
+        imageAlt: ''
+      - title: Dedicated support
+        description: Silver partners can join a private Slack channel with our support and engineering team.
+        imageSource: /src/assets/images/marketing/slack-1.png
+        imageHeight: 175
+        imageAlt: ''
+      - title: Attract more clients
+        description: Join the Experts directory and showcase your work to potential leads.
+        imageSource: /src/assets/images/marketing/attract-1.png
+        imageHeight: 139
+        imageAlt: ''
+      - title: Roadmap access
+        description: Get early roadmap access and shape future features with direct input.
+        imageSource: /src/assets/images/marketing/roadmap-1.png
+        imageHeight: 173
+        imageAlt: ''
+    columns: 3
+    alignmentHorizontal: center
     heading: What are the perks?
-    subtext: Track site health, errors, usage and billing for every client from one place.
-    subtextSize: lg
     backgroundColor: base
     colorScheme: dark
     lockColorScheme: true
-    subtextWidth: 320
+    cardHeight: 334
     headingSize: lg
   - _component: page-sections/conversion/pricing-tiers
     eyebrow: PARTNER TIERS
