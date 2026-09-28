@@ -16,7 +16,7 @@ pageSections:
     imageOverflow: 83
     background:
       type: pattern
-      imageSource: /src/assets/images/marketing/patterns/sand-grid.png
+      imageSource: /src/assets/images/marketing/patterns/sand-dotted.png
       patternSize: natural
       mask: none
     haze:
