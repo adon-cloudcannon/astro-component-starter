@@ -44,6 +44,7 @@ const {
   patternSize = "natural",
   pattern = "",
   patternPitch = 0,
+  patternDot = 0,
   mask = bgType === "pattern" ? "frame" : "none",
 } = background || {};
 
@@ -120,6 +121,7 @@ const arrayDataAttributes =
         style={{
           ...(patternImageUrl ? { backgroundImage: `url("${patternImageUrl}")` } : {}),
           ...(patternPitch ? { "--pattern-pitch": `${patternPitch}px` } : {}),
+          ...(patternDot ? { "--pattern-dot": `${patternDot}px` } : {}),
         }}
       />
     )}
@@ -454,8 +456,10 @@ const arrayDataAttributes =
           /* The pitch the design draws both patterns on. The grid's rule is
              2px, solid, with no anti-aliasing of its own — read straight off
              the tile, where it sits at x=38,39 of 40 — and a dot is 6px
-             across. A band that wants a different density sets
-             --pattern-pitch rather than needing another file. */
+             across at the usual 40px pitch. Size and spacing are separate
+             because the design varies them separately: its two denser dot
+             patterns both draw about 4.2px, at 33 and at 21. A band sets
+             --pattern-pitch and --pattern-dot rather than needing a file. */
           --pattern-pitch: 40px;
           --pattern-rule: 2px;
           --pattern-dot: 6px;

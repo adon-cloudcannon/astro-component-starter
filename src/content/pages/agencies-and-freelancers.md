@@ -18,6 +18,7 @@ pageSections:
       type: pattern
       pattern: grid
       patternPitch: 40
+      patternDot: 6
       mask: none
     haze:
       - x: 0.2206
@@ -100,6 +101,7 @@ pageSections:
       type: pattern
       pattern: dots
       patternPitch: 33
+      patternDot: 4.2
       mask: fade
     backgroundColor: surface
     haze:
@@ -126,6 +128,7 @@ pageSections:
       type: pattern
       pattern: grid
       patternPitch: 40
+      patternDot: 6
       mask: none
     haze:
       - x: 0.2342

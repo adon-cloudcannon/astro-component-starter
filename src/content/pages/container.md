@@ -19,6 +19,7 @@ pageSections:
       type: pattern
       pattern: grid
       patternPitch: 40
+      patternDot: 6
       mask: none
     haze:
       - x: 0.2538

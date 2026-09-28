@@ -17,6 +17,7 @@ pageSections:
       type: pattern
       pattern: dots
       patternPitch: 40
+      patternDot: 6
       mask: none
     backgroundColor: surface
     haze:
@@ -53,6 +54,7 @@ pageSections:
       type: pattern
       pattern: dots
       patternPitch: 40
+      patternDot: 6
       mask: none
   - _component: page-sections/conversion/cta-center
     heading: Here, you don’t need to wait to make changes
@@ -64,6 +66,7 @@ pageSections:
       type: pattern
       pattern: grid
       patternPitch: 40
+      patternDot: 6
       mask: none
     haze:
       - x: 0.5357
@@ -157,6 +160,7 @@ pageSections:
       type: pattern
       pattern: dots
       patternPitch: 40
+      patternDot: 6
       mask: none
     backgroundColor: surface
 ---

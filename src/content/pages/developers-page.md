@@ -18,6 +18,7 @@ pageSections:
       type: pattern
       pattern: grid
       patternPitch: 40
+      patternDot: 6
       mask: fade
     backgroundColor: base
     colorScheme: dark
@@ -103,6 +104,7 @@ pageSections:
       type: pattern
       pattern: grid
       patternPitch: 40
+      patternDot: 6
       mask: fade
   - _component: page-sections/proof/testimonial-bento
     testimonials:
@@ -154,6 +156,7 @@ pageSections:
       type: pattern
       pattern: grid
       patternPitch: 40
+      patternDot: 6
       mask: fade
   - _component: page-sections/conversion/cta-center
     heading: The tool you’ve been looking for
@@ -169,6 +172,7 @@ pageSections:
       type: pattern
       pattern: grid
       patternPitch: 40
+      patternDot: 6
       mask: none
     buttonSections:
       - _component: building-blocks/core-elements/button
@@ -220,6 +224,7 @@ pageSections:
       type: pattern
       pattern: grid
       patternPitch: 40
+      patternDot: 6
       mask: none
     haze:
       - x: 0.1923

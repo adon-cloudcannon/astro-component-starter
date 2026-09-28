@@ -18,6 +18,7 @@ pageSections:
       type: pattern
       pattern: grid
       patternPitch: 40
+      patternDot: 6
       mask: none
     haze:
       - x: 0.2243
@@ -95,6 +96,7 @@ pageSections:
       type: pattern
       pattern: grid
       patternPitch: 40
+      patternDot: 6
       mask: fade
     haze:
       - x: 0.4975
@@ -168,6 +170,7 @@ pageSections:
       type: pattern
       pattern: grid
       patternPitch: 40
+      patternDot: 6
       mask: fade
   - _component: page-sections/proof/testimonial-section
     text: >-
@@ -186,6 +189,7 @@ pageSections:
       type: pattern
       pattern: dots
       patternPitch: 40
+      patternDot: 6
       mask: none
   - _component: page-sections/conversion/cta-center
     heading: Your content is yours

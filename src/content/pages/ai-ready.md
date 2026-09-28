@@ -16,6 +16,7 @@ pageSections:
       type: pattern
       pattern: grid
       patternPitch: 40
+      patternDot: 6
       mask: none
     haze:
       - x: 0.1628
@@ -81,6 +82,7 @@ pageSections:
       type: pattern
       pattern: grid
       patternPitch: 40
+      patternDot: 6
       mask: fade
   - _component: page-sections/explainers/feature-split
     reverse: true
@@ -110,6 +112,7 @@ pageSections:
       type: pattern
       pattern: dots
       patternPitch: 21
+      patternDot: 4.1
       mask: none
     backgroundColor: base
     colorScheme: dark
@@ -141,6 +144,7 @@ pageSections:
       type: pattern
       pattern: grid
       patternPitch: 40
+      patternDot: 6
       mask: none
     backgroundColor: muted
     buttonSections:
