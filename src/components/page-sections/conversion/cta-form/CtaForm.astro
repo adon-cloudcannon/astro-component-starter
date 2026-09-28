@@ -71,6 +71,7 @@ const {
       class="cta-form-steps"
       orientation="horizontal"
       items={steps}
+      style={`--step-count: ${steps.length}`}
       data-children-prop="steps"
     />
   )}
@@ -158,18 +159,34 @@ const {
       padding-inline: var(--spacing-lg);
     }
 
-    /* Drawn as a gradient rather than a dashed border, because `dashed` takes
+    /* One line behind the whole strip, not a segment per column. Drawn per
+       column each one restarts the dash pattern at its own edge, so the dashes
+       double up where two meet — the design draws a single vector across all
+       four rings and this has to be one element to match it.
+
+       Drawn as a gradient rather than a dashed border, because `dashed` takes
        its pattern from the browser: the design sets 4 on, 4 off. */
     .cta-form .cta-form-steps .step-band::after {
-      background-color: transparent;
+      content: none;
+    }
+
+    .cta-form .cta-form-steps .steps-list.orientation-horizontal {
+      position: relative;
+    }
+
+    /* Ring centre to ring centre: with `--step-count` equal columns and the
+       ring centred in each, the first sits at half a column in. */
+    .cta-form .cta-form-steps .steps-list.orientation-horizontal::before {
       background-image: repeating-linear-gradient(
         to right,
         #333333 0 4px,
         transparent 4px 8px
       );
       block-size: var(--border-width-sm);
-      border: 0;
-      inset-inline: 0;
+      content: "";
+      inset-block-start: calc(var(--step-marker-size) / 2);
+      inset-inline: calc(50% / var(--step-count, 4));
+      position: absolute;
     }
 
     /* The rule runs between the first ring and the last, not past them. */
