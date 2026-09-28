@@ -82,12 +82,16 @@ pageSections:
       imageSource: /src/assets/images/marketing/patterns/dark-grid.png
       patternSize: natural
       mask: fade
-  - _component: page-sections/explainers/feature-grid
+  - _component: page-sections/explainers/feature-split
+    reverse: true
     heading: One repo, the whole picture
+    subtext: >-
+      Point an agent at a CloudCannon project and it sees templates, content, configuration and
+      styles sitting next to each other in Git. Markdown, frontmatter, YAML, folder structures, and
+      diffs: models have seen it all before, and know how the pieces fit together.
     backgroundColor: base
     colorScheme: dark
     lockColorScheme: true
-    alignmentHorizontal: start
     headingSize: sm
   - _component: page-sections/proof/testimonial-section
     text: >-
