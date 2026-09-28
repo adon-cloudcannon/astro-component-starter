@@ -33,6 +33,37 @@ pageSections:
         text: Book a demo
   - _component: page-sections/proof/logo-cloud
     backgroundColor: surface
+    logos:
+      - image: /src/assets/images/marketing/logos/twitch.svg
+        alt: Twitch
+        width: 75
+        height: 17
+        monochrome: true
+        aspect: 126 / 28
+      - image: /src/assets/images/marketing/logos/hnry.svg
+        alt: Hnry
+        width: 87
+        height: 31
+        monochrome: true
+        aspect: 78 / 28
+      - image: /src/assets/images/marketing/logos/Ocupop.png
+        alt: Ocupop
+        width: 137
+        height: 37
+      - image: /src/assets/images/marketing/logos/DX.svg
+        alt: DX Developer Experience Insights Platform
+        width: 52
+        height: 30
+        monochrome: true
+        aspect: 49 / 28
+      - image: /src/assets/images/marketing/logos/Papercut.svg
+        alt: Papercut
+        width: 100
+        height: 31
+        monochrome: true
+        aspect: 90 / 28
+    headingPlacement: inline
+    heading: STATIC SITE GENERATORS
   - _component: page-sections/conversion/cta-center
     eyebrow: INTERACTIVE DEMO
     heading: Here’s how to set up visual editing in minutes
