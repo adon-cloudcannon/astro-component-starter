@@ -56,7 +56,38 @@ pageSections:
       - _component: building-blocks/core-elements/button
         variant: primary
         text: View case study
-  - _component: page-sections/explainers/feature-split
+  - _component: page-sections/explainers/feature-grid
+    features:
+      - title: Site security
+        description: SOC2 Type 2 certified for enterprise-grade security
+        imageSource: /src/assets/images/marketing/cloudcannon-testing-security-1.png
+        imageHeight: 159
+        imageAlt: ''
+      - title: Asset management
+        description: Centralize, control and access approved and optimized assets.
+        imageSource: /src/assets/images/marketing/layer-25-1-3806-73633.png
+        imageHeight: 151
+        imageAlt: ''
+      - title: Flexible hosting options
+        description: Load instantly and perform consistently under any load.
+        imageSource: /src/assets/images/marketing/hosting.png
+        imageHeight: 148
+        imageAlt: ''
+      - title: Translation support
+        description: Serve and edit multilingual content across multiple sites.
+        imageSource: /src/assets/images/marketing/layer-26-1-3806-73642.png
+        imageHeight: 162
+        imageAlt: ''
+      - title: Custom permissions
+        description: Define roles and groups to match your organization structure.
+        imageSource: /src/assets/images/marketing/layer-28-1-3806-73647.png
+        imageHeight: 180
+        imageAlt: ''
+      - title: Custom workflows
+        description: Customize a fine-grained review process for approvals and publishing.
+        imageSource: /src/assets/images/marketing/layer-29-1-3806-73651.png
+        imageHeight: 195
+        imageAlt: ''
     heading: Built for how large teams actually work
     subtext: Benefit from more uptime, faster sites, better SEO, enterprise- grade security, and more.
     subtextSize: lg
