@@ -266,10 +266,82 @@ const {
   @layer page-sections {
     .cta-form .cta-form-card {
       background-color: var(--white, #ffffff);
+      /* The design rules the card and floats it: #EBE1C9 at 1px, and a wide
+         soft shadow 10 down at 65 blur. */
+      border: var(--border-width-sm) solid var(--dark-sand);
       border-radius: 1.125rem;
+      box-shadow: 0 0.625rem 4rem rgb(0 0 0 / 0.16);
       margin-inline: auto;
       max-inline-size: 60rem;
       padding: var(--spacing-3xl);
+    }
+
+    /* Every field is sand in a sand rule, not the page colour in the generic
+       grey: 44 high, 4 radius, #FBF6E9 inside #EBE1C9. The labels are 14 over
+       19 at medium, #333333 — the base sets 16 semibold. */
+    .cta-form .cta-form-card label,
+    .cta-form .cta-form-card .choice-group-title {
+      color: #333333;
+      font-size: 0.875rem;
+      font-weight: var(--font-weight-medium, 500);
+      line-height: 1.357;
+    }
+
+    .cta-form .cta-form-card input:not([type="checkbox"]):not([type="radio"]),
+    .cta-form .cta-form-card textarea,
+    .cta-form .cta-form-card select {
+      background-color: var(--sand);
+      border-color: var(--dark-sand);
+      border-radius: var(--radius-xs);
+      color: var(--black);
+    }
+
+    .cta-form .cta-form-card input:not([type="checkbox"]):not([type="radio"]),
+    .cta-form .cta-form-card select {
+      block-size: 2.75rem;
+    }
+
+    .cta-form .cta-form-card textarea {
+      block-size: 6.25rem;
+    }
+
+    /* 14px boxes in the same sand pair. `appearance: none` first, or the
+       platform checkbox ignores the fill and the rule entirely. */
+    /* The design gives the group no box of its own — the title sits above the
+       list like any other label, where a fieldset draws a rule around it and
+       notches the legend into it. */
+    .cta-form .cta-form-card fieldset {
+      border: 0;
+      margin: 0;
+      padding: 0;
+    }
+
+    .cta-form .cta-form-card input[type="checkbox"] {
+      appearance: none;
+      /* `box-sizing` and no padding, or the base input rule pads these to 18
+         where the design draws 14. */
+      box-sizing: border-box;
+      padding: 0;
+      background-color: var(--sand);
+      background-position: center;
+      background-repeat: no-repeat;
+      background-size: 0.625rem;
+      border: var(--border-width-sm) solid var(--dark-sand);
+      border-radius: var(--radius-xs);
+      block-size: 0.875rem;
+      inline-size: 0.875rem;
+      margin: 0;
+    }
+
+    .cta-form .cta-form-card input[type="checkbox"]:checked {
+      background-color: var(--pacific);
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 12'%3E%3Cpath d='M2 6.2 4.7 9 10 3.4' fill='none' stroke='%23fff' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+      border-color: var(--pacific);
+    }
+
+    .cta-form .cta-form-card .choice-group-label-text {
+      color: #333333;
+      font-size: 0.875rem;
     }
 
     /* On .form-fields, which is the element that actually holds them: the
