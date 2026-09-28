@@ -38,11 +38,6 @@ pageSections:
         iconName: check
         iconColor: default
   - _component: page-sections/builders/custom-section
-    background:
-      type: pattern
-      imageSource: /src/assets/images/marketing/patterns/dark-grid.png
-      patternSize: natural
-      mask: fade
   - _component: page-sections/proof/testimonial-section
     text: When we show clients the Visual Editor during our meetings, their eyes light up.
     authorName: Alex Murray
