@@ -129,6 +129,11 @@ pageSections:
       in any IDE and the agent has full project context: code, content, config, the lot.
     subtextSize: lg
     headingSize: sm
+    background:
+      type: pattern
+      imageSource: /src/assets/images/marketing/patterns/sand-grid.png
+      patternSize: natural
+      mask: none
     buttonSections:
       - _component: building-blocks/core-elements/button
         variant: text

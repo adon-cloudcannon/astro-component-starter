@@ -190,6 +190,16 @@ pageSections:
     subtextWidth: 672
     cardHeight: 247
     headingSize: lg
+    background:
+      type: pattern
+      imageSource: /src/assets/images/marketing/patterns/sand-grid.png
+      patternSize: natural
+      mask: none
+    haze:
+      - x: 0.4889
+        rx: 366px
+        'y': 17.5%
+        ry: 16.4%
   - _component: page-sections/conversion/cta-team-member
     member:
       _component: building-blocks/wrappers/team-member
