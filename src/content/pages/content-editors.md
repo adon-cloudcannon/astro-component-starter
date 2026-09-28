@@ -16,8 +16,8 @@ pageSections:
     imageOverflow: 83
     background:
       type: pattern
-      imageSource: /src/assets/images/marketing/patterns/sand-dotted.png
-      patternSize: natural
+      pattern: dots
+      patternPitch: 40
       mask: none
     haze:
       - x: 0.2563
@@ -67,14 +67,14 @@ pageSections:
     company: Nomio
     linkText: Read case study
     authorImage: /src/assets/images/marketing/ellipse-287.jpg
+    background:
+      type: pattern
+      pattern: dots
+      patternPitch: 21
+      mask: none
     backgroundColor: base
     colorScheme: dark
     lockColorScheme: true
-    background:
-      type: pattern
-      imageSource: /src/assets/images/marketing/patterns/dark-grid.png
-      patternSize: natural
-      mask: fade
     haze:
       - x: 0.4938
         rx: 933px

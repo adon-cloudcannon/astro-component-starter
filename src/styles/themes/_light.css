@@ -26,6 +26,24 @@
 
   --color-bg-code: color-mix(in srgb, var(--black) 8%, transparent);
 
+  /* The ink a background pattern is drawn in.
+
+     A grid rule is a tint of the band it sits on, not a colour of its own: it
+     goes darker on a light band and lighter on a dark one. Taken from
+     --color-bg-inverse at 5% — the token that is already the opposite of the
+     band, black on cream and cream on black — it lands within 10/255 of every
+     grid the design draws:
+     #F5EEDE on light sand, #E5D9BB on dark sand, #282725 on black. Nothing
+     has to be told which band it is on. That is the whole reason
+     the pattern stopped being a picture: an opaque tile bakes one band colour
+     in, so the same grid needed a second file for dark and would have needed a
+     third for dark sand.
+
+     Dots are the other kind. They are a palette colour rather than a tint, so
+     they get their own token. */
+  --pattern-ink: color-mix(in srgb, var(--color-bg-inverse) 5%, transparent);
+  --pattern-ink-dots: var(--golden-200);
+
   --color-border: var(--gray-300);
   --color-border-inputs: var(--gray-400);
   --color-border-strong: var(--earth);

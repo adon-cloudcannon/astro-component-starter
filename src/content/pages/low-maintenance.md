@@ -16,9 +16,10 @@ pageSections:
     imageOverflow: 107
     background:
       type: pattern
-      imageSource: /src/assets/images/marketing/patterns/sand-dotted.png
-      patternSize: natural
+      pattern: dots
+      patternPitch: 40
       mask: none
+    backgroundColor: surface
     haze:
       - x: 0.228
         rx: 366px
@@ -101,8 +102,8 @@ pageSections:
     headingSize: lg
     background:
       type: pattern
-      imageSource: /src/assets/images/marketing/patterns/sand-grid.png
-      patternSize: natural
+      pattern: grid
+      patternPitch: 40
       mask: none
     haze:
       - x: 0.2342
@@ -122,8 +123,8 @@ pageSections:
     headingSize: lg
     background:
       type: pattern
-      imageSource: /src/assets/images/marketing/patterns/dark-grid.png
-      patternSize: natural
+      pattern: grid
+      patternPitch: 40
       mask: fade
   - _component: page-sections/explainers/scroll-steps
     reverse: false
@@ -155,14 +156,14 @@ pageSections:
     quoted: false
     quoteSize: md
     linkText: Read case study
+    background:
+      type: pattern
+      pattern: dots
+      patternPitch: 21
+      mask: none
     backgroundColor: base
     colorScheme: dark
     lockColorScheme: true
-    background:
-      type: pattern
-      imageSource: /src/assets/images/marketing/patterns/dark-grid.png
-      patternSize: natural
-      mask: fade
     haze:
       - x: 0.4791
         rx: 933px

@@ -17,9 +17,10 @@ pageSections:
     reverse: true
     background:
       type: pattern
-      imageSource: /src/assets/images/marketing/patterns/sand-dotted.png
-      patternSize: natural
+      pattern: dots
+      patternPitch: 40
       mask: none
+    backgroundColor: surface
     haze:
       - x: 0.6662
         rx: 512px
@@ -87,14 +88,14 @@ pageSections:
   - _component: page-sections/conversion/cta-split
     heading: New client sites shipped in 60 minutes instead of days.
     headingSize: md
+    background:
+      type: pattern
+      pattern: dots
+      patternPitch: 21
+      mask: none
     backgroundColor: base
     colorScheme: dark
     lockColorScheme: true
-    background:
-      type: pattern
-      imageSource: /src/assets/images/marketing/patterns/dark-grid.png
-      patternSize: natural
-      mask: fade
     haze:
       - x: 0.4791
         rx: 933px
@@ -282,8 +283,8 @@ pageSections:
     headingSize: lg
     background:
       type: pattern
-      imageSource: /src/assets/images/marketing/patterns/sand-grid.png
-      patternSize: natural
+      pattern: grid
+      patternPitch: 40
       mask: none
     haze:
       - x: 0.5

@@ -17,8 +17,8 @@ pageSections:
     imageOverflow: 29
     background:
       type: pattern
-      imageSource: /src/assets/images/marketing/patterns/sand-grid.png
-      patternSize: natural
+      pattern: grid
+      patternPitch: 40
       mask: none
     haze:
       - x: 0.1492
@@ -129,8 +129,8 @@ pageSections:
         linkText: Learn more
     background:
       type: pattern
-      imageSource: /src/assets/images/marketing/patterns/sand-pegboard.png
-      patternSize: natural
+      pattern: dots
+      patternPitch: 33
       mask: fade
     haze:
       - x: 0.5086
@@ -364,8 +364,8 @@ pageSections:
     cardColorScheme: light
     background:
       type: pattern
-      imageSource: /src/assets/images/marketing/patterns/dark-grid.png
-      patternSize: natural
+      pattern: grid
+      patternPitch: 40
       mask: fade
   - _component: page-sections/proof/testimonial-section
     text: I almost forgot that website maintenance was a thing.
@@ -427,8 +427,8 @@ pageSections:
         linkText: Read story
     background:
       type: pattern
-      imageSource: /src/assets/images/marketing/patterns/dark-grid.png
-      patternSize: natural
+      pattern: grid
+      patternPitch: 40
       mask: top
     buttonSections:
       - _component: building-blocks/core-elements/button

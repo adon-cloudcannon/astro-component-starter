@@ -14,8 +14,8 @@ pageSections:
     imageOverflow: 42
     background:
       type: pattern
-      imageSource: /src/assets/images/marketing/patterns/sand-grid.png
-      patternSize: natural
+      pattern: grid
+      patternPitch: 40
       mask: none
     haze:
       - x: 0.1628
@@ -79,8 +79,8 @@ pageSections:
     headingSize: lg
     background:
       type: pattern
-      imageSource: /src/assets/images/marketing/patterns/dark-grid.png
-      patternSize: natural
+      pattern: grid
+      patternPitch: 40
       mask: fade
   - _component: page-sections/explainers/feature-split
     reverse: true
@@ -106,14 +106,14 @@ pageSections:
     company: Nomio
     linkText: Read case study
     authorImage: /src/assets/images/marketing/ellipse-287.jpg
+    background:
+      type: pattern
+      pattern: dots
+      patternPitch: 21
+      mask: none
     backgroundColor: base
     colorScheme: dark
     lockColorScheme: true
-    background:
-      type: pattern
-      imageSource: /src/assets/images/marketing/patterns/dark-grid.png
-      patternSize: natural
-      mask: fade
     haze:
       - x: 0.4938
         rx: 933px
@@ -137,6 +137,12 @@ pageSections:
     subtextSize: lg
     imageSource: /src/assets/images/marketing/camera-01-1.png
     headingSize: lg
+    background:
+      type: pattern
+      pattern: grid
+      patternPitch: 40
+      mask: none
+    backgroundColor: muted
     buttonSections:
       - _component: building-blocks/core-elements/button
         variant: primary

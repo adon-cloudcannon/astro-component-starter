@@ -42,6 +42,8 @@ const {
   overlay = 0,
   fixed = false,
   patternSize = "natural",
+  pattern = "",
+  patternPitch = 0,
   mask = bgType === "pattern" ? "frame" : "none",
 } = background || {};
 
@@ -51,8 +53,14 @@ const {
 const hazePools = haze === true ? [{}] : Array.isArray(haze) ? haze : haze ? [haze] : [];
 
 const usesFixedBackground = bgType === "image" && fixed && !!imageSource;
+
+// A named shape is drawn rather than fetched, and beats any file still set on
+// the block. `grid` and `dots` are the whole set: the pegboard turned out to
+// be nine dots on a 33px pitch, which is the dot pattern with its spacing
+// changed rather than a third thing.
+const patternShape = bgType === "pattern" && pattern ? pattern : null;
 const patternImageUrl =
-  bgType === "pattern" && imageSource ? resolveImageSource(imageSource) : null;
+  bgType === "pattern" && !patternShape && imageSource ? resolveImageSource(imageSource) : null;
 
 if (!htmlAttributes.id && label) {
   htmlAttributes.id = slugifyLabel(label);
@@ -102,11 +110,17 @@ const arrayDataAttributes =
         style={{ "--background-position": `${positionHorizontal} ${positionVertical}` }}
       />
     )}
-    {patternImageUrl && (
+    {(patternShape || patternImageUrl) && (
       <div
-        class:list={["background-pattern", `pattern-size-${patternSize}`]}
+        class:list={[
+          "background-pattern",
+          patternShape ? `pattern-${patternShape}` : `pattern-size-${patternSize}`,
+        ]}
         aria-hidden="true"
-        style={{ backgroundImage: `url("${patternImageUrl}")` }}
+        style={{
+          ...(patternImageUrl ? { backgroundImage: `url("${patternImageUrl}")` } : {}),
+          ...(patternPitch ? { "--pattern-pitch": `${patternPitch}px` } : {}),
+        }}
       />
     )}
     {overlay !== 0 && (
@@ -437,11 +451,45 @@ const arrayDataAttributes =
         }
 
         > .background-pattern {
+          /* The pitch the design draws both patterns on. The grid's rule is
+             2px and a dot is 6px across, measured off the tiles these
+             replaced. A band that wants a different density sets
+             --pattern-pitch rather than needing another file. */
+          --pattern-pitch: 40px;
+          --pattern-rule: 2px;
+          --pattern-dot: 6px;
+
           background-position: top left;
           background-repeat: repeat;
           inset: 0;
           position: absolute;
           z-index: var(--layer-1);
+
+          /* Drawn, not fetched. The ink is a tint of the band (see
+             --pattern-ink in the theme files), so one rule covers a cream
+             band, a dark sand one and a black one. */
+          &.pattern-grid {
+            background-image:
+              repeating-linear-gradient(
+                to right,
+                var(--pattern-ink) 0 var(--pattern-rule),
+                transparent var(--pattern-rule) var(--pattern-pitch)
+              ),
+              repeating-linear-gradient(
+                to bottom,
+                var(--pattern-ink) 0 var(--pattern-rule),
+                transparent var(--pattern-rule) var(--pattern-pitch)
+              );
+          }
+
+          &.pattern-dots {
+            background-image: radial-gradient(
+              circle at center,
+              var(--pattern-ink-dots) 0 calc(var(--pattern-dot) / 2),
+              transparent calc(var(--pattern-dot) / 2)
+            );
+            background-size: var(--pattern-pitch) var(--pattern-pitch);
+          }
 
           &.pattern-size-natural {
             background-size: auto;

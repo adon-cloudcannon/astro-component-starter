@@ -16,8 +16,8 @@ pageSections:
     imageOverflow: 119
     background:
       type: pattern
-      imageSource: /src/assets/images/marketing/patterns/sand-grid.png
-      patternSize: natural
+      pattern: grid
+      patternPitch: 40
       mask: none
     haze:
       - x: 0.2243
@@ -93,8 +93,8 @@ pageSections:
     lockColorScheme: true
     background:
       type: pattern
-      imageSource: /src/assets/images/marketing/patterns/dark-grid.png
-      patternSize: natural
+      pattern: grid
+      patternPitch: 40
       mask: fade
     haze:
       - x: 0.4975
@@ -166,8 +166,8 @@ pageSections:
     lockColorScheme: true
     background:
       type: pattern
-      imageSource: /src/assets/images/marketing/patterns/dark-grid.png
-      patternSize: natural
+      pattern: grid
+      patternPitch: 40
       mask: fade
   - _component: page-sections/proof/testimonial-section
     text: >-
@@ -184,8 +184,8 @@ pageSections:
     backgroundColor: surface
     background:
       type: pattern
-      imageSource: /src/assets/images/marketing/patterns/sand-dotted.png
-      patternSize: natural
+      pattern: dots
+      patternPitch: 40
       mask: none
   - _component: page-sections/conversion/cta-center
     heading: Your content is yours

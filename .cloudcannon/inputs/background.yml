@@ -41,9 +41,9 @@ background:
           icon: texture
           value:
             type: pattern
-            imageSource: ""
-            patternSize: natural
-            mask: frame
+            pattern: grid
+            patternPitch: 40
+            mask: none
             overlay: 0
 background.type:
   type: select
@@ -157,3 +157,24 @@ background.mask:
         name: Fade the right
       - id: blend
         name: Fade top and bottom
+
+background.pattern:
+  type: select
+  label: Pattern
+  comment: >-
+    Drawn rather than loaded, and inked from the band's own colours: a grid
+    rule is a tint of the background, dots are Golden. Both work on any
+    background colour, light or dark, without a second file.
+  options:
+    values:
+      - id: grid
+        name: Grid
+      - id: dots
+        name: Dots
+
+background.patternPitch:
+  type: number
+  label: Pattern spacing
+  comment: >-
+    Distance between rules, or between dots, in pixels. The design draws most
+    bands at 40; its denser ones are 33 and 21.

@@ -15,9 +15,10 @@ pageSections:
     reverse: true
     background:
       type: pattern
-      imageSource: /src/assets/images/marketing/patterns/sand-dotted.png
-      patternSize: natural
+      pattern: dots
+      patternPitch: 40
       mask: none
+    backgroundColor: surface
     haze:
       - x: 0.6957
         rx: 458px
@@ -50,8 +51,8 @@ pageSections:
     backgroundColor: surface
     background:
       type: pattern
-      imageSource: /src/assets/images/marketing/patterns/sand-dotted.png
-      patternSize: natural
+      pattern: dots
+      patternPitch: 40
       mask: none
   - _component: page-sections/conversion/cta-center
     heading: Here, you don’t need to wait to make changes
@@ -61,8 +62,8 @@ pageSections:
     headingSize: lg
     background:
       type: pattern
-      imageSource: /src/assets/images/marketing/patterns/sand-grid.png
-      patternSize: natural
+      pattern: grid
+      patternPitch: 40
       mask: none
     haze:
       - x: 0.5357
@@ -154,7 +155,8 @@ pageSections:
     alignmentHorizontal: start
     background:
       type: pattern
-      imageSource: /src/assets/images/marketing/patterns/sand-dotted.png
-      patternSize: natural
+      pattern: dots
+      patternPitch: 40
       mask: none
+    backgroundColor: surface
 ---

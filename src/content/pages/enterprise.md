@@ -16,8 +16,8 @@ pageSections:
     imageOverflow: 151
     background:
       type: pattern
-      imageSource: /src/assets/images/marketing/patterns/sand-grid.png
-      patternSize: natural
+      pattern: grid
+      patternPitch: 40
       mask: none
     haze:
       - x: 0.1123
@@ -81,8 +81,8 @@ pageSections:
     lockColorScheme: true
     background:
       type: pattern
-      imageSource: /src/assets/images/marketing/patterns/dark-grid.png
-      patternSize: natural
+      pattern: grid
+      patternPitch: 40
       mask: fade
     buttonSections:
       - _component: building-blocks/core-elements/button
@@ -175,8 +175,8 @@ pageSections:
         linkText: Read story
     background:
       type: pattern
-      imageSource: /src/assets/images/marketing/patterns/dark-grid.png
-      patternSize: natural
+      pattern: grid
+      patternPitch: 40
       mask: top
     buttonSections:
       - _component: building-blocks/core-elements/button
@@ -224,8 +224,8 @@ pageSections:
     headingSize: lg
     background:
       type: pattern
-      imageSource: /src/assets/images/marketing/patterns/sand-grid.png
-      patternSize: natural
+      pattern: grid
+      patternPitch: 40
       mask: bottom
     haze:
       - x: 0.4889

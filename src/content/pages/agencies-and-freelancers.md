@@ -16,8 +16,8 @@ pageSections:
     imageOverflow: 63
     background:
       type: pattern
-      imageSource: /src/assets/images/marketing/patterns/sand-grid.png
-      patternSize: natural
+      pattern: grid
+      patternPitch: 40
       mask: none
     haze:
       - x: 0.2206
@@ -98,9 +98,10 @@ pageSections:
     headingSize: lg
     background:
       type: pattern
-      imageSource: /src/assets/images/marketing/patterns/sand-pegboard.png
-      patternSize: natural
+      pattern: dots
+      patternPitch: 33
       mask: fade
+    backgroundColor: surface
     haze:
       - x: 0.4951
         rx: 531px
@@ -123,8 +124,8 @@ pageSections:
   - _component: page-sections/builders/custom-section
     background:
       type: pattern
-      imageSource: /src/assets/images/marketing/patterns/sand-grid.png
-      patternSize: natural
+      pattern: grid
+      patternPitch: 40
       mask: none
     haze:
       - x: 0.2342
