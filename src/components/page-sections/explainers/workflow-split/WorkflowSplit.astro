@@ -82,6 +82,16 @@ const {
    * the header row the way a Git client does.
    */
   centreBranch = "",
+  /**
+   * The commit rows down the panel. Each is a kind, an author, a message and a
+   * hash, which is the four parts the design gives them: 290x30 on a 37 pitch,
+   * rounded 8, on white at 5% over the card.
+   *
+   * `kind` rather than a pair of colours per row: the design draws exactly two
+   * of these, an editor in blue and a dev in Sunset, and each sets its dot and
+   * its label together.
+   */
+  centreRows = [],
   centreSections = [],
   sectionLabel,
   maxContentWidth = "xl",
@@ -236,6 +246,18 @@ const panelList: PanelProps[] = Array.isArray(panels) ? panels : [];
                   )}
                 </p>
               )}
+              {centreRows.length > 0 && (
+                <ul class="workflow-centre-rows">
+                  {centreRows.map((row: Record<string, unknown>) => (
+                    <li class:list={["workflow-centre-row", `kind-${row.kind ?? "editor"}`]}>
+                      <span class="workflow-centre-dot" aria-hidden="true" />
+                      <span class="workflow-centre-author">{row.author}</span>
+                      <span class="workflow-centre-message">{row.message}</span>
+                      <span class="workflow-centre-hash">{row.hash}</span>
+                    </li>
+                  ))}
+                </ul>
+              )}
               <Component contentSections={centreSections} />
             </div>
           ) : centreImageSource ? (
@@ -308,7 +330,7 @@ const panelList: PanelProps[] = Array.isArray(panels) ? panels : [];
         font-weight: 700;
         gap: 0.6em;
         line-height: 1.35;
-        margin: 0;
+        margin: 0 0 14px;
         /* The design sets the rule 2px under the header, which at the mark's
            own 17 reads fine and at md's 22 does not — the row is taller and
            the line ends up hugging the text. Given room instead. */
@@ -339,6 +361,70 @@ const panelList: PanelProps[] = Array.isArray(panels) ? panels : [];
         font-size: 10.5px;
         font-weight: 400;
         gap: 0.65em;
+        margin-inline-start: auto;
+      }
+
+      /* 37px pitch: a 30 row and 7 between, which is what the design measures
+         down the panel. */
+      .workflow-centre-rows {
+        display: grid;
+        gap: 7px;
+        list-style: none;
+        margin: 0;
+        padding: 0;
+      }
+
+      /* White at 5% rather than a flat grey. The fill reads #FFFFFF in the
+         file and the opacity sits on the fill, so taking the colour alone
+         gives a white bar where the design has a barely-lifted panel. */
+      .workflow-centre-row {
+        align-items: center;
+        background-color: rgb(255 255 255 / 5%);
+        block-size: 30px;
+        border-radius: 8px;
+        color: #cfd2e8;
+        display: flex;
+        font-family: var(--font-mono);
+        font-size: 11px;
+        font-weight: 400;
+        gap: 9px;
+        padding-inline: 10px;
+      }
+
+      .workflow-centre-row.kind-editor {
+        --workflow-row-dot: #4d7dff;
+        --workflow-row-author: #7ea6ff;
+      }
+
+      .workflow-centre-row.kind-dev {
+        --workflow-row-dot: var(--sunset);
+        --workflow-row-author: #f0a07a;
+      }
+
+      .workflow-centre-dot {
+        background-color: var(--workflow-row-dot);
+        block-size: 6px;
+        border-radius: var(--radius-full);
+        flex: none;
+        inline-size: 6px;
+      }
+
+      .workflow-centre-author {
+        color: var(--workflow-row-author);
+        flex: none;
+      }
+
+      /* Clipped rather than wrapped: the design runs one of them past the
+         hash — "content: new team membe" — so a row is always one line. */
+      .workflow-centre-message {
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+      }
+
+      .workflow-centre-hash {
+        color: #5a6080;
+        flex: none;
         margin-inline-start: auto;
       }
 

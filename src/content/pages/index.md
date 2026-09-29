@@ -89,6 +89,11 @@ pageSections:
     centreIconName: git-branch
     centreTitle: Your Git repo
     centreBranch: main
+    centreRows:
+      - kind: editor
+        author: editor
+        message: 'content: hero copy'
+        hash: a3f9c2
     heading: Two workflows. One source of truth.
     subtext: >-
       Editors edit visually, developers stay in code — and every change lands in the same Git

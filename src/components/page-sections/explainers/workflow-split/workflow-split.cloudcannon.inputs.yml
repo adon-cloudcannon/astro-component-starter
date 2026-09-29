@@ -177,3 +177,9 @@ centreBranch:
   comment: >-
     Closes the header row with a status light and the branch name, set in the
     mono face at 10.5 the way a Git client shows it.
+
+centreRows:
+  type: array
+  hidden: true
+  label: Middle panel rows
+  comment: The commit rows down the panel. Chrome, like the header above them.

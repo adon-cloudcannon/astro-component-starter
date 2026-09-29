@@ -36,6 +36,7 @@ value:
   centreIconName: ""
   centreTitle: ""
   centreBranch: ""
+  centreRows: []
   centreSections: []
   centreImageAlt: ""
   maxContentWidth: xl
