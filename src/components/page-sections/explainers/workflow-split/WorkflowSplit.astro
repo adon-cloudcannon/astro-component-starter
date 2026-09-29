@@ -8,9 +8,11 @@
  * On the homepage that is editors and developers either side of a Git repo.
  *
  * The panels carry the accent, so a reader can tell which column is which
- * before reading a word of it, the same way the story cards do. The middle is
- * an image rather than a third panel, because what sits there is a drawing.
+ * before reading a word of it, the same way the story cards do. The middle can
+ * be a picture or a third panel of its own: on the homepage the design draws a
+ * dark card there, taller than the pair and sharing their bottom edge.
  */
+import Component from "@component-utils/renderBlock.astro";
 import CustomSection from "@builders/custom-section/CustomSection.astro";
 import Card from "@wrappers/card/Card.astro";
 import Heading from "@core-elements/heading/Heading.astro";
@@ -54,6 +56,19 @@ const {
   panels = [],
   centreImageSource = "",
   centreImageAlt = "",
+  /**
+   * The panel between the two workflows, which is the common ground they both
+   * land in. The design draws it 330x366 in #26262F against the pair's 323x321
+   * tints, sharing their bottom edge and reaching 45px higher, so it is a card
+   * in its own right rather than a picture of one.
+   *
+   * Its colour is a value rather than a token on purpose: #26262F is not in
+   * the palette, and the nearest thing to it, --gray-900 at #252423, is a
+   * different colour by about 12.
+   */
+  centreColor = "",
+  centreMinHeight = 0,
+  centreSections = [],
   sectionLabel,
   maxContentWidth = "xl",
   paddingHorizontal = "gutter",
@@ -185,7 +200,19 @@ const panelList: PanelProps[] = Array.isArray(panels) ? panels : [];
             yet: without it the second panel slides into the middle column and
             the row reads as two columns of the wrong width. */}
         {index === 0 &&
-          (centreImageSource ? (
+          (centreColor || centreSections.length ? (
+            <div
+              class="workflow-centre-card"
+              style={{
+                ...(centreColor ? { "--workflow-centre-color": centreColor } : {}),
+                ...(centreMinHeight ? { "--workflow-centre-height": `${Number(centreMinHeight)}px` } : {}),
+              }}
+              data-editable="array"
+              data-prop="centreSections"
+            >
+              <Component contentSections={centreSections} />
+            </div>
+          ) : centreImageSource ? (
             <Image
               class="workflow-centre"
               source={centreImageSource}
@@ -220,6 +247,20 @@ const panelList: PanelProps[] = Array.isArray(panels) ? panels : [];
         display: grid;
         gap: 4rem;
         grid-template-columns: repeat(3, minmax(0, 1fr));
+      }
+
+      /* Shares the pair's bottom edge and reaches above them, which is how the
+         design draws it: all three finish at the same line, and this one is 45
+         taller. Bottom-aligned rather than given a top offset, so it stays put
+         however tall the illustrations above the other two turn out. */
+      .workflow-centre-card {
+        align-self: end;
+        background-color: var(--workflow-centre-color, var(--color-bg-muted));
+        /* --radius-card, not --radius-lg: the cards either side of it round
+           at 18 and the generic large radius is 16, so the middle panel was a
+           touch squarer than its neighbours. */
+        border-radius: var(--radius-card);
+        min-block-size: var(--workflow-centre-height, 0);
       }
 
       /* A panel is its illustration and its card, stacked, so the cards sit on

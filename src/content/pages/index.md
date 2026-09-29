@@ -84,6 +84,8 @@ pageSections:
         variant: primary
         text: Learn about our visual editor
   - _component: page-sections/explainers/workflow-split
+    centreColor: '#26262F'
+    centreMinHeight: 366
     heading: Two workflows. One source of truth.
     subtext: >-
       Editors edit visually, developers stay in code — and every change lands in the same Git

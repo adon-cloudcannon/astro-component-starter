@@ -127,3 +127,25 @@ background:
   type: object
   comment: Background image, video or pattern for the section.
 
+centreColor:
+  type: color
+  label: Middle panel colour
+  comment: >-
+    Draws the middle of the row as a panel of its own rather than a picture.
+    The design uses #26262F, which is not in the palette: the nearest token,
+    --gray-900, is a different colour by about 12.
+
+centreMinHeight:
+  type: number
+  label: Middle panel height
+  comment: >-
+    The least it can be, in pixels. It shares the bottom edge of the pair
+    either side and grows upward, so the design's 366 against their 321 is what
+    makes it stand a little proud of them.
+
+centreSections:
+  type: array
+  label: Middle panel content
+  comment: What goes inside the middle panel.
+  options:
+    structures: _structures.scrollStepperSections

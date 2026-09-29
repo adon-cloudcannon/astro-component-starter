@@ -31,6 +31,9 @@ value:
       linkText: Learn more
       link: ""
   centreImageSource: ""
+  centreColor: ""
+  centreMinHeight: 0
+  centreSections: []
   centreImageAlt: ""
   maxContentWidth: xl
   paddingHorizontal: gutter
