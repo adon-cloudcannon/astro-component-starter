@@ -110,14 +110,14 @@ pageSections:
         author: editor
         message: 'content: new team member'
         hash: c0d8f1
-      - kind: editor
-        author: editor
-        message: 'content: new blog post'
-        hash: c0d8f1
       - kind: dev
         author: dev
         message: 'feat: new page'
         hash: 7b1e44
+      - kind: editor
+        author: editor
+        message: 'content: new blog post'
+        hash: c0d8f1
       - kind: dev
         author: dev
         message: 'feat: chatbot install'
