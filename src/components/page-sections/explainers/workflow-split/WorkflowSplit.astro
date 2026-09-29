@@ -221,7 +221,7 @@ const panelList: PanelProps[] = Array.isArray(panels) ? panels : [];
             >
               {(centreIconName || centreTitle) && (
                 <p class="workflow-centre-title">
-                  {centreIconName && <Icon name={centreIconName} size="sm" />}
+                  {centreIconName && <Icon name={centreIconName} size="md" />}
                   {centreTitle && <span data-prop="centreTitle">{centreTitle}</span>}
                 </p>
               )}
@@ -294,11 +294,12 @@ const panelList: PanelProps[] = Array.isArray(panels) ? panels : [];
         line-height: 1.35;
         margin: 0;
 
+        /* No size of its own: Icon sets its own font-size from the `size`
+           prop and the glyph is 1em of that, so pinning a box here just
+           overrode the choice. Only the things the row needs. */
         .icon {
-          block-size: 1.2em;
           color: currentcolor;
           flex: none;
-          inline-size: 1.2em;
         }
       }
 
