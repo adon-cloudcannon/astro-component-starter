@@ -1,0 +1,234 @@
+eyebrow:
+  type: text
+  comment: Small label above the heading.
+
+heading:
+  type: text
+  comment: The band's own heading, above the steps. Each step keeps its own.
+
+headingLevel:
+  type: select
+  comment: Heading rank in the page outline. Pick by position, not by size.
+  options:
+    values:
+      - id: h2
+        name: H2
+      - id: h3
+        name: H3
+      - id: h4
+        name: H4
+
+headingSize:
+  type: select
+  comment: Visual size, independent of the rank above.
+  options:
+    values:
+      - id: xl
+        name: Extra large
+      - id: lg
+        name: Large
+      - id: md
+        name: Medium
+      - id: sm
+        name: Small
+
+subtext:
+  type: markdown
+  comment: Supporting line under the heading.
+
+subtextSize:
+  type: select
+  options:
+    values:
+      - id: xl
+        name: Extra large
+      - id: lg
+        name: Large
+      - id: md
+        name: Medium
+      - id: sm
+        name: Small
+
+subtextWidth:
+  type: number
+  comment: >-
+    The measure the supporting line is set in, in pixels. Not the column it
+    sits in: the design draws a centred one at about 580 in the 1040 column,
+    and run to the full width it reads as a different block.
+
+alignmentHorizontal:
+  type: select
+  label: Header alignment
+  comment: >-
+    Whether the band's own header is centred over the steps or runs from the
+    left. Each step's own copy stays left either way.
+  options:
+    values:
+      - id: start
+        name: Left
+      - id: center
+        name: Centered
+
+steps:
+  type: array
+  comment: >-
+    One per state of the band. The band holds still for a screen of scroll per
+    step while the copy and the picture beside it change.
+  options:
+    structures:
+      values:
+        - label: Step
+          icon: layers
+          value:
+            contentSections: []
+            mediaSections: []
+          preview:
+            icon: layers
+            text:
+              - Step
+          _inputs:
+            contentSections:
+              type: array
+              label: Copy
+              comment: The words for this step. Usually a heading, a line and a link.
+              options:
+                structures: _structures.scrollStepperSections
+            mediaSections:
+              type: array
+              label: Picture
+              comment: >-
+                What shows beside the copy for this step. Safe to leave empty:
+                the band holds its shape and steps either way.
+              options:
+                structures: _structures.scrollStepperSections
+
+reverse:
+  type: switch
+  comment: Put the picture on the left and the copy on the right.
+
+mediaWidth:
+  type: select
+  comment: How much of the band the picture takes.
+  options:
+    values:
+      - id: half
+        name: Half
+      - id: wide
+        name: Wide
+      - id: narrow
+        name: Narrow
+
+showProgress:
+  type: switch
+  label: Progress bar
+  comment: >-
+    A bar along the foot of the band, one segment per step, filling as you
+    advance. Hidden below the tablet breakpoint, where every step is shown at
+    once.
+
+# The band-level inputs, same set and same wording as every other page
+# section carries, so this one is configured the way the rest are.
+sectionLabel:
+  type: text
+  comment: Names the section in the editor and sets its anchor id.
+maxContentWidth:
+  type: select
+  comment: Maximum width of the content.
+  options:
+    values:
+      - id: none
+        name: None
+      - id: xs
+        name: Extra Small
+      - id: sm
+        name: Small
+      - id: md
+        name: Medium
+      - id: lg
+        name: Large
+      - id: xl
+        name: Extra Large
+      - id: 2xl
+        name: 2xl
+      - id: 3xl
+        name: 3xl
+paddingHorizontal:
+  type: select
+  comment: Horizontal padding around the content.
+  options:
+    values:
+      - id: none
+        name: None
+      - id: gutter
+        name: Page gutter
+      - id: xs
+        name: Extra Small
+      - id: sm
+        name: Small
+      - id: md
+        name: Medium
+      - id: lg
+        name: Large
+      - id: xl
+        name: Extra Large
+      - id: 2xl
+        name: 2xl
+      - id: 3xl
+        name: 3xl
+paddingVertical:
+  type: select
+  comment: Vertical padding around the content.
+  options:
+    values:
+      - id: none
+        name: None
+      - id: xs
+        name: Extra Small
+      - id: sm
+        name: Small
+      - id: md
+        name: Medium
+      - id: lg
+        name: Large
+      - id: xl
+        name: Extra Large
+      - id: 2xl
+        name: 2xl
+      - id: 3xl
+        name: 3xl
+      - id: 4xl
+        name: 4xl
+      - id: 5xl
+        name: 5xl
+      - id: 6xl
+        name: 6xl
+colorScheme:
+  type: select
+  comment: Light or dark scheme for the section. Inherit follows the page.
+  options:
+    values:
+      - id: inherit
+        name: Inherit
+      - id: light
+        name: Light
+      - id: dark
+        name: Dark
+lockColorScheme:
+  type: switch
+  label: Lock color scheme
+  comment: Ignores the site theme toggle. Only applies when Color Scheme is Light or Dark.
+backgroundColor:
+  type: select
+  comment: Background color for the section.
+  options:
+    values:
+      - id: none
+        name: None
+      - id: base
+        name: Base
+      - id: surface
+        name: Surface
+      - id: accent
+        name: Accent
+      - id: highlight
+        name: Highlight

@@ -142,14 +142,13 @@ pageSections:
         rx: 453px
         'y': 45.2%
         ry: 45.6%
-  - _component: page-sections/explainers/scroll-steps
+  - _component: page-sections/explainers/pinned-steps
     heading: Happy developers
     headingSize: lg
     subtext: ''
     eyebrow: ''
     reverse: true
     mediaWidth: wide
-    progressStyle: bar
     backgroundColor: base
     colorScheme: dark
     lockColorScheme: true
@@ -158,8 +157,7 @@ pageSections:
       pattern: grid
       mask: top
     steps:
-      - _component: building-blocks/wrappers/scroll-stepper/scroll-stepper-step
-        contentSections:
+      - contentSections:
           - _component: building-blocks/core-elements/heading
             text: Craft the ideal editing interface
             level: h3
@@ -175,8 +173,7 @@ pageSections:
             iconPosition: after
             text: Learn more
         mediaSections: []
-      - _component: building-blocks/wrappers/scroll-stepper/scroll-stepper-step
-        contentSections:
+      - contentSections:
           - _component: building-blocks/core-elements/heading
             text: Efficiency and speed that delivers results
             level: h3

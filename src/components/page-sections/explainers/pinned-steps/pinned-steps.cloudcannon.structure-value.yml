@@ -1,0 +1,83 @@
+label: Pinned Steps
+icon: web_stories
+description: A band that holds still while its steps and pictures change.
+value:
+  _component: page-sections/explainers/pinned-steps
+  sectionLabel: ""
+  eyebrow: ""
+  heading: ""
+  headingLevel: h2
+  headingSize: lg
+  subtext: ""
+  subtextSize: md
+  alignmentHorizontal: center
+  steps:
+    - contentSections:
+        - _component: building-blocks/core-elements/heading
+          text: The first thing it does
+          level: h3
+          size: sm
+        - _component: building-blocks/core-elements/text
+          text: A line about it, in the copy column beside the picture.
+      mediaSections: []
+    - contentSections:
+        - _component: building-blocks/core-elements/heading
+          text: And then the next
+          level: h3
+          size: sm
+        - _component: building-blocks/core-elements/text
+          text: The band holds still while this replaces the line above it.
+      mediaSections: []
+  reverse: false
+  mediaWidth: half
+  showProgress: true
+  maxContentWidth: xl
+  paddingHorizontal: gutter
+  paddingVertical: 4xl
+  colorScheme: inherit
+  lockColorScheme: false
+  backgroundColor: base
+  background:
+    type: image
+    imageSource: ""
+preview:
+  text:
+    - Pinned Steps
+  subtext:
+    - key: heading
+  icon: web_stories
+picker_preview:
+  text: Pinned Steps
+  subtext: A band that holds still while its steps and pictures change.
+_inputs_from_glob:
+  - /src/components/page-sections/explainers/pinned-steps/pinned-steps.cloudcannon.inputs.yml
+  - /.cloudcannon/inputs/background.yml
+  - /.cloudcannon/inputs/haze.yml
+groups:
+  - heading: Content
+    inputs:
+      - eyebrow
+      - heading
+      - headingLevel
+      - headingSize
+      - subtext
+      - subtextSize
+      - subtextWidth
+      - alignmentHorizontal
+      - steps
+  - heading: Layout
+    inputs:
+      - reverse
+      - mediaWidth
+      - showProgress
+      - maxContentWidth
+      - paddingHorizontal
+      - paddingVertical
+  - heading: Section settings
+    inputs:
+      - sectionLabel
+      - colorScheme
+      - lockColorScheme
+      - backgroundColor
+      - background
+      - haze

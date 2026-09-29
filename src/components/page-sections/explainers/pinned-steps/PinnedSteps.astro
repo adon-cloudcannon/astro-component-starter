@@ -1,0 +1,330 @@
+---
+/**
+ * A band that pins while its steps advance.
+ *
+ * The difference from `scroll-steps` is what holds still. There, the media is
+ * sticky and the copy scrolls past it, so the band's background travels with
+ * the page and each step keeps its own slot in a tall column. Here the whole
+ * band pins — background, pattern and both columns — and only the contents
+ * change, one step at a time, with a bar along the foot saying where you are.
+ *
+ * Two things follow from that, and they are the reasons this exists:
+ *
+ *  - It does not depend on there being a picture. The stage's height is the
+ *    viewport's and the runway's is the step count, so a step whose media is
+ *    still a hand export behaves exactly like one with the art in place.
+ *  - The steps share a single cell and cross-fade, so they replace each other
+ *    where they stand instead of stacking with the inactive one leaving a
+ *    hole the same size.
+ *
+ * The band itself is still a CustomSection, so colour, pattern, haze, padding
+ * and the editable bindings all work the way they do everywhere else. This
+ * only wraps it in a runway and makes it sticky.
+ */
+import CustomSection from "@page-sections/builders/custom-section/CustomSection.astro";
+import Component from "@component-utils/renderBlock.astro";
+import Heading from "@core-elements/heading/Heading.astro";
+import SimpleText from "@core-elements/simple-text/SimpleText.astro";
+import Text from "@core-elements/text/Text.astro";
+import type { ContentBlock } from "../../../../types";
+
+type Step = Record<string, unknown> & {
+  contentSections?: ContentBlock[];
+  mediaSections?: ContentBlock[];
+};
+
+const {
+  eyebrow = "",
+  heading = "",
+  headingLevel = "h2",
+  headingSize = "lg",
+  subtext = "",
+  subtextSize = "md",
+  subtextWidth,
+  alignmentHorizontal = "center",
+  steps = [],
+  reverse = false,
+  mediaWidth = "half",
+  showProgress = true,
+  sectionLabel,
+  maxContentWidth = "xl",
+  paddingHorizontal = "gutter",
+  paddingVertical = "4xl",
+  colorScheme = "inherit",
+  lockColorScheme = false,
+  backgroundColor = "base",
+  background,
+  haze = false,
+  class: className,
+  useDefaultEditableBinding = false,
+  _component,
+  "data-children-prop": childrenDataProp,
+  ...htmlAttributes
+} = Astro.props;
+
+const stepList: Step[] = Array.isArray(steps) ? steps : [];
+const blocks = (sections: unknown): ContentBlock[] =>
+  Array.isArray(sections) ? (sections as ContentBlock[]) : [];
+
+const hasHeader = Boolean(eyebrow || heading || subtext);
+const effectiveChildrenProp = childrenDataProp ?? (useDefaultEditableBinding ? "steps" : null);
+const arrayDataAttributes = effectiveChildrenProp
+  ? { "data-editable": "array", "data-prop": effectiveChildrenProp }
+  : {};
+---
+
+<div
+  class:list={["pinned-steps", className]}
+  style={{ "--pinned-steps-count": Math.max(stepList.length, 1) }}
+  {...htmlAttributes}
+>
+  <CustomSection
+    class="pinned-steps-stage"
+    label={sectionLabel}
+    maxContentWidth={maxContentWidth}
+    paddingHorizontal={paddingHorizontal}
+    paddingVertical={paddingVertical}
+    colorScheme={colorScheme}
+    lockColorScheme={lockColorScheme}
+    backgroundColor={backgroundColor}
+    background={background}
+    haze={haze}
+  >
+    {hasHeader && (
+      <Fragment>
+        {/* Each guarded on its own content. An empty element is still a
+            sibling, and the flow layer pays for every one after the first. */}
+        {eyebrow && (
+          <SimpleText
+            alignmentHorizontal={alignmentHorizontal}
+            class="eyebrow"
+            size="sm"
+            text={eyebrow}
+          />
+        )}
+        {heading && (
+          <Heading
+            alignmentHorizontal={alignmentHorizontal}
+            level={headingLevel}
+            size={headingSize}
+          >
+            {heading}
+          </Heading>
+        )}
+        {subtext && (
+          <Text
+            alignmentHorizontal={alignmentHorizontal}
+            class="subtext"
+            size={subtextSize}
+            style={subtextWidth
+              ? `max-inline-size: ${Number(subtextWidth)}px; margin-inline: auto`
+              : undefined}
+            text={subtext}
+          />
+        )}
+      </Fragment>
+    )}
+
+    <div
+      class:list={["pinned-steps-layout", `media-${mediaWidth}`, { reversed: reverse }]}
+      {...arrayDataAttributes}
+    >
+      <div class="pinned-steps-media">
+        {stepList.map((step, index) => (
+          <div
+            class="pinned-steps-panel"
+            data-index={index}
+            data-active={index === 0 ? "" : undefined}
+            aria-hidden={index !== 0}
+          >
+            <Component contentSections={blocks(step.mediaSections)} />
+          </div>
+        ))}
+      </div>
+
+      <div class="pinned-steps-copy">
+        {stepList.map((step, index) => (
+          <div
+            class="pinned-steps-step flow"
+            data-index={index}
+            data-active={index === 0 ? "" : undefined}
+            data-editable="array-item"
+            aria-hidden={index !== 0}
+            role="group"
+            aria-roledescription="step"
+            aria-label={`Step ${index + 1} of ${stepList.length}`}
+          >
+            <Component contentSections={blocks(step.contentSections)} />
+          </div>
+        ))}
+      </div>
+    </div>
+
+    {showProgress && stepList.length > 1 && (
+      <div
+        class="pinned-steps-progress"
+        aria-hidden="true"
+      >
+        {stepList.map((_step, index) => (
+          <span
+            class="pinned-steps-progress-segment"
+            data-index={index}
+            data-active={index === 0 ? "" : undefined}
+          />
+        ))}
+      </div>
+    )}
+  </CustomSection>
+</div>
+
+<style is:global>
+  @layer page-sections {
+    .pinned-steps {
+      /* The runway. One screen of scroll per step is what the sequence is
+         read off, and it is the only thing that decides how long the band
+         holds — not the height of whatever is in the media. */
+      min-height: calc(var(--pinned-steps-count, 1) * 100dvh);
+      position: relative;
+    }
+
+    .pinned-steps > .pinned-steps-stage {
+      min-height: calc(100dvh - var(--main-nav-height, 0px));
+      position: sticky;
+      top: var(--main-nav-height, 0px);
+    }
+
+    .pinned-steps-layout {
+      --pinned-steps-columns: 1fr 1fr;
+
+      align-items: center;
+      display: grid;
+      gap: var(--spacing-3xl);
+      grid-template-columns: var(--pinned-steps-columns);
+
+      &.media-wide {
+        --pinned-steps-columns: 2fr 3fr;
+      }
+
+      &.media-narrow {
+        --pinned-steps-columns: 3fr 2fr;
+      }
+
+      /* Reversing swaps the tracks as well as the order. Moved with `order`
+         alone, a wide media came out as the narrow column. */
+      &.reversed {
+        direction: rtl;
+
+        > * {
+          direction: ltr;
+        }
+      }
+    }
+
+    /* Both columns stack their own children in one cell, so a step and its
+       picture each replace what came before where they stand. */
+    .pinned-steps-media,
+    .pinned-steps-copy {
+      display: grid;
+    }
+
+    .pinned-steps-panel,
+    .pinned-steps-step {
+      grid-area: 1 / 1;
+      opacity: 0;
+      pointer-events: none;
+      transition:
+        opacity var(--duration-md, 0.3s) var(--ease-smooth),
+        visibility 0s linear var(--duration-md, 0.3s);
+      visibility: hidden;
+
+      &[data-active] {
+        opacity: 1;
+        pointer-events: auto;
+        transition-delay: 0s, 0s;
+        visibility: visible;
+      }
+    }
+
+    /* The design draws the bar across the whole band at its foot, not across
+       the column the copy sits in. Absolute against the nearest positioned
+       ancestor gave it the column's 1096, so it is centred on the viewport and
+       given the viewport's width instead: that holds whatever the section's
+       own padding and max-width happen to be. */
+    .pinned-steps-progress {
+      bottom: 0;
+      display: grid;
+      gap: 8px;
+      grid-auto-columns: 1fr;
+      grid-auto-flow: column;
+      inline-size: 100vw;
+      left: 50%;
+      position: absolute;
+      transform: translateX(-50%);
+      z-index: var(--layer-2);
+    }
+
+    .pinned-steps-progress-segment {
+      background-color: color-mix(in srgb, var(--sunset) 22%, transparent);
+      block-size: 6px;
+      transition: background-color var(--duration-md, 0.3s) var(--ease-smooth);
+
+      &[data-active] {
+        background-color: var(--sunset);
+      }
+    }
+
+    /* One column, everything visible, nothing pinned. The sequence is a
+       desktop idea: on a phone there is no room beside the copy for the media
+       to hold still in. */
+    @media (max-width: 767px) {
+      .pinned-steps {
+        min-height: 0;
+      }
+
+      .pinned-steps > .pinned-steps-stage {
+        min-height: 0;
+        position: static;
+      }
+
+      .pinned-steps-layout {
+        grid-template-columns: 1fr;
+
+        &.reversed {
+          direction: ltr;
+        }
+      }
+
+      .pinned-steps-media,
+      .pinned-steps-copy {
+        display: contents;
+      }
+
+      .pinned-steps-panel,
+      .pinned-steps-step {
+        grid-area: auto;
+        opacity: 1;
+        pointer-events: auto;
+        visibility: visible;
+      }
+
+      .pinned-steps-progress {
+        display: none;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .pinned-steps-panel,
+      .pinned-steps-step,
+      .pinned-steps-progress-segment {
+        transition: none;
+      }
+    }
+  }
+</style>
+
+<script>
+  import { onPageLoad } from "@component-utils/onPageLoad";
+  import { setupAllPinnedSteps } from "./setup";
+
+  onPageLoad(() => setupAllPinnedSteps());
+</script>
