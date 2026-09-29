@@ -99,7 +99,13 @@ if (!_component && !hasCards && !hasSlotContent) return;
       --deck-index: 0;
       --deck-top: calc(var(--main-nav-height, 0px) + var(--deck-offset));
       --deck-rail-hit: 24px;
-      --deck-rail-dot: 8px;
+      /* Read off the design's rail: 7px markers on 80px centres, the one you
+         are on drawn as a 7x12 pill rather than a bigger dot, and a 2px line
+         running the length of them. */
+      --deck-rail-dot: 7px;
+      --deck-rail-active-length: 12px;
+      --deck-rail-pitch: 80px;
+      --deck-rail-line: 2px;
       --deck-covered: 0;
       --deck-cover-scale: 0.04;
       --deck-cover-dim: 0.12;
@@ -231,7 +237,9 @@ if (!_component && !hasCards && !hasSlotContent) return;
         .scroll-deck-rail {
           align-self: start;
           display: grid;
-          gap: var(--spacing-xs);
+          /* The pitch is centre to centre, so the gap is what is left of it
+             once the hit area is taken out. The target stays 24 either way. */
+          gap: calc(var(--deck-rail-pitch) - var(--deck-rail-hit));
           justify-items: center;
           position: sticky;
           /* Centered on the pinned card, not on the viewport: the stack pins
@@ -248,25 +256,48 @@ if (!_component && !hasCards && !hasSlotContent) return;
         }
       }
 
+      /* The line the markers sit on, from the first centre to the last. Its
+         own colour rather than a border token: on the design's dark band it is
+         #4B4A46, which is lighter than any of them. */
+      .scroll-deck-rail {
+        position: relative;
+      }
+
+      .scroll-deck-rail::before {
+        background-color: var(--deck-rail-line-color, #4b4a46);
+        block-size: auto;
+        content: "";
+        inline-size: var(--deck-rail-line);
+        inset-block: calc(var(--deck-rail-hit) / 2);
+        inset-inline-start: 50%;
+        position: absolute;
+        translate: -50% 0;
+      }
+
       .scroll-deck-rail-link {
         display: grid;
         height: var(--deck-rail-hit);
         place-items: center;
+        /* Above the line rather than behind it, so the markers read as sitting
+           on the rail rather than being crossed by it. */
+        position: relative;
         width: var(--deck-rail-hit);
 
         > .scroll-deck-rail-dot {
-          background-color: var(--color-border);
+          background-color: var(--deck-rail-dot-color, #919191);
           border-radius: var(--radius-full);
           height: var(--deck-rail-dot);
           transition:
             background-color var(--animation-normal) var(--ease-in-out),
-            scale var(--animation-normal) var(--ease-in-out);
+            height var(--animation-normal) var(--ease-in-out);
           width: var(--deck-rail-dot);
         }
 
+        /* Longer, not larger: the one you are on is a pill the same width as
+           the rest, which is what the design draws. */
         &[aria-current] > .scroll-deck-rail-dot {
-          background-color: var(--color-brand);
-          scale: 1.5;
+          background-color: var(--deck-rail-active-color, var(--sunset));
+          height: var(--deck-rail-active-length);
         }
       }
     }
