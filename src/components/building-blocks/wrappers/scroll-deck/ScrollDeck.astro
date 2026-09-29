@@ -258,11 +258,12 @@ if (!_component && !hasCards && !hasSlotContent) return;
 
       /* The line the markers sit on, from the first centre to the last. Its
          own colour rather than a border token: on the design's dark band it is
-         #4B4A46, which is lighter than any of them. */
-      .scroll-deck-rail {
-        position: relative;
-      }
+         #4B4A46, which is lighter than any of them.
 
+         No `position` on the rail to hang this off. It is already sticky,
+         which is a positioned value, so absolute resolves against it — and
+         setting `relative` here overrode the sticky further up and sent the
+         whole rail scrolling away with the page while the cards stayed pinned. */
       .scroll-deck-rail::before {
         background-color: var(--deck-rail-line-color, #4b4a46);
         block-size: auto;
