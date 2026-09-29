@@ -145,6 +145,8 @@ pageSections:
   - _component: page-sections/explainers/scroll-steps
     heading: Happy developers
     headingSize: lg
+    subtext: ''
+    eyebrow: ''
     reverse: true
     mediaWidth: wide
     progressStyle: bar
@@ -190,11 +192,7 @@ pageSections:
             iconPosition: after
             text: Learn more
         mediaSections: []
-    subtext: >-
-      Build with the static site generator you already use. Define components once and reuse them
-      across every client site.
-    subtextSize: lg
-    subtextWidth: 441
+    alignmentHorizontal: center
   - _component: page-sections/conversion/pricing-tiers
     heading: Join a Partner Program that rewards good work
     subtext: As you bring in new clients, you’ll gain points and more benefits.

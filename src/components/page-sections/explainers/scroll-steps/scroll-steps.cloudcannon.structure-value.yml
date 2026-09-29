@@ -10,6 +10,7 @@ value:
   headingSize: lg
   subtext: ""
   subtextSize: md
+  alignmentHorizontal: start
   steps: []
   reverse: false
   mediaWidth: half
@@ -53,6 +54,7 @@ groups:
       - subtext
       - subtextSize
       - subtextWidth
+      - alignmentHorizontal
       - steps
   - heading: Layout
     inputs:

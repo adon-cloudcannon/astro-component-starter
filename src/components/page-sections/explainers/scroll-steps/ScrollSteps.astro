@@ -29,6 +29,14 @@ const {
   // either was carried through, so nothing moves unless the design named it.
   subtextSize = "md",
   /**
+   * Whether the band's own header is centred over the steps or runs from the
+   * left. The design does both with the same parts, so it is read off the
+   * heading's own alignment rather than fixed here: "Happy developers" is
+   * centred above the Agencies stepper, while every step's own heading inside
+   * it stays left whatever this says.
+   */
+  alignmentHorizontal = "start",
+  /**
    * The measure the design sets the supporting line in, in pixels.
    *
    * Not the column it sits in: a centred subtext is drawn at about 580 in the
@@ -74,25 +82,40 @@ const hasHeader = Boolean(eyebrow || heading || subtext);
 >
   {hasHeader && (
     <Fragment>
-      <SimpleText
-        class="eyebrow"
-        size="sm"
-        data-prop="eyebrow"
-        text={eyebrow}
-      />
-      <Heading
-        level={headingLevel}
-        size={headingSize}
-        data-prop="heading"
-      >
-        {heading}
-      </Heading>
-      <Text
-        class="subtext"
-        style={subtextWidth ? `max-inline-size: ${Number(subtextWidth)}px; margin-inline: auto; justify-self: center` : undefined}        size={subtextSize}
-        data-prop="subtext"
-        text={subtext}
-      />
+      {/* Each guarded on its own content, not on hasHeader. An empty element
+          is still a sibling, and the flow layer gives every one after the
+          first a space-before — so a band with a heading and nothing else was
+          drawing an empty eyebrow and an empty subtext around it and paying
+          for both in spacing. */}
+      {eyebrow && (
+        <SimpleText
+          alignmentHorizontal={alignmentHorizontal}
+          class="eyebrow"
+          size="sm"
+          data-prop="eyebrow"
+          text={eyebrow}
+        />
+      )}
+      {heading && (
+        <Heading
+          alignmentHorizontal={alignmentHorizontal}
+          level={headingLevel}
+          size={headingSize}
+          data-prop="heading"
+        >
+          {heading}
+        </Heading>
+      )}
+      {subtext && (
+        <Text
+          alignmentHorizontal={alignmentHorizontal}
+          class="subtext"
+          style={subtextWidth ? `max-inline-size: ${Number(subtextWidth)}px; margin-inline: auto; justify-self: center` : undefined}
+          size={subtextSize}
+          data-prop="subtext"
+          text={subtext}
+        />
+      )}
     </Fragment>
   )}
 

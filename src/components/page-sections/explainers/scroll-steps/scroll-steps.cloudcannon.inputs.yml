@@ -189,3 +189,15 @@ backgroundColor:
       - id: highlight
         name: Highlight
 
+alignmentHorizontal:
+  type: select
+  label: Header alignment
+  comment: >-
+    Whether the band's own heading is centred over the steps or runs from the
+    left. Each step's own heading stays left either way.
+  options:
+    values:
+      - id: start
+        name: Left
+      - id: center
+        name: Centered
