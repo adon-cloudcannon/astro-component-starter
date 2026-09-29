@@ -404,6 +404,12 @@ const panelList: PanelProps[] = Array.isArray(panels) ? panels : [];
         font-size: 11px;
         font-weight: 400;
         gap: 9px;
+        /* The row is a grid item, and a grid item's automatic minimum is its
+           own min-content — which, with the message set to nowrap, is the
+           whole string. So the row sized itself to its longest commit and lost
+           its right corners to the feed's clip. Shrinking the message was not
+           enough on its own; the row has to be allowed to shrink too. */
+        min-inline-size: 0;
         padding-inline: 10px;
       }
 
