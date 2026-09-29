@@ -249,5 +249,6 @@ progressColor:
 stepScroll:
   type: number
   comment: >-
-    Screens of scrolling each step holds for. Higher is slower. 1.6 is the
-    default; 1 reads as fast.
+    Screens of scrolling each step holds for. Higher is slower, and the band
+    is pinned for all of it, so high values read as the page not responding.
+    1.1 is the default.

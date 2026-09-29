@@ -62,7 +62,7 @@ const {
    * decides the pace — the runway is split evenly, so there is no separate
    * pause to tune.
    */
-  stepScroll = 1.6,
+  stepScroll = 1.1,
   progressWidth = "full",
   /** The palette colour the fill is drawn in. */
   progressColor = "sunset",
@@ -103,7 +103,7 @@ const arrayDataAttributes = effectiveChildrenProp
   style={{
     "--pinned-steps-accent": `var(--${progressColor})`,
     "--pinned-steps-count": Math.max(stepList.length, 1),
-    "--pinned-steps-step-scroll": `calc(${Number(stepScroll) || 1.6} * 100dvh)`,
+    "--pinned-steps-step-scroll": `calc(${Number(stepScroll) || 1.1} * 100dvh)`,
   }}
   {...htmlAttributes}
 >
@@ -212,11 +212,14 @@ const arrayDataAttributes = effectiveChildrenProp
       /* The runway, and the only thing that decides how long the band holds:
          not the height of whatever is in the media.
 
-         A screen and a half of scroll per step by default, plus a screen for
-         the stage itself. One screen a step read as fast: the next slide was
-         on its way before the copy had been read. Split evenly rather than
-         pausing on the first — a hold that only the first step gets is a
-         special case, and how long a slide lasts is one number.
+         A screen and a tenth per step by default, plus a screen for the stage
+         itself. This is a balance, not a maximum: the band is pinned for the
+         whole runway, so every extra screen is a screen where scrolling
+         appears to do nothing. At 1.6 one band was 5220px of a 9605px page —
+         54% of Low Maintenance spent pinned, which reads as the page having
+         stopped responding. Split evenly rather than pausing on the first — a
+         hold that only the first step gets is a special case, and how long a
+         slide lasts is one number.
 
          `stepScroll` writes it per band, so a long step can be given more
          without changing the rest. */
