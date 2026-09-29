@@ -187,13 +187,19 @@ pageSections:
       type: pattern
       pattern: grid
       mask: fade
-  - _component: page-sections/explainers/scroll-steps
+  - _component: page-sections/explainers/pinned-steps
+    heading: ''
+    subtext: ''
+    eyebrow: ''
     reverse: false
     mediaWidth: wide
-    progressStyle: bar
+    progressWidth: content
+    progressColor: pacific-300
+    backgroundColor: base
+    colorScheme: dark
+    lockColorScheme: true
     steps:
-      - _component: building-blocks/wrappers/scroll-stepper/scroll-stepper-step
-        contentSections:
+      - contentSections:
           - _component: building-blocks/core-elements/heading
             text: A much smaller target
             level: h2
@@ -203,11 +209,29 @@ pageSections:
               Most CMS vulnerabilities live in databases, plugins and server-side code. A static
               site puts none of those in front of visitors, so there’s very little left to attack.
               Your content sits in your own repo, and the platform itself is SOC 2 Type 2 compliant.
+            size: lg
         mediaSections: []
-    subtext: 
-    backgroundColor: base
-    colorScheme: dark
-    lockColorScheme: true
+      - contentSections:
+          - _component: building-blocks/core-elements/heading
+            text: Upgrade only when it suits you
+            level: h2
+            size: sm
+          - _component: building-blocks/core-elements/text
+            text: >-
+              With CloudCannon you’ll have no forced version upgrades, no plugin conflicts to
+              untangle, no unplanned migrations. Things change when you decide they should.
+            size: lg
+        mediaSections: []
+      - contentSections:
+          - _component: building-blocks/core-elements/heading
+            text: Launch a new site this afternoon
+            level: h2
+            size: sm
+          - _component: building-blocks/core-elements/text
+            text: >-
+              Reusable components and templates mean you're not starting from scratch every time.
+            size: lg
+        mediaSections: []
   - _component: page-sections/proof/testimonial-section
     company: Absoluttweb
     text: Absoluttweb went from days per new client site to around an hour.

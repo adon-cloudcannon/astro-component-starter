@@ -46,6 +46,17 @@ const {
   reverse = false,
   mediaWidth = "half",
   showProgress = true,
+  /**
+   * How far the progress bar runs.
+   *
+   * `full` spans the whole band, which is what the design draws where the
+   * sequence owns the band. `content` runs from the media column's edge to the
+   * band's, so it sits under the copy alone — 490 of a 1293 band on Low
+   * Maintenance, against 1276 of 1352 on Agencies.
+   */
+  progressWidth = "full",
+  /** The palette colour the fill is drawn in. */
+  progressColor = "sunset",
   sectionLabel,
   maxContentWidth = "xl",
   paddingHorizontal = "gutter",
@@ -74,7 +85,8 @@ const arrayDataAttributes = effectiveChildrenProp
 ---
 
 <div
-  class:list={["pinned-steps", className]}
+  class:list={["pinned-steps", `media-${mediaWidth}`, className]}
+  style={`--pinned-steps-accent: var(--${progressColor})`}
   style={{ "--pinned-steps-count": Math.max(stepList.length, 1) }}
   {...htmlAttributes}
 >
@@ -162,10 +174,12 @@ const arrayDataAttributes = effectiveChildrenProp
 
     {showProgress && stepList.length > 1 && (
       <div
-        class="pinned-steps-progress"
+        class:list={["pinned-steps-progress-rail", `progress-${progressWidth}`]}
         aria-hidden="true"
       >
-        <span class="pinned-steps-progress-fill" />
+        <div class="pinned-steps-progress">
+          <span class="pinned-steps-progress-fill" />
+        </div>
       </div>
     )}
   </CustomSection>
@@ -194,21 +208,25 @@ const arrayDataAttributes = effectiveChildrenProp
       top: var(--main-nav-height, 0px);
     }
 
-    .pinned-steps-layout {
+    /* On the section rather than the layout, so the progress rail can lay
+       itself out on the same tracks instead of restating the fractions. */
+    .pinned-steps {
       --pinned-steps-columns: 1fr 1fr;
+    }
 
+    .pinned-steps.media-wide {
+      --pinned-steps-columns: 2fr 3fr;
+    }
+
+    .pinned-steps.media-narrow {
+      --pinned-steps-columns: 3fr 2fr;
+    }
+
+    .pinned-steps-layout {
       align-items: center;
       display: grid;
       gap: var(--spacing-3xl);
       grid-template-columns: var(--pinned-steps-columns);
-
-      &.media-wide {
-        --pinned-steps-columns: 2fr 3fr;
-      }
-
-      &.media-narrow {
-        --pinned-steps-columns: 3fr 2fr;
-      }
 
       /* Reversing swaps the tracks as well as the order. Moved with `order`
          alone, a wide media came out as the narrow column. */
@@ -251,16 +269,48 @@ const arrayDataAttributes = effectiveChildrenProp
        ancestor gave it the column's 1096, so it is centred on the viewport and
        given the viewport's width instead: that holds whatever the section's
        own padding and max-width happen to be. */
-    .pinned-steps-progress {
-      background-color: color-mix(in srgb, var(--sunset) 22%, transparent);
-      block-size: 6px;
+    /* Hard on the band's foot, the full width of the window, with the bar
+       placed inside it. The design draws both variants 10 thick and sitting on
+       the very bottom edge. */
+    .pinned-steps-progress-rail {
       bottom: 0;
       inline-size: 100vw;
       left: 50%;
-      overflow: hidden;
       position: absolute;
       transform: translateX(-50%);
       z-index: var(--layer-2);
+    }
+
+    /* Under the copy alone. The rail narrows to the content column and borrows
+       the layout's own tracks, so the split follows `mediaWidth` rather than
+       being restated here; the bar then takes the copy track, eats the gap so
+       it starts where the media ends, and bleeds out to the band's edge. */
+    .pinned-steps-progress-rail.progress-content {
+      --pinned-steps-rail: min(
+        calc(100vw - 2 * var(--spacing-gutter)),
+        var(--content-width-xl, 1040px)
+      );
+
+      display: grid;
+      gap: var(--spacing-3xl);
+      grid-template-columns: var(--pinned-steps-columns);
+      inline-size: var(--pinned-steps-rail);
+    }
+
+    /* Out to the window's edge. Written from the rail's own width rather than
+       as a percentage: a percentage margin on a grid item resolves against its
+       grid AREA, not its container, so `calc(50% - 50vw)` took half the copy
+       track and reached 227px past the window. */
+    .pinned-steps-progress-rail.progress-content > .pinned-steps-progress {
+      grid-column: 2;
+      margin-inline-end: calc(var(--pinned-steps-rail) / 2 - 50vw);
+      margin-inline-start: calc(-1 * var(--spacing-3xl));
+    }
+
+    .pinned-steps-progress {
+      background-color: color-mix(in srgb, var(--pinned-steps-accent, var(--sunset)) 22%, transparent);
+      block-size: 10px;
+      overflow: hidden;
     }
 
     /* Held at 0 until the band actually pins, so a reader who has not reached
@@ -277,7 +327,7 @@ const arrayDataAttributes = effectiveChildrenProp
        anything else does, and clipping leaves the fill at full width so
        nothing is laid out again. */
     .pinned-steps-progress-fill {
-      background-color: var(--sunset);
+      background-color: var(--pinned-steps-accent, var(--sunset));
       block-size: 100%;
       clip-path: inset(0 100% 0 0);
       display: block;
