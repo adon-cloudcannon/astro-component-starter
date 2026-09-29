@@ -355,7 +355,11 @@ const arrayDataAttributes = effectiveChildrenProp
     .pinned-steps-progress-fill {
       background-color: var(--pinned-steps-accent, var(--sunset));
       block-size: 100%;
-      clip-path: inset(0 100% 0 0);
+      /* The first step's share, not empty: this is where the bar starts, and
+         it is also exactly what the driver writes on its first pass, so
+         nothing animates on arrival. It is the right state with no script
+         running too. */
+      clip-path: inset(0 calc(100% - 100% / var(--pinned-steps-count, 1)) 0 0);
       display: block;
       transition: clip-path var(--duration-lg, 0.5s) var(--ease-smooth, ease);
     }

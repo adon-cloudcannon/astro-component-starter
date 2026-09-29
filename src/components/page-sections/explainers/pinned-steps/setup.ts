@@ -115,7 +115,7 @@ function setupPinnedSteps(stepper: Pinned): void {
       return;
     }
 
-    const { pinned, progress } = travelOf(stepper);
+    const { progress } = travelOf(stepper);
     // An even share of the runway each. How long a slide lasts is the runway's
     // job, set in one place on the band, rather than something weighted here.
     // The last step holds to the end rather than for a share of it, so the
@@ -124,12 +124,15 @@ function setupPinnedSteps(stepper: Pinned): void {
 
     setActive(stepper, index);
 
-    // One bar, filled to the step you are on, and empty until the band has
-    // pinned. Scrolled up to but not yet reached, it would otherwise already
-    // show the first step's share, which reads as having missed something.
+    // One bar, filled to the step you are on — and the first step is already a
+    // share of the way along, because this says where you are rather than how
+    // far the slide has loaded. Held at 0 until the band pinned, it climbed
+    // from empty to a third on arrival, which reads as the first slide being
+    // fetched rather than simply being the first of three.
+    //
     // Written as a whole value rather than through a custom property, or the
     // transition never fires and it sticks at whatever it first computed.
-    const filled = pinned ? (index + 1) / steps.length : 0;
+    const filled = (index + 1) / steps.length;
     const fill = stepper.querySelector<HTMLElement>(".pinned-steps-progress-fill");
 
     if (fill) fill.style.clipPath = `inset(0 ${(1 - filled) * 100}% 0 0)`;
