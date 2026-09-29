@@ -154,5 +154,22 @@ const hasHeader = Boolean(eyebrow || heading || subtext);
     .scroll-steps .scroll-stepper-steps {
       align-self: start;
     }
+
+    /* A step whose picture is still a hand export leaves its panel measuring
+       nothing, and the whole band folds down around the copy: the design draws
+       the media about 730 by 600 beside it. Holding the cell open is the same
+       fix as a grid track with no content in it — the space is the design's,
+       whether or not the drawing has arrived.
+
+       It also gives the stepper something real to centre the first step
+       against. That measurement is a loop, and with a media of no height the
+       gap it is closing never closes.
+
+       Styled here rather than in ScrollStepper: the starter's component is
+       left alone deliberately, and this is what the design asks of this band
+       rather than of every stepper. */
+    .scroll-steps .scroll-stepper-media-panel:has(> .scroll-stepper-media-content:empty) {
+      aspect-ratio: 730 / 600;
+    }
   }
 </style>
