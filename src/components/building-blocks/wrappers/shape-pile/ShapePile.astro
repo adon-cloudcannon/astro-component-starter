@@ -30,6 +30,15 @@ type Shape = {
   /** Label size, in the same design units as the box. */
   fontSize?: number;
   strong?: boolean;
+  /**
+   * The wedge another shape casts onto this one, in design units from this
+   * shape's own top left. Carried by the shape that receives it, because that
+   * is what clips it.
+   */
+  shadowX?: number;
+  shadowY?: number;
+  shadowWidth?: number;
+  shadowHeight?: number;
   round?: boolean;
   lightText?: boolean;
 };
@@ -101,6 +110,18 @@ const RISE = 190;
       >
         {shape.text}
       </span>
+      {Number(shape.shadowWidth) > 0 && (
+        <span
+          class="shape-pile-shadow"
+          aria-hidden="true"
+          style={[
+            `--shadow-x: ${((Number(shape.shadowX) || 0) / (Number(shape.width) || 1)) * 100}%`,
+            `--shadow-y: ${((Number(shape.shadowY) || 0) / (Number(shape.height) || 1)) * 100}%`,
+            `--shadow-w: ${(Number(shape.shadowWidth) / (Number(shape.width) || 1)) * 100}%`,
+            `--shadow-h: ${((Number(shape.shadowHeight) || 0) / (Number(shape.height) || 1)) * 100}%`,
+          ].join("; ")}
+        />
+      )}
     </div>
   ))}
 </div>
@@ -138,6 +159,11 @@ const RISE = 190;
       inset-block-start: var(--pile-y);
       inset-inline-start: var(--pile-x);
       justify-content: center;
+      /* So a wedge drawn wider than its card is cut off by it, rounded corners
+         and all. The design relies on this: two of the three are the same
+         triangle in the same place, duplicated into neighbouring cards, and it
+         is the clipping that makes them read as one shadow crossing both. */
+      overflow: hidden;
       padding: var(--spacing-sm);
       position: absolute;
       rotate: var(--pile-rot);
@@ -159,6 +185,29 @@ const RISE = 190;
 
     .shape-pile-shape.is-strong > .shape-pile-text {
       font-weight: 700;
+    }
+
+    /* A right triangle: top left, top right, bottom right. A wedge under the
+       shape's top edge that deepens across it.
+
+       The colour is a pale blue at multiply, which is how the design gets that
+       dark olive over orange — it is a colour trick, not a grey shadow. The
+       multiply is on the *fill* in Figma while the node's own blend mode reads
+       PASS_THROUGH, so reading the node alone loses it, the same way a fill's
+       opacity hides separately from its colour.
+
+       Inside the shape rather than on the one casting it, so it darkens this
+       card's own scratched texture instead of flatly covering it, and so it
+       travels with the card when the pile falls. */
+    .shape-pile-shadow {
+      background-color: var(--pile-shadow-color, #a6c1fa);
+      block-size: var(--shadow-h);
+      clip-path: polygon(0 0, 100% 0, 100% 100%);
+      inline-size: var(--shadow-w);
+      inset-block-start: var(--shadow-y);
+      inset-inline-start: var(--shadow-x);
+      mix-blend-mode: multiply;
+      position: absolute;
     }
 
     .shape-pile-shape.is-light-text > .shape-pile-text {
@@ -188,11 +237,25 @@ const RISE = 190;
       .shape-pile[data-fallen] > .shape-pile-shape {
         animation: shape-pile-drop 620ms var(--pile-delay) both;
       }
+
+      /* Held back until the pile has settled. Carried by the card, a shadow
+         would otherwise travel with it through the air, which is a shadow of
+         something that has not landed yet. The last shape starts at 475 and
+         runs 620, so everything is down by 1095. */
+      .shape-pile-shadow {
+        opacity: 0;
+      }
+
+      .shape-pile[data-fallen] .shape-pile-shadow {
+        animation: shape-pile-shadow-in 320ms 1100ms both;
+      }
     }
 
     @media (prefers-reduced-motion: reduce) {
       .shape-pile-shape,
-      .shape-pile[data-fallen] > .shape-pile-shape {
+      .shape-pile[data-fallen] > .shape-pile-shape,
+      .shape-pile-shadow,
+      .shape-pile[data-fallen] .shape-pile-shadow {
         animation: none;
         opacity: 1;
       }
@@ -232,6 +295,16 @@ const RISE = 190;
       opacity: 1;
       rotate: var(--pile-rot);
       translate: 0 0;
+    }
+  }
+
+  @keyframes shape-pile-shadow-in {
+    from {
+      opacity: 0;
+    }
+
+    to {
+      opacity: 1;
     }
   }
 </style>

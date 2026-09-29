@@ -127,6 +127,10 @@ pageSections:
         height: 78
         rotation: -14.8
       - text: PHP and runtime version bumps
+        shadowX: 87
+        shadowY: 1
+        shadowWidth: 135
+        shadowHeight: 36
         tone: golden
         x: 0
         'y': 208
@@ -134,6 +138,10 @@ pageSections:
         height: 132
         rotation: 0
       - text: Plugin updates, and the conflicts that follow them
+        shadowX: 147
+        shadowY: 1
+        shadowWidth: 297
+        shadowHeight: 38
         tone: rust
         lightText: true
         x: 220
@@ -142,6 +150,10 @@ pageSections:
         height: 171
         rotation: 0
       - text: Emergency fixes at hours you’d rather be asleep
+        shadowX: -72
+        shadowY: 1
+        shadowWidth: 297
+        shadowHeight: 38
         tone: coral
         x: 440
         'y': 169

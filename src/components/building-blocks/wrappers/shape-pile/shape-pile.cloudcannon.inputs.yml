@@ -48,3 +48,17 @@ fontSize:
 strong:
   type: switch
   comment: Draw the label bold.
+shadowX:
+  type: number
+  comment: >-
+    The wedge another shape casts onto this one, measured from this shape's own
+    top left. Negative where it starts outside and is clipped.
+shadowY:
+  type: number
+  comment: Top of the cast wedge, in design units.
+shadowWidth:
+  type: number
+  comment: Width of the cast wedge. Leave empty for no shadow.
+shadowHeight:
+  type: number
+  comment: How deep the wedge gets at its far edge.
