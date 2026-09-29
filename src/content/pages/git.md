@@ -195,6 +195,10 @@ pageSections:
             text: Learn more
         mediaSections: []
       - contentSections:
+          - _component: building-blocks/core-elements/simple-text
+            text: GIT FOR AI AGENTS
+            size: sm
+            class: eyebrow
           - _component: building-blocks/core-elements/heading
             text: Agents have full context
             level: h2
@@ -205,6 +209,12 @@ pageSections:
               config as plain files in one repo. No API to learn first, no content stuck behind an
               endpoint.
             size: lg
+          - _component: building-blocks/core-elements/button
+            variant: text
+            iconName: arrow-right
+            iconPosition: after
+            textColor: sunset
+            text: Learn more
         mediaSections: []
   - _component: page-sections/proof/testimonial-section
     text: >-
