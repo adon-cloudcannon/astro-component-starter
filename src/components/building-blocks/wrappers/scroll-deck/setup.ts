@@ -13,6 +13,16 @@
 /** Cards dim and shrink one step per card covering them, up to this many. */
 const MAX_DEPTH = 3;
 
+/**
+ * How much of a card's travel is left when the rail moves to it.
+ *
+ * At 0 the rail waits for a card to fully reach its sticky top, so the marker
+ * only ever arrives after the card has stopped and reads as lagging behind the
+ * stack. At 0.2 it sets off with a fifth of the travel still to go, and the
+ * two land together.
+ */
+const ACTIVATION_LEAD = 0.2;
+
 export function setupScrollDeck(deck: HTMLElement): void {
   // Keyed on the layout, not the `.scroll-deck` root: the root survives an
   // editor re-render while its contents are replaced, so a flag on the root
@@ -61,6 +71,7 @@ export function setupScrollDeck(deck: HTMLElement): void {
       );
     }
 
+    offsets = null;
     placeMarker();
   };
 
@@ -74,6 +85,36 @@ export function setupScrollDeck(deck: HTMLElement): void {
     if (!marker || !link) return;
 
     marker.style.translate = `-50% ${link.offsetTop}px`;
+  };
+
+  // Cached, because `update()` reads it on every scroll and measuring it
+  // unsticks the cards for a synchronous layout read. Thrown away whenever the
+  // deck is re-measured rather than recomputed there, so a ResizeObserver
+  // cannot drive itself round again.
+  let offsets: number[] | null = null;
+
+  const scrollOffsets = (): number[] => {
+    if (offsets) return offsets;
+
+    cards.forEach((card) => card.style.setProperty("position", "static"));
+    const natural = cards.map((card) => card.offsetTop);
+    cards.forEach((card) => card.style.removeProperty("position"));
+
+    const port = scrollport();
+    const deckTop = deck.getBoundingClientRect().top;
+    const deckOffset = port
+      ? deckTop - port.getBoundingClientRect().top + port.scrollTop
+      : deckTop + window.scrollY;
+
+    offsets = cards.map((card, index) => {
+      const stickyTop = parseFloat(getComputedStyle(card).top);
+
+      // A pixel past the threshold, so the card is decidedly the active one
+      // rather than sitting exactly on the line `update()` tests.
+      return deckOffset + natural[index] - (Number.isNaN(stickyTop) ? 0 : stickyTop) + 1;
+    });
+
+    return offsets;
   };
 
   deck.style.setProperty("--deck-last-index", String(cards.length - 1));
@@ -139,10 +180,21 @@ export function setupScrollDeck(deck: HTMLElement): void {
     const portTop = scrollportTop();
     let top = 0;
 
+    const points = scrollOffsets();
+
     cards.forEach((card, index) => {
       const stickyTop = parseFloat(getComputedStyle(card).top);
 
-      if (!Number.isNaN(stickyTop) && card.getBoundingClientRect().top - portTop <= stickyTop + 1) {
+      if (Number.isNaN(stickyTop)) return;
+
+      // The card's own travel, which is the scroll between the one before it
+      // arriving and this one arriving. Taken per card rather than as one
+      // figure: the first card's run into the stack is a different length from
+      // the steps between the rest, and the entry gap can differ again.
+      const travel = index > 0 ? points[index] - points[index - 1] : 0;
+      const lead = Math.max(0, travel) * ACTIVATION_LEAD;
+
+      if (card.getBoundingClientRect().top - portTop <= stickyTop + lead + 1) {
         top = index;
       }
     });
@@ -194,26 +246,6 @@ export function setupScrollDeck(deck: HTMLElement): void {
   // sticky top, and `offsetTop` reports the stuck position rather than that
   // one. Unsticking the cards for a single synchronous read is the cheapest way
   // to recover it, and it only happens on a click.
-  const scrollOffsets = (): number[] => {
-    cards.forEach((card) => card.style.setProperty("position", "static"));
-    const natural = cards.map((card) => card.offsetTop);
-    cards.forEach((card) => card.style.removeProperty("position"));
-
-    const port = scrollport();
-    const deckTop = deck.getBoundingClientRect().top;
-    const deckOffset = port
-      ? deckTop - port.getBoundingClientRect().top + port.scrollTop
-      : deckTop + window.scrollY;
-
-    return cards.map((card, index) => {
-      const stickyTop = parseFloat(getComputedStyle(card).top);
-
-      // A pixel past the threshold, so the card is decidedly the active one
-      // rather than sitting exactly on the line `update()` tests.
-      return deckOffset + natural[index] - (Number.isNaN(stickyTop) ? 0 : stickyTop) + 1;
-    });
-  };
-
   const goTo = (index: number, behavior: ScrollBehavior) => {
     const target = scrollOffsets()[index];
 

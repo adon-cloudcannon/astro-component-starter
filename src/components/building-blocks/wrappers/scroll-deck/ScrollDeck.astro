@@ -113,6 +113,9 @@ if (!_component && !hasCards && !hasSlotContent) return;
       --deck-rail-active-length: 12px;
       --deck-rail-pitch: 80px;
       --deck-rail-line: 2px;
+      /* Slower than the shared normal, which at 200ms read as a snap rather
+         than a slide over the rail's 80px pitch. */
+      --deck-rail-travel: var(--animation-slow);
       --deck-covered: 0;
       --deck-cover-scale: 0.04;
       --deck-cover-dim: 0.12;
@@ -326,7 +329,7 @@ if (!_component && !hasCards && !hasSlotContent) return;
         position: absolute;
         pointer-events: none;
         translate: -50% 0;
-        transition: translate var(--animation-normal) var(--ease-in-out);
+        transition: translate var(--deck-rail-travel) var(--ease-in-out);
       }
     }
   }
