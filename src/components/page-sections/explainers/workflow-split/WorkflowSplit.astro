@@ -177,6 +177,13 @@ const panelList: PanelProps[] = Array.isArray(panels) ? panels : [];
               data-prop-alt="imageAlt"
             />
           )}
+          {/* The line that runs from this panel's card into the one between
+              them, in the panel's own accent. Outside the Card because Card
+              clips itself with a clip-path, and a sibling of it rather than a
+              child of the panel so it can be placed against the card's centre
+              — the panel's own centre is higher, since the illustration takes
+              the row above. */}
+          <div class="workflow-card-slot">
           <Card
             accentColor={panel.accentColor || "none"}
             backgroundColor="accent-tint"
@@ -217,6 +224,14 @@ const panelList: PanelProps[] = Array.isArray(panels) ? panels : [];
               />
             )}
           </Card>
+            {index < 2 && (
+              <span
+                class:list={["workflow-connector", index === 0 ? "to-end" : "to-start"]}
+                style={panel.accentColor ? { "--workflow-connector": `var(--${panel.accentColor})` } : undefined}
+                aria-hidden="true"
+              />
+            )}
+          </div>
         </div>
 
         {/* The common ground goes between the first pair, which is where the
@@ -469,6 +484,71 @@ const panelList: PanelProps[] = Array.isArray(panels) ? panels : [];
       .workflow-panel {
         display: grid;
         grid-template-rows: auto 1fr;
+      }
+
+      .workflow-card-slot {
+        display: grid;
+        position: relative;
+      }
+
+      /* A 2px rule with a 7px dot at each end, measured off nodes 3806:70020
+         and 3806:70103. It spans the whole 64 of the grid's gap and sits at
+         the card's vertical centre, which is where the design draws it.
+
+         It fades outward, away from the panel between them: the line runs at
+         about a quarter (0.25 on the left, 0.28 on the right — one value here,
+         the difference is not visible), the dot at the middle card's end is
+         solid, and the dot against the panel's own card is a third.
+
+         All of it is opacity on the fill rather than in the colour, which is
+         why the first pass drew three solid blue and orange marks where the
+         design has a line easing away. Third time that has caught me: the
+         workflow panels' own rules and the mega menu's backing were the
+         others. */
+      .workflow-connector {
+        background-color: color-mix(in srgb, var(--workflow-connector, var(--color-brand)) 26%, transparent);
+        block-size: 2px;
+        border-radius: 1px;
+        inline-size: var(--scroll-stepper-gap, 4rem);
+        position: absolute;
+        top: 50%;
+        translate: 0 -50%;
+      }
+
+      .workflow-connector.to-end {
+        inset-inline-start: 100%;
+      }
+
+      .workflow-connector.to-start {
+        inset-inline-end: 100%;
+      }
+
+      .workflow-connector::before,
+      .workflow-connector::after {
+        background-color: var(--workflow-connector, var(--color-brand));
+        block-size: 7px;
+        border-radius: var(--radius-full);
+        content: "";
+        inline-size: 7px;
+        position: absolute;
+        top: 50%;
+        translate: 0 -50%;
+      }
+
+      .workflow-connector::before {
+        inset-inline-start: -3px;
+      }
+
+      .workflow-connector::after {
+        inset-inline-end: -3px;
+      }
+
+      /* Which end is the faded one depends on which side of the middle the
+         panel is: the solid dot is always the one nearest the card between
+         them. */
+      .workflow-connector.to-end::before,
+      .workflow-connector.to-start::after {
+        background-color: color-mix(in srgb, var(--workflow-connector, var(--color-brand)) 33%, transparent);
       }
 
       /* The drawing sits on the card's top edge and dips into it: 24px on the
