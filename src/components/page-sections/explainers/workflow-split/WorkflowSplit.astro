@@ -18,6 +18,7 @@ import Card from "@wrappers/card/Card.astro";
 import Heading from "@core-elements/heading/Heading.astro";
 import Text from "@core-elements/text/Text.astro";
 import SimpleText from "@core-elements/simple-text/SimpleText.astro";
+import Icon from "@core-elements/icon/Icon.astro";
 import Image from "@core-elements/image/Image.astro";
 import List from "@core-elements/list/List.astro";
 import Button from "@core-elements/button/Button.astro";
@@ -68,6 +69,14 @@ const {
    */
   centreColor = "",
   centreMinHeight = 0,
+  /**
+   * The line across the top of the middle panel. The design draws an icon and
+   * a title in 14/700 white, which is its own small scale rather than a rung
+   * on the heading ramp — that starts at 20 — so these are their own props and
+   * not a heading block inside `centreSections`.
+   */
+  centreIconName = "",
+  centreTitle = "",
   centreSections = [],
   sectionLabel,
   maxContentWidth = "xl",
@@ -210,6 +219,12 @@ const panelList: PanelProps[] = Array.isArray(panels) ? panels : [];
               data-editable="array"
               data-prop="centreSections"
             >
+              {(centreIconName || centreTitle) && (
+                <p class="workflow-centre-title">
+                  {centreIconName && <Icon name={centreIconName} size="sm" />}
+                  {centreTitle && <span data-prop="centreTitle">{centreTitle}</span>}
+                </p>
+              )}
               <Component contentSections={centreSections} />
             </div>
           ) : centreImageSource ? (
@@ -261,6 +276,30 @@ const panelList: PanelProps[] = Array.isArray(panels) ? panels : [];
            touch squarer than its neighbours. */
         border-radius: var(--radius-card);
         min-block-size: var(--workflow-centre-height, 0);
+        /* 20, which is what the design insets its contents by. --spacing-lg
+           is 24 and left the rows 4 short of the card's edges. */
+        padding: 20px;
+      }
+
+      /* 14/700 white, read off the design rather than taken from a rung: the
+         heading ramp starts at 20 and the text ramp's nearest is 14.5, so this
+         line sets its own size. The icon is the same height as the text. */
+      .workflow-centre-title {
+        align-items: center;
+        color: var(--white);
+        display: flex;
+        font-size: 14px;
+        font-weight: 700;
+        gap: 0.6em;
+        line-height: 1.35;
+        margin: 0;
+
+        .icon {
+          block-size: 1.2em;
+          color: currentcolor;
+          flex: none;
+          inline-size: 1.2em;
+        }
       }
 
       /* A panel is its illustration and its card, stacked, so the cards sit on

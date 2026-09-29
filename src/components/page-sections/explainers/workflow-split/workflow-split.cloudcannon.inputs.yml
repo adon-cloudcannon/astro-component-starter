@@ -149,3 +149,15 @@ centreSections:
   comment: What goes inside the middle panel.
   options:
     structures: _structures.scrollStepperSections
+
+centreIconName:
+  type: select
+  label: Middle panel icon
+  comment: The mark at the head of the middle panel.
+  options:
+    values: data.icons
+
+centreTitle:
+  type: text
+  label: Middle panel title
+  comment: The line beside that icon, set in 14/700 white.

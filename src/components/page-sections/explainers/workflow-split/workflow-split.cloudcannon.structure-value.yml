@@ -33,6 +33,8 @@ value:
   centreImageSource: ""
   centreColor: ""
   centreMinHeight: 0
+  centreIconName: ""
+  centreTitle: ""
   centreSections: []
   centreImageAlt: ""
   maxContentWidth: xl

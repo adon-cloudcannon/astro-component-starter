@@ -390,6 +390,8 @@
   name: Gift
 - id: gift-top
   name: Gift Top
+- id: git-branch
+  name: Git Branch
 - id: globe-alt
   name: Globe Alt
 - id: globe-americas
