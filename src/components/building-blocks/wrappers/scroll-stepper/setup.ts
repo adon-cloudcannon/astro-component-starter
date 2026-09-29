@@ -1,5 +1,20 @@
 const desktopQuery = "(min-width: 768px)";
 
+/**
+ * How many times the first step's centring may re-measure before it gives up.
+ *
+ * The loop adds the current gap to a running offset and schedules another
+ * frame until the gap is under 1px. That only shrinks if moving the content
+ * actually closes the gap, which needs a media with something in it. With an
+ * empty media column — a step whose picture is still a hand export — the gap
+ * never closes and the offset grows every frame for as long as the page is
+ * open, taking the document with it.
+ *
+ * A loop that has not settled by now is a bug in the measurement, not a reason
+ * to keep re-laying out the page.
+ */
+const MAX_CENTRING_PASSES = 24;
+
 function isStacked(stepper: HTMLElement): boolean {
   const layout = stepper.querySelector<HTMLElement>(".scroll-stepper-layout");
 
@@ -189,8 +204,24 @@ function setTrailingRunway(stepper: HTMLElement, scenes: HTMLElement[]): void {
     // appear to begin partway through the first handoff.
     stepper.__scrollStepperProgressStart = undefined;
 
+    const passes = (stepper.__scrollStepperCentringPasses ?? 0) + 1;
+    const previousDelta = stepper.__scrollStepperContentDelta;
+
+    stepper.__scrollStepperCentringPasses = passes;
+    stepper.__scrollStepperContentDelta = contentDelta;
+
+    // Moving the content has to actually bring the gap in. When it does not,
+    // another frame will not help: the offset is chasing something it can never
+    // reach, so it is dropped rather than carried at whatever it had reached.
+    const closing =
+      previousDelta === undefined || Math.abs(contentDelta) < Math.abs(previousDelta) - 0.5;
+
     if (Math.abs(contentDelta) <= 1) {
       stepper.__scrollStepperContentOffsetSettled = true;
+    } else if (!closing || passes >= MAX_CENTRING_PASSES) {
+      stepper.__scrollStepperContentOffsetSettled = true;
+      stepper.__scrollStepperContentOffset = 0;
+      stepper.style.setProperty("--scroll-stepper-content-offset", "0px");
     } else if (!stepper.__scrollStepperContentOffsetFrame) {
       stepper.__scrollStepperContentOffsetFrame = requestAnimationFrame(() => {
         stepper.__scrollStepperContentOffsetFrame = undefined;
@@ -227,6 +258,8 @@ function showStaticGallery(stepper: HTMLElement): void {
   stepper.style.removeProperty("--scroll-stepper-sticky-translate");
   stepper.__scrollStepperContentOffset = undefined;
   stepper.__scrollStepperContentOffsetSettled = undefined;
+  stepper.__scrollStepperCentringPasses = undefined;
+  stepper.__scrollStepperContentDelta = undefined;
   if (stepper.__scrollStepperContentOffsetFrame) {
     cancelAnimationFrame(stepper.__scrollStepperContentOffsetFrame);
     stepper.__scrollStepperContentOffsetFrame = undefined;
@@ -345,5 +378,7 @@ declare global {
     __scrollStepperContentOffset?: number;
     __scrollStepperContentOffsetSettled?: boolean;
     __scrollStepperContentOffsetFrame?: number;
+    __scrollStepperCentringPasses?: number;
+    __scrollStepperContentDelta?: number;
   }
 }
