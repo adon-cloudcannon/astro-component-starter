@@ -246,3 +246,8 @@ progressWidth:
 progressColor:
   type: text
   comment: The palette colour the progress fill is drawn in, e.g. sunset, pacific-300.
+stepScroll:
+  type: number
+  comment: >-
+    Screens of scrolling each step holds for. Higher is slower. 1.6 is the
+    default; 1 reads as fast.

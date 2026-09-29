@@ -54,6 +54,15 @@ const {
    * band's, so it sits under the copy alone — 490 of a 1293 band on Low
    * Maintenance, against 1276 of 1352 on Agencies.
    */
+  /**
+   * Screens of scrolling each step holds for.
+   *
+   * One screen a step reads as fast: a slide arrives, and the next is already
+   * on its way before the copy has been read. This is the only number that
+   * decides the pace — the runway is split evenly, so there is no separate
+   * pause to tune.
+   */
+  stepScroll = 1.6,
   progressWidth = "full",
   /** The palette colour the fill is drawn in. */
   progressColor = "sunset",
@@ -86,8 +95,16 @@ const arrayDataAttributes = effectiveChildrenProp
 
 <div
   class:list={["pinned-steps", `media-${mediaWidth}`, className]}
-  style={`--pinned-steps-accent: var(--${progressColor})`}
-  style={{ "--pinned-steps-count": Math.max(stepList.length, 1) }}
+  {/* One `style`, not two. A second style attribute on the same element wins
+      outright and drops the first: adding the accent this way quietly took the
+      step count with it, and the runway was then built for a single step — all
+      three advanced inside 1800px instead of 5220, which reads as the whole
+      thing scrolling past far too fast. */}
+  style={{
+    "--pinned-steps-accent": `var(--${progressColor})`,
+    "--pinned-steps-count": Math.max(stepList.length, 1),
+    "--pinned-steps-step-scroll": `calc(${Number(stepScroll) || 1.6} * 100dvh)`,
+  }}
   {...htmlAttributes}
 >
   <CustomSection
@@ -191,11 +208,14 @@ const arrayDataAttributes = effectiveChildrenProp
       /* The runway, and the only thing that decides how long the band holds:
          not the height of whatever is in the media.
 
-         One screen of scroll per step, plus a screen for the stage itself,
-         which works out at about a viewport of scrolling to advance one slide.
-         Split evenly rather than pausing on the first — a hold that only the
-         first step gets is a special case, and how long a slide lasts is one
-         number. Raise --pinned-steps-step-scroll on a band that wants longer. */
+         A screen and a half of scroll per step by default, plus a screen for
+         the stage itself. One screen a step read as fast: the next slide was
+         on its way before the copy had been read. Split evenly rather than
+         pausing on the first — a hold that only the first step gets is a
+         special case, and how long a slide lasts is one number.
+
+         `stepScroll` writes it per band, so a long step can be given more
+         without changing the rest. */
       min-height: calc(
         100dvh + var(--pinned-steps-count, 1) * var(--pinned-steps-step-scroll, 100dvh)
       );
@@ -214,12 +234,18 @@ const arrayDataAttributes = effectiveChildrenProp
       --pinned-steps-columns: 1fr 1fr;
     }
 
+    /* The media takes two thirds and the copy one, which is what both designs
+       draw: the copy measures 441 of the 1352 band on Agencies and about 314
+       of 1293 on Low Maintenance, a third or less either way.
+
+       These were 2fr 3fr and 3fr 2fr, which gave the copy 60% — the media was
+       the narrower column on a band named `media-wide`. */
     .pinned-steps.media-wide {
-      --pinned-steps-columns: 2fr 3fr;
+      --pinned-steps-columns: 2fr 1fr;
     }
 
     .pinned-steps.media-narrow {
-      --pinned-steps-columns: 3fr 2fr;
+      --pinned-steps-columns: 1fr 2fr;
     }
 
     .pinned-steps-layout {
