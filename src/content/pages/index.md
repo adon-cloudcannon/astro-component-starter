@@ -521,14 +521,14 @@ pageSections:
     subtextWidth: 460
     headingSize: lg
   - _component: page-sections/conversion/cta-split
+    imageReveal: /src/assets/images/marketing/cloudcannon-truck-open-1.png
+    imageRevealLabel: Open and close the truck's hood
     heading: Take a peek under the hood
     subtext: >-
       Git underneath, a visual editor on top, with code and content running on one engine. Start
       free in minutes, or book a demo and we’ll walk you through the real thing.
     subtextSize: lg
     imageSource: /src/assets/images/marketing/cloudcannon-truck-closed-1.png
-    imageReveal: /src/assets/images/marketing/cloudcannon-truck-open-1.png
-    imageRevealLabel: Open and close the truck's hood
     backgroundColor: brand
     headingSize: lg
     imageOverflow: 333

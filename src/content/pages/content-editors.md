@@ -1,5 +1,5 @@
 ---
-# Generated from the Figma mapping. 2 of 7 blocks are
+# Generated from the Figma mapping. 3 of 8 blocks are
 # confirmed decisions; the rest are proposals to review on the page.
 _schema: default
 title: Content Editors
@@ -101,6 +101,19 @@ pageSections:
             text: Publish now or schedule it for later. Nothing goes live by accident.
             size: lg
         mediaSections: []
+    background:
+      type: pattern
+      pattern: grid
+      mask: fade
+    haze:
+      - x: -0.4009
+        rx: 186px
+        'y': 165.5%
+        ry: 19.5%
+      - x: -0.3997
+        rx: 186px
+        'y': 165.6%
+        ry: 19.5%
   - _component: page-sections/proof/testimonial-section
     text: >-
       You can have lots of concurrent pieces of work: a solutions page, a new case study layout, new
@@ -158,14 +171,14 @@ pageSections:
     cardHeight: 334
     headingSize: lg
   - _component: page-sections/conversion/cta-split
+    imageReveal: /src/assets/images/marketing/cloudcannon-truck-open-1.png
+    imageRevealLabel: Open and close the truck's hood
     heading: Take a peek under the hood
     subtext: >-
       Git underneath, a visual editor on top, with code and content running on one engine. Start
       free in minutes, or book a demo and we’ll walk you through the real thing.
     subtextSize: lg
     imageSource: /src/assets/images/marketing/cloudcannon-truck-closed-1.png
-    imageReveal: /src/assets/images/marketing/cloudcannon-truck-open-1.png
-    imageRevealLabel: Open and close the truck's hood
     backgroundColor: brand
     headingSize: lg
     imageOverflow: 336

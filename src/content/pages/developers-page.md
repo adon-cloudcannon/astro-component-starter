@@ -176,8 +176,8 @@ pageSections:
           - _component: building-blocks/core-elements/text
             text: >-
               Projects are local-first and Git-based, so the tools already in use just work. Open
-              the repo in any IDE and the agent has full project context: code, content, config,
-              the lot.
+              the repo in any IDE and the agent has full project context: code, content, config, the
+              lot.
             size: lg
           - _component: building-blocks/core-elements/button
             variant: text
@@ -194,8 +194,8 @@ pageSections:
           - _component: building-blocks/core-elements/text
             text: >-
               Editors shouldn’t need a developer to update a headline or swap an image. They manage
-              content themselves using the components already built, so there are no urgent
-              requests from marketing and no developer hours lost to copy tweaks.
+              content themselves using the components already built, so there are no urgent requests
+              from marketing and no developer hours lost to copy tweaks.
             size: lg
           - _component: building-blocks/core-elements/button
             variant: text

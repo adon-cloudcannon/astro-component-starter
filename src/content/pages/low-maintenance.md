@@ -95,11 +95,7 @@ pageSections:
     company: Absoluttweb
     authorImage: /src/assets/images/marketing/ellipse-287.jpg
   - _component: page-sections/explainers/feature-split
-    heading: We don’t think a website should need this much looking after
-    subtext: 'With a static site and Git you won’t need to worry about:'
-    subtextSize: xl
     subtextWidth: 342
-    headingSize: lg
     shapes:
       - text: Uptime monitoring and security scanning
         tone: golden
@@ -163,6 +159,10 @@ pageSections:
         width: 224
         height: 171
         rotation: 0
+    heading: We don’t think a website should need this much looking after
+    subtext: 'With a static site and Git you won’t need to worry about:'
+    subtextSize: xl
+    headingSize: lg
     background:
       type: pattern
       pattern: grid
@@ -228,8 +228,7 @@ pageSections:
             level: h2
             size: sm
           - _component: building-blocks/core-elements/text
-            text: >-
-              Reusable components and templates mean you're not starting from scratch every time.
+            text: Reusable components and templates mean you're not starting from scratch every time.
             size: lg
         mediaSections: []
   - _component: page-sections/proof/testimonial-section
