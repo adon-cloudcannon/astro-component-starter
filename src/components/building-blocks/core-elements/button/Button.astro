@@ -6,6 +6,16 @@ const {
   text,
   iconName,
   iconColor = "default",
+  /**
+   * Colour the whole label, not just the icon.
+   *
+   * A text button draws its label in the base colour and only its arrow in the
+   * brand, which is right for some of the design's links and wrong for most:
+   * of the arrow-link labels that survive as text in the file, 23 are Sunset
+   * against about 16 in a base colour, so it is a per-link fact rather than a
+   * rule. Unset, nothing changes.
+   */
+  textColor = "default",
   iconPosition = "before",
   hideText = false,
   variant = "primary",
@@ -120,6 +130,7 @@ if (!_component && !hasText && !hasSlotContent && !hasIcon) return;
     class:list={[
       "button-inner",
       `variant-${variant}`,
+      textColor !== "default" && `text-${textColor}`,
       `size-${size}`,
       iconPosition === "after" && "icon-after",
       hideText && "icon-only",
@@ -145,13 +156,66 @@ if (!_component && !hasText && !hasSlotContent && !hasIcon) return;
 
 <style is:global>
   @layer components {
+    /* Written flat rather than nested under `.button > .button-inner`. Rules
+       three levels deep get dropped without warning, which is how the label
+       kept its base colour while the classes were plainly on the element.
+
+       Set, it takes the label and the icon together: the design draws an arrow
+       link as one colour, never a coloured arrow beside a base-coloured word.
+       Of the link labels that survive as text in the file, 23 are Sunset
+       against about 16 in a base colour, so it is a per-link fact rather than
+       a rule and nothing changes unless it is asked for. */
+    .button > .button-inner.text-pacific {
+      --button-text-color: var(--pacific);
+    }
+
+    .button > .button-inner.text-moss {
+      --button-text-color: var(--moss);
+    }
+
+    .button > .button-inner.text-golden {
+      --button-text-color: var(--golden);
+    }
+
+    .button > .button-inner.text-peachy {
+      --button-text-color: var(--peachy);
+    }
+
+    .button > .button-inner.text-sunset {
+      --button-text-color: var(--sunset);
+    }
+
+    .button > .button-inner.text-kiwi {
+      --button-text-color: var(--kiwi);
+    }
+
+    .button > .button-inner.text-blush {
+      --button-text-color: var(--blush);
+    }
+
+    .button > .button-inner.text-harbour {
+      --button-text-color: var(--harbour);
+    }
+
+    .button > .button-inner[class*="text-"]:not(.text-default) {
+      color: var(--button-text-color, inherit);
+    }
+
+    .button > .button-inner[class*="text-"]:not(.text-default) .icon {
+      color: var(--button-text-color, inherit);
+    }
+
     .button {
       --button-icon-gap: 0.15em;
       /* Measured off the design's Pill Button: 190x50 around a 16px/600 label
          on a 21px line, so 26px each side and 14px top and bottom. Kept in em
-         so a button at another size keeps the same proportions. */
-      --button-padding-block: 0.875em;
-      --button-padding-inline: 1.625em;
+         so a button at another size keeps the same proportions.
+
+         A pixel is taken off each: the 1px border sits outside the padding, so
+         14/26 drew a 192x52 button where the design has 190x50. Every button
+         on the site was a couple of pixels fat. */
+      --button-padding-block: 0.8125em;
+      --button-padding-inline: 1.5625em;
       --button-line-height: 1.3;
 
       display: inline-flex;
@@ -206,6 +270,7 @@ if (!_component && !hasText && !hasSlotContent && !hasIcon) return;
         &.variant-text .icon {
           color: var(--color-brand);
         }
+
 
         &.variant-primary {
           background-color: var(--color-bg-brand);

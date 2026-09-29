@@ -38,6 +38,32 @@ iconColor:
         name: Blush
       - id: harbour
         name: Harbour
+textColor:
+  type: select
+  label: Label color
+  comment: >-
+    Colours the label and the icon together. The design draws an arrow link as
+    one colour rather than a coloured arrow beside a base-coloured word.
+  options:
+    values:
+      - id: default
+        name: Default
+      - id: pacific
+        name: Pacific
+      - id: moss
+        name: Moss
+      - id: golden
+        name: Golden
+      - id: peachy
+        name: Peachy
+      - id: sunset
+        name: Sunset
+      - id: kiwi
+        name: Kiwi
+      - id: blush
+        name: Blush
+      - id: harbour
+        name: Harbour
 iconPosition:
   type: select
   comment: The position of the icon relative to the text.
