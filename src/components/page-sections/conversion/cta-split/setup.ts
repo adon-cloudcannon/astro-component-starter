@@ -1,5 +1,5 @@
 /**
- * Crossfade a CTA Split's second picture in when the section is scrolled to.
+ * Swap in a CTA Split's second picture when the section is scrolled to.
  *
  * Used by `CtaSplit.astro`'s inline script and by `editor-live-sync.js`, where
  * inline scripts don't run. Without it the section shows the first picture and
@@ -25,9 +25,9 @@ export function setupCtaSplitReveal(reveal: HTMLElement): void {
 
         observer.disconnect();
 
-        // Seamless means never fading to a picture that has not arrived. The
+        // Seamless means never cutting to a picture that has not arrived. The
         // second image is lazy, so on a fast scroll it can still be decoding
-        // when the section comes into view, and fading then shows the band
+        // when the section comes into view, and swapping then shows the band
         // through it for a frame or two. `decode()` settles either way, so a
         // failure here still swaps rather than leaving the hood shut.
         const image = reveal.querySelector<HTMLImageElement>(".cta-split-reveal-top img");

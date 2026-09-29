@@ -214,21 +214,18 @@ const bleedLimit = !imageBleed && overflow > 0 ? `${overflow}px` : undefined;
       margin-block: 0;
     }
 
+    /* A cut, not a fade. These are flat line illustrations, so a dissolve
+       shows both bonnet outlines at once for the length of it and reads as a
+       double exposure rather than as a hood opening. The two frames are
+       pixel-aligned, so a straight swap reads as the thing popping open.
+
+       Nothing to soften for reduced motion either: a cut is not motion. */
     .cta-split .cta-split-reveal > .cta-split-reveal-top {
       opacity: 0;
-      transition: opacity var(--cta-split-reveal-duration, 800ms) var(--ease-in-out);
     }
 
     .cta-split .cta-split-reveal[data-revealed] > .cta-split-reveal-top {
       opacity: 1;
-    }
-
-    /* The change is content, not decoration, so it still happens — it just
-       stops being a fade. */
-    @media (prefers-reduced-motion: reduce) {
-      .cta-split .cta-split-reveal > .cta-split-reveal-top {
-        transition-duration: 1ms;
-      }
     }
 
     .cta-split .cta-split-portrait {
