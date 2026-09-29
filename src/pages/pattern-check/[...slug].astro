@@ -1,0 +1,275 @@
+---
+/**
+ * Every pattern the site draws, in 100px slices, beside the design's own.
+ *
+ * Dev only: getStaticPaths returns nothing in a build, so this emits no page.
+ * Delete this file and public/pattern-check/ when the sizes are settled.
+ *
+ * The slices on the right are real CustomSections with the real props, not a
+ * mock — the whole point is to look at the shipped CSS. The ones on the left
+ * are 300x100 rectangles lifted straight out of the Figma exports in
+ * MARKETING-WEBSITE-ACS/previews/sections, picked by scanning each crop for
+ * the cleanest patch of ground-plus-ink.
+ */
+import CustomSection from "@page-sections/builders/custom-section/CustomSection.astro";
+import "@styles/style.css";
+
+export function getStaticPaths() {
+  return import.meta.env.DEV ? [{ params: { slug: undefined } }] : [];
+}
+
+const ALTERNATIVES = [4.2, 5, 6];
+
+const ROWS = [
+  {
+    name: "Sand dots",
+    design: "dots-40",
+    note: "Visual Editing hero, High Performance CTA, Low Maintenance hero, Git testimonial",
+    count: 8,
+    backgroundColor: "surface",
+    background: { type: "pattern", pattern: "dots", patternPitch: 40, patternDot: 6, mask: "none" },
+  },
+  {
+    name: "Pegboard",
+    design: "pegboard-33",
+    note: "Homepage “Two workflows”, Agencies “Here to help you succeed”",
+    caveat: "design sample is the band's top-left corner — it hazes in the middle and fades at the foot, so there is no clean patch anywhere else",
+    count: 2,
+    backgroundColor: "surface",
+    background: { type: "pattern", pattern: "dots", patternPitch: 33, patternDot: 4.2, mask: "none" },
+  },
+  {
+    name: "Dark dots",
+    design: "darkdots-21",
+    note: "the case-study quote band on AI Ready, Low Maintenance, Content Editors, Partner Program",
+    count: 4,
+    backgroundColor: "base",
+    colorScheme: "dark",
+    background: { type: "pattern", pattern: "dots", patternPitch: 21, patternDot: 4.1, mask: "none" },
+  },
+  {
+    name: "Sand grid",
+    design: "grid-40",
+    note: "most heroes",
+    count: 19,
+    background: { type: "pattern", pattern: "grid", patternPitch: 40, mask: "none" },
+  },
+  {
+    name: "Grid on dark sand",
+    design: "grid-darksand",
+    note: "AI Ready “Give AI the full picture” — the band that started this",
+    caveat: "the design's ground is #F3ECDC and we paint --dark-sand #EBE1C9; nothing in the palette is that colour",
+    count: 1,
+    backgroundColor: "muted",
+    background: { type: "pattern", pattern: "grid", patternPitch: 40, mask: "none" },
+  },
+  {
+    name: "Dark grid",
+    design: "grid-dark",
+    note: "every dark band; fades out down the band in place",
+    count: 8,
+    backgroundColor: "base",
+    colorScheme: "dark",
+    background: { type: "pattern", pattern: "grid", patternPitch: 40, mask: "none" },
+  },
+];
+
+const coverage = (pitch: number, dot: number) =>
+  ((Math.PI * (dot / 2) ** 2) / pitch ** 2) * 100;
+---
+
+<html lang="en" data-theme="light">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title>Pattern check</title>
+  </head>
+  <body class="check">
+    <header>
+      <h1>Every pattern, 100px of it</h1>
+      <p>
+        Left is the design, lifted straight out of the Figma export. Right is the page, rendered
+        through the real CustomSection. Both 300&times;100 at 1:1 — nothing is scaled.
+      </p>
+    </header>
+
+    {
+      ROWS.map((row) => (
+        <section class="row">
+          <div class="meta">
+            <h2>{row.name}</h2>
+            <p class="where">
+              {row.count} {row.count === 1 ? "band" : "bands"} &middot; {row.note}
+            </p>
+            {row.caveat && <p class="caveat">{row.caveat}</p>}
+            <p class="nums">
+              {row.background.pattern === "dots"
+                ? `${row.background.patternPitch}px pitch, ${row.background.patternDot}px dot — ${coverage(row.background.patternPitch, row.background.patternDot).toFixed(2)}% ink`
+                : `${row.background.patternPitch}px pitch, 2px rule`}
+            </p>
+          </div>
+
+          <figure>
+            <figcaption>design</figcaption>
+            <img src={`/pattern-check/${row.design}.png`} width="300" height="100" alt="" />
+          </figure>
+
+          <figure>
+            <figcaption>page</figcaption>
+            <div class="slice">
+              <CustomSection
+                background={row.background}
+                backgroundColor={row.backgroundColor}
+                colorScheme={row.colorScheme}
+                lockColorScheme={!!row.colorScheme}
+                paddingVertical="none"
+                paddingHorizontal="none"
+              />
+            </div>
+          </figure>
+
+          {row.background.pattern === "dots" && (
+            <div class="alts">
+              <figcaption>if the dot were</figcaption>
+              <div class="alt-row">
+                {ALTERNATIVES.map((dot) => (
+                  <figure class="alt">
+                    <div class="slice narrow">
+                      <CustomSection
+                        background={{ ...row.background, patternDot: dot }}
+                        backgroundColor={row.backgroundColor}
+                        colorScheme={row.colorScheme}
+                        lockColorScheme={!!row.colorScheme}
+                        paddingVertical="none"
+                        paddingHorizontal="none"
+                      />
+                    </div>
+                    <figcaption>
+                      {dot}px
+                      {dot === row.background.patternDot && <b> &larr; now</b>}
+                    </figcaption>
+                  </figure>
+                ))}
+              </div>
+            </div>
+          )}
+        </section>
+      ))
+    }
+  </body>
+</html>
+
+<style is:global>
+  body.check {
+    background: #fff;
+    color: #1d1b17;
+    font-family: system-ui, sans-serif;
+    margin: 0;
+    padding: 32px;
+  }
+
+  body.check header {
+    margin-bottom: 28px;
+    max-width: 60ch;
+  }
+
+  body.check h1 {
+    font-size: 20px;
+    margin: 0 0 6px;
+  }
+
+  body.check header p {
+    color: #6b6157;
+    font-size: 13px;
+    line-height: 1.5;
+    margin: 0;
+  }
+
+  body.check .row {
+    align-items: start;
+    border-top: 1px solid #e7e3da;
+    display: grid;
+    gap: 20px;
+    grid-template-columns: 196px 300px 300px 1fr;
+    padding: 20px 0;
+  }
+
+  body.check h2 {
+    font-size: 15px;
+    margin: 0 0 4px;
+  }
+
+  body.check .where {
+    color: #6b6157;
+    font-size: 12px;
+    line-height: 1.45;
+    margin: 0 0 6px;
+  }
+
+  body.check .caveat {
+    background: #fff6d9;
+    color: #6b5100;
+    font-size: 11px;
+    line-height: 1.4;
+    margin: 0 0 6px;
+    padding: 4px 6px;
+  }
+
+  body.check .nums {
+    color: #1d1b17;
+    font: 12px/1.4 ui-monospace, monospace;
+    margin: 0;
+  }
+
+  body.check figure {
+    margin: 0;
+  }
+
+  body.check figcaption {
+    color: #6b6157;
+    font-size: 11px;
+    letter-spacing: 0.04em;
+    margin-bottom: 5px;
+    text-transform: uppercase;
+  }
+
+  body.check img,
+  body.check .slice {
+    border: 1px solid #e7e3da;
+    display: block;
+  }
+
+  /* The band draws itself at whatever height it has; this is the 100px of it
+     we are looking at. */
+  body.check .slice {
+    height: 100px;
+    overflow: hidden;
+    position: relative;
+    width: 300px;
+  }
+
+  body.check .slice.narrow {
+    width: 120px;
+  }
+
+  body.check .slice > * {
+    height: 100%;
+    inset: 0;
+    position: absolute;
+    width: 100%;
+  }
+
+  body.check .alt-row {
+    display: flex;
+    gap: 8px;
+  }
+
+  body.check .alt figcaption {
+    margin: 5px 0 0;
+    text-transform: none;
+  }
+
+  body.check .alt b {
+    color: #1d1b17;
+  }
+</style>
