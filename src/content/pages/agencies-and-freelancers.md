@@ -106,19 +106,35 @@ pageSections:
         'y': 27.6%
         ry: 36.2%
   - _component: page-sections/builders/custom-section
-  - _component: page-sections/explainers/feature-split
-    subtext: >-
-      Build with the static site generator you already use. Define components once and reuse them
-      across every client site.
-    subtextSize: lg
-    imageSource: /src/assets/images/marketing/hero-background-feature-2.jpg
-    subtextWidth: 527
-    buttonSections:
-      - _component: building-blocks/core-elements/button
-        variant: text
-        iconName: arrow-right
-        iconPosition: after
-        text: How we’re ready for AI
+    contentSections:
+      - _component: building-blocks/core-elements/heading
+        text: Happy clients
+        level: h2
+        size: lg
+        alignmentHorizontal: center
+      - _component: building-blocks/core-elements/heading
+        text: Hand over a site that clients can update themselves
+        level: h3
+        size: sm
+        alignmentHorizontal: center
+      - _component: building-blocks/core-elements/text
+        text: >-
+          Build with the static site generator you already use. Define components once and reuse
+          them across every client site.
+        size: lg
+        alignmentHorizontal: center
+        style: 'max-inline-size: 527px; margin-inline: auto'
+      - _component: building-blocks/wrappers/button-group
+        alignmentHorizontal: center
+        buttonSections:
+          - _component: building-blocks/core-elements/button
+            variant: text
+            iconName: arrow-right
+            iconPosition: after
+            textColor: sunset
+            text: Learn more
+  - _component: page-sections/builders/custom-section
+    contentSections: []
   - _component: page-sections/explainers/feature-split
     buttonSections:
       - _component: building-blocks/core-elements/button
