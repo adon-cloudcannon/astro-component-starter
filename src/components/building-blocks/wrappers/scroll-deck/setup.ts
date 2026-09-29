@@ -25,6 +25,7 @@ export function setupScrollDeck(deck: HTMLElement): void {
   const cards = Array.from(deck.querySelectorAll<HTMLElement>(".scroll-deck-card"));
   const links = Array.from(deck.querySelectorAll<HTMLAnchorElement>(".scroll-deck-rail-link"));
   const rail = deck.querySelector<HTMLElement>(".scroll-deck-rail");
+  const marker = deck.querySelector<HTMLElement>(".scroll-deck-rail-marker");
 
   if (!cards.length) {
     // In the CloudCannon editor the subtree can be briefly incomplete while
@@ -39,6 +40,11 @@ export function setupScrollDeck(deck: HTMLElement): void {
   // what lets the complete stepped stack release together at the end. Measure
   // the tallest natural card so this flow keeps the equal-height card chrome
   // that the grid layout previously provided.
+  // Declared up here because `syncCardHeight` places the marker, and that runs
+  // during setup: left where it was read, `active` was still in its temporal
+  // dead zone and the whole setup threw.
+  let active = -1;
+
   const syncCardHeight = () => {
     deck.style.removeProperty("--deck-card-height");
 
@@ -54,6 +60,20 @@ export function setupScrollDeck(deck: HTMLElement): void {
         `${Math.ceil(rail.getBoundingClientRect().height)}px`
       );
     }
+
+    placeMarker();
+  };
+
+  // Measured off the link rather than worked out from the pitch token, so the
+  // marker keeps up with a rail whose spacing is overridden or whose hit area
+  // changes with the breakpoint. Both the link and the marker have the rail as
+  // their offset parent, since it is sticky.
+  const placeMarker = () => {
+    const link = links[active];
+
+    if (!marker || !link) return;
+
+    marker.style.translate = `-50% ${link.offsetTop}px`;
   };
 
   deck.style.setProperty("--deck-last-index", String(cards.length - 1));
@@ -92,8 +112,6 @@ export function setupScrollDeck(deck: HTMLElement): void {
 
   const scrollportTop = (): number => scrollport()?.getBoundingClientRect().top ?? 0;
 
-  let active = -1;
-
   const apply = (index: number) => {
     if (index === active) return;
     active = index;
@@ -102,6 +120,8 @@ export function setupScrollDeck(deck: HTMLElement): void {
       if (i === index) link.setAttribute("aria-current", "true");
       else link.removeAttribute("aria-current");
     });
+
+    placeMarker();
 
     cards.forEach((card, i) => {
       const depth = Math.min(Math.max(index - i, 0), MAX_DEPTH);

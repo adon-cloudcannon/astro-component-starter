@@ -78,6 +78,13 @@ if (!_component && !hasCards && !hasSlotContent) return;
             <span class="visually-hidden">Card {index + 1}</span>
           </a>
         ))}
+        {/* One marker for the whole rail rather than a state on each dot, so
+            it travels between them. Rendered at the first centre, which is
+            where it stays if the setup script never runs. */}
+        <span
+          class="scroll-deck-rail-marker"
+          aria-hidden="true"
+        />
       </nav>
     )}
   </div>
@@ -294,12 +301,32 @@ if (!_component && !hasCards && !hasSlotContent) return;
           width: var(--deck-rail-dot);
         }
 
-        /* Longer, not larger: the one you are on is a pill the same width as
-           the rest, which is what the design draws. */
-        &[aria-current] > .scroll-deck-rail-dot {
-          background-color: var(--deck-rail-active-color, var(--sunset));
-          height: var(--deck-rail-active-length);
-        }
+      }
+
+      /* Longer, not larger: the one you are on is a pill the same width as the
+         rest, which is what the design draws. It is a single element the
+         script moves, so it slides from one dot to the next instead of one
+         dot changing colour while another changes back.
+
+         The offset is written as a concrete length by the script. A custom
+         property holding the distance does not transition — an animated value
+         derived from an unregistered property sticks at whatever it first
+         computed, which is how the pinned stepper's bar sat at zero. */
+      .scroll-deck-rail-marker {
+        background-color: var(--deck-rail-active-color, var(--sunset));
+        block-size: var(--deck-rail-active-length);
+        border-radius: var(--radius-full);
+        inline-size: var(--deck-rail-dot);
+        inset-block-start: calc(
+          (var(--deck-rail-hit) - var(--deck-rail-active-length)) / 2
+        );
+        inset-inline-start: 50%;
+        /* The rail is sticky, which is already a positioned value, so this
+           resolves against it without a `position` of its own up there. */
+        position: absolute;
+        pointer-events: none;
+        translate: -50% 0;
+        transition: translate var(--animation-normal) var(--ease-in-out);
       }
     }
   }
