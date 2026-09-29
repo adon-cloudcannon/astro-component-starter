@@ -142,55 +142,59 @@ pageSections:
         rx: 453px
         'y': 45.2%
         ry: 45.6%
-  - _component: building-blocks/wrappers/content-selector
+  - _component: page-sections/explainers/scroll-steps
+    heading: Happy developers
+    headingSize: lg
+    reverse: true
+    mediaWidth: wide
+    progressStyle: bar
     backgroundColor: base
     colorScheme: dark
     lockColorScheme: true
-    items:
-      - text: >-
-          Build with the static site generator you already use. Define components once and reuse
-          them across every client site.
-        iconName: check
-        iconColor: default
-      - text: 
-        iconName: check
-        iconColor: default
-      - text: HTML
-        iconName: check
-        iconColor: default
-      - text: 
-        iconName: check
-        iconColor: default
-      - text: CSS
-        iconName: check
-        iconColor: default
-      - text: 
-        iconName: check
-        iconColor: default
-      - text: JavaScript
-        iconName: check
-        iconColor: default
-      - text: Label
-        iconName: check
-        iconColor: default
-      - text: Label
-        iconName: check
-        iconColor: default
-      - text: Label
-        iconName: check
-        iconColor: default
-      - text: Heading
-        iconName: check
-        iconColor: default
-      - text: Description
-        iconName: check
-        iconColor: default
-      - text: Ship and iterate
-        iconName: check
-        iconColor: default
-      - text: Build a website with no compromises, from development team to content team.
-        iconName: check
-        iconColor: default
+    background:
+      type: pattern
+      pattern: grid
+      mask: top
+    steps:
+      - _component: building-blocks/wrappers/scroll-stepper/scroll-stepper-step
+        contentSections:
+          - _component: building-blocks/core-elements/heading
+            text: Craft the ideal editing interface
+            level: h3
+            size: sm
+          - _component: building-blocks/core-elements/text
+            text: >-
+              Build with the static site generator you already use. Define components once and reuse
+              them across every client site.
+            size: lg
+          - _component: building-blocks/core-elements/button
+            variant: text
+            iconName: arrow-right
+            iconPosition: after
+            text: Learn more
+        mediaSections: []
+      - _component: building-blocks/wrappers/scroll-stepper/scroll-stepper-step
+        contentSections:
+          - _component: building-blocks/core-elements/heading
+            text: Efficiency and speed that delivers results
+            level: h3
+            size: sm
+          - _component: building-blocks/core-elements/text
+            text: >-
+              Ship custom sites that are fast, secure, and built to rank. Then, because they're
+              static, there's nothing to maintain.
+            size: lg
+          - _component: building-blocks/core-elements/button
+            variant: text
+            iconName: arrow-right
+            iconPosition: after
+            text: Learn more
+        mediaSections: []
+    subtext: >-
+      Build with the static site generator you already use. Define components once and reuse them
+      across every client site.
+    subtextSize: lg
+    subtextWidth: 441
   - _component: page-sections/conversion/pricing-tiers
     heading: Join a Partner Program that rewards good work
     subtext: As you bring in new clients, you’ll gain points and more benefits.
