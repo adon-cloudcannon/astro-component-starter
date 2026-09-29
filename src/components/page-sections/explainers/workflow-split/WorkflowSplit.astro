@@ -564,7 +564,9 @@ const panelList: PanelProps[] = Array.isArray(panels) ? panels : [];
          there — so the feed is driven by this arriving rather than by a clock
          of its own. Solid, where the line it runs along is a quarter. */
       .workflow-pulse {
-        --workflow-pulse-size: 11px;
+        /* The same 7 as the line's own end dots, so the thing travelling is
+           the thing that sits at either end of the wire. */
+        --workflow-pulse-size: 7px;
 
         background-color: var(--workflow-connector, var(--color-brand));
         block-size: var(--workflow-pulse-size);

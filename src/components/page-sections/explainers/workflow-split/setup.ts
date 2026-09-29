@@ -54,14 +54,17 @@ function pulse(connector: HTMLElement): number {
   const from = toMiddle ? 0 : span;
   const to = toMiddle ? span + OVERLAP_PX : -OVERLAP_PX;
 
-  // Linear: it is a thing travelling a wire, not a thing being eased into
-  // place, and an ease-out made it look like it was running out of steam just
-  // as it reached the card.
+  const at = (t: number): string => `${from + (to - from) * t}px -50%`;
+
+  // One size the whole way, matching the line's own end dots. Linear too: it
+  // is a thing travelling a wire, not a thing being eased into place, and an
+  // ease-out made it look like it was running out of steam just as it reached
+  // the card.
   const animation = dot.animate(
     [
-      { translate: `${from}px -50%`, opacity: 0, scale: 0.4 },
-      { translate: `${from + (to - from) * 0.1}px -50%`, opacity: 1, scale: 1, offset: 0.1 },
-      { translate: `${to}px -50%`, opacity: 1, scale: 1 },
+      { offset: 0, translate: at(0), opacity: 0 },
+      { offset: 0.08, translate: at(0.08), opacity: 1 },
+      { offset: 1, translate: at(1), opacity: 1 },
     ],
     { duration: TRAVEL_MS, easing: "linear" },
   );
