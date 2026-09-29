@@ -12,7 +12,25 @@
  */
 
 /** How much of the picture has to be on screen before it changes. */
-const THRESHOLD = 0.45;
+const THRESHOLD = 0.8;
+
+/**
+ * The most of the viewport the picture is assumed to be able to fill.
+ *
+ * A threshold is a share of the element, so one this high can never be met by
+ * something taller than the screen and the hood would simply never open. The
+ * ask is only ever "most of it", so on a picture that big the share is brought
+ * down to whatever a full screen of it would be.
+ */
+const MOST_OF_SCREEN = 0.85;
+
+function reachableThreshold(reveal: HTMLElement): number {
+  const height = reveal.getBoundingClientRect().height;
+
+  if (!height) return THRESHOLD;
+
+  return Math.min(THRESHOLD, (window.innerHeight * MOST_OF_SCREEN) / height);
+}
 
 export function setupCtaSplitReveal(reveal: HTMLElement): void {
   if (reveal.hasAttribute("data-reveal-initialized")) return;
@@ -37,7 +55,7 @@ export function setupCtaSplitReveal(reveal: HTMLElement): void {
           .then(() => reveal.setAttribute("data-revealed", ""));
       }
     },
-    { threshold: THRESHOLD },
+    { threshold: reachableThreshold(reveal) },
   );
 
   observer.observe(reveal);
