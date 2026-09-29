@@ -131,6 +131,7 @@ pageSections:
         shadowY: 1
         shadowWidth: 135
         shadowHeight: 36
+        shadowFrom: 2
         tone: golden
         x: 0
         'y': 208
@@ -142,6 +143,7 @@ pageSections:
         shadowY: 1
         shadowWidth: 297
         shadowHeight: 38
+        shadowFrom: 1
         tone: rust
         lightText: true
         x: 220
@@ -154,6 +156,7 @@ pageSections:
         shadowY: 1
         shadowWidth: 297
         shadowHeight: 38
+        shadowFrom: 1
         tone: coral
         x: 440
         'y': 169

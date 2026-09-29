@@ -39,6 +39,14 @@ type Shape = {
   shadowY?: number;
   shadowWidth?: number;
   shadowHeight?: number;
+  /**
+   * Which shape casts it, counting from 1 in the order they are listed.
+   *
+   * Stated rather than worked out: the caster never overlaps the wedge by
+   * much — it sits above it — so picking the shape with the largest overlap
+   * chooses the neighbouring floor card every time.
+   */
+  shadowFrom?: number;
   round?: boolean;
   lightText?: boolean;
 };
@@ -70,8 +78,18 @@ const byLowest = list
 const rank = new Map(byLowest.map((entry, position) => [entry.index, position]));
 
 const STAGGER_MS = 95;
+const FALL_MS = 620;
+/** The point in the fall where a shape reaches its place, before the bounce. */
+const LANDS_AT = 0.58;
 /** How far above its place a shape starts. */
 const RISE = 190;
+
+/** When a shape touches down, measured from the first one being let go. */
+const landingOf = (index: number) =>
+  Math.round((rank.get(index) ?? 0) * STAGGER_MS + FALL_MS * LANDS_AT);
+
+/** Everything down, for a shadow that does not say what casts it. */
+const settled = Math.round((list.length - 1) * STAGGER_MS + FALL_MS);
 ---
 
 <div
@@ -115,6 +133,9 @@ const RISE = 190;
           class="shape-pile-shadow"
           aria-hidden="true"
           style={[
+            `--shadow-delay: ${
+              Number(shape.shadowFrom) > 0 ? landingOf(Number(shape.shadowFrom) - 1) : settled
+            }ms`,
             `--shadow-x: ${((Number(shape.shadowX) || 0) / (Number(shape.width) || 1)) * 100}%`,
             `--shadow-y: ${((Number(shape.shadowY) || 0) / (Number(shape.height) || 1)) * 100}%`,
             `--shadow-w: ${(Number(shape.shadowWidth) / (Number(shape.width) || 1)) * 100}%`,
@@ -238,16 +259,19 @@ const RISE = 190;
         animation: shape-pile-drop 620ms var(--pile-delay) both;
       }
 
-      /* Held back until the pile has settled. Carried by the card, a shadow
-         would otherwise travel with it through the air, which is a shadow of
-         something that has not landed yet. The last shape starts at 475 and
-         runs 620, so everything is down by 1095. */
+      /* Each one arrives as the shape that casts it touches down, not when the
+         whole pile has finished: the card above the PHP one lands at 645 and
+         the card above the other two at 740, where a shared timer held all
+         three back to 1100 and left a dead beat after everything had settled.
+
+         Quick, too. A shadow appears because something hit — 320ms read as it
+         being faded up by hand. */
       .shape-pile-shadow {
         opacity: 0;
       }
 
       .shape-pile[data-fallen] .shape-pile-shadow {
-        animation: shape-pile-shadow-in 320ms 1100ms both;
+        animation: shape-pile-shadow-in 150ms var(--shadow-delay, 1100ms) both;
       }
     }
 
