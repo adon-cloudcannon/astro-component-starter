@@ -297,6 +297,11 @@ const panelList: PanelProps[] = Array.isArray(panels) ? panels : [];
          line sets its own size. The icon is the same height as the text. */
       .workflow-centre-title {
         align-items: center;
+        /* The rule under the header, measured off the card at #32333D and a
+           pixel tall. It runs the content column, inset 20 each side, not the
+           card's full width — the first reading said it reached the right edge
+           and that was the card's own edge highlight, not the line. */
+        border-block-end: 1px solid var(--workflow-panel-rule, #32333d);
         color: var(--white);
         display: flex;
         font-size: 14px;
@@ -304,6 +309,10 @@ const panelList: PanelProps[] = Array.isArray(panels) ? panels : [];
         gap: 0.6em;
         line-height: 1.35;
         margin: 0;
+        /* The design sets the rule 2px under the header, which at the mark's
+           own 17 reads fine and at md's 22 does not — the row is taller and
+           the line ends up hugging the text. Given room instead. */
+        padding-block-end: 12px;
 
         /* No size of its own: Icon sets its own font-size from the `size`
            prop and the glyph is 1em of that, so pinning a box here just
