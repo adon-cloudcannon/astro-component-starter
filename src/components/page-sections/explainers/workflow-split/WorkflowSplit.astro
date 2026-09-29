@@ -228,8 +228,14 @@ const panelList: PanelProps[] = Array.isArray(panels) ? panels : [];
               <span
                 class:list={["workflow-connector", index === 0 ? "to-end" : "to-start"]}
                 style={panel.accentColor ? { "--workflow-connector": `var(--${panel.accentColor})` } : undefined}
+                data-kind={index === 0 ? "editor" : "dev"}
                 aria-hidden="true"
-              />
+              >
+                {/* Which panel feeds which commit is the design's own reading:
+                    the editors' column is the blue one and its commits are
+                    blue, the developers' is Sunset and so are theirs. */}
+                <span class="workflow-pulse" />
+              </span>
             )}
           </div>
         </div>
@@ -320,6 +326,13 @@ const panelList: PanelProps[] = Array.isArray(panels) ? panels : [];
          however tall the illustrations above the other two turn out. */
       .workflow-centre-card {
         align-self: end;
+        /* Positioned *and* lifted, so it takes part in z-order and wins.
+           Position alone is not enough: grid items at the same level paint in
+           DOM order, so the left panel's connector went under this correctly
+           while the right panel's — which comes after it — ran over the top.
+           The pulse has to disappear beneath this from either side. */
+        position: relative;
+        z-index: 1;
         background-color: var(--workflow-centre-color, var(--color-bg-muted));
         /* --radius-card, not --radius-lg: the cards either side of it round
            at 18 and the generic large radius is 16, so the middle panel was a
@@ -546,6 +559,26 @@ const panelList: PanelProps[] = Array.isArray(panels) ? panels : [];
       /* Which end is the faded one depends on which side of the middle the
          panel is: the solid dot is always the one nearest the card between
          them. */
+      /* The one that travels. It runs the line from the panel's own card to the
+         card between them, and the commit it is carrying lands when it gets
+         there — so the feed is driven by this arriving rather than by a clock
+         of its own. Solid, where the line it runs along is a quarter. */
+      .workflow-pulse {
+        background-color: var(--workflow-connector, var(--color-brand));
+        block-size: 11px;
+        border-radius: var(--radius-full);
+        /* The glow the design gives the connector's own dots: a drop shadow
+           with no offset at radius 8, 0.7 on the blue and 0.6 on the orange.
+           One value here — at this size the difference is not visible. */
+        box-shadow: 0 0 8px color-mix(in srgb, var(--workflow-connector, var(--color-brand)) 65%, transparent);
+        inline-size: 11px;
+        inset-inline-start: 0;
+        opacity: 0;
+        position: absolute;
+        top: 50%;
+        translate: 0 -50%;
+      }
+
       .workflow-connector.to-end::before,
       .workflow-connector.to-start::after {
         background-color: color-mix(in srgb, var(--workflow-connector, var(--color-brand)) 33%, transparent);

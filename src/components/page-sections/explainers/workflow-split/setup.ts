@@ -1,84 +1,153 @@
 /**
- * The middle panel's commit feed.
+ * The middle panel's commit feed, and the pulses that feed it.
  *
- * One row slides up, the list holds, the next slides on. The loop is seamless
- * because nothing is ever added or removed: after each slide the first row is
- * moved to the end of the same list and the track snaps back to where it
- * started, so eight rows cycle forever without a jump or a second copy.
+ * A dot runs the connector from one of the side cards to the panel between
+ * them, and the commit it is carrying lands the moment it arrives: the row
+ * slides up, the list holds, and the next pulse sets off from whichever side
+ * owns the commit after that. So the timing reads as cause and effect rather
+ * than two things animating near each other.
  *
- * It only runs while the panel is on screen, and not at all for a reader who
- * has asked for less motion — a feed that never stops is exactly the kind of
- * thing that setting is for.
+ * Which side fires is read off the row that is about to arrive, not alternated
+ * — the design's order is editor, dev, editor, dev, editor, editor, dev, dev,
+ * and two in a row from the same side is the point of it.
+ *
+ * The loop is seamless because nothing is added or removed: after each slide
+ * the row that left the top is moved to the end of the same list and the track
+ * snaps back to 0 in the same frame.
  */
+// The dot keeps going once it reaches the gap's end, sliding under the card
+// between the panels rather than stopping against its edge.
+const OVERLAP_PX = 44;
+const TRAVEL_MS = 1100;
 const SLIDE_MS = 450;
-const HOLD_MS = 2200;
+const HOLD_MS = 1350;
 
 type Feed = HTMLElement & {
-  __workflowFeedTimer?: number;
-  __workflowFeedObserver?: IntersectionObserver;
+  __workflowTimer?: number;
+  __workflowObserver?: IntersectionObserver;
+  __workflowRunning?: boolean;
 };
 
-function step(track: Feed): void {
+const reduceMotion = (): boolean =>
+  window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+/** Run the dot along its line, from the panel's card to the one in the middle. */
+function pulse(connector: HTMLElement): Promise<void> {
+  const dot = connector.querySelector<HTMLElement>(".workflow-pulse");
+
+  if (!dot) return Promise.resolve();
+
+  // The line's own width less the dot, then on by the overlap so it finishes
+  // underneath the card rather than against it. `to-start` connectors run the
+  // other way — their outer end is the far side, because the card between them
+  // is to their left — so for those the overlap is a negative offset.
+  const span = connector.getBoundingClientRect().width - dot.offsetWidth;
+  const toMiddle = connector.classList.contains("to-end");
+  const from = toMiddle ? 0 : span;
+  const to = toMiddle ? span + OVERLAP_PX : -OVERLAP_PX;
+
+  // Linear: it is a thing travelling a wire, not a thing being eased into
+  // place, and an ease-out made it look like it was running out of steam just
+  // as it reached the card.
+  const animation = dot.animate(
+    [
+      { translate: `${from}px -50%`, opacity: 0, scale: 0.4 },
+      { translate: `${from + (to - from) * 0.1}px -50%`, opacity: 1, scale: 1, offset: 0.1 },
+      { translate: `${to}px -50%`, opacity: 1, scale: 1 },
+    ],
+    { duration: TRAVEL_MS, easing: "linear" },
+  );
+
+  return animation.finished.then(() => undefined).catch(() => undefined);
+}
+
+/** Slide the feed up by one row and put the one that left back at the end. */
+function slide(track: HTMLElement): Promise<void> {
   const first = track.firstElementChild;
 
-  if (!first) return;
+  if (!first) return Promise.resolve();
 
-  track.style.transition = `transform ${SLIDE_MS}ms var(--ease-smooth, ease)`;
+  track.style.transition = `transform ${SLIDE_MS}ms cubic-bezier(0.4, 0, 0.2, 1)`;
   track.style.transform = "translateY(calc(-1 * var(--workflow-row-pitch)))";
 
-  window.setTimeout(() => {
-    // Moved, not cloned: the row that just left the top becomes the one
-    // waiting at the bottom, and the track returns to 0 in the same frame so
-    // the snap is never seen.
-    track.style.transition = "none";
-    track.style.transform = "none";
-    track.append(first);
-    // Force the browser to take the reset before the next slide is queued,
-    // or the two collapse into one and a row is skipped.
-    void track.offsetHeight;
-  }, SLIDE_MS);
+  return new Promise((resolve) => {
+    window.setTimeout(() => {
+      // Moved, not cloned, and reset in the same frame so the snap is unseen.
+      track.style.transition = "none";
+      track.style.transform = "none";
+      track.append(first);
+      void track.offsetHeight;
+      resolve();
+    }, SLIDE_MS);
+  });
 }
 
-function start(track: Feed): void {
-  if (track.__workflowFeedTimer) return;
+async function cycle(row: Feed): Promise<void> {
+  const track = row.querySelector<HTMLElement>(".workflow-centre-rows");
 
-  track.__workflowFeedTimer = window.setInterval(() => step(track), SLIDE_MS + HOLD_MS);
+  if (!track || !row.isConnected) return;
+
+  const next = track.firstElementChild;
+  const kind = next?.classList.contains("kind-dev") ? "dev" : "editor";
+  const connector = row.querySelector<HTMLElement>(`.workflow-connector[data-kind="${kind}"]`);
+
+  if (connector) await pulse(connector);
+  if (!row.isConnected) return;
+
+  await slide(track);
 }
 
-function stop(track: Feed): void {
-  if (!track.__workflowFeedTimer) return;
+function start(row: Feed): void {
+  if (row.__workflowTimer) return;
 
-  window.clearInterval(track.__workflowFeedTimer);
-  track.__workflowFeedTimer = undefined;
+  const tick = async (): Promise<void> => {
+    if (row.__workflowRunning) return;
+
+    row.__workflowRunning = true;
+    await cycle(row);
+    row.__workflowRunning = false;
+  };
+
+  row.__workflowTimer = window.setInterval(tick, TRAVEL_MS + SLIDE_MS + HOLD_MS);
+  void tick();
 }
 
-function setupFeed(track: Feed): void {
-  if (track.children.length < 2) return;
-  if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+function stop(row: Feed): void {
+  if (!row.__workflowTimer) return;
 
-  track.__workflowFeedObserver?.disconnect();
+  window.clearInterval(row.__workflowTimer);
+  row.__workflowTimer = undefined;
+}
 
-  // A ClientRouter navigation discards the panel but not the interval, which
-  // would keep animating detached DOM for the rest of the session.
+function setupRow(row: Feed): void {
+  const track = row.querySelector<HTMLElement>(".workflow-centre-rows");
+
+  if (!track || track.children.length < 2) return;
+  if (reduceMotion()) return;
+
+  row.__workflowObserver?.disconnect();
+
+  // A ClientRouter navigation discards the section but not the interval, which
+  // would animate detached DOM for the rest of the session.
   const observer = new IntersectionObserver((entries) => {
     for (const entry of entries) {
-      if (!track.isConnected) {
-        stop(track);
+      if (!row.isConnected) {
+        stop(row);
         observer.disconnect();
         return;
       }
 
-      if (entry.isIntersecting) start(track);
-      else stop(track);
+      if (entry.isIntersecting) start(row);
+      else stop(row);
     }
   });
 
-  observer.observe(track);
-  track.__workflowFeedObserver = observer;
+  observer.observe(row);
+  row.__workflowObserver = observer;
 }
 
 export function setupAllWorkflowFeeds(root: ParentNode = document): void {
   root
-    .querySelectorAll<HTMLElement>(".workflow-centre-rows")
-    .forEach((track) => setupFeed(track as Feed));
+    .querySelectorAll<HTMLElement>(".workflow-columns")
+    .forEach((row) => setupRow(row as Feed));
 }
