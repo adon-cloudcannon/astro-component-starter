@@ -119,6 +119,8 @@ pageSections:
         tone: rust
         round: true
         lightText: true
+        fontSize: 64
+        strong: true
         x: 274
         'y': 53
         width: 78

@@ -27,6 +27,9 @@ type Shape = {
   height?: number;
   /** Where it comes to rest, in degrees. */
   rotation?: number;
+  /** Label size, in the same design units as the box. */
+  fontSize?: number;
+  strong?: boolean;
   round?: boolean;
   lightText?: boolean;
 };
@@ -75,6 +78,7 @@ const RISE = 190;
         `tone-${shape.tone || "golden"}`,
         shape.round && "is-round",
         shape.lightText && "is-light-text",
+        shape.strong && "is-strong",
       ]}
       data-editable="array-item"
       style={[
@@ -83,6 +87,7 @@ const RISE = 190;
         `--pile-w: ${((Number(shape.width) || 0) / designWidth) * 100}%`,
         `--pile-h: ${((Number(shape.height) || 0) / designHeight) * 100}%`,
         `--pile-rot: ${Number(shape.rotation) || 0}deg`,
+        `--pile-font: ${Number(shape.fontSize) || 20}`,
         /* It comes in at a steeper angle than it settles at, so the tilt is
            still moving when the position has stopped. */
         `--pile-tilt: ${(Number(shape.rotation) || 0) - 9}deg`,
@@ -111,6 +116,10 @@ const RISE = 190;
   @layer components {
     .shape-pile {
       aspect-ratio: var(--pile-design-width) / var(--pile-design-height);
+      /* So the labels can be sized against the pile rather than the viewport.
+         The design sets them in its own units — 20 on a card, 64 on the badge
+         — and they have to shrink with the pile, not with the window. */
+      container-type: inline-size;
       inline-size: 100%;
       position: relative;
     }
@@ -141,9 +150,15 @@ const RISE = 190;
 
     .shape-pile-text {
       color: #1d1b17;
-      font-size: clamp(0.75rem, 1.25vw, 1rem);
-      font-weight: var(--font-weight-body);
-      line-height: 1.25;
+      /* One design unit is 100cqi/664, so this is the design's own number. */
+      font-size: calc(var(--pile-font, 20) / var(--pile-design-width) * 100cqi);
+      font-weight: 500;
+      /* The design's 27 on 20. */
+      line-height: 1.35;
+    }
+
+    .shape-pile-shape.is-strong > .shape-pile-text {
+      font-weight: 700;
     }
 
     .shape-pile-shape.is-light-text > .shape-pile-text {

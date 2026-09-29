@@ -42,3 +42,9 @@ round:
 lightText:
   type: switch
   comment: White label, for the darker sheets.
+fontSize:
+  type: number
+  comment: Label size, in the same design units as the positions.
+strong:
+  type: switch
+  comment: Draw the label bold.
