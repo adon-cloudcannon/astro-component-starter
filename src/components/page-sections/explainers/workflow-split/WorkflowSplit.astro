@@ -564,15 +564,23 @@ const panelList: PanelProps[] = Array.isArray(panels) ? panels : [];
          there — so the feed is driven by this arriving rather than by a clock
          of its own. Solid, where the line it runs along is a quarter. */
       .workflow-pulse {
+        --workflow-pulse-size: 11px;
+
         background-color: var(--workflow-connector, var(--color-brand));
-        block-size: 11px;
+        block-size: var(--workflow-pulse-size);
         border-radius: var(--radius-full);
         /* The glow the design gives the connector's own dots: a drop shadow
            with no offset at radius 8, 0.7 on the blue and 0.6 on the orange.
            One value here — at this size the difference is not visible. */
         box-shadow: 0 0 8px color-mix(in srgb, var(--workflow-connector, var(--color-brand)) 65%, transparent);
-        inline-size: 11px;
-        inset-inline-start: 0;
+        inline-size: var(--workflow-pulse-size);
+        /* Centred on the line's start, not butted against it. Left at 0 its
+           left edge sat on the card and its centre was 6px into the gap, so it
+           looked like it appeared beside the card rather than out of it — the
+           static dot at that end is centred on the edge, and this has to leave
+           from the same place. Travel is measured centre to centre because of
+           it. */
+        inset-inline-start: calc(var(--workflow-pulse-size) / -2);
         opacity: 0;
         position: absolute;
         top: 50%;

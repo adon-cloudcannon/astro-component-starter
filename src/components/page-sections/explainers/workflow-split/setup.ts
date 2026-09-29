@@ -31,17 +31,25 @@ type Feed = HTMLElement & {
 const reduceMotion = (): boolean =>
   window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
-/** Run the dot along its line, from the panel's card to the one in the middle. */
-function pulse(connector: HTMLElement): Promise<void> {
+/**
+ * Run the dot along its line, from the panel's card to the one in the middle.
+ *
+ * Returns how long until it reaches the card's edge, which is earlier than the
+ * end of its run: the last stretch is spent sliding underneath. The commit
+ * lands on arrival rather than on the animation finishing, so the row appears
+ * as the dot goes under instead of after it has gone.
+ */
+function pulse(connector: HTMLElement): number {
   const dot = connector.querySelector<HTMLElement>(".workflow-pulse");
 
-  if (!dot) return Promise.resolve();
+  if (!dot) return 0;
 
-  // The line's own width less the dot, then on by the overlap so it finishes
-  // underneath the card rather than against it. `to-start` connectors run the
-  // other way — their outer end is the far side, because the card between them
-  // is to their left — so for those the overlap is a negative offset.
-  const span = connector.getBoundingClientRect().width - dot.offsetWidth;
+  // Centre to centre: the dot rests centred on the line's start, so the line's
+  // own width is the distance between its two ends, and the overlap carries it
+  // on underneath the card rather than stopping against it. `to-start`
+  // connectors run the other way — their outer end is the far side, because
+  // the card between them is to their left — so there the overlap is negative.
+  const span = connector.getBoundingClientRect().width;
   const toMiddle = connector.classList.contains("to-end");
   const from = toMiddle ? 0 : span;
   const to = toMiddle ? span + OVERLAP_PX : -OVERLAP_PX;
@@ -58,8 +66,13 @@ function pulse(connector: HTMLElement): Promise<void> {
     { duration: TRAVEL_MS, easing: "linear" },
   );
 
-  return animation.finished.then(() => undefined).catch(() => undefined);
+  // The line's own length as a share of the whole run, which is the point the
+  // dot crosses the card's edge.
+  return TRAVEL_MS * (span / (span + OVERLAP_PX));
 }
+
+const wait = (ms: number): Promise<void> =>
+  new Promise((resolve) => window.setTimeout(resolve, ms));
 
 /** Slide the feed up by one row and put the one that left back at the end. */
 function slide(track: HTMLElement): Promise<void> {
@@ -91,7 +104,9 @@ async function cycle(row: Feed): Promise<void> {
   const kind = next?.classList.contains("kind-dev") ? "dev" : "editor";
   const connector = row.querySelector<HTMLElement>(`.workflow-connector[data-kind="${kind}"]`);
 
-  if (connector) await pulse(connector);
+  // Not awaited: the dot carries on under the card while the row it delivered
+  // is still sliding into place.
+  if (connector) await wait(pulse(connector));
   if (!row.isConnected) return;
 
   await slide(track);
