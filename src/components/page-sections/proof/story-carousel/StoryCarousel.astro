@@ -200,14 +200,19 @@ const {
   @layer page-sections {
     .story-carousel {
       /* The row breaks out of the content column, which is what makes the last
-         card read as "there is more" rather than as cut off.
+         card read as "there is more" rather than as cut off. Clipped at the
+         column, the fourth card showed 68px of itself and read as broken.
 
-         The design draws the carousel's clip starting at the page gutter and a
-         full page wide, so it runs off the right edge of the frame: the first
-         card sits at 90 against the column's 120, and the fourth shows 230 of
-         itself. Clipped at the column instead, the fourth showed 68 and read
-         as broken. Body already hides horizontal overflow, so the right bleed
-         costs no scrollbar. */
+         It is cropped to the page frame, not to the window: 1280 against the
+         1040 column, so 120 either side. Symmetric on purpose — a card sliding
+         off the left has to be cut on the same line the fourth is cut on at
+         the right, and a band that only broke out rightwards also carried the
+         prev/next arrows 46px off the page's centre. */
+      --story-crop: 120px;
+      /* The first card sits 30 inside that crop, at 90 on a 1280 page, which
+         is where the design draws it. */
+      --story-inset: 90px;
+
       .story-slides {
         /* Carousel sets `width: 100%`, and a fixed width is not something a
            negative margin can grow: the margins applied, the left edge moved
@@ -317,9 +322,18 @@ const {
        Written flat rather than nested in the block above: a rule three levels
        deep gets dropped without a warning. */
     @media (min-width: 1096px) {
+      /* Never past the window: between 1096 and 1280 there is less than the
+         crop to give, so the band takes what there is. `100%` is the column,
+         since a percentage margin resolves against its containing block. */
       .story-carousel .story-slides {
-        margin-inline-end: calc(50% - 50vw);
-        margin-inline-start: calc(-1 * var(--spacing-gutter));
+        margin-inline: calc(-1 * min(var(--story-crop), (100vw - 100%) / 2));
+      }
+
+      /* Padding on the clip rather than a margin on the track: the clip is
+         this element's own box, so a card sliding out passes underneath the
+         inset and is cut at the band's edge instead of stopping short of it. */
+      .story-carousel .story-slides .viewport {
+        padding-inline-start: var(--story-inset);
       }
     }
   }
