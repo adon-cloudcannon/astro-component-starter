@@ -1,0 +1,44 @@
+shapes:
+  type: array
+  comment: The shapes in the pile, each with its own place, size and angle.
+designWidth:
+  type: number
+  comment: The width the positions below are measured in. Rarely changed.
+designHeight:
+  type: number
+  comment: The height the positions below are measured in. Rarely changed.
+text:
+  type: text
+  comment: The label on the shape.
+tone:
+  type: select
+  comment: Which scratched sheet colours the shape.
+  options:
+    values:
+      - id: golden
+        name: Golden
+      - id: coral
+        name: Coral
+      - id: rust
+        name: Rust
+x:
+  type: number
+  comment: Distance from the left of the pile, in design units.
+'y':
+  type: number
+  comment: Distance from the top of the pile, in design units.
+width:
+  type: number
+  comment: Width of the shape, in design units.
+height:
+  type: number
+  comment: Height of the shape, in design units.
+rotation:
+  type: number
+  comment: The angle it comes to rest at, in degrees.
+round:
+  type: switch
+  comment: Draw it as a circle rather than a rounded card.
+lightText:
+  type: switch
+  comment: White label, for the darker sheets.

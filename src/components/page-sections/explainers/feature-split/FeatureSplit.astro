@@ -2,6 +2,7 @@
 import CustomSection from "@builders/custom-section/CustomSection.astro";
 import Heading from "@core-elements/heading/Heading.astro";
 import Image from "@core-elements/image/Image.astro";
+import ShapePile from "@wrappers/shape-pile/ShapePile.astro";
 import SimpleText from "@core-elements/simple-text/SimpleText.astro";
 import Text from "@core-elements/text/Text.astro";
 import ButtonGroup from "@wrappers/button-group/ButtonGroup.astro";
@@ -25,6 +26,13 @@ const {
   subtextWidth,
   buttonSections = [],
   imageSource = "",
+  /**
+   * A pile of labelled shapes in place of the picture.
+   *
+   * Opt-in, the way CtaSplit's second picture is: set it and the media half
+   * becomes the pile, leave it and nothing about the section changes.
+   */
+  shapes = [],
   imageAlt = "",
   imageAspectRatio = "portrait",
   imageRounded = true,
@@ -52,7 +60,7 @@ const imagePositionVertical = imageBleed ? "top" : "center";
 ---
 
 <CustomSection
-  class:list={["feature-split", className]}
+  class:list={["feature-split", shapes?.length > 0 && "has-pile", className]}
   label={sectionLabel}
   maxContentWidth={maxContentWidth}
   paddingHorizontal={paddingHorizontal}
@@ -91,8 +99,14 @@ const imagePositionVertical = imageBleed ? "top" : "center";
         {heading}
       </Heading>
       <Text
-        class="subtext"
-        style={subtextWidth ? `max-inline-size: ${Number(subtextWidth)}px; margin-inline: auto; justify-self: center` : undefined}        size={subtextSize}
+        class="subtext feature-split-subtext"
+        {/* A measure, not a centred block. The auto margins came from the
+            centred sections and are wrong in a split, where the header runs
+            from the column's left edge: they pushed the line in by half the
+            slack, so a 342 measure in a 592 column started at 245 and ran to
+            575 — straight under the pile. */}
+        style={subtextWidth ? `max-inline-size: ${Number(subtextWidth)}px` : undefined}
+        size={subtextSize}
         data-prop="subtext"
         text={subtext}
       />
@@ -104,6 +118,14 @@ const imagePositionVertical = imageBleed ? "top" : "center";
         data-children-prop="buttonSections"
       />
     </Fragment>
+    {shapes?.length > 0 ? (
+      <ShapePile
+        slot="second"
+        class="feature-split-pile"
+        shapes={shapes}
+        data-children-prop="shapes"
+      />
+    ) : (
     <Image
       slot="second"
       class="feature-split-image"
@@ -118,11 +140,64 @@ const imagePositionVertical = imageBleed ? "top" : "center";
       data-prop-src="imageSource"
       data-prop-alt="imageAlt"
     />
+    )}
   </Split>
 </CustomSection>
 
 <style is:global>
   @layer page-sections {
+    /* The design draws the pile 664 wide from x=495, where the media half of
+       a 1040 column starts nearer 530 — so it overhangs the copy column
+       rather than the columns being resized. The overlap is only over empty
+       space: the heading's block ends well above the cards that reach back
+       that far.
+
+       And it rests on the band's foot, not on the padding above it, which is
+       what makes it a pile on the floor rather than a pile in mid-air. */
+    /* The pile reaches back over the copy column, so the heading's own wrap is
+       what keeps the two apart — and `text-wrap: balance` was quietly changing
+       it. The design wraps "We don't think a website / should need this much /
+       looking after", which is what plain wrapping gives at any width over
+       500; balance evens the lines instead, at 322/415/462, and the long third
+       line ran under the cards. Only where there is a pile to collide with. */
+    /* The wrapper takes the measure; the paragraph inside it does not inherit
+       one, so it kept `max-inline-size: none` and its lines ran past the box
+       that was meant to hold them. Measure the leaf, style the leaf. */
+    .feature-split .feature-split-subtext > :where(p, .simple-text-inner) {
+      max-inline-size: 100%;
+    }
+
+    .feature-split.has-pile .heading,
+    .feature-split.has-pile .heading-inner {
+      text-wrap: wrap;
+    }
+
+    .feature-split .feature-split-pile {
+      /* A share of the pane, not a length: the panes shrink with the column
+         below 1096 and a fixed overhang would eat the copy. The media pane is
+         400 of the 1040 column, so 66% of it is the 264 that takes the pile to
+         the design's 664 starting at 496. */
+      --pile-overhang: 66%;
+      /* The design's band is 527 with the 340 pile on its foot, so 187 sits
+         above it, of which the band's own top padding is 80. Without the rest
+         the band came out 420, the pile rode up into the copy, and the heading
+         ran behind the card that reaches furthest back. */
+      --pile-headroom: 107px;
+
+      align-self: end;
+      margin-block-start: var(--pile-headroom);
+      inline-size: calc(100% + var(--pile-overhang));
+      margin-block-end: calc(-1 * var(--spacing-4xl));
+      margin-inline-start: calc(-1 * var(--pile-overhang));
+    }
+
+    /* Stacked, there is no copy column to reach back into. */
+    @media (max-width: 699px) {
+      .feature-split .feature-split-pile {
+        --pile-overhang: 0%;
+      }
+    }
+
     .feature-split-layout {
       container-type: inline-size;
     }

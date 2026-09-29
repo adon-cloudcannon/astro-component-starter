@@ -98,7 +98,54 @@ pageSections:
     heading: We don’t think a website should need this much looking after
     subtext: 'With a static site and Git you won’t need to worry about:'
     subtextSize: xl
+    subtextWidth: 342
     headingSize: lg
+    shapes:
+      - text: Uptime monitoring and security scanning
+        tone: golden
+        x: 351
+        'y': 0
+        width: 224
+        height: 171
+        rotation: 0
+      - text: Database backups
+        tone: coral
+        x: 55
+        'y': 70
+        width: 224
+        height: 116
+        rotation: -14.8
+      - text: '!'
+        tone: rust
+        round: true
+        lightText: true
+        x: 274
+        'y': 53
+        width: 78
+        height: 78
+        rotation: -14.8
+      - text: PHP and runtime version bumps
+        tone: golden
+        x: 0
+        'y': 208
+        width: 221
+        height: 132
+        rotation: 0
+      - text: Plugin updates, and the conflicts that follow them
+        tone: rust
+        lightText: true
+        x: 220
+        'y': 169
+        width: 221
+        height: 171
+        rotation: 0
+      - text: Emergency fixes at hours you’d rather be asleep
+        tone: coral
+        x: 440
+        'y': 169
+        width: 224
+        height: 171
+        rotation: 0
     background:
       type: pattern
       pattern: grid

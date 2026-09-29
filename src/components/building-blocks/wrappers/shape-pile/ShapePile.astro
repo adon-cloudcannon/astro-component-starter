@@ -1,0 +1,222 @@
+---
+/**
+ * A pile of labelled shapes that fall into place.
+ *
+ * The design draws the pile at rest: six shapes, each at its own position and
+ * angle, overlapping in a set order, with the text readable in every one. That
+ * is why this is scripted rather than simulated — a solver cannot be told to
+ * come to rest exactly here, so a real engine would give a different pile on
+ * every load and put the copy at angles nobody chose.
+ *
+ * What sells the fall instead is four cheap things: the shapes resting on the
+ * floor land before the ones resting on them, the drop accelerates rather than
+ * easing out, each one bounces a little on landing, and the tilt arrives a beat
+ * after the position.
+ *
+ * Positions are in the design's own units, inside a box the section scales as a
+ * whole, so the arrangement holds at any width.
+ */
+type Shape = {
+  text?: string;
+  /** Which of the three scratched sheets colours it. */
+  tone?: string;
+  /** Design units, from the top left of the pile box. */
+  x?: number;
+  y?: number;
+  width?: number;
+  height?: number;
+  /** Where it comes to rest, in degrees. */
+  rotation?: number;
+  round?: boolean;
+  lightText?: boolean;
+};
+
+const {
+  shapes = [],
+  /** The box the positions above are measured in. */
+  designWidth = 664,
+  designHeight = 340,
+  class: className,
+  "data-children-prop": childrenDataProp,
+  _component,
+  ...htmlAttributes
+} = Astro.props;
+
+const list: Shape[] = Array.isArray(shapes) ? shapes : [];
+
+/**
+ * Lowest edge falls first, which is the whole trick: a card that comes to rest
+ * on another has to arrive after it, or it lands on nothing.
+ *
+ * Worked out from the geometry rather than carried in the data, so an editor
+ * moving a shape does not also have to restate the order.
+ */
+const bottomOf = (shape: Shape) => (Number(shape.y) || 0) + (Number(shape.height) || 0);
+const byLowest = list
+  .map((shape, index) => ({ index, bottom: bottomOf(shape) }))
+  .sort((a, b) => b.bottom - a.bottom);
+const rank = new Map(byLowest.map((entry, position) => [entry.index, position]));
+
+const STAGGER_MS = 95;
+/** How far above its place a shape starts. */
+const RISE = 190;
+---
+
+<div
+  class:list={["shape-pile", className]}
+  style={`--pile-design-width: ${designWidth}; --pile-design-height: ${designHeight}`}
+  data-children-prop={childrenDataProp}
+  {...htmlAttributes}
+>
+  {list.map((shape, index) => (
+    <div
+      class:list={[
+        "shape-pile-shape",
+        `tone-${shape.tone || "golden"}`,
+        shape.round && "is-round",
+        shape.lightText && "is-light-text",
+      ]}
+      data-editable="array-item"
+      style={[
+        `--pile-x: ${((Number(shape.x) || 0) / designWidth) * 100}%`,
+        `--pile-y: ${((Number(shape.y) || 0) / designHeight) * 100}%`,
+        `--pile-w: ${((Number(shape.width) || 0) / designWidth) * 100}%`,
+        `--pile-h: ${((Number(shape.height) || 0) / designHeight) * 100}%`,
+        `--pile-rot: ${Number(shape.rotation) || 0}deg`,
+        /* It comes in at a steeper angle than it settles at, so the tilt is
+           still moving when the position has stopped. */
+        `--pile-tilt: ${(Number(shape.rotation) || 0) - 9}deg`,
+        `--pile-rise: ${-RISE}px`,
+        `--pile-delay: ${(rank.get(index) ?? 0) * STAGGER_MS}ms`,
+      ].join("; ")}
+    >
+      <span
+        class="shape-pile-text"
+        data-prop="text"
+      >
+        {shape.text}
+      </span>
+    </div>
+  ))}
+</div>
+
+<script>
+  import { onPageLoad } from "@component-utils/onPageLoad";
+  import { setupAllShapePiles } from "./setup";
+
+  onPageLoad(setupAllShapePiles);
+</script>
+
+<style is:global>
+  @layer components {
+    .shape-pile {
+      aspect-ratio: var(--pile-design-width) / var(--pile-design-height);
+      inline-size: 100%;
+      position: relative;
+    }
+
+    .shape-pile-shape {
+      align-items: center;
+      /* The sheet is the colour; the card's own pale fill sits under it and is
+         what shows through where the scratches are punched out. */
+      background-color: var(--pile-backing, #f9e6df);
+      background-position: center;
+      background-size: cover;
+      block-size: var(--pile-h);
+      border-radius: 19px;
+      display: flex;
+      inline-size: var(--pile-w);
+      inset-block-start: var(--pile-y);
+      inset-inline-start: var(--pile-x);
+      justify-content: center;
+      padding: var(--spacing-sm);
+      position: absolute;
+      rotate: var(--pile-rot);
+      text-align: center;
+    }
+
+    .shape-pile-shape.is-round {
+      border-radius: var(--radius-full);
+    }
+
+    .shape-pile-text {
+      color: #1d1b17;
+      font-size: clamp(0.75rem, 1.25vw, 1rem);
+      font-weight: var(--font-weight-body);
+      line-height: 1.25;
+    }
+
+    .shape-pile-shape.is-light-text > .shape-pile-text {
+      color: #ffffff;
+    }
+
+    .shape-pile-shape.tone-rust {
+      background-image: url("/src/assets/images/marketing/pile-texture-rust.webp");
+    }
+
+    .shape-pile-shape.tone-coral {
+      background-image: url("/src/assets/images/marketing/pile-texture-coral.webp");
+    }
+
+    .shape-pile-shape.tone-golden {
+      background-image: url("/src/assets/images/marketing/pile-texture-golden.webp");
+    }
+
+    /* Held back only where there is something to run the fall. Without this the
+       pile would be invisible to a reader with no scripting, and gating it on a
+       class the script adds instead shows the pile first and then hides it. */
+    @media (scripting: enabled) {
+      .shape-pile-shape {
+        opacity: 0;
+      }
+
+      .shape-pile[data-fallen] > .shape-pile-shape {
+        animation: shape-pile-drop 620ms var(--pile-delay) both;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .shape-pile-shape,
+      .shape-pile[data-fallen] > .shape-pile-shape {
+        animation: none;
+        opacity: 1;
+      }
+    }
+  }
+
+  /* Top level: a keyframes block nested inside a style rule is dropped without
+     a warning, which is how the workflow split's pulses came to sit still. */
+  @keyframes shape-pile-drop {
+    from {
+      /* Accelerating, the way a falling thing does. An ease-out here reads as
+         the shape being lowered into place rather than dropped. */
+      animation-timing-function: cubic-bezier(0.5, 0, 0.9, 0.4);
+      opacity: 0;
+      rotate: var(--pile-tilt);
+      translate: 0 var(--pile-rise);
+    }
+
+    8% {
+      opacity: 1;
+    }
+
+    58% {
+      animation-timing-function: cubic-bezier(0.25, 0, 0.3, 1);
+      opacity: 1;
+      rotate: var(--pile-rot);
+      translate: 0 0;
+    }
+
+    74% {
+      animation-timing-function: cubic-bezier(0.6, 0, 0.95, 0.5);
+      rotate: var(--pile-rot);
+      translate: 0 -9px;
+    }
+
+    to {
+      opacity: 1;
+      rotate: var(--pile-rot);
+      translate: 0 0;
+    }
+  }
+</style>
