@@ -53,6 +53,54 @@ pageSections:
     company: Firebrand
     linkText: Read case study
     authorImage: /src/assets/images/marketing/ellipse-287-2.png
+  - _component: page-sections/explainers/pinned-steps
+    heading: No more waiting on tickets
+    headingSize: lg
+    alignmentHorizontal: start
+    subtext: ''
+    eyebrow: ''
+    reverse: true
+    mediaWidth: wide
+    progressWidth: content
+    progressColor: golden
+    backgroundColor: base
+    colorScheme: dark
+    lockColorScheme: true
+    steps:
+      - number: '1'
+        contentSections:
+          - _component: building-blocks/core-elements/heading
+            text: Update the website right away
+            level: h3
+            size: sm
+          - _component: building-blocks/core-elements/text
+            text: >-
+              Change a headline, swap an image, or build a whole new page from components your
+              developers already built.
+            size: lg
+        mediaSections: []
+      - number: '2'
+        contentSections:
+          - _component: building-blocks/core-elements/heading
+            text: Preview before anyone else sees it
+            level: h3
+            size: sm
+          - _component: building-blocks/core-elements/text
+            text: >-
+              Every change gets a live preview. Share it, gather feedback, and sort things out while
+              the page is still private.
+            size: lg
+        mediaSections: []
+      - number: '3'
+        contentSections:
+          - _component: building-blocks/core-elements/heading
+            text: Publish when you’re ready
+            level: h3
+            size: sm
+          - _component: building-blocks/core-elements/text
+            text: Publish now or schedule it for later. Nothing goes live by accident.
+            size: lg
+        mediaSections: []
   - _component: page-sections/proof/testimonial-section
     text: >-
       You can have lots of concurrent pieces of work: a solutions page, a new case study layout, new

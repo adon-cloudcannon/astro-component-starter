@@ -252,3 +252,8 @@ stepScroll:
     Screens of scrolling each step holds for. Higher is slower, and the band
     is pinned for all of it, so high values read as the page not responding.
     1.1 is the default.
+number:
+  type: text
+  comment: >-
+    A step number shown above the copy. Decorative — it is hidden from screen
+    readers, which have the step's own label already.

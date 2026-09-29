@@ -183,6 +183,16 @@ const arrayDataAttributes = effectiveChildrenProp
             aria-roledescription="step"
             aria-label={`Step ${index + 1} of ${stepList.length}`}
           >
+            {step.number && (
+              /* Decorative: it repeats what the progress bar already says, so
+                 it is hidden rather than read out as another heading. */
+              <span
+                class="pinned-steps-step-number"
+                aria-hidden="true"
+              >
+                {step.number}
+              </span>
+            )}
             <Component contentSections={blocks(step.contentSections)} />
           </div>
         ))}
@@ -305,6 +315,17 @@ const arrayDataAttributes = effectiveChildrenProp
     /* Hard on the band's foot, the full width of the window, with the bar
        placed inside it. The design draws both variants 10 thick and sitting on
        the very bottom edge. */
+    /* The design draws it at 40 in white above the step's own title; the
+       nearest slot is Header 4 at 42. */
+    .pinned-steps-step-number {
+      display: block;
+      font-family: var(--font-family-heading);
+      font-size: var(--font-size-heading-md);
+      font-weight: var(--font-weight-heading-md);
+      line-height: 1;
+      margin-block-end: var(--spacing-lg);
+    }
+
     .pinned-steps-progress-rail {
       bottom: 0;
       inline-size: 100vw;
