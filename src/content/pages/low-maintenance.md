@@ -258,7 +258,10 @@ pageSections:
         iconPosition: after
         text: Book a demo
   - _component: page-sections/conversion/cta-banner
-    backgroundColor: brand
+    backgroundColor: base
+    background:
+      type: image
+      imageSource: /src/assets/images/marketing/cta-banner-scratch-brand.webp
     colorScheme: dark
     lockColorScheme: true
     heading: Wanna learn more about our product?

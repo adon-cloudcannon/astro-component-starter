@@ -42,7 +42,7 @@ const {
 ---
 
 <CustomSection
-  class:list={["cta-banner", className]}
+  class:list={["cta-banner", background?.type === "image" && "has-sheet", className]}
   label={sectionLabel}
   maxContentWidth={maxContentWidth}
   paddingHorizontal={paddingHorizontal}
@@ -85,14 +85,36 @@ const {
 </CustomSection>
 
 <style is:global>
-  /* The band clips nothing horizontally but the drawing runs past its bottom
-     edge, so the section itself cannot hide overflow.
-
-     Flat, because rules nested deeper than a couple of levels get dropped (see
+  /* Flat, because rules nested deeper than a couple of levels get dropped (see
      CLAUDE.md). */
   @layer page-sections {
+    /* The band clips, which is how the design draws it: the frame is set to
+       clip its contents and the drawing is 227 tall inside 217, so it is cut
+       off at the foot rather than hanging past it. Left to overhang it read as
+       a sticker sitting on the band instead of something behind its edge. */
     .cta-banner {
+      overflow: hidden;
       position: relative;
+    }
+
+    /* The band's fill is a sheet of brand blue with the scratches punched
+       clean through it, so whatever sits behind becomes the scratches. Backed
+       with the band's own blue they disappear; backed with the dark base they
+       come out black, which is what `backgroundColor: base` gives here because
+       the scheme is locked dark and `base` resolves with it. It wants the
+       page's own light ground, the way the design has the sheet sitting on the
+       cream page.
+
+       Two rules, because the colour layer is drawn AFTER the picture and so
+       paints over it — any background image under a background colour is
+       hidden. The sheet has to come back up on top of its own backing. */
+    .cta-banner.has-sheet .background {
+      background-color: var(--cta-banner-backing, #fffcf3);
+    }
+
+    .cta-banner.has-sheet .background-image {
+      position: absolute;
+      z-index: 1;
     }
 
     /* The drawing pins to the band, not to the column, so `.content` stays
@@ -118,7 +140,10 @@ const {
        column: it takes its own size and is pinned, not laid out. */
     .cta-banner .cta-banner-art {
       --space-before: 0;
-      inset-block-end: -0.625rem;
+      /* The design puts the drawing 3 below the band's foot and 7 above its
+         head, both cut off by the band. Flush would leave its base sitting on
+         the edge like a line. */
+      inset-block-end: -3px;
       /* Out to the edge of the window. CustomSection positions `.content` for
          its own background layer, so that is the containing block whatever
          this component does, and `inset-inline-end: 0` left the drawing a
