@@ -191,7 +191,11 @@ const arrayDataAttributes = effectiveChildrenProp
 
     {showProgress && stepList.length > 1 && (
       <div
-        class:list={["pinned-steps-progress-rail", `progress-${progressWidth}`]}
+        class:list={[
+          "pinned-steps-progress-rail",
+          `progress-${progressWidth}`,
+          { reversed: reverse },
+        ]}
         aria-hidden="true"
       >
         <div class="pinned-steps-progress">
@@ -321,6 +325,20 @@ const arrayDataAttributes = effectiveChildrenProp
       gap: var(--spacing-3xl);
       grid-template-columns: var(--pinned-steps-columns);
       inline-size: var(--pinned-steps-rail);
+    }
+
+    /* Reversed the same way the layout is, so the bar follows the copy to the
+       other side. Without it the rail kept `grid-column: 2` on the right while
+       the copy moved left, and Git's bar sat at 771 where the design draws it
+       at 0. The inline margins are direction-relative, so the gap it eats and
+       the edge it bleeds to swap with it — which is why the bar is NOT set
+       back to ltr here the way the layout's children are. Doing that resolves
+       its margins against its own direction again, and it came out 56 short of
+       the window instead of flush to it. The fill is unaffected either way:
+       `clip-path` is physical, so it grows from the left, which is the side
+       the design fills from in both directions. */
+    .pinned-steps-progress-rail.reversed {
+      direction: rtl;
     }
 
     /* Out to the window's edge. Written from the rail's own width rather than

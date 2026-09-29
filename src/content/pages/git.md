@@ -133,18 +133,24 @@ pageSections:
     backgroundColor: base
     colorScheme: dark
     lockColorScheme: true
-  - _component: page-sections/explainers/scroll-steps
+  - _component: page-sections/explainers/pinned-steps
+    heading: ''
+    subtext: ''
+    eyebrow: ''
     reverse: true
     mediaWidth: wide
-    progressStyle: bar
+    progressWidth: content
+    progressColor: moss
     background:
       type: pattern
       pattern: grid
       mask: fade
       fixed: true
+    backgroundColor: base
+    colorScheme: dark
+    lockColorScheme: true
     steps:
-      - _component: building-blocks/wrappers/scroll-stepper/scroll-stepper-step
-        contentSections:
+      - contentSections:
           - _component: building-blocks/core-elements/simple-text
             text: GIT FOR DEVELOPERS
             size: sm
@@ -158,15 +164,48 @@ pageSections:
               Your content gets the same treatment: branches, commits, reviews, and a history you
               can walk back through. You keep building locally, with the SSG and tooling you already
               use.
+            size: lg
           - _component: building-blocks/core-elements/button
             variant: text
             iconName: arrow-right
             iconPosition: after
+            textColor: sunset
             text: Learn more
         mediaSections: []
-    backgroundColor: base
-    colorScheme: dark
-    lockColorScheme: true
+      - contentSections:
+          - _component: building-blocks/core-elements/simple-text
+            text: GIT FOR EDITORS
+            size: sm
+            class: eyebrow
+          - _component: building-blocks/core-elements/heading
+            text: They don’t want to learn Git. They don’t have to.
+            level: h2
+            size: sm
+          - _component: building-blocks/core-elements/text
+            text: >-
+              Editors work on the page itself and see the change before it goes live. On the surface
+              it’s just a page with editable parts. Underneath it’s all branches and commits, and
+              every version sits in Git.
+            size: lg
+          - _component: building-blocks/core-elements/button
+            variant: text
+            iconName: arrow-right
+            iconPosition: after
+            textColor: sunset
+            text: Learn more
+        mediaSections: []
+      - contentSections:
+          - _component: building-blocks/core-elements/heading
+            text: Agents have full context
+            level: h2
+            size: sm
+          - _component: building-blocks/core-elements/text
+            text: >-
+              Point your coding agent at the project and it sees everything: code, content and
+              config as plain files in one repo. No API to learn first, no content stuck behind an
+              endpoint.
+            size: lg
+        mediaSections: []
   - _component: page-sections/proof/testimonial-section
     text: >-
       It’s important to me that CloudCannon is a Git-based CMS. I hate having a vendor lock with
@@ -243,6 +282,8 @@ pageSections:
       free in minutes, or book a demo and we’ll walk you through the real thing.
     subtextSize: lg
     imageSource: /src/assets/images/marketing/cloudcannon-truck-closed-1.png
+    imageReveal: /src/assets/images/marketing/cloudcannon-truck-open-1.png
+    imageRevealLabel: Open and close the truck's hood
     backgroundColor: brand
     headingSize: lg
     imageOverflow: 334

@@ -116,6 +116,8 @@ pageSections:
       free in minutes, or book a demo and we’ll walk you through the real thing.
     subtextSize: lg
     imageSource: /src/assets/images/marketing/cloudcannon-truck-closed-1.png
+    imageReveal: /src/assets/images/marketing/cloudcannon-truck-open-1.png
+    imageRevealLabel: Open and close the truck's hood
     backgroundColor: brand
     headingSize: lg
     imageOverflow: 336
