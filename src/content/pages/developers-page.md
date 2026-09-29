@@ -155,43 +155,73 @@ pageSections:
   - _component: page-sections/conversion/cta-center
     heading: The tool you’ve been looking for
     headingSize: lg
-  - _component: page-sections/explainers/feature-split
-    heading: Bring your own AI tooling
-    subtext: >-
-      Projects are local-first and Git-based, so the tools already in use just work. Open the repo
-      in any IDE and the agent has full project context: code, content, config, the lot.
-    subtextSize: lg
-    headingSize: sm
+  - _component: page-sections/explainers/pinned-steps
+    heading: ''
+    subtext: ''
+    eyebrow: ''
+    reverse: true
+    mediaWidth: wide
+    progressWidth: content
+    progressColor: pacific
     background:
       type: pattern
       pattern: grid
       mask: none
-    buttonSections:
-      - _component: building-blocks/core-elements/button
-        variant: text
-        iconName: arrow-right
-        iconPosition: after
-        text: Learn more
-      - _component: building-blocks/core-elements/button
-        variant: text
-        iconName: arrow-right
-        iconPosition: after
-        text: Cursor
-      - _component: building-blocks/core-elements/button
-        variant: text
-        iconName: arrow-right
-        iconPosition: after
-        text: GitHub Copilot
-      - _component: building-blocks/core-elements/button
-        variant: text
-        iconName: arrow-right
-        iconPosition: after
-        text: Claude Code
-      - _component: building-blocks/core-elements/button
-        variant: text
-        iconName: arrow-right
-        iconPosition: after
-        text: Your own model
+    steps:
+      - contentSections:
+          - _component: building-blocks/core-elements/heading
+            text: Bring your own AI tooling
+            level: h2
+            size: sm
+          - _component: building-blocks/core-elements/text
+            text: >-
+              Projects are local-first and Git-based, so the tools already in use just work. Open
+              the repo in any IDE and the agent has full project context: code, content, config,
+              the lot.
+            size: lg
+          - _component: building-blocks/core-elements/button
+            variant: text
+            iconName: arrow-right
+            iconPosition: after
+            textColor: sunset
+            text: Learn more
+        mediaSections: []
+      - contentSections:
+          - _component: building-blocks/core-elements/heading
+            text: No more quick copy requests
+            level: h2
+            size: sm
+          - _component: building-blocks/core-elements/text
+            text: >-
+              Editors shouldn’t need a developer to update a headline or swap an image. They manage
+              content themselves using the components already built, so there are no urgent
+              requests from marketing and no developer hours lost to copy tweaks.
+            size: lg
+          - _component: building-blocks/core-elements/button
+            variant: text
+            iconName: arrow-right
+            iconPosition: after
+            textColor: sunset
+            text: Learn more
+        mediaSections: []
+      - contentSections:
+          - _component: building-blocks/core-elements/heading
+            text: Craft the ideal editing interface
+            level: h2
+            size: sm
+          - _component: building-blocks/core-elements/text
+            text: >-
+              Complete control over how the team manages content. Customize inputs with a full range
+              of field types, and fine-tune roles and permissions for a secure, autonomous editing
+              experience.
+            size: lg
+          - _component: building-blocks/core-elements/button
+            variant: text
+            iconName: arrow-right
+            iconPosition: after
+            textColor: sunset
+            text: Learn more
+        mediaSections: []
   - _component: page-sections/conversion/cta-center
     heading: Own your content, always
     subtext: >-
