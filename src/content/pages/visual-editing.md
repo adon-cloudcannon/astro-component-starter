@@ -51,7 +51,7 @@ pageSections:
     background:
       type: pattern
       pattern: dots
-      mask: none
+      mask: fade
   - _component: page-sections/conversion/cta-center
     heading: Here, you don’t need to wait to make changes
     subtext: When something on the site needs updating, the person who noticed can just fix it.

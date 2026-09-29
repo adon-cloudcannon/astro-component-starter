@@ -222,7 +222,7 @@ pageSections:
     background:
       type: pattern
       pattern: grid
-      mask: bottom
+      mask: fade
     haze:
       - x: 0.4889
         rx: 366px
