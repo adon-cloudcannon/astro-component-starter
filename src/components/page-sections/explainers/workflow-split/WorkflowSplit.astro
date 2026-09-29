@@ -367,10 +367,12 @@ const panelList: PanelProps[] = Array.isArray(panels) ? panels : [];
       }
 
       /* Clipped to a whole number of rows, so the one arriving is cut by the
-         card's edge rather than half-drawn against it. Seven fit under the
-         header at the design's 366; the eighth is the one queued below. */
+         card's edge rather than half-drawn against it. Eight showing, with the
+         ninth queued below — the card takes its height from this, so changing
+         the count is the only place the size is set and the 20 of padding
+         stays even top and bottom on its own. */
       .workflow-centre-feed {
-        --workflow-rows-visible: 7;
+        --workflow-rows-visible: 8;
 
         block-size: calc(
           var(--workflow-rows-visible) * 30px + (var(--workflow-rows-visible) - 1) * 7px
