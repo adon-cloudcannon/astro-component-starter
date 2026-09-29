@@ -1,14 +1,14 @@
 /**
- * Swap in a CTA Split's second picture when the section is scrolled to.
+ * Swap in a CTA Split's second picture when the section is scrolled to, and
+ * let it be swapped back by hand after that.
  *
  * Used by `CtaSplit.astro`'s inline script and by `editor-live-sync.js`, where
  * inline scripts don't run. Without it the section shows the first picture and
  * nothing else happens, which is the right thing to degrade to.
  *
- * An IntersectionObserver rather than a `view()` timeline: this is a one-way
- * switch, not something that should run backwards as the reader scrolls up,
- * and a view timeline would tie the hood to the exact scroll position rather
- * than letting it open at its own pace.
+ * An IntersectionObserver rather than a `view()` timeline: the scroll opens it
+ * once, and from then on it is the reader's to open and close. A view timeline
+ * would keep hold of it and shut it again on the way back up.
  */
 
 /** How much of the picture has to be on screen before it changes. */
@@ -36,29 +36,48 @@ export function setupCtaSplitReveal(reveal: HTMLElement): void {
   if (reveal.hasAttribute("data-reveal-initialized")) return;
   reveal.setAttribute("data-reveal-initialized", "");
 
+  const setOpen = (open: boolean) => reveal.setAttribute("aria-pressed", String(open));
+
+  /**
+   * Seamless means never cutting to a picture that has not arrived. The second
+   * image is lazy, so on a fast scroll it can still be decoding when the band
+   * comes into view, and swapping then shows the band through it for a frame
+   * or two.
+   *
+   * Only worth waiting for when nobody asked. `decode()` does not settle at
+   * all until the image loads, so gating a *click* on it means a slow or
+   * failed picture leaves the reader pressing a button that does nothing —
+   * which is exactly what a hidden preview pane produced, where the lazy image
+   * is never fetched and the hood would not open however many times it was
+   * clicked. A click flips it now and wears the odd first frame.
+   */
+  const openWhenReady = () => {
+    const image = reveal.querySelector<HTMLImageElement>(".cta-split-reveal-top img");
+
+    Promise.resolve(image?.decode?.())
+      .catch(() => {})
+      .then(() => setOpen(true));
+  };
+
   const observer = new IntersectionObserver(
     (entries) => {
       for (const entry of entries) {
         if (!entry.isIntersecting) continue;
 
+        // The first arrival only. Left connected, scrolling away and back
+        // would re-open a picture the reader had just closed by hand.
         observer.disconnect();
-
-        // Seamless means never cutting to a picture that has not arrived. The
-        // second image is lazy, so on a fast scroll it can still be decoding
-        // when the section comes into view, and swapping then shows the band
-        // through it for a frame or two. `decode()` settles either way, so a
-        // failure here still swaps rather than leaving the hood shut.
-        const image = reveal.querySelector<HTMLImageElement>(".cta-split-reveal-top img");
-
-        Promise.resolve(image?.decode?.())
-          .catch(() => {})
-          .then(() => reveal.setAttribute("data-revealed", ""));
+        openWhenReady();
       }
     },
     { threshold: reachableThreshold(reveal) },
   );
 
   observer.observe(reveal);
+
+  reveal.addEventListener("click", () => {
+    setOpen(reveal.getAttribute("aria-pressed") !== "true");
+  });
 }
 
 export function setupAllCtaSplitReveals(root: ParentNode = document): void {

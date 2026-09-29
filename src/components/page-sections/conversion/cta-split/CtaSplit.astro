@@ -31,6 +31,8 @@ const {
    * draw the body between x 7 and 1591.
    */
   imageReveal = "",
+  /** What a reader who cannot see the swap is told the control does. */
+  imageRevealLabel = "Show the other view of this picture",
   imageAlt = "",
   reverse = false,
   /**
@@ -148,7 +150,21 @@ const bleedLimit = !imageBleed && overflow > 0 ? `${overflow}px` : undefined;
           />
         </div>
       ) : imageReveal ? (
-        <div class="cta-split-reveal">
+        <button
+          type="button"
+          class="cta-split-reveal"
+          aria-pressed="false"
+          aria-label={imageRevealLabel}
+        >
+          {/* A button rather than a div with a handler: it is a real toggle, so
+              it has to be reachable by keyboard and announce its state.
+              `aria-pressed` carries that state and the CSS reads the same
+              attribute, so there is one source of truth rather than a data
+              attribute sitting beside it.
+
+              The comment lives in here rather than above the element: a JSX
+              expression takes one root, and a comment before it is a second
+              one — "Expected `,` or `)` but found `type`". */}
           <Image
             source={imageSource}
             rounded={true}
@@ -167,7 +183,7 @@ const bleedLimit = !imageBleed && overflow > 0 ? `${overflow}px` : undefined;
             aspectRatio={imageAspectRatio}
             data-prop-src="imageReveal"
           />
-        </div>
+        </button>
       ) : (
         <Image
           source={imageSource}
@@ -202,7 +218,23 @@ const bleedLimit = !imageBleed && overflow > 0 ? `${overflow}px` : undefined;
        only the hood opens. Stacked in one grid cell rather than positioned, so
        the box still takes its height from the picture. */
     .cta-split .cta-split-reveal {
+      appearance: none;
+      background: none;
+      border: 0;
+      color: inherit;
+      cursor: pointer;
       display: grid;
+      font: inherit;
+      /* A button shrinks to its content where the div it replaced filled the
+         column, which left the picture at its own width and off to one side. */
+      inline-size: 100%;
+      padding: 0;
+      text-align: inherit;
+    }
+
+    .cta-split .cta-split-reveal:focus-visible {
+      outline: var(--focus-ring-width) var(--focus-ring-style) var(--color-focus-ring);
+      outline-offset: var(--spacing-xs);
     }
 
     /* flow puts a space-before on every child after the first, which here is
@@ -224,7 +256,7 @@ const bleedLimit = !imageBleed && overflow > 0 ? `${overflow}px` : undefined;
       opacity: 0;
     }
 
-    .cta-split .cta-split-reveal[data-revealed] > .cta-split-reveal-top {
+    .cta-split .cta-split-reveal[aria-pressed="true"] > .cta-split-reveal-top {
       opacity: 1;
     }
 
