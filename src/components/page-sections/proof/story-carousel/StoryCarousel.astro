@@ -199,6 +199,32 @@ const {
 <style is:global>
   @layer page-sections {
     .story-carousel {
+      /* The row breaks out of the content column, which is what makes the last
+         card read as "there is more" rather than as cut off.
+
+         The design draws the carousel's clip starting at the page gutter and a
+         full page wide, so it runs off the right edge of the frame: the first
+         card sits at 90 against the column's 120, and the fourth shows 230 of
+         itself. Clipped at the column instead, the fourth showed 68 and read
+         as broken. Body already hides horizontal overflow, so the right bleed
+         costs no scrollbar. */
+      .story-slides {
+        /* Carousel sets `width: 100%`, and a fixed width is not something a
+           negative margin can grow: the margins applied, the left edge moved
+           and the box stayed exactly the column's 1040, so the bleed did
+           nothing. This layer out-ranks `components`, so auto is enough. */
+        inline-size: auto;
+      }
+
+      /* The design draws no arrows at this width, so there is no measurement
+         to take from it. Carousel gives them 8px of its own `margin-top`,
+         which sits them right under the cards; this is not the flow layer, so
+         --space-before reaches nothing. A plain margin from `page-sections`
+         out-ranks the one in `components`. */
+      .story-slides .controls-wrapper {
+        margin-block-start: var(--spacing-xl);
+      }
+
       /* The cards are a fixed shape in the design, 300 wide by 380 tall, and
          the row is meant to run past the edge rather than fit. Without this
          the slides shrink to share the track and the cards come out narrow. */
@@ -280,6 +306,20 @@ const {
         :where(.simple-text-content, .simple-text-inner, p, span) {
           color: var(--color-brand);
         }
+      }
+    }
+
+    /* Only once the column has stopped growing with the window. Narrower than
+       that it is already a gutter from the edge, so a gutter of break-out puts
+       the first card flush against the screen. 1096 is the column plus its two
+       gutters, which is the width it stops being gutter-bound at.
+
+       Written flat rather than nested in the block above: a rule three levels
+       deep gets dropped without a warning. */
+    @media (min-width: 1096px) {
+      .story-carousel .story-slides {
+        margin-inline-end: calc(50% - 50vw);
+        margin-inline-start: calc(-1 * var(--spacing-gutter));
       }
     }
   }
