@@ -94,6 +94,34 @@ pageSections:
         author: editor
         message: 'content: hero copy'
         hash: a3f9c2
+      - kind: dev
+        author: dev
+        message: 'feat: pricing component'
+        hash: 7b1e44
+      - kind: editor
+        author: editor
+        message: 'content: new blog post'
+        hash: c0d8f1
+      - kind: dev
+        author: dev
+        message: 'refactor: nav links'
+        hash: 2f90ab
+      - kind: editor
+        author: editor
+        message: 'content: new team member'
+        hash: c0d8f1
+      - kind: editor
+        author: editor
+        message: 'content: new blog post'
+        hash: c0d8f1
+      - kind: dev
+        author: dev
+        message: 'feat: new page'
+        hash: 7b1e44
+      - kind: dev
+        author: dev
+        message: 'feat: chatbot install'
+        hash: 7b1e44
     heading: Two workflows. One source of truth.
     subtext: >-
       Editors edit visually, developers stay in code — and every change lands in the same Git
