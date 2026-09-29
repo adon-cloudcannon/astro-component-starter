@@ -76,19 +76,21 @@ export function setupScrollDeck(deck: HTMLElement): void {
   // must ACTUALLY scroll — the site sets `overflow-x: hidden` on body, which
   // computes `overflow-y: auto`, so testing the computed value alone picks body
   // on every real page.
-  const scrollportTop = (): number => {
+  const scrollport = (): HTMLElement | null => {
     let el = deck.parentElement;
 
     while (el && el !== document.body && el !== document.documentElement) {
       const overflowY = getComputedStyle(el).overflowY;
 
       if ((overflowY === "auto" || overflowY === "scroll") && el.scrollHeight > el.clientHeight) {
-        return el.getBoundingClientRect().top;
+        return el;
       }
       el = el.parentElement;
     }
-    return 0;
+    return null;
   };
+
+  const scrollportTop = (): number => scrollport()?.getBoundingClientRect().top ?? 0;
 
   let active = -1;
 
@@ -160,6 +162,67 @@ export function setupScrollDeck(deck: HTMLElement): void {
 
     update();
   };
+
+  // The rail cannot navigate as a plain anchor jump. Every card is sticky in
+  // one shared containing block, so once the stack is pinned they all sit at
+  // the top of the scrollport at once: the target of an earlier card is already
+  // in view and the browser has nothing to scroll to. Measured on the homepage
+  // deck, clicking dot 1 from card 3 moved the page 144px the WRONG way, while
+  // clicking downwards worked, which is what reads as "it only goes forwards".
+  //
+  // The offset that makes a card active is where its NATURAL top reaches its
+  // sticky top, and `offsetTop` reports the stuck position rather than that
+  // one. Unsticking the cards for a single synchronous read is the cheapest way
+  // to recover it, and it only happens on a click.
+  const scrollOffsets = (): number[] => {
+    cards.forEach((card) => card.style.setProperty("position", "static"));
+    const natural = cards.map((card) => card.offsetTop);
+    cards.forEach((card) => card.style.removeProperty("position"));
+
+    const port = scrollport();
+    const deckTop = deck.getBoundingClientRect().top;
+    const deckOffset = port
+      ? deckTop - port.getBoundingClientRect().top + port.scrollTop
+      : deckTop + window.scrollY;
+
+    return cards.map((card, index) => {
+      const stickyTop = parseFloat(getComputedStyle(card).top);
+
+      // A pixel past the threshold, so the card is decidedly the active one
+      // rather than sitting exactly on the line `update()` tests.
+      return deckOffset + natural[index] - (Number.isNaN(stickyTop) ? 0 : stickyTop) + 1;
+    });
+  };
+
+  const goTo = (index: number, behavior: ScrollBehavior) => {
+    const target = scrollOffsets()[index];
+
+    if (target === undefined) return;
+    (scrollport() ?? window).scrollTo({ top: target, behavior });
+  };
+
+  links.forEach((link, index) => {
+    link.addEventListener("click", (event) => {
+      if (event.defaultPrevented || event.metaKey || event.ctrlKey || event.shiftKey) return;
+
+      event.preventDefault();
+      goTo(
+        index,
+        matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth",
+      );
+
+      // Keeps the link shareable without letting the hash change scroll the
+      // page back to the stuck position we just scrolled away from.
+      history.replaceState(null, "", link.getAttribute("href"));
+    });
+  });
+
+  // Landing on the page with a card's hash has the same problem, one frame
+  // later: the browser has already jumped to the stuck position by the time
+  // this runs, so the deck opens on the wrong card.
+  const landed = links.findIndex((link) => link.getAttribute("href") === location.hash);
+
+  if (landed >= 0) requestAnimationFrame(() => goTo(landed, "auto"));
 
   document.addEventListener("scroll", onScroll, { capture: true, passive: true });
   update();
