@@ -18,8 +18,6 @@ pageSections:
     background:
       type: pattern
       pattern: grid
-      patternPitch: 40
-      patternDot: 6
       mask: none
     haze:
       - x: 0.1492
@@ -131,8 +129,6 @@ pageSections:
     background:
       type: pattern
       pattern: dots
-      patternPitch: 33
-      patternDot: 4.2
       mask: fade
     haze:
       - x: 0.5086
@@ -367,8 +363,6 @@ pageSections:
     background:
       type: pattern
       pattern: grid
-      patternPitch: 40
-      patternDot: 6
       mask: fade
   - _component: page-sections/proof/testimonial-section
     text: I almost forgot that website maintenance was a thing.
@@ -431,8 +425,6 @@ pageSections:
     background:
       type: pattern
       pattern: grid
-      patternPitch: 40
-      patternDot: 6
       mask: top
     buttonSections:
       - _component: building-blocks/core-elements/button

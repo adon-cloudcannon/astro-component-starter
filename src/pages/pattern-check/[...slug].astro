@@ -18,59 +18,66 @@ export function getStaticPaths() {
   return import.meta.env.DEV ? [{ params: { slug: undefined } }] : [];
 }
 
-const ALTERNATIVES = [4.2, 5, 6];
+const DOTS = { type: "pattern", pattern: "dots", mask: "none" };
+const GRID = { type: "pattern", pattern: "grid", mask: "none" };
 
 const ROWS = [
   {
-    name: "Sand dots",
+    name: "Dots",
     design: "dots-40",
     note: "Visual Editing hero, High Performance CTA, Low Maintenance hero, Git testimonial",
     count: 8,
     backgroundColor: "surface",
-    background: { type: "pattern", pattern: "dots", patternPitch: 40, patternDot: 6, mask: "none" },
+    background: DOTS,
   },
   {
-    name: "Pegboard",
+    name: "Dots — was the pegboard",
     design: "pegboard-33",
     note: "Homepage “Two workflows”, Agencies “Here to help you succeed”",
-    caveat: "design sample is the band's top-left corner — it hazes in the middle and fades at the foot, so there is no clean patch anywhere else",
     count: 2,
     backgroundColor: "surface",
-    background: { type: "pattern", pattern: "dots", patternPitch: 33, patternDot: 4.2, mask: "none" },
+    background: DOTS,
+    diverges:
+      "the design draws these at a 33px pitch with a 4.2px dot, and a step lighter in Golden 150. Deliberately the same dots as every other band — three near-identical dot patterns is not a choice worth handing an editor.",
+    caveat:
+      "design sample is the band’s top-left corner — it hazes in the middle and fades at the foot, so there is no clean patch anywhere else",
   },
   {
-    name: "Dark dots",
+    name: "Dots on dark",
     design: "darkdots-21",
     note: "the case-study quote band on AI Ready, Low Maintenance, Content Editors, Partner Program",
     count: 4,
     backgroundColor: "base",
     colorScheme: "dark",
-    background: { type: "pattern", pattern: "dots", patternPitch: 21, patternDot: 4.1, mask: "none" },
+    background: DOTS,
+    diverges:
+      "the design draws these at a 21px pitch with a 4.1px dot, so ours are sparser and larger. Same call as the row above.",
   },
   {
-    name: "Sand grid",
+    name: "Grid",
     design: "grid-40",
     note: "most heroes",
     count: 19,
-    background: { type: "pattern", pattern: "grid", patternPitch: 40, mask: "none" },
+    background: GRID,
   },
   {
     name: "Grid on dark sand",
     design: "grid-darksand",
     note: "AI Ready “Give AI the full picture” — the band that started this",
-    caveat: "the design's ground is #F3ECDC and we paint --dark-sand #EBE1C9; nothing in the palette is that colour",
     count: 1,
     backgroundColor: "muted",
-    background: { type: "pattern", pattern: "grid", patternPitch: 40, mask: "none" },
+    background: GRID,
+    caveat:
+      "the design’s ground is #F3ECDC and we paint --dark-sand #EBE1C9; nothing in the palette is that colour. Still open.",
   },
   {
-    name: "Dark grid",
+    name: "Grid on dark",
     design: "grid-dark",
     note: "every dark band; fades out down the band in place",
     count: 8,
     backgroundColor: "base",
     colorScheme: "dark",
-    background: { type: "pattern", pattern: "grid", patternPitch: 40, mask: "none" },
+    background: GRID,
   },
 ];
 
@@ -101,11 +108,12 @@ const coverage = (pitch: number, dot: number) =>
             <p class="where">
               {row.count} {row.count === 1 ? "band" : "bands"} &middot; {row.note}
             </p>
+            {row.diverges && <p class="diverges">{row.diverges}</p>}
             {row.caveat && <p class="caveat">{row.caveat}</p>}
             <p class="nums">
               {row.background.pattern === "dots"
-                ? `${row.background.patternPitch}px pitch, ${row.background.patternDot}px dot — ${coverage(row.background.patternPitch, row.background.patternDot).toFixed(2)}% ink`
-                : `${row.background.patternPitch}px pitch, 2px rule`}
+                ? `40px pitch, 6px dot — ${coverage(40, 6).toFixed(2)}% ink`
+                : "40px pitch, 2px rule"}
             </p>
           </div>
 
@@ -128,31 +136,6 @@ const coverage = (pitch: number, dot: number) =>
             </div>
           </figure>
 
-          {row.background.pattern === "dots" && (
-            <div class="alts">
-              <figcaption>if the dot were</figcaption>
-              <div class="alt-row">
-                {ALTERNATIVES.map((dot) => (
-                  <figure class="alt">
-                    <div class="slice narrow">
-                      <CustomSection
-                        background={{ ...row.background, patternDot: dot }}
-                        backgroundColor={row.backgroundColor}
-                        colorScheme={row.colorScheme}
-                        lockColorScheme={!!row.colorScheme}
-                        paddingVertical="none"
-                        paddingHorizontal="none"
-                      />
-                    </div>
-                    <figcaption>
-                      {dot}px
-                      {dot === row.background.patternDot && <b> &larr; now</b>}
-                    </figcaption>
-                  </figure>
-                ))}
-              </div>
-            </div>
-          )}
         </section>
       ))
     }
@@ -190,7 +173,7 @@ const coverage = (pitch: number, dot: number) =>
     border-top: 1px solid #e7e3da;
     display: grid;
     gap: 20px;
-    grid-template-columns: 196px 300px 300px 1fr;
+    grid-template-columns: 300px 300px 300px 1fr;
     padding: 20px 0;
   }
 
@@ -204,6 +187,15 @@ const coverage = (pitch: number, dot: number) =>
     font-size: 12px;
     line-height: 1.45;
     margin: 0 0 6px;
+  }
+
+  body.check .diverges {
+    background: #eef2ff;
+    color: #2a3a7a;
+    font-size: 11px;
+    line-height: 1.4;
+    margin: 0 0 6px;
+    padding: 4px 6px;
   }
 
   body.check .caveat {

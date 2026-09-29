@@ -43,8 +43,6 @@ const {
   fixed = false,
   patternSize = "natural",
   pattern = "",
-  patternPitch = 0,
-  patternDot = 0,
   mask = bgType === "pattern" ? "frame" : "none",
 } = background || {};
 
@@ -120,8 +118,6 @@ const arrayDataAttributes =
         aria-hidden="true"
         style={{
           ...(patternImageUrl ? { backgroundImage: `url("${patternImageUrl}")` } : {}),
-          ...(patternPitch ? { "--pattern-pitch": `${patternPitch}px` } : {}),
-          ...(patternDot ? { "--pattern-dot": `${patternDot}px` } : {}),
         }}
       />
     )}
@@ -453,13 +449,18 @@ const arrayDataAttributes =
         }
 
         > .background-pattern {
-          /* The pitch the design draws both patterns on. The grid's rule is
-             2px, solid, with no anti-aliasing of its own — read straight off
-             the tile, where it sits at x=38,39 of 40 — and a dot is 6px
-             across at the usual 40px pitch. Size and spacing are separate
-             because the design varies them separately: its two denser dot
-             patterns both draw about 4.2px, at 33 and at 21. A band sets
-             --pattern-pitch and --pattern-dot rather than needing a file. */
+          /* One pitch, one rule, one dot, for every band.
+
+             The design is not actually this consistent — it draws dots at 40,
+             33 and 21, with a 6px dot on the first and about 4.2 on the other
+             two — but those are near-identical patterns, and carrying them
+             meant every band had to choose between them. Deliberately dropped:
+             one dots and one grid is the whole set. See CLAUDE.md.
+
+             The numbers themselves are measured. The rule is 2px solid with no
+             anti-aliasing of its own, read off the tile this replaced where it
+             sits at x=38,39 of 40; the dot is 6px across. Overridable in CSS
+             if a band ever genuinely needs it, but not from content. */
           --pattern-pitch: 40px;
           --pattern-rule: 2px;
           --pattern-dot: 6px;

@@ -17,8 +17,6 @@ pageSections:
     background:
       type: pattern
       pattern: grid
-      patternPitch: 40
-      patternDot: 6
       mask: none
     haze:
       - x: 0.1123
@@ -83,8 +81,6 @@ pageSections:
     background:
       type: pattern
       pattern: grid
-      patternPitch: 40
-      patternDot: 6
       mask: fade
     buttonSections:
       - _component: building-blocks/core-elements/button
@@ -178,8 +174,6 @@ pageSections:
     background:
       type: pattern
       pattern: grid
-      patternPitch: 40
-      patternDot: 6
       mask: top
     buttonSections:
       - _component: building-blocks/core-elements/button
@@ -228,8 +222,6 @@ pageSections:
     background:
       type: pattern
       pattern: grid
-      patternPitch: 40
-      patternDot: 6
       mask: bottom
     haze:
       - x: 0.4889

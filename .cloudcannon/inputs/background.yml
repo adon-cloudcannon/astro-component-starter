@@ -42,8 +42,6 @@ background:
           value:
             type: pattern
             pattern: grid
-            patternPitch: 40
-            patternDot: 6
             mask: none
             overlay: 0
 background.type:
@@ -172,17 +170,3 @@ background.pattern:
         name: Grid
       - id: dots
         name: Dots
-
-background.patternPitch:
-  type: number
-  label: Pattern spacing
-  comment: >-
-    Distance between rules, or between dots, in pixels. The design draws most
-    bands at 40; its denser ones are 33 and 21.
-
-background.patternDot:
-  type: number
-  label: Dot size
-  comment: >-
-    How wide a dot is, in pixels. Ignored by the grid. The design draws 6 at
-    the usual 40px spacing and about 4.2 on both of its tighter ones.

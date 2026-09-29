@@ -17,8 +17,6 @@ pageSections:
     background:
       type: pattern
       pattern: dots
-      patternPitch: 40
-      patternDot: 6
       mask: none
     haze:
       - x: 0.2563
@@ -71,8 +69,6 @@ pageSections:
     background:
       type: pattern
       pattern: dots
-      patternPitch: 21
-      patternDot: 4.1
       mask: none
     backgroundColor: base
     colorScheme: dark

@@ -17,8 +17,6 @@ pageSections:
     background:
       type: pattern
       pattern: dots
-      patternPitch: 40
-      patternDot: 6
       mask: none
     backgroundColor: surface
     haze:
@@ -104,8 +102,6 @@ pageSections:
     background:
       type: pattern
       pattern: grid
-      patternPitch: 40
-      patternDot: 6
       mask: none
     haze:
       - x: 0.2342
@@ -126,8 +122,6 @@ pageSections:
     background:
       type: pattern
       pattern: grid
-      patternPitch: 40
-      patternDot: 6
       mask: fade
   - _component: page-sections/explainers/scroll-steps
     reverse: false
@@ -162,8 +156,6 @@ pageSections:
     background:
       type: pattern
       pattern: dots
-      patternPitch: 21
-      patternDot: 4.1
       mask: none
     backgroundColor: base
     colorScheme: dark
