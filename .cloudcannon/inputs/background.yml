@@ -42,6 +42,7 @@ background:
           value:
             type: pattern
             pattern: grid
+            fixed: false
             mask: none
             overlay: 0
 background.type:
@@ -80,8 +81,11 @@ background.positionHorizontal:
         name: Right
 background.fixed:
   type: switch
-  label: Fixed background (parallax)
-  comment: Pins the image in place while the page scrolls past.
+  label: Hold the background still
+  comment: >-
+    Keeps the background where it is while the page scrolls past it, clipped to
+    the band. On an image that reads as parallax; on a colour or a pattern it is
+    the band holding still while its own content moves through it.
 background.priority:
   type: switch
   label: Prioritize image load

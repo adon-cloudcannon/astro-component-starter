@@ -142,6 +142,11 @@ pageSections:
         iconPosition: after
         text: Learn about Git-based CMS
   - _component: page-sections/explainers/feature-deck
+    background:
+      type: pattern
+      pattern: grid
+      mask: fade
+      fixed: true
     subtextSize: lg
     backgroundColor: base
     subtextWidth: 480
@@ -360,10 +365,6 @@ pageSections:
     colorScheme: dark
     lockColorScheme: true
     cardColorScheme: light
-    background:
-      type: pattern
-      pattern: grid
-      mask: fade
   - _component: page-sections/proof/testimonial-section
     text: I almost forgot that website maintenance was a thing.
     authorName: Sindre Gusdal
