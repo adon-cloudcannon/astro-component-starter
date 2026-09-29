@@ -57,6 +57,18 @@ subtextWidth:
   comment: >-
     Measure for the supporting line, in pixels. The design sets a centred one
     at about 580 rather than the full column. Leave empty for the full width.
+imageReveal:
+  type: image
+  comment: >-
+    A second picture that fades in over the first when the section is scrolled
+    to. Use the same size and framing as the image beside the copy, or the
+    change reads as a jump.
+  options:
+    paths:
+      uploads: src/assets/images
+      static: ""
+    resize_style: contain
+    width: 1920
 imageSource:
   type: image
   comment: Image shown beside the copy.
