@@ -119,7 +119,20 @@ pageSections:
         iconName: arrow-right
         iconPosition: after
         text: How we’re ready for AI
-  - _component: page-sections/builders/custom-section
+  - _component: page-sections/explainers/feature-split
+    buttonSections:
+      - _component: building-blocks/core-elements/button
+        variant: text
+        iconName: arrow-right
+        iconPosition: after
+        text: Learn more
+    imageSource: ''
+    heading: A platform that wins pitches
+    subtext: >-
+      Clients own their content outright. It lives in their repo as files, not locked in a database.
+      They’re never tied to a platform, and neither are you.
+    subtextSize: lg
+    headingSize: sm
     background:
       type: pattern
       pattern: grid
