@@ -137,6 +137,11 @@ pageSections:
     reverse: true
     mediaWidth: wide
     progressStyle: bar
+    background:
+      type: pattern
+      pattern: grid
+      mask: fade
+      fixed: true
     steps:
       - _component: building-blocks/wrappers/scroll-stepper/scroll-stepper-step
         contentSections:
@@ -162,10 +167,6 @@ pageSections:
     backgroundColor: base
     colorScheme: dark
     lockColorScheme: true
-    background:
-      type: pattern
-      pattern: grid
-      mask: fade
   - _component: page-sections/proof/testimonial-section
     text: >-
       It’s important to me that CloudCannon is a Git-based CMS. I hate having a vendor lock with
