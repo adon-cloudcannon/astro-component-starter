@@ -19,43 +19,48 @@ type Pinned = HTMLElement & {
 };
 
 function setActive(stepper: Pinned, index: number): void {
-  const groups = [
-    [...stepper.querySelectorAll<HTMLElement>(".pinned-steps-panel")],
-    [...stepper.querySelectorAll<HTMLElement>(".pinned-steps-step")],
-    [...stepper.querySelectorAll<HTMLElement>(".pinned-steps-progress-segment")],
-  ];
-
-  for (const group of groups) {
-    group.forEach((item, itemIndex) => {
-      // The bar fills up to and including the step you are on; the columns
-      // show only it.
-      const on = item.classList.contains("pinned-steps-progress-segment")
-        ? itemIndex <= index
-        : itemIndex === index;
+  for (const selector of [".pinned-steps-panel", ".pinned-steps-step"]) {
+    stepper.querySelectorAll<HTMLElement>(selector).forEach((item, itemIndex) => {
+      const on = itemIndex === index;
 
       item.toggleAttribute("data-active", on);
-      if (!item.classList.contains("pinned-steps-progress-segment")) {
-        item.setAttribute("aria-hidden", String(!on));
-      }
+      item.setAttribute("aria-hidden", String(!on));
     });
   }
 }
 
-/** How far the stage has travelled inside the runway, 0 to 1. */
-function progressOf(stepper: Pinned): number {
+/**
+ * How far the stage has slid inside its runway.
+ *
+ * `offset` is how far it has travelled in pixels and is 0 until the band
+ * actually pins, which is what tells the bar it has not been reached yet.
+ * `progress` is the same thing as a fraction, and decides which step shows.
+ *
+ * Both are measured stage-against-runway rather than against the viewport, so
+ * the sticky offset never has to be known or resolved here.
+ */
+function travelOf(stepper: Pinned): { pinned: boolean; progress: number } {
   const stage = stepper.querySelector<HTMLElement>(".pinned-steps-stage");
 
-  if (!stage) return 0;
+  if (!stage) return { pinned: false, progress: 0 };
 
   const runway = stepper.getBoundingClientRect();
   const stageBounds = stage.getBoundingClientRect();
-  // Measured stage-against-runway rather than against the viewport, so the
-  // sticky offset never has to be known or resolved here.
   const travel = runway.height - stageBounds.height;
+  // Whether the band has actually been reached, which is what the bar waits
+  // for. Not "has the stage moved inside the runway": the stage starts below
+  // the runway's top by its own space-before, so that was true before the
+  // reader had seen the band at all and the bar was pre-filled on arrival.
+  // `top` is a real property, so it resolves to pixels.
+  const pin = Number.parseFloat(getComputedStyle(stage).top) || 0;
+  const pinned = stageBounds.top <= pin + 1;
 
-  if (travel <= 0) return 0;
+  if (travel <= 0) return { pinned, progress: 0 };
 
-  return Math.max(0, Math.min(1, (stageBounds.top - runway.top) / travel));
+  return {
+    pinned,
+    progress: Math.max(0, Math.min(1, (stageBounds.top - runway.top) / travel)),
+  };
 }
 
 function teardown(stepper: Pinned): void {
@@ -110,12 +115,24 @@ function setupPinnedSteps(stepper: Pinned): void {
       return;
     }
 
-    const progress = progressOf(stepper);
-    // The last step holds to the end rather than for a share of the runway, so
-    // the sequence finishes on it instead of flicking past.
+    const { pinned, progress } = travelOf(stepper);
+    // An even share of the runway each. How long a slide lasts is the runway's
+    // job, set in one place on the band, rather than something weighted here.
+    // The last step holds to the end rather than for a share of it, so the
+    // sequence finishes on it instead of flicking past.
     const index = Math.min(steps.length - 1, Math.floor(progress * steps.length));
 
     setActive(stepper, index);
+
+    // One bar, filled to the step you are on, and empty until the band has
+    // pinned. Scrolled up to but not yet reached, it would otherwise already
+    // show the first step's share, which reads as having missed something.
+    // Written as a whole value rather than through a custom property, or the
+    // transition never fires and it sticks at whatever it first computed.
+    const filled = pinned ? (index + 1) / steps.length : 0;
+    const fill = stepper.querySelector<HTMLElement>(".pinned-steps-progress-fill");
+
+    if (fill) fill.style.clipPath = `inset(0 ${(1 - filled) * 100}% 0 0)`;
   };
 
   stepper.__pinnedStepsOnScroll = onScroll;

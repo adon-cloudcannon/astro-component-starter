@@ -171,6 +171,7 @@ pageSections:
             variant: text
             iconName: arrow-right
             iconPosition: after
+            textColor: sunset
             text: Learn more
         mediaSections: []
       - contentSections:
@@ -187,6 +188,7 @@ pageSections:
             variant: text
             iconName: arrow-right
             iconPosition: after
+            textColor: sunset
             text: Learn more
         mediaSections: []
     alignmentHorizontal: center

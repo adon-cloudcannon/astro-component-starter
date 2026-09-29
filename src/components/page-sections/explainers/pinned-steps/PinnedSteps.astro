@@ -165,13 +165,7 @@ const arrayDataAttributes = effectiveChildrenProp
         class="pinned-steps-progress"
         aria-hidden="true"
       >
-        {stepList.map((_step, index) => (
-          <span
-            class="pinned-steps-progress-segment"
-            data-index={index}
-            data-active={index === 0 ? "" : undefined}
-          />
-        ))}
+        <span class="pinned-steps-progress-fill" />
       </div>
     )}
   </CustomSection>
@@ -180,10 +174,17 @@ const arrayDataAttributes = effectiveChildrenProp
 <style is:global>
   @layer page-sections {
     .pinned-steps {
-      /* The runway. One screen of scroll per step is what the sequence is
-         read off, and it is the only thing that decides how long the band
-         holds — not the height of whatever is in the media. */
-      min-height: calc(var(--pinned-steps-count, 1) * 100dvh);
+      /* The runway, and the only thing that decides how long the band holds:
+         not the height of whatever is in the media.
+
+         One screen of scroll per step, plus a screen for the stage itself,
+         which works out at about a viewport of scrolling to advance one slide.
+         Split evenly rather than pausing on the first — a hold that only the
+         first step gets is a special case, and how long a slide lasts is one
+         number. Raise --pinned-steps-step-scroll on a band that wants longer. */
+      min-height: calc(
+        100dvh + var(--pinned-steps-count, 1) * var(--pinned-steps-step-scroll, 100dvh)
+      );
       position: relative;
     }
 
@@ -251,26 +252,36 @@ const arrayDataAttributes = effectiveChildrenProp
        given the viewport's width instead: that holds whatever the section's
        own padding and max-width happen to be. */
     .pinned-steps-progress {
+      background-color: color-mix(in srgb, var(--sunset) 22%, transparent);
+      block-size: 6px;
       bottom: 0;
-      display: grid;
-      gap: 8px;
-      grid-auto-columns: 1fr;
-      grid-auto-flow: column;
       inline-size: 100vw;
       left: 50%;
+      overflow: hidden;
       position: absolute;
       transform: translateX(-50%);
       z-index: var(--layer-2);
     }
 
-    .pinned-steps-progress-segment {
-      background-color: color-mix(in srgb, var(--sunset) 22%, transparent);
-      block-size: 6px;
-      transition: background-color var(--duration-md, 0.3s) var(--ease-smooth);
+    /* Held at 0 until the band actually pins, so a reader who has not reached
+       it yet sees an empty bar rather than one already a step in. The driver
+       then jumps it to the first step's share and this slides it there, which
+       is the only animation in the block.
 
-      &[data-active] {
-        background-color: var(--sunset);
-      }
+       Revealed with clip-path, and the driver writes the whole value rather
+       than feeding a custom property into it. A transition never fires when
+       what it would animate is derived from an unregistered custom property:
+       `scaleX(var(--pinned-steps-progress))` stayed at its initial 0 whatever
+       the variable did, and a `calc()` on the same variable then stuck at the
+       first value it happened to compute. A concrete value transitions the way
+       anything else does, and clipping leaves the fill at full width so
+       nothing is laid out again. */
+    .pinned-steps-progress-fill {
+      background-color: var(--sunset);
+      block-size: 100%;
+      clip-path: inset(0 100% 0 0);
+      display: block;
+      transition: clip-path var(--duration-lg, 0.5s) var(--ease-smooth, ease);
     }
 
     /* One column, everything visible, nothing pinned. The sequence is a
@@ -315,7 +326,7 @@ const arrayDataAttributes = effectiveChildrenProp
     @media (prefers-reduced-motion: reduce) {
       .pinned-steps-panel,
       .pinned-steps-step,
-      .pinned-steps-progress-segment {
+      .pinned-steps-progress-fill {
         transition: none;
       }
     }
