@@ -77,6 +77,11 @@ const {
    */
   centreIconName = "",
   centreTitle = "",
+  /**
+   * The branch the panel is showing, with a status light before it. Closing
+   * the header row the way a Git client does.
+   */
+  centreBranch = "",
   centreSections = [],
   sectionLabel,
   maxContentWidth = "xl",
@@ -223,6 +228,12 @@ const panelList: PanelProps[] = Array.isArray(panels) ? panels : [];
                 <p class="workflow-centre-title">
                   {centreIconName && <Icon name={centreIconName} size="md" />}
                   {centreTitle && <span data-prop="centreTitle">{centreTitle}</span>}
+                  {centreBranch && (
+                    <span class="workflow-centre-branch">
+                      <span class="workflow-centre-light" aria-hidden="true" />
+                      <span data-prop="centreBranch">{centreBranch}</span>
+                    </span>
+                  )}
                 </p>
               )}
               <Component contentSections={centreSections} />
@@ -301,6 +312,33 @@ const panelList: PanelProps[] = Array.isArray(panels) ? panels : [];
           color: currentcolor;
           flex: none;
         }
+      }
+
+      /* Closes the header row, pushed over by its own auto margin rather than
+         by spacing the row apart, so the icon and title stay together.
+
+         Fragment Mono is what the design sets it in, and the site already
+         carries that face as --font-mono. The two colours are literals: this
+         is chrome inside a panel depicting a Git client, and neither is in the
+         palette — the dot's nearest token is --moss-400, an olive, a hundred
+         away from this traffic-light green. */
+      .workflow-centre-branch {
+        align-items: center;
+        color: var(--workflow-branch-color, #cfd2e8);
+        display: flex;
+        font-family: var(--font-mono);
+        font-size: 10.5px;
+        font-weight: 400;
+        gap: 0.65em;
+        margin-inline-start: auto;
+      }
+
+      .workflow-centre-light {
+        background-color: var(--workflow-branch-light, #28c840);
+        block-size: 7px;
+        border-radius: var(--radius-full);
+        flex: none;
+        inline-size: 7px;
       }
 
       /* A panel is its illustration and its card, stacked, so the cards sit on

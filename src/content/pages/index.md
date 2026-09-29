@@ -88,6 +88,7 @@ pageSections:
     centreMinHeight: 366
     centreIconName: git-branch
     centreTitle: Your Git repo
+    centreBranch: main
     heading: Two workflows. One source of truth.
     subtext: >-
       Editors edit visually, developers stay in code — and every change lands in the same Git

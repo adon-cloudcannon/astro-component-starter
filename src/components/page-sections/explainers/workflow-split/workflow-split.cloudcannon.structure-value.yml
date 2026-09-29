@@ -35,6 +35,7 @@ value:
   centreMinHeight: 0
   centreIconName: ""
   centreTitle: ""
+  centreBranch: ""
   centreSections: []
   centreImageAlt: ""
   maxContentWidth: xl
