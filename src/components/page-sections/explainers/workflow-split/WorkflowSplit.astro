@@ -110,6 +110,45 @@ const {
 } = Astro.props;
 
 const panelList: PanelProps[] = Array.isArray(panels) ? panels : [];
+
+/**
+ * The commit feed's timing, and the keyframes that drive it.
+ *
+ * All of the motion in this section is CSS: the track that slides and the two
+ * dots that run the connectors are three composited animations sharing one
+ * clock, so they stay in step for as long as the page is open without anything
+ * measuring or correcting them. The version before this did it in script and
+ * paid a forced reflow every cycle for the privilege.
+ *
+ * The track's keyframes are the one part that depends on how many commits
+ * there are, so they are written out here rather than guessed at in a
+ * stylesheet. Everything else is static CSS below.
+ */
+const ROW_PITCH = 37;
+const CYCLE_MS = 2900;
+/** When the dot reaches the card, which is when the commit it carries lands. */
+const LANDS_MS = 652;
+const SLIDE_MS = 450;
+
+const feedRows: Record<string, unknown>[] = Array.isArray(centreRows) ? centreRows : [];
+const feedSteps = feedRows.length;
+const feedName = `workflow-feed-${feedSteps}`;
+const feedPeriod = feedSteps * CYCLE_MS;
+const stop = (ms: number): string => `${((ms / feedPeriod) * 100).toFixed(4)}%`;
+
+/**
+ * Hold, slide, hold, slide. At the end the track has moved by exactly the
+ * length of the list, and the second copy of the rows underneath means that
+ * position is identical to the start — so it repeats with nothing to reset.
+ */
+const feedKeyframes = feedSteps
+  ? `@keyframes ${feedName}{0%{transform:translateY(0)}${Array.from(
+      { length: feedSteps },
+      (_unused, index) =>
+        `${stop(index * CYCLE_MS + LANDS_MS)}{transform:translateY(${-index * ROW_PITCH}px)}` +
+        `${stop(index * CYCLE_MS + LANDS_MS + SLIDE_MS)}{transform:translateY(${-(index + 1) * ROW_PITCH}px)}`,
+    ).join("")}100%{transform:translateY(${-feedSteps * ROW_PITCH}px)}}`
+  : "";
 ---
 
 <CustomSection
@@ -269,9 +308,19 @@ const panelList: PanelProps[] = Array.isArray(panels) ? panels : [];
               )}
               {centreRows.length > 0 && (
                 <div class="workflow-centre-feed">
-                  <ul class="workflow-centre-rows">
-                    {centreRows.map((row: Record<string, unknown>) => (
-                      <li class:list={["workflow-centre-row", `kind-${row.kind ?? "editor"}`]}>
+                  {/* Twice. The track slides by exactly the length of one
+                      copy and then repeats, and because the second copy sits
+                      where the first started there is nothing to reset and no
+                      seam to hide — which is what lets this be CSS at all. */}
+                  <ul
+                    class="workflow-centre-rows"
+                    style={{ animationName: feedName, animationDuration: `${feedPeriod}ms` }}
+                  >
+                    {[...feedRows, ...feedRows].map((row: Record<string, unknown>, index: number) => (
+                      <li
+                        class:list={["workflow-centre-row", `kind-${row.kind ?? "editor"}`]}
+                        aria-hidden={index >= feedSteps ? "true" : undefined}
+                      >
                         <span class="workflow-centre-dot" aria-hidden="true" />
                         <span class="workflow-centre-author">{row.author}</span>
                         <span class="workflow-centre-message">{row.message}</span>
@@ -298,6 +347,70 @@ const panelList: PanelProps[] = Array.isArray(panels) ? panels : [];
     ))}
   </div>
 </CustomSection>
+
+<style is:inline set:html={feedKeyframes} />
+
+<!-- Top level on purpose. @keyframes cannot be nested inside a style rule:
+     written inside `.workflow-split { … }` they are dropped without warning,
+     which is why the dots sat still while the feed ran. -->
+<style is:global>
+  /* Left to right, then on under the card. */
+  @keyframes workflow-pulse-to-end {
+    0% {
+      opacity: 0;
+      translate: 0 -50%;
+    }
+
+    1.5% {
+      opacity: 1;
+      translate: 8.6px -50%;
+    }
+
+    18.966% {
+      opacity: 1;
+      translate: 108px -50%;
+    }
+
+    18.97% {
+      opacity: 0;
+      translate: 0 -50%;
+    }
+
+    100% {
+      opacity: 0;
+      translate: 0 -50%;
+    }
+  }
+
+  /* Right to left: its far end is the one against its own card, because
+     the panel between them is on its other side. */
+  @keyframes workflow-pulse-to-start {
+    0% {
+      opacity: 0;
+      translate: 64px -50%;
+    }
+
+    1.5% {
+      opacity: 1;
+      translate: 55.4px -50%;
+    }
+
+    18.966% {
+      opacity: 1;
+      translate: -44px -50%;
+    }
+
+    18.97% {
+      opacity: 0;
+      translate: 64px -50%;
+    }
+
+    100% {
+      opacity: 0;
+      translate: 64px -50%;
+    }
+  }
+</style>
 
 <style is:global>
   @layer page-sections {
@@ -405,13 +518,24 @@ const panelList: PanelProps[] = Array.isArray(panels) ? panels : [];
         block-size: calc(
           var(--workflow-rows-visible) * 30px + (var(--workflow-rows-visible) - 1) * 7px
         );
+        /* Its height is set above rather than by its contents, so the browser
+           can skip rendering the sixteen rows inside it whenever the panel is
+           off screen without anything moving when it comes back. That is what
+           stands in for pausing the animation, now that there is no script to
+           pause it with. */
+        content-visibility: auto;
+        contain-intrinsic-size: auto calc(
+          var(--workflow-rows-visible) * 30px + (var(--workflow-rows-visible) - 1) * 7px
+        );
         overflow: hidden;
       }
 
       /* 37px pitch: a 30 row and 7 between, which is what the design measures
          down the panel, and the distance the feed travels on each step. */
       .workflow-centre-rows {
-        --workflow-row-pitch: 37px;
+        animation-duration: inherit;
+        animation-iteration-count: infinite;
+        animation-timing-function: linear;
 
         display: grid;
         gap: 7px;
@@ -589,6 +713,40 @@ const panelList: PanelProps[] = Array.isArray(panels) ? panels : [];
         translate: 0 -50%;
       }
 
+      /* The two dots run on the same clock as the feed: a period of two
+         commits each, the right one half a period behind, so they alternate
+         without anything telling them to. The distances are the 64 of the grid
+         gap plus the 44 it carries on under the card; 18.966% of the period is
+         the 1100ms run inside the 5800ms of two commits, and 12.328% is where
+         it crosses the card's edge. */
+      .workflow-pulse {
+        animation-duration: 5800ms;
+        animation-iteration-count: infinite;
+        animation-timing-function: linear;
+      }
+
+      .to-end .workflow-pulse {
+        animation-name: workflow-pulse-to-end;
+      }
+
+      .to-start .workflow-pulse {
+        animation-delay: 2900ms;
+        animation-name: workflow-pulse-to-start;
+      }
+
+      /* Nothing moves for a reader who has asked for less motion. The feed
+         still shows its eight; it just shows them still. */
+      @media (prefers-reduced-motion: reduce) {
+        .workflow-centre-rows,
+        .workflow-pulse {
+          animation: none;
+        }
+
+        .workflow-pulse {
+          opacity: 0;
+        }
+      }
+
       .workflow-connector.to-end::before,
       .workflow-connector.to-start::after {
         background-color: color-mix(in srgb, var(--workflow-connector, var(--color-brand)) 33%, transparent);
@@ -676,9 +834,3 @@ const panelList: PanelProps[] = Array.isArray(panels) ? panels : [];
   }
 </style>
 
-<script>
-  import { onPageLoad } from "@component-utils/onPageLoad";
-  import { setupAllWorkflowFeeds } from "./setup";
-
-  onPageLoad(() => setupAllWorkflowFeeds());
-</script>
