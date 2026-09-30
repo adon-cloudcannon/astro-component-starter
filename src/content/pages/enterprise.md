@@ -75,13 +75,6 @@ pageSections:
     imageSource: /src/assets/images/marketing/image-48.png
     subtextWidth: 573
     headingSize: lg
-    backgroundColor: base
-    colorScheme: dark
-    lockColorScheme: true
-    background:
-      type: pattern
-      pattern: grid
-      mask: fade
     buttonSections:
       - _component: building-blocks/core-elements/button
         variant: primary
