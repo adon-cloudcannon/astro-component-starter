@@ -43,7 +43,16 @@ const {
   stats = [],
   statsPosition = "end",
   statsAlign = "start",
-  /** The panel's shape. The design draws it 1160 by 679. */
+  /**
+   * How the panel sits in whatever holds it.
+   *
+   * `card` is the Enterprise shape: a rounded box of its own proportions.
+   * `fill` is the High Performance one, where the sheet is not a card at all —
+   * it is the whole half of the band, 1280x723 at 0,0 with square corners and
+   * the copy side painted over it.
+   */
+  panelFit = "card",
+  /** The panel's shape when it is a card. The design draws it 1160 by 679. */
   ratioWidth = 1160,
   ratioHeight = 679,
   class: className,
@@ -57,7 +66,7 @@ const statList: StatProps[] = Array.isArray(stats) ? stats : [];
 ---
 
 <div
-  class:list={["stat-panel-panel", className]}
+  class:list={["stat-panel-panel", `fit-${panelFit}`, className]}
   style={[
     /* A palette name, or a literal the design states outright: High
        Performance lays its sheet over #FFFFFF rather than over a token. */
@@ -160,6 +169,14 @@ const statList: StatProps[] = Array.isArray(stats) ? stats : [];
        sizing the wrapper and the img alone left the sheet at its natural
        height with the panel's colour showing under it. Every level between
        has to be told, which is the same reason the marks came out small. */
+    /* Edge to edge: no corners of its own, and it takes the height of
+       whatever holds it rather than a ratio. */
+    .stat-panel-panel.fit-fill {
+      aspect-ratio: auto;
+      block-size: 100%;
+      border-radius: 0;
+    }
+
     .stat-panel-ground,
     .stat-panel-ground .image-inner,
     .stat-panel-ground picture {

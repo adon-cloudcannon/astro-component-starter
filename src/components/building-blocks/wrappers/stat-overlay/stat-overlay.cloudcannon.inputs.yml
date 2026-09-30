@@ -66,12 +66,24 @@ statsAlign:
         name: From the bottom
       - id: between
         name: Apart
+panelFit:
+  type: select
+  comment: >-
+    Whether the panel is a card of its own shape, or fills whatever holds it.
+    High Performance draws the sheet as the whole half of the band, square
+    cornered, with the copy side painted over it.
+  options:
+    values:
+      - id: card
+        name: A card of its own shape
+      - id: fill
+        name: Edge to edge
 ratioWidth:
   type: number
-  comment: The panel's shape, width. The design draws it 1160 by 679.
+  comment: The panel's shape as a card, width. The design draws it 1160 by 679.
 ratioHeight:
   type: number
-  comment: The panel's shape, height.
+  comment: The panel's shape as a card, height.
 number:
   type: number
   comment: The figure. It counts up to this when the panel is scrolled to.

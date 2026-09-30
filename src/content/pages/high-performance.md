@@ -40,6 +40,7 @@ pageSections:
     heading: High speed whether you have 10 visitors or 10 million
     headingSize: lg
   - _component: page-sections/explainers/pinned-steps
+    backgroundColor: surface
     heading: ''
     subtext: ''
     eyebrow: ''
@@ -86,6 +87,7 @@ pageSections:
           - _component: building-blocks/wrappers/stat-overlay
             panelImage: /src/assets/images/marketing/stat-panel-scratch-high-performance.webp
             panelColor: '#FFFFFF'
+            panelFit: fill
             imageSource: /src/assets/images/marketing/partner-dashboard-1.png
             imageAlt: ''
             imagePlacement: center

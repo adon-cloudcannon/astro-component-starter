@@ -318,6 +318,47 @@ const arrayDataAttributes = effectiveChildrenProp
       display: grid;
     }
 
+    /* A media that carries a full-bleed panel is not a picture in a column:
+       the design paints that half of the band, corner to corner. So the row
+       stretches, the column takes the band's whole height, and the panel
+       reaches past the content column to the window's edge. */
+    .pinned-steps-layout:has(.stat-panel-panel.fit-fill) {
+      align-items: stretch;
+      /* The layout has to fill the content box before stretching its columns
+         can mean anything: as a flow child it was only as tall as the copy, so
+         the panel came out 272 of the band's 820. The content box already
+         fills the stage, and the media's negative block margins then take the
+         panel back out through its padding. */
+      --space-before: 0;
+      block-size: 100%;
+      margin-block: 0;
+    }
+
+    /* Out to the window from the content column's edge. Written from the
+       column rather than as a percentage: a percentage margin resolves against
+       the element's own grid area — the media column — so `calc(50% - 50vw)`
+       took half of THAT and overshot the window by 195px. */
+    .pinned-steps-media:has(.stat-panel-panel.fit-fill) {
+      /* A negative margin moves the box, it does not grow it: at a plain 100%
+         the panel sat 80 above and 80 short of the band's feet, the padding it
+         had just been pulled out through. Take the padding back as height. */
+      block-size: calc(100% + 2 * var(--spacing-4xl));
+      margin-block: calc(-1 * var(--spacing-4xl));
+      margin-inline-start: calc(var(--content-width-xl, 1040px) / 2 - 50vw);
+    }
+
+    .pinned-steps-layout.reversed .pinned-steps-media:has(.stat-panel-panel.fit-fill) {
+      margin-inline-end: calc(var(--content-width-xl, 1040px) / 2 - 50vw);
+      margin-inline-start: 0;
+    }
+
+    /* And the height has to reach the panel: the media is a grid of stacked
+       steps, each one its own box, so stretching the column alone left the
+       panel at its content height. */
+    .pinned-steps-media:has(.stat-panel-panel.fit-fill) .pinned-steps-panel {
+      block-size: 100%;
+    }
+
     .pinned-steps-panel,
     .pinned-steps-step {
       grid-area: 1 / 1;
