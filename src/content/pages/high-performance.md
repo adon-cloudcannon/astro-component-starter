@@ -1,5 +1,5 @@
 ---
-# Generated from the Figma mapping. 2 of 5 blocks are
+# Generated from the Figma mapping. 3 of 5 blocks are
 # confirmed decisions; the rest are proposals to review on the page.
 _schema: default
 title: High Performance
@@ -39,14 +39,65 @@ pageSections:
   - _component: page-sections/conversion/cta-center
     heading: High speed whether you have 10 visitors or 10 million
     headingSize: lg
-  - _component: page-sections/explainers/feature-split
-    eyebrow: Editing
-    heading: Your pages are built before anyone asks for them
-    subtext: >-
-      Nothing gets assembled while a visitor waits. Your site is built when you push, then served as
-      finished files from wherever is closest to the person reading it.
-    subtextSize: lg
-    headingSize: sm
+  - _component: page-sections/explainers/pinned-steps
+    heading: ''
+    subtext: ''
+    eyebrow: ''
+    reverse: false
+    mediaWidth: wide
+    progressWidth: content
+    progressColor: blush
+    steps:
+      - contentSections:
+          - _component: building-blocks/core-elements/heading
+            text: Your pages are built before anyone asks for them
+            level: h2
+            size: sm
+          - _component: building-blocks/core-elements/text
+            text: >-
+              Nothing gets assembled while a visitor waits. Your site is built when you push, then
+              served as finished files from wherever is closest to the person reading it.
+            size: lg
+        mediaSections: []
+      - contentSections:
+          - _component: building-blocks/core-elements/heading
+            text: SEO built in, not bolted on
+            level: h2
+            size: sm
+          - _component: building-blocks/core-elements/text
+            text: >-
+              No SEO plugin needed. Build titles, meta tags, and structured data directly into your
+              templates for clean HTML that ranks.
+            size: lg
+        mediaSections: []
+      - contentSections:
+          - _component: building-blocks/core-elements/heading
+            text: Speed at any scale
+            level: h2
+            size: sm
+          - _component: building-blocks/core-elements/text
+            text: >-
+              Static sites handle a traffic spike the same way they handle a quiet afternoon.
+              There's no database to fall over and no server to patch, so pages keep being served
+              from the closest location whatever the load looks like.
+            size: lg
+        mediaSections:
+          - _component: building-blocks/wrappers/stat-overlay
+            panelImage: /src/assets/images/marketing/stat-panel-scratch-high-performance.webp
+            panelColor: '#FFFFFF'
+            imageSource: ''
+            imagePlacement: center
+            imageWidth: 74
+            ratioWidth: 800
+            ratioHeight: 560
+            statsPosition: end
+            statsAlign: end
+            stats:
+              - number: 100
+                suffix: x
+                label: publishing velocity
+                iconName: bolt
+                iconColor: moss-400
   - _component: page-sections/proof/testimonial-bento
     testimonials:
       - text: |-

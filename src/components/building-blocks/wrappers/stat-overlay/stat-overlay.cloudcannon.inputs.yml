@@ -1,0 +1,94 @@
+imageSource:
+  type: image
+  comment: The picture shown on the panel.
+  options:
+    paths:
+      uploads: src/assets/images
+      static: ""
+imageAlt:
+  type: text
+  comment: Alternative text for the picture.
+imageAnchor:
+  type: select
+  comment: >-
+    Where the picture ends. To the foot runs it down to the panel's bottom edge
+    and lets the panel cut it off, which is how the design draws it.
+  options:
+    values:
+      - id: foot
+        name: Down to the foot
+      - id: top
+        name: Its own height
+imagePlacement:
+  type: select
+  comment: Where the picture sits on the panel.
+  options:
+    values:
+      - id: inset
+        name: Inset from the top left
+      - id: center
+        name: Centred
+imageWidth:
+  type: number
+  comment: How wide the picture is, as a percentage of the panel.
+panelImage:
+  type: image
+  comment: A picture for the panel itself, behind everything.
+  options:
+    paths:
+      uploads: src/assets/images
+      static: ""
+panelColor:
+  type: text
+  comment: A palette colour for the panel when it carries no picture.
+stats:
+  type: array
+  comment: The callouts laid over the panel.
+statsPosition:
+  type: select
+  comment: Which side of the panel they sit on.
+  options:
+    values:
+      - id: end
+        name: Right
+      - id: start
+        name: Left
+statsAlign:
+  type: select
+  comment: How they distribute down the panel.
+  options:
+    values:
+      - id: start
+        name: From the top
+      - id: center
+        name: Centred
+      - id: end
+        name: From the bottom
+      - id: between
+        name: Apart
+ratioWidth:
+  type: number
+  comment: The panel's shape, width. The design draws it 1160 by 679.
+ratioHeight:
+  type: number
+  comment: The panel's shape, height.
+number:
+  type: number
+  comment: The figure. It counts up to this when the panel is scrolled to.
+prefix:
+  type: text
+  comment: Shown before the figure.
+suffix:
+  type: text
+  comment: Shown after the figure, e.g. x, %, +.
+label:
+  type: text
+  comment: What the figure measures.
+iconName:
+  type: select
+  comment: The mark shown beside the figure.
+  options:
+    values_source: /icons
+iconColor:
+  type: text
+  comment: A palette colour for the mark, e.g. moss-400, sunset, pacific.

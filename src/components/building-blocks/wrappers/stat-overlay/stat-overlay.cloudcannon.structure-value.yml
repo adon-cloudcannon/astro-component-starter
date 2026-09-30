@@ -1,0 +1,21 @@
+label: Stat overlay
+icon: insights
+description: A picture on a panel, with stat callouts laid over it.
+value:
+  _component: building-blocks/wrappers/stat-overlay
+  imageSource: ""
+  imageAlt: ""
+  imageAnchor: foot
+  imagePlacement: inset
+  imageWidth: 62
+  panelImage: ""
+  panelColor: ""
+  statsPosition: end
+  statsAlign: center
+  stats:
+    - number: 100
+      prefix: ""
+      suffix: x
+      label: publishing velocity
+      iconName: bolt
+      iconColor: moss-400
