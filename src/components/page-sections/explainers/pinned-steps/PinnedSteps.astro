@@ -240,9 +240,21 @@ const arrayDataAttributes = effectiveChildrenProp
     }
 
     .pinned-steps > .pinned-steps-stage {
+      /* One row that takes what is left, so the content box fills the pinned
+         band rather than stopping at the copy. The progress rail is positioned
+         against `.content` — CustomSection makes it the nearest positioned
+         ancestor — so `bottom: 0` was the foot of the COPY, not of the band:
+         205px short on High Performance, where the steps are shortest. */
+      display: grid;
+      grid-template-rows: 1fr;
       min-height: calc(100dvh - var(--main-nav-height, 0px));
       position: sticky;
       top: var(--main-nav-height, 0px);
+    }
+
+    .pinned-steps > .pinned-steps-stage > .outer-content,
+    .pinned-steps > .pinned-steps-stage > .outer-content > .content {
+      block-size: 100%;
     }
 
     /* On the section rather than the layout, so the progress rail can lay
