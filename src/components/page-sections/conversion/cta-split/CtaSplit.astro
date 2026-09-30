@@ -54,6 +54,20 @@ const {
    */
   imageBleed = false,
   imageOverflow = 0,
+  /**
+   * Draws the split on a card instead of straight on the band.
+   *
+   * The design's closing CTA on High Performance is a 1040x445 white panel,
+   * 18px corners and a 1px sand rule, floating on a dotted band: the pattern
+   * runs the full width and the copy and the drawing both sit inside the
+   * panel. Without it the section reads as a CTA printed on the dots.
+   *
+   * It carries the column split with it. The design draws the two halves of
+   * the panel at 512 and 471, where the band-level split fixes one column at
+   * 400 for the trucks, so a card would put the drawing in a column a
+   * quarter too narrow.
+   */
+  contentCard = false,
   sectionLabel,
   maxContentWidth = "xl",
   paddingHorizontal = "gutter",
@@ -72,6 +86,13 @@ const {
   _component,
   ...htmlAttributes
 } = Astro.props;
+
+/* Astro takes a component expression here, so the wrapper can be a real
+   element or nothing at all. Rendering the div either way and styling it only
+   when it is a card would put a flow child between the section and the split,
+   which every cta-split already laid out without. */
+const Wrapper = contentCard ? "div" : Fragment;
+const wrapperProps = contentCard ? { class: "cta-split-card" } : {};
 
 const overflow = Number(imageOverflow) || 0;
 const bleedSide =
@@ -100,9 +121,10 @@ const bleedLimit = !imageBleed && overflow > 0 ? `${overflow}px` : undefined;
       which pushed the heading 119 further right than the design draws it.
       Asking for the opposite mode lands it back on fixed-flexible, so the
       fixed width travels with the picture. */}
+  <Wrapper {...wrapperProps}>
   <Split
-    distributionMode={reverse ? "flexible-fixed" : "fixed-flexible"}
-    fixedWidth="400"
+    distributionMode={contentCard ? "half" : reverse ? "flexible-fixed" : "fixed-flexible"}
+    fixedWidth={contentCard ? undefined : "400"}
     data-bleed={bleedSide}
     style={bleedLimit ? { "--split-bleed-limit": bleedLimit } : undefined}
     alignmentVertical="center"
@@ -196,6 +218,7 @@ const bleedLimit = !imageBleed && overflow > 0 ? `${overflow}px` : undefined;
       )}
     </Fragment>
   </Split>
+  </Wrapper>
 </CustomSection>
 
 <script>
@@ -213,6 +236,23 @@ const bleedLimit = !imageBleed && overflow > 0 ? `${overflow}px` : undefined;
      Flat, because rules nested deeper than a couple of levels get dropped (see
      CLAUDE.md). */
   @layer page-sections {
+    /* The panel the design floats on the dotted band. White rather than the
+       page's light sand: the design states #FFFFFF, which on a sand band is a
+       step up rather than the usual step down. */
+    .cta-split .cta-split-card {
+      background-color: var(--white);
+      border: 1px solid var(--color-border-subtle);
+      border-radius: var(--radius-card);
+      padding: var(--spacing-2xl) 69px;
+    }
+
+    /* flow's space-before is what sets the gap from the section above, and on
+       a card it would print inside the rule instead. */
+    .cta-split .cta-split-card > .split {
+      --space-before: 0;
+      margin-block: 0;
+    }
+
     /* Two pictures of one subject in a single box. They are the same size with
        their artwork on the same pixels, so nothing moves across the change:
        only the hood opens. Stacked in one grid cell rather than positioned, so

@@ -84,6 +84,12 @@ imageSource:
     resize_style: contain
     width: 1920
     height: 1280
+contentCard:
+  type: switch
+  comment: >-
+    Draws the copy and the drawing on a white card instead of straight on the
+    band, which is how the design floats a closing CTA on a patterned one. The
+    card splits its width evenly rather than fixing one column.
 imageOverflow:
   type: number
   comment: >-

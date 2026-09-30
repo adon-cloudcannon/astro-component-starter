@@ -1,5 +1,5 @@
 ---
-# Generated from the Figma mapping. 3 of 5 blocks are
+# Generated from the Figma mapping. 4 of 5 blocks are
 # confirmed decisions; the rest are proposals to review on the page.
 _schema: default
 title: High Performance
@@ -152,11 +152,14 @@ pageSections:
       type: pattern
       pattern: grid
       mask: fade
-  - _component: page-sections/conversion/cta-center
+  - _component: page-sections/conversion/cta-split
+    contentCard: true
+    paddingVertical: 5xl
+    imageSource: /src/assets/images/marketing/motorcycle-01-1.png
+    imageReveal: ''
     heading: See how fast your site could be
     subtext: See how CloudCannon's static-first approach delivers the speed boost your business needs.
     subtextSize: lg
-    imageSource: /src/assets/images/marketing/motorcycle-01-1.png
     headingSize: lg
     background:
       type: pattern
@@ -165,11 +168,11 @@ pageSections:
     backgroundColor: surface
     buttonSections:
       - _component: building-blocks/core-elements/button
+        variant: primary
+        text: Start your free trial
+      - _component: building-blocks/core-elements/button
         variant: text
         iconName: arrow-right
         iconPosition: after
         text: Book a demo
-      - _component: building-blocks/core-elements/button
-        variant: primary
-        text: Start your free trial
 ---

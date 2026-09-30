@@ -387,11 +387,11 @@ pageSections:
     headingSize: lg
     buttonSections:
       - _component: building-blocks/core-elements/button
+        variant: primary
+        text: Our team
+      - _component: building-blocks/core-elements/button
         variant: text
         iconName: arrow-right
         iconPosition: after
         text: Our values
-      - _component: building-blocks/core-elements/button
-        variant: primary
-        text: Our team
 ---
