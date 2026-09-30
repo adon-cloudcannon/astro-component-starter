@@ -1,0 +1,26 @@
+label: Stat panel
+icon: insights
+description: A picture on a panel, with stat callouts laid over it.
+value:
+  _component: page-sections/proof/stat-panel
+  sectionLabel: ""
+  eyebrow: SUCCESS STORY
+  heading: A result worth showing
+  headingLevel: h2
+  headingSize: lg
+  subtext: One line on what changed, and for whom.
+  subtextSize: lg
+  imageSource: ""
+  imageAlt: ""
+  panelImage: ""
+  panelColor: moss
+  statsPosition: end
+  statsAlign: start
+  stats:
+    - number: 100
+      prefix: ""
+      suffix: x
+      label: publishing velocity
+      iconName: bolt
+      iconColor: moss-400
+  buttonSections: []

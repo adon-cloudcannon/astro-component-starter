@@ -1,0 +1,354 @@
+---
+/**
+ * A picture on a panel, with stat callouts laid over it.
+ *
+ * The design draws this once, on Enterprise: a 1160x679 panel whose fill is a
+ * scratched green sheet, a screenshot inset on it and running off its foot,
+ * and three dark pills stacked down the right — each an icon in a circle, a
+ * figure, and a line saying what the figure measures.
+ *
+ * The figures are `Counter`, which already animates from a share of the value
+ * when it is scrolled to, respects reduced motion, groups thousands and keeps
+ * the target's own precision. Nothing here reimplements that; the stats take
+ * the same `number`/`prefix`/`suffix` the Stats section takes, so the two
+ * describe a statistic the same way.
+ */
+import CustomSection from "@builders/custom-section/CustomSection.astro";
+import ButtonGroup from "@wrappers/button-group/ButtonGroup.astro";
+import Counter from "@core-elements/counter/Counter.astro";
+import Heading from "@core-elements/heading/Heading.astro";
+import Icon from "@core-elements/icon/Icon.astro";
+import Image from "@core-elements/image/Image.astro";
+import SimpleText from "@core-elements/simple-text/SimpleText.astro";
+import Text from "@core-elements/text/Text.astro";
+
+type StatProps = {
+  number?: number;
+  prefix?: string;
+  suffix?: string;
+  label?: string;
+  iconName?: string;
+  /** A palette colour for the mark, e.g. moss, sunset, pacific. */
+  iconColor?: string;
+};
+
+const {
+  eyebrow = "",
+  heading = "",
+  headingLevel = "h2",
+  headingSize = "lg",
+  subtext = "",
+  subtextSize = "lg",
+  subtextWidth,
+  buttonSections = [],
+  /** The picture on the panel. */
+  imageSource = "",
+  imageAlt = "",
+  /** What the panel itself is: a picture of a texture, or nothing. */
+  panelImage = "",
+  panelColor = "",
+  stats = [],
+  /** Which side of the panel the stats sit on. */
+  statsPosition = "end",
+  /** How they distribute down it: one centred, two apart, three stacked. */
+  statsAlign = "start",
+  sectionLabel,
+  maxContentWidth = "xl",
+  paddingHorizontal = "gutter",
+  paddingVertical = "4xl",
+  colorScheme = "inherit",
+  lockColorScheme = false,
+  backgroundColor = "base",
+  background,
+  haze = false,
+  class: className,
+  useDefaultEditableBinding = false,
+  _component,
+  "data-children-prop": childrenDataProp,
+  ...htmlAttributes
+} = Astro.props;
+
+const statList: StatProps[] = Array.isArray(stats) ? stats : [];
+const hasHeader = Boolean(eyebrow || heading || subtext || buttonSections?.length);
+---
+
+<CustomSection
+  class:list={["stat-panel", className]}
+  label={sectionLabel}
+  maxContentWidth={maxContentWidth}
+  paddingHorizontal={paddingHorizontal}
+  paddingVertical={paddingVertical}
+  colorScheme={colorScheme}
+  lockColorScheme={lockColorScheme}
+  backgroundColor={backgroundColor}
+  background={background}
+  haze={haze}
+  useDefaultEditableBinding={useDefaultEditableBinding}
+  {...htmlAttributes}
+>
+  {hasHeader && (
+    <Fragment>
+      <SimpleText
+        class="eyebrow"
+        size="sm"
+        alignmentHorizontal="center"
+        data-prop="eyebrow"
+        text={eyebrow}
+      />
+      <Heading
+        level={headingLevel}
+        size={headingSize}
+        alignmentHorizontal="center"
+        data-prop="heading"
+      >
+        {heading}
+      </Heading>
+      <Text
+        class="stat-panel-subtext"
+        style={subtextWidth
+          ? `max-inline-size: ${Number(subtextWidth)}px; margin-inline: auto`
+          : undefined}
+        size={subtextSize}
+        alignmentHorizontal="center"
+        data-prop="subtext"
+        text={subtext}
+      />
+      <ButtonGroup
+        buttonSections={buttonSections}
+        direction="row"
+        alignmentHorizontal="center"
+        data-children-prop="buttonSections"
+      />
+    </Fragment>
+  )}
+
+  <div
+    class="stat-panel-panel"
+    style={panelColor ? `--stat-panel-ground: var(--${panelColor})` : undefined}
+  >
+    {panelImage && (
+      <Image
+        class="stat-panel-ground"
+        source={panelImage}
+        decorative={true}
+        data-prop-src="panelImage"
+      />
+    )}
+    {imageSource && (
+      <Image
+        class="stat-panel-shot"
+        source={imageSource}
+        alt={imageAlt}
+        data-prop-src="imageSource"
+        data-prop-alt="imageAlt"
+      />
+    )}
+    {statList.length > 0 && (
+      <dl
+        class:list={["stat-panel-stats", `at-${statsPosition}`, `align-${statsAlign}`]}
+        data-editable="array"
+        data-children-prop={childrenDataProp ?? "stats"}
+      >
+        {statList.map((stat) => (
+          <div
+            class="stat-panel-stat"
+            data-editable="array-item"
+            style={stat.iconColor ? `--stat-panel-mark: var(--${stat.iconColor})` : undefined}
+          >
+            {stat.iconName && (
+              <span class="stat-panel-mark">
+                <Icon
+                  name={stat.iconName}
+                  size="lg"
+                />
+              </span>
+            )}
+            <div class="stat-panel-figures">
+              <dd class="stat-panel-value">
+                <Counter
+                  number={stat.number}
+                  prefix={stat.prefix}
+                  suffix={stat.suffix}
+                  size="xl"
+                  spaceBefore="none"
+                />
+              </dd>
+              <dt
+                class="stat-panel-label"
+                data-editable="text"
+                data-prop="label"
+              >
+                {stat.label}
+              </dt>
+            </div>
+          </div>
+        ))}
+      </dl>
+    )}
+  </div>
+</CustomSection>
+
+<style is:global>
+  /* Flat, because rules nested deeper than a couple of levels get dropped
+     (see CLAUDE.md). */
+  @layer page-sections {
+    /* Everything inside is measured against the panel rather than the window,
+       so the whole arrangement holds its proportions at any width: the design
+       states it all against a 1160x679 box, and one design unit is
+       100cqi/1160. */
+    .stat-panel .stat-panel-panel {
+      aspect-ratio: 1160 / 679;
+      background-color: var(--stat-panel-ground, transparent);
+      border-radius: var(--radius-card);
+      container-type: inline-size;
+      inline-size: 100%;
+      /* The screenshot runs past the panel's foot in the design — 91 down and
+         608 tall inside 679 — so the panel cuts it off rather than growing. */
+      overflow: hidden;
+      position: relative;
+    }
+
+    .stat-panel .stat-panel-ground {
+      block-size: 100%;
+      inset: 0;
+      position: absolute;
+    }
+
+    .stat-panel .stat-panel-ground img {
+      block-size: 100%;
+      inline-size: 100%;
+      object-fit: cover;
+    }
+
+    /* 102,91 and 719 wide of the design's 1160. */
+    .stat-panel .stat-panel-shot {
+      --space-before: 0;
+      inline-size: 61.98%;
+      inset-block-start: 13.4%;
+      inset-inline-start: 8.79%;
+      margin: 0;
+      position: absolute;
+    }
+
+    /* The column of pills: 366 of 1160 wide, 95 in from the edge, 77 down. */
+    .stat-panel .stat-panel-stats {
+      display: flex;
+      flex-direction: column;
+      gap: 4.12cqi;
+      inline-size: 31.55%;
+      inset-block: 11.34% 11.34%;
+      margin: 0;
+      position: absolute;
+    }
+
+    .stat-panel .stat-panel-stats.at-end {
+      inset-inline-end: 8.19%;
+    }
+
+    .stat-panel .stat-panel-stats.at-start {
+      inset-inline-start: 8.19%;
+    }
+
+    /* One centred, two apart, three stacked from the top — the arrangements
+       the same panel is asked for with different numbers of stats. */
+    .stat-panel .stat-panel-stats.align-start { justify-content: flex-start; }
+    .stat-panel .stat-panel-stats.align-center { justify-content: center; }
+    .stat-panel .stat-panel-stats.align-end { justify-content: flex-end; }
+    .stat-panel .stat-panel-stats.align-between { justify-content: space-between; }
+
+    .stat-panel .stat-panel-stat {
+      align-items: center;
+      background-color: var(--stat-panel-card, #1d1b17);
+      border-radius: var(--radius-card);
+      display: flex;
+      gap: 1.98cqi;
+      padding: 2.07cqi;
+    }
+
+    /* The mark sits in a circle a shade lighter than the pill, and takes the
+       stat's own colour. */
+    .stat-panel .stat-panel-mark {
+      align-items: center;
+      aspect-ratio: 1;
+      background-color: var(--stat-panel-mark-ground, #333333);
+      border-radius: var(--radius-full);
+      color: var(--stat-panel-mark, var(--moss));
+      display: flex;
+      flex-shrink: 0;
+      inline-size: 7.5cqi;
+      justify-content: center;
+    }
+
+    .stat-panel .stat-panel-mark .icon {
+      block-size: 4.2cqi;
+      inline-size: 4.2cqi;
+    }
+
+    .stat-panel .stat-panel-figures {
+      display: grid;
+      min-inline-size: 0;
+    }
+
+    /* Counter carries its own size token; the design draws the figure at 65,
+       which is Header 2, and it has to shrink with the panel rather than the
+       window. */
+    .stat-panel .stat-panel-value {
+      margin: 0;
+    }
+
+    .stat-panel .stat-panel-value .counter-inner {
+      color: var(--stat-panel-figure, #ffffff);
+      font-size: 5.6cqi;
+      line-height: 1.15;
+    }
+
+    .stat-panel .stat-panel-label {
+      color: var(--stat-panel-label, #c2cbd8);
+      font-size: 1.9cqi;
+      line-height: 1.3;
+    }
+
+    /* Overlaid is a desktop idea. Narrow, the panel stops holding a fixed
+       shape and the stats fall in under the picture. */
+    @media (max-width: 767px) {
+      .stat-panel .stat-panel-panel {
+        aspect-ratio: auto;
+        padding: var(--spacing-lg);
+      }
+
+      .stat-panel .stat-panel-shot,
+      .stat-panel .stat-panel-stats {
+        inline-size: 100%;
+        inset: auto;
+        position: static;
+      }
+
+      .stat-panel .stat-panel-stats {
+        gap: var(--spacing-md);
+        margin-block-start: var(--spacing-lg);
+      }
+
+      .stat-panel .stat-panel-stat {
+        gap: var(--spacing-md);
+        padding: var(--spacing-md);
+      }
+
+      .stat-panel .stat-panel-mark {
+        inline-size: 3rem;
+      }
+
+      .stat-panel .stat-panel-mark .icon {
+        block-size: 1.6rem;
+        inline-size: 1.6rem;
+      }
+
+      .stat-panel .stat-panel-value .counter-inner {
+        font-size: var(--font-size-heading-md);
+      }
+
+      .stat-panel .stat-panel-label {
+        font-size: var(--font-size-md);
+      }
+    }
+  }
+</style>

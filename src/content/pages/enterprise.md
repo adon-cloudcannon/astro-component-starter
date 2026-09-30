@@ -1,5 +1,5 @@
 ---
-# Generated from the Figma mapping. 1 of 7 blocks are
+# Generated from the Figma mapping. 2 of 7 blocks are
 # confirmed decisions; the rest are proposals to review on the page.
 _schema: default
 title: Enterprise
@@ -65,20 +65,40 @@ pageSections:
         aspect: 90 / 28
     headingPlacement: inline
     heading: SERVING CLIENTS LIKE
-  - _component: page-sections/conversion/cta-center
+  - _component: page-sections/proof/stat-panel
     eyebrow: SUCCESS STORY
     heading: Publishing took up to five weeks. Now it takes minutes.
+    headingSize: lg
     subtext: >-
       PaperCut moved 4,000 pages and 110 editors onto CloudCannon, and lifted their performance
       score from 14 to 90+.
     subtextSize: lg
-    imageSource: /src/assets/images/marketing/image-48.png
     subtextWidth: 573
-    headingSize: lg
     buttonSections:
       - _component: building-blocks/core-elements/button
         variant: primary
         text: View case study
+    imageSource: /src/assets/images/marketing/image-48.png
+    imageAlt: The PaperCut Grows site, built on CloudCannon
+    panelImage: /src/assets/images/marketing/stat-panel-scratch-moss.webp
+    statsPosition: end
+    statsAlign: start
+    stats:
+      - number: 100
+        suffix: x
+        label: publishing velocity
+        iconName: bolt
+        iconColor: moss-400
+      - number: 90
+        suffix: +
+        label: core web vitals score
+        iconName: shield-check
+        iconColor: moss-400
+      - number: 98
+        suffix: '%'
+        label: web pages migrated
+        iconName: window
+        iconColor: moss-400
   - _component: page-sections/explainers/feature-grid
     features:
       - title: Site security

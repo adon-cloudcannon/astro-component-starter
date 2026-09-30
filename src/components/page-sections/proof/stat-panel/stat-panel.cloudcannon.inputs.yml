@@ -1,0 +1,109 @@
+eyebrow:
+  type: text
+  comment: Short label above the heading.
+heading:
+  type: text
+  comment: Main heading for the section.
+headingSize:
+  type: select
+  comment: Size of the title, independent of its level.
+  options:
+    values:
+      - id: xl
+        name: Header 2
+      - id: lg
+        name: Header 3
+      - id: md
+        name: Header 4
+      - id: sm
+        name: Header 5
+headingLevel:
+  type: select
+  comment: Heading level for the title. Use h1 once per page, on the first section.
+  options:
+    values: [h1, h2, h3]
+subtext:
+  type: markdown
+  comment: Supporting copy beneath the heading.
+subtextSize:
+  type: select
+  comment: Size of the supporting copy.
+  options:
+    values: [sm, md, lg, xl]
+subtextWidth:
+  type: number
+  comment: The measure the copy is set in, in pixels. Leave empty for the full column.
+buttonSections:
+  type: array
+  comment: Actions under the copy.
+imageSource:
+  type: image
+  comment: The picture shown on the panel.
+  options:
+    paths:
+      uploads: src/assets/images
+      static: ""
+imageAlt:
+  type: text
+  comment: Alternative text for the picture.
+panelImage:
+  type: image
+  comment: >-
+    A picture for the panel itself, behind everything — the scratched sheet the
+    design paints it with. Leave empty to use a flat colour instead.
+  options:
+    paths:
+      uploads: src/assets/images
+      static: ""
+panelColor:
+  type: text
+  comment: >-
+    A palette colour for the panel when it carries no picture, e.g. moss,
+    pacific, sunset.
+stats:
+  type: array
+  comment: The callouts laid over the panel.
+statsPosition:
+  type: select
+  comment: Which side of the panel they sit on.
+  options:
+    values:
+      - id: end
+        name: Right
+      - id: start
+        name: Left
+statsAlign:
+  type: select
+  comment: >-
+    How they distribute down the panel. Centre suits one, apart suits two,
+    top suits three.
+  options:
+    values:
+      - id: start
+        name: From the top
+      - id: center
+        name: Centred
+      - id: end
+        name: From the bottom
+      - id: between
+        name: Apart
+number:
+  type: number
+  comment: The figure. It counts up to this when the panel is scrolled to.
+prefix:
+  type: text
+  comment: Shown before the figure, e.g. a currency mark.
+suffix:
+  type: text
+  comment: Shown after the figure, e.g. x, %, +.
+label:
+  type: text
+  comment: What the figure measures.
+iconName:
+  type: select
+  comment: The mark shown beside the figure.
+  options:
+    values_source: /icons
+iconColor:
+  type: text
+  comment: A palette colour for the mark, e.g. moss, sunset, pacific.
