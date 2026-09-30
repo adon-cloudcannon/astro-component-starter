@@ -40,6 +40,16 @@ const {
   imageWidth = 62,
   panelImage = "",
   panelColor = "",
+  /**
+   * Draw the panel's scratched sheet instead of loading one.
+   *
+   * A palette name or a hex. Every exported sheet was a flat colour with the
+   * whole texture in its alpha channel, so a new colour meant a new file;
+   * `.scratched` generates the texture and takes the colour from here.
+   */
+  panelScratch = "",
+  /** What a scratch shows. Defaults to the fill lifted toward white. */
+  panelScratchInk = "",
   stats = [],
   statsPosition = "end",
   statsAlign = "start",
@@ -63,16 +73,19 @@ const {
 } = Astro.props;
 
 const statList: StatProps[] = Array.isArray(stats) ? stats : [];
+
+/** A palette name, or a literal the design states outright. */
+const colour = (value: string) => (value.startsWith("#") ? value : `var(--${value})`);
 ---
 
 <div
-  class:list={["stat-panel-panel", `fit-${panelFit}`, className]}
+  class:list={["stat-panel-panel", `fit-${panelFit}`, { scratched: panelScratch }, className]}
   style={[
     /* A palette name, or a literal the design states outright: High
        Performance lays its sheet over #FFFFFF rather than over a token. */
-    panelColor
-      ? `--stat-panel-ground: ${panelColor.startsWith("#") ? panelColor : `var(--${panelColor})`}`
-      : "",
+    panelColor ? `--stat-panel-ground: ${colour(panelColor)}` : "",
+    panelScratch ? `--scratch-fill: ${colour(panelScratch)}` : "",
+    panelScratchInk ? `--scratch-ink: ${colour(panelScratchInk)}` : "",
   `--stat-panel-ratio-w: ${Number(ratioWidth) || 1160}`,
   `--stat-panel-ratio-h: ${Number(ratioHeight) || 679}`,
   ].filter(Boolean).join("; ")}

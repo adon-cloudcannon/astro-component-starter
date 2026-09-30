@@ -477,38 +477,38 @@ pageSections:
         role: Co-founder & CTO
         imageSource: /src/assets/images/marketing/george-profile-1.png
         imageAlt: George Phillips, Co-founder & CTO at CloudCannon
-        backgroundImage: /src/assets/images/marketing/container-2-3806-69465-1.png
+        backgroundColor: '#748831'
       - _component: building-blocks/wrappers/team-member
         name: Mike Neumegen
         role: Co-founder & CEO
         imageSource: >-
           /src/assets/images/marketing/screenshot-2026-06-09-at-7-38-38-pm-background-r-3806-69478.png
         imageAlt: Mike Neumegen, Co-founder & CEO at CloudCannon
-        backgroundImage: /src/assets/images/marketing/container-3.png
+        backgroundColor: '#FF8853'
       - _component: building-blocks/wrappers/team-member
         name: Olivia Nicholson
         role: Head of Content
         imageSource: /src/assets/images/marketing/container-5-3806-69485-2.png
         imageAlt: Olivia Nicholson, Head of Content at CloudCannon
-        backgroundImage: /src/assets/images/marketing/container-4-3806-69485-1.png
+        backgroundColor: pacific
       - _component: building-blocks/wrappers/team-member
         name: Sam Whitfield
         role: Product Design
         imageSource: /src/assets/images/marketing/container-7-3806-69515-2.png
         imageAlt: Sam Whitfield, Product Design at CloudCannon
-        backgroundImage: /src/assets/images/marketing/container-6-3806-69515-1.png
+        backgroundColor: '#D06524'
       - _component: building-blocks/wrappers/team-member
         name: Tom Richardson
         role: Solutions Architect
         imageSource: /src/assets/images/marketing/container-9-3806-69524-1.png
         imageAlt: Tom Richardson, Solutions Architect at CloudCannon
-        backgroundImage: /src/assets/images/marketing/container-8-3806-69524.png
+        backgroundColor: '#FABD3D'
       - _component: building-blocks/wrappers/team-member
         name: Chris Wingate
         role: CRO
         imageSource: /src/assets/images/marketing/chris-profile-1.png
         imageAlt: Chris Wingate, CRO at CloudCannon
-        backgroundImage: /src/assets/images/marketing/container-2-3806-69533-1.png
+        backgroundColor: '#748831'
     eyebrow: Who we are
     heading: Made for the work, not for the upsell
     linkText: Meet the team

@@ -80,7 +80,8 @@ pageSections:
         text: View case study
     imageSource: /src/assets/images/marketing/image-48.png
     imageAlt: The PaperCut Grows site, built on CloudCannon
-    panelImage: /src/assets/images/marketing/stat-panel-scratch-moss.webp
+    panelScratch: moss
+    panelImage: ''
     statsPosition: end
     statsAlign: start
     stats:
@@ -249,7 +250,6 @@ pageSections:
       imageSource: /src/assets/images/marketing/container-5-3806-73607-2.png
       imageAlt: Olivia Nicholson, Head of Content at CloudCannon
       backgroundColor: pacific
-      backgroundImage: /src/assets/images/marketing/container-4-3806-73607-1.png
       propSource: /src/assets/images/marketing/phone-01-1.png
       propAlt: ''
     heading: Real humans on support, always

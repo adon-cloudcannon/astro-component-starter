@@ -260,9 +260,7 @@ pageSections:
       role: Solutions Architect
       imageSource: /src/assets/images/marketing/container-9-3806-70538.png
       imageAlt: Tom Richardson, Solutions Architect at CloudCannon
-      backgroundColor: golden
-      backgroundImage: >-
-        /src/assets/images/marketing/screenshot-2026-06-09-at-7-38-38-pm-background-r-2-3806-70537.png
+      backgroundColor: '#E4A832'
       propSource: /src/assets/images/marketing/hero-lowmaintenance-01-1-2-3806-70539.png
       propAlt: ''
     heading: A CMS to build, not babysit
@@ -282,10 +280,7 @@ pageSections:
         iconPosition: after
         text: Book a demo
   - _component: page-sections/conversion/cta-banner
-    backgroundColor: base
-    background:
-      type: image
-      imageSource: /src/assets/images/marketing/cta-banner-scratch-brand.webp
+    scratch: pacific
     colorScheme: dark
     lockColorScheme: true
     heading: Wanna learn more about our product?

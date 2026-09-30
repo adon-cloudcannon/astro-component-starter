@@ -85,7 +85,8 @@ pageSections:
             size: lg
         mediaSections:
           - _component: building-blocks/wrappers/stat-overlay
-            panelImage: /src/assets/images/marketing/stat-panel-scratch-high-performance.webp
+            panelScratch: kiwi
+            panelImage: ''
             panelColor: '#FFFFFF'
             panelFit: fill
             imageSource: /src/assets/images/marketing/partner-dashboard-1.png

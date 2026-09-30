@@ -1,0 +1,94 @@
+@layer utils {
+  /**
+   * A scratched panel, drawn rather than exported.
+   *
+   * The design paints half a dozen of these: a flat colour with fine
+   * directional scratches through it. Every one arrived as its own file, and
+   * every one was the same thing twice over: a single RGB value (moss is
+   * 99.8% one colour) with the whole texture carried in the alpha channel. A
+   * new palette colour therefore meant a new export, and the two mega menu
+   * panels were 15MB each.
+   *
+   * Here the texture is generated. `feTurbulence` with a frequency stretched
+   * along one axis gives streaks: the frequency across them sets how thick
+   * they are and the one along them sets how long. The transfer on alpha
+   * keeps everything opaque but the crests, which is what makes them sparse
+   * rather than a corduroy. A second, much coarser turbulence displaces the
+   * first, which bends and fans the strokes instead of leaving them all
+   * parallel. The result is a mask, so the colour underneath shows through.
+   *
+   * Two knobs, and they are the whole interface:
+   *
+   *   --scratch-fill   the panel's colour. Required.
+   *   --scratch-ink    what a scratch shows. Defaults to the fill lifted a
+   *                    quarter of the way to white, which is about where the
+   *                    exports sit: their mean alpha is 253 of 255, so most
+   *                    of a scratch is a hint rather than a hole.
+   *
+   * Judge the ink on the panel, not on a swatch. The mask covers its element,
+   * so the streaks scale with it: 62% read right on a 190px tile and shouted
+   * on the 1040x610 panel the same rule landed on.
+   *
+   * Stating the ink rather than punching through has a second use. Every one
+   * of the exported sheets is a sheet with holes in it, so what is behind
+   * *becomes* the texture. Backed with the panel's own colour the card goes
+   * flat, backed with the dark base the flecks come out black, and an image
+   * viewer draws alpha 0 as black so a preview of one lies about it. None of
+   * that applies to a colour you name.
+   *
+   * The host has to establish a positioning context. That is deliberately not
+   * set here, the same reason `.tap-target` does not: `utils` layers over
+   * `components`, so it would override a panel that positions itself.
+   *
+   * Stacking is the whole subtlety. A sheet is a backdrop, so everything laid
+   * on the panel has to paint over it, and a positioned pseudo-element paints
+   * over in-flow content whatever its order: as `::after` it covered the stat
+   * panel's screenshot, and `::before` alone only works where every child is
+   * positioned too, which the team cards' portraits are not. A `z-index` on
+   * the host's own rule cannot fix it either, because this layer out-ranks
+   * the component's.
+   *
+   * `isolation: isolate` settles it. The host becomes a stacking context, so
+   * the sheet at `z-index: -1` is clamped to just above the host's own
+   * background and below everything in it. No host has to know.
+   */
+  .scratched {
+    background-color: var(--scratch-ink, color-mix(in srgb, #fff 25%, var(--scratch-fill)));
+    isolation: isolate;
+  }
+
+  .scratched::before {
+    z-index: -1;
+    background-color: var(--scratch-fill);
+    content: "";
+    inset: 0;
+    /* cover, not 100% 100%: stretched to the box the streaks would sit at a
+       different angle on every panel that is not 3:2. */
+    /* Three fields, not one, and that is what answers "can the strokes vary".
+       A turbulence is one field with one grain, so every stroke in it runs
+       the same way: layered at three angles, three thicknesses and three
+       lengths, a panel carries three families instead. `intersect` multiplies
+       the masks, so a stroke from any of them cuts. */
+    mask-composite: intersect, intersect;
+    mask-image: var(--scratch-texture);
+    mask-position: center;
+    mask-repeat: no-repeat;
+    mask-size: cover;
+    position: absolute;
+  }
+}
+
+:root {
+  /**
+   * The texture itself, so a panel can swap it for a different seed or a
+   * finer weave without carrying the whole filter around.
+   *
+   * The filter region is stated in user units rather than percentages on
+   * purpose: a `%` inside a data URI is the start of an escape, and
+   * `width="160%"` is a malformed one.
+   */
+  --scratch-texture:
+    url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="900" height="600"><filter id="s" filterUnits="userSpaceOnUse" x="-500" y="-500" width="2000" height="1700"><feTurbulence type="fractalNoise" baseFrequency="0.9 0.03" numOctaves="4" seed="6" result="st"/><feTurbulence type="fractalNoise" baseFrequency="0.006" numOctaves="2" seed="23" result="w"/><feDisplacementMap in="st" in2="w" scale="70" xChannelSelector="R" yChannelSelector="G" result="d"/><feColorMatrix in="d" type="matrix" values="0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 1 0 0 0 0" result="a"/><feComponentTransfer in="a"><feFuncA type="linear" slope="-3" intercept="3.05"/></feComponentTransfer></filter><g transform="rotate(-22 450 300)"><rect x="-450" y="-450" width="1800" height="1500" filter="url(%23s)"/></g></svg>'),
+    url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="900" height="600"><filter id="s" filterUnits="userSpaceOnUse" x="-500" y="-500" width="2000" height="1700"><feTurbulence type="fractalNoise" baseFrequency="0.3 0.02" numOctaves="4" seed="44" result="st"/><feTurbulence type="fractalNoise" baseFrequency="0.006" numOctaves="2" seed="61" result="w"/><feDisplacementMap in="st" in2="w" scale="70" xChannelSelector="R" yChannelSelector="G" result="d"/><feColorMatrix in="d" type="matrix" values="0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 1 0 0 0 0" result="a"/><feComponentTransfer in="a"><feFuncA type="linear" slope="-3" intercept="3.1"/></feComponentTransfer></filter><g transform="rotate(-52 450 300)"><rect x="-450" y="-450" width="1800" height="1500" filter="url(%23s)"/></g></svg>'),
+    url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="900" height="600"><filter id="s" filterUnits="userSpaceOnUse" x="-500" y="-500" width="2000" height="1700"><feTurbulence type="fractalNoise" baseFrequency="0.6 0.025" numOctaves="4" seed="77" result="st"/><feTurbulence type="fractalNoise" baseFrequency="0.006" numOctaves="2" seed="94" result="w"/><feDisplacementMap in="st" in2="w" scale="70" xChannelSelector="R" yChannelSelector="G" result="d"/><feColorMatrix in="d" type="matrix" values="0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 1 0 0 0 0" result="a"/><feComponentTransfer in="a"><feFuncA type="linear" slope="-3" intercept="3.12"/></feComponentTransfer></filter><g transform="rotate(8 450 300)"><rect x="-450" y="-450" width="1800" height="1500" filter="url(%23s)"/></g></svg>');
+}

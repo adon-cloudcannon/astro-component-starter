@@ -32,6 +32,14 @@ const {
   colorScheme = "inherit",
   lockColorScheme = true,
   backgroundColor = "brand",
+  /**
+   * Draws the band's scratched sheet in this colour instead of loading one.
+   *
+   * The export was a flat #004AD7 with the whole texture in its alpha, which
+   * is Pacific. It also had to be backed with the page's cream, because the
+   * scratches were holes: painted, that whole dance goes away.
+   */
+  scratch = "",
   background,
   haze = false,
   class: className,
@@ -42,14 +50,22 @@ const {
 ---
 
 <CustomSection
-  class:list={["cta-banner", background?.type === "image" && "has-sheet", className]}
+  class:list={[
+    "cta-banner",
+    background?.type === "image" && "has-sheet",
+    { scratched: scratch },
+    className,
+  ]}
+  style={scratch
+    ? `--scratch-fill: ${scratch.startsWith("#") ? scratch : `var(--${scratch})`}`
+    : undefined}
   label={sectionLabel}
   maxContentWidth={maxContentWidth}
   paddingHorizontal={paddingHorizontal}
   paddingVertical={paddingVertical}
   colorScheme={colorScheme}
   lockColorScheme={lockColorScheme}
-  backgroundColor={backgroundColor}
+  backgroundColor={scratch ? "none" : backgroundColor}
   background={background}
   haze={haze}
   useDefaultEditableBinding={useDefaultEditableBinding}

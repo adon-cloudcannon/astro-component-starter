@@ -102,6 +102,7 @@ const settled = Math.round((list.length - 1) * STAGGER_MS + FALL_MS);
     <div
       class:list={[
         "shape-pile-shape",
+        "scratched",
         `tone-${shape.tone || "golden"}`,
         shape.round && "is-round",
         shape.lightText && "is-light-text",
@@ -168,11 +169,13 @@ const settled = Math.round((list.length - 1) * STAGGER_MS + FALL_MS);
 
     .shape-pile-shape {
       align-items: center;
-      /* The sheet is the colour; the card's own pale fill sits under it and is
-         what shows through where the scratches are punched out. */
-      background-color: var(--pile-backing, #f9e6df);
-      background-position: center;
-      background-size: cover;
+      /* The sheet is drawn, not loaded. It used to be three exports, one per
+         tone, each a flat colour with the whole texture in its alpha; the ink
+         is the pale fill their scratches punched through to.
+
+         Set the token rather than the colour: `.scratched` is in `utils`,
+         which out-ranks this. */
+      --scratch-ink: var(--pile-backing, #f9e6df);
       block-size: var(--pile-h);
       border-radius: 19px;
       display: flex;
@@ -235,16 +238,19 @@ const settled = Math.round((list.length - 1) * STAGGER_MS + FALL_MS);
       color: #ffffff;
     }
 
+    /* The design's own colours, off the fully opaque pixels of each export.
+       None of the three is a palette entry: rust is 17 from Sunset, coral 46
+       from Peachy, golden 56 from Golden. */
     .shape-pile-shape.tone-rust {
-      background-image: url("/src/assets/images/marketing/pile-texture-rust.webp");
+      --scratch-fill: #d06522;
     }
 
     .shape-pile-shape.tone-coral {
-      background-image: url("/src/assets/images/marketing/pile-texture-coral.webp");
+      --scratch-fill: #e98057;
     }
 
     .shape-pile-shape.tone-golden {
-      background-image: url("/src/assets/images/marketing/pile-texture-golden.webp");
+      --scratch-fill: #e4a831;
     }
 
     /* Held back only where there is something to run the fall. Without this the

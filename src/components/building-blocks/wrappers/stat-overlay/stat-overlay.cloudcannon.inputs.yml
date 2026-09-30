@@ -41,6 +41,16 @@ panelImage:
 panelColor:
   type: text
   comment: A palette colour for the panel when it carries no picture.
+panelScratch:
+  type: text
+  comment: >-
+    Draws the panel's scratched sheet in this colour instead of loading an
+    export. A palette name or a hex.
+panelScratchInk:
+  type: text
+  comment: >-
+    What a scratch shows. Left empty it is the panel colour lifted toward
+    white, which is how the exported sheets read.
 stats:
   type: array
   comment: The callouts laid over the panel.

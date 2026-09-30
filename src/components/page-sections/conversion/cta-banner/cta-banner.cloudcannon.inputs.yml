@@ -1,3 +1,8 @@
+scratch:
+  type: text
+  comment: >-
+    Draws the band's scratched sheet in this colour instead of loading an
+    export. A palette name or a hex.
 heading:
   type: text
   comment: The banner's heading.
