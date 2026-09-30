@@ -1,5 +1,5 @@
 ---
-# Generated from the Figma mapping. 2 of 10 blocks are
+# Generated from the Figma mapping. 3 of 10 blocks are
 # confirmed decisions; the rest are proposals to review on the page.
 _schema: default
 title: Developers Page
@@ -74,34 +74,57 @@ pageSections:
     imageSource: /src/assets/images/marketing/screenshot-2026-08-11-at-17-25-56-1.png
     subtextWidth: 612
     headingSize: lg
-  - _component: page-sections/explainers/step-selector
-    items:
-      - title: Build with your favorite tools
-        subtext: STEP 01
+  - _component: page-sections/explainers/pinned-steps
+    heading: Your stack, plus an editing layer
+    headingSize: lg
+    alignmentHorizontal: start
+    subtext: ''
+    eyebrow: ''
+    reverse: true
+    mediaWidth: wide
+    progressWidth: content
+    progressColor: sunset
+    backgroundColor: base
+    colorScheme: dark
+    lockColorScheme: true
+    steps:
+      - number: '1'
         contentSections:
+          - _component: building-blocks/core-elements/heading
+            text: Build with your favorite tools
+            level: h3
+            size: sm
           - _component: building-blocks/core-elements/text
             text: >-
               Choose from the most popular static site generators: Astro, Hugo, Eleventy, Next.js,
               Jekyll, SvelteKit, and more.
-          - _component: building-blocks/core-elements/image
-            source: /src/assets/images/marketing/build-with-your-favorite-tools-3806-74574.png
-            alt: ''
-      - title: Set up the editing environment
-        subtext: STEP 02
-        contentSections: []
-      - title: Stay in sync
-        subtext: STEP 03
-        contentSections: []
-    eyebrow: How it works
-    heading: Your stack, plus an editing layer
-    headingSize: lg
-    backgroundColor: base
-    colorScheme: dark
-    lockColorScheme: true
-    background:
-      type: pattern
-      pattern: grid
-      mask: fade
+            size: lg
+        mediaSections: []
+      - number: '2'
+        contentSections:
+          - _component: building-blocks/core-elements/heading
+            text: Set up the editing environment
+            level: h3
+            size: sm
+          - _component: building-blocks/core-elements/text
+            text: >-
+              Configure exactly what editors can touch, from a single line of text to whole sections
+              of custom built blocks.
+            size: lg
+        mediaSections: []
+      - number: '3'
+        contentSections:
+          - _component: building-blocks/core-elements/heading
+            text: Stay in sync
+            level: h3
+            size: sm
+          - _component: building-blocks/core-elements/text
+            text: >-
+              Everything developers push is pulled in by CloudCannon and built automatically.
+              Everything editors change is committed back to the repo. They can branch and merge in
+              the CMS, no command line needed.
+            size: lg
+        mediaSections: []
   - _component: page-sections/proof/testimonial-bento
     testimonials:
       - text: |-
