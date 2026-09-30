@@ -44,6 +44,15 @@ const {
   /** The picture on the panel. */
   imageSource = "",
   imageAlt = "",
+  /**
+   * Where the picture ends.
+   *
+   * `foot` runs it from its inset down to the panel's bottom edge and lets the
+   * panel cut it off, which is what the design draws: 608 tall from 91 down a
+   * 679 panel, so it overshoots by 2.9%. `top` leaves it at its own height,
+   * which floats it when the picture is wider than the slot the design cut.
+   */
+  imageAnchor = "foot",
   /** What the panel itself is: a picture of a texture, or nothing. */
   panelImage = "",
   panelColor = "",
@@ -136,7 +145,7 @@ const hasHeader = Boolean(eyebrow || heading || subtext || buttonSections?.lengt
     )}
     {imageSource && (
       <Image
-        class="stat-panel-shot"
+        class:list={["stat-panel-shot", `anchor-${imageAnchor}`]}
         source={imageSource}
         alt={imageAlt}
         data-prop-src="imageSource"
@@ -230,6 +239,28 @@ const hasHeader = Boolean(eyebrow || heading || subtext || buttonSections?.lengt
       position: absolute;
     }
 
+    /* Down to the foot and past it, cut off by the panel. The design's slot is
+       719x608, a ratio of 1.18, and a picture wider than that — the PaperCut
+       screenshot is 1.55 — stops short and floats unless it is told to fill
+       the height and crop. */
+    .stat-panel .stat-panel-shot.anchor-foot {
+      block-size: 89.5%;
+    }
+
+    .stat-panel .stat-panel-shot.anchor-foot .image-inner,
+    .stat-panel .stat-panel-shot.anchor-foot picture {
+      block-size: 100%;
+      display: block;
+    }
+
+    .stat-panel .stat-panel-shot.anchor-foot img {
+      block-size: 100%;
+      inline-size: 100%;
+      /* From the top: the head of a screenshot is the part worth keeping. */
+      object-fit: cover;
+      object-position: top center;
+    }
+
     /* The column of pills: 366 of 1160 wide, 95 in from the edge, 77 down. */
     .stat-panel .stat-panel-stats {
       display: flex;
@@ -279,9 +310,25 @@ const hasHeader = Boolean(eyebrow || heading || subtext || buttonSections?.lengt
       justify-content: center;
     }
 
-    .stat-panel .stat-panel-mark .icon {
-      block-size: 4.2cqi;
-      inline-size: 4.2cqi;
+    /* Size and centre the element that actually draws, not the one the class
+       lands on. Icon puts an `.icon-inner` inside carrying the real size —
+       `size-lg` here — so sizing the outer span alone left the svg at 27px in
+       a 44px box, sitting at its top-left: both too small and off-centre.
+       These three have to agree or the mark drifts. */
+    .stat-panel .stat-panel-mark .icon,
+    .stat-panel .stat-panel-mark .icon-inner {
+      align-items: center;
+      block-size: 100%;
+      display: flex;
+      inline-size: 100%;
+      justify-content: center;
+    }
+
+    /* The design draws the mark at 49 to 54 inside an 87 circle, so a little
+       over half of it. */
+    .stat-panel .stat-panel-mark svg {
+      block-size: 4.7cqi;
+      inline-size: 4.7cqi;
     }
 
     .stat-panel .stat-panel-figures {
@@ -316,6 +363,15 @@ const hasHeader = Boolean(eyebrow || heading || subtext || buttonSections?.lengt
         padding: var(--spacing-lg);
       }
 
+      .stat-panel .stat-panel-shot.anchor-foot {
+        block-size: auto;
+      }
+
+      .stat-panel .stat-panel-shot.anchor-foot img {
+        block-size: auto;
+        object-fit: fill;
+      }
+
       .stat-panel .stat-panel-shot,
       .stat-panel .stat-panel-stats {
         inline-size: 100%;
@@ -337,9 +393,9 @@ const hasHeader = Boolean(eyebrow || heading || subtext || buttonSections?.lengt
         inline-size: 3rem;
       }
 
-      .stat-panel .stat-panel-mark .icon {
-        block-size: 1.6rem;
-        inline-size: 1.6rem;
+      .stat-panel .stat-panel-mark svg {
+        block-size: 1.7rem;
+        inline-size: 1.7rem;
       }
 
       .stat-panel .stat-panel-value .counter-inner {

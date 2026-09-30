@@ -46,6 +46,17 @@ imageSource:
 imageAlt:
   type: text
   comment: Alternative text for the picture.
+imageAnchor:
+  type: select
+  comment: >-
+    Where the picture ends. To the foot runs it down to the panel's bottom
+    edge and lets the panel cut it off, which is how the design draws it.
+  options:
+    values:
+      - id: foot
+        name: Down to the foot
+      - id: top
+        name: Its own height
 panelImage:
   type: image
   comment: >-

@@ -12,6 +12,7 @@ value:
   subtextSize: lg
   imageSource: ""
   imageAlt: ""
+  imageAnchor: foot
   panelImage: ""
   panelColor: moss
   statsPosition: end
