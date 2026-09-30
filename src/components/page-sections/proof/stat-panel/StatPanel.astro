@@ -261,6 +261,19 @@ const hasHeader = Boolean(eyebrow || heading || subtext || buttonSections?.lengt
       object-position: top center;
     }
 
+    /* The design rounds the picture's top corners and leaves its bottom ones
+       square — `rectangleCornerRadii: [18, 18, 0, 0]` — because the panel cuts
+       that edge off anyway. Left at its own height there is no cut edge, so it
+       is rounded all the way round. */
+    .stat-panel .stat-panel-shot img {
+      border-start-end-radius: var(--radius-card);
+      border-start-start-radius: var(--radius-card);
+    }
+
+    .stat-panel .stat-panel-shot.anchor-top img {
+      border-radius: var(--radius-card);
+    }
+
     /* The column of pills: 366 of 1160 wide, 95 in from the edge, 77 down. */
     .stat-panel .stat-panel-stats {
       display: flex;
