@@ -84,6 +84,7 @@ pageSections:
     mediaWidth: wide
     progressWidth: content
     progressColor: sunset
+    progressTrackColor: midnight
     backgroundColor: base
     colorScheme: dark
     lockColorScheme: true
@@ -186,6 +187,7 @@ pageSections:
     mediaWidth: wide
     progressWidth: content
     progressColor: pacific
+    progressTrackColor: pacific-100
     background:
       type: pattern
       pattern: grid

@@ -141,6 +141,7 @@ pageSections:
     mediaWidth: wide
     progressWidth: content
     progressColor: moss
+    progressTrackColor: gray-550
     background:
       type: pattern
       pattern: grid

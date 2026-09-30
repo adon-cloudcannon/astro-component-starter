@@ -47,6 +47,7 @@ pageSections:
     mediaWidth: wide
     progressWidth: content
     progressColor: blush
+    progressTrackColor: earth
     steps:
       - contentSections:
           - _component: building-blocks/core-elements/heading

@@ -66,6 +66,16 @@ const {
   progressWidth = "full",
   /** The palette colour the fill is drawn in. */
   progressColor = "sunset",
+  /**
+   * The colour of the track behind the fill.
+   *
+   * Stated, not derived. The design picks one per band and not one of them is
+   * a tint of its fill: #6B6157 behind blush on High Performance, #333333
+   * behind three different colours, #9FA199 behind moss on Git. Left as the
+   * fill at 22% the track came out a pale wash of the accent where the design
+   * draws a flat grey.
+   */
+  progressTrackColor = "",
   sectionLabel,
   maxContentWidth = "xl",
   paddingHorizontal = "gutter",
@@ -102,6 +112,13 @@ const arrayDataAttributes = effectiveChildrenProp
       thing scrolling past far too fast. */}
   style={{
     "--pinned-steps-accent": `var(--${progressColor})`,
+    ...(progressTrackColor
+      ? {
+          "--pinned-steps-track": progressTrackColor.startsWith("#")
+            ? progressTrackColor
+            : `var(--${progressTrackColor})`,
+        }
+      : {}),
     "--pinned-steps-count": Math.max(stepList.length, 1),
     "--pinned-steps-step-scroll": `calc(${Number(stepScroll) || 1.1} * 100dvh)`,
   }}
@@ -388,7 +405,10 @@ const arrayDataAttributes = effectiveChildrenProp
     }
 
     .pinned-steps-progress {
-      background-color: color-mix(in srgb, var(--pinned-steps-accent, var(--sunset)) 22%, transparent);
+      background-color: var(
+        --pinned-steps-track,
+        color-mix(in srgb, var(--pinned-steps-accent, var(--sunset)) 22%, transparent)
+      );
       block-size: 10px;
       overflow: hidden;
     }

@@ -195,6 +195,7 @@ pageSections:
     mediaWidth: wide
     progressWidth: content
     progressColor: pacific-300
+    progressTrackColor: midnight
     backgroundColor: base
     colorScheme: dark
     lockColorScheme: true

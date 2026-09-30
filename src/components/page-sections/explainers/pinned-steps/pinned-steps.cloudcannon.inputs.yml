@@ -257,3 +257,9 @@ number:
   comment: >-
     A step number shown above the copy. Decorative — it is hidden from screen
     readers, which have the step's own label already.
+progressTrackColor:
+  type: text
+  comment: >-
+    The colour behind the progress fill, as a palette name or a hex. The design
+    picks one per band rather than tinting the fill. Leave empty for the fill
+    at 22%.

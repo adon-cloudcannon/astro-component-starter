@@ -63,6 +63,7 @@ pageSections:
     mediaWidth: wide
     progressWidth: content
     progressColor: golden
+    progressTrackColor: midnight
     backgroundColor: base
     colorScheme: dark
     lockColorScheme: true

@@ -159,6 +159,7 @@ pageSections:
         'y': 45.2%
         ry: 45.6%
   - _component: page-sections/explainers/pinned-steps
+    progressTrackColor: '#674A3F'
     heading: Happy developers
     headingSize: lg
     subtext: ''
