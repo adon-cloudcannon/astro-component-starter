@@ -155,13 +155,28 @@ const statList: StatProps[] = Array.isArray(stats) ? stats : [];
       position: relative;
     }
 
-    .stat-panel-ground {
+    /* Edge to edge. Image nests an `.image-inner` and a `<picture>` between
+       the class and the `<img>`, and neither takes a height of its own — so
+       sizing the wrapper and the img alone left the sheet at its natural
+       height with the panel's colour showing under it. Every level between
+       has to be told, which is the same reason the marks came out small. */
+    .stat-panel-ground,
+    .stat-panel-ground .image-inner,
+    .stat-panel-ground picture {
       block-size: 100%;
+      display: block;
+      inline-size: 100%;
+    }
+
+    .stat-panel-ground {
       inset: 0;
       position: absolute;
     }
 
-    .stat-panel-ground img {
+    /* Scoped through the panel to out-specify Image's own `height: auto`,
+       which otherwise wins and leaves the sheet at its natural aspect — 367
+       of the 455 the panel needs, with the backing colour showing beneath. */
+    .stat-panel-panel > .stat-panel-ground img {
       block-size: 100%;
       inline-size: 100%;
       object-fit: cover;
@@ -306,7 +321,13 @@ const statList: StatProps[] = Array.isArray(stats) ? stats : [];
       margin: 0;
     }
 
-    .stat-panel-value .counter-inner {
+    /* Scoped through the panel to out-specify Counter's own `size-xl`, which
+       is a flat 65px and ties on specificity. Left to win, the figure stayed
+       65 whatever the panel measured — fine at Enterprise's 1040, but it
+       overran the pill on High Performance's 651, where the same share is 36.
+       The point of sizing in `cqi` is that the pill holds its proportions
+       wherever it is put, so the rule has to actually land. */
+    .stat-panel-panel .stat-panel-value .counter-inner {
       color: var(--stat-panel-figure, #ffffff);
       font-size: 5.6cqi;
       line-height: 1.15;

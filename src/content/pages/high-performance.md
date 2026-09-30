@@ -85,7 +85,8 @@ pageSections:
           - _component: building-blocks/wrappers/stat-overlay
             panelImage: /src/assets/images/marketing/stat-panel-scratch-high-performance.webp
             panelColor: '#FFFFFF'
-            imageSource: ''
+            imageSource: /src/assets/images/marketing/partner-dashboard-1.png
+            imageAlt: ''
             imagePlacement: center
             imageWidth: 74
             ratioWidth: 800
@@ -97,7 +98,7 @@ pageSections:
                 suffix: x
                 label: publishing velocity
                 iconName: bolt
-                iconColor: moss-400
+                iconColor: blush
   - _component: page-sections/proof/testimonial-bento
     testimonials:
       - text: |-
