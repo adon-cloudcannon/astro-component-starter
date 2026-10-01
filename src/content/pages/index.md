@@ -404,15 +404,18 @@ pageSections:
     colorScheme: dark
     lockColorScheme: true
     cardColorScheme: light
-  - _component: page-sections/proof/testimonial-section
-    text: I almost forgot that website maintenance was a thing.
-    authorName: Sindre Gusdal
-    authorDescription: General Manager · Absoluttweb
-    layout: split
-    markPosition: start
-    markStyle: plain
-    company: Absoluttweb
-    authorImage: /src/assets/images/marketing/ellipse-287.jpg
+  - _component: page-sections/proof/testimonial-quote
+    variant: static
+    quoteSize: lg
+    tone: base
+    quotes:
+      - text: I almost **forgot** that website maintenance was a thing.
+        authorName: Sindre Gusdal
+        authorDescription: General Manager,
+        company: Absoluttweb
+        authorImage: /src/assets/images/marketing/ellipse-287.jpg
+        authorImageAlt: Sindre Gusdal
+        accentColor: harbour
     backgroundColor: base
     colorScheme: dark
     lockColorScheme: true
