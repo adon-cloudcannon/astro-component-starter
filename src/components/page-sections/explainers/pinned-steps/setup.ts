@@ -93,7 +93,7 @@ function setupPinnedSteps(stepper: Pinned): void {
 
   // Below the breakpoint everything is shown at once, so there is no active
   // step to track and nothing to listen for.
-  if (steps.length < 2 || !stepper.__pinnedStepsQuery.matches) {
+  if (!stepper.__pinnedStepsQuery.matches) {
     steps.forEach((step) => {
       step.removeAttribute("data-active");
       step.removeAttribute("aria-hidden");
@@ -104,6 +104,23 @@ function setupPinnedSteps(stepper: Pinned): void {
         panel.removeAttribute("data-active");
         panel.removeAttribute("aria-hidden");
       });
+    return;
+  }
+
+  /**
+   * One step is always the active one.
+   *
+   * It used to be swept up with the below-the-breakpoint case and have its
+   * `data-active` stripped, which is right down there, where a rule shows
+   * every step at once. Up here nothing shows a step but that attribute, so a
+   * band with a single step rendered as an empty dark box: the copy was in the
+   * DOM, at the right size, at `opacity: 0` and `visibility: hidden`.
+   *
+   * There is no progress to track with one step, so this returns before the
+   * scroll listener the same as that case does.
+   */
+  if (steps.length < 2) {
+    setActive(stepper, 0);
     return;
   }
 

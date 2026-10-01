@@ -137,7 +137,7 @@ const arrayDataAttributes = effectiveChildrenProp
     haze={haze}
   >
     {hasHeader && (
-      <Fragment>
+      <div class="pinned-steps-header flow">
         {/* Each guarded on its own content. An empty element is still a
             sibling, and the flow layer pays for every one after the first. */}
         {eyebrow && (
@@ -168,7 +168,7 @@ const arrayDataAttributes = effectiveChildrenProp
             text={subtext}
           />
         )}
-      </Fragment>
+      </div>
     )}
 
     <div
@@ -263,8 +263,22 @@ const arrayDataAttributes = effectiveChildrenProp
          ancestor — so `bottom: 0` was the foot of the COPY, not of the band:
          205px short on High Performance, where the steps are shortest. */
       display: grid;
-      grid-template-rows: 1fr;
-      min-height: calc(100dvh - var(--main-nav-height, 0px));
+      /* `minmax(0, 1fr)`, not `1fr`: a grid row's automatic minimum is its
+         content's min-content size, so the row grew to whatever was in it and
+         took the stage's own height with it. That is what put the content box
+         72px past the stage here. */
+      grid-template-rows: minmax(0, 1fr);
+      /* Exactly the visible area, never taller.
+      
+         It was a minimum, so content taller than the viewport pushed the stage
+         past it, and everything anchored to the stage's foot went with it: on
+         a 780-tall window the stage ran to 806 and the progress bar sat 26px
+         below the fold. Measured across eight sizes, the bar was off-screen on
+         five of them, which is most laptops.
+      
+         A pinned band is the visible area by definition, so this is a height
+         rather than a floor, and what is inside fits itself to it. */
+      block-size: calc(100dvh - var(--main-nav-height, 0px));
       position: sticky;
       top: var(--main-nav-height, 0px);
     }
@@ -272,6 +286,30 @@ const arrayDataAttributes = effectiveChildrenProp
     .pinned-steps > .pinned-steps-stage > .outer-content,
     .pinned-steps > .pinned-steps-stage > .outer-content > .content {
       block-size: 100%;
+    }
+
+    /* The steps sit in the middle of what the header leaves, not directly
+       under it. The design gives "Happy developers" 228px between its foot
+       and the step's heading where flow's own space-before gave 24, and the
+       distance is not a number to hardcode: it is whatever is left of the
+       band once the header has taken its share. A band with no header gets
+       the same treatment with one row, so the four that carry no heading
+       centre in the band rather than sitting at its top. */
+    .pinned-steps > .pinned-steps-stage > .outer-content > .content {
+      display: grid;
+      grid-template-rows: minmax(0, 1fr);
+    }
+
+    .pinned-steps > .pinned-steps-stage > .outer-content > .content:has(> .pinned-steps-header) {
+      grid-template-rows: auto minmax(0, 1fr);
+    }
+
+    .pinned-steps > .pinned-steps-stage > .outer-content > .content > .pinned-steps-layout {
+      align-self: center;
+      /* flow writes margin-block-start from this, and a plain margin loses to
+         it. Inside a grid row the row does the spacing. */
+      --space-before: 0;
+      margin-block: 0;
     }
 
     /* On the section rather than the layout, so the progress rail can lay
