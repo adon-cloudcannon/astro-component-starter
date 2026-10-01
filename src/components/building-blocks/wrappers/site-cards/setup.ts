@@ -42,7 +42,65 @@ const markLive = (stage: HTMLElement) => {
   const flow = stage.dataset.flow || "";
   const live = flow === "synced" ? "production" : flow;
   stage.querySelectorAll<HTMLElement>(".site-cards-card").forEach((card) => {
-    card.toggleAttribute("data-live", card.dataset.env === live);
+    const isLive = card.dataset.env === live;
+    card.toggleAttribute("data-live", isLive);
+
+    // The card's own control. Only the one with somewhere to publish to can
+    // be pressed, which rules out production and everything once synced.
+    const button = card.querySelector<HTMLButtonElement>("[data-publish]");
+    if (button) button.disabled = !isLive || !card.dataset.next || flow === "synced";
+  });
+
+};
+
+/**
+ * Draw the graph from the cards themselves.
+ *
+ * The edges were written out by hand against the design's measurements, which
+ * meant every change to a card's content moved the cards and left the arrows
+ * pointing at where they used to be. Taking the boxes at run time costs one
+ * measurement per resize and cannot drift.
+ *
+ * Each edge is the same U: out of the source card's foot 40 left of its
+ * middle, down 30, across, and up into the card it feeds 40 right of that
+ * one's middle.
+ */
+const drawEdges = (stage: HTMLElement) => {
+  const svg = stage.querySelector<SVGSVGElement>(".site-cards-wire");
+  if (!svg) return;
+
+  const rect = stage.getBoundingClientRect();
+  if (!rect.width) return;
+  // The viewBox is 708 wide and the stage holds its aspect ratio, so one
+  // stage pixel is this many of the drawing's units, on both axes.
+  const unit = 708 / rect.width;
+  const R = 14;
+
+  stage.querySelectorAll<HTMLElement>(".site-cards-card[data-next]").forEach((from) => {
+    const to = cardFor(stage, from.dataset.next || "");
+    if (!to) return;
+
+    const a = boxIn(stage, from);
+    const b = boxIn(stage, to);
+    // Left of the source's middle, right of the target's. Started right of
+    // centre the run was 304 long — wider than the step between the cards —
+    // so it passed under the card in between and crossed the other edge.
+    // Inside the middles the two runs are 144 and cannot meet.
+    const startX = (a.left + a.width / 2) * unit - 40;
+    const endX = (b.left + b.width / 2) * unit + 40;
+    const startY = (a.top + a.height) * unit;
+    const endY = (b.top + b.height) * unit + 7;
+    const floor = startY + 30;
+
+    const line =
+      `M${startX} ${startY} V${floor - R} Q${startX} ${floor} ${startX - R} ${floor} ` +
+      `H${endX + R} Q${endX} ${floor} ${endX} ${floor - R} V${endY}`;
+    const head = `M${endX - 10} ${endY + 16} L${endX} ${endY} L${endX + 10} ${endY + 16}`;
+
+    const edge = from.dataset.env || "";
+    svg.querySelectorAll<SVGPathElement>(`[data-edge="${edge}"]`).forEach((path) => {
+      path.setAttribute("d", path.dataset.role === "head" ? head : line);
+    });
   });
 };
 
@@ -53,18 +111,10 @@ const markLive = (stage: HTMLElement) => {
  * share stays right through a resize without anything having to listen for
  * one.
  */
-const moveControl = (stage: HTMLElement) => {
+/** Everything that has to be put right after the flow moves or the stage resizes. */
+const refresh = (stage: HTMLElement) => {
   markLive(stage);
-
-  // `synced` is a state, not a card, so there is nothing left to place.
-  const card = cardFor(stage, stage.dataset.flow || "");
-  if (!card) return;
-
-  const box = boxIn(stage, card);
-  const width = stage.getBoundingClientRect().width || 1;
-  const height = stage.getBoundingClientRect().height || 1;
-  stage.style.setProperty("--flow-x", `${(box.left / width) * 100}%`);
-  stage.style.setProperty("--flow-bottom", `${((box.top + box.height) / height) * 100}%`);
+  drawEdges(stage);
 };
 
 /**
@@ -104,7 +154,10 @@ const publish = (stage: Stage) => {
   const target = photoOf(to);
   if (!from || !to || !source || !target) return;
 
-  const button = stage.querySelector<HTMLButtonElement>("[data-publish]");
+  // The card's own control, not the stage's first: with one on every card,
+  // `stage.querySelector` is production's, and re-enabling that at the end
+  // handed a working button to the one environment with nowhere to publish.
+  const button = from.querySelector<HTMLButtonElement>("[data-publish]");
   if (button) button.disabled = true;
 
   runPulse(stage, from.dataset.env || "");
@@ -129,8 +182,8 @@ const publish = (stage: Stage) => {
       target.innerHTML = arriving;
       stage.dataset.flow =
         FLOW[Math.min(FLOW.indexOf(stage.dataset.flow || "") + 1, FLOW.length - 1)];
-      moveControl(stage);
-      if (button) button.disabled = false;
+      // `refresh` owns every button's state, so nothing is re-enabled here.
+      refresh(stage);
     }, FADE + 60);
   }, PULSE - 120);
 };
@@ -157,16 +210,16 @@ export const setupSiteCards = (stage: Stage) => {
         photo.innerHTML = html;
       });
       stage.dataset.flow = first;
-      moveControl(stage);
+      refresh(stage);
     }
   });
 
-  moveControl(stage);
+  refresh(stage);
 
   // The control is placed off the card's measured box, so it has to be put
   // back when the stage changes size. One observer per stage.
   if ("ResizeObserver" in window) {
-    new ResizeObserver(() => moveControl(stage)).observe(stage);
+    new ResizeObserver(() => refresh(stage)).observe(stage);
   }
 };
 

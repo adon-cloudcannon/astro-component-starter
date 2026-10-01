@@ -62,8 +62,8 @@ const {
 // put the same 34.5 of card behind each one.
 const PLACES = [
   { x: 0, y: 0 },
-  { x: 224.5 / 708, y: 41 / 421 },
-  { x: 449 / 708, y: 82 / 421 },
+  { x: 224.5 / 708, y: 41 / 470 },
+  { x: 449 / 708, y: 82 / 470 },
 ];
 
 // Branch publishes to staging, staging to production. Written here rather
@@ -101,7 +101,7 @@ const first = placed.find((card) => card.env === "branch") ? "branch" : "staging
     {buttonLabel && (
       <svg
         class="site-cards-wire"
-        viewBox="0 0 708 421"
+        viewBox="0 0 708 470"
         fill="none"
         aria-hidden="true"
       >
@@ -122,17 +122,22 @@ const first = placed.find((card) => card.env === "branch") ? "branch" : "staging
             ratio, so the drawing scales evenly on its own, and keeping the
             stroke in path units is what lets the dot below be a dash measured
             along the path. */}
-        <path class="site-cards-edge" data-edge="branch"
-          d="M489 347 V363 Q489 377 475 377 H428 Q414 377 414 363 V313" />
-        <path class="site-cards-edge" data-edge="branch" d="M404 326 L414 310 L424 326" />
+        {/* `d` is written by the script from the cards' own boxes, so the
+            graph follows them when their content changes their height. These
+            are the shape it draws, kept as a fallback for no script. */}
+        <path class="site-cards-edge" data-edge="branch" data-role="line"
+          d="M538 382 V398 Q538 412 524 412 H408 Q394 412 394 398 V348" />
+        <path class="site-cards-edge" data-edge="branch" data-role="head"
+          d="M384 364 L394 348 L404 364" />
         <path class="site-cards-pulse" data-edge="branch"
-          d="M489 347 V363 Q489 377 475 377 H428 Q414 377 414 363 V313" />
+          d="M538 382 V398 Q538 412 524 412 H408 Q394 412 394 398 V348" />
 
-        <path class="site-cards-edge" data-edge="staging"
-          d="M264 306 V322 Q264 336 250 336 H203 Q189 336 189 322 V272" />
-        <path class="site-cards-edge" data-edge="staging" d="M179 285 L189 269 L199 285" />
+        <path class="site-cards-edge" data-edge="staging" data-role="line"
+          d="M314 341 V357 Q314 371 300 371 H184 Q170 371 170 357 V307" />
+        <path class="site-cards-edge" data-edge="staging" data-role="head"
+          d="M160 323 L170 307 L180 323" />
         <path class="site-cards-pulse" data-edge="staging"
-          d="M264 306 V322 Q264 336 250 336 H203 Q189 336 189 322 V272" />
+          d="M314 341 V357 Q314 371 300 371 H184 Q170 371 170 357 V307" />
       </svg>
     )}
 
@@ -191,19 +196,24 @@ const first = placed.find((card) => card.env === "branch") ? "branch" : "staging
               )}
             </div>
           )}
+
+          {buttonLabel && (
+            /* One on every card, under its last row. Only the card whose turn
+               it is can be pressed; the others are drawn disabled rather than
+               hidden, so the control is part of what a site card looks like
+               instead of something that appears and moves. */
+            <button
+              class="site-cards-publish"
+              type="button"
+              data-publish
+              disabled={card.env !== first}
+            >
+              <span data-prop="buttonLabel">{buttonLabel}</span>
+            </button>
+          )}
         </div>
       </article>
     ))}
-
-    {buttonLabel && (
-      /* One control, on the card whose turn it is. The design draws a single
-         pill under the stack, which reads as a control for the picture; this
-         one belongs to a card, so it sits on that card's foot and travels
-         with the work. */
-      <button class="site-cards-publish" type="button" data-publish>
-        <span class="site-cards-publish-label" data-prop="buttonLabel">{buttonLabel}</span>
-      </button>
-    )}
 
     {buttonLabel && (
       <p class="site-cards-synced" aria-live="polite">
@@ -228,7 +238,13 @@ const first = placed.find((card) => card.env === "branch") ? "branch" : "staging
       font-family:
         -apple-system, blinkmacsystemfont, "Segoe UI", "Noto Sans", arial, helvetica, sans-serif,
         "Apple Color Emoji", "Segoe UI Emoji";
-      aspect-ratio: 708 / 421;
+      /* 708 x 470, not the design's 708 x 421.
+
+         The design's art group has no graph under it and no control on the
+         cards. Putting a publish pill in every card made them 300 tall, and
+         the lowest card's edge drops 30 below its foot, which ran off the
+         bottom of the design's own box. */
+      aspect-ratio: 708 / 470;
       container-type: inline-size;
       inline-size: 100%;
       position: relative;
@@ -415,44 +431,42 @@ const first = placed.find((card) => card.env === "branch") ? "branch" : "staging
       gap: 0.25cqi;
     }
 
-    /* The control sits on the foot of whichever card is next, half over it,
-       so it reads as that card's button rather than the picture's. It is
-       placed from the card's own custom properties, which the stage sets as
-       the flow advances. */
+    /* The control, on the card. A smaller pill than the design's floating
+       one, sized to sit under the information rows rather than over the
+       picture. */
     .site-cards-publish {
+      /* `justify-self`, not `align-self`: the info is a grid, so the inline
+         axis is the one that stretches, and on the block axis the button was
+         already its own height. Set the wrong one it ran the card's full
+         width, which is a bar rather than a pill. */
+      justify-self: start;
       background: var(--sunset, #d85a2c);
       border: 0;
       border-radius: 999px;
       color: var(--white);
       cursor: pointer;
       font: inherit;
-      font-size: 2.118cqi;
+      font-size: 1.906cqi;
       font-weight: 700;
-      inline-size: 15.536cqi;
-      block-size: 7.203cqi;
-      position: absolute;
-      z-index: 4;
-      /* Centred under the active card, clear of its foot. Astride the edge it
-         sat over the card's last information row, which is content rather
-         than space the button is free to take. */
-      inset-inline-start: calc(var(--flow-x, 40%) + 18.291cqi - 7.768cqi);
-      inset-block-start: calc(var(--flow-bottom, 82%) + 1.4cqi);
+      line-height: 1;
+      margin-block-start: 0.6cqi;
+      padding: 0.95cqi 2.2cqi;
       transition:
-        inset-inline-start var(--animation-slow, 0.45s) var(--ease-in-out),
-        inset-block-start var(--animation-slow, 0.45s) var(--ease-in-out),
-        opacity var(--animation-normal) var(--ease-in-out),
-        transform var(--animation-normal) var(--ease-in-out);
+        background-color var(--animation-normal) var(--ease-in-out),
+        color var(--animation-normal) var(--ease-in-out);
     }
 
-    .site-cards-publish:hover,
-    .site-cards-publish:focus-visible {
-      transform: translateY(-0.3cqi);
+    .site-cards-publish:hover:not(:disabled),
+    .site-cards-publish:focus-visible:not(:disabled) {
+      background: color-mix(in srgb, var(--sunset, #d85a2c) 86%, #000);
     }
 
-    /* Nothing left to publish. */
-    .site-cards[data-flow="synced"] .site-cards-publish {
-      opacity: 0;
-      pointer-events: none;
+    /* The design's own disabled greys, the ones it uses on the "Branched"
+       badge: #EEEEEE behind #757575. */
+    .site-cards-publish:disabled {
+      background: #eeeeee;
+      color: #757575;
+      cursor: default;
     }
 
     .site-cards-synced {
