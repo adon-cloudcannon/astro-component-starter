@@ -440,7 +440,15 @@ const items: Quote[] = (isCarousel ? quotes : quotes.slice(0, 1)) as Quote[];
          1104 content box. */
       .testimonial-quote-card[data-layout="split-person"] .testimonial-quote-slide,
       .testimonial-quote-card[data-layout="split-quote"] .testimonial-quote-slide {
-        align-items: start;
+        /* Stretch, not start.
+
+           The rule is the column's own border, so its length is that column's
+           height: top-aligned, it stopped where the shorter side's text
+           stopped and left a different amount of card under it than over it.
+           Stretched, it runs the row, which puts the card's own padding above
+           and below it equally. The content inside each column is held at the
+           top separately. */
+        align-items: stretch;
         column-gap: var(--testimonial-quote-pad);
         display: grid;
       }
@@ -477,6 +485,10 @@ const items: Quote[] = (isCarousel ? quotes : quotes.slice(0, 1)) as Quote[];
          block's own heading rather than a byline under it. */
       .testimonial-quote-card[data-layout="split-person"] .testimonial-quote-who,
       .testimonial-quote-card[data-layout="split-quote"] .testimonial-quote-who {
+        /* `align-content` as well as `align-items`: a grid's auto rows absorb
+           the spare height a stretched column now has, so without it the face
+           and the name drift apart to fill the card. */
+        align-content: start;
         align-items: start;
         display: grid;
         gap: var(--spacing-lg);
