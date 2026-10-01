@@ -260,11 +260,11 @@ const first = placed.find((card) => card.env === "branch") ? "branch" : "staging
        a drop shadow, against the 0.85 hairline the other two carry. Here that
        mark travels, so the card you can act on is the one that stands out,
        and a card that has published drops back to the hairline. */
-    /* `.site-cards` in the selector on purpose. The resting order below is
-       `.site-cards-card[data-env="..."]`, which is two classes-worth of
-       specificity, the same as this was; equal rules fall to source order and
-       the env ones come later, so the live card took the heavy rule and
-       stayed behind its neighbour. */
+    /* The mark, and only the mark. Raising the live card above the stack as
+       well made the order flip twice as the work moved through it: staging
+       came over the branch, then fell back under it the moment it published.
+       The cascade keeps its own descending order throughout, and the rule is
+       what says which card you can act on. */
     .site-cards .site-cards-card[data-live] {
       border-color: #333333;
       /* The second pixel of the rule is a ring just outside the border, not a
@@ -280,11 +280,11 @@ const first = placed.find((card) => card.env === "branch") ? "branch" : "staging
       box-shadow:
         0 0 0 max(1px, 0.151cqi) #333333,
         0 1.98cqi 2.646cqi color-mix(in srgb, #000 10%, transparent);
-      z-index: 4;
     }
 
-    /* The cascade's resting order, which the live card above overrides. A
-       card that has published falls back into it. */
+    /* The cascade's order, front to back, which nothing overrides: each card
+       overlaps the one to its left, so this is the order the drawing already
+       implies. */
     .site-cards-card[data-env="branch"] {
       z-index: 3;
     }
