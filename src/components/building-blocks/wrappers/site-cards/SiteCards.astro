@@ -215,6 +215,7 @@ const first = placed.find((card) => card.env === "branch") ? "branch" : "staging
               data-publish
               disabled={card.env !== first}
             >
+              <Icon name="arrow-up" size="none" />
               <span data-prop="buttonLabel">{buttonLabel}</span>
             </button>
           ) : (
@@ -455,17 +456,20 @@ const first = placed.find((card) => card.env === "branch") ? "branch" : "staging
          already its own height. Set the wrong one it ran the card's full
          width, which is a bar rather than a pill. */
       justify-self: start;
+      align-items: center;
       background: var(--sunset, #d85a2c);
       border: 0;
       border-radius: 999px;
       color: var(--white);
       cursor: pointer;
+      display: inline-flex;
       font: inherit;
       font-size: 1.906cqi;
       font-weight: 700;
+      gap: 0.6cqi;
       line-height: 1;
       margin-block-start: 0.6cqi;
-      padding: 0.95cqi 2.2cqi;
+      padding: 0.95cqi 2.2cqi 0.95cqi 1.7cqi;
       transition:
         background-color var(--animation-normal) var(--ease-in-out),
         color var(--animation-normal) var(--ease-in-out);
@@ -478,10 +482,22 @@ const first = placed.find((card) => card.env === "branch") ? "branch" : "staging
 
     /* The design's own disabled greys, the ones it uses on the "Branched"
        badge: #EEEEEE behind #757575. */
+    /* Just over the label's own size, so it reads as part of the word rather
+       than as a badge beside it. */
+    .site-cards-publish .icon {
+      block-size: 2.3cqi;
+      flex: none;
+      font-size: 2.3cqi;
+      inline-size: 2.3cqi;
+    }
+
     /* The same box as the button, drawing nothing. */
+    /* The same box as the button, drawing nothing. The icon is what sets the
+       button's height now, so the spacer carries its size rather than the
+       label's, or the live site's card comes out shorter than the others. */
     .site-cards-publish-space {
       display: block;
-      font-size: 1.906cqi;
+      font-size: 2.3cqi;
       line-height: 1;
       margin-block-start: 0.6cqi;
       padding: 0.95cqi 0;
