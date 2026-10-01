@@ -20,14 +20,18 @@
    * Two knobs, and they are the whole interface:
    *
    *   --scratch-fill   the panel's colour. Required.
-   *   --scratch-ink    what a scratch shows. Defaults to the fill lifted a
-   *                    quarter of the way to white, which is about where the
-   *                    exports sit: their mean alpha is 253 of 255, so most
-   *                    of a scratch is a hint rather than a hole.
+   *   --scratch-ink    the colour a scratch is. Defaults to the page's ground,
+   *                    which is what the exported sheets punched through to.
    *
-   * Judge the ink on the panel, not on a swatch. The mask covers its element,
-   * so the streaks scale with it: 62% read right on a 190px tile and shouted
-   * on the 1040x610 panel the same rule landed on.
+   * There is a third, --scratch-strength, and it exists to be left alone: it
+   * is set from the panel's own width, because a stroke drawn twice the size
+   * at the same strength reads twice as loud.
+   *
+   * Nothing else should need setting. A new component picks up the same
+   * texture at the same scale and the same ink, and a new palette colour is
+   * one line. The only reason to state an ink is a panel that genuinely sits
+   * on something other than the page, which is what the mega menu's card and
+   * the shape pile do.
    *
    * Stating the ink rather than punching through has a second use. Every one
    * of the exported sheets is a sheet with holes in it, so what is behind
@@ -53,28 +57,69 @@
    * background and below everything in it. No host has to know.
    */
   .scratched {
-    background-color: var(--scratch-ink, color-mix(in srgb, #fff 25%, var(--scratch-fill)));
+    background-color: var(--scratch-fill);
+    /* Its own query container, so the sheet can read the panel's width
+       without any host having to declare one. */
+    container-type: inline-size;
     isolation: isolate;
   }
 
+  /**
+   * The scratches are painted, not punched.
+   *
+   * The mask is opaque only WHERE a stroke is, so this paints the ink into
+   * the strokes rather than the fill everywhere else. That is what makes
+   * their strength a plain `opacity`, which a container query can drive;
+   * punched, the only lever was the ink colour, and it had to be set per
+   * panel.
+   */
   .scratched::before {
-    z-index: -1;
-    background-color: var(--scratch-fill);
+    background-color: var(--scratch-ink, var(--color-bg));
     content: "";
     inset: 0;
-    /* cover, not 100% 100%: stretched to the box the streaks would sit at a
-       different angle on every panel that is not 3:2. */
+    opacity: var(--scratch-strength, 0.8);
     /* Three fields, not one, and that is what answers "can the strokes vary".
        A turbulence is one field with one grain, so every stroke in it runs
        the same way: layered at three angles, three thicknesses and three
-       lengths, a panel carries three families instead. `intersect` multiplies
-       the masks, so a stroke from any of them cuts. */
-    mask-composite: intersect, intersect;
+       lengths, a panel carries three families instead. `add` unions them, so
+       a stroke from any of the three shows.
+
+       The tile grows with the panel and is held between a card's scale and a
+       band's, so a big panel draws bigger strokes rather than more of them.
+       Three sizes, so the pattern repeats at their least common multiple
+       rather than every 640px, and there is no seam to hide: the strokes are
+       sparse and the tiles large, so the joins do not read even across a
+       full-width band. */
+    mask-composite: add, add;
     mask-image: var(--scratch-texture);
-    mask-position: center;
-    mask-repeat: no-repeat;
-    mask-size: cover;
+    mask-position: 0 0;
+    mask-repeat: repeat;
+    mask-size:
+      clamp(560px, 156cqi, 1500px) clamp(560px, 156cqi, 1500px),
+      clamp(455px, 127cqi, 1220px) clamp(455px, 127cqi, 1220px),
+      clamp(648px, 180cqi, 1735px) clamp(648px, 180cqi, 1735px);
     position: absolute;
+    z-index: -1;
+  }
+
+  /* A stroke twice the size at the same strength reads twice as loud, which
+     is what made the stat panel scratchy while the team card was right. Size
+     and strength move together instead, so neither needs setting by hand.
+
+     The whole ladder sits a fifth under where it started. At full strength
+     the deepest strokes read as hard cuts, where the exports run from the
+     panel's own colour out to the page's and only touch the far end of that
+     range here and there. */
+  @container (min-width: 620px) {
+    .scratched::before {
+      opacity: var(--scratch-strength, 0.5);
+    }
+  }
+
+  @container (min-width: 1000px) {
+    .scratched::before {
+      opacity: var(--scratch-strength, 0.36);
+    }
   }
 }
 
@@ -85,10 +130,12 @@
    *
    * The filter region is stated in user units rather than percentages on
    * purpose: a `%` inside a data URI is the start of an escape, and
-   * `width="160%"` is a malformed one.
+   * `width="160%"` is a malformed one. It also has to reach well past the
+   * tile on every side, or the rotated rect leaves the tile's own corners
+   * untouched and every panel renders with its corners chamfered off.
    */
   --scratch-texture:
-    url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="900" height="600"><filter id="s" filterUnits="userSpaceOnUse" x="-500" y="-500" width="2000" height="1700"><feTurbulence type="fractalNoise" baseFrequency="0.9 0.03" numOctaves="4" seed="6" result="st"/><feTurbulence type="fractalNoise" baseFrequency="0.006" numOctaves="2" seed="23" result="w"/><feDisplacementMap in="st" in2="w" scale="70" xChannelSelector="R" yChannelSelector="G" result="d"/><feColorMatrix in="d" type="matrix" values="0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 1 0 0 0 0" result="a"/><feComponentTransfer in="a"><feFuncA type="linear" slope="-3" intercept="3.05"/></feComponentTransfer></filter><g transform="rotate(-22 450 300)"><rect x="-450" y="-450" width="1800" height="1500" filter="url(%23s)"/></g></svg>'),
-    url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="900" height="600"><filter id="s" filterUnits="userSpaceOnUse" x="-500" y="-500" width="2000" height="1700"><feTurbulence type="fractalNoise" baseFrequency="0.3 0.02" numOctaves="4" seed="44" result="st"/><feTurbulence type="fractalNoise" baseFrequency="0.006" numOctaves="2" seed="61" result="w"/><feDisplacementMap in="st" in2="w" scale="70" xChannelSelector="R" yChannelSelector="G" result="d"/><feColorMatrix in="d" type="matrix" values="0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 1 0 0 0 0" result="a"/><feComponentTransfer in="a"><feFuncA type="linear" slope="-3" intercept="3.1"/></feComponentTransfer></filter><g transform="rotate(-52 450 300)"><rect x="-450" y="-450" width="1800" height="1500" filter="url(%23s)"/></g></svg>'),
-    url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="900" height="600"><filter id="s" filterUnits="userSpaceOnUse" x="-500" y="-500" width="2000" height="1700"><feTurbulence type="fractalNoise" baseFrequency="0.6 0.025" numOctaves="4" seed="77" result="st"/><feTurbulence type="fractalNoise" baseFrequency="0.006" numOctaves="2" seed="94" result="w"/><feDisplacementMap in="st" in2="w" scale="70" xChannelSelector="R" yChannelSelector="G" result="d"/><feColorMatrix in="d" type="matrix" values="0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 1 0 0 0 0" result="a"/><feComponentTransfer in="a"><feFuncA type="linear" slope="-3" intercept="3.12"/></feComponentTransfer></filter><g transform="rotate(8 450 300)"><rect x="-450" y="-450" width="1800" height="1500" filter="url(%23s)"/></g></svg>');
+    url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="640" height="640"><filter id="s" filterUnits="userSpaceOnUse" x="-640" y="-640" width="1920" height="1920"><feTurbulence type="fractalNoise" baseFrequency="0.9 0.03" numOctaves="4" seed="6" result="st"/><feTurbulence type="fractalNoise" baseFrequency="0.006" numOctaves="2" seed="23" result="w"/><feDisplacementMap in="st" in2="w" scale="70" xChannelSelector="R" yChannelSelector="G" result="d"/><feColorMatrix in="d" type="matrix" values="0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 1 0 0 0 0" result="a"/><feComponentTransfer in="a"><feFuncA type="linear" slope="3" intercept="-2.05"/></feComponentTransfer></filter><g transform="rotate(-22 320 320)"><rect x="-640" y="-640" width="1920" height="1920" filter="url(%23s)"/></g></svg>'),
+    url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="520" height="520"><filter id="s" filterUnits="userSpaceOnUse" x="-520" y="-520" width="1560" height="1560"><feTurbulence type="fractalNoise" baseFrequency="0.3 0.02" numOctaves="4" seed="44" result="st"/><feTurbulence type="fractalNoise" baseFrequency="0.006" numOctaves="2" seed="61" result="w"/><feDisplacementMap in="st" in2="w" scale="70" xChannelSelector="R" yChannelSelector="G" result="d"/><feColorMatrix in="d" type="matrix" values="0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 1 0 0 0 0" result="a"/><feComponentTransfer in="a"><feFuncA type="linear" slope="3" intercept="-2.1"/></feComponentTransfer></filter><g transform="rotate(-52 260 260)"><rect x="-520" y="-520" width="1560" height="1560" filter="url(%23s)"/></g></svg>'),
+    url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="740" height="740"><filter id="s" filterUnits="userSpaceOnUse" x="-740" y="-740" width="2220" height="2220"><feTurbulence type="fractalNoise" baseFrequency="0.6 0.025" numOctaves="4" seed="77" result="st"/><feTurbulence type="fractalNoise" baseFrequency="0.006" numOctaves="2" seed="94" result="w"/><feDisplacementMap in="st" in2="w" scale="70" xChannelSelector="R" yChannelSelector="G" result="d"/><feColorMatrix in="d" type="matrix" values="0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 1 0 0 0 0" result="a"/><feComponentTransfer in="a"><feFuncA type="linear" slope="3" intercept="-2.12"/></feComponentTransfer></filter><g transform="rotate(8 370 370)"><rect x="-740" y="-740" width="2220" height="2220" filter="url(%23s)"/></g></svg>');
 }

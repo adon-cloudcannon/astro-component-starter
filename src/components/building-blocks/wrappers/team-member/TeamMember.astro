@@ -1,0 +1,250 @@
+---
+/**
+ * A person on a scratchy panel, with their name on a badge and a creature or
+ * object beside them: Tom has a lizard lounging in the corner, Olivia a green
+ * rotary telephone, Sam a handset.
+ *
+ * The design uses this in two places and at two sizes — a grid of the whole
+ * team on the homepage, and one large card beside a call to action on Low
+ * Maintenance, Enterprise and Developers — so it is a block rather than part
+ * of either. Read off 3806:73607: a 410x412 panel at radius 32, a 378x79
+ * badge at radius 21.5 hanging off the bottom-left, and the prop overhanging
+ * the bottom-right corner.
+ *
+ * The photograph is a cut-out with a transparent background, which is what
+ * makes the panel show through. Taken as an ordinary picture it fills its
+ * column and the panel disappears behind it.
+ */
+import Image from "@core-elements/image/Image.astro";
+
+const {
+  name = "",
+  role = "",
+  imageSource = "",
+  imageAlt = "",
+  /** The panel behind them. A colour from the palette, or a painted panel. */
+  backgroundColor = "sunset",
+  backgroundImage = "",
+  /** The lizard, the telephone, whatever is keeping them company. */
+  propSource = "",
+  propAlt = "",
+  class: className,
+  useDefaultEditableBinding = false,
+  _component,
+  ...htmlAttributes
+} = Astro.props;
+
+/* A palette name or a literal. The exported sheets were flat colours the
+   palette does not hold: #FF8853, #748831, #D06524, #FABD3D, measured off
+   their fully opaque pixels. */
+const paint = (value: string) => (value.startsWith("#") ? value : `var(--${value})`);
+
+const panelColour =
+  backgroundColor && backgroundColor !== "none" ? paint(backgroundColor) : undefined;
+/* The ink is the light ground the export punched through to, not a tint of
+   the panel. The design means white; a little of the page's cream takes the
+   edge off flat #FFF, and `--team-member-scratch` still tunes it. */
+const tone = panelColour
+  ? { "--team-member-panel": panelColour, "--scratch-fill": panelColour }
+  : undefined;
+---
+
+<div
+  class:list={["team-member", className]}
+  style={tone}
+  {...htmlAttributes}
+>
+  <div class:list={["team-member-panel", { scratched: !backgroundImage }]}>
+    {backgroundImage && (
+      <Image
+        class="team-member-ground"
+        source={backgroundImage}
+        alt=""
+        data-prop-src="backgroundImage"
+      />
+    )}
+    {imageSource && (
+      <Image
+        class="team-member-portrait"
+        source={imageSource}
+        alt={imageAlt || name}
+        data-prop-src="imageSource"
+        data-prop-alt="imageAlt"
+      />
+    )}
+  </div>
+
+  {(name || role) && (
+    <div class="team-member-badge">
+      {name && (
+        <strong
+          class="team-member-name"
+          data-editable="text"
+          data-prop="name"
+        >
+          {name}
+        </strong>
+      )}
+      {role && (
+        <span
+          class="team-member-role"
+          data-editable="text"
+          data-prop="role"
+        >
+          {role}
+        </span>
+      )}
+    </div>
+  )}
+
+  {propSource && (
+    <Image
+      class="team-member-prop"
+      source={propSource}
+      alt={propAlt}
+      data-prop-src="propSource"
+      data-prop-alt="propAlt"
+    />
+  )}
+</div>
+
+<style is:global>
+  /* Flat, because rules nested deeper than a couple of levels get dropped (see
+     CLAUDE.md). */
+  @layer components {
+    /* One treatment, sized against the card rather than chosen.
+     
+       The design draws the badge two ways — 14/10 on the homepage wall where
+       the cards are 229 wide, and 25/18 on Olivia's 410 card — which made it
+       look like two components. It is one, and an editor should not have to
+       pick a font size to place a person. So the badge measures itself against
+       the card it is on, clamped so it never gets smaller than the wall's or
+       larger than a call to action's. */
+    .team-member {
+      --team-member-radius: clamp(1.125rem, 7.3cqi, 1.75rem);
+      --team-member-badge-radius: clamp(0.625rem, 4.2cqi, 1rem);
+      --team-member-name: clamp(0.875rem, 5cqi, 1.1875rem);
+      --team-member-role: clamp(0.625rem, 3.6cqi, 0.875rem);
+      --team-member-badge-pad: clamp(0.4375rem, 2.6cqi, 0.625rem);
+
+      container-type: inline-size;
+      position: relative;
+    }
+
+    /* The panel is the coloured ground plus its scratches. Drawn by
+       `.scratched` unless a card still carries an exported sheet, which is
+       what `backgroundImage` now means. */
+    .team-member .team-member-panel {
+      aspect-ratio: 410 / 412;
+      background-color: var(--team-member-panel, var(--sunset));
+      border-radius: var(--team-member-radius);
+      overflow: hidden;
+      position: relative;
+    }
+
+    /* Every box down to the img, or the height has nothing to resolve against:
+       Image nests a picture inside an inner wrapper, both auto-height, so a
+       100% on the img alone measured 512 against a 386 panel and the scratches
+       fell outside the crop (see CLAUDE.md on percentage heights). */
+    .team-member .team-member-ground,
+    .team-member .team-member-ground .image-inner,
+    .team-member .team-member-ground picture {
+      block-size: 100%;
+      inline-size: 100%;
+    }
+
+    .team-member .team-member-ground {
+      inset: 0;
+      position: absolute;
+    }
+
+    /* What shows through the scratches.
+       
+       The panel export is not a picture of a scratched card: it is an opaque
+       sheet of the card's colour with the scratches punched right through it,
+       the same trick the mega menu's feature card uses. So whatever sits
+       behind it becomes the scratches. Backed with the panel colour they match
+       the sheet exactly and the card goes flat, which is what it was doing.
+       
+       The design means white. A little of the page's cream takes the edge off
+       flat #FFF, and one token if it wants tuning. */
+    .team-member .team-member-ground {
+      background-color: var(--team-member-scratch, var(--light-sand));
+    }
+
+    /* No ink of its own. `.scratched` defaults to the page's ground, which is
+       the --light-sand this was already asking for; `--team-member-scratch`
+       still overrides it for a card that wants something else. */
+
+    .team-member .team-member-ground img {
+      block-size: 100%;
+      inline-size: 100%;
+      object-fit: cover;
+    }
+
+    /* Bottom-aligned: the design crops each person at the shoulders on the
+       panel's own bottom edge, so they are placed rather than laid out. */
+    .team-member .team-member-portrait {
+      inset-block-end: 0;
+      inset-inline: 0;
+      margin: 0;
+      position: absolute;
+    }
+
+    .team-member .team-member-portrait img {
+      block-size: auto;
+      inline-size: 100%;
+      object-fit: contain;
+    }
+
+    /* The badge hangs off the bottom-left and runs past the panel's edge. */
+    /* As wide as the name, not as wide as the card. Tom's badge is 154 of a
+       366 panel and Olivia's 378 of 410; the difference is the type inside it,
+       so the box follows the words rather than a share of the panel. */
+    .team-member .team-member-badge {
+      background-color: var(--light-sand);
+      border-radius: var(--team-member-badge-radius);
+      inset-block-end: 6%;
+      inset-inline-start: 8%;
+      max-inline-size: 84%;
+      padding: var(--team-member-badge-pad) calc(var(--team-member-badge-pad) * 1.6);
+      position: absolute;
+      inline-size: max-content;
+      z-index: var(--layer-1);
+    }
+
+    .team-member .team-member-name {
+      display: block;
+      font-size: var(--team-member-name);
+      font-weight: var(--font-weight-bold);
+      line-height: 1.16;
+    }
+
+    .team-member .team-member-role {
+      color: var(--color-text-muted);
+      display: block;
+      font-family: var(--font-mono);
+      font-size: var(--team-member-role);
+      line-height: 1.23;
+    }
+
+    /* The prop overhangs the bottom-right corner, over the badge. */
+    .team-member .team-member-prop {
+      inset-block-end: -3%;
+      inset-inline-end: -12%;
+      margin: 0;
+      position: absolute;
+      inline-size: 48%;
+      z-index: var(--layer-2);
+    }
+
+    .team-member .team-member-prop img {
+      block-size: auto;
+      inline-size: 100%;
+    }
+  }
+
+  /* The grid on the homepage draws the same card at 229 square, so the badge
+     and its type come down with it. */
+  }
+</style>

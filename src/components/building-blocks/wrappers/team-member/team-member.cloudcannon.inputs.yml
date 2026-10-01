@@ -1,0 +1,41 @@
+name:
+  type: text
+  comment: The person's name, shown on the badge.
+role:
+  type: text
+  comment: Their role, under the name in the mono face.
+imageSource:
+  type: image
+  comment: >-
+    A cut-out photograph with a transparent background. The panel shows through
+    behind them, so an ordinary photo with its own background will hide it.
+imageAlt:
+  type: text
+  comment: Alt text. Falls back to the name.
+backgroundColor:
+  type: select
+  label: Panel color
+  comment: The scratchy panel behind them.
+  options:
+    values:
+      - id: sunset
+        name: Sunset
+      - id: pacific
+        name: Pacific
+      - id: moss
+        name: Moss
+      - id: golden
+        name: Golden
+      - id: peachy
+        name: Peachy
+      - id: harbour
+        name: Harbour
+backgroundImage:
+  type: image
+  comment: The scratch texture laid over the panel color. One tile, repeated.
+propSource:
+  type: image
+  comment: What they are holding, overhanging the bottom-right corner.
+propAlt:
+  type: text
+  comment: Alt text for that. Leave empty if it is decoration.

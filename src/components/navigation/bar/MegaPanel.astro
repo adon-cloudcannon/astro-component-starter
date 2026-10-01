@@ -15,15 +15,25 @@ const pathname = Astro.url.pathname;
 const itemData = createNavItemData(pathname, item, groupName);
 
 const feature = item.megaMenu?.feature;
-const hasFeature = Boolean(feature?.heading || feature?.image);
+const hasFeature = Boolean(feature?.heading || feature?.image || feature?.backgroundImage);
 const FeatureTag = feature?.link ? "a" : "div";
 // An image-only feature card is a link wrapping one image; with no alt it has
 // no accessible name at all, so fall back to the nav item it sits under.
 const featureLinkLabel = feature?.imageAlt || item.name || "Featured";
 const columns: MegaMenuColumn[] = item.megaMenu?.columns ?? [];
+const accent = item.megaMenu?.accentColor;
+const accentStyle = accent
+  ? {
+      "--mega-accent": `var(--${accent})`,
+      "--mega-accent-tint": `var(--${accent}-50)`,
+    }
+  : undefined;
 ---
 
-<li class="nav-item has-children has-mega">
+<li
+  class="nav-item has-children has-mega"
+  style={accentStyle}
+>
   <NavItemTrigger
     item={itemData}
     inputType="checkbox"
@@ -39,29 +49,52 @@ const columns: MegaMenuColumn[] = item.megaMenu?.columns ?? [];
           aria-label={feature!.link && !feature!.heading ? featureLinkLabel : undefined}
           class="mega-feature"
         >
+          <span
+            class:list={["mega-feature-panel", { scratched: feature!.backgroundColor }]}
+            style={feature!.backgroundColor
+              ? `--scratch-fill: ${feature!.backgroundColor.startsWith("#") ? feature!.backgroundColor : `var(--${feature!.backgroundColor})`}`
+              : undefined}
+          >
+            {feature!.backgroundImage && (
+              <Image
+                source={feature!.backgroundImage}
+                alt={feature!.backgroundImageAlt ?? ""}
+                sizes="17rem"
+                widths={[260, 520]}
+                width={520}
+                {/* Fetched with the page, not when the panel opens. A panel
+                    that is display:none until you hover never starts its lazy
+                    images, so they arrived visibly, one at a time, the first
+                    time each menu was opened. */}
+                priority={true}
+                class="mega-feature-backdrop"
+              />
+            )}
+            {feature!.heading && (
+              <span class="mega-feature-heading">
+                {feature!.heading}
+                {feature!.link && (
+                  <span class="mega-feature-arrow">
+                    <Icon
+                      name="arrow-right"
+                      size="none"
+                      aria-hidden="true"
+                    />
+                  </span>
+                )}
+              </span>
+            )}
+          </span>
           {feature!.image && (
             <Image
               source={feature!.image}
               alt={feature!.imageAlt ?? ""}
-              aspectRatio="widescreen"
-              rounded={true}
-              sizes="20rem"
-              widths={[320, 640]}
-              width={640}
+              sizes="11rem"
+              widths={[169, 338]}
+              width={338}
+              priority={true}
               class="mega-feature-image"
             />
-          )}
-          {feature!.heading && (
-            <span class="mega-feature-heading">
-              {feature!.heading}
-              <span class="mega-feature-arrow">
-                <Icon
-                  name="arrow-right"
-                  size="none"
-                  aria-hidden="true"
-                />
-              </span>
-            </span>
           )}
         </FeatureTag>
       )}
@@ -121,15 +154,35 @@ const columns: MegaMenuColumn[] = item.megaMenu?.columns ?? [];
       position: static;
     }
 
+    /* A sheet dropping out of the bar, not a card floating under it. The
+       design draws it the full 1280 with no radius, in the same cream as the
+       bar, so there is no visible seam between them. Its only shadow points
+       straight down onto the page below: 0 11px 11px at 10% black, which is
+       what the design sets, rather than a card shadow on every side.
+
+       The full width is taken with a margin rather than a transform, because
+       the transform on this element is what the open animation drives. */
     .bar .nav-item.has-mega > .nav-item-content {
-      border-radius: var(--radius-md);
-      box-shadow: var(--shadow-lg);
+      background: var(--color-bg);
+      border: 0;
+      border-radius: 0;
+      box-shadow: 0 0.6875rem 0.6875rem rgb(0 0 0 / 0.1);
       left: 0;
+      /* Flush with the bar. The ordinary dropdown floats 4px clear of it,
+         which is right for a card hanging under a link and wrong for a sheet
+         that is meant to read as the bar continuing downward — it left a 3px
+         line of page showing between the two. */
+      margin-block-start: 0;
+      margin-inline: calc((100% - 100vw) / 2);
+      /* The ordinary dropdown caps itself at `100vw - 2 * spacing-md` so it
+         never touches the window edge. This one is meant to, and that cap was
+         holding it 32px short of full width. */
+      max-width: none;
       min-width: 0;
-      padding: var(--spacing-lg);
-      right: 0;
+      padding: var(--spacing-lg) 0;
+      right: auto;
       transform: none;
-      width: auto;
+      width: 100vw;
     }
 
     /* The centered animation would re-apply translateX(-50%). */
@@ -137,65 +190,171 @@ const columns: MegaMenuColumn[] = item.megaMenu?.columns ?? [];
       animation-name: grow-out;
     }
 
+    /* The panel spans the window, but what is in it lines up with the page's
+       own column: the design puts the feature card's left edge at 113 of 1280,
+       which is the content column, not the panel's edge. */
+    /* 1052 wide, not the page's 1040: the design's nav runs 113..1166, which
+       is its own slightly wider column. It is exactly the room the panel needs
+       — 428 of card, 46 of gap and three 171 columns with 33 between them add
+       up to 1053, and at 1040 the third column wrapped with 7px to spare. */
     .bar .mega-panel-layout {
       display: flex;
       flex-wrap: wrap;
-      gap: var(--spacing-xl);
+      gap: 2.875rem;
+      margin-inline: auto;
+      max-width: var(--content-width-nav, 65.8125rem);
     }
 
+    /* One card, split 260/169. The design draws it as two rectangles rounded
+       on opposite sides, which is a designer drawing one card in two pieces;
+       here it is one box that clips its own corners, so the image on the right
+       runs to the card's edge with no padding of its own. */
     .bar .mega-feature {
-      border-radius: var(--radius-md);
-      color: var(--color-text-strong);
-      display: flex;
-      flex: 1 1 14rem;
-      flex-direction: column;
-      gap: var(--spacing-sm);
-      max-width: 20rem;
+      /* This colour matters more than it looks, because both images on the
+         card are cut out: the grain is a sheet of the panel's colour with the
+         scratches punched right through it, and the illustration beside it is
+         transparent too. Whatever sits here shows through both. Set to the
+         accent it matched the grain exactly and the card went flat; set dark
+         it turned the flecks into scratches and put a black ground behind the
+         drawing.
+
+         The design means white, and draws something a shade softer — the file
+         has a 30% #333333 rectangle under the grain, which is too grey, but
+         flat white is harsher than the artwork. A little of the panel's own
+         cream takes the edge off. One token, if it wants tuning. */
+      background-color: var(
+        --mega-feature-backing,
+        color-mix(in srgb, var(--midnight) 8%, var(--color-bg))
+      );
+      border-radius: var(--radius-card);
+      color: var(--white);
+      display: grid;
+      flex: 1 1 26.75rem;
+      grid-template-columns: 260fr 169fr;
+      max-width: 26.75rem;
+      overflow: hidden;
       text-decoration: none;
     }
 
-    .bar .mega-feature-heading {
-      align-items: center;
-      display: inline-flex;
-      font-size: var(--font-size-md);
-      font-weight: var(--font-weight-semibold);
-      gap: var(--spacing-xs);
+    /* The coloured half: art behind, heading and arrow in front, the arrow
+       pushed to the bottom the way the design sets it.
+
+       The grain used to be a 15MB export, a flat sheet with the scratches
+       punched through it; `.scratched` draws the same thing from the colour
+       alone. The illustration beside it is still cut out, so the card's own
+       backing still shows through that one. */
+    .bar .mega-feature-panel {
+      align-content: space-between;
+      display: grid;
+      padding: 3rem 1.8125rem 1.8125rem;
+      position: relative;
     }
 
+    .bar .mega-feature-backdrop {
+      inset: 0;
+      position: absolute;
+    }
+
+    /* This card sits on its own backing rather than on the page, so it says
+       so: the scratches show the same thing the cut-out illustration beside
+       them does. That is the ink token doing its job, not a tuning fudge. */
+    .bar .mega-feature-panel.scratched {
+      --scratch-ink: var(
+        --mega-feature-backing,
+        color-mix(in srgb, var(--midnight) 8%, var(--color-bg))
+      );
+    }
+
+    .bar .mega-feature-heading {
+      display: block;
+      font-size: 1.8125rem;
+      font-weight: var(--font-weight-semibold);
+      line-height: 1.2;
+      position: relative;
+    }
+
+    /* Inline, on the heading's last line, which is where the design puts it:
+       after the text when it fits, wrapped to its own line when it does not.
+
+       What it must not do is stretch that line. An inline-flex box sits on the
+       baseline by default, and its baseline is its bottom edge, so it hangs
+       below the text and pushes the line box open — that was the extra leading
+       on the last line. `vertical-align: middle` centres it on the text
+       instead, and `line-height: 0` stops it contributing leading of its own. */
     .bar .mega-feature-arrow {
-      color: var(--color-text-muted);
+      color: inherit;
       display: inline-flex;
-      font-size: var(--font-size-md);
+      font-size: 1.75rem;
+      line-height: 0;
+      margin-inline-start: 0.25em;
+      position: relative;
       transition: transform var(--animation-normal) var(--ease-in-out);
+      vertical-align: middle;
     }
 
     .bar .mega-feature:hover .mega-feature-arrow {
       transform: translateX(4px);
     }
 
+    /* Both halves are filled by their art rather than fitted to it, and both
+       are written flat: nested this deep the inner rules get dropped. */
+    .bar .mega-feature-backdrop,
+    .bar .mega-feature-image,
+    .bar .mega-feature-backdrop picture,
+    .bar .mega-feature-image picture {
+      block-size: 100%;
+      inline-size: 100%;
+    }
+
+    .bar .mega-feature-backdrop img,
+    .bar .mega-feature-image img {
+      block-size: 100%;
+      inline-size: 100%;
+      object-fit: cover;
+      /* A hair over, so the edge lands outside the card's clip. The grain's
+         outermost pixels are not quite opaque (alpha 240-255 where the crop
+         cut it), so the card's backing showed through them as a pale hairline
+         around the card and along the seam between the halves. */
+      scale: 1.01;
+    }
+
     .bar .mega-columns {
       display: flex;
       flex: 999 1 24rem;
       flex-wrap: wrap;
-      gap: var(--spacing-xl);
+      /* The design's columns are 171 wide and 204 apart, which is this gap. */
+      gap: 2.0625rem;
       list-style: none;
       margin: 0;
       padding: 0;
     }
 
+    /* A fixed 171, not an equal share. The design keeps three column slots in
+       every panel: Product has two, and they stay at 587 and 791 with the
+       third slot empty rather than spreading to fill the row. */
     .bar .mega-column {
-      flex: 1 1 10rem;
+      flex: 0 1 10.6875rem;
       min-width: 0;
     }
 
+    /* A column heading is an eyebrow: Fragment Mono, uppercase, Gray 700
+       rather than the usual Sunset. The rule under it is drawn in the design
+       too, 171 wide, which is the column.
+
+       Its tracking is the site eyebrow's exception. The convention is 0.2em,
+       measured off 13px eyebrows; these are set at 0.819px on 15.24, which is
+       0.054em. At 0.2em "SITE MANAGEMENT" wants 183px in a 171px column and
+       drops onto a second line, where the design keeps every heading on one. */
     .bar .mega-column-heading {
       border-bottom: var(--border-width-sm) solid var(--color-border-subtle);
-      color: var(--color-text-muted);
-      font-size: var(--font-size-xs);
-      font-weight: var(--font-weight-semibold);
-      letter-spacing: 0.08em;
-      margin: 0 0 var(--spacing-sm);
-      padding: var(--spacing-xs) var(--spacing-sm);
+      color: var(--gray-700);
+      font-family: var(--font-mono);
+      font-size: 0.9375rem;
+      font-weight: var(--font-weight-normal);
+      letter-spacing: 0.054em;
+      line-height: 1.2;
+      margin: 0 0 var(--spacing-md);
+      padding: 0 0 var(--spacing-sm);
       text-transform: uppercase;
     }
 
@@ -208,27 +367,20 @@ const columns: MegaMenuColumn[] = item.megaMenu?.columns ?? [];
       padding: 0;
     }
 
+    /* The row's background bleeds 11px past the column on each side, which is
+       what makes the design's hover rect 190 wide against a 171 column. The
+       negative margin keeps the icon and the text on the column while the
+       background reaches wider. */
     .bar .mega-link {
       align-items: flex-start;
-      border-radius: var(--radius-sm);
+      border-radius: 0.53125rem;
       color: var(--color-text-strong);
       display: flex;
       gap: var(--spacing-sm);
-      padding: var(--spacing-sm);
+      margin-inline: -0.6875rem;
+      padding: 0.625rem 0.6875rem;
       text-decoration: none;
       transition: background var(--animation-normal) var(--ease-in-out);
-
-      &:hover {
-        background: var(--color-state-hover);
-      }
-
-      &.is-highlighted {
-        background: var(--color-bg-surface);
-
-        &:hover {
-          background: var(--color-state-hover);
-        }
-      }
 
       &[aria-current="page"] .mega-link-name {
         text-decoration: underline dotted;
@@ -237,32 +389,64 @@ const columns: MegaMenuColumn[] = item.megaMenu?.columns ?? [];
       }
     }
 
+    /* A 32px tile with a 6px radius, holding a 20px icon: the design draws
+       every link this way, tinted in the panel's own colour. */
     .bar .mega-link-icon {
       align-items: center;
-      background: var(--color-bg-muted);
-      border-radius: var(--radius-sm);
-      color: var(--color-text-strong);
+      background: var(--mega-accent-tint, var(--color-bg-muted));
+      border-radius: 0.375rem;
+      color: var(--mega-accent, var(--color-text-strong));
       display: flex;
       flex-shrink: 0;
-      font-size: var(--font-size-lg);
-      height: 2.25rem;
+      font-size: 1.25rem;
+      height: 2rem;
       justify-content: center;
-      width: 2.25rem;
+      /* The same easing and duration as the row behind it. Left untransitioned
+         the tile snapped to its hover colour while the row faded in around it,
+         and the two arriving at different times read as a glitch. */
+      transition:
+        background var(--animation-normal) var(--ease-in-out),
+        color var(--animation-normal) var(--ease-in-out);
+      width: 2rem;
+    }
+
+    /* Both at 13px with 16.9 of leading, which is the one line height the
+       design uses across every column: the name in bold Midnight, the
+       description in regular Earth. They are one text node in the design, with
+       the weight and colour set per line. */
+    /* Hovering a link tints its row in the panel's colour and fills its tile
+       solid with a white icon. The design draws one link of each panel this
+       way, which read as a permanent mark until it was clear it was a state.
+       `.is-highlighted` stays as a way to pin that look to a link on purpose.
+
+       Focus gets the same treatment, so keyboard users see what the pointer
+       does. */
+    .bar .mega-link:hover,
+    .bar .mega-link:focus-visible,
+    .bar .mega-link.is-highlighted {
+      background: var(--mega-accent-tint, var(--color-state-hover));
+    }
+
+    .bar .mega-link:hover .mega-link-icon,
+    .bar .mega-link:focus-visible .mega-link-icon,
+    .bar .mega-link.is-highlighted .mega-link-icon {
+      background: var(--mega-accent, var(--color-text-strong));
+      color: var(--white);
     }
 
     .bar .mega-link-name {
       display: block;
-      font-size: var(--font-size-sm);
-      font-weight: var(--font-weight-semibold);
-      line-height: var(--line-height-normal);
+      font-size: 0.8125rem;
+      font-weight: var(--font-weight-bold);
+      line-height: 1.3;
     }
 
     .bar .mega-link-description {
       color: var(--color-text-muted);
       display: block;
-      font-size: var(--font-size-sm);
+      font-size: 0.8125rem;
       font-weight: var(--font-weight-normal);
-      line-height: var(--line-height-tight);
+      line-height: 1.3;
     }
   }
 </style>
