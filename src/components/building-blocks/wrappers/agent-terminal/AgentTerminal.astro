@@ -1,0 +1,399 @@
+---
+/**
+ * A terminal session playing itself, with agents wired into it.
+ *
+ * The design draws this flat: a dark panel showing a finished session, and
+ * eight coloured squares around it on hairlines, which read as agents
+ * connected to the machine. What it cannot draw is the part that makes the
+ * point, so here the session types itself out, works, and prints what it did,
+ * and the agents light up while it is working.
+ *
+ * Every number below is measured off `previews/sections/3806_69335.png`:
+ *
+ *   panel    380x227 at (735,227) in the 1280 frame, fill #1C1B17
+ *   squares  32px, eight of them, at the centres in SPOKES
+ *   lines    1px, #6B6156
+ *   type     path and ticks #E3E0D7, body #726F69
+ *
+ * Those are all expressed against a 495x517 box, which is the drawing's own
+ * bounds with the origin moved to its top left, so the whole composition
+ * scales as one thing instead of each piece carrying a pixel size.
+ */
+const BOX = { w: 495, h: 517 };
+/* The panel, in that box. Its centre is where every line is aimed. */
+const PANEL = { x: 72, y: 121, w: 380, h: 227 };
+const HUB = { x: PANEL.x + PANEL.w / 2, y: PANEL.y + PANEL.h / 2 };
+
+/**
+ * Where a line leaves the panel.
+ *
+ * Aiming each one at the panel's centre and letting the panel cover the rest
+ * draws the right picture while nothing moves, but the covered part is still
+ * part of the line: a dash measured from the start was retracting through the
+ * half nobody can see, so a line could disappear entirely without appearing
+ * to shorten. Clipped to the panel's edge here, the whole of each line is the
+ * visible part, and one keyframe shortens all eight by the same share.
+ */
+const exitAt = (x: number, y: number) => {
+  const dx = x - HUB.x;
+  const dy = y - HUB.y;
+  const tx = dx === 0 ? Infinity : ((dx > 0 ? PANEL.x + PANEL.w : PANEL.x) - HUB.x) / dx;
+  const ty = dy === 0 ? Infinity : ((dy > 0 ? PANEL.y + PANEL.h : PANEL.y) - HUB.y) / dy;
+  const t = Math.min(tx, ty);
+  return { x: HUB.x + dx * t, y: HUB.y + dy * t };
+};
+
+/**
+ * The agents.
+ *
+ * `beat` and `after` are each one's own, and deliberately not a series: on a
+ * shared duration with a delay stepped by index, eight squares breathing read
+ * as one wave going round the ring rather than as eight things working. These
+ * are spread so no two line up for long, and they are written down rather than
+ * generated so the server and the browser agree on them.
+ */
+const SPOKES = [
+  { x: 106, y: 16, color: "#7c3442", beat: 1.6, after: 0 },
+  { x: 317, y: 16, color: "#e7b0b8", beat: 2.05, after: 0.35 },
+  { x: 463, y: 55, color: "#feb520", beat: 1.35, after: 0.62 },
+  { x: 16, y: 159, color: "#a6c1f9", beat: 1.85, after: 0.14 },
+  { x: 16, y: 388, color: "#677e01", beat: 1.5, after: 0.78 },
+  { x: 317, y: 430, color: "#dd6f46", beat: 2.2, after: 0.26 },
+  { x: 479, y: 430, color: "#2361db", beat: 1.7, after: 0.52 },
+  { x: 161, y: 501, color: "#f4a889", beat: 1.95, after: 0.05 },
+];
+
+/** How much of its line an agent draws back, and travels with. */
+const PULL = 0.18;
+
+/**
+ * What one spoke needs to move: where its line starts, and how far the square
+ * has to come in to stay on the end of it.
+ *
+ * Worked out here rather than in CSS because it is geometry, and because the
+ * square and its line have to agree: the line retracts by `PULL` of its
+ * length, so the square travels exactly that, along the same axis. Given in
+ * `cqi`, which is a share of the graphic's own width, so the whole thing
+ * scales as one piece.
+ */
+const geometryOf = (spoke: { x: number; y: number }) => {
+  const from = exitAt(spoke.x, spoke.y);
+  const dx = spoke.x - from.x;
+  const dy = spoke.y - from.y;
+  const len = Math.hypot(dx, dy) || 1;
+  const travel = (len * PULL) / BOX.w * 100;
+  return {
+    from,
+    // Toward the panel, which is the way the line retracts.
+    mx: (-dx / len) * travel,
+    my: (-dy / len) * travel,
+  };
+};
+
+const {
+  /** The working directory shown above the session. */
+  path = "~/marketing-site",
+  /**
+   * The session, as a list of steps.
+   *
+   * Each step is one command typed out, a beat where it works, and the lines
+   * it prints when it is done. Written this way rather than as a flat list of
+   * lines because the timing belongs to the step: what the agents do while it
+   * runs is driven by which step is in its working beat.
+   */
+  script = [
+    {
+      run: "npx skills add cloudcannon/agent-skills",
+      done: ["migrate · configure · visual-editing"],
+    },
+    {
+      run: '"add visual editing to this site"',
+      done: ["cloudcannon.config.yaml", "12 components made editable"],
+    },
+  ],
+  /** Runs again from the top once it has finished. */
+  loop = true,
+  class: className,
+  _component,
+  ...htmlAttributes
+} = Astro.props;
+
+const steps = Array.isArray(script) ? script : [];
+---
+
+<div
+  class:list={["agent-terminal", className]}
+  data-agent-terminal
+  data-loop={loop ? "" : undefined}
+  data-state="idle"
+  {...htmlAttributes}
+>
+  {/* The session itself, as data rather than markup: `setup.ts` plays it out
+      a character at a time, and a reader who never gets the script still has
+      the finished text, which is printed into the body below. */}
+  <script type="application/json" data-agent-script set:html={JSON.stringify(steps)} />
+
+  {/* Decorative: it is a picture of a machine, and the session inside it is
+      the part worth reading. */}
+  <svg
+    aria-hidden="true"
+    class="agent-terminal-lines"
+    preserveAspectRatio="none"
+    viewBox={`0 0 ${BOX.w} ${BOX.h}`}
+  >
+    {/* Each line is drawn from the panel out to the agent, not the other way.
+        The dash runs from the path's start, so the end that grows and
+        retracts is whichever end is drawn last: started at the square, the
+        movement happened down at the panel, which is the end that should be
+        fixed. The comment sits out here because a JSX expression takes one
+        root, and a comment before the element inside is a second one. */}
+    {SPOKES.map((spoke, at) => (
+      <line
+        pathLength="1"
+        style={`--beat: ${spoke.beat}s; --after: ${spoke.after}s`}
+        x1={geometryOf(spoke).from.x}
+        x2={spoke.x}
+        y1={geometryOf(spoke).from.y}
+        y2={spoke.y}
+      />
+    ))}
+  </svg>
+
+  {SPOKES.map((spoke, at) => (
+    <span
+      aria-hidden="true"
+      class="agent-terminal-spoke"
+      style={`--x: ${(spoke.x / BOX.w) * 100}%; --y: ${(spoke.y / BOX.h) * 100}%; --fill: ${spoke.color}; --mx: ${geometryOf(spoke).mx.toFixed(3)}cqi; --my: ${geometryOf(spoke).my.toFixed(3)}cqi; --beat: ${spoke.beat}s; --after: ${spoke.after}s`}
+    ></span>
+  ))}
+
+  <div class="agent-terminal-panel">
+    <p class="agent-terminal-path">{path}</p>
+    {/* The finished session, server-rendered. The script replaces it the
+        moment it starts, so what is here is what anyone sees who never gets
+        the animation: no script, reduced motion, or the panel never scrolled
+        into view. */}
+    <div class="agent-terminal-body" data-agent-body>
+      {steps.map((step: Record<string, any>) => (
+        <>
+          <p class="agent-terminal-line is-run"><span class="agent-terminal-mark">&gt;</span>{step.run}</p>
+          {(step.done ?? []).map((line: string) => (
+            <p class="agent-terminal-line is-done"><span class="agent-terminal-mark">✓</span>{line}</p>
+          ))}
+        </>
+      ))}
+    </div>
+  </div>
+</div>
+
+<script>
+  import { onPageLoad } from "@component-utils/onPageLoad";
+  import { setupAllAgentTerminals } from "./setup";
+
+  onPageLoad(() => setupAllAgentTerminals());
+</script>
+
+<style is:global>
+  @layer components {
+    /* The drawing's own bounds, so everything inside can be a percentage of
+       it and the composition holds at any width. Its own query container, so
+       the type inside scales with the picture rather than with the page. */
+    .agent-terminal {
+      aspect-ratio: 495 / 517;
+      container-type: inline-size;
+      inline-size: 100%;
+      position: relative;
+    }
+
+    .agent-terminal-lines {
+      block-size: 100%;
+      inline-size: 100%;
+      inset: 0;
+      position: absolute;
+    }
+
+    /* Drawn in the box's own units rather than held to a screen pixel.
+    
+       `vector-effect: non-scaling-stroke` keeps a hairline thin at any size,
+       but it also takes the dash pattern out of the path's units, so a line
+       told to draw all of itself stopped short of its square by a few pixels,
+       differently per line. The dash is the whole mechanism here, so the path
+       has to own it. */
+    .agent-terminal-lines line {
+      stroke: #6b6156;
+      stroke-width: 1;
+    }
+
+    /* 32 in the 495 box. A square, placed by its centre. */
+    .agent-terminal-spoke {
+      background-color: var(--fill);
+      block-size: calc(32 / 517 * 100%);
+      inline-size: calc(32 / 495 * 100%);
+      inset-block-start: var(--y);
+      inset-inline-start: var(--x);
+      position: absolute;
+      translate: -50% -50%;
+    }
+
+    /* Opaque, and over the lines, which is what cuts them off at its edge:
+       the design stops every line at the panel's boundary, and aiming them at
+       its centre and letting the panel cover the rest draws exactly that with
+       no geometry to work out. */
+    .agent-terminal-panel {
+      background-color: #1c1b17;
+      block-size: calc(227 / 517 * 100%);
+      border-radius: calc(16 / 495 * 100cqi);
+      display: flex;
+      flex-direction: column;
+      inline-size: calc(380 / 495 * 100%);
+      inset-block-start: calc(121 / 517 * 100%);
+      inset-inline-start: calc(72 / 495 * 100%);
+      /* A session that outgrew the panel would push its own floor out. */
+      overflow: hidden;
+      padding: calc(22 / 495 * 100cqi) calc(28 / 495 * 100cqi);
+      position: absolute;
+    }
+
+    .agent-terminal-path,
+    .agent-terminal-line {
+      font-family: var(--font-monospace, ui-monospace, "SF Mono", monospace);
+      /* 13 in a 495 box, held readable at the ends. */
+      font-size: clamp(0.625rem, 2.63cqi, 0.875rem);
+      line-height: 1.55;
+      margin: 0;
+    }
+
+    .agent-terminal-path {
+      color: #e3e0d7;
+      margin-block-end: calc(18 / 495 * 100cqi);
+    }
+
+    .agent-terminal-line {
+      color: #726f69;
+      /* The mark hangs in its own column, so a line that wraps lines up under
+         itself rather than under the tick. */
+      padding-inline-start: 1.6em;
+      text-indent: -1.6em;
+    }
+
+    .agent-terminal-line.is-done {
+      color: #e3e0d7;
+    }
+
+    .agent-terminal-mark {
+      display: inline-block;
+      inline-size: 1.6em;
+      text-indent: 0;
+    }
+
+    .agent-terminal-line.is-run .agent-terminal-mark {
+      color: #e3e0d7;
+    }
+
+    /* The caret, while a command is being typed. */
+    .agent-terminal-caret {
+      animation: agent-terminal-blink 1s steps(1, end) infinite;
+      background-color: #e3e0d7;
+      display: inline-block;
+      inline-size: 0.55em;
+      block-size: 1em;
+      margin-inline-start: 0.1em;
+      vertical-align: text-bottom;
+    }
+
+    @keyframes agent-terminal-blink {
+      0%, 50% { opacity: 1 }
+      50.01%, 100% { opacity: 0 }
+    }
+
+    /* The agents.
+    
+       At rest they sit still. While a command is working they light one after
+       another, which is the whole reason the two halves are one picture: the
+       squares are not decoration running on their own clock, they are what is
+       happening in the panel. `--at` is the square's place in the ring, so one
+       rule staggers all eight. */
+    .agent-terminal-spoke,
+    .agent-terminal-lines line {
+      transition:
+        filter var(--duration-md, 0.3s) var(--ease-smooth, ease),
+        opacity var(--duration-md, 0.3s) var(--ease-smooth, ease),
+        scale var(--duration-md, 0.3s) var(--ease-smooth, ease);
+    }
+
+    /* Always solid. Faded, the hairline runs visibly through the square, and
+       pulsing the opacity pulsed the line showing through it along with it. */
+    .agent-terminal-spoke {
+      opacity: 1;
+    }
+
+    /* Full strength at rest, which is what the design draws: #6B6156 solid.
+       Held at 0.45 it rendered around #BCB6AC over the cream, a good deal
+       fainter than the drawing. The dimming belongs to the movement. */
+    .agent-terminal-lines line {
+      opacity: 1;
+      /* The whole length drawn, with a gap after it to retract into. */
+      stroke-dasharray: 1 1;
+    }
+
+    /* Each on its own clock. A square and its line share one, because they
+       are one movement: the line draws back and the square comes in with it.
+
+       Running the whole time the graphic is on screen, not just through the
+       working beat. Switched on and off by state it was torn away mid-travel
+       whenever a step finished, and a square part way in snapped home in a
+       single frame. There is no state to be caught in now: they breathe, and
+       stop when the graphic is scrolled away. */
+    .agent-terminal[data-visible] .agent-terminal-spoke {
+      animation: agent-terminal-pulse var(--beat) var(--ease-smooth, ease) var(--after) infinite;
+    }
+
+    .agent-terminal[data-visible] .agent-terminal-lines line {
+      animation: agent-terminal-travel var(--beat) var(--ease-smooth, ease) var(--after) infinite;
+    }
+
+    /* The square travels with its line: `--mx` and `--my` are the same
+       fraction of the same line, pointing at the panel, so the two stay
+       joined instead of the line pulling out from under it.
+
+       Size and brightness rather than opacity, because a square has a line
+       underneath it and fading one fades the other through it. */
+    @keyframes agent-terminal-pulse {
+      0%, 100% {
+        filter: brightness(1);
+        scale: 1;
+        translate: -50% -50%;
+      }
+
+      /* Smaller as it comes in, bigger as it goes back out: the square reads
+         as being on the end of the line rather than as a separate thing
+         throbbing near one. It was growing while its line shortened, which is
+         the two halves disagreeing about what is happening. */
+      45% {
+        filter: brightness(0.86);
+        scale: 0.86;
+        translate: calc(-50% + var(--mx)) calc(-50% + var(--my));
+      }
+    }
+
+    /* The line retracts toward the panel and runs back out, which reads as
+       something being sent and answered. `pathLength="1"` is what makes one
+       keyframe work for eight lines of different lengths. */
+    /* Dimmer as it draws in, with the square it carries. Brightest at full
+       length, which is also where the design leaves it. */
+    @keyframes agent-terminal-travel {
+      0%, 100% { opacity: 1; stroke-dasharray: 1 1 }
+      45% { opacity: 0.5; stroke-dasharray: 0.82 1 }
+    }
+
+    /* Nothing moves, and the finished session is what is on screen. The
+       server-rendered body is already that, so there is nothing to put back. */
+    @media (prefers-reduced-motion: reduce) {
+      .agent-terminal-spoke,
+      .agent-terminal-lines line,
+      .agent-terminal-caret {
+        animation: none !important;
+      }
+    }
+  }
+</style>

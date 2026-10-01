@@ -1,3 +1,14 @@
+imageFlush:
+  type: switch
+  comment: >-
+    Stands the drawing on the card's bottom edge instead of inside its
+    padding, and lets the card cut it off. Needs contentCard.
+contentCardColor:
+  type: text
+  comment: >-
+    The card's colour when contentCard is on. A palette name; `base` is the
+    page's light sand. Defaults to white, which is what the patterned bands
+    state.
 heading:
   type: text
   comment: Main heading for the section.

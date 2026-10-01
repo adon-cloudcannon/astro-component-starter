@@ -1,6 +1,8 @@
 ---
 import CustomSection from "@builders/custom-section/CustomSection.astro";
 import Heading from "@core-elements/heading/Heading.astro";
+import AgentTerminal from "@wrappers/agent-terminal/AgentTerminal.astro";
+import PolaroidCamera from "@wrappers/polaroid-camera/PolaroidCamera.astro";
 import Image from "@core-elements/image/Image.astro";
 import Text from "@core-elements/text/Text.astro";
 import ButtonGroup from "@wrappers/button-group/ButtonGroup.astro";
@@ -23,6 +25,21 @@ const {
   subtextWidth,
   buttonSections = [],
   imageSource = "",
+  /**
+   * A terminal session in place of the picture.
+   *
+   * An object rather than a handful of flat props, because it is one thing:
+   * `{ path, script, loop }`. Present and carrying a script, it takes the
+   * media side; absent, nothing about this section changes.
+   */
+  terminal,
+  /**
+   * Turns the picture into a camera you can take a picture with.
+   *
+   * `{ shots: [{ source, alt }], label }`. Present, the media side becomes the
+   * camera and its pile; absent, nothing about this section changes.
+   */
+  camera,
   /**
    * A second picture of the same subject, crossfaded in when the section is
    * scrolled to. The two have to be the same size with their artwork on the
@@ -68,6 +85,23 @@ const {
    * quarter too narrow.
    */
   contentCard = false,
+  /**
+   * The card's own colour, as a palette name.
+   *
+   * White on the two patterned bands, which state #FFFFFF outright. Partner
+   * Program's Enterprise card is #FFFCF3 on a Sand band instead, which is the
+   * usual rule: a card is a shade off its band, and here the band is the
+   * darker of the two sands.
+   */
+  contentCardColor = "white",
+  /**
+   * Sits the drawing on the card's bottom edge instead of inside its padding.
+   *
+   * The design draws the Enterprise card's creatures from y=19 to y=269 in a
+   * card 268 tall, so they run to the foot and the card cuts them off. Boxed
+   * into the padding they float with a gap under them.
+   */
+  imageFlush = false,
   sectionLabel,
   maxContentWidth = "xl",
   paddingHorizontal = "gutter",
@@ -92,7 +126,12 @@ const {
    when it is a card would put a flow child between the section and the split,
    which every cta-split already laid out without. */
 const Wrapper = contentCard ? "div" : Fragment;
-const wrapperProps = contentCard ? { class: "cta-split-card" } : {};
+const wrapperProps = contentCard
+  ? {
+      class: imageFlush ? "cta-split-card image-flush" : "cta-split-card",
+      style: `--cta-split-card-bg: var(--${contentCardColor === "base" ? "color-bg" : contentCardColor})`,
+    }
+  : {};
 
 const overflow = Number(imageOverflow) || 0;
 const bleedSide =
@@ -152,7 +191,22 @@ const bleedLimit = !imageBleed && overflow > 0 ? `${overflow}px` : undefined;
       />
     </Fragment>
     <Fragment slot="second">
-      {imageBackdrop ? (
+      {camera?.shots?.length ? (
+        <PolaroidCamera
+          alt={imageAlt}
+          class="cta-split-camera"
+          label={camera.label}
+          shots={camera.shots}
+          source={imageSource}
+        />
+      ) : terminal?.script?.length ? (
+        <AgentTerminal
+          class="cta-split-terminal"
+          loop={terminal.loop !== false}
+          path={terminal.path}
+          script={terminal.script}
+        />
+      ) : imageBackdrop ? (
         <div class="cta-split-portrait">
           <Image
             class="cta-split-backdrop"
@@ -208,6 +262,7 @@ const bleedLimit = !imageBleed && overflow > 0 ? `${overflow}px` : undefined;
         </button>
       ) : (
         <Image
+          class="cta-split-media"
           source={imageSource}
           rounded={true}
           alt={imageAlt}
@@ -240,10 +295,36 @@ const bleedLimit = !imageBleed && overflow > 0 ? `${overflow}px` : undefined;
        page's light sand: the design states #FFFFFF, which on a sand band is a
        step up rather than the usual step down. */
     .cta-split .cta-split-card {
-      background-color: var(--white);
+      background-color: var(--cta-split-card-bg, var(--white));
       border: 1px solid var(--color-border-subtle);
       border-radius: var(--radius-card);
+      /* So a drawing on the foot is cut by the card's own corners rather than
+         hanging past them. */
+      overflow: hidden;
       padding: var(--spacing-2xl) 69px;
+    }
+
+    /* Except where the card holds a camera: its prints are meant to spill
+       past the edges, and the clip above is there for a drawing standing on
+       the foot, which this card does not have. */
+    .cta-split .cta-split-card:has(.polaroid-camera) {
+      overflow: visible;
+    }
+
+    /* The drawing stands on the card's bottom edge.
+    
+       Two rules, because the grid item is the pane and not the picture: an
+       `align-self` on the image did nothing, since the pane is an ordinary
+       block, and the picture hung 24px short off the centred pane's foot
+       rather than the card's. The pane goes to the end of the row and the
+       picture then sinks through the card's own bottom padding. The copy
+       beside it is untouched. */
+    .cta-split .cta-split-card.image-flush .split-inner > .pane:has(.cta-split-media) {
+      align-self: end;
+    }
+
+    .cta-split .cta-split-card.image-flush .cta-split-media {
+      margin-block-end: calc(-1 * var(--spacing-2xl));
     }
 
     /* flow's space-before is what sets the gap from the section above, and on

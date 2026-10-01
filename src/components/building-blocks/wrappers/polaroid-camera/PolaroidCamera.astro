@@ -1,0 +1,252 @@
+---
+/**
+ * A camera you can take a picture with.
+ *
+ * The design already draws a print coming out of this camera's slot, so the
+ * illustration is made the button: click it, the screen flashes, and a
+ * polaroid drops out and settles on the pile.
+ *
+ * The flash is deliberately small and single. A full-screen white pulse is
+ * exactly the thing that can set off a photosensitive response, so it fires
+ * once per click, peaks under 60% white, lasts about a fifth of a second, and
+ * does not happen at all under `prefers-reduced-motion`, where the picture
+ * still appears. Nothing here can repeat fast enough to flicker: the shutter
+ * is locked out while a flash is running.
+ */
+import Image from "@core-elements/image/Image.astro";
+
+const {
+  /** The camera itself. */
+  source = "",
+  alt = "",
+  /** What it takes pictures of, in order, cycling. */
+  shots = [
+    { source: "/src/assets/images/marketing/hero-lowmaintenance-01-1.png", alt: "" },
+    { source: "/src/assets/images/marketing/penguin-01-1.png", alt: "" },
+    { source: "/src/assets/images/marketing/motorcycle-01-1.png", alt: "" },
+    { source: "/src/assets/images/marketing/hero-developers-01-1.png", alt: "" },
+  ],
+  /** What the button announces, since the picture itself is decorative. */
+  label = "Take a picture",
+  class: className,
+  _component,
+  ...htmlAttributes
+} = Astro.props;
+
+/* What each print is backed with, in turn, unless a shot names its own. */
+const FILMS = ["var(--sunset)", "var(--pacific)", "var(--moss)", "var(--blush)"];
+
+const roll = (Array.isArray(shots) ? shots : []).filter((shot) => shot?.source);
+---
+
+<div
+  class:list={["polaroid-camera", className]}
+  data-polaroid-camera
+  {...htmlAttributes}
+>
+  {/* A real button, so it is reachable and announced. The picture inside is
+      decorative: the label says what the control does, which is the part a
+      reader needs. */}
+  <button class="polaroid-camera-shutter" type="button" aria-label={label}>
+    {/* Sized for the slot it sits in. Left to its own devices Astro served a
+        299px file into a 438px column, which is the camera arriving soft. */}
+    <Image
+      source={source}
+      alt={alt}
+      decorative={!alt}
+      widths={[480, 720, 960]}
+      sizes="(min-width: 48rem) 40vw, 90vw"
+    />
+  </button>
+
+  {/* One template per shot. Rendered by Astro so each picture is optimised by
+      the build, and cloned on click rather than fetched then. */}
+  {roll.map((shot: Record<string, string>, at: number) => (
+    <template data-shot>
+      <li class="polaroid">
+        {/* The site's own scratched sheet behind each print, in a different
+            palette colour per shot. A near-white window left the frame
+            invisible: a polaroid is its border, and the border only reads
+            against something. */}
+        <span
+          class="polaroid-window scratched"
+          style={`--scratch-fill: ${shot.color || FILMS[at % FILMS.length]}`}
+        >
+          <Image source={shot.source} alt={shot.alt} decorative={!shot.alt} />
+        </span>
+      </li>
+    </template>
+  ))}
+
+  {/* `aria-live` so the pile being added to is announced without stealing
+      focus, and a list because that is what it is. */}
+  <ul aria-live="polite" class="polaroid-camera-pile"></ul>
+</div>
+
+<script>
+  import { onPageLoad } from "@component-utils/onPageLoad";
+  import { setupAllPolaroidCameras } from "./setup";
+
+  onPageLoad(() => setupAllPolaroidCameras());
+</script>
+
+<style is:global>
+  @layer components {
+    .polaroid-camera {
+      position: relative;
+    }
+
+    /* The illustration, with nothing of a button about it but the pointer and
+       the focus ring: the camera is the affordance. */
+    .polaroid-camera-shutter {
+      background: none;
+      border: 0;
+      border-radius: var(--radius-md);
+      cursor: pointer;
+      display: block;
+      /* A button sizes to its content whatever its display is, so without
+         this it shrink-wrapped the picture and the camera came out 300 wide
+         in a 438 column, sitting off to one side. */
+      inline-size: 100%;
+      padding: 0;
+      transition: scale var(--duration-sm, 0.15s) var(--ease-smooth, ease);
+    }
+
+    .polaroid-camera-shutter:hover {
+      scale: 1.02;
+    }
+
+    /* Pressed, it dips, which is the only cue that the click landed before
+       the flash arrives. */
+    .polaroid-camera-shutter:active {
+      scale: 0.99;
+    }
+
+    .polaroid-camera-shutter img {
+      display: block;
+      inline-size: 100%;
+      block-size: auto;
+    }
+
+    /* Laid over the camera rather than under it, so the card keeps its size
+       however many pictures are taken. `pointer-events: none` so a print
+       landing across the shutter does not stop the next click. */
+    .polaroid-camera-pile {
+      inset: 0;
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      pointer-events: none;
+      position: absolute;
+    }
+
+    /* A polaroid: white, a hairline edge, and a deeper margin at the foot,
+       which is the whole shape of the thing. */
+    /* Each one lands where the script put it, askew, and over the ones before
+       it. The position is the print's top left rather than its centre, so the
+       drop can animate `translate` without fighting a transform that is doing
+       the placing. */
+    .polaroid {
+      background-color: var(--white);
+      border: 1px solid color-mix(in srgb, var(--midnight) 12%, transparent);
+      border-radius: 2px;
+      box-shadow: 0 2px 10px rgb(0 0 0 / 12%);
+      inline-size: 8.5rem;
+      inset-block-start: var(--y, 60%);
+      inset-inline-start: var(--x, 20%);
+      /* The foot is deeper than the other three, which is the whole shape of
+         a polaroid: 8 all round and 30 below. */
+      padding: 8px 8px 30px;
+      position: absolute;
+      rotate: var(--spin, -2deg);
+      z-index: var(--at, 1);
+    }
+
+    /* The picture sits in a square window, which is what makes it read as a
+       print rather than as a thumbnail with a border. */
+    /* A square, which is what a print is. `.scratched` paints it and needs a
+       positioning context of its own, which `position: relative` gives it. */
+    .polaroid-window {
+      aspect-ratio: 1;
+      display: grid;
+      overflow: hidden;
+      place-items: center;
+      position: relative;
+    }
+
+    /* Inset a little, so the drawing sits on the colour rather than running
+       to the window's own edges. */
+    .polaroid-window img {
+      block-size: 100%;
+      display: block;
+      inline-size: 100%;
+      object-fit: contain;
+      padding: 0.35rem;
+    }
+
+
+    /* Nothing left to take. The camera stops being a target rather than
+       quietly doing nothing when clicked. */
+    .polaroid-camera-shutter:disabled {
+      cursor: default;
+    }
+
+    .polaroid-camera-shutter:disabled:hover {
+      scale: 1;
+    }
+
+    /* Dropping out of the slot and settling. */
+    .polaroid.is-new {
+      animation: polaroid-drop var(--duration-lg, 0.45s) var(--ease-smooth, ease);
+    }
+
+    /* Rotation is left out of this on purpose: it is set per print from
+       `--spin`, and a keyframe that touched it would override the placement
+       for the length of the drop and then snap. */
+    @keyframes polaroid-drop {
+      from {
+        opacity: 0;
+        translate: 0 -1.75rem;
+      }
+
+      to {
+        opacity: 1;
+        translate: 0 0;
+      }
+    }
+
+    /* The flash. Fixed, over everything, and never interactive. */
+    .polaroid-flash {
+      animation: polaroid-flash 200ms ease-out;
+      background-color: var(--white);
+      inset: 0;
+      opacity: 0;
+      pointer-events: none;
+      position: fixed;
+      z-index: var(--layer-5, 60);
+    }
+
+    @keyframes polaroid-flash {
+      0% { opacity: 0 }
+      18% { opacity: 0.55 }
+      100% { opacity: 0 }
+    }
+
+    /* No flash and no drop. The picture still arrives, which is the part that
+       carries the meaning. */
+    @media (prefers-reduced-motion: reduce) {
+      .polaroid.is-new {
+        animation: none;
+      }
+
+      .polaroid-flash {
+        display: none;
+      }
+
+
+      .polaroid-camera-shutter {
+        transition: none;
+      }
+    }
+  }
+</style>
