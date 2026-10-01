@@ -38,16 +38,21 @@ pageSections:
         iconColor: default
   - _component: page-sections/builders/custom-section
     backgroundColor: base
-  - _component: page-sections/proof/testimonial-section
-    text: When we show clients the Visual Editor during our meetings, their eyes light up.
-    authorName: Alex Murray
-    authorDescription: Digital Design Director · Firebrand
-    layout: split
-    markPosition: start
-    markStyle: card
-    company: Firebrand
-    linkText: Read case study
-    authorImage: /src/assets/images/marketing/ellipse-287-2.png
+  - _component: page-sections/proof/testimonial-quote
+    variant: static
+    quoteSize: sm
+    tone: light
+    cardWidth: medium
+    bordered: true
+    quotes:
+      - text: When we show clients the Visual Editor during our meetings, **their eyes light up.**
+        authorName: Alex Murray
+        authorDescription: Digital Design Director,
+        company: Firebrand
+        authorImage: /src/assets/images/marketing/ellipse-287-2.png
+        authorImageAlt: Alex Murray
+        linkText: Read case study
+        accentColor: sunset
     backgroundColor: surface
     background:
       type: pattern
