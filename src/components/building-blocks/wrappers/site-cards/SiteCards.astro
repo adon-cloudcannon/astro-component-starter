@@ -270,15 +270,17 @@ const placed = (cards as Card[]).slice(0, 3).map((card, index) => ({
       white-space: nowrap;
     }
 
-    /* 18.7 of 708, which is the mark itself. The box around it in the file is
-       22.5, and sized to the box the icons came out a touch heavier than the
-       text beside them. */
+    /* 16.5 of 708. The file's own mark is 18.7 in a 22.5 box, and both read
+       heavy here: these are solid discs rather than the outline glyphs the
+       rest of the site uses, so they carry more ink at the same size than the
+       15px text beside them. Just over the text's cap height is where they
+       sit level with it. */
     .site-cards-subtitle .icon,
     .site-cards-row .icon {
-      block-size: 2.641cqi;
+      block-size: 2.331cqi;
       flex: none;
-      font-size: 2.641cqi;
-      inline-size: 2.641cqi;
+      font-size: 2.331cqi;
+      inline-size: 2.331cqi;
     }
 
     .site-cards-rows {
