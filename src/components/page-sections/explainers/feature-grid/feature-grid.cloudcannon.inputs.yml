@@ -1,3 +1,18 @@
+descriptionSize:
+  type: select
+  comment: >-
+    The size of every card's line in the grid. The design sets 19, which is
+    Large here. A card can override it.
+  options:
+    values:
+      - id: sm
+        name: Small
+      - id: md
+        name: Medium
+      - id: lg
+        name: Large
+      - id: xl
+        name: Extra Large
 eyebrow:
   type: text
   comment: Short label above the heading.

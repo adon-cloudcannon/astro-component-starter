@@ -103,8 +103,12 @@ backgroundColor:
         name: Base
       - id: surface
         name: Surface
+      - id: muted
+        name: Muted
       - id: accent
         name: Accent
+      - id: accent-tint
+        name: Accent tint
       - id: highlight
         name: Highlight
 background:

@@ -1,3 +1,22 @@
+accent:
+  type: text
+  comment: >-
+    A palette colour for this tier, mixed into the card at 12% so the ladder
+    reads as a ladder. Empty leaves the card the same sand as its neighbours,
+    which is what the design draws.
+cardColor:
+  type: select
+  comment: >-
+    Which of the two sands the cards are. A card is a shade off its band, and
+    the design goes both ways with it, so this is stated per section.
+  options:
+    values:
+      - id: surface
+        name: Sand
+      - id: base
+        name: Light sand
+      - id: muted
+        name: Dark sand
 eyebrow:
   type: text
   comment: Short label above the heading.

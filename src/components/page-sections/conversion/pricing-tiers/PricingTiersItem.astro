@@ -33,11 +33,24 @@ const {
   /** The height the design draws this card at, in pixels. */
   height,
   showAnnualPricing = false,
+  /** Which of the two sands this card is. Set for the whole grid. */
+  cardColor = "surface",
+  /**
+   * A palette colour for this tier, mixed into the card at 12%.
+   *
+   * Not in the design, which paints all four the same Sand: a decision to let
+   * the ladder read as a ladder. 12% because 5%, the tint the rest of the site
+   * uses, leaves bronze and silver indistinguishable, and 20% reads as four
+   * different components rather than four tiers of one.
+   */
+  accent = "",
   class: className,
   _component,
   useDefaultEditableBinding: _useDefaultEditableBinding = false,
   ...htmlAttributes
 } = Astro.props;
+
+const sand = `var(--color-bg${cardColor === "base" ? "" : `-${cardColor}`})`;
 
 const priceRows = [
   {
@@ -64,7 +77,10 @@ const priceRows = [
 <GridItem {...htmlAttributes}>
   <article
     class:list={["pricing-tier", highlight && "highlight", `price-${pricePosition}`, className]}
-    style={height ? `--pricing-tier-height: ${Number(height)}px` : undefined}
+    style={[
+      height ? `--pricing-tier-height: ${Number(height)}px` : "",
+      `--pricing-tier-bg: ${accent ? `color-mix(in srgb, ${accent.startsWith("#") ? accent : `var(--${accent})`} 12%, ${sand})` : sand}`,
+    ].filter(Boolean).join("; ")}
   >
     {/* Not gated on `highlight`: the design badges the recommended plan and
         rules all three cards the same, where highlight also draws a heavier
@@ -156,9 +172,13 @@ const priceRows = [
 <style is:global>
   @layer page-sections {
     .pricing-tier {
-      background-color: var(--color-bg);
+      /* A shade off the band, whichever way the band goes. The design draws
+         both: Sand cards on a light sand band on Partner Program, and light
+         sand cards on a Sand band on Pricing. */
+      background-color: var(--pricing-tier-bg, var(--color-bg-surface));
       border: var(--border-width-sm) solid var(--color-border);
-      border-radius: var(--radius-md);
+      /* 18, the file's card radius, not the starter's 12. */
+      border-radius: var(--radius-card);
       display: flex;
       flex-direction: column;
       height: 100%;
@@ -352,10 +372,24 @@ const priceRows = [
     /* The tick sits on the middle of its line, not on the first baseline: the
        shipped card nudges it down with a top margin, which reads as hanging
        under the text on a line this tall. */
+    /* The design's 34 on 14.5 is the distance between one feature and the
+       next, not the leading inside one. Set as line-height it was fine while
+       every feature fitted on a line and broke the moment one did not:
+       Platinum's "Bronze, Silver, and Gold benefits" wraps, and its two
+       halves sat 34px apart, reading as two separate items.
+
+       So the leading is ordinary and the 34 is a gap. Baseline to baseline
+       across single-line features is unchanged. */
+    .pricing-tier .pricing-tier-features {
+      display: flex;
+      flex-direction: column;
+      row-gap: 14px;
+    }
+
     .pricing-tier .pricing-tier-feature {
-      align-items: center;
+      align-items: flex-start;
       color: var(--black);
-      line-height: 2.34;
+      line-height: 1.38;
     }
 
     .pricing-tier .pricing-tier-feature .icon {

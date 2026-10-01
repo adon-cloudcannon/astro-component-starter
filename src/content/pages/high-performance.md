@@ -38,6 +38,7 @@ pageSections:
         iconColor: default
   - _component: page-sections/conversion/cta-center
     heading: High speed whether you have 10 visitors or 10 million
+    backgroundColor: base
     headingSize: lg
   - _component: page-sections/explainers/pinned-steps
     backgroundColor: surface
@@ -60,7 +61,13 @@ pageSections:
               Nothing gets assembled while a visitor waits. Your site is built when you push, then
               served as finished files from wherever is closest to the person reading it.
             size: lg
-        mediaSections: []
+        mediaSections:
+          - _component: building-blocks/wrappers/stat-overlay
+            panelScratch: moss
+            panelFit: fill
+            panelImage: ''
+            imageSource: ''
+            imageAlt: ''
       - contentSections:
           - _component: building-blocks/core-elements/heading
             text: SEO built in, not bolted on
@@ -71,7 +78,13 @@ pageSections:
               No SEO plugin needed. Build titles, meta tags, and structured data directly into your
               templates for clean HTML that ranks.
             size: lg
-        mediaSections: []
+        mediaSections:
+          - _component: building-blocks/wrappers/stat-overlay
+            panelScratch: harbour
+            panelFit: fill
+            panelImage: ''
+            imageSource: ''
+            imageAlt: ''
       - contentSections:
           - _component: building-blocks/core-elements/heading
             text: Speed at any scale

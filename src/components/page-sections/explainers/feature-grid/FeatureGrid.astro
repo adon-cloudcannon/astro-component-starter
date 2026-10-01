@@ -50,6 +50,11 @@ const {
   background,
   haze = false,
   alignmentHorizontal = "center",
+  /**
+   * The size of each card's line, for the whole grid. A card can still say
+   * otherwise: this sits before the spread.
+   */
+  descriptionSize = "lg",
   class: className,
   useDefaultEditableBinding = false,
   _component,
@@ -139,6 +144,7 @@ const artRow = Math.max(0, ...features.map((feature: FeatureProps) => Number(fea
         data-editable="array-item"
         alignmentHorizontal={alignmentHorizontal}
         backgroundColor={cardColor}
+        descriptionSize={descriptionSize}
         {...feature}
         headingLevel={itemHeadingLevel}
       />

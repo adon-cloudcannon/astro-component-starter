@@ -72,6 +72,7 @@ pageSections:
       through the demo.
     subtextSize: lg
     imageSource: /src/assets/images/marketing/screenshot-2026-08-11-at-17-25-56-1.png
+    backgroundColor: base
     subtextWidth: 612
     headingSize: lg
   - _component: page-sections/explainers/pinned-steps
@@ -178,6 +179,7 @@ pageSections:
       mask: fade
   - _component: page-sections/conversion/cta-center
     heading: The tool you’ve been looking for
+    backgroundColor: base
     headingSize: lg
   - _component: page-sections/explainers/pinned-steps
     heading: ''
@@ -254,6 +256,7 @@ pageSections:
       leave CloudCannon, you leave with everything: your content, your code, your commits.
     subtextSize: lg
     imageSource: /src/assets/images/marketing/ribbon-01-1.png
+    backgroundColor: base
     subtextWidth: 816
     headingSize: lg
     buttonSections:
@@ -271,6 +274,7 @@ pageSections:
       type: pattern
       pattern: grid
       mask: none
+    backgroundColor: surface
     haze:
       - x: 0.1923
         rx: 399px
@@ -295,6 +299,7 @@ pageSections:
       We're a small team with a lot of knowledge, so you'll talk to someone who knows what they're
       talking about and can give you hands-on help whatever the problem.
     subtextSize: lg
+    backgroundColor: base
     subtextWidth: 489
     headingSize: lg
     buttonSections:

@@ -1,19 +1,43 @@
 ---
+/**
+ * The site footer, built from node 3806:69389 ("Revised Footer").
+ *
+ * Three bands, which is how the design draws it: the mark with its line of
+ * copy and the social buttons opposite; five columns of links under headings
+ * with a rule beneath each; and a bottom bar carrying the legal line, the
+ * policy links and the status light.
+ *
+ * The starter's version was one row of links and a divider. That is a
+ * different component, not a smaller one: a flat bar cannot say which section
+ * a link belongs to, and the design's whole middle band is that grouping.
+ *
+ * The consent button has no place in the design, which predates it, but it is
+ * a working feature rather than decoration, so it sits with the policy links
+ * where a reader would look for it.
+ */
 import CustomSection from "@builders/custom-section/CustomSection.astro";
-import Bar from "@navigation/bar/Bar.astro";
-import Divider from "@core-elements/divider/Divider.astro";
 import Image from "@core-elements/image/Image.astro";
 import SocialLinks from "@core-elements/social-links/SocialLinks.astro";
-import Text from "@core-elements/text/Text.astro";
 import type { SocialLink } from "../../../types";
 import privacyData from "@data/privacy.json";
 import { parsePrivacyConfig } from "../../../integrations/consent/config";
 
+type FooterLink = { name?: string; path?: string };
+type FooterColumn = { heading?: string; links?: FooterLink[] };
+
 const privacy = parsePrivacyConfig(privacyData);
 const {
-  links = [],
+  tagline = "",
+  columns = [] as FooterColumn[],
+  policyLinks = [] as FooterLink[],
+  statusText = "",
+  statusLink = "",
   socials = [] as SocialLink[],
+  legalText = "",
+  // The starter called this `footerText` and passed a flat `links` array. Both
+  // are still read so an older footer.json renders rather than emptying out.
   footerText = "",
+  links = [] as FooterLink[],
   logoSource,
   logoAlternateSource,
   logoAlt,
@@ -22,6 +46,14 @@ const {
   _component,
   ...htmlAttributes
 } = Astro.props;
+
+const columnList: FooterColumn[] = columns.length
+  ? columns
+  : links.length
+    ? [{ heading: "", links }]
+    : [];
+const legal = legalText || footerText;
+const policy: FooterLink[] = policyLinks ?? [];
 ---
 
 <footer
@@ -29,13 +61,14 @@ const {
   {...htmlAttributes}
 >
   <CustomSection
-    maxContentWidth="2xl"
-    paddingHorizontal="md"
-    paddingVertical="2xl"
+    maxContentWidth="xl"
+    paddingHorizontal="gutter"
+    paddingVertical="none"
+    backgroundColor="surface"
     useDefaultEditableBinding={false}
   >
-    <div class="footer-content">
-      <div class="content-container">
+    <div class="footer-brand">
+      <div class="footer-brand-copy">
         {logoSource && (
           <a
             href="/"
@@ -50,25 +83,49 @@ const {
             />
           </a>
         )}
+        {tagline && <p class="footer-tagline">{tagline}</p>}
       </div>
-      <div class="content-container">
-        <Bar
-          navData={links}
-          useDefaultEditableBinding={false}
-          aria-label="Footer"
-        />
-      </div>
+
+      <SocialLinks
+        class="footer-socials"
+        links={socials}
+        variant="ghost"
+        size="md"
+        alignmentHorizontal="end"
+        useDefaultEditableBinding={false}
+      />
     </div>
 
-    <Divider />
+    {columnList.length > 0 && (
+      <nav
+        class="footer-columns"
+        aria-label="Footer"
+      >
+        {columnList.map((column) => (
+          <div class="footer-column">
+            {column.heading && <h2 class="footer-column-heading">{column.heading}</h2>}
+            <ul
+              role="list"
+              class="footer-column-links"
+            >
+              {(column.links ?? []).map((link) => (
+                <li>
+                  <a href={link.path}>{link.name}</a>
+                </li>
+              ))}
+            </ul>
+          </div>
+        ))}
+      </nav>
+    )}
 
-    <div class="footer-content">
-      <div class="content-container">
-        <Text
-          class="footer-legal-text"
-          text={footerText || ""}
-          useDefaultEditableBinding={false}
-        />
+    <div class="footer-bottom">
+      {legal && <p class="footer-legal">{legal}</p>}
+
+      <div class="footer-bottom-links">
+        {policy.map((link) => (
+          <a href={link.path}>{link.name}</a>
+        ))}
         {privacy.enabled && (
           <button
             type="button"
@@ -78,106 +135,245 @@ const {
             {privacy.settingsLabel}
           </button>
         )}
-      </div>
-      <div class="content-container">
-        {/* The same block editors can place on a page — it owns the nav/list
-            semantics, the 44px targets, and the new-tab rel attributes, so the
-            footer doesn't hand-roll a second social row. */}
-        <SocialLinks
-          class="footer-socials"
-          links={socials}
-          variant="ghost"
-          size="md"
-          alignmentHorizontal="end"
-          useDefaultEditableBinding={false}
-        />
+        {statusText &&
+          (statusLink ? (
+            <a
+              class="footer-status"
+              href={statusLink}
+            >
+              <span
+                class="footer-status-dot"
+                aria-hidden="true"
+              ></span>
+              {statusText}
+            </a>
+          ) : (
+            <span class="footer-status">
+              <span
+                class="footer-status-dot"
+                aria-hidden="true"
+              ></span>
+              {statusText}
+            </span>
+          ))}
       </div>
     </div>
   </CustomSection>
 </footer>
 
 <style is:global>
+  /* Measured off 3806:69389 at 1280: the mark sits 96 down, the columns start
+     at 270, the bottom rule at 660 and the bar closes 27 from the foot. */
+  @layer overrides {
+    .footer .content {
+      padding-block: 6rem 1.6875rem;
+    }
+  }
+
   @layer page-sections {
     .footer {
       container-type: inline-size;
+    }
 
-      /* Stacked footer: the socials centre under the legal line rather than
-         sitting hard against the edge. */
-      .footer-socials {
-        @container (max-width: 639px) {
-          .social-links-list {
-            justify-content: center;
-          }
-        }
+    /* The mark and its line on one side, the social buttons on the other, both
+       sitting at the top of the band rather than centred against each other:
+       the design puts the buttons level with the tagline, not with the logo. */
+    .footer .footer-brand {
+      display: flex;
+      gap: var(--spacing-2xl);
+      justify-content: space-between;
+    }
+
+    .footer .footer-tagline {
+      color: var(--color-text-muted);
+      line-height: 1.325;
+      margin-block: 1.125rem 0;
+      max-inline-size: 19rem;
+    }
+
+    /* `line-height: 0`, or the inline box under the mark pushes the tagline
+       7px further down than the design draws it. */
+    .footer .footer-logo-link {
+      display: block;
+      line-height: 0;
+    }
+
+    .footer .footer-logo-link:focus-visible {
+      outline: var(--focus-ring-width) var(--focus-ring-style) var(--color-focus-ring);
+      outline-offset: 2px;
+    }
+
+    .footer .footer-socials {
+      align-self: end;
+    }
+
+    /* 38px circles with a hairline round them, which the ghost variant does
+       not draw. The stroke is #B4B4B4 on the sand ground, read off the four
+       "Link - X/GitHub/LinkedIn/YouTube" frames. */
+    .footer .footer-socials .social-link {
+      block-size: 2.375rem;
+      border: var(--border-width-sm) solid #b4b4b4;
+      border-radius: var(--radius-full);
+      inline-size: 2.375rem;
+      min-block-size: 0;
+      min-inline-size: 0;
+    }
+
+    .footer .footer-socials .social-links-list {
+      gap: 0.625rem;
+    }
+  }
+
+  /* Five columns of 182 with 33 between them, which is what 1040 divides into.
+     Flat, because rules nested deeper than a couple of levels get dropped (see
+     CLAUDE.md). */
+  @layer page-sections {
+    /* `--space-before`, not a margin: the flow layer writes margin-block-start
+       from it and a plain margin loses (see CLAUDE.md). Set as a margin this
+       sat 48 too high. */
+    .footer .footer-columns {
+      --space-before: 5.5rem;
+      display: grid;
+      gap: 2.0625rem;
+      grid-template-columns: repeat(5, minmax(0, 1fr));
+    }
+
+    /* The heading's rule is the container's bottom edge in the design, drawn
+       the full width of the column rather than under the words. */
+    .footer .footer-column-heading {
+      border-block-end: var(--border-width-sm) solid #e5d7b7;
+      color: var(--sunset);
+      font-family: var(--font-mono);
+      font-size: 0.8125rem;
+      font-weight: var(--font-weight-normal);
+      letter-spacing: 0.2em;
+      line-height: 1.2;
+      margin: 0;
+      padding-block-end: 0.9375rem;
+      text-transform: uppercase;
+    }
+
+    .footer .footer-column-links {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+    }
+
+    /* 39 between one link and the next, off a 21.2 line: the list item is 26
+       tall, so 13 between them, and the same again under the heading rule. */
+    .footer .footer-column-links li {
+      margin-block-start: 0.8125rem;
+    }
+
+    .footer .footer-column-links a,
+    .footer .footer-bottom-links a,
+    .footer .footer-bottom-links .footer-status {
+      color: var(--color-text-muted);
+      text-decoration: none;
+    }
+
+    .footer .footer-column-links a:hover,
+    .footer .footer-bottom-links a:hover {
+      color: var(--color-text);
+      text-decoration: underline;
+    }
+  }
+
+  /* The closing bar: a rule across the column, then the legal line opposite
+     the policy links and the status light. */
+  @layer page-sections {
+    .footer .footer-bottom {
+      align-items: center;
+      border-block-start: var(--border-width-sm) solid #e5d7b7;
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--spacing-md) var(--spacing-xl);
+      justify-content: space-between;
+      --space-before: 4.875rem;
+      padding-block-start: 1.6875rem;
+    }
+
+    .footer .footer-legal {
+      color: var(--color-text-muted);
+      font-family: var(--font-mono);
+      font-size: 0.8125rem;
+      margin: 0;
+    }
+
+    .footer .footer-bottom-links {
+      align-items: center;
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--spacing-lg);
+      font-size: 0.90625rem;
+    }
+
+    .footer .footer-status {
+      align-items: center;
+      display: inline-flex;
+      gap: 0.5rem;
+    }
+
+    /* 7px, moss, which is the colour the design uses for "running". */
+    .footer .footer-status-dot {
+      background-color: var(--moss);
+      block-size: 0.4375rem;
+      border-radius: var(--radius-full);
+      inline-size: 0.4375rem;
+    }
+
+    .footer .footer-privacy-settings {
+      background: transparent;
+      border: 0;
+      color: var(--color-text-muted);
+      cursor: pointer;
+      font: inherit;
+      padding: 0;
+      text-decoration: underline;
+    }
+
+    .footer .footer-privacy-settings:focus-visible {
+      outline: var(--focus-ring-width) var(--focus-ring-style) var(--color-focus-ring);
+      outline-offset: 2px;
+    }
+  }
+
+  /* The mark is 194x26 in the design. `width: auto` on an image falls back to
+     the served file's size, so the cap has to be a real length. */
+  @layer page-sections {
+    .footer .footer-logo img {
+      block-size: auto;
+      inline-size: auto;
+      max-block-size: 1.625rem;
+      max-inline-size: 100%;
+    }
+  }
+
+  /* Narrow: the five columns fold to two, then one, and the closing bar stops
+     trying to hold two ends apart. */
+  @layer page-sections {
+    @container (max-width: 60rem) {
+      .footer .footer-columns {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: var(--spacing-2xl);
+      }
+    }
+
+    @container (max-width: 40rem) {
+      .footer .footer-brand {
+        flex-direction: column;
       }
 
-      .footer-content {
-        @container (min-width: 640px) {
-          align-items: center;
-          display: flex;
-          flex-wrap: wrap;
-          justify-content: space-between;
-        }
-
-        .content-container {
-          flex: 1;
-        }
+      .footer .footer-socials {
+        align-self: start;
       }
 
-      .footer-legal-text {
-        color: var(--color-text-muted);
-        text-align: center;
-        @container (min-width: 640px) {
-          text-align: start;
-        }
+      .footer .footer-columns {
+        grid-template-columns: minmax(0, 1fr);
       }
 
-      .footer-privacy-settings {
-        background: transparent;
-        border: 0;
-        color: var(--color-text-muted);
-        cursor: pointer;
-        font: inherit;
-        margin-top: var(--spacing-xs);
-        padding: 0;
-        text-decoration: underline;
-
-        &:focus-visible {
-          outline: var(--focus-ring-width) var(--focus-ring-style) var(--color-focus-ring);
-          outline-offset: 2px;
-        }
-      }
-
-      .footer-logo-link {
-        display: inline-block;
-
-        &:focus-visible {
-          outline: var(--focus-ring-width) var(--focus-ring-style) var(--color-focus-ring);
-          outline-offset: 2px;
-        }
-      }
-
-      .footer-logo {
-        flex-shrink: 0;
-
-        img {
-          margin-inline: auto;
-          margin-bottom: var(--spacing-md);
-          max-height: 2em;
-          max-width: min(20em, 100%);
-          width: auto;
-          @container (min-width: 640px) {
-            margin: 0;
-          }
-        }
-      }
-
-      .bar .bar-list {
-        flex-flow: column wrap;
-        @container (min-width: 640px) {
-          flex-direction: row;
-          justify-content: end;
-        }
+      .footer .footer-bottom {
+        justify-content: start;
       }
     }
   }

@@ -132,6 +132,7 @@ _structures:
           buttonLink: "#"
           highlight: false
           badgeText: ""
+          accent: ""
         preview:
           text:
             - key: name

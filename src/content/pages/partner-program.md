@@ -159,6 +159,7 @@ pageSections:
           - text: Free onboarding and training
             included: true
         height: 274
+        accent: sunset
       - name: Silver
         description: 20-99 points
         features:
@@ -173,6 +174,7 @@ pageSections:
           - text: Priority support
             included: true
         height: 328
+        accent: earth
       - name: Gold
         description: 100-199 points
         features:
@@ -187,6 +189,7 @@ pageSections:
           - text: Beta testing
             included: true
         height: 399
+        accent: golden
       - name: Platinum
         description: 200+ points
         features:
@@ -195,16 +198,19 @@ pageSections:
           - text: 20% off all plans
             included: true
         height: 454
+        accent: harbour
     eyebrow: PARTNER TIERS
     heading: Climb as your portfolio grows
     subtext: >-
       Bring on new clients, move up the tiers, and unlock bigger discounts, dedicated support, and
       more exposure to new leads.
     subtextSize: lg
+    backgroundColor: base
     subtextWidth: 580
     alignmentHorizontal: start
     headingSize: lg
   - _component: page-sections/conversion/pricing-tiers
+    cardColor: base
     tiers:
       - name: Lite
         description: A pay-as-you-go plan for smaller clients
@@ -265,24 +271,30 @@ pageSections:
     subtextWidth: 446
     alignmentHorizontal: center
     headingSize: lg
-  - _component: page-sections/explainers/feature-split
+  - _component: page-sections/conversion/cta-split
     backgroundColor: surface
+    contentCard: true
+    contentCardColor: base
+    paddingVertical: 2xl
+    imageSource: /src/assets/images/marketing/keatuatara-03-1-3806-72612.png
+    imageReveal: ''
+    headingSize: md
+    imageFlush: true
     heading: Enterprise
     subtext: We’ll work with you to craft a plan that fits your particular client’s needs.
     subtextSize: lg
-    imageSource: /src/assets/images/marketing/keatuatara-03-1-3806-72612.png
-    headingSize: md
     buttonSections:
       - _component: building-blocks/core-elements/button
         variant: primary
         text: Join the Partner Program
   - _component: page-sections/conversion/cta-center
     heading: Become a CloudCannon Partner
+    paddingVerticalEnd: 3xl
     headingSize: lg
     background:
       type: pattern
       pattern: grid
-      mask: none
+      mask: fade
     haze:
       - x: 0.5
         rx: 640px
@@ -295,6 +307,7 @@ pageSections:
   - _component: page-sections/conversion/cta-form
     formAction: /partner-program/
     imageSource: ''
+    paddingVerticalStart: lg
     formBlocks:
       - _component: building-blocks/forms/input
         label: First name
@@ -379,6 +392,7 @@ pageSections:
           - _component: building-blocks/core-elements/simple-text
             text: Once approved, access the Lite plan and Bronze benefits. Start launching!
             size: lg
+    backgroundColor: base
   - _component: page-sections/conversion/cta-center
     heading: Keen to collaborate?
     backgroundColor: base

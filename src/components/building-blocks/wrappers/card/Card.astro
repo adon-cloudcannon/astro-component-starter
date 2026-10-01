@@ -25,6 +25,10 @@ const {
   showBeforeAfter: _showBeforeAfter = false,
   rounded = false,
   accentColor = "none",
+  // The rule is opt-in. An accent colours what a card holds; whether it also
+  // draws a line across the top is a separate question, and the design does it
+  // on the story cards and not on the workflow panels.
+  accentRule = false,
   border = false,
   spaceBefore = "default",
   class: className,
@@ -92,6 +96,16 @@ const usesAfterContentSections = !hasAfterSlot && afterContentSections;
 
 <div
   class:list={["card", "stackable", className]}
+  style={
+    accentColor !== "none"
+      ? {
+          "--card-accent": `var(--${accentColor})`,
+          // Faint enough to read as an edge rather than a frame: the design
+          // rules its workflow panels in Pacific at 16% and Sunset at 20%.
+          "--card-accent-border": `color-mix(in srgb, var(--${accentColor}) 18%, transparent)`,
+        }
+      : undefined
+  }
   {...htmlAttributes}
 >
   <div
@@ -164,10 +178,7 @@ const usesAfterContentSections = !hasAfterSlot && afterContentSections;
       </div>
     )}
 
-    <div
-      class="card-outer-content"
-      style={accentColor !== "none" ? { "--card-accent": `var(--${accentColor})` } : undefined}
-    >
+    <div class="card-outer-content">
 
       <div
         class:list={[
@@ -180,7 +191,7 @@ const usesAfterContentSections = !hasAfterSlot && afterContentSections;
         ]}
         {...arrayDataAttributes}
       >
-        {accentColor !== "none" && (
+        {accentRule && accentColor !== "none" && (
           <span
             aria-hidden="true"
             class="card-accent"
@@ -317,7 +328,12 @@ const usesAfterContentSections = !hasAfterSlot && afterContentSections;
         }
 
         &.border {
-          border: var(--border-width-sm) solid var(--color-border);
+          /* An accented card rules itself in its own colour, faintly: the
+             design's two workflow panels are Pacific at 16% and Sunset at 20%
+             over a 1px edge. One value for both, since the difference between
+             them is not something a reader can see. */
+          border: var(--border-width-sm) solid
+            var(--card-accent-border, var(--color-border));
         }
 
         /* Parallax: the background image is pinned to the viewport and the card
@@ -447,6 +463,19 @@ const usesAfterContentSections = !hasAfterSlot && afterContentSections;
 
         > .bg-accent {
           background-color: var(--color-bg-accent);
+        }
+
+        /* The card's own accent, laid faintly over the surface rather than
+           taken from the theme. The design tints a panel with the colour that
+           marks it: the editors panel is #F0EFE8 and the developers panel is
+           #F9EEDF, which are Pacific and Sunset at 5% in Sand. Written as a
+           mix so one rule covers every accent instead of a hex per panel. */
+        > .bg-accent-tint {
+          background-color: color-mix(
+            in srgb,
+            var(--card-accent, var(--color-brand)) 5%,
+            var(--color-bg-surface)
+          );
         }
 
         > .bg-highlight {

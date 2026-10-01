@@ -37,6 +37,7 @@ pageSections:
         iconName: check
         iconColor: default
   - _component: page-sections/builders/custom-section
+    backgroundColor: base
   - _component: page-sections/proof/testimonial-section
     text: When we show clients the Visual Editor during our meetings, their eyes light up.
     authorName: Alex Murray
@@ -55,6 +56,7 @@ pageSections:
   - _component: page-sections/conversion/cta-center
     heading: Here, you don’t need to wait to make changes
     subtext: When something on the site needs updating, the person who noticed can just fix it.
+    backgroundColor: base
     subtextSize: xl
     subtextWidth: 580
     headingSize: lg
@@ -125,6 +127,7 @@ pageSections:
       Make changes on a branch and share a hosted preview with whoever needs to see it first.
       Publish once it's approved, or schedule it to go live later.
     subtextSize: lg
+    backgroundColor: base
     headingSize: lg
     buttonSections:
       - _component: building-blocks/core-elements/button

@@ -212,10 +212,14 @@ const pathname = Astro.url.pathname;
       --bar-dropdown-min-width: 200px;
 
       font-weight: var(--font-weight-semibold);
+      /* The design's nav buttons touch: what looks like space between them is
+         their own padding, 16px a side on a 42px pill. A gap here on top of
+         that pushed the labels 7px closer together than the design has them,
+         which is the wrong way round. */
       .bar-list {
         align-items: center;
         display: flex;
-        gap: var(--spacing-sm);
+        gap: 0;
         list-style: none;
         margin: 0;
         padding: 0;
@@ -231,14 +235,16 @@ const pathname = Astro.url.pathname;
         position: relative;
       }
 
+      /* The design sets a nav label at 16px semibold in Black, not the body
+         weight in Midnight. */
       .nav-item > a,
       .nav-item > .nav-item-trigger {
-        border-radius: var(--radius-xs);
-        color: var(--color-text-strong);
+        border-radius: var(--radius-full);
+        color: var(--black);
         cursor: pointer;
         display: block;
-        font-weight: var(--font-weight-normal);
-        padding: var(--spacing-sm) var(--spacing-md);
+        font-weight: var(--font-weight-semibold);
+        padding: 0.625rem 1rem;
         text-decoration: none;
         transition: background var(--animation-normal) var(--ease-in-out);
         white-space: nowrap;
@@ -334,13 +340,36 @@ const pathname = Astro.url.pathname;
         top: 0.2rem;
       }
 
+      /* The design leaves 10px between a label and its chevron, which is what
+         makes its buttons 117 wide where ours came out 104. The chevron is
+         drawn in the label's own colour, not a muted grey. */
+      .nav-item-trigger .nav-item-icon {
+        color: inherit;
+        margin-inline-start: 0.625rem;
+      }
+
       .nav-item-trigger:hover .nav-item-icon {
         color: var(--color-text-strong);
       }
 
+      /* The chevron points down and turns over, rather than pointing right
+         and turning down: the design draws these flat and wide. */
       .nav-item-toggle:checked ~ .nav-item-trigger .nav-item-icon,
       .nav-item-toggle:checked ~ .nav-item-split .nav-item-icon {
-        transform: rotate(90deg);
+        transform: rotate(180deg);
+      }
+
+      /* An open panel fills its button with the panel's own colour: a solid
+         pill with a white label, which is how the design marks which one is
+         showing. --mega-accent is set on the nav item, so each panel's button
+         lights up in its own colour rather than one shared highlight. */
+      .nav-item:has(> .nav-item-toggle:checked) > .nav-item-trigger {
+        background: var(--mega-accent, var(--color-brand));
+        color: var(--white);
+      }
+
+      .nav-item:has(> .nav-item-toggle:checked) > .nav-item-trigger .nav-item-icon {
+        color: var(--white);
       }
 
       /* The input is hidden by `.visually-hidden`, not `display: none`, so it

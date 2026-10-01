@@ -1,14 +1,20 @@
 label: Footer
 icon: dock_to_bottom
-description: Footer with a logo, links, and legal information.
+description: Footer with a logo, a line of copy, socials, columns of links, and a legal bar.
 value:
   _component: navigation/footer
   logoSource: ""
   logoAlt: "Logo"
-  links: []
-  socials: []
-  footerText: ""
   logoAlternateSource: ""
+  tagline: ""
+  socials: []
+  columns: []
+  legalText: ""
+  policyLinks: []
+  statusText: ""
+  statusLink: ""
+  links: []
+  footerText: ""
 preview:
   text:
     - Footer
@@ -27,3 +33,23 @@ picker_preview:
     fit: cover
 _inputs_from_glob:
   - /src/components/navigation/footer/footer.cloudcannon.inputs.yml
+_structures:
+  footerColumns:
+    values:
+      - label: Column
+        icon: list
+        value:
+          heading: ""
+          links: []
+        preview:
+          text:
+            - key: heading
+            - Column
+        _inputs:
+          heading:
+            type: text
+            comment: The column's heading. Shown in caps, above a rule.
+          links:
+            type: array
+            options:
+              structures: _structures.linkItems

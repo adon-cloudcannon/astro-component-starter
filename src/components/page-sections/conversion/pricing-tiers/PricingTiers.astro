@@ -29,6 +29,15 @@ const {
    * 1040 column, and run the full width it reads as a different block.
    */
   subtextWidth,
+  /**
+   * Which of the two sands the cards are.
+   *
+   * A card is a shade off its band, and the design goes both ways with it:
+   * "Climb as your portfolio grows" is a #FBF6E9 card on a #FFFCF3 band and
+   * "Pricing plans designed for your clients" is the same pair the other way
+   * round. So it is stated per section rather than derived.
+   */
+  cardColor = "surface",
   showAnnualPricing = false,
   monthlyLabel = "Monthly",
   annualLabel = "Annual",
@@ -143,6 +152,7 @@ const annualSelected = defaultInterval === "annual";
       <PricingTiersItem
         data-id="page-sections/conversion/pricing-tiers/pricing-tiers-item"
         data-editable="array-item"
+        cardColor={cardColor}
         {...tier}
         headingLevel={itemHeadingLevel}
         showAnnualPricing={showAnnualPricing}

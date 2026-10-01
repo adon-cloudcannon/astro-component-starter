@@ -77,6 +77,7 @@ pageSections:
       somewhere to work, your site stays as a set of static files, and neither one needs looking
       after.
     subtextSize: lg
+    backgroundColor: base
     subtextWidth: 816
     headingSize: lg
     buttonSections:
@@ -94,6 +95,7 @@ pageSections:
     markStyle: card
     company: Absoluttweb
     authorImage: /src/assets/images/marketing/ellipse-287.jpg
+    backgroundColor: base
   - _component: page-sections/explainers/feature-split
     subtextWidth: 342
     shapes:
@@ -162,6 +164,7 @@ pageSections:
     heading: We don’t think a website should need this much looking after
     subtext: 'With a static site and Git you won’t need to worry about:'
     subtextSize: xl
+    backgroundColor: base
     headingSize: lg
     background:
       type: pattern
@@ -268,6 +271,7 @@ pageSections:
       Git underneath, a visual editor on top, with code and content running on one engine. Start
       free in minutes, or book a demo and we’ll walk you through the real thing.
     subtextSize: lg
+    backgroundColor: base
     subtextWidth: 489
     headingSize: lg
     buttonSections:

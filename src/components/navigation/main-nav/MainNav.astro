@@ -39,8 +39,11 @@ const mobileNavData = [
 ---
 
 <CustomSection
-  maxContentWidth="2xl"
-  paddingHorizontal="lg"
+  {/* The design's nav sits in the same column as the page: its logo starts at
+      114 of 1280 and the Get started button ends at 1166, which is the content
+      column, not the wider 2xl the starter used. */}
+  maxContentWidth="xl"
+  paddingHorizontal="gutter"
   paddingVertical="none"
   class:list={["main-nav", className]}
   {...htmlAttributes}
@@ -100,6 +103,74 @@ const mobileNavData = [
 </script>
 
 <style is:global>
+  /* The nav keeps its own column, a little wider than the page's: the design
+     starts the logo at 114 of 1280 and ends Get started at 1166. The mega
+     panels read the same token, which is what lets a three-column panel fit.
+
+     Flat, because a third level of nesting gets dropped. */
+  @layer components {
+    .main-nav {
+      /* 1053: 428 of feature card, 46 of gap and three 171 columns with 33
+         between them, which is what a three-column panel needs. */
+      --content-width-nav: 65.8125rem;
+    }
+
+    /* Narrowed by redefining the token rather than by overriding the rule:
+       `.max-width-xl` lives in the page-sections layer, which outranks this
+       one whatever the selector, but it reads --content-width-xl at the
+       element. Scoped here it moves the nav and nothing else. */
+    .main-nav {
+      --content-width-xl: var(--content-width-nav);
+      /* The same line the Sand Grid is drawn in: its tile is #FFFCF3 with
+         #F5EEDE rules, which is Dark Sand at 50% over Light Sand. The design
+         leaves the bar's own stroke at zero opacity, so this is ours — it
+         gives the bar an edge without putting a grey line on the cream. */
+      border-block-end: var(--border-width-sm) solid
+        color-mix(in srgb, var(--dark-sand) 50%, var(--light-sand));
+    }
+
+    /* The nav row is a flex line, not a column of content, so the flow layer's
+       space-before has nothing to do here. With `align-items: center` it is
+       the margin box that gets centred, so a 24px top margin dropped the
+       links, search and buttons 12px below the logo: everything looked
+       baseline-aligned against a centred mark. The design centres all of it.
+       --space-before as well as the margin, because the flow layer writes
+       margin-block-start from that token and a plain margin loses to it. */
+    .main-nav .content > * {
+      --space-before: 0;
+      margin-block: 0;
+    }
+
+    /* The nav's buttons are smaller than the page's: the design draws Log in
+       at 76x42 and Get started at 141x42, against a 50-tall button in a hero.
+       9.5px top and bottom and 18 a side, less the 1px border. */
+    .main-nav .button {
+      --button-padding-block: 0.53125em;
+      --button-padding-inline: 1.0625em;
+    }
+
+    /* The design's search control is a 38x38 target, not a bare 13px glyph.
+       Ours sat so close to "Log in" that they read as one thing. */
+    .main-nav .search .button-inner {
+      block-size: 2.375rem;
+      inline-size: 2.375rem;
+      padding: 0;
+    }
+
+    /* "Log in" is a text button, which normally carries no side padding. The
+       design gives it the same 76x42 target as the filled one beside it. */
+    .main-nav .button .button-inner.variant-text {
+      padding-inline: var(--button-padding-inline);
+    }
+
+    /* 10px between the search control and the two buttons, which is what the
+       design leaves; the starter's 16 spread them past the column. */
+    .main-nav .nav-end,
+    .main-nav .button-group {
+      gap: 0.625rem;
+    }
+  }
+
   @layer page-sections {
     :root {
       --main-nav-height: 5rem;
@@ -138,12 +209,15 @@ const mobileNavData = [
         gap: var(--spacing-md);
         height: var(--main-nav-height);
 
+        /* The design draws the mark 194 wide by 26 tall, sitting at x=114 of
+           1280. Sized to that rather than the starter's 11rem box, which cut
+           the wordmark off. */
         > .main-nav-logo-link {
           align-items: center;
           display: flex;
-          flex: 0 1 min(11rem, 100%);
+          flex: 0 0 auto;
           min-width: 0;
-          width: min(11rem, 100%);
+          width: min(12.125rem, 100%);
         }
 
         > .main-nav-logo-link > .main-nav-logo {
@@ -164,7 +238,7 @@ const mobileNavData = [
         > .main-nav-logo-link > .main-nav-logo img,
         > .main-nav-logo-link > .main-nav-logo svg {
           display: block;
-          height: 2rem;
+          height: 1.625rem;
           max-width: 100%;
           width: auto;
         }

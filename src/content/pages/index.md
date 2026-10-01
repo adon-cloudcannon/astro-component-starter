@@ -77,6 +77,7 @@ pageSections:
       visual interface to edit it.
     subtextSize: lg
     imageSource: /src/assets/images/marketing/food-bank-volunteers-produce-1-3806-69798.png
+    backgroundColor: base
     subtextWidth: 580
     headingSize: lg
     buttonSections:

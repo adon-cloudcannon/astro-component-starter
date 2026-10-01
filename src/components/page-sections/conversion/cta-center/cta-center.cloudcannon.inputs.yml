@@ -1,3 +1,57 @@
+paddingVerticalStart:
+  type: select
+  comment: >-
+    Overrides the top of the vertical padding on its own. Empty follows
+    Vertical padding.
+  options:
+    values:
+      - id: none
+        name: None
+      - id: sm
+        name: Small
+      - id: md
+        name: Medium
+      - id: lg
+        name: Large
+      - id: xl
+        name: Extra Large
+      - id: 2xl
+        name: 2xl
+      - id: 3xl
+        name: 3xl
+      - id: 4xl
+        name: 4xl
+      - id: 5xl
+        name: 5xl
+      - id: 6xl
+        name: 6xl
+paddingVerticalEnd:
+  type: select
+  comment: >-
+    Overrides the bottom of the vertical padding on its own. Empty follows
+    Vertical padding.
+  options:
+    values:
+      - id: none
+        name: None
+      - id: sm
+        name: Small
+      - id: md
+        name: Medium
+      - id: lg
+        name: Large
+      - id: xl
+        name: Extra Large
+      - id: 2xl
+        name: 2xl
+      - id: 3xl
+        name: 3xl
+      - id: 4xl
+        name: 4xl
+      - id: 5xl
+        name: 5xl
+      - id: 6xl
+        name: 6xl
 eyebrow:
   type: text
   comment: Short label above the heading.

@@ -99,7 +99,7 @@ pageSections:
       type: pattern
       pattern: dots
       mask: fade
-    backgroundColor: surface
+    backgroundColor: base
     haze:
       - x: 0.4951
         rx: 531px
@@ -133,14 +133,17 @@ pageSections:
             iconPosition: after
             textColor: sunset
             text: Learn more
+    backgroundColor: base
   - _component: page-sections/builders/custom-section
     contentSections: []
+    backgroundColor: base
   - _component: page-sections/explainers/feature-split
     buttonSections:
       - _component: building-blocks/core-elements/button
         variant: text
         iconName: arrow-right
         iconPosition: after
+        textColor: sunset
         text: Learn more
     imageSource: ''
     heading: A platform that wins pitches
@@ -148,6 +151,7 @@ pageSections:
       Clients own their content outright. It lives in their repo as files, not locked in a database.
       They’re never tied to a platform, and neither are you.
     subtextSize: lg
+    backgroundColor: base
     headingSize: sm
     background:
       type: pattern
@@ -207,12 +211,27 @@ pageSections:
             iconPosition: after
             textColor: sunset
             text: Learn more
-        mediaSections: []
+        mediaSections:
+          - _component: building-blocks/wrappers/stat-overlay
+            panelColor: '#FFFFFF'
+            imageSource: /src/assets/images/marketing/partner-dashboard-1.png
+            imageAlt: ''
+            imagePlacement: center
+            imageWidth: 86
+            statsPosition: end
+            statsAlign: start
+            stats:
+              - number: 10
+                suffix: x
+                label: overall site speed
+                iconName: bolt
+                iconColor: sunset
     alignmentHorizontal: center
   - _component: page-sections/conversion/pricing-tiers
     heading: Join a Partner Program that rewards good work
     subtext: As you bring in new clients, you’ll gain points and more benefits.
     subtextSize: lg
+    backgroundColor: base
     alignmentHorizontal: center
     headingSize: lg
 ---

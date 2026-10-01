@@ -12,6 +12,16 @@ const {
   maxContentWidth,
   paddingHorizontal,
   paddingVertical = "4xl",
+  /**
+   * Override just one end of the vertical padding.
+   *
+   * The design is asymmetric where it matters and `paddingVertical` is one
+   * value for both ends: the Partner Program form frame is 26 above its step
+   * row and 120 below its submit, and the band above it is 136 over its
+   * heading and 86 under it. Left empty, both follow `paddingVertical`.
+   */
+  paddingVerticalStart = "",
+  paddingVerticalEnd = "",
   colorScheme = "inherit",
   lockColorScheme = false,
   backgroundColor = "base",
@@ -161,6 +171,10 @@ const arrayDataAttributes =
         paddingVertical && `pad-y-${paddingVertical}`,
         maxContentWidth && `max-width-${maxContentWidth}`,
       ]}
+      style={[
+        paddingVerticalStart ? `padding-block-start: var(--spacing-${paddingVerticalStart})` : "",
+        paddingVerticalEnd ? `padding-block-end: var(--spacing-${paddingVerticalEnd})` : "",
+      ].filter(Boolean).join("; ") || undefined}
       {...arrayDataAttributes}
     >
       <slot>

@@ -11,6 +11,10 @@
   /* The measure the design gives centred supporting copy: a heading takes the
      whole column and the line beneath it is held to this, on 8 sections. */
   --content-width-measure: 580px;
+  /* The design's second column: 1180 turns up 171 times across the file,
+     behind only 1040. Rows of cards and other full-bleed-ish blocks sit in
+     it while the copy stays in --content-width-xl. */
+  --content-width-wide: 1180px;
   --content-width-2xl: 1280px;
   --content-width-3xl: 1536px;
 }

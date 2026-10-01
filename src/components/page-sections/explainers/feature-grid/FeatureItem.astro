@@ -55,6 +55,13 @@ const {
    * so the size has to be read off the page rather than off the token file.
    */
   titleSize,
+  /**
+   * The card's line, which the design sets at 19 rather than the 16 this was
+   * rendering. Six of the seven feature grids in the file put their card body
+   * at 19px, which is `lg` in this theme; the seventh, Agencies' "Scale
+   * changes nothing", sets 17 and can say so.
+   */
+  descriptionSize = "lg",
   alignmentHorizontal = "start",
   class: className,
   useDefaultEditableBinding: _useDefaultEditableBinding = false,
@@ -132,7 +139,7 @@ const headingSize = titleSize ?? (signpost ? "lg" : imageSource || !iconName ? "
     <Text
       class="feature-description"
       alignmentHorizontal={alignmentHorizontal}
-      size={signpost ? "lg" : "md"}
+      size={descriptionSize}
       data-prop="description"
       text={description}
     />

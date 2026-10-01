@@ -1,38 +1,76 @@
 {
-  "logoSource": "/src/assets/images/component-docs/acs-logo.svg",
-  "logoAlternateSource": "/src/assets/images/component-docs/acs-logo-dark.svg",
-  "logoAlt": "Astro Component Starter",
-  "links": [
-    {
-      "name": "Home",
-      "path": "/"
-    },
-    {
-      "name": "Why",
-      "path": "/why/"
-    },
-    {
-      "name": "Get started",
-      "path": "/start/"
-    },
-    {
-      "name": "Examples",
-      "path": "/examples/"
-    },
-    {
-      "name": "Components",
-      "path": "/component-docs/"
-    },
-    {
-      "name": "Blog",
-      "path": "/blog/"
-    }
-  ],
+  "logoSource": "/src/assets/images/marketing/logos/cloudcannon.svg",
+  "logoAlt": "CloudCannon",
+  "tagline": "The Git-based CMS where code and content move together.",
   "socials": [
+    { "icon": "social/x", "link": "https://x.com/cloudcannon" },
+    { "icon": "social/github", "link": "https://github.com/CloudCannon" },
+    { "icon": "social/linkedin", "link": "https://www.linkedin.com/company/cloudcannon" },
+    { "icon": "social/youtube", "link": "https://www.youtube.com/@CloudCannon" }
+  ],
+  "columns": [
     {
-      "icon": "social/github",
-      "link": "https://github.com/CloudCannon/astro-component-starter"
+      "heading": "Product",
+      "links": [
+        { "name": "Git-based CMS", "path": "/git/" },
+        { "name": "Visual editing", "path": "/visual-editing/" },
+        { "name": "High performance", "path": "/high-performance/" },
+        { "name": "Low maintenance", "path": "/low-maintenance/" },
+        { "name": "AI-ready", "path": "/ai-ready/" },
+        { "name": "Pricing", "path": "/pricing/" },
+        { "name": "Book a demo", "path": "/book-a-demo/" }
+      ]
+    },
+    {
+      "heading": "Solutions",
+      "links": [
+        { "name": "Agencies & freelancers", "path": "/agencies-and-freelancers/" },
+        { "name": "Partner program", "path": "/partner-program/" },
+        { "name": "Developers", "path": "/developers-page/" },
+        { "name": "Content editors", "path": "/content-editors/" },
+        { "name": "Enterprise", "path": "/enterprise/" }
+      ]
+    },
+    {
+      "heading": "Resources",
+      "links": [
+        { "name": "Documentation", "path": "/documentation/" },
+        { "name": "Tutorials", "path": "/tutorials/" },
+        { "name": "Community", "path": "/community/" },
+        { "name": "Experts directory", "path": "/experts-directory/" },
+        { "name": "Support", "path": "/support/" },
+        { "name": "Case studies", "path": "/case-studies/" },
+        { "name": "Blog", "path": "/blog/" }
+      ]
+    },
+    {
+      "heading": "Development",
+      "links": [
+        { "name": "Templates", "path": "/templates/" },
+        { "name": "Open source tools", "path": "/open-source-tools/" },
+        { "name": "Migration", "path": "/migration/" },
+        { "name": "Hosting", "path": "/hosting/" }
+      ]
+    },
+    {
+      "heading": "Company",
+      "links": [
+        { "name": "Our story", "path": "/our-story/" },
+        { "name": "Our values", "path": "/our-values/" },
+        { "name": "FAQ", "path": "/faq/" },
+        { "name": "Careers", "path": "/careers/" },
+        { "name": "Contact us", "path": "/contact/" },
+        { "name": "How we compare", "path": "/how-we-compare/" }
+      ]
     }
   ],
-  "footerText": "© 2026 All rights reserved."
+  "legalText": "© 2026 CloudCannon. All rights reserved.",
+  "policyLinks": [
+    { "name": "Accessibility", "path": "/accessibility/" },
+    { "name": "Privacy", "path": "/privacy/" },
+    { "name": "Terms", "path": "/terms/" },
+    { "name": "Security", "path": "/security/" }
+  ],
+  "statusText": "All systems operational",
+  "statusLink": ""
 }

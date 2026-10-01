@@ -66,27 +66,26 @@ const subtextDataAttributes = effectiveSubtextProp
     >
       {/* `level="span"`, not a real heading: a tab label is not a section title,
         and an h3 per tab injects the whole tab strip into the page outline. */}
+      {/* The label sits above the title, which is how the design orders a
+          step: "STEP 01" small over "Build with your favorite tools". */}
+      {subtext && (
+        <span
+          class:list={["content-selector-tab-subtext", "align-start"]}
+          {...subtextDataAttributes}
+        >
+          {subtext}
+        </span>
+      )}
       <Heading
         text={title}
         level="span"
         size="sm"
         iconName={iconName}
         iconColor={iconColor}
-        alignmentHorizontal={navigationPosition === "top" ? "center" : "start"}
+        alignmentHorizontal="start"
         class="content-selector-tab-heading"
         data-prop={effectiveTitleProp}
       />
-      {subtext && (
-        <span
-          class:list={[
-            "content-selector-tab-subtext",
-            `align-${navigationPosition === "top" ? "center" : "start"}`,
-          ]}
-          {...subtextDataAttributes}
-        >
-          {subtext}
-        </span>
-      )}
       <Icon
         name="chevron-down"
         size="none"
@@ -118,6 +117,89 @@ const subtextDataAttributes = effectiveSubtextProp
 </div>
 
 <style is:global>
+  /* Flat, because rules nested deeper get dropped (see CLAUDE.md).
+
+     The design's step strip, measured: the label is 11px/500 and the title
+     17px/500, both left-aligned, with the whole tab carrying a rule along its
+     top — Sunset on the step you are on, grey on the rest. Colour does the
+     work of saying which is selected: Sunset over white when it is, grey over
+     a muted grey when it is not. */
+  @layer components {
+    .content-selector-items.nav-top .content-selector-tab {
+      align-items: start;
+      /* 2px, #34322E when idle and Sunset when current, which is what the
+         Tablist - Steps component draws. */
+      border-block-start: 2px solid #34322e;
+      padding-block-start: var(--spacing-sm);
+      text-align: start;
+    }
+
+    .content-selector-items.nav-top .content-selector-tab[aria-selected="true"] {
+      border-block-start-color: var(--sunset);
+    }
+
+    /* The step label is an eyebrow: the design sets it in a mono face at
+       0.2em of tracking, which is the site's eyebrow convention, so it takes
+       --font-mono rather than the mono the section happens to be drawn in. */
+    .content-selector-items.nav-top .content-selector-tab-subtext {
+      /* #A5A099. --gray-500 is #B8B4AD, two steps light of it. */
+      color: #a5a099;
+      font-family: var(--font-mono);
+      font-size: 0.6875rem;
+      font-weight: var(--font-weight-medium);
+      letter-spacing: 0.2em;
+      line-height: 1.27;
+      text-transform: uppercase;
+    }
+
+    .content-selector-items.nav-top
+      .content-selector-tab[aria-selected="true"]
+      .content-selector-tab-subtext {
+      color: var(--sunset);
+    }
+
+    /* On the text, not the wrapper. Heading's own size class sets a font-size
+       on .heading-inner, so a rule on the outer span was overridden and the
+       tab titles stayed at 26px where the design sets 17. */
+    /* The title sits on a narrow measure inside its tab, so it wraps the way
+       the design sets it — 126px of text in a 400px tab for "Build with your
+       favorite tools", 151 for "Set up the editing environment". Given the
+       full width they each came out as one long line. */
+    .content-selector-items.nav-top .content-selector-tab-heading,
+    .content-selector-items.nav-top .content-selector-tab-heading .heading-inner {
+      /* `display: block` as well as the measure: the Heading renders a span,
+         and a max-inline-size on an inline box does nothing — the titles
+         stayed 299px wide on one line. */
+      display: block;
+      max-inline-size: 9.5rem;
+    }
+
+    .content-selector-items.nav-top .content-selector-tab-heading,
+    .content-selector-items.nav-top .content-selector-tab-heading .heading-inner,
+    .content-selector-items.nav-top .content-selector-tab-heading .heading-text {
+      font-size: 1.0625rem;
+      font-weight: var(--font-weight-medium);
+      line-height: 1.29;
+    }
+
+    .content-selector-items.nav-top .content-selector-tab:not([aria-selected="true"]) {
+      color: var(--color-text-muted);
+    }
+
+    /* The chevron is a phone affordance; the strip shows every step already. */
+    .content-selector-items.nav-top .content-selector-tab-chevron {
+      display: none;
+    }
+
+    /* The panel is a split: copy on the left, the picture on the right. */
+    .content-selector-items.nav-top .content-selector-panel-content {
+      align-items: center;
+      display: grid;
+      gap: var(--spacing-2xl);
+      grid-template-columns: repeat(auto-fit, minmax(min(18rem, 100%), 1fr));
+    }
+  }
+
   @layer components {
     /*
      * Each item overlays the WHOLE items grid and re-exposes the parent's

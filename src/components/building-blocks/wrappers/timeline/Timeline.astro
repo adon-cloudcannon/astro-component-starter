@@ -42,7 +42,11 @@ const arrayDataAttributes = effectiveChildrenProp
 const hasEntries = entries?.length > 0;
 const hasSlotContent = Astro.slots.has("default");
 const isHorizontal = layout === "horizontal";
-const isSplit = layout === "split";
+// A rail is a split drawn down one side: same markup, same marker, but every
+// entry on the right of the line instead of alternating. It is what the
+// design draws when the entries are steps rather than dates.
+const isRail = layout === "rail";
+const isSplit = layout === "split" || isRail;
 // Grouped entries sit under the year heading, so they take the level below it.
 const YearTag = "h3";
 const entryHeadingLevel = nextHeadingLevel(YearTag);
@@ -103,7 +107,7 @@ if (!_component && !hasEntries && !hasSlotContent) return;
   ) : isSplit ? (
     <ol
       role="list"
-      class="timeline-list timeline-split"
+      class:list={["timeline-list", "timeline-split", { "timeline-rail": isRail }]}
       data-space-before={spaceBeforeAttr(spaceBefore)}
       {...arrayDataAttributes}
     >
@@ -111,6 +115,8 @@ if (!_component && !hasEntries && !hasSlotContent) return;
         {entries?.map((entry: EntryProps) => (
           <TimelineItem
             layout={layout}
+            headingSize={isRail ? "sm" : "xs"}
+            bodySize={isRail ? "md" : "sm"}
             useDefaultEditableBinding={!!effectiveChildrenProp}
             data-editable="array-item"
             data-id="building-blocks/wrappers/timeline/timeline-item"
@@ -216,9 +222,11 @@ if (!_component && !hasEntries && !hasSlotContent) return;
         margin-top: var(--spacing-xs);
       }
 
+      /* The size comes from the element's own class, so an entry can be set
+         larger where the design sets it larger — the rail draws these at the
+         page's body size rather than a caption's. */
       .timeline-body .simple-text-content {
         color: var(--color-text-muted);
-        font-size: var(--font-size-sm);
         line-height: var(--line-height-tight);
         text-wrap: pretty;
       }
@@ -591,4 +599,73 @@ if (!_component && !hasEntries && !hasSlotContent) return;
       }
     }
   }
+
+  /* Rail: every entry on one side of the line, marker on the left. This is the
+     shape the split layout already collapses to on a narrow screen, asked for
+     at every width.
+
+     Flat, because rules nested deeper than a couple of levels get dropped (see
+     CLAUDE.md), and these have to beat the split rules above by order. */
+  @layer components {
+    .timeline:has(> .timeline-rail) .timeline-rail::before {
+      inset-block: var(--timeline-split-marker) var(--timeline-split-marker);
+      inset-inline-start: calc(var(--timeline-split-marker) / 2);
+      transform: none;
+    }
+
+    .timeline:has(> .timeline-rail) .timeline-entry {
+      grid-template-columns: var(--timeline-split-marker) minmax(0, 1fr);
+    }
+
+    .timeline:has(> .timeline-rail) .timeline-entry:nth-child(odd) .timeline-split-content,
+    .timeline:has(> .timeline-rail) .timeline-entry:nth-child(even) .timeline-split-content {
+      grid-column: 2;
+      justify-self: start;
+      text-align: start;
+    }
+
+    .timeline:has(> .timeline-rail) .timeline-split-marker {
+      grid-column: 1;
+    }
+
+    /* The design holds the rail to a narrow measure and centres the block in
+       the column: 432 of 1280, rather than the full 1040 the section gives it.
+       A margin would shrink a grid item rather than centre it, so this is the
+       track's own width plus justify-self. */
+    .timeline:has(> .timeline-rail) .timeline-rail {
+      /* 7rem, because the design draws 158 between one title and the next and
+         an entry is about 45 tall. No token lands on it. */
+      gap: 7rem;
+      justify-self: center;
+      inline-size: 100%;
+      max-inline-size: 27rem;
+    }
+
+    /* Title over line, with the line close under it: the design sets 29 over
+       19 with 29 between the pair and the next title. */
+    .timeline:has(> .timeline-rail) .timeline-entry {
+      gap: var(--spacing-lg);
+    }
+  }
+
+  /* A coloured marker, filled rather than outlined: the entry's own colour
+     behind a mark in the page background's colour. Set per entry, so a step
+     can be told from the one above it at a glance. */
+  @layer components {
+    .timeline .timeline-entry[style*="--timeline-accent"] .timeline-split-marker {
+      background-color: var(--timeline-accent);
+      border-color: var(--timeline-accent);
+    }
+
+    .timeline .timeline-entry[style*="--timeline-accent"] .timeline-split-marker .icon {
+      color: var(--timeline-accent-ink, var(--color-bg));
+    }
+
+    /* The disc is the mark. Left in, the fallback dot sits in the middle of it
+       in the link colour, which is not something the design draws anywhere. */
+    .timeline .timeline-entry[style*="--timeline-accent"] .timeline-split-marker .timeline-dot {
+      display: none;
+    }
+  }
+
 </style>

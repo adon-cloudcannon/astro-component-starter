@@ -135,6 +135,7 @@ pageSections:
     heading: Built for how large teams actually work
     subtext: Benefit from more uptime, faster sites, better SEO, enterprise- grade security, and more.
     subtextSize: lg
+    backgroundColor: base
     subtextWidth: 580
     alignmentHorizontal: center
     cardHeight: 334
@@ -257,6 +258,7 @@ pageSections:
       Git underneath, a visual editor on top, with code and content running on one engine. Start
       free in minutes, or book a demo and we’ll walk you through the real thing.
     subtextSize: lg
+    backgroundColor: base
     subtextWidth: 489
     headingSize: lg
     buttonSections:

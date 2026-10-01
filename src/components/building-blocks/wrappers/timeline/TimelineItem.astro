@@ -11,9 +11,12 @@ const {
   title: rawTitle,
   body: rawBody,
   iconName = "",
+  accentColor = "",
   layout = "vertical",
   grouped = false,
   headingLevel = "h3",
+  headingSize = "xs",
+  bodySize = "sm",
   useDefaultEditableBinding = false,
   class: className,
   _component,
@@ -28,7 +31,34 @@ const hasTitle = isNonEmptyString(title);
 const hasBody = isNonEmptyString(body);
 const hasDate = isNonEmptyString(date);
 const isHorizontal = layout === "horizontal";
-const isSplit = layout === "split";
+// The rail draws the same markup as the split, down one side. Left out of
+// this test the entries fell through to the vertical branch and lost their
+// markers entirely — a bare dot where the design has a coloured disc.
+const isSplit = layout === "split" || layout === "rail";
+
+// The marker takes the entry's own colour, which is how the design tells the
+// steps apart. Left unset it falls back to the timeline's brand colour.
+//
+// The mark inside it needs to read against that colour, and the design picks
+// per colour rather than using one ink throughout: white on moss and sunset,
+// near-black on harbour and golden. CSS has no contrast function to do this
+// for us, so the pairing is written down.
+const MARKER_INK = {
+  moss: "var(--light-sand)",
+  sunset: "var(--light-sand)",
+  pacific: "var(--light-sand)",
+  golden: "var(--black)",
+  harbour: "var(--black)",
+  peachy: "var(--black)",
+};
+
+const accentStyle =
+  accentColor && accentColor !== "none"
+    ? {
+        "--timeline-accent": `var(--${accentColor})`,
+        "--timeline-accent-ink": MARKER_INK[accentColor] ?? "var(--light-sand)",
+      }
+    : undefined;
 
 const dateBinding =
   useDefaultEditableBinding && hasDate ? { "data-editable": "text", "data-prop": "date" } : {};
@@ -36,6 +66,7 @@ const dateBinding =
 
 <li
   class:list={["timeline-entry", className]}
+  style={accentStyle}
   {...htmlAttributes}
 >
   {isSplit ? (
@@ -53,7 +84,7 @@ const dateBinding =
           <Heading
             class="timeline-title"
             level={headingLevel}
-            size="xs"
+            size={headingSize}
             data-prop={useDefaultEditableBinding ? "title" : undefined}
           >
             {title}
@@ -62,7 +93,7 @@ const dateBinding =
         {hasBody && (
           <SimpleText
             class="timeline-body"
-            size="sm"
+            size={bodySize}
             data-prop={useDefaultEditableBinding ? "body" : undefined}
             text={body}
           />

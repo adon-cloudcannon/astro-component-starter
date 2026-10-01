@@ -15,19 +15,47 @@ logoAlternateSource:
 logoAlt:
   type: text
   comment: Alt text for the logo image.
-links:
-  type: array
-  comment: Navigation links shown in the footer.
-  options:
-    structures: _structures.linkItems
+tagline:
+  type: text
+  comment: One line under the logo saying what the site is.
 socials:
   type: array
-  comment: Social media links shown in the footer.
+  comment: Social media links, shown as circles opposite the logo.
   options:
     structures: _structures.socialItems
+columns:
+  type: array
+  label: Link columns
+  comment: >-
+    One per column of the footer. The design draws five; more will wrap onto a
+    second row rather than squeezing.
+  options:
+    structures: _structures.footerColumns
+legalText:
+  type: text
+  comment: The copyright line at the foot, on the left.
+policyLinks:
+  type: array
+  label: Policy links
+  comment: Accessibility, privacy and terms, shown at the foot on the right.
+  options:
+    structures: _structures.linkItems
+statusText:
+  type: text
+  comment: The status line at the foot, next to a green light. Leave empty to hide it.
+statusLink:
+  type: url
+  comment: Where the status line points, usually a status page. Optional.
+links:
+  type: array
+  comment: >-
+    Superseded by Link columns, and only read when no column is set. Kept so an
+    older footer.json still renders.
+  options:
+    structures: _structures.linkItems
 footerText:
   type: markdown
-  comment: Legal or copyright text at the bottom of the footer.
+  comment: Superseded by Legal text, and only read when that is empty.
   options:
     blockquote: false
     bold: true

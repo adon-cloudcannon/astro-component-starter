@@ -15,13 +15,30 @@ export interface MegaMenuColumn {
 }
 
 export interface MegaMenuFeature {
+  /**
+   * Fills the right of the card, edge to edge. The design draws the feature as
+   * one card split 260/169: a coloured half carrying the heading, and an image
+   * that runs to the card's own corners with no padding of its own. The halves
+   * are drawn as two rectangles rounded on opposite sides, which is how a
+   * designer draws one card in two pieces.
+   */
   image?: string;
   imageAlt?: string;
+  /** Art sitting on the coloured half, behind the heading. */
+  backgroundImage?: string;
+  backgroundImageAlt?: string;
   heading?: string;
   link?: string;
 }
 
 export interface MegaMenu {
+  /**
+   * The panel's own colour, as a palette name: `pacific`, `moss`, `sunset`.
+   * The design gives each panel one and runs it through the whole thing — the
+   * feature card's grain, every icon tile, and the one highlighted link that
+   * takes it solid. Its `-50` step is the tint the other tiles sit on.
+   */
+  accentColor?: string;
   feature?: MegaMenuFeature;
   columns?: MegaMenuColumn[];
 }

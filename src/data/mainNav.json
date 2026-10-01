@@ -1,71 +1,222 @@
 {
-  "logoSource": "/src/assets/images/component-docs/acs-logo.svg",
-  "logoAlternateSource": "/src/assets/images/component-docs/acs-logo-dark.svg",
-  "logoAlt": "Astro Component Starter",
-  "themeToggle": true,
+  "logoSource": "/src/assets/images/marketing/logos/cloudcannon.svg",
+  "logoAlt": "CloudCannon",
+  "themeToggle": false,
   "search": true,
   "navData": [
     {
-      "name": "Home",
-      "path": "/",
-      "children": []
-    },
-    {
-      "name": "Why",
-      "path": "/why/",
-      "children": []
-    },
-    {
-      "name": "Get started",
-      "path": "/start/",
-      "children": []
-    },
-    {
-      "name": "Examples",
+      "name": "Product",
       "path": "",
-      "children": [
-        {
-          "name": "Overview",
-          "path": "/examples/",
-          "children": []
+      "megaMenu": {
+        "feature": {
+          "heading": "What is CloudCannon and how does it work?",
+          "link": "/how-it-works/",
+          "backgroundColor": "pacific",
+          "backgroundImageAlt": "",
+          "image": "/src/assets/images/marketing/mega-product-image-I3806-73470-3743-62015.webp",
+          "imageAlt": "Pages built in CloudCannon"
         },
-        {
-          "name": "Pricing",
-          "path": "/examples/pricing/",
-          "children": []
-        },
-        {
-          "name": "About",
-          "path": "/examples/about/",
-          "children": []
-        },
-        {
-          "name": "Services",
-          "path": "/examples/services/",
-          "children": []
-        },
-        {
-          "name": "Portfolio",
-          "path": "/examples/portfolio/",
-          "children": []
-        },
-        {
-          "name": "Contact",
-          "path": "/examples/contact/",
-          "children": []
-        },
-        {
-          "name": "Blog",
-          "path": "/blog/",
-          "children": []
-        }
-      ]
+        "columns": [
+          {
+            "heading": "Features",
+            "items": [
+              {
+                "name": "Git-based CMS",
+                "description": "Editorial freedom & clean commits",
+                "path": "/git/",
+                "icon": "code-bracket-square"
+              },
+              {
+                "name": "Visual editing",
+                "description": "Edit right on the page",
+                "path": "/visual-editing/",
+                "icon": "pencil-square"
+              }
+            ]
+          },
+          {
+            "heading": "Benefits",
+            "items": [
+              {
+                "name": "High performance",
+                "description": "Load instantly & rank higher",
+                "path": "/high-performance/",
+                "icon": "bolt"
+              },
+              {
+                "name": "Low maintenance",
+                "description": "Sites with less to worry about",
+                "path": "/low-maintenance/",
+                "icon": "check-circle"
+              },
+              {
+                "name": "AI-ready",
+                "description": "The CMS AI can read",
+                "path": "/ai-ready/",
+                "icon": "sparkles"
+              }
+            ]
+          }
+        ],
+        "accentColor": "pacific"
+      }
     },
     {
-      "name": "Components",
-      "path": "/component-docs/",
+      "name": "Solutions",
+      "path": "",
+      "megaMenu": {
+        "feature": {
+          "heading": "Who is CloudCannon for?",
+          "link": "/who-its-for/",
+          "backgroundColor": "#748831",
+          "backgroundImageAlt": "",
+          "image": "/src/assets/images/marketing/mega-solutions-image-I3806-73469-3743-61921.webp",
+          "imageAlt": "The CloudCannon content editor"
+        },
+        "columns": [
+          {
+            "heading": "Client sites",
+            "items": [
+              {
+                "name": "Agencies & freelancers",
+                "description": "Quick launches & happy clients",
+                "path": "/agencies-and-freelancers/",
+                "icon": "user"
+              },
+              {
+                "name": "Partner program",
+                "description": "Earn points for every launch",
+                "path": "/partner-program/",
+                "icon": "users"
+              }
+            ]
+          },
+          {
+            "heading": "Your team",
+            "items": [
+              {
+                "name": "Developers",
+                "description": "Your stack + editing",
+                "path": "/developers-page/",
+                "icon": "code-bracket"
+              },
+              {
+                "name": "Content editors",
+                "description": "Draft. Edit. Publish.",
+                "path": "/content-editors/",
+                "icon": "pencil-square"
+              }
+            ]
+          },
+          {
+            "heading": "Site management",
+            "items": [
+              {
+                "name": "Enterprise",
+                "description": "Built for how large teams actually work",
+                "path": "/enterprise/",
+                "icon": "building-office-2"
+              }
+            ]
+          }
+        ],
+        "accentColor": "moss"
+      }
+    },
+    {
+      "name": "Resources",
+      "path": "",
+      "megaMenu": {
+        "feature": {
+          "heading": "How to use CloudCannon",
+          "link": "/documentation/",
+          "backgroundColor": "#CF6522",
+          "backgroundImageAlt": "",
+          "image": "/src/assets/images/marketing/mega-resources-image-I3806-73467-3743-61812.webp",
+          "imageAlt": "The CloudCannon documentation"
+        },
+        "columns": [
+          {
+            "heading": "Build",
+            "items": [
+              {
+                "name": "Documentation",
+                "description": "Get the details you need",
+                "path": "/documentation/",
+                "icon": "document-text"
+              },
+              {
+                "name": "Tutorials",
+                "description": "Step-by-step guides",
+                "path": "/tutorials/",
+                "icon": "play-circle"
+              }
+            ]
+          },
+          {
+            "heading": "Connect",
+            "items": [
+              {
+                "name": "Community",
+                "description": "Connect with other builders",
+                "path": "/community/",
+                "icon": "user-group"
+              },
+              {
+                "name": "Experts directory",
+                "description": "Find a partner to build your site",
+                "path": "/experts-directory/",
+                "icon": "star"
+              },
+              {
+                "name": "Support",
+                "description": "Get help from our team fast",
+                "path": "/support/",
+                "icon": "question-mark-circle"
+              }
+            ]
+          },
+          {
+            "heading": "Learn",
+            "items": [
+              {
+                "name": "Case studies",
+                "description": "See how real teams build",
+                "path": "/case-studies/",
+                "icon": "folder"
+              },
+              {
+                "name": "Blog",
+                "description": "News, updates, and best practices",
+                "path": "/blog/",
+                "icon": "chat-bubble-oval-left"
+              }
+            ]
+          }
+        ],
+        "accentColor": "sunset"
+      }
+    },
+    {
+      "name": "Pricing",
+      "path": "/pricing/",
       "children": []
     }
   ],
-  "buttonSections": []
+  "buttonSections": [
+    {
+      "_component": "building-blocks/core-elements/button",
+      "text": "Log in",
+      "link": "/login/",
+      "variant": "text"
+    },
+    {
+      "_component": "building-blocks/core-elements/button",
+      "text": "Get started",
+      "link": "/start/",
+      "variant": "primary",
+      "iconName": "arrow-right",
+      "iconPosition": "after"
+    }
+  ]
 }

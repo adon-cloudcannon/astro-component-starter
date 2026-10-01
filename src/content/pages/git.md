@@ -241,6 +241,7 @@ pageSections:
       you're stuck.
     subtextSize: lg
     imageSource: /src/assets/images/marketing/ribbon-01-1.png
+    backgroundColor: base
     subtextWidth: 579
     headingSize: lg
     buttonSections:
@@ -283,6 +284,7 @@ pageSections:
     heading: Fits the way you already build
     subtext: Connect your repo, keep your tooling, and add a visual editor on top.
     subtextSize: lg
+    backgroundColor: base
     subtextWidth: 580
     cardHeight: 334
     headingSize: lg
