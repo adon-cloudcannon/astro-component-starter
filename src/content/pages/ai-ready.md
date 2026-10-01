@@ -93,7 +93,6 @@ pageSections:
     # component's own order rather than its reversed one.
     reverse: false
     mediaWidth: wide
-    progressWidth: content
     # #034AD7 and #333333 off the design, which are Pacific and Midnight.
     progressColor: pacific
     progressTrackColor: midnight

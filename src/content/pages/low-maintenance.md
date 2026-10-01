@@ -196,7 +196,6 @@ pageSections:
     eyebrow: ''
     reverse: false
     mediaWidth: wide
-    progressWidth: content
     progressColor: pacific-300
     progressTrackColor: midnight
     backgroundColor: base

@@ -83,7 +83,6 @@ pageSections:
     eyebrow: ''
     reverse: true
     mediaWidth: wide
-    progressWidth: content
     progressColor: sunset
     progressTrackColor: midnight
     backgroundColor: base
@@ -187,7 +186,6 @@ pageSections:
     eyebrow: ''
     reverse: true
     mediaWidth: wide
-    progressWidth: content
     progressColor: pacific
     progressTrackColor: pacific-100
     background:

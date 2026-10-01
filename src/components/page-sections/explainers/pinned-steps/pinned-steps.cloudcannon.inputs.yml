@@ -232,17 +232,6 @@ backgroundColor:
         name: Accent
       - id: highlight
         name: Highlight
-progressWidth:
-  type: select
-  comment: >-
-    How far the progress bar runs. Full spans the whole band; copy column runs
-    from the media's edge to the band's, under the copy alone.
-  options:
-    values:
-      - id: full
-        name: Full width
-      - id: content
-        name: Copy column
 progressColor:
   type: text
   comment: The palette colour the progress fill is drawn in, e.g. sunset, pacific-300.

@@ -63,7 +63,6 @@ const {
    * pause to tune.
    */
   stepScroll = 1.1,
-  progressWidth = "full",
   /** The palette colour the fill is drawn in. */
   progressColor = "sunset",
   /**
@@ -218,11 +217,7 @@ const arrayDataAttributes = effectiveChildrenProp
 
     {showProgress && stepList.length > 1 && (
       <div
-        class:list={[
-          "pinned-steps-progress-rail",
-          `progress-${progressWidth}`,
-          { reversed: reverse },
-        ]}
+        class:list={["pinned-steps-progress-rail", { reversed: reverse }]}
         aria-hidden="true"
       >
         <div class="pinned-steps-progress">
@@ -436,7 +431,6 @@ const arrayDataAttributes = effectiveChildrenProp
 
     .pinned-steps-progress-rail {
       bottom: 0;
-      inline-size: 100vw;
       left: 50%;
       position: absolute;
       transform: translateX(-50%);
@@ -447,7 +441,7 @@ const arrayDataAttributes = effectiveChildrenProp
        the layout's own tracks, so the split follows `mediaWidth` rather than
        being restated here; the bar then takes the copy track, eats the gap so
        it starts where the media ends, and bleeds out to the band's edge. */
-    .pinned-steps-progress-rail.progress-content {
+    .pinned-steps-progress-rail {
       --pinned-steps-rail: min(
         calc(100vw - 2 * var(--spacing-gutter)),
         var(--content-width-xl, 1040px)
@@ -477,7 +471,7 @@ const arrayDataAttributes = effectiveChildrenProp
        as a percentage: a percentage margin on a grid item resolves against its
        grid AREA, not its container, so `calc(50% - 50vw)` took half the copy
        track and reached 227px past the window. */
-    .pinned-steps-progress-rail.progress-content > .pinned-steps-progress {
+    .pinned-steps-progress-rail > .pinned-steps-progress {
       grid-column: 2;
       margin-inline-end: calc(var(--pinned-steps-rail) / 2 - 50vw);
       margin-inline-start: calc(-1 * var(--spacing-3xl));

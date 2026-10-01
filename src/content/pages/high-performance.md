@@ -47,7 +47,6 @@ pageSections:
     eyebrow: ''
     reverse: false
     mediaWidth: wide
-    progressWidth: content
     progressColor: blush
     progressTrackColor: earth
     steps:

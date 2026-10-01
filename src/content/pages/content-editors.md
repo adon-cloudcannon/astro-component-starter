@@ -64,7 +64,6 @@ pageSections:
     eyebrow: ''
     reverse: true
     mediaWidth: wide
-    progressWidth: content
     progressColor: golden
     progressTrackColor: midnight
     backgroundColor: base

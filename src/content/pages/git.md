@@ -136,7 +136,6 @@ pageSections:
     eyebrow: ''
     reverse: true
     mediaWidth: wide
-    progressWidth: content
     progressColor: moss
     progressTrackColor: gray-550
     background:
