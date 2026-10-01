@@ -1,0 +1,604 @@
+---
+/**
+ * One quote, drawn as a card, in the four layouts the design draws it in.
+ *
+ * `downloaded-nodes/testimonial-quote-block.html` is a comparison sheet: four
+ * layouts, each shown twice, once in Absoluttweb's colour and once in DX's.
+ * Labelled there as 2a/2b (static, with the quote stepping down a size as it
+ * gets longer), 2c (carousel), 2d (split, person left) and 2e (split, quote
+ * left). The two static examples are one layout at two quote sizes rather
+ * than two layouts, so there are four:
+ *
+ *   static        quote, a rule, then the person with the company's mark
+ *   carousel      the same card, several quotes, dots and arrows
+ *   split-person  the person in a column, a rule, the quote beside it
+ *   split-quote   the same the other way round
+ *
+ * The sheet is drawn at about a 1280 card and this is built at the content
+ * column, and its type is Outfit where the site sets Red Hat Display, so the
+ * numbers do not carry across. What carries across is the structure. The type,
+ * the colour and the spacing follow the testimonial bento instead, which is
+ * the card this project has already settled: the quote bold at 1.3, the name
+ * 18, the role and company 13 in mono, the marks and the emphasis in the
+ * card's own accent, a rule between the quote and the person.
+ */
+import CustomSection from "@builders/custom-section/CustomSection.astro";
+import Image from "@core-elements/image/Image.astro";
+import { renderMarkdown } from "@component-utils/markdown";
+
+type Quote = {
+  text?: string;
+  authorName?: string;
+  authorDescription?: string;
+  company?: string;
+  authorImage?: string;
+  authorImageAlt?: string;
+  logoSource?: string;
+  logoAlt?: string;
+  linkText?: string;
+  link?: string;
+  accentColor?: string;
+  quoteMarks?: boolean;
+};
+
+const {
+  /**
+   * Which of the four the design draws.
+   *
+   * `carousel` is the only one that reads more than the first quote.
+   */
+  variant = "static",
+  quotes = [],
+  /**
+   * The quote's size, which the sheet steps down as the quote gets longer:
+   * `lg` is Header 4 and `sm` is Header 5, the two the theme already sets.
+   */
+  quoteSize = "sm",
+  sectionLabel,
+  maxContentWidth = "xl",
+  paddingHorizontal = "gutter",
+  paddingVertical = "4xl",
+  colorScheme = "inherit",
+  lockColorScheme = false,
+  backgroundColor = "base",
+  background,
+  haze = false,
+  class: className,
+  useDefaultEditableBinding = false,
+  _component,
+  ...htmlAttributes
+} = Astro.props;
+
+const LAYOUTS = ["static", "carousel", "split-person", "split-quote"];
+const layout = LAYOUTS.includes(String(variant)) ? String(variant) : "static";
+const isSplit = layout.startsWith("split");
+const isCarousel = layout === "carousel";
+
+// Only the carousel reads past the first. Everything else draws one card, so a
+// section left with four quotes and switched to `static` shows the first
+// rather than four stacked cards.
+const items: Quote[] = (isCarousel ? quotes : quotes.slice(0, 1)) as Quote[];
+---
+
+{items.length > 0 && (
+  <CustomSection
+    class:list={["testimonial-quote", className]}
+    label={sectionLabel}
+    maxContentWidth={maxContentWidth}
+    paddingHorizontal={paddingHorizontal}
+    paddingVertical={paddingVertical}
+    colorScheme={colorScheme}
+    lockColorScheme={lockColorScheme}
+    backgroundColor={backgroundColor}
+    background={background}
+    haze={haze}
+    useDefaultEditableBinding={useDefaultEditableBinding}
+    {...htmlAttributes}
+  >
+    <div
+      class="testimonial-quote-card"
+      data-layout={layout}
+      data-quote-size={quoteSize === "lg" ? "lg" : undefined}
+      data-editable="array"
+      data-prop="quotes"
+    >
+      {items.map((quote, index) => {
+        const accent = quote.accentColor ? `var(--${quote.accentColor})` : undefined;
+        const body = quote.text ? renderMarkdown(quote.text) : "";
+        const marks = quote.quoteMarks !== false;
+
+        const person = (
+          <div class="testimonial-quote-who">
+            {/* Always a disc, even with nothing in it: the design's card has
+                a face at the head of its column, and without one the name
+                starts hard against the card's edge and the whole block reads
+                as a different composition. */}
+            <span class="testimonial-quote-avatar">
+              {quote.authorImage && (
+                <Image
+                  source={quote.authorImage}
+                  alt={quote.authorImageAlt}
+                  decorative={!quote.authorImageAlt}
+                  data-prop-src="authorImage"
+                  data-prop-alt="authorImageAlt"
+                />
+              )}
+            </span>
+            <div class="testimonial-quote-attribution">
+              {quote.authorName && (
+                <p class="testimonial-quote-name" data-prop="authorName">{quote.authorName}</p>
+              )}
+              {(quote.authorDescription || quote.company) && (
+                <p class="testimonial-quote-role">
+                  <span data-prop="authorDescription">{quote.authorDescription}</span>
+                  {quote.company && (
+                    <>
+                      {quote.authorDescription && " "}
+                      <span class="testimonial-quote-company" data-prop="company">{quote.company}</span>
+                    </>
+                  )}
+                </p>
+              )}
+              {quote.linkText && (
+                <a class="testimonial-quote-link" href={quote.link || undefined}>
+                  {/* Its own span because text-decoration propagates down and
+                      a child cannot take it off: ruled on the anchor, the
+                      line ran under the arrow too. */}
+                  <span class="testimonial-quote-link-label" data-prop="linkText">{quote.linkText}</span>
+                  {quote.company && <span class="visually-hidden"> about {quote.company}</span>}
+                  <span aria-hidden="true">&rarr;</span>
+                </a>
+              )}
+            </div>
+          </div>
+        );
+
+        return (
+          <article
+            class="testimonial-quote-slide"
+            style={accent ? `--testimonial-quote-accent: ${accent}` : undefined}
+            data-editable="array-item"
+            data-id="page-sections/proof/testimonial-quote/testimonial-quote-item"
+            data-index={index}
+            data-active={index === 0 ? "" : undefined}
+            hidden={isCarousel && index > 0}
+            aria-roledescription={isCarousel ? "slide" : undefined}
+            aria-label={isCarousel ? `${index + 1} of ${items.length}` : undefined}
+          >
+            {/* The marks are drawn in CSS. Written into the text they land on
+                their own lines when the quote is more than one paragraph, and
+                an editor has to remember to type them. */}
+            <blockquote
+              class="testimonial-quote-text"
+              data-marks={marks ? "" : undefined}
+              data-prop="text"
+              set:html={body}
+            />
+
+            {!isSplit && (
+              <div class="testimonial-quote-foot">
+                {person}
+                {quote.logoSource && (
+                  <span class="testimonial-quote-logo">
+                    <Image
+                      source={quote.logoSource}
+                      alt={quote.logoAlt}
+                      decorative={!quote.logoAlt}
+                      data-prop-src="logoSource"
+                      data-prop-alt="logoAlt"
+                    />
+                  </span>
+                )}
+              </div>
+            )}
+
+            {isSplit && person}
+          </article>
+        );
+      })}
+
+      {isCarousel && items.length > 1 && (
+        /* One set of controls for the card rather than one per slide: the
+           slides swap, the controls do not. */
+        <div class="testimonial-quote-nav">
+          <div class="testimonial-quote-dots" role="tablist" aria-label="Quotes">
+            {items.map((_, index) => (
+              <button
+                type="button"
+                class="testimonial-quote-dot"
+                role="tab"
+                data-goto={index}
+                aria-selected={index === 0 ? "true" : "false"}
+                aria-label={`Quote ${index + 1}`}
+              ></button>
+            ))}
+          </div>
+          <div class="testimonial-quote-arrows">
+            <button type="button" class="testimonial-quote-arrow" data-step="-1" aria-label="Previous quote">
+              <span aria-hidden="true">&lsaquo;</span>
+            </button>
+            <button type="button" class="testimonial-quote-arrow" data-step="1" aria-label="Next quote">
+              <span aria-hidden="true">&rsaquo;</span>
+            </button>
+          </div>
+        </div>
+      )}
+    </div>
+  </CustomSection>
+)}
+
+<style is:global>
+  @layer page-sections {
+    .testimonial-quote {
+      .testimonial-quote-card {
+        /* The bento's card, at this one's size.
+
+           Same surface, same edge, same ink: a quote card on a dark band has
+           to be the same object whether it is one of four in a bento or on
+           its own in a band, or the two read as different components. The
+           padding is a step up from the bento's 40, because this card is the
+           content column wide rather than a third of it. */
+        --testimonial-quote-surface: var(--black);
+        --testimonial-quote-edge: color-mix(in srgb, var(--gray-200, #d9d9d9) 8%, transparent);
+        --testimonial-quote-ink: var(--color-text-strong);
+        --testimonial-quote-quiet: var(--gray-400, #9a9a9a);
+        --testimonial-quote-pad: 48px;
+        /* Header 5. The sheet steps the quote down as it gets longer, and
+           these are the two sizes the theme already draws. */
+        --testimonial-quote-size: var(--font-size-heading-sm);
+        --testimonial-quote-name: 1.125rem;
+        --testimonial-quote-meta: 0.8125rem;
+
+        background: var(--testimonial-quote-surface);
+        border: var(--border-width-sm) solid var(--testimonial-quote-edge);
+        border-radius: var(--radius-card);
+        padding: var(--testimonial-quote-pad);
+        position: relative;
+      }
+
+      /* Header 4. */
+      .testimonial-quote-card[data-quote-size="lg"] {
+        --testimonial-quote-size: var(--font-size-heading-md);
+      }
+
+      /* Quote above, person below, so the weight of the padding sits with the
+         quote: the attribution is a footnote to it. The splits are side by
+         side and stay even. */
+      .testimonial-quote-card[data-layout="static"],
+      .testimonial-quote-card[data-layout="carousel"] {
+        padding-block-end: 40px;
+      }
+
+      .testimonial-quote-slide[hidden] {
+        display: none;
+      }
+
+      /* --- the quote ------------------------------------------------- */
+
+      .testimonial-quote-text {
+        /* The base layer rules every blockquote down its left and pads it to
+           clear that, which is right in running text and wrong for one that
+           is the card. */
+        border-left: 0;
+        padding-left: 0;
+        color: var(--testimonial-quote-ink);
+        margin: 0;
+      }
+
+      /* On the paragraph as well as the blockquote. The quote is markdown, so
+         what carries the words is a <p>, and the base layer sets a size on
+         every <p>: set on the blockquote alone this measures as applied and
+         draws at 16. */
+      .testimonial-quote-text,
+      .testimonial-quote-text p {
+        font-size: var(--testimonial-quote-size);
+        font-weight: 700;
+        line-height: 1.3;
+      }
+
+      .testimonial-quote-text p {
+        margin: 0;
+      }
+
+      .testimonial-quote-text p + p {
+        margin-block-start: 0.6em;
+      }
+
+      /* The emphasis and the marks are the same colour, which is what ties
+         the card together: the design marks a phrase in the card's accent and
+         draws the quotes around the whole thing in it too. */
+      .testimonial-quote-text strong {
+        color: var(--testimonial-quote-accent, inherit);
+        font-weight: inherit;
+      }
+
+      .testimonial-quote-text[data-marks] {
+        quotes: "\201C" "\201D";
+      }
+
+      .testimonial-quote-text[data-marks] > p:first-child::before {
+        color: var(--testimonial-quote-accent, inherit);
+        content: open-quote;
+      }
+
+      .testimonial-quote-text[data-marks] > p:last-child::after {
+        color: var(--testimonial-quote-accent, inherit);
+        content: close-quote;
+      }
+
+      /* --- the person ------------------------------------------------ */
+
+      .testimonial-quote-who {
+        align-items: center;
+        display: flex;
+        gap: var(--spacing-md);
+        min-inline-size: 0;
+      }
+
+      .testimonial-quote-avatar {
+        background: color-mix(in srgb, var(--testimonial-quote-ink) 10%, transparent);
+        block-size: 56px;
+        border-radius: 50%;
+        display: block;
+        flex-shrink: 0;
+        inline-size: 56px;
+        overflow: hidden;
+      }
+
+      .testimonial-quote-avatar img {
+        block-size: 100%;
+        display: block;
+        inline-size: 100%;
+        object-fit: cover;
+      }
+
+      .testimonial-quote-attribution {
+        min-inline-size: 0;
+      }
+
+      .testimonial-quote-name {
+        color: var(--testimonial-quote-ink);
+        font-size: var(--testimonial-quote-name);
+        font-weight: 500;
+        line-height: 1.2;
+        margin: 0;
+      }
+
+      /* Mono, which is what the design sets on the role: it reads as a label
+         rather than as more of the quote. */
+      .testimonial-quote-role {
+        color: var(--testimonial-quote-quiet);
+        font-family: var(--font-monospace, ui-monospace, monospace);
+        font-size: var(--testimonial-quote-meta);
+        line-height: 1.4;
+        margin: 0.25rem 0 0;
+      }
+
+      /* The company is the emphasis on that line, and it is a brightness
+         rather than a weight: in mono at 13 a bolder cut reads as noise. */
+      .testimonial-quote-company {
+        color: var(--testimonial-quote-ink);
+      }
+
+      .testimonial-quote-link {
+        align-items: center;
+        color: var(--testimonial-quote-quiet);
+        display: inline-flex;
+        font-size: var(--testimonial-quote-meta);
+        font-weight: 600;
+        gap: 0.5em;
+        margin-block-start: var(--spacing-sm);
+        text-decoration: none;
+        transition: color var(--animation-normal) var(--ease-in-out);
+      }
+
+      /* Only the words are ruled. The arrow is a glyph doing the same job as
+         the underline, and run through by it as well it reads as struck out. */
+      .testimonial-quote-link-label {
+        text-decoration: underline;
+        text-underline-offset: 0.35em;
+      }
+
+      /* The card's hover carries the link with it: the two are one gesture. */
+      .testimonial-quote-card:hover .testimonial-quote-link,
+      .testimonial-quote-link:hover,
+      .testimonial-quote-link:focus-visible {
+        color: var(--testimonial-quote-accent, var(--testimonial-quote-ink));
+      }
+
+      /* --- static and carousel: quote, rule, person ------------------ */
+
+      .testimonial-quote-foot {
+        align-items: center;
+        border-block-start: var(--border-width-sm) solid var(--testimonial-quote-edge);
+        display: flex;
+        flex-wrap: nowrap;
+        gap: var(--spacing-xl);
+        justify-content: space-between;
+        margin-block-start: 32px;
+        padding-block-start: 24px;
+      }
+
+      .testimonial-quote-logo {
+        display: block;
+        flex-shrink: 0;
+        max-inline-size: 160px;
+      }
+
+      .testimonial-quote-logo img {
+        block-size: auto;
+        display: block;
+        inline-size: 100%;
+      }
+
+      /* --- the splits ------------------------------------------------ */
+
+      /* The rule is the column's own border rather than an element between
+         them, so it runs the height of the taller side without being measured.
+
+         22/78 is the sheet's: a 219 person column against a 771 quote in an
+         1104 content box. */
+      .testimonial-quote-card[data-layout="split-person"] .testimonial-quote-slide,
+      .testimonial-quote-card[data-layout="split-quote"] .testimonial-quote-slide {
+        align-items: start;
+        column-gap: var(--testimonial-quote-pad);
+        display: grid;
+      }
+
+      .testimonial-quote-card[data-layout="split-person"] .testimonial-quote-slide {
+        grid-template-columns: minmax(0, 22%) minmax(0, 1fr);
+      }
+
+      .testimonial-quote-card[data-layout="split-quote"] .testimonial-quote-slide {
+        grid-template-columns: minmax(0, 1fr) minmax(0, 22%);
+      }
+
+      /* Column order. The person is written after the quote in the markup
+         either way, so the quote stays first for a reader and for a copy. */
+      .testimonial-quote-card[data-layout="split-person"] .testimonial-quote-text {
+        border-inline-start: var(--border-width-sm) solid var(--testimonial-quote-edge);
+        grid-column: 2;
+        padding-inline-start: var(--testimonial-quote-pad);
+      }
+
+      .testimonial-quote-card[data-layout="split-person"] .testimonial-quote-who {
+        grid-column: 1;
+        grid-row: 1;
+      }
+
+      .testimonial-quote-card[data-layout="split-quote"] .testimonial-quote-who {
+        border-inline-start: var(--border-width-sm) solid var(--testimonial-quote-edge);
+        grid-column: 2;
+        padding-inline-start: var(--testimonial-quote-pad);
+      }
+
+      /* In a column of its own the person stacks, with a bigger face: the
+         sheet draws 98 against the foot row's 78. Beside a quote this is the
+         block's own heading rather than a byline under it. */
+      .testimonial-quote-card[data-layout="split-person"] .testimonial-quote-who,
+      .testimonial-quote-card[data-layout="split-quote"] .testimonial-quote-who {
+        align-items: start;
+        display: grid;
+        gap: var(--spacing-lg);
+      }
+
+      .testimonial-quote-card[data-layout="split-person"] .testimonial-quote-avatar,
+      .testimonial-quote-card[data-layout="split-quote"] .testimonial-quote-avatar {
+        block-size: 72px;
+        inline-size: 72px;
+      }
+
+      /* --- the carousel's controls ----------------------------------- */
+
+      /* Placed against the card rather than inside a slide, because the
+         slides swap and the controls do not. Level with the middle of the
+         face in the foot, which is a fixed 56 from the card's bottom
+         padding. */
+      .testimonial-quote-nav {
+        align-items: center;
+        display: flex;
+        gap: var(--spacing-lg);
+        inset-block-end: calc(40px + 28px - 16px);
+        inset-inline-end: var(--testimonial-quote-pad);
+        position: absolute;
+      }
+
+      .testimonial-quote-dots {
+        align-items: center;
+        display: flex;
+        gap: 0.5rem;
+      }
+
+      /* A dash rather than a dot, which is what the sheet draws, and the
+         selected one takes the card's accent. */
+      .testimonial-quote-dot {
+        background: var(--testimonial-quote-quiet);
+        block-size: 2px;
+        border: 0;
+        border-radius: 2px;
+        cursor: pointer;
+        inline-size: 12px;
+        opacity: 0.5;
+        padding: 0;
+        transition:
+          inline-size var(--animation-normal) var(--ease-in-out),
+          opacity var(--animation-normal) var(--ease-in-out);
+      }
+
+      .testimonial-quote-dot[aria-selected="true"] {
+        background: var(--testimonial-quote-accent, var(--testimonial-quote-ink));
+        inline-size: 28px;
+        opacity: 1;
+      }
+
+      .testimonial-quote-arrows {
+        display: flex;
+        gap: 0.5rem;
+      }
+
+      .testimonial-quote-arrow {
+        align-items: center;
+        background: none;
+        block-size: 32px;
+        border: var(--border-width-sm) solid var(--testimonial-quote-edge);
+        border-radius: 50%;
+        color: var(--testimonial-quote-quiet);
+        cursor: pointer;
+        display: flex;
+        font-size: 1rem;
+        inline-size: 32px;
+        justify-content: center;
+        line-height: 1;
+        padding: 0;
+        transition:
+          border-color var(--animation-normal) var(--ease-in-out),
+          color var(--animation-normal) var(--ease-in-out);
+      }
+
+      .testimonial-quote-arrow:hover,
+      .testimonial-quote-arrow:focus-visible {
+        border-color: var(--testimonial-quote-accent, var(--testimonial-quote-ink));
+        color: var(--testimonial-quote-accent, var(--testimonial-quote-ink));
+      }
+
+      /* --- narrow ----------------------------------------------------- */
+
+      /* The splits stack. A 22% column is 80px on a phone, which is narrower
+         than the face that goes in it. */
+      @media (width <= 767px) {
+        .testimonial-quote-card {
+          --testimonial-quote-pad: 24px;
+        }
+
+        .testimonial-quote-card[data-layout="split-person"] .testimonial-quote-slide,
+        .testimonial-quote-card[data-layout="split-quote"] .testimonial-quote-slide {
+          display: block;
+        }
+
+        .testimonial-quote-card[data-layout="split-person"] .testimonial-quote-text,
+        .testimonial-quote-card[data-layout="split-quote"] .testimonial-quote-who {
+          border-inline-start: 0;
+          padding-inline-start: 0;
+        }
+
+        .testimonial-quote-card[data-layout="split-person"] .testimonial-quote-who,
+        .testimonial-quote-card[data-layout="split-quote"] .testimonial-quote-who {
+          border-block-start: var(--border-width-sm) solid var(--testimonial-quote-edge);
+          margin-block-start: 28px;
+          padding-block-start: 24px;
+        }
+
+        .testimonial-quote-nav {
+          inset-block-end: var(--testimonial-quote-pad);
+        }
+      }
+    }
+  }
+</style>
+
+<script>
+  import { onPageLoad } from "@component-utils/onPageLoad";
+  import { setupAllTestimonialQuotes } from "./setup";
+
+  onPageLoad(() => setupAllTestimonialQuotes());
+</script>

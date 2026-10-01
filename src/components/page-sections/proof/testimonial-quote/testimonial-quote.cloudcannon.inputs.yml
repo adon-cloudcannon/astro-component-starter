@@ -1,0 +1,145 @@
+variant:
+  type: select
+  label: Layout
+  comment: >-
+    The four the design draws. Carousel is the only one that shows more than
+    the first quote.
+  options:
+    values:
+      - id: static
+        name: Static
+      - id: carousel
+        name: Carousel
+      - id: split-person
+        name: Split, person left
+      - id: split-quote
+        name: Split, quote left
+quoteSize:
+  type: select
+  label: Quote size
+  comment: >-
+    The design steps the quote down a size as it gets longer. Header 5 is the
+    smaller of the two.
+  options:
+    values:
+      - id: sm
+        name: Header 5
+      - id: lg
+        name: Header 4
+quotes:
+  type: array
+  label: Quotes
+  comment: >-
+    One quote for every layout but the carousel, which reads them all.
+  options:
+    structures: _structures.testimonialQuoteItems
+
+# --- section wrapper inputs (CustomSection) ---
+# Configures the CustomSection wrapper, not this section's own content. Inline
+# per component so a project can trim the size/padding lists in place.
+# `new:component` slices from this marker down — keep the marker line verbatim.
+sectionLabel:
+  type: text
+  comment: Names the section in the editor and sets its anchor id.
+maxContentWidth:
+  type: select
+  comment: Maximum width of the content.
+  options:
+    values:
+      - id: none
+        name: None
+      - id: xs
+        name: Extra Small
+      - id: sm
+        name: Small
+      - id: md
+        name: Medium
+      - id: lg
+        name: Large
+      - id: xl
+        name: Extra Large
+      - id: 2xl
+        name: 2xl
+      - id: 3xl
+        name: 3xl
+paddingHorizontal:
+  type: select
+  comment: Horizontal padding around the content.
+  options:
+    values:
+      - id: none
+        name: None
+      - id: gutter
+        name: Page gutter
+      - id: xs
+        name: Extra Small
+      - id: sm
+        name: Small
+      - id: md
+        name: Medium
+      - id: lg
+        name: Large
+      - id: xl
+        name: Extra Large
+      - id: 2xl
+        name: 2xl
+      - id: 3xl
+        name: 3xl
+paddingVertical:
+  type: select
+  comment: Vertical padding around the content.
+  options:
+    values:
+      - id: none
+        name: None
+      - id: xs
+        name: Extra Small
+      - id: sm
+        name: Small
+      - id: md
+        name: Medium
+      - id: lg
+        name: Large
+      - id: xl
+        name: Extra Large
+      - id: 2xl
+        name: 2xl
+      - id: 3xl
+        name: 3xl
+      - id: 4xl
+        name: 4xl
+      - id: 5xl
+        name: 5xl
+      - id: 6xl
+        name: 6xl
+colorScheme:
+  type: select
+  comment: Light or dark scheme for the section. Inherit follows the page.
+  options:
+    values:
+      - id: inherit
+        name: Inherit
+      - id: light
+        name: Light
+      - id: dark
+        name: Dark
+lockColorScheme:
+  type: switch
+  label: Lock color scheme
+  comment: Ignores the site theme toggle. Only applies when Color Scheme is Light or Dark.
+backgroundColor:
+  type: select
+  comment: Background color for the section.
+  options:
+    values:
+      - id: none
+        name: None
+      - id: base
+        name: Base
+      - id: surface
+        name: Surface
+      - id: accent
+        name: Accent
+      - id: highlight
+        name: Highlight
+

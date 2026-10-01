@@ -1,0 +1,159 @@
+label: Testimonial Quote
+icon: format_quote
+description: One customer quote on a card, in any of the four layouts the design draws.
+value:
+  _component: page-sections/proof/testimonial-quote
+  sectionLabel: ""
+  variant: static
+  quoteSize: sm
+  quotes:
+    - text: We handed the site to our marketing team on a Friday and they had three new landing pages live by Monday. **No tickets, no deploys**, nothing broken.
+      authorName: Priya Raman
+      authorDescription: Head of Marketing,
+      company: Northwind
+      authorImage: /src/assets/images/component-docs/profile1.jpg
+      accentColor: sunset
+  maxContentWidth: xl
+  paddingHorizontal: gutter
+  paddingVertical: 4xl
+  colorScheme: inherit
+  lockColorScheme: false
+  backgroundColor: base
+  background:
+    type: image
+    imageSource: ""
+    imageAlt: ""
+    positionVertical: top
+    positionHorizontal: center
+    fixed: false
+    priority: false
+    mask: none
+    overlay: 0
+preview:
+  text:
+    - Testimonial Quote
+  subtext:
+    - key: quotes[0].authorName
+  icon: format_quote
+picker_preview:
+  text: Testimonial Quote
+  subtext: One quote on a card, static, as a carousel, or split beside the person.
+  icon: format_quote
+_inputs_from_glob:
+  - /src/components/page-sections/proof/testimonial-quote/testimonial-quote.cloudcannon.inputs.yml
+  - /.cloudcannon/inputs/background.yml
+  - /.cloudcannon/inputs/haze.yml
+_structures:
+  testimonialQuoteItems:
+    values:
+      - label: Quote
+        icon: format_quote
+        value:
+          text: ""
+          authorName: ""
+          authorDescription: ""
+          company: ""
+          authorImage: ""
+          authorImageAlt: ""
+          logoSource: ""
+          logoAlt: ""
+          linkText: ""
+          link: ""
+          accentColor: ""
+          quoteMarks: true
+        preview:
+          text:
+            - key: authorName
+            - Quote
+          subtext:
+            - key: text
+          icon: format_quote
+        _inputs:
+          text:
+            type: markdown
+            comment: >-
+              The quote itself. Bold picks words out in the card's accent
+              colour, which is how the design highlights a result.
+          authorName:
+            type: text
+            comment: Who said it.
+          authorDescription:
+            type: text
+            comment: Their role. Leave the company to its own field so it can be emphasised.
+          company:
+            type: text
+            comment: Shown after the role, in the card's brighter ink.
+          authorImage:
+            type: image
+            comment: Their headshot. The circle is drawn either way.
+            options:
+              paths:
+                static: ""
+                uploads: src/assets/images
+          authorImageAlt:
+            type: text
+            comment: Alt text for the headshot. Leave empty to treat it as decorative.
+          logoSource:
+            type: image
+            comment: The customer's wordmark, shown at the end of the foot. Static layout only.
+            options:
+              paths:
+                static: ""
+                uploads: src/assets/images
+          logoAlt:
+            type: text
+            comment: Alt text for the wordmark.
+          linkText:
+            type: text
+            comment: Label for the link under the person, e.g. "Read case study".
+          link:
+            type: url
+            comment: Where that link goes.
+          quoteMarks:
+            type: switch
+            comment: >-
+              Wraps the quote in the card's colour. Turn off for a figure
+              rather than something somebody said.
+          accentColor:
+            type: select
+            comment: >-
+              The card's colour. It does three jobs at once: the emphasised
+              words in the quote take it, the quote marks are drawn in it, and
+              the link turns to it on hover.
+            options:
+              values:
+                - id: ""
+                  name: None
+                - id: sunset
+                  name: Sunset (orange)
+                - id: golden
+                  name: Golden (yellow)
+                - id: pacific
+                  name: Pacific (blue)
+                - id: moss
+                  name: Moss (green)
+                - id: peachy
+                  name: Peachy
+                - id: harbour
+                  name: Harbour (pale blue)
+                - id: blush
+                  name: Blush (pink)
+groups:
+  - heading: Content
+    inputs:
+      - variant
+      - quoteSize
+      - quotes
+  - heading: Section settings
+    comment: Width, spacing, color scheme, and background for this section.
+    collapsed: true
+    inputs:
+      - sectionLabel
+      - maxContentWidth
+      - paddingHorizontal
+      - paddingVertical
+      - colorScheme
+      - lockColorScheme
+      - backgroundColor
+      - background
+      - haze

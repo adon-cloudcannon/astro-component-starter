@@ -75,18 +75,19 @@ pageSections:
     subtextSize: lg
     subtextWidth: 808
     headingSize: lg
-  - _component: page-sections/proof/testimonial-section
-    text: >-
-      Having that flexibility of having everything live in a Git repository is pretty amazing. **We
-      don’t have to worry about a separate database**, or any other pieces in the mix, it’s dead
-      simple.
-    authorName: Justin Parsons
-    authorDescription: Director of Front-End Development Insight Creative, Inc
-    layout: split
-    markPosition: start
-    markStyle: plain
-    linkText: Read case study
-    accentColor: sunset
+  - _component: page-sections/proof/testimonial-quote
+    variant: split-person
+    quoteSize: sm
+    quotes:
+      - text: >-
+          Having that flexibility of having everything live in a Git repository is pretty amazing.
+          **We don’t have to worry about a separate database**, or any other pieces in the mix,
+          it’s dead simple.
+        authorName: Justin Parsons
+        authorDescription: Director of Front-End Development,
+        company: Insight Creative, Inc
+        linkText: Read case study
+        accentColor: sunset
     backgroundColor: base
     colorScheme: dark
     lockColorScheme: true
