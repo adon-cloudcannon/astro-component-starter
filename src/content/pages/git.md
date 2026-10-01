@@ -215,7 +215,7 @@ pageSections:
             text: Learn more
         mediaSections: []
   - _component: page-sections/proof/testimonial-quote
-    variant: split-quote
+    variant: static
     quoteSize: sm
     tone: light
     bordered: true
