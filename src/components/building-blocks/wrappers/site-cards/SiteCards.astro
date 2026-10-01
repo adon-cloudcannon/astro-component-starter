@@ -47,6 +47,12 @@ const {
   buttonLabel = "",
   /** What the control says once every environment matches. */
   syncedLabel = "All in sync",
+  /**
+   * What a card's build line says once it has just received.
+   *
+   * Empty leaves the line alone, for a stack where the dates are the point.
+   */
+  builtNowLabel = "Built just now",
   /** The label on the control that puts it back to the start. */
   resetLabel = "Start over",
   class: className,
@@ -88,6 +94,7 @@ const first = placed.find((card) => card.env === "branch") ? "branch" : "staging
   <div
     class:list={["site-cards", className]}
     data-flow={buttonLabel ? first : undefined}
+    data-built-now={builtNowLabel || undefined}
     {...htmlAttributes}
   >
     {/* The graph, drawn in the stage's own 708 x 421 so it lands the same way
@@ -191,7 +198,7 @@ const first = placed.find((card) => card.env === "branch") ? "branch" : "staging
               {card.built && (
                 <span class="site-cards-row">
                   <Icon name="wrench-circle" size="none" />
-                  <span data-prop="built">{card.built}</span>
+                  <span data-built data-prop="built">{card.built}</span>
                 </span>
               )}
             </div>
@@ -560,10 +567,15 @@ const first = placed.find((card) => card.env === "branch") ? "branch" : "staging
        stroke, cut to a single round dash and walked along with the dash
        offset, so it follows every curve without anything having to know where
        the curve goes. */
+    /* The same dot the workflow split sends down its connector: 7 across with
+       the design's glow on it, a shadow at radius 8 and no offset, in its own
+       colour at 65%. The filter is in the viewBox's units like everything
+       else here, so it scales with the stage. */
     .site-cards-pulse {
       stroke: var(--sunset, #d85a2c);
-      stroke-width: 9;
+      stroke-width: 7;
       stroke-linecap: round;
+      filter: drop-shadow(0 0 8px color-mix(in srgb, var(--sunset, #d85a2c) 65%, transparent));
       opacity: 0;
     }
 

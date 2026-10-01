@@ -200,6 +200,12 @@ const publish = (stage: Stage) => {
         // instead left the picture changing half a second before the card it
         // belongs to looked like the live one.
         incoming.setAttribute("data-shown", "");
+
+        // It has just been built, so its build line says so. Part of the same
+        // frame as everything else about the arrival.
+        const built = to.querySelector<HTMLElement>("[data-built]");
+        if (built && stage.dataset.builtNow) built.textContent = stage.dataset.builtNow;
+
         stage.dataset.flow = next;
         refresh(stage);
       });
@@ -217,10 +223,15 @@ export const setupSiteCards = (stage: Stage) => {
   if (stage.__siteCardsBound) return;
   stage.__siteCardsBound = true;
 
-  // What every card started with, so the sequence can be run again.
+  // What every card started with, so the sequence can be run again: both the
+  // screenshot and the build line, since both change on arrival.
   const start = new Map<HTMLElement, string>();
   stage.querySelectorAll<HTMLElement>("[data-photo]").forEach((photo) => {
     start.set(photo, photo.innerHTML);
+  });
+  const builtAtStart = new Map<HTMLElement, string>();
+  stage.querySelectorAll<HTMLElement>("[data-built]").forEach((built) => {
+    builtAtStart.set(built, built.textContent || "");
   });
   const first = stage.dataset.flow || FLOW[0];
 
@@ -233,6 +244,9 @@ export const setupSiteCards = (stage: Stage) => {
     if (target?.closest("[data-reset]")) {
       start.forEach((html, photo) => {
         photo.innerHTML = html;
+      });
+      builtAtStart.forEach((text, built) => {
+        built.textContent = text;
       });
       stage.dataset.flow = first;
       refresh(stage);
