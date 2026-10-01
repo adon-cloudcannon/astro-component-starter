@@ -3,6 +3,7 @@ import Heading from "@core-elements/heading/Heading.astro";
 import Icon from "@core-elements/icon/Icon.astro";
 import SimpleText from "@core-elements/simple-text/SimpleText.astro";
 import Text from "@core-elements/text/Text.astro";
+import Button from "@core-elements/button/Button.astro";
 import Card from "@wrappers/card/Card.astro";
 import Image from "@core-elements/image/Image.astro";
 import GridItem from "@wrappers/grid/GridItem.astro";
@@ -144,10 +145,21 @@ const headingSize = titleSize ?? (signpost ? "lg" : imageSource || !iconName ? "
       text={description}
     />
     {linkText && (
-      <a class="feature-link" href={link} data-editable="text" data-prop="linkText">
-        {linkText}
-        <span aria-hidden="true">&#8594;</span>
-      </a>
+      /* The same Button every other arrow link on the site is, rather than an
+         anchor of this card's own: side by side with the one in the Publish
+         band these were the same size and colour at different weights, 400
+         against 600, because only one of them was the component. */
+      <Button
+        class="feature-link"
+        variant="text"
+        textColor="sunset"
+        iconName="arrow-right"
+        iconPosition="after"
+        size="md"
+        text={linkText}
+        link={link}
+        data-prop="linkText"
+      />
     )}
   </Card>
 </GridItem>
@@ -325,17 +337,14 @@ const headingSize = titleSize ?? (signpost ? "lg" : imageSource || !iconName ? "
 
     /* Same text link the testimonials use: Sunset, with the arrow beside the
        label rather than inside it. */
+    /* The gap above it is this card's own; everything else about the link now
+       comes from the Button component. */
     .feature-item.is-signpost .feature-link {
-      align-items: center;
-      color: var(--sunset);
-      display: inline-flex;
       --space-before: 0.75rem;
-      gap: 0.5rem;
-      text-decoration: none;
     }
 
-    .feature-item.is-signpost .feature-link:hover {
-      text-decoration: underline;
+    .feature-item.is-signpost .feature-link .button-inner {
+      padding-block: 0;
     }
   }
 </style>

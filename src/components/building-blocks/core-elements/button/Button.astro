@@ -205,6 +205,19 @@ if (!_component && !hasText && !hasSlotContent && !hasIcon) return;
       color: var(--button-text-color, inherit);
     }
 
+    /* A coloured label deepens on hover rather than going to the brand.
+
+       `variant-text` hovers to `--color-brand-muted`, which is right for the
+       links that are drawn in the base colour and wrong for the ones that are
+       not: a Sunset link turned blue under the pointer. These selectors carry
+       a class more than that rule, so they win wherever a colour is set. */
+    .button > .button-inner[class*="text-"]:not(.text-default):hover,
+    .button > .button-inner[class*="text-"]:not(.text-default):focus,
+    .button > .button-inner[class*="text-"]:not(.text-default):hover .icon,
+    .button > .button-inner[class*="text-"]:not(.text-default):focus .icon {
+      color: color-mix(in srgb, var(--button-text-color, currentColor) 78%, #000);
+    }
+
     .button {
       --button-icon-gap: 0.15em;
       /* Measured off the design's Pill Button: 190x50 around a 16px/600 label
