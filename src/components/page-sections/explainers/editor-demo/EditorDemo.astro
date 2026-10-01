@@ -1,0 +1,2015 @@
+---
+/**
+ * The interactive demo on Content Editors, "Here's what you're working with".
+ *
+ * The design draws the whole thing as a flat screenshot of the real editor, a
+ * 1108x787 rectangle with two image fills, so there is nothing in the file to
+ * read: the structure here comes from the picture and from the section's own
+ * copy, which states the interactions outright ("Click a heading and change
+ * it").
+ *
+ * Shell first. The window chrome is its own component so the same frame can
+ * hold a mockup elsewhere, and the demo inside it lands next.
+ */
+import BrowserFrame from "@wrappers/browser-frame/BrowserFrame.astro";
+import CustomSection from "@builders/custom-section/CustomSection.astro";
+import Fields from "./Fields.astro";
+import Pane from "./Pane.astro";
+import Preview from "./Preview.astro";
+import Row from "./Row.astro";
+import Heading from "@core-elements/heading/Heading.astro";
+import Icon from "@core-elements/icon/Icon.astro";
+import Image from "@core-elements/image/Image.astro";
+import SimpleText from "@core-elements/simple-text/SimpleText.astro";
+import Text from "@core-elements/text/Text.astro";
+
+type Field = {
+  /** `text`, `textarea` or `image`. */
+  type?: string;
+  label?: string;
+  /** The line under the label. The app draws one on every field. */
+  description?: string;
+  /** What an empty image field says, which is also its drop target. */
+  emptyLabel?: string;
+  /** Which part of the page it edits: `heading`, `subtext` or `image`. */
+  binds?: string;
+};
+type Block = {
+  title?: string;
+  subtitle?: string;
+  iconName?: string;
+  fields?: Field[];
+};
+type Swatch = { label?: string; color?: string };
+
+const {
+  eyebrow = "",
+  heading = "",
+  headingLevel = "h2",
+  headingSize = "lg",
+  subtext = "",
+  subtextSize = "md",
+  /** The measure the design sets the line in, in pixels. */
+  subtextWidth,
+  alignmentHorizontal = "center",
+  /** The address in the window's bar. */
+  frameLabel = "",
+  frameTone = "light",
+  /**
+   * How wide the window is, in pixels. Empty fills the content column.
+   *
+   * There is no width to take from the design here. The panel in the file is
+   * a screenshot of the real editor, so its box is whatever the person who
+   * took it had on screen: the rectangle measures 1108 and the rules drawn
+   * inside it 1024, and neither is a decision. The column is, so the column
+   * is the default and this exists for a section that wants otherwise.
+   */
+  frameWidth = 0,
+  /** The panel's own title, which names the component being edited. */
+  panelTitle = "Hero",
+  /** The label over the colour control. */
+  colorLabel = "Background Color",
+  /**
+   * The colours the preview can be painted, first one selected.
+   *
+   * The site's own, rather than the design's "Purple": each carries the
+   * palette name it paints with, so the preview is a real colour from the
+   * theme and not a word standing in for one.
+   */
+  colorOptions = [
+    { label: "Sand", color: "sand" },
+    { label: "Blush", color: "blush" },
+    { label: "Harbour", color: "harbour" },
+    { label: "Golden", color: "golden-200" },
+  ],
+  /** The label over the block list. */
+  blocksLabel = "Content Blocks",
+  /** The blocks in the list, in order. */
+  blocks = [
+    {
+      title: "Text Block",
+      subtitle: "Headline & Description",
+      iconName: "document-text",
+      fields: [
+        { type: "text", label: "Headline", binds: "heading" },
+        { type: "textarea", label: "Description", binds: "subtext" },
+      ],
+    },
+    {
+      title: "Image",
+      subtitle: "Hero Image",
+      iconName: "photo",
+      fields: [
+        {
+          type: "image",
+          label: "Hero Image",
+          description: "The URL or path to the image.",
+          binds: "image",
+        },
+      ],
+    },
+  ],
+  /** The button under the list. */
+  addLabel = "Add Content Block",
+  /**
+   * What that button offers.
+   *
+   * The editor lists what can be added, not what is already there, so this is
+   * its own prop rather than a reading of `blocks`: the two happen to match
+   * while the demo has one of each.
+   */
+  addOptions = [
+    {
+      title: "Text Block",
+      description: "A headline and a line of copy beneath it.",
+      iconName: "document-text",
+      subtitle: "Headline & Description",
+      fields: [
+        { type: "text", label: "Headline", binds: "heading" },
+        { type: "textarea", label: "Description", binds: "subtext" },
+      ],
+      values: {
+        heading: "A new headline",
+        subtext: "And a line of copy to go under it.",
+      },
+    },
+    {
+      title: "Image",
+      description: "A picture, sized to the space it is given.",
+      iconName: "photo",
+      subtitle: "Hero Image",
+      fields: [
+        {
+          type: "image",
+          label: "Hero Image",
+          description: "The URL or path to the image.",
+          binds: "image",
+        },
+      ],
+    },
+  ],
+  /**
+   * The headline on the page being edited.
+   *
+   * This is the thing the demo is about: the copy invites you to click it and
+   * change it, so it is the one piece of the preview that has to be real
+   * before anything else in there is.
+   */
+  previewHeading = "Edit this headline",
+  /** The picture under the copy on the page being edited. */
+  previewImage = "/src/assets/images/marketing/hero-lowmaintenance-01-1.png",
+  previewImageAlt = "",
+  /** The line under the headline on the page being edited. */
+  previewSubtext =
+    "Change the headline or this line in the sidebar, and the page updates as you type.",
+  /** The link back out of a block's own panel. */
+  backLabel = "Back",
+  /** What the six dots on a block offer. */
+  menuLabels = {
+    duplicate: "Duplicate",
+    moveUp: "Move up",
+    moveDown: "Move down",
+    remove: "Delete",
+  },
+  sectionLabel,
+  maxContentWidth = "xl",
+  paddingHorizontal = "gutter",
+  paddingVertical = "4xl",
+  colorScheme = "inherit",
+  lockColorScheme = false,
+  backgroundColor = "base",
+  background,
+  haze = false,
+  class: className,
+  _component,
+  ...htmlAttributes
+} = Astro.props;
+
+const hasHeader = Boolean(eyebrow || heading || subtext);
+
+/* Every block gets an instance id, and every binding is scoped to it. Without
+   that there is nowhere for a second Text Block to write: two of them binding
+   "heading" would share one paragraph on the page. */
+const blockId = (index: number) => `b${index}`;
+const blockList: Block[] = Array.isArray(blocks) ? blocks : [];
+
+/* A palette name or a literal, the same rule the rest of the site uses. */
+const paint = (value: string) => (value.startsWith("#") ? value : `var(--${value})`);
+
+/* A plain list of names still works: it just paints nothing. */
+const colorList: Swatch[] = (Array.isArray(colorOptions) ? colorOptions : [])
+  .filter(Boolean)
+  .map((option) => (typeof option === "string" ? { label: option } : option));
+
+const firstColor = colorList[0]?.color ? paint(colorList[0].color) : "transparent";
+
+/* What each block starts out holding.
+ *
+ * A block can carry its own `values`. Where it does not, the `preview*` props
+ * seed the first block that binds that name, which is what those props have
+ * always meant, and everything after it starts empty. Walked in order once,
+ * since `used` is what makes "the first" mean anything.
+ */
+const seeds: Record<string, string> = {
+  heading: previewHeading,
+  subtext: previewSubtext,
+  image: previewImage,
+};
+const used = new Set<string>();
+const valuesFor = (block: Block) => {
+  const out: Record<string, string> = { ...((block as any).values ?? {}) };
+  for (const field of block.fields ?? []) {
+    const bind = field.binds ?? "";
+    if (!bind || out[bind] !== undefined) continue;
+    if (!used.has(bind) && seeds[bind]) {
+      out[bind] = seeds[bind];
+      used.add(bind);
+    } else {
+      out[bind] = "";
+    }
+  }
+  return out;
+};
+const blockValues = blockList.map(valuesFor);
+
+/* What the add menu can make. Each option is a whole block definition, not
+   just a label: the template it renders has to produce a row, a panel, a copy
+   of the fields for the popup and the content on the page, and all four come
+   from the same shape the starting blocks use. */
+const addList = ((Array.isArray(addOptions) ? addOptions : []) as (Block & {
+  description?: string;
+  values?: Record<string, string>;
+})[]).map((option) => ({
+  ...option,
+  /* A field with nothing of its own takes the section's default for that
+     name, which is how an added Image arrives carrying a picture rather than
+     an empty box. An option's own `values` still win, which is what gives a
+     new Text Block its own copy rather than a second copy of the first
+     block's. The seeds are read without being consumed: `used` is only about
+     which of the starting blocks gets the prop. */
+  values: {
+    ...Object.fromEntries(
+      (option.fields ?? []).map((field) => [field.binds ?? "", seeds[field.binds ?? ""] ?? ""]),
+    ),
+    ...(option.values ?? {}),
+  },
+}));
+---
+
+<CustomSection
+  class:list={["editor-demo", className]}
+  label={sectionLabel}
+  maxContentWidth={maxContentWidth}
+  paddingHorizontal={paddingHorizontal}
+  paddingVertical={paddingVertical}
+  colorScheme={colorScheme}
+  lockColorScheme={lockColorScheme}
+  backgroundColor={backgroundColor}
+  background={background}
+  haze={haze}
+  {...htmlAttributes}
+>
+  {hasHeader && (
+    <div class="editor-demo-header flow">
+      {eyebrow && (
+        <SimpleText
+          alignmentHorizontal={alignmentHorizontal}
+          class="eyebrow"
+          size="sm"
+          text={eyebrow}
+        />
+      )}
+      {heading && (
+        <Heading
+          alignmentHorizontal={alignmentHorizontal}
+          level={headingLevel}
+          size={headingSize}
+        >
+          {heading}
+        </Heading>
+      )}
+      {subtext && (
+        <Text
+          alignmentHorizontal={alignmentHorizontal}
+          class="subtext"
+          size={subtextSize}
+          style={subtextWidth
+            ? `max-inline-size: ${Number(subtextWidth)}px; margin-inline: auto`
+            : undefined}
+          text={subtext}
+        />
+      )}
+    </div>
+  )}
+
+  <BrowserFrame
+    class="editor-demo-frame"
+    label={frameLabel}
+    tone={frameTone}
+    style={Number(frameWidth) ? `--editor-demo-frame-width: ${Number(frameWidth)}px` : undefined}
+  >
+    <div
+      class="editor-demo-stage"
+      style={`--editor-demo-preview-bg: ${firstColor}`}
+    >
+      {/* The editor's own chrome. A real <select> and real <button>s, so the
+          demo is operable by keyboard and by a screen reader before any of it
+          is wired up: what lands next is behaviour, not controls. */}
+      <div
+        class="editor-demo-sidebar"
+        data-editor-demo-panes
+      >
+       <div class="editor-demo-panes">
+        <div class="editor-demo-pane" data-pane="root">
+        <p class="editor-demo-panel-title">{panelTitle}</p>
+
+        {colorList.length > 0 && (
+          <div class="editor-demo-field">
+            <p
+              class="editor-demo-label"
+              id="editor-demo-color-label"
+            >
+              {colorLabel}
+            </p>
+            {/* Built rather than a native <select>: the app draws its own, and
+                a system dropdown cannot be styled to match it. A button and a
+                listbox, with the ARIA a real combobox needs, so it stays
+                operable by keyboard and by a screen reader. */}
+            <div class="editor-demo-select" data-editor-demo-select>
+              <button
+                aria-controls="editor-demo-color-list"
+                aria-expanded="false"
+                aria-haspopup="listbox"
+                aria-labelledby="editor-demo-color-label editor-demo-color-value"
+                class="editor-demo-select-trigger"
+                type="button"
+              >
+                <span
+                  class="editor-demo-select-value"
+                  id="editor-demo-color-value"
+                >
+                  {colorList[0]?.label}
+                </span>
+                <Icon
+                  name="chevron-down"
+                  size="none"
+                  aria-hidden="true"
+                />
+              </button>
+              <ul
+                aria-labelledby="editor-demo-color-label"
+                class="editor-demo-select-list"
+                hidden
+                id="editor-demo-color-list"
+                role="listbox"
+                tabindex="-1"
+              >
+                {colorList.map((option, index) => (
+                  <li
+                    aria-selected={index === 0 ? "true" : "false"}
+                    class="editor-demo-select-option"
+                    data-color={option.color ? paint(option.color) : undefined}
+                    data-value={option.label}
+                    id={`editor-demo-color-option-${index}`}
+                    role="option"
+                  >
+                    {option.label}
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </div>
+        )}
+
+        {(blockList.length > 0 || addLabel) && (
+          <div class="editor-demo-blocks-group">
+        {blockList.length > 0 && (
+          <div class="editor-demo-field">
+            <p
+              class="editor-demo-label"
+              id="editor-demo-blocks-label"
+            >
+              {blocksLabel}
+            </p>
+            <ul
+              class="editor-demo-blocks"
+              aria-labelledby="editor-demo-blocks-label"
+            >
+              {blockList.map((block, index) => (
+                <Row block={block} id={blockId(index)} />
+              ))}
+            </ul>
+          </div>
+        )}
+
+        {addLabel && (
+          /* The button and its list are one box, so the list can be placed
+             against the button rather than against the pane. */
+          <div class="editor-demo-add-menu" data-editor-demo-add>
+            <button
+              aria-controls="editor-demo-add-list"
+              aria-expanded="false"
+              aria-haspopup="menu"
+              class="editor-demo-add"
+              type="button"
+            >
+              <Icon
+                name="plus"
+                size="none"
+                aria-hidden="true"
+              />
+              {addLabel}
+            </button>
+
+            {/* A menu rather than a listbox: picking one does something,
+                it does not set a value. */}
+            <ul
+              aria-label={addLabel}
+              class="editor-demo-add-list"
+              hidden
+              id="editor-demo-add-list"
+              role="menu"
+            >
+              {addList.map((option) => (
+                <li role="none">
+                  <button class="editor-demo-add-option" role="menuitem" type="button">
+                    <span class="editor-demo-add-icon">
+                      <Icon name={option.iconName || "squares-2x2"} size="none" aria-hidden="true" />
+                    </span>
+                    <span class="editor-demo-add-text">
+                      <span class="editor-demo-add-name">{option.title}</span>
+                      {option.description && (
+                        <span class="editor-demo-add-line">{option.description}</span>
+                      )}
+                    </span>
+                  </button>
+                </li>
+              ))}
+            </ul>
+          </div>
+        )}
+          </div>
+        )}
+        </div>
+
+        {/* A panel per block, not one panel that changes its fields: the
+            Image block's is a different thing from the Text Block's, and
+            swapping contents in place meant the pane sliding in still showed
+            the last block's for a frame.
+
+            `inert` while off-screen, so nothing in a hidden pane is tabbable
+            or readable: a pane that has merely been translated away is still
+            in the tab order and still in the accessibility tree. */}
+        {blockList.map((block, index) => (
+          <Pane
+            backLabel={backLabel}
+            block={block}
+            id={blockId(index)}
+            values={blockValues[index]}
+          />
+        ))}
+       </div>
+
+      </div>
+
+      {/* Painted by the dropdown. It starts on the first option's colour, so
+          what the control says and what the page shows agree before anything
+          is touched. */}
+      <div class="editor-demo-preview">
+        {/* The pencil on the page opens this rather than the sidebar: the app
+            brings the fields to what you clicked instead of sending you back
+            across the window to find them. The fields are moved in and out, so
+            there is only ever one of each. */}
+        <div
+          aria-labelledby="editor-demo-popup-title"
+          class="editor-demo-popup"
+          hidden
+          role="dialog"
+        >
+          <div class="editor-demo-popup-head">
+            <span class="editor-demo-grip-dots" aria-hidden="true">
+              <i></i><i></i><i></i><i></i><i></i><i></i>
+            </span>
+            <p
+              class="editor-demo-panel-title editor-demo-popup-title"
+              id="editor-demo-popup-title"
+            ></p>
+            <button
+              aria-label="Close"
+              class="editor-demo-popup-close"
+              type="button"
+            >
+              <Icon name="x-mark" size="none" aria-hidden="true" />
+            </button>
+          </div>
+          {/* A copy per block, not the sidebar's moved across. Both are real
+              panels in the editor and either can be open while the other is,
+              so each needs its own. They are kept in step by `setup.ts`. */}
+          <div class="editor-demo-popup-body">
+            {blockList.map((block, index) => (
+              <Fields
+                block={block}
+                hidden
+                id={blockId(index)}
+                scope="popup"
+                values={blockValues[index]}
+              />
+            ))}
+          </div>
+        </div>
+        {/* One per block, in the block list's order. Nothing here is
+            hardcoded any more: a second Text Block needs somewhere of its own
+            to write to, and two blocks binding the same name would otherwise
+            share a paragraph. */}
+        {/* The page scrolls inside the window; the popup does not scroll with
+            it, which is why the two are siblings rather than nested. */}
+        <div class="editor-demo-page">
+          {blockList.map((block, index) => (
+            <Preview block={block} id={blockId(index)} values={blockValues[index]} />
+          ))}
+        </div>
+      </div>
+
+      {/* The six dots' menu. One of them, moved to whichever block asked for
+          it: every row carries the same actions, so a menu per row would be
+          the same markup over and over and a stale copy waiting to happen.
+
+          A child of the window rather than of the sidebar. The sidebar hides
+          its horizontal overflow, to clip the panes sliding through it, which
+          also clipped anything trying to fly out of it sideways. Out here the
+          submenu can open over the page, which is where the editor puts it. */}
+       <div
+         aria-label={menuLabels.duplicate}
+         class="editor-demo-menu"
+         hidden
+         role="menu"
+       >
+         <button
+           aria-expanded="false"
+           class="editor-demo-menu-item"
+           data-menu="add"
+           role="menuitem"
+           type="button"
+         >
+           <Icon name="plus" size="none" aria-hidden="true" />
+           <span class="editor-demo-menu-label">{addLabel}</span>
+           {/* Turns to point down when it is open, the way the colour
+               dropdown's does. */}
+           <span class="editor-demo-menu-more">
+             <Icon name="chevron-right" size="none" aria-hidden="true" />
+           </span>
+         </button>
+
+         {/* Opened beneath rather than out to the side. The app has room to
+             fly a submenu out next to the menu; a 340 sidebar does not, and a
+             panel hanging off its edge would be clipped by the slide's own
+             overflow. */}
+         <div class="editor-demo-menu-sub" hidden>
+           {addList.map((option, index) => (
+             <button
+               class="editor-demo-menu-item editor-demo-menu-child"
+               data-menu="add-one"
+               data-which={String(index)}
+               role="menuitem"
+               type="button"
+             >
+               <Icon name={option.iconName || "squares-2x2"} size="none" aria-hidden="true" />
+               <span class="editor-demo-menu-label">{`Add ${option.title}`}</span>
+             </button>
+           ))}
+         </div>
+
+         <button class="editor-demo-menu-item" data-menu="duplicate" role="menuitem" type="button">
+           <Icon name="document-duplicate" size="none" aria-hidden="true" />
+           <span class="editor-demo-menu-label">{menuLabels.duplicate}</span>
+         </button>
+
+         <hr class="editor-demo-menu-rule" />
+
+         <button class="editor-demo-menu-item" data-menu="up" role="menuitem" type="button">
+           <Icon name="arrow-up" size="none" aria-hidden="true" />
+           <span class="editor-demo-menu-label">{menuLabels.moveUp}</span>
+         </button>
+         <button class="editor-demo-menu-item" data-menu="down" role="menuitem" type="button">
+           <Icon name="arrow-down" size="none" aria-hidden="true" />
+           <span class="editor-demo-menu-label">{menuLabels.moveDown}</span>
+         </button>
+
+         <hr class="editor-demo-menu-rule" />
+
+         <button class="editor-demo-menu-item" data-menu="remove" role="menuitem" type="button">
+           <Icon name="trash" size="none" aria-hidden="true" />
+           <span class="editor-demo-menu-label">{menuLabels.remove}</span>
+         </button>
+      </div>
+
+      {/* What the add menu clones.
+      
+          A block is four pieces in four different places: a row in the list, a
+          panel in the sidebar, a copy of its fields for the popup, and its
+          content on the page. All four are rendered here from the same
+          components the starting blocks use, so there is no second version of
+          any of them to drift. `__ID__` is swapped for a fresh instance id on
+          the way in. */}
+      {addList.map((option, index) => (
+        <template data-add-template={String(index)}>
+          <Row block={option} id="__ID__" />
+          <Pane backLabel={backLabel} block={option} id="__ID__" values={option.values ?? {}} />
+          <Fields block={option} hidden id="__ID__" scope="popup" values={option.values ?? {}} />
+          <Preview block={option} id="__ID__" values={option.values ?? {}} />
+        </template>
+      ))}
+    </div>
+  </BrowserFrame>
+</CustomSection>
+
+<script>
+  import { onPageLoad } from "@component-utils/onPageLoad";
+  import {
+    setupAllEditorDemoAddMenus,
+    setupAllEditorDemoPanes,
+    setupAllEditorDemoSelects,
+  } from "./setup";
+
+  onPageLoad(() => {
+    setupAllEditorDemoSelects();
+    setupAllEditorDemoPanes();
+    setupAllEditorDemoAddMenus();
+  });
+</script>
+
+<style is:global>
+  @layer page-sections {
+
+  /* The stack the editor itself uses. */
+  .editor-demo {
+    /* 15.5, which is what the app sets. Stated as a variable and set on each
+       text element rather than inherited: base rules for p, li and the like
+       set their own 1rem, so inheritance alone left the rows at 16 and the
+       panel title in the site's warm Earth. */
+    --editor-demo-size: 0.96875rem;
+    /* The app's own rule: 2px of #CFCFCF, which is heavier and cooler than
+       the site's 1px border token. Every box inside the window uses it. */
+    --editor-demo-line-width: 2px;
+    --editor-demo-line-color: #cfcfcf;
+    /* An open dropdown swaps the light rule for the dark one, which is what
+       lifts it off the panel behind: sampled at #393939 on both the trigger
+       and the list, 2px each, with a 2px divider of the same between them. */
+    --editor-demo-line-strong: #393939;
+    /* The one already chosen, which the app fades rather than marks. */
+    --editor-demo-ink-faded: #9c9c9c;
+    /* The navy the app puts on its actions, sampled at #00284E. Pacific 800
+       is #011E56 and reads a touch more violet. */
+    --editor-demo-accent: #00284e;
+    /* What that navy fades to behind a hovered action. */
+    --editor-demo-accent-bed: #e5e9ed;
+    /* The editor's two outlines, sampled off a capture of it. The region you
+       are over is yellow, the element you can actually change is green.
+       Everything but the peak pixel of each line is lighter than this: the
+       capture was resized, so a 1px rule came through blended with the white
+       behind it. */
+    --editor-demo-edit-region: #f3df68;
+    --editor-demo-edit-element: #3d9f17;
+    --editor-demo-font:
+      -apple-system, blinkmacsystemfont, "Segoe UI", "Noto Sans", arial, helvetica, sans-serif,
+      "Apple Color Emoji", "Segoe UI Emoji";
+  }
+
+    /* The content column by default, so it lines up with every other section
+       on the page rather than carrying a number out of a screenshot.
+
+       An explicit inline-size, not a max-inline-size: a max on a grid item
+       lets it shrink to its own content. And `justify-self`, not an auto
+       inline margin, which on a grid item shrinks the item instead of
+       centring it. Both matter only if a section sets a width of its own. */
+    .editor-demo .editor-demo-frame {
+      inline-size: min(
+        var(--editor-demo-frame-width, 100%),
+        calc(100vw - 2 * var(--spacing-gutter))
+      );
+      justify-self: center;
+    }
+
+    /* Sidebar then preview, the way the design splits the window. The
+       sidebar is a third of it there (340 of 1024); a fixed column rather
+       than a fraction, because the controls inside it have a width they stop
+       working under. */
+    /* A set height, not a minimum: the window is a window, and one that
+       resizes as you edit the page inside it moves everything below it down
+       the document. Clearing the picture took 86px out of the band, and a
+       headline that wraps to a second line does the same the other way.
+       
+       520 is what the full state measures, so nothing about the window
+       changes; what changes is that the empty states no longer collapse it.
+       Auto again in one column, where the two halves are stacked and a fixed
+       height would cut the lower one off. */
+    .editor-demo .editor-demo-stage {
+      block-size: 32.5rem;
+      display: grid;
+      /* What the six dots' menu is placed against. */
+      position: relative;
+      /* 340, the design's own. At 320 "Headline & Description" wrapped and
+         the row grew a line taller than its neighbour. */
+      grid-template-columns: 21.25rem 1fr;
+    }
+
+    /* Neutral greys inside the window. The site's text tokens are warm, and
+       against a picture of an application the brown reads as a mistake:
+       --color-text is Earth and the editor draws near-black on grey. */
+    .editor-demo .editor-demo-stage {
+      /* #393939, sampled off the app rather than taken from the palette:
+         --midnight is #333333 and reads a shade heavier beside it. */
+      --editor-demo-ink: #393939;
+      --editor-demo-ink-muted: var(--gray-700);
+      color: var(--editor-demo-ink);
+      /* The editor's own stack, not the site's. It is a picture of an
+         application, and an application uses the system face: in the site's
+         display face the panel reads as marketing rather than as software. */
+      font-family: var(--editor-demo-font);
+      /* 15.5, which is what the app sets. Everything inside sizes off it in
+         em rather than off the site's rem scale, so the window keeps its own
+         proportions wherever it is dropped. */
+      font-size: var(--editor-demo-size);
+      line-height: 1.45;
+    }
+
+    /* `flow` on the wrapper, not just a class of my own: the flow layer is
+       what writes --space-before into a margin, and it only does it for the
+       children of a .flow element. Wrapped in a plain div the eyebrow,
+       heading and line sat flush against each other at 0.
+
+       18 between each, which is what the design sets: 4..20 for the eyebrow,
+       38..88 for the heading, 106..132 for the line.
+
+       Redefining flow's own tokens rather than setting --space-before on the
+       children, which is the only thing that works here. flow pairs an
+       eyebrow with the heading after it and writes `tight` (8), and that rule
+       is in `utils`: it out-ranks anything this layer says however the
+       selector is written. The scale has no 18 either, tight being 8 and
+       default 24, so the tokens the winning rule reads are the way in. */
+    .editor-demo .editor-demo-header {
+      --space-before-default: 18px;
+      --space-before-tight: 18px;
+    }
+
+    /* 48 from the line to the window, the design's own: its header ends at
+       198 and the window starts at 246. */
+    .editor-demo .editor-demo-frame {
+      --space-before: 48px;
+    }
+
+    /* Two panes on a track. The sidebar is the window they slide through, so
+       it clips: the one off-screen must not be reachable by scrolling it back
+       into view. */
+    /* The six dots' menu, placed against whichever grip opened it. A child of
+       the sidebar rather than of the row, so the sliding track cannot take it
+       with it, and so it scrolls with the panel it belongs to.
+
+       2px #CFCFCF on a 10 radius, the same rule every other box in the panel
+       carries, measured off the app. */
+    .editor-demo .editor-demo-menu {
+      background: var(--white);
+      border: var(--editor-demo-line-width) solid var(--editor-demo-line-color);
+      border-radius: 10px;
+      box-shadow: 0 2px 8px rgb(0 0 0 / 10%);
+      inline-size: max-content;
+      min-inline-size: 13.75rem;
+      padding: 4px;
+      position: absolute;
+      z-index: var(--layer-3, 3);
+    }
+
+    .editor-demo .editor-demo-menu[hidden] {
+      display: none;
+    }
+
+    /* 48 tall with the icon 16 in and the label 48 in, which is the same
+       measure the add menu uses: 16 of padding, a 20 icon, then 12. */
+    .editor-demo .editor-demo-menu-item {
+      align-items: center;
+      background: none;
+      block-size: 3rem;
+      border: 0;
+      color: var(--editor-demo-ink);
+      cursor: pointer;
+      display: flex;
+      font-family: inherit;
+      /* 15.5 at 500. Measured: a cap height of 22 and 3px stems at 2x, which
+         is the panel's own size at the weight the add menu's titles carry. */
+      font-size: var(--editor-demo-size);
+      font-weight: 500;
+      /* Rounded and inset, the same mark the add menu carries. The 12 here
+         plus the panel's own 4 keeps the icon 16 from its edge. */
+      border-radius: 6px;
+      gap: 12px;
+      inline-size: 100%;
+      padding-inline: 12px;
+      text-align: start;
+    }
+
+    .editor-demo .editor-demo-menu-item:hover:not(:disabled),
+    .editor-demo .editor-demo-menu-item:focus-visible:not(:disabled) {
+      background-color: #e6eaed;
+      outline: none;
+    }
+
+    /* #A0A0A0, measured. Still rendered, because what you cannot do here is
+       worth knowing: the first block has nothing above it to move past. */
+    .editor-demo .editor-demo-menu-item:disabled {
+      color: #a0a0a0;
+      cursor: default;
+    }
+
+    .editor-demo .editor-demo-menu-item .icon svg {
+      block-size: 1.25rem;
+      inline-size: 1.25rem;
+    }
+
+    .editor-demo .editor-demo-menu-label {
+      flex: 1;
+      min-inline-size: 0;
+    }
+
+    .editor-demo .editor-demo-menu-more {
+      display: flex;
+    }
+
+    .editor-demo .editor-demo-menu-more .icon svg {
+      transition: rotate var(--duration-sm, 0.15s) var(--ease-smooth, ease);
+    }
+
+    .editor-demo .editor-demo-menu-item[aria-expanded="true"] .editor-demo-menu-more .icon svg {
+      rotate: 90deg;
+    }
+
+    /* Flown out beside the menu, level with the item that opened it, which is
+       what the editor draws. Its own panel, so it needs the same chrome. */
+    .editor-demo .editor-demo-menu-sub {
+      background: var(--white);
+      border: var(--editor-demo-line-width) solid var(--editor-demo-line-color);
+      border-radius: 10px;
+      box-shadow: 0 2px 8px rgb(0 0 0 / 10%);
+      inline-size: max-content;
+      min-inline-size: 13.75rem;
+      /* 4 down is the menu's own top padding, which is where the first item
+         starts, and the first item is the one this belongs to. */
+      inset-block-start: 4px;
+      inset-inline-start: calc(100% + 4px);
+      padding: 4px;
+      position: absolute;
+    }
+
+    /* Opened to the left instead, when the window has no room on the right. */
+    .editor-demo .editor-demo-menu-sub[data-side="start"] {
+      inset-inline-end: calc(100% + 4px);
+      inset-inline-start: auto;
+    }
+
+    .editor-demo .editor-demo-menu-sub[hidden] {
+      display: none;
+    }
+
+    /* The item stays marked while its submenu is open, so it is clear which
+       one the flyout belongs to. */
+    .editor-demo .editor-demo-menu-item[aria-expanded="true"] {
+      background-color: #e6eaed;
+    }
+
+    /* 2px of the same rule, inset 16 either side. */
+    .editor-demo .editor-demo-menu-rule {
+      background-color: var(--editor-demo-line-color);
+      block-size: var(--editor-demo-line-width);
+      border: 0;
+      margin: 4px 12px;
+    }
+
+    /* The slide is clipped across, but the panel scrolls down: a list you can
+       add to outgrows the sidebar, and `overflow: hidden` on both axes cut the
+       rows off rather than letting them be reached. */
+    .editor-demo .editor-demo-sidebar {
+      border-inline-end: var(--editor-demo-line-width) solid var(--editor-demo-line-color);
+      overflow-x: hidden;
+      overflow-y: auto;
+    }
+
+    /* Two slots, not one per pane. The root sits in the first and every
+       block's panel is stacked in the second, so the track only ever travels
+       one panel's width: laid out end to end, opening the second block slid
+       across the first block's panel on the way, which read as two moves
+       rather than one. Only the open panel is rendered in that slot, so the
+       slot takes its height. */
+    .editor-demo .editor-demo-panes {
+      display: grid;
+      grid-template-columns: 100% 100%;
+      transition: translate var(--duration-md, 0.3s) var(--ease-smooth, ease);
+      translate: calc(-100% * var(--editor-demo-open, 0));
+    }
+
+    /* The panes are different heights, and the track takes the taller of the
+       two. `align-items: start` keeps each one at its own height rather than
+       stretching the short one down the sidebar. */
+    .editor-demo .editor-demo-pane {
+      align-content: start;
+      display: flex;
+      flex-direction: column;
+      gap: var(--spacing-lg);
+      grid-column: 2;
+      grid-row: 1;
+      /* 16, the app's own. */
+      padding: var(--spacing-md);
+    }
+
+    .editor-demo .editor-demo-pane[data-pane="root"] {
+      grid-column: 1;
+    }
+
+    /* The `hidden` attribute is only a default of `display: none`, and the
+       rule above sets `display: flex`, which beats it. Without this the two
+       block panels drew on top of each other in the same slot: "Text Block"
+       and "Image" overprinted, and so did their fields. */
+    .editor-demo .editor-demo-pane[hidden] {
+      display: none;
+    }
+
+    .editor-demo .editor-demo-back {
+      align-items: center;
+      align-self: start;
+      background: none;
+      border: 0;
+      color: var(--editor-demo-accent);
+      cursor: pointer;
+      display: inline-flex;
+      font-family: inherit;
+      font-size: var(--editor-demo-size);
+      font-weight: 600;
+      gap: var(--spacing-sm);
+      padding: 0;
+    }
+
+    .editor-demo .editor-demo-back .icon svg {
+      block-size: 1.125rem;
+      inline-size: 1.125rem;
+      stroke-width: 2.5;
+    }
+
+    /* The image field: the path, the two keys and the picture, drawn as one
+       box.
+       
+       The border is on the cells, not on the box around them. Drawn on the
+       box, marking the focused path meant a second line a couple of pixels
+       inside the first, which is the double border the other inputs do not
+       have: they darken the rule they already carry. So each cell carries its
+       own and shares its neighbour's, and focus is that rule going dark. It
+       is what the app draws too, where the dark ring is the path's own edges
+       and the keys beside it stay light. */
+    .editor-demo .editor-demo-file {
+      background: var(--white);
+    }
+
+    /* The path takes what is left, the two keys take their own width. */
+    .editor-demo .editor-demo-file-row {
+      display: grid;
+      grid-template-columns: 1fr auto auto;
+    }
+
+    /* Its own rule on all four sides, and the key beside it drops its left
+       one, so the path's right edge is the divider between them. That is what
+       lets focus mark the path alone. */
+    .editor-demo .editor-demo-file-path {
+      background: none;
+      /* 48 including the rule: box-sizing is border-box, so the border comes
+         out of the height rather than adding to it. */
+      block-size: 3rem;
+      border: var(--editor-demo-line-width) solid var(--editor-demo-line-color);
+      /* All four stated, not just the corner that is rounded. An input
+         carries a 4px radius from the base layer, so setting the top left
+         alone left the other three curving away from the divider and from the
+         floor of the row, which reads as the cell not reaching either. */
+      border-radius: var(--radius-sm) 0 0 0;
+      color: var(--editor-demo-ink);
+      font-family: inherit;
+      font-size: var(--editor-demo-size);
+      /* So it can shrink under a long path rather than pushing the keys out
+         of the box: a grid item will not go below its content without it. */
+      min-inline-size: 0;
+      padding: var(--spacing-sm) 12px;
+    }
+
+    /* The rule it already has, gone dark. No outline: the swap from #CFCFCF
+       to #393939 is a big enough change to be the focus indicator on its own,
+       and it is the one the rest of the panel uses. */
+    .editor-demo .editor-demo-file-path:hover,
+    .editor-demo .editor-demo-file-path:focus-visible {
+      border-color: var(--editor-demo-line-strong);
+      outline: none;
+    }
+
+    /* Square, the row's own height, divided off by the same rule the box is
+       drawn in. */
+    .editor-demo .editor-demo-file-action {
+      align-items: center;
+      background: none;
+      block-size: 3rem;
+      border: var(--editor-demo-line-width) solid var(--editor-demo-line-color);
+      /* Shares the cell before it, so two 2px rules never meet and read as
+         4, and the path's own right edge is the divider. */
+      border-inline-start: 0;
+      color: var(--editor-demo-ink);
+      cursor: pointer;
+      display: flex;
+      /* 44 on 48, which is the app's: it reads as a square and is not one. */
+      inline-size: 2.75rem;
+      justify-content: center;
+      padding: 0;
+    }
+
+    .editor-demo .editor-demo-file-action:last-of-type {
+      border-start-end-radius: var(--radius-sm);
+    }
+
+    /* The clear key is taken away when there is nothing to clear, and the
+       rule above sets `display: flex`, which beats the `hidden` attribute. */
+    .editor-demo .editor-demo-file-action[hidden] {
+      display: none;
+    }
+
+    /* The grip's own grey, so every small key in the panel lights the same
+       way. */
+    .editor-demo .editor-demo-file-action:hover,
+    .editor-demo .editor-demo-file-action:focus-visible {
+      background-color: #e8e8e8;
+      outline: none;
+    }
+
+    /* The two keys are not drawn at one size. Measured against the app, the
+       backspace is about 20 and the plus about 14, which is why matching them
+       made the plus read as the loudest thing in the panel.
+
+       The weight has to come back as the size drops: stroke-width is in the
+       glyph's own units, so the same 2 on a 14px plus renders at 1.2 and
+       looks like a hairline beside the backspace's 1.7. */
+    .editor-demo .editor-demo-file-action .icon svg {
+      block-size: 1.25rem;
+      inline-size: 1.25rem;
+      stroke-width: 2;
+    }
+
+    .editor-demo .editor-demo-file-action[data-uploads] .icon svg {
+      block-size: 1.125rem;
+      inline-size: 1.125rem;
+      stroke-width: 2.5;
+    }
+
+    /* What is in the field now, under the row it belongs to. No top rule of
+       its own: the row above already draws one along its foot.
+
+       A set height, and whatever is in it is fitted to that: sized to its
+       contents the box grew and shrank as pictures came and went, and every
+       swap moved the panel under the pointer. 176 is the empty state's 160
+       and its padding. */
+    .editor-demo .editor-demo-file-preview {
+      align-items: center;
+      block-size: 11rem;
+      border: var(--editor-demo-line-width) solid var(--editor-demo-line-color);
+      border-block-start: 0;
+      border-end-end-radius: var(--radius-sm);
+      border-end-start-radius: var(--radius-sm);
+      display: flex;
+      justify-content: center;
+      padding: var(--spacing-sm);
+    }
+
+    .editor-demo .editor-demo-file-shown {
+      display: block;
+      /* So a tall picture cannot push the box open from the inside. */
+      max-block-size: 100%;
+      max-inline-size: 100%;
+      min-block-size: 0;
+    }
+
+    /* Both of these are toggled, and both need stating: the `hidden`
+       attribute is only a default of `display: none` and loses to any display
+       of its own, which is how the two sidebar panes came to overprint each
+       other. */
+    .editor-demo .editor-demo-file-shown[hidden],
+    .editor-demo .editor-demo-file-drop[hidden] {
+      display: none;
+    }
+
+    /* What an empty field says, and the target it says it is. The height is
+       the app's: the box keeps its floor whether or not anything is in it, so
+       the panel does not jump as pictures come and go. */
+    .editor-demo .editor-demo-file-drop {
+      align-items: center;
+      /* Fills the box, so the whole empty area is the target it says it is
+         rather than just the line of text in the middle of it. */
+      align-self: stretch;
+      background: none;
+      border: 0;
+      color: var(--editor-demo-ink-muted);
+      cursor: pointer;
+      display: flex;
+      flex: 1;
+      font-family: inherit;
+      font-size: var(--editor-demo-size);
+      justify-content: center;
+      padding: var(--spacing-md);
+      text-align: center;
+    }
+
+    .editor-demo .editor-demo-file-drop:hover,
+    .editor-demo .editor-demo-file-drop:focus-visible {
+      color: var(--editor-demo-ink);
+      outline: none;
+    }
+
+    /* While a file is over the field. Its own colour rather than a dashed
+       edge: the box is already a box, and a rule that changes shape on hover
+       reads as the field resizing. */
+    .editor-demo .editor-demo-file[data-dropping] .editor-demo-file-preview {
+      background-color: var(--editor-demo-accent-bed);
+    }
+
+    /* Fitted to the box at its own aspect, never stretched to it: run to the
+       box's width a small file is drawn bigger than it is, and the app's own
+       field does not do that.
+
+       A length for the height cap, not a percentage: a percentage resolves
+       against the parent, which here is a <picture> of automatic height, so
+       it is ignored. 160 is the box's 176 less its padding. */
+    .editor-demo .editor-demo-file-preview img {
+      block-size: auto;
+      display: block;
+      inline-size: auto;
+      margin-inline: auto;
+      max-block-size: 10rem;
+      max-inline-size: 100%;
+    }
+
+    /* The same box as the select's trigger: 48 tall on the app's 2px rule. */
+    .editor-demo .editor-demo-input {
+      background: var(--white);
+      block-size: 3rem;
+      border: var(--editor-demo-line-width) solid var(--editor-demo-line-color);
+      border-radius: var(--radius-sm);
+      color: var(--editor-demo-ink);
+      font-family: inherit;
+      font-size: var(--editor-demo-size);
+      inline-size: 100%;
+      /* The app's own 8/12, which is tighter than the 16 the select trigger
+         uses. The 48 height still decides the box; the vertical 8 is there so
+         the two agree if the height is ever dropped. */
+      padding: var(--spacing-sm) 12px;
+    }
+
+    .editor-demo .editor-demo-input:hover,
+    .editor-demo .editor-demo-input:focus-visible {
+      border-color: var(--editor-demo-line-strong);
+      outline: none;
+    }
+
+    .editor-demo .editor-demo-panel-title {
+      color: var(--editor-demo-ink);
+      font-size: calc(1.8 * var(--editor-demo-size));
+      font-weight: 700;
+      line-height: 1.1;
+      margin: 0;
+    }
+
+    /* The list and the button under it belong together: 8 between them, not
+       the 24 the pane puts between everything else. */
+    .editor-demo .editor-demo-blocks-group {
+      display: flex;
+      flex-direction: column;
+      gap: var(--spacing-sm);
+    }
+
+    .editor-demo .editor-demo-field {
+      display: flex;
+      flex-direction: column;
+      gap: var(--spacing-sm);
+    }
+
+    /* The guidance under a label. Muted and the same size, which is how the
+       app sets it: smaller reads as fine print, and the editor's own is not. */
+    .editor-demo .editor-demo-hint {
+      color: var(--editor-demo-ink-muted);
+      font-size: var(--editor-demo-size);
+      margin: 0;
+    }
+
+    .editor-demo .editor-demo-label {
+      color: var(--editor-demo-ink);
+      font-size: var(--editor-demo-size);
+      font-weight: 600;
+      margin: 0;
+    }
+
+    /* The dropdown is drawn, not native. The trigger and the list are one
+       box: when it is open the trigger loses its bottom corners and the list
+       carries on from its rule, which is how the app draws it. */
+    .editor-demo .editor-demo-select {
+      position: relative;
+    }
+
+    .editor-demo .editor-demo-select-trigger {
+      align-items: center;
+      background: var(--white);
+      block-size: 3rem;
+      border: var(--editor-demo-line-width) solid var(--editor-demo-line-color);
+      border-radius: var(--radius-sm);
+      color: var(--editor-demo-ink);
+      cursor: pointer;
+      display: flex;
+      font-family: inherit;
+      font-size: var(--editor-demo-size);
+      font-weight: 600;
+      inline-size: 100%;
+      justify-content: space-between;
+      padding-inline: var(--spacing-md);
+      text-align: start;
+    }
+
+    /* Hovered, focused or open: all three darken the whole rule, the same
+       marking the block rows take. The focus case doubles as the control's
+       focus indicator, and the swap from #CFCFCF to #393939 is a big enough
+       change to be one on its own, so nothing else is drawn over it. */
+    .editor-demo .editor-demo-select-trigger:hover,
+    .editor-demo .editor-demo-select-trigger:focus-visible,
+    .editor-demo .editor-demo-select-trigger[aria-expanded="true"] {
+      border-color: var(--editor-demo-line-strong);
+      outline: none;
+    }
+
+    /* Only the open one loses its bottom corners: focused and closed it is
+       still a box of its own. */
+    .editor-demo .editor-demo-select-trigger[aria-expanded="true"] {
+      border-end-end-radius: 0;
+      border-end-start-radius: 0;
+    }
+
+    /* Heavier than the icon set draws it. The stroke-width is an attribute on
+       the svg, so a CSS value overrides it: heroicons ship at 1.5 and the app
+       draws a chunkier chevron than that. */
+    .editor-demo .editor-demo-select-trigger .icon svg {
+      block-size: 1.125rem;
+      inline-size: 1.125rem;
+      stroke-width: 2.5;
+      transition: rotate var(--duration-sm, 0.15s) var(--ease-smooth, ease);
+    }
+
+    /* The chevron turns rather than being swapped for an up arrow: one glyph,
+       and the turn says which way it is going. */
+    .editor-demo .editor-demo-select-trigger[aria-expanded="true"] .icon svg {
+      rotate: 180deg;
+    }
+
+    .editor-demo .editor-demo-select-list {
+      background: var(--white);
+      border: var(--editor-demo-line-width) solid var(--editor-demo-line-strong);
+      border-end-end-radius: var(--radius-sm);
+      border-end-start-radius: var(--radius-sm);
+      /* The trigger's own rule is the list's top rule: the app draws one 2px
+         divider there, and without this the two 2px lines meet and read as
+         4. */
+      border-block-start: 0;
+      inset-block-start: 100%;
+      inset-inline: 0;
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      position: absolute;
+      /* Over the blocks below it rather than pushing them down. */
+      z-index: var(--layer-2, 2);
+    }
+
+    /* 40 tall on 8 of padding, the app's own. A set height rather than one
+       derived from the padding, so the marked row's 2px rule cannot make it a
+       different height from its neighbours: box-sizing is border-box, so the
+       rule comes out of the 40 rather than adding to it. */
+    .editor-demo .editor-demo-select-option {
+      align-items: center;
+      block-size: 2.5rem;
+      color: var(--editor-demo-ink);
+      cursor: pointer;
+      display: flex;
+      /* Bold, all of them. The app sets the weight on the list rather than
+         using it to mark one. */
+      font-weight: 600;
+      padding-block: var(--spacing-sm);
+      padding-inline: var(--spacing-md);
+    }
+
+    /* The one already chosen is faded, not highlighted: it is the value the
+       trigger is already showing, so the list says "not this one again". */
+    .editor-demo .editor-demo-select-option[aria-selected="true"] {
+      color: var(--editor-demo-ink-faded);
+    }
+
+    /* The blue bed is hover, not selection. It follows the pointer and the
+       keyboard, and it can land on the faded one too.
+
+       Ruled top and bottom, not just under: the app boxes the row it is on.
+       The borders come out of the 40 rather than adding to it, so a marked
+       row stays the same height as its neighbours. */
+    .editor-demo .editor-demo-select-option[data-active] {
+      background-color: var(--pacific-50);
+      border-block: var(--editor-demo-line-width) solid var(--editor-demo-line-strong);
+    }
+
+    /* No border of its own. Each row carries one and they overlap, so the
+       list still reads as a single box but a row can take the whole rule
+       when it is hovered. With the border on the list, a row could only ever
+       draw inside it and you saw both lines at once. */
+    .editor-demo .editor-demo-blocks {
+      display: flex;
+      flex-direction: column;
+      list-style: none;
+      margin: 0;
+      padding: 0;
+    }
+
+    /* No padding of its own: it belongs to the button inside, so the whole
+       row is clickable. With it here the row was 60 tall and the button 40,
+       leaving a dead 10px strip along the top and bottom that looked
+       clickable and was not. */
+    .editor-demo .editor-demo-block {
+      background-color: var(--white);
+      border: var(--editor-demo-line-width) solid var(--editor-demo-line-color);
+      position: relative;
+    }
+
+    /* The row's own button: everything but the grip. */
+    .editor-demo .editor-demo-block-open {
+      /* start, not centre: the glyph lines up with the title, and a row whose
+         sub-label runs to two lines keeps it there rather than drifting down
+         the row with the text. */
+      align-items: start;
+      background: none;
+      border: 0;
+      color: inherit;
+      cursor: pointer;
+      display: grid;
+      font: inherit;
+      /* 8 between the glyph and the text, the app's own. */
+      gap: var(--spacing-sm);
+      grid-template-columns: auto 1fr;
+      inline-size: 100%;
+      padding: var(--spacing-sm);
+      /* Room for the grip, which is out of flow: 8 of gap, the grip's 28,
+         then the 7 it sits from the edge. */
+      padding-inline-end: calc(var(--spacing-sm) + 1.75rem + 7px);
+      text-align: start;
+    }
+
+    .editor-demo .editor-demo-block-open:focus-visible {
+      outline: none;
+    }
+
+    /* Rows overlap by their own rule, so two adjacent 2px borders read as one
+       divider rather than a 4px band. */
+    .editor-demo .editor-demo-block + .editor-demo-block {
+      margin-block-start: calc(-1 * var(--editor-demo-line-width));
+    }
+
+    .editor-demo .editor-demo-block:first-child {
+      border-start-end-radius: var(--radius-sm);
+      border-start-start-radius: var(--radius-sm);
+    }
+
+    .editor-demo .editor-demo-block:last-child {
+      border-end-end-radius: var(--radius-sm);
+      border-end-start-radius: var(--radius-sm);
+    }
+
+    /* The row under the pointer takes the dark rule, in place of its own
+       rather than inside it. It is lifted so its border wins over the
+       neighbours it overlaps.
+
+       `:has(:focus-visible)`, not `:focus-within`. Back hands focus to the row
+       that opened the panel, and with :focus-within that row came back from
+       the slide still wearing the dark rule as though it were hovered.
+       :focus-visible only marks it when focus arrived by keyboard, which is
+       the case where the mark is doing a job. */
+    .editor-demo .editor-demo-block:hover,
+    .editor-demo .editor-demo-block:has(:focus-visible) {
+      border-color: var(--editor-demo-line-strong);
+      z-index: 1;
+    }
+
+    /* Bare, not on a tile. The editor draws the glyph straight on the row. */
+    .editor-demo .editor-demo-block-icon {
+      align-items: center;
+      color: var(--editor-demo-ink);
+      display: flex;
+      justify-content: center;
+    }
+
+    .editor-demo .editor-demo-block-icon .icon svg {
+      block-size: 1.5rem;
+      inline-size: 1.5rem;
+    }
+
+    .editor-demo .editor-demo-block-text {
+      display: flex;
+      flex-direction: column;
+      /* So the ellipsis above has something to measure against: a grid item
+         will not shrink below its content without it. */
+      min-inline-size: 0;
+      /* No leading of its own: two lines that belong together. */
+      line-height: 1.3;
+    }
+
+    .editor-demo .editor-demo-block-title {
+      color: var(--editor-demo-ink);
+      font-size: var(--editor-demo-size);
+      font-weight: 600;
+    }
+
+    /* Wraps. The editor lets a long sub-label run to a second line and the
+       row grows with it, which is why the rows in a real panel are uneven. An
+       ellipsis here was mine, not theirs. */
+    .editor-demo .editor-demo-block-subtitle {
+      color: var(--editor-demo-ink-muted);
+      font-size: var(--editor-demo-size);
+    }
+
+    /* A square bed the dots sit in the middle of, so the hover has a shape
+       to fill rather than lighting up a ragged 10x16 box. */
+    /* 7 from the top and 7 from the right, which is not the row's own 8: the
+       grip sits a pixel outside the padding on both. Negative margins rather
+       than absolute positioning, so it keeps its column and the title beside
+       it still has somewhere to stop. */
+    .editor-demo .editor-demo-grip {
+      align-items: center;
+      background: none;
+      block-size: 1.75rem;
+      inset-block-start: 7px;
+      inset-inline-end: 7px;
+      position: absolute;
+      border: 0;
+      border-radius: 6px;
+      /* The app's own neutral, sampled at rgb(176,176,176). The site's grey
+         tokens are warm and read brown beside it. */
+      color: #b0b0b0;
+      cursor: pointer;
+      display: flex;
+      inline-size: 1.75rem;
+      justify-content: center;
+      padding: 0;
+    }
+
+    .editor-demo .editor-demo-grip:hover,
+    .editor-demo .editor-demo-grip:focus-visible {
+      background-color: #e8e8e8;
+      color: var(--editor-demo-ink);
+    }
+
+    /* Six dots in two columns. Drawn one by one rather than as a repeating
+       gradient: a gradient tiles from the box's edges, so a 12x18 box came
+       out three columns wide with half a dot on each side.
+
+       4px dots on a 2px gap, measured off the app: its capture has them 8
+       wide with 4 between, at 2x. Mine were 3 and 3, which read thin. */
+    .editor-demo .editor-demo-grip-dots {
+      display: grid;
+      gap: 2px;
+      grid-template-columns: repeat(2, 4px);
+    }
+
+    .editor-demo .editor-demo-grip-dots > i {
+      background-color: currentColor;
+      block-size: 4px;
+      border-radius: 50%;
+      display: block;
+      inline-size: 4px;
+    }
+
+    /* Shrinks to its label and sits at the start, where the editor puts it.
+       Full width it read as a third row of the list rather than an action
+       under it. The navy is Pacific 800, which is what the editor draws it
+       in: the brand blue is far brighter than this. */
+    .editor-demo .editor-demo-add {
+      align-items: center;
+      align-self: start;
+      background: none;
+      border: var(--editor-demo-line-width) solid var(--editor-demo-line-color);
+      border-radius: var(--radius-sm);
+      color: var(--editor-demo-accent);
+      cursor: pointer;
+      display: inline-flex;
+      font-size: var(--editor-demo-size);
+      font-weight: 600;
+      gap: var(--spacing-sm);
+      /* A set height rather than vertical padding, which is how the app sizes
+         it: 48 tall with 16 either side, and the label centred in it. */
+      block-size: 3rem;
+      padding-block: 0;
+      padding-inline: var(--spacing-md);
+    }
+
+    /* The button and the list it opens, placed against each other. */
+    .editor-demo .editor-demo-add-menu {
+      align-self: start;
+      position: relative;
+    }
+
+    /* Measured off the app: a 2px #CFCFCF rule, which is the same one every
+       other box in the panel carries, and the full width of the pane rather
+       than the button's own.
+
+       It is placed against the button, and which way it opens is decided when
+       it opens: the button sits near the foot of the sidebar, which clips, so
+       a list that only ever dropped would be cut off every time. `setup.ts`
+       measures the room and sets `data-drop`. */
+    .editor-demo .editor-demo-add-list {
+      background: var(--white);
+      border: var(--editor-demo-line-width) solid var(--editor-demo-line-color);
+      border-radius: var(--radius-sm);
+      box-shadow: 0 2px 8px rgb(0 0 0 / 10%);
+      inline-size: max-content;
+      inset-inline-start: 0;
+      list-style: none;
+      margin: 0;
+      /* Not past the pane it sits in, whatever the longest line is. */
+      max-inline-size: calc(var(--editor-demo-sidebar-width, 21.25rem) - 2 * var(--spacing-md));
+      /* 4 all round, which is what insets the hovered row from the panel's
+         own edge rather than running it corner to corner. */
+      padding: 4px;
+      position: absolute;
+      z-index: var(--layer-2, 2);
+    }
+
+    .editor-demo .editor-demo-add-list[hidden] {
+      display: none;
+    }
+
+    /* 4 clear of the button, whichever way it goes. */
+    .editor-demo .editor-demo-add-list[data-drop="down"] {
+      inset-block-start: calc(100% + 4px);
+    }
+
+    .editor-demo .editor-demo-add-list[data-drop="up"] {
+      inset-block-end: calc(100% + 4px);
+    }
+
+    /* 16 of padding before the icon, a 20 icon, then 12 to the text, which is
+       what puts the name 48 in. Measured 47. */
+    .editor-demo .editor-demo-add-option {
+      align-items: start;
+      background: none;
+      border: 0;
+      border-radius: 6px;
+      color: inherit;
+      cursor: pointer;
+      display: flex;
+      font: inherit;
+      gap: 12px;
+      inline-size: 100%;
+      /* 12 here plus the list's 4 puts the icon 16 from the panel's edge,
+         which is what the app draws. */
+      padding: 12px;
+      text-align: start;
+    }
+
+    /* A cool grey, #E6EAED, not the blue the colour dropdown marks with. The
+       two are different controls in the app and they are marked differently:
+       a listbox option takes the blue bed, a menu item takes this. */
+    .editor-demo .editor-demo-add-option:hover,
+    .editor-demo .editor-demo-add-option:focus-visible,
+    .editor-demo .editor-demo-add-option[data-active] {
+      background-color: #e6eaed;
+      outline: none;
+    }
+
+    .editor-demo .editor-demo-add-icon {
+      color: var(--editor-demo-ink);
+      display: flex;
+      flex-shrink: 0;
+      /* Level with the name beside it rather than with the whole block, so a
+         description that runs to two lines does not drag it down the row. */
+      padding-block-start: 2px;
+    }
+
+    .editor-demo .editor-demo-add-icon .icon svg {
+      block-size: 1.25rem;
+      inline-size: 1.25rem;
+    }
+
+    .editor-demo .editor-demo-add-text {
+      display: flex;
+      flex-direction: column;
+      line-height: 1.3;
+      min-inline-size: 0;
+    }
+
+    /* 16 at 500, not the panel's 15.5 at 600.
+    
+       Measured off the app rather than assumed: across four items its titles
+       carry a cap height of 23 against the descriptions' 21, and stems of 3px
+       against 2px, at 2x. The size difference alone cannot account for the
+       stems, so there is weight on it, but a tenth more size and half a pixel
+       more stem is a medium rather than the semibold the rest of the panel
+       sets on a label. */
+    .editor-demo .editor-demo-add-name {
+      color: var(--editor-demo-ink);
+      font-size: 1rem;
+      font-weight: 500;
+    }
+
+    /* And 14.5, a size under the title. The panel's own 15.5 read level with
+       it, which is what made the pair look like one weight of the same thing. */
+    .editor-demo .editor-demo-add-line {
+      color: var(--editor-demo-ink-muted);
+      font-size: 0.90625rem;
+      /* 4 under the name, which is what the two lines measure apart. */
+      margin-block-start: 4px;
+    }
+
+    /* Hovered, the rule takes the label's own colour and the bed is that
+       colour faded. `currentColor` rather than the token again, so the two
+       can never drift apart. */
+    .editor-demo .editor-demo-add:hover,
+    .editor-demo .editor-demo-add:focus-visible {
+      background-color: var(--editor-demo-accent-bed);
+      border-color: currentColor;
+      outline: none;
+    }
+
+    /* Heavier than heroicons draw it, the same call as the chevron: the
+       stroke-width is an attribute on the svg, so a CSS value overrides it. */
+    .editor-demo .editor-demo-add .icon svg {
+      block-size: 1.125rem;
+      inline-size: 1.125rem;
+      stroke-width: 2.5;
+    }
+
+    /* The fields, wherever they are shown. The same stack the pane uses, so
+       moving them into the popup changes nothing about how they sit. */
+    .editor-demo .editor-demo-fields {
+      display: flex;
+      flex-direction: column;
+      gap: var(--spacing-lg);
+    }
+
+    .editor-demo .editor-demo-fields[hidden] {
+      display: none;
+    }
+
+    /* The popup on the page.
+    
+       Its rule is #00284E at 2px and its padding is 16, both read off a
+       capture of the app. That navy is already the token the panel's actions
+       use, so it takes the token.
+       
+       It sets the app's face and size again: the preview around it is a page,
+       so it is in the site's display font, and the popup is chrome. */
+    .editor-demo .editor-demo-popup {
+      background-color: var(--white);
+      border: var(--editor-demo-line-width) solid var(--editor-demo-accent);
+      border-radius: 10px;
+      color: var(--editor-demo-ink);
+      display: flex;
+      flex-direction: column;
+      font-family: var(--editor-demo-font);
+      font-size: var(--editor-demo-size);
+      gap: var(--spacing-lg);
+      inline-size: 21.25rem;
+      /* Placed against the panel rather than beside the picture: the two
+         together are wider than the page the demo draws, so a popup truly
+         alongside it would hang off the window. */
+      inset-block-start: var(--spacing-md);
+      inset-inline-start: 50%;
+      line-height: 1.45;
+      max-block-size: calc(100% - 2 * var(--spacing-md));
+      overflow: auto;
+      padding: var(--spacing-md);
+      position: absolute;
+      translate: -50% 0;
+      z-index: var(--layer-3, 3);
+    }
+
+    .editor-demo .editor-demo-popup[hidden] {
+      display: none;
+    }
+
+    .editor-demo .editor-demo-popup-head {
+      align-items: center;
+      display: flex;
+      gap: var(--spacing-md);
+    }
+
+    /* Takes the room between the grip and the close, so both stay in their
+       corners however long the name is. */
+    .editor-demo .editor-demo-popup-title {
+      flex: 1;
+      min-inline-size: 0;
+    }
+
+    .editor-demo .editor-demo-popup-head .editor-demo-grip-dots {
+      color: #b0b0b0;
+      flex-shrink: 0;
+    }
+
+    .editor-demo .editor-demo-popup-close {
+      align-items: center;
+      background: none;
+      block-size: 2rem;
+      border: 0;
+      border-radius: 6px;
+      color: var(--editor-demo-ink);
+      cursor: pointer;
+      display: flex;
+      flex-shrink: 0;
+      inline-size: 2rem;
+      justify-content: center;
+      padding: 0;
+    }
+
+    .editor-demo .editor-demo-popup-close:hover,
+    .editor-demo .editor-demo-popup-close:focus-visible {
+      background-color: #e8e8e8;
+      outline: none;
+    }
+
+    .editor-demo .editor-demo-popup-close .icon svg {
+      block-size: 1.25rem;
+      inline-size: 1.25rem;
+      stroke-width: 2;
+    }
+
+    /* No transition on the colour. The editor repaints the moment the value
+       changes, and a fade reads as the page catching up rather than as the
+       change being instant. */
+    .editor-demo .editor-demo-preview {
+      background-color: var(--editor-demo-preview-bg, transparent);
+      /* The page inside the window is a page, so it goes back to the site's
+         own face. Only the app chrome around it uses the system stack. */
+      font-family: var(--font-headings);
+      /* Cut at the window's edge, the way a viewport cuts a page that is
+         taller than it. The alternative is the window growing to fit, which
+         is the thing being fixed. */
+      overflow: hidden;
+      /* What the popup is placed against. */
+      position: relative;
+    }
+
+    /* The page itself, which scrolls once there is more of it than the window
+       can show. It used to squash instead: the picture was a flex item that
+       could shrink, which was right when the window held one block and wrong
+       the moment a second one was added, because the drawings went to 40px
+       while the copy kept its size. A page that is too tall scrolls. */
+    .editor-demo .editor-demo-page {
+      block-size: 100%;
+      display: flex;
+      flex-direction: column;
+      /* Between blocks, not inside them. A block added under a picture used
+         to land flush against it, because the only spacing on the page was
+         each element's own top margin and a heading carries none. */
+      gap: var(--spacing-2xl);
+      overflow-y: auto;
+      padding: var(--spacing-3xl) var(--spacing-2xl);
+    }
+
+    /* Only the ones you type into. The picture is an editable too and a text
+       caret over it is a lie. */
+    .editor-demo .editor-demo-editable[contenteditable] {
+      cursor: text;
+    }
+
+    /* Everything you could change, marked as soon as the pointer is anywhere
+       on the page. The area itself is never outlined: the yellow says "these
+       are the parts", which is why it lands on the elements and not on the box
+       around them.
+
+       An outline, not a border: it takes no space, so nothing moves as the
+       marks come and go. Offset out a little, the way the editor draws it,
+       since tight to the glyphs it reads as an underline on the descenders. */
+    .editor-demo .editor-demo-preview:hover .editor-demo-editable {
+      outline: 2px solid var(--editor-demo-edit-region);
+      outline-offset: 3px;
+    }
+
+    /* And the one you are on, or the one you are in the middle of editing.
+       Every selector here has to be at least as specific as the rule above or
+       the yellow wins: the region rule carries a class more than a bare
+       `.editor-demo-editable:hover` does. The two focus cases tie with it and
+       come later, which is what settles them. */
+    .editor-demo .editor-demo-preview:hover .editor-demo-editable:hover,
+    .editor-demo .editor-demo-preview .editor-demo-editable:focus,
+    .editor-demo .editor-demo-preview .editor-demo-editable:focus-visible {
+      outline: 2px solid var(--editor-demo-edit-element);
+      outline-offset: 3px;
+    }
+
+    /* A column of its own, so the picture inside one can still centre itself
+       against the page's width. */
+    .editor-demo .editor-demo-block-content {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .editor-demo .editor-demo-preview-heading {
+      color: var(--color-text-strong);
+      font-size: clamp(1.5rem, 4cqi, 2.25rem);
+      font-weight: 700;
+      line-height: 1.15;
+      margin: 0;
+      text-align: center;
+    }
+
+    /* A measure, not the column: run the full width of the panel it reads as
+       a different block from the headline above it. */
+    .editor-demo .editor-demo-preview-subtext {
+      color: var(--color-text);
+      font-size: clamp(1rem, 1.9cqi, 1.1875rem);
+      line-height: 1.6;
+      margin: var(--spacing-md) auto 0;
+      max-inline-size: 34rem;
+      text-align: center;
+    }
+
+    /* Centred under the copy.
+    
+       Every level, not just the wrapper: Image nests an `.image-inner` and a
+       `<picture>` between the class and the `<img>`, and the inner takes the
+       full width and leaves the picture at its start, so centring the wrapper
+       alone leaves the drawing off to the left.
+
+       And a length for the cap, not a percentage: a percentage max-height
+       resolves against the parent, which here is a `<picture>` of automatic
+       height, so it is ignored. */
+    /* The picture's slot.
+    
+       `flex: 0 1 auto` with `min-block-size: 0`, not `flex: 1`: it takes its
+       content's height when there is room, which is what lets the outline hug
+       the picture, and shrinks below it when the copy above has grown. Given
+       flex-grow it filled the window and the outline ran the whole column.
+       Either way its height is definite, so the cap on the picture resolves.
+       
+       `align-self: center` shrinks it to the picture's width and centres it,
+       rather than stretching across the panel. */
+    .editor-demo .editor-demo-preview-media {
+      align-self: center;
+      /* Never shrinks. Its size is its picture's, and the page scrolls. */
+      flex: 0 0 auto;
+      min-block-size: 0;
+      position: relative;
+    }
+
+    /* Clearing the field takes the picture off the page, and `display` on the
+       rule above would beat the `hidden` attribute on its own. */
+    .editor-demo .editor-demo-preview-media[hidden] {
+      display: none;
+    }
+
+    .editor-demo .editor-demo-preview-image {
+      block-size: 100%;
+      display: block;
+    }
+
+    /* The editor's corner menu: a white pill over the top right of the thing
+       it acts on, inset a few pixels rather than hung outside it.
+    
+       Opacity rather than `visibility` or `display`, so the buttons stay
+       focusable while they are invisible: hidden either of those other ways,
+       `focus-within` can never fire, because nothing inside can take focus to
+       fire it. */
+    .editor-demo .editor-demo-tools {
+      background-color: var(--white);
+      /* The app's face, like the popup sets. The pill sits inside the page
+         being edited, which is in the site's display font, and this is chrome
+         drawn over it. Nothing in here renders text today, so it was a latent
+         one rather than a visible one. */
+      font-family: var(--editor-demo-font);
+      font-size: var(--editor-demo-size);
+      /* 1px rule, 6 of padding, 4 clear of the corner: the app's own numbers,
+         read off its computed box rather than measured off a capture. */
+      border: 1px solid #e8e8e8;
+      border-radius: 12px;
+      box-shadow: 0 2px 8px rgb(0 0 0 / 16%);
+      display: flex;
+      gap: 12px;
+      inset-block-start: 4px;
+      inset-inline-end: 4px;
+      /* No transition, on either of these or on the buttons inside.
+      
+         Both used to fade over 150ms, and leaving the picture and coming back
+         inside that window caught them mid-flight and reversed them: the blue
+         dipped and recovered instead of simply staying on. Measured, a 40ms
+         round trip takes the visible blue to 0.68 and back over four frames,
+         which is not a fade, it is a flick. 80ms takes it to 0.03 and back.
+         Longer than the transition and it reads as an ordinary leave and
+         return, which is why it only ever showed up on a quick one.
+      
+         Instant on and instant off has nothing to catch, and it is what the
+         app does. */
+      opacity: 0;
+      padding: 6px;
+      position: absolute;
+    }
+
+    .editor-demo .editor-demo-preview-media:hover .editor-demo-tools,
+    .editor-demo .editor-demo-tools:focus-within {
+      opacity: 1;
+    }
+
+    /* Square, 40 each. The pill's own box and the gap between them are in the
+       same proportion as the app's, 1.96 against its 1.98. */
+    .editor-demo .editor-demo-tool {
+      align-items: center;
+      background: none;
+      block-size: 2.5rem;
+      border: 0;
+      border-radius: 10px;
+      color: var(--editor-demo-ink);
+      cursor: pointer;
+      display: flex;
+      inline-size: 2.5rem;
+      justify-content: center;
+      padding: 0;
+    }
+
+    /* The brand blue, filled, with the glyph knocked out of it. Measured
+       #0249DC off the app, which is --pacific to within three parts in 255, so
+       it takes the token rather than a hex of its own. */
+    .editor-demo .editor-demo-tool:hover,
+    .editor-demo .editor-demo-tool:focus-visible {
+      background-color: var(--pacific);
+      color: var(--white);
+      outline: none;
+    }
+
+    .editor-demo .editor-demo-tool .icon svg {
+      block-size: 1rem;
+      inline-size: 1rem;
+      stroke-width: 2.25;
+    }
+
+    /* Wider spacing than the sidebar's grip, which is what the app draws here:
+       its dots are about as far apart as they are across, where the row's are
+       half that. */
+    .editor-demo .editor-demo-tool .editor-demo-grip-dots {
+      gap: 4px;
+    }
+
+    /* Height all the way down, or the cap below resolves against nothing:
+       Image nests an .image-inner and a <picture> between the class and the
+       <img>, both of automatic height, and a percentage against an automatic
+       height is ignored. */
+    .editor-demo .editor-demo-preview-media .image-inner,
+    .editor-demo .editor-demo-preview-media picture {
+      block-size: 100%;
+      display: block;
+      text-align: center;
+    }
+
+    /* Fitted to the room it has, at its own aspect. The 14rem stays as the
+       size it wants to be; the percentage is what stops it overrunning a
+       window whose copy has grown. */
+    .editor-demo .editor-demo-preview-media img {
+      block-size: auto;
+      inline-size: auto;
+      margin-inline: auto;
+      max-block-size: min(14rem, 100%);
+      max-inline-size: 100%;
+      object-fit: contain;
+    }
+
+    /* The input's box, with room for a few lines. */
+    .editor-demo .editor-demo-textarea {
+      background: var(--white);
+      border: var(--editor-demo-line-width) solid var(--editor-demo-line-color);
+      border-radius: var(--radius-sm);
+      color: var(--editor-demo-ink);
+      font-family: inherit;
+      font-size: var(--editor-demo-size);
+      inline-size: 100%;
+      line-height: 1.45;
+      min-block-size: 6rem;
+      padding: var(--spacing-sm) 12px;
+      resize: vertical;
+    }
+
+    .editor-demo .editor-demo-textarea:hover,
+    .editor-demo .editor-demo-textarea:focus-visible {
+      border-color: var(--editor-demo-line-strong);
+      outline: none;
+    }
+
+    /* The two columns stop working side by side well before phone width: the
+       controls need their 20rem and the preview needs more than what is
+       left. */
+    @media (max-width: 47.5rem) {
+      .editor-demo .editor-demo-stage {
+        block-size: auto;
+        grid-template-columns: 1fr;
+      }
+
+      .editor-demo .editor-demo-sidebar {
+        border-block-end: var(--editor-demo-line-width) solid var(--editor-demo-line-color);
+        border-inline-end: 0;
+      }
+    }
+  }
+</style>

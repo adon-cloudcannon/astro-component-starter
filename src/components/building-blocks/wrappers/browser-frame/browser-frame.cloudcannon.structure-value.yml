@@ -1,0 +1,8 @@
+label: Browser frame
+icon: web_asset
+description: A window chrome to put a demo or a mockup inside.
+value:
+  _component: building-blocks/wrappers/browser-frame
+  label: ""
+  tone: light
+  dots: color

@@ -1,0 +1,22 @@
+---
+/**
+ * A block's panel in the sidebar.
+ *
+ * `inert` while off-screen, so nothing in a hidden pane is tabbable or
+ * readable: a pane that has merely been translated away is still in the tab
+ * order and still in the accessibility tree.
+ */
+import Fields from "./Fields.astro";
+import Icon from "@core-elements/icon/Icon.astro";
+
+const { block = {}, id = "", values = {}, backLabel = "Back" } = Astro.props;
+---
+
+<div class="editor-demo-pane" data-pane={id} data-block={id} hidden inert>
+  <button class="editor-demo-back" type="button">
+    <Icon name="arrow-left" size="none" aria-hidden="true" />
+    {backLabel}
+  </button>
+  <p class="editor-demo-panel-title">{block.title}</p>
+  <Fields block={block} id={id} scope="pane" values={values} />
+</div>

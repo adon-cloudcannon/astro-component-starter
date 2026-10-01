@@ -1,0 +1,96 @@
+---
+/**
+ * What one block draws on the page being edited.
+ *
+ * The page is rendered from the block list, in order, one element per field.
+ * It used to be three hardcoded elements bound by name, which is why a second
+ * Text Block had nowhere to go: two blocks both binding "heading" would have
+ * written to the same paragraph. Every binding is scoped to its block now.
+ */
+import Icon from "@core-elements/icon/Icon.astro";
+import Image from "@core-elements/image/Image.astro";
+
+const { block = {}, id = "", values = {} } = Astro.props;
+const fields = (block.fields ?? []) as Record<string, any>[];
+const image = fields.find((field) => field.type === "image");
+---
+
+{/* Wrapped, so a block is one thing on the page rather than a loose run of
+    elements. That is what lets the page space blocks apart with a `gap`
+    instead of each element guessing what came before it, and it is what
+    reordering will move. */}
+<div class="editor-demo-block-content" data-block={id}>
+{fields.map((field) => {
+  const bind = `${id}:${field.binds}`;
+  const value = values[field.binds] ?? "";
+
+  if (field.binds === "heading") {
+    return (
+      /* A <p>, not a heading. This is a picture of a page inside a picture of
+         an app: a real <h2> here would land in the document's own outline
+         between this section's headings and read as part of the site rather
+         than as the demo's content.
+
+         `plaintext-only` rather than `true`: a plain contenteditable accepts
+         pasted markup, which would put somebody else's HTML inside the
+         preview. The browser does the stripping, so nothing has to sanitise a
+         paste by hand. Editable also means focusable, so this is reachable
+         and changeable by keyboard with nothing else added. */
+      <p
+        class="editor-demo-preview-heading editor-demo-editable"
+        contenteditable="plaintext-only"
+        data-block={id}
+        data-edits={bind}
+      >{value}</p>
+    );
+  }
+
+  if (field.binds === "subtext") {
+    return (
+      <p
+        class="editor-demo-preview-subtext editor-demo-editable"
+        contenteditable="plaintext-only"
+        data-block={id}
+        data-edits={bind}
+      >{value}</p>
+    );
+  }
+
+  if (field.type === "image") {
+    return (
+      /* Wrapped, because a picture cannot hold the tools drawn on it. The
+         wrapper is the editable, so the outline hugs the picture rather than
+         the column it sits in. */
+      <div
+        class="editor-demo-preview-media editor-demo-editable"
+        data-block={id}
+        data-edits={bind}
+        hidden={!value}
+      >
+        {value && <Image class="editor-demo-preview-image" source={value} alt="" decorative={true} />}
+        {/* The editor's own corner menu: change it, or move it. Real buttons
+            rather than pointer-only chrome, revealed on `focus-within` as well
+            as hover, or they would be reachable by keyboard and invisible when
+            they got there. */}
+        <div class="editor-demo-tools">
+          <button
+            aria-label="Edit the image"
+            class="editor-demo-tool"
+            data-opens-media={id}
+            type="button"
+          >
+            <Icon name="pencil" size="none" aria-hidden="true" />
+          </button>
+          <button aria-label="Reorder the image" class="editor-demo-tool" type="button">
+            <span class="editor-demo-grip-dots" aria-hidden="true">
+              <i></i><i></i><i></i><i></i><i></i><i></i>
+            </span>
+          </button>
+        </div>
+      </div>
+    );
+  }
+
+  return null;
+})}
+</div>

@@ -1,0 +1,11 @@
+label: Editor demo
+icon: edit_note
+description: The interactive editor demo, in a browser window.
+value:
+  _component: page-sections/explainers/editor-demo
+  eyebrow: INTERACTIVE DEMO
+  heading: Here's what you're working with
+  subtext: Click a heading and change it. See what's possible with the Visual Editor.
+  frameLabel: ""
+  frameTone: light
+  frameWidth: 0

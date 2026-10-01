@@ -36,12 +36,14 @@ pageSections:
       - text: No credit card · 14-day free trial · No lock-in
         iconName: check
         iconColor: default
-  - _component: page-sections/conversion/cta-center
+  - _component: page-sections/explainers/editor-demo
     eyebrow: INTERACTIVE DEMO
     heading: Here’s what you’re working with
     subtext: Click a heading and change it. See what’s possible with the Visual Editor.
     subtextSize: lg
+    backgroundColor: base
     subtextWidth: 612
+    alignmentHorizontal: center
     headingSize: lg
   - _component: page-sections/proof/testimonial-section
     text: When we show clients the Visual Editor during our meetings, their eyes light up.
@@ -53,6 +55,7 @@ pageSections:
     company: Firebrand
     linkText: Read case study
     authorImage: /src/assets/images/marketing/ellipse-287-2.png
+    backgroundColor: base
   - _component: page-sections/explainers/pinned-steps
     heading: No more waiting on tickets
     headingSize: lg
@@ -147,6 +150,7 @@ pageSections:
       Every piece of work happens on its own branched site, so a new blog post, a landing page
       redesign, and a navigation update can all run at once without anyone treading on toes.
     subtextSize: lg
+    backgroundColor: base
     subtextWidth: 612
     headingSize: lg
   - _component: page-sections/explainers/feature-grid
@@ -169,6 +173,7 @@ pageSections:
     columns: 3
     alignmentHorizontal: center
     heading: Built for the work
+    backgroundColor: base
     cardHeight: 334
     headingSize: lg
   - _component: page-sections/conversion/cta-split

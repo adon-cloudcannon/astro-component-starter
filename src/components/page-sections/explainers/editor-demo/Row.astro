@@ -1,0 +1,41 @@
+---
+/**
+ * A block's row in the sidebar's list.
+ *
+ * Its own component because it is rendered twice: once for each block the
+ * demo starts with, and once inside the `<template>` the add menu clones.
+ * Written out in both places it would drift the first time either changed.
+ */
+import Icon from "@core-elements/icon/Icon.astro";
+
+const { block = {}, id = "" } = Astro.props;
+---
+
+<li class="editor-demo-block" data-block={id}>
+  {/* A button, not a click handler on the row: opening the block's panel is
+      a real action and has to be reachable without a pointer. It sits beside
+      the grip rather than around it, so the two are not nested buttons. */}
+  <button class="editor-demo-block-open" data-opens={id} type="button">
+    <span class="editor-demo-block-icon">
+      <Icon name={block.iconName || "squares-2x2"} size="none" aria-hidden="true" />
+    </span>
+    <span class="editor-demo-block-text">
+      <span class="editor-demo-block-title">{block.title}</span>
+      {block.subtitle && <span class="editor-demo-block-subtitle">{block.subtitle}</span>}
+    </span>
+  </button>
+  {/* The six dots open the block's own menu: duplicate, move, delete. A real
+      button with the menu's ARIA on it, because everything in there has to be
+      reachable without a pointer, and the dots are only what a mouse reads. */}
+  <button
+    aria-expanded="false"
+    aria-haspopup="menu"
+    aria-label={`Actions for ${block.title}`}
+    class="editor-demo-grip"
+    type="button"
+  >
+    <span class="editor-demo-grip-dots" aria-hidden="true">
+      <i></i><i></i><i></i><i></i><i></i><i></i>
+    </span>
+  </button>
+</li>

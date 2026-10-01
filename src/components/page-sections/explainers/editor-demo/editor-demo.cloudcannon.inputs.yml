@@ -1,0 +1,190 @@
+eyebrow:
+  type: text
+  comment: The small label above the heading.
+heading:
+  type: text
+  comment: The section's heading.
+headingLevel:
+  type: select
+  comment: The heading level.
+  options:
+    values:
+      - id: h2
+        name: H2
+      - id: h3
+        name: H3
+headingSize:
+  type: select
+  comment: The size of the heading.
+  options:
+    values:
+      - id: sm
+        name: Small
+      - id: md
+        name: Medium
+      - id: lg
+        name: Large
+      - id: xl
+        name: Extra Large
+subtext:
+  type: markdown
+  comment: The supporting line under the heading.
+subtextSize:
+  type: select
+  comment: The size of the supporting line.
+  options:
+    values:
+      - id: sm
+        name: Small
+      - id: md
+        name: Medium
+      - id: lg
+        name: Large
+subtextWidth:
+  type: number
+  comment: >-
+    The measure the design sets the line in, in pixels. Empty runs it to the
+    column.
+alignmentHorizontal:
+  type: select
+  comment: How the header is aligned.
+  options:
+    values:
+      - id: start
+        name: Start
+      - id: center
+        name: Centre
+frameLabel:
+  type: text
+  comment: The address shown in the window's bar. Empty leaves only the dots.
+frameTone:
+  type: select
+  comment: How the window is lit.
+  options:
+    values:
+      - id: light
+        name: Light
+      - id: dark
+        name: Dark
+frameWidth:
+  type: number
+  comment: >-
+    How wide the window is, in pixels. Empty fills the content column, which
+    is what lines it up with the rest of the page.
+
+# --- section wrapper inputs (CustomSection) ---
+# Configures the CustomSection wrapper, not this section's own content. Inline
+# per component so a project can trim the size/padding lists in place.
+# `new:component` slices from this marker down — keep the marker line verbatim.
+sectionLabel:
+  type: text
+  comment: Names the section in the editor and sets its anchor id.
+maxContentWidth:
+  type: select
+  comment: Maximum width of the content.
+  options:
+    values:
+      - id: none
+        name: None
+      - id: xs
+        name: Extra Small
+      - id: sm
+        name: Small
+      - id: md
+        name: Medium
+      - id: lg
+        name: Large
+      - id: xl
+        name: Extra Large
+      - id: 2xl
+        name: 2xl
+      - id: 3xl
+        name: 3xl
+paddingHorizontal:
+  type: select
+  comment: Horizontal padding around the content.
+  options:
+    values:
+      - id: none
+        name: None
+      - id: gutter
+        name: Page gutter
+      - id: xs
+        name: Extra Small
+      - id: sm
+        name: Small
+      - id: md
+        name: Medium
+      - id: lg
+        name: Large
+      - id: xl
+        name: Extra Large
+      - id: 2xl
+        name: 2xl
+      - id: 3xl
+        name: 3xl
+paddingVertical:
+  type: select
+  comment: Vertical padding around the content.
+  options:
+    values:
+      - id: none
+        name: None
+      - id: xs
+        name: Extra Small
+      - id: sm
+        name: Small
+      - id: md
+        name: Medium
+      - id: lg
+        name: Large
+      - id: xl
+        name: Extra Large
+      - id: 2xl
+        name: 2xl
+      - id: 3xl
+        name: 3xl
+      - id: 4xl
+        name: 4xl
+      - id: 5xl
+        name: 5xl
+      - id: 6xl
+        name: 6xl
+colorScheme:
+  type: select
+  comment: Light or dark scheme for the section. Inherit follows the page.
+  options:
+    values:
+      - id: inherit
+        name: Inherit
+      - id: light
+        name: Light
+      - id: dark
+        name: Dark
+lockColorScheme:
+  type: switch
+  label: Lock color scheme
+  comment: Ignores the site theme toggle. Only applies when Color Scheme is Light or Dark.
+backgroundColor:
+  type: select
+  comment: Background color for the section.
+  options:
+    values:
+      - id: none
+        name: None
+      - id: base
+        name: Base
+      - id: surface
+        name: Surface
+      - id: accent
+        name: Accent
+      - id: highlight
+        name: Highlight
+
+
+imageSource:
+  type: image
+  comment: A picture beneath the call to action, running the width of the column.
+imageAlt:
+  type: text
+  comment: Alt text for that picture.

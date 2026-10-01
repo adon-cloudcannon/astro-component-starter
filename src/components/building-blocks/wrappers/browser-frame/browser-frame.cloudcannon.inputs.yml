@@ -1,0 +1,24 @@
+label:
+  type: text
+  comment: >-
+    The address shown in the bar. Left empty, the bar carries only the dots.
+tone:
+  type: select
+  comment: How the window is lit.
+  options:
+    values:
+      - id: light
+        name: Light
+      - id: dark
+        name: Dark
+dots:
+  type: select
+  comment: >-
+    The three dots. Colour is the Mac's own red, amber and green; muted draws
+    them in the frame's border colour.
+  options:
+    values:
+      - id: color
+        name: Colour
+      - id: muted
+        name: Muted

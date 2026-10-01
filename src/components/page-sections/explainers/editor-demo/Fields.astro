@@ -1,0 +1,140 @@
+---
+/**
+ * One block's fields.
+ *
+ * Rendered twice: once in the sidebar's pane and once in the popup the pencil
+ * on the page opens. Both are real panels in the editor and either can be open
+ * while the other is, so this cannot be one set of fields moved between them.
+ *
+ * Two copies means two lots of state, so every copy announces what it changed
+ * and the others follow. That is `editor-demo:image` for the picture, and a
+ * plain mirror by `data-binds` for the text. See `setup.ts`.
+ *
+ * `scope` keeps the ids apart. A label's `for` and a hint's `aria-describedby`
+ * both point at an id, and two copies of the same id means every label in the
+ * popup addresses the sidebar's field instead of its own.
+ */
+import Icon from "@core-elements/icon/Icon.astro";
+import Image from "@core-elements/image/Image.astro";
+
+const {
+  block = {},
+  /** The block instance these fields edit, e.g. `b0`. */
+  id = "",
+  scope = "pane",
+  /** What each of this block's fields starts out holding, by bind name. */
+  values = {} as Record<string, string>,
+  hidden = false,
+} = Astro.props;
+---
+
+<div class="editor-demo-fields" data-block={id} hidden={hidden}>
+  {(block.fields ?? []).map((field: Record<string, any>, at: number) => {
+    /* Scoped by block and by panel. A label's `for` and a hint's
+       `aria-describedby` both point at an id, so two copies sharing one would
+       have every label in the popup addressing the sidebar's field. */
+    const fieldId = `editor-demo-${scope}-${id}-${at}`;
+    /* Scoped by block too: two Text Blocks both binding "heading" would
+       otherwise write to each other's paragraph. */
+    const bind = `${id}:${field.binds}`;
+    const value = values[field.binds] ?? "";
+    const hintId = field.description ? `${fieldId}-hint` : undefined;
+    return (
+      <div class="editor-demo-field">
+        <label class="editor-demo-label" for={fieldId}>
+          {field.label}
+        </label>
+        {/* The app puts a line of guidance under every label, and it is part
+            of what makes the panel read as an editor rather than as a form.
+            Tied to the control with `aria-describedby`, or it is a paragraph
+            nothing owns. */}
+        {field.description && (
+          <p class="editor-demo-hint" id={hintId}>{field.description}</p>
+        )}
+
+        {field.type === "textarea" && (
+          <textarea
+            aria-describedby={hintId}
+            class="editor-demo-textarea"
+            data-binds={bind}
+            id={fieldId}
+            rows="3"
+          >{value}</textarea>
+        )}
+
+        {field.type === "image" && (
+          /* The app's image field: the path, a key to clear it, a plus to put
+             something else there, and what is there now underneath. All four
+             in one box, which is how the editor draws it.
+
+             Nothing is uploaded. The plus opens the machine's own file picker
+             and the chosen file is read straight into the page, so the demo
+             does the visible half of an upload without a server to put
+             anything on. */
+          <div class="editor-demo-file" data-binds={bind}>
+            <div class="editor-demo-file-row">
+              <input
+                aria-describedby={hintId}
+                class="editor-demo-file-path"
+                id={fieldId}
+                spellcheck="false"
+                type="text"
+                value={value}
+              />
+              {/* Only when there is something to clear. The app takes the key
+                  away rather than leaving a dead one. */}
+              <button
+                aria-label="Clear the image"
+                class="editor-demo-file-action"
+                data-clears
+                hidden={!value}
+                type="button"
+              >
+                <Icon name="backspace" size="none" aria-hidden="true" />
+              </button>
+              <button
+                aria-label="Choose an image"
+                class="editor-demo-file-action"
+                data-uploads
+                type="button"
+              >
+                <Icon name="plus" size="none" aria-hidden="true" />
+              </button>
+              {/* Out of the way rather than styled. A file input's own button
+                  cannot be drawn to match the app, and the one beside it is
+                  what opens this. */}
+              <input accept="image/*" hidden type="file" />
+            </div>
+            <div class="editor-demo-file-preview">
+              <span class="editor-demo-file-shown" hidden={!value}>
+                {value && <Image source={value} alt="" decorative={true} />}
+              </span>
+              {/* The empty state, and the second way in: the app says you can
+                  drop a file here, so it takes one. A button, because clicking
+                  it opens the picker, and it is the only thing in the box when
+                  there is no picture. */}
+              <button
+                class="editor-demo-file-drop"
+                hidden={Boolean(value)}
+                type="button"
+              >
+                {field.emptyLabel || "Select or drop your image here"}
+              </button>
+            </div>
+          </div>
+        )}
+
+        {(!field.type || field.type === "text") && (
+          <input
+            aria-describedby={hintId}
+            class="editor-demo-input"
+            data-binds={bind}
+            id={fieldId}
+            type="text"
+            value={value}
+          />
+        )}
+      </div>
+    );
+  })}
+</div>
