@@ -1,0 +1,319 @@
+---
+/**
+ * The stack of site cards the design draws beside "Publish when you're ready".
+ *
+ * Three cards of one environment each — the live site, a staging site, a
+ * branch — overlapping down and to the right, with a Publish button under
+ * them and a connector running from it back to the live card.
+ *
+ * Measured off node 3806:72842, the art group on Visual Editing. That group
+ * is 708 x 421 and every number below is a share of it, so the whole thing
+ * scales with its container rather than at breakpoints:
+ *
+ *   card         259 wide, radius 8.5, image 150 tall
+ *   production     0,   0   247 tall   one information row
+ *   staging      211,  50   279 tall   two rows, and it sits on top
+ *   branch       449, 139   279 tall
+ *   button       286, 370   110 x 51
+ *
+ * The cards are drawn rather than exported because the design's own are
+ * drawn: each is a frame with a photo at the top and type under it, and the
+ * type in it is real text at 15/22.5 rather than part of a picture.
+ */
+import Image from "@core-elements/image/Image.astro";
+import Icon from "@core-elements/icon/Icon.astro";
+
+type Card = {
+  badge?: string;
+  title?: string;
+  subtitle?: string;
+  image?: string;
+  imageAlt?: string;
+  domain?: string;
+  built?: string;
+  /** Left and top, as shares of the 708 x 421 the design draws it in. */
+  x?: number;
+  y?: number;
+};
+
+const {
+  cards = [],
+  /** The pill under the stack. Empty hides it and its connector. */
+  buttonLabel = "",
+  class: className,
+  _component,
+  ...htmlAttributes
+} = Astro.props;
+
+// The design's own three positions, used in order for any card that does not
+// carry its own. A fourth would stack on the third rather than guessing.
+const PLACES = [
+  { x: 0, y: 0 },
+  { x: 211 / 708, y: 50 / 421 },
+  { x: 449 / 708, y: 139 / 421 },
+];
+
+const placed = (cards as Card[]).slice(0, 3).map((card, index) => ({
+  ...card,
+  left: card.x ?? PLACES[Math.min(index, 2)].x,
+  top: card.y ?? PLACES[Math.min(index, 2)].y,
+}));
+---
+
+{placed.length > 0 && (
+  <div class:list={["site-cards", className]} {...htmlAttributes}>
+    {/* The connector is one path in the group's own coordinates, so it lands
+        the same way at every size. It runs from the button up to the staging
+        card, and left then up into the live one, which is the direction the
+        design points its arrowhead. */}
+    {buttonLabel && (
+      <svg
+        class="site-cards-wire"
+        viewBox="0 0 708 421"
+        fill="none"
+        aria-hidden="true"
+        preserveAspectRatio="none"
+      >
+        <path d="M341 370 V 395 H 114 V 262" />
+        <path d="M341 370 V 331" />
+        <path class="site-cards-head" d="M108 272 L114 260 L120 272" />
+      </svg>
+    )}
+
+    {placed.map((card, index) => (
+      <article
+        class="site-cards-card"
+        data-index={index}
+        style={`--site-card-x: ${(card.left * 100).toFixed(3)}%; --site-card-y: ${(card.top * 100).toFixed(3)}%`}
+      >
+        {card.image && (
+          <span class="site-cards-photo">
+            <Image
+              source={card.image}
+              alt={card.imageAlt}
+              decorative={!card.imageAlt}
+              data-prop-src="image"
+              data-prop-alt="imageAlt"
+            />
+          </span>
+        )}
+
+        <div class="site-cards-info">
+          <div class="site-cards-head-row">
+            {card.badge && (
+              <span class="site-cards-badge" aria-hidden="true">{card.badge}</span>
+            )}
+            <span class="site-cards-names">
+              {card.title && <span class="site-cards-title" data-prop="title">{card.title}</span>}
+              {card.subtitle && (
+                <span class="site-cards-subtitle">
+                  <Icon name="rectangle-group" size="none" />
+                  <span data-prop="subtitle">{card.subtitle}</span>
+                </span>
+              )}
+            </span>
+          </div>
+
+          {(card.domain || card.built) && (
+            <div class="site-cards-rows">
+              {card.domain && (
+                <span class="site-cards-row">
+                  <Icon name="globe-alt" size="none" />
+                  <span data-prop="domain">{card.domain}</span>
+                </span>
+              )}
+              {card.built && (
+                <span class="site-cards-row">
+                  <Icon name="clock" size="none" />
+                  <span data-prop="built">{card.built}</span>
+                </span>
+              )}
+            </div>
+          )}
+        </div>
+      </article>
+    ))}
+
+    {buttonLabel && (
+      <span class="site-cards-button" data-prop="buttonLabel">{buttonLabel}</span>
+    )}
+  </div>
+)}
+
+<style is:global>
+  @layer components {
+    /* Every size in here is in cqi, a share of the stage's own width, so the
+       mockup scales as one picture. The stage holds the design's 708 x 421. */
+    .site-cards {
+      aspect-ratio: 708 / 421;
+      container-type: inline-size;
+      inline-size: 100%;
+      position: relative;
+    }
+
+    .site-cards-card {
+      /* 259 of 708. */
+      inline-size: 36.582cqi;
+      inset-block-start: var(--site-card-y, 0);
+      inset-inline-start: var(--site-card-x, 0);
+      position: absolute;
+      /* 8.53 of 708. */
+      border-radius: 1.204cqi;
+      background: var(--white);
+      overflow: hidden;
+      box-shadow:
+        0 0.5cqi 1.5cqi color-mix(in srgb, var(--midnight) 10%, transparent),
+        0 0.1cqi 0.4cqi color-mix(in srgb, var(--midnight) 8%, transparent);
+    }
+
+    /* The staging card sits over both of its neighbours in the design, which
+       is what makes the three read as a stack rather than as a row. */
+    .site-cards-card[data-index="1"] {
+      z-index: 2;
+    }
+
+    .site-cards-card[data-index="2"] {
+      z-index: 1;
+    }
+
+    .site-cards-photo {
+      /* 150 of 421 against a 259-wide card: the photo is a fixed slab at the
+         top of the card, not an aspect the picture chooses. */
+      aspect-ratio: 259 / 150;
+      display: block;
+      inline-size: 100%;
+      overflow: hidden;
+    }
+
+    .site-cards-photo img,
+    .site-cards-photo picture,
+    .site-cards-photo .image-inner {
+      block-size: 100%;
+      display: block;
+      inline-size: 100%;
+      object-fit: cover;
+    }
+
+    .site-cards-info {
+      display: grid;
+      /* 9 of 708. */
+      gap: 0.8cqi;
+      padding: 1.27cqi;
+    }
+
+    .site-cards-head-row {
+      align-items: start;
+      display: flex;
+      gap: 1.27cqi;
+    }
+
+    /* 43 x 45.5 at radius 7.5, which is near enough a square. */
+    .site-cards-badge {
+      align-items: center;
+      aspect-ratio: 1;
+      background: #212121;
+      border-radius: 1.06cqi;
+      color: var(--white);
+      display: flex;
+      flex: none;
+      font-size: 3.044cqi;
+      font-weight: 700;
+      inline-size: 6.09cqi;
+      justify-content: center;
+      line-height: 1;
+    }
+
+    .site-cards-names {
+      display: grid;
+      min-inline-size: 0;
+    }
+
+    /* 15 over 22.5 in the file, which is 1.5. */
+    .site-cards-title {
+      color: #212121;
+      font-size: 2.118cqi;
+      font-weight: 700;
+      line-height: 1.5;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    .site-cards-subtitle,
+    .site-cards-row {
+      align-items: center;
+      color: #757575;
+      display: flex;
+      font-size: 2.118cqi;
+      font-weight: 400;
+      gap: 0.9cqi;
+      line-height: 1.5;
+      min-inline-size: 0;
+    }
+
+    .site-cards-subtitle > span:last-child,
+    .site-cards-row > span:last-child {
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    /* 22.5 of 708, and the glyph fills its own box. */
+    .site-cards-subtitle .icon,
+    .site-cards-row .icon {
+      block-size: 3.178cqi;
+      flex: none;
+      font-size: 3.178cqi;
+      inline-size: 3.178cqi;
+    }
+
+    .site-cards-rows {
+      display: grid;
+      gap: 0.25cqi;
+    }
+
+    /* 110 x 51 at 286, 370, centred on the stage's own midline. */
+    .site-cards-button {
+      align-items: center;
+      background: var(--sunset, #d85a2c);
+      border-radius: 999px;
+      color: var(--white);
+      display: flex;
+      font-size: 2.118cqi;
+      font-weight: 700;
+      inline-size: 15.536cqi;
+      inset-block-start: 87.886%;
+      inset-inline-start: 40.4%;
+      justify-content: center;
+      /* 51 of 708, not of 421. `cqi` is a share of the container's inline
+         size whichever axis it is spent on, so taking the height off the
+         design's own 421 made the pill 48 tall where it wanted 29, and a
+         110x51 pill came out a circle. */
+      block-size: 7.203cqi;
+      position: absolute;
+      z-index: 3;
+    }
+
+    .site-cards-wire {
+      inset: 0;
+      position: absolute;
+      inline-size: 100%;
+      block-size: 100%;
+      /* Behind the cards and the button, which is how a connector reads: the
+         line runs to the card rather than over it. */
+      z-index: 0;
+    }
+
+    .site-cards-wire path {
+      stroke: #212121;
+      stroke-width: 1.5;
+      /* The viewBox is stretched to the stage, so a stroke in its own units
+         would squash with it. */
+      vector-effect: non-scaling-stroke;
+    }
+
+    .site-cards-head {
+      fill: none;
+    }
+  }
+</style>

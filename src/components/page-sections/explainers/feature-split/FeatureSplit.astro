@@ -3,6 +3,7 @@ import CustomSection from "@builders/custom-section/CustomSection.astro";
 import Heading from "@core-elements/heading/Heading.astro";
 import Image from "@core-elements/image/Image.astro";
 import ShapePile from "@wrappers/shape-pile/ShapePile.astro";
+import SiteCards from "@wrappers/site-cards/SiteCards.astro";
 import SimpleText from "@core-elements/simple-text/SimpleText.astro";
 import Text from "@core-elements/text/Text.astro";
 import ButtonGroup from "@wrappers/button-group/ButtonGroup.astro";
@@ -33,6 +34,11 @@ const {
    * becomes the pile, leave it and nothing about the section changes.
    */
   shapes = [],
+  /**
+   * The stack of environment cards the design draws beside "Publish when
+   * you're ready". Takes the media half in place of a picture.
+   */
+  siteCards,
   imageAlt = "",
   imageAspectRatio = "portrait",
   imageRounded = true,
@@ -76,7 +82,12 @@ const imagePositionVertical = imageBleed ? "top" : "center";
   <Split
     class="feature-split-layout"
     distributionMode={imageBleed ? "half" : "flexible-fixed"}
-    fixedWidth="400"
+    {/* 708 for the site cards, which is the width the design draws that art
+        group at: 492 to 1200 of a 1280 frame, against a copy column that is
+        only 300 wide and wraps its heading onto two lines because of it. The
+        400 every other split uses would shrink the mockup's own type with
+        it, since the whole stack scales off its container. */}
+    fixedWidth={siteCards?.cards?.length ? "708" : "400"}
     data-bleed={bleedSide}
     minSplitWidth={minSplitWidth}
     reverse={reverse}
@@ -118,7 +129,14 @@ const imagePositionVertical = imageBleed ? "top" : "center";
         data-children-prop="buttonSections"
       />
     </Fragment>
-    {shapes?.length > 0 ? (
+    {siteCards?.cards?.length > 0 ? (
+      <SiteCards
+        slot="second"
+        class="feature-split-site-cards"
+        cards={siteCards.cards}
+        buttonLabel={siteCards.buttonLabel}
+      />
+    ) : shapes?.length > 0 ? (
       <ShapePile
         slot="second"
         class="feature-split-pile"

@@ -140,8 +140,33 @@ pageSections:
     headingSize: lg
     buttonSections:
       - _component: building-blocks/core-elements/button
-        variant: primary
-        text: Publish
+        variant: text
+        iconName: arrow-right
+        iconPosition: after
+        text: Learn more
+    siteCards:
+      buttonLabel: Publish
+      cards:
+        - badge: P
+          title: Production – Live Site
+          subtitle: State University
+          domain: stateuniversity.com
+          image: /src/assets/images/marketing/card-image-4-3806-72846.png
+          imageAlt: ""
+        - badge: T
+          title: "Staging: Testing Site"
+          subtitle: State University
+          domain: funky-pear.cloudvent.net
+          built: Built 3 days ago
+          image: /src/assets/images/marketing/card-image-5.jpg
+          imageAlt: ""
+        - badge: B
+          title: "Branch: New Alumni Page"
+          subtitle: State University
+          domain: cool-lab.cloudvent.net
+          built: Built 3 days ago
+          image: /src/assets/images/marketing/card-image-3.jpg
+          imageAlt: ""
   - _component: page-sections/explainers/feature-grid
     features:
       - eyebrow: For AGENCIES
