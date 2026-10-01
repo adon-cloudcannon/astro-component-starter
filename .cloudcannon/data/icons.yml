@@ -336,6 +336,8 @@
   name: Document Plus
 - id: document-text
   name: Document Text
+- id: earth
+  name: Earth
 - id: ellipsis-horizontal
   name: Ellipsis Horizontal
 - id: ellipsis-horizontal-circle
@@ -684,6 +686,8 @@
   name: Window
 - id: wrench
   name: Wrench
+- id: wrench-circle
+  name: Wrench Circle
 - id: wrench-screwdriver
   name: Wrench Screwdriver
 - id: x-circle

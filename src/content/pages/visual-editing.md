@@ -143,6 +143,7 @@ pageSections:
         variant: text
         iconName: arrow-right
         iconPosition: after
+        textColor: sunset
         text: Learn more
     siteCards:
       buttonLabel: Publish
