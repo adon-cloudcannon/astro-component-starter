@@ -91,10 +91,6 @@ pageSections:
     backgroundColor: base
     colorScheme: dark
     lockColorScheme: true
-    background:
-      type: pattern
-      pattern: grid
-      mask: fade
     haze:
       - x: 0.4975
         rx: 938px
@@ -122,15 +118,15 @@ pageSections:
       - title: Build your components
         body: Set what's editable, down to the field.
         accentColor: harbour
-        iconName: folder
+        iconName: rectangle-group
       - title: Hand it over.
         body: Content teams edit on the page, with a live preview they can share.
         accentColor: sunset
-        iconName: view-columns
+        iconName: window
       - title: Everything is a commit
         body: Branch it, review it, roll it back.
         accentColor: golden
-        iconName: arrow-path
+        iconName: command-line
     backgroundColor: base
     colorScheme: dark
     lockColorScheme: true
