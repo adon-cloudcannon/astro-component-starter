@@ -23,6 +23,7 @@
  * card's own accent, a rule between the quote and the person.
  */
 import CustomSection from "@builders/custom-section/CustomSection.astro";
+import Button from "@core-elements/button/Button.astro";
 import Image from "@core-elements/image/Image.astro";
 import { renderMarkdown } from "@component-utils/markdown";
 
@@ -175,15 +176,26 @@ const items: Quote[] = (isCarousel ? quotes : quotes.slice(0, 1)) as Quote[];
                   )}
                 </p>
               )}
+              {/* The Button, like every other arrow link on the site, so a
+                  change to the button changes this one too. Its own
+                  `.label-text` span is what takes the underline:
+                  text-decoration propagates down and a child cannot take it
+                  off, so ruled on the whole link the line ran under the arrow.
+                  The card sets the size, the colour and the hover; the
+                  component sets everything else. */}
               {quote.linkText && (
-                <a class="testimonial-quote-link" href={quote.link || undefined}>
-                  {/* Its own span because text-decoration propagates down and
-                      a child cannot take it off: ruled on the anchor, the
-                      line ran under the arrow too. */}
-                  <span class="testimonial-quote-link-label" data-prop="linkText">{quote.linkText}</span>
+                <Button
+                  class="testimonial-quote-link"
+                  variant="text"
+                  size="sm"
+                  iconName="arrow-right"
+                  iconPosition="after"
+                  link={quote.link || undefined}
+                  data-prop="linkText"
+                >
+                  {quote.linkText}
                   {quote.company && <span class="visually-hidden"> about {quote.company}</span>}
-                  <span aria-hidden="true">&rarr;</span>
-                </a>
+                </Button>
               )}
             </div>
           </div>
@@ -457,28 +469,32 @@ const items: Quote[] = (isCarousel ? quotes : quotes.slice(0, 1)) as Quote[];
       }
 
       .testimonial-quote-link {
-        align-items: center;
-        color: var(--testimonial-quote-quiet);
-        display: inline-flex;
-        font-size: var(--testimonial-quote-meta);
-        font-weight: 600;
-        gap: 0.5em;
         margin-block-start: var(--spacing-sm);
-        text-decoration: none;
+      }
+
+      /* The card's own colour and size, over the Button's. This file is in
+         `page-sections`, which out-ranks `components`, so these win without
+         having to out-specify anything. */
+      .testimonial-quote-link .button-inner {
+        color: var(--testimonial-quote-quiet);
+        font-size: var(--testimonial-quote-meta);
+        padding-block: 0;
         transition: color var(--animation-normal) var(--ease-in-out);
       }
 
       /* Only the words are ruled. The arrow is a glyph doing the same job as
          the underline, and run through by it as well it reads as struck out. */
-      .testimonial-quote-link-label {
+      .testimonial-quote-link .label-text {
         text-decoration: underline;
         text-underline-offset: 0.35em;
       }
 
       /* The card's hover carries the link with it: the two are one gesture. */
-      .testimonial-quote-card:hover .testimonial-quote-link,
-      .testimonial-quote-link:hover,
-      .testimonial-quote-link:focus-visible {
+      .testimonial-quote-card:hover .testimonial-quote-link .button-inner,
+      .testimonial-quote-link:hover .button-inner,
+      .testimonial-quote-link:focus-visible .button-inner,
+      .testimonial-quote-card:hover .testimonial-quote-link .icon,
+      .testimonial-quote-link:hover .icon {
         color: var(--testimonial-quote-accent, var(--testimonial-quote-ink));
       }
 

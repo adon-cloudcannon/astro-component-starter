@@ -13,6 +13,7 @@
  * are one value here, 13, which is the only place this departs from the
  * export and is explained on `--testimonial-bento-meta` below.
  */
+import Button from "@core-elements/button/Button.astro";
 import Image from "@core-elements/image/Image.astro";
 import { renderMarkdown } from "@component-utils/markdown";
 
@@ -135,17 +136,25 @@ const accent = accentColor ? `var(--${accentColor})` : undefined;
       </div>
     </div>
 
+    {/* The Button, like every other arrow link on the site. Its own
+        `.label-text` span takes the underline, since text-decoration
+        propagates down and a child cannot take it off: ruled on the whole
+        link the line ran under the arrow. The hidden words after the label
+        name the destination, because "Read case study" on four cards says the
+        same thing four times. */}
     {linkText && (
-      <a class="testimonial-bento-link" href={link || undefined}>
-        {/* The words are their own span because text-decoration propagates
-            down and a child cannot take it off again: underlined on the
-            anchor, the rule ran under the arrow too. */}
-        <span class="testimonial-bento-link-label" data-prop="linkText">{linkText}</span>
-        {/* Named for a reader, since "Read case study" on four cards says the
-            same thing four times. */}
+      <Button
+        class="testimonial-bento-link"
+        variant="text"
+        size="sm"
+        iconName="arrow-right"
+        iconPosition="after"
+        link={link || undefined}
+        data-prop="linkText"
+      >
+        {linkText}
         {company && <span class="visually-hidden"> about {company}</span>}
-        <span aria-hidden="true">&rarr;</span>
-      </a>
+      </Button>
     )}
   </div>
 </div>
@@ -361,22 +370,24 @@ const accent = accentColor ? `var(--${accentColor})` : undefined;
     }
 
     .testimonial-bento-link {
-      align-items: center;
       /* Level with the last line of the role beside it. */
       align-self: end;
-      color: var(--testimonial-bento-quiet);
-      display: inline-flex;
       flex-shrink: 0;
+    }
+
+    /* The card's own colour and size over the Button's. This file is in
+       `page-sections`, which out-ranks `components`, so these win without
+       having to out-specify anything. */
+    .testimonial-bento-link .button-inner {
+      color: var(--testimonial-bento-quiet);
       font-size: var(--testimonial-bento-meta);
-      font-weight: 600;
-      gap: 0.5em;
-      text-decoration: none;
+      padding-block: 0;
       transition: color var(--animation-normal) var(--ease-in-out);
     }
 
     /* Only the words are ruled. The arrow is a glyph doing the same job as
        the underline, and run through by it as well it reads as struck out. */
-    .testimonial-bento-link-label {
+    .testimonial-bento-link .label-text {
       text-decoration: underline;
       text-underline-offset: 0.35em;
     }
@@ -386,9 +397,11 @@ const accent = accentColor ? `var(--${accentColor})` : undefined;
        The border and the link are the same gesture, so lighting only the rule
        left the link grey until the pointer reached it, and from a step back
        that reads as the link not having a hover at all. */
-    .testimonial-bento-item:hover .testimonial-bento-link,
-    .testimonial-bento-link:hover,
-    .testimonial-bento-link:focus-visible {
+    .testimonial-bento-item:hover .testimonial-bento-link .button-inner,
+    .testimonial-bento-link:hover .button-inner,
+    .testimonial-bento-link:focus-visible .button-inner,
+    .testimonial-bento-item:hover .testimonial-bento-link .icon,
+    .testimonial-bento-link:hover .icon {
       color: var(--testimonial-bento-accent, var(--testimonial-bento-ink));
     }
 

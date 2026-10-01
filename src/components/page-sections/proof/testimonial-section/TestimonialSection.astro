@@ -1,4 +1,5 @@
 ---
+import Button from "@core-elements/button/Button.astro";
 import CustomSection from "@builders/custom-section/CustomSection.astro";
 import Testimonial from "@core-elements/testimonial/Testimonial.astro";
 import Image from "@core-elements/image/Image.astro";
@@ -169,15 +170,17 @@ const accentStyle =
   />
 
   {isSplit && linkText && (
-    <a
+    <Button
       class="testimonial-link"
-      href={link}
-      data-editable="text"
+      variant="text"
+      textColor="sunset"
+      iconName="arrow-right"
+      iconPosition="after"
+      size="md"
+      text={linkText}
+      link={link}
       data-prop="linkText"
-    >
-      {linkText}
-      <span aria-hidden="true">&#8594;</span>
-    </a>
+    />
   )}
 </CustomSection>
 
@@ -412,19 +415,15 @@ const accentStyle =
     }
 
     /* "Read case study" sits under the quote, in the accent. */
+    /* Where it sits is this section's; what it looks like is the Button's. */
     .testimonial-section .testimonial-link {
-      align-items: center;
-      color: var(--sunset);
-      display: inline-flex;
-      gap: 0.5rem;
       grid-column: 2;
       justify-self: start;
       margin-block-start: var(--spacing-lg);
-      text-decoration: none;
     }
 
-    .testimonial-section .testimonial-link:hover {
-      text-decoration: underline;
+    .testimonial-section .testimonial-link .button-inner {
+      padding-block: 0;
     }
   }
 
