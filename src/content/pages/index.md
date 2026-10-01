@@ -167,7 +167,7 @@ pageSections:
         linkText: Learn more
     background:
       type: pattern
-      pattern: dots
+      pattern: pegboard
       mask: fade
     haze:
       - x: 0.5086

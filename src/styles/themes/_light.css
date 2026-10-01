@@ -49,7 +49,7 @@
      Dots are the other kind. They are a palette colour rather than a tint, so
      they get their own token and no alpha. */
   --pattern-ink: color-mix(in srgb, var(--golden-750) 8.3%, transparent);
-  --pattern-ink-dots: var(--golden-200);
+  --pattern-ink-pegboard: var(--golden-200);
 
   --color-border: var(--gray-300);
   --color-border-inputs: var(--gray-400);

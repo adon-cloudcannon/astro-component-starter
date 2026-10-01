@@ -17,7 +17,7 @@ pageSections:
     reverse: true
     background:
       type: pattern
-      pattern: dots
+      pattern: pegboard
       mask: none
     backgroundColor: surface
     haze:
@@ -89,7 +89,7 @@ pageSections:
     headingSize: md
     background:
       type: pattern
-      pattern: dots
+      pattern: pegboard
       mask: none
     backgroundColor: base
     colorScheme: dark

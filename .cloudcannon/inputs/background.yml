@@ -166,11 +166,11 @@ background.pattern:
   label: Pattern
   comment: >-
     Drawn rather than loaded, and inked from the band's own colours: a grid
-    rule is a tint of the background, dots are Golden. Both work on any
+    rule is a tint of the background, the peg board is Golden. Both work on any
     background colour, light or dark, without a second file.
   options:
     values:
       - id: grid
         name: Grid
-      - id: dots
-        name: Dots
+      - id: pegboard
+        name: Peg board

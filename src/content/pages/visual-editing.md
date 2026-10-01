@@ -15,7 +15,7 @@ pageSections:
     reverse: true
     background:
       type: pattern
-      pattern: dots
+      pattern: pegboard
       mask: none
     backgroundColor: surface
     haze:
@@ -60,7 +60,7 @@ pageSections:
     backgroundColor: surface
     background:
       type: pattern
-      pattern: dots
+      pattern: pegboard
       mask: fade
   - _component: page-sections/conversion/cta-center
     heading: Here, you don’t need to wait to make changes
@@ -194,7 +194,7 @@ pageSections:
     alignmentHorizontal: start
     background:
       type: pattern
-      pattern: dots
+      pattern: pegboard
       mask: none
     backgroundColor: surface
 ---

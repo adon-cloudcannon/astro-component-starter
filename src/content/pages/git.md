@@ -232,7 +232,7 @@ pageSections:
     backgroundColor: surface
     background:
       type: pattern
-      pattern: dots
+      pattern: pegboard
       mask: fade
   - _component: page-sections/conversion/cta-center
     heading: Your content is yours

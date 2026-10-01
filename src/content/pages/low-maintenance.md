@@ -16,7 +16,7 @@ pageSections:
     imageOverflow: 107
     background:
       type: pattern
-      pattern: dots
+      pattern: pegboard
       mask: none
     backgroundColor: surface
     haze:
@@ -245,7 +245,7 @@ pageSections:
     linkText: Read case study
     background:
       type: pattern
-      pattern: dots
+      pattern: pegboard
       mask: none
     backgroundColor: base
     colorScheme: dark

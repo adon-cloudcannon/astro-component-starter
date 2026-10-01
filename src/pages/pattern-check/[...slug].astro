@@ -18,7 +18,7 @@ export function getStaticPaths() {
   return import.meta.env.DEV ? [{ params: { slug: undefined } }] : [];
 }
 
-const DOTS = { type: "pattern", pattern: "dots", mask: "none" };
+const PEGBOARD = { type: "pattern", pattern: "pegboard", mask: "none" };
 const GRID = { type: "pattern", pattern: "grid", mask: "none" };
 
 const ROWS = [
@@ -28,7 +28,7 @@ const ROWS = [
     note: "Visual Editing hero, High Performance CTA, Low Maintenance hero, Git testimonial",
     count: 8,
     backgroundColor: "surface",
-    background: DOTS,
+    background: PEGBOARD,
   },
   {
     name: "Dots — was the pegboard",
@@ -36,9 +36,9 @@ const ROWS = [
     note: "Homepage “Two workflows”, Agencies “Here to help you succeed”",
     count: 2,
     backgroundColor: "surface",
-    background: DOTS,
+    background: PEGBOARD,
     diverges:
-      "the design draws these at a 33px pitch with a 4.2px dot, and a step lighter in Golden 150. Deliberately the same dots as every other band — three near-identical dot patterns is not a choice worth handing an editor.",
+      "the design draws these at a 33px pitch with a 4.2px dot, and a step lighter in Golden 150. Deliberately the same peg board as every other band — three near-identical peg boards is not a choice worth handing an editor.",
     caveat:
       "design sample is the band’s top-left corner — it hazes in the middle and fades at the foot, so there is no clean patch anywhere else",
   },
@@ -49,7 +49,7 @@ const ROWS = [
     count: 4,
     backgroundColor: "base",
     colorScheme: "dark",
-    background: DOTS,
+    background: PEGBOARD,
     diverges:
       "the design draws these at a 21px pitch with a 4.1px dot, so ours are sparser and larger. Same call as the row above.",
   },
@@ -111,7 +111,7 @@ const coverage = (pitch: number, dot: number) =>
             {row.diverges && <p class="diverges">{row.diverges}</p>}
             {row.caveat && <p class="caveat">{row.caveat}</p>}
             <p class="nums">
-              {row.background.pattern === "dots"
+              {row.background.pattern === "pegboard"
                 ? `40px pitch, 6px dot — ${coverage(40, 6).toFixed(2)}% ink`
                 : "40px pitch, 2px rule"}
             </p>

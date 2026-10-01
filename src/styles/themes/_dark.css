@@ -37,7 +37,7 @@
      on black in Golden itself at 13%, which comes out the dark amber #3A2D15
      the AI Ready case-study bands carry. */
   --pattern-ink: color-mix(in srgb, var(--color-bg-inverse) 5.5%, transparent);
-  --pattern-ink-dots: color-mix(in srgb, var(--golden) 13%, transparent);
+  --pattern-ink-pegboard: color-mix(in srgb, var(--golden) 13%, transparent);
 
   --color-border: var(--gray-850);
   --color-border-inputs: var(--gray-700);

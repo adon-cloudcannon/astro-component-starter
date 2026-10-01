@@ -97,7 +97,7 @@ pageSections:
     headingSize: lg
     background:
       type: pattern
-      pattern: dots
+      pattern: pegboard
       mask: fade
     backgroundColor: base
     haze:

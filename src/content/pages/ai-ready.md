@@ -158,7 +158,7 @@ pageSections:
     authorImage: /src/assets/images/marketing/ellipse-287.jpg
     background:
       type: pattern
-      pattern: dots
+      pattern: pegboard
       mask: none
     backgroundColor: base
     colorScheme: dark

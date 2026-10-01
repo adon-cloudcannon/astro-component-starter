@@ -179,7 +179,7 @@ pageSections:
     headingSize: lg
     background:
       type: pattern
-      pattern: dots
+      pattern: pegboard
       mask: none
     backgroundColor: surface
     buttonSections:

@@ -16,7 +16,7 @@ pageSections:
     imageOverflow: 83
     background:
       type: pattern
-      pattern: dots
+      pattern: pegboard
       mask: none
     haze:
       - x: 0.2563
@@ -132,7 +132,7 @@ pageSections:
     authorImage: /src/assets/images/marketing/ellipse-287.jpg
     background:
       type: pattern
-      pattern: dots
+      pattern: pegboard
       mask: none
     backgroundColor: base
     colorScheme: dark

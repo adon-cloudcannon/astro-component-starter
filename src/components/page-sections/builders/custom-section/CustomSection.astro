@@ -69,9 +69,9 @@ const hazePools = haze === true ? [{}] : Array.isArray(haze) ? haze : haze ? [ha
 const usesFixedBackground = fixed && (bgType !== "image" || !!imageSource);
 
 // A named shape is drawn rather than fetched, and beats any file still set on
-// the block. `grid` and `dots` are the whole set: the pegboard turned out to
-// be nine dots on a 33px pitch, which is the dot pattern with its spacing
-// changed rather than a third thing.
+// the block. `grid` and `pegboard` are the whole set the Design System page
+// names, along with the scratched sheets: the denser band turned out to be
+// the same peg board on a 33px pitch rather than a pattern of its own.
 const patternShape = bgType === "pattern" && pattern ? pattern : null;
 const patternImageUrl =
   bgType === "pattern" && !patternShape && imageSource ? resolveImageSource(imageSource) : null;
@@ -475,11 +475,13 @@ const arrayDataAttributes =
         > .background-pattern {
           /* One pitch, one rule, one dot, for every band.
 
-             The design is not actually this consistent — it draws dots at 40,
-             33 and 21, with a 6px dot on the first and about 4.2 on the other
-             two — but those are near-identical patterns, and carrying them
-             meant every band had to choose between them. Deliberately dropped:
-             one dots and one grid is the whole set. See CLAUDE.md.
+             The design is not actually this consistent — it draws the peg
+             board at 40, 33 and 21, with a 6px dot on the first and about 4.2
+             on the other two — but those are near-identical patterns, and
+             carrying them meant every band had to choose between them.
+             Deliberately dropped: one peg board and one grid is the whole set,
+             which is the count the Design System page gives too. See
+             CLAUDE.md.
 
              The numbers themselves are measured. The rule is 2px solid with no
              anti-aliasing of its own, read off the tile this replaced where it
@@ -515,10 +517,10 @@ const arrayDataAttributes =
           /* Half a pixel of feather on the edge. The tile these replaced
              carried its own anti-aliasing — a 6px dot was 16 core pixels with
              16 more part-way — and a hard colour stop draws a stair instead. */
-          &.pattern-dots {
+          &.pattern-pegboard {
             background-image: radial-gradient(
               circle at center,
-              var(--pattern-ink-dots) 0 calc(var(--pattern-dot) / 2 - 0.5px),
+              var(--pattern-ink-pegboard) 0 calc(var(--pattern-dot) / 2 - 0.5px),
               transparent calc(var(--pattern-dot) / 2 + 0.5px)
             );
             background-size: var(--pattern-pitch) var(--pattern-pitch);
