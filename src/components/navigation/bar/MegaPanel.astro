@@ -218,14 +218,12 @@ const accentStyle = accent
          it turned the flecks into scratches and put a black ground behind the
          drawing.
 
-         The design means white, and draws something a shade softer — the file
-         has a 30% #333333 rectangle under the grain, which is too grey, but
-         flat white is harsher than the artwork. A little of the panel's own
-         cream takes the edge off. One token, if it wants tuning. */
-      background-color: var(
-        --mega-feature-backing,
-        color-mix(in srgb, var(--midnight) 8%, var(--color-bg))
-      );
+         White. The file has a 30% #333333 rectangle under the grain, which
+         reads as a mid grey and is not what the card wants; a cream tinted
+         with 8% of it was the first try here and reads grey too, because the
+         drawings are mostly pale and anything off-white behind them shows as
+         a dull panel rather than as paper. One token, if it wants tuning. */
+      background-color: var(--mega-feature-backing, var(--white));
       border-radius: var(--radius-card);
       color: var(--white);
       display: grid;
@@ -259,10 +257,7 @@ const accentStyle = accent
        so: the scratches show the same thing the cut-out illustration beside
        them does. That is the ink token doing its job, not a tuning fudge. */
     .bar .mega-feature-panel.scratched {
-      --scratch-ink: var(
-        --mega-feature-backing,
-        color-mix(in srgb, var(--midnight) 8%, var(--color-bg))
-      );
+      --scratch-ink: var(--mega-feature-backing, var(--white));
     }
 
     .bar .mega-feature-heading {
