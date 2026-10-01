@@ -36,8 +36,12 @@ pageSections:
       - text: No credit card · 14-day free trial · No lock-in
         iconName: check
         iconColor: default
-  - _component: page-sections/builders/custom-section
+  - _component: page-sections/explainers/editor-demo
+    eyebrow: INTERACTIVE DEMO
+    heading: Try it out, and see if it’s right for you and your team.
     backgroundColor: base
+    alignmentHorizontal: center
+    headingSize: lg
   - _component: page-sections/proof/testimonial-quote
     variant: static
     quoteSize: sm
