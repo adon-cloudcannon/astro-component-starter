@@ -150,14 +150,14 @@ pageSections:
       cards:
         - env: production
           badge: P
-          title: Production – Live Site
+          title: "Production: Live Site"
           subtitle: State University
           domain: stateuniversity.com
           built: Built 5 days ago
           image: /src/assets/images/marketing/card-image-4-3806-72846.png
           imageAlt: ""
         - env: staging
-          badge: T
+          badge: S
           title: "Staging: Testing Site"
           subtitle: State University
           domain: funky-pear.cloudvent.net
