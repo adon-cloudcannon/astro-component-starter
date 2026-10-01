@@ -35,6 +35,22 @@ const place = (el: HTMLElement, box: ReturnType<typeof boxIn>) => {
 };
 
 /**
+ * Mark the card the flow is on, which is what draws it in front with the
+ * design's heavier rule.
+ *
+ * Once everything matches there is nothing to act on, so the mark goes to
+ * production: it is the card that just received, and the end state still
+ * wants somewhere to look.
+ */
+const markLive = (stage: HTMLElement) => {
+  const flow = stage.dataset.flow || "";
+  const live = flow === "synced" ? "production" : flow;
+  stage.querySelectorAll<HTMLElement>(".site-cards-card").forEach((card) => {
+    card.toggleAttribute("data-live", card.dataset.env === live);
+  });
+};
+
+/**
  * Put the control on the card whose turn it is.
  *
  * As shares of the stage, not pixels: the stage holds its aspect ratio, so a
@@ -42,6 +58,9 @@ const place = (el: HTMLElement, box: ReturnType<typeof boxIn>) => {
  * one.
  */
 const moveControl = (stage: HTMLElement) => {
+  markLive(stage);
+
+  // `synced` is a state, not a card, so there is nothing left to place.
   const card = cardFor(stage, stage.dataset.flow || "");
   if (!card) return;
 

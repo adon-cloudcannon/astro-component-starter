@@ -216,16 +216,48 @@ const first = placed.find((card) => card.env === "branch") ? "branch" : "staging
       /* 8.53 of 708. */
       border-radius: 1.204cqi;
       background: var(--white);
+      /* The design's hairline, 0.85 at #CFCFCF, floored at a device pixel so
+         it does not vanish on a narrow container. box-sizing keeps the card
+         259 wide when the live one takes a heavier rule. */
+      border: max(1px, 0.12cqi) solid #cfcfcf;
+      box-sizing: border-box;
       overflow: hidden;
-      box-shadow:
-        0 0.5cqi 1.5cqi color-mix(in srgb, var(--midnight) 10%, transparent),
-        0 0.1cqi 0.4cqi color-mix(in srgb, var(--midnight) 8%, transparent);
+      transition:
+        border-color var(--animation-normal) var(--ease-in-out),
+        box-shadow var(--animation-normal) var(--ease-in-out);
     }
 
-    /* Front to back in the order the work runs: the branch is the card you
-       act on, so it is on top, then staging, then the live site behind both.
-       The design stacks staging highest, which reads as a composition rather
-       than as a sequence. */
+    /* The card the flow is on.
+
+       The design marks its front card exactly this way: 1.92 at #333333 with
+       a drop shadow, against the 0.85 hairline the other two carry. Here that
+       mark travels, so the card you can act on is the one that stands out,
+       and a card that has published drops back to the hairline. */
+    /* `.site-cards` in the selector on purpose. The resting order below is
+       `.site-cards-card[data-env="..."]`, which is two classes-worth of
+       specificity, the same as this was; equal rules fall to source order and
+       the env ones come later, so the live card took the heavy rule and
+       stayed behind its neighbour. */
+    .site-cards .site-cards-card[data-live] {
+      border-color: #333333;
+      /* The second pixel of the rule is a ring just outside the border, not a
+         wider border and not an inset shadow.
+
+         A wider border takes its width out of the content at border-box, and
+         two pixels was enough to truncate the branch card's title. An inset
+         shadow is painted under the card's own children, so the photo running
+         to the top edge covered that part of it and the rule came out thin
+         along the top and full thickness at the foot. A 0-offset spread sits
+         outside the box, where nothing in the card can paint over it, and it
+         follows the radius. */
+      box-shadow:
+        0 0 0 max(1px, 0.151cqi) #333333,
+        0 1.98cqi 2.646cqi color-mix(in srgb, #000 10%, transparent);
+      z-index: 4;
+    }
+
+    /* The cascade's resting order, which the live card above overrides. A
+       card that has published falls back into it. */
     .site-cards-card[data-env="branch"] {
       z-index: 3;
     }
