@@ -124,38 +124,41 @@ pageSections:
           the first page.** And we hadn’t even added fresh content to
           it yet.
         authorName: Roy Gabriel
-        authorDescription: Vice President Operations, Gabriel Maggio Construction
+        authorDescription: Vice President Operations,
+        company: Gabriel Maggio Construction
+        linkText: Read case study
+        accentColor: harbour
+        size: wide
+      - text: >-
+          CloudCannon is the ideal CMS for us — editors can update their content easily, and it’s
+          saved back to our Git repo, so we **never feel locked in.**
+        authorName: Cayvon Morady
+        authorDescription: Senior Technical Program Manager,
+        company: Twitch
         linkText: Read case study
         accentColor: sunset
-        size: wide
-      - logo: /src/assets/images/marketing/logos/twitch.svg
-        logoMonochrome: true
-        logoAlt: Twitch
-        text: >-
-          CloudCannon is the ideal CMS for us — editors can update their content easily, and it’s
-          saved back to our Git repo, so we never feel locked in.
-        authorName: Cayvon Morady
-        authorDescription: Senior Technical Program Manager, Twitch
-        linkText: Read case study
         size: standard
-      - company: Firebrand
-        text: When we show the Visual Editor during our meetings, their eyes light up.
+      - text: When we show the Visual Editor during our meetings, **their eyes light up.**
         authorName: Alex Murray
-        authorDescription: Digital Design Director, Firebrand
+        quoteSize: large
+        authorDescription: Digital Design Director,
+        company: Firebrand
         linkText: Read case study
+        accentColor: blush
         size: standard
-      - logo: /src/assets/images/marketing/logos/DX.svg
-        logoMonochrome: true
-        logoAlt: ''
-        text: |-
+      - text: |-
           **400% increase in leads. $150,000 saved.** That is the
           equivalent of a full-time developer’s salary.
         authorName: Abi Noda
-        authorDescription: CEO, DX
+        quoteSize: large
+        authorDescription: CEO,
+        company: DX
         linkText: Read case study
         accentColor: golden
+        quoteMarks: false
         size: wide
-    columns: 3
+    columns: 2
+    stagger: true
     eyebrow: SUCCESS STORIES
     heading: What clients are saying
     headingSize: md

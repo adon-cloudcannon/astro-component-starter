@@ -89,6 +89,7 @@ _structures:
           link: ""
           accentColor: ""
           size: standard
+          quoteSize: standard
           tone: base
         preview:
           text:
@@ -153,6 +154,15 @@ _structures:
               paths:
                 static: ""
                 uploads: src/assets/images
+          quoteSize:
+            type: select
+            comment: The quote's own size. Large is 28px against the standard 24px.
+            options:
+              values:
+                - id: standard
+                  name: Standard (24px)
+                - id: large
+                  name: Large (28px)
           size:
             type: select
             comment: How much of the grid this quote takes. Featured is two columns by two rows, and Full width spans the whole row. On small screens every quote is full width.

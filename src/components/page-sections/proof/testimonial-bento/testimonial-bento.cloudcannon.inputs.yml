@@ -65,6 +65,12 @@ columns:
         name: 3 Columns
       - id: "4"
         name: 4 Columns
+stagger:
+  type: switch
+  label: Stagger
+  comment: >-
+    Two columns only. Draws the design's bento: a wide card beside a narrow
+    one, then the two the other way round on the next row.
 
 # --- section wrapper inputs (CustomSection) ---
 # Configures the CustomSection wrapper, not this section's own content. Inline

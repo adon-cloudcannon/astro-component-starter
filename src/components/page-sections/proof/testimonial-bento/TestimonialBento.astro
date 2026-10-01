@@ -25,6 +25,15 @@ const {
   subtextWidth,
   testimonials = [],
   columns = "3",
+  /**
+   * The design's own two-up bento: a wide card beside a narrow one, then the
+   * two the other way round on the next row.
+   *
+   * Measured off `downloaded-nodes/Testimonial Bento.html`, which draws the
+   * four cards at 709.8, 450.2, 450.2 and 709.8 in an 1180 row. Only an
+   * option at two columns; three and four across are drawn even.
+   */
+  stagger = false,
   sectionLabel,
   maxContentWidth = "xl",
   paddingHorizontal = "gutter",
@@ -86,6 +95,7 @@ const columnCount = ["2", "4"].includes(String(columns)) ? String(columns) : "3"
       <div
         class="testimonial-bento-grid"
         data-columns={columnCount}
+        data-stagger={stagger && columnCount === "2" ? "" : undefined}
         data-editable="array"
         data-prop="testimonials"
         data-direction="row"
@@ -111,6 +121,21 @@ const columnCount = ["2", "4"].includes(String(columns)) ? String(columns) : "3"
         container-type: inline-size;
       }
 
+      /* The cards sit in the file's other column, 1180, and the copy above
+         them stays in 1040. The export is 1180 wide exactly.
+
+         Only the row breaks out, by half the difference, which is the pattern
+         the pricing tiers use. `inline-size: auto` as well, because the frame
+         is sized against the 1040 column and negative margins alone slide it
+         left rather than widening it. Guarded on there being room for it:
+         1180 and both gutters. */
+      @media (width >= 1236px) {
+        .testimonial-bento-frame {
+          inline-size: auto;
+          margin-inline: calc((var(--content-width-xl) - var(--content-width-wide)) / 2);
+        }
+      }
+
       .testimonial-bento-grid {
         display: grid;
         gap: var(--spacing-md);
@@ -119,6 +144,45 @@ const columnCount = ["2", "4"].includes(String(columns)) ? String(columns) : "3"
 
         &[data-columns="2"] {
           grid-template-columns: repeat(2, minmax(0, 1fr));
+        }
+
+        /* Staggered, the row is a flex line rather than a grid.
+
+           Grid sizes a track once for every row in it, so the pattern the
+           design draws — wide beside narrow, then narrow beside wide — cannot
+           be a two-column template however the items are placed. Flex sizes
+           each item, which is also how the file itself writes it: the export
+           carries four cards at 709.8, 450.2, 450.2 and 709.8 of an 1180 row.
+
+           The shares are of the space left after the gap, so the pair adds up
+           to the row whatever the container is. */
+        &[data-columns="2"][data-stagger] {
+          /* 55/45, not the design's 61/39.
+
+             The file draws 709.8 against 450.2 of an 1180 row, which is a
+             third again. That much difference reads as one card having been
+             widened rather than as a pair, and it squeezes the narrow card's
+             attribution to three lines. Nearer even keeps the stagger
+             legible. This is a decision, not a gap in the reading. */
+          --testimonial-bento-wide: 0.55;
+          --testimonial-bento-narrow: 0.45;
+          /* 1180 less 709.8 and 450.2. */
+          --testimonial-bento-gap: 20px;
+
+          display: flex;
+          flex-wrap: wrap;
+          gap: var(--testimonial-bento-gap);
+        }
+
+        &[data-columns="2"][data-stagger] > * {
+          flex: 0 1 calc((100% - var(--testimonial-bento-gap)) * var(--testimonial-bento-wide));
+        }
+
+        /* Second of one row and first of the next, which is what turns the
+           pair over. */
+        &[data-columns="2"][data-stagger] > :nth-child(4n + 2),
+        &[data-columns="2"][data-stagger] > :nth-child(4n + 3) {
+          flex: 0 1 calc((100% - var(--testimonial-bento-gap)) * var(--testimonial-bento-narrow));
         }
 
         &[data-columns="4"] {
@@ -138,6 +202,17 @@ const columnCount = ["2", "4"].includes(String(columns)) ? String(columns) : "3"
           &,
           &[data-columns="4"] {
             grid-template-columns: repeat(2, minmax(0, 1fr));
+          }
+        }
+
+        /* The narrow card is 39% of the row, so it reaches a width a quote
+           cannot be set in well before a plain half does. One per line from
+           here rather than carrying the stagger down into it. */
+        @container (width <= 680px) {
+          &[data-columns="2"][data-stagger] > *,
+          &[data-columns="2"][data-stagger] > :nth-child(4n + 2),
+          &[data-columns="2"][data-stagger] > :nth-child(4n + 3) {
+            flex: 1 1 100%;
           }
         }
 
