@@ -408,6 +408,7 @@ pageSections:
     variant: static
     quoteSize: lg
     tone: base
+    cardWidth: medium
     quotes:
       - text: I almost **forgot** that website maintenance was a thing.
         authorName: Sindre Gusdal
