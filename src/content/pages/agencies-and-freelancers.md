@@ -227,11 +227,15 @@ pageSections:
                 iconName: bolt
                 iconColor: sunset
     alignmentHorizontal: center
-  - _component: page-sections/conversion/pricing-tiers
+  - _component: page-sections/conversion/cta-center
     heading: Join a Partner Program that rewards good work
     subtext: As you bring in new clients, you’ll gain points and more benefits.
     subtextSize: lg
     backgroundColor: base
     alignmentHorizontal: center
     headingSize: lg
+    buttonSections:
+      - _component: building-blocks/core-elements/button
+        variant: primary
+        text: Learn more about the Partner Program
 ---
