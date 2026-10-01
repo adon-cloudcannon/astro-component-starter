@@ -38,6 +38,21 @@ tone:
         name: Dark
       - id: light
         name: Light
+cardWidth:
+  type: select
+  label: Card width
+  comment: >-
+    How much of the column the card takes. Narrow is the testimonial bento's
+    wide card. A split stacks when the card gets below 680px, so a narrow one
+    draws as a stack.
+  options:
+    values:
+      - id: full
+        name: Full width
+      - id: medium
+        name: Medium (72%)
+      - id: narrow
+        name: Narrow (55%)
 bordered:
   type: switch
   label: Outline the card

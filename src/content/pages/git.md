@@ -218,6 +218,7 @@ pageSections:
     variant: static
     quoteSize: sm
     tone: light
+    cardWidth: narrow
     bordered: true
     quotes:
       - text: >-

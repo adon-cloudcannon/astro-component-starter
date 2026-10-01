@@ -75,6 +75,18 @@ const {
    * accents are for a dark ground and will not hold on a pale one.
    */
   tone = "base",
+  /**
+   * How much of the column the card takes.
+   *
+   * `full` is the design's: the sheet draws every one of these at the full
+   * width of its frame. `narrow` is the bento's wide card, 55% of the row,
+   * which is the one width this project has already decided on, and `medium`
+   * sits between the two for a quote that is too long to hold at 55.
+   *
+   * The splits stack below 680 of card, so a narrow one draws as a stack
+   * whatever the layout says.
+   */
+  cardWidth = "full",
   sectionLabel,
   maxContentWidth = "xl",
   paddingHorizontal = "gutter",
@@ -116,6 +128,7 @@ const items: Quote[] = (isCarousel ? quotes : quotes.slice(0, 1)) as Quote[];
     useDefaultEditableBinding={useDefaultEditableBinding}
     {...htmlAttributes}
   >
+    <div class="testimonial-quote-frame" data-width={cardWidth === "full" ? undefined : cardWidth}>
     <div
       class="testimonial-quote-card"
       data-layout={layout}
@@ -247,12 +260,38 @@ const items: Quote[] = (isCarousel ? quotes : quotes.slice(0, 1)) as Quote[];
         </div>
       )}
     </div>
+    </div>
   </CustomSection>
 )}
 
 <style is:global>
   @layer page-sections {
     .testimonial-quote {
+      /* The frame carries the width and is what the card is measured against.
+
+         A query container rather than a viewport breakpoint, because a card
+         set to 55% of the column is as narrow at 1280 as a full-width one is
+         on a tablet, and the splits have to stack for the same reason in
+         both: a 22% person column is narrower than the face that goes in it.
+
+         `justify-self`, not an auto inline margin: on a grid item the margin
+         shrinks the item rather than centring it. */
+      .testimonial-quote-frame {
+        container-type: inline-size;
+        inline-size: 100%;
+        justify-self: center;
+      }
+
+      /* 55% is the bento's wide card, the one width this project has already
+         decided on. */
+      .testimonial-quote-frame[data-width="narrow"] {
+        inline-size: 55%;
+      }
+
+      .testimonial-quote-frame[data-width="medium"] {
+        inline-size: 72%;
+      }
+
       .testimonial-quote-card {
         /* The bento's card, at this one's size.
 
@@ -612,9 +651,10 @@ const items: Quote[] = (isCarousel ? quotes : quotes.slice(0, 1)) as Quote[];
 
       /* --- narrow ----------------------------------------------------- */
 
-      /* The splits stack. A 22% column is 80px on a phone, which is narrower
-         than the face that goes in it. */
-      @media (width <= 767px) {
+      /* The splits stack, and the padding comes in. Measured on the card
+         rather than on the window, so a narrow card does this on a desktop
+         too. */
+      @container (width <= 680px) {
         .testimonial-quote-card {
           --testimonial-quote-pad: 24px;
         }
