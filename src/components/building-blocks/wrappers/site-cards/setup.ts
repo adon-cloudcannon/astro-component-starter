@@ -182,6 +182,7 @@ const publish = (stage: Stage) => {
   runPulse(stage, from.dataset.env || "");
 
   const arriving = source.innerHTML;
+  const next = FLOW[Math.min(FLOW.indexOf(stage.dataset.flow || "") + 1, FLOW.length - 1)];
 
   window.setTimeout(() => {
     const incoming = document.createElement("span");
@@ -192,19 +193,24 @@ const publish = (stage: Stage) => {
     // One frame for the layer to exist at zero, one for the browser to notice
     // it changed. In a single frame there is nothing to transition from.
     requestAnimationFrame(() => {
-      requestAnimationFrame(() => incoming.setAttribute("data-shown", ""));
+      requestAnimationFrame(() => {
+        // The arrival is one event, so it is one frame: the new screenshot
+        // starts fading up, the rule moves to this card and the stack
+        // reorders all on the same tick. Advancing the flow after the fade
+        // instead left the picture changing half a second before the card it
+        // belongs to looked like the live one.
+        incoming.setAttribute("data-shown", "");
+        stage.dataset.flow = next;
+        refresh(stage);
+      });
     });
 
     window.setTimeout(() => {
       // Collapse back to one picture, so a second publish has a single layer
       // to read and copy.
       target.innerHTML = arriving;
-      stage.dataset.flow =
-        FLOW[Math.min(FLOW.indexOf(stage.dataset.flow || "") + 1, FLOW.length - 1)];
-      // `refresh` owns every button's state, so nothing is re-enabled here.
-      refresh(stage);
-    }, FADE + 60);
-  }, PULSE - 120);
+    }, FADE + 90);
+  }, PULSE);
 };
 
 export const setupSiteCards = (stage: Stage) => {

@@ -271,9 +271,11 @@ const first = placed.find((card) => card.env === "branch") ? "branch" : "staging
       border: max(1px, 0.12cqi) solid #cfcfcf;
       box-sizing: border-box;
       overflow: hidden;
+      /* The same length as the picture's cross-fade, so the rule arriving and
+         the screenshot arriving are one movement rather than two. */
       transition:
-        border-color var(--animation-normal) var(--ease-in-out),
-        box-shadow var(--animation-normal) var(--ease-in-out);
+        border-color var(--site-cards-fade, 0.45s) var(--ease-in-out),
+        box-shadow var(--site-cards-fade, 0.45s) var(--ease-in-out);
     }
 
     /* The card the flow is on.
