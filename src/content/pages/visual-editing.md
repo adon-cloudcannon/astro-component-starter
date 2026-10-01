@@ -153,6 +153,7 @@ pageSections:
           title: Production – Live Site
           subtitle: State University
           domain: stateuniversity.com
+          built: Built 5 days ago
           image: /src/assets/images/marketing/card-image-4-3806-72846.png
           imageAlt: ""
         - env: staging

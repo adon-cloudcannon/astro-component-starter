@@ -56,9 +56,13 @@ const {
 
 // The design's own three positions, used in order for any card that does not
 // carry its own. A fourth would stack on the third rather than guessing.
+// Even steps. The design's are 211 then 238 across and 50 then 89 down, so
+// each card overlaps its neighbour by a different amount — 48 on one side and
+// 21 on the other — which reads as a slip rather than a cascade. 224.5 and 41
+// put the same 34.5 of card behind each one.
 const PLACES = [
   { x: 0, y: 0 },
-  { x: 211 / 708, y: 40 / 421 },
+  { x: 224.5 / 708, y: 41 / 421 },
   { x: 449 / 708, y: 82 / 421 },
 ];
 
@@ -100,12 +104,35 @@ const first = placed.find((card) => card.env === "branch") ? "branch" : "staging
         viewBox="0 0 708 421"
         fill="none"
         aria-hidden="true"
-        preserveAspectRatio="none"
       >
-        <path class="site-cards-edge" data-edge="branch" d="M449 347 H 340 V 313" />
-        <path class="site-cards-edge" data-edge="branch" d="M330 326 L340 310 L350 326" />
-        <path class="site-cards-edge" data-edge="staging" d="M211 305 H 114 V 249" />
-        <path class="site-cards-edge" data-edge="staging" d="M104 262 L114 246 L124 262" />
+        {/* Each edge is a U: down out of the card that publishes, across, and
+            up into the one that receives. A right angle out of a corner reads
+            as a bracket around the cards; coming down first says the work
+            leaves this card and arrives at that one.
+
+            Both are the same shape against their own pair: each leaves 40 in
+            from its card's left edge, drops 30 below that card's foot, runs
+            74.5 across, and rises into the card to its left 190 in from that
+            one's edge. With all three cards carrying the same rows they are
+            the same height, so the second edge is the first translated by
+            exactly one step of the cascade: -225 across and -41 down.
+
+            The corners are quarter arcs of 14. No `preserveAspectRatio` and
+            no `non-scaling-stroke`: the stage holds the viewBox's own aspect
+            ratio, so the drawing scales evenly on its own, and keeping the
+            stroke in path units is what lets the dot below be a dash measured
+            along the path. */}
+        <path class="site-cards-edge" data-edge="branch"
+          d="M489 347 V363 Q489 377 475 377 H428 Q414 377 414 363 V313" />
+        <path class="site-cards-edge" data-edge="branch" d="M404 326 L414 310 L424 326" />
+        <path class="site-cards-pulse" data-edge="branch"
+          d="M489 347 V363 Q489 377 475 377 H428 Q414 377 414 363 V313" />
+
+        <path class="site-cards-edge" data-edge="staging"
+          d="M264 306 V322 Q264 336 250 336 H203 Q189 336 189 322 V272" />
+        <path class="site-cards-edge" data-edge="staging" d="M179 285 L189 269 L199 285" />
+        <path class="site-cards-pulse" data-edge="staging"
+          d="M264 306 V322 Q264 336 250 336 H203 Q189 336 189 322 V272" />
       </svg>
     )}
 
@@ -277,11 +304,29 @@ const first = placed.find((card) => card.env === "branch") ? "branch" : "staging
       display: block;
       inline-size: 100%;
       overflow: hidden;
+      position: relative;
+    }
+
+    /* The picture that arrives, laid over the one that is there and faded up.
+       Nothing travels between the cards any more: the dot on the edge says
+       where the work went, and the card it lands on just changes. */
+    .site-cards-incoming {
+      inset: 0;
+      opacity: 0;
+      position: absolute;
+      transition: opacity var(--site-cards-fade, 0.45s) var(--ease-in-out);
+    }
+
+    .site-cards-incoming[data-shown] {
+      opacity: 1;
     }
 
     .site-cards-photo img,
     .site-cards-photo picture,
-    .site-cards-photo .image-inner {
+    .site-cards-photo .image-inner,
+    .site-cards-incoming img,
+    .site-cards-incoming picture,
+    .site-cards-incoming .image-inner {
       block-size: 100%;
       display: block;
       inline-size: 100%;
@@ -442,43 +487,17 @@ const first = placed.find((card) => card.env === "branch") ? "branch" : "staging
       text-underline-offset: 0.35em;
     }
 
-    /* The travel is the whole point of the graphic, so it is not removed for
+    /* The change is the whole point of the graphic, so it is not removed for
        a reader who asks for less motion, only shortened to a cut. The picture
        still changes card, which is the information. */
     @media (prefers-reduced-motion: reduce) {
       .site-cards {
-        --site-cards-travel: 0.01s;
+        --site-cards-fade: 0.01s;
       }
 
       .site-cards-publish {
         transition: opacity var(--animation-normal) var(--ease-in-out);
       }
-    }
-
-    /* The picture that travels. A copy of the source photo, laid over the
-       stage in its coordinates and moved to the target's box; the real swap
-       happens underneath when it lands. */
-    .site-cards-ghost {
-      overflow: hidden;
-      pointer-events: none;
-      position: absolute;
-      z-index: 5;
-      border-radius: 1.204cqi;
-      box-shadow: 0 1cqi 2.5cqi color-mix(in srgb, var(--midnight) 22%, transparent);
-      transition:
-        inset-inline-start var(--site-cards-travel, 0.6s) var(--ease-in-out),
-        inset-block-start var(--site-cards-travel, 0.6s) var(--ease-in-out),
-        inline-size var(--site-cards-travel, 0.6s) var(--ease-in-out),
-        block-size var(--site-cards-travel, 0.6s) var(--ease-in-out);
-    }
-
-    .site-cards-ghost img,
-    .site-cards-ghost picture,
-    .site-cards-ghost .image-inner {
-      block-size: 100%;
-      display: block;
-      inline-size: 100%;
-      object-fit: cover;
     }
 
     .site-cards-wire {
@@ -491,15 +510,30 @@ const first = placed.find((card) => card.env === "branch") ? "branch" : "staging
       z-index: 0;
     }
 
-    .site-cards-wire path {
+    .site-cards-edge {
       stroke: #212121;
       stroke-width: 1.75;
+      stroke-linecap: round;
+      stroke-linejoin: round;
       opacity: 0.22;
-      transition: opacity var(--animation-normal) var(--ease-in-out),
+      transition:
+        opacity var(--animation-normal) var(--ease-in-out),
         stroke var(--animation-normal) var(--ease-in-out);
-      /* The viewBox is stretched to the stage, so a stroke in its own units
-         would squash with it. */
-      vector-effect: non-scaling-stroke;
+    }
+
+    /* The dot that runs the edge when you publish. It is the edge's own
+       stroke, cut to a single round dash and walked along with the dash
+       offset, so it follows every curve without anything having to know where
+       the curve goes. */
+    .site-cards-pulse {
+      stroke: var(--sunset, #d85a2c);
+      stroke-width: 9;
+      stroke-linecap: round;
+      opacity: 0;
+    }
+
+    .site-cards-pulse[data-running] {
+      opacity: 1;
     }
 
     /* The edge about to be used is the only one drawn at full strength, so

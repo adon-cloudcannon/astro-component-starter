@@ -3,12 +3,11 @@
  *
  * The picture is a sequence: the branch holds work the other two have not
  * seen, publishing sends it to staging, and publishing again sends it to
- * production. The thing that moves is the screenshot, because that is the
- * part a reader can see change.
+ * production. Nothing is carried between the cards: a dot runs the edge, and
+ * the card it arrives at fades to the new screenshot.
  *
  * Everything is measured against the stage rather than the page, so the same
- * code works at any size the container gives it, and the ghost that travels
- * is placed in the stage's own box.
+ * code works at any size the container gives it.
  */
 type Stage = HTMLElement & { __siteCardsBound?: boolean };
 
@@ -20,19 +19,16 @@ const cardFor = (stage: HTMLElement, env: string) =>
 const photoOf = (card: HTMLElement | null) =>
   card?.querySelector<HTMLElement>("[data-photo]") ?? null;
 
-/** A box in the stage's coordinates, which is what the ghost is placed in. */
+/** A box in the stage's own coordinates. */
 const boxIn = (stage: HTMLElement, el: HTMLElement) => {
   const a = stage.getBoundingClientRect();
   const b = el.getBoundingClientRect();
   return { left: b.left - a.left, top: b.top - a.top, width: b.width, height: b.height };
 };
 
-const place = (el: HTMLElement, box: ReturnType<typeof boxIn>) => {
-  el.style.setProperty("inset-inline-start", `${box.left}px`);
-  el.style.setProperty("inset-block-start", `${box.top}px`);
-  el.style.setProperty("inline-size", `${box.width}px`);
-  el.style.setProperty("block-size", `${box.height}px`);
-};
+/** How long the dot takes to run an edge, and the cross-fade after it. */
+const PULSE = 700;
+const FADE = 450;
 
 /**
  * Mark the card the flow is on, which is what draws it in front with the
@@ -71,6 +67,36 @@ const moveControl = (stage: HTMLElement) => {
   stage.style.setProperty("--flow-bottom", `${((box.top + box.height) / height) * 100}%`);
 };
 
+/**
+ * Run the dot along the edge that is being used.
+ *
+ * The dot is the edge's own stroke cut to one round dash and walked along
+ * with the dash offset, so it follows the curve without anything having to
+ * know where the curve goes. The length comes from the path itself.
+ */
+const runPulse = (stage: HTMLElement, edge: string) => {
+  const path = stage.querySelector<SVGPathElement>(`.site-cards-pulse[data-edge="${edge}"]`);
+  if (!path || typeof path.getTotalLength !== "function") return;
+
+  const length = path.getTotalLength();
+  path.style.strokeDasharray = `0.01 ${length}`;
+  path.setAttribute("data-running", "");
+
+  const run = path.animate(
+    [{ strokeDashoffset: 0 }, { strokeDashoffset: -length }],
+    { duration: PULSE, easing: "cubic-bezier(.4, 0, .2, 1)" }
+  );
+  run.addEventListener("finish", () => path.removeAttribute("data-running"));
+  run.addEventListener("cancel", () => path.removeAttribute("data-running"));
+};
+
+/**
+ * Hand the branch's screenshot to the card below it.
+ *
+ * The picture does not travel. The dot on the edge says where the work went,
+ * and the card it lands on changes: the new screenshot is laid over the old
+ * one and faded up, then the layers are collapsed back to one.
+ */
 const publish = (stage: Stage) => {
   const from = cardFor(stage, stage.dataset.flow || "");
   const to = cardFor(stage, from?.dataset.next || "");
@@ -81,38 +107,32 @@ const publish = (stage: Stage) => {
   const button = stage.querySelector<HTMLButtonElement>("[data-publish]");
   if (button) button.disabled = true;
 
-  const ghost = document.createElement("div");
-  ghost.className = "site-cards-ghost";
-  ghost.innerHTML = source.innerHTML;
-  place(ghost, boxIn(stage, source));
-  stage.append(ghost);
+  runPulse(stage, from.dataset.env || "");
 
-  // Two frames: one for the ghost to take its starting box, one for the
-  // browser to notice the change. In one frame the transition never runs and
-  // the picture teleports.
-  requestAnimationFrame(() => {
-    requestAnimationFrame(() => place(ghost, boxIn(stage, target)));
-  });
+  const arriving = source.innerHTML;
 
-  const land = () => {
-    target.innerHTML = source.innerHTML;
-    ghost.remove();
-    stage.dataset.flow = FLOW[Math.min(FLOW.indexOf(stage.dataset.flow || "") + 1, FLOW.length - 1)];
-    moveControl(stage);
-    if (button) button.disabled = false;
-  };
+  window.setTimeout(() => {
+    const incoming = document.createElement("span");
+    incoming.className = "site-cards-incoming";
+    incoming.innerHTML = arriving;
+    target.append(incoming);
 
-  // `transitionend` fires per property, so it is taken once and a timer backs
-  // it up: a tab that is hidden when the click lands never fires one at all.
-  let done = false;
-  const once = () => {
-    if (done) return;
-    done = true;
-    ghost.removeEventListener("transitionend", once);
-    land();
-  };
-  ghost.addEventListener("transitionend", once);
-  window.setTimeout(once, 1200);
+    // One frame for the layer to exist at zero, one for the browser to notice
+    // it changed. In a single frame there is nothing to transition from.
+    requestAnimationFrame(() => {
+      requestAnimationFrame(() => incoming.setAttribute("data-shown", ""));
+    });
+
+    window.setTimeout(() => {
+      // Collapse back to one picture, so a second publish has a single layer
+      // to read and copy.
+      target.innerHTML = arriving;
+      stage.dataset.flow =
+        FLOW[Math.min(FLOW.indexOf(stage.dataset.flow || "") + 1, FLOW.length - 1)];
+      moveControl(stage);
+      if (button) button.disabled = false;
+    }, FADE + 60);
+  }, PULSE - 120);
 };
 
 export const setupSiteCards = (stage: Stage) => {
