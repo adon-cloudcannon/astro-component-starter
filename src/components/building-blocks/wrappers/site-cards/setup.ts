@@ -38,19 +38,38 @@ const FADE = 450;
  * production: it is the card that just received, and the end state still
  * wants somewhere to look.
  */
+/** The order the work runs in, which is also the order the cards stack in. */
+const CHAIN = ["branch", "staging", "production"];
+
 const markLive = (stage: HTMLElement) => {
   const flow = stage.dataset.flow || "";
   const live = flow === "synced" ? "production" : flow;
+  const at = CHAIN.indexOf(live);
+
   stage.querySelectorAll<HTMLElement>(".site-cards-card").forEach((card) => {
     const isLive = card.dataset.env === live;
     card.toggleAttribute("data-live", isLive);
 
+    /**
+     * Stack from the card in hand, not from a fixed cascade.
+     *
+     * A fixed order leaves the marked card behind an unmarked one: staging
+     * takes the heavy rule and the branch card still overlaps it. Raising
+     * only the live card is worse — the card that has just published drops
+     * two places and flips under one it was in front of.
+     *
+     * So: the live card on top, the one that fed it behind that, and the
+     * ones it has not reached yet falling away in the cascade's own order.
+     * Nothing moves more than one place at a time.
+     */
+    const index = CHAIN.indexOf(card.dataset.env || "");
+    card.style.zIndex = String(index <= at ? 3 - (at - index) : 3 - index);
+
     // The card's own control. Only the one with somewhere to publish to can
-    // be pressed, which rules out production and everything once synced.
+    // be pressed, which rules out everything once synced.
     const button = card.querySelector<HTMLButtonElement>("[data-publish]");
     if (button) button.disabled = !isLive || !card.dataset.next || flow === "synced";
   });
-
 };
 
 /**

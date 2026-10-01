@@ -197,11 +197,11 @@ const first = placed.find((card) => card.env === "branch") ? "branch" : "staging
             </div>
           )}
 
-          {buttonLabel && (
-            /* One on every card, under its last row. Only the card whose turn
-               it is can be pressed; the others are drawn disabled rather than
-               hidden, so the control is part of what a site card looks like
-               instead of something that appears and moves. */
+          {buttonLabel && (NEXT[card.env] ? (
+            /* On every card that has somewhere to publish to, under its last
+               row. The others are drawn disabled rather than hidden, so the
+               control is part of what a site card looks like instead of
+               something that appears and moves. */
             <button
               class="site-cards-publish"
               type="button"
@@ -210,7 +210,13 @@ const first = placed.find((card) => card.env === "branch") ? "branch" : "staging
             >
               <span data-prop="buttonLabel">{buttonLabel}</span>
             </button>
-          )}
+          ) : (
+            /* The live site has nowhere to publish to, so it carries the
+               space and not the button: a control that can never be pressed
+               is worse than none. The space keeps all three cards the same
+               height, which is what keeps the two edges identical. */
+            <span class="site-cards-publish-space" aria-hidden="true"></span>
+          ))}
         </div>
       </article>
     ))}
@@ -298,9 +304,9 @@ const first = placed.find((card) => card.env === "branch") ? "branch" : "staging
         0 1.98cqi 2.646cqi color-mix(in srgb, #000 10%, transparent);
     }
 
-    /* The cascade's order, front to back, which nothing overrides: each card
-       overlaps the one to its left, so this is the order the drawing already
-       implies. */
+    /* The resting order, front to back, for before the script runs: each card
+       overlaps the one to its left, so this is what the drawing implies. Once
+       it runs, the stack follows the work instead — see `markLive`. */
     .site-cards-card[data-env="branch"] {
       z-index: 3;
     }
@@ -463,6 +469,19 @@ const first = placed.find((card) => card.env === "branch") ? "branch" : "staging
 
     /* The design's own disabled greys, the ones it uses on the "Branched"
        badge: #EEEEEE behind #757575. */
+    /* The same box as the button, drawing nothing. */
+    .site-cards-publish-space {
+      display: block;
+      font-size: 1.906cqi;
+      line-height: 1;
+      margin-block-start: 0.6cqi;
+      padding: 0.95cqi 0;
+    }
+
+    .site-cards-publish-space::before {
+      content: "\200B";
+    }
+
     .site-cards-publish:disabled {
       background: #eeeeee;
       color: #757575;
