@@ -148,20 +148,23 @@ pageSections:
     siteCards:
       buttonLabel: Publish
       cards:
-        - badge: P
+        - env: production
+          badge: P
           title: Production – Live Site
           subtitle: State University
           domain: stateuniversity.com
           image: /src/assets/images/marketing/card-image-4-3806-72846.png
           imageAlt: ""
-        - badge: T
+        - env: staging
+          badge: T
           title: "Staging: Testing Site"
           subtitle: State University
           domain: funky-pear.cloudvent.net
           built: Built 3 days ago
-          image: /src/assets/images/marketing/card-image-5.jpg
+          image: /src/assets/images/marketing/card-image-4-3806-72846.png
           imageAlt: ""
-        - badge: B
+        - env: branch
+          badge: B
           title: "Branch: New Alumni Page"
           subtitle: State University
           domain: cool-lab.cloudvent.net

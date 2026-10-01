@@ -24,6 +24,11 @@ import Image from "@core-elements/image/Image.astro";
 import Icon from "@core-elements/icon/Icon.astro";
 
 type Card = {
+  /**
+   * Which environment this is. The flow runs branch to staging to
+   * production, and the publish control appears on whichever card is next.
+   */
+  env?: string;
   badge?: string;
   title?: string;
   subtitle?: string;
@@ -38,8 +43,12 @@ type Card = {
 
 const {
   cards = [],
-  /** The pill under the stack. Empty hides it and its connector. */
+  /** The label on the publish control. Empty leaves the stack static. */
   buttonLabel = "",
+  /** What the control says once every environment matches. */
+  syncedLabel = "All in sync",
+  /** The label on the control that puts it back to the start. */
+  resetLabel = "Start over",
   class: className,
   _component,
   ...htmlAttributes
@@ -49,23 +58,42 @@ const {
 // carry its own. A fourth would stack on the third rather than guessing.
 const PLACES = [
   { x: 0, y: 0 },
-  { x: 211 / 708, y: 50 / 421 },
-  { x: 449 / 708, y: 139 / 421 },
+  { x: 211 / 708, y: 40 / 421 },
+  { x: 449 / 708, y: 82 / 421 },
 ];
+
+// Branch publishes to staging, staging to production. Written here rather
+// than inferred from the order the cards are given, because the order they
+// are drawn in and the order the work flows in are different things: the
+// cascade runs production, staging, branch down the page.
+const NEXT: Record<string, string> = { branch: "staging", staging: "production" };
 
 const placed = (cards as Card[]).slice(0, 3).map((card, index) => ({
   ...card,
+  env: card.env || ["production", "staging", "branch"][index],
   left: card.x ?? PLACES[Math.min(index, 2)].x,
   top: card.y ?? PLACES[Math.min(index, 2)].y,
 }));
+
+// The one the control starts on: the furthest from production that has
+// somewhere to publish to.
+const first = placed.find((card) => card.env === "branch") ? "branch" : "staging";
 ---
 
 {placed.length > 0 && (
-  <div class:list={["site-cards", className]} {...htmlAttributes}>
-    {/* The connector is one path in the group's own coordinates, so it lands
-        the same way at every size. It runs from the button up to the staging
-        card, and left then up into the live one, which is the direction the
-        design points its arrowhead. */}
+  <div
+    class:list={["site-cards", className]}
+    data-flow={buttonLabel ? first : undefined}
+    {...htmlAttributes}
+  >
+    {/* The graph, drawn in the stage's own 708 x 421 so it lands the same way
+        at every size. Two edges rather than the design's one, because the
+        picture is now a sequence: branch publishes to staging, staging
+        publishes to production, and each arrow points at the card it feeds.
+
+        Both run through the band under the cards. The branch card reaches
+        y=404 of 421, so there is no room beneath it; the edges use the strip
+        left of it instead, which is clear once staging's bottom is past. */}
     {buttonLabel && (
       <svg
         class="site-cards-wire"
@@ -74,9 +102,10 @@ const placed = (cards as Card[]).slice(0, 3).map((card, index) => ({
         aria-hidden="true"
         preserveAspectRatio="none"
       >
-        <path d="M341 370 V 395 H 114 V 262" />
-        <path d="M341 370 V 331" />
-        <path class="site-cards-head" d="M108 272 L114 260 L120 272" />
+        <path class="site-cards-edge" data-edge="branch" d="M449 347 H 340 V 313" />
+        <path class="site-cards-edge" data-edge="branch" d="M330 326 L340 310 L350 326" />
+        <path class="site-cards-edge" data-edge="staging" d="M211 305 H 114 V 249" />
+        <path class="site-cards-edge" data-edge="staging" d="M104 262 L114 246 L124 262" />
       </svg>
     )}
 
@@ -84,10 +113,12 @@ const placed = (cards as Card[]).slice(0, 3).map((card, index) => ({
       <article
         class="site-cards-card"
         data-index={index}
+        data-env={card.env}
+        data-next={NEXT[card.env] || undefined}
         style={`--site-card-x: ${(card.left * 100).toFixed(3)}%; --site-card-y: ${(card.top * 100).toFixed(3)}%`}
       >
         {card.image && (
-          <span class="site-cards-photo">
+          <span class="site-cards-photo" data-photo>
             <Image
               source={card.image}
               alt={card.imageAlt}
@@ -138,7 +169,20 @@ const placed = (cards as Card[]).slice(0, 3).map((card, index) => ({
     ))}
 
     {buttonLabel && (
-      <span class="site-cards-button" data-prop="buttonLabel">{buttonLabel}</span>
+      /* One control, on the card whose turn it is. The design draws a single
+         pill under the stack, which reads as a control for the picture; this
+         one belongs to a card, so it sits on that card's foot and travels
+         with the work. */
+      <button class="site-cards-publish" type="button" data-publish>
+        <span class="site-cards-publish-label" data-prop="buttonLabel">{buttonLabel}</span>
+      </button>
+    )}
+
+    {buttonLabel && (
+      <p class="site-cards-synced" aria-live="polite">
+        <span data-prop="syncedLabel">{syncedLabel}</span>
+        <button class="site-cards-reset" type="button" data-reset>{resetLabel}</button>
+      </p>
     )}
   </div>
 )}
@@ -178,13 +222,19 @@ const placed = (cards as Card[]).slice(0, 3).map((card, index) => ({
         0 0.1cqi 0.4cqi color-mix(in srgb, var(--midnight) 8%, transparent);
     }
 
-    /* The staging card sits over both of its neighbours in the design, which
-       is what makes the three read as a stack rather than as a row. */
-    .site-cards-card[data-index="1"] {
+    /* Front to back in the order the work runs: the branch is the card you
+       act on, so it is on top, then staging, then the live site behind both.
+       The design stacks staging highest, which reads as a composition rather
+       than as a sequence. */
+    .site-cards-card[data-env="branch"] {
+      z-index: 3;
+    }
+
+    .site-cards-card[data-env="staging"] {
       z-index: 2;
     }
 
-    .site-cards-card[data-index="2"] {
+    .site-cards-card[data-env="production"] {
       z-index: 1;
     }
 
@@ -288,26 +338,115 @@ const placed = (cards as Card[]).slice(0, 3).map((card, index) => ({
       gap: 0.25cqi;
     }
 
-    /* 110 x 51 at 286, 370, centred on the stage's own midline. */
-    .site-cards-button {
-      align-items: center;
+    /* The control sits on the foot of whichever card is next, half over it,
+       so it reads as that card's button rather than the picture's. It is
+       placed from the card's own custom properties, which the stage sets as
+       the flow advances. */
+    .site-cards-publish {
       background: var(--sunset, #d85a2c);
+      border: 0;
       border-radius: 999px;
       color: var(--white);
-      display: flex;
+      cursor: pointer;
+      font: inherit;
       font-size: 2.118cqi;
       font-weight: 700;
       inline-size: 15.536cqi;
-      inset-block-start: 87.886%;
-      inset-inline-start: 40.4%;
-      justify-content: center;
-      /* 51 of 708, not of 421. `cqi` is a share of the container's inline
-         size whichever axis it is spent on, so taking the height off the
-         design's own 421 made the pill 48 tall where it wanted 29, and a
-         110x51 pill came out a circle. */
       block-size: 7.203cqi;
       position: absolute;
-      z-index: 3;
+      z-index: 4;
+      /* Centred under the active card, clear of its foot. Astride the edge it
+         sat over the card's last information row, which is content rather
+         than space the button is free to take. */
+      inset-inline-start: calc(var(--flow-x, 40%) + 18.291cqi - 7.768cqi);
+      inset-block-start: calc(var(--flow-bottom, 82%) + 1.4cqi);
+      transition:
+        inset-inline-start var(--animation-slow, 0.45s) var(--ease-in-out),
+        inset-block-start var(--animation-slow, 0.45s) var(--ease-in-out),
+        opacity var(--animation-normal) var(--ease-in-out),
+        transform var(--animation-normal) var(--ease-in-out);
+    }
+
+    .site-cards-publish:hover,
+    .site-cards-publish:focus-visible {
+      transform: translateY(-0.3cqi);
+    }
+
+    /* Nothing left to publish. */
+    .site-cards[data-flow="synced"] .site-cards-publish {
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    .site-cards-synced {
+      align-items: center;
+      display: flex;
+      gap: 1.5cqi;
+      font-size: 2.118cqi;
+      inset-block-end: 0;
+      inset-inline-start: 0;
+      justify-content: flex-start;
+      margin: 0;
+      opacity: 0;
+      pointer-events: none;
+      position: absolute;
+      transition: opacity var(--animation-normal) var(--ease-in-out);
+      z-index: 4;
+    }
+
+    .site-cards[data-flow="synced"] .site-cards-synced {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .site-cards-reset {
+      background: none;
+      border: 0;
+      color: inherit;
+      cursor: pointer;
+      font: inherit;
+      padding: 0;
+      text-decoration: underline;
+      text-underline-offset: 0.35em;
+    }
+
+    /* The travel is the whole point of the graphic, so it is not removed for
+       a reader who asks for less motion, only shortened to a cut. The picture
+       still changes card, which is the information. */
+    @media (prefers-reduced-motion: reduce) {
+      .site-cards {
+        --site-cards-travel: 0.01s;
+      }
+
+      .site-cards-publish {
+        transition: opacity var(--animation-normal) var(--ease-in-out);
+      }
+    }
+
+    /* The picture that travels. A copy of the source photo, laid over the
+       stage in its coordinates and moved to the target's box; the real swap
+       happens underneath when it lands. */
+    .site-cards-ghost {
+      overflow: hidden;
+      pointer-events: none;
+      position: absolute;
+      z-index: 5;
+      border-radius: 1.204cqi;
+      box-shadow: 0 1cqi 2.5cqi color-mix(in srgb, var(--midnight) 22%, transparent);
+      transition:
+        inset-inline-start var(--site-cards-travel, 0.6s) var(--ease-in-out),
+        inset-block-start var(--site-cards-travel, 0.6s) var(--ease-in-out),
+        inline-size var(--site-cards-travel, 0.6s) var(--ease-in-out),
+        block-size var(--site-cards-travel, 0.6s) var(--ease-in-out);
+    }
+
+    .site-cards-ghost img,
+    .site-cards-ghost picture,
+    .site-cards-ghost .image-inner {
+      block-size: 100%;
+      display: block;
+      inline-size: 100%;
+      object-fit: cover;
     }
 
     .site-cards-wire {
@@ -322,10 +461,21 @@ const placed = (cards as Card[]).slice(0, 3).map((card, index) => ({
 
     .site-cards-wire path {
       stroke: #212121;
-      stroke-width: 1.5;
+      stroke-width: 1.75;
+      opacity: 0.22;
+      transition: opacity var(--animation-normal) var(--ease-in-out),
+        stroke var(--animation-normal) var(--ease-in-out);
       /* The viewBox is stretched to the stage, so a stroke in its own units
          would squash with it. */
       vector-effect: non-scaling-stroke;
+    }
+
+    /* The edge about to be used is the only one drawn at full strength, so
+       the graph says which way the work goes next. */
+    .site-cards[data-flow="branch"] .site-cards-edge[data-edge="branch"],
+    .site-cards[data-flow="staging"] .site-cards-edge[data-edge="staging"] {
+      opacity: 1;
+      stroke: var(--sunset, #d85a2c);
     }
 
     .site-cards-head {
@@ -333,3 +483,10 @@ const placed = (cards as Card[]).slice(0, 3).map((card, index) => ({
     }
   }
 </style>
+
+<script>
+  import { onPageLoad } from "@component-utils/onPageLoad";
+  import { setupAllSiteCards } from "./setup";
+
+  onPageLoad(() => setupAllSiteCards());
+</script>
