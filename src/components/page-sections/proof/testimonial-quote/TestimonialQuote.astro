@@ -54,6 +54,16 @@ const {
    * `lg` is Header 4 and `sm` is Header 5, the two the theme already sets.
    */
   quoteSize = "sm",
+  /**
+   * The card's own outline.
+   *
+   * Off. The design draws one, but it draws it on a card sitting on a flat
+   * band; on a patterned band the rule reads as a box around the quote rather
+   * than as the edge of a surface, and the fill is already enough to separate
+   * the card from the band. The rule between the quote and the person is a
+   * different thing and is always drawn.
+   */
+  bordered = false,
   sectionLabel,
   maxContentWidth = "xl",
   paddingHorizontal = "gutter",
@@ -99,6 +109,7 @@ const items: Quote[] = (isCarousel ? quotes : quotes.slice(0, 1)) as Quote[];
       class="testimonial-quote-card"
       data-layout={layout}
       data-quote-size={quoteSize === "lg" ? "lg" : undefined}
+      data-bordered={bordered ? "" : undefined}
       data-editable="array"
       data-prop="quotes"
     >
@@ -250,10 +261,14 @@ const items: Quote[] = (isCarousel ? quotes : quotes.slice(0, 1)) as Quote[];
         --testimonial-quote-meta: 0.8125rem;
 
         background: var(--testimonial-quote-surface);
-        border: var(--border-width-sm) solid var(--testimonial-quote-edge);
+        border: 0;
         border-radius: var(--radius-card);
         padding: var(--testimonial-quote-pad);
         position: relative;
+      }
+
+      .testimonial-quote-card[data-bordered] {
+        border: var(--border-width-sm) solid var(--testimonial-quote-edge);
       }
 
       /* Header 4. */

@@ -26,6 +26,12 @@ quoteSize:
         name: Header 5
       - id: lg
         name: Header 4
+bordered:
+  type: switch
+  label: Outline the card
+  comment: >-
+    Draws a hairline around the card. Off by default: on a patterned band it
+    reads as a box around the quote rather than as the edge of a surface.
 quotes:
   type: array
   label: Quotes
