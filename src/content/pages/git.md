@@ -214,18 +214,21 @@ pageSections:
             textColor: sunset
             text: Learn more
         mediaSections: []
-  - _component: page-sections/proof/testimonial-section
-    text: >-
-      It’s important to me that CloudCannon is a Git-based CMS. I hate having a vendor lock with
-      API-based CMSs — **how can I trust anyone else with our data?**
-    authorName: Alexander Luttringer
-    authorDescription: Technical Director · Croissant & Baguette
-    layout: split
-    markPosition: start
-    markStyle: card
-    company: Croissant & Baguette
-    accentColor: pacific
-    authorImage: /src/assets/images/marketing/ellipse-288.jpg
+  - _component: page-sections/proof/testimonial-quote
+    variant: split-quote
+    quoteSize: sm
+    tone: light
+    bordered: true
+    quotes:
+      - text: >-
+          It’s important to me that CloudCannon is a Git-based CMS. I hate having a vendor lock
+          with API-based CMSs — **how can I trust anyone else with our data?**
+        authorName: Alexander Luttringer
+        authorDescription: Technical Director,
+        company: Croissant & Baguette
+        authorImage: /src/assets/images/marketing/ellipse-288.jpg
+        authorImageAlt: Alexander Luttringer
+        accentColor: pacific
     backgroundColor: surface
     background:
       type: pattern

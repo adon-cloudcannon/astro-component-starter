@@ -64,6 +64,17 @@ const {
    * different thing and is always drawn.
    */
   bordered = false,
+  /**
+   * `base` is the design's near-black card, for a dark band. `light` is the
+   * card for a cream one: light sand against the band's sand, which is the
+   * "a shade off its band" relationship the project settles on.
+   *
+   * The accent does not move with it. On this band the design draws its
+   * emphasis in the full-strength colour, #034AD8 on cream, so stepping it
+   * down would be a correction the design has not asked for. The pastel
+   * accents are for a dark ground and will not hold on a pale one.
+   */
+  tone = "base",
   sectionLabel,
   maxContentWidth = "xl",
   paddingHorizontal = "gutter",
@@ -110,6 +121,7 @@ const items: Quote[] = (isCarousel ? quotes : quotes.slice(0, 1)) as Quote[];
       data-layout={layout}
       data-quote-size={quoteSize === "lg" ? "lg" : undefined}
       data-bordered={bordered ? "" : undefined}
+      data-tone={tone === "light" ? "light" : undefined}
       data-editable="array"
       data-prop="quotes"
     >
@@ -265,6 +277,16 @@ const items: Quote[] = (isCarousel ? quotes : quotes.slice(0, 1)) as Quote[];
         border-radius: var(--radius-card);
         padding: var(--testimonial-quote-pad);
         position: relative;
+      }
+
+      /* The cream card. The edge is a midnight tint rather than the dark
+         card's white one, or the rule between the quote and the person
+         disappears into the fill. */
+      .testimonial-quote-card[data-tone="light"] {
+        --testimonial-quote-surface: var(--light-sand);
+        --testimonial-quote-edge: color-mix(in srgb, var(--midnight) 12%, transparent);
+        --testimonial-quote-ink: var(--midnight);
+        --testimonial-quote-quiet: var(--gray-700, #5c5c5c);
       }
 
       .testimonial-quote-card[data-bordered] {

@@ -26,6 +26,18 @@ quoteSize:
         name: Header 5
       - id: lg
         name: Header 4
+tone:
+  type: select
+  label: Card tone
+  comment: >-
+    Dark for a dark band, light for a cream one. The accent colour does not
+    change with it, and the pale accents only hold on the dark card.
+  options:
+    values:
+      - id: base
+        name: Dark
+      - id: light
+        name: Light
 bordered:
   type: switch
   label: Outline the card

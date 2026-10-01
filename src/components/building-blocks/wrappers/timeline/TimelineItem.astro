@@ -104,9 +104,11 @@ const dateBinding =
         aria-hidden="true"
       >
         {isNonEmptyString(iconName) ? (
+          /* `md` is 22 in a 44 disc. At `sm` the glyph was 15, a third of the
+             circle, which reads as a dot with something printed on it. */
           <Icon
             name={iconName}
-            size="sm"
+            size="md"
           />
         ) : (
           <span class="timeline-dot" />

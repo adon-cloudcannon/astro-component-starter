@@ -6,6 +6,7 @@ value:
   sectionLabel: ""
   variant: static
   quoteSize: sm
+  tone: base
   bordered: false
   quotes:
     - text: We handed the site to our marketing team on a Friday and they had three new landing pages live by Monday. **No tickets, no deploys**, nothing broken.
@@ -144,6 +145,7 @@ groups:
     inputs:
       - variant
       - quoteSize
+      - tone
       - bordered
       - quotes
   - heading: Section settings
