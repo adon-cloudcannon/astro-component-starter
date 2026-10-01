@@ -381,6 +381,12 @@ const accent = accentColor ? `var(--${accentColor})` : undefined;
       text-underline-offset: 0.35em;
     }
 
+    /* The card's hover carries the link with it.
+
+       The border and the link are the same gesture, so lighting only the rule
+       left the link grey until the pointer reached it, and from a step back
+       that reads as the link not having a hover at all. */
+    .testimonial-bento-item:hover .testimonial-bento-link,
     .testimonial-bento-link:hover,
     .testimonial-bento-link:focus-visible {
       color: var(--testimonial-bento-accent, var(--testimonial-bento-ink));
