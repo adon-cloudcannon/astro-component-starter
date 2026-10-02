@@ -154,6 +154,47 @@ const vine = (box: { x: number; y: number; w: number; h: number }, seed: number)
 };
 
 /**
+ * A stem that comes over the card's far top corner and hangs down it.
+ *
+ * The top tier had everything along its near edge and nothing on the other
+ * side, which left it looking bare on the half a reader actually looks at.
+ * This is the one plant here that is not climbing: it arrives over the
+ * corner and falls, which is what an established planting does once it has
+ * run out of card to climb.
+ */
+const drape = (box: { x: number; y: number; w: number; h: number }, seed: number) => {
+  const stems: SVGElement[] = [];
+  const pops: { el: SVGElement; rise: number }[] = [];
+  const right = box.x + box.w;
+  const top = box.y;
+
+  const stem = make("path", {
+    class: "tier-garden-stroke is-vine",
+    d: `M${right - box.w * 0.46} ${top - 16} C ${right - box.w * 0.2} ${top - 22}, ${
+      right + 16
+    } ${top + 6}, ${right + 4} ${top + box.h * 0.26} C ${right - 2} ${
+      top + box.h * 0.4
+    }, ${right + 10} ${top + box.h * 0.46}, ${right + 2} ${top + box.h * 0.56}`,
+  });
+  stems.push(stem);
+
+  document.body.append(stem);
+  const length = stem.getTotalLength();
+  for (let i = 0; i < 5; i++) {
+    const at = ((i + 0.6) / 5.4) * length;
+    const p = stem.getPointAtLength(at);
+    const side = i % 2 ? 1 : -1;
+    pops.push({
+      el: sprig(p.x, p.y, 118 + side * 58 + (wobble(seed + i) - 0.5) * 26, 0.48 + wobble(seed + i) * 0.24),
+      rise: at / length,
+    });
+  }
+  stem.remove();
+
+  return { stems, pops };
+};
+
+/**
  * Blooms scattered over a card.
  *
  * No stalks. Stood on stems against one edge they read as three cut flowers
@@ -262,7 +303,13 @@ const plant = (garden: Garden) => {
       pops.push(...grown.pops);
     }
 
-    if (stage >= 2) pops.push(...flowers(box, seed + 3, stage >= 3 ? 7 : 5));
+    if (stage >= 2) pops.push(...flowers(box, seed + 3, stage >= 3 ? 11 : 5));
+
+    if (stage >= 3) {
+      const over = drape(box, seed + 9);
+      strokes.push(...over.stems);
+      pops.push(...over.pops);
+    }
 
     sprouts.forEach((el) => bed.append(el));
     strokes.forEach((el) => bed.append(el));
@@ -310,7 +357,7 @@ const plant = (garden: Garden) => {
 
 /** How long the whole garden takes to come up once it starts: lawn, then
  * vines and their flowers behind it. */
-const SPAN = 2100;
+const SPAN = 1500;
 
 /** Apply a point in the growth, 0 to 1, to every part. */
 const show = (garden: Garden, progress: number) => {
