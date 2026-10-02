@@ -76,27 +76,10 @@ const {
       stroke-linejoin: round;
     }
 
-    .tier-garden-stroke.is-grass {
-      stroke-width: 2.5;
-    }
-
+    /* Thicker than the design's own hairline vines: those are drawn at a
+       corner of the band, where this one runs the height of a card. */
     .tier-garden-stroke.is-vine {
-      stroke-width: 2.5;
-    }
-
-    .tier-garden-stroke.is-stalk {
-      stroke-width: 2;
-    }
-
-    .tier-garden-stroke.is-trunk {
-      stroke: var(--earth, #6b6157);
-      stroke-width: 7;
-    }
-
-    /* A cabbage tree's leaves are long and sword-shaped, so they are strokes
-       rather than filled blades. */
-    .tier-garden-stroke.is-frond {
-      stroke-width: 4;
+      stroke-width: 3.5;
     }
 
     .tier-garden-stroke.is-dark {
@@ -121,6 +104,34 @@ const {
 
     .tier-garden-blade {
       fill: var(--moss, #687e00);
+    }
+
+    /* A blade of grass is a filled triangle, so it comes up out of the ground
+       rather than drawing on. `fill-box` is honoured on a path, which is what
+       lets the origin sit at the blade's own foot. */
+    .tier-garden-blade-grass {
+      fill: var(--moss, #687e00);
+      scale: 1 0;
+      transform-box: fill-box;
+      transform-origin: 50% 100%;
+    }
+
+    .tier-garden-blade-grass.is-dark {
+      fill: #002810;
+    }
+
+    .tier-garden-blade-grass[data-sprout] {
+      animation: tier-garden-sprout 520ms var(--ease-out, cubic-bezier(0.2, 0.8, 0.2, 1)) both;
+    }
+
+    @keyframes tier-garden-sprout {
+      from {
+        scale: 1 0;
+      }
+
+      to {
+        scale: 1 1;
+      }
     }
 
     .tier-garden-blade.is-dark {
@@ -167,6 +178,11 @@ const {
       .tier-garden-pop {
         animation: none !important;
         opacity: 1;
+      }
+
+      .tier-garden-blade-grass {
+        animation: none !important;
+        scale: 1 1;
       }
     }
   }

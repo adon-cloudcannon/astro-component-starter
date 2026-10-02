@@ -1,10 +1,10 @@
 /**
- * Plants the garden from the cards it grows around, then grows it on scroll.
+ * Plants the garden from the cards it grows around, then grows it on arrival.
  *
  * Two jobs, kept apart. `plant` is geometry: it reads the cards' boxes and
- * draws a bed per card, and it reruns whenever those boxes change. `grow` is
- * the part that moves: how much of each bed is drawn, as a share of how far
- * the section has travelled through the window.
+ * draws a bed per card, and it reruns whenever those boxes change. `show` is
+ * the part that moves: how much of each bed is drawn at a given point in the
+ * growth, which `run` walks from 0 to 1 once the band is in view.
  *
  * Everything is drawn in the host's own pixels — the SVG takes a viewBox the
  * size of the host — so no number here is scaled or converted.
@@ -12,6 +12,7 @@
 type Garden = HTMLElement & {
   __gardenBound?: boolean;
   __gardenParts?: Part[];
+  __gardenRunning?: boolean;
 };
 
 /** One drawn thing, with the window of growth it belongs to. */
@@ -22,6 +23,8 @@ type Part = {
   to: number;
   /** Strokes are drawn on; everything else pops open. */
   length?: number;
+  /** A filled blade, which comes up out of the ground. */
+  sprout?: boolean;
 };
 
 const NS = "http://www.w3.org/2000/svg";
@@ -68,24 +71,40 @@ const sprig = (x: number, y: number, turn: number, scale: number) => {
   return g;
 };
 
-/** Tufts along the foot of a card. */
+/**
+ * Tufts along the foot of a card.
+ *
+ * Filled blades rather than strokes: a blade of grass is wide at the ground
+ * and comes to a point, and a stroke is the same width all the way up, which
+ * is why the first pass read as wire. Each one is a triangle with a bend in
+ * it — up one side, around the tip, back down the other.
+ *
+ * Dense, too. Thin and spaced out it read as a few weeds; the illusion needs
+ * enough blades to overlap.
+ */
 const grass = (box: { x: number; y: number; w: number; h: number }, seed: number) => {
   const parts: SVGElement[] = [];
   const base = box.y + box.h;
-  const blades = Math.max(9, Math.round(box.w / 26));
+  const blades = Math.max(22, Math.round(box.w / 11));
 
   for (let i = 0; i < blades; i++) {
     const r = wobble(seed + i);
     const r2 = wobble(seed + i + 0.5);
-    const x = box.x - 10 + ((box.w + 20) * (i + r * 0.6)) / blades;
-    const tall = 26 + r2 * 34;
-    const lean = (r - 0.5) * 30;
+    const x = box.x - 12 + ((box.w + 24) * (i + r * 0.8)) / blades;
+    // Short enough to clear the cards' last line. The tallest blades were
+    // touching "Free onboarding and training" at the foot of the first card.
+    const tall = 20 + r2 * 30;
+    const lean = (r - 0.5) * 34;
+    const wide = 2.6 + r2 * 2.2;
+    const tipX = x + lean * 1.3;
+    const tipY = base - tall;
+    // Out from the base, bowing the way it leans, to a point, and back.
     parts.push(
       make("path", {
-        class: `tier-garden-stroke is-grass${r > 0.78 ? " is-dark" : ""}`,
-        d: `M${x} ${base} C ${x + lean * 0.3} ${base - tall * 0.5}, ${x + lean} ${
-          base - tall * 0.8
-        }, ${x + lean * 1.3} ${base - tall}`,
+        class: `tier-garden-blade-grass${r > 0.74 ? " is-dark" : ""}`,
+        d: `M${x - wide} ${base} Q ${x + lean * 0.35 - wide * 0.5} ${base - tall * 0.58}, ${tipX} ${tipY} Q ${
+          x + lean * 0.35 + wide * 0.7
+        } ${base - tall * 0.55}, ${x + wide} ${base} Z`,
       })
     );
   }
@@ -100,12 +119,16 @@ const vine = (box: { x: number; y: number; w: number; h: number }, seed: number)
   const x = box.x - 6;
   const top = box.y + box.h * 0.12;
 
+  // No hook at the top. Three cards carrying the same little curl read as a
+  // repeated stamp rather than as three plants; a plain stem is quieter, and
+  // the sprigs are what make it a vine.
   const stem = make("path", {
     class: "tier-garden-stroke is-vine",
-    d: `M${x} ${foot + 8} C ${x - 18} ${foot - box.h * 0.3}, ${x + 22} ${
-      box.y + box.h * 0.5
-    }, ${x + 4} ${top} C ${x - 6} ${top - 22}, ${x + 26} ${top - 26}, ${x + 30} ${top - 6}`,
+    d: `M${x} ${foot + 8} C ${x - 20} ${foot - box.h * 0.32}, ${x + 24} ${
+      box.y + box.h * 0.52
+    }, ${x + 2} ${top}`,
   });
+
   stems.push(stem);
 
   // Sprigs read off the stem itself, so they sit on it however it bends.
@@ -176,52 +199,6 @@ const bloom = (x: number, y: number, colour: string, scale: number) => {
   return g;
 };
 
-/**
- * A cabbage tree out of the top of the card.
- *
- * A short trunk and a spray of long arching blades, which is what a Cordyline
- * does: the leaves fall from one crown rather than branching.
- */
-const cabbageTree = (box: { x: number; y: number; w: number; h: number }, seed: number) => {
-  const trunk: SVGElement[] = [];
-  const crownBlades: SVGElement[] = [];
-  const x = box.x + box.w * 0.72;
-  const base = box.y + 18;
-  const crown = base - 70;
-
-  trunk.push(
-    make("path", {
-      class: "tier-garden-stroke is-trunk",
-      d: `M${x} ${base} C ${x - 4} ${base - 26}, ${x + 3} ${crown + 20}, ${x} ${crown}`,
-    })
-  );
-
-  const blades = 13;
-  for (let i = 0; i < blades; i++) {
-    const r = wobble(seed + i);
-    // Fanned from straight up, both ways, arching over at the tips.
-    const spread = -90 + (i - (blades - 1) / 2) * (166 / blades) + (r - 0.5) * 8;
-    const len = 48 + r * 36;
-    const rad = (spread * Math.PI) / 180;
-    const tipX = x + Math.cos(rad) * len;
-    const tipY = crown + Math.sin(rad) * len;
-    const droop = 16 + r * 18;
-    crownBlades.push(
-      make("path", {
-        class: `tier-garden-stroke is-frond${r > 0.72 ? " is-dark" : ""}`,
-        d: `M${x} ${crown} Q ${x + Math.cos(rad) * len * 0.6} ${
-          crown + Math.sin(rad) * len * 0.6 - 6
-        }, ${tipX} ${tipY + droop}`,
-      })
-    );
-  }
-
-  // Kept apart so the crown opens once the trunk has arrived. Grown together,
-  // the blades were already spreading beside a half-height trunk, which is
-  // what made them look like they came from nowhere.
-  return { trunk, crown: crownBlades };
-};
-
 const plant = (garden: Garden) => {
   const svg = garden.querySelector<SVGSVGElement>(".tier-garden-art");
   const host = garden.parentElement;
@@ -243,7 +220,7 @@ const plant = (garden: Garden) => {
   const beds = boxes.length;
 
   boxes.forEach((box, index) => {
-    // Each bed grows in its own slice of the scroll, overlapping the next a
+    // Each bed grows in its own slice of the run, overlapping the next a
     // little so the garden runs rather than ticks.
     const from = (index / beds) * 0.82;
     const to = clamp(from + 1 / beds + 0.12, 0, 1);
@@ -253,21 +230,19 @@ const plant = (garden: Garden) => {
     /**
      * Each tier keeps what the one below it has and adds its own.
      *
-     * Bronze is grass, Silver adds the vine, Gold adds flowers, and the top
-     * tier adds the tree — so the planting thickens up the staircase rather
-     * than swapping one plant for another, which is what "more of everything"
-     * means on the tallest card. The last card always takes the tree, however
-     * many tiers there are.
+     * Bronze is grass, Silver adds the vine, and Gold and up add flowers, so
+     * the planting thickens along the staircase rather than swapping one
+     * plant for another. The top tier takes the most of all of it.
      */
     const last = index === beds - 1;
     const stage = last ? 3 : Math.min(index, 2);
 
     const strokes: SVGElement[] = [];
+    /** Filled shapes: they grow from the ground rather than drawing on. */
+    const sprouts: SVGElement[] = [];
     const pops: SVGElement[] = [];
-    /** Drawn after the rest of this bed, not alongside it. */
-    const late: SVGElement[] = [];
 
-    strokes.push(...grass(box, seed));
+    sprouts.push(...grass(box, seed));
 
     if (stage >= 1) {
       const grown = vine(box, seed);
@@ -277,14 +252,8 @@ const plant = (garden: Garden) => {
 
     if (stage >= 2) pops.push(...flowers(box, seed + 3, stage >= 3 ? 7 : 5));
 
-    if (stage >= 3) {
-      const tree = cabbageTree(box, seed);
-      strokes.push(...tree.trunk);
-      late.push(...tree.crown);
-    }
-
+    sprouts.forEach((el) => bed.append(el));
     strokes.forEach((el) => bed.append(el));
-    late.forEach((el) => bed.append(el));
     pops.forEach((el) => bed.append(el));
     svg.append(bed);
 
@@ -301,11 +270,11 @@ const plant = (garden: Garden) => {
       draw(el, from + (to - from) * slot * 0.5, from + (to - from) * 0.78);
     });
 
-    // The crown waits for the trunk, then opens blade by blade.
-    late.forEach((el, i) => {
-      const slot = late.length > 1 ? i / late.length : 0;
-      const at = from + (to - from) * (0.62 + slot * 0.3);
-      draw(el, at, Math.min(1, at + (to - from) * 0.22));
+    // Grass comes up first and together, in a quick ripple across the foot.
+    sprouts.forEach((el, i) => {
+      const slot = sprouts.length > 1 ? i / sprouts.length : 0;
+      const at = from + (to - from) * slot * 0.42;
+      parts.push({ el, from: at, to: at, sprout: true });
     });
 
     pops.forEach((el, i) => {
@@ -318,22 +287,13 @@ const plant = (garden: Garden) => {
   garden.__gardenParts = parts;
 };
 
-/**
- * How far the garden has grown.
- *
- * Measured off the host's own trip through the window rather than off the
- * page: it starts as the section's top reaches the bottom of the window and
- * is done well before the section leaves, so the finished garden is on screen
- * while the cards are still being read.
- */
-const grow = (garden: Garden) => {
-  const host = garden.parentElement;
-  const parts = garden.__gardenParts;
-  if (!host || !parts) return;
+/** How long the whole garden takes to come up once it starts. */
+const SPAN = 2600;
 
-  const box = host.getBoundingClientRect();
-  const view = window.innerHeight || 1;
-  const progress = clamp((view - box.top) / (view * 0.78), 0, 1);
+/** Apply a point in the growth, 0 to 1, to every part. */
+const show = (garden: Garden, progress: number) => {
+  const parts = garden.__gardenParts;
+  if (!parts) return;
 
   for (const part of parts) {
     if (part.length) {
@@ -342,8 +302,32 @@ const grow = (garden: Garden) => {
       part.el.setAttribute("stroke-dashoffset", `${part.length * (1 - local)}`);
     } else if (progress >= part.from && !part.el.hasAttribute("data-open")) {
       part.el.setAttribute("data-open", "");
+      if (part.sprout) part.el.setAttribute("data-sprout", "");
     }
   }
+};
+
+/**
+ * Grow it on a clock, started when the band arrives.
+ *
+ * It used to track the scrollbar, which sounds right and is not: the band is
+ * taller than it looks, so by the time it is centred enough to read, its own
+ * trip through the window is nearly over and the first two beds have already
+ * finished. Nobody saw them grow. Started on arrival, the whole thing plays
+ * once, in order, at a speed that has nothing to do with how fast the reader
+ * happens to be scrolling.
+ */
+const run = (garden: Garden) => {
+  if (garden.__gardenRunning) return;
+  garden.__gardenRunning = true;
+
+  const started = performance.now();
+  const tick = () => {
+    const progress = clamp((performance.now() - started) / SPAN, 0, 1);
+    show(garden, progress);
+    if (progress < 1) requestAnimationFrame(tick);
+  };
+  requestAnimationFrame(tick);
 };
 
 export const setupTierGarden = (garden: Garden) => {
@@ -352,7 +336,9 @@ export const setupTierGarden = (garden: Garden) => {
 
   const refresh = () => {
     plant(garden);
-    grow(garden);
+    // A rebuild after the garden has been up keeps it up: the parts are new
+    // elements, so they start closed again unless they are shown.
+    if (garden.__gardenRunning) show(garden, 1);
   };
 
   refresh();
@@ -361,20 +347,26 @@ export const setupTierGarden = (garden: Garden) => {
   // number in here is measured from.
   if (document.fonts?.ready) document.fonts.ready.then(refresh);
 
-  let frame = 0;
-  window.addEventListener(
-    "scroll",
-    () => {
-      if (frame) return;
-      frame = requestAnimationFrame(() => {
-        frame = 0;
-        grow(garden);
-      });
-    },
-    { passive: true }
-  );
+  const host = garden.parentElement;
+  if (!host) return;
 
-  if ("ResizeObserver" in window && garden.parentElement) {
+  if ("IntersectionObserver" in window) {
+    const watcher = new IntersectionObserver(
+      (entries) => {
+        if (!entries.some((e) => e.isIntersecting)) return;
+        watcher.disconnect();
+        run(garden);
+      },
+      // A fifth of the band in view, which on this one is the heading and the
+      // top of the shortest card.
+      { threshold: 0.2 }
+    );
+    watcher.observe(host);
+  } else {
+    run(garden);
+  }
+
+  if ("ResizeObserver" in window) {
     let first = true;
     new ResizeObserver(() => {
       if (first) {
@@ -382,7 +374,7 @@ export const setupTierGarden = (garden: Garden) => {
         return;
       }
       refresh();
-    }).observe(garden.parentElement);
+    }).observe(host);
   }
 };
 
