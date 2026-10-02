@@ -124,7 +124,10 @@ const vine = (box: { x: number; y: number; w: number; h: number }, seed: number)
   // the sprigs are what make it a vine.
   const stem = make("path", {
     class: "tier-garden-stroke is-vine",
-    d: `M${x} ${foot + 8} C ${x - 20} ${foot - box.h * 0.32}, ${x + 24} ${
+    // Out of the grass, not from under it. Started below the card's foot the
+    // stem's tail hung past the bottom of the lawn, which read as a vine
+    // growing out of the floor rather than out of the planting.
+    d: `M${x} ${foot - 10} C ${x - 20} ${foot - box.h * 0.34}, ${x + 24} ${
       box.y + box.h * 0.52
     }, ${x + 2} ${top}`,
   });
@@ -179,7 +182,7 @@ const flowers = (box: { x: number; y: number; w: number; h: number }, seed: numb
 /** A five-petal flower with a golden eye. */
 const bloom = (x: number, y: number, colour: string, scale: number) => {
   const g = make("g", {
-    class: "tier-garden-pop",
+    class: "tier-garden-pop tier-garden-bloom",
     transform: `translate(${x} ${y}) scale(${scale})`,
     style: `--tier-garden-bloom: ${colour}`,
   });
@@ -220,10 +223,9 @@ const plant = (garden: Garden) => {
   const beds = boxes.length;
 
   boxes.forEach((box, index) => {
-    // Each bed grows in its own slice of the run, overlapping the next a
-    // little so the garden runs rather than ticks.
-    const from = (index / beds) * 0.82;
-    const to = clamp(from + 1 / beds + 0.12, 0, 1);
+    // Where this bed sits across the row, which is what staggers each phase
+    // from left to right.
+    const across = beds > 1 ? index / (beds - 1) : 0;
     const seed = index * 3.7 + 1;
     const bed = make("g", { class: "tier-garden-bed", "data-bed": String(index) });
 
@@ -257,6 +259,22 @@ const plant = (garden: Garden) => {
     pops.forEach((el) => bed.append(el));
     svg.append(bed);
 
+    /**
+     * Three phases, and each one crosses the row before the next starts.
+     *
+     * The lawn comes up first, left to right; then the vines climb, left to
+     * right; then the flowers open. Run bed by bed instead — everything about
+     * Bronze, then everything about Silver — the planting arrived in columns,
+     * and a garden does not establish a column at a time.
+     *
+     * The windows overlap a little at the seams so one phase is still
+     * finishing as the next begins.
+     */
+    const phase = (start: number, end: number, slot: number, span: number) => {
+      const lead = start + (end - start - span) * across;
+      return [lead + span * slot * 0.8, lead + span] as const;
+    };
+
     // Lengths have to be read once the nodes are in the document.
     const draw = (el: SVGElement, at: number, until: number) => {
       const length = (el as SVGPathElement).getTotalLength();
@@ -265,21 +283,23 @@ const plant = (garden: Garden) => {
       parts.push({ el, from: at, to: until, length });
     };
 
-    strokes.forEach((el, i) => {
-      const slot = strokes.length > 1 ? i / strokes.length : 0;
-      draw(el, from + (to - from) * slot * 0.5, from + (to - from) * 0.78);
-    });
-
-    // Grass comes up first and together, in a quick ripple across the foot.
     sprouts.forEach((el, i) => {
       const slot = sprouts.length > 1 ? i / sprouts.length : 0;
-      const at = from + (to - from) * slot * 0.42;
+      const [at] = phase(0, 0.44, slot, 0.2);
       parts.push({ el, from: at, to: at, sprout: true });
     });
 
+    strokes.forEach((el, i) => {
+      const slot = strokes.length > 1 ? i / strokes.length : 0;
+      const [at, until] = phase(0.38, 0.8, slot, 0.26);
+      draw(el, at, until);
+    });
+
+    // The sprigs open behind their stem, so the vine is leafing as it climbs.
     pops.forEach((el, i) => {
+      const flower = el.classList.contains("tier-garden-bloom");
       const slot = pops.length > 1 ? i / pops.length : 0;
-      const at = from + (to - from) * (0.4 + slot * 0.5);
+      const [at] = flower ? phase(0.72, 1, slot, 0.22) : phase(0.46, 0.84, slot, 0.26);
       parts.push({ el, from: at, to: at });
     });
   });
@@ -287,8 +307,9 @@ const plant = (garden: Garden) => {
   garden.__gardenParts = parts;
 };
 
-/** How long the whole garden takes to come up once it starts. */
-const SPAN = 2600;
+/** How long the whole garden takes to come up once it starts: lawn, then
+ * vines, then flowers. */
+const SPAN = 3200;
 
 /** Apply a point in the growth, 0 to 1, to every part. */
 const show = (garden: Garden, progress: number) => {
