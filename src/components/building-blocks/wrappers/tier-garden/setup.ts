@@ -114,7 +114,7 @@ const grass = (box: { x: number; y: number; w: number; h: number }, seed: number
 /** A vine up the near side of a card, with sprigs along it. */
 const vine = (box: { x: number; y: number; w: number; h: number }, seed: number) => {
   const stems: SVGElement[] = [];
-  const pops: SVGElement[] = [];
+  const pops: { el: SVGElement; rise: number }[] = [];
   const foot = box.y + box.h;
   const x = box.x - 6;
   const top = box.y + box.h * 0.12;
@@ -142,7 +142,11 @@ const vine = (box: { x: number; y: number; w: number; h: number }, seed: number)
     const at = ((i + 0.8) / (count + 0.6)) * length;
     const p = stem.getPointAtLength(at);
     const side = i % 2 ? 1 : -1;
-    pops.push(sprig(p.x, p.y, 200 + side * 62 + (wobble(seed + i) - 0.5) * 24, 0.5 + wobble(seed + i) * 0.22));
+    pops.push({
+      el: sprig(p.x, p.y, 200 + side * 62 + (wobble(seed + i) - 0.5) * 24, 0.5 + wobble(seed + i) * 0.22),
+      // Where it sits along the stem, which is when the stem reaches it.
+      rise: at / length,
+    });
   }
   stem.remove();
 
@@ -158,7 +162,7 @@ const vine = (box: { x: number; y: number; w: number; h: number }, seed: number)
  * and kept out of the top quarter, where the tier's name and points are.
  */
 const flowers = (box: { x: number; y: number; w: number; h: number }, seed: number, count: number) => {
-  const out: SVGElement[] = [];
+  const out: { el: SVGElement; rise: number }[] = [];
   for (let i = 0; i < count; i++) {
     const r = wobble(seed + i * 1.7);
     const r2 = wobble(seed + i * 1.7 + 0.31);
@@ -174,7 +178,12 @@ const flowers = (box: { x: number; y: number; w: number; h: number }, seed: numb
     const y = margin
       ? box.y + box.h * (0.3 + r * 0.6)
       : box.y + box.h * (0.66 + r2 * 0.3);
-    out.push(bloom(x, y, BLOOMS[i % BLOOMS.length], 0.62 + r3 * 0.55));
+    out.push({
+      el: bloom(x, y, BLOOMS[i % BLOOMS.length], 0.62 + r3 * 0.55),
+      // 0 at the card's foot, 1 at its head, so a bloom opens as the vine
+      // beside it reaches that height rather than all of them at once.
+      rise: clamp((box.y + box.h - y) / box.h, 0, 1),
+    });
   }
   return out;
 };
@@ -242,7 +251,8 @@ const plant = (garden: Garden) => {
     const strokes: SVGElement[] = [];
     /** Filled shapes: they grow from the ground rather than drawing on. */
     const sprouts: SVGElement[] = [];
-    const pops: SVGElement[] = [];
+    /** Leaves and petals, each with how far up its plant it sits. */
+    const pops: { el: SVGElement; rise: number }[] = [];
 
     sprouts.push(...grass(box, seed));
 
@@ -256,26 +266,23 @@ const plant = (garden: Garden) => {
 
     sprouts.forEach((el) => bed.append(el));
     strokes.forEach((el) => bed.append(el));
-    pops.forEach((el) => bed.append(el));
+    pops.forEach(({ el }) => bed.append(el));
     svg.append(bed);
 
     /**
-     * Three phases, and each one crosses the row before the next starts.
+     * One wave, not three phases.
      *
-     * The lawn comes up first, left to right; then the vines climb, left to
-     * right; then the flowers open. Run bed by bed instead — everything about
-     * Bronze, then everything about Silver — the planting arrived in columns,
-     * and a garden does not establish a column at a time.
-     *
-     * The windows overlap a little at the seams so one phase is still
-     * finishing as the next begins.
+     * The lawn crosses the row, and each tier's vine starts as the lawn
+     * reaches that tier rather than waiting for the whole lawn to finish.
+     * The sprigs and the blooms then open at the height the vine has got to,
+     * so a flower never appears above the stem that is meant to be carrying
+     * it. Everything after the grass is keyed off one pair of numbers per
+     * bed, which is what keeps them in step.
      */
-    const phase = (start: number, end: number, slot: number, span: number) => {
-      const lead = start + (end - start - span) * across;
-      return [lead + span * slot * 0.8, lead + span] as const;
-    };
+    const wave = across * 0.46;
+    const climbFrom = wave + 0.08;
+    const climbSpan = 0.34;
 
-    // Lengths have to be read once the nodes are in the document.
     const draw = (el: SVGElement, at: number, until: number) => {
       const length = (el as SVGPathElement).getTotalLength();
       el.setAttribute("stroke-dasharray", `${length}`);
@@ -285,21 +292,15 @@ const plant = (garden: Garden) => {
 
     sprouts.forEach((el, i) => {
       const slot = sprouts.length > 1 ? i / sprouts.length : 0;
-      const [at] = phase(0, 0.44, slot, 0.2);
+      const at = wave + slot * 0.12;
       parts.push({ el, from: at, to: at, sprout: true });
     });
 
-    strokes.forEach((el, i) => {
-      const slot = strokes.length > 1 ? i / strokes.length : 0;
-      const [at, until] = phase(0.38, 0.8, slot, 0.26);
-      draw(el, at, until);
-    });
+    strokes.forEach((el) => draw(el, climbFrom, climbFrom + climbSpan));
 
-    // The sprigs open behind their stem, so the vine is leafing as it climbs.
-    pops.forEach((el, i) => {
-      const flower = el.classList.contains("tier-garden-bloom");
-      const slot = pops.length > 1 ? i / pops.length : 0;
-      const [at] = flower ? phase(0.72, 1, slot, 0.22) : phase(0.46, 0.84, slot, 0.26);
+    pops.forEach(({ el, rise }) => {
+      // A touch behind the tip, so the stem is always ahead of its own leaves.
+      const at = climbFrom + climbSpan * clamp(rise * 1.04 - 0.04, 0, 1);
       parts.push({ el, from: at, to: at });
     });
   });
@@ -308,8 +309,8 @@ const plant = (garden: Garden) => {
 };
 
 /** How long the whole garden takes to come up once it starts: lawn, then
- * vines, then flowers. */
-const SPAN = 3200;
+ * vines and their flowers behind it. */
+const SPAN = 2100;
 
 /** Apply a point in the growth, 0 to 1, to every part. */
 const show = (garden: Garden, progress: number) => {
