@@ -167,23 +167,23 @@ const vine = (box: { x: number; y: number; w: number; h: number }, seed: number)
  * has to work out which way it is pointing.
  */
 const butterfly = (box: { x: number; y: number; w: number; h: number }, stage: number) => {
-  // Resting on the card with about 20 of clearance at the top and the far
-  // edge. Measured to the wingtip, not the body: its wings span some 42, so
-  // a body 20 in left half the butterfly hanging over the side.
-  const endX = box.x + box.w - 42;
-  const endY = box.y + 32;
-  // One long lope in from off the right of the band. Two curves made it
-  // zig-zag; a single cubic sweeps in and settles without changing its mind.
+  // High on the card's far corner, with the wings allowed over the edge.
+  const endX = box.x + box.w - 28;
+  const endY = box.y + 18;
+  // One long, shallow lope in from off the right of the band. Two curves
+  // made it zig-zag, and a deep one made it swoop; this is nearly a straight
+  // run with a little fall in it.
   const flight =
-    `M${stage + 90} ${endY - 120} C ${stage * 0.52} ${endY - 170}, ` +
-    `${endX + 190} ${endY + 80}, ${endX} ${endY}`;
+    `M${stage + 90} ${endY - 56} C ${stage * 0.62} ${endY - 76}, ` +
+    `${endX + 150} ${endY + 26}, ${endX} ${endY}`;
 
   const g = make("g", { class: "tier-garden-pop tier-garden-flier" });
   const inner = make("g", { class: "tier-garden-flight", style: `offset-path: path("${flight}")` });
-  // Set down at an angle rather than square to the card. The rotate is on
-  // the group's own transform, which turns about its local origin — the
-  // body — so no transform-box is involved.
-  const tilt = make("g", { transform: "rotate(-24)" });
+  // Set down at an angle rather than square to the card, head to the right.
+  // The rotate is on the group's own transform, which turns about its local
+  // origin — the body — so no transform-box is involved. It is drawn head-up,
+  // so a positive angle turns it clockwise, which is to the right.
+  const tilt = make("g", { transform: "rotate(26)" });
 
   // Two pairs of wings around a body at (0,0), drawn small: it is a long way
   // off and it should read as a flicker, not a specimen.
