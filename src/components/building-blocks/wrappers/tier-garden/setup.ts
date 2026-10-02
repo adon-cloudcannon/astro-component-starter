@@ -170,11 +170,16 @@ const drape = (box: { x: number; y: number; w: number; h: number }, seed: number
 
   const stem = make("path", {
     class: "tier-garden-stroke is-vine",
-    d: `M${right - box.w * 0.46} ${top - 16} C ${right - box.w * 0.2} ${top - 22}, ${
-      right + 16
-    } ${top + 6}, ${right + 4} ${top + box.h * 0.26} C ${right - 2} ${
-      top + box.h * 0.4
-    }, ${right + 10} ${top + box.h * 0.46}, ${right + 2} ${top + box.h * 0.56}`,
+    // It lies along the card's top edge before it goes over the corner.
+    // Started above the card it hung in mid-air with nothing holding it up,
+    // which is the one thing a drape cannot do.
+    d: `M${right - box.w * 0.54} ${top - 2} C ${right - box.w * 0.36} ${top - 9}, ${
+      right - box.w * 0.17
+    } ${top + 1}, ${right - 13} ${top - 4} C ${right + 9} ${top - 8}, ${right + 8} ${
+      top + 16
+    }, ${right + 3} ${top + box.h * 0.26} C ${right - 2} ${top + box.h * 0.4}, ${
+      right + 10
+    } ${top + box.h * 0.46}, ${right + 2} ${top + box.h * 0.56}`,
   });
   stems.push(stem);
 
