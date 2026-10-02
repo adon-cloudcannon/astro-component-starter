@@ -2,7 +2,7 @@ label: Team Grid
 icon: groups
 description: A wall of team member cards beside a line about the team.
 value:
-  _component: page-sections/proof/team-grid
+  _component: page-sections/proof/team-grid-section
   sectionLabel: ""
   eyebrow: ""
   heading: ""
@@ -40,7 +40,7 @@ picker_preview:
   subtext: A wall of team member cards beside a line about the team.
   icon: groups
 _inputs_from_glob:
-  - /src/components/page-sections/proof/team-grid/team-grid.cloudcannon.inputs.yml
+  - /src/components/page-sections/proof/team-grid-section/team-grid-section.cloudcannon.inputs.yml
   - /.cloudcannon/inputs/background.yml
   - /.cloudcannon/inputs/haze.yml
 _structures:

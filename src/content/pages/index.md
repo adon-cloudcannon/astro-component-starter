@@ -474,7 +474,7 @@ pageSections:
       - _component: building-blocks/core-elements/button
         variant: primary
         text: See how others did it
-  - _component: page-sections/proof/team-grid
+  - _component: page-sections/proof/team-grid-section
     paddingVertical: none
     members:
       - _component: building-blocks/wrappers/team-member
