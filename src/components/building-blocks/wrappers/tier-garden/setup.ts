@@ -111,6 +111,36 @@ const grass = (box: { x: number; y: number; w: number; h: number }, seed: number
   return parts;
 };
 
+/**
+ * A few blades around one point, drawn in front of whatever is there.
+ *
+ * The grass is behind the vines, so a stem's rounded end showed through the
+ * lawn wherever no blade happened to fall in front of it. These are planted
+ * at the vine's own foot and painted over it.
+ */
+const tuft = (x: number, base: number, seed: number) => {
+  const parts: SVGElement[] = [];
+  for (let i = 0; i < 5; i++) {
+    const r = wobble(seed + i);
+    const r2 = wobble(seed + i + 0.5);
+    const at = x - 14 + i * 7 + r * 5;
+    const tall = 26 + r2 * 26;
+    const lean = (r - 0.5) * 26;
+    const wide = 2.6 + r2 * 1.8;
+    parts.push(
+      make("path", {
+        class: `tier-garden-blade-grass${r > 0.6 ? " is-dark" : ""}`,
+        d: `M${at - wide} ${base} Q ${at + lean * 0.35 - wide * 0.5} ${base - tall * 0.58}, ${
+          at + lean * 1.3
+        } ${base - tall} Q ${at + lean * 0.35 + wide * 0.7} ${base - tall * 0.55}, ${
+          at + wide
+        } ${base} Z`,
+      })
+    );
+  }
+  return parts;
+};
+
 /** A vine up the near side of a card, with sprigs along it. */
 const vine = (
   box: { x: number; y: number; w: number; h: number },
@@ -141,7 +171,7 @@ const vine = (
     // Out of the grass, not from under it. Started below the card's foot the
     // stem's tail hung past the bottom of the lawn, which read as a vine
     // growing out of the floor rather than out of the planting.
-    d: `M${x} ${foot - 10} C ${x - 22} ${foot - box.h * 0.36}, ${x + 26} ${
+    d: `M${x} ${foot - 26} C ${x - 22} ${foot - box.h * 0.36}, ${x + 26} ${
       box.y + box.h * 0.46
     }, ${x + 4} ${top}`,
   });
@@ -343,6 +373,8 @@ const plant = (garden: Garden) => {
     const strokes: SVGElement[] = [];
     /** Filled shapes: they grow from the ground rather than drawing on. */
     const sprouts: SVGElement[] = [];
+    /** The same, but painted after the vines so they cover a stem's foot. */
+    const front: SVGElement[] = [];
     /** Leaves and petals, each with how far up its plant it sits. */
     const pops: { el: SVGElement; rise: number }[] = [];
 
@@ -354,6 +386,7 @@ const plant = (garden: Garden) => {
       const grown = vine(box, seed, stage >= 3, [0, 0.62, 0.84, 1][stage] ?? 1);
       strokes.push(...grown.stems);
       pops.push(...grown.pops);
+      front.push(...tuft(box.x + 9, box.y + box.h, seed + 21));
     }
 
     if (stage >= 2) pops.push(...flowers(box, seed + 3, stage >= 3 ? 9 : 5));
@@ -363,6 +396,7 @@ const plant = (garden: Garden) => {
 
     sprouts.forEach((el) => bed.append(el));
     strokes.forEach((el) => bed.append(el));
+    front.forEach((el) => bed.append(el));
     pops.forEach(({ el }) => bed.append(el));
     svg.append(bed);
 
@@ -387,8 +421,8 @@ const plant = (garden: Garden) => {
       parts.push({ el, from: at, to: until, length });
     };
 
-    sprouts.forEach((el, i) => {
-      const slot = sprouts.length > 1 ? i / sprouts.length : 0;
+    [...sprouts, ...front].forEach((el, i) => {
+      const slot = sprouts.length > 1 ? (i % sprouts.length) / sprouts.length : 0;
       const at = wave + slot * 0.12;
       parts.push({ el, from: at, to: at, sprout: true });
     });
