@@ -82,18 +82,27 @@ const sprig = (x: number, y: number, turn: number, scale: number) => {
  * Dense, too. Thin and spaced out it read as a few weeds; the illusion needs
  * enough blades to overlap.
  */
-const grass = (box: { x: number; y: number; w: number; h: number }, seed: number) => {
+const grass = (
+  box: { x: number; y: number; w: number; h: number },
+  seed: number,
+  /** How much empty card there is below the copy, for the grass to fill. */
+  headroom: number
+) => {
   const parts: SVGElement[] = [];
   const base = box.y + box.h;
   const blades = Math.max(22, Math.round(box.w / 11));
+  // The tallest blade stops just short of the lowest line on the card, and
+  // the shortest is about half of it. A tier with two benefits leaves a lot
+  // of card under them and gets deep grass; one with five leaves little and
+  // gets a trim.
+  const high = clamp(headroom - 10, 24, 104);
+  const low = high * 0.46;
 
   for (let i = 0; i < blades; i++) {
     const r = wobble(seed + i);
     const r2 = wobble(seed + i + 0.5);
     const x = box.x - 12 + ((box.w + 24) * (i + r * 0.8)) / blades;
-    // Short enough to clear the cards' last line. The tallest blades were
-    // touching "Free onboarding and training" at the foot of the first card.
-    const tall = 20 + r2 * 30;
+    const tall = low + r2 * (high - low);
     const lean = (r - 0.5) * 34;
     const wide = 2.6 + r2 * 2.2;
     const tipX = x + lean * 1.3;
@@ -373,10 +382,27 @@ const plant = (garden: Garden) => {
   svg.setAttribute("viewBox", `0 0 ${hostBox.width} ${hostBox.height}`);
   svg.textContent = "";
 
-  const boxes = cards
-    .map((c) => c.getBoundingClientRect())
-    .sort((a, b) => a.left - b.left)
-    .map((b) => ({ x: b.left - hostBox.left, y: b.top - hostBox.top, w: b.width, h: b.height }));
+  /**
+   * Each card, with how much empty card sits below its copy.
+   *
+   * Read off the lowest thing printed on it rather than off a count: a tier
+   * with two benefits and a tier with five leave different amounts of room,
+   * and that room is what the grass is allowed to grow into.
+   */
+  const plots = cards
+    .map((card) => {
+      const b = card.getBoundingClientRect();
+      const lines = [...card.querySelectorAll("*")].filter(
+        (el) => !el.children.length && el.textContent?.trim()
+      );
+      const lowest = lines.reduce((low, el) => Math.max(low, el.getBoundingClientRect().bottom), b.top);
+      return {
+        box: { x: b.left - hostBox.left, y: b.top - hostBox.top, w: b.width, h: b.height },
+        headroom: b.bottom - lowest,
+      };
+    })
+    .sort((a, b) => a.box.x - b.box.x);
+  const boxes = plots.map((plot) => plot.box);
 
   const parts: Part[] = [];
   const beds = boxes.length;
@@ -408,7 +434,7 @@ const plant = (garden: Garden) => {
     /** Leaves and petals, each with how far up its plant it sits. */
     const pops: { el: SVGElement; rise: number }[] = [];
 
-    sprouts.push(...grass(box, seed));
+    sprouts.push(...grass(box, seed, plots[index].headroom));
 
     if (stage >= 1) {
       // Silver stops short of its card, Gold gets most of the way, the top
