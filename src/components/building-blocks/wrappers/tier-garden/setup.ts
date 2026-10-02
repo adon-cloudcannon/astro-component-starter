@@ -116,7 +116,9 @@ const vine = (
   box: { x: number; y: number; w: number; h: number },
   seed: number,
   /** Blooms on the stem itself, which only the top tier gets. */
-  flowering = false
+  flowering = false,
+  /** How much of the card it climbs: the higher the tier, the further. */
+  reach = 1
 ) => {
   const stems: SVGElement[] = [];
   const pops: { el: SVGElement; rise: number }[] = [];
@@ -125,9 +127,11 @@ const vine = (
   // tier's name starts there, so a stem any further in strikes through
   // "Silver", "Gold" and "Platinum" on the way past.
   const x = box.x + 9;
-  // Dead on the top edge, so it reads as carrying on behind the card rather
-  // than stopping in the middle of it.
-  const top = box.y;
+  // How far up this card it gets. Only the top tier reaches the head of its
+  // card; the ones below it stop short, which is the climb the band is
+  // about. At `reach: 1` it finishes dead on the top edge, so it reads as
+  // carrying on behind the card rather than stopping in the middle of it.
+  const top = box.y + box.h * (1 - reach);
 
   // No hook at the top. Three cards carrying the same little curl read as a
   // repeated stamp rather than as three plants; a plain stem is quieter, and
@@ -158,6 +162,17 @@ const vine = (
       rise: at / length,
     });
   }
+  // A sprig on the very end, so the stem stops inside a leaf rather than at
+  // a cut edge. The tip is the one place a round cap still reads as a stroke
+  // that was trimmed.
+  {
+    const tip = stem.getPointAtLength(length);
+    const back = stem.getPointAtLength(Math.max(0, length - 2));
+    const angle = (Math.atan2(tip.y - back.y, tip.x - back.x) * 180) / Math.PI;
+    pops.push({ el: sprig(tip.x, tip.y, angle - 52, 0.62), rise: 1 });
+    pops.push({ el: sprig(tip.x, tip.y, angle + 44, 0.5), rise: 1 });
+  }
+
   if (flowering) {
     // On the stem, at the points it has already reached, so they come out
     // of the vine rather than hovering beside it.
@@ -324,7 +339,9 @@ const plant = (garden: Garden) => {
     sprouts.push(...grass(box, seed));
 
     if (stage >= 1) {
-      const grown = vine(box, seed, stage >= 3);
+      // Silver stops short of its card, Gold gets most of the way, the top
+      // tier goes all the way up.
+      const grown = vine(box, seed, stage >= 3, [0, 0.62, 0.84, 1][stage] ?? 1);
       strokes.push(...grown.stems);
       pops.push(...grown.pops);
     }
