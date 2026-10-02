@@ -162,15 +162,25 @@ const vine = (
       rise: at / length,
     });
   }
-  // A sprig on the very end, so the stem stops inside a leaf rather than at
-  // a cut edge. The tip is the one place a round cap still reads as a stroke
-  // that was trimmed.
+  // Something on the very end, so the stem stops inside a plant rather than
+  // at a cut edge: a round cap on a stroke still reads as trimmed, and the
+  // tip is the one place a reader looks.
+  //
+  // The flowering vine ends in a bloom, which is the top of the whole band —
+  // the tallest tier, the top of its vine, the last thing to open.
   {
     const tip = stem.getPointAtLength(length);
     const back = stem.getPointAtLength(Math.max(0, length - 2));
     const angle = (Math.atan2(tip.y - back.y, tip.x - back.x) * 180) / Math.PI;
-    pops.push({ el: sprig(tip.x, tip.y, angle - 52, 0.62), rise: 1 });
-    pops.push({ el: sprig(tip.x, tip.y, angle + 44, 0.5), rise: 1 });
+
+    if (flowering) {
+      pops.push({ el: sprig(tip.x, tip.y, angle - 62, 0.56), rise: 0.99 });
+      pops.push({ el: sprig(tip.x, tip.y, angle + 54, 0.48), rise: 0.99 });
+      pops.push({ el: bloom(tip.x, tip.y - 2, BLOOMS[1], 1.15), rise: 1 });
+    } else {
+      pops.push({ el: sprig(tip.x, tip.y, angle - 52, 0.62), rise: 1 });
+      pops.push({ el: sprig(tip.x, tip.y, angle + 44, 0.5), rise: 1 });
+    }
   }
 
   if (flowering) {
