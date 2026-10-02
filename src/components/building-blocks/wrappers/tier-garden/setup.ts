@@ -93,7 +93,7 @@ const grass = (box: { x: number; y: number; w: number; h: number }, seed: number
 };
 
 /** A vine up the near side of a card, with sprigs along it. */
-const vine = (box: { x: number; y: number; w: number; h: number }, seed: number, flowering: boolean) => {
+const vine = (box: { x: number; y: number; w: number; h: number }, seed: number) => {
   const stems: SVGElement[] = [];
   const pops: SVGElement[] = [];
   const foot = box.y + box.h;
@@ -111,7 +111,7 @@ const vine = (box: { x: number; y: number; w: number; h: number }, seed: number,
   // Sprigs read off the stem itself, so they sit on it however it bends.
   document.body.append(stem);
   const length = stem.getTotalLength();
-  const count = flowering ? 4 : 5;
+  const count = 5;
   for (let i = 0; i < count; i++) {
     const at = ((i + 0.8) / (count + 0.6)) * length;
     const p = stem.getPointAtLength(at);
@@ -120,24 +120,37 @@ const vine = (box: { x: number; y: number; w: number; h: number }, seed: number,
   }
   stem.remove();
 
-  if (flowering) {
-    for (let i = 0; i < 3; i++) {
-      const r = wobble(seed + 7 + i);
-      // Held to the card's edge. Spread around the stem they reached a third
-      // of the way across the card and sat on the feature list.
-      const fx = x - 10 + r * 16;
-      const fy = box.y + box.h * (0.2 + i * 0.22) - 10;
-      stems.push(
-        make("path", {
-          class: "tier-garden-stroke is-stalk",
-          d: `M${fx + 16} ${fy + 36} Q ${fx + 4} ${fy + 16}, ${fx} ${fy}`,
-        })
-      );
-      pops.push(bloom(fx, fy, BLOOMS[i % BLOOMS.length], 0.8 + r * 0.4));
-    }
-  }
-
   return { stems, pops };
+};
+
+/**
+ * Blooms scattered over a card.
+ *
+ * No stalks. Stood on stems against one edge they read as three cut flowers
+ * in a row; loose, they read as a card in flower. Spread a little past both
+ * sides, so some sit in the gaps between tiers rather than all on the face,
+ * and kept out of the top quarter, where the tier's name and points are.
+ */
+const flowers = (box: { x: number; y: number; w: number; h: number }, seed: number, count: number) => {
+  const out: SVGElement[] = [];
+  for (let i = 0; i < count; i++) {
+    const r = wobble(seed + i * 1.7);
+    const r2 = wobble(seed + i * 1.7 + 0.31);
+    const r3 = wobble(seed + i * 1.7 + 0.77);
+    // Two beds rather than one scatter: most of them low on the card, the
+    // rest along either margin at any height. Spread evenly over the whole
+    // face one landed on the word "benefits", and a flower a reader has to
+    // look past is worse than no flower.
+    const margin = r3 > 0.62;
+    const x = margin
+      ? box.x + (r > 0.5 ? box.w - 10 - r2 * 26 : -14 + r2 * 26)
+      : box.x - 16 + (box.w + 32) * ((i + r) / count);
+    const y = margin
+      ? box.y + box.h * (0.3 + r * 0.6)
+      : box.y + box.h * (0.66 + r2 * 0.3);
+    out.push(bloom(x, y, BLOOMS[i % BLOOMS.length], 0.62 + r3 * 0.55));
+  }
+  return out;
 };
 
 /** A five-petal flower with a golden eye. */
@@ -170,29 +183,30 @@ const bloom = (x: number, y: number, colour: string, scale: number) => {
  * does: the leaves fall from one crown rather than branching.
  */
 const cabbageTree = (box: { x: number; y: number; w: number; h: number }, seed: number) => {
-  const parts: SVGElement[] = [];
+  const trunk: SVGElement[] = [];
+  const crownBlades: SVGElement[] = [];
   const x = box.x + box.w * 0.72;
   const base = box.y + 18;
-  const crown = base - 62;
+  const crown = base - 70;
 
-  parts.push(
+  trunk.push(
     make("path", {
       class: "tier-garden-stroke is-trunk",
       d: `M${x} ${base} C ${x - 4} ${base - 26}, ${x + 3} ${crown + 20}, ${x} ${crown}`,
     })
   );
 
-  const fronds = 11;
-  for (let i = 0; i < fronds; i++) {
+  const blades = 13;
+  for (let i = 0; i < blades; i++) {
     const r = wobble(seed + i);
     // Fanned from straight up, both ways, arching over at the tips.
-    const spread = -90 + (i - (fronds - 1) / 2) * (152 / fronds) + (r - 0.5) * 8;
-    const len = 46 + r * 34;
+    const spread = -90 + (i - (blades - 1) / 2) * (166 / blades) + (r - 0.5) * 8;
+    const len = 48 + r * 36;
     const rad = (spread * Math.PI) / 180;
     const tipX = x + Math.cos(rad) * len;
     const tipY = crown + Math.sin(rad) * len;
-    const droop = 14 + r * 16;
-    parts.push(
+    const droop = 16 + r * 18;
+    crownBlades.push(
       make("path", {
         class: `tier-garden-stroke is-frond${r > 0.72 ? " is-dark" : ""}`,
         d: `M${x} ${crown} Q ${x + Math.cos(rad) * len * 0.6} ${
@@ -201,7 +215,11 @@ const cabbageTree = (box: { x: number; y: number; w: number; h: number }, seed: 
       })
     );
   }
-  return parts;
+
+  // Kept apart so the crown opens once the trunk has arrived. Grown together,
+  // the blades were already spreading beside a half-height trunk, which is
+  // what made them look like they came from nowhere.
+  return { trunk, crown: crownBlades };
 };
 
 const plant = (garden: Garden) => {
@@ -232,41 +250,67 @@ const plant = (garden: Garden) => {
     const seed = index * 3.7 + 1;
     const bed = make("g", { class: "tier-garden-bed", "data-bed": String(index) });
 
-    // What a bed gets depends on how far up the staircase it is, and the
-    // last one always gets the tree however many there are.
+    /**
+     * Each tier keeps what the one below it has and adds its own.
+     *
+     * Bronze is grass, Silver adds the vine, Gold adds flowers, and the top
+     * tier adds the tree — so the planting thickens up the staircase rather
+     * than swapping one plant for another, which is what "more of everything"
+     * means on the tallest card. The last card always takes the tree, however
+     * many tiers there are.
+     */
     const last = index === beds - 1;
     const stage = last ? 3 : Math.min(index, 2);
 
     const strokes: SVGElement[] = [];
     const pops: SVGElement[] = [];
+    /** Drawn after the rest of this bed, not alongside it. */
+    const late: SVGElement[] = [];
 
-    if (stage === 0) strokes.push(...grass(box, seed));
-    if (stage === 1 || stage === 2) {
-      const grown = vine(box, seed, stage === 2);
+    strokes.push(...grass(box, seed));
+
+    if (stage >= 1) {
+      const grown = vine(box, seed);
       strokes.push(...grown.stems);
       pops.push(...grown.pops);
-      strokes.push(...grass(box, seed + 11).slice(0, 4));
     }
-    if (stage === 3) {
-      strokes.push(...cabbageTree(box, seed));
-      strokes.push(...grass(box, seed + 5).slice(0, 5));
+
+    if (stage >= 2) pops.push(...flowers(box, seed + 3, stage >= 3 ? 7 : 5));
+
+    if (stage >= 3) {
+      const tree = cabbageTree(box, seed);
+      strokes.push(...tree.trunk);
+      late.push(...tree.crown);
     }
 
     strokes.forEach((el) => bed.append(el));
+    late.forEach((el) => bed.append(el));
     pops.forEach((el) => bed.append(el));
     svg.append(bed);
 
     // Lengths have to be read once the nodes are in the document.
-    strokes.forEach((el, i) => {
+    const draw = (el: SVGElement, at: number, until: number) => {
       const length = (el as SVGPathElement).getTotalLength();
       el.setAttribute("stroke-dasharray", `${length}`);
       el.setAttribute("stroke-dashoffset", `${length}`);
+      parts.push({ el, from: at, to: until, length });
+    };
+
+    strokes.forEach((el, i) => {
       const slot = strokes.length > 1 ? i / strokes.length : 0;
-      parts.push({ el, from: from + (to - from) * slot * 0.6, to, length });
+      draw(el, from + (to - from) * slot * 0.5, from + (to - from) * 0.78);
     });
+
+    // The crown waits for the trunk, then opens blade by blade.
+    late.forEach((el, i) => {
+      const slot = late.length > 1 ? i / late.length : 0;
+      const at = from + (to - from) * (0.62 + slot * 0.3);
+      draw(el, at, Math.min(1, at + (to - from) * 0.22));
+    });
+
     pops.forEach((el, i) => {
       const slot = pops.length > 1 ? i / pops.length : 0;
-      const at = from + (to - from) * (0.35 + slot * 0.5);
+      const at = from + (to - from) * (0.4 + slot * 0.5);
       parts.push({ el, from: at, to: at });
     });
   });
