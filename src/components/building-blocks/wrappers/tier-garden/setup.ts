@@ -167,26 +167,34 @@ const vine = (box: { x: number; y: number; w: number; h: number }, seed: number)
  * has to work out which way it is pointing.
  */
 const butterfly = (box: { x: number; y: number; w: number; h: number }, stage: number) => {
-  // It lands on the card, inside its far top corner, not in the air above it.
-  const endX = box.x + box.w - 58;
-  const endY = box.y + 18;
-  // In from off the right of the band, dipping and rising the way one does.
+  // Resting on the card with about 20 of clearance at the top and the far
+  // edge. Measured to the wingtip, not the body: its wings span some 42, so
+  // a body 20 in left half the butterfly hanging over the side.
+  const endX = box.x + box.w - 42;
+  const endY = box.y + 32;
+  // One long lope in from off the right of the band. Two curves made it
+  // zig-zag; a single cubic sweeps in and settles without changing its mind.
   const flight =
-    `M${stage + 80} ${endY - 150} C ${stage - 40} ${endY - 180}, ${endX + 210} ${endY + 60}, ` +
-    `${endX + 120} ${endY - 6} C ${endX + 70} ${endY - 34}, ${endX + 34} ${endY - 46}, ${endX} ${endY}`;
+    `M${stage + 90} ${endY - 120} C ${stage * 0.52} ${endY - 170}, ` +
+    `${endX + 190} ${endY + 80}, ${endX} ${endY}`;
 
   const g = make("g", { class: "tier-garden-pop tier-garden-flier" });
   const inner = make("g", { class: "tier-garden-flight", style: `offset-path: path("${flight}")` });
+  // Set down at an angle rather than square to the card. The rotate is on
+  // the group's own transform, which turns about its local origin — the
+  // body — so no transform-box is involved.
+  const tilt = make("g", { transform: "rotate(-24)" });
 
   // Two pairs of wings around a body at (0,0), drawn small: it is a long way
   // off and it should read as a flicker, not a specimen.
-  inner.append(
+  tilt.append(
     make("path", { class: "tier-garden-wing is-left", d: "M0 0 C -13 -14, -26 -9, -21 2 C -17 10, -6 7, 0 0 Z" }),
     make("path", { class: "tier-garden-wing is-left is-low", d: "M0 1 C -10 6, -17 14, -10 17 C -4 19, -1 9, 0 1 Z" }),
     make("path", { class: "tier-garden-wing is-right", d: "M0 0 C 13 -14, 26 -9, 21 2 C 17 10, 6 7, 0 0 Z" }),
     make("path", { class: "tier-garden-wing is-right is-low", d: "M0 1 C 10 6, 17 14, 10 17 C 4 19, 1 9, 0 1 Z" }),
     make("ellipse", { class: "tier-garden-body", cx: "0", cy: "3", rx: "1.7", ry: "7" })
   );
+  inner.append(tilt);
   g.append(inner);
   return g;
 };
