@@ -236,3 +236,12 @@ imageSource:
 imageAlt:
   type: text
   comment: Alt text for that picture.
+cornerStart:
+  type: object
+  comment: >-
+    A drawing hung off the band's bottom-left corner. Source, alt, and `width`
+    and `drop` as percentages of the band: how wide it is, and how far it runs
+    past the foot before the band cuts it off.
+cornerEnd:
+  type: object
+  comment: The same for the band's bottom-right corner.

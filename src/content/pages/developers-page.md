@@ -77,6 +77,7 @@ pageSections:
     headingSize: lg
   - _component: page-sections/explainers/pinned-steps
     heading: Your stack, plus an editing layer
+    numbered: true
     headingSize: lg
     alignmentHorizontal: start
     subtext: ''
@@ -89,8 +90,7 @@ pageSections:
     colorScheme: dark
     lockColorScheme: true
     steps:
-      - number: '1'
-        contentSections:
+      - contentSections:
           - _component: building-blocks/core-elements/heading
             text: Build with your favorite tools
             level: h3

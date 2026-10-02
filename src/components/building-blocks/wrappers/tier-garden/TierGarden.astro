@@ -184,8 +184,11 @@ const {
       transform-origin: 0% 50%;
     }
 
+    /* Counted, not infinite. 11 beats of 180ms covers the 1900ms flight and
+       then stops: left running, four wings kept a compositor animation alive
+       for as long as the page was open, for a butterfly that had landed. */
     .tier-garden-flier[data-open] .tier-garden-wing {
-      animation: tier-garden-beat 180ms steps(2, end) infinite;
+      animation: tier-garden-beat 180ms steps(2, end) 11;
     }
 
     .tier-garden-body {

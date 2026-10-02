@@ -1,0 +1,351 @@
+---
+/**
+ * Two characters having a conversation.
+ *
+ * The design draws the Enterprise card's pair as one bitmap: a kea, a tuatara
+ * and the speech bubble between them, all baked together. That is fine until
+ * the card changes shape, and it cannot be edited or animated at all — the
+ * bubble's contents are drawn as coloured blocks.
+ *
+ * So the characters are cut out of that drawing and placed separately, and the
+ * bubble becomes a thread: messages arrive one at a time, alternating sides,
+ * each one pushing the ones before it up and out through the top, then the
+ * whole thing starts over. The design's own bubble is the vocabulary for what
+ * is written in them — words of coloured shapes rather than letters.
+ *
+ * The characters are laid out from the design's measurements as shares of the
+ * row, so the pair holds its proportions at whatever width the column gives
+ * it, and they stand on the foot of the card that cuts them off.
+ */
+import Image from "@core-elements/image/Image.astro";
+import { compose } from "./words";
+
+const {
+  /**
+   * The characters, left to right.
+   *
+   * `{ source, alt, width, drop }`, both measurements as shares of the row:
+   * `width` is how much of it the character takes, `drop` how far it runs past
+   * the foot. Two is what the design draws; the row takes however many it is
+   * given.
+   */
+  characters = [],
+  /**
+   * The conversation, in order.
+   *
+   * `{ side, words }`. `side` is which character is speaking — `start` for the
+   * first, `end` for the second — and `words` is roughly how long the message
+   * is. The shapes themselves are generated from the seed, so an editor writes
+   * the rhythm and gets a sentence that looks like one.
+   */
+  conversation = [],
+  /** What the whole exchange is, for anyone who cannot see it. */
+  conversationLabel = "",
+  /** Changes every message at once. Any number; nothing reads it but the shapes. */
+  seed = 7,
+  /** How tall the thread is, as a share of the row's width. */
+  threadHeight = 36,
+  /**
+   * How far in the messages sit, as shares of the row.
+   *
+   * Set so each side's outer end lands over the middle of the character
+   * speaking rather than against its outer edge: level with the edge, a
+   * message reads as a label stuck to the side of the drawing. A long one is
+   * free to cross the centre, which is what gives the thread its rhythm.
+   *
+   * Two numbers rather than one because the pair is not centred either.
+   */
+  insetStart = 27,
+  insetEnd = 22,
+  /**
+   * Where the pair stands, as shares of the row from each edge.
+   *
+   * Also two numbers: on a split the copy is up against the character on the
+   * near side, so the room to spread into is all on the far one. Growing the
+   * gap from the centre moves both of them and walks the near one into the
+   * text.
+   */
+  castInsetStart = 14,
+  castInsetEnd = 8,
+  /**
+   * How wide the row is drawn, as a percentage of the column it is given.
+   *
+   * The design's pair is wider than the half the card splits into: it runs
+   * from x 423 to 931 of a 1029 card, where half the padded card is 450. So it
+   * grows past its column's start, into the air between itself and the copy,
+   * rather than being boxed in and coming out a seventh too small.
+   */
+  scale = 100,
+  class: className,
+  _component,
+  ...htmlAttributes
+} = Astro.props;
+
+const num = (value, fallback) => (Number.isFinite(Number(value)) ? Number(value) : fallback);
+
+const cast = characters.filter((character) => character?.source);
+const thread = conversation
+  .filter(Boolean)
+  .map((message, index) => ({
+    side: message.side === "end" ? "end" : "start",
+    words: compose(num(seed, 7) * 1013 + index * 7919, num(message.words, 4)),
+  }));
+---
+
+<div
+  class:list={["character-chat", className]}
+  data-conversation={thread.length ? "" : undefined}
+  style={`--character-chat-scale: ${num(scale, 100)}%; --character-chat-thread: ${num(threadHeight, 36)}%; --character-chat-inset-start: ${num(insetStart, 27)}%; --character-chat-inset-end: ${num(insetEnd, 22)}%; --character-chat-cast-start: ${num(castInsetStart, 14)}%; --character-chat-cast-end: ${num(castInsetEnd, 8)}%`}
+  {...htmlAttributes}
+>
+  {thread.length > 0 && (
+    <div class="character-chat-thread">
+      {/* One line for a reader who cannot see it. The shapes say nothing on
+          their own, so there is nothing per-message worth announcing. */}
+      {conversationLabel && <p class="visually-hidden">{conversationLabel}</p>}
+      <div class="character-chat-stack" data-thread aria-hidden="true">
+        {thread.map((message, index) => (
+          <div class="character-chat-row" data-side={message.side} data-index={index}>
+            <div class="character-chat-row-inner">
+              <div class="character-chat-bubble">
+                {message.words.map((word) => (
+                  <span class="character-chat-word">
+                    {word.map((glyph) => (
+                      <i
+                        class="character-chat-glyph"
+                        data-kind={glyph.kind}
+                        style={`--glyph-width: ${glyph.width}px; --glyph-ink: var(--${glyph.color})`}
+                      />
+                    ))}
+                  </span>
+                ))}
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  )}
+
+  <div class="character-chat-cast">
+    {cast.map((character, index) => (
+      <Image
+        class="character-chat-figure"
+        source={character.source}
+        alt={character.alt}
+        decorative={!character.alt}
+        style={`--character-chat-width: ${num(character.width, 100 / cast.length)}%; --character-chat-drop: ${num(character.drop, 0)}%`}
+        data-character={index}
+      />
+    ))}
+  </div>
+</div>
+
+<style is:global>
+  @layer components {
+    .character-chat {
+      display: flex;
+      flex-direction: column;
+      inline-size: var(--character-chat-scale, 100%);
+      /* Grown past its column on the inside, towards the copy, so the far edge
+         stays where the column puts it. An auto margin cannot do this: a box
+         wider than its container is over-constrained, so the auto resolves to
+         zero and it overflows the other way. */
+      margin-inline-start: calc(100% - var(--character-chat-scale, 100%));
+      /* Not clipped here. The characters are meant to run past the foot, and
+         the card they sit on is what cuts them off. */
+      position: relative;
+    }
+
+    /* The thread's height is a share of the row's width, written as padding
+       rather than as a ratio: a percentage padding resolves against the
+       container's inline size whatever else is going on, where `aspect-ratio`
+       on a box in a flex column loses to the height of what is inside it. */
+    .character-chat .character-chat-thread {
+      flex: none;
+      padding-block-start: var(--character-chat-thread, 36%);
+      position: relative;
+    }
+
+    .character-chat .character-chat-stack {
+      display: flex;
+      flex-direction: column;
+      inset: 0;
+      justify-content: flex-end;
+      /* Messages leave through the top rather than stopping at it. */
+      mask-image: linear-gradient(to bottom, transparent 0%, #000 22%);
+      overflow: hidden;
+      position: absolute;
+    }
+
+    /* A row opens from nothing to its own height, which is what pushes the
+       thread up. `0fr` to `1fr` is the one way to transition to a height
+       nobody has measured. */
+    .character-chat .character-chat-row {
+      display: grid;
+      grid-template-rows: 1fr;
+      justify-items: start;
+      /* Held off both edges so each side's outer end sits over the middle of
+         the character speaking, rather than in the corners of the box. */
+      padding-inline: var(--character-chat-inset-start, 27%) var(--character-chat-inset-end, 22%);
+    }
+
+    .character-chat .character-chat-row[data-side="end"] {
+      justify-items: end;
+    }
+
+    .character-chat .character-chat-row-inner {
+      min-block-size: 0;
+      /* The gap between messages lives in here so it closes with the row. A
+         margin on the row would hold the space open while the row was shut. */
+      padding-block-start: 7px;
+      overflow: hidden;
+    }
+
+    .character-chat[data-conversation] .character-chat-stack[data-playing] .character-chat-row {
+      grid-template-rows: 0fr;
+      transition: grid-template-rows 440ms var(--ease-out, cubic-bezier(0.2, 0.8, 0.2, 1));
+    }
+
+    .character-chat[data-conversation] .character-chat-stack[data-playing] .character-chat-row[data-shown] {
+      grid-template-rows: 1fr;
+    }
+
+    /* The bubble settles a beat after its row has opened, so it arrives in the
+       space rather than being drawn as the space appears. */
+    .character-chat[data-conversation] .character-chat-stack[data-playing] .character-chat-bubble {
+      opacity: 0;
+      transition:
+        opacity 260ms ease,
+        translate 260ms var(--ease-out, cubic-bezier(0.2, 0.8, 0.2, 1));
+      translate: 0 10px;
+    }
+
+    .character-chat[data-conversation] .character-chat-stack[data-playing] .character-chat-row[data-shown] .character-chat-bubble {
+      opacity: 1;
+      transition-delay: 150ms;
+      translate: 0 0;
+    }
+
+    /* Cream and sand, the two the card is already drawn between: the band is
+       sand, the card the lighter one, and the two sides of the conversation
+       sit either side of it. */
+    .character-chat .character-chat-bubble {
+      align-items: center;
+      background-color: var(--sand, #fbf6e9);
+      border-radius: 16px;
+      column-gap: 7px;
+      display: flex;
+      flex-wrap: wrap;
+      /* Of the inset row, so a long one reaches past the centre line. */
+      max-inline-size: 86%;
+      padding: 10px 13px;
+      row-gap: 6px;
+      /* The one square corner is the tail, the way a messaging app draws it. */
+      border-end-start-radius: 5px;
+    }
+
+    .character-chat .character-chat-row[data-side="end"] .character-chat-bubble {
+      background-color: var(--dark-sand, #ebe1c9);
+      border-end-end-radius: 5px;
+      border-end-start-radius: 16px;
+    }
+
+    .character-chat .character-chat-word {
+      display: inline-flex;
+      gap: 2px;
+    }
+
+    .character-chat .character-chat-glyph {
+      background-color: var(--glyph-ink, var(--pacific, #034ad8));
+      block-size: 9px;
+      border-radius: 4.5px;
+      display: block;
+      inline-size: var(--glyph-width, 9px);
+    }
+
+    .character-chat .character-chat-glyph[data-kind="block"] {
+      border-radius: 2px;
+    }
+
+    .character-chat .character-chat-glyph[data-kind="arch"] {
+      border-radius: 50% 50% 2px 2px;
+    }
+
+    .character-chat .character-chat-glyph[data-kind="wedge"] {
+      border-radius: 1px;
+      clip-path: polygon(50% 0, 100% 100%, 0 100%);
+    }
+
+    .character-chat .character-chat-glyph[data-kind="hourglass"] {
+      border-radius: 1px;
+      clip-path: polygon(0 0, 100% 0, 50% 50%, 100% 100%, 0 100%, 50% 50%);
+    }
+
+    /* The characters stand on the foot of the card, which is what cuts them
+       off, so they are levelled by their feet rather than by their tops. */
+    .character-chat .character-chat-cast {
+      align-items: end;
+      display: flex;
+      flex: none;
+      /* Each one placed from its own edge rather than spread from the centre,
+         so the far character can take the room the copy leaves on its side
+         without the near one being pushed into the text. */
+      justify-content: space-between;
+    }
+
+    /* The placing is a margin on each figure, not padding on the row.
+       Padding would shrink the box the figures' own widths are measured
+       against, so holding them off the edges made both characters smaller:
+       29% of a padded 396 rather than of the row's 508. A percentage margin
+       resolves against the same box the width does, so the two stay in step. */
+    .character-chat .character-chat-cast > .character-chat-figure:first-child {
+      margin-inline-start: var(--character-chat-cast-start, 14%);
+    }
+
+    .character-chat .character-chat-cast > .character-chat-figure:last-child {
+      margin-inline-end: var(--character-chat-cast-end, 8%);
+    }
+
+    /* `flex: none` rather than a basis: the figure carries its own share, and a
+       flex row would otherwise shrink it to fit the two of them in. The
+       negative block margin is how far it runs past the foot. */
+    .character-chat .character-chat-figure {
+      block-size: auto;
+      flex: none;
+      inline-size: var(--character-chat-width, 50%);
+      margin-block-end: calc(-1 * var(--character-chat-drop, 0%));
+    }
+
+    /* Image puts an `.image-inner` inside that takes the full width, so the
+       size has to land on it and on the picture too, or the drawing is left at
+       its served size inside a box of the right width. */
+    .character-chat .character-chat-figure .image-inner,
+    .character-chat .character-chat-figure img {
+      block-size: auto;
+      inline-size: 100%;
+    }
+
+    /* Settled, not playing. A reader who asks for less motion gets the whole
+       exchange, which is what it renders as. */
+    @media (prefers-reduced-motion: reduce) {
+      .character-chat .character-chat-row {
+        grid-template-rows: 1fr !important;
+        transition: none !important;
+      }
+
+      .character-chat .character-chat-bubble {
+        opacity: 1 !important;
+        transition: none !important;
+        translate: none !important;
+      }
+    }
+  }
+</style>
+
+<script>
+  import { onPageLoad } from "@component-utils/onPageLoad";
+  import { setupAllCharacterChats } from "./setup";
+
+  onPageLoad(() => setupAllCharacterChats());
+</script>

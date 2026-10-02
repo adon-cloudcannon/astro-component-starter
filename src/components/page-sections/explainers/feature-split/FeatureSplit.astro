@@ -43,6 +43,15 @@ const {
   imageAspectRatio = "portrait",
   imageRounded = true,
   imageBleed = false,
+  /**
+   * How wide the media column is drawn, in pixels.
+   *
+   * 400 is what every section built before this one used, so it stays the
+   * default. The Partner Program's dashboard is drawn 628 against a 386 column
+   * of copy, which is the picture carrying the band rather than sitting beside
+   * it: left at 400 the mockup is too small to read.
+   */
+  mediaWidth,
   reverse = false,
   sectionLabel,
   maxContentWidth = "xl",
@@ -87,7 +96,7 @@ const imagePositionVertical = imageBleed ? "top" : "center";
         only 300 wide and wraps its heading onto two lines because of it. The
         400 every other split uses would shrink the mockup's own type with
         it, since the whole stack scales off its container. */}
-    fixedWidth={siteCards?.cards?.length ? "708" : "400"}
+    fixedWidth={siteCards?.cards?.length ? "708" : String(Number(mediaWidth) || 400)}
     data-bleed={bleedSide}
     minSplitWidth={minSplitWidth}
     reverse={reverse}

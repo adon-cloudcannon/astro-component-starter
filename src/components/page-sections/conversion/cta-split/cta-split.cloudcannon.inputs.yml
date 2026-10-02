@@ -85,6 +85,12 @@ imageReveal:
       static: ""
     resize_style: contain
     width: 1920
+characters:
+  type: object
+  comment: >-
+    Two characters in conversation in place of the picture. The design draws
+    the Enterprise pair as one bitmap with their speech bubble baked in; placed
+    separately they hold their proportions whatever shape the card takes.
 imageSource:
   type: image
   comment: Image shown beside the copy.

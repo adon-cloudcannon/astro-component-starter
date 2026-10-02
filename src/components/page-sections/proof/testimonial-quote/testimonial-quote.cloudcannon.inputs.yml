@@ -30,21 +30,24 @@ tone:
   type: select
   label: Card tone
   comment: >-
-    Dark for a dark band, light for a cream one. The accent colour does not
-    change with it, and the pale accents only hold on the dark card.
+    Dark for a dark band, light for a cream one. Plain draws no card at all,
+    which is what the case-study band wants: the quote sits on the band's own
+    pattern. The accent colour does not change with it, and the pale accents
+    only hold on the dark card.
   options:
     values:
       - id: base
         name: Dark
       - id: light
         name: Light
+      - id: plain
+        name: No card
 cardWidth:
   type: select
   label: Card width
   comment: >-
-    How much of the column the card takes. Narrow is the testimonial bento's
-    wide card. A split stacks when the card gets below 680px, so a narrow one
-    draws as a stack.
+    How much of the column the card takes. 72% is the house width and the
+    default; full runs it to the whole column, narrow is the bento's 55%.
   options:
     values:
       - id: full
@@ -176,3 +179,20 @@ backgroundColor:
       - id: highlight
         name: Highlight
 
+logoAspect:
+  type: text
+  comment: >-
+    The client mark's own proportions, as `width / height`, for the case-study
+    layout. Taken from the SVG's viewBox.
+paddingVerticalStart:
+  type: select
+  comment: >-
+    Overrides the padding above the card. Useful where the band above already
+    carries its own, and the two stack into a gap neither asked for.
+  options:
+    values: [none, xs, sm, md, lg, xl, 2xl, 3xl, 4xl, 5xl, 6xl]
+paddingVerticalEnd:
+  type: select
+  comment: Overrides the padding below the card.
+  options:
+    values: [none, xs, sm, md, lg, xl, 2xl, 3xl, 4xl, 5xl, 6xl]

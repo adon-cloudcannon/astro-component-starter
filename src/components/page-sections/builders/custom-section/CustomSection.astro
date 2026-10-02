@@ -162,6 +162,13 @@ const arrayDataAttributes =
       />
     ))}
 
+    {/* Band-level art: drawn against the full width of the section rather than
+        inside its content column. The closing CTAs hang illustrations off the
+        band's own corners, and the content column cannot hold them — it is
+        1040 or 1180 wide and centred, so a corner drawing placed in it sits
+        well inside the edge it is supposed to run off. */}
+    <slot name="band" />
+
     <div
       class:list={[
         "content",

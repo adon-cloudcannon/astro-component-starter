@@ -806,8 +806,20 @@ const feedKeyframes = feedSteps
         grid-template-columns: minmax(0, 1fr);
       }
 
-      .workflow-split .workflow-illustration {
-        margin-block-end: 0;
+      /* The connector joins two columns. Stacked there are none to join, and
+         it was still drawn from the panel's right edge out by the gap's 4rem:
+         on a 375 phone that put its end at 411 and set the width of the whole
+         document, so every band on the homepage scrolled sideways with it. */
+      .workflow-split .workflow-connector {
+        display: none;
+      }
+
+      /* The card between the two panels carries the connector's story: the
+         repo the two halves meet in. Stacked, it is a third card in a column
+         with nothing either side of it to join, so it drops out with the rule
+         it belongs to. */
+      .workflow-split .workflow-centre-card {
+        display: none;
       }
     }
   }

@@ -228,6 +228,15 @@ list.forEach((member, index) => lanes[index % lanes.length].push(member));
       .team-grid .team-grid-wall {
         overflow: visible;
       }
+
+      /* The copy's 96 top and bottom hold it off the wall's edges where the
+         two sit side by side. Stacked there is no wall beside it: the 96 above
+         lands on top of the band's own padding, and the 96 below lands on top
+         of the row gap, which put 144 between "Meet the team" and the first
+         face. Half above, and the gap below is the grid's to set. */
+      .team-grid .team-grid-copy {
+        padding-block: 3rem 0;
+      }
     }
   }
 </style>

@@ -3,6 +3,7 @@ import CustomSection from "@builders/custom-section/CustomSection.astro";
 import Heading from "@core-elements/heading/Heading.astro";
 import AgentTerminal from "@wrappers/agent-terminal/AgentTerminal.astro";
 import PolaroidCamera from "@wrappers/polaroid-camera/PolaroidCamera.astro";
+import CharacterChat from "@wrappers/character-chat/CharacterChat.astro";
 import Image from "@core-elements/image/Image.astro";
 import Text from "@core-elements/text/Text.astro";
 import ButtonGroup from "@wrappers/button-group/ButtonGroup.astro";
@@ -40,6 +41,15 @@ const {
    * camera and its pile; absent, nothing about this section changes.
    */
   camera,
+  /**
+   * Two characters in conversation in place of the picture.
+   *
+   * `{ characters: [{ source, alt, width }], gap, ratio }`. The design draws
+   * the Enterprise card's pair as one bitmap with the speech bubble baked into
+   * it; placed separately they hold their proportions whatever shape the card
+   * takes. Absent, nothing about this section changes.
+   */
+  characters,
   /**
    * A second picture of the same subject, crossfaded in when the section is
    * scrolled to. The two have to be the same size with their artwork on the
@@ -191,7 +201,21 @@ const bleedLimit = !imageBleed && overflow > 0 ? `${overflow}px` : undefined;
       />
     </Fragment>
     <Fragment slot="second">
-      {camera?.shots?.length ? (
+      {characters?.characters?.length ? (
+        <CharacterChat
+          class="cta-split-media cta-split-characters"
+          characters={characters.characters}
+          conversation={characters.conversation}
+          conversationLabel={characters.conversationLabel}
+          seed={characters.seed}
+          threadHeight={characters.threadHeight}
+          insetStart={characters.insetStart}
+          insetEnd={characters.insetEnd}
+          castInsetStart={characters.castInsetStart}
+          castInsetEnd={characters.castInsetEnd}
+          scale={characters.scale}
+        />
+      ) : camera?.shots?.length ? (
         <PolaroidCamera
           alt={imageAlt}
           class="cta-split-camera"

@@ -98,6 +98,25 @@ if (!_component && !hasCards && !hasSlotContent) return;
 </script>
 
 <style is:global>
+  /* The card keeps its full vertical padding on a phone.
+
+     `pad-y-xl` steps down to 16 below 640, which is the site's own one-step
+     mobile reduction and right nearly everywhere. It is wrong here: these
+     cards are a screen tall with a button as the last thing in them, so 16 put
+     the button hard against the card's foot while the sides kept 32.
+
+     In `overrides`, not `components`: the spacing utilities are in `utils`,
+     which out-ranks `components`, so no amount of specificity down there wins
+     (see CLAUDE.md on the layer order). The deck opts out rather than the
+     utility changing for every section on the site. */
+  @layer overrides {
+    @media (width < 640px) {
+      .scroll-deck-card .card-content.pad-y-xl {
+        padding-block: var(--spacing-xl);
+      }
+    }
+  }
+
   @layer components {
     .scroll-deck {
       --deck-offset: var(--spacing-md);
@@ -178,6 +197,37 @@ if (!_component && !hasCards && !hasSlotContent) return;
           var(--spacing-sm) + (var(--deck-last-index, 0) - var(--deck-index)) * var(--deck-peek)
         );
         min-block-size: var(--deck-card-height, 0px);
+      }
+
+      /* Each card fits its own content on a phone.
+ 
+         The shared height is what gives the stack its even chrome where the
+         cards sit on top of each other, and the deck only pins from 768 up.
+         Below that they are three cards in a column, and holding them all to
+         the tallest one left the short ones with the difference as dead space
+         under their button: 34, 80 and 57 from the foot on the homepage, for
+         three cards that should read the same. */
+      @media (width < 640px) {
+        .scroll-deck-track > .scroll-deck-card {
+          min-block-size: 0;
+        }
+
+        /* Nothing is reserved after the last card.
+ 
+           The track holds a bottom padding of one peek per card, and every
+           card carries a peek margin, so the stack has somewhere to sit when
+           the cards are piled on top of each other. Unpinned they are a plain
+           column, and that reserve became 168px of empty band under the last
+           card before the section's own padding had even started: 216 to the
+           next band. The gap between cards stays as it is — that is the
+           column's rhythm, not the stack's. */
+        .scroll-deck-track {
+          padding-block-end: 0;
+        }
+
+        .scroll-deck-track > .scroll-deck-card:last-child {
+          margin-block-end: 0;
+        }
       }
 
       .scroll-deck-card > .scroll-deck-card-inner {

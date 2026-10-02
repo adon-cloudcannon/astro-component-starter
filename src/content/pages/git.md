@@ -138,6 +138,7 @@ pageSections:
     mediaWidth: wide
     progressColor: moss
     progressTrackColor: gray-550
+    numbered: true
     background:
       type: pattern
       pattern: grid

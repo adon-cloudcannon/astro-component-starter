@@ -75,18 +75,30 @@ pageSections:
       have, the more benefits you unlock.
     subtextSize: lg
     headingSize: lg
+    imageSource: /src/assets/images/marketing/partner-dashboard-panel.png
+    imageAlt: >-
+      The partner dashboard, with a Gold Partner badge on its corner and a card
+      reading 101 points.
+    imageAspectRatio: none
+    imageRounded: false
+    mediaWidth: 628
     buttonSections:
       - _component: building-blocks/core-elements/button
         variant: primary
         text: Join the Partner Program
-      - _component: building-blocks/core-elements/button
-        variant: text
-        iconName: arrow-right
-        iconPosition: after
-        text: Create organization
-  - _component: page-sections/conversion/cta-split
-    heading: New client sites shipped in 60 minutes instead of days.
-    headingSize: md
+  - _component: page-sections/proof/testimonial-quote
+    variant: static
+    quoteSize: lg
+    tone: base
+    quotes:
+      - text: New client sites shipped in **60 minutes** instead of days.
+        logoSource: /src/assets/images/marketing/logos/DX.svg
+        logoAlt: DX
+        logoAspect: 49 / 28
+        company: DX
+        linkText: Read case study
+        accentColor: sunset
+        quoteMarks: false
     background:
       type: pattern
       pattern: pegboard
@@ -99,12 +111,6 @@ pageSections:
         rx: 933px
         'y': 49.8%
         ry: 74.8%
-    buttonSections:
-      - _component: building-blocks/core-elements/button
-        variant: text
-        iconName: arrow-right
-        iconPosition: after
-        text: Read case study
   - _component: page-sections/explainers/feature-grid
     features:
       - title: Partner dashboard
@@ -277,10 +283,37 @@ pageSections:
     contentCard: true
     contentCardColor: base
     paddingVertical: 2xl
-    imageSource: /src/assets/images/marketing/keatuatara-03-1-3806-72612.png
+    imageSource: ''
     imageReveal: ''
+    characters:
+      scale: 116
+      threadHeight: 34
+      insetStart: 27
+      insetEnd: 22
+      castInsetStart: 14
+      castInsetEnd: 8
+      seed: 7
+      conversationLabel: A client and a developer talking over a plan.
+      characters:
+        - source: /src/assets/images/marketing/kea.png
+          alt: ''
+          width: 29
+          drop: 0
+        - source: /src/assets/images/marketing/tuatara.png
+          alt: ''
+          width: 31
+          drop: 0
+      conversation:
+        - side: start
+          words: 5
+        - side: end
+          words: 3
+        - side: start
+          words: 6
+        - side: end
+          words: 4
     headingSize: md
-    imageFlush: true
+    imageFlush: false
     heading: Enterprise
     subtext: We’ll work with you to craft a plan that fits your particular client’s needs.
     subtextSize: lg
@@ -400,6 +433,17 @@ pageSections:
     colorScheme: dark
     lockColorScheme: true
     headingSize: lg
+    paddingVertical: 2xl
+    cornerStart:
+      source: /src/assets/images/marketing/ferns-corner-3806-72622.png
+      alt: ''
+      width: 23.4
+      drop: 4
+    cornerEnd:
+      source: /src/assets/images/marketing/rocks-corner-3806-72621.png
+      alt: ''
+      width: 18
+      drop: 0.3
     buttonSections:
       - _component: building-blocks/core-elements/button
         variant: primary

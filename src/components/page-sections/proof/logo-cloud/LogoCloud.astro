@@ -217,7 +217,19 @@ const {
         }
 
         > .eyebrow {
+          /* Held at its own width so the label stays on one line beside the
+             marks, which is what the design draws. `max-inline-size` is the
+             ceiling on that: a non-shrinking flex item still honours one, so
+             the label keeps its line wherever there is room and gives way to
+             the container where there is not.
+
+             Without it the strip set the width of the whole page on a phone:
+             the label's max-content is 393 at 0.2em tracking, the viewport is
+             375, and `flex-shrink: 0` meant it never came down — the document
+             scrolled 45px sideways and every band on the homepage went with
+             it. */
           flex: 0 0 auto;
+          max-inline-size: 100%;
         }
 
         > .logo-cloud-grid,

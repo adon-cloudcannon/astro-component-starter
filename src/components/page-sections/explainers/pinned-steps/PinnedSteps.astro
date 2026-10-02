@@ -45,6 +45,22 @@ const {
   steps = [],
   reverse = false,
   mediaWidth = "half",
+  /**
+   * Number the steps from their place in the list.
+   *
+   * The design draws a step's number in a ring: a 77px circle, no fill, a 1px
+   * rule, and the figure at 40 in the mono face. Hand-set numbers still work
+   * and draw the same way, but an author writing 1, 2, 3 into three steps is
+   * keeping a list in sync by hand, and the one thing the component knows for
+   * certain is which step this is.
+   *
+   * One size, on purpose, against the design. The file draws the ring at 77
+   * with the figure at 40 on Content Editors and Developers and at 48 and 32
+   * on Git; two rings that close together are not a choice worth handing an
+   * editor, and carrying them meant a size travelling with every stepper.
+   * Same decision as the one pitch and one dot the patterns settled on.
+   */
+  numbered = false,
   showProgress = true,
   /**
    * How far the progress bar runs.
@@ -199,14 +215,15 @@ const arrayDataAttributes = effectiveChildrenProp
             aria-roledescription="step"
             aria-label={`Step ${index + 1} of ${stepList.length}`}
           >
-            {step.number && (
-              /* Decorative: it repeats what the progress bar already says, so
-                 it is hidden rather than read out as another heading. */
+            {(numbered ? String(index + 1) : step.number) && (
+              /* Decorative: it repeats what the progress bar already says, and
+                 the step carries its count in `aria-label`, so it is hidden
+                 rather than read out again. */
               <span
                 class="pinned-steps-step-number"
                 aria-hidden="true"
               >
-                {step.number}
+                {numbered ? index + 1 : step.number}
               </span>
             )}
             <Component contentSections={blocks(step.contentSections)} />
@@ -418,15 +435,31 @@ const arrayDataAttributes = effectiveChildrenProp
     /* Hard on the band's foot, the full width of the window, with the bar
        placed inside it. The design draws both variants 10 thick and sitting on
        the very bottom edge. */
-    /* The design draws it at 40 in white above the step's own title; the
-       nearest slot is Header 4 at 42. */
+    /* The design draws the number in a ring above the step's title: a 77px
+       circle with no fill and a 1px rule, the figure at 40 in the mono face.
+       `currentColor` on the rule rather than white, so the ring follows the
+       band's ink instead of only working on a dark one.
+
+       `display: grid` with both axes centred, because a line box cannot centre
+       a glyph in a circle on its own: the design's own text node states a 22
+       line height on a 40px figure, which is the mark of it having been nudged
+       by hand. */
     .pinned-steps-step-number {
-      display: block;
-      font-family: var(--font-family-heading);
-      font-size: var(--font-size-heading-md);
-      font-weight: var(--font-weight-heading-md);
+      align-items: center;
+      aspect-ratio: 1;
+      border: var(--border-width-sm) solid currentColor;
+      border-radius: 50%;
+      display: grid;
+      font-family: var(--font-mono);
+      font-size: 2.5rem;
+      font-weight: 400;
+      inline-size: 77px;
+      justify-items: center;
       line-height: 1;
       margin-block-end: var(--spacing-lg);
+      /* The mono face carries its own side bearings, so a centred figure sits
+         a hair right of the ring's middle. */
+      padding-inline-end: 0.04em;
     }
 
     .pinned-steps-progress-rail {

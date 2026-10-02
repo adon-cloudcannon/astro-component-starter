@@ -1,0 +1,83 @@
+characters:
+  type: array
+  comment: >-
+    The characters, left to right. Two is what the design draws: a kea and a
+    tuatara, cut out of the one drawing they were painted in.
+source:
+  type: image
+  comment: The character's cut-out, on a transparent ground.
+  options:
+    paths:
+      uploads: src/assets/images
+      static: ""
+    resize_style: contain
+    width: 1200
+alt:
+  type: text
+  comment: >-
+    What the character is, for anyone who cannot see it. Leave empty where the
+    pair is decoration beside copy that already says it.
+width:
+  type: number
+  comment: The character's share of the row, as a percentage.
+drop:
+  type: number
+  comment: >-
+    How far the character runs past the foot of the row, as a percentage of the
+    row's width. The card it sits on is what cuts it off.
+conversation:
+  type: array
+  comment: >-
+    The messages, in order. They arrive one at a time and push the ones before
+    them up and out through the top, then the thread starts over.
+side:
+  type: select
+  comment: Which character is speaking.
+  options:
+    values:
+      - id: start
+        name: The first character
+      - id: end
+        name: The second character
+words:
+  type: number
+  comment: >-
+    Roughly how long the message is, in words. The shapes themselves come from
+    the seed; this sets the rhythm.
+conversationLabel:
+  type: text
+  comment: >-
+    One line saying what the exchange is, for anyone who cannot see it. The
+    shapes say nothing on their own.
+seed:
+  type: number
+  comment: Changes every message at once. Any number.
+threadHeight:
+  type: number
+  comment: How tall the thread is, as a percentage of the row's width.
+scale:
+  type: number
+  comment: >-
+    How wide the row is drawn, as a percentage of its column. Over 100 grows it
+    past the column's start, towards the copy, which is where the design draws
+    the pair.
+insetStart:
+  type: number
+  comment: >-
+    How far in the first character's messages sit, as a percentage of the row.
+    Set so their outer end lands over the middle of the character speaking.
+insetEnd:
+  type: number
+  comment: >-
+    The same for the second character's messages, measured from the row's far
+    edge.
+castInsetStart:
+  type: number
+  comment: >-
+    Where the first character stands, as a percentage in from the row's near
+    edge.
+castInsetEnd:
+  type: number
+  comment: >-
+    Where the second character stands, as a percentage in from the row's far
+    edge. The room to spread into is usually all on this side.

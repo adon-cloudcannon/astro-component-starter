@@ -45,16 +45,23 @@ pageSections:
     subtextWidth: 612
     alignmentHorizontal: center
     headingSize: lg
-  - _component: page-sections/proof/testimonial-section
-    text: When we show clients the Visual Editor during our meetings, their eyes light up.
-    authorName: Alex Murray
-    authorDescription: Digital Design Director · Firebrand
-    layout: split
-    markPosition: start
-    markStyle: card
-    company: Firebrand
-    linkText: Read case study
-    authorImage: /src/assets/images/marketing/ellipse-287-2.png
+  - _component: page-sections/proof/testimonial-quote
+    variant: static
+    quoteSize: lg
+    tone: light
+    paddingVerticalStart: lg
+    quotes:
+      - text: When we show clients the Visual Editor during our meetings, **their eyes light up.**
+        logoSource: /src/assets/images/marketing/logos/firebrand.svg
+        logoAlt: Firebrand
+        logoAspect: 239 / 50
+        authorName: Alex Murray
+        authorDescription: Digital Design Director ·
+        company: Firebrand
+        authorImage: /src/assets/images/marketing/ellipse-287-2.png
+        authorImageAlt: Alex Murray
+        linkText: Read case study
+        accentColor: pacific
     backgroundColor: base
   - _component: page-sections/explainers/pinned-steps
     heading: No more waiting on tickets
@@ -66,12 +73,12 @@ pageSections:
     mediaWidth: wide
     progressColor: golden
     progressTrackColor: midnight
+    numbered: true
     backgroundColor: base
     colorScheme: dark
     lockColorScheme: true
     steps:
-      - number: '1'
-        contentSections:
+      - contentSections:
           - _component: building-blocks/core-elements/heading
             text: Update the website right away
             level: h3
@@ -82,8 +89,7 @@ pageSections:
               developers already built.
             size: lg
         mediaSections: []
-      - number: '2'
-        contentSections:
+      - contentSections:
           - _component: building-blocks/core-elements/heading
             text: Preview before anyone else sees it
             level: h3
@@ -94,8 +100,7 @@ pageSections:
               the page is still private.
             size: lg
         mediaSections: []
-      - number: '3'
-        contentSections:
+      - contentSections:
           - _component: building-blocks/core-elements/heading
             text: Publish when you’re ready
             level: h3
@@ -117,19 +122,27 @@ pageSections:
         rx: 186px
         'y': 165.6%
         ry: 19.5%
-  - _component: page-sections/proof/testimonial-section
-    text: >-
-      You can have lots of concurrent pieces of work: a solutions page, a new case study layout, new
-      terms and conditions, a legal section, all on different branches with different agents working
-      on them in isolation, without corrupting your main site.
-    authorName: Ed Stennett
-    authorDescription: Head of Growth · Nomio
-    layout: split
-    markPosition: start
-    markStyle: plain
-    company: Nomio
-    linkText: Read case study
-    authorImage: /src/assets/images/marketing/ellipse-287.jpg
+  - _component: page-sections/proof/testimonial-quote
+    variant: static
+    quoteSize: sm
+    tone: base
+    cardWidth: medium
+    bordered: true
+    quotes:
+      - text: >-
+          You can have lots of **concurrent pieces of work**: a solutions page, a new case study
+          layout, new terms and conditions, a legal section, all on different branches with
+          different agents working on them in isolation, without corrupting your main site.
+        logoSource: /src/assets/images/marketing/logos/nomio.svg
+        logoAlt: Nomio
+        logoAspect: 275 / 63
+        authorName: Ed Stennett
+        authorDescription: Head of Growth ·
+        company: Nomio
+        authorImage: /src/assets/images/marketing/ellipse-287.jpg
+        authorImageAlt: Ed Stennett
+        linkText: Read case study
+        accentColor: sunset
     background:
       type: pattern
       pattern: pegboard

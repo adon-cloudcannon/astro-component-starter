@@ -226,3 +226,9 @@ backgroundColor:
       - id: highlight
         name: Highlight
 
+mediaWidth:
+  type: number
+  comment: >-
+    How wide the picture's column is drawn, in pixels. Defaults to 400. The
+    design draws the Partner Program's dashboard at 628, where the picture
+    carries the band rather than sitting beside the copy.

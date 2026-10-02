@@ -39,6 +39,21 @@ const {
    */
   imageSource = "",
   imageAlt = "",
+  /**
+   * Drawings hung off the band's own bottom corners.
+   *
+   * `{ source, alt, width, drop }`, with `width` and `drop` as shares of the
+   * band: how wide the drawing is, and how far it runs past the foot before
+   * the band cuts it off. The design's closing CTA on Partner Program draws
+   * ferns 300 wide out of the left corner, 52 past the foot, and rocks 231
+   * wide out of the right, 4 past it.
+   *
+   * Both are shares rather than lengths because the band is full-bleed: on a
+   * wider window the drawings grow with it, which is what keeps them in the
+   * corners rather than stranded a few hundred pixels inside them.
+   */
+  cornerStart,
+  cornerEnd,
   sectionLabel,
   maxContentWidth = "xl",
   paddingHorizontal = "gutter",
@@ -74,6 +89,29 @@ const {
   useDefaultEditableBinding={useDefaultEditableBinding}
   {...htmlAttributes}
 >
+
+  {(cornerStart?.source || cornerEnd?.source) && (
+    <Fragment slot="band">
+      {cornerStart?.source && (
+        <Image
+          class="cta-center-corner is-start"
+          source={cornerStart.source}
+          alt={cornerStart.alt}
+          decorative={!cornerStart.alt}
+          style={`--corner-width: ${Number(cornerStart.width) || 20}%; --corner-drop: ${Number(cornerStart.drop) || 0}%`}
+        />
+      )}
+      {cornerEnd?.source && (
+        <Image
+          class="cta-center-corner is-end"
+          source={cornerEnd.source}
+          alt={cornerEnd.alt}
+          decorative={!cornerEnd.alt}
+          style={`--corner-width: ${Number(cornerEnd.width) || 20}%; --corner-drop: ${Number(cornerEnd.drop) || 0}%`}
+        />
+      )}
+    </Fragment>
+  )}
   <SimpleText
     class="eyebrow"
     size="sm"
@@ -140,7 +178,44 @@ const {
       max-inline-size: var(--content-width-measure);
     }
 
-    .cta-center {
+    /* Clip, not hidden: hidden makes a scroll container and kills sticky
+       descendants, which is CustomSection's own note about this element. */
+    .cta-center:has(.cta-center-corner) > .outer-content {
+      overflow: clip;
+    }
+
+    /* Hung off the band's corners and cut off by its foot.
+ 
+       `inset-block-end` would take its percentage from the band's height,
+       which is the wrong measure: the drawings are sized against its width, so
+       the overhang has to be too. A percentage margin on an absolutely
+       positioned box resolves against the containing block's inline size,
+       which is the one number both of them can share. */
+    .cta-center .cta-center-corner {
+      block-size: auto;
+      inline-size: var(--corner-width, 20%);
+      inset-block-end: 0;
+      margin-block-end: calc(-1 * var(--corner-drop, 0%));
+      position: absolute;
+      /* `.content` carries `--layer-1`, so it stays over these without
+         anything here having to be told about it. */
+      z-index: 0;
+    }
+
+    .cta-center .cta-center-corner.is-start {
+      inset-inline-start: 0;
+    }
+
+    .cta-center .cta-center-corner.is-end {
+      inset-inline-end: 0;
+    }
+
+    /* Image puts an `.image-inner` inside that takes the full width, so the
+       size has to land on it and on the picture too. */
+    .cta-center .cta-center-corner .image-inner,
+    .cta-center .cta-center-corner img {
+      block-size: auto;
+      inline-size: 100%;
     }
   }
 </style>

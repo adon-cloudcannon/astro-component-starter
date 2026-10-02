@@ -288,6 +288,6 @@ pageSections:
     lockColorScheme: true
     heading: Wanna learn more about our product?
     linkText: Explore visual editing
-    imageSource: /src/assets/images/marketing/ferns-rocks-2-3806-70523.png
+    imageSource: /src/assets/images/marketing/rocks-corner-3806-70523.png
     headingSize: lg
 ---

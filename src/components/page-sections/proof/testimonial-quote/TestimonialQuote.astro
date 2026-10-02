@@ -36,6 +36,7 @@ type Quote = {
   authorImageAlt?: string;
   logoSource?: string;
   logoAlt?: string;
+  logoAspect?: string;
   linkText?: string;
   link?: string;
   accentColor?: string;
@@ -79,19 +80,29 @@ const {
   /**
    * How much of the column the card takes.
    *
-   * `full` is the design's: the sheet draws every one of these at the full
-   * width of its frame. `narrow` is the bento's wide card, 55% of the row,
-   * which is the one width this project has already decided on, and `medium`
-   * sits between the two for a quote that is too long to hold at 55.
+   * `medium`, 72%, is the default: it is what every testimonial on the site
+   * was set to one at a time, so it is the house width rather than a per-band
+   * choice. `full` runs the card to the whole column, and `narrow` is the
+   * bento's wide card at 55% of the row.
    *
-   * The splits stack below 680 of card, so a narrow one draws as a stack
-   * whatever the layout says.
+   * The splits stack below 680 of card. 72% of the 1040 column is 749, so a
+   * split still draws side by side at the default.
    */
-  cardWidth = "full",
+  cardWidth = "medium",
   sectionLabel,
   maxContentWidth = "xl",
   paddingHorizontal = "gutter",
   paddingVertical = "4xl",
+  /**
+   * Override one end of the vertical padding; empty follows paddingVertical.
+   *
+   * The band above a testimonial already carries its own bottom padding, so
+   * the two stack: after the editor demo on Content Editors that came to 96
+   * between the demo and the card. Trimming the top alone keeps the space
+   * under the card where the design has it.
+   */
+  paddingVerticalStart = "",
+  paddingVerticalEnd = "",
   colorScheme = "inherit",
   lockColorScheme = false,
   backgroundColor = "base",
@@ -121,6 +132,8 @@ const items: Quote[] = (isCarousel ? quotes : quotes.slice(0, 1)) as Quote[];
     maxContentWidth={maxContentWidth}
     paddingHorizontal={paddingHorizontal}
     paddingVertical={paddingVertical}
+    paddingVerticalStart={paddingVerticalStart}
+    paddingVerticalEnd={paddingVerticalEnd}
     colorScheme={colorScheme}
     lockColorScheme={lockColorScheme}
     backgroundColor={backgroundColor}
@@ -135,7 +148,7 @@ const items: Quote[] = (isCarousel ? quotes : quotes.slice(0, 1)) as Quote[];
       data-layout={layout}
       data-quote-size={quoteSize === "lg" ? "lg" : undefined}
       data-bordered={bordered ? "" : undefined}
-      data-tone={tone === "light" ? "light" : undefined}
+      data-tone={tone !== "base" ? tone : undefined}
       data-editable="array"
       data-prop="quotes"
     >
@@ -143,6 +156,24 @@ const items: Quote[] = (isCarousel ? quotes : quotes.slice(0, 1)) as Quote[];
         const accent = quote.accentColor ? `var(--${quote.accentColor})` : undefined;
         const body = quote.text ? renderMarkdown(quote.text) : "";
         const marks = quote.quoteMarks !== false;
+
+        /* Lifted out of the attribution: on the case-study band the link sits
+           under the quote rather than under a name, and it is the same Button
+           either way. */
+        const linkButton = quote.linkText ? (
+          <Button
+            class="testimonial-quote-link"
+            variant="text"
+            size="sm"
+            iconName="arrow-right"
+            iconPosition="after"
+            link={quote.link || undefined}
+            data-prop="linkText"
+          >
+            {quote.linkText}
+            {quote.company && <span class="visually-hidden"> about {quote.company}</span>}
+          </Button>
+        ) : null;
 
         const person = (
           <div class="testimonial-quote-who">
@@ -183,20 +214,7 @@ const items: Quote[] = (isCarousel ? quotes : quotes.slice(0, 1)) as Quote[];
                   off, so ruled on the whole link the line ran under the arrow.
                   The card sets the size, the colour and the hover; the
                   component sets everything else. */}
-              {quote.linkText && (
-                <Button
-                  class="testimonial-quote-link"
-                  variant="text"
-                  size="sm"
-                  iconName="arrow-right"
-                  iconPosition="after"
-                  link={quote.link || undefined}
-                  data-prop="linkText"
-                >
-                  {quote.linkText}
-                  {quote.company && <span class="visually-hidden"> about {quote.company}</span>}
-                </Button>
-              )}
+              {linkButton}
             </div>
           </div>
         );
@@ -227,15 +245,22 @@ const items: Quote[] = (isCarousel ? quotes : quotes.slice(0, 1)) as Quote[];
               <div class="testimonial-quote-foot">
                 {person}
                 {quote.logoSource && (
-                  <span class="testimonial-quote-logo">
-                    <Image
-                      source={quote.logoSource}
-                      alt={quote.logoAlt}
-                      decorative={!quote.logoAlt}
-                      data-prop-src="logoSource"
-                      data-prop-alt="logoAlt"
-                    />
-                  </span>
+                  /* The repo's mask utility rather than a picture. A client
+                     mark has its fills baked in, so an `<img>` of a white one
+                     is invisible on a light card and a dark one is invisible
+                     on a dark card; as a mask it takes the card's own quiet
+                     ink either way. Same mechanism the logo row uses. */
+                  <span
+                    class="testimonial-quote-logo logo-mark"
+                    role="img"
+                    aria-label={quote.logoAlt || quote.company}
+                    style={{
+                      "--logo-mark-source": `url("${quote.logoSource}")`,
+                      ...(quote.logoAspect ? { "--logo-mark-aspect": quote.logoAspect } : {}),
+                    }}
+                    data-prop-src="logoSource"
+                    data-prop-alt="logoAlt"
+                  />
                 )}
               </div>
             )}
@@ -304,6 +329,18 @@ const items: Quote[] = (isCarousel ? quotes : quotes.slice(0, 1)) as Quote[];
         inline-size: 72%;
       }
 
+      /* Both widths are measures for a desktop column, and on a phone they
+         are just a narrower page. 72% of the column at 375 left the card 248
+         wide and the quote 200: "maintenance" needs 216 at this size, so
+         `overflow-wrap` dropped its last letter onto the next line. The card
+         takes the width it is given instead. */
+      @media (width < 48rem) {
+        .testimonial-quote-frame[data-width="narrow"],
+        .testimonial-quote-frame[data-width="medium"] {
+          inline-size: 100%;
+        }
+      }
+
       .testimonial-quote-card {
         /* The bento's card, at this one's size.
 
@@ -317,6 +354,11 @@ const items: Quote[] = (isCarousel ? quotes : quotes.slice(0, 1)) as Quote[];
         --testimonial-quote-ink: var(--color-text-strong);
         --testimonial-quote-quiet: var(--gray-400, #9a9a9a);
         --testimonial-quote-pad: 48px;
+        /* Taller than it is wide, which is how the approved card is drawn: 80
+           above and below against 88 either side, on a card the full width of
+           its frame. Ours sits at 72% of the column, so the sides come in but
+           the vertical stays generous. */
+        --testimonial-quote-pad-y: 64px;
         /* Header 5. The sheet steps the quote down as it gets longer, and
            these are the two sizes the theme already draws. */
         --testimonial-quote-size: var(--font-size-heading-sm);
@@ -326,7 +368,7 @@ const items: Quote[] = (isCarousel ? quotes : quotes.slice(0, 1)) as Quote[];
         background: var(--testimonial-quote-surface);
         border: 0;
         border-radius: var(--radius-card);
-        padding: var(--testimonial-quote-pad);
+        padding: var(--testimonial-quote-pad-y, var(--testimonial-quote-pad)) var(--testimonial-quote-pad);
         position: relative;
       }
 
@@ -349,13 +391,9 @@ const items: Quote[] = (isCarousel ? quotes : quotes.slice(0, 1)) as Quote[];
         --testimonial-quote-size: var(--font-size-heading-md);
       }
 
-      /* Quote above, person below, so the weight of the padding sits with the
-         quote: the attribution is a footnote to it. The splits are side by
-         side and stay even. */
-      .testimonial-quote-card[data-layout="static"],
-      .testimonial-quote-card[data-layout="carousel"] {
-        padding-block-end: 40px;
-      }
+      /* Even, top and bottom. A lighter foot was a reading of the card as
+         quote-with-a-footnote; the approved card draws 80 at both ends and the
+         card looked cramped against its own quote without it. */
 
       .testimonial-quote-slide[hidden] {
         display: none;
@@ -511,86 +549,31 @@ const items: Quote[] = (isCarousel ? quotes : quotes.slice(0, 1)) as Quote[];
         padding-block-start: 24px;
       }
 
+      /* The reference draws the mark 81x40 at the foot's far end. Height is
+         what holds across marks of different proportions: a width would draw a
+         wide wordmark and a square monogram at wildly different sizes. */
       .testimonial-quote-logo {
-        display: block;
+        aspect-ratio: var(--logo-mark-aspect, 81 / 40);
+        background-color: var(--testimonial-quote-quiet);
+        block-size: 40px;
         flex-shrink: 0;
-        max-inline-size: 160px;
+        inline-size: auto;
+        max-inline-size: 200px;
       }
 
-      .testimonial-quote-logo img {
-        block-size: auto;
-        display: block;
-        inline-size: 100%;
+      /* A card with nothing drawn behind it.
+ 
+         The case-study band has no quote card: the design paints the band,
+         puts the client's mark in a box of its own and sets the quote straight
+         on the pegboard beside it. Left on the default surface the card prints
+         a near-black rectangle over the pattern, which reads as the band
+         having a hole in it. */
+      .testimonial-quote-card[data-tone="plain"] {
+        background: none;
+        padding: 0;
       }
 
       /* --- the splits ------------------------------------------------ */
-
-      /* The rule is the column's own border rather than an element between
-         them, so it runs the height of the taller side without being measured.
-
-         22/78 is the sheet's: a 219 person column against a 771 quote in an
-         1104 content box. */
-      .testimonial-quote-card[data-layout="split-person"] .testimonial-quote-slide,
-      .testimonial-quote-card[data-layout="split-quote"] .testimonial-quote-slide {
-        /* Stretch, not start.
-
-           The rule is the column's own border, so its length is that column's
-           height: top-aligned, it stopped where the shorter side's text
-           stopped and left a different amount of card under it than over it.
-           Stretched, it runs the row, which puts the card's own padding above
-           and below it equally. The content inside each column is held at the
-           top separately. */
-        align-items: stretch;
-        column-gap: var(--testimonial-quote-pad);
-        display: grid;
-      }
-
-      .testimonial-quote-card[data-layout="split-person"] .testimonial-quote-slide {
-        grid-template-columns: minmax(0, 22%) minmax(0, 1fr);
-      }
-
-      .testimonial-quote-card[data-layout="split-quote"] .testimonial-quote-slide {
-        grid-template-columns: minmax(0, 1fr) minmax(0, 22%);
-      }
-
-      /* Column order. The person is written after the quote in the markup
-         either way, so the quote stays first for a reader and for a copy. */
-      .testimonial-quote-card[data-layout="split-person"] .testimonial-quote-text {
-        border-inline-start: var(--border-width-sm) solid var(--testimonial-quote-edge);
-        grid-column: 2;
-        padding-inline-start: var(--testimonial-quote-pad);
-      }
-
-      .testimonial-quote-card[data-layout="split-person"] .testimonial-quote-who {
-        grid-column: 1;
-        grid-row: 1;
-      }
-
-      .testimonial-quote-card[data-layout="split-quote"] .testimonial-quote-who {
-        border-inline-start: var(--border-width-sm) solid var(--testimonial-quote-edge);
-        grid-column: 2;
-        padding-inline-start: var(--testimonial-quote-pad);
-      }
-
-      /* In a column of its own the person stacks, with a bigger face: the
-         sheet draws 98 against the foot row's 78. Beside a quote this is the
-         block's own heading rather than a byline under it. */
-      .testimonial-quote-card[data-layout="split-person"] .testimonial-quote-who,
-      .testimonial-quote-card[data-layout="split-quote"] .testimonial-quote-who {
-        /* `align-content` as well as `align-items`: a grid's auto rows absorb
-           the spare height a stretched column now has, so without it the face
-           and the name drift apart to fill the card. */
-        align-content: start;
-        align-items: start;
-        display: grid;
-        gap: var(--spacing-lg);
-      }
-
-      .testimonial-quote-card[data-layout="split-person"] .testimonial-quote-avatar,
-      .testimonial-quote-card[data-layout="split-quote"] .testimonial-quote-avatar {
-        block-size: 72px;
-        inline-size: 72px;
-      }
 
       /* --- the carousel's controls ----------------------------------- */
 
@@ -673,6 +656,7 @@ const items: Quote[] = (isCarousel ? quotes : quotes.slice(0, 1)) as Quote[];
       @container (width <= 680px) {
         .testimonial-quote-card {
           --testimonial-quote-pad: 24px;
+          --testimonial-quote-pad-y: 32px;
         }
 
         .testimonial-quote-card[data-layout="split-person"] .testimonial-quote-slide,

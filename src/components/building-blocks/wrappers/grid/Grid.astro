@@ -72,6 +72,18 @@ if (!_component && !hasItems && !hasSlotContent) return;
 
 <style is:global>
   @layer components {
+    /* One column: the drawing and its title are the width of the page, and
+       flow's 48 above the title then reads as a gap between two things rather
+       than as the space inside one. Written flat and against `.grid`'s own
+       container query, because rules nested deeper than a couple of levels get
+       dropped here (see CLAUDE.md) and the column count is a fact about the
+       grid's width, not the window's. */
+    @container (width < 640px) {
+      .grid .grid-item-content > .image + .heading {
+        --space-before: var(--spacing-lg);
+      }
+    }
+
     .grid {
       --space-before: var(--space-before-loose);
       container-type: inline-size;
