@@ -147,6 +147,69 @@ const {
       stroke-width: 2.5;
     }
 
+    /* The butterfly.
+
+       It is the only thing here that arrives rather than grows, so it has its
+       own flight: `offset-path` carries it along the curve. The wings beat
+       about their own inner edge, which is what `fill-box` gives on a path. */
+    .tier-garden-flight {
+      offset-distance: 0%;
+      /* Not `auto`. Banking turns the element's own +x along the path, and
+         this one is drawn head-up with its body on the y axis, so the bank
+         rolled it onto its back for most of the flight. It stays upright and
+         the path alone carries it. */
+      offset-rotate: 0deg;
+    }
+
+    .tier-garden-flier[data-open] .tier-garden-flight {
+      animation: tier-garden-fly 1700ms cubic-bezier(0.32, 0.12, 0.28, 1) both;
+    }
+
+    .tier-garden-wing {
+      fill: var(--pacific, #034ad8);
+      transform-box: fill-box;
+    }
+
+    .tier-garden-wing.is-low {
+      fill: color-mix(in srgb, var(--pacific, #034ad8) 72%, #000);
+    }
+
+    .tier-garden-wing.is-left {
+      transform-origin: 100% 50%;
+    }
+
+    .tier-garden-wing.is-right {
+      transform-origin: 0% 50%;
+    }
+
+    .tier-garden-flier[data-open] .tier-garden-wing {
+      animation: tier-garden-beat 180ms steps(2, end) infinite;
+    }
+
+    .tier-garden-body {
+      fill: #002810;
+    }
+
+    @keyframes tier-garden-fly {
+      from {
+        offset-distance: 0%;
+      }
+
+      to {
+        offset-distance: 100%;
+      }
+    }
+
+    @keyframes tier-garden-beat {
+      from {
+        scale: 1 1;
+      }
+
+      to {
+        scale: 0.35 1;
+      }
+    }
+
     .tier-garden-petal {
       fill: var(--tier-garden-bloom, var(--blush, #e7b0b9));
     }
@@ -183,6 +246,16 @@ const {
       .tier-garden-blade-grass {
         animation: none !important;
         scale: 1 1;
+      }
+
+      /* It arrives, it does not flap its way in. */
+      .tier-garden-flier[data-open] .tier-garden-flight {
+        animation: none !important;
+        offset-distance: 100%;
+      }
+
+      .tier-garden-flier[data-open] .tier-garden-wing {
+        animation: none !important;
       }
     }
   }

@@ -116,8 +116,13 @@ const vine = (box: { x: number; y: number; w: number; h: number }, seed: number)
   const stems: SVGElement[] = [];
   const pops: { el: SVGElement; rise: number }[] = [];
   const foot = box.y + box.h;
-  const x = box.x - 6;
-  const top = box.y + box.h * 0.12;
+  // On the card, but at its very edge: the cards are padded about 26 and the
+  // tier's name starts there, so a stem any further in strikes through
+  // "Silver", "Gold" and "Platinum" on the way past.
+  const x = box.x + 9;
+  // Dead on the top edge, so it reads as carrying on behind the card rather
+  // than stopping in the middle of it.
+  const top = box.y;
 
   // No hook at the top. Three cards carrying the same little curl read as a
   // repeated stamp rather than as three plants; a plain stem is quieter, and
@@ -127,9 +132,9 @@ const vine = (box: { x: number; y: number; w: number; h: number }, seed: number)
     // Out of the grass, not from under it. Started below the card's foot the
     // stem's tail hung past the bottom of the lawn, which read as a vine
     // growing out of the floor rather than out of the planting.
-    d: `M${x} ${foot - 10} C ${x - 20} ${foot - box.h * 0.34}, ${x + 24} ${
-      box.y + box.h * 0.52
-    }, ${x + 2} ${top}`,
+    d: `M${x} ${foot - 10} C ${x - 22} ${foot - box.h * 0.36}, ${x + 26} ${
+      box.y + box.h * 0.46
+    }, ${x + 4} ${top}`,
   });
 
   stems.push(stem);
@@ -154,49 +159,36 @@ const vine = (box: { x: number; y: number; w: number; h: number }, seed: number)
 };
 
 /**
- * A stem that comes over the card's far top corner and hangs down it.
+ * A butterfly, which flies in once the planting has settled.
  *
- * The top tier had everything along its near edge and nothing on the other
- * side, which left it looking bare on the half a reader actually looks at.
- * This is the one plant here that is not climbing: it arrives over the
- * corner and falls, which is what an established planting does once it has
- * run out of card to climb.
+ * The only thing here that arrives rather than grows, so it is the only one
+ * that moves on its own clock: the growth sets it going and CSS flies it.
+ * It travels on an `offset-path`, which banks it along the curve, so nothing
+ * has to work out which way it is pointing.
  */
-const drape = (box: { x: number; y: number; w: number; h: number }, seed: number) => {
-  const stems: SVGElement[] = [];
-  const pops: { el: SVGElement; rise: number }[] = [];
-  const right = box.x + box.w;
-  const top = box.y;
+const butterfly = (box: { x: number; y: number; w: number; h: number }, stage: number) => {
+  // It lands on the card, inside its far top corner, not in the air above it.
+  const endX = box.x + box.w - 58;
+  const endY = box.y + 18;
+  // In from off the right of the band, dipping and rising the way one does.
+  const flight =
+    `M${stage + 80} ${endY - 150} C ${stage - 40} ${endY - 180}, ${endX + 210} ${endY + 60}, ` +
+    `${endX + 120} ${endY - 6} C ${endX + 70} ${endY - 34}, ${endX + 34} ${endY - 46}, ${endX} ${endY}`;
 
-  const stem = make("path", {
-    class: "tier-garden-stroke is-vine",
-    // It lies along the card's top edge before it goes over the corner.
-    // Started above the card it hung in mid-air with nothing holding it up,
-    // which is the one thing a drape cannot do.
-    d: `M${right - box.w * 0.54} ${top - 2} C ${right - box.w * 0.36} ${top - 9}, ${
-      right - box.w * 0.17
-    } ${top + 1}, ${right - 13} ${top - 4} C ${right + 9} ${top - 8}, ${right + 8} ${
-      top + 16
-    }, ${right + 3} ${top + box.h * 0.26} C ${right - 2} ${top + box.h * 0.4}, ${
-      right + 10
-    } ${top + box.h * 0.46}, ${right + 2} ${top + box.h * 0.56}`,
-  });
-  stems.push(stem);
+  const g = make("g", { class: "tier-garden-pop tier-garden-flier" });
+  const inner = make("g", { class: "tier-garden-flight", style: `offset-path: path("${flight}")` });
 
-  document.body.append(stem);
-  const length = stem.getTotalLength();
-  for (let i = 0; i < 5; i++) {
-    const at = ((i + 0.6) / 5.4) * length;
-    const p = stem.getPointAtLength(at);
-    const side = i % 2 ? 1 : -1;
-    pops.push({
-      el: sprig(p.x, p.y, 118 + side * 58 + (wobble(seed + i) - 0.5) * 26, 0.48 + wobble(seed + i) * 0.24),
-      rise: at / length,
-    });
-  }
-  stem.remove();
-
-  return { stems, pops };
+  // Two pairs of wings around a body at (0,0), drawn small: it is a long way
+  // off and it should read as a flicker, not a specimen.
+  inner.append(
+    make("path", { class: "tier-garden-wing is-left", d: "M0 0 C -13 -14, -26 -9, -21 2 C -17 10, -6 7, 0 0 Z" }),
+    make("path", { class: "tier-garden-wing is-left is-low", d: "M0 1 C -10 6, -17 14, -10 17 C -4 19, -1 9, 0 1 Z" }),
+    make("path", { class: "tier-garden-wing is-right", d: "M0 0 C 13 -14, 26 -9, 21 2 C 17 10, 6 7, 0 0 Z" }),
+    make("path", { class: "tier-garden-wing is-right is-low", d: "M0 1 C 10 6, 17 14, 10 17 C 4 19, 1 9, 0 1 Z" }),
+    make("ellipse", { class: "tier-garden-body", cx: "0", cy: "3", rx: "1.7", ry: "7" })
+  );
+  g.append(inner);
+  return g;
 };
 
 /**
@@ -310,11 +302,8 @@ const plant = (garden: Garden) => {
 
     if (stage >= 2) pops.push(...flowers(box, seed + 3, stage >= 3 ? 11 : 5));
 
-    if (stage >= 3) {
-      const over = drape(box, seed + 9);
-      strokes.push(...over.stems);
-      pops.push(...over.pops);
-    }
+    // The butterfly lands on the top tier, after everything else is up.
+    if (stage >= 3) pops.push({ el: butterfly(box, hostBox.width), rise: 1.6 });
 
     sprouts.forEach((el) => bed.append(el));
     strokes.forEach((el) => bed.append(el));
@@ -352,7 +341,11 @@ const plant = (garden: Garden) => {
 
     pops.forEach(({ el, rise }) => {
       // A touch behind the tip, so the stem is always ahead of its own leaves.
-      const at = climbFrom + climbSpan * clamp(rise * 1.04 - 0.04, 0, 1);
+      // A rise past 1 means "after this bed is done", which is the butterfly.
+      const at =
+        rise > 1
+          ? Math.min(0.97, climbFrom + climbSpan * 1.05)
+          : climbFrom + climbSpan * clamp(rise * 1.04 - 0.04, 0, 1);
       parts.push({ el, from: at, to: at });
     });
   });
