@@ -112,7 +112,12 @@ const grass = (box: { x: number; y: number; w: number; h: number }, seed: number
 };
 
 /** A vine up the near side of a card, with sprigs along it. */
-const vine = (box: { x: number; y: number; w: number; h: number }, seed: number) => {
+const vine = (
+  box: { x: number; y: number; w: number; h: number },
+  seed: number,
+  /** Blooms on the stem itself, which only the top tier gets. */
+  flowering = false
+) => {
   const stems: SVGElement[] = [];
   const pops: { el: SVGElement; rise: number }[] = [];
   const foot = box.y + box.h;
@@ -153,6 +158,18 @@ const vine = (box: { x: number; y: number; w: number; h: number }, seed: number)
       rise: at / length,
     });
   }
+  if (flowering) {
+    // On the stem, at the points it has already reached, so they come out
+    // of the vine rather than hovering beside it.
+    [0.34, 0.58, 0.79].forEach((along, i) => {
+      const p = stem.getPointAtLength(along * length);
+      pops.push({
+        el: bloom(p.x, p.y, BLOOMS[i % BLOOMS.length], 0.78 + wobble(seed + i * 2) * 0.3),
+        rise: along,
+      });
+    });
+  }
+
   stem.remove();
 
   return { stems, pops };
@@ -170,12 +187,18 @@ const butterfly = (box: { x: number; y: number; w: number; h: number }, stage: n
   // High on the card's far corner, with the wings allowed over the edge.
   const endX = box.x + box.w - 28;
   const endY = box.y + 18;
-  // One long, shallow lope in from off the right of the band. Two curves
-  // made it zig-zag, and a deep one made it swoop; this is nearly a straight
-  // run with a little fall in it.
+  /**
+   * In from off the right of the band on a shallow glide.
+   *
+   * Every point moves the same way — right to left, high to low — which is
+   * what finally stopped the whiplash. The curve before this had its first
+   * handle well to the LEFT of where it lands and its second back to the
+   * RIGHT, so the butterfly overshot the card, swung back, and settled: a
+   * boomerang, in a line that was meant to read as a drift.
+   */
   const flight =
-    `M${stage + 90} ${endY - 56} C ${stage * 0.62} ${endY - 76}, ` +
-    `${endX + 150} ${endY + 26}, ${endX} ${endY}`;
+    `M${stage + 230} ${endY - 86} C ${stage + 80} ${endY - 70}, ` +
+    `${endX + 60} ${endY - 34}, ${endX} ${endY}`;
 
   const g = make("g", { class: "tier-garden-pop tier-garden-flier" });
   const inner = make("g", { class: "tier-garden-flight", style: `offset-path: path("${flight}")` });
@@ -213,17 +236,15 @@ const flowers = (box: { x: number; y: number; w: number; h: number }, seed: numb
     const r = wobble(seed + i * 1.7);
     const r2 = wobble(seed + i * 1.7 + 0.31);
     const r3 = wobble(seed + i * 1.7 + 0.77);
-    // Two beds rather than one scatter: most of them low on the card, the
-    // rest along either margin at any height. Spread evenly over the whole
-    // face one landed on the word "benefits", and a flower a reader has to
-    // look past is worse than no flower.
-    const margin = r3 > 0.62;
-    const x = margin
-      ? box.x + (r > 0.5 ? box.w - 10 - r2 * 26 : -14 + r2 * 26)
-      : box.x - 16 + (box.w + 32) * ((i + r) / count);
-    const y = margin
-      ? box.y + box.h * (0.3 + r * 0.6)
-      : box.y + box.h * (0.66 + r2 * 0.3);
+    // Low on the card only. They used to climb either margin at any height
+    // too, which put a big bloom up beside the tier's name — the loudest
+    // thing in the band, arriving before the vine had got anywhere.
+    const x = box.x - 16 + (box.w + 32) * ((i + r) / count);
+    // The bottom seventh of the card, which is below every tier's last
+    // feature line. Gold's list runs to about 0.80 of its height, so blooms
+    // at 0.66 sat on "Marketing opportunities" and at 0.78 on "Beta
+    // testing".
+    const y = box.y + box.h * (0.87 + r2 * 0.11);
     out.push({
       el: bloom(x, y, BLOOMS[i % BLOOMS.length], 0.62 + r3 * 0.55),
       // 0 at the card's foot, 1 at its head, so a bloom opens as the vine
@@ -287,9 +308,9 @@ const plant = (garden: Garden) => {
     /**
      * Each tier keeps what the one below it has and adds its own.
      *
-     * Bronze is grass, Silver adds the vine, and Gold and up add flowers, so
-     * the planting thickens along the staircase rather than swapping one
-     * plant for another. The top tier takes the most of all of it.
+     * Grass; then a vine; then flowers in the grass; then flowers in the
+     * grass and up the vine as well. Four tiers, four steps, each one
+     * everything the tier below it has plus one thing more.
      */
     const last = index === beds - 1;
     const stage = last ? 3 : Math.min(index, 2);
@@ -303,12 +324,12 @@ const plant = (garden: Garden) => {
     sprouts.push(...grass(box, seed));
 
     if (stage >= 1) {
-      const grown = vine(box, seed);
+      const grown = vine(box, seed, stage >= 3);
       strokes.push(...grown.stems);
       pops.push(...grown.pops);
     }
 
-    if (stage >= 2) pops.push(...flowers(box, seed + 3, stage >= 3 ? 11 : 5));
+    if (stage >= 2) pops.push(...flowers(box, seed + 3, stage >= 3 ? 9 : 5));
 
     // The butterfly lands on the top tier, after everything else is up.
     if (stage >= 3) pops.push({ el: butterfly(box, hostBox.width), rise: 1.6 });
