@@ -112,32 +112,36 @@ const grass = (box: { x: number; y: number; w: number; h: number }, seed: number
 };
 
 /**
- * A few blades around one point, drawn in front of whatever is there.
+ * Blades that straddle one point, drawn in front of whatever is there.
  *
- * The grass is behind the vines, so a stem's rounded end showed through the
- * lawn wherever no blade happened to fall in front of it. These are planted
- * at the vine's own foot and painted over it.
+ * The lawn's own blades are placed by a wobble that knows nothing about the
+ * vines, so whether any of them fell in front of a stem was luck — and on
+ * the top tier it did not, leaving the stem's rounded end showing through
+ * the grass. These are placed against the stem's base on purpose: two each
+ * side, one over it, and all of them taller than the stump they cover.
  */
-const tuft = (x: number, base: number, seed: number) => {
+const tuft = (x: number, base: number, cover: number, seed: number) => {
   const parts: SVGElement[] = [];
-  for (let i = 0; i < 5; i++) {
+  const offsets = [-9, -4, 0, 5, 10];
+
+  offsets.forEach((offset, i) => {
     const r = wobble(seed + i);
-    const r2 = wobble(seed + i + 0.5);
-    const at = x - 14 + i * 7 + r * 5;
-    const tall = 26 + r2 * 26;
-    const lean = (r - 0.5) * 26;
-    const wide = 2.6 + r2 * 1.8;
+    // Every blade clears the stem's end, with the middle ones tallest.
+    const tall = cover + 16 + r * 20 - Math.abs(offset) * 0.8;
+    const at = x + offset;
+    const lean = offset * 1.5 + (r - 0.5) * 12;
+    const wide = 3 + r * 1.6;
     parts.push(
       make("path", {
-        class: `tier-garden-blade-grass${r > 0.6 ? " is-dark" : ""}`,
+        class: `tier-garden-blade-grass${i % 2 ? " is-dark" : ""}`,
         d: `M${at - wide} ${base} Q ${at + lean * 0.35 - wide * 0.5} ${base - tall * 0.58}, ${
-          at + lean * 1.3
+          at + lean
         } ${base - tall} Q ${at + lean * 0.35 + wide * 0.7} ${base - tall * 0.55}, ${
           at + wide
         } ${base} Z`,
       })
     );
-  }
+  });
   return parts;
 };
 
@@ -153,10 +157,18 @@ const vine = (
   const stems: SVGElement[] = [];
   const pops: { el: SVGElement; rise: number }[] = [];
   const foot = box.y + box.h;
-  // On the card, but at its very edge: the cards are padded about 26 and the
-  // tier's name starts there, so a stem any further in strikes through
-  // "Silver", "Gold" and "Platinum" on the way past.
-  const x = box.x + 9;
+  /**
+   * Up the card's trailing edge.
+   *
+   * One constant decides the side, because everything about the vine has to
+   * agree with it: which way the stem leans, which way its sprigs fan, and
+   * where the tuft at its foot goes. `-1` is the right-hand side.
+   */
+  const lean = -1;
+  // At the very edge either way: the cards are padded about 26 and the
+  // tier's name starts there, so a stem further in strikes through "Silver",
+  // "Gold" and "Platinum" on the way past.
+  const x = lean < 0 ? box.x + box.w - 9 : box.x + 9;
   // How far up this card it gets. Only the top tier reaches the head of its
   // card; the ones below it stop short, which is the climb the band is
   // about. At `reach: 1` it finishes dead on the top edge, so it reads as
@@ -168,12 +180,16 @@ const vine = (
   // the sprigs are what make it a vine.
   const stem = make("path", {
     class: "tier-garden-stroke is-vine",
-    // Out of the grass, not from under it. Started below the card's foot the
-    // stem's tail hung past the bottom of the lawn, which read as a vine
-    // growing out of the floor rather than out of the planting.
-    d: `M${x} ${foot - 26} C ${x - 22} ${foot - box.h * 0.36}, ${x + 26} ${
+    // Rooted on the ground line, which is the card's bottom edge — the same
+    // line every blade of grass starts from.
+    //
+    // Below it, the stem hung past the bottom of the lawn. Above it, it
+    // ended in mid-air inside the grass, and whether anything covered that
+    // stump came down to where the blades happened to fall. On the line
+    // there is no stump to hide: it comes out of the ground like the rest.
+    d: `M${x} ${foot} C ${x - 22 * lean} ${foot - box.h * 0.36}, ${x + 26 * lean} ${
       box.y + box.h * 0.46
-    }, ${x + 4} ${top}`,
+    }, ${x + 4 * lean} ${top}`,
   });
 
   stems.push(stem);
@@ -187,7 +203,14 @@ const vine = (
     const p = stem.getPointAtLength(at);
     const side = i % 2 ? 1 : -1;
     pops.push({
-      el: sprig(p.x, p.y, 200 + side * 62 + (wobble(seed + i) - 0.5) * 24, 0.5 + wobble(seed + i) * 0.22),
+      // The fan mirrors with the stem, so the leaves always hang off the
+      // card's edge rather than reaching across its face.
+      el: sprig(
+        p.x,
+        p.y,
+        (lean < 0 ? -20 : 200) + side * 62 + (wobble(seed + i) - 0.5) * 24,
+        0.5 + wobble(seed + i) * 0.22
+      ),
       // Where it sits along the stem, which is when the stem reaches it.
       rise: at / length,
     });
@@ -204,12 +227,12 @@ const vine = (
     const angle = (Math.atan2(tip.y - back.y, tip.x - back.x) * 180) / Math.PI;
 
     if (flowering) {
-      pops.push({ el: sprig(tip.x, tip.y, angle - 62, 0.56), rise: 0.99 });
-      pops.push({ el: sprig(tip.x, tip.y, angle + 54, 0.48), rise: 0.99 });
+      pops.push({ el: sprig(tip.x, tip.y, angle - 62 * lean, 0.56), rise: 0.99 });
+      pops.push({ el: sprig(tip.x, tip.y, angle + 54 * lean, 0.48), rise: 0.99 });
       pops.push({ el: bloom(tip.x, tip.y - 2, BLOOMS[1], 1.15), rise: 1 });
     } else {
-      pops.push({ el: sprig(tip.x, tip.y, angle - 52, 0.62), rise: 1 });
-      pops.push({ el: sprig(tip.x, tip.y, angle + 44, 0.5), rise: 1 });
+      pops.push({ el: sprig(tip.x, tip.y, angle - 52 * lean, 0.62), rise: 1 });
+      pops.push({ el: sprig(tip.x, tip.y, angle + 44 * lean, 0.5), rise: 1 });
     }
   }
 
@@ -227,7 +250,7 @@ const vine = (
 
   stem.remove();
 
-  return { stems, pops };
+  return { stems, pops, foot: x };
 };
 
 /**
@@ -386,7 +409,8 @@ const plant = (garden: Garden) => {
       const grown = vine(box, seed, stage >= 3, [0, 0.62, 0.84, 1][stage] ?? 1);
       strokes.push(...grown.stems);
       pops.push(...grown.pops);
-      front.push(...tuft(box.x + 9, box.y + box.h, seed + 21));
+      // At the stem's own foot, wherever the vine put it.
+      front.push(...tuft(grown.foot, box.y + box.h, 14, seed + 21));
     }
 
     if (stage >= 2) pops.push(...flowers(box, seed + 3, stage >= 3 ? 9 : 5));
