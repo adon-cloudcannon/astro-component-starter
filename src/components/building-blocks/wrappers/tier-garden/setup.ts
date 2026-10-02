@@ -248,9 +248,13 @@ const vine = (
     });
   }
 
+  // Where the butterfly can settle: on the stem, just below whatever caps
+  // it, read off the stem itself so it sits on the line rather than near it.
+  const perch = stem.getPointAtLength(length * 0.88);
+
   stem.remove();
 
-  return { stems, pops, foot: x };
+  return { stems, pops, foot: x, perch: { x: perch.x, y: perch.y } };
 };
 
 /**
@@ -261,10 +265,11 @@ const vine = (
  * It travels on an `offset-path`, which banks it along the curve, so nothing
  * has to work out which way it is pointing.
  */
-const butterfly = (box: { x: number; y: number; w: number; h: number }, stage: number) => {
-  // High on the card's far corner, with the wings allowed over the edge.
-  const endX = box.x + box.w - 28;
-  const endY = box.y + 18;
+const butterfly = (land: { x: number; y: number }, stage: number) => {
+  // Wherever it was told to settle — the top of the vine, so it lands on the
+  // plant rather than on the card beside it.
+  const endX = land.x;
+  const endY = land.y;
   /**
    * In from off the right of the band on a shallow glide.
    *
@@ -393,6 +398,8 @@ const plant = (garden: Garden) => {
     const last = index === beds - 1;
     const stage = last ? 3 : Math.min(index, 2);
 
+    /** Where the butterfly will land, once there is a vine to land on. */
+    let perch: { x: number; y: number } | null = null;
     const strokes: SVGElement[] = [];
     /** Filled shapes: they grow from the ground rather than drawing on. */
     const sprouts: SVGElement[] = [];
@@ -411,12 +418,13 @@ const plant = (garden: Garden) => {
       pops.push(...grown.pops);
       // At the stem's own foot, wherever the vine put it.
       front.push(...tuft(grown.foot, box.y + box.h, 14, seed + 21));
+      perch = grown.perch;
     }
 
     if (stage >= 2) pops.push(...flowers(box, seed + 3, stage >= 3 ? 9 : 5));
 
-    // The butterfly lands on the top tier, after everything else is up.
-    if (stage >= 3) pops.push({ el: butterfly(box, hostBox.width), rise: 1.6 });
+    // The butterfly settles on the top tier's vine, after everything is up.
+    if (stage >= 3 && perch) pops.push({ el: butterfly(perch, hostBox.width), rise: 1.6 });
 
     sprouts.forEach((el) => bed.append(el));
     strokes.forEach((el) => bed.append(el));
