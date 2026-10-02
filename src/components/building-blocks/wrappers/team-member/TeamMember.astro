@@ -122,6 +122,10 @@ const tone = panelColour
        larger than a call to action's. */
     .team-member {
       --team-member-radius: clamp(1.125rem, 7.3cqi, 1.75rem);
+      /* The grid on the homepage draws the same card at 229 square, so the
+         badge and its type come down with it. Container units rather than a
+         breakpoint: the card is the query container, so one clamp covers
+         every size it is drawn at. */
       --team-member-badge-radius: clamp(0.625rem, 4.2cqi, 1rem);
       --team-member-name: clamp(0.875rem, 5cqi, 1.1875rem);
       --team-member-role: clamp(0.625rem, 3.6cqi, 0.875rem);
@@ -242,9 +246,5 @@ const tone = panelColour
       block-size: auto;
       inline-size: 100%;
     }
-  }
-
-  /* The grid on the homepage draws the same card at 229 square, so the badge
-     and its type come down with it. */
   }
 </style>
