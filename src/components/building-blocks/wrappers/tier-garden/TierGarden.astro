@@ -1,0 +1,175 @@
+---
+/**
+ * A garden that gets more established the higher the tier.
+ *
+ * The partner tiers are a staircase — Bronze, Silver, Gold, Platinum, each
+ * taller than the last — under a heading that reads "Climb as your portfolio
+ * grows". The design marks artwork for it twice: a text layer saying "Plant
+ * Illo Overlay", and two cut-out vine PNGs dropped on the band. Both are
+ * fixed pictures, so they only line up with the tiers they were drawn
+ * against: add a tier or change a card's height and the planting is left
+ * behind.
+ *
+ * So it is drawn instead, per card, from the cards' own boxes:
+ *
+ *   1st   grass at the foot
+ *   2nd   a vine up the side, with sprigs
+ *   3rd   the vine again, flowering
+ *   4th   a cabbage tree out of the top
+ *
+ * A fifth tier would get a cabbage tree too; two tiers get grass and a vine.
+ * Nothing is authored and nothing is measured against a fixed layout.
+ *
+ * It plants itself as the section scrolls through the window, left to right,
+ * so the garden grows in the same direction the tiers climb.
+ *
+ * The green is the palette's Moss, which is what the design's own vines are
+ * drawn in: the most common pixel in that artwork is #688000 against the
+ * token's #687E00. The near-black green behind the leaves and the deep blue
+ * buds are sampled off it too.
+ */
+const {
+  /** What it plants around, as a selector inside the host section. */
+  cards = ".pricing-tier",
+  class: className,
+  _component,
+  ...htmlAttributes
+} = Astro.props;
+---
+
+<div class:list={["tier-garden", className]} data-cards={cards} aria-hidden="true" {...htmlAttributes}>
+  {/* Filled by the script from the cards' boxes. Empty without it, which is
+      the right state for a decoration: nothing drawn beats something drawn
+      in the wrong place. */}
+  <svg class="tier-garden-art" fill="none" preserveAspectRatio="none"></svg>
+</div>
+
+<style is:global>
+  @layer components {
+    .tier-garden {
+      inset: 0;
+      pointer-events: none;
+      position: absolute;
+      /* In front of the cards.
+
+         Behind them it was all but invisible: the cards are opaque, so the
+         only planting that showed was the slivers in the gaps between them.
+         A vine drapes over the thing it climbs anyway, which is what the
+         design's own artwork does. Everything is drawn at the cards' edges
+         and feet, where there is nothing to cover. */
+      z-index: 2;
+    }
+
+    .tier-garden-art {
+      block-size: 100%;
+      inline-size: 100%;
+      /* The cabbage tree leans past the top of the band. */
+      overflow: visible;
+    }
+
+    /* Stems, blades and stalks are all strokes, so they can be drawn on by
+       their own dash offset as the garden grows. */
+    .tier-garden-stroke {
+      fill: none;
+      stroke: var(--moss, #687e00);
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+
+    .tier-garden-stroke.is-grass {
+      stroke-width: 2.5;
+    }
+
+    .tier-garden-stroke.is-vine {
+      stroke-width: 2.5;
+    }
+
+    .tier-garden-stroke.is-stalk {
+      stroke-width: 2;
+    }
+
+    .tier-garden-stroke.is-trunk {
+      stroke: var(--earth, #6b6157);
+      stroke-width: 7;
+    }
+
+    /* A cabbage tree's leaves are long and sword-shaped, so they are strokes
+       rather than filled blades. */
+    .tier-garden-stroke.is-frond {
+      stroke-width: 4;
+    }
+
+    .tier-garden-stroke.is-dark {
+      stroke: #002810;
+    }
+
+    /* Leaves, petals and seed heads open rather than draw. */
+    .tier-garden-pop {
+      opacity: 0;
+      transform-box: fill-box;
+      transform-origin: 0 50%;
+    }
+
+    .tier-garden-pop[data-open] {
+      animation: tier-garden-open 420ms var(--ease-out, cubic-bezier(0.2, 0.8, 0.2, 1)) both;
+    }
+
+    .tier-garden-blade {
+      fill: var(--moss, #687e00);
+    }
+
+    .tier-garden-blade.is-dark {
+      fill: #002810;
+    }
+
+    .tier-garden-bud {
+      fill: none;
+      /* #003878 in the artwork, near enough Pacific's own dark to use the
+         token rather than another hex. */
+      stroke: var(--pacific-700, #022c82);
+      stroke-linecap: round;
+      stroke-width: 2.5;
+    }
+
+    .tier-garden-petal {
+      fill: var(--tier-garden-bloom, var(--blush, #e7b0b9));
+    }
+
+    .tier-garden-eye {
+      fill: var(--golden, #ffaa00);
+    }
+
+    @keyframes tier-garden-open {
+      from {
+        opacity: 0;
+        scale: 0.2 0.4;
+      }
+
+      to {
+        opacity: 1;
+        scale: 1 1;
+      }
+    }
+
+    /* Planted, not planting. A reader who asks for less motion gets the
+       finished garden rather than one that never arrives. */
+    @media (prefers-reduced-motion: reduce) {
+      .tier-garden-stroke {
+        stroke-dasharray: none !important;
+        stroke-dashoffset: 0 !important;
+      }
+
+      .tier-garden-pop {
+        animation: none !important;
+        opacity: 1;
+      }
+    }
+  }
+</style>
+
+<script>
+  import { onPageLoad } from "@component-utils/onPageLoad";
+  import { setupAllTierGardens } from "./setup";
+
+  onPageLoad(() => setupAllTierGardens());
+</script>

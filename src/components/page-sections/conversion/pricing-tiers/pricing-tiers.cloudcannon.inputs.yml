@@ -113,6 +113,14 @@ defaultInterval:
         name: Monthly
       - id: annual
         name: Annual
+garden:
+  type: switch
+  label: Plant a garden
+  comment: >-
+    Grows planting around the tiers as the section scrolls in: grass at the
+    foot of the first, a vine up the next, flowers on the one after, and a
+    cabbage tree out of the top of the tallest. Drawn from the cards
+    themselves, so it follows however many tiers there are.
 tiers:
   type: array
   label: Tiers

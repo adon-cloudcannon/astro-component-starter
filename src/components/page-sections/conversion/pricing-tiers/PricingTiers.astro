@@ -2,6 +2,7 @@
 import { isNonEmptyString } from "@component-utils/isNonEmptyString";
 import { slugifyLabel } from "@component-utils/slugify";
 import CustomSection from "@builders/custom-section/CustomSection.astro";
+import TierGarden from "@wrappers/tier-garden/TierGarden.astro";
 import Heading from "@core-elements/heading/Heading.astro";
 import SimpleText from "@core-elements/simple-text/SimpleText.astro";
 import Text from "@core-elements/text/Text.astro";
@@ -38,6 +39,13 @@ const {
    * round. So it is stated per section rather than derived.
    */
   cardColor = "surface",
+  /**
+   * Plants a garden around the tiers: grass at the foot of the first, a vine
+   * up the next, flowers on the one after, and a cabbage tree out of the top
+   * of the tallest. Drawn from the cards' own boxes, so it follows however
+   * many there are.
+   */
+  garden = false,
   showAnnualPricing = false,
   monthlyLabel = "Monthly",
   annualLabel = "Annual",
@@ -141,6 +149,8 @@ const annualSelected = defaultInterval === "annual";
       </Toggle>
     </div>
   )}
+  <div class="pricing-tiers-bed">
+  {garden && <TierGarden cards=".pricing-tier" />}
   <Grid
     gap="lg"
     minItemWidth={tiers.length >= 4 ? 240 : 272}
@@ -159,10 +169,23 @@ const annualSelected = defaultInterval === "annual";
       />
     ))}
   </Grid>
+  </div>
 </CustomSection>
 
 <style is:global>
   @layer page-sections {
+    /* The bed the garden is drawn in. It holds the grid's own box so the
+       planting can be placed against the cards, and nothing else: the grid
+       keeps its own width and breakout. */
+    .pricing-tiers .pricing-tiers-bed {
+      position: relative;
+    }
+
+    .pricing-tiers .pricing-tiers-grid {
+      position: relative;
+      z-index: 1;
+    }
+
     /* Not Grid's maxItemWidth: auto-fill counts tracks at the max, so three
        420px-capped cards wrapped 2 + 1 until ~1300px. The cap is on the row. */
     .pricing-tiers-grid > .grid-inner.columns-auto {

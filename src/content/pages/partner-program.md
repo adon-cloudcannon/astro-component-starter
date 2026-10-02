@@ -146,6 +146,7 @@ pageSections:
     cardHeight: 334
     headingSize: lg
   - _component: page-sections/conversion/pricing-tiers
+    garden: true
     tiers:
       - name: Bronze
         description: 0-19 points
