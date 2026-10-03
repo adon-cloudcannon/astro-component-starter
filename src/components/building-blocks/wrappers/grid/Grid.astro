@@ -61,6 +61,7 @@ if (!_component && !hasItems && !hasSlotContent) return;
       {items?.map((item: ItemProps) => (
         <GridItem
           data-id="building-blocks/wrappers/grid/grid-item"
+          data-component="building-blocks/wrappers/grid/grid-item"
           data-editable="array-item"
           useDefaultEditableBinding={!!effectiveChildrenProp}
           {...item}

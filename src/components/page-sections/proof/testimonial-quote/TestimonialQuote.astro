@@ -226,6 +226,7 @@ const items: Quote[] = (isCarousel ? quotes : quotes.slice(0, 1)) as Quote[];
             style={accent ? `--testimonial-quote-accent: ${accent}` : undefined}
             data-editable="array-item"
             data-id="page-sections/proof/testimonial-quote/testimonial-quote-item"
+            data-component="page-sections/proof/testimonial-quote/testimonial-quote-item"
             data-index={index}
             data-active={index === 0 ? "" : undefined}
             hidden={isCarousel && index > 0}

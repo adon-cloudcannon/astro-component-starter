@@ -53,11 +53,20 @@ const resolved = await Promise.all(
 
 {
   // Array-level editable attributes are owned by the caller's container element.
+  //
+  // `data-component` is the renderer the editor redraws a row with. An array
+  // item on its own gets the CRUD controls and nothing else: the primitives
+  // inside it update because each binds its own region, and everything the
+  // component derives from its props stays as the page was built. Only the
+  // page's own section list escaped that, because `MainComponent` puts
+  // `data-component-key` on the wrapper; every nested array of blocks had no
+  // such key and no renderer either.
   resolved.map(({ block, Component }) =>
     Component ? (
       <Component
         data-editable={useDefaultEditableBinding ? "array-item" : undefined}
         data-id={block._component}
+        data-component={useDefaultEditableBinding ? block._component : undefined}
         {...block}
         useDefaultEditableBinding={useDefaultEditableBinding}
       />
