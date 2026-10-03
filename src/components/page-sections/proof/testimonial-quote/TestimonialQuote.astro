@@ -23,6 +23,7 @@
  * card's own accent, a rule between the quote and the person.
  */
 import CustomSection from "@builders/custom-section/CustomSection.astro";
+import { resolveImageSource } from "@component-utils/resolveImageSource";
 import Button from "@core-elements/button/Button.astro";
 import Image from "@core-elements/image/Image.astro";
 import { renderMarkdown } from "@component-utils/markdown";
@@ -255,7 +256,7 @@ const items: Quote[] = (isCarousel ? quotes : quotes.slice(0, 1)) as Quote[];
                     role="img"
                     aria-label={quote.logoAlt || quote.company}
                     style={{
-                      "--logo-mark-source": `url("${quote.logoSource}")`,
+                      "--logo-mark-source": `url("${resolveImageSource(quote.logoSource)}")`,
                       ...(quote.logoAspect ? { "--logo-mark-aspect": quote.logoAspect } : {}),
                     }}
                     data-prop-src="logoSource"

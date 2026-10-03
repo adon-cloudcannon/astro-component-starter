@@ -15,6 +15,7 @@
  * section only arranges them.
  */
 import CustomSection from "@builders/custom-section/CustomSection.astro";
+import { resolveImageSource } from "@component-utils/resolveImageSource";
 import Carousel from "@wrappers/carousel/Carousel.astro";
 import CarouselSlide from "@wrappers/carousel/CarouselSlide.astro";
 import Card from "@wrappers/card/Card.astro";
@@ -146,7 +147,7 @@ const {
                   role="img"
                   aria-label={story.logoAlt}
                   style={{
-                    "--logo-mark-source": `url("${story.logoSource}")`,
+                    "--logo-mark-source": `url("${resolveImageSource(story.logoSource)}")`,
                     ...(story.logoAspect ? { "--logo-mark-aspect": story.logoAspect } : {}),
                   }}
                   data-prop-src="logoSource"

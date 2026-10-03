@@ -1,5 +1,6 @@
 ---
 import CustomSection from "@builders/custom-section/CustomSection.astro";
+import { resolveImageSource } from "@component-utils/resolveImageSource";
 import Image from "@core-elements/image/Image.astro";
 import SimpleText from "@core-elements/simple-text/SimpleText.astro";
 import Carousel from "@wrappers/carousel/Carousel.astro";
@@ -96,7 +97,7 @@ const {
                     role="img"
                     aria-label={logo.alt}
                     style={{
-                      "--logo-mark-source": `url("${logo.image}")`,
+                      "--logo-mark-source": `url("${resolveImageSource(logo.image)}")`,
                       ...(logo.width ? { inlineSize: `${logo.width}px` } : {}),
                       ...(logo.height ? { blockSize: `${logo.height}px` } : {}),
                     }}
@@ -146,7 +147,7 @@ const {
                     role="img"
                     aria-label={logo.alt}
                     style={{
-                      "--logo-mark-source": `url("${logo.image}")`,
+                      "--logo-mark-source": `url("${resolveImageSource(logo.image)}")`,
                       ...(logo.width ? { inlineSize: `${logo.width}px` } : {}),
                       ...(logo.height ? { blockSize: `${logo.height}px` } : {}),
                     }}
