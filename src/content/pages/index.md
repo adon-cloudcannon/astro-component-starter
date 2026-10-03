@@ -479,14 +479,14 @@ pageSections:
         role: Co-founder & CTO
         imageSource: /src/assets/images/marketing/george-profile-1.png
         imageAlt: George Phillips, Co-founder & CTO at CloudCannon
-        backgroundColor: '#748831'
+        backgroundColor: moss
       - _component: building-blocks/wrappers/team-member
         name: Mike Neumegen
         role: Co-founder & CEO
         imageSource: >-
           /src/assets/images/marketing/screenshot-2026-06-09-at-7-38-38-pm-background-r-3806-69478.png
         imageAlt: Mike Neumegen, Co-founder & CEO at CloudCannon
-        backgroundColor: '#FF8853'
+        backgroundColor: peachy
       - _component: building-blocks/wrappers/team-member
         name: Olivia Nicholson
         role: Head of Content
@@ -498,19 +498,19 @@ pageSections:
         role: Product Design
         imageSource: /src/assets/images/marketing/container-7-3806-69515-2.png
         imageAlt: Sam Whitfield, Product Design at CloudCannon
-        backgroundColor: '#D06524'
+        backgroundColor: sunset
       - _component: building-blocks/wrappers/team-member
         name: Tom Richardson
         role: Solutions Architect
         imageSource: /src/assets/images/marketing/container-9-3806-69524-1.png
         imageAlt: Tom Richardson, Solutions Architect at CloudCannon
-        backgroundColor: '#FABD3D'
+        backgroundColor: golden
       - _component: building-blocks/wrappers/team-member
         name: Chris Wingate
         role: CRO
         imageSource: /src/assets/images/marketing/chris-profile-1.png
         imageAlt: Chris Wingate, CRO at CloudCannon
-        backgroundColor: '#748831'
+        backgroundColor: moss
     eyebrow: Who we are
     heading: Made for the work, not for the upsell
     linkText: Meet the team

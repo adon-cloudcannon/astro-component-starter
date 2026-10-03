@@ -34,9 +34,17 @@ const {
   ...htmlAttributes
 } = Astro.props;
 
-/* A palette name or a literal. The exported sheets were flat colours the
-   palette does not hold: #FF8853, #748831, #D06524, #FABD3D, measured off
-   their fully opaque pixels. */
+/* A palette name or a literal.
+
+   The panels came off the exported sheets as flat colours the palette does
+   not hold, measured from their fully opaque pixels: #748831, #FF8853,
+   #D06524, #FABD3D. Carried as literals they showed in the editor as raw hex
+   where a colour name belongs, and an editor who opened that field could not
+   put back what was there. They are palette colours now, each its nearest
+   family: Moss, Peachy, Sunset, Golden, with Pacific already one.
+
+   The literal branch stays as an escape hatch for a panel hand-set outside
+   the palette; nothing on the site uses it. */
 const paint = (value: string) => (value.startsWith("#") ? value : `var(--${value})`);
 
 const panelColour =

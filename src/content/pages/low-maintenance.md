@@ -262,7 +262,7 @@ pageSections:
       role: Solutions Architect
       imageSource: /src/assets/images/marketing/container-9-3806-70538.png
       imageAlt: Tom Richardson, Solutions Architect at CloudCannon
-      backgroundColor: '#E4A832'
+      backgroundColor: golden
       propSource: /src/assets/images/marketing/hero-lowmaintenance-01-1-2-3806-70539.png
       propAlt: ''
     heading: A CMS to build, not babysit
