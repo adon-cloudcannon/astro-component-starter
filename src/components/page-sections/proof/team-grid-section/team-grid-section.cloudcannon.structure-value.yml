@@ -55,7 +55,6 @@ _structures:
           imageSource: ""
           imageAlt: ""
           backgroundColor: sunset
-          backgroundImage: ""
           propSource: ""
           propAlt: ""
         _inputs_from_glob:

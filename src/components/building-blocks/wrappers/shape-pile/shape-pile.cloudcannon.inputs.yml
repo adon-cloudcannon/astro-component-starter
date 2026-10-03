@@ -17,10 +17,19 @@ tone:
     values:
       - id: golden
         name: Golden
+        preview:
+          icon: square
+          icon_color: "#E4A831"
       - id: coral
         name: Coral
+        preview:
+          icon: square
+          icon_color: "#E98057"
       - id: rust
         name: Rust
+        preview:
+          icon: square
+          icon_color: "#D06522"
 x:
   type: number
   comment: Distance from the left of the pile, in design units.

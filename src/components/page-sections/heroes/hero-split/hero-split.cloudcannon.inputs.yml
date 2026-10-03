@@ -235,12 +235,27 @@ backgroundColor:
     values:
       - id: light-sand
         name: Light sand
+        preview:
+          icon: square
+          icon_color: "#FFFCF3"
       - id: sand
         name: Sand
+        preview:
+          icon: square
+          icon_color: "#FBF6E9"
       - id: dark-sand
         name: Dark sand
+        preview:
+          icon: square
+          icon_color: "#EBE1C9"
       - id: dark
         name: Dark
+        preview:
+          icon: square
+          icon_color: "#1D1B17"
       - id: pacific
         name: Pacific
+        preview:
+          icon: square
+          icon_color: "#034AD8"
 

@@ -127,20 +127,43 @@ _structures:
               values:
                 - id: ""
                   name: None
+                  preview:
+                    icon: check_box_outline_blank
                 - id: sunset
                   name: Sunset (orange)
+                  preview:
+                    icon: square
+                    icon_color: "#D85A2C"
                 - id: golden
                   name: Golden (yellow)
+                  preview:
+                    icon: square
+                    icon_color: "#FFAA00"
                 - id: pacific
                   name: Pacific (blue)
+                  preview:
+                    icon: square
+                    icon_color: "#034AD8"
                 - id: moss
                   name: Moss (green)
+                  preview:
+                    icon: square
+                    icon_color: "#687E00"
                 - id: peachy
                   name: Peachy
+                  preview:
+                    icon: square
+                    icon_color: "#F39B7B"
                 - id: harbour
                   name: Harbour (pale blue)
+                  preview:
+                    icon: square
+                    icon_color: "#A6C1FA"
                 - id: blush
                   name: Blush (pink)
+                  preview:
+                    icon: square
+                    icon_color: "#E7B0B9"
 groups:
   - heading: Content
     inputs:

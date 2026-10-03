@@ -84,18 +84,39 @@ _structures:
               values:
                 - id: golden
                   name: Golden
+                  preview:
+                    icon: square
+                    icon_color: "#FFAA00"
                 - id: harbour
                   name: Harbour
+                  preview:
+                    icon: square
+                    icon_color: "#A6C1FA"
                 - id: peachy
                   name: Peachy
+                  preview:
+                    icon: square
+                    icon_color: "#F39B7B"
                 - id: moss-350
                   name: Moss
+                  preview:
+                    icon: square
+                    icon_color: "#95A54D"
                 - id: pacific
                   name: Pacific
+                  preview:
+                    icon: square
+                    icon_color: "#034AD8"
                 - id: sunset
                   name: Sunset
+                  preview:
+                    icon: square
+                    icon_color: "#D85A2C"
                 - id: blush
                   name: Blush
+                  preview:
+                    icon: square
+                    icon_color: "#E7B0B9"
           logoSource:
             type: image
             comment: The client's logo.

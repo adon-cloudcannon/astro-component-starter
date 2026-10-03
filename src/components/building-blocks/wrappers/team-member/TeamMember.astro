@@ -24,7 +24,6 @@ const {
   imageAlt = "",
   /** The panel behind them. A colour from the palette, or a painted panel. */
   backgroundColor = "sunset",
-  backgroundImage = "",
   /** The lizard, the telephone, whatever is keeping them company. */
   propSource = "",
   propAlt = "",
@@ -49,9 +48,9 @@ const paint = (value: string) => (value.startsWith("#") ? value : `var(--${value
 
 const panelColour =
   backgroundColor && backgroundColor !== "none" ? paint(backgroundColor) : undefined;
-/* The ink is the light ground the export punched through to, not a tint of
-   the panel. The design means white; a little of the page's cream takes the
-   edge off flat #FFF, and `--team-member-scratch` still tunes it. */
+/* The panel's colour is the scratch sheet's fill. The ink is what a scratch
+   shows, and `.scratched` defaults it to the page's own ground, which is the
+   near-white the design draws. */
 const tone = panelColour
   ? { "--team-member-panel": panelColour, "--scratch-fill": panelColour }
   : undefined;
@@ -62,15 +61,7 @@ const tone = panelColour
   style={tone}
   {...htmlAttributes}
 >
-  <div class:list={["team-member-panel", { scratched: !backgroundImage }]}>
-    {backgroundImage && (
-      <Image
-        class="team-member-ground"
-        source={backgroundImage}
-        alt=""
-        data-prop-src="backgroundImage"
-      />
-    )}
+  <div class="team-member-panel scratched">
     {imageSource && (
       <Image
         class="team-member-portrait"
@@ -143,55 +134,22 @@ const tone = panelColour
       position: relative;
     }
 
-    /* The panel is the coloured ground plus its scratches. Drawn by
-       `.scratched` unless a card still carries an exported sheet, which is
-       what `backgroundImage` now means. */
+    /* The panel is the coloured ground plus its scratches, and `.scratched`
+       draws both.
+
+       There was a `backgroundImage` beside it for a card still carrying one
+       of the exported sheets. Those sheets were the reason the component took
+       a picture at all: each was an opaque sheet of one colour with the
+       scratches punched through, so a card needed a different file per
+       colour. `.scratched` generates them from the panel colour, no card on
+       the site set one, and an image input for a texture the panel already
+       draws is a way for an editor to break it. */
     .team-member .team-member-panel {
       aspect-ratio: 410 / 412;
       background-color: var(--team-member-panel, var(--sunset));
       border-radius: var(--team-member-radius);
       overflow: hidden;
       position: relative;
-    }
-
-    /* Every box down to the img, or the height has nothing to resolve against:
-       Image nests a picture inside an inner wrapper, both auto-height, so a
-       100% on the img alone measured 512 against a 386 panel and the scratches
-       fell outside the crop (see CLAUDE.md on percentage heights). */
-    .team-member .team-member-ground,
-    .team-member .team-member-ground .image-inner,
-    .team-member .team-member-ground picture {
-      block-size: 100%;
-      inline-size: 100%;
-    }
-
-    .team-member .team-member-ground {
-      inset: 0;
-      position: absolute;
-    }
-
-    /* What shows through the scratches.
-       
-       The panel export is not a picture of a scratched card: it is an opaque
-       sheet of the card's colour with the scratches punched right through it,
-       the same trick the mega menu's feature card uses. So whatever sits
-       behind it becomes the scratches. Backed with the panel colour they match
-       the sheet exactly and the card goes flat, which is what it was doing.
-       
-       The design means white. A little of the page's cream takes the edge off
-       flat #FFF, and one token if it wants tuning. */
-    .team-member .team-member-ground {
-      background-color: var(--team-member-scratch, var(--light-sand));
-    }
-
-    /* No ink of its own. `.scratched` defaults to the page's ground, which is
-       the --light-sand this was already asking for; `--team-member-scratch`
-       still overrides it for a card that wants something else. */
-
-    .team-member .team-member-ground img {
-      block-size: 100%;
-      inline-size: 100%;
-      object-fit: cover;
     }
 
     /* Bottom-aligned: the design crops each person at the shoulders on the

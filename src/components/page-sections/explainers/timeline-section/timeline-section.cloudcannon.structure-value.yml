@@ -95,18 +95,38 @@ _structures:
               values:
                 - id: ""
                   name: Default
+                  preview:
+                    icon: check_box_outline_blank
                 - id: moss
                   name: Moss
+                  preview:
+                    icon: square
+                    icon_color: "#687E00"
                 - id: pacific
                   name: Pacific
+                  preview:
+                    icon: square
+                    icon_color: "#034AD8"
                 - id: sunset
                   name: Sunset
+                  preview:
+                    icon: square
+                    icon_color: "#D85A2C"
                 - id: golden
                   name: Golden
+                  preview:
+                    icon: square
+                    icon_color: "#FFAA00"
                 - id: peachy
                   name: Peachy
+                  preview:
+                    icon: square
+                    icon_color: "#F39B7B"
                 - id: harbour
                   name: Harbour
+                  preview:
+                    icon: square
+                    icon_color: "#A6C1FA"
           iconName:
             type: select
             label: Marker icon

@@ -64,22 +64,48 @@ iconColor:
     values:
       - id: default
         name: Default
+        preview:
+          icon: check_box_outline_blank
       - id: pacific
         name: Pacific
+        preview:
+          icon: square
+          icon_color: "#034AD8"
       - id: moss
         name: Moss
+        preview:
+          icon: square
+          icon_color: "#687E00"
       - id: golden
         name: Golden
+        preview:
+          icon: square
+          icon_color: "#FFAA00"
       - id: peachy
         name: Peachy
+        preview:
+          icon: square
+          icon_color: "#F39B7B"
       - id: sunset
         name: Sunset
+        preview:
+          icon: square
+          icon_color: "#D85A2C"
       - id: kiwi
         name: Kiwi
+        preview:
+          icon: square
+          icon_color: "#7C3442"
       - id: blush
         name: Blush
+        preview:
+          icon: square
+          icon_color: "#E7B0B9"
       - id: harbour
         name: Harbour
+        preview:
+          icon: square
+          icon_color: "#A6C1FA"
 iconPosition:
   comment: The position of the icon relative to the text.
   type: select

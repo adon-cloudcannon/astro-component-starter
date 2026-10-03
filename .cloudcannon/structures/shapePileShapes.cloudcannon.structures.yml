@@ -32,6 +32,9 @@ shapePileShapes:
             values:
               - id: golden
                 name: Golden
+                preview:
+                  icon: square
+                  icon_color: "#FFAA00"
               - id: coral
                 name: Coral
               - id: rust
