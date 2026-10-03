@@ -122,9 +122,35 @@ label:
   comment: What the figure measures.
 iconName:
   type: select
-  comment: The mark shown beside the figure.
+  comment: The mark shown beside the figure. Sourced from [Heroicons](https://heroicons.com/).
   options:
-    values_source: /icons
+    values: data.icons
+    preview:
+      text:
+        - key: name
+      image:
+        - template: src/icons/{id}.svg
 iconColor:
-  type: text
-  comment: A palette colour for the mark, e.g. moss, sunset, pacific.
+  type: select
+  comment: A palette colour for the mark.
+  hidden: "!iconName"
+  options:
+    values:
+      - id: ""
+        name: Default
+      - id: pacific
+        name: Pacific
+      - id: moss
+        name: Moss
+      - id: golden
+        name: Golden
+      - id: peachy
+        name: Peachy
+      - id: sunset
+        name: Sunset
+      - id: kiwi
+        name: Kiwi
+      - id: blush
+        name: Blush
+      - id: harbour
+        name: Harbour

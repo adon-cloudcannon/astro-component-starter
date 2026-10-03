@@ -24,6 +24,17 @@ type StatProps = {
   iconColor?: string;
 };
 
+/**
+ * The mark's colour, from a palette family name.
+ *
+ * Lifted to the family's 400 shade. The mark sits on the card's own #333333
+ * chip, where a family's base tone reads as a smudge: Moss at #687E00 is
+ * barely a step off the chip it is on, and #869833 is legible. The fallback
+ * keeps a value that already names a shade, such as `moss-400`, working as
+ * written.
+ */
+const markColour = (name: string) => `var(--${name}-400, var(--${name}))`;
+
 const {
   imageSource = "",
   imageAlt = "",
@@ -123,7 +134,7 @@ const colour = (value: string) => (value.startsWith("#") ? value : `var(--${valu
         <div
           class="stat-panel-stat"
           data-editable="array-item"
-          style={stat.iconColor ? `--stat-panel-mark: var(--${stat.iconColor})` : undefined}
+          style={stat.iconColor ? `--stat-panel-mark: ${markColour(stat.iconColor)}` : undefined}
         >
           {stat.iconName && (
             <span class="stat-panel-mark">

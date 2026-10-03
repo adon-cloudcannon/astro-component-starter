@@ -1,0 +1,80 @@
+# One shape in a shape pile, shared by shape-pile and the feature-split section
+# that can draw a pile in place of its picture.
+#
+# Must live here, not inside a component's structure-value file. A `_structures`
+# block there only reaches the component it sits in, so feature-split's `shapes`
+# array resolved to nothing and CloudCannon guessed every field from the values.
+shapePileShapes:
+  values:
+    - label: Shape
+      icon: category
+      value:
+        text: A thing you no longer worry about
+        tone: golden
+        x: 0
+        "y": 208
+        width: 221
+        height: 132
+        rotation: 0
+      preview:
+        text:
+          - key: text
+          - Shape
+        icon: category
+      _inputs:
+        text:
+          type: text
+          comment: The label on the shape.
+        tone:
+          type: select
+          comment: Which scratched sheet colours the shape.
+          options:
+            values:
+              - id: golden
+                name: Golden
+              - id: coral
+                name: Coral
+              - id: rust
+                name: Rust
+        x:
+          type: number
+          comment: Distance from the left of the pile, in design units.
+        "y":
+          type: number
+          comment: Distance from the top of the pile, in design units.
+        width:
+          type: number
+          comment: Width of the shape, in design units.
+        height:
+          type: number
+          comment: Height of the shape, in design units.
+        rotation:
+          type: number
+          comment: The angle it comes to rest at, in degrees.
+        round:
+          type: switch
+          comment: Draw it as a circle rather than a rounded card.
+        lightText:
+          type: switch
+          comment: White label, for the darker sheets.
+        fontSize:
+          type: number
+          comment: Label size, in the same design units as the positions.
+        strong:
+          type: switch
+          comment: Draw the label bold.
+        shadowX:
+          type: number
+          comment: >-
+            The wedge another shape casts onto this one, measured from this
+            shape's own top left. Negative where it starts outside and is
+            clipped.
+        shadowY:
+          type: number
+          comment: Top of the cast wedge, in design units.
+        shadowWidth:
+          type: number
+          comment: Width of the cast wedge. Leave empty for no shadow.
+        shadowHeight:
+          type: number
+          comment: How deep the wedge gets at its far edge.

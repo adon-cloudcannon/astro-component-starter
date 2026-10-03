@@ -1,0 +1,37 @@
+# A deck card, shared by scroll-deck and the feature-deck section that wraps it.
+#
+# Must live here, not inside a component's structure-value file. A `_structures`
+# block there only reaches the component it sits in, so a section that wraps this
+# one referenced the name and resolved to nothing, and CloudCannon guessed the
+# fields from the values instead.
+
+scrollDeckCards:
+  values:
+    - label: Deck card
+      icon: layers
+      value:
+        _component: building-blocks/wrappers/scroll-deck/scroll-deck-card
+        label: Card
+        contentSections:
+          - _component: building-blocks/core-elements/heading
+            text: Card heading
+            level: h3
+            size: xl
+          - _component: building-blocks/core-elements/text
+            text: Every card matches the tallest card in the deck.
+      preview:
+        text:
+          - key: label
+          - Deck card
+      _inputs:
+        label:
+          type: text
+          comment: Names the card in the editor and in the array preview. Not rendered on the page.
+        contentSections:
+          type: array
+          label: Card content
+          comment: Blocks shown inside this card.
+          options:
+            structures: _structures.deckCardSections
+      _structures_from_glob:
+        - /.cloudcannon/structures/deckCardSections.cloudcannon.structures.yml

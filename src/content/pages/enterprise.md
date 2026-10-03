@@ -90,17 +90,17 @@ pageSections:
         suffix: x
         label: publishing velocity
         iconName: bolt
-        iconColor: moss-400
+        iconColor: moss
       - number: 90
         suffix: +
         label: core web vitals score
         iconName: shield-check
-        iconColor: moss-400
+        iconColor: moss
       - number: 98
         suffix: '%'
         label: web pages migrated
         iconName: window
-        iconColor: moss-400
+        iconColor: moss
   - _component: page-sections/explainers/feature-grid
     features:
       - title: Site security

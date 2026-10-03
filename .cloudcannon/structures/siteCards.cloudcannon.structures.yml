@@ -1,0 +1,101 @@
+# The stack of environment cards, shared by site-cards and the feature-split
+# section that can draw the stack in place of its picture.
+#
+# Two names: `siteCardsPanel` is the stack itself, `siteCardsCards` the cards
+# in it. Both must live here, not inside a component's structure-value file. A
+# `_structures` block there only reaches the component it sits in, so
+# feature-split's `siteCards` object resolved to nothing and CloudCannon
+# guessed every field from the values.
+siteCardsPanel:
+  values:
+    - label: Site cards
+      icon: layers
+      value:
+        buttonLabel: Publish
+        cards: []
+      _inputs:
+        buttonLabel:
+          type: text
+          comment: >-
+            The pill under the stack, and the connector that runs from it to
+            the live card. Leave empty to draw neither.
+        cards:
+          type: array
+          comment: >-
+            The environments, in the order they stack: live site, then staging,
+            then the branch. Three is what the design draws; a fourth would sit
+            on the third.
+          options:
+            structures: _structures.siteCardsCards
+
+siteCardsCards:
+  values:
+    - label: Environment
+      icon: public
+      value:
+        env: production
+        badge: P
+        title: "Production: Live Site"
+        subtitle: ""
+        domain: ""
+        built: ""
+        image: ""
+        imageAlt: ""
+      preview:
+        text:
+          - key: title
+          - Environment
+        subtext:
+          - key: domain
+        icon: public
+      _inputs:
+        env:
+          type: select
+          comment: >-
+            Which environment this card is. The flow publishes a branch to
+            staging and staging to production, in that order.
+          options:
+            values:
+              - id: production
+                name: Production
+              - id: staging
+                name: Staging
+              - id: branch
+                name: Branch
+        badge:
+          type: text
+          comment: The letter in the dark square, e.g. P, S or B.
+        title:
+          type: text
+          comment: >-
+            The environment's name, as the design writes it: "Production: Live
+            Site", "Staging: Testing Site".
+        subtitle:
+          type: text
+          comment: The site the environment belongs to.
+        domain:
+          type: text
+          comment: Where it is served, e.g. funky-pear.cloudvent.net.
+        built:
+          type: text
+          comment: >-
+            When it was last built. Leave empty to drop the row, as the live
+            card does.
+        image:
+          type: image
+          comment: The screenshot at the top of the card.
+          options:
+            paths:
+              static: ""
+              uploads: src/assets/images
+        imageAlt:
+          type: text
+          comment: Alt text for it. Leave empty to treat it as decorative.
+        x:
+          type: number
+          comment: >-
+            Distance from the left of the stack, as a fraction of its width.
+            Leave empty for the design's own place for this card.
+        "y":
+          type: number
+          comment: Distance from the top, as a fraction of the stack's height.

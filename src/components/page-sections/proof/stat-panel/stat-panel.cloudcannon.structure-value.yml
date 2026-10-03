@@ -23,5 +23,5 @@ value:
       suffix: x
       label: publishing velocity
       iconName: bolt
-      iconColor: moss-400
+      iconColor: moss
   buttonSections: []

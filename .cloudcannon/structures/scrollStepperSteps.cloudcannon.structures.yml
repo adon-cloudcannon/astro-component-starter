@@ -1,0 +1,33 @@
+# A stepper step, shared by scroll-stepper and the scroll-steps section.
+#
+# Must live here, not inside a component's structure-value file. A `_structures`
+# block there only reaches the component it sits in, so a section that wraps this
+# one referenced the name and resolved to nothing, and CloudCannon guessed the
+# fields from the values instead.
+
+scrollStepperSteps:
+  values:
+    - label: Step
+      icon: view_day
+      value:
+        _component: building-blocks/wrappers/scroll-stepper/scroll-stepper-step
+        mediaSections: []
+        contentSections: []
+      preview:
+        text:
+          - Step
+        subtext:
+          - Add content and media
+      _inputs:
+        mediaSections:
+          type: array
+          label: Media
+          comment: Content shown for this scroll state. Narrow layouts place it directly before its matching message.
+          options:
+            structures: _structures.scrollStepperSections
+        contentSections:
+          type: array
+          label: Content
+          comment: The message for this step. It scrolls beside the pinned media on desktop.
+          options:
+            structures: _structures.scrollStepperSections

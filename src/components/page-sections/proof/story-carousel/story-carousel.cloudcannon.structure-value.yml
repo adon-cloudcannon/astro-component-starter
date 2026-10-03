@@ -60,7 +60,7 @@ _inputs:
   buttonSections:
     type: array
     options:
-      structures: _structures.buttons
+      structures: _structures.buttonSections
 _structures:
   story_card:
     values:

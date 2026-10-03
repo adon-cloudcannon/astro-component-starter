@@ -71,14 +71,14 @@ shapes:
     A pile of labelled shapes in place of the picture. Leave empty for a normal
     split.
   options:
-    structures: _structures.shape_pile_shape
+    structures: _structures.shapePileShapes
 siteCards:
   type: object
   comment: >-
     The stack of environment cards, in place of the picture. Leave empty for a
     normal split.
   options:
-    structures: _structures.site_cards
+    structures: _structures.siteCardsPanel
 imageSource:
   type: image
   comment: Image shown beside the copy. Leave empty for a copy-only section.
