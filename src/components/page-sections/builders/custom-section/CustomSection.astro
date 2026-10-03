@@ -421,10 +421,32 @@ const arrayDataAttributes =
           }
 
           /* The design inverts the pill on a brand band: light fill, dark
-             label, which is the one pairing that reads on the colour. */
+             label, which is the one pairing that reads on the colour.
+
+             Both ends are palette colours rather than theme tokens, because
+             the band is the same Pacific whichever scheme it locks and so is
+             the pill on it. The label was `--color-text-on-muted`, which is
+             the near-black this wants on a light page and Light Sand on a dark
+             one, so a band that locked dark drew a white label on a white
+             pill: the hero's Pacific option, where "Start your free trial"
+             came out blank.
+
+             The hover is here too. A page section out-ranks a building block
+             whatever the selector, so Button's own `:hover` could not reach
+             past this rule and the pill had no hover at all on a brand band.
+             It takes the band's own colour at 8%, which is the pill tinting
+             toward what it sits on. */
           .button-inner.variant-primary {
-            background-color: var(--color-text-on-brand);
-            color: var(--color-text-on-muted);
+            background-color: var(--white);
+            color: var(--black);
+          }
+
+          a:hover > .button-inner.variant-primary,
+          button:hover > .button-inner.variant-primary,
+          .button-inner.variant-primary:hover,
+          .button-inner.variant-primary:focus-visible {
+            background-color: color-mix(in srgb, var(--color-bg-brand) 8%, var(--white));
+            color: var(--black);
           }
         }
 
