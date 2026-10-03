@@ -1,4 +1,5 @@
 ---
+import { rootMirror } from "@component-utils/rootMirror.mjs";
 /**
  * A band that pins while its steps advance.
  *
@@ -116,6 +117,23 @@ const effectiveChildrenProp = childrenDataProp ?? (useDefaultEditableBinding ? "
 const arrayDataAttributes = effectiveChildrenProp
   ? { "data-editable": "array", "data-prop": effectiveChildrenProp }
   : {};
+
+/* The root's own prop-driven attributes, mirrored for the Visual Editor.
+   CloudCannon keeps a region's root element and swaps only its contents, so
+   these never change there without it. */
+const mirror = rootMirror({
+  class: Object.fromEntries(
+    ["half", "wide", "narrow", "full"].map((width) => [`media-${width}`, mediaWidth === width])
+  ),
+  style: {
+    "--pinned-steps-accent": `var(--${progressColor})`,
+    "--pinned-steps-track": progressTrackColor
+      ? progressTrackColor.startsWith("#")
+        ? progressTrackColor
+        : `var(--${progressTrackColor})`
+      : null,
+  },
+});
 ---
 
 <div
@@ -139,6 +157,10 @@ const arrayDataAttributes = effectiveChildrenProp
   }}
   {...htmlAttributes}
 >
+  {/* Carries this component's own root attributes for the Visual Editor,
+      which never rewrites a region root. See utils/rootMirror.mjs. */}
+  <span class="root-mirror" hidden {...mirror} />
+
   <CustomSection
     class="pinned-steps-stage"
     label={sectionLabel}

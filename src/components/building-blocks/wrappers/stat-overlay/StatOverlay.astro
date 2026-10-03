@@ -1,4 +1,5 @@
 ---
+import { rootMirror } from "@component-utils/rootMirror.mjs";
 /**
  * A picture on a panel with stat callouts laid over it.
  *
@@ -87,6 +88,23 @@ const statList: StatProps[] = Array.isArray(stats) ? stats : [];
 
 /** A palette name, or a literal the design states outright. */
 const colour = (value: string) => (value.startsWith("#") ? value : `var(--${value})`);
+
+/* The root's own prop-driven attributes, mirrored for the Visual Editor.
+   CloudCannon keeps a region's root element and swaps only its contents, so
+   these never change there without it. */
+const mirror = rootMirror({
+  class: {
+    ...Object.fromEntries(["cover", "contain", "fill"].map((fit) => [`fit-${fit}`, panelFit === fit])),
+    scratched: Boolean(panelScratch),
+  },
+  style: {
+    "--stat-panel-ground": panelColor ? colour(panelColor) : null,
+    "--scratch-fill": panelScratch ? colour(panelScratch) : null,
+    "--scratch-ink": panelScratchInk ? colour(panelScratchInk) : null,
+    "--stat-panel-ratio-w": String(Number(ratioWidth) || 1160),
+    "--stat-panel-ratio-h": String(Number(ratioHeight) || 679),
+  },
+});
 ---
 
 <div
@@ -102,6 +120,9 @@ const colour = (value: string) => (value.startsWith("#") ? value : `var(--${valu
   ].filter(Boolean).join("; ")}
   {...htmlAttributes}
   >
+  {/* Carries this component's own root attributes for the Visual Editor,
+      which never rewrites a region root. See utils/rootMirror.mjs. */}
+  <span class="root-mirror" hidden {...mirror} />
   {panelImage && (
     <Image
       class="stat-panel-ground"

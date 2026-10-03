@@ -1,4 +1,5 @@
 ---
+import { rootMirror } from "@component-utils/rootMirror.mjs";
 /**
  * A call to action with a real person beside it.
  *
@@ -48,10 +49,16 @@ const {
   _component,
   ...htmlAttributes
 } = Astro.props;
+
+/* Mirrored onto the builder's `.content`, because the flag lands on the
+   section's root and the editor never rewrites a region root. */
+const mirror = rootMirror({ "data-member-end": reverse ? "" : null });
 ---
 
 <CustomSection
-  class:list={["cta-team-member", { "member-end": reverse }, className]}
+  mirror={mirror}
+  class:list={["cta-team-member", className]}
+  data-member-end={reverse ? "" : undefined}
   label={sectionLabel}
   maxContentWidth={maxContentWidth}
   paddingHorizontal={paddingHorizontal}
@@ -113,12 +120,12 @@ const {
       margin-block: 0;
     }
 
-    .cta-team-member.member-end .cta-team-member-card {
+    .cta-team-member[data-member-end] .cta-team-member-card {
       grid-column: 2;
       grid-row: 1;
     }
 
-    .cta-team-member.member-end .cta-team-member-copy {
+    .cta-team-member[data-member-end] .cta-team-member-copy {
       grid-column: 1;
       grid-row: 1;
     }
@@ -160,8 +167,8 @@ const {
         row-gap: var(--spacing-2xl);
       }
 
-      .cta-team-member.member-end .cta-team-member-card,
-      .cta-team-member.member-end .cta-team-member-copy {
+      .cta-team-member[data-member-end] .cta-team-member-card,
+      .cta-team-member[data-member-end] .cta-team-member-copy {
         grid-column: 1;
         grid-row: auto;
       }

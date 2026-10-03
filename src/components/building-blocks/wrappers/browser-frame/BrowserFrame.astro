@@ -1,4 +1,5 @@
 ---
+import { rootMirror } from "@component-utils/rootMirror.mjs";
 /**
  * A window chrome to put a demo inside.
  *
@@ -33,12 +34,26 @@ const {
   _component,
   ...htmlAttributes
 } = Astro.props;
+
+/* The root's own prop-driven attributes, mirrored for the Visual Editor.
+   CloudCannon keeps a region's root element and swaps only its contents, so
+   these never change there without it. */
+const mirror = rootMirror({
+  class: {
+    ...Object.fromEntries(["light", "dark", "sand"].map((t) => [`tone-${t}`, tone === t])),
+    ...Object.fromEntries(["color", "mono", "none"].map((d) => [`dots-${d}`, dots === d])),
+  },
+});
 ---
 
 <div
   class:list={["browser-frame", `tone-${tone}`, `dots-${dots}`, className]}
   {...htmlAttributes}
 >
+  {/* Carries this component's own root attributes for the Visual Editor,
+      which never rewrites a region root. See utils/rootMirror.mjs. */}
+  <span class="root-mirror" hidden {...mirror} />
+
   {/* Decorative: it is a picture of a window, not a window. A reader who
       cannot see it gains nothing from "three circles and an address". */}
   <div

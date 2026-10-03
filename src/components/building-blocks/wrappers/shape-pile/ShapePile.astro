@@ -1,4 +1,5 @@
 ---
+import { rootMirror } from "@component-utils/rootMirror.mjs";
 /**
  * A pile of labelled shapes that fall into place.
  *
@@ -90,6 +91,16 @@ const landingOf = (index: number) =>
 
 /** Everything down, for a shadow that does not say what casts it. */
 const settled = Math.round((list.length - 1) * STAGGER_MS + FALL_MS);
+
+/* The root's own prop-driven attributes, mirrored for the Visual Editor.
+   CloudCannon keeps a region's root element and swaps only its contents, so
+   these never change there without it. */
+const mirror = rootMirror({
+  style: {
+    "--pile-design-width": String(designWidth),
+    "--pile-design-height": String(designHeight),
+  },
+});
 ---
 
 <div
@@ -98,6 +109,10 @@ const settled = Math.round((list.length - 1) * STAGGER_MS + FALL_MS);
   data-children-prop={childrenDataProp}
   {...htmlAttributes}
 >
+  {/* Carries this component's own root attributes for the Visual Editor,
+      which never rewrites a region root. See utils/rootMirror.mjs. */}
+  <span class="root-mirror" hidden {...mirror} />
+
   {list.map((shape, index) => (
     <div
       class:list={[

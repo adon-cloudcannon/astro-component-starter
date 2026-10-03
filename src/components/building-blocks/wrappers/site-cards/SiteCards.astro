@@ -1,4 +1,5 @@
 ---
+import { rootMirror } from "@component-utils/rootMirror.mjs";
 /**
  * The stack of site cards the design draws beside "Publish when you're ready".
  *
@@ -88,6 +89,17 @@ const placed = (cards as Card[]).slice(0, 3).map((card, index) => ({
 // The one the control starts on: the furthest from production that has
 // somewhere to publish to.
 const first = placed.find((card) => card.env === "branch") ? "branch" : "staging";
+
+/* The root's own prop-driven attributes, mirrored for the Visual Editor.
+
+   `data-flow` is also the demo's running state: the setup script advances it
+   as an editor clicks publish. Mirroring it is still right, because the only
+   thing that writes the mirror is a change to the component's own data, and
+   re-seeding the flow from its first environment is what that should do. */
+const mirror = rootMirror({
+  "data-flow": buttonLabel ? first : null,
+  "data-built-now": builtNowLabel || null,
+});
 ---
 
 {placed.length > 0 && (
@@ -97,6 +109,9 @@ const first = placed.find((card) => card.env === "branch") ? "branch" : "staging
     data-built-now={builtNowLabel || undefined}
     {...htmlAttributes}
   >
+    {/* Carries this component's own root attributes for the Visual Editor,
+        which never rewrites a region root. See utils/rootMirror.mjs. */}
+    <span class="root-mirror" hidden {...mirror} />
     {/* The graph, drawn in the stage's own 708 x 421 so it lands the same way
         at every size. Two edges rather than the design's one, because the
         picture is now a sequence: branch publishes to staging, staging

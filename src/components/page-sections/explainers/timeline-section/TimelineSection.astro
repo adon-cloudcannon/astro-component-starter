@@ -1,4 +1,5 @@
 ---
+import { rootMirror } from "@component-utils/rootMirror.mjs";
 import CustomSection from "@builders/custom-section/CustomSection.astro";
 import Heading from "@core-elements/heading/Heading.astro";
 import SimpleText from "@core-elements/simple-text/SimpleText.astro";
@@ -50,10 +51,16 @@ const hasHeader = Boolean(eyebrow || heading || subtext);
 
 const gutter =
   paddingHorizontal && paddingHorizontal !== "none" ? `var(--spacing-${paddingHorizontal})` : "0px";
+
+/* Mirrored onto the builder's `.content`, because the flag lands on the
+   section's root and the editor never rewrites a region root. */
+const mirror = rootMirror({ "data-no-header": !hasHeader ? "" : null });
 ---
 
 <CustomSection
-  class:list={["timeline-section", { "no-header": !hasHeader }, className]}
+  mirror={mirror}
+  class:list={["timeline-section", className]}
+  data-no-header={!hasHeader ? "" : undefined}
   label={sectionLabel}
   maxContentWidth={maxContentWidth}
   paddingHorizontal={paddingHorizontal}
@@ -124,7 +131,7 @@ const gutter =
      Flat, because rules nested deeper than a couple of levels get dropped
      (see CLAUDE.md). */
   @layer overrides {
-    .timeline-section.no-header .content {
+    .timeline-section[data-no-header] .content {
       padding-block-start: 0;
     }
   }

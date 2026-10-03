@@ -1,4 +1,5 @@
 ---
+import { rootMirror } from "@component-utils/rootMirror.mjs";
 /**
  * Two characters having a conversation.
  *
@@ -90,6 +91,21 @@ const thread = conversation
     side: message.side === "end" ? "end" : "start",
     words: compose(num(seed, 7) * 1013 + index * 7919, num(message.words, 4)),
   }));
+
+/* The root's own prop-driven attributes, mirrored for the Visual Editor.
+   CloudCannon keeps a region's root element and swaps only its contents, so
+   these never change there without it. */
+const mirror = rootMirror({
+  "data-conversation": thread.length ? "" : null,
+  style: {
+    "--character-chat-scale": `${num(scale, 100)}%`,
+    "--character-chat-thread": `${num(threadHeight, 36)}%`,
+    "--character-chat-inset-start": `${num(insetStart, 27)}%`,
+    "--character-chat-inset-end": `${num(insetEnd, 22)}%`,
+    "--character-chat-cast-start": `${num(castInsetStart, 14)}%`,
+    "--character-chat-cast-end": `${num(castInsetEnd, 8)}%`,
+  },
+});
 ---
 
 <div
@@ -98,6 +114,10 @@ const thread = conversation
   style={`--character-chat-scale: ${num(scale, 100)}%; --character-chat-thread: ${num(threadHeight, 36)}%; --character-chat-inset-start: ${num(insetStart, 27)}%; --character-chat-inset-end: ${num(insetEnd, 22)}%; --character-chat-cast-start: ${num(castInsetStart, 14)}%; --character-chat-cast-end: ${num(castInsetEnd, 8)}%`}
   {...htmlAttributes}
 >
+  {/* Carries this component's own root attributes for the Visual Editor,
+      which never rewrites a region root. See utils/rootMirror.mjs. */}
+  <span class="root-mirror" hidden {...mirror} />
+
   {thread.length > 0 && (
     <div class="character-chat-thread">
       {/* One line for a reader who cannot see it. The shapes say nothing on

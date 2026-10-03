@@ -1,4 +1,5 @@
 ---
+import { rootMirror } from "@component-utils/rootMirror.mjs";
 import CustomSection from "@builders/custom-section/CustomSection.astro";
 import Heading from "@core-elements/heading/Heading.astro";
 import Image from "@core-elements/image/Image.astro";
@@ -72,9 +73,15 @@ const minSplitWidth = 800;
 const bleedSide = imageBleed ? (reverse ? "inline-start" : "inline-end") : undefined;
 const imagePositionHorizontal = imageBleed ? (reverse ? "right" : "left") : "center";
 const imagePositionVertical = imageBleed ? "top" : "center";
+
+/* Mirrored onto the builder's `.content`: these land on the section's own
+   root, which is the element CloudCannon binds the region to and never
+   rewrites, so without this they are whatever the page was built with. */
+const mirror = rootMirror({ class: { "has-pile": shapes?.length > 0 } });
 ---
 
 <CustomSection
+  mirror={mirror}
   class:list={["feature-split", shapes?.length > 0 && "has-pile", className]}
   label={sectionLabel}
   maxContentWidth={maxContentWidth}

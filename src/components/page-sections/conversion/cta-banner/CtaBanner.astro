@@ -1,4 +1,5 @@
 ---
+import { rootMirror } from "@component-utils/rootMirror.mjs";
 /**
  * A short, full-width band: a heading, a link, and a drawing in the corner.
  *
@@ -62,9 +63,24 @@ const {
  */
 const DARK_SCRATCH = new Set(["pacific", "kiwi", "moss", "sunset", "black", "midnight", "earth"]);
 const scratchScheme = DARK_SCRATCH.has(String(scratch).toLowerCase()) ? "dark" : "light";
+
+/* Mirrored onto the builder's `.content`: these land on the section's own
+   root, which is the element CloudCannon binds the region to and never
+   rewrites, so without this they are whatever the page was built with. */
+const mirror = rootMirror({
+  class: { "has-sheet": background?.type === "image", scratched: Boolean(scratch) },
+  style: {
+    "--scratch-fill": scratch
+      ? scratch.startsWith("#")
+        ? scratch
+        : `var(--${scratch})`
+      : null,
+  },
+});
 ---
 
 <CustomSection
+  mirror={mirror}
   class:list={[
     "cta-banner",
     background?.type === "image" && "has-sheet",

@@ -1,4 +1,5 @@
 ---
+import { rootMirror } from "@component-utils/rootMirror.mjs";
 import CustomSection from "@builders/custom-section/CustomSection.astro";
 import { resolveImageSource } from "@component-utils/resolveImageSource";
 import Image from "@core-elements/image/Image.astro";
@@ -40,10 +41,16 @@ const {
   _component,
   ...htmlAttributes
 } = Astro.props;
+
+/* Mirrored onto the builder's `.content`, because the flag lands on the
+   section's root and the editor never rewrites a region root. */
+const mirror = rootMirror({ "data-heading-inline": headingPlacement === "inline" ? "" : null });
 ---
 
 <CustomSection
-  class:list={["logo-cloud", headingPlacement === "inline" && "heading-inline", className]}
+  mirror={mirror}
+  class:list={["logo-cloud", className]}
+  data-heading-inline={headingPlacement === "inline" ? "" : undefined}
   label={sectionLabel}
   maxContentWidth={maxContentWidth}
   paddingHorizontal={paddingHorizontal}
@@ -204,7 +211,7 @@ const {
          the children is what turns the flow column into a row: the flow rule
          reads that property, and setting it on .content itself loses to
          utils, which resets it there. */
-      &.heading-inline > .outer-content > .content {
+      &[data-heading-inline] > .outer-content > .content {
         align-items: center;
         display: flex;
         flex-wrap: wrap;

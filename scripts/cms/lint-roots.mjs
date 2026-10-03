@@ -49,11 +49,61 @@ const ALLOWED = [
   // `id` from `label`/`sectionLabel` is a documented exception: it is an anchor
   // target, and a stale anchor id is harmless until the next reload.
   { attr: "id" },
+  // A role cannot move: it is what the accessible name and state hang off, and
+  // a stale one shows in the editor's own preview and nowhere else.
+  { attr: "role" },
   // `_flow.css` documents the roots with no child to carry the attribute.
   { attr: "data-space-before", components: ["Video", "Pagination"] },
   // Synced up from an inner node by editor-live-sync.js.
   { attr: "style", components: ["BentoBoxItem"] },
 ];
+
+/**
+ * Attributes a component mirrors onto a child for the Visual Editor.
+ *
+ * `rootMirror()` hands the root's own prop-driven attributes to a child, which
+ * is content the editor does rewrite, and `editor-live-sync.js` copies them
+ * back up. An attribute named in that call is not stale, so it is not a
+ * finding. One that is missing from it still is, which is the point: the
+ * mirror has to list everything the root carries or it silently covers less
+ * than it looks like it does.
+ *
+ * @param {string} source
+ * @returns {Set<string>} the attribute names the mirror declares
+ */
+function mirroredAttrs(source) {
+  const at = source.indexOf("rootMirror(");
+
+  if (at === -1) return new Set();
+
+  // the call's own braces, so a later `rootMirror` reference cannot widen it
+  const open = source.indexOf("{", at);
+
+  if (open === -1) return new Set();
+
+  let depth = 0;
+  let end = open;
+
+  for (; end < source.length; end += 1) {
+    if (source[end] === "{") depth += 1;
+    else if (source[end] === "}") {
+      depth -= 1;
+      if (depth === 0) break;
+    }
+  }
+
+  const call = source.slice(open, end + 1);
+  const names = new Set();
+
+  for (const match of call.matchAll(/["'`]?((?:data-|aria-)[\w-]+|class|style|role)["'`]?\s*:/g)) {
+    names.add(match[1]);
+  }
+
+  // `class:list` on the root is covered by a `class` map in the mirror
+  if (names.has("class")) names.add("class:list");
+
+  return names;
+}
 
 /**
  * An accessible name or ARIA state has to sit on the element that carries the
@@ -365,6 +415,8 @@ for (const file of files) {
 
   if (!props.length) continue;
 
+  const mirrored = mirroredAttrs(source);
+
   const element = firstElement(source);
 
   if (!element) continue;
@@ -378,6 +430,7 @@ for (const file of files) {
     if (!WATCHED.test(name)) continue;
     if (REGION_ATTRS.has(name)) continue;
     if (ALLOWED_ARIA.test(name)) continue;
+    if (mirrored.has(name)) continue;
     if (
       ALLOWED.some(
         (rule) =>

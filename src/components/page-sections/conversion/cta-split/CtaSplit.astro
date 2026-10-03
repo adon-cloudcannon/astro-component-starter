@@ -1,4 +1,5 @@
 ---
+import { rootMirror } from "@component-utils/rootMirror.mjs";
 import CustomSection from "@builders/custom-section/CustomSection.astro";
 import Heading from "@core-elements/heading/Heading.astro";
 import AgentTerminal from "@wrappers/agent-terminal/AgentTerminal.astro";
@@ -147,10 +148,16 @@ const overflow = Number(imageOverflow) || 0;
 const bleedSide =
   imageBleed || overflow > 0 ? (reverse ? "inline-start" : "inline-end") : undefined;
 const bleedLimit = !imageBleed && overflow > 0 ? `${overflow}px` : undefined;
+
+/* Mirrored onto the builder's `.content`, because the flag lands on the
+   section's root and the editor never rewrites a region root. */
+const mirror = rootMirror({ "data-picture-first": reverse ? "" : null });
 ---
 
 <CustomSection
-  class:list={["cta-split", { "picture-first": reverse }, className]}
+  mirror={mirror}
+  class:list={["cta-split", className]}
+  data-picture-first={reverse ? "" : undefined}
   label={sectionLabel}
   maxContentWidth={maxContentWidth}
   paddingHorizontal={paddingHorizontal}
@@ -441,7 +448,7 @@ const bleedLimit = !imageBleed && overflow > 0 ? `${overflow}px` : undefined;
      Flat, because rules nested deeper than a couple of levels get dropped (see
      CLAUDE.md). */
   @layer overrides {
-    .cta-split.picture-first .split-inner {
+    .cta-split[data-picture-first] .split-inner {
       column-gap: 7.5625rem;
     }
   }

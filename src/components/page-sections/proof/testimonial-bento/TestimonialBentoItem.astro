@@ -1,4 +1,5 @@
 ---
+import { rootMirror } from "@component-utils/rootMirror.mjs";
 /**
  * One cell of TestimonialBento.
  *
@@ -74,6 +75,17 @@ const {
 } = Astro.props;
 
 const quote = text ? renderMarkdown(text) : "";
+/* These five have to resolve on the card itself: the theme tokens, the tone's
+   surface, the quote's size and the whole-card link all key off the root. The
+   card is placed as an array item, so that root is a region root the editor
+   never rewrites — the mirror is what carries them back. */
+const mirror = rootMirror({
+  "data-card-link": cardLink && link ? "" : null,
+  "data-size": size,
+  "data-quote-size": quoteSize === "large" ? "large" : null,
+  "data-tone": tone,
+  "data-theme": tone === "light" ? "light" : "dark",
+});
 ---
 
 <div
@@ -92,6 +104,7 @@ const quote = text ? renderMarkdown(text) : "";
       draws it, and it stays out of the accessibility tree without needing to
       be hidden. */}
   <blockquote
+    {...mirror}
     class="testimonial-bento-quote"
     data-marks={quoteMarks ? "" : undefined}
     data-prop="text"

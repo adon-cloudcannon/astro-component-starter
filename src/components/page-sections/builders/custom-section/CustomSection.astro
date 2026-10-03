@@ -33,6 +33,17 @@ const {
    * plain — the Developers hero has none.
    */
   haze = false,
+  /**
+   * Root attributes a section needs mirrored for the Visual Editor.
+   *
+   * A section's own layout flags land on this builder's root, which is the
+   * element CloudCannon binds the region to and never rewrites. The section
+   * builds the mirror with `rootMirror()` and it rides on `.outer-content`, a
+   * direct child of this builder's root that is always rendered, so
+   * `editor-live-sync.js` copies the attributes one level up onto the root
+   * the editor binds its region to.
+   */
+  mirror,
   rounded = false,
   useDefaultEditableBinding = false,
   class: className,
@@ -158,6 +169,7 @@ const arrayDataAttributes =
     ]}
     data-theme={bandScheme && bandScheme !== "inherit" ? bandScheme : undefined}
     data-theme-lock={bandLock || undefined}
+    {...mirror}
   >
     {bgType === "image" && (
       <Image

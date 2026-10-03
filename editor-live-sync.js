@@ -78,6 +78,77 @@ function syncBentoBoxSpans(target) {
 const BENTO_BOX_ATTRS = ["data-col-span", "data-row-span"];
 
 /**
+ * Mirror a component's prop-driven root attributes from a direct child.
+ *
+ * CloudCannon keeps a region's root element and swaps only its contents, so
+ * an attribute on the root whose value comes from a prop never changes in the
+ * Visual Editor. Where the attribute can move down, it should: a custom
+ * property belongs on whatever reads it, and `:has()` lifts a name back up
+ * when the root itself needs it.
+ *
+ * This is for the rest. A theme, a layout class, a size the CSS keys off: all
+ * of them have to resolve on the root, and some cannot be enumerated into one
+ * `:has()` rule per value. The component renders the truth on its root as it
+ * always did, so the built page is unchanged, and mirrors the same attributes
+ * onto a child as JSON. The child is content, so the editor rewrites it, and
+ * this copies it back up.
+ *
+ * `null` removes an attribute, which is how a conditional one comes off.
+ */
+function syncRootMirror(target) {
+  // The parent, always. A mirror is a direct child of the root it describes,
+  // which is the only rule that holds for a component nested inside another:
+  // walking up to the nearest region found the enclosing page section rather
+  // than the component's own root, and a shape pile set its section's styles.
+  const root = target.parentElement;
+
+  if (!root) return;
+
+  let attributes;
+
+  try {
+    attributes = JSON.parse(target.dataset.rootMirror || "{}");
+  } catch {
+    log("unparseable data-root-mirror", target);
+    return;
+  }
+
+  for (const [name, value] of Object.entries(attributes)) {
+    // `class` and `style` are maps, never whole values. A root's class list
+    // holds the builder's own hooks and its band colour, and its style can
+    // hold more than one custom property, so replacing either wholesale would
+    // throw away what the component does not know about. Toggling a named
+    // flag and setting a named property touch only what was declared.
+    if (name === "class" && value && typeof value === "object") {
+      for (const [className, on] of Object.entries(value)) {
+        root.classList.toggle(className, Boolean(on));
+      }
+      continue;
+    }
+
+    if (name === "style" && value && typeof value === "object") {
+      for (const [property, setting] of Object.entries(value)) {
+        if (setting === null || setting === undefined) {
+          root.style.removeProperty(property);
+        } else {
+          root.style.setProperty(property, String(setting));
+        }
+      }
+      continue;
+    }
+
+    if (value === null || value === undefined) {
+      root.removeAttribute(name);
+    } else {
+      root.setAttribute(name, String(value));
+    }
+  }
+}
+
+const ROOT_MIRROR_ATTRS = ["data-root-mirror"];
+
+
+/**
  * Carousel config is read from attributes on `.carousel-inner` at
  * Embla init time, so any change to those attributes, the inline
  * style (CSS vars like `--slide-width`), or the slide list requires
@@ -330,6 +401,11 @@ const observer = new MutationObserver((mutations) => {
         continue;
       }
 
+      if (ROOT_MIRROR_ATTRS.includes(attributeName)) {
+        syncRootMirror(target);
+        continue;
+      }
+
       if (!(target instanceof Element)) continue;
 
       if (
@@ -382,6 +458,12 @@ const observer = new MutationObserver((mutations) => {
           syncBentoBoxSpans(child);
         }
 
+        if (node.dataset?.rootMirror) syncRootMirror(node);
+
+        for (const child of node.querySelectorAll("[data-root-mirror]")) {
+          syncRootMirror(child);
+        }
+
         initNewComponents(node);
       }
     }
@@ -390,7 +472,12 @@ const observer = new MutationObserver((mutations) => {
 
 observer.observe(document.body, {
   attributes: true,
-  attributeFilter: [...BENTO_BOX_ATTRS, ...CAROUSEL_INNER_ATTRS, ...IMAGE_CAROUSEL_CONTENT_ATTRS],
+  attributeFilter: [
+    ...BENTO_BOX_ATTRS,
+    ...ROOT_MIRROR_ATTRS,
+    ...CAROUSEL_INNER_ATTRS,
+    ...IMAGE_CAROUSEL_CONTENT_ATTRS,
+  ],
   childList: true,
   subtree: true,
 });
@@ -411,8 +498,12 @@ setupAllCodeBlocks();
 setupAllScrollSteppers();
 setupAllForms();
 
+// Everything already on the page, before the editor changes anything.
+document.querySelectorAll("[data-root-mirror]").forEach(syncRootMirror);
+
 log("observer active", {
   bentoAttrs: BENTO_BOX_ATTRS,
+  rootMirrorAttrs: ROOT_MIRROR_ATTRS,
   carouselAttrs: CAROUSEL_INNER_ATTRS,
   imageCarouselAttrs: IMAGE_CAROUSEL_CONTENT_ATTRS,
 });

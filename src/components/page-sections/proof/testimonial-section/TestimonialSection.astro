@@ -1,4 +1,5 @@
 ---
+import { rootMirror } from "@component-utils/rootMirror.mjs";
 import Button from "@core-elements/button/Button.astro";
 import CustomSection from "@builders/custom-section/CustomSection.astro";
 import Testimonial from "@core-elements/testimonial/Testimonial.astro";
@@ -80,9 +81,31 @@ const accentStyle =
   accentColor && accentColor !== "none"
     ? { "--testimonial-accent": `var(--${accentColor})` }
     : undefined;
+
+/* Mirrored onto the builder's `.content`: these land on the section's own
+   root, which is the element CloudCannon binds the region to and never
+   rewrites, so without this they are whatever the page was built with. */
+const mirror = rootMirror({
+  class: {
+    "is-split": isSplit,
+    "mark-plain": isSplit && isPlain,
+    "mark-end": isSplit && atEnd,
+    "not-quoted": !quoted,
+    // Every `quote-*` the stylesheet below actually has a rule for. The class
+    // is written from the prop, so the set cannot be derived from one value:
+    // each is toggled on its own and the rest come off.
+    ...Object.fromEntries(
+      ["small", "standard", "large", "md"].map((size) => [
+        `quote-${size}`,
+        isSplit && quoteSize === size,
+      ])
+    ),
+  },
+});
 ---
 
 <CustomSection
+  mirror={mirror}
   {...htmlAttributes}
   class:list={[
     "testimonial-section",
