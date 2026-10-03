@@ -101,8 +101,17 @@ const columnCount = ["2", "4"].includes(String(columns)) ? String(columns) : "3"
         data-direction="row"
       >
         {testimonials.map((testimonial: TestimonialProps) => (
+          /* `data-component` is what makes a card redraw when its own fields
+             change. An array item on its own gets the CRUD controls and
+             nothing else: the editor updates the primitives inside it, the
+             quote and the names, because each of those binds its own region,
+             and leaves everything else as the page was built. So changing a
+             card's accent or its tone saved the value and changed nothing
+             until a reload. Naming the component here gives the editor a
+             renderer to redraw the row with. */
           <TestimonialBentoItem
             data-editable="array-item"
+            data-component="page-sections/proof/testimonial-bento/testimonial-bento-item"
             data-id="page-sections/proof/testimonial-bento/testimonial-bento-item"
             {...testimonial}
           />
