@@ -28,7 +28,7 @@ pageSections:
     pattern: pegboard
     haze: true
   - _component: page-sections/proof/logo-cloud
-    backgroundColor: surface
+    backgroundColor: sand
     logos:
       - image: /src/assets/images/marketing/logos/twitch.svg
         alt: Twitch
@@ -96,9 +96,7 @@ pageSections:
       type: pattern
       pattern: pegboard
       mask: none
-    backgroundColor: base
-    colorScheme: dark
-    lockColorScheme: true
+    backgroundColor: dark
     haze:
       - x: 0.4791
         rx: 933px
@@ -139,9 +137,7 @@ pageSections:
     columns: 3
     alignmentHorizontal: center
     heading: What are the perks?
-    backgroundColor: base
-    colorScheme: dark
-    lockColorScheme: true
+    backgroundColor: dark
     cardHeight: 334
     headingSize: lg
   - _component: page-sections/conversion/pricing-tiers
@@ -205,7 +201,7 @@ pageSections:
       Bring on new clients, move up the tiers, and unlock bigger discounts, dedicated support, and
       more exposure to new leads.
     subtextSize: lg
-    backgroundColor: base
+    backgroundColor: light-sand
     subtextWidth: 580
     alignmentHorizontal: start
     headingSize: lg
@@ -267,12 +263,12 @@ pageSections:
     heading: Pricing plans designed for your clients
     subtext: Handle billing yourself or pass it on to clients, whatever fits the workflow.
     subtextSize: lg
-    backgroundColor: surface
+    backgroundColor: sand
     subtextWidth: 446
     alignmentHorizontal: center
     headingSize: lg
   - _component: page-sections/conversion/cta-split
-    backgroundColor: surface
+    backgroundColor: sand
     contentCard: true
     contentCardColor: base
     paddingVertical: 2xl
@@ -419,12 +415,10 @@ pageSections:
           - _component: building-blocks/core-elements/simple-text
             text: Once approved, access the Lite plan and Bronze benefits. Start launching!
             size: lg
-    backgroundColor: base
+    backgroundColor: light-sand
   - _component: page-sections/conversion/cta-center
     heading: Keen to collaborate?
-    backgroundColor: base
-    colorScheme: dark
-    lockColorScheme: true
+    backgroundColor: dark
     headingSize: lg
     paddingVertical: 2xl
     cornerStart:

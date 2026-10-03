@@ -14,9 +14,7 @@ value:
   maxContentWidth: xl
   paddingHorizontal: gutter
   paddingVertical: 2xl
-  colorScheme: inherit
-  lockColorScheme: true
-  backgroundColor: brand
+  backgroundColor: pacific
   background:
     type: image
     imageSource: ""
@@ -57,8 +55,6 @@ groups:
       - maxContentWidth
       - paddingHorizontal
       - paddingVertical
-      - colorScheme
-      - lockColorScheme
       - backgroundColor
       - background
       - haze

@@ -35,7 +35,7 @@ pageSections:
     heading: Here’s what you’re working with
     subtext: Click a heading and change it. See what’s possible with the Visual Editor.
     subtextSize: lg
-    backgroundColor: base
+    backgroundColor: light-sand
     subtextWidth: 612
     alignmentHorizontal: center
     headingSize: lg
@@ -56,7 +56,7 @@ pageSections:
         authorImageAlt: Alex Murray
         linkText: Read case study
         accentColor: pacific
-    backgroundColor: base
+    backgroundColor: light-sand
   - _component: page-sections/explainers/pinned-steps
     heading: No more waiting on tickets
     headingSize: lg
@@ -68,9 +68,7 @@ pageSections:
     progressColor: golden
     progressTrackColor: midnight
     numbered: true
-    backgroundColor: base
-    colorScheme: dark
-    lockColorScheme: true
+    backgroundColor: dark
     steps:
       - contentSections:
           - _component: building-blocks/core-elements/heading
@@ -141,9 +139,7 @@ pageSections:
       type: pattern
       pattern: pegboard
       mask: none
-    backgroundColor: base
-    colorScheme: dark
-    lockColorScheme: true
+    backgroundColor: dark
     haze:
       - x: 0.4938
         rx: 933px
@@ -156,7 +152,7 @@ pageSections:
       Every piece of work happens on its own branched site, so a new blog post, a landing page
       redesign, and a navigation update can all run at once without anyone treading on toes.
     subtextSize: lg
-    backgroundColor: base
+    backgroundColor: light-sand
     subtextWidth: 612
     headingSize: lg
   - _component: page-sections/explainers/feature-grid
@@ -179,7 +175,7 @@ pageSections:
     columns: 3
     alignmentHorizontal: center
     heading: Built for the work
-    backgroundColor: base
+    backgroundColor: light-sand
     cardHeight: 334
     headingSize: lg
   - _component: page-sections/conversion/cta-split
@@ -191,7 +187,7 @@ pageSections:
       free in minutes, or book a demo and we’ll walk you through the real thing.
     subtextSize: lg
     imageSource: /src/assets/images/marketing/cloudcannon-truck-closed-1.png
-    backgroundColor: brand
+    backgroundColor: pacific
     headingSize: lg
     imageOverflow: 336
     buttonSections:

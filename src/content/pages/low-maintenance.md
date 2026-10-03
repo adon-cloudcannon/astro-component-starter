@@ -31,7 +31,7 @@ pageSections:
     pattern: pegboard
     haze: true
   - _component: page-sections/proof/logo-cloud
-    backgroundColor: surface
+    backgroundColor: sand
     logos:
       - image: /src/assets/images/marketing/logos/twitch.svg
         alt: Twitch
@@ -70,7 +70,7 @@ pageSections:
       somewhere to work, your site stays as a set of static files, and neither one needs looking
       after.
     subtextSize: lg
-    backgroundColor: base
+    backgroundColor: light-sand
     subtextWidth: 816
     headingSize: lg
     buttonSections:
@@ -88,7 +88,7 @@ pageSections:
     markStyle: card
     company: Absoluttweb
     authorImage: /src/assets/images/marketing/ellipse-287.jpg
-    backgroundColor: base
+    backgroundColor: light-sand
   - _component: page-sections/explainers/feature-split
     subtextWidth: 342
     shapes:
@@ -157,7 +157,7 @@ pageSections:
     heading: We don’t think a website should need this much looking after
     subtext: 'With a static site and Git you won’t need to worry about:'
     subtextSize: xl
-    backgroundColor: base
+    backgroundColor: light-sand
     headingSize: lg
     background:
       type: pattern
@@ -173,9 +173,7 @@ pageSections:
     subtext: >-
       Whether it's three client sites or three hundred, another site is another repo. The
       maintenance doesn't come with it.
-    backgroundColor: base
-    colorScheme: dark
-    lockColorScheme: true
+    backgroundColor: dark
     subtextSize: lg
     subtextWidth: 580
     headingSize: lg
@@ -191,9 +189,7 @@ pageSections:
     mediaWidth: wide
     progressColor: pacific-300
     progressTrackColor: midnight
-    backgroundColor: base
-    colorScheme: dark
-    lockColorScheme: true
+    backgroundColor: dark
     steps:
       - contentSections:
           - _component: building-blocks/core-elements/heading
@@ -240,9 +236,7 @@ pageSections:
       type: pattern
       pattern: pegboard
       mask: none
-    backgroundColor: base
-    colorScheme: dark
-    lockColorScheme: true
+    backgroundColor: dark
     haze:
       - x: 0.4791
         rx: 933px
@@ -264,7 +258,7 @@ pageSections:
       Git underneath, a visual editor on top, with code and content running on one engine. Start
       free in minutes, or book a demo and we’ll walk you through the real thing.
     subtextSize: lg
-    backgroundColor: base
+    backgroundColor: light-sand
     subtextWidth: 489
     headingSize: lg
     buttonSections:
@@ -278,8 +272,6 @@ pageSections:
         text: Book a demo
   - _component: page-sections/conversion/cta-banner
     scratch: pacific
-    colorScheme: dark
-    lockColorScheme: true
     heading: Wanna learn more about our product?
     linkText: Explore visual editing
     imageSource: /src/assets/images/marketing/rocks-corner-3806-70523.png

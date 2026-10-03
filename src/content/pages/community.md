@@ -10,6 +10,5 @@ pageSections:
     subtext: Connect with other builders.
     showBreadcrumbs: true
     alignmentHorizontal: start
-    colorScheme: inherit
-    backgroundColor: base
+    backgroundColor: light-sand
 ---

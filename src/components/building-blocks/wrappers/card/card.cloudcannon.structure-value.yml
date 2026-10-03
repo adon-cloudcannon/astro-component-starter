@@ -8,9 +8,7 @@ value:
   maxContentWidth: null
   paddingHorizontal: sm
   paddingVertical: sm
-  colorScheme: inherit
-  lockColorScheme: false
-  backgroundColor: base
+  backgroundColor: light-sand
   background:
     type: image
     imageSource: ""

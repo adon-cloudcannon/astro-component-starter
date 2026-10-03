@@ -32,7 +32,7 @@ pageSections:
     pattern: grid
     haze: true
   - _component: page-sections/proof/logo-cloud
-    backgroundColor: surface
+    backgroundColor: sand
     logos:
       - image: /src/assets/images/marketing/logos/twitch.svg
         alt: Twitch
@@ -67,7 +67,7 @@ pageSections:
       visual interface to edit it.
     subtextSize: lg
     imageSource: /src/assets/images/marketing/food-bank-volunteers-produce-1-3806-69798.png
-    backgroundColor: base
+    backgroundColor: light-sand
     subtextWidth: 580
     headingSize: lg
     buttonSections:
@@ -177,7 +177,7 @@ pageSections:
       mask: fade
       fixed: true
     subtextSize: lg
-    backgroundColor: base
+    backgroundColor: dark
     subtextWidth: 480
     headingSize: lg
     cards:
@@ -391,8 +391,6 @@ pageSections:
               - _component: building-blocks/core-elements/button
                 variant: primary
                 text: How sites stay fast
-    colorScheme: dark
-    lockColorScheme: true
     cardColorScheme: light
   - _component: page-sections/proof/testimonial-quote
     variant: static
@@ -407,16 +405,12 @@ pageSections:
         authorImage: /src/assets/images/marketing/ellipse-287.jpg
         authorImageAlt: Sindre Gusdal
         accentColor: harbour
-    backgroundColor: base
-    colorScheme: dark
-    lockColorScheme: true
+    backgroundColor: dark
   - _component: page-sections/proof/story-carousel
     heading: Grow your sites, not your headcount.
     subtext: From fast-moving startups to multi-site agencies, teams ship more with CloudCannon.
     subtextSize: lg
-    backgroundColor: base
-    colorScheme: dark
-    lockColorScheme: true
+    backgroundColor: dark
     subtextWidth: 560
     headingSize: lg
     stories:
@@ -512,7 +506,7 @@ pageSections:
       world. We started CloudCannon because every CMS we tried gave editors a better experience by
       giving developers a worse one. So we built a CMS that works for both.
     subtextSize: lg
-    backgroundColor: surface
+    backgroundColor: sand
     subtextWidth: 460
     headingSize: lg
   - _component: page-sections/conversion/cta-split
@@ -524,7 +518,7 @@ pageSections:
       free in minutes, or book a demo and we’ll walk you through the real thing.
     subtextSize: lg
     imageSource: /src/assets/images/marketing/cloudcannon-truck-closed-1.png
-    backgroundColor: brand
+    backgroundColor: pacific
     headingSize: lg
     imageOverflow: 333
     buttonSections:

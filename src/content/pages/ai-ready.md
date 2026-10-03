@@ -29,7 +29,7 @@ pageSections:
     pattern: grid
     haze: true
   - _component: page-sections/proof/logo-cloud
-    backgroundColor: surface
+    backgroundColor: sand
     logos:
       # The models, in the design's order, each at its own drawn size: the
       # file's viewBox and the size the design draws it at are the same to
@@ -64,9 +64,7 @@ pageSections:
   - _component: page-sections/conversion/cta-center
     heading: Ready, set, code
     subtext: AI agents working on the site have complete context
-    backgroundColor: base
-    colorScheme: dark
-    lockColorScheme: true
+    backgroundColor: dark
     subtextSize: lg
     subtextWidth: 580
     headingSize: lg
@@ -90,9 +88,7 @@ pageSections:
     # #034AD7 and #333333 off the design, which are Pacific and Midnight.
     progressColor: pacific
     progressTrackColor: midnight
-    backgroundColor: base
-    colorScheme: dark
-    lockColorScheme: true
+    backgroundColor: dark
     steps:
       # No number: the design does not draw one on this band.
       - number: ''
@@ -154,9 +150,7 @@ pageSections:
       type: pattern
       pattern: pegboard
       mask: none
-    backgroundColor: base
-    colorScheme: dark
-    lockColorScheme: true
+    backgroundColor: dark
     haze:
       - x: 0.4938
         rx: 933px
@@ -180,7 +174,7 @@ pageSections:
       existing site onto CloudCannon, write the config, and set up visual editing, without you
       needing to explain how any of it works first.
     subtextSize: lg
-    backgroundColor: base
+    backgroundColor: light-sand
     headingSize: lg
     buttonSections:
       - _component: building-blocks/core-elements/button
@@ -222,7 +216,7 @@ pageSections:
       type: pattern
       pattern: grid
       mask: none
-    backgroundColor: muted
+    backgroundColor: dark-sand
     buttonSections:
       - _component: building-blocks/core-elements/button
         variant: primary

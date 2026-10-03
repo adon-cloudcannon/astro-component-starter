@@ -14,7 +14,7 @@ value:
       authorDescription: Head of Marketing, Northwind
       authorImage: /src/assets/images/component-docs/profile1.jpg
       size: featured
-      tone: surface
+      tone: light
     - text: Our Lighthouse scores went up without anyone working on performance.
       authorName: Dana Whitfield
       authorDescription: Engineering Lead, Cascade
@@ -26,7 +26,7 @@ value:
       authorDescription: Founder, Fieldnote
       authorImage: /src/assets/images/component-docs/profile2.jpg
       size: standard
-      tone: inverse
+      tone: base
     - text: Two weeks from kickoff to launch, including content. The component library did most of the work for us.
       authorName: Sam Okafor
       authorDescription: Design Director, Loam Studio
@@ -37,9 +37,7 @@ value:
   maxContentWidth: xl
   paddingHorizontal: gutter
   paddingVertical: 4xl
-  colorScheme: inherit
-  lockColorScheme: false
-  backgroundColor: base
+  backgroundColor: light-sand
   background:
     type: image
     imageSource: ""
@@ -201,19 +199,30 @@ _structures:
                   name: Full width
           tone:
             type: select
-            comment: The card's background. Inverse uses the opposite color scheme, so it stands out in both light and dark mode.
+            comment: >-
+              Which ground the card is drawn on. There are two: the dark one
+              the design mostly uses, and the pale one for the card it marks
+              out. The accent travels with the ground rather than being set
+              separately, because Harbour and Golden are tuned to glow on
+              near-black and all but vanish on a pale card.
             options:
               values:
                 - id: base
-                  name: Base
-                - id: surface
-                  name: Surface
-                - id: accent
-                  name: Accent
-                - id: highlight
-                  name: Highlight
-                - id: inverse
-                  name: Inverse
+                  name: Dark
+                  swatch: square
+                  color: "#252423"
+                - id: light
+                  name: Light
+                  swatch: square
+                  color: "#FFFCF3"
+              picker_view: card
+              preview:
+                icon:
+                  - key: swatch
+                icon_color:
+                  - key: color
+                text:
+                  - key: name
 groups:
   - heading: Content
     inputs:
@@ -233,8 +242,6 @@ groups:
       - maxContentWidth
       - paddingHorizontal
       - paddingVertical
-      - colorScheme
-      - lockColorScheme
       - backgroundColor
       - background
       - haze

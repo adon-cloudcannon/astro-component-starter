@@ -10,6 +10,5 @@ pageSections:
     subtext: Plans and pricing for CloudCannon.
     showBreadcrumbs: true
     alignmentHorizontal: start
-    colorScheme: inherit
-    backgroundColor: base
+    backgroundColor: light-sand
 ---

@@ -24,7 +24,7 @@ const {
   paddingVerticalEnd = "",
   colorScheme = "inherit",
   lockColorScheme = false,
-  backgroundColor = "base",
+  backgroundColor = "light-sand",
   background,
   /**
    * A soft pool of the band's own colour behind the content, so a heading
@@ -59,6 +59,42 @@ const {
 // One layer per pool. A section can carry several: the AI Ready hero pools
 // behind its heading and again behind its illustration, and `true` on its own
 // still means one centred pool.
+/**
+ * A band by the name the design calls it, expanded into what the builder takes.
+ *
+ * The builder's own names are semantic tokens, and between them and a colour
+ * scheme they do not say what colour you get: `base` is the cream band and the
+ * near-black one, decided by a second field. That is why every dark band in
+ * the content carried three keys that had to agree — `base`, `dark`, `true` —
+ * and why an editor was being shown two fields whose only correct setting
+ * followed from a third.
+ *
+ * So a section may name its band instead, and the token, the scheme and the
+ * lock all follow. The tokens still work as they always did, for anything
+ * reaching past this.
+ *
+ * Every named band locks. There is no dark mode on this site, so an unlocked
+ * band follows a page theme that never changes, and the one thing that would
+ * flip it is the thing we do not ship.
+ */
+const BANDS = {
+  "light-sand": { token: "base", scheme: "light" },   // #FFFCF3
+  sand: { token: "surface", scheme: "light" },        // #FBF6E9
+  "dark-sand": { token: "muted", scheme: "light" },   // #EBE1C9
+  dark: { token: "base", scheme: "dark" },            // #1D1B17
+  // Light, not dark, which looks wrong and is not. A brand band colours its
+  // own text from `--color-text-on-brand`, which is white under either scheme,
+  // so the scheme decides everything *except* the thing it looks like it
+  // decides. The three Pacific bands already on the site run light and are
+  // right; a dark one would re-theme their buttons, cards and rules for no
+  // visible gain.
+  pacific: { token: "brand", scheme: "light" },       // #034AD8
+};
+const band = BANDS[backgroundColor];
+const bandToken = band ? band.token : backgroundColor;
+const bandScheme = band ? band.scheme : colorScheme;
+const bandLock = band ? true : lockColorScheme;
+
 const hazePools = haze === true ? [{}] : Array.isArray(haze) ? haze : haze ? [haze] : [];
 
 /**
@@ -79,7 +115,7 @@ const HAZE_COLOR = {
   brand: "var(--color-bg-brand)",
   highlight: "var(--color-bg-highlight)",
 };
-const hazeColor = HAZE_COLOR[backgroundColor];
+const hazeColor = HAZE_COLOR[bandToken];
 
 // Held in place while the page scrolls past. For an image that is parallax,
 // which is what this was written for; for a colour or a pattern it is the band
@@ -120,8 +156,8 @@ const arrayDataAttributes =
       usesFixedBackground && "background-fixed",
       mask !== "none" && `background-mask-${mask}`,
     ]}
-    data-theme={colorScheme && colorScheme !== "inherit" ? colorScheme : undefined}
-    data-theme-lock={lockColorScheme || undefined}
+    data-theme={bandScheme && bandScheme !== "inherit" ? bandScheme : undefined}
+    data-theme-lock={bandLock || undefined}
   >
     {bgType === "image" && (
       <Image
@@ -165,8 +201,8 @@ const arrayDataAttributes =
         }}
       />
     )}
-    {backgroundColor && (
-      <div class:list={["background", backgroundColor && `bg-${backgroundColor}`]} />
+    {bandToken && (
+      <div class:list={["background", bandToken && `bg-${bandToken}`]} />
     )}
     {hazePools.map((pool) => (
       <div

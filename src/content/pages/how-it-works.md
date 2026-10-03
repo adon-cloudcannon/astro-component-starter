@@ -10,6 +10,5 @@ pageSections:
     subtext: How CloudCannon keeps your site in Git and gives content teams a visual interface.
     showBreadcrumbs: true
     alignmentHorizontal: start
-    colorScheme: inherit
-    backgroundColor: base
+    backgroundColor: light-sand
 ---

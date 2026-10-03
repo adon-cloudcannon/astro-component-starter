@@ -10,6 +10,5 @@ pageSections:
     subtext: Find a partner to build your site.
     showBreadcrumbs: true
     alignmentHorizontal: start
-    colorScheme: inherit
-    backgroundColor: base
+    backgroundColor: light-sand
 ---

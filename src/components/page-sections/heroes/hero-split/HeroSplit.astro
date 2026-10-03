@@ -49,11 +49,10 @@ const {
   /**
    * The band's colour, by the name the design calls it.
    *
-   * The builder underneath takes a semantic token and a colour scheme, and
-   * between them they do not say what colour you get: `base` is the cream band
-   * and the near-black one, depending on a second field. So the section takes
-   * one name and expands it, and `CustomSection` carries on taking exactly
-   * what it took before.
+   * Passed straight down: the builder knows the names now, and expands each
+   * one into the token, the scheme and the lock. This used to be a table here,
+   * which was the right shape in the wrong place, since every other section
+   * needed it too.
    */
   backgroundColor = "light-sand",
   /**
@@ -87,22 +86,6 @@ const {
   ...htmlAttributes
 } = Astro.props;
 
-/**
- * Each band, as the token and scheme the builder wants.
- *
- * Every one locks: there is no dark mode on this site, so an unlocked band
- * follows a page theme that never changes, and the one thing that would flip
- * it is the thing we do not ship.
- */
-const BANDS = {
-  "light-sand": { token: "base", scheme: "light" },   // #FFFCF3
-  sand: { token: "surface", scheme: "light" },        // #FBF6E9
-  "dark-sand": { token: "muted", scheme: "light" },   // #EBE1C9
-  dark: { token: "base", scheme: "dark" },            // #1D1B17
-  pacific: { token: "brand", scheme: "dark" },        // #034AD8
-};
-
-const band = BANDS[backgroundColor] ?? BANDS["light-sand"];
 
 /**
  * The pattern, as the builder's own background object.
@@ -145,9 +128,7 @@ const imagePositionVertical = imageBleed ? "top" : "center";
   maxContentWidth={maxContentWidth}
   paddingHorizontal={paddingHorizontal}
   paddingVertical={paddingVertical}
-  colorScheme={band.scheme}
-  lockColorScheme={true}
-  backgroundColor={band.token}
+  backgroundColor={backgroundColor}
   background={backgroundPattern}
   haze={haze ? [hazePool] : false}
   class:list={["hero-split", className]}

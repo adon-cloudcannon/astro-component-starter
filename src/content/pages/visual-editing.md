@@ -32,7 +32,7 @@ pageSections:
   - _component: page-sections/explainers/editor-demo
     eyebrow: INTERACTIVE DEMO
     heading: Try it out, and see if it’s right for you and your team.
-    backgroundColor: base
+    backgroundColor: light-sand
     alignmentHorizontal: center
     headingSize: lg
   - _component: page-sections/proof/testimonial-quote
@@ -50,7 +50,7 @@ pageSections:
         authorImageAlt: Alex Murray
         linkText: Read case study
         accentColor: sunset
-    backgroundColor: surface
+    backgroundColor: sand
     background:
       type: pattern
       pattern: pegboard
@@ -58,7 +58,7 @@ pageSections:
   - _component: page-sections/conversion/cta-center
     heading: Here, you don’t need to wait to make changes
     subtext: When something on the site needs updating, the person who noticed can just fix it.
-    backgroundColor: base
+    backgroundColor: light-sand
     subtextSize: xl
     subtextWidth: 580
     headingSize: lg
@@ -120,7 +120,7 @@ pageSections:
       rearrange. Editors get room to work, and nobody can break a layout by accident.
     subtextSize: lg
     imageSource: /src/assets/images/marketing/rectangle-856-3806-72794.png
-    backgroundColor: surface
+    backgroundColor: sand
     subtextWidth: 646
     headingSize: lg
   - _component: page-sections/explainers/feature-split
@@ -129,7 +129,7 @@ pageSections:
       Make changes on a branch and share a hosted preview with whoever needs to see it first.
       Publish once it's approved, or schedule it to go live later.
     subtextSize: lg
-    backgroundColor: base
+    backgroundColor: light-sand
     headingSize: lg
     buttonSections:
       - _component: building-blocks/core-elements/button
@@ -189,5 +189,5 @@ pageSections:
       type: pattern
       pattern: pegboard
       mask: none
-    backgroundColor: surface
+    backgroundColor: sand
 ---

@@ -34,9 +34,7 @@ value:
   maxContentWidth: xl
   paddingHorizontal: gutter
   paddingVertical: 4xl
-  colorScheme: inherit
-  lockColorScheme: false
-  backgroundColor: base
+  backgroundColor: light-sand
   background:
     type: image
     imageSource: ""
@@ -76,8 +74,6 @@ groups:
   - heading: Section settings
     inputs:
       - sectionLabel
-      - colorScheme
-      - lockColorScheme
       - backgroundColor
       - background
       - haze

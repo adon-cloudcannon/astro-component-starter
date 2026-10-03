@@ -149,6 +149,11 @@ paddingVertical:
       - id: 6xl
         name: 6xl
 colorScheme:
+  hidden: true
+  # Carried by the band colour. Every band the design draws names its own ink,
+  # and `base` on its own does not say whether you get the cream band or the
+  # near-black one — which is why this and the lock had to agree with a third
+  # field on every dark section.
   type: select
   comment: Light or dark scheme for the section. Inherit follows the page.
   options:
@@ -160,25 +165,49 @@ colorScheme:
       - id: dark
         name: Dark
 lockColorScheme:
+  hidden: true
+  # Carried by the band colour: every named band locks, because there is no
+  # dark mode here for an unlocked one to follow.
   type: switch
   label: Lock color scheme
   comment: Ignores the site theme toggle. Only applies when Color Scheme is Light or Dark.
 backgroundColor:
   type: select
-  comment: Background color for the section.
+  label: Band colour
+  comment: The colour this band is painted, and the ink that goes with it.
   options:
     values:
       - id: none
         name: None
-      - id: base
-        name: Base
-      - id: surface
-        name: Surface
-      - id: accent
-        name: Accent
-      - id: highlight
-        name: Highlight
-
+        swatch: check_box_outline_blank
+      - id: light-sand
+        name: Light sand
+        swatch: square
+        color: "#FFFCF3"
+      - id: sand
+        name: Sand
+        swatch: square
+        color: "#FBF6E9"
+      - id: dark-sand
+        name: Dark sand
+        swatch: square
+        color: "#EBE1C9"
+      - id: dark
+        name: Dark
+        swatch: square
+        color: "#1D1B17"
+      - id: pacific
+        name: Pacific
+        swatch: square
+        color: "#034AD8"
+    picker_view: card
+    preview:
+      icon:
+        - key: swatch
+      icon_color:
+        - key: color
+      text:
+        - key: name
 logoAspect:
   type: text
   comment: >-

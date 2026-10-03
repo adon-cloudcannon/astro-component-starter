@@ -27,7 +27,7 @@ pageSections:
     pattern: grid
     haze: true
   - _component: page-sections/proof/logo-cloud
-    backgroundColor: surface
+    backgroundColor: sand
     logos:
       - image: /src/assets/images/marketing/logos/twitch.svg
         alt: Twitch
@@ -82,9 +82,7 @@ pageSections:
         company: Insight Creative, Inc
         linkText: Read case study
         accentColor: sunset
-    backgroundColor: base
-    colorScheme: dark
-    lockColorScheme: true
+    backgroundColor: dark
     haze:
       - x: 0.4975
         rx: 938px
@@ -96,9 +94,7 @@ pageSections:
     subtext: >-
       Whether it's three client sites or three hundred, another site is another repo. The
       maintenance doesn't come with it.
-    backgroundColor: base
-    colorScheme: dark
-    lockColorScheme: true
+    backgroundColor: dark
     subtextSize: lg
     subtextWidth: 580
     headingSize: lg
@@ -121,9 +117,7 @@ pageSections:
         body: Branch it, review it, roll it back.
         accentColor: golden
         iconName: command-line
-    backgroundColor: base
-    colorScheme: dark
-    lockColorScheme: true
+    backgroundColor: dark
   - _component: page-sections/explainers/pinned-steps
     heading: ''
     subtext: ''
@@ -138,9 +132,7 @@ pageSections:
       pattern: grid
       mask: fade
       fixed: true
-    backgroundColor: base
-    colorScheme: dark
-    lockColorScheme: true
+    backgroundColor: dark
     steps:
       - contentSections:
           - _component: building-blocks/core-elements/simple-text
@@ -224,7 +216,7 @@ pageSections:
         authorImage: /src/assets/images/marketing/ellipse-288.jpg
         authorImageAlt: Alexander Luttringer
         accentColor: pacific
-    backgroundColor: surface
+    backgroundColor: sand
     background:
       type: pattern
       pattern: pegboard
@@ -236,7 +228,7 @@ pageSections:
       you're stuck.
     subtextSize: lg
     imageSource: /src/assets/images/marketing/ribbon-01-1.png
-    backgroundColor: base
+    backgroundColor: light-sand
     subtextWidth: 579
     headingSize: lg
     buttonSections:
@@ -279,7 +271,7 @@ pageSections:
     heading: Fits the way you already build
     subtext: Connect your repo, keep your tooling, and add a visual editor on top.
     subtextSize: lg
-    backgroundColor: base
+    backgroundColor: light-sand
     subtextWidth: 580
     cardHeight: 334
     headingSize: lg
@@ -292,7 +284,7 @@ pageSections:
       free in minutes, or book a demo and we’ll walk you through the real thing.
     subtextSize: lg
     imageSource: /src/assets/images/marketing/cloudcannon-truck-closed-1.png
-    backgroundColor: brand
+    backgroundColor: pacific
     headingSize: lg
     imageOverflow: 334
     buttonSections:

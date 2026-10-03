@@ -27,7 +27,7 @@ pageSections:
     pattern: grid
     haze: false
   - _component: page-sections/proof/logo-cloud
-    backgroundColor: surface
+    backgroundColor: sand
     logos:
       - image: /src/assets/images/marketing/logos/twitch.svg
         alt: Twitch
@@ -68,7 +68,7 @@ pageSections:
       through the demo.
     subtextSize: lg
     imageSource: /src/assets/images/marketing/screenshot-2026-08-11-at-17-25-56-1.png
-    backgroundColor: base
+    backgroundColor: light-sand
     subtextWidth: 612
     headingSize: lg
   - _component: page-sections/explainers/pinned-steps
@@ -82,9 +82,7 @@ pageSections:
     mediaWidth: wide
     progressColor: sunset
     progressTrackColor: midnight
-    backgroundColor: base
-    colorScheme: dark
-    lockColorScheme: true
+    backgroundColor: dark
     steps:
       - contentSections:
           - _component: building-blocks/core-elements/heading
@@ -165,16 +163,14 @@ pageSections:
     eyebrow: SUCCESS STORIES
     heading: What clients are saying
     headingSize: md
-    backgroundColor: base
-    colorScheme: dark
-    lockColorScheme: true
+    backgroundColor: dark
     background:
       type: pattern
       pattern: grid
       mask: fade
   - _component: page-sections/conversion/cta-center
     heading: The tool you’ve been looking for
-    backgroundColor: base
+    backgroundColor: light-sand
     headingSize: lg
   - _component: page-sections/explainers/pinned-steps
     heading: ''
@@ -250,7 +246,7 @@ pageSections:
       leave CloudCannon, you leave with everything: your content, your code, your commits.
     subtextSize: lg
     imageSource: /src/assets/images/marketing/ribbon-01-1.png
-    backgroundColor: base
+    backgroundColor: light-sand
     subtextWidth: 816
     headingSize: lg
     buttonSections:
@@ -268,7 +264,7 @@ pageSections:
       type: pattern
       pattern: grid
       mask: none
-    backgroundColor: surface
+    backgroundColor: sand
     haze:
       - x: 0.1923
         rx: 399px
@@ -294,7 +290,7 @@ pageSections:
       We're a small team with a lot of knowledge, so you'll talk to someone who knows what they're
       talking about and can give you hands-on help whatever the problem.
     subtextSize: lg
-    backgroundColor: base
+    backgroundColor: light-sand
     subtextWidth: 489
     headingSize: lg
     buttonSections:

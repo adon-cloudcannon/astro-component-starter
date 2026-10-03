@@ -255,12 +255,6 @@ haze:
     Pools the band's own colour behind the copy and blurs it, so the heading
     stays readable where the pattern runs under it. Where it sits and how big
     it is follow the copy column.
-background:
-  hidden: true
-  # The hero writes this itself from `pattern`. An image or a video behind a
-  # hero is not something the design does, and the focal point, fade, overlay
-  # and tile size underneath are the builder's, not an editor's.
-  type: object
 backgroundColor:
   type: select
   label: Band colour

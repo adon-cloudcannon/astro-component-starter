@@ -10,6 +10,5 @@ pageSections:
     subtext: Get the details you need.
     showBreadcrumbs: true
     alignmentHorizontal: start
-    colorScheme: inherit
-    backgroundColor: base
+    backgroundColor: light-sand
 ---

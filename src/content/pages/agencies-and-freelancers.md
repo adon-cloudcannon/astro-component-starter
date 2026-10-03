@@ -27,7 +27,7 @@ pageSections:
     pattern: grid
     haze: true
   - _component: page-sections/proof/logo-cloud
-    backgroundColor: surface
+    backgroundColor: sand
     logos:
       - image: /src/assets/images/marketing/logos/twitch.svg
         alt: Twitch
@@ -93,7 +93,7 @@ pageSections:
       type: pattern
       pattern: pegboard
       mask: fade
-    backgroundColor: base
+    backgroundColor: light-sand
     haze:
       - x: 0.4951
         rx: 531px
@@ -127,10 +127,10 @@ pageSections:
             iconPosition: after
             textColor: sunset
             text: Learn more
-    backgroundColor: base
+    backgroundColor: light-sand
   - _component: page-sections/builders/custom-section
     contentSections: []
-    backgroundColor: base
+    backgroundColor: light-sand
   - _component: page-sections/explainers/feature-split
     buttonSections:
       - _component: building-blocks/core-elements/button
@@ -145,7 +145,7 @@ pageSections:
       Clients own their content outright. It lives in their repo as files, not locked in a database.
       They’re never tied to a platform, and neither are you.
     subtextSize: lg
-    backgroundColor: base
+    backgroundColor: light-sand
     headingSize: sm
     background:
       type: pattern
@@ -164,9 +164,7 @@ pageSections:
     eyebrow: ''
     reverse: true
     mediaWidth: wide
-    backgroundColor: base
-    colorScheme: dark
-    lockColorScheme: true
+    backgroundColor: dark
     background:
       type: pattern
       pattern: grid
@@ -225,7 +223,7 @@ pageSections:
     heading: Join a Partner Program that rewards good work
     subtext: As you bring in new clients, you’ll gain points and more benefits.
     subtextSize: lg
-    backgroundColor: base
+    backgroundColor: light-sand
     alignmentHorizontal: center
     headingSize: lg
     buttonSections:

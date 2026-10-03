@@ -10,6 +10,5 @@ pageSections:
     subtext: Get help from our team fast.
     showBreadcrumbs: true
     alignmentHorizontal: start
-    colorScheme: inherit
-    backgroundColor: base
+    backgroundColor: light-sand
 ---

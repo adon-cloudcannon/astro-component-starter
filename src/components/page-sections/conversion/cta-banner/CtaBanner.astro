@@ -31,7 +31,7 @@ const {
   paddingVertical = "2xl",
   colorScheme = "inherit",
   lockColorScheme = true,
-  backgroundColor = "brand",
+  backgroundColor = "pacific",
   /**
    * Draws the band's scratched sheet in this colour instead of loading one.
    *
@@ -47,6 +47,21 @@ const {
   _component,
   ...htmlAttributes
 } = Astro.props;
+
+/**
+ * The ink on a scratched band, from the sheet it is scratched in.
+ *
+ * A scratch paints the band itself, so `backgroundColor` goes to `none` and
+ * the builder has no token to read a scheme off. That left the scheme as a
+ * field the page had to set by hand, and it is not a choice: the sheet is
+ * either dark enough to need light text or it is not.
+ *
+ * Listed rather than computed, because a scratch may be any palette name or a
+ * literal hex, and guessing at the luminance of a hex is how a settled text
+ * link turns back into a pill.
+ */
+const DARK_SCRATCH = new Set(["pacific", "kiwi", "moss", "sunset", "black", "midnight", "earth"]);
+const scratchScheme = DARK_SCRATCH.has(String(scratch).toLowerCase()) ? "dark" : "light";
 ---
 
 <CustomSection
@@ -63,8 +78,8 @@ const {
   maxContentWidth={maxContentWidth}
   paddingHorizontal={paddingHorizontal}
   paddingVertical={paddingVertical}
-  colorScheme={colorScheme}
-  lockColorScheme={lockColorScheme}
+  colorScheme={scratch ? scratchScheme : colorScheme}
+  lockColorScheme={scratch ? true : lockColorScheme}
   backgroundColor={scratch ? "none" : backgroundColor}
   background={background}
   haze={haze}

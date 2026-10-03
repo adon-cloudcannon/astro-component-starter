@@ -27,7 +27,7 @@ pageSections:
     pattern: grid
     haze: true
   - _component: page-sections/proof/logo-cloud
-    backgroundColor: surface
+    backgroundColor: sand
     logos:
       - image: /src/assets/images/marketing/logos/twitch.svg
         alt: Twitch
@@ -129,7 +129,7 @@ pageSections:
     heading: Built for how large teams actually work
     subtext: Benefit from more uptime, faster sites, better SEO, enterprise- grade security, and more.
     subtextSize: lg
-    backgroundColor: base
+    backgroundColor: light-sand
     subtextWidth: 580
     alignmentHorizontal: center
     cardHeight: 334
@@ -138,9 +138,7 @@ pageSections:
     heading: Grow your sites, not your headcount.
     subtext: From fast-moving startups to multi-site agencies, teams ship more with CloudCannon.
     subtextSize: lg
-    backgroundColor: base
-    colorScheme: dark
-    lockColorScheme: true
+    backgroundColor: dark
     subtextWidth: 560
     headingSize: lg
     stories:
@@ -253,7 +251,7 @@ pageSections:
       Git underneath, a visual editor on top, with code and content running on one engine. Start
       free in minutes, or book a demo and we’ll walk you through the real thing.
     subtextSize: lg
-    backgroundColor: base
+    backgroundColor: light-sand
     subtextWidth: 489
     headingSize: lg
     buttonSections:

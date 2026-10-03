@@ -10,6 +10,5 @@ pageSections:
     subtext: The teams CloudCannon is built for, from agencies to enterprise.
     showBreadcrumbs: true
     alignmentHorizontal: start
-    colorScheme: inherit
-    backgroundColor: base
+    backgroundColor: light-sand
 ---

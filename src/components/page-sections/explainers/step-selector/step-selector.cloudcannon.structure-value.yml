@@ -6,7 +6,7 @@ value:
   heading: ""
   subtext: ""
   items: []
-  backgroundColor: base
+  backgroundColor: light-sand
 _inputs:
   $:
     preview:

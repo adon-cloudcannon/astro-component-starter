@@ -27,9 +27,7 @@ value:
   maxContentWidth: xl
   paddingHorizontal: gutter
   paddingVertical: 4xl
-  colorScheme: inherit
-  lockColorScheme: false
-  backgroundColor: base
+  backgroundColor: light-sand
   background:
     type: image
     imageSource: ""
@@ -120,8 +118,6 @@ groups:
       - maxContentWidth
       - paddingHorizontal
       - paddingVertical
-      - colorScheme
-      - lockColorScheme
       - backgroundColor
       - background
       - haze

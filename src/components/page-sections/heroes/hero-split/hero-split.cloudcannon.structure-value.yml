@@ -37,8 +37,6 @@ value:
   maxContentWidth: xl
   paddingHorizontal: gutter
   paddingVertical: 4xl
-  colorScheme: inherit
-  lockColorScheme: false
   backgroundColor: light-sand
   pattern: grid
   haze: true

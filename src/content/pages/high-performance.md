@@ -32,10 +32,10 @@ pageSections:
     haze: true
   - _component: page-sections/conversion/cta-center
     heading: High speed whether you have 10 visitors or 10 million
-    backgroundColor: base
+    backgroundColor: light-sand
     headingSize: lg
   - _component: page-sections/explainers/pinned-steps
-    backgroundColor: surface
+    backgroundColor: sand
     heading: ''
     subtext: ''
     eyebrow: ''
@@ -155,9 +155,7 @@ pageSections:
     eyebrow: SUCCESS STORIES
     heading: What clients are saying
     headingSize: md
-    backgroundColor: base
-    colorScheme: dark
-    lockColorScheme: true
+    backgroundColor: dark
     background:
       type: pattern
       pattern: grid
@@ -175,7 +173,7 @@ pageSections:
       type: pattern
       pattern: pegboard
       mask: none
-    backgroundColor: surface
+    backgroundColor: sand
     buttonSections:
       - _component: building-blocks/core-elements/button
         variant: primary
