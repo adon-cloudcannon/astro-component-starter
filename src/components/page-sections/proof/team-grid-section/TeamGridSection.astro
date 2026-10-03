@@ -53,11 +53,28 @@ const {
 } = Astro.props;
 
 const list: Member[] = Array.isArray(members) ? members : [];
+const laneCount = Math.max(1, Number(columns) || 1);
 
-// Dealt round the columns rather than split down the middle, so a column is
-// never left short when the count does not divide evenly.
-const lanes: Member[][] = Array.from({ length: Math.max(1, columns) }, () => []);
-list.forEach((member, index) => lanes[index % lanes.length].push(member));
+/**
+ * Laid out in the order they are written, never dealt into lanes.
+ *
+ * The cards used to be pushed round the columns and rendered lane by lane,
+ * which put six members into the DOM as 1, 3, 5, 2, 4, 6. A row-major grid
+ * reaches the same picture from the order they are written, because it
+ * already sends items 1, 3 and 5 down the left column.
+ *
+ * The reorder is what broke CloudCannon. The wall is `data-editable="array"`
+ * and each card an `array-item`, and the editor maps those children onto
+ * `members` by walking them in DOM order, so it wrote the second member's
+ * name, role and portrait onto the third member's card. The panel colour is
+ * an inline custom property rather than a bound prop, so it stayed where it
+ * was drawn and the two came apart: Mike's name on Olivia's Pacific panel.
+ * The first and last cards sit at the same index in both orders, which is
+ * why the ends looked right.
+ *
+ * Nothing may reorder this list. A card's place is its index.
+ */
+const offsetAt = (index: number) => (index % laneCount) % 2 === 1;
 ---
 
 <CustomSection
@@ -112,17 +129,14 @@ list.forEach((member, index) => lanes[index % lanes.length].push(member));
     data-editable="array"
     data-prop={useDefaultEditableBinding ? "members" : undefined}
   >
-    <div class="team-grid-lanes">
-      {lanes.map((lane) => (
-        <div class="team-grid-lane">
-        {lane.map((member) => (
-          <TeamMember
-            data-editable="array-item"
-            data-id="building-blocks/wrappers/team-member"
-            {...member}
-          />
-          ))}
-        </div>
+    <div class="team-grid-lanes" style={`--team-grid-lanes: ${laneCount}`}>
+      {list.map((member, index) => (
+        <TeamMember
+          class:list={[offsetAt(index) && "is-offset"]}
+          data-editable="array-item"
+          data-id="building-blocks/wrappers/team-member"
+          {...member}
+        />
       ))}
     </div>
   </div>
@@ -183,26 +197,28 @@ list.forEach((member, index) => lanes[index % lanes.length].push(member));
       position: relative;
     }
 
+    /* One grid, filled in the order the cards are written. Row-major puts the
+       odd ones down the first column on its own, which is what the lanes were
+       doing by hand. */
     .team-grid .team-grid-lanes {
       display: grid;
       gap: 1rem;
-      grid-auto-columns: minmax(0, 1fr);
-      grid-auto-flow: column;
+      grid-template-columns: repeat(var(--team-grid-lanes, 2), minmax(0, 1fr));
       inset-block-start: 0;
       inset-inline: 0;
       position: absolute;
     }
 
-    .team-grid .team-grid-lane {
-      display: flex;
-      flex-direction: column;
-      gap: 1rem;
-    }
-
     /* Every other column starts half a card further down, which is the offset
-       the design draws between them. */
-    .team-grid .team-grid-lane:nth-child(even) {
-      margin-block-start: -7.6875rem;
+       the design draws between them.
+
+       A translate, not a margin: the cards all share the 410/412 ratio, so
+       lifting each card in those columns by half a card is the same picture
+       as lifting the whole column, and it leaves the grid's own rows where
+       they are. The wall is out of flow and clipped, so the height it reports
+       is not load-bearing either way. */
+    .team-grid .team-grid-lanes > .is-offset {
+      translate: 0 -7.6875rem;
     }
   }
 
@@ -217,8 +233,8 @@ list.forEach((member, index) => lanes[index % lanes.length].push(member));
         row-gap: var(--spacing-2xl);
       }
 
-      .team-grid .team-grid-lane:nth-child(even) {
-        margin-block-start: 0;
+      .team-grid .team-grid-lanes > .is-offset {
+        translate: none;
       }
 
       .team-grid .team-grid-lanes {
