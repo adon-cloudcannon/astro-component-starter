@@ -73,10 +73,17 @@ const tone = panelColour
 
 <div
   class:list={["team-member", className]}
-  style={tone}
   {...htmlAttributes}
 >
-  <div class="team-member-panel scratched">
+  {/* The colour is on the panel, not on the member.
+
+      It was an inline style on the root, and the root is where this component
+      is placed as an array item: CloudCannon keeps a region's root element and
+      swaps only its contents, so picking a panel colour saved the value and
+      repainted nothing until a reload. Both readers are this element anyway,
+      its own `background-color` and `.scratched`'s fill, so there was never a
+      reason for it to sit higher. */}
+  <div class="team-member-panel scratched" style={tone}>
     {imageSource && (
       <Image
         class="team-member-portrait"
