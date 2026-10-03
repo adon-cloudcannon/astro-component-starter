@@ -17,19 +17,24 @@ tone:
     values:
       - id: golden
         name: Golden
-        preview:
-          icon: square
-          icon_color: "#E4A831"
+        swatch: square
+        color: "#E4A831"
       - id: coral
         name: Coral
-        preview:
-          icon: square
-          icon_color: "#E98057"
+        swatch: square
+        color: "#E98057"
       - id: rust
         name: Rust
-        preview:
-          icon: square
-          icon_color: "#D06522"
+        swatch: square
+        color: "#D06522"
+    picker_view: card
+    preview:
+      icon:
+        - key: swatch
+      icon_color:
+        - key: color
+      text:
+        - key: name
 x:
   type: number
   comment: Distance from the left of the pile, in design units.

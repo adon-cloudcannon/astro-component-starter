@@ -24,38 +24,39 @@ accentColor:
     values:
       - id: none
         name: Default
-        preview:
-          icon: check_box_outline_blank
+        swatch: check_box_outline_blank
       - id: moss
         name: Moss
-        preview:
-          icon: square
-          icon_color: "#687E00"
+        swatch: square
+        color: "#687E00"
       - id: pacific
         name: Pacific
-        preview:
-          icon: square
-          icon_color: "#034AD8"
+        swatch: square
+        color: "#034AD8"
       - id: sunset
         name: Sunset
-        preview:
-          icon: square
-          icon_color: "#D85A2C"
+        swatch: square
+        color: "#D85A2C"
       - id: golden
         name: Golden
-        preview:
-          icon: square
-          icon_color: "#FFAA00"
+        swatch: square
+        color: "#FFAA00"
       - id: peachy
         name: Peachy
-        preview:
-          icon: square
-          icon_color: "#F39B7B"
+        swatch: square
+        color: "#F39B7B"
       - id: harbour
         name: Harbour
-        preview:
-          icon: square
-          icon_color: "#A6C1FA"
+        swatch: square
+        color: "#A6C1FA"
+    picker_view: card
+    preview:
+      icon:
+        - key: swatch
+      icon_color:
+        - key: color
+      text:
+        - key: name
 text:
   type: markdown
   comment: The testimonial quote text.

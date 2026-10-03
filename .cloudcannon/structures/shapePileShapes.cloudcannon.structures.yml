@@ -32,13 +32,22 @@ shapePileShapes:
             values:
               - id: golden
                 name: Golden
-                preview:
-                  icon: square
-                  icon_color: "#FFAA00"
+                swatch: square
+                color: "#FFAA00"
               - id: coral
                 name: Coral
+                swatch: check_box_outline_blank
               - id: rust
                 name: Rust
+                swatch: check_box_outline_blank
+            picker_view: card
+            preview:
+              icon:
+                - key: swatch
+              icon_color:
+                - key: color
+              text:
+                - key: name
         x:
           type: number
           comment: Distance from the left of the pile, in design units.
