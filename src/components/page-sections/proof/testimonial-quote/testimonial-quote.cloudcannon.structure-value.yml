@@ -129,19 +129,19 @@ _structures:
                   name: None
                   swatch: check_box_outline_blank
                 - id: sunset
-                  name: Sunset (orange)
+                  name: Sunset
                   swatch: square
                   color: "#D85A2C"
                 - id: golden
-                  name: Golden (yellow)
+                  name: Golden
                   swatch: square
                   color: "#FFAA00"
                 - id: pacific
-                  name: Pacific (blue)
+                  name: Pacific
                   swatch: square
                   color: "#034AD8"
                 - id: moss
-                  name: Moss (green)
+                  name: Moss
                   swatch: square
                   color: "#687E00"
                 - id: peachy
@@ -149,11 +149,11 @@ _structures:
                   swatch: square
                   color: "#F39B7B"
                 - id: harbour
-                  name: Harbour (pale blue)
+                  name: Harbour
                   swatch: square
                   color: "#A6C1FA"
                 - id: blush
-                  name: Blush (pink)
+                  name: Blush
                   swatch: square
                   color: "#E7B0B9"
               picker_view: card
