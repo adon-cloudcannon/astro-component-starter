@@ -27,6 +27,21 @@ const {
   /** The lizard, the telephone, whatever is keeping them company. */
   propSource = "",
   propAlt = "",
+  /**
+   * How wide the drawing is, as a share of the panel.
+   *
+   * There was one box at 48% for every embellishment, and the drawing inside
+   * it came out whatever size its file's transparent padding left over. That
+   * is what the design does, but only because it is painting the padded
+   * uploads: the cocktail's file is 64% artwork so it drew at 31% of the
+   * panel, the telephone's is 98% so it drew at 47%. Two numbers nobody chose.
+   *
+   * The drawings are trimmed now, so a width is the width of the drawing. The
+   * design's own two are 31.1% and 46.5%, measured off the panel and the prop
+   * box on Low Maintenance and Enterprise, and they are set per instance. The
+   * default is for a drawing nobody has sized yet.
+   */
+  propWidth = 40,
   class: className,
   useDefaultEditableBinding = false,
   _component,
@@ -101,6 +116,7 @@ const tone = panelColour
       class="team-member-prop"
       source={propSource}
       alt={propAlt}
+      style={`--team-member-prop-width: ${Number(propWidth) || 40}%`}
       data-prop-src="propSource"
       data-prop-alt="propAlt"
     />
@@ -198,13 +214,20 @@ const tone = panelColour
       line-height: 1.23;
     }
 
-    /* The prop overhangs the bottom-right corner, over the badge. */
+    /* The prop overhangs the bottom-right corner, over the badge.
+
+       The overhang is the design's, measured as a share of the panel rather
+       than of the drawing, so it holds whatever size the drawing is: the
+       cocktail clears the right edge by 14.8% of its panel and the telephone
+       by 14.2%, which is one number. Below, 6.6% and 3.9%, which is near
+       enough one too. Taken off the drawing instead, a wide one would sit
+       further out than a narrow one for no reason anybody chose. */
     .team-member .team-member-prop {
-      inset-block-end: -3%;
-      inset-inline-end: -12%;
+      inset-block-end: -5%;
+      inset-inline-end: -14.5%;
       margin: 0;
       position: absolute;
-      inline-size: 48%;
+      inline-size: var(--team-member-prop-width, 40%);
       z-index: var(--layer-2);
     }
 

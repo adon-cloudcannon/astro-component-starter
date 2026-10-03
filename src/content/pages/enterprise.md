@@ -252,7 +252,8 @@ pageSections:
       imageSource: /src/assets/images/marketing/container-5-3806-73607-2.png
       imageAlt: Olivia Nicholson, Head of Content at CloudCannon
       backgroundColor: pacific
-      propSource: /src/assets/images/marketing/phone-01-1.png
+      propSource: /src/assets/images/embellishments/telephone.png
+      propWidth: 47
       propAlt: ''
     heading: Real humans on support, always
     subtext: >-

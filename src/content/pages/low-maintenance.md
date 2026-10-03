@@ -263,7 +263,8 @@ pageSections:
       imageSource: /src/assets/images/marketing/container-9-3806-70538.png
       imageAlt: Tom Richardson, Solutions Architect at CloudCannon
       backgroundColor: golden
-      propSource: /src/assets/images/marketing/hero-lowmaintenance-01-1-2-3806-70539.png
+      propSource: /src/assets/images/embellishments/cocktail.png
+      propWidth: 31
       propAlt: ''
     heading: A CMS to build, not babysit
     subtext: >-

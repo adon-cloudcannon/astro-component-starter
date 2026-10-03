@@ -74,16 +74,17 @@ propSource:
   # reads, so nothing authored had to move and there is no name-to-file table
   # to keep in step.
   #
-  # `thumb` is a separate picture, trimmed to its artwork and capped at 320px,
-  # under .cloudcannon/previews. The drawings carry a lot of transparent
-  # padding, from 37% artwork on the alarm clock to 100% on the hosting one,
-  # and in a picker that reads as some of them being drawn tiny. The padding
-  # cannot come out of the files themselves: the design paints each one into a
-  # box 48% of the panel's width, 177 of 366 on Low Maintenance and 195 of 410
-  # on Enterprise, and sizes the drawing inside that box by how much padding
-  # its file carries. Trimmed, every one would fill 48%, and the cocktail would
-  # come out half again larger than the design draws it. So the file renders as
-  # it always has and only the picker sees a trimmed copy.
+  # The drawings are trimmed to their own artwork, under
+  # src/assets/images/embellishments, cut from the uploads rather than drawn
+  # again. The uploads carry a lot of transparent padding, from 37% artwork on
+  # the alarm clock to 100% on the hosting one, and they keep it: a dozen of
+  # the Tier 3 boxes in the design frame the padded file, so the pages that
+  # draw these in a feature grid still want them as they are. Only the corner
+  # of a panel wants them trimmed, where padding is the difference between a
+  # drawing that fills its box and one adrift in the middle of it.
+  #
+  # Trimmed, `embellishmentWidth` means what it says: the width of the drawing,
+  # not of a box with a drawing somewhere inside it.
   #
   # The gallery view is what gives the picker somewhere to draw it.
   comment: A spot illustration propped on the bottom-right corner of the panel.
@@ -92,51 +93,51 @@ propSource:
       - id: ""
         name: None
         icon: check_box_outline_blank
-      - id: /src/assets/images/marketing/ai-2-1.png
+      - id: /src/assets/images/embellishments/ai.png
         name: AI
-        thumb: .cloudcannon/previews/embellishments/ai.png
-      - id: /src/assets/images/marketing/extended-trial-1.png
+        thumb: src/assets/images/embellishments/ai.png
+      - id: /src/assets/images/embellishments/alarm-clock.png
         name: Alarm clock
-        thumb: .cloudcannon/previews/embellishments/alarm-clock.png
-      - id: /src/assets/images/marketing/api-1.png
+        thumb: src/assets/images/embellishments/alarm-clock.png
+      - id: /src/assets/images/embellishments/api.png
         name: API
-        thumb: .cloudcannon/previews/embellishments/api.png
-      - id: /src/assets/images/marketing/hero-lowmaintenance-01-1-2-3806-70539.png
+        thumb: src/assets/images/embellishments/api.png
+      - id: /src/assets/images/embellishments/cocktail.png
         name: Cocktail
-        thumb: .cloudcannon/previews/embellishments/cocktail.png
-      - id: /src/assets/images/marketing/globe-1-I3806-70251-3743-54504.png
+        thumb: src/assets/images/embellishments/cocktail.png
+      - id: /src/assets/images/embellishments/globe.png
         name: Globe
-        thumb: .cloudcannon/previews/embellishments/globe.png
-      - id: /src/assets/images/marketing/hosting.png
+        thumb: src/assets/images/embellishments/globe.png
+      - id: /src/assets/images/embellishments/hosting.png
         name: Hosting
-        thumb: .cloudcannon/previews/embellishments/hosting.png
-      - id: /src/assets/images/marketing/attract-1.png
+        thumb: src/assets/images/embellishments/hosting.png
+      - id: /src/assets/images/embellishments/magnet.png
         name: Magnet
-        thumb: .cloudcannon/previews/embellishments/magnet.png
-      - id: /src/assets/images/marketing/layer-25-1-3806-71332.png
+        thumb: src/assets/images/embellishments/magnet.png
+      - id: /src/assets/images/embellishments/media-library.png
         name: Media library
-        thumb: .cloudcannon/previews/embellishments/media-library.png
-      - id: /src/assets/images/marketing/layer-28-1-3806-71328.png
+        thumb: src/assets/images/embellishments/media-library.png
+      - id: /src/assets/images/embellishments/page-author.png
         name: Page author
-        thumb: .cloudcannon/previews/embellishments/page-author.png
-      - id: /src/assets/images/marketing/partner-dashboard-1.png
+        thumb: src/assets/images/embellishments/page-author.png
+      - id: /src/assets/images/embellishments/partner-dashboard.png
         name: Partner dashboard
-        thumb: .cloudcannon/previews/embellishments/partner-dashboard.png
-      - id: /src/assets/images/marketing/slack-1.png
+        thumb: src/assets/images/embellishments/partner-dashboard.png
+      - id: /src/assets/images/embellishments/slack.png
         name: Slack
-        thumb: .cloudcannon/previews/embellishments/slack.png
-      - id: /src/assets/images/marketing/context-1.png
+        thumb: src/assets/images/embellishments/slack.png
+      - id: /src/assets/images/embellishments/split-preview.png
         name: Split preview
-        thumb: .cloudcannon/previews/embellishments/split-preview.png
-      - id: /src/assets/images/marketing/phone-01-1.png
+        thumb: src/assets/images/embellishments/split-preview.png
+      - id: /src/assets/images/embellishments/telephone.png
         name: Telephone
-        thumb: .cloudcannon/previews/embellishments/telephone.png
-      - id: /src/assets/images/marketing/layer-26-1-3806-71336.png
+        thumb: src/assets/images/embellishments/telephone.png
+      - id: /src/assets/images/embellishments/translation.png
         name: Translation
-        thumb: .cloudcannon/previews/embellishments/translation.png
-      - id: /src/assets/images/marketing/low-maintenence-I3806-70250-3743-54479.png
+        thumb: src/assets/images/embellishments/translation.png
+      - id: /src/assets/images/embellishments/window-and-cog.png
         name: Window and cog
-        thumb: .cloudcannon/previews/embellishments/window-and-cog.png
+        thumb: src/assets/images/embellishments/window-and-cog.png
     picker_view: gallery
     preview:
       image:
@@ -151,6 +152,13 @@ propSource:
         icon:
           - key: icon
         fit: contain
+propWidth:
+  label: Embellishment width
+  type: number
+  comment: >-
+    How wide the drawing is, as a percentage of the panel. The design draws
+    the cocktail at 31 and the telephone at 47.
+  hidden: "!propSource"
 propAlt:
   label: Embellishment alt text
   type: text

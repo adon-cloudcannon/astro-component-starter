@@ -20,6 +20,7 @@ teamMember:
         imageAlt: ""
         backgroundColor: sunset
         propSource: ""
+        propWidth: 40
         propAlt: ""
       preview:
         text:
