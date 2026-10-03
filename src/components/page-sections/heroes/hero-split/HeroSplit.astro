@@ -3,13 +3,11 @@ import CustomSection from "@builders/custom-section/CustomSection.astro";
 import Heading from "@core-elements/heading/Heading.astro";
 import Image from "@core-elements/image/Image.astro";
 import List from "@core-elements/list/List.astro";
-import SimpleText from "@core-elements/simple-text/SimpleText.astro";
 import Text from "@core-elements/text/Text.astro";
 import ButtonGroup from "@wrappers/button-group/ButtonGroup.astro";
 import Split from "@wrappers/split/Split.astro";
 
 const {
-  eyebrow = "",
   heading = "",
   headingLevel = "h1",
   headingSize = "2xl",
@@ -91,12 +89,6 @@ const imagePositionVertical = imageBleed ? "top" : "center";
     class="hero-split-layout"
   >
     <Fragment slot="first">
-      <SimpleText
-        class="eyebrow"
-        data-prop="eyebrow"
-        text={eyebrow}
-        size="sm"
-      />
       <Heading
         level={headingLevel}
         size={headingSize}

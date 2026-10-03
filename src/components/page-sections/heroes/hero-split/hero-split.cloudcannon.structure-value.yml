@@ -4,7 +4,6 @@ description: Hero with text on one side and an image on the other.
 value:
   _component: page-sections/heroes/hero-split
   sectionLabel: ""
-  eyebrow: Introducing
   heading: A clear promise in one line
   headingLevel: h1
   headingSize: 2xl
@@ -75,8 +74,9 @@ _inputs_from_glob:
 groups:
   - heading: Content
     inputs:
-      - eyebrow
       - heading
+      - headingSize
+      - headingLevel
       - subtext
       - subtextSize
       - subtextWidth
@@ -94,11 +94,6 @@ groups:
     collapsed: true
     inputs:
       - sectionLabel
-      - headingLevel
-      - headingSize
-      - maxContentWidth
-      - paddingHorizontal
-      - paddingVertical
       - colorScheme
       - lockColorScheme
       - backgroundColor

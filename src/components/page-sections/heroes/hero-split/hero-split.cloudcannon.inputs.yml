@@ -1,6 +1,3 @@
-eyebrow:
-  type: text
-  comment: Short label above the heading.
 heading:
   type: text
   comment: Main heading for the section.
@@ -124,6 +121,10 @@ sectionLabel:
   type: text
   comment: Names the section in the editor and sets its anchor id.
 maxContentWidth:
+  hidden: true
+  # Set from the design, not by an editor: every band on the site uses the
+  # same column and the same rhythm, and a section that drifts from it reads
+  # as a mistake rather than a choice.
   type: select
   comment: Maximum width of the content.
   options:
@@ -145,6 +146,10 @@ maxContentWidth:
       - id: 3xl
         name: 3xl
 paddingHorizontal:
+  hidden: true
+  # Set from the design, not by an editor: every band on the site uses the
+  # same column and the same rhythm, and a section that drifts from it reads
+  # as a mistake rather than a choice.
   type: select
   comment: Horizontal padding around the content.
   options:
@@ -168,6 +173,10 @@ paddingHorizontal:
       - id: 3xl
         name: 3xl
 paddingVertical:
+  hidden: true
+  # Set from the design, not by an editor: every band on the site uses the
+  # same column and the same rhythm, and a section that drifts from it reads
+  # as a mistake rather than a choice.
   type: select
   comment: Vertical padding around the content.
   options:

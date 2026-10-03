@@ -12,7 +12,7 @@ import {
 
 const B = band(960);
 
-// The archetype: eyebrow, display heading, three copy lines, a button pair and a
+// The archetype: display heading, three copy lines, a button pair and a
 // line of small print on the left, a landscape photo on the right.
 export default preview({
   width: B.w,
