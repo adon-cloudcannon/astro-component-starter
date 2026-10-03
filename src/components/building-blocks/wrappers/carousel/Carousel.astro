@@ -106,9 +106,9 @@ if (!_component && !hasSlides && !hasSlotContent) return;
           {slides?.map((slide: SlideProps, index: number) => (
             <CarouselSlide
               {...slide}
-              data-editable="array-item"
-              data-id="building-blocks/wrappers/carousel/carousel-slide"
-              data-component="building-blocks/wrappers/carousel/carousel-slide"
+              data-editable={effectiveChildrenProp ? "array-item" : undefined}
+              data-id={effectiveChildrenProp ? "building-blocks/wrappers/carousel/carousel-slide" : undefined}
+              data-component={effectiveChildrenProp ? "building-blocks/wrappers/carousel/carousel-slide" : undefined}
               useDefaultEditableBinding={!!effectiveChildrenProp}
               aria-label={`Slide ${index + 1} of ${slides.length}`}
             />

@@ -96,9 +96,9 @@ if (!_component && !hasEntries && !hasSlotContent) return;
             <TimelineItem
               layout={layout}
               useDefaultEditableBinding={!!effectiveChildrenProp}
-              data-editable="array-item"
-              data-id="building-blocks/wrappers/timeline/timeline-item"
-              data-component="building-blocks/wrappers/timeline/timeline-item"
+              data-editable={effectiveChildrenProp ? "array-item" : undefined}
+              data-id={effectiveChildrenProp ? "building-blocks/wrappers/timeline/timeline-item" : undefined}
+              data-component={effectiveChildrenProp ? "building-blocks/wrappers/timeline/timeline-item" : undefined}
               {...entry}
             />
           ))}
@@ -119,9 +119,9 @@ if (!_component && !hasEntries && !hasSlotContent) return;
             headingSize={isRail ? "sm" : "xs"}
             bodySize={isRail ? "md" : "sm"}
             useDefaultEditableBinding={!!effectiveChildrenProp}
-            data-editable="array-item"
-            data-id="building-blocks/wrappers/timeline/timeline-item"
-            data-component="building-blocks/wrappers/timeline/timeline-item"
+            data-editable={effectiveChildrenProp ? "array-item" : undefined}
+            data-id={effectiveChildrenProp ? "building-blocks/wrappers/timeline/timeline-item" : undefined}
+            data-component={effectiveChildrenProp ? "building-blocks/wrappers/timeline/timeline-item" : undefined}
             {...entry}
           />
         ))}
@@ -148,9 +148,9 @@ if (!_component && !hasEntries && !hasSlotContent) return;
                   grouped={true}
                   headingLevel={entryHeadingLevel}
                   useDefaultEditableBinding={!!effectiveChildrenProp}
-                  data-editable="array-item"
-                  data-id="building-blocks/wrappers/timeline/timeline-item"
-                  data-component="building-blocks/wrappers/timeline/timeline-item"
+                  data-editable={effectiveChildrenProp ? "array-item" : undefined}
+                  data-id={effectiveChildrenProp ? "building-blocks/wrappers/timeline/timeline-item" : undefined}
+                  data-component={effectiveChildrenProp ? "building-blocks/wrappers/timeline/timeline-item" : undefined}
                   {...entry}
                 />
               ))}
@@ -171,9 +171,9 @@ if (!_component && !hasEntries && !hasSlotContent) return;
           <TimelineItem
             layout={layout}
             useDefaultEditableBinding={!!effectiveChildrenProp}
-            data-editable="array-item"
-            data-id="building-blocks/wrappers/timeline/timeline-item"
-            data-component="building-blocks/wrappers/timeline/timeline-item"
+            data-editable={effectiveChildrenProp ? "array-item" : undefined}
+            data-id={effectiveChildrenProp ? "building-blocks/wrappers/timeline/timeline-item" : undefined}
+            data-component={effectiveChildrenProp ? "building-blocks/wrappers/timeline/timeline-item" : undefined}
             {...entry}
           />
         ))}

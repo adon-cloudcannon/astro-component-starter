@@ -59,9 +59,9 @@ if (!_component && !hasItems && !hasSlotContent) return;
             isOpen={isFirst}
             accordionName={accordionName}
             useDefaultEditableBinding={!!effectiveChildrenProp}
-            data-editable="array-item"
-            data-id="building-blocks/wrappers/accordion/accordion-item"
-            data-component="building-blocks/wrappers/accordion/accordion-item"
+            data-editable={effectiveChildrenProp ? "array-item" : undefined}
+            data-id={effectiveChildrenProp ? "building-blocks/wrappers/accordion/accordion-item" : undefined}
+            data-component={effectiveChildrenProp ? "building-blocks/wrappers/accordion/accordion-item" : undefined}
             {...item}
           />
         );

@@ -114,6 +114,15 @@ const blocks = (sections: unknown): ContentBlock[] =>
 
 const hasHeader = Boolean(eyebrow || heading || subtext);
 const effectiveChildrenProp = childrenDataProp ?? (useDefaultEditableBinding ? "steps" : null);
+/* The blocks inside a step are their own array, nested under the step's own
+   index. They were rendered with `data-editable="array-item"` and nothing
+   around them saying `array`, which is the one shape the editor rejects
+   outright: "Array item editable regions must be nested inside an array
+   editable region". It went unseen until the items had a renderer and
+   actually mounted. */
+const stepContentAttributes = effectiveChildrenProp
+  ? { "data-editable": "array", "data-prop": "contentSections" }
+  : {};
 const arrayDataAttributes = effectiveChildrenProp
   ? { "data-editable": "array", "data-prop": effectiveChildrenProp }
   : {};
@@ -228,10 +237,10 @@ const mirror = rootMirror({
       <div class="pinned-steps-copy">
         {stepList.map((step, index) => (
           <div
-            class="pinned-steps-step flow"
+            class="pinned-steps-step"
             data-index={index}
             data-active={index === 0 ? "" : undefined}
-            data-editable="array-item"
+            data-editable={effectiveChildrenProp ? "array-item" : undefined}
             aria-hidden={index !== 0}
             role="group"
             aria-roledescription="step"
@@ -248,7 +257,18 @@ const mirror = rootMirror({
                 {numbered ? index + 1 : step.number}
               </span>
             )}
-            <Component contentSections={blocks(step.contentSections)} />
+            {/* `flow` moves here with the blocks it spaces: the step is the
+                array item, so the array around its content has to be an
+                element of its own. */}
+            <div
+              class="pinned-steps-step-content flow"
+              {...stepContentAttributes}
+            >
+              <Component
+                contentSections={blocks(step.contentSections)}
+                useDefaultEditableBinding={Boolean(effectiveChildrenProp)}
+              />
+            </div>
           </div>
         ))}
       </div>

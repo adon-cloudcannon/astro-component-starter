@@ -55,9 +55,9 @@ if (!_component && !hasItems && !hasSlotContent) return;
         <StepsItem
           imageAspectRatio={imageAspectRatio}
           useDefaultEditableBinding={!!effectiveChildrenProp}
-          data-editable="array-item"
-          data-id="building-blocks/wrappers/steps/steps-item"
-          data-component="building-blocks/wrappers/steps/steps-item"
+          data-editable={effectiveChildrenProp ? "array-item" : undefined}
+          data-id={effectiveChildrenProp ? "building-blocks/wrappers/steps/steps-item" : undefined}
+          data-component={effectiveChildrenProp ? "building-blocks/wrappers/steps/steps-item" : undefined}
           {...item}
         />
       ))}

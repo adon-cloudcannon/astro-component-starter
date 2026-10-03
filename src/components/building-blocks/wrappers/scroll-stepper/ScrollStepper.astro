@@ -116,9 +116,9 @@ if (!_component && !hasSteps) return;
             contentSections={stepContent(step, index)}
             aria-label={`Step ${index + 1} of ${stepList.length}`}
             data-index={index}
-            data-editable="array-item"
-            data-id="building-blocks/wrappers/scroll-stepper/scroll-stepper-step"
-            data-component="building-blocks/wrappers/scroll-stepper/scroll-stepper-step"
+            data-editable={effectiveChildrenProp ? "array-item" : undefined}
+            data-id={effectiveChildrenProp ? "building-blocks/wrappers/scroll-stepper/scroll-stepper-step" : undefined}
+            data-component={effectiveChildrenProp ? "building-blocks/wrappers/scroll-stepper/scroll-stepper-step" : undefined}
             useDefaultEditableBinding={!!effectiveChildrenProp}
           />
         ))}
@@ -131,9 +131,9 @@ if (!_component && !hasSteps) return;
       {stepList.map((step: StepProps, index: number) => (
         <div
           class="scroll-stepper-mobile-step"
-          data-editable="array-item"
-          data-id="building-blocks/wrappers/scroll-stepper/scroll-stepper-step"
-          data-component="building-blocks/wrappers/scroll-stepper/scroll-stepper-step"
+          data-editable={effectiveChildrenProp ? "array-item" : undefined}
+          data-id={effectiveChildrenProp ? "building-blocks/wrappers/scroll-stepper/scroll-stepper-step" : undefined}
+          data-component={effectiveChildrenProp ? "building-blocks/wrappers/scroll-stepper/scroll-stepper-step" : undefined}
         >
           <div class="scroll-stepper-mobile-media flow">
             <div

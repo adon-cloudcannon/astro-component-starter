@@ -56,9 +56,9 @@ if (!_component && !hasItems && !hasSlotContent) return;
     <slot>
       {items?.map((item: ItemProps) => (
         <MasonryItem
-          data-id="building-blocks/wrappers/masonry/masonry-item"
-          data-component="building-blocks/wrappers/masonry/masonry-item"
-          data-editable="array-item"
+          data-id={effectiveChildrenProp ? "building-blocks/wrappers/masonry/masonry-item" : undefined}
+          data-component={effectiveChildrenProp ? "building-blocks/wrappers/masonry/masonry-item" : undefined}
+          data-editable={effectiveChildrenProp ? "array-item" : undefined}
           useDefaultEditableBinding={!!effectiveChildrenProp}
           {...item}
         />

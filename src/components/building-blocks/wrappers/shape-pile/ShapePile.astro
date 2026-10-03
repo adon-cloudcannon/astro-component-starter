@@ -59,6 +59,7 @@ const {
   designHeight = 340,
   class: className,
   "data-children-prop": childrenDataProp,
+  useDefaultEditableBinding = false,
   _component,
   ...htmlAttributes
 } = Astro.props;
@@ -101,12 +102,21 @@ const mirror = rootMirror({
     "--pile-design-height": String(designHeight),
   },
 });
+
+/* The pile is the array its shapes are items of. `data-children-prop` was
+   being written onto the div as a plain attribute, which means nothing to the
+   editor, so every shape was an array item with no array around it. */
+const effectiveChildrenProp =
+  childrenDataProp ?? (useDefaultEditableBinding ? "shapes" : null);
+const arrayDataAttributes = effectiveChildrenProp
+  ? { "data-editable": "array", "data-prop": effectiveChildrenProp }
+  : {};
 ---
 
 <div
   class:list={["shape-pile", className]}
   style={`--pile-design-width: ${designWidth}; --pile-design-height: ${designHeight}`}
-  data-children-prop={childrenDataProp}
+  {...arrayDataAttributes}
   {...htmlAttributes}
 >
   {/* Carries this component's own root attributes for the Visual Editor,
@@ -123,7 +133,7 @@ const mirror = rootMirror({
         shape.lightText && "is-light-text",
         shape.strong && "is-strong",
       ]}
-      data-editable="array-item"
+      data-editable={effectiveChildrenProp ? "array-item" : undefined}
       style={[
         `--pile-x: ${((Number(shape.x) || 0) / designWidth) * 100}%`,
         `--pile-y: ${((Number(shape.y) || 0) / designHeight) * 100}%`,
