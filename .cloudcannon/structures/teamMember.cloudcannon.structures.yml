@@ -1,0 +1,39 @@
+# A person on a scratchy panel, shared by the team grid and the team-member CTA.
+#
+# Must live here, not inside a component's structure-value file. A `_structures`
+# block there only reaches the component it sits in, and this one was written
+# out twice under the same global name, once in each section that uses it, so
+# the two copies could drift apart with nothing to say which had won.
+#
+# The card carries the person's own photograph. An icon is the same drawing on
+# every member, which tells an editor nothing about which one they are looking
+# at; `imageSource` is a cut-out portrait and is the only thing that does.
+teamMember:
+  values:
+    - label: Team member
+      icon: person
+      value:
+        _component: building-blocks/wrappers/team-member
+        name: ""
+        role: ""
+        imageSource: ""
+        imageAlt: ""
+        backgroundColor: sunset
+        propSource: ""
+        propAlt: ""
+      preview:
+        text:
+          - key: name
+          - Team member
+        subtext:
+          - key: role
+        image:
+          - key: imageSource
+        icon: person
+        gallery:
+          image:
+            - key: imageSource
+          icon: person
+          fit: contain
+      _inputs_from_glob:
+        - /src/components/building-blocks/wrappers/team-member/team-member.cloudcannon.inputs.yml

@@ -51,8 +51,59 @@ backgroundColor:
       text:
         - key: name
 propSource:
-  type: image
-  comment: What they are holding, overhanging the bottom-right corner.
+  type: select
+  label: Embellishment
+  # The drawings are the design's own, so this is a list rather than an image
+  # input: an editor picks one of the illustrations the site already has
+  # instead of uploading a photo that would sit on the corner looking wrong.
+  #
+  # The saved value is the file's own path, which is what the component already
+  # reads, so nothing authored had to move and there is no name-to-file table to
+  # keep in step. `thumb` is the same file without the leading slash, which is
+  # the form CloudCannon's previews resolve, and the gallery view is what gives
+  # the picker somewhere to draw it.
+  comment: A drawing propped on the bottom-right corner of the panel.
+  options:
+    values:
+      - id: ""
+        name: None
+        icon: check_box_outline_blank
+      - id: /src/assets/images/marketing/hero-lowmaintenance-01-1-2-3806-70539.png
+        name: Cocktail
+        thumb: src/assets/images/marketing/hero-lowmaintenance-01-1-2-3806-70539.png
+      - id: /src/assets/images/marketing/phone-01-1.png
+        name: Telephone
+        thumb: src/assets/images/marketing/phone-01-1.png
+      - id: /src/assets/images/marketing/camera-01-1.png
+        name: Camera
+        thumb: src/assets/images/marketing/camera-01-1.png
+      - id: /src/assets/images/marketing/motorcycle-01-1.png
+        name: Motorcycle
+        thumb: src/assets/images/marketing/motorcycle-01-1.png
+      - id: /src/assets/images/marketing/ribbon-01-1.png
+        name: Ribbon
+        thumb: src/assets/images/marketing/ribbon-01-1.png
+      - id: /src/assets/images/marketing/kea.png
+        name: Kea
+        thumb: src/assets/images/marketing/kea.png
+      - id: /src/assets/images/marketing/tuatara.png
+        name: Tuatara
+        thumb: src/assets/images/marketing/tuatara.png
+    picker_view: gallery
+    preview:
+      image:
+        - key: thumb
+      icon:
+        - key: icon
+      text:
+        - key: name
+      gallery:
+        image:
+          - key: thumb
+        icon:
+          - key: icon
+        fit: contain
 propAlt:
+  label: Embellishment alt text
   type: text
-  comment: Alt text for that. Leave empty if it is decoration.
+  comment: Alt text for the drawing. Leave empty if it is decoration.

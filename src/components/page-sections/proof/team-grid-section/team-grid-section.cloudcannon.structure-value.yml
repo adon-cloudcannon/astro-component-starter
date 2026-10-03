@@ -43,22 +43,6 @@ _inputs_from_glob:
   - /src/components/page-sections/proof/team-grid-section/team-grid-section.cloudcannon.inputs.yml
   - /.cloudcannon/inputs/background.yml
   - /.cloudcannon/inputs/haze.yml
-_structures:
-  teamMember:
-    values:
-      - label: Team member
-        icon: person
-        value:
-          _component: building-blocks/wrappers/team-member
-          name: ""
-          role: ""
-          imageSource: ""
-          imageAlt: ""
-          backgroundColor: sunset
-          propSource: ""
-          propAlt: ""
-        _inputs_from_glob:
-          - /src/components/building-blocks/wrappers/team-member/team-member.cloudcannon.inputs.yml
 groups:
   - heading: Content
     inputs:
