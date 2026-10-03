@@ -223,7 +223,6 @@ const items: Quote[] = (isCarousel ? quotes : quotes.slice(0, 1)) as Quote[];
         return (
           <article
             class="testimonial-quote-slide"
-            style={accent ? `--testimonial-quote-accent: ${accent}` : undefined}
             data-editable="array-item"
             data-id="page-sections/proof/testimonial-quote/testimonial-quote-item"
             data-component="page-sections/proof/testimonial-quote/testimonial-quote-item"
@@ -236,7 +235,23 @@ const items: Quote[] = (isCarousel ? quotes : quotes.slice(0, 1)) as Quote[];
             {/* The marks are drawn in CSS. Written into the text they land on
                 their own lines when the quote is more than one paragraph, and
                 an editor has to remember to type them. */}
+            {/* The accent rides on the quote and is lifted back to the slide
+                in CSS.
+
+                It was an inline style on the `<article>`, which is this
+                slide's array-item root. CloudCannon keeps a region's root
+                element and swaps only its contents, so an attribute set there
+                from a prop never changes in the Visual Editor: picking a
+                colour saved it and repainted nothing until a reload. The
+                emphasised run, the quote marks and the link's arrow all read
+                the property and all sit inside this slide, so a lift puts it
+                back where they can see it.
+
+                `lint:roots` does not catch this one. It reads the first
+                element of a component's template, and an array item built
+                inside a `.map()` is a region root it never looks at. */}
             <blockquote
+              data-accent={quote.accentColor || undefined}
               class="testimonial-quote-text"
               data-marks={marks ? "" : undefined}
               data-prop="text"
@@ -435,6 +450,35 @@ const items: Quote[] = (isCarousel ? quotes : quotes.slice(0, 1)) as Quote[];
       /* The emphasis and the marks are the same colour, which is what ties
          the card together: the design marks a phrase in the card's accent and
          draws the quotes around the whole thing in it too. */
+      /* Lifted from the quote. See the note on the element itself. */
+      .testimonial-quote-slide:has(> .testimonial-quote-text[data-accent="sunset"]) {
+        --testimonial-quote-accent: var(--sunset);
+      }
+
+      .testimonial-quote-slide:has(> .testimonial-quote-text[data-accent="golden"]) {
+        --testimonial-quote-accent: var(--golden);
+      }
+
+      .testimonial-quote-slide:has(> .testimonial-quote-text[data-accent="pacific"]) {
+        --testimonial-quote-accent: var(--pacific);
+      }
+
+      .testimonial-quote-slide:has(> .testimonial-quote-text[data-accent="moss"]) {
+        --testimonial-quote-accent: var(--moss);
+      }
+
+      .testimonial-quote-slide:has(> .testimonial-quote-text[data-accent="peachy"]) {
+        --testimonial-quote-accent: var(--peachy);
+      }
+
+      .testimonial-quote-slide:has(> .testimonial-quote-text[data-accent="harbour"]) {
+        --testimonial-quote-accent: var(--harbour);
+      }
+
+      .testimonial-quote-slide:has(> .testimonial-quote-text[data-accent="blush"]) {
+        --testimonial-quote-accent: var(--blush);
+      }
+
       .testimonial-quote-text strong {
         color: var(--testimonial-quote-accent, inherit);
         font-weight: inherit;
