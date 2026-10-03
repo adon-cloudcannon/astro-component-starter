@@ -44,6 +44,9 @@ subtext:
     bulletedlist: false
     numberedlist: false
 subtextSize:
+  hidden: true
+  # One size on every hero, so it is the component's decision rather than
+  # a field an editor has to get right.
   type: select
   comment: Body 3 at 19 or Subtitle 1 at 22 in the design; regular is 16.
   options:
@@ -55,6 +58,8 @@ subtextSize:
       - id: xl
         name: Extra large
 subtextWidth:
+  hidden: true
+  # Never set on a hero: the measure is the split's own column.
   type: number
   comment: >-
     Measure for the supporting line, in pixels. The design sets a centred one

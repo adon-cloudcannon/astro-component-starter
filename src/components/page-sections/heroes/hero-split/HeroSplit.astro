@@ -14,7 +14,10 @@ const {
   subtext = "",
   // The design sets this in Body 3 at 19 or Subtitle 1 at 22; the default
   // keeps the 16 every section used before either was carried through.
-  subtextSize = "md",
+  /* The hero's supporting line is Subtitle 1 on all eleven heroes, so the
+     size is the component's rather than a per-page choice. Still a prop: the
+     pages set it explicitly today and a hidden input keeps working. */
+  subtextSize = "xl",
   /**
    * The measure the design sets the supporting line in, in pixels.
    *
