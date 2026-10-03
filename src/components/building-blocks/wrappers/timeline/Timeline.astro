@@ -652,18 +652,18 @@ if (!_component && !hasEntries && !hasSlotContent) return;
      behind a mark in the page background's colour. Set per entry, so a step
      can be told from the one above it at a glance. */
   @layer components {
-    .timeline .timeline-entry[style*="--timeline-accent"] .timeline-split-marker {
+    .timeline .timeline-split-marker[style*="--timeline-accent"] {
       background-color: var(--timeline-accent);
       border-color: var(--timeline-accent);
     }
 
-    .timeline .timeline-entry[style*="--timeline-accent"] .timeline-split-marker .icon {
+    .timeline .timeline-split-marker[style*="--timeline-accent"] .icon {
       color: var(--timeline-accent-ink, var(--color-bg));
     }
 
     /* The disc is the mark. Left in, the fallback dot sits in the middle of it
        in the link colour, which is not something the design draws anywhere. */
-    .timeline .timeline-entry[style*="--timeline-accent"] .timeline-split-marker .timeline-dot {
+    .timeline .timeline-split-marker[style*="--timeline-accent"] .timeline-dot {
       display: none;
     }
   }

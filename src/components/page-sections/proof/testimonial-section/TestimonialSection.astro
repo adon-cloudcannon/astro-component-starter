@@ -101,7 +101,6 @@ const accentStyle =
   background={background}
   haze={haze}
   useDefaultEditableBinding={useDefaultEditableBinding}
-  style={accentStyle}
 >
   {isSplit && (hasMark || isPlain) && (
     <div class="testimonial-mark">
@@ -157,7 +156,15 @@ const accentStyle =
     </div>
   )}
 
+  {/* The accent is on the quote, not the band.
+
+      It was an inline style on the CustomSection, which is this section's
+      root, and a prop-driven style there goes stale in the Visual Editor:
+      CloudCannon keeps a region's root and swaps only its contents. One rule
+      reads it, the emphasised run of the quote, and that sits inside here, so
+      this is where it belongs. */}
   <Testimonial
+    style={accentStyle}
     text={text}
     authorName={isPlain ? "" : authorName}
     authorDescription={isPlain ? "" : authorDescription}

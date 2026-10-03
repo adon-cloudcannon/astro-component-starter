@@ -74,7 +74,6 @@ const {
 } = Astro.props;
 
 const quote = text ? renderMarkdown(text) : "";
-const accent = accentColor ? `var(--${accentColor})` : undefined;
 ---
 
 <div
@@ -84,7 +83,6 @@ const accent = accentColor ? `var(--${accentColor})` : undefined;
   data-quote-size={quoteSize === "large" ? "large" : undefined}
   data-tone={tone}
   data-theme={tone === "light" ? "light" : "dark"}
-  style={accent ? `--testimonial-bento-accent: ${accent}` : undefined}
   {...htmlAttributes}
 >
   {/* The marks are drawn in CSS rather than written here. The quote renders
@@ -100,7 +98,20 @@ const accent = accentColor ? `var(--${accentColor})` : undefined;
     set:html={quote}
   />
 
-  <div class="testimonial-bento-foot">
+  {/* The accent rides here and is lifted back to the card in CSS.
+
+      It was an inline style on the card itself, which is this component's
+      root, and a prop-driven style there goes stale in the Visual Editor:
+      CloudCannon keeps a region's root and swaps only its contents, so
+      changing a card's accent repainted nothing. The card's own hover border
+      and focus outline read the property, so it cannot simply move down; the
+      foot carries the name instead and `:has()` lifts it, which is the same
+      trick `_flow.css` plays with `data-space-before`.
+
+      One rule per colour, which is the price of a lift: a selector can test
+      for a descendant but cannot read a value off one. The list is the same
+      one the component's YAML offers. */}
+  <div class="testimonial-bento-foot" data-accent={accentColor || undefined}>
     <div class="testimonial-bento-who">
       {/* Drawn whether or not there is a picture for it. The circle is part
           of the card's composition: without it the attribution starts hard
@@ -222,6 +233,31 @@ const accent = accentColor ? `var(--${accentColor})` : undefined;
     /* 28, the card marked as the louder one. */
     .testimonial-bento-item[data-quote-size="large"] {
       --testimonial-bento-quote: 1.75rem;
+    }
+
+    /* Lifted from the foot. See the note on the element itself. */
+    .testimonial-bento-item:has(> .testimonial-bento-foot[data-accent="sunset"]) {
+      --testimonial-bento-accent: var(--sunset);
+    }
+
+    .testimonial-bento-item:has(> .testimonial-bento-foot[data-accent="golden"]) {
+      --testimonial-bento-accent: var(--golden);
+    }
+
+    .testimonial-bento-item:has(> .testimonial-bento-foot[data-accent="pacific"]) {
+      --testimonial-bento-accent: var(--pacific);
+    }
+
+    .testimonial-bento-item:has(> .testimonial-bento-foot[data-accent="moss"]) {
+      --testimonial-bento-accent: var(--moss);
+    }
+
+    .testimonial-bento-item:has(> .testimonial-bento-foot[data-accent="peachy"]) {
+      --testimonial-bento-accent: var(--peachy);
+    }
+
+    .testimonial-bento-item:has(> .testimonial-bento-foot[data-accent="harbour"]) {
+      --testimonial-bento-accent: var(--harbour);
     }
 
     .testimonial-bento-item:hover {
