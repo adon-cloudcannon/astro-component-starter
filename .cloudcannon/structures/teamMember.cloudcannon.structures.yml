@@ -8,6 +8,10 @@
 # The card carries the person's own photograph. An icon is the same drawing on
 # every member, which tells an editor nothing about which one they are looking
 # at; `imageSource` is a cut-out portrait and is the only thing that does.
+#
+# `image` and nothing else. `image` is the thumbnail beside the name; `gallery`
+# is the panel above it, and a cut-out portrait in one is a small figure adrift
+# on a large empty ground, since the picture has no background of its own.
 teamMember:
   values:
     - label: Team member
@@ -31,10 +35,5 @@ teamMember:
         image:
           - key: imageSource
         icon: person
-        gallery:
-          image:
-            - key: imageSource
-          icon: person
-          fit: contain
       _inputs_from_glob:
         - /src/components/building-blocks/wrappers/team-member/team-member.cloudcannon.inputs.yml

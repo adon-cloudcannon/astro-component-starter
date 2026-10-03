@@ -22,11 +22,6 @@ preview:
   image:
     - key: imageSource
   icon: person
-  gallery:
-    image:
-      - key: imageSource
-    icon: person
-    fit: contain
 picker_preview:
   text: Team Member
   subtext: A cut-out portrait on a coloured panel with a name badge.
