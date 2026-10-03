@@ -53,42 +53,79 @@ backgroundColor:
 propSource:
   type: select
   label: Embellishment
-  # The drawings are the design's own, so this is a list rather than an image
-  # input: an editor picks one of the illustrations the site already has
-  # instead of uploading a photo that would sit on the corner looking wrong.
+  # The design system's own Tier 3, plus the two already on pages.
+  #
+  # Canvas 222:45304 under Illustrations & Graphics names four tiers, and Tier
+  # 3 is "Small, conceptual icons used in feature splits, carousels, and
+  # supporting areas that need a quick visual to capture a concept." The
+  # thirteen of them are drawn in group 222:46835; the cocktail and the
+  # telephone are not in that group but are what the pages already prop on a
+  # panel, so they are here too.
+  #
+  # Characters and scenes are deliberately out. A kea or a motorcycle is Tier
+  # 1 or 2 artwork with its own placement rules, and at a corner's size it
+  # reads as a second subject competing with the person.
+  #
+  # Four of these bind a per-node crop rather than the upload it came from,
+  # because the upload is mostly empty: `layer-25-1.png` is 7% artwork where
+  # its crop is 67%. See CLAUDE.md on binding the crop, not the raw file.
   #
   # The saved value is the file's own path, which is what the component already
-  # reads, so nothing authored had to move and there is no name-to-file table to
-  # keep in step. `thumb` is the same file without the leading slash, which is
-  # the form CloudCannon's previews resolve, and the gallery view is what gives
-  # the picker somewhere to draw it.
-  comment: A drawing propped on the bottom-right corner of the panel.
+  # reads, so nothing authored had to move and there is no name-to-file table
+  # to keep in step. `thumb` is the same file without the leading slash, which
+  # is the form CloudCannon's previews resolve, and the gallery view is what
+  # gives the picker somewhere to draw it.
+  comment: A spot illustration propped on the bottom-right corner of the panel.
   options:
     values:
       - id: ""
         name: None
         icon: check_box_outline_blank
+      - id: /src/assets/images/marketing/ai-2-1.png
+        name: AI
+        thumb: src/assets/images/marketing/ai-2-1.png
+      - id: /src/assets/images/marketing/extended-trial-1.png
+        name: Alarm clock
+        thumb: src/assets/images/marketing/extended-trial-1.png
+      - id: /src/assets/images/marketing/api-1.png
+        name: API
+        thumb: src/assets/images/marketing/api-1.png
       - id: /src/assets/images/marketing/hero-lowmaintenance-01-1-2-3806-70539.png
         name: Cocktail
         thumb: src/assets/images/marketing/hero-lowmaintenance-01-1-2-3806-70539.png
+      - id: /src/assets/images/marketing/globe-1-I3806-70251-3743-54504.png
+        name: Globe
+        thumb: src/assets/images/marketing/globe-1-I3806-70251-3743-54504.png
+      - id: /src/assets/images/marketing/hosting.png
+        name: Hosting
+        thumb: src/assets/images/marketing/hosting.png
+      - id: /src/assets/images/marketing/attract-1.png
+        name: Magnet
+        thumb: src/assets/images/marketing/attract-1.png
+      - id: /src/assets/images/marketing/layer-25-1-3806-71332.png
+        name: Media library
+        thumb: src/assets/images/marketing/layer-25-1-3806-71332.png
+      - id: /src/assets/images/marketing/layer-28-1-3806-71328.png
+        name: Page author
+        thumb: src/assets/images/marketing/layer-28-1-3806-71328.png
+      - id: /src/assets/images/marketing/partner-dashboard-1.png
+        name: Partner dashboard
+        thumb: src/assets/images/marketing/partner-dashboard-1.png
+      - id: /src/assets/images/marketing/slack-1.png
+        name: Slack
+        thumb: src/assets/images/marketing/slack-1.png
+      - id: /src/assets/images/marketing/context-1.png
+        name: Split preview
+        thumb: src/assets/images/marketing/context-1.png
       - id: /src/assets/images/marketing/phone-01-1.png
         name: Telephone
         thumb: src/assets/images/marketing/phone-01-1.png
-      - id: /src/assets/images/marketing/camera-01-1.png
-        name: Camera
-        thumb: src/assets/images/marketing/camera-01-1.png
-      - id: /src/assets/images/marketing/motorcycle-01-1.png
-        name: Motorcycle
-        thumb: src/assets/images/marketing/motorcycle-01-1.png
-      - id: /src/assets/images/marketing/ribbon-01-1.png
-        name: Ribbon
-        thumb: src/assets/images/marketing/ribbon-01-1.png
-      - id: /src/assets/images/marketing/kea.png
-        name: Kea
-        thumb: src/assets/images/marketing/kea.png
-      - id: /src/assets/images/marketing/tuatara.png
-        name: Tuatara
-        thumb: src/assets/images/marketing/tuatara.png
+      - id: /src/assets/images/marketing/layer-26-1-3806-71336.png
+        name: Translation
+        thumb: src/assets/images/marketing/layer-26-1-3806-71336.png
+      - id: /src/assets/images/marketing/low-maintenence-I3806-70250-3743-54479.png
+        name: Window and cog
+        thumb: src/assets/images/marketing/low-maintenence-I3806-70250-3743-54479.png
     picker_view: gallery
     preview:
       image:
