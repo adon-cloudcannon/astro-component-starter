@@ -16,15 +16,6 @@ pageSections:
     headingSize: xl
     imageOverflow: 59
     reverse: true
-    background:
-      type: pattern
-      pattern: pegboard
-      mask: none
-    haze:
-      - x: 0.6662
-        rx: 512px
-        'y': 40.1%
-        ry: 73.6%
     buttonSections:
       - _component: building-blocks/core-elements/button
         variant: primary
@@ -34,6 +25,8 @@ pageSections:
         iconName: arrow-right
         iconPosition: after
         text: Book a demo
+    pattern: pegboard
+    haze: true
   - _component: page-sections/proof/logo-cloud
     backgroundColor: surface
     logos:

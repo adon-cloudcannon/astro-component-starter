@@ -13,15 +13,6 @@ pageSections:
     imageSource: /src/assets/images/marketing/screenshot-2026-08-15-at-15-46-59-1-3806-68971.png
     headingSize: xl
     imageOverflow: 42
-    background:
-      type: pattern
-      pattern: grid
-      mask: none
-    haze:
-      - x: 0.1628
-        rx: 506px
-        'y': 49.6%
-        ry: 63.4%
     buttonSections:
       - _component: building-blocks/core-elements/button
         variant: primary
@@ -35,6 +26,8 @@ pageSections:
       - text: No credit card · 14-day free trial · No lock-in
         iconName: check
         iconColor: default
+    pattern: grid
+    haze: true
   - _component: page-sections/proof/logo-cloud
     backgroundColor: surface
     logos:

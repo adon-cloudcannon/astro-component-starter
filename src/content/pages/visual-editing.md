@@ -14,15 +14,6 @@ pageSections:
     headingSize: xl
     imageOverflow: 15
     reverse: true
-    background:
-      type: pattern
-      pattern: pegboard
-      mask: none
-    haze:
-      - x: 0.6957
-        rx: 458px
-        'y': 51.3%
-        ry: 48%
     buttonSections:
       - _component: building-blocks/core-elements/button
         variant: primary
@@ -36,6 +27,8 @@ pageSections:
       - text: No credit card · 14-day free trial · No lock-in
         iconName: check
         iconColor: default
+    pattern: pegboard
+    haze: true
   - _component: page-sections/explainers/editor-demo
     eyebrow: INTERACTIVE DEMO
     heading: Try it out, and see if it’s right for you and your team.

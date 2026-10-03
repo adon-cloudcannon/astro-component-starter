@@ -15,15 +15,6 @@ pageSections:
     imageSource: /src/assets/images/marketing/screenshot-2026-08-15-at-15-52-30-1-3806-70839.png
     headingSize: xl
     imageOverflow: 5
-    background:
-      type: pattern
-      pattern: grid
-      mask: none
-    haze:
-      - x: 0.2305
-        rx: 378px
-        'y': 51.8%
-        ry: 50.6%
     buttonSections:
       - _component: building-blocks/core-elements/button
         variant: primary
@@ -37,6 +28,8 @@ pageSections:
       - text: No credit card · 14-day free trial · No lock-in
         iconName: check
         iconColor: default
+    pattern: grid
+    haze: true
   - _component: page-sections/conversion/cta-center
     heading: High speed whether you have 10 visitors or 10 million
     backgroundColor: base

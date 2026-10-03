@@ -15,15 +15,6 @@ pageSections:
     imageSource: /src/assets/images/marketing/cloudcannon-hero-portfolio-01-1.png
     headingSize: xl
     imageOverflow: 63
-    background:
-      type: pattern
-      pattern: grid
-      mask: none
-    haze:
-      - x: 0.2206
-        rx: 499px
-        'y': 48.3%
-        ry: 68%
     buttonSections:
       - _component: building-blocks/core-elements/button
         variant: primary
@@ -33,6 +24,8 @@ pageSections:
         iconName: arrow-right
         iconPosition: after
         text: Book a demo
+    pattern: grid
+    haze: true
   - _component: page-sections/proof/logo-cloud
     backgroundColor: surface
     logos:

@@ -15,15 +15,6 @@ pageSections:
     imageSource: /src/assets/images/marketing/screenshot-2026-08-18-at-14-16-52-1.png
     headingSize: xl
     imageOverflow: 151
-    background:
-      type: pattern
-      pattern: grid
-      mask: none
-    haze:
-      - x: 0.1123
-        rx: 666px
-        'y': 47.9%
-        ry: 72%
     buttonSections:
       - _component: building-blocks/core-elements/button
         variant: primary
@@ -33,6 +24,8 @@ pageSections:
         iconName: arrow-right
         iconPosition: after
         text: Book a demo
+    pattern: grid
+    haze: true
   - _component: page-sections/proof/logo-cloud
     backgroundColor: surface
     logos:

@@ -40,16 +40,8 @@ value:
   colorScheme: inherit
   lockColorScheme: false
   backgroundColor: light-sand
-  background:
-    type: image
-    imageSource: ""
-    imageAlt: ""
-    positionVertical: top
-    positionHorizontal: center
-    fixed: false
-    priority: false
-    mask: none
-    overlay: 0
+  pattern: grid
+  haze: true
 preview:
   text:
     - Hero Split
@@ -67,10 +59,11 @@ picker_preview:
   gallery:
     image: public/component-previews/page-sections/heroes/hero-split.svg
     fit: cover
+# No background.yml or haze.yml. The hero writes both itself, from `pattern`
+# and a switch, and a later glob entry would put the shared definitions back
+# over the top of the simpler ones.
 _inputs_from_glob:
   - /src/components/page-sections/heroes/hero-split/hero-split.cloudcannon.inputs.yml
-  - /.cloudcannon/inputs/background.yml
-  - /.cloudcannon/inputs/haze.yml
 groups:
   - heading: Content
     inputs:
@@ -93,5 +86,5 @@ groups:
     inputs:
       - sectionLabel
       - backgroundColor
-      - background
+      - pattern
       - haze

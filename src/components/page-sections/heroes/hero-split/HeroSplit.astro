@@ -56,8 +56,31 @@ const {
    * what it took before.
    */
   backgroundColor = "light-sand",
-  background,
-  haze = false,
+  /**
+   * The texture behind the band, by name.
+   *
+   * The builder's `background` is an image, a video or a pattern, each with
+   * its own focal point, fade, overlay and tile size. A hero uses one corner
+   * of that: every one of the twelve draws a pattern, nine a grid and three a
+   * peg board, and not one sets anything else. So the section takes the name
+   * and writes the object, the same way it takes a band colour and writes a
+   * token.
+   */
+  pattern = "grid",
+  /**
+   * Whether the heading sits on a pool of the band's own colour.
+   *
+   * Where it goes is not a question worth asking: it goes behind the copy, and
+   * the design agrees. Eleven of the twelve heroes carry a measured pool, and
+   * every one of the nine copy-left heroes centres it between 0.11 and 0.26 of
+   * the column while both copy-right heroes put it at 0.67 and 0.70. That is
+   * one rule with a mirror in it, not eleven measurements, so it is computed
+   * below and the numbers are gone.
+   *
+   * The switch stays because one hero genuinely has none: the Developers hero
+   * is drawn without a pool, on #FFFFFF where every other is #FFFCF3.
+   */
+  haze = true,
   class: className,
   useDefaultEditableBinding = false,
   _component,
@@ -81,6 +104,30 @@ const BANDS = {
 
 const band = BANDS[backgroundColor] ?? BANDS["light-sand"];
 
+/**
+ * The pattern, as the builder's own background object.
+ *
+ * `fixed`, `mask` and `overlay` are the builder's defaults written out, so
+ * switching a hero's pattern cannot leave a stale key behind from whatever it
+ * was before.
+ */
+const backgroundPattern =
+  pattern && pattern !== "none"
+    ? { type: "pattern", pattern, fixed: false, mask: "none", overlay: 0 }
+    : undefined;
+
+/**
+ * One pool, behind the copy.
+ *
+ * Averaged off the design's own eleven rather than invented: the copy-left
+ * heroes centre between 0.11 and 0.26, mean 0.20, and the two copy-right ones
+ * sit at 0.67 and 0.70. Down the band they run 39% to 52%, mean 48%, and their
+ * vertical radii 48% to 74%, mean 60%. The horizontal radius is the one that
+ * varies most, 366px to 941px on a 1280 frame, so it is taken as a share of
+ * the band instead of a length: 45% is 576 there, against a mean of 559.
+ */
+const hazePool = { x: reverse ? 0.68 : 0.2, y: "48%", rx: "45%", ry: "60%" };
+
 // The design draws hero illustrations wider than their half of the column and
 // lets them spill toward the page edge, by anything from 5px to 217px. That is
 // a property of the drawing, so it is measured per section rather than guessed
@@ -101,8 +148,8 @@ const imagePositionVertical = imageBleed ? "top" : "center";
   colorScheme={band.scheme}
   lockColorScheme={true}
   backgroundColor={band.token}
-  background={background}
-  haze={haze}
+  background={backgroundPattern}
+  haze={haze ? [hazePool] : false}
   class:list={["hero-split", className]}
   useDefaultEditableBinding={useDefaultEditableBinding}
   {...htmlAttributes}

@@ -16,15 +16,6 @@ pageSections:
     imageAlt: A person reaching up to edit content blocks, with their dog
     headingSize: 2xl
     imageOverflow: 29
-    background:
-      type: pattern
-      pattern: grid
-      mask: none
-    haze:
-      - x: 0.1492
-        rx: 682px
-        'y': 45.6%
-        ry: 63.4%
     buttonSections:
       - _component: building-blocks/core-elements/button
         variant: primary
@@ -38,6 +29,8 @@ pageSections:
       - text: No credit card · 14-day free trial · No lock-in
         iconName: check
         iconColor: default
+    pattern: grid
+    haze: true
   - _component: page-sections/proof/logo-cloud
     backgroundColor: surface
     logos:

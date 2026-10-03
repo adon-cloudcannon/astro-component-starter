@@ -227,6 +227,40 @@ lockColorScheme:
   type: switch
   label: Lock color scheme
   comment: Ignores the site theme toggle. Only applies when Color Scheme is Light or Dark.
+pattern:
+  type: select
+  label: Texture
+  comment: The pattern drawn behind the band. Both are inked from the band's own colours.
+  options:
+    values:
+      - id: none
+        name: None
+        swatch: check_box_outline_blank
+      - id: grid
+        name: Grid
+        swatch: grid_4x4
+      - id: pegboard
+        name: Peg board
+        swatch: blur_linear
+    picker_view: card
+    preview:
+      icon:
+        - key: swatch
+      text:
+        - key: name
+haze:
+  type: switch
+  label: Haze behind the heading
+  comment: >-
+    Pools the band's own colour behind the copy and blurs it, so the heading
+    stays readable where the pattern runs under it. Where it sits and how big
+    it is follow the copy column.
+background:
+  hidden: true
+  # The hero writes this itself from `pattern`. An image or a video behind a
+  # hero is not something the design does, and the focal point, fade, overlay
+  # and tile size underneath are the builder's, not an editor's.
+  type: object
 backgroundColor:
   type: select
   label: Band colour

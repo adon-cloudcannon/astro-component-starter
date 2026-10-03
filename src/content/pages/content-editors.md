@@ -15,15 +15,6 @@ pageSections:
     imageSource: /src/assets/images/marketing/screenshot-2026-08-19-at-12-59-24-1.png
     headingSize: xl
     imageOverflow: 83
-    background:
-      type: pattern
-      pattern: pegboard
-      mask: none
-    haze:
-      - x: 0.2563
-        rx: 393px
-        'y': 50.2%
-        ry: 50.2%
     buttonSections:
       - _component: building-blocks/core-elements/button
         variant: primary
@@ -37,6 +28,8 @@ pageSections:
       - text: No credit card · 14-day free trial · No lock-in
         iconName: check
         iconColor: default
+    pattern: pegboard
+    haze: true
   - _component: page-sections/explainers/editor-demo
     eyebrow: INTERACTIVE DEMO
     heading: Here’s what you’re working with

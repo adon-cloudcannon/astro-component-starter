@@ -15,15 +15,6 @@ pageSections:
     imageSource: /src/assets/images/marketing/hero-lowmaintenance-01-1.png
     headingSize: xl
     imageOverflow: 107
-    background:
-      type: pattern
-      pattern: pegboard
-      mask: none
-    haze:
-      - x: 0.228
-        rx: 366px
-        'y': 50.9%
-        ry: 52.3%
     buttonSections:
       - _component: building-blocks/core-elements/button
         variant: primary
@@ -37,6 +28,8 @@ pageSections:
       - text: No credit card · 14-day free trial · No lock-in
         iconName: check
         iconColor: default
+    pattern: pegboard
+    haze: true
   - _component: page-sections/proof/logo-cloud
     backgroundColor: surface
     logos:

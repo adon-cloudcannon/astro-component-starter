@@ -15,10 +15,6 @@ pageSections:
     imageSource: /src/assets/images/marketing/hero-developers-01-1.png
     headingSize: xl
     imageOverflow: 217
-    background:
-      type: pattern
-      pattern: grid
-      mask: fade
     buttonSections:
       - _component: building-blocks/core-elements/button
         variant: primary
@@ -28,6 +24,8 @@ pageSections:
         iconName: arrow-right
         iconPosition: after
         text: Book a demo
+    pattern: grid
+    haze: false
   - _component: page-sections/proof/logo-cloud
     backgroundColor: surface
     logos:

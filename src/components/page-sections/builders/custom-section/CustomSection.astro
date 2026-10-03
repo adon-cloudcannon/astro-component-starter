@@ -61,6 +61,26 @@ const {
 // still means one centred pool.
 const hazePools = haze === true ? [{}] : Array.isArray(haze) ? haze : haze ? [haze] : [];
 
+/**
+ * The colour a haze pools, which is the band's own and not the page's.
+ *
+ * The pool read `--color-bg` and nothing redefined it, so every band hazed in
+ * the page's base colour however it was painted. On `base` that is right by
+ * accident. On the others it is wrong, and on `brand` it is wrong enough to
+ * see: a Pacific band pooling near-black behind its heading.
+ *
+ * `base` is `--color-bg` rather than `--color-bg-base`, which is not a token.
+ */
+const HAZE_COLOR = {
+  base: "var(--color-bg)",
+  surface: "var(--color-bg-surface)",
+  muted: "var(--color-bg-muted)",
+  accent: "var(--color-bg-accent)",
+  brand: "var(--color-bg-brand)",
+  highlight: "var(--color-bg-highlight)",
+};
+const hazeColor = HAZE_COLOR[backgroundColor];
+
 // Held in place while the page scrolls past. For an image that is parallax,
 // which is what this was written for; for a colour or a pattern it is the band
 // keeping still while its own content moves through it, which is what the
@@ -158,6 +178,7 @@ const arrayDataAttributes =
           ...(pool?.y ? { "--haze-y": pool.y } : {}),
           ...(pool?.ry ? { "--haze-ry": pool.ry } : {}),
           ...(maxContentWidth ? { "--haze-track": `min(100%, var(--content-width-${maxContentWidth}))` } : {}),
+          ...(hazeColor ? { "--haze-color": hazeColor } : {}),
         }}
       />
     ))}

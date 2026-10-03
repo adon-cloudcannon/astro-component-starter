@@ -16,15 +16,6 @@ pageSections:
     imageAlt: A person reaching up to edit content blocks, with their dog
     headingSize: 2xl
     imageOverflow: 70
-    background:
-      type: pattern
-      pattern: grid
-      mask: none
-    haze:
-      - x: 0.2538
-        rx: 941px
-        'y': 39.1%
-        ry: 53.8%
     buttonSections:
       - _component: building-blocks/core-elements/button
         variant: primary
@@ -39,3 +30,6 @@ pageSections:
         iconName: check
         iconColor: default
 ---
+
+    pattern: grid
+    haze: true

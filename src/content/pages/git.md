@@ -15,15 +15,6 @@ pageSections:
     imageSource: /src/assets/images/marketing/hero-gitbasedcms-01-1.png
     headingSize: xl
     imageOverflow: 119
-    background:
-      type: pattern
-      pattern: grid
-      mask: none
-    haze:
-      - x: 0.2243
-        rx: 735px
-        'y': 50.9%
-        ry: 65.1%
     buttonSections:
       - _component: building-blocks/core-elements/button
         variant: primary
@@ -33,6 +24,8 @@ pageSections:
         iconName: arrow-right
         iconPosition: after
         text: Book a demo
+    pattern: grid
+    haze: true
   - _component: page-sections/proof/logo-cloud
     backgroundColor: surface
     logos:
