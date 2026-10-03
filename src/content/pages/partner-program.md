@@ -6,6 +6,7 @@ title: Partner Program
 description: The more you launch, the more you unlock
 pageSections:
   - _component: page-sections/heroes/hero-split
+    backgroundColor: sand
     heading: The more you launch, the more you unlock
     subtext: >-
       Welcome to a Partner Program that rewards good work. Get better margins and less overhead as
@@ -19,7 +20,6 @@ pageSections:
       type: pattern
       pattern: pegboard
       mask: none
-    backgroundColor: surface
     haze:
       - x: 0.6662
         rx: 512px

@@ -6,6 +6,7 @@ title: Developers Page
 description: A CMS that uses Git, just like you do
 pageSections:
   - _component: page-sections/heroes/hero-split
+    backgroundColor: dark
     heading: A CMS that uses Git, just like you do
     subtext: >-
       Connect CloudCannon to your repo and keep working locally. Editors manage content visually,
@@ -18,9 +19,6 @@ pageSections:
       type: pattern
       pattern: grid
       mask: fade
-    backgroundColor: base
-    colorScheme: dark
-    lockColorScheme: true
     buttonSections:
       - _component: building-blocks/core-elements/button
         variant: primary

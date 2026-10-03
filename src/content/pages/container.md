@@ -6,6 +6,7 @@ title: Container
 description: Build freely. Edit eas
 pageSections:
   - _component: page-sections/heroes/hero-split
+    backgroundColor: light-sand
     heading: Build freely. Edit eas
     subtext: >-
       Welcome to the Git-based CMS that doesn't fight your workflow. Your site lives in Git, your

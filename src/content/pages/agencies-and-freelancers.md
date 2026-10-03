@@ -6,6 +6,7 @@ title: Agencies & Freelancers
 description: Faster launches. Happier clients. Less support.
 pageSections:
   - _component: page-sections/heroes/hero-split
+    backgroundColor: light-sand
     heading: Faster launches. Happier clients. Less support.
     subtext: >-
       Here, agencies spend less time on maintenance and more time on billable work, with websites

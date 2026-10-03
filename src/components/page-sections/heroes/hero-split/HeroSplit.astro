@@ -46,7 +46,16 @@ const {
   paddingVertical = "4xl",
   colorScheme = "inherit",
   lockColorScheme = false,
-  backgroundColor = "base",
+  /**
+   * The band's colour, by the name the design calls it.
+   *
+   * The builder underneath takes a semantic token and a colour scheme, and
+   * between them they do not say what colour you get: `base` is the cream band
+   * and the near-black one, depending on a second field. So the section takes
+   * one name and expands it, and `CustomSection` carries on taking exactly
+   * what it took before.
+   */
+  backgroundColor = "light-sand",
   background,
   haze = false,
   class: className,
@@ -54,6 +63,23 @@ const {
   _component,
   ...htmlAttributes
 } = Astro.props;
+
+/**
+ * Each band, as the token and scheme the builder wants.
+ *
+ * Every one locks: there is no dark mode on this site, so an unlocked band
+ * follows a page theme that never changes, and the one thing that would flip
+ * it is the thing we do not ship.
+ */
+const BANDS = {
+  "light-sand": { token: "base", scheme: "light" },   // #FFFCF3
+  sand: { token: "surface", scheme: "light" },        // #FBF6E9
+  "dark-sand": { token: "muted", scheme: "light" },   // #EBE1C9
+  dark: { token: "base", scheme: "dark" },            // #1D1B17
+  pacific: { token: "brand", scheme: "dark" },        // #034AD8
+};
+
+const band = BANDS[backgroundColor] ?? BANDS["light-sand"];
 
 // The design draws hero illustrations wider than their half of the column and
 // lets them spill toward the page edge, by anything from 5px to 217px. That is
@@ -72,9 +98,9 @@ const imagePositionVertical = imageBleed ? "top" : "center";
   maxContentWidth={maxContentWidth}
   paddingHorizontal={paddingHorizontal}
   paddingVertical={paddingVertical}
-  colorScheme={colorScheme}
-  lockColorScheme={lockColorScheme}
-  backgroundColor={backgroundColor}
+  colorScheme={band.scheme}
+  lockColorScheme={true}
+  backgroundColor={band.token}
   background={background}
   haze={haze}
   class:list={["hero-split", className]}

@@ -6,6 +6,7 @@ title: High Performance
 description: Load instantly. Rank higher.
 pageSections:
   - _component: page-sections/heroes/hero-split
+    backgroundColor: light-sand
     heading: Load instantly. Rank higher.
     subtext: >-
       Pre-rendered pages, global delivery, and structured content that search engines love. Speed is

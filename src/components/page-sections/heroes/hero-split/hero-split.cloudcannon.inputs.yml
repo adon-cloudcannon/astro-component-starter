@@ -209,6 +209,8 @@ paddingVertical:
       - id: 6xl
         name: 6xl
 colorScheme:
+  hidden: true
+  # Carried by the band colour: picking Dark brings its ink with it.
   type: select
   comment: Light or dark scheme for the section. Inherit follows the page.
   options:
@@ -220,22 +222,25 @@ colorScheme:
       - id: dark
         name: Dark
 lockColorScheme:
+  hidden: true
+  # Carried by the band colour: picking Dark brings its ink with it.
   type: switch
   label: Lock color scheme
   comment: Ignores the site theme toggle. Only applies when Color Scheme is Light or Dark.
 backgroundColor:
   type: select
-  comment: Background color for the section.
+  label: Band colour
+  comment: The colour this band is painted, and the ink that goes with it.
   options:
     values:
-      - id: none
-        name: None
-      - id: base
-        name: Base
-      - id: surface
-        name: Surface
-      - id: accent
-        name: Accent
-      - id: highlight
-        name: Highlight
+      - id: light-sand
+        name: Light sand
+      - id: sand
+        name: Sand
+      - id: dark-sand
+        name: Dark sand
+      - id: dark
+        name: Dark
+      - id: pacific
+        name: Pacific
 

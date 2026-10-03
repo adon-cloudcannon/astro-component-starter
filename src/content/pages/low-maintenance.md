@@ -6,6 +6,7 @@ title: Low Maintenance
 description: No database. No 2 a.m. panic.
 pageSections:
   - _component: page-sections/heroes/hero-split
+    backgroundColor: sand
     heading: No database. No 2 a.m. panic.
     subtext: >-
       Skip the forced updates, security patches, and midnight outages. Your site keeps running while
@@ -18,7 +19,6 @@ pageSections:
       type: pattern
       pattern: pegboard
       mask: none
-    backgroundColor: surface
     haze:
       - x: 0.228
         rx: 366px

@@ -39,7 +39,7 @@ value:
   paddingVertical: 4xl
   colorScheme: inherit
   lockColorScheme: false
-  backgroundColor: base
+  backgroundColor: light-sand
   background:
     type: image
     imageSource: ""
@@ -92,8 +92,6 @@ groups:
     collapsed: true
     inputs:
       - sectionLabel
-      - colorScheme
-      - lockColorScheme
       - backgroundColor
       - background
       - haze

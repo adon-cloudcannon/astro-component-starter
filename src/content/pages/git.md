@@ -6,6 +6,7 @@ title: Git
 description: Everything lives in the repo, not a database.
 pageSections:
   - _component: page-sections/heroes/hero-split
+    backgroundColor: light-sand
     heading: Everything lives in the repo, not a database.
     subtext: >-
       CloudCannon reads and writes directly to your Git repo, so every change is tracked, every

@@ -6,6 +6,7 @@ title: Content Editors
 description: Draft. Edit. Publish. No problem.
 pageSections:
   - _component: page-sections/heroes/hero-split
+    backgroundColor: light-sand
     heading: Draft. Edit. Publish. No problem.
     subtext: >-
       Publish your best content with visual editing, custom components, and a flexible review

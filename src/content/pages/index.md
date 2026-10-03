@@ -6,6 +6,7 @@ title: Homepage
 description: Build freely. Edit easily.
 pageSections:
   - _component: page-sections/heroes/hero-split
+    backgroundColor: light-sand
     heading: Build freely. Edit easily.
     subtext: >-
       Welcome to the Git-based CMS that doesn't fight your workflow. Your site lives in Git, your

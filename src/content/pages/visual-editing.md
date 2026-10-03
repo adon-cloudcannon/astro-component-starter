@@ -6,6 +6,7 @@ title: Visual Editing
 description: Visual editing that commits to your repo
 pageSections:
   - _component: page-sections/heroes/hero-split
+    backgroundColor: sand
     heading: Visual editing that commits to your repo
     subtext: Code, content, and config all sit in one repo as plain files, so agents get the full picture.
     subtextSize: xl
@@ -17,7 +18,6 @@ pageSections:
       type: pattern
       pattern: pegboard
       mask: none
-    backgroundColor: surface
     haze:
       - x: 0.6957
         rx: 458px

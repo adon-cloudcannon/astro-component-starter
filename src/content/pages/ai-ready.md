@@ -6,6 +6,7 @@ title: AI Ready
 description: The CMS your AI tools can actually read
 pageSections:
   - _component: page-sections/heroes/hero-split
+    backgroundColor: light-sand
     heading: The CMS your AI tools can actually read
     subtext: Code, content, and config all sit in one repo as plain files, so agents get the full picture.
     subtextSize: xl

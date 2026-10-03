@@ -6,6 +6,7 @@ title: Enterprise
 description: Stop juggling websites. Start managing them.
 pageSections:
   - _component: page-sections/heroes/hero-split
+    backgroundColor: light-sand
     heading: Stop juggling websites. Start managing them.
     subtext: >-
       CloudCannon lets you have a high-impact web presence without the maintenance burden. Static
