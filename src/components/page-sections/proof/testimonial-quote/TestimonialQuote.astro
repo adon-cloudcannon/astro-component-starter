@@ -124,6 +124,16 @@ const isCarousel = layout === "carousel";
 // section left with four quotes and switched to `static` shows the first
 // rather than four stacked cards.
 const items: Quote[] = (isCarousel ? quotes : quotes.slice(0, 1)) as Quote[];
+
+/* The card declares its own scheme, the way the bento's cards do. Anything
+   inside it that reads a theme token rather than one of the card's own (a
+   Button's arrow, a link's hover) otherwise follows the band, so a cream card
+   on a dark band drew a Harbour arrow that all but vanished into it. `plain`
+   has no card, so it keeps the band's.
+
+   A comment cannot go between the attributes themselves: a JSX comment in
+   attribute position is a parse error in Astro, not a comment. */
+const cardScheme = tone === "plain" ? undefined : tone === "light" ? "light" : "dark";
 ---
 
 {items.length > 0 && (
@@ -150,6 +160,7 @@ const items: Quote[] = (isCarousel ? quotes : quotes.slice(0, 1)) as Quote[];
       data-quote-size={quoteSize === "lg" ? "lg" : undefined}
       data-bordered={bordered ? "" : undefined}
       data-tone={tone !== "base" ? tone : undefined}
+      data-theme={cardScheme}
       data-editable="array"
       data-prop="quotes"
     >
@@ -368,7 +379,12 @@ const items: Quote[] = (isCarousel ? quotes : quotes.slice(0, 1)) as Quote[];
            content column wide rather than a third of it. */
         --testimonial-quote-surface: var(--black);
         --testimonial-quote-edge: color-mix(in srgb, var(--gray-200, #d9d9d9) 8%, transparent);
-        --testimonial-quote-ink: var(--color-text-strong);
+        /* The card's own ink, not the band's. Read from `--color-text-strong`
+           this followed the section instead: a near-black card dropped onto a
+           cream band got midnight type on black, and the light card below got
+           cream on cream. The tone decides what the card is, so it decides
+           what colour the words are. */
+        --testimonial-quote-ink: var(--white);
         --testimonial-quote-quiet: var(--gray-400, #9a9a9a);
         --testimonial-quote-pad: 48px;
         /* Taller than it is wide, which is how the approved card is drawn: 80
@@ -424,16 +440,18 @@ const items: Quote[] = (isCarousel ? quotes : quotes.slice(0, 1)) as Quote[];
            is the card. */
         border-left: 0;
         padding-left: 0;
-        color: var(--testimonial-quote-ink);
         margin: 0;
       }
 
       /* On the paragraph as well as the blockquote. The quote is markdown, so
-         what carries the words is a <p>, and the base layer sets a size on
-         every <p>: set on the blockquote alone this measures as applied and
-         draws at 16. */
+         what carries the words is a <p>, and the base layer sets a size and a
+         colour on every <p>: set on the blockquote alone these measure as
+         applied and draw at 16 in the band's own text colour. Colour is the
+         one that shows: a light card on a dark band drew its quote cream on
+         cream while the blockquote around it carried the midnight. */
       .testimonial-quote-text,
       .testimonial-quote-text p {
+        color: var(--testimonial-quote-ink);
         font-size: var(--testimonial-quote-size);
         font-weight: 700;
         line-height: 1.3;
