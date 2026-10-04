@@ -196,6 +196,7 @@ pageSections:
             alignmentHorizontal: center
           - _component: building-blocks/core-elements/text
             text: Code, content, and config live together in Git. The whole project, in plain files.
+            size: lg
             alignmentHorizontal: center
           - _component: building-blocks/wrappers/grid
             columns: '3'
@@ -266,6 +267,7 @@ pageSections:
             alignmentHorizontal: center
           - _component: building-blocks/core-elements/text
             text: Forget update queues, plugin conflicts, and things breaking while you sleep.
+            size: lg
             alignmentHorizontal: center
           - _component: building-blocks/wrappers/grid
             columns: '3'
@@ -336,6 +338,7 @@ pageSections:
             alignmentHorizontal: center
           - _component: building-blocks/core-elements/text
             text: Pages are pre-built and served from a CDN, so sites load fast anywhere in the world.
+            size: lg
             alignmentHorizontal: center
           - _component: building-blocks/wrappers/grid
             columns: '3'
