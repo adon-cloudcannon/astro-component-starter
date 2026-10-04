@@ -11,6 +11,9 @@ headingLevel:
       - h3
 headingSize:
   type: select
+  # Two, not six. The design opens the homepage on Header 1 and every other
+  # page on Header 2, and that is what all thirteen heroes draw. A hero set to
+  # Header 5 is a mistake that looks like a choice.
   comment: >-
     Size of the title, independent of its level. The design opens the homepage
     on Header 1 and every other page on Header 2.
@@ -20,14 +23,6 @@ headingSize:
         name: Header 1
       - id: xl
         name: Header 2
-      - id: lg
-        name: Header 3
-      - id: md
-        name: Header 4
-      - id: sm
-        name: Header 5
-      - id: xs
-        name: Header 6
 subtext:
   type: markdown
   comment: Supporting copy beneath the heading.
