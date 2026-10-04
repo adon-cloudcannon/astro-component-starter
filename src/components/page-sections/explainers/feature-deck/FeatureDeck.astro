@@ -76,13 +76,19 @@ const {
     data-prop="eyebrow"
     text={eyebrow}
   />
-  <Heading
-    level={headingLevel}
-    size={headingSize}
-    data-prop="heading"
-  >
-    {heading}
-  </Heading>
+  {/* Only when there is one. A bound region with nothing behind it is an
+      error card in the Visual Editor, "expect to receive a value of type
+      string but instead received undefined", and an empty heading on the page
+      that the flow layer still spaces around. */}
+  {heading && (
+    <Heading
+      level={headingLevel}
+      size={headingSize}
+      data-prop="heading"
+    >
+      {heading}
+    </Heading>
+  )}
   <Text
     class="subtext"
     data-prop="subtext"

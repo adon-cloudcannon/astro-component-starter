@@ -43,6 +43,17 @@ const {
    */
   propWidth = 40,
   class: className,
+  /**
+   * What to put in front of this member's own field names when binding them.
+   *
+   * In a grid each member is an item of `members`, so a bare `name` resolves
+   * to `members.3.name` through the array around it. In the team-member CTA
+   * there is one member under a `member` key and no array, so a bare `name`
+   * asks the file for a top-level `name` that is not there and the editor
+   * draws an error card over the badge. The caller says where its member
+   * lives; nothing here can know.
+   */
+  propPrefix = "",
   useDefaultEditableBinding = false,
   _component,
   ...htmlAttributes
@@ -89,8 +100,8 @@ const tone = panelColour
         class="team-member-portrait"
         source={imageSource}
         alt={imageAlt || name}
-        data-prop-src="imageSource"
-        data-prop-alt="imageAlt"
+        data-prop-src={`${propPrefix}imageSource`}
+        data-prop-alt={`${propPrefix}imageAlt`}
       />
     )}
   </div>
@@ -101,7 +112,7 @@ const tone = panelColour
         <strong
           class="team-member-name"
           data-editable="text"
-          data-prop="name"
+          data-prop={`${propPrefix}name`}
         >
           {name}
         </strong>
@@ -110,7 +121,7 @@ const tone = panelColour
         <span
           class="team-member-role"
           data-editable="text"
-          data-prop="role"
+          data-prop={`${propPrefix}role`}
         >
           {role}
         </span>
@@ -124,8 +135,8 @@ const tone = panelColour
       source={propSource}
       alt={propAlt}
       style={`--team-member-prop-width: ${Number(propWidth) || 40}%`}
-      data-prop-src="propSource"
-      data-prop-alt="propAlt"
+      data-prop-src={`${propPrefix}propSource`}
+      data-prop-alt={`${propPrefix}propAlt`}
     />
   )}
 </div>

@@ -78,13 +78,24 @@ const {
   ratioWidth = 1160,
   ratioHeight = 679,
   class: className,
-  useDefaultEditableBinding: _useDefaultEditableBinding = false,
+  useDefaultEditableBinding = false,
   _component,
   "data-children-prop": childrenDataProp,
   ...htmlAttributes
 } = Astro.props;
 
 const statList: StatProps[] = Array.isArray(stats) ? stats : [];
+
+/* The stats are a region only where the caller says so, like every other
+   wrapper's array. Written unconditionally they claimed one wherever the
+   panel was drawn, including the pinned stepper's media column, which is the
+   same `steps` array rendered a second time and owns no paths: a label there
+   asked for `steps.stats.0.label`, a key with no index in front of it. */
+const effectiveChildrenProp =
+  childrenDataProp ?? (useDefaultEditableBinding ? "stats" : null);
+const arrayDataAttributes = effectiveChildrenProp
+  ? { "data-editable": "array", "data-prop": effectiveChildrenProp }
+  : {};
 
 /** A palette name, or a literal the design states outright. */
 const colour = (value: string) => (value.startsWith("#") ? value : `var(--${value})`);
@@ -145,16 +156,20 @@ const mirror = rootMirror({
       data-prop-alt="imageAlt"
     />
   )}
+  {/* `data-prop` on the list below, not `data-children-prop`. The latter is
+      the prop one component passes another; written onto a plain element it
+      is an attribute the editor does not read, so the array never said which
+      key it was and a stat's label asked for `pageSections.2.0.label`, an
+      index with no array in front of it. */}
   {statList.length > 0 && (
     <dl
       class:list={["stat-panel-stats", `at-${statsPosition}`, `align-${statsAlign}`]}
-      data-editable="array"
-      data-children-prop={childrenDataProp ?? "stats"}
+      {...arrayDataAttributes}
     >
       {statList.map((stat) => (
         <div
           class="stat-panel-stat"
-          data-editable="array-item"
+          data-editable={effectiveChildrenProp ? "array-item" : undefined}
           style={stat.iconColor ? `--stat-panel-mark: ${markColour(stat.iconColor)}` : undefined}
         >
           {stat.iconName && (
@@ -177,8 +192,8 @@ const mirror = rootMirror({
             </dd>
             <dt
               class="stat-panel-label"
-              data-editable="text"
-              data-prop="label"
+              data-editable={effectiveChildrenProp ? "text" : undefined}
+              data-prop={effectiveChildrenProp ? "label" : undefined}
             >
               {stat.label}
             </dt>

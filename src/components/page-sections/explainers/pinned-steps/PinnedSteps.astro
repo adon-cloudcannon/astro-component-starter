@@ -229,7 +229,18 @@ const mirror = rootMirror({
             data-active={index === 0 ? "" : undefined}
             aria-hidden={index !== 0}
           >
-            <Component contentSections={blocks(step.mediaSections)} />
+            {/* Not editable, deliberately. The media column is a second
+                rendering of the same `steps` array: the copy column already
+                binds each step as the array item, and a panel here is the
+                same row drawn again in another place. Bound as well, the
+                editor would be shown two of every step, and a block inside
+                one would ask for a path with no index in it —
+                `steps.mediaSections.0.stats.0.label`, which is what it did.
+                The copy column owns the regions; this column draws. */}
+            <Component
+              contentSections={blocks(step.mediaSections)}
+              useDefaultEditableBinding={false}
+            />
           </div>
         ))}
       </div>

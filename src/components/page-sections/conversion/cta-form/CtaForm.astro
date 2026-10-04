@@ -91,13 +91,18 @@ const {
       <Fragment slot="first">
         {/* `lg`, not the `xl` the other CTAs use: this one shares its row with
             a form, so the heading has half the width to fill. */}
-        <Heading
-          level={headingLevel}
-          size={headingSize}
-          data-prop="heading"
-        >
-          {heading}
-        </Heading>
+        {/* Only when there is one. A bound region with nothing behind it is
+            an error card in the Visual Editor and an empty heading on the
+            page. */}
+        {heading && (
+          <Heading
+            level={headingLevel}
+            size={headingSize}
+            data-prop="heading"
+          >
+            {heading}
+          </Heading>
+        )}
         <Text
           style={subtextWidth ? `max-inline-size: ${Number(subtextWidth)}px; margin-inline: auto; justify-self: center` : undefined}
           size={subtextSize}
@@ -127,13 +132,16 @@ const {
        empty second pane left the form in a 400 column with half the band
        blank. */
     <div class="cta-form-card">
-      <Heading
-        level={headingLevel}
-        size={headingSize}
-        data-prop="heading"
-      >
-        {heading}
-      </Heading>
+      {/* Only when there is one, as in the split above. */}
+      {heading && (
+        <Heading
+          level={headingLevel}
+          size={headingSize}
+          data-prop="heading"
+        >
+          {heading}
+        </Heading>
+      )}
       <Text
         style={subtextWidth ? `max-inline-size: ${Number(subtextWidth)}px` : undefined}
         size={subtextSize}

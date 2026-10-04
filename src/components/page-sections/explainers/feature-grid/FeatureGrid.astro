@@ -111,14 +111,18 @@ const artRow = Math.max(0, ...features.map((feature: FeatureProps) => Number(fea
     text={eyebrow}
     size="sm"
   />
-  <Heading
-    level={headingLevel}
-    size={headingSize}
-    alignmentHorizontal={alignmentHorizontal}
-    data-prop="heading"
-  >
-    {heading}
-  </Heading>
+  {/* Only when there is one. A bound region with nothing behind it is an
+      error card in the Visual Editor and an empty heading on the page. */}
+  {heading && (
+    <Heading
+      level={headingLevel}
+      size={headingSize}
+      alignmentHorizontal={alignmentHorizontal}
+      data-prop="heading"
+    >
+      {heading}
+    </Heading>
+  )}
   <Text
     class="feature-grid-subtext"
     alignmentHorizontal={alignmentHorizontal}

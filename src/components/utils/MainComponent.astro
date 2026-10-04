@@ -1,21 +1,27 @@
 ---
 import Components from "@component-utils/renderBlock.astro";
 
-const { sections } = Astro.props;
+const { sections, sectionsProp } = Astro.props;
 ---
 
 <!--
   Renders a page's block tree for both shells (`Page.astro`, `LibraryLayout`).
-  `data-prop` is relative to the `data-editable="component"` region the shell
-  wraps this in, whose `data-prop-<key>` maps it back to that shell's own
-  frontmatter key. That wrapper cannot live here: the editor's re-render would
-  nest a second copy of the region inside the first. Search indexing is the
-  shell's business too — the site shell marks the wrapper as a Pagefind body,
-  the docs shell deliberately does not.
+
+  `data-prop` is the shell's own frontmatter key, handed down as `sectionsProp`
+  — `pageSections` on the site, `contentSections` in the docs. It used to name
+  this component's own `sections` prop and lean on the wrapper's
+  `data-prop-sections` to map it back, which read well and did not hold: once
+  each row became a component region of its own the two were concatenated and
+  a heading asked for `pageSections.sections.4.heading`, a path no file has.
+
+  The wrapper cannot live here: the editor's re-render would nest a second
+  copy of the region inside the first. Search indexing is the shell's business
+  too — the site shell marks the wrapper as a Pagefind body, the docs shell
+  deliberately does not.
 -->
 <div
   data-editable="array"
-  data-prop="sections"
+  data-prop={sectionsProp}
   data-component-key="_component"
 >
   <Components contentSections={sections} />
