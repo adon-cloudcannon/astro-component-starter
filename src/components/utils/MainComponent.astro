@@ -1,26 +1,25 @@
 ---
 import Components from "@component-utils/renderBlock.astro";
 
-/* Defaulted, never bare. The editor re-renders this component on its own with
-   nothing but its data, so a prop the shell passes in the template is gone by
-   then: left undefined, `data-prop` came off the array entirely and the whole
-   page was replaced by "Array editable regions require a 'data-prop' HTML
-   attribute but none was provided". The site's key is the default because it
-   is the one an editor is ever looking at; the docs shell passes its own and
-   falls back to this if it is ever re-rendered alone, which is a wrong path
-   rather than a blank page. */
-const { sections, sectionsProp = "pageSections" } = Astro.props;
+const { sections } = Astro.props;
 ---
 
 <!--
   Renders a page's block tree for both shells (`Page.astro`, `LibraryLayout`).
 
-  `data-prop` is the shell's own frontmatter key, handed down as `sectionsProp`
-  — `pageSections` on the site, `contentSections` in the docs. It used to name
-  this component's own `sections` prop and lean on the wrapper's
-  `data-prop-sections` to map it back, which read well and did not hold: once
-  each row became a component region of its own the two were concatenated and
-  a heading asked for `pageSections.sections.4.heading`, a path no file has.
+  `data-prop` is this component's own `sections` prop, which is right and has
+  to stay that way: paths inside a component region resolve against the
+  component's props, and the shell's `data-prop-<key>` is what maps `sections`
+  back to its own frontmatter key — `pageSections` on the site,
+  `contentSections` in the docs.
+
+  Naming the frontmatter key here instead looks tidier and is fatal. `pageSections`
+  is not a key of this component's props, so the array resolves to nothing and
+  the editor replaces the whole page with "expect to receive a value of type
+  array but instead received undefined". The error that prompted that change
+  printed the path as `pageSections.sections.4.heading`, which is the editor
+  showing both hops of a chain that was working; the fault was a heading bound
+  on a section that had none.
 
   The wrapper cannot live here: the editor's re-render would nest a second
   copy of the region inside the first. Search indexing is the shell's business
@@ -29,7 +28,7 @@ const { sections, sectionsProp = "pageSections" } = Astro.props;
 -->
 <div
   data-editable="array"
-  data-prop={sectionsProp || "pageSections"}
+  data-prop="sections"
   data-component-key="_component"
 >
   <Components contentSections={sections} />
