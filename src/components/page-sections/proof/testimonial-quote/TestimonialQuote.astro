@@ -23,10 +23,7 @@
  * card's own accent, a rule between the quote and the person.
  */
 import CustomSection from "@builders/custom-section/CustomSection.astro";
-import { resolveImageSource } from "@component-utils/resolveImageSource";
-import Button from "@core-elements/button/Button.astro";
-import Image from "@core-elements/image/Image.astro";
-import { renderMarkdown } from "@component-utils/markdown";
+import TestimonialQuoteItem from "./TestimonialQuoteItem.astro";
 
 type Quote = {
   text?: string;
@@ -117,13 +114,16 @@ const {
 
 const LAYOUTS = ["static", "carousel", "split-person", "split-quote"];
 const layout = LAYOUTS.includes(String(variant)) ? String(variant) : "static";
-const isSplit = layout.startsWith("split");
 const isCarousel = layout === "carousel";
 
-// Only the carousel reads past the first. Everything else draws one card, so a
-// section left with four quotes and switched to `static` shows the first
-// rather than four stacked cards.
-const items: Quote[] = (isCarousel ? quotes : quotes.slice(0, 1)) as Quote[];
+/* Every quote, in every layout.
+
+   Only the carousel used to read past the first, so a static card with two
+   quotes drew one. That is not what an editor sees: CloudCannon draws the
+   item it has just added, so a second quote appeared in the Visual Editor and
+   was gone on the next load. The layouts that are not a carousel stack them,
+   with a gap. */
+const items: Quote[] = quotes as Quote[];
 
 /* The card declares its own scheme, the way the bento's cards do. Anything
    inside it that reads a theme token rather than one of the card's own (a
@@ -164,139 +164,18 @@ const cardScheme = tone === "plain" ? undefined : tone === "light" ? "light" : "
       data-editable="array"
       data-prop="quotes"
     >
-      {items.map((quote, index) => {
-        const accent = quote.accentColor ? `var(--${quote.accentColor})` : undefined;
-        const body = quote.text ? renderMarkdown(quote.text) : "";
-        const marks = quote.quoteMarks !== false;
-
-        /* Lifted out of the attribution: on the case-study band the link sits
-           under the quote rather than under a name, and it is the same Button
-           either way. */
-        const linkButton = quote.linkText ? (
-          <Button
-            class="testimonial-quote-link"
-            variant="text"
-            size="sm"
-            iconName="arrow-right"
-            iconPosition="after"
-            link={quote.link || undefined}
-            data-prop="linkText"
-          >
-            {quote.linkText}
-            {quote.company && <span class="visually-hidden"> about {quote.company}</span>}
-          </Button>
-        ) : null;
-
-        const person = (
-          <div class="testimonial-quote-who">
-            {/* Always a disc, even with nothing in it: the design's card has
-                a face at the head of its column, and without one the name
-                starts hard against the card's edge and the whole block reads
-                as a different composition. */}
-            <span class="testimonial-quote-avatar">
-              {quote.authorImage && (
-                <Image
-                  source={quote.authorImage}
-                  alt={quote.authorImageAlt}
-                  decorative={!quote.authorImageAlt}
-                  data-prop-src="authorImage"
-                  data-prop-alt="authorImageAlt"
-                />
-              )}
-            </span>
-            <div class="testimonial-quote-attribution">
-              {quote.authorName && (
-                <p class="testimonial-quote-name" data-prop="authorName">{quote.authorName}</p>
-              )}
-              {(quote.authorDescription || quote.company) && (
-                <p class="testimonial-quote-role">
-                  <span data-prop="authorDescription">{quote.authorDescription}</span>
-                  {quote.company && (
-                    <>
-                      {quote.authorDescription && " "}
-                      <span class="testimonial-quote-company" data-prop="company">{quote.company}</span>
-                    </>
-                  )}
-                </p>
-              )}
-              {/* The Button, like every other arrow link on the site, so a
-                  change to the button changes this one too. Its own
-                  `.label-text` span is what takes the underline:
-                  text-decoration propagates down and a child cannot take it
-                  off, so ruled on the whole link the line ran under the arrow.
-                  The card sets the size, the colour and the hover; the
-                  component sets everything else. */}
-              {linkButton}
-            </div>
-          </div>
-        );
-
-        return (
-          <article
-            class="testimonial-quote-slide"
-            data-editable="array-item"
-            data-id="page-sections/proof/testimonial-quote/testimonial-quote-item"
-            data-component="page-sections/proof/testimonial-quote/testimonial-quote-item"
-            data-index={index}
-            data-active={index === 0 ? "" : undefined}
-            hidden={isCarousel && index > 0}
-            aria-roledescription={isCarousel ? "slide" : undefined}
-            aria-label={isCarousel ? `${index + 1} of ${items.length}` : undefined}
-          >
-            {/* The marks are drawn in CSS. Written into the text they land on
-                their own lines when the quote is more than one paragraph, and
-                an editor has to remember to type them. */}
-            {/* The accent rides on the quote and is lifted back to the slide
-                in CSS.
-
-                It was an inline style on the `<article>`, which is this
-                slide's array-item root. CloudCannon keeps a region's root
-                element and swaps only its contents, so an attribute set there
-                from a prop never changes in the Visual Editor: picking a
-                colour saved it and repainted nothing until a reload. The
-                emphasised run, the quote marks and the link's arrow all read
-                the property and all sit inside this slide, so a lift puts it
-                back where they can see it.
-
-                `lint:roots` does not catch this one. It reads the first
-                element of a component's template, and an array item built
-                inside a `.map()` is a region root it never looks at. */}
-            <blockquote
-              data-accent={quote.accentColor || undefined}
-              class="testimonial-quote-text"
-              data-marks={marks ? "" : undefined}
-              data-prop="text"
-              set:html={body}
-            />
-
-            {!isSplit && (
-              <div class="testimonial-quote-foot">
-                {person}
-                {quote.logoSource && (
-                  /* The repo's mask utility rather than a picture. A client
-                     mark has its fills baked in, so an `<img>` of a white one
-                     is invisible on a light card and a dark one is invisible
-                     on a dark card; as a mask it takes the card's own quiet
-                     ink either way. Same mechanism the logo row uses. */
-                  <span
-                    class="testimonial-quote-logo logo-mark"
-                    role="img"
-                    aria-label={quote.logoAlt || quote.company}
-                    style={{
-                      "--logo-mark-source": `url("${resolveImageSource(quote.logoSource)}")`,
-                      ...(quote.logoAspect ? { "--logo-mark-aspect": quote.logoAspect } : {}),
-                    }}
-                    data-prop-src="logoSource"
-                    data-prop-alt="logoAlt"
-                  />
-                )}
-              </div>
-            )}
-
-            {isSplit && person}
-          </article>
-        );
-      })}
+      {items.map((quote, index) => (
+        <TestimonialQuoteItem
+          {...quote}
+          layout={layout}
+          index={index}
+          isCarousel={isCarousel}
+          slideCount={items.length}
+          data-editable="array-item"
+          data-id="page-sections/proof/testimonial-quote/testimonial-quote-item"
+          data-component="page-sections/proof/testimonial-quote/testimonial-quote-item"
+        />
+      ))}
 
       {isCarousel && items.length > 1 && (
         /* One set of controls for the card rather than one per slide: the
@@ -430,6 +309,24 @@ const cardScheme = tone === "plain" ? undefined : tone === "light" ? "light" : "
 
       .testimonial-quote-slide[hidden] {
         display: none;
+      }
+
+      /* Two quotes in one card are two quotes, not one long one.
+
+         The card draws 80 at its own ends, so the space between a pair sits
+         under that at the card's 48: enough to read as a break, not so much
+         that the second quote looks like it belongs to the next band. The
+         carousel's slides are `display: none` rather than hidden in flow, so
+         they take no gap and a one-quote card is unchanged.
+
+         `--space-before` as well as the margin: the flow layer writes
+         `margin-block-start` from that property and `utils` out-ranks
+         `page-sections`, so a plain margin here loses to it wherever the card
+         lands inside a flow. */
+      .testimonial-quote-slide + .testimonial-quote-slide {
+        --space-before: var(--testimonial-quote-pad);
+
+        margin-block-start: var(--testimonial-quote-pad);
       }
 
       /* --- the quote ------------------------------------------------- */

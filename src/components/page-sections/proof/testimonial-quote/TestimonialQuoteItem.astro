@@ -1,0 +1,184 @@
+---
+/**
+ * One quote inside a quote card.
+ *
+ * Drawn here rather than in the parent's `.map()` because an array item the
+ * editor can redraw has to be a component it can find: the item carried a
+ * `data-component` key for a file that did not exist, so adding a second
+ * quote in CloudCannon rendered "Failed to find a registered component".
+ * `componentKeyFromPath` turns this filename into exactly that key.
+ *
+ * Everything the parent knows and this does not — which layout, which slide,
+ * how many — arrives as a prop with a default that draws a single static
+ * quote, because a standalone redraw by the editor passes the array item's
+ * own fields and nothing else.
+ *
+ * The styles stay in TestimonialQuote's global block: these class names are
+ * the card's, and splitting them across two files would mean reading both to
+ * know what one of them draws.
+ */
+import { resolveImageSource } from "@component-utils/resolveImageSource";
+import { rootMirror } from "@component-utils/rootMirror.mjs";
+import Button from "@core-elements/button/Button.astro";
+import Image from "@core-elements/image/Image.astro";
+import { renderMarkdown } from "@component-utils/markdown";
+
+const {
+  text = "",
+  authorName = "",
+  authorDescription = "",
+  company = "",
+  authorImage = "",
+  authorImageAlt = "",
+  logoSource = "",
+  logoAlt = "",
+  logoAspect = "",
+  linkText = "",
+  link = "",
+  accentColor = "",
+  /** The pair of marks around the quote. On unless a quote turns them off. */
+  quoteMarks = true,
+  /** The card's layout, which decides whether the person sits under the quote. */
+  layout = "static",
+  /** Which slide this is, and whether the carousel is showing it. */
+  index = 0,
+  isCarousel = false,
+  slideCount = 1,
+  class: className,
+  _component,
+  ...htmlAttributes
+} = Astro.props;
+
+const isSplit = String(layout).startsWith("split");
+const body = text ? renderMarkdown(text) : "";
+const marks = quoteMarks !== false;
+
+/* The carousel's bookkeeping, mirrored rather than written on the root. This
+   article is the array item's region root, which the editor keeps while it
+   swaps the contents, so an attribute set here from a prop goes stale: a
+   redrawn slide would keep the index it had when the page loaded. The mirror
+   rides on the blockquote and is copied back up. */
+const mirror = rootMirror({
+  "data-index": index,
+  "data-active": index === 0 ? "" : null,
+});
+
+/* The person and the link are built in the template, not here: Astro's
+   frontmatter is TypeScript, so markup assigned to a `const` up here is a
+   parse error rather than an element. */
+---
+
+<article
+  class:list={["testimonial-quote-slide", className]}
+  data-index={index}
+  data-active={index === 0 ? "" : undefined}
+  hidden={isCarousel && index > 0}
+  aria-roledescription={isCarousel ? "slide" : undefined}
+  aria-label={isCarousel ? `${index + 1} of ${slideCount}` : undefined}
+  {...htmlAttributes}
+>
+  {/* The marks are drawn in CSS. Written into the text they land on their own
+      lines when the quote is more than one paragraph, and an editor has to
+      remember to type them. */}
+  {/* The accent rides on the quote and is lifted back to the slide in CSS.
+
+      It was an inline style on the `<article>`, which is this slide's
+      array-item root. CloudCannon keeps a region's root element and swaps only
+      its contents, so an attribute set there from a prop never changes in the
+      Visual Editor: picking a colour saved it and repainted nothing until a
+      reload. The emphasised run, the quote marks and the link's arrow all read
+      the property and all sit inside this slide, so a lift puts it back where
+      they can see it. */}
+  <blockquote
+    {...mirror}
+    data-accent={accentColor || undefined}
+    class="testimonial-quote-text"
+    data-marks={marks ? "" : undefined}
+    data-prop="text"
+    set:html={body}
+  />
+
+  {(() => {
+    /* The Button, like every other arrow link on the site, so a change to the
+       button changes this one too. Its own `.label-text` span is what takes
+       the underline: text-decoration propagates down and a child cannot take
+       it off, so ruled on the whole link the line ran under the arrow. The
+       card sets the size, the colour and the hover; the component sets
+       everything else. */
+    const linkButton = linkText ? (
+      <Button
+        class="testimonial-quote-link"
+        variant="text"
+        size="sm"
+        iconName="arrow-right"
+        iconPosition="after"
+        link={link || undefined}
+        data-prop="linkText"
+      >
+        {linkText}
+        {company && <span class="visually-hidden"> about {company}</span>}
+      </Button>
+    ) : null;
+
+    const person = (
+      <div class="testimonial-quote-who">
+        {/* Always a disc, even with nothing in it: the design's card has a
+            face at the head of its column, and without one the name starts
+            hard against the card's edge and the whole block reads as a
+            different composition. */}
+        <span class="testimonial-quote-avatar">
+          {authorImage && (
+            <Image
+              source={authorImage}
+              alt={authorImageAlt}
+              decorative={!authorImageAlt}
+              data-prop-src="authorImage"
+              data-prop-alt="authorImageAlt"
+            />
+          )}
+        </span>
+        <div class="testimonial-quote-attribution">
+          {authorName && <p class="testimonial-quote-name" data-prop="authorName">{authorName}</p>}
+          {(authorDescription || company) && (
+            <p class="testimonial-quote-role">
+              <span data-prop="authorDescription">{authorDescription}</span>
+              {company && (
+                <>
+                  {authorDescription && " "}
+                  <span class="testimonial-quote-company" data-prop="company">{company}</span>
+                </>
+              )}
+            </p>
+          )}
+          {linkButton}
+        </div>
+      </div>
+    );
+
+    if (isSplit) return person;
+
+    return (
+      <div class="testimonial-quote-foot">
+        {person}
+        {logoSource && (
+          /* The repo's mask utility rather than a picture. A client mark has
+             its fills baked in, so an `<img>` of a white one is invisible on a
+             light card and a dark one is invisible on a dark card; as a mask
+             it takes the card's own quiet ink either way. Same mechanism the
+             logo row uses. */
+          <span
+            class="testimonial-quote-logo logo-mark"
+            role="img"
+            aria-label={logoAlt || company}
+            style={{
+              "--logo-mark-source": `url("${resolveImageSource(logoSource)}")`,
+              ...(logoAspect ? { "--logo-mark-aspect": logoAspect } : {}),
+            }}
+            data-prop-src="logoSource"
+            data-prop-alt="logoAlt"
+          />
+        )}
+      </div>
+    );
+  })()}
+</article>
