@@ -126,7 +126,7 @@ lockColorScheme:
   comment: Ignores the site theme toggle. Only applies when Color Scheme is Light or Dark.
 backgroundColor:
   type: select
-  label: Band colour
+  label: Background colour
   comment: The colour this band is painted, and the ink that goes with it.
   options:
     values:

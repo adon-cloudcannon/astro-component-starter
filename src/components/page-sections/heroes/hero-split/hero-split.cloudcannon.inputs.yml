@@ -252,7 +252,7 @@ haze:
     it is follow the copy column.
 backgroundColor:
   type: select
-  label: Band colour
+  label: Background colour
   comment: The colour this band is painted, and the ink that goes with it.
   options:
     values:
