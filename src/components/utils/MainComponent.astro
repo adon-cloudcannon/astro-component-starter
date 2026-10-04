@@ -1,7 +1,15 @@
 ---
 import Components from "@component-utils/renderBlock.astro";
 
-const { sections, sectionsProp } = Astro.props;
+/* Defaulted, never bare. The editor re-renders this component on its own with
+   nothing but its data, so a prop the shell passes in the template is gone by
+   then: left undefined, `data-prop` came off the array entirely and the whole
+   page was replaced by "Array editable regions require a 'data-prop' HTML
+   attribute but none was provided". The site's key is the default because it
+   is the one an editor is ever looking at; the docs shell passes its own and
+   falls back to this if it is ever re-rendered alone, which is a wrong path
+   rather than a blank page. */
+const { sections, sectionsProp = "pageSections" } = Astro.props;
 ---
 
 <!--
@@ -21,7 +29,7 @@ const { sections, sectionsProp } = Astro.props;
 -->
 <div
   data-editable="array"
-  data-prop={sectionsProp}
+  data-prop={sectionsProp || "pageSections"}
   data-component-key="_component"
 >
   <Components contentSections={sections} />

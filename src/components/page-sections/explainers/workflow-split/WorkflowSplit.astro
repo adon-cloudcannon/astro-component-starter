@@ -149,6 +149,9 @@ const feedKeyframes = feedSteps
         `${stop(index * CYCLE_MS + LANDS_MS + SLIDE_MS)}{transform:translateY(${-(index + 1) * ROW_PITCH}px)}`,
     ).join("")}100%{transform:translateY(${-feedSteps * ROW_PITCH}px)}}`
   : "";
+
+/* One name for both halves of the region, so they cannot disagree. */
+const panelsProp = childrenDataProp ?? (useDefaultEditableBinding ? "panels" : undefined);
 ---
 
 <CustomSection
@@ -195,10 +198,15 @@ const feedKeyframes = feedSteps
     data-children-prop="buttonSections"
   />
 
+    {/* Both halves together. `data-editable="array"` with no `data-prop` is
+        not a weaker region, it is a fatal one: the editor replaces the whole
+        thing with "Array editable regions require a 'data-prop' HTML
+        attribute but none was provided". The prop is conditional, so the
+        region has to be. */}
   <div
     class="workflow-columns"
-    data-editable="array"
-    data-prop={childrenDataProp ?? (useDefaultEditableBinding ? "panels" : undefined)}
+    data-editable={panelsProp ? "array" : undefined}
+    data-prop={panelsProp}
   >
     {panelList.map((panel, index) => (
       <Fragment>

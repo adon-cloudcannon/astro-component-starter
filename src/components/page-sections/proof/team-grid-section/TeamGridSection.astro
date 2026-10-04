@@ -124,9 +124,14 @@ const offsetAt = (index: number) => (index % laneCount) % 2 === 1;
     )}
   </div>
 
+    {/* Both halves together. `data-editable="array"` with no `data-prop` is
+        not a weaker region, it is a fatal one: the editor replaces the whole
+        thing with "Array editable regions require a 'data-prop' HTML
+        attribute but none was provided". The prop is conditional, so the
+        region has to be. */}
   <div
     class="team-grid-wall"
-    data-editable="array"
+    data-editable={useDefaultEditableBinding ? "array" : undefined}
     data-prop={useDefaultEditableBinding ? "members" : undefined}
   >
     <div class="team-grid-lanes" style={`--team-grid-lanes: ${laneCount}`}>
