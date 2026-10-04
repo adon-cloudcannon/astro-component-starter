@@ -171,14 +171,18 @@ const mirror = rootMirror({
         data-next={NEXT[card.env] || undefined}
         style={`--site-card-x: ${(card.left * 100).toFixed(3)}%; --site-card-y: ${(card.top * 100).toFixed(3)}%`}
       >
+        {/* The screenshot is not bound. It lives at `siteCards.cards.N.image`,
+            and nothing between here and the section declares `cards` as an
+            array, so a binding asks the section for a top-level `image` and
+            draws an error card over the mockup. Wiring the real path means
+            declaring that nested array, which is a change to how
+            feature-split hands this component its data. */}
         {card.image && (
           <span class="site-cards-photo" data-photo>
             <Image
               source={card.image}
               alt={card.imageAlt}
               decorative={!card.imageAlt}
-              data-prop-src="image"
-              data-prop-alt="imageAlt"
             />
           </span>
         )}

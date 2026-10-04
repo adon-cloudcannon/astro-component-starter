@@ -13,6 +13,7 @@ pageSections:
       version is recoverable, access it with any tool.
     subtextSize: xl
     imageSource: /src/assets/images/marketing/hero-gitbasedcms-01-1.png
+    imageAlt: ''
     headingSize: xl
     imageOverflow: 119
     buttonSections:
@@ -228,6 +229,7 @@ pageSections:
       you're stuck.
     subtextSize: lg
     imageSource: /src/assets/images/marketing/ribbon-01-1.png
+    imageAlt: ''
     backgroundColor: light-sand
     subtextWidth: 579
     headingSize: lg
@@ -284,6 +286,7 @@ pageSections:
       free in minutes, or book a demo and we’ll walk you through the real thing.
     subtextSize: lg
     imageSource: /src/assets/images/marketing/cloudcannon-truck-closed-1.png
+    imageAlt: ''
     backgroundColor: pacific
     headingSize: lg
     imageOverflow: 334

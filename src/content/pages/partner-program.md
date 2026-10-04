@@ -13,6 +13,7 @@ pageSections:
       you grow your portfolio.
     subtextSize: xl
     imageSource: /src/assets/images/marketing/screenshot-2026-08-17-at-12-00-53-1.png
+    imageAlt: ''
     headingSize: xl
     imageOverflow: 59
     reverse: true

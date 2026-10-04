@@ -11,6 +11,7 @@ pageSections:
     subtext: Code, content, and config all sit in one repo as plain files, so agents get the full picture.
     subtextSize: xl
     imageSource: /src/assets/images/marketing/hero-visualediting-01-1.png
+    imageAlt: ''
     headingSize: xl
     imageOverflow: 15
     reverse: true
@@ -120,6 +121,7 @@ pageSections:
       rearrange. Editors get room to work, and nobody can break a layout by accident.
     subtextSize: lg
     imageSource: /src/assets/images/marketing/rectangle-856-3806-72794.png
+    imageAlt: ''
     backgroundColor: sand
     subtextWidth: 646
     headingSize: lg

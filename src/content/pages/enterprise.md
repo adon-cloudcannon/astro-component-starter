@@ -13,6 +13,7 @@ pageSections:
       architecture keeps things fast, secure, and quiet.
     subtextSize: xl
     imageSource: /src/assets/images/marketing/screenshot-2026-08-18-at-14-16-52-1.png
+    imageAlt: ''
     headingSize: xl
     imageOverflow: 151
     buttonSections:

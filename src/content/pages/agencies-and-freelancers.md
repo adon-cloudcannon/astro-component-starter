@@ -13,6 +13,7 @@ pageSections:
       your clients love to edit.
     subtextSize: xl
     imageSource: /src/assets/images/marketing/cloudcannon-hero-portfolio-01-1.png
+    imageAlt: ''
     headingSize: xl
     imageOverflow: 63
     buttonSections:

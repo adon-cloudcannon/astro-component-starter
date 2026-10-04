@@ -13,6 +13,7 @@ pageSections:
       process for your whole team.
     subtextSize: xl
     imageSource: /src/assets/images/marketing/screenshot-2026-08-19-at-12-59-24-1.png
+    imageAlt: ''
     headingSize: xl
     imageOverflow: 83
     buttonSections:
@@ -187,6 +188,7 @@ pageSections:
       free in minutes, or book a demo and we’ll walk you through the real thing.
     subtextSize: lg
     imageSource: /src/assets/images/marketing/cloudcannon-truck-closed-1.png
+    imageAlt: ''
     backgroundColor: pacific
     headingSize: lg
     imageOverflow: 336

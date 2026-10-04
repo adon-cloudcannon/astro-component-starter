@@ -13,6 +13,7 @@ pageSections:
       and everyone's changes sync automatically.
     subtextSize: xl
     imageSource: /src/assets/images/marketing/hero-developers-01-1.png
+    imageAlt: ''
     headingSize: xl
     imageOverflow: 217
     buttonSections:
@@ -68,6 +69,7 @@ pageSections:
       through the demo.
     subtextSize: lg
     imageSource: /src/assets/images/marketing/screenshot-2026-08-11-at-17-25-56-1.png
+    imageAlt: ''
     backgroundColor: light-sand
     subtextWidth: 612
     headingSize: lg
@@ -246,6 +248,7 @@ pageSections:
       leave CloudCannon, you leave with everything: your content, your code, your commits.
     subtextSize: lg
     imageSource: /src/assets/images/marketing/ribbon-01-1.png
+    imageAlt: ''
     backgroundColor: light-sand
     subtextWidth: 816
     headingSize: lg

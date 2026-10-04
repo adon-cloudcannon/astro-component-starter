@@ -46,11 +46,19 @@ if (import.meta.env.DEV && hasValidSrc && !decorative && !isNonEmptyString(alt))
 }
 const isEditable =
   useDefaultEditableBinding || customDataPropSrc != null || customDataPropAlt != null;
+/* Bind each facet only where there is something to bind it to.
+   `source` and `alt` are the default binding's own names and belong to a
+   block an editor placed, where the data really does have those keys. A
+   caller naming one facet explicitly is saying where its picture lives, and
+   inventing the other from the default asks the file for an `alt` that is
+   not there: the cta-split's reveal and the testimonial's author avatar both
+   pass a src and derive their alt from another field, and both drew
+   "expect the alt key to have a value of type string" over the picture. */
 const dataAttributes = isEditable
   ? {
       "data-editable": "image",
-      "data-prop-src": customDataPropSrc || "source",
-      "data-prop-alt": customDataPropAlt || "alt",
+      "data-prop-src": customDataPropSrc || (useDefaultEditableBinding ? "source" : undefined),
+      "data-prop-alt": customDataPropAlt || (useDefaultEditableBinding ? "alt" : undefined),
     }
   : {};
 

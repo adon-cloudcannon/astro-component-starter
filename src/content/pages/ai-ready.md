@@ -11,6 +11,7 @@ pageSections:
     subtext: Code, content, and config all sit in one repo as plain files, so agents get the full picture.
     subtextSize: xl
     imageSource: /src/assets/images/marketing/screenshot-2026-08-15-at-15-46-59-1-3806-68971.png
+    imageAlt: ''
     headingSize: xl
     imageOverflow: 42
     buttonSections:
@@ -184,6 +185,7 @@ pageSections:
     contentCard: true
     paddingVertical: 5xl
     imageSource: /src/assets/images/marketing/camera-01-1.png
+    imageAlt: ''
     imageReveal: ''
     # Click the camera and it takes one.
     camera:

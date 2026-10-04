@@ -13,6 +13,7 @@ pageSections:
       your team spends time building what's next.
     subtextSize: xl
     imageSource: /src/assets/images/marketing/hero-lowmaintenance-01-1.png
+    imageAlt: ''
     headingSize: xl
     imageOverflow: 107
     buttonSections:
@@ -275,5 +276,6 @@ pageSections:
     heading: Wanna learn more about our product?
     linkText: Explore visual editing
     imageSource: /src/assets/images/marketing/rocks-corner-3806-70523.png
+    imageAlt: ''
     headingSize: lg
 ---

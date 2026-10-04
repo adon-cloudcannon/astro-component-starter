@@ -13,6 +13,7 @@ pageSections:
       built into the architecture, not bolted on.
     subtextSize: xl
     imageSource: /src/assets/images/marketing/screenshot-2026-08-15-at-15-52-30-1-3806-70839.png
+    imageAlt: ''
     headingSize: xl
     imageOverflow: 5
     buttonSections:
@@ -164,6 +165,7 @@ pageSections:
     contentCard: true
     paddingVertical: 5xl
     imageSource: /src/assets/images/marketing/motorcycle-01-1.png
+    imageAlt: ''
     imageReveal: ''
     heading: See how fast your site could be
     subtext: See how CloudCannon's static-first approach delivers the speed boost your business needs.

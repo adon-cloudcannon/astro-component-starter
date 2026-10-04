@@ -152,8 +152,8 @@ const mirror = rootMirror({
       style={`--stat-panel-shot-width: ${Number(imageWidth) || 62}%`}
       source={imageSource}
       alt={imageAlt}
-      data-prop-src="imageSource"
-      data-prop-alt="imageAlt"
+      data-prop-src={effectiveChildrenProp ? "imageSource" : undefined}
+      data-prop-alt={effectiveChildrenProp ? "imageAlt" : undefined}
     />
   )}
   {/* `data-prop` on the list below, not `data-children-prop`. The latter is

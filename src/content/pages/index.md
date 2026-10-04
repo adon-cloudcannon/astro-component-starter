@@ -67,6 +67,7 @@ pageSections:
       visual interface to edit it.
     subtextSize: lg
     imageSource: /src/assets/images/marketing/food-bank-volunteers-produce-1-3806-69798.png
+    imageAlt: ''
     backgroundColor: light-sand
     subtextWidth: 580
     headingSize: lg
@@ -518,6 +519,7 @@ pageSections:
       free in minutes, or book a demo and we’ll walk you through the real thing.
     subtextSize: lg
     imageSource: /src/assets/images/marketing/cloudcannon-truck-closed-1.png
+    imageAlt: ''
     backgroundColor: pacific
     headingSize: lg
     imageOverflow: 333
