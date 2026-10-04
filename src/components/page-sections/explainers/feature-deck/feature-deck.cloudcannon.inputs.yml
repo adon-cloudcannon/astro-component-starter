@@ -63,6 +63,10 @@ stickyOffset:
       - id: lg
         name: Large
 cardColorScheme:
+  hidden: true
+  # The cards are cream on every deck the design draws, and a card that
+  # takes its own scheme independently of the band is a way to get a dark
+  # card on a dark band and nothing else.
   type: select
   comment: Colour scheme for the cards, independent of the section.
   options:
@@ -74,6 +78,9 @@ cardColorScheme:
       - id: dark
         name: Dark
 showRail:
+  hidden: true
+  # The rail is what tells a reader where they are in the stack, so a deck
+  # without it is a deck missing a part rather than a variant.
   type: switch
   comment: Shows the jump links beside the deck.
 
@@ -82,6 +89,10 @@ sectionLabel:
   type: text
   comment: Accessible name for the section, used by screen readers.
 maxContentWidth:
+  hidden: true
+  # Set from the design, not by an editor: every band on the site uses the
+  # same column and the same rhythm, and a section that drifts from it reads
+  # as a mistake rather than a choice.
   type: select
   comment: Maximum width of the section's content.
   options:
@@ -93,6 +104,10 @@ maxContentWidth:
       - id: 2xl
         name: 2xl
 paddingHorizontal:
+  hidden: true
+  # Set from the design, not by an editor: every band on the site uses the
+  # same column and the same rhythm, and a section that drifts from it reads
+  # as a mistake rather than a choice.
   type: select
   comment: Horizontal padding around the content.
   options:
@@ -104,6 +119,10 @@ paddingHorizontal:
       - id: lg
         name: Large
 paddingVertical:
+  hidden: true
+  # Set from the design, not by an editor: every band on the site uses the
+  # same column and the same rhythm, and a section that drifts from it reads
+  # as a mistake rather than a choice.
   type: select
   comment: Vertical padding around the content.
   options:
@@ -139,7 +158,7 @@ lockColorScheme:
   comment: Ignores the site theme toggle. Only applies when Color Scheme is Light or Dark.
 backgroundColor:
   type: select
-  label: Band colour
+  label: Background colour
   comment: The colour this band is painted, and the ink that goes with it.
   options:
     values:
