@@ -1,0 +1,24 @@
+# A print in the Our Story hero's deck.
+#
+# Here rather than inside the component's structure-value file: a `_structures`
+# block there reaches only the component it sits in, and the hero and anything
+# else that grows a deck later should be adding to one list, not each writing
+# their own under the same global name.
+#
+# The thumbnail is the photo itself. A deck is a set of photographs that differ
+# only in what they show, so a generic icon beside each one would name none of
+# them.
+photoStackPhotos:
+  values:
+    - label: Photo
+      icon: photo_camera
+      value:
+        _component: page-sections/heroes/hero-photo-stack/photo-stack-card
+        source: ""
+        alt: ""
+      preview:
+        text:
+          - key: alt
+          - Photo
+        image:
+          - key: source

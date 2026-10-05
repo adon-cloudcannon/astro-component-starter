@@ -1,0 +1,37 @@
+label: Hero Photo Stack
+icon: photo_library
+description: Hero with copy on one side and a deck of photos you can click through on the other.
+value:
+  _component: page-sections/heroes/hero-photo-stack
+  eyebrow: ""
+  heading: A clear promise in one line
+  headingLevel: h1
+  headingSize: 2xl
+  subtext: One or two sentences on who this is for and what they get.
+  subtextSize: xl
+  subtextWidth: ""
+  photos:
+    - _component: page-sections/heroes/hero-photo-stack/photo-stack-card
+      source: ""
+      alt: ""
+    - _component: page-sections/heroes/hero-photo-stack/photo-stack-card
+      source: ""
+      alt: ""
+  buttonSections: []
+  embellishmentSource: ""
+  embellishmentWidth: 55
+  reverse: false
+  sectionLabel: ""
+  maxContentWidth: xl
+  paddingHorizontal: gutter
+  paddingVertical: 4xl
+  backgroundColor: light-sand
+  pattern: grid
+  haze: true
+_inputs:
+  photos:
+    type: array
+    options:
+      structures: _structures.photoStackPhotos
+_inputs_from_glob:
+  - /src/components/page-sections/heroes/hero-photo-stack/hero-photo-stack.cloudcannon.inputs.yml

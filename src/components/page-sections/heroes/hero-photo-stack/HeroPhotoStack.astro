@@ -1,0 +1,328 @@
+---
+/**
+ * A hero whose picture is a deck of photo prints you can click through.
+ *
+ * Our Story draws two prints stacked and turned a few degrees from each
+ * other, the top one showing the team on the lake. A hero-split cannot draw
+ * it: its media slot is one image, and the whole point here is the second
+ * photo sitting behind the first.
+ *
+ * Clicking sends the front print to the back, so two photos loop between
+ * themselves and a third or fourth would simply join the cycle. The deck is a
+ * button rather than a div, so it answers the keyboard too, and it only
+ * becomes one when there is more than one photo: a single print is a picture,
+ * not a control.
+ *
+ * Geometry off the design: a 440x488 card, the photo inset 39 at the sides
+ * and top and 60 at the foot, 18 on the photo's corners, a four-stop shadow,
+ * and about 3 degrees between the two cards.
+ */
+import CustomSection from "@builders/custom-section/CustomSection.astro";
+import { subtextMeasure } from "@component-utils/subtextMeasure.mjs";
+import Heading from "@core-elements/heading/Heading.astro";
+import Image from "@core-elements/image/Image.astro";
+import SimpleText from "@core-elements/simple-text/SimpleText.astro";
+import Text from "@core-elements/text/Text.astro";
+import ButtonGroup from "@wrappers/button-group/ButtonGroup.astro";
+import Split from "@wrappers/split/Split.astro";
+import PhotoStackCard from "./PhotoStackCard.astro";
+
+const {
+  eyebrow = "",
+  heading = "",
+  headingLevel = "h1",
+  headingSize = "2xl",
+  subtext = "",
+  subtextSize = "xl",
+  subtextWidth,
+  /** The deck, front first. Two in the design; the cycle takes any number. */
+  photos = [],
+  buttonSections = [],
+  /**
+   * A drawing laid over the deck's bottom corner, like the frond the design
+   * puts there. Decoration: it is never the subject and carries no alt.
+   */
+  embellishmentSource = "",
+  /** How wide the drawing is drawn, as a share of the deck. */
+  embellishmentWidth = 55,
+  reverse = false,
+  sectionLabel,
+  maxContentWidth = "xl",
+  paddingHorizontal = "gutter",
+  paddingVertical = "4xl",
+  colorScheme = "inherit",
+  lockColorScheme = false,
+  backgroundColor = "light-sand",
+  pattern = "grid",
+  haze = true,
+  class: className,
+  useDefaultEditableBinding = false,
+  _component,
+  ...htmlAttributes
+} = Astro.props;
+
+const subtextCap = subtextMeasure(subtextWidth);
+
+/* The same two writes hero-split makes: the pattern as the builder's object,
+   and one pool behind the copy rather than four measured numbers. */
+const backgroundPattern =
+  pattern && pattern !== "none"
+    ? { type: "pattern", pattern, fixed: false, mask: "none", overlay: 0 }
+    : undefined;
+const hazePool = { x: reverse ? 0.68 : 0.2, y: "48%", rx: "45%", ry: "60%" };
+
+const cards = (Array.isArray(photos) ? photos : []).filter((photo) => photo?.source);
+const interactive = cards.length > 1;
+
+/* A deck you can click is a button; one print is not a control. Rendering the
+   tag from a variable keeps one copy of the markup, and the array binding
+   lands on whichever it is. */
+const Stack = interactive ? "button" : "div";
+---
+
+<CustomSection
+  label={sectionLabel}
+  maxContentWidth={maxContentWidth}
+  paddingHorizontal={paddingHorizontal}
+  paddingVertical={paddingVertical}
+  backgroundColor={backgroundColor}
+  background={backgroundPattern}
+  haze={haze ? [hazePool] : false}
+  class:list={["hero-photo-stack", className]}
+  useDefaultEditableBinding={useDefaultEditableBinding}
+  {...htmlAttributes}
+>
+  <Split
+    distributionMode="half"
+    alignmentVertical="center"
+    reverse={reverse}
+    minSplitWidth={800}
+    gap="2xl"
+    class="hero-photo-stack-layout"
+  >
+    <Fragment slot="first">
+      {eyebrow && <SimpleText class="eyebrow" text={eyebrow} data-prop="eyebrow" />}
+      <Heading level={headingLevel} size={headingSize} data-prop="heading">
+        {heading}
+      </Heading>
+      <Text
+        class="subtext"
+        style={subtextCap ? `max-inline-size: ${subtextCap}` : undefined}
+        size={subtextSize}
+        data-prop="subtext"
+        text={subtext}
+      />
+      <ButtonGroup
+        class="buttons-container"
+        buttonSections={buttonSections}
+        data-children-prop="buttonSections"
+      />
+    </Fragment>
+    <Fragment slot="second">
+      <div class="photo-stack-frame">
+        <Stack
+          type={interactive ? "button" : undefined}
+          class="photo-stack"
+          aria-label={interactive ? "Show the next photo" : undefined}
+          data-interactive={interactive ? "" : undefined}
+          data-editable="array"
+          data-prop="photos"
+        >
+          {cards.map((photo, index) => (
+            <PhotoStackCard
+              {...photo}
+              depth={index}
+              data-editable="array-item"
+              data-id="page-sections/heroes/hero-photo-stack/photo-stack-card"
+              data-component="page-sections/heroes/hero-photo-stack/photo-stack-card"
+            />
+          ))}
+        </Stack>
+        {embellishmentSource && (
+          <span
+            class="photo-stack-embellishment"
+            style={`--photo-stack-embellishment-width: ${Number(embellishmentWidth) || 55}%`}
+          >
+            <Image source={embellishmentSource} alt="" decorative={true} />
+          </span>
+        )}
+      </div>
+    </Fragment>
+  </Split>
+</CustomSection>
+
+<style is:global>
+  @layer page-sections {
+    .hero-photo-stack {
+      /* The design's card, and the turn between the two prints. */
+      --photo-stack-card-width: 440;
+      --photo-stack-card-height: 488;
+      --photo-stack-turn: 3.2deg;
+    }
+
+    .photo-stack-frame {
+      inline-size: 100%;
+      position: relative;
+    }
+
+    /* A button when there is a deck to cycle and a plain box when there is
+       one photo. Reset rather than styled: the control is the photo. */
+    .photo-stack {
+      aspect-ratio: var(--photo-stack-card-width) / var(--photo-stack-card-height);
+      background: none;
+      border: 0;
+      display: block;
+      inline-size: 100%;
+      margin: 0;
+      /* Room for the turned card and its shadow, which both reach past the
+         cards' own box. */
+      padding: 4% 5%;
+      position: relative;
+    }
+
+    .photo-stack[data-interactive] {
+      cursor: pointer;
+    }
+
+    .photo-stack[data-interactive]:focus-visible {
+      border-radius: var(--radius-sm, 4px);
+      outline: var(--border-width-md, 2px) solid var(--color-brand);
+      outline-offset: 6px;
+    }
+
+    .photo-stack-card {
+      background: var(--white, #fff);
+      box-shadow:
+        0 0 1px rgb(0 0 0 / 10%),
+        0 2px 2px rgb(0 0 0 / 9%),
+        0 4px 3px rgb(0 0 0 / 5%),
+        0 8px 3px rgb(0 0 0 / 1%);
+      inset: 0;
+      margin: 0;
+      /* 39 at the sides and top and 60 at the foot, on a 440 card: the deeper
+         bottom margin is what makes it a print rather than a framed image.
+         Percentages so it holds at any width, and every one of them resolves
+         against the width, including the bottom. */
+      padding: 8.9% 8.9% 13.6%;
+      position: absolute;
+      transition:
+        transform 320ms var(--ease-out, cubic-bezier(0.2, 0.8, 0.2, 1)),
+        z-index 0s 160ms;
+    }
+
+    /* The front print is the turned one, which is how the design draws it.
+       Everything behind sits square and steps back a little. */
+    .photo-stack-card[data-depth="0"] {
+      transform: rotate(var(--photo-stack-turn));
+      z-index: 3;
+    }
+
+    .photo-stack-card[data-depth="1"] {
+      transform: translate(-2.4%, -2.4%);
+      z-index: 2;
+    }
+
+    .photo-stack-card[data-depth="2"] {
+      transform: translate(-4.8%, -4.8%) rotate(calc(var(--photo-stack-turn) * -0.6));
+      z-index: 1;
+    }
+
+    /* Anything deeper than the third is hidden behind the deck rather than
+       fanned out: the design draws two and a fan of five is a different
+       picture. */
+    .photo-stack-card:not([data-depth="0"]):not([data-depth="1"]):not([data-depth="2"]) {
+      transform: translate(-4.8%, -4.8%);
+      z-index: 0;
+    }
+
+    /* Out of the way first, then behind. Without the step the card swaps its
+       stacking while it is still in front, which reads as a cut. */
+    .photo-stack-card[data-leaving] {
+      transform: rotate(var(--photo-stack-turn)) translate(-9%, 5%);
+    }
+
+    .photo-stack-card-photo {
+      block-size: 100%;
+      overflow: hidden;
+      /* The 18 the design puts on the photo. The card's own corners are
+         square. */
+      border-radius: 18px;
+    }
+
+    /* Every wrapper, flat, not nested. Image puts `.image > .image-inner >
+       picture` between the element the class lands on and the `<img>`, and
+       each of those is auto-height: setting the height on the outer one alone
+       leaves the photo at its own aspect in the top of the print. Nested
+       rules three deep are dropped by the build, so these are written out. */
+    .photo-stack-card-photo .image,
+    .photo-stack-card-photo .image-inner,
+    .photo-stack-card-photo picture {
+      block-size: 100%;
+      display: block;
+      inline-size: 100%;
+    }
+
+    .photo-stack-card-photo img {
+      block-size: 100%;
+      inline-size: 100%;
+      object-fit: cover;
+    }
+
+    /* Over the deck's bottom corner, like the frond the design lays there. */
+    .photo-stack-embellishment {
+      inline-size: var(--photo-stack-embellishment-width, 55%);
+      inset-block-end: -6%;
+      inset-inline-end: -14%;
+      pointer-events: none;
+      position: absolute;
+      z-index: 4;
+    }
+
+    .photo-stack-embellishment img {
+      inline-size: 100%;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .photo-stack-card {
+        transition: none;
+      }
+    }
+  }
+</style>
+
+<script>
+  import { onPageLoad } from "@component-utils/onPageLoad";
+
+  function cycle(stack: HTMLElement) {
+    const cards = [...stack.querySelectorAll<HTMLElement>(".photo-stack-card")];
+    if (cards.length < 2 || stack.dataset.busy !== undefined) return;
+
+    const front = cards.find((card) => card.dataset.depth === "0");
+    if (!front) return;
+
+    stack.dataset.busy = "";
+    front.dataset.leaving = "";
+
+    /* Each card moves one place forward and the front one wraps to the back,
+       so two photos trade places and three or more run as a cycle. */
+    const settle = () => {
+      for (const card of cards) {
+        const depth = Number(card.dataset.depth) || 0;
+        card.dataset.depth = String((depth - 1 + cards.length) % cards.length);
+      }
+      delete front.dataset.leaving;
+      delete stack.dataset.busy;
+    };
+
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) settle();
+    else window.setTimeout(settle, 180);
+  }
+
+  onPageLoad(() => {
+    for (const stack of document.querySelectorAll<HTMLElement>(".photo-stack[data-interactive]")) {
+      if (stack.dataset.wired !== undefined) continue;
+      stack.dataset.wired = "";
+      stack.addEventListener("click", () => cycle(stack));
+    }
+  });
+</script>

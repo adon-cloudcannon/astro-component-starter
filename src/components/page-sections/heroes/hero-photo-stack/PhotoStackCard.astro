@@ -1,0 +1,47 @@
+---
+/**
+ * One photo in the stack, drawn as a print.
+ *
+ * The design's card is 440x488 with the photo inset 39 at the sides and top
+ * and 60 at the foot, which is what makes it read as a print rather than a
+ * rounded image: the deeper bottom margin is the whole trick. The photo
+ * carries the 18 radius, the card itself is square-cornered.
+ *
+ * Which card is in front is not this component's business. It renders at the
+ * depth it is given and the stack decides what that is, so a click reorders
+ * the deck without re-rendering anything.
+ */
+import Image from "@core-elements/image/Image.astro";
+import { rootMirror } from "@component-utils/rootMirror.mjs";
+
+const {
+  source = "",
+  alt = "",
+  /** 0 is the front of the deck. */
+  depth = 0,
+  class: className,
+  _component,
+  ...htmlAttributes
+} = Astro.props;
+
+/* The depth decides the transform and the stacking, and it rides on a child
+   so a redraw in the editor cannot leave the card at the depth it had when
+   the page loaded. Same reason the testimonial slide mirrors its index. */
+const mirror = rootMirror({ "data-depth": depth });
+---
+
+<figure
+  class:list={["photo-stack-card", className]}
+  data-depth={depth}
+  {...htmlAttributes}
+>
+  <div class="photo-stack-card-photo" {...mirror}>
+    <Image
+      source={source}
+      alt={alt}
+      decorative={!alt}
+      data-prop-src="source"
+      data-prop-alt="alt"
+    />
+  </div>
+</figure>
