@@ -17,6 +17,7 @@
  * Logs editor mutations to the console in dev; silent in production.
  */
 
+import { setupAllPhotoStacks } from "./src/components/page-sections/heroes/hero-photo-stack/setup";
 import {
   destroyCarousel,
   setupAllCarousels,
@@ -492,6 +493,7 @@ setupAllSearch();
 setupAllGalleries();
 setupAllMasonry();
 setupAllScrollDecks();
+setupAllPhotoStacks();
 setupAllVideos();
 setupAllTabs();
 setupAllCodeBlocks();

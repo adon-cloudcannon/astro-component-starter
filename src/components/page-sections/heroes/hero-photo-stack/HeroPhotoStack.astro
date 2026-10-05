@@ -292,37 +292,7 @@ const Stack = interactive ? "button" : "div";
 
 <script>
   import { onPageLoad } from "@component-utils/onPageLoad";
+  import { setupAllPhotoStacks } from "./setup";
 
-  function cycle(stack: HTMLElement) {
-    const cards = [...stack.querySelectorAll<HTMLElement>(".photo-stack-card")];
-    if (cards.length < 2 || stack.dataset.busy !== undefined) return;
-
-    const front = cards.find((card) => card.dataset.depth === "0");
-    if (!front) return;
-
-    stack.dataset.busy = "";
-    front.dataset.leaving = "";
-
-    /* Each card moves one place forward and the front one wraps to the back,
-       so two photos trade places and three or more run as a cycle. */
-    const settle = () => {
-      for (const card of cards) {
-        const depth = Number(card.dataset.depth) || 0;
-        card.dataset.depth = String((depth - 1 + cards.length) % cards.length);
-      }
-      delete front.dataset.leaving;
-      delete stack.dataset.busy;
-    };
-
-    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) settle();
-    else window.setTimeout(settle, 180);
-  }
-
-  onPageLoad(() => {
-    for (const stack of document.querySelectorAll<HTMLElement>(".photo-stack[data-interactive]")) {
-      if (stack.dataset.wired !== undefined) continue;
-      stack.dataset.wired = "";
-      stack.addEventListener("click", () => cycle(stack));
-    }
-  });
+  onPageLoad(() => setupAllPhotoStacks());
 </script>
