@@ -49,6 +49,14 @@ const {
   ...htmlAttributes
 } = Astro.props;
 
+/* `flow` on the header, so its three blocks space themselves the way every
+   other section's copy does: without it they sat flush, the heading's foot
+   against the subtext's head.
+
+   The subtext sits 20 under the heading, which is what the design draws and
+   what `snug` is on the site's own scale. Left alone the flow layer pairs a
+   heading with the copy under it at 8. A comment cannot go between the
+   attributes themselves: in Astro that is a parse error, not a comment. */
 const subtextCap = subtextMeasure(subtextWidth);
 const leadList = (Array.isArray(leads) ? leads : []).filter((person) => person?.name || person?.imageSource);
 const memberList = (Array.isArray(members) ? members : []).filter((person) => person?.name || person?.imageSource);
@@ -71,7 +79,7 @@ const hasHeader = Boolean(eyebrow || heading || subtext);
       and the flow layer then spaces the row below it off something nobody
       can see. */}
   {hasHeader && (
-    <div class="team-roster-header">
+    <div class="team-roster-header flow">
       {eyebrow && <SimpleText class="eyebrow" size="sm" text={eyebrow} data-prop="eyebrow" />}
       {heading && (
         <Heading
@@ -88,6 +96,7 @@ const hasHeader = Boolean(eyebrow || heading || subtext);
           style={subtextCap ? `max-inline-size: ${subtextCap}; margin-inline: auto` : undefined}
           size={subtextSize}
           alignmentHorizontal="center"
+          spaceBefore="snug"
           data-prop="subtext"
           text={subtext}
         />
