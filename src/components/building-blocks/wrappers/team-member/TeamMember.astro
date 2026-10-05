@@ -278,6 +278,33 @@ const mirror = rootMirror({ "data-variant": variant });
       object-fit: contain;
     }
 
+    /* On the captioned card the person is sized by the panel's height, not
+       its width.
+
+       The badged card is square, so a cut-out drawn to the full width lands
+       exactly as the design crops it. This one is wider than it is tall,
+       374x334, and the same rule drew the person a head taller than the
+       panel: the hair was cut off at the top edge and the shoulders ran past
+       both sides. Fitting the height instead puts the air back above the
+       head and leaves panel showing either side, which is what the design
+       draws. */
+    .team-member[data-variant="caption"] .team-member-portrait,
+    .team-member[data-variant="caption"] .team-member-portrait .image-inner,
+    .team-member[data-variant="caption"] .team-member-portrait picture {
+      block-size: 100%;
+      display: block;
+      inline-size: 100%;
+    }
+
+    .team-member[data-variant="caption"] .team-member-portrait img {
+      block-size: 100%;
+      display: block;
+      inline-size: auto;
+      margin-inline: auto;
+      object-fit: contain;
+      object-position: bottom center;
+    }
+
     /* The badge hangs off the bottom-left and runs past the panel's edge. */
     /* As wide as the name, not as wide as the card. Tom's badge is 154 of a
        366 panel and Olivia's 378 of 410; the difference is the type inside it,

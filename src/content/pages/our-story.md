@@ -117,6 +117,30 @@ pageSections:
         imageSource: /src/assets/images/marketing/container-7-3806-69515-2.png
         imageAlt: Sam Whitfield, Product Design at CloudCannon
         backgroundColor: peachy
+      - _component: building-blocks/wrappers/team-member
+        name: Sam Whitfield
+        role: Product Design
+        imageSource: /src/assets/images/marketing/container-7-3806-69515-2.png
+        imageAlt: Sam Whitfield, Product Design at CloudCannon
+        backgroundColor: golden
+      - _component: building-blocks/wrappers/team-member
+        name: Sam Whitfield
+        role: Product Design
+        imageSource: /src/assets/images/marketing/container-7-3806-69515-2.png
+        imageAlt: Sam Whitfield, Product Design at CloudCannon
+        backgroundColor: moss
+      - _component: building-blocks/wrappers/team-member
+        name: Tom Richardson
+        role: Solutions Architect
+        imageSource: /src/assets/images/marketing/container-9-3806-69524-1.png
+        imageAlt: Tom Richardson, Solutions Architect at CloudCannon
+        backgroundColor: coral
+      - _component: building-blocks/wrappers/team-member
+        name: Olivia Nicholson
+        role: Head of Content
+        imageSource: /src/assets/images/marketing/container-5-3806-69485-2.png
+        imageAlt: Olivia Nicholson, Head of Content at CloudCannon
+        backgroundColor: pacific
     backgroundColor: light-sand
     background:
       type: pattern
