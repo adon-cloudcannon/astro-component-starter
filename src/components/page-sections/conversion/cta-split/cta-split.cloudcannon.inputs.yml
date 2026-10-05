@@ -55,16 +55,16 @@ subtext:
 subtextSize:
   type: select
   comment: >-
-    How big the supporting line under the heading is. The design sets Large on
-    most sections and Extra large on a few.
+    How big the supporting line under the heading is. Regular is the size the
+    design uses on most sections.
   options:
     values:
       - id: md
-        name: Regular (16)
+        name: Small (16)
       - id: lg
-        name: Large (19)
+        name: Regular (19)
       - id: xl
-        name: Extra large (22)
+        name: Large (22)
 subtextWidth:
   type: select
   label: Subtext width
