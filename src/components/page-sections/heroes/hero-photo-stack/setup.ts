@@ -14,24 +14,34 @@ export function cyclePhotoStack(stack: HTMLElement): void {
   if (!front) return;
 
   stack.dataset.busy = "";
-  front.dataset.leaving = "";
 
-  /* Each print moves one place forward and the front one wraps to the back,
-     so a pair trades places and three or more run as a cycle. */
-  const settle = () => {
-    for (const card of cards) {
-      const depth = Number(card.dataset.depth) || 0;
-      card.dataset.depth = String((depth - 1 + cards.length) % cards.length);
-    }
-    delete front.dataset.leaving;
+  /* Every print moves one place forward and the one on top wraps to the back,
+     so a pair trades places and three or more run as a cycle.
+     
+     The depths change first and the animation runs afterwards, from where the
+     card was to where it now belongs. The card is in the deck's 3D space, so
+     it passes under its neighbour because its Z is lower at that moment, not
+     because anything swapped: swapping is what made it read as a cut. */
+  for (const card of cards) {
+    const depth = Number(card.dataset.depth) || 0;
+    card.dataset.depth = String((depth - 1 + cards.length) % cards.length);
+  }
+
+  if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
     delete stack.dataset.busy;
-  };
+    return;
+  }
 
-  /* Out of the way first, then behind: swapping the stacking while the print
-     is still in front reads as a cut rather than a shuffle. The reader who
-     asked for less motion gets the swap and none of the travel. */
-  if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) settle();
-  else window.setTimeout(settle, 180);
+  front.dataset.shuffling = "";
+  const done = () => {
+    delete front.dataset.shuffling;
+    delete stack.dataset.busy;
+    front.removeEventListener("animationend", done);
+  };
+  front.addEventListener("animationend", done);
+  /* A belt for the case where the animation never fires: a deck stuck busy
+     would never shuffle again. */
+  window.setTimeout(done, 900);
 }
 
 export function setupPhotoStack(stack: HTMLElement): void {

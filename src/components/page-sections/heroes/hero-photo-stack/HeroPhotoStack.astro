@@ -99,6 +99,7 @@ const Stack = interactive ? "button" : "div";
   maxContentWidth={maxContentWidth}
   paddingHorizontal={paddingHorizontal}
   paddingVertical={paddingVertical}
+  paddingVerticalEnd={columns.length > 0 ? "none" : undefined}
   backgroundColor={backgroundColor}
   background={backgroundPattern}
   haze={haze ? [hazePool] : false}
@@ -228,7 +229,16 @@ const Stack = interactive ? "button" : "div";
       /* Room for the turned card and its shadow, which both reach past the
          cards' own box. */
       padding: 4% 5%;
+      /* The deck is a real stack, not a pile of z-indexes.
+
+         A print that goes behind another by swapping `z-index` changes which
+         is on top in one frame, in the middle of its own slide, which reads
+         as a jiggle and a cut. In 3D the browser occludes by depth: the card
+         travels back along Z and passes under its neighbour on the way, with
+         nothing to switch. */
+      perspective: 1400px;
       position: relative;
+      transform-style: preserve-3d;
     }
 
     .photo-stack[data-interactive] {
@@ -256,40 +266,56 @@ const Stack = interactive ? "button" : "div";
          against the width, including the bottom. */
       padding: 8.9% 8.9% 13.6%;
       position: absolute;
-      transition:
-        transform 320ms var(--ease-out, cubic-bezier(0.2, 0.8, 0.2, 1)),
-        z-index 0s 160ms;
+      transform: var(--photo-stack-resting);
+      transition: transform 340ms var(--ease-out, cubic-bezier(0.2, 0.8, 0.2, 1));
     }
 
-    /* The front print is the turned one, which is how the design draws it.
-       Everything behind sits square and steps back a little. */
+    /* Each depth is a place in the deck: a step back along Z, a step up and
+       left, and the front one turned the way the design draws it. */
     .photo-stack-card[data-depth="0"] {
-      transform: rotate(var(--photo-stack-turn));
-      z-index: 3;
+      --photo-stack-resting: translate3d(0, 0, 0) rotate(var(--photo-stack-turn));
     }
 
     .photo-stack-card[data-depth="1"] {
-      transform: translate(-2.4%, -2.4%);
-      z-index: 2;
+      --photo-stack-resting: translate3d(-2.4%, -2.4%, -40px);
     }
 
     .photo-stack-card[data-depth="2"] {
-      transform: translate(-4.8%, -4.8%) rotate(calc(var(--photo-stack-turn) * -0.6));
-      z-index: 1;
+      --photo-stack-resting: translate3d(-4.8%, -4.8%, -80px)
+        rotate(calc(var(--photo-stack-turn) * -0.6));
     }
 
-    /* Anything deeper than the third is hidden behind the deck rather than
-       fanned out: the design draws two and a fan of five is a different
-       picture. */
+    /* Anything deeper than the third sits behind the deck rather than fanned
+       out: the design draws two and a fan of five is a different picture. */
     .photo-stack-card:not([data-depth="0"]):not([data-depth="1"]):not([data-depth="2"]) {
-      transform: translate(-4.8%, -4.8%);
-      z-index: 0;
+      --photo-stack-resting: translate3d(-4.8%, -4.8%, -120px);
     }
 
-    /* Out of the way first, then behind. Without the step the card swaps its
-       stacking while it is still in front, which reads as a cut. */
-    .photo-stack-card[data-leaving] {
-      transform: rotate(var(--photo-stack-turn)) translate(-9%, 5%);
+    /* The print that was on top goes to the back the long way: out to the
+       side, down behind the others, and into the slot it now owns. Its new
+       depth is set before the animation starts, so the keyframes carry it
+       from where it was, and the pass under its neighbour happens in Z where
+       the browser draws it rather than in a property swap. */
+    .photo-stack-card[data-shuffling] {
+      animation: photo-stack-shuffle 620ms var(--ease-in-out, cubic-bezier(0.65, 0, 0.35, 1)) both;
+    }
+
+    @keyframes photo-stack-shuffle {
+      0% {
+        transform: translate3d(0, 0, 0) rotate(var(--photo-stack-turn));
+      }
+
+      35% {
+        transform: translate3d(-42%, 7%, 30px) rotate(calc(var(--photo-stack-turn) * -2.4));
+      }
+
+      65% {
+        transform: translate3d(-34%, 5%, -70px) rotate(calc(var(--photo-stack-turn) * -1.6));
+      }
+
+      100% {
+        transform: var(--photo-stack-resting);
+      }
     }
 
     .photo-stack-card-photo {
@@ -358,9 +384,13 @@ const Stack = interactive ? "button" : "div";
     .story-panel {
       isolation: isolate;
       /* The copy sits a long way down inside its block: 91 on the raised
-         column, 76 on the other, against the design's own edges. The foot is
-         the band's, which is why the fill runs on well past the last line. */
-      padding-block: 76px 0;
+         column, 76 on the other, measured against the design's own edges.
+
+         148 at the foot, which is what the design leaves under the longer
+         column's last line. Zero there ran the text hard onto the band's
+         bottom edge: the fill is meant to carry on past the copy, and with
+         the band's own bottom padding dropped it had nothing else to sit on. */
+      padding-block: 76px 148px;
       position: relative;
     }
 
@@ -441,6 +471,10 @@ const Stack = interactive ? "button" : "div";
     @media (prefers-reduced-motion: reduce) {
       .photo-stack-card {
         transition: none;
+      }
+
+      .photo-stack-card[data-shuffling] {
+        animation: none;
       }
     }
   }
