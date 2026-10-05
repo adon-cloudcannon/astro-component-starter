@@ -46,16 +46,17 @@ cardWidth:
   type: select
   label: Card width
   comment: >-
-    How much of the column the card takes. 72% is the house width and the
-    default; full runs it to the whole column, narrow is the bento's 55%.
+    How much of the column the card takes. Medium is the house width and the
+    default; full runs it to the whole column, and narrow is the width the
+    bento's wide card is drawn at.
   options:
     values:
       - id: full
         name: Full width
       - id: medium
-        name: Medium (72%)
+        name: Medium
       - id: narrow
-        name: Narrow (55%)
+        name: Narrow
 bordered:
   type: switch
   label: Outline the card

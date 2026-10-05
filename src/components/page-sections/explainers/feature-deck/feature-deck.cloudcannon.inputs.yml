@@ -36,11 +36,11 @@ subtextSize:
   options:
     values:
       - id: md
-        name: Small (16)
+        name: Small
       - id: lg
-        name: Regular (19)
+        name: Regular
       - id: xl
-        name: Large (22)
+        name: Large
 subtextWidth:
   type: select
   label: Subtext width
@@ -53,13 +53,13 @@ subtextWidth:
       - id: ""
         name: Full width
       - id: sm
-        name: Narrow (460)
+        name: Narrow
       - id: md
-        name: Medium (580)
+        name: Medium
       - id: lg
-        name: Wide (680)
+        name: Wide
       - id: xl
-        name: Extra wide (820)
+        name: Extra wide
 cards:
   type: array
   comment: >-
