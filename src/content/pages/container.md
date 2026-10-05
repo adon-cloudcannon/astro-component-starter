@@ -6,30 +6,29 @@ title: Container
 description: Build freely. Edit eas
 pageSections:
   - _component: page-sections/heroes/hero-split
-    backgroundColor: light-sand
     heading: Build freely. Edit eas
+    headingSize: 2xl
     subtext: >-
       Welcome to the Git-based CMS that doesn't fight your workflow. Your site lives in Git, your
       team edits visually, and everything stays in sync.
     subtextSize: xl
     imageSource: /src/assets/images/marketing/image-3806-74415.png
     imageAlt: A person reaching up to edit content blocks, with their dog
-    headingSize: 2xl
     imageOverflow: 70
     buttonSections:
       - _component: building-blocks/core-elements/button
-        variant: primary
         text: Start your free trial
+        variant: primary
       - _component: building-blocks/core-elements/button
-        variant: text
+        text: Book a demo
         iconName: arrow-right
         iconPosition: after
-        text: Book a demo
+        variant: text
     note:
       - text: No credit card · 14-day free trial · No lock-in
         iconName: check
         iconColor: default
----
-
     pattern: grid
     haze: true
+    backgroundColor: light-sand
+---
