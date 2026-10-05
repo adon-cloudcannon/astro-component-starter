@@ -146,4 +146,28 @@ pageSections:
       type: pattern
       pattern: grid
       mask: fade
+  - _component: page-sections/conversion/cta-center
+    heading: Keen to collaborate?
+    headingSize: lg
+    buttonSections:
+      - _component: building-blocks/core-elements/button
+        text: Work with us
+        variant: primary
+      - _component: building-blocks/core-elements/button
+        text: Our values
+        iconName: arrow-right
+        iconPosition: after
+        variant: text
+    paddingVertical: 2xl
+    backgroundColor: dark
+    cornerStart:
+      source: /src/assets/images/marketing/ferns-corner-3806-72622.png
+      alt: ""
+      width: 23.4
+      drop: 4
+    cornerEnd:
+      source: /src/assets/images/marketing/rocks-corner-3806-72621.png
+      alt: ""
+      width: 18
+      drop: 0.3
 ---
