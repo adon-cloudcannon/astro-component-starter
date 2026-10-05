@@ -46,8 +46,12 @@ const mirror = rootMirror({
   data-raised={raised ? "" : undefined}
   {...htmlAttributes}
 >
-  <div class="story-panel-content" {...mirror}>
-    {eyebrow && <SimpleText class="eyebrow" text={eyebrow} data-prop="eyebrow" />}
+  {/* `flow`, like every other section's copy wrapper. Without it the column
+      had no rhythm at all: the eyebrow, the quote and the copy sat flush
+      against each other, because the spacing every other block on the site
+      gets comes from that layer rather than from the components. */}
+  <div class="story-panel-content flow" {...mirror}>
+    {eyebrow && <SimpleText class="eyebrow" size="sm" text={eyebrow} data-prop="eyebrow" />}
     {heading && (
       <Heading level={headingLevel} size="sm" data-prop="heading">
         {heading}

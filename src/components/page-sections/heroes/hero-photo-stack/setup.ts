@@ -32,9 +32,15 @@ export function cyclePhotoStack(stack: HTMLElement): void {
     return;
   }
 
+  /* The one that leaves, and the one it uncovers: they move apart, which is
+     what makes it read as a shuffle rather than one print crossing another. */
+  const revealed = cards.find((card) => card.dataset.depth === "0");
   front.dataset.shuffling = "";
+  if (revealed) revealed.dataset.parting = "";
+
   const done = () => {
     delete front.dataset.shuffling;
+    if (revealed) delete revealed.dataset.parting;
     delete stack.dataset.busy;
     front.removeEventListener("animationend", done);
   };

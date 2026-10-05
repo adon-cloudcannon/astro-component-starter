@@ -193,6 +193,18 @@ const Stack = interactive ? "button" : "div";
       --photo-stack-card-width: 440;
       --photo-stack-card-height: 488;
       --photo-stack-turn: 3.2deg;
+      /* How far each column's fill has to reach to meet the page edge: the
+         gutter either side of the content column.
+
+         Not `calc(50% - 50vw)`. That only reaches the edge from something
+         centred in the page, and a half-column is not: it put the right
+         column's fill 260 past the page and gave the document a horizontal
+         scroll. */
+      --story-panel-bleed: max(0px, calc((100vw - var(--content-width-xl, 1040px)) / 2));
+
+      /* A print mid-shuffle reaches toward the page edge; clipping it there
+         is better than a scrollbar. */
+      overflow-x: clip;
     }
 
     /* The copy starts level with the deck rather than centred against it: the
@@ -205,6 +217,14 @@ const Stack = interactive ? "button" : "div";
        `--space-before` and would have won anyway. */
     .hero-photo-stack-layout .pane.first {
       padding-block-start: 81px;
+    }
+
+    /* Above the columns, which come after it in the document and paint over
+       it otherwise: each column isolates itself to keep its own fill behind
+       its own copy, and that fill was passing in front of the deck. */
+    .hero-photo-stack-layout {
+      position: relative;
+      z-index: 1;
     }
 
     .photo-stack-frame {
@@ -292,10 +312,15 @@ const Stack = interactive ? "button" : "div";
     }
 
     /* The print that was on top goes to the back the long way: out to the
-       side, down behind the others, and into the slot it now owns. Its new
-       depth is set before the animation starts, so the keyframes carry it
-       from where it was, and the pass under its neighbour happens in Z where
-       the browser draws it rather than in a property swap. */
+       right, lifted off the deck, then down past its neighbour and into the
+       slot it now owns. Its new depth is set before the animation starts, so
+       the keyframes carry it from where it was, and the pass under happens in
+       Z where the browser draws it rather than in a property swap.
+
+       Right, not left. Left ran it over the origin-story column, which paints
+       in its own stacking context, so the print slid under a block of colour
+       on its way past. There is 120 of page to the right of the deck and
+       nothing in it. */
     .photo-stack-card[data-shuffling] {
       animation: photo-stack-shuffle 620ms var(--ease-in-out, cubic-bezier(0.65, 0, 0.35, 1)) both;
     }
@@ -305,12 +330,43 @@ const Stack = interactive ? "button" : "div";
         transform: translate3d(0, 0, 0) rotate(var(--photo-stack-turn));
       }
 
-      35% {
-        transform: translate3d(-42%, 7%, 30px) rotate(calc(var(--photo-stack-turn) * -2.4));
+      34% {
+        /* Off the deck and toward the reader before it travels, which is what
+           stops the two prints reading as one melting through the other.
+
+           16 and not 24: the deck's right edge is 120 from the page's, and a
+           print that is also turned and lifted grows past its own box, so a
+           bigger swing put 48 of it off the page. The travel it loses
+           sideways it takes downward, where there is room. */
+        transform: translate3d(16%, 10%, 40px) rotate(calc(var(--photo-stack-turn) * 2.2));
       }
 
-      65% {
-        transform: translate3d(-34%, 5%, -70px) rotate(calc(var(--photo-stack-turn) * -1.6));
+      66% {
+        transform: translate3d(12%, 7%, -70px) rotate(calc(var(--photo-stack-turn) * 1.3));
+      }
+
+      100% {
+        transform: var(--photo-stack-resting);
+      }
+    }
+
+    /* The print underneath gets out of the way, the other way.
+     
+       Two cards moving apart is what reads as a deck being shuffled; one card
+       crossing a stationary one reads as a card passing through it however
+       the depth is drawn. It leans left while the other leaves right, then
+       comes back to take the front slot. */
+    .photo-stack-card[data-parting] {
+      animation: photo-stack-part 620ms var(--ease-in-out, cubic-bezier(0.65, 0, 0.35, 1)) both;
+    }
+
+    @keyframes photo-stack-part {
+      0% {
+        transform: translate3d(-2.4%, -2.4%, -40px);
+      }
+
+      38% {
+        transform: translate3d(-11%, -1%, -40px) rotate(calc(var(--photo-stack-turn) * -0.9));
       }
 
       100% {
@@ -412,11 +468,11 @@ const Stack = interactive ? "button" : "div";
     }
 
     .story-panel[data-side="start"]::before {
-      inset-inline-start: calc(50% - 50vw);
+      inset-inline-start: calc(var(--story-panel-bleed) * -1);
     }
 
     .story-panel[data-side="end"]::before {
-      inset-inline-end: calc(50% - 50vw);
+      inset-inline-end: calc(var(--story-panel-bleed) * -1);
     }
 
     .story-panel[data-raised] {
@@ -464,7 +520,7 @@ const Stack = interactive ? "button" : "div";
       }
 
       .story-panel::before {
-        inset-inline: calc(50% - 50vw);
+        inset-inline: calc(var(--story-panel-bleed) * -1);
       }
     }
 
@@ -473,7 +529,8 @@ const Stack = interactive ? "button" : "div";
         transition: none;
       }
 
-      .photo-stack-card[data-shuffling] {
+      .photo-stack-card[data-shuffling],
+      .photo-stack-card[data-parting] {
         animation: none;
       }
     }
