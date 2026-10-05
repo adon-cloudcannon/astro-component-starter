@@ -1,0 +1,51 @@
+label: Team Roster
+icon: groups
+description: A centred header, a row of people with biographies, then the rest of the team.
+value:
+  _component: page-sections/proof/team-roster
+  eyebrow: ""
+  heading: Our team
+  headingLevel: h2
+  headingSize: lg
+  subtext: One or two lines on what the team is for.
+  subtextSize: lg
+  subtextWidth: sm
+  leads:
+    - _component: building-blocks/wrappers/team-member
+      name: ""
+      role: ""
+      bio: ""
+      imageSource: ""
+      imageAlt: ""
+      backgroundColor: sunset
+      propSource: ""
+      propWidth: 40
+      propAlt: ""
+  members:
+    - _component: building-blocks/wrappers/team-member
+      name: ""
+      role: ""
+      imageSource: ""
+      imageAlt: ""
+      backgroundColor: pacific
+      propSource: ""
+      propWidth: 40
+      propAlt: ""
+  sectionLabel: ""
+  maxContentWidth: xl
+  paddingHorizontal: gutter
+  paddingVertical: 4xl
+  backgroundColor: light-sand
+_inputs:
+  leads:
+    type: array
+    options:
+      structures: _structures.teamMember
+  members:
+    type: array
+    options:
+      structures: _structures.teamMember
+_inputs_from_glob:
+  - /src/components/page-sections/proof/team-roster/team-roster.cloudcannon.inputs.yml
+  - /.cloudcannon/inputs/background.yml
+  - /.cloudcannon/inputs/haze.yml

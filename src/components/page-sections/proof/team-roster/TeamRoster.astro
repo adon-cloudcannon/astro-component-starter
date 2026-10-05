@@ -1,0 +1,180 @@
+---
+/**
+ * The whole team: a few people with a biography, then everyone else.
+ *
+ * Our Story draws a centred header, three 374x334 cards with a name, a role
+ * and a paragraph under each, then a 4-across grid of 275x252 cards with the
+ * name on a badge. Both rows are the same person card, in its two variants,
+ * so this section is the arrangement and nothing else.
+ *
+ * Not the team grid: that one is tuned to the homepage's band, where the copy
+ * holds the left 460 of the column and the cards stagger down the right 476.
+ * This is a centred header over two plain rows, which is a different band
+ * rather than a mode of that one.
+ *
+ * The column is 1160 here against the site's usual 1040, measured off the
+ * design: the cards start 60 from the page's edges.
+ */
+import CustomSection from "@builders/custom-section/CustomSection.astro";
+import { subtextMeasure } from "@component-utils/subtextMeasure.mjs";
+import Heading from "@core-elements/heading/Heading.astro";
+import SimpleText from "@core-elements/simple-text/SimpleText.astro";
+import Text from "@core-elements/text/Text.astro";
+import TeamMember from "@wrappers/team-member/TeamMember.astro";
+
+const {
+  eyebrow = "",
+  heading = "",
+  headingLevel = "h2",
+  headingSize = "lg",
+  subtext = "",
+  subtextSize = "lg",
+  subtextWidth = "sm",
+  /** The people with a paragraph: three across in the design. */
+  leads = [],
+  /** Everyone else: four across. */
+  members = [],
+  sectionLabel,
+  maxContentWidth = "xl",
+  paddingHorizontal = "gutter",
+  paddingVertical = "4xl",
+  colorScheme = "inherit",
+  lockColorScheme = false,
+  backgroundColor = "light-sand",
+  background,
+  haze = false,
+  class: className,
+  useDefaultEditableBinding = false,
+  _component,
+  ...htmlAttributes
+} = Astro.props;
+
+const subtextCap = subtextMeasure(subtextWidth);
+const leadList = (Array.isArray(leads) ? leads : []).filter((person) => person?.name || person?.imageSource);
+const memberList = (Array.isArray(members) ? members : []).filter((person) => person?.name || person?.imageSource);
+const hasHeader = Boolean(eyebrow || heading || subtext);
+---
+
+<CustomSection
+  label={sectionLabel}
+  maxContentWidth={maxContentWidth}
+  paddingHorizontal={paddingHorizontal}
+  paddingVertical={paddingVertical}
+  backgroundColor={backgroundColor}
+  background={background}
+  haze={haze}
+  class:list={["team-roster", className]}
+  useDefaultEditableBinding={useDefaultEditableBinding}
+  {...htmlAttributes}
+>
+  {/* Guarded whole, not left to collapse: an empty heading still draws a box
+      and the flow layer then spaces the row below it off something nobody
+      can see. */}
+  {hasHeader && (
+    <div class="team-roster-header">
+      {eyebrow && <SimpleText class="eyebrow" size="sm" text={eyebrow} data-prop="eyebrow" />}
+      {heading && (
+        <Heading
+          level={headingLevel}
+          size={headingSize}
+          alignmentHorizontal="center"
+          data-prop="heading"
+          text={heading}
+        />
+      )}
+      {subtext && (
+        <Text
+          class="subtext"
+          style={subtextCap ? `max-inline-size: ${subtextCap}; margin-inline: auto` : undefined}
+          size={subtextSize}
+          alignmentHorizontal="center"
+          data-prop="subtext"
+          text={subtext}
+        />
+      )}
+    </div>
+  )}
+
+  {leadList.length > 0 && (
+    <div class="team-roster-leads" data-editable="array" data-prop="leads">
+      {leadList.map((person) => (
+        <TeamMember
+          {...person}
+          variant="caption"
+          data-editable="array-item"
+          data-id="building-blocks/wrappers/team-member"
+          data-component="building-blocks/wrappers/team-member"
+        />
+      ))}
+    </div>
+  )}
+
+  {memberList.length > 0 && (
+    <div class="team-roster-members" data-editable="array" data-prop="members">
+      {memberList.map((person) => (
+        <TeamMember
+          {...person}
+          variant="badge"
+          data-editable="array-item"
+          data-id="building-blocks/wrappers/team-member"
+          data-component="building-blocks/wrappers/team-member"
+        />
+      ))}
+    </div>
+  )}
+</CustomSection>
+
+<style is:global>
+  @layer page-sections {
+    .team-roster {
+      /* 1160, not the site's 1040: the design starts the cards 60 from the
+         page's edges. A page section cannot out-specify CustomSection's own
+         width rule, so the token it reads is redefined here instead. */
+      --content-width-xl: 1160px;
+    }
+
+    .team-roster .team-roster-header {
+      margin-inline: auto;
+      max-inline-size: var(--content-width-xl);
+    }
+
+    /* Three across, then four. Both rows set their own gap rather than
+       inheriting the flow layer's, which spaces stacked blocks and not
+       grids. */
+    .team-roster .team-roster-leads,
+    .team-roster .team-roster-members {
+      --space-before: var(--space-before-loose);
+
+      display: grid;
+      gap: 20px;
+    }
+
+    .team-roster .team-roster-leads {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    .team-roster .team-roster-members {
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+    }
+
+    @media (width < 900px) {
+      .team-roster .team-roster-leads {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .team-roster .team-roster-members {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+      }
+    }
+
+    @media (width < 600px) {
+      .team-roster .team-roster-leads {
+        grid-template-columns: minmax(0, 1fr);
+      }
+
+      .team-roster .team-roster-members {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
+  }
+</style>

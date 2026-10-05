@@ -20,6 +20,7 @@ teamMember:
         _component: building-blocks/wrappers/team-member
         name: ""
         role: ""
+        bio: ""
         imageSource: ""
         imageAlt: ""
         backgroundColor: sunset

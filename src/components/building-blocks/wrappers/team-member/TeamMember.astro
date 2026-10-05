@@ -16,12 +16,26 @@
  * column and the panel disappears behind it.
  */
 import Image from "@core-elements/image/Image.astro";
+import { rootMirror } from "@component-utils/rootMirror.mjs";
 
 const {
   name = "",
   role = "",
   imageSource = "",
   imageAlt = "",
+  /**
+   * Where the name goes.
+   *
+   * `badge` hangs it off the panel's bottom-left corner, which is how the
+   * homepage wall and the CTA card draw it. `caption` sets it under the
+   * panel with the role and a paragraph, which is how Our Story draws the
+   * three it gives a biography to. Same person, same panel, same prop: only
+   * the name's place changes, so it is a variant rather than a second
+   * component.
+   */
+  variant = "badge",
+  /** A paragraph under the name. Only drawn in the caption variant. */
+  bio = "",
   /** The panel behind them. A colour from the palette, or a painted panel. */
   backgroundColor = "sunset",
   /** The lizard, the telephone, whatever is keeping them company. */
@@ -80,10 +94,17 @@ const panelColour =
 const tone = panelColour
   ? { "--team-member-panel": panelColour, "--scratch-fill": panelColour }
   : undefined;
+
+const captioned = variant === "caption";
+
+/* The variant decides the whole card's shape, and the root is a region root
+   the editor keeps, so it rides on the panel and is copied back up. */
+const mirror = rootMirror({ "data-variant": variant });
 ---
 
 <div
   class:list={["team-member", className]}
+  data-variant={variant}
   {...htmlAttributes}
 >
   {/* The colour is on the panel, not on the member.
@@ -94,7 +115,7 @@ const tone = panelColour
       repainted nothing until a reload. Both readers are this element anyway,
       its own `background-color` and `.scratched`'s fill, so there was never a
       reason for it to sit higher. */}
-  <div class="team-member-panel scratched" style={tone}>
+  <div class="team-member-panel scratched" style={tone} {...mirror}>
     {imageSource && (
       <Image
         class="team-member-portrait"
@@ -106,7 +127,7 @@ const tone = panelColour
     )}
   </div>
 
-  {(name || role) && (
+  {(name || role) && !captioned && (
     <div class="team-member-badge">
       {name && (
         <strong
@@ -125,6 +146,26 @@ const tone = panelColour
         >
           {role}
         </span>
+      )}
+    </div>
+  )}
+
+  {captioned && (name || role || bio) && (
+    <div class="team-member-caption">
+      {name && (
+        <strong class="team-member-name" data-editable="text" data-prop={`${propPrefix}name`}>
+          {name}
+        </strong>
+      )}
+      {role && (
+        <span class="team-member-role" data-editable="text" data-prop={`${propPrefix}role`}>
+          {role}
+        </span>
+      )}
+      {bio && (
+        <p class="team-member-bio" data-editable="text" data-prop={`${propPrefix}bio`}>
+          {bio}
+        </p>
       )}
     </div>
   )}
@@ -184,6 +225,42 @@ const tone = panelColour
       border-radius: var(--team-member-radius);
       overflow: hidden;
       position: relative;
+    }
+
+    /* The captioned card is drawn wider than it is tall, where the badged one
+       is square: 374x334 against 410x412. */
+    .team-member[data-variant="caption"] .team-member-panel {
+      aspect-ratio: 374 / 334;
+    }
+
+    /* Name, role and paragraph under the panel rather than on it. The design
+       sets the name at 20, the role at 13 in the mono, and the paragraph at
+       14.5, with 20 under the panel, 4 under the name and 20 under the role. */
+    .team-member-caption {
+      display: grid;
+      margin-block-start: 20px;
+    }
+
+    .team-member[data-variant="caption"] .team-member-name {
+      color: var(--color-text-strong);
+      font-size: 1.25rem;
+      font-weight: 700;
+      line-height: 1.2;
+    }
+
+    .team-member[data-variant="caption"] .team-member-role {
+      color: var(--sunset);
+      font-family: var(--font-monospace, ui-monospace, monospace);
+      font-size: 0.8125rem;
+      line-height: 1.25;
+      margin-block-start: 4px;
+    }
+
+    .team-member-bio {
+      color: var(--color-text);
+      font-size: 0.9063rem;
+      line-height: 1.55;
+      margin: 20px 0 0;
     }
 
     /* Bottom-aligned: the design crops each person at the shoulders on the

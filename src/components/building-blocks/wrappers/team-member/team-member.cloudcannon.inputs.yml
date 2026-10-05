@@ -4,6 +4,23 @@ name:
 role:
   type: text
   comment: Their role, under the name in the mono face.
+bio:
+  type: textarea
+  comment: >-
+    A paragraph under the name. Only drawn where the section asks for people
+    with a biography; the badge over a card has no room for one.
+variant:
+  hidden: true
+  # Set by the section that places the card, not by an editor: the badge is
+  # the homepage wall and the CTA card, the caption is Our Story's three.
+  type: select
+  comment: Where the name goes.
+  options:
+    values:
+      - id: badge
+        name: On a badge over the card
+      - id: caption
+        name: Under the card, with a biography
 imageSource:
   type: image
   comment: >-
