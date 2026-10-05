@@ -284,7 +284,6 @@ pageSections:
       We're a small team with a lot of knowledge, so you'll talk to someone who knows what they're
       talking about and can give you hands-on help whatever the problem.
     subtextSize: lg
-    subtextWidth: sm
     member:
       _component: building-blocks/wrappers/team-member
       name: Olivia Nicholson

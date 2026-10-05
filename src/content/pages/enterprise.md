@@ -243,7 +243,6 @@ pageSections:
       Git underneath, a visual editor on top, with code and content running on one engine. Start
       free in minutes, or book a demo and we’ll walk you through the real thing.
     subtextSize: lg
-    subtextWidth: sm
     member:
       _component: building-blocks/wrappers/team-member
       name: Olivia Nicholson
