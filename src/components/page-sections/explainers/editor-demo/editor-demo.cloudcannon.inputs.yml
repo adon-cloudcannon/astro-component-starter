@@ -31,22 +31,24 @@ subtext:
   comment: The supporting line under the heading.
 subtextSize:
   type: select
-  comment: The size of the supporting line.
+  comment: >-
+    How big the supporting line under the heading is. The design sets Large on
+    most sections and Extra large on a few.
   options:
     values:
-      - id: sm
-        name: Small
       - id: md
-        name: Medium
+        name: Regular (16)
       - id: lg
-        name: Large
+        name: Large (19)
+      - id: xl
+        name: Extra large (22)
 subtextWidth:
   type: select
   label: Subtext width
   comment: >-
-    The measure the supporting line is set in, not the column it sits in. The
-    design draws a centred one at about Medium in the 1040 column; run to the
-    full width it reads as a different block.
+    How wide the supporting line is allowed to run before it wraps. The design
+    keeps a centred one around Medium rather than letting it run the full
+    width of the section.
   options:
     values:
       - id: ""

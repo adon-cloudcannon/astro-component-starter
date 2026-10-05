@@ -43,24 +43,26 @@ subtextSize:
   # One size on every hero, so it is the component's decision rather than
   # a field an editor has to get right.
   type: select
-  comment: Body 3 at 19 or Subtitle 1 at 22 in the design; regular is 16.
+  comment: >-
+    How big the supporting line under the heading is. The design sets Large on
+    most sections and Extra large on a few.
   options:
     values:
       - id: md
-        name: Regular
+        name: Regular (16)
       - id: lg
-        name: Large
+        name: Large (19)
       - id: xl
-        name: Extra large
+        name: Extra large (22)
 subtextWidth:
   hidden: true
   # Never set on a hero: the measure is the split's own column.
   type: select
   label: Subtext width
   comment: >-
-    The measure the supporting line is set in, not the column it sits in. The
-    design draws a centred one at about Medium in the 1040 column; run to the
-    full width it reads as a different block.
+    How wide the supporting line is allowed to run before it wraps. The design
+    keeps a centred one around Medium rather than letting it run the full
+    width of the section.
   options:
     values:
       - id: ""
