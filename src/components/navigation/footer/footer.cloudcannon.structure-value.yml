@@ -4,8 +4,8 @@ description: Footer with a logo, a line of copy, socials, columns of links, and 
 value:
   _component: navigation/footer
   logoSource: ""
-  logoAlt: "Logo"
   logoAlternateSource: ""
+  logoAlt: Logo
   tagline: ""
   socials: []
   columns: []
@@ -25,7 +25,7 @@ preview:
     fit: cover
 picker_preview:
   text: Footer
-  subtext: "Footer block with logo, links, and legal information."
+  subtext: Footer block with logo, links, and legal information.
   image: public/component-previews/navigation/footer.svg
   icon: dock_to_bottom
   gallery:

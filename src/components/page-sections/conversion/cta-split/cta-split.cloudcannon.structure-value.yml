@@ -3,10 +3,11 @@ icon: call_to_action
 description: Call to action with copy and buttons beside an image.
 value:
   _component: page-sections/conversion/cta-split
-  sectionLabel: ""
   heading: Ready to get started?
   headingLevel: h2
   subtext: One line that makes the next step obvious.
+  subtextSize: md
+  subtextWidth: ""
   imageSource: /src/assets/images/component-docs/dunedin-cliff.jpg
   imageAlt: Sea cliffs above a bay
   buttonSections:
@@ -20,6 +21,7 @@ value:
       variant: primary
       size: md
   reverse: false
+  sectionLabel: ""
   maxContentWidth: xl
   paddingHorizontal: gutter
   paddingVertical: 4xl

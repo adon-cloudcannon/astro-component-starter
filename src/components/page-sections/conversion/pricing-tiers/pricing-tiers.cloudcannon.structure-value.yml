@@ -3,12 +3,12 @@ icon: payments
 description: Plan cards with features, a highlighted plan, and a monthly/annual switch.
 value:
   _component: page-sections/conversion/pricing-tiers
-  sectionLabel: ""
   eyebrow: Plans
   heading: Simple pricing that scales with you
   headingLevel: h2
   subtext: Every plan includes global CDN hosting and automatic SSL.
   subtextSize: md
+  subtextWidth: ""
   showAnnualPricing: false
   monthlyLabel: Monthly
   annualLabel: Annual
@@ -76,6 +76,7 @@ value:
       buttonLink: "#"
       highlight: false
       badgeText: ""
+  sectionLabel: ""
   maxContentWidth: xl
   paddingHorizontal: gutter
   paddingVertical: 4xl
@@ -102,7 +103,9 @@ preview:
     fit: cover
 picker_preview:
   text: Pricing Tiers
-  subtext: Plan comparison cards with feature checklists, a highlighted tier, and an optional monthly/annual billing switch.
+  subtext: >-
+    Plan comparison cards with feature checklists, a highlighted tier, and an optional
+    monthly/annual billing switch.
   image: public/component-previews/page-sections/conversion/pricing-tiers.svg
   gallery:
     image: public/component-previews/page-sections/conversion/pricing-tiers.svg
@@ -143,13 +146,17 @@ _structures:
             comment: Name of the plan.
           price:
             type: text
-            comment: The price, including the currency symbol (e.g. $19). Shown on the monthly option, and whenever annual pricing is off.
+            comment: >-
+              The price, including the currency symbol (e.g. $19). Shown on the monthly option, and
+              whenever annual pricing is off.
           priceSuffix:
             type: text
             comment: Billing period shown after the price (e.g. /month). Leave empty to hide.
           annualPrice:
             type: text
-            comment: Optional annual price (e.g. $190). Used when Annual pricing is on. Leave empty to keep showing the monthly price in both modes.
+            comment: >-
+              Optional annual price (e.g. $190). Used when Annual pricing is on. Leave empty to keep
+              showing the monthly price in both modes.
           annualPriceSuffix:
             type: text
             comment: Billing period shown after the annual price (e.g. /year). Leave empty to hide.
@@ -160,7 +167,9 @@ _structures:
           features:
             type: array
             label: Features
-            comment: Feature checklist. Excluded rows render muted with a dash so the lists align across tiers.
+            comment: >-
+              Feature checklist. Excluded rows render muted with a dash so the lists align across
+              tiers.
             options:
               structures: _structures.pricingTierFeatures
           buttonText:

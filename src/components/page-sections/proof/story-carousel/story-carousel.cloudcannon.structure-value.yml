@@ -3,13 +3,13 @@ icon: view_carousel
 description: Sliding row of customer story cards, each in its own accent colour.
 value:
   _component: page-sections/proof/story-carousel
-  sectionLabel: ""
   eyebrow: ""
   heading: Grow your sites, not your headcount.
   headingLevel: h2
   headingSize: lg
   subtext: From fast-moving startups to multi-site agencies, teams ship more.
   subtextSize: md
+  subtextWidth: ""
   stories:
     - accentColor: golden
       logoSource: ""
@@ -43,6 +43,7 @@ value:
     - _component: building-blocks/core-elements/button
       text: See how others did it
       variant: primary
+  sectionLabel: ""
   maxContentWidth: xl
   paddingHorizontal: gutter
   paddingVertical: 4xl
@@ -76,8 +77,8 @@ _structures:
           accentColor:
             type: select
             comment: >-
-              Drives both the rule at the top of the card and the figure below
-              it, so one choice colours the whole card.
+              Drives both the rule at the top of the card and the figure below it, so one choice
+              colours the whole card.
             options:
               values:
                 - id: golden

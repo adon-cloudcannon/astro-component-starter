@@ -71,10 +71,24 @@ subtextSize:
       - id: xl
         name: Extra large
 subtextWidth:
-  type: number
+  type: select
+  label: Subtext width
   comment: >-
-    Measure for the supporting line, in pixels. The design sets a centred one
-    at about 580 rather than the full column. Leave empty for the full width.
+    The measure the supporting line is set in, not the column it sits in. The
+    design draws a centred one at about Medium in the 1040 column; run to the
+    full width it reads as a different block.
+  options:
+    values:
+      - id: ""
+        name: Full width
+      - id: sm
+        name: Narrow (460)
+      - id: md
+        name: Medium (580)
+      - id: lg
+        name: Wide (680)
+      - id: xl
+        name: Extra wide (820)
 alignmentHorizontal:
   type: select
   comment: Alignment for the heading and supporting text.

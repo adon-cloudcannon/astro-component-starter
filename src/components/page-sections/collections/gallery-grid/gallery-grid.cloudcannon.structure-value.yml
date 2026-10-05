@@ -3,7 +3,6 @@ icon: photo_library
 description: Image grid with captions. Click a photo to view it full size.
 value:
   _component: page-sections/collections/gallery-grid
-  sectionLabel: ""
   eyebrow: Gallery
   heading: Field notes from the coast
   headingLevel: h2
@@ -30,6 +29,7 @@ value:
   aspectRatio: square
   lightbox: true
   showThumbnails: false
+  sectionLabel: ""
   maxContentWidth: xl
   paddingHorizontal: gutter
   paddingVertical: 4xl

@@ -3,11 +3,12 @@ icon: timeline
 description: Dated timeline for a company story, funding history, or what comes next.
 value:
   _component: page-sections/explainers/timeline-section
-  sectionLabel: ""
   eyebrow: Our story
   heading: How we got here
   headingLevel: h2
   subtext: ""
+  subtextSize: md
+  subtextWidth: ""
   layout: vertical
   entries:
     - date: "2019"
@@ -19,6 +20,7 @@ value:
     - date: "2025"
       title: New markets
       body: Took on the first clients outside the country.
+  sectionLabel: ""
   maxContentWidth: xl
   paddingHorizontal: gutter
   paddingVertical: 4xl
@@ -78,7 +80,9 @@ _structures:
             comment: Optional. Set the same year on consecutive entries to group them (month goes in Date).
           date:
             type: text
-            comment: The date shown beside the rail — a year (`2019`), a quarter (`Q3 2026`), or a month when Year is set.
+            comment: >-
+              The date shown beside the rail — a year (`2019`), a quarter (`Q3 2026`), or a month
+              when Year is set.
           title:
             type: text
             comment: What happened.

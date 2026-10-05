@@ -6,29 +6,29 @@ title: Git
 description: Everything lives in the repo, not a database.
 pageSections:
   - _component: page-sections/heroes/hero-split
-    backgroundColor: light-sand
     heading: Everything lives in the repo, not a database.
+    headingSize: xl
     subtext: >-
       CloudCannon reads and writes directly to your Git repo, so every change is tracked, every
       version is recoverable, access it with any tool.
     subtextSize: xl
     imageSource: /src/assets/images/marketing/hero-gitbasedcms-01-1.png
     imageAlt: ''
-    headingSize: xl
     imageOverflow: 119
     buttonSections:
       - _component: building-blocks/core-elements/button
-        variant: primary
         text: Start your free trial
+        variant: primary
       - _component: building-blocks/core-elements/button
-        variant: text
+        text: Book a demo
         iconName: arrow-right
         iconPosition: after
-        text: Book a demo
+        variant: text
     pattern: grid
     haze: true
+    backgroundColor: light-sand
   - _component: page-sections/proof/logo-cloud
-    backgroundColor: sand
+    heading: 20,000+ sites shipped
     logos:
       - image: /src/assets/images/marketing/logos/twitch.svg
         alt: Twitch
@@ -59,25 +59,25 @@ pageSections:
         monochrome: true
         aspect: 90 / 28
     headingPlacement: inline
-    heading: 20,000+ sites shipped
+    backgroundColor: sand
   - _component: page-sections/conversion/cta-center
     heading: What is a Git-based CMS?
+    headingSize: lg
     subtext: >-
       A Git-based CMS stores your content as files in a Git repository instead of in a database.
       Your team edits through a visual interface, and every change is committed to the repo like any
       other work. The site builds from those files using whatever static site generator you already
       use.
     subtextSize: lg
-    subtextWidth: 808
-    headingSize: lg
+    subtextWidth: xl
   - _component: page-sections/proof/testimonial-quote
     variant: split-person
     quoteSize: sm
     quotes:
       - text: >-
           Having that flexibility of having everything live in a Git repository is pretty amazing.
-          **We don’t have to worry about a separate database**, or any other pieces in the mix,
-          it’s dead simple.
+          **We don’t have to worry about a separate database**, or any other pieces in the mix, it’s
+          dead simple.
         authorName: Justin Parsons
         authorDescription: Director of Front-End Development,
         company: Insight Creative, Inc
@@ -90,15 +90,15 @@ pageSections:
         'y': 49.7%
         ry: 74.8%
   - _component: page-sections/conversion/cta-center
-    heading: Here’s the whole setup
     eyebrow: HOW IT WORKS
+    heading: Here’s the whole setup
+    headingSize: lg
     subtext: >-
       Whether it's three client sites or three hundred, another site is another repo. The
       maintenance doesn't come with it.
-    backgroundColor: dark
     subtextSize: lg
-    subtextWidth: 580
-    headingSize: lg
+    subtextWidth: md
+    backgroundColor: dark
   - _component: page-sections/explainers/timeline-section
     layout: rail
     entries:
@@ -120,20 +120,9 @@ pageSections:
         iconName: command-line
     backgroundColor: dark
   - _component: page-sections/explainers/pinned-steps
+    eyebrow: ''
     heading: ''
     subtext: ''
-    eyebrow: ''
-    reverse: true
-    mediaWidth: wide
-    progressColor: moss
-    progressTrackColor: gray-550
-    numbered: true
-    background:
-      type: pattern
-      pattern: grid
-      mask: fade
-      fixed: true
-    backgroundColor: dark
     steps:
       - contentSections:
           - _component: building-blocks/core-elements/simple-text
@@ -151,11 +140,11 @@ pageSections:
               use.
             size: lg
           - _component: building-blocks/core-elements/button
-            variant: text
-            iconName: arrow-right
-            iconPosition: after
-            textColor: sunset
             text: Learn more
+            iconName: arrow-right
+            textColor: sunset
+            iconPosition: after
+            variant: text
         mediaSections: []
       - contentSections:
           - _component: building-blocks/core-elements/simple-text
@@ -173,11 +162,11 @@ pageSections:
               every version sits in Git.
             size: lg
           - _component: building-blocks/core-elements/button
-            variant: text
-            iconName: arrow-right
-            iconPosition: after
-            textColor: sunset
             text: Learn more
+            iconName: arrow-right
+            textColor: sunset
+            iconPosition: after
+            variant: text
         mediaSections: []
       - contentSections:
           - _component: building-blocks/core-elements/simple-text
@@ -195,12 +184,23 @@ pageSections:
               endpoint.
             size: lg
           - _component: building-blocks/core-elements/button
-            variant: text
-            iconName: arrow-right
-            iconPosition: after
-            textColor: sunset
             text: Learn more
+            iconName: arrow-right
+            textColor: sunset
+            iconPosition: after
+            variant: text
         mediaSections: []
+    reverse: true
+    mediaWidth: wide
+    backgroundColor: dark
+    progressColor: moss
+    progressTrackColor: gray-550
+    numbered: true
+    background:
+      type: pattern
+      pattern: grid
+      mask: fade
+      fixed: true
   - _component: page-sections/proof/testimonial-quote
     variant: static
     quoteSize: sm
@@ -209,8 +209,8 @@ pageSections:
     bordered: true
     quotes:
       - text: >-
-          It’s important to me that CloudCannon is a Git-based CMS. I hate having a vendor lock
-          with API-based CMSs — **how can I trust anyone else with our data?**
+          It’s important to me that CloudCannon is a Git-based CMS. I hate having a vendor lock with
+          API-based CMSs — **how can I trust anyone else with our data?**
         authorName: Alexander Luttringer
         authorDescription: Technical Director,
         company: Croissant & Baguette
@@ -224,21 +224,27 @@ pageSections:
       mask: fade
   - _component: page-sections/conversion/cta-center
     heading: Your content is yours
+    headingSize: lg
     subtext: >-
       Markdown, YAML and JSON, in a repo you already own. You stay because it works, not because
       you're stuck.
     subtextSize: lg
-    imageSource: /src/assets/images/marketing/ribbon-01-1.png
-    imageAlt: ''
-    backgroundColor: light-sand
-    subtextWidth: 579
-    headingSize: lg
+    subtextWidth: md
     buttonSections:
       - _component: building-blocks/core-elements/button
-        variant: primary
         text: Get skills repo
+        variant: primary
+    backgroundColor: light-sand
+    imageSource: /src/assets/images/marketing/ribbon-01-1.png
+    imageAlt: ''
   - _component: page-sections/explainers/feature-grid
+    heading: Fits the way you already build
+    headingSize: lg
+    subtext: Connect your repo, keep your tooling, and add a visual editor on top.
+    subtextSize: lg
+    subtextWidth: md
     alignmentHorizontal: center
+    cardHeight: 334
     features:
       - title: Git providers
         description: Connect to GitHub, GitLab, or Bitbucket
@@ -270,33 +276,27 @@ pageSections:
         imageSource: /src/assets/images/marketing/layer-29-1-3806-74351.png
         imageHeight: 195
         imageAlt: ''
-    heading: Fits the way you already build
-    subtext: Connect your repo, keep your tooling, and add a visual editor on top.
-    subtextSize: lg
     backgroundColor: light-sand
-    subtextWidth: 580
-    cardHeight: 334
-    headingSize: lg
   - _component: page-sections/conversion/cta-split
-    imageReveal: /src/assets/images/marketing/cloudcannon-truck-open-1.png
-    imageRevealLabel: Open and close the truck's hood
     heading: Take a peek under the hood
+    headingSize: lg
     subtext: >-
       Git underneath, a visual editor on top, with code and content running on one engine. Start
       free in minutes, or book a demo and we’ll walk you through the real thing.
     subtextSize: lg
+    imageRevealLabel: Open and close the truck's hood
+    imageReveal: /src/assets/images/marketing/cloudcannon-truck-open-1.png
     imageSource: /src/assets/images/marketing/cloudcannon-truck-closed-1.png
-    imageAlt: ''
-    backgroundColor: pacific
-    headingSize: lg
     imageOverflow: 334
+    imageAlt: ''
     buttonSections:
       - _component: building-blocks/core-elements/button
-        variant: primary
         text: Start your free trial
+        variant: primary
       - _component: building-blocks/core-elements/button
-        variant: text
+        text: Book a demo
         iconName: arrow-right
         iconPosition: after
-        text: Book a demo
+        variant: text
+    backgroundColor: pacific
 ---

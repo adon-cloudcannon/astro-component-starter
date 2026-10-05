@@ -3,7 +3,6 @@ icon: groups
 description: Team member cards in a three-column grid.
 value:
   _component: page-sections/collections/team-grid
-  sectionLabel: ""
   eyebrow: Our team
   heading: Meet the team
   headingLevel: h2
@@ -24,6 +23,7 @@ value:
       bio: David creates beautiful, user-centered designs that solve real problems.
       imageSource: /src/assets/images/component-docs/profile2.jpg
       imageAlt: David Kim
+  sectionLabel: ""
   maxContentWidth: xl
   paddingHorizontal: gutter
   paddingVertical: 4xl

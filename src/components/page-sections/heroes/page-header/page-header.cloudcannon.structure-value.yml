@@ -3,13 +3,15 @@ icon: title
 description: Slim title block for inner pages, with optional breadcrumbs.
 value:
   _component: page-sections/heroes/page-header
-  sectionLabel: ""
   eyebrow: ""
   heading: About us
   headingLevel: h1
   subtext: A short introduction to the page, one or two lines long.
+  subtextSize: md
+  subtextWidth: ""
   showBreadcrumbs: true
   alignmentHorizontal: start
+  sectionLabel: ""
   maxContentWidth: xl
   paddingHorizontal: gutter
   paddingVertical: 2xl

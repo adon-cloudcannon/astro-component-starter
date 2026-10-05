@@ -1,5 +1,6 @@
 ---
 import CustomSection from "@builders/custom-section/CustomSection.astro";
+import { subtextMeasure } from "@component-utils/subtextMeasure.mjs";
 import Heading from "@core-elements/heading/Heading.astro";
 import SimpleText from "@core-elements/simple-text/SimpleText.astro";
 import Text from "@core-elements/text/Text.astro";
@@ -49,6 +50,9 @@ const {
   ...htmlAttributes
 } = Astro.props;
 
+/* The measure the subtext is set in, as a length. */
+const subtextCap = subtextMeasure(subtextWidth);
+
 // The design's developer-page bento is two across, two down, so two is a real
 // option rather than something that falls back to three.
 const columnCount = ["2", "4"].includes(String(columns)) ? String(columns) : "3";
@@ -87,7 +91,7 @@ const columnCount = ["2", "4"].includes(String(columns)) ? String(columns) : "3"
     class="section-subtext testimonial-bento-subtext"
     alignmentHorizontal="center"
     data-prop="subtext"
-    style={subtextWidth ? `max-inline-size: ${Number(subtextWidth)}px; margin-inline: auto; justify-self: center` : undefined}    size={subtextSize}    text={subtext}
+    style={subtextCap ? `max-inline-size: ${subtextCap}; margin-inline: auto; justify-self: center` : undefined}    size={subtextSize}    text={subtext}
   />
 
   {testimonials?.length > 0 && (

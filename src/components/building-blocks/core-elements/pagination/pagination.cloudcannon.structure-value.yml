@@ -14,7 +14,7 @@ preview:
     fit: cover
 picker_preview:
   text: Pagination
-  subtext: "Navigation component for multi-page content."
+  subtext: Navigation component for multi-page content.
   image: public/component-previews/building-blocks/core-elements/pagination.svg
   icon: list
   gallery:

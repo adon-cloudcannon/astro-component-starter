@@ -4,8 +4,6 @@ description: Numbered how-it-works sequence with optional images.
 value:
   _component: building-blocks/wrappers/steps
   label: ""
-  orientation: vertical
-  imageAspectRatio: landscape
   items:
     - image: ""
       imageAlt: ""
@@ -37,6 +35,8 @@ value:
         - _component: building-blocks/core-elements/simple-text
           text: A tracking link arrives by email as soon as the parcel is scanned.
           size: sm
+  orientation: vertical
+  imageAspectRatio: landscape
 preview:
   text:
     - Steps
@@ -78,7 +78,9 @@ _structures:
         _inputs:
           image:
             type: image
-            comment: Optional featured photo. Every step in the list shares the parent’s image aspect ratio.
+            comment: >-
+              Optional featured photo. Every step in the list shares the parent’s image aspect
+              ratio.
             options:
               paths:
                 static: ""

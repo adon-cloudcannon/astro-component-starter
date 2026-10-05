@@ -3,13 +3,13 @@ icon: web_stories
 description: A band that holds still while its steps and pictures change.
 value:
   _component: page-sections/explainers/pinned-steps
-  sectionLabel: ""
   eyebrow: ""
   heading: ""
   headingLevel: h2
   headingSize: lg
   subtext: ""
   subtextSize: md
+  subtextWidth: ""
   alignmentHorizontal: center
   steps:
     - contentSections:
@@ -31,6 +31,7 @@ value:
   reverse: false
   mediaWidth: half
   showProgress: true
+  sectionLabel: ""
   maxContentWidth: xl
   paddingHorizontal: gutter
   paddingVertical: 4xl

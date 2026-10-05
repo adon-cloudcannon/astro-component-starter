@@ -3,11 +3,11 @@ icon: call_to_action
 description: Call to action with a form on one side and an image on the other.
 value:
   _component: page-sections/conversion/cta-form
-  sectionLabel: ""
   heading: Get in touch
   headingLevel: h2
   subtext: Fill out the form below and we'll get back to you as soon as possible.
   subtextSize: md
+  subtextWidth: ""
   formAction: ./
   formBlocks:
     - _component: building-blocks/forms/input
@@ -30,6 +30,7 @@ value:
   imageSource: /src/assets/images/component-docs/dunedin-cliff.jpg
   imageAlt: Sea cliffs above a bay
   reverse: false
+  sectionLabel: ""
   maxContentWidth: xl
   paddingHorizontal: gutter
   paddingVertical: 4xl

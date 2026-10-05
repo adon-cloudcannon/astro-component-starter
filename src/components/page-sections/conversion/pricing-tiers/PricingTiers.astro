@@ -2,6 +2,7 @@
 import { isNonEmptyString } from "@component-utils/isNonEmptyString";
 import { slugifyLabel } from "@component-utils/slugify";
 import CustomSection from "@builders/custom-section/CustomSection.astro";
+import { subtextMeasure } from "@component-utils/subtextMeasure.mjs";
 import TierGarden from "@wrappers/tier-garden/TierGarden.astro";
 import Heading from "@core-elements/heading/Heading.astro";
 import SimpleText from "@core-elements/simple-text/SimpleText.astro";
@@ -75,6 +76,9 @@ const {
   ...htmlAttributes
 } = Astro.props;
 
+/* The measure the subtext is set in, as a length. */
+const subtextCap = subtextMeasure(subtextWidth);
+
 const itemHeadingLevel = nextHeadingLevel(headingLevel);
 
 // A radio group's name must be unique per section on the page, so a section
@@ -116,8 +120,8 @@ const annualSelected = defaultInterval === "annual";
   <Text
     class="pricing-tiers-subtext"
     alignmentHorizontal={alignmentHorizontal}
-    style={subtextWidth
-      ? `max-inline-size: ${Number(subtextWidth)}px;${
+    style={subtextCap
+      ? `max-inline-size: ${subtextCap};${
           alignmentHorizontal === "center" ? " margin-inline: auto; justify-self: center" : ""
         }`
       : undefined}    size={subtextSize}

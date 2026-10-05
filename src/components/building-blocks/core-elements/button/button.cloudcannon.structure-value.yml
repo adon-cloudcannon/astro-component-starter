@@ -4,12 +4,12 @@ description: Clickable button for actions and links.
 value:
   _component: building-blocks/core-elements/button
   text: My Button
-  hideText: false
   link: ""
   iconName: ""
   iconColor: default
   textColor: default
   iconPosition: before
+  hideText: false
   variant: primary
   size: md
 preview:

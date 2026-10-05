@@ -6,35 +6,32 @@ title: AI Ready
 description: The CMS your AI tools can actually read
 pageSections:
   - _component: page-sections/heroes/hero-split
-    backgroundColor: light-sand
     heading: The CMS your AI tools can actually read
+    headingSize: xl
     subtext: Code, content, and config all sit in one repo as plain files, so agents get the full picture.
     subtextSize: xl
     imageSource: /src/assets/images/marketing/screenshot-2026-08-15-at-15-46-59-1-3806-68971.png
     imageAlt: ''
-    headingSize: xl
     imageOverflow: 42
     buttonSections:
       - _component: building-blocks/core-elements/button
-        variant: primary
         text: Start your free trial
+        variant: primary
       - _component: building-blocks/core-elements/button
-        variant: text
+        text: Book a demo
         iconName: arrow-right
         iconPosition: after
-        text: Book a demo
+        variant: text
     note:
       - text: No credit card · 14-day free trial · No lock-in
         iconName: check
         iconColor: default
     pattern: grid
     haze: true
+    backgroundColor: light-sand
   - _component: page-sections/proof/logo-cloud
-    backgroundColor: sand
+    heading: WE WORK WITH ALL MODELS
     logos:
-      # The models, in the design's order, each at its own drawn size: the
-      # file's viewBox and the size the design draws it at are the same to
-      # within a pixel, so there is nothing to scale.
       - image: /src/assets/images/marketing/logos/anthropic.svg
         alt: Anthropic
         width: 178
@@ -61,37 +58,24 @@ pageSections:
         height: 34
         monochrome: true
     headingPlacement: inline
-    heading: WE WORK WITH ALL MODELS
+    backgroundColor: sand
   - _component: page-sections/conversion/cta-center
     heading: Ready, set, code
-    subtext: AI agents working on the site have complete context
-    backgroundColor: dark
-    subtextSize: lg
-    subtextWidth: 580
     headingSize: lg
+    subtext: AI agents working on the site have complete context
+    subtextSize: lg
+    subtextWidth: md
+    backgroundColor: dark
     background:
       type: pattern
       pattern: grid
       mask: fade
-  # A pinned stepper, not a split: the design draws one band with a progress
-  # bar along its foot, which is what this component is for. The media takes
-  # two thirds and the copy one, which is the 803 of 1293 the design gives the
-  # editor mockup and the 307 it leaves the paragraph.
   - _component: page-sections/explainers/pinned-steps
-    heading: ''
     eyebrow: ''
+    heading: ''
     subtext: ''
     alignmentHorizontal: start
-    # The mockup is on the left and the copy on the right, which is this
-    # component's own order rather than its reversed one.
-    reverse: false
-    mediaWidth: wide
-    # #034AD7 and #333333 off the design, which are Pacific and Midnight.
-    progressColor: pacific
-    progressTrackColor: midnight
-    backgroundColor: dark
     steps:
-      # No number: the design does not draw one on this band.
       - number: ''
         contentSections:
           - _component: building-blocks/core-elements/heading
@@ -105,17 +89,11 @@ pageSections:
               structures, and diffs: models have seen it all before, and know how the pieces fit
               together.
             size: lg
-        # Cut out on transparency, with the band's own dark where the panel is
-        # solid: it is drawn to sit on this band rather than being a picture of
-        # one. Decorative, because the copy beside it says what it shows.
         mediaSections:
           - _component: building-blocks/core-elements/image
             source: /src/assets/images/marketing/editor-code-view-1.png
             alt: ''
             decorative: true
-      # Drawn on the canvas rather than in the page frame, as
-      # `ai-ready-benefits-slide-2`, which is why neither the section reader
-      # nor the crop tool ever saw it.
       - number: ''
         contentSections:
           - _component: building-blocks/core-elements/heading
@@ -134,30 +112,47 @@ pageSections:
             source: /src/assets/images/marketing/editor-code-view-2.png
             alt: ''
             decorative: true
+    reverse: false
+    mediaWidth: wide
+    backgroundColor: dark
+    progressColor: pacific
+    progressTrackColor: midnight
   - _component: page-sections/proof/testimonial-section
+    layout: split
+    company: Nomio
     text: >-
       You can have lots of concurrent pieces of work: a solutions page, a new case study layout, new
       terms and conditions, a legal section, all on different branches with different agents working
       on them in isolation, without corrupting your main site.
     authorName: Ed Stennett
     authorDescription: Head of Growth · Nomio
-    layout: split
-    markPosition: start
-    markStyle: plain
-    company: Nomio
-    linkText: Read case study
     authorImage: /src/assets/images/marketing/ellipse-287.jpg
+    backgroundColor: dark
     background:
       type: pattern
       pattern: pegboard
       mask: none
-    backgroundColor: dark
     haze:
       - x: 0.4938
         rx: 933px
         'y': 49.8%
         ry: 74.8%
+    markPosition: start
+    markStyle: plain
+    linkText: Read case study
   - _component: page-sections/conversion/cta-split
+    heading: We've already taught agents how to use CloudCannon
+    headingSize: lg
+    subtext: >-
+      Our agent skills are open source. Point your agent at them and it can help to migrate an
+      existing site onto CloudCannon, write the config, and set up visual editing, without you
+      needing to explain how any of it works first.
+    subtextSize: lg
+    buttonSections:
+      - _component: building-blocks/core-elements/button
+        text: Get skills repo
+        variant: primary
+    backgroundColor: light-sand
     terminal:
       path: ~/marketing-site
       loop: true
@@ -169,63 +164,43 @@ pageSections:
           done:
             - cloudcannon.config.yaml
             - 12 components made editable
-    heading: We've already taught agents how to use CloudCannon
-    subtext: >-
-      Our agent skills are open source. Point your agent at them and it can help to migrate an
-      existing site onto CloudCannon, write the config, and set up visual editing, without you
-      needing to explain how any of it works first.
-    subtextSize: lg
-    backgroundColor: light-sand
-    headingSize: lg
-    buttonSections:
-      - _component: building-blocks/core-elements/button
-        variant: primary
-        text: Get skills repo
   - _component: page-sections/conversion/cta-split
-    contentCard: true
-    paddingVertical: 5xl
-    imageSource: /src/assets/images/marketing/camera-01-1.png
-    imageAlt: ''
-    imageReveal: ''
-    # Click the camera and it takes one.
-    camera:
-      label: Take a picture
-      # The subjects are four heroes from around the site, all of them
-      # cutouts, so the scratched ground shows through behind each one. One
-      # colour across all four: the prints are a set, and four different
-      # grounds read as four unrelated things rather than one roll of film.
-      shots:
-        - source: /src/assets/images/marketing/hero-lowmaintenance-01-1.png
-          alt: ''
-          color: var(--dark-sand)
-        # This page's own hero, the kiwi with the burst.
-        - source: /src/assets/images/marketing/screenshot-2026-08-15-at-15-46-59-1-3806-68971.png
-          alt: ''
-          color: var(--dark-sand)
-        # High Performance's, which is the motorbike with someone on it.
-        - source: /src/assets/images/marketing/screenshot-2026-08-15-at-15-52-30-1-3806-70839.png
-          alt: ''
-          color: var(--dark-sand)
-        # And the pair, back to back.
-        - source: /src/assets/images/marketing/thumbsup-01-1.png
-          alt: ''
-          color: var(--dark-sand)
     heading: Give AI the full picture
+    headingSize: lg
     subtext: With CloudCannon the code and content stay in Git, and the repo stays yours.
     subtextSize: lg
-    headingSize: lg
+    imageReveal: ''
+    imageSource: /src/assets/images/marketing/camera-01-1.png
+    contentCard: true
+    imageAlt: ''
+    buttonSections:
+      - _component: building-blocks/core-elements/button
+        text: Start your free trial
+        variant: primary
+      - _component: building-blocks/core-elements/button
+        text: Book a demo
+        iconName: arrow-right
+        iconPosition: after
+        variant: text
+    paddingVertical: 5xl
+    backgroundColor: dark-sand
     background:
       type: pattern
       pattern: grid
       mask: none
-    backgroundColor: dark-sand
-    buttonSections:
-      - _component: building-blocks/core-elements/button
-        variant: primary
-        text: Start your free trial
-      - _component: building-blocks/core-elements/button
-        variant: text
-        iconName: arrow-right
-        iconPosition: after
-        text: Book a demo
+    camera:
+      label: Take a picture
+      shots:
+        - source: /src/assets/images/marketing/hero-lowmaintenance-01-1.png
+          alt: ''
+          color: var(--dark-sand)
+        - source: /src/assets/images/marketing/screenshot-2026-08-15-at-15-46-59-1-3806-68971.png
+          alt: ''
+          color: var(--dark-sand)
+        - source: /src/assets/images/marketing/screenshot-2026-08-15-at-15-52-30-1-3806-70839.png
+          alt: ''
+          color: var(--dark-sand)
+        - source: /src/assets/images/marketing/thumbsup-01-1.png
+          alt: ''
+          color: var(--dark-sand)
 ---

@@ -3,33 +3,45 @@ icon: reviews
 description: Several customer quotes as cards in a masonry layout.
 value:
   _component: page-sections/proof/testimonial-wall
-  sectionLabel: ""
   eyebrow: Testimonials
   heading: What teams say after shipping
   headingLevel: h2
   subtext: ""
+  subtextSize: md
+  subtextWidth: ""
   testimonials:
-    - text: This framework has completely changed the way we build. The sites come together fast, they run even faster, and the whole process feels effortless.
+    - text: >-
+        This framework has completely changed the way we build. The sites come together fast, they
+        run even faster, and the whole process feels effortless.
       authorName: Richard Johnson
       authorDescription: CEO, Tech Innovations
       authorImage: /src/assets/images/component-docs/profile.jpg
-    - text: We handed the site to our marketing team on a Friday and they had three new landing pages live by Monday. No tickets, no deploys, nothing broken.
+    - text: >-
+        We handed the site to our marketing team on a Friday and they had three new landing pages
+        live by Monday. No tickets, no deploys, nothing broken.
       authorName: Priya Raman
       authorDescription: Head of Marketing, Northwind
       authorImage: /src/assets/images/component-docs/profile1.jpg
-    - text: The editing experience is the part that sold us. Everything is visual, and the guardrails mean nobody can wreck the design.
+    - text: >-
+        The editing experience is the part that sold us. Everything is visual, and the guardrails
+        mean nobody can wreck the design.
       authorName: Tom Alvarez
       authorDescription: Founder, Fieldnote
       authorImage: /src/assets/images/component-docs/profile2.jpg
-    - text: Our Lighthouse scores went up without anyone working on performance. That never happens on a redesign.
+    - text: >-
+        Our Lighthouse scores went up without anyone working on performance. That never happens on a
+        redesign.
       authorName: Dana Whitfield
       authorDescription: Engineering Lead, Cascade
       authorImage: /src/assets/images/component-docs/profile3.jpg
-    - text: Two weeks from kickoff to launch, including content. The component library did most of the work for us.
+    - text: >-
+        Two weeks from kickoff to launch, including content. The component library did most of the
+        work for us.
       authorName: Sam Okafor
       authorDescription: Design Director, Loam Studio
       authorImage: /src/assets/images/component-docs/profile4.jpg
   columns: 3
+  sectionLabel: ""
   maxContentWidth: xl
   paddingHorizontal: gutter
   paddingVertical: 4xl
@@ -96,14 +108,13 @@ _structures:
           quoted:
             type: switch
             comment: >-
-              Draw quotation marks around it. Off for a line that is a statement
-              rather than something said.
+              Draw quotation marks around it. Off for a line that is a statement rather than
+              something said.
           quoteSize:
             type: number
             comment: >-
-              Size of this card's quote, in pixels. The design varies it per card so
-              cards of different lengths come out the same height. Leave empty for the
-              default.
+              Size of this card's quote, in pixels. The design varies it per card so cards of
+              different lengths come out the same height. Leave empty for the default.
           authorImage:
             type: image
             comment: Optional headshot. Falls back to the author's initials.

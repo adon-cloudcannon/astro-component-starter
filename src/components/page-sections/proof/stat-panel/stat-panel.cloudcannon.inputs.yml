@@ -31,8 +31,24 @@ subtextSize:
   options:
     values: [sm, md, lg, xl]
 subtextWidth:
-  type: number
-  comment: The measure the copy is set in, in pixels. Leave empty for the full column.
+  type: select
+  label: Subtext width
+  comment: >-
+    The measure the supporting line is set in, not the column it sits in. The
+    design draws a centred one at about Medium in the 1040 column; run to the
+    full width it reads as a different block.
+  options:
+    values:
+      - id: ""
+        name: Full width
+      - id: sm
+        name: Narrow (460)
+      - id: md
+        name: Medium (580)
+      - id: lg
+        name: Wide (680)
+      - id: xl
+        name: Extra wide (820)
 buttonSections:
   type: array
   comment: Actions under the copy.

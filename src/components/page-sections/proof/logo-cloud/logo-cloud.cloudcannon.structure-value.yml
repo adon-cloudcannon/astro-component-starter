@@ -3,7 +3,6 @@ icon: workspaces
 description: Row of client logos, with an optional heading.
 value:
   _component: page-sections/proof/logo-cloud
-  sectionLabel: ""
   heading: Trusted by teams shipping every day
   logos:
     - image: /src/assets/images/component-docs/logo-acme.svg
@@ -24,6 +23,7 @@ value:
   headingPlacement: above
   grayscale: true
   scrolling: false
+  sectionLabel: ""
   maxContentWidth: xl
   paddingHorizontal: gutter
   paddingVertical: 2xl
@@ -93,20 +93,22 @@ _structures:
               required_message: A linked logo with no alt text is a link with no name.
           url:
             type: url
-            comment: Optional link to the company's site. Linked logos show a hover affordance — color restore in grayscale, a slight scale in full color.
+            comment: >-
+              Optional link to the company's site. Linked logos show a hover affordance — color
+              restore in grayscale, a slight scale in full color.
           monochrome:
             type: switch
             comment: >-
-              Draws the mark in the strip's own grey instead of its own colours,
-              which is how the design sets this row. It silhouettes the file, so
-              leave it off for a logo that needs more than one colour. A mark
-              saved in white needs it on, or it is invisible on the cream strip.
+              Draws the mark in the strip's own grey instead of its own colours, which is how the
+              design sets this row. It silhouettes the file, so leave it off for a logo that needs
+              more than one colour. A mark saved in white needs it on, or it is invisible on the
+              cream strip.
           width:
             type: number
             comment: >-
-              The width the mark is drawn at, in pixels, measured off the design.
-              Marks sit on one line and are capped by height, so this mostly sets
-              how the mark reads against its neighbours.
+              The width the mark is drawn at, in pixels, measured off the design. Marks sit on one
+              line and are capped by height, so this mostly sets how the mark reads against its
+              neighbours.
           height:
             type: number
             comment: The matching height in pixels. 28 for most of the row.

@@ -13,7 +13,7 @@ preview:
     fit: cover
 picker_preview:
   text: Side Navigation
-  subtext: "Sidebar navigation with expandable sections."
+  subtext: Sidebar navigation with expandable sections.
   image: public/component-previews/navigation/side.svg
   icon: view_sidebar
   gallery:

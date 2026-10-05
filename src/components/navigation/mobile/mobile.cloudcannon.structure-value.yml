@@ -15,7 +15,7 @@ preview:
     fit: cover
 picker_preview:
   text: Mobile Navigation
-  subtext: "Mobile navigation with full-screen overlay."
+  subtext: Mobile navigation with full-screen overlay.
   image: public/component-previews/navigation/mobile.svg
   icon: smartphone
   gallery:

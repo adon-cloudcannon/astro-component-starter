@@ -3,22 +3,23 @@ icon: view_day
 description: Steps that advance as the page scrolls, with the picture beside them changing.
 value:
   _component: page-sections/explainers/scroll-steps
-  sectionLabel: ""
   eyebrow: ""
   heading: ""
-  headingLevel: h2
   headingSize: lg
+  headingLevel: h2
   subtext: ""
   subtextSize: md
-  alignmentHorizontal: start
+  subtextWidth: ""
   steps: []
   reverse: false
   mediaWidth: half
   progressStyle: bar
+  sectionLabel: ""
   maxContentWidth: xl
   paddingHorizontal: gutter
   paddingVertical: 4xl
   backgroundColor: light-sand
+  alignmentHorizontal: start
   background:
     type: image
     imageSource: ""

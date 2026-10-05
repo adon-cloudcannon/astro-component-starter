@@ -6,44 +6,39 @@ title: High Performance
 description: Load instantly. Rank higher.
 pageSections:
   - _component: page-sections/heroes/hero-split
-    backgroundColor: light-sand
     heading: Load instantly. Rank higher.
+    headingSize: xl
     subtext: >-
       Pre-rendered pages, global delivery, and structured content that search engines love. Speed is
       built into the architecture, not bolted on.
     subtextSize: xl
     imageSource: /src/assets/images/marketing/screenshot-2026-08-15-at-15-52-30-1-3806-70839.png
     imageAlt: ''
-    headingSize: xl
     imageOverflow: 5
     buttonSections:
       - _component: building-blocks/core-elements/button
-        variant: primary
         text: Start your free trial
+        variant: primary
       - _component: building-blocks/core-elements/button
-        variant: text
+        text: Book a demo
         iconName: arrow-right
         iconPosition: after
-        text: Book a demo
+        variant: text
     note:
       - text: No credit card · 14-day free trial · No lock-in
         iconName: check
         iconColor: default
     pattern: grid
     haze: true
+    backgroundColor: light-sand
   - _component: page-sections/conversion/cta-center
     heading: High speed whether you have 10 visitors or 10 million
-    backgroundColor: light-sand
     headingSize: lg
+    backgroundColor: light-sand
   - _component: page-sections/explainers/pinned-steps
-    backgroundColor: sand
+    eyebrow: ''
     heading: ''
     subtext: ''
-    eyebrow: ''
-    reverse: false
-    mediaWidth: wide
-    progressColor: blush
-    progressTrackColor: earth
     steps:
       - contentSections:
           - _component: building-blocks/core-elements/heading
@@ -110,7 +105,15 @@ pageSections:
                 label: publishing velocity
                 iconName: bolt
                 iconColor: blush
+    reverse: false
+    mediaWidth: wide
+    backgroundColor: sand
+    progressColor: blush
+    progressTrackColor: earth
   - _component: page-sections/proof/testimonial-bento
+    eyebrow: SUCCESS STORIES
+    heading: What clients are saying
+    headingSize: md
     testimonials:
       - text: |-
           Within the first few weeks after CloudCannon migrated the
@@ -153,36 +156,33 @@ pageSections:
         size: wide
     columns: 2
     stagger: true
-    eyebrow: SUCCESS STORIES
-    heading: What clients are saying
-    headingSize: md
     backgroundColor: dark
     background:
       type: pattern
       pattern: grid
       mask: fade
   - _component: page-sections/conversion/cta-split
-    contentCard: true
-    paddingVertical: 5xl
-    imageSource: /src/assets/images/marketing/motorcycle-01-1.png
-    imageAlt: ''
-    imageReveal: ''
     heading: See how fast your site could be
+    headingSize: lg
     subtext: See how CloudCannon's static-first approach delivers the speed boost your business needs.
     subtextSize: lg
-    headingSize: lg
+    imageReveal: ''
+    imageSource: /src/assets/images/marketing/motorcycle-01-1.png
+    contentCard: true
+    imageAlt: ''
+    buttonSections:
+      - _component: building-blocks/core-elements/button
+        text: Start your free trial
+        variant: primary
+      - _component: building-blocks/core-elements/button
+        text: Book a demo
+        iconName: arrow-right
+        iconPosition: after
+        variant: text
+    paddingVertical: 5xl
+    backgroundColor: sand
     background:
       type: pattern
       pattern: pegboard
       mask: none
-    backgroundColor: sand
-    buttonSections:
-      - _component: building-blocks/core-elements/button
-        variant: primary
-        text: Start your free trial
-      - _component: building-blocks/core-elements/button
-        variant: text
-        iconName: arrow-right
-        iconPosition: after
-        text: Book a demo
 ---

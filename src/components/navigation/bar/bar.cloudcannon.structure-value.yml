@@ -14,7 +14,7 @@ preview:
     fit: cover
 picker_preview:
   text: Bar Navigation
-  subtext: "Horizontal navigation bar with dropdown menus."
+  subtext: Horizontal navigation bar with dropdown menus.
   image: public/component-previews/navigation/bar.svg
   icon: navigation
   gallery:

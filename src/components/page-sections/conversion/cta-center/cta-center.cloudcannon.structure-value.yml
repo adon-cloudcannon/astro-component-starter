@@ -4,11 +4,11 @@ description: Centered call to action with a headline, supporting text, and butto
 value:
   _component: page-sections/conversion/cta-center
   eyebrow: ""
-  sectionLabel: ""
   heading: Ready to get started?
   headingLevel: h2
   subtext: One line that makes the next step obvious.
   subtextSize: md
+  subtextWidth: ""
   buttonSections:
     - _component: building-blocks/core-elements/button
       text: Get started
@@ -19,6 +19,7 @@ value:
       iconPosition: before
       variant: primary
       size: md
+  sectionLabel: ""
   maxContentWidth: lg
   paddingHorizontal: gutter
   paddingVertical: 4xl

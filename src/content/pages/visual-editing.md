@@ -6,30 +6,30 @@ title: Visual Editing
 description: Visual editing that commits to your repo
 pageSections:
   - _component: page-sections/heroes/hero-split
-    backgroundColor: sand
     heading: Visual editing that commits to your repo
+    headingSize: xl
     subtext: Code, content, and config all sit in one repo as plain files, so agents get the full picture.
     subtextSize: xl
     imageSource: /src/assets/images/marketing/hero-visualediting-01-1.png
     imageAlt: ''
-    headingSize: xl
     imageOverflow: 15
-    reverse: true
     buttonSections:
       - _component: building-blocks/core-elements/button
-        variant: primary
         text: Start your free trial
+        variant: primary
       - _component: building-blocks/core-elements/button
-        variant: text
+        text: Book a demo
         iconName: arrow-right
         iconPosition: after
-        text: Book a demo
+        variant: text
+    reverse: true
     note:
       - text: No credit card · 14-day free trial · No lock-in
         iconName: check
         iconColor: default
     pattern: pegboard
     haze: true
+    backgroundColor: sand
   - _component: page-sections/explainers/editor-demo
     eyebrow: INTERACTIVE DEMO
     heading: Try it out, and see if it’s right for you and your team.
@@ -58,11 +58,11 @@ pageSections:
       mask: fade
   - _component: page-sections/conversion/cta-center
     heading: Here, you don’t need to wait to make changes
-    subtext: When something on the site needs updating, the person who noticed can just fix it.
-    backgroundColor: light-sand
-    subtextSize: xl
-    subtextWidth: 580
     headingSize: lg
+    subtext: When something on the site needs updating, the person who noticed can just fix it.
+    subtextSize: xl
+    subtextWidth: md
+    backgroundColor: light-sand
     background:
       type: pattern
       pattern: grid
@@ -116,58 +116,60 @@ pageSections:
         iconColor: default
   - _component: page-sections/conversion/cta-center
     heading: You decide what’s editable
+    headingSize: lg
     subtext: >-
       Developers build custom components that define exactly what editors can change, add and
       rearrange. Editors get room to work, and nobody can break a layout by accident.
     subtextSize: lg
+    subtextWidth: lg
+    backgroundColor: sand
     imageSource: /src/assets/images/marketing/rectangle-856-3806-72794.png
     imageAlt: ''
-    backgroundColor: sand
-    subtextWidth: 646
-    headingSize: lg
   - _component: page-sections/explainers/feature-split
     heading: Publish when you’re ready
+    headingSize: lg
     subtext: >-
       Make changes on a branch and share a hosted preview with whoever needs to see it first.
       Publish once it's approved, or schedule it to go live later.
     subtextSize: lg
-    backgroundColor: light-sand
-    headingSize: lg
     buttonSections:
       - _component: building-blocks/core-elements/button
-        variant: text
-        iconName: arrow-right
-        iconPosition: after
-        textColor: sunset
         text: Learn more
+        iconName: arrow-right
+        textColor: sunset
+        iconPosition: after
+        variant: text
     siteCards:
       buttonLabel: Publish
       cards:
         - env: production
           badge: P
-          title: "Production: Live Site"
+          title: 'Production: Live Site'
           subtitle: State University
           domain: stateuniversity.com
           built: Built 5 days ago
           image: /src/assets/images/marketing/card-image-4-3806-72846.png
-          imageAlt: ""
+          imageAlt: ''
         - env: staging
           badge: S
-          title: "Staging: Testing Site"
+          title: 'Staging: Testing Site'
           subtitle: State University
           domain: funky-pear.cloudvent.net
           built: Built 3 days ago
           image: /src/assets/images/marketing/card-image-4-3806-72846.png
-          imageAlt: ""
+          imageAlt: ''
         - env: branch
           badge: B
-          title: "Branch: New Alumni Page"
+          title: 'Branch: New Alumni Page'
           subtitle: State University
           domain: cool-lab.cloudvent.net
           built: Built 3 days ago
           image: /src/assets/images/marketing/card-image-3.jpg
-          imageAlt: ""
+          imageAlt: ''
+    backgroundColor: light-sand
   - _component: page-sections/explainers/feature-grid
+    alignmentHorizontal: start
+    columns: 2
     features:
       - eyebrow: For AGENCIES
         title: Build it once, hand it over safely
@@ -185,11 +187,9 @@ pageSections:
         imageSource: /src/assets/images/marketing/screenshot-2026-08-18-at-14-16-52-1-3806-72940.png
         imageHeight: 319
         imageAlt: ''
-    columns: 2
-    alignmentHorizontal: start
+    backgroundColor: sand
     background:
       type: pattern
       pattern: pegboard
       mask: none
-    backgroundColor: sand
 ---

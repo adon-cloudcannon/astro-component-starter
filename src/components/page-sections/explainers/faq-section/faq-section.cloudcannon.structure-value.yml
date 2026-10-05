@@ -3,7 +3,6 @@ icon: help
 description: Frequently asked questions in an accordion.
 value:
   _component: page-sections/explainers/faq-section
-  sectionLabel: ""
   heading: Frequently Asked Questions
   headingLevel: h2
   items:
@@ -22,6 +21,7 @@ value:
         - _component: building-blocks/core-elements/text
           text: You own the repository and the content. We stay on call for the first month.
           size: md
+  sectionLabel: ""
   maxContentWidth: xl
   paddingHorizontal: gutter
   paddingVertical: 4xl

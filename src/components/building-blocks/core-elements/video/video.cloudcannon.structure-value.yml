@@ -4,14 +4,14 @@ description: Video from YouTube, Vimeo, or a local file.
 value:
   _component: building-blocks/core-elements/video
   type: youtube
-  videoId: ""
   title: ""
+  videoId: ""
   source: ""
   autoplay: false
   loop: false
-  thumbnail: ""
   captions: ""
   captionsLanguage: en
+  thumbnail: ""
 preview:
   text:
     - template: Video - {type}

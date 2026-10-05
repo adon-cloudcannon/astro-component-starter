@@ -1,4 +1,5 @@
 ---
+import { subtextMeasure } from "@component-utils/subtextMeasure.mjs";
 import { rootMirror } from "@component-utils/rootMirror.mjs";
 /**
  * A band that pins while its steps advance.
@@ -108,6 +109,9 @@ const {
   ...htmlAttributes
 } = Astro.props;
 
+/* The measure the subtext is set in, as a length. */
+const subtextCap = subtextMeasure(subtextWidth);
+
 const stepList: Step[] = Array.isArray(steps) ? steps : [];
 const blocks = (sections: unknown): ContentBlock[] =>
   Array.isArray(sections) ? (sections as ContentBlock[]) : [];
@@ -208,8 +212,8 @@ const mirror = rootMirror({
             alignmentHorizontal={alignmentHorizontal}
             class="subtext"
             size={subtextSize}
-            style={subtextWidth
-              ? `max-inline-size: ${Number(subtextWidth)}px; margin-inline: auto`
+            style={subtextCap
+              ? `max-inline-size: ${subtextCap}; margin-inline: auto`
               : undefined}
             text={subtext}
           />

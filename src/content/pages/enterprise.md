@@ -6,29 +6,29 @@ title: Enterprise
 description: Stop juggling websites. Start managing them.
 pageSections:
   - _component: page-sections/heroes/hero-split
-    backgroundColor: light-sand
     heading: Stop juggling websites. Start managing them.
+    headingSize: xl
     subtext: >-
       CloudCannon lets you have a high-impact web presence without the maintenance burden. Static
       architecture keeps things fast, secure, and quiet.
     subtextSize: xl
     imageSource: /src/assets/images/marketing/screenshot-2026-08-18-at-14-16-52-1.png
     imageAlt: ''
-    headingSize: xl
     imageOverflow: 151
     buttonSections:
       - _component: building-blocks/core-elements/button
-        variant: primary
         text: Start your free trial
+        variant: primary
       - _component: building-blocks/core-elements/button
-        variant: text
+        text: Book a demo
         iconName: arrow-right
         iconPosition: after
-        text: Book a demo
+        variant: text
     pattern: grid
     haze: true
+    backgroundColor: light-sand
   - _component: page-sections/proof/logo-cloud
-    backgroundColor: sand
+    heading: SERVING CLIENTS LIKE
     logos:
       - image: /src/assets/images/marketing/logos/twitch.svg
         alt: Twitch
@@ -59,7 +59,7 @@ pageSections:
         monochrome: true
         aspect: 90 / 28
     headingPlacement: inline
-    heading: SERVING CLIENTS LIKE
+    backgroundColor: sand
   - _component: page-sections/proof/stat-panel
     eyebrow: SUCCESS STORY
     heading: Publishing took up to five weeks. Now it takes minutes.
@@ -68,11 +68,11 @@ pageSections:
       PaperCut moved 4,000 pages and 110 editors onto CloudCannon, and lifted their performance
       score from 14 to 90+.
     subtextSize: lg
-    subtextWidth: 573
+    subtextWidth: md
     buttonSections:
       - _component: building-blocks/core-elements/button
-        variant: primary
         text: View case study
+        variant: primary
     imageSource: /src/assets/images/marketing/image-48.png
     imageAlt: The PaperCut Grows site, built on CloudCannon
     panelScratch: moss
@@ -96,6 +96,13 @@ pageSections:
         iconName: window
         iconColor: moss
   - _component: page-sections/explainers/feature-grid
+    heading: Built for how large teams actually work
+    headingSize: lg
+    subtext: Benefit from more uptime, faster sites, better SEO, enterprise- grade security, and more.
+    subtextSize: lg
+    subtextWidth: md
+    alignmentHorizontal: center
+    cardHeight: 334
     features:
       - title: Site security
         description: SOC2 Type 2 certified for enterprise-grade security
@@ -127,21 +134,13 @@ pageSections:
         imageSource: /src/assets/images/marketing/layer-29-1-3806-73651.png
         imageHeight: 195
         imageAlt: ''
-    heading: Built for how large teams actually work
-    subtext: Benefit from more uptime, faster sites, better SEO, enterprise- grade security, and more.
-    subtextSize: lg
     backgroundColor: light-sand
-    subtextWidth: 580
-    alignmentHorizontal: center
-    cardHeight: 334
-    headingSize: lg
   - _component: page-sections/proof/story-carousel
     heading: Grow your sites, not your headcount.
+    headingSize: lg
     subtext: From fast-moving startups to multi-site agencies, teams ship more with CloudCannon.
     subtextSize: lg
-    backgroundColor: dark
-    subtextWidth: 560
-    headingSize: lg
+    subtextWidth: md
     stories:
       - accentColor: golden
         logoSource: /src/assets/images/marketing/logos/hnry.svg
@@ -179,15 +178,26 @@ pageSections:
         figure: '90'
         label: average Lighthouse score
         linkText: Read story
+    buttonSections:
+      - _component: building-blocks/core-elements/button
+        text: See how others did it
+        variant: primary
+    backgroundColor: dark
     background:
       type: pattern
       pattern: grid
       mask: top
-    buttonSections:
-      - _component: building-blocks/core-elements/button
-        variant: primary
-        text: See how others did it
   - _component: page-sections/explainers/feature-grid
+    heading: Custom plans for enterprise needs
+    headingSize: lg
+    subtext: >-
+      To support the large scale and speed your enterprise needs, we'll tailor your plan to your
+      exact specifications so you can enjoy the features that are right for you.
+    subtextSize: lg
+    subtextWidth: lg
+    alignmentHorizontal: center
+    columns: 3
+    cardHeight: 247
     features:
       - title: Onboarding services
         description: >-
@@ -217,16 +227,6 @@ pageSections:
         description: Get access to the CloudCannon Enterprise Success Team
         accentColor: moss
         imageAlt: ''
-    columns: 3
-    alignmentHorizontal: center
-    heading: Custom plans for enterprise needs
-    subtext: >-
-      To support the large scale and speed your enterprise needs, we'll tailor your plan to your
-      exact specifications so you can enjoy the features that are right for you.
-    subtextSize: lg
-    subtextWidth: 672
-    cardHeight: 247
-    headingSize: lg
     background:
       type: pattern
       pattern: grid
@@ -237,6 +237,13 @@ pageSections:
         'y': 17.5%
         ry: 16.4%
   - _component: page-sections/conversion/cta-team-member
+    heading: Real humans on support, always
+    headingSize: lg
+    subtext: >-
+      Git underneath, a visual editor on top, with code and content running on one engine. Start
+      free in minutes, or book a demo and we’ll walk you through the real thing.
+    subtextSize: lg
+    subtextWidth: sm
     member:
       _component: building-blocks/wrappers/team-member
       name: Olivia Nicholson
@@ -247,21 +254,14 @@ pageSections:
       propSource: /src/assets/images/embellishments/telephone.png
       propWidth: 47
       propAlt: ''
-    heading: Real humans on support, always
-    subtext: >-
-      Git underneath, a visual editor on top, with code and content running on one engine. Start
-      free in minutes, or book a demo and we’ll walk you through the real thing.
-    subtextSize: lg
-    backgroundColor: light-sand
-    subtextWidth: 489
-    headingSize: lg
     buttonSections:
       - _component: building-blocks/core-elements/button
-        variant: primary
         text: Start your free trial
+        variant: primary
       - _component: building-blocks/core-elements/button
-        variant: text
+        text: Talk with us
         iconName: arrow-right
         iconPosition: after
-        text: Talk with us
+        variant: text
+    backgroundColor: light-sand
 ---

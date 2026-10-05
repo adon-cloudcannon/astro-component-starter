@@ -34,8 +34,8 @@ _structures:
     values:
       - label: Definition List Item
         value:
-          title: "My definition title"
-          text: "My definition content"
+          title: My definition title
+          text: My definition content
         preview:
           icon: list
           text:
@@ -53,7 +53,7 @@ _structures:
             options:
               blockquote: false
               bold: true
-              format:
+              format: null
               italic: true
               link: true
               strike: false

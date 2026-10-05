@@ -3,13 +3,13 @@ icon: alt_route
 description: Two ways of working either side of what they share.
 value:
   _component: page-sections/explainers/workflow-split
-  sectionLabel: ""
   eyebrow: ""
   heading: Two workflows. One source of truth.
   headingLevel: h2
   headingSize: lg
   subtext: Editors edit visually, developers stay in code.
   subtextSize: md
+  subtextWidth: ""
   buttonSections: []
   panels:
     - accentColor: pacific
@@ -31,14 +31,8 @@ value:
       linkText: Learn more
       link: ""
   centreImageSource: ""
-  centreColor: ""
-  centreMinHeight: 0
-  centreIconName: ""
-  centreTitle: ""
-  centreBranch: ""
-  centreRows: []
-  centreSections: []
   centreImageAlt: ""
+  sectionLabel: ""
   maxContentWidth: xl
   paddingHorizontal: gutter
   paddingVertical: 4xl
@@ -46,6 +40,13 @@ value:
   background:
     type: image
     imageSource: ""
+  centreColor: ""
+  centreMinHeight: 0
+  centreSections: []
+  centreIconName: ""
+  centreTitle: ""
+  centreBranch: ""
+  centreRows: []
 _inputs:
   panels:
     type: array
@@ -69,8 +70,8 @@ _structures:
           accentColor:
             type: select
             comment: >-
-              Colours the rule on the panel, its list markers and its link, so
-              one choice marks the whole column.
+              Colours the rule on the panel, its list markers and its link, so one choice marks the
+              whole column.
             options:
               values:
                 - id: pacific

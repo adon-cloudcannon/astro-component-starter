@@ -6,45 +6,44 @@ title: Content Editors
 description: Draft. Edit. Publish. No problem.
 pageSections:
   - _component: page-sections/heroes/hero-split
-    backgroundColor: light-sand
     heading: Draft. Edit. Publish. No problem.
+    headingSize: xl
     subtext: >-
       Publish your best content with visual editing, custom components, and a flexible review
       process for your whole team.
     subtextSize: xl
     imageSource: /src/assets/images/marketing/screenshot-2026-08-19-at-12-59-24-1.png
     imageAlt: ''
-    headingSize: xl
     imageOverflow: 83
     buttonSections:
       - _component: building-blocks/core-elements/button
-        variant: primary
         text: Start your free trial
+        variant: primary
       - _component: building-blocks/core-elements/button
-        variant: text
+        text: Book a demo
         iconName: arrow-right
         iconPosition: after
-        text: Book a demo
+        variant: text
     note:
       - text: No credit card · 14-day free trial · No lock-in
         iconName: check
         iconColor: default
     pattern: pegboard
     haze: true
+    backgroundColor: light-sand
   - _component: page-sections/explainers/editor-demo
     eyebrow: INTERACTIVE DEMO
     heading: Here’s what you’re working with
     subtext: Click a heading and change it. See what’s possible with the Visual Editor.
     subtextSize: lg
     backgroundColor: light-sand
-    subtextWidth: 612
+    subtextWidth: md
     alignmentHorizontal: center
     headingSize: lg
   - _component: page-sections/proof/testimonial-quote
     variant: static
     quoteSize: lg
     tone: light
-    paddingVerticalStart: lg
     quotes:
       - text: When we show clients the Visual Editor during our meetings, **their eyes light up.**
         logoSource: /src/assets/images/marketing/logos/firebrand.svg
@@ -58,18 +57,13 @@ pageSections:
         linkText: Read case study
         accentColor: pacific
     backgroundColor: light-sand
+    paddingVerticalStart: lg
   - _component: page-sections/explainers/pinned-steps
+    eyebrow: ''
     heading: No more waiting on tickets
     headingSize: lg
-    alignmentHorizontal: start
     subtext: ''
-    eyebrow: ''
-    reverse: true
-    mediaWidth: wide
-    progressColor: golden
-    progressTrackColor: midnight
-    numbered: true
-    backgroundColor: dark
+    alignmentHorizontal: start
     steps:
       - contentSections:
           - _component: building-blocks/core-elements/heading
@@ -102,6 +96,12 @@ pageSections:
             text: Publish now or schedule it for later. Nothing goes live by accident.
             size: lg
         mediaSections: []
+    reverse: true
+    mediaWidth: wide
+    backgroundColor: dark
+    progressColor: golden
+    progressTrackColor: midnight
+    numbered: true
     background:
       type: pattern
       pattern: grid
@@ -136,27 +136,32 @@ pageSections:
         authorImageAlt: Ed Stennett
         linkText: Read case study
         accentColor: sunset
+    backgroundColor: dark
     background:
       type: pattern
       pattern: pegboard
       mask: none
-    backgroundColor: dark
     haze:
       - x: 0.4938
         rx: 933px
         'y': 49.8%
         ry: 74.8%
   - _component: page-sections/conversion/cta-center
-    background: ''
     heading: Room for everyone to work at once
+    headingSize: lg
     subtext: >-
       Every piece of work happens on its own branched site, so a new blog post, a landing page
       redesign, and a navigation update can all run at once without anyone treading on toes.
     subtextSize: lg
+    subtextWidth: md
     backgroundColor: light-sand
-    subtextWidth: 612
-    headingSize: lg
+    background: ''
   - _component: page-sections/explainers/feature-grid
+    heading: Built for the work
+    headingSize: lg
+    alignmentHorizontal: center
+    columns: 3
+    cardHeight: 334
     features:
       - title: Custom permissions
         description: Define roles and groups to match your organization structure.
@@ -173,32 +178,27 @@ pageSections:
         imageSource: /src/assets/images/marketing/layer-26-1-3806-71336.png
         imageHeight: 162
         imageAlt: ''
-    columns: 3
-    alignmentHorizontal: center
-    heading: Built for the work
     backgroundColor: light-sand
-    cardHeight: 334
-    headingSize: lg
   - _component: page-sections/conversion/cta-split
-    imageReveal: /src/assets/images/marketing/cloudcannon-truck-open-1.png
-    imageRevealLabel: Open and close the truck's hood
     heading: Take a peek under the hood
+    headingSize: lg
     subtext: >-
       Git underneath, a visual editor on top, with code and content running on one engine. Start
       free in minutes, or book a demo and we’ll walk you through the real thing.
     subtextSize: lg
+    imageRevealLabel: Open and close the truck's hood
+    imageReveal: /src/assets/images/marketing/cloudcannon-truck-open-1.png
     imageSource: /src/assets/images/marketing/cloudcannon-truck-closed-1.png
-    imageAlt: ''
-    backgroundColor: pacific
-    headingSize: lg
     imageOverflow: 336
+    imageAlt: ''
     buttonSections:
       - _component: building-blocks/core-elements/button
-        variant: primary
         text: Start your free trial
+        variant: primary
       - _component: building-blocks/core-elements/button
-        variant: text
+        text: Book a demo
         iconName: arrow-right
         iconPosition: after
-        text: Book a demo
+        variant: text
+    backgroundColor: pacific
 ---

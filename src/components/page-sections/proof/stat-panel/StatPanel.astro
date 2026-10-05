@@ -14,6 +14,7 @@
  * describe a statistic the same way.
  */
 import CustomSection from "@builders/custom-section/CustomSection.astro";
+import { subtextMeasure } from "@component-utils/subtextMeasure.mjs";
 import ButtonGroup from "@wrappers/button-group/ButtonGroup.astro";
 import StatOverlay from "@wrappers/stat-overlay/StatOverlay.astro";
 import Heading from "@core-elements/heading/Heading.astro";
@@ -78,6 +79,9 @@ const {
   ...htmlAttributes
 } = Astro.props;
 
+/* The measure the subtext is set in, as a length. */
+const subtextCap = subtextMeasure(subtextWidth);
+
 const hasHeader = Boolean(eyebrow || heading || subtext || buttonSections?.length);
 ---
 
@@ -114,8 +118,8 @@ const hasHeader = Boolean(eyebrow || heading || subtext || buttonSections?.lengt
       </Heading>
       <Text
         class="stat-panel-subtext"
-        style={subtextWidth
-          ? `max-inline-size: ${Number(subtextWidth)}px; margin-inline: auto`
+        style={subtextCap
+          ? `max-inline-size: ${subtextCap}; margin-inline: auto`
           : undefined}
         size={subtextSize}
         alignmentHorizontal="center"

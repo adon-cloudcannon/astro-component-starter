@@ -40,7 +40,9 @@ _structures:
           icon: dashboard_customize
           text: Bento Box Item
           subtext:
-            - template: '{colSpan}x{rowSpan} — Contains {contentSections|array_length} content {"block"|pluralize=contentSections}'
+            - template: >-
+                {colSpan}x{rowSpan} — Contains {contentSections|array_length} content
+                {"block"|pluralize=contentSections}
             - Add content blocks to this bento item
         _inputs:
           colSpan:

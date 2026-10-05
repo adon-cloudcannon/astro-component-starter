@@ -11,7 +11,9 @@ value:
     expiryDays: 180
     policyUrl: /privacy/
     bannerHeading: Your privacy, your choice
-    bannerText: We use optional services to understand site usage and show external media. You can change your choices at any time.
+    bannerText: >-
+      We use optional services to understand site usage and show external media. You can change your
+      choices at any time.
     settingsLabel: Privacy settings
     necessaryLabel: Necessary
     necessaryDescription: Stores your privacy choices so the site can remember them.

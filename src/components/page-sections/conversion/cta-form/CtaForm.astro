@@ -1,5 +1,6 @@
 ---
 import CustomSection from "@builders/custom-section/CustomSection.astro";
+import { subtextMeasure } from "@component-utils/subtextMeasure.mjs";
 import Heading from "@core-elements/heading/Heading.astro";
 import Image from "@core-elements/image/Image.astro";
 import Text from "@core-elements/text/Text.astro";
@@ -53,6 +54,9 @@ const {
   _component,
   ...htmlAttributes
 } = Astro.props;
+
+/* The measure the subtext is set in, as a length. */
+const subtextCap = subtextMeasure(subtextWidth);
 ---
 
 <CustomSection
@@ -104,7 +108,7 @@ const {
           </Heading>
         )}
         <Text
-          style={subtextWidth ? `max-inline-size: ${Number(subtextWidth)}px; margin-inline: auto; justify-self: center` : undefined}
+          style={subtextCap ? `max-inline-size: ${subtextCap}; margin-inline: auto; justify-self: center` : undefined}
           size={subtextSize}
           data-prop="subtext"
           text={subtext}
@@ -143,7 +147,7 @@ const {
         </Heading>
       )}
       <Text
-        style={subtextWidth ? `max-inline-size: ${Number(subtextWidth)}px` : undefined}
+        style={subtextCap ? `max-inline-size: ${subtextCap}` : undefined}
         size={subtextSize}
         data-prop="subtext"
         text={subtext}

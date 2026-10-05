@@ -1,6 +1,7 @@
 ---
 import { rootMirror } from "@component-utils/rootMirror.mjs";
 import CustomSection from "@builders/custom-section/CustomSection.astro";
+import { subtextMeasure } from "@component-utils/subtextMeasure.mjs";
 import Heading from "@core-elements/heading/Heading.astro";
 import AgentTerminal from "@wrappers/agent-terminal/AgentTerminal.astro";
 import PolaroidCamera from "@wrappers/polaroid-camera/PolaroidCamera.astro";
@@ -132,6 +133,9 @@ const {
   ...htmlAttributes
 } = Astro.props;
 
+/* The measure the subtext is set in, as a length. */
+const subtextCap = subtextMeasure(subtextWidth);
+
 /* Astro takes a component expression here, so the wrapper can be a real
    element or nothing at all. Rendering the div either way and styling it only
    when it is a card would put a flow child between the section and the split,
@@ -196,7 +200,7 @@ const mirror = rootMirror({ "data-picture-first": reverse ? "" : null });
         {heading}
       </Heading>
       <Text
-        style={subtextWidth ? `max-inline-size: ${Number(subtextWidth)}px; margin-inline: auto; justify-self: center` : undefined}        size={subtextSize}
+        style={subtextCap ? `max-inline-size: ${subtextCap}; margin-inline: auto; justify-self: center` : undefined}        size={subtextSize}
         data-prop="subtext"
         text={subtext}
       />

@@ -6,30 +6,30 @@ title: Partner Program
 description: The more you launch, the more you unlock
 pageSections:
   - _component: page-sections/heroes/hero-split
-    backgroundColor: sand
     heading: The more you launch, the more you unlock
+    headingSize: xl
     subtext: >-
       Welcome to a Partner Program that rewards good work. Get better margins and less overhead as
       you grow your portfolio.
     subtextSize: xl
     imageSource: /src/assets/images/marketing/screenshot-2026-08-17-at-12-00-53-1.png
     imageAlt: ''
-    headingSize: xl
     imageOverflow: 59
-    reverse: true
     buttonSections:
       - _component: building-blocks/core-elements/button
-        variant: primary
         text: Start your free trial
+        variant: primary
       - _component: building-blocks/core-elements/button
-        variant: text
+        text: Book a demo
         iconName: arrow-right
         iconPosition: after
-        text: Book a demo
+        variant: text
+    reverse: true
     pattern: pegboard
     haze: true
-  - _component: page-sections/proof/logo-cloud
     backgroundColor: sand
+  - _component: page-sections/proof/logo-cloud
+    heading: 20,000+ sites shipped
     logos:
       - image: /src/assets/images/marketing/logos/twitch.svg
         alt: Twitch
@@ -60,26 +60,24 @@ pageSections:
         monochrome: true
         aspect: 90 / 28
     headingPlacement: inline
-    heading: 20,000+ sites shipped
+    backgroundColor: sand
   - _component: page-sections/explainers/feature-split
     eyebrow: THE PROGRAM
     heading: What is the Partner Program?
+    headingSize: lg
     subtext: >-
       We want to reward good work. Every new client you bring on earns points, and the more you
       have, the more benefits you unlock.
     subtextSize: lg
-    headingSize: lg
+    buttonSections:
+      - _component: building-blocks/core-elements/button
+        text: Join the Partner Program
+        variant: primary
     imageSource: /src/assets/images/marketing/partner-dashboard-panel.png
-    imageAlt: >-
-      The partner dashboard, with a Gold Partner badge on its corner and a card
-      reading 101 points.
+    imageAlt: The partner dashboard, with a Gold Partner badge on its corner and a card reading 101 points.
     imageAspectRatio: none
     imageRounded: false
     mediaWidth: 628
-    buttonSections:
-      - _component: building-blocks/core-elements/button
-        variant: primary
-        text: Join the Partner Program
   - _component: page-sections/proof/testimonial-quote
     variant: static
     quoteSize: lg
@@ -93,17 +91,22 @@ pageSections:
         linkText: Read case study
         accentColor: sunset
         quoteMarks: false
+    backgroundColor: dark
     background:
       type: pattern
       pattern: pegboard
       mask: none
-    backgroundColor: dark
     haze:
       - x: 0.4791
         rx: 933px
         'y': 49.8%
         ry: 74.8%
   - _component: page-sections/explainers/feature-grid
+    heading: What are the perks?
+    headingSize: lg
+    alignmentHorizontal: center
+    columns: 3
+    cardHeight: 334
     features:
       - title: Partner dashboard
         description: Track site health, errors, usage and billing for every client from one place.
@@ -135,13 +138,17 @@ pageSections:
         imageSource: /src/assets/images/marketing/roadmap-1.png
         imageHeight: 173
         imageAlt: ''
-    columns: 3
-    alignmentHorizontal: center
-    heading: What are the perks?
     backgroundColor: dark
-    cardHeight: 334
-    headingSize: lg
   - _component: page-sections/conversion/pricing-tiers
+    eyebrow: PARTNER TIERS
+    heading: Climb as your portfolio grows
+    headingSize: lg
+    subtext: >-
+      Bring on new clients, move up the tiers, and unlock bigger discounts, dedicated support, and
+      more exposure to new leads.
+    alignmentHorizontal: start
+    subtextSize: lg
+    subtextWidth: md
     garden: true
     tiers:
       - name: Bronze
@@ -196,18 +203,15 @@ pageSections:
             included: true
         height: 454
         accent: harbour
-    eyebrow: PARTNER TIERS
-    heading: Climb as your portfolio grows
-    subtext: >-
-      Bring on new clients, move up the tiers, and unlock bigger discounts, dedicated support, and
-      more exposure to new leads.
-    subtextSize: lg
     backgroundColor: light-sand
-    subtextWidth: 580
-    alignmentHorizontal: start
-    headingSize: lg
   - _component: page-sections/conversion/pricing-tiers
     cardColor: base
+    heading: Pricing plans designed for your clients
+    headingSize: lg
+    subtext: Handle billing yourself or pass it on to clients, whatever fits the workflow.
+    alignmentHorizontal: center
+    subtextSize: lg
+    subtextWidth: sm
     tiers:
       - name: Lite
         description: A pay-as-you-go plan for smaller clients
@@ -261,19 +265,14 @@ pageSections:
         priceSuffix: /month (USD)
         pricePosition: bottom
         height: 454
-    heading: Pricing plans designed for your clients
-    subtext: Handle billing yourself or pass it on to clients, whatever fits the workflow.
-    subtextSize: lg
     backgroundColor: sand
-    subtextWidth: 446
-    alignmentHorizontal: center
-    headingSize: lg
   - _component: page-sections/conversion/cta-split
-    backgroundColor: sand
-    contentCard: true
+    imageFlush: false
     contentCardColor: base
-    paddingVertical: 2xl
-    imageSource: ''
+    heading: Enterprise
+    headingSize: md
+    subtext: We’ll work with you to craft a plan that fits your particular client’s needs.
+    subtextSize: lg
     imageReveal: ''
     characters:
       scale: 116
@@ -302,18 +301,17 @@ pageSections:
           words: 6
         - side: end
           words: 4
-    headingSize: md
-    imageFlush: false
-    heading: Enterprise
-    subtext: We’ll work with you to craft a plan that fits your particular client’s needs.
-    subtextSize: lg
+    imageSource: ''
+    contentCard: true
     buttonSections:
       - _component: building-blocks/core-elements/button
-        variant: primary
         text: Join the Partner Program
+        variant: primary
+    paddingVertical: 2xl
+    backgroundColor: sand
   - _component: page-sections/conversion/cta-center
-    heading: Become a CloudCannon Partner
     paddingVerticalEnd: 3xl
+    heading: Become a CloudCannon Partner
     headingSize: lg
     background:
       type: pattern
@@ -329,9 +327,25 @@ pageSections:
         'y': 54.4%
         ry: 36%
   - _component: page-sections/conversion/cta-form
-    formAction: /partner-program/
-    imageSource: ''
     paddingVerticalStart: lg
+    steps:
+      - contentSections:
+          - _component: building-blocks/core-elements/simple-text
+            text: Complete the Partner Program application below
+            size: lg
+      - contentSections:
+          - _component: building-blocks/core-elements/simple-text
+            text: Sign up for CloudCannon and start your free trial
+            size: lg
+      - contentSections:
+          - _component: building-blocks/core-elements/simple-text
+            text: Wait to hear from us on your application
+            size: lg
+      - contentSections:
+          - _component: building-blocks/core-elements/simple-text
+            text: Once approved, access the Lite plan and Bronze benefits. Start launching!
+            size: lg
+    formAction: /partner-program/
     formBlocks:
       - _component: building-blocks/forms/input
         label: First name
@@ -362,7 +376,6 @@ pageSections:
       - _component: building-blocks/forms/choice-group
         title: What static site generator(s) do you use?
         name: generators
-        multiple: true
         required: true
         options:
           - label: Astro
@@ -387,6 +400,7 @@ pageSections:
             value: sveltekit
           - label: Other
             value: other
+        multiple: true
       - _component: building-blocks/forms/textarea
         label: What goals would you like to achieve by using CloudCannon?
         name: goals
@@ -399,29 +413,22 @@ pageSections:
         placeholder: Please Select
       - _component: building-blocks/forms/submit
         text: Submit
-    steps:
-      - contentSections:
-          - _component: building-blocks/core-elements/simple-text
-            text: Complete the Partner Program application below
-            size: lg
-      - contentSections:
-          - _component: building-blocks/core-elements/simple-text
-            text: Sign up for CloudCannon and start your free trial
-            size: lg
-      - contentSections:
-          - _component: building-blocks/core-elements/simple-text
-            text: Wait to hear from us on your application
-            size: lg
-      - contentSections:
-          - _component: building-blocks/core-elements/simple-text
-            text: Once approved, access the Lite plan and Bronze benefits. Start launching!
-            size: lg
+    imageSource: ''
     backgroundColor: light-sand
   - _component: page-sections/conversion/cta-center
     heading: Keen to collaborate?
-    backgroundColor: dark
     headingSize: lg
+    buttonSections:
+      - _component: building-blocks/core-elements/button
+        text: Our team
+        variant: primary
+      - _component: building-blocks/core-elements/button
+        text: Our values
+        iconName: arrow-right
+        iconPosition: after
+        variant: text
     paddingVertical: 2xl
+    backgroundColor: dark
     cornerStart:
       source: /src/assets/images/marketing/ferns-corner-3806-72622.png
       alt: ''
@@ -432,13 +439,4 @@ pageSections:
       alt: ''
       width: 18
       drop: 0.3
-    buttonSections:
-      - _component: building-blocks/core-elements/button
-        variant: primary
-        text: Our team
-      - _component: building-blocks/core-elements/button
-        variant: text
-        iconName: arrow-right
-        iconPosition: after
-        text: Our values
 ---

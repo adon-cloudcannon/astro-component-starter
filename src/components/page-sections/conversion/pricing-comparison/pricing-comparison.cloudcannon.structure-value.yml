@@ -3,7 +3,6 @@ icon: table_chart
 description: Table that compares features across plans.
 value:
   _component: page-sections/conversion/pricing-comparison
-  sectionLabel: ""
   eyebrow: Pricing
   heading: Compare plans feature by feature
   headingLevel: h2
@@ -56,6 +55,7 @@ value:
         - Priority email
         - Dedicated manager
   striped: true
+  sectionLabel: ""
   maxContentWidth: xl
   paddingHorizontal: gutter
   paddingVertical: 4xl
@@ -119,7 +119,9 @@ _structures:
             comment: Price line under the name (e.g. "$49/mo" or "Custom"). Leave empty to hide.
           highlight:
             type: switch
-            comment: Marks this plan as the recommended one, giving its call-to-action the primary button style.
+            comment: >-
+              Marks this plan as the recommended one, giving its call-to-action the primary button
+              style.
           buttonText:
             type: text
             comment: Call to action under the column. Leave empty for no button.
@@ -147,10 +149,12 @@ _structures:
             comment: The feature being compared, shown in the first column.
           values:
             type: array
-            comment: One value per plan, in the same order as the plans. Missing values render as an empty cell.
+            comment: >-
+              One value per plan, in the same order as the plans. Missing values render as an empty
+              cell.
           values[*]:
             type: text
-            comment: 'Enter "yes" or "no" for a tick or a dash, or any text (e.g. "5 seats") to show as-is.'
+            comment: Enter "yes" or "no" for a tick or a dash, or any text (e.g. "5 seats") to show as-is.
 groups:
   - heading: Content
     inputs:

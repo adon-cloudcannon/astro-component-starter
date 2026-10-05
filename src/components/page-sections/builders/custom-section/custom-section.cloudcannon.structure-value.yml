@@ -9,6 +9,7 @@ value:
   paddingHorizontal: md
   paddingVertical: 4xl
   backgroundColor: light-sand
+  rounded: false
   background:
     type: image
     imageSource: ""
@@ -19,7 +20,6 @@ value:
     priority: false
     mask: none
     overlay: 0
-  rounded: false
 preview:
   text:
     - Custom Section

@@ -3,12 +3,12 @@ icon: apps
 description: Grid of features with icons and short descriptions.
 value:
   _component: page-sections/explainers/feature-grid
-  sectionLabel: ""
   eyebrow: What you get
   heading: Three things worth knowing
   headingLevel: h2
   subtext: One line that frames the points below.
   subtextSize: md
+  subtextWidth: ""
   alignmentHorizontal: center
   columns: 3
   features:
@@ -27,6 +27,7 @@ value:
       iconName: pencil-square
       iconColor: moss
       iconBackground: true
+  sectionLabel: ""
   maxContentWidth: xl
   paddingHorizontal: gutter
   paddingVertical: 4xl
@@ -85,8 +86,8 @@ _structures:
           eyebrow:
             type: text
             comment: >-
-              Short label above the title. Setting one turns the card into a
-              signpost: bigger title, a rule under the art, and a link out.
+              Short label above the title. Setting one turns the card into a signpost: bigger title,
+              a rule under the art, and a link out.
           title:
             type: text
             comment: Name of the feature.
@@ -96,7 +97,7 @@ _structures:
             options:
               blockquote: false
               bold: true
-              format:
+              format: null
               italic: true
               link: true
               strike: false
@@ -215,8 +216,8 @@ _structures:
           imageHeight:
             type: number
             comment: >-
-              How tall to draw the illustration, in pixels. The design gives each one its own
-              box. Leave empty for the default.
+              How tall to draw the illustration, in pixels. The design gives each one its own box.
+              Leave empty for the default.
           linkText:
             type: text
             comment: Label for the link out of the card. Leave empty for no link.

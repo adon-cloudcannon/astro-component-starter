@@ -5,7 +5,10 @@ value:
   _component: building-blocks/wrappers/card
   label: null
   contentSections: []
+  beforeContentSections: []
+  afterContentSections: []
   maxContentWidth: null
+  showBeforeAfter: false
   paddingHorizontal: sm
   paddingVertical: sm
   backgroundColor: light-sand
@@ -21,9 +24,6 @@ value:
   link: null
   rounded: false
   border: false
-  showBeforeAfter: false
-  beforeContentSections: []
-  afterContentSections: []
 preview:
   text:
     - Card

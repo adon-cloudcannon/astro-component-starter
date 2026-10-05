@@ -3,7 +3,6 @@ icon: contact_mail
 description: Contact details beside a form, with an optional map.
 value:
   _component: page-sections/conversion/contact-split
-  sectionLabel: ""
   eyebrow: Contact
   heading: Talk to a human
   headingLevel: h2
@@ -16,11 +15,11 @@ value:
     - icon: phone
       label: Phone
       value: +64 3 555 0142
-      url: "tel:+6435550142"
+      url: tel:+6435550142
     - icon: envelope
       label: Email
       value: hello@example.com
-      url: "mailto:hello@example.com"
+      url: mailto:hello@example.com
     - icon: clock
       label: Hours
       value: Mon–Fri, 9am–5pm NZST
@@ -45,6 +44,7 @@ value:
       text: Send message
       variant: primary
   mapEmbedUrl: ""
+  sectionLabel: ""
   maxContentWidth: xl
   paddingHorizontal: gutter
   paddingVertical: 4xl

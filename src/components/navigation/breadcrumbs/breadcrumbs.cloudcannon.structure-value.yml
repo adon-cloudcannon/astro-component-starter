@@ -17,7 +17,7 @@ preview:
     fit: cover
 picker_preview:
   text: Breadcrumbs
-  subtext: "Wayfinding trail rendered above blog post and tag page titles."
+  subtext: Wayfinding trail rendered above blog post and tag page titles.
   image: public/component-previews/navigation/breadcrumbs.svg
   icon: chevron_right
   gallery:

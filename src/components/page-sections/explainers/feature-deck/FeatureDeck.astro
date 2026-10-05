@@ -12,6 +12,7 @@
  * a section to live in with its background and padding.
  */
 import CustomSection from "@builders/custom-section/CustomSection.astro";
+import { subtextMeasure } from "@component-utils/subtextMeasure.mjs";
 import ScrollDeck from "@wrappers/scroll-deck/ScrollDeck.astro";
 import Heading from "@core-elements/heading/Heading.astro";
 import Text from "@core-elements/text/Text.astro";
@@ -54,6 +55,9 @@ const {
   "data-children-prop": childrenDataProp,
   ...htmlAttributes
 } = Astro.props;
+
+/* The measure the subtext is set in, as a length. */
+const subtextCap = subtextMeasure(subtextWidth);
 ---
 
 <CustomSection
@@ -92,7 +96,7 @@ const {
   <Text
     class="subtext"
     data-prop="subtext"
-    style={subtextWidth ? `max-inline-size: ${Number(subtextWidth)}px; margin-inline: auto; justify-self: center` : undefined}    size={subtextSize}    text={subtext}
+    style={subtextCap ? `max-inline-size: ${subtextCap}; margin-inline: auto; justify-self: center` : undefined}    size={subtextSize}    text={subtext}
   />
 
   <ScrollDeck

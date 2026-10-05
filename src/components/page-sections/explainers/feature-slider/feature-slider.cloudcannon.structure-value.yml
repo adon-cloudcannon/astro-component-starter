@@ -3,7 +3,6 @@ icon: view_carousel
 description: Carousel of features, one slide at a time.
 value:
   _component: page-sections/explainers/feature-slider
-  sectionLabel: ""
   slides:
     - _component: page-sections/explainers/feature-slider/feature-slider-item
       eyebrow: Northwind
@@ -23,6 +22,7 @@ value:
       description: The component library did the layout work, so the time went into content.
       imageSource: /src/assets/images/component-docs/quiet-street.jpg
       imageAlt: A quiet residential street
+  sectionLabel: ""
   maxContentWidth: xl
   paddingHorizontal: gutter
   paddingVertical: 4xl

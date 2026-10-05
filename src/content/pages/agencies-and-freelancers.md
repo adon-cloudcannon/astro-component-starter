@@ -6,29 +6,29 @@ title: Agencies & Freelancers
 description: Faster launches. Happier clients. Less support.
 pageSections:
   - _component: page-sections/heroes/hero-split
-    backgroundColor: light-sand
     heading: Faster launches. Happier clients. Less support.
+    headingSize: xl
     subtext: >-
       Here, agencies spend less time on maintenance and more time on billable work, with websites
       your clients love to edit.
     subtextSize: xl
     imageSource: /src/assets/images/marketing/cloudcannon-hero-portfolio-01-1.png
     imageAlt: ''
-    headingSize: xl
     imageOverflow: 63
     buttonSections:
       - _component: building-blocks/core-elements/button
-        variant: primary
         text: Start your free trial
+        variant: primary
       - _component: building-blocks/core-elements/button
-        variant: text
+        text: Book a demo
         iconName: arrow-right
         iconPosition: after
-        text: Book a demo
+        variant: text
     pattern: grid
     haze: true
+    backgroundColor: light-sand
   - _component: page-sections/proof/logo-cloud
-    backgroundColor: sand
+    heading: PARTNERS TO BE PROUD OF
     logos:
       - image: /src/assets/images/marketing/logos/twitch.svg
         alt: Twitch
@@ -59,8 +59,16 @@ pageSections:
         monochrome: true
         aspect: 90 / 28
     headingPlacement: inline
-    heading: PARTNERS TO BE PROUD OF
+    backgroundColor: sand
   - _component: page-sections/proof/testimonial-wall
+    eyebrow: SUCCESS STORIES
+    heading: Here to help you succeed
+    headingSize: lg
+    subtext: >-
+      Grow your portfolio, not your overhead. Ship faster, hand over confidently, and get on with
+      what’s next.
+    subtextSize: xl
+    subtextWidth: md
     layout: row
     testimonials:
       - text: Absoluttweb can deploy a client website in just 1 hour
@@ -82,19 +90,11 @@ pageSections:
         quoteSize: 27
         authorName: Person McPerson
         authorDescription: Digital Design Director, Croissant & Baguette
-    eyebrow: SUCCESS STORIES
-    heading: Here to help you succeed
-    subtext: >-
-      Grow your portfolio, not your overhead. Ship faster, hand over confidently, and get on with
-      what’s next.
-    subtextSize: xl
-    subtextWidth: 602
-    headingSize: lg
+    backgroundColor: light-sand
     background:
       type: pattern
       pattern: pegboard
       mask: fade
-    backgroundColor: light-sand
     haze:
       - x: 0.4951
         rx: 531px
@@ -116,38 +116,38 @@ pageSections:
         text: >-
           Build with the static site generator you already use. Define components once and reuse
           them across every client site.
-        size: lg
         alignmentHorizontal: center
+        size: lg
         style: 'max-inline-size: 527px; margin-inline: auto'
       - _component: building-blocks/wrappers/button-group
-        alignmentHorizontal: center
         buttonSections:
           - _component: building-blocks/core-elements/button
-            variant: text
-            iconName: arrow-right
-            iconPosition: after
-            textColor: sunset
             text: Learn more
+            iconName: arrow-right
+            textColor: sunset
+            iconPosition: after
+            variant: text
+        alignmentHorizontal: center
     backgroundColor: light-sand
   - _component: page-sections/builders/custom-section
     contentSections: []
     backgroundColor: light-sand
   - _component: page-sections/explainers/feature-split
-    buttonSections:
-      - _component: building-blocks/core-elements/button
-        variant: text
-        iconName: arrow-right
-        iconPosition: after
-        textColor: sunset
-        text: Learn more
-    imageSource: ''
     heading: A platform that wins pitches
+    headingSize: sm
     subtext: >-
       Clients own their content outright. It lives in their repo as files, not locked in a database.
       They’re never tied to a platform, and neither are you.
     subtextSize: lg
+    buttonSections:
+      - _component: building-blocks/core-elements/button
+        text: Learn more
+        iconName: arrow-right
+        textColor: sunset
+        iconPosition: after
+        variant: text
+    imageSource: ''
     backgroundColor: light-sand
-    headingSize: sm
     background:
       type: pattern
       pattern: grid
@@ -158,18 +158,11 @@ pageSections:
         'y': 45.2%
         ry: 45.6%
   - _component: page-sections/explainers/pinned-steps
-    progressTrackColor: '#674A3F'
+    eyebrow: ''
     heading: Happy developers
     headingSize: lg
     subtext: ''
-    eyebrow: ''
-    reverse: true
-    mediaWidth: wide
-    backgroundColor: dark
-    background:
-      type: pattern
-      pattern: grid
-      mask: top
+    alignmentHorizontal: center
     steps:
       - contentSections:
           - _component: building-blocks/core-elements/heading
@@ -182,11 +175,11 @@ pageSections:
               them across every client site.
             size: lg
           - _component: building-blocks/core-elements/button
-            variant: text
-            iconName: arrow-right
-            iconPosition: after
-            textColor: sunset
             text: Learn more
+            iconName: arrow-right
+            textColor: sunset
+            iconPosition: after
+            variant: text
         mediaSections: []
       - contentSections:
           - _component: building-blocks/core-elements/heading
@@ -199,11 +192,11 @@ pageSections:
               static, there's nothing to maintain.
             size: lg
           - _component: building-blocks/core-elements/button
-            variant: text
-            iconName: arrow-right
-            iconPosition: after
-            textColor: sunset
             text: Learn more
+            iconName: arrow-right
+            textColor: sunset
+            iconPosition: after
+            variant: text
         mediaSections:
           - _component: building-blocks/wrappers/stat-overlay
             panelColor: '#FFFFFF'
@@ -219,16 +212,23 @@ pageSections:
                 label: overall site speed
                 iconName: bolt
                 iconColor: sunset
-    alignmentHorizontal: center
+    reverse: true
+    mediaWidth: wide
+    backgroundColor: dark
+    progressTrackColor: '#674A3F'
+    background:
+      type: pattern
+      pattern: grid
+      mask: top
   - _component: page-sections/conversion/cta-center
     heading: Join a Partner Program that rewards good work
+    headingSize: lg
     subtext: As you bring in new clients, you’ll gain points and more benefits.
     subtextSize: lg
-    backgroundColor: light-sand
-    alignmentHorizontal: center
-    headingSize: lg
     buttonSections:
       - _component: building-blocks/core-elements/button
-        variant: primary
         text: Learn more about the Partner Program
+        variant: primary
+    backgroundColor: light-sand
+    alignmentHorizontal: center
 ---

@@ -1,6 +1,7 @@
 ---
 import { rootMirror } from "@component-utils/rootMirror.mjs";
 import CustomSection from "@builders/custom-section/CustomSection.astro";
+import { subtextMeasure } from "@component-utils/subtextMeasure.mjs";
 import Heading from "@core-elements/heading/Heading.astro";
 import Image from "@core-elements/image/Image.astro";
 import ShapePile from "@wrappers/shape-pile/ShapePile.astro";
@@ -69,6 +70,9 @@ const {
   ...htmlAttributes
 } = Astro.props;
 
+/* The measure the subtext is set in, as a length. */
+const subtextCap = subtextMeasure(subtextWidth);
+
 const minSplitWidth = 800;
 const bleedSide = imageBleed ? (reverse ? "inline-start" : "inline-end") : undefined;
 const imagePositionHorizontal = imageBleed ? (reverse ? "right" : "left") : "center";
@@ -132,7 +136,7 @@ const mirror = rootMirror({ class: { "has-pile": shapes?.length > 0 } });
             from the column's left edge: they pushed the line in by half the
             slack, so a 342 measure in a 592 column started at 245 and ran to
             575 — straight under the pile. */}
-        style={subtextWidth ? `max-inline-size: ${Number(subtextWidth)}px` : undefined}
+        style={subtextCap ? `max-inline-size: ${subtextCap}` : undefined}
         size={subtextSize}
         data-prop="subtext"
         text={subtext}

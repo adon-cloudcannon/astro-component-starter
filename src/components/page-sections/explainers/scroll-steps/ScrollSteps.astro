@@ -13,6 +13,7 @@
  * this gives it a band, a heading and the section's padding.
  */
 import CustomSection from "@builders/custom-section/CustomSection.astro";
+import { subtextMeasure } from "@component-utils/subtextMeasure.mjs";
 import ScrollStepper from "@wrappers/scroll-stepper/ScrollStepper.astro";
 import Heading from "@core-elements/heading/Heading.astro";
 import Text from "@core-elements/text/Text.astro";
@@ -63,6 +64,9 @@ const {
   ...htmlAttributes
 } = Astro.props;
 
+/* The measure the subtext is set in, as a length. */
+const subtextCap = subtextMeasure(subtextWidth);
+
 const hasHeader = Boolean(eyebrow || heading || subtext);
 ---
 
@@ -110,7 +114,7 @@ const hasHeader = Boolean(eyebrow || heading || subtext);
         <Text
           alignmentHorizontal={alignmentHorizontal}
           class="subtext"
-          style={subtextWidth ? `max-inline-size: ${Number(subtextWidth)}px; margin-inline: auto; justify-self: center` : undefined}
+          style={subtextCap ? `max-inline-size: ${subtextCap}; margin-inline: auto; justify-self: center` : undefined}
           size={subtextSize}
           data-prop="subtext"
           text={subtext}

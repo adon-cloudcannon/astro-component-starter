@@ -41,10 +41,24 @@ subtextSize:
       - id: lg
         name: Large
 subtextWidth:
-  type: number
+  type: select
+  label: Subtext width
   comment: >-
-    The measure the design sets the line in, in pixels. Empty runs it to the
-    column.
+    The measure the supporting line is set in, not the column it sits in. The
+    design draws a centred one at about Medium in the 1040 column; run to the
+    full width it reads as a different block.
+  options:
+    values:
+      - id: ""
+        name: Full width
+      - id: sm
+        name: Narrow (460)
+      - id: md
+        name: Medium (580)
+      - id: lg
+        name: Wide (680)
+      - id: xl
+        name: Extra wide (820)
 alignmentHorizontal:
   type: select
   comment: How the header is aligned.

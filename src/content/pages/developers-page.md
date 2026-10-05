@@ -6,29 +6,29 @@ title: Developers Page
 description: A CMS that uses Git, just like you do
 pageSections:
   - _component: page-sections/heroes/hero-split
-    backgroundColor: dark
     heading: A CMS that uses Git, just like you do
+    headingSize: xl
     subtext: >-
       Connect CloudCannon to your repo and keep working locally. Editors manage content visually,
       and everyone's changes sync automatically.
     subtextSize: xl
     imageSource: /src/assets/images/marketing/hero-developers-01-1.png
     imageAlt: ''
-    headingSize: xl
     imageOverflow: 217
     buttonSections:
       - _component: building-blocks/core-elements/button
-        variant: primary
         text: Start your free trial
+        variant: primary
       - _component: building-blocks/core-elements/button
-        variant: text
+        text: Book a demo
         iconName: arrow-right
         iconPosition: after
-        text: Book a demo
+        variant: text
     pattern: grid
     haze: false
+    backgroundColor: dark
   - _component: page-sections/proof/logo-cloud
-    backgroundColor: sand
+    heading: STATIC SITE GENERATORS
     logos:
       - image: /src/assets/images/marketing/logos/twitch.svg
         alt: Twitch
@@ -59,32 +59,26 @@ pageSections:
         monochrome: true
         aspect: 90 / 28
     headingPlacement: inline
-    heading: STATIC SITE GENERATORS
+    backgroundColor: sand
   - _component: page-sections/conversion/cta-center
     eyebrow: INTERACTIVE DEMO
     heading: Here’s how to set up visual editing in minutes
+    headingSize: lg
     subtext: >-
       This demo walks you through the process of adding Editable Regions to your code, so your
       editors can visually change text, structured data, and images. Save your changes to proceed
       through the demo.
     subtextSize: lg
+    subtextWidth: md
+    backgroundColor: light-sand
     imageSource: /src/assets/images/marketing/screenshot-2026-08-11-at-17-25-56-1.png
     imageAlt: ''
-    backgroundColor: light-sand
-    subtextWidth: 612
-    headingSize: lg
   - _component: page-sections/explainers/pinned-steps
-    heading: Your stack, plus an editing layer
-    numbered: true
-    headingSize: lg
-    alignmentHorizontal: start
-    subtext: ''
     eyebrow: ''
-    reverse: true
-    mediaWidth: wide
-    progressColor: sunset
-    progressTrackColor: midnight
-    backgroundColor: dark
+    heading: Your stack, plus an editing layer
+    headingSize: lg
+    subtext: ''
+    alignmentHorizontal: start
     steps:
       - contentSections:
           - _component: building-blocks/core-elements/heading
@@ -122,7 +116,16 @@ pageSections:
               the CMS, no command line needed.
             size: lg
         mediaSections: []
+    reverse: true
+    mediaWidth: wide
+    backgroundColor: dark
+    progressColor: sunset
+    progressTrackColor: midnight
+    numbered: true
   - _component: page-sections/proof/testimonial-bento
+    eyebrow: SUCCESS STORIES
+    heading: What clients are saying
+    headingSize: md
     testimonials:
       - text: |-
           Within the first few weeks after CloudCannon migrated the
@@ -162,9 +165,6 @@ pageSections:
         accentColor: golden
         size: wide
     columns: 3
-    eyebrow: SUCCESS STORIES
-    heading: What clients are saying
-    headingSize: md
     backgroundColor: dark
     background:
       type: pattern
@@ -172,20 +172,12 @@ pageSections:
       mask: fade
   - _component: page-sections/conversion/cta-center
     heading: The tool you’ve been looking for
-    backgroundColor: light-sand
     headingSize: lg
+    backgroundColor: light-sand
   - _component: page-sections/explainers/pinned-steps
+    eyebrow: ''
     heading: ''
     subtext: ''
-    eyebrow: ''
-    reverse: true
-    mediaWidth: wide
-    progressColor: pacific
-    progressTrackColor: pacific-100
-    background:
-      type: pattern
-      pattern: grid
-      mask: none
     steps:
       - contentSections:
           - _component: building-blocks/core-elements/heading
@@ -199,11 +191,11 @@ pageSections:
               lot.
             size: lg
           - _component: building-blocks/core-elements/button
-            variant: text
-            iconName: arrow-right
-            iconPosition: after
-            textColor: sunset
             text: Learn more
+            iconName: arrow-right
+            textColor: sunset
+            iconPosition: after
+            variant: text
         mediaSections: []
       - contentSections:
           - _component: building-blocks/core-elements/heading
@@ -217,11 +209,11 @@ pageSections:
               from marketing and no developer hours lost to copy tweaks.
             size: lg
           - _component: building-blocks/core-elements/button
-            variant: text
-            iconName: arrow-right
-            iconPosition: after
-            textColor: sunset
             text: Learn more
+            iconName: arrow-right
+            textColor: sunset
+            iconPosition: after
+            variant: text
         mediaSections: []
       - contentSections:
           - _component: building-blocks/core-elements/heading
@@ -235,49 +227,64 @@ pageSections:
               experience.
             size: lg
           - _component: building-blocks/core-elements/button
-            variant: text
-            iconName: arrow-right
-            iconPosition: after
-            textColor: sunset
             text: Learn more
+            iconName: arrow-right
+            textColor: sunset
+            iconPosition: after
+            variant: text
         mediaSections: []
-  - _component: page-sections/conversion/cta-center
-    heading: Own your content, always
-    subtext: >-
-      Content lives in the repository along with the complete history of every change. If you ever
-      leave CloudCannon, you leave with everything: your content, your code, your commits.
-    subtextSize: lg
-    imageSource: /src/assets/images/marketing/ribbon-01-1.png
-    imageAlt: ''
-    backgroundColor: light-sand
-    subtextWidth: 816
-    headingSize: lg
-    buttonSections:
-      - _component: building-blocks/core-elements/button
-        variant: primary
-        text: Get skills repo
-  - _component: page-sections/explainers/feature-split
-    heading: Open-source ecosystem
-    subtext: >-
-      We won’t upsell tools that don’t need to exist, and we’ll often point to open source instead.
-      These are ours, and they work on any static site.
-    subtextSize: xl
-    headingSize: lg
+    reverse: true
+    mediaWidth: wide
+    progressColor: pacific
+    progressTrackColor: pacific-100
     background:
       type: pattern
       pattern: grid
       mask: none
+  - _component: page-sections/conversion/cta-center
+    heading: Own your content, always
+    headingSize: lg
+    subtext: >-
+      Content lives in the repository along with the complete history of every change. If you ever
+      leave CloudCannon, you leave with everything: your content, your code, your commits.
+    subtextSize: lg
+    subtextWidth: xl
+    buttonSections:
+      - _component: building-blocks/core-elements/button
+        text: Get skills repo
+        variant: primary
+    backgroundColor: light-sand
+    imageSource: /src/assets/images/marketing/ribbon-01-1.png
+    imageAlt: ''
+  - _component: page-sections/explainers/feature-split
+    heading: Open-source ecosystem
+    headingSize: lg
+    subtext: >-
+      We won’t upsell tools that don’t need to exist, and we’ll often point to open source instead.
+      These are ours, and they work on any static site.
+    subtextSize: xl
+    buttonSections:
+      - _component: building-blocks/core-elements/button
+        text: Explore open-source tools
+        variant: primary
     backgroundColor: sand
+    background:
+      type: pattern
+      pattern: grid
+      mask: none
     haze:
       - x: 0.1923
         rx: 399px
         'y': 49.4%
         ry: 49.9%
-    buttonSections:
-      - _component: building-blocks/core-elements/button
-        variant: primary
-        text: Explore open-source tools
   - _component: page-sections/conversion/cta-team-member
+    heading: We’re here to help
+    headingSize: lg
+    subtext: >-
+      We're a small team with a lot of knowledge, so you'll talk to someone who knows what they're
+      talking about and can give you hands-on help whatever the problem.
+    subtextSize: lg
+    subtextWidth: sm
     member:
       _component: building-blocks/wrappers/team-member
       name: Olivia Nicholson
@@ -288,21 +295,14 @@ pageSections:
       propSource: /src/assets/images/embellishments/telephone.png
       propWidth: 47
       propAlt: ''
-    heading: We’re here to help
-    subtext: >-
-      We're a small team with a lot of knowledge, so you'll talk to someone who knows what they're
-      talking about and can give you hands-on help whatever the problem.
-    subtextSize: lg
-    backgroundColor: light-sand
-    subtextWidth: 489
-    headingSize: lg
     buttonSections:
       - _component: building-blocks/core-elements/button
-        variant: primary
         text: Start your free trial
+        variant: primary
       - _component: building-blocks/core-elements/button
-        variant: text
+        text: Book a demo
         iconName: arrow-right
         iconPosition: after
-        text: Book a demo
+        variant: text
+    backgroundColor: light-sand
 ---

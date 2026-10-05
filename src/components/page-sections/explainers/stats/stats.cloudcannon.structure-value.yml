@@ -3,7 +3,6 @@ icon: monitoring
 description: Row of big numbers with labels.
 value:
   _component: page-sections/explainers/stats
-  sectionLabel: ""
   eyebrow: ""
   heading: Numbers that hold up
   headingLevel: h2
@@ -30,6 +29,7 @@ value:
       label: Support score
       sublabel: Out of 5
   dividers: true
+  sectionLabel: ""
   maxContentWidth: xl
   paddingHorizontal: gutter
   paddingVertical: 4xl

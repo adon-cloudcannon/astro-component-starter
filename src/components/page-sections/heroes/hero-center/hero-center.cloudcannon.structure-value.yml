@@ -3,7 +3,6 @@ icon: web_asset
 description: Centered hero with a heading, supporting text, and buttons.
 value:
   _component: page-sections/heroes/hero-center
-  sectionLabel: ""
   eyebrow: Introducing
   heading: A clear promise in one line
   headingLevel: h1
@@ -18,6 +17,7 @@ value:
       iconPosition: before
       variant: primary
       size: md
+  sectionLabel: ""
   maxContentWidth: xl
   paddingHorizontal: gutter
   paddingVertical: 4xl

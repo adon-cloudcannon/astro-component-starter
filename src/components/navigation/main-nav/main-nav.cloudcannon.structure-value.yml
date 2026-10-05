@@ -4,10 +4,10 @@ description: Site header with a logo, links, and action buttons.
 value:
   _component: navigation/main-nav
   logoSource: ""
-  logoAlt: "Logo"
+  logoAlternateSource: ""
+  logoAlt: Logo
   navData: []
   buttonSections: []
-  logoAlternateSource: ""
   search: true
   searchPlaceholder: ""
   themeToggle: true
@@ -21,7 +21,7 @@ preview:
     fit: cover
 picker_preview:
   text: Main Nav
-  subtext: "Header navigation combining logo, links, and actions."
+  subtext: Header navigation combining logo, links, and actions.
   image: public/component-previews/navigation/main-nav.svg
   icon: navigation
   gallery:

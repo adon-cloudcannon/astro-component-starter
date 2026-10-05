@@ -3,12 +3,13 @@ icon: layers
 description: Cards that pin and stack as the page scrolls.
 value:
   _component: page-sections/explainers/feature-deck
-  sectionLabel: ""
   eyebrow: ""
   heading: ""
   headingLevel: h2
   headingSize: lg
   subtext: ""
+  subtextSize: md
+  subtextWidth: ""
   cards:
     - _component: building-blocks/wrappers/scroll-deck/scroll-deck-card
       label: AI-ready
@@ -24,6 +25,7 @@ value:
   stickyOffset: md
   cardColorScheme: light
   showRail: true
+  sectionLabel: ""
   maxContentWidth: xl
   paddingHorizontal: gutter
   paddingVertical: 4xl

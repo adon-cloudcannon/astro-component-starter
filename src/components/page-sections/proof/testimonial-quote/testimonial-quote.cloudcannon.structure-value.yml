@@ -3,19 +3,21 @@ icon: format_quote
 description: One customer quote on a card, in any of the four layouts the design draws.
 value:
   _component: page-sections/proof/testimonial-quote
-  sectionLabel: ""
   variant: static
   quoteSize: sm
   tone: base
   cardWidth: full
   bordered: false
   quotes:
-    - text: We handed the site to our marketing team on a Friday and they had three new landing pages live by Monday. **No tickets, no deploys**, nothing broken.
+    - text: >-
+        We handed the site to our marketing team on a Friday and they had three new landing pages
+        live by Monday. **No tickets, no deploys**, nothing broken.
       authorName: Priya Raman
       authorDescription: Head of Marketing,
       company: Northwind
       authorImage: /src/assets/images/component-docs/profile1.jpg
       accentColor: sunset
+  sectionLabel: ""
   maxContentWidth: xl
   paddingHorizontal: gutter
   paddingVertical: 4xl
@@ -73,8 +75,8 @@ _structures:
           text:
             type: markdown
             comment: >-
-              The quote itself. Bold picks words out in the card's accent
-              colour, which is how the design highlights a result.
+              The quote itself. Bold picks words out in the card's accent colour, which is how the
+              design highlights a result.
           authorName:
             type: text
             comment: Who said it.
@@ -113,14 +115,13 @@ _structures:
           quoteMarks:
             type: switch
             comment: >-
-              Wraps the quote in the card's colour. Turn off for a figure
-              rather than something somebody said.
+              Wraps the quote in the card's colour. Turn off for a figure rather than something
+              somebody said.
           accentColor:
             type: select
             comment: >-
-              The card's colour. It does three jobs at once: the emphasised
-              words in the quote take it, the quote marks are drawn in it, and
-              the link turns to it on hover.
+              The card's colour. It does three jobs at once: the emphasised words in the quote take
+              it, the quote marks are drawn in it, and the link turns to it on hover.
             options:
               values:
                 - id: ""

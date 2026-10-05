@@ -3,12 +3,12 @@ icon: record_voice_over
 description: A call to action with a member of the team beside it.
 value:
   _component: page-sections/conversion/cta-team-member
-  sectionLabel: ""
   heading: ""
-  headingLevel: h2
   headingSize: lg
+  headingLevel: h2
   subtext: ""
   subtextSize: lg
+  subtextWidth: ""
   member:
     _component: building-blocks/wrappers/team-member
     name: ""
@@ -20,6 +20,7 @@ value:
     propAlt: ""
   buttonSections: []
   reverse: false
+  sectionLabel: ""
   maxContentWidth: xl
   paddingHorizontal: gutter
   paddingVertical: 4xl

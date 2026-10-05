@@ -3,7 +3,6 @@ icon: newsmode
 description: Newest blog posts as cards, loaded automatically when the site builds.
 value:
   _component: page-sections/collections/latest-posts
-  sectionLabel: ""
   eyebrow: Writing
   heading: From the blog
   headingLevel: h2
@@ -12,6 +11,7 @@ value:
   tag: ""
   showViewAllButton: true
   viewAllLabel: View all posts
+  sectionLabel: ""
   maxContentWidth: xl
   paddingHorizontal: gutter
   paddingVertical: 4xl

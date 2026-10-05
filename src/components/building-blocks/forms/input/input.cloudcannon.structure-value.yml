@@ -9,11 +9,11 @@ value:
   placeholder: null
   required: false
   value: null
+  hint: null
+  autocomplete: null
   iconName: null
   iconColor: default
   iconPosition: before
-  hint: null
-  autocomplete: null
 preview:
   text:
     - template: Input - {type}

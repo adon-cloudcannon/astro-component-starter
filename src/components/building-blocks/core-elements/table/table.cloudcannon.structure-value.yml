@@ -28,7 +28,7 @@ value:
         - Unlimited
         - "25"
         - 5 TB
-        - "24/7"
+        - 24/7
     - cells:
         - Enterprise
         - Unlimited

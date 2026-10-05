@@ -5,6 +5,8 @@ value:
   eyebrow: ""
   heading: ""
   subtext: ""
+  subtextSize: md
+  subtextWidth: ""
   items: []
   backgroundColor: light-sand
 _inputs:

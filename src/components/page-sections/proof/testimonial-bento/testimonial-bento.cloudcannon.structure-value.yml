@@ -3,13 +3,16 @@ icon: dashboard
 description: Customer quotes in a bento grid, led by a featured quote.
 value:
   _component: page-sections/proof/testimonial-bento
-  sectionLabel: ""
   eyebrow: Testimonials
   heading: Loved by the teams who use it
   headingLevel: h2
   subtext: ""
+  subtextSize: md
+  subtextWidth: ""
   testimonials:
-    - text: We handed the site to our marketing team on a Friday and they had three new landing pages live by Monday. No tickets, no deploys, nothing broken.
+    - text: >-
+        We handed the site to our marketing team on a Friday and they had three new landing pages
+        live by Monday. No tickets, no deploys, nothing broken.
       authorName: Priya Raman
       authorDescription: Head of Marketing, Northwind
       authorImage: /src/assets/images/component-docs/profile1.jpg
@@ -27,13 +30,16 @@ value:
       authorImage: /src/assets/images/component-docs/profile2.jpg
       size: standard
       tone: base
-    - text: Two weeks from kickoff to launch, including content. The component library did most of the work for us.
+    - text: >-
+        Two weeks from kickoff to launch, including content. The component library did most of the
+        work for us.
       authorName: Sam Okafor
       authorDescription: Design Director, Loam Studio
       authorImage: /src/assets/images/component-docs/profile4.jpg
       size: full
       tone: base
   columns: "3"
+  sectionLabel: ""
   maxContentWidth: xl
   paddingHorizontal: gutter
   paddingVertical: 4xl
@@ -109,9 +115,8 @@ _structures:
           accentColor:
             type: select
             comment: >-
-              The card's colour. It does three jobs at once: the emphasised
-              words in the quote take it, the card's border shows in it on
-              hover, and the link turns to it on hover.
+              The card's colour. It does three jobs at once: the emphasised words in the quote take
+              it, the card's border shows in it on hover, and the link turns to it on hover.
             options:
               values:
                 - id: ""
@@ -158,8 +163,8 @@ _structures:
           text:
             type: markdown
             comment: >-
-              The quote itself. Bold picks words out in the card's accent
-              colour, which is how the design highlights a result.
+              The quote itself. Bold picks words out in the card's accent colour, which is how the
+              design highlights a result.
           authorName:
             type: text
             comment: Who said it.
@@ -184,7 +189,9 @@ _structures:
                   name: Large (28px)
           size:
             type: select
-            comment: How much of the grid this quote takes. Featured is two columns by two rows, and Full width spans the whole row. On small screens every quote is full width.
+            comment: >-
+              How much of the grid this quote takes. Featured is two columns by two rows, and Full
+              width spans the whole row. On small screens every quote is full width.
             options:
               values:
                 - id: standard
@@ -200,11 +207,10 @@ _structures:
           tone:
             type: select
             comment: >-
-              Which ground the card is drawn on. There are two: the dark one
-              the design mostly uses, and the pale one for the card it marks
-              out. The accent travels with the ground rather than being set
-              separately, because Harbour and Golden are tuned to glow on
-              near-black and all but vanish on a pale card.
+              Which ground the card is drawn on. There are two: the dark one the design mostly uses,
+              and the pale one for the card it marks out. The accent travels with the ground rather
+              than being set separately, because Harbour and Golden are tuned to glow on near-black
+              and all but vanish on a pale card.
             options:
               values:
                 - id: base

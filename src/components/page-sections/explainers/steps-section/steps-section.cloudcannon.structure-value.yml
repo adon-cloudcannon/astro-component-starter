@@ -3,7 +3,6 @@ icon: format_list_numbered
 description: Numbered how-it-works sequence with optional images.
 value:
   _component: page-sections/explainers/steps-section
-  sectionLabel: ""
   eyebrow: How it works
   heading: From order to doorstep
   headingLevel: h2
@@ -41,6 +40,7 @@ value:
           size: sm
   orientation: horizontal
   imageAspectRatio: landscape
+  sectionLabel: ""
   maxContentWidth: xl
   paddingHorizontal: gutter
   paddingVertical: 4xl

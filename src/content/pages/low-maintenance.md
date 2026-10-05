@@ -6,33 +6,33 @@ title: Low Maintenance
 description: No database. No 2 a.m. panic.
 pageSections:
   - _component: page-sections/heroes/hero-split
-    backgroundColor: sand
     heading: No database. No 2 a.m. panic.
+    headingSize: xl
     subtext: >-
       Skip the forced updates, security patches, and midnight outages. Your site keeps running while
       your team spends time building what's next.
     subtextSize: xl
     imageSource: /src/assets/images/marketing/hero-lowmaintenance-01-1.png
     imageAlt: ''
-    headingSize: xl
     imageOverflow: 107
     buttonSections:
       - _component: building-blocks/core-elements/button
-        variant: primary
         text: Start your free trial
+        variant: primary
       - _component: building-blocks/core-elements/button
-        variant: text
+        text: Book a demo
         iconName: arrow-right
         iconPosition: after
-        text: Book a demo
+        variant: text
     note:
       - text: No credit card · 14-day free trial · No lock-in
         iconName: check
         iconColor: default
     pattern: pegboard
     haze: true
-  - _component: page-sections/proof/logo-cloud
     backgroundColor: sand
+  - _component: page-sections/proof/logo-cloud
+    heading: BUILT BY DEVS. RUN BY EDITORS.
     logos:
       - image: /src/assets/images/marketing/logos/twitch.svg
         alt: Twitch
@@ -63,35 +63,39 @@ pageSections:
         monochrome: true
         aspect: 90 / 28
     headingPlacement: inline
-    heading: BUILT BY DEVS. RUN BY EDITORS.
+    backgroundColor: sand
   - _component: page-sections/conversion/cta-center
     heading: Give editors a CMS, keep a static site
+    headingSize: lg
     subtext: >-
       At CloudCannon the editing interface sits as a layer on top of your site. Your team gets
       somewhere to work, your site stays as a set of static files, and neither one needs looking
       after.
     subtextSize: lg
-    backgroundColor: light-sand
-    subtextWidth: 816
-    headingSize: lg
+    subtextWidth: xl
     buttonSections:
       - _component: building-blocks/core-elements/button
-        variant: primary
         text: Why should you cheese?
+        variant: primary
+    backgroundColor: light-sand
   - _component: page-sections/proof/testimonial-section
+    layout: split
+    company: Absoluttweb
     text: >-
       I almost forgot that website maintenance was a thing. That’s something you just don’t need to
       do when you have this static tech stack.
     authorName: Sindre Gusdal
     authorDescription: General Manager · Absoluttweb
-    layout: split
-    markPosition: start
-    markStyle: card
-    company: Absoluttweb
     authorImage: /src/assets/images/marketing/ellipse-287.jpg
     backgroundColor: light-sand
+    markPosition: start
+    markStyle: card
   - _component: page-sections/explainers/feature-split
-    subtextWidth: 342
+    heading: We don’t think a website should need this much looking after
+    headingSize: lg
+    subtext: 'With a static site and Git you won’t need to worry about:'
+    subtextSize: xl
+    subtextWidth: sm
     shapes:
       - text: Uptime monitoring and security scanning
         tone: golden
@@ -155,11 +159,7 @@ pageSections:
         width: 224
         height: 171
         rotation: 0
-    heading: We don’t think a website should need this much looking after
-    subtext: 'With a static site and Git you won’t need to worry about:'
-    subtextSize: xl
     backgroundColor: light-sand
-    headingSize: lg
     background:
       type: pattern
       pattern: grid
@@ -171,26 +171,21 @@ pageSections:
         ry: 45.6%
   - _component: page-sections/conversion/cta-center
     heading: Maintenance that doesn’t multiply
+    headingSize: lg
     subtext: >-
       Whether it's three client sites or three hundred, another site is another repo. The
       maintenance doesn't come with it.
-    backgroundColor: dark
     subtextSize: lg
-    subtextWidth: 580
-    headingSize: lg
+    subtextWidth: md
+    backgroundColor: dark
     background:
       type: pattern
       pattern: grid
       mask: fade
   - _component: page-sections/explainers/pinned-steps
+    eyebrow: ''
     heading: ''
     subtext: ''
-    eyebrow: ''
-    reverse: false
-    mediaWidth: wide
-    progressColor: pacific-300
-    progressTrackColor: midnight
-    backgroundColor: dark
     steps:
       - contentSections:
           - _component: building-blocks/core-elements/heading
@@ -224,26 +219,38 @@ pageSections:
             text: Reusable components and templates mean you're not starting from scratch every time.
             size: lg
         mediaSections: []
+    reverse: false
+    mediaWidth: wide
+    backgroundColor: dark
+    progressColor: pacific-300
+    progressTrackColor: midnight
   - _component: page-sections/proof/testimonial-section
+    layout: split
     company: Absoluttweb
     text: Absoluttweb went from days per new client site to around an hour.
-    layout: split
-    markPosition: end
-    markStyle: card
-    quoted: false
-    quoteSize: md
-    linkText: Read case study
+    backgroundColor: dark
     background:
       type: pattern
       pattern: pegboard
       mask: none
-    backgroundColor: dark
     haze:
       - x: 0.4791
         rx: 933px
         'y': 54.5%
         ry: 74.4%
+    markPosition: end
+    markStyle: card
+    quoted: false
+    quoteSize: md
+    linkText: Read case study
   - _component: page-sections/conversion/cta-team-member
+    heading: A CMS to build, not babysit
+    headingSize: lg
+    subtext: >-
+      Git underneath, a visual editor on top, with code and content running on one engine. Start
+      free in minutes, or book a demo and we’ll walk you through the real thing.
+    subtextSize: lg
+    subtextWidth: sm
     member:
       _component: building-blocks/wrappers/team-member
       name: Tom Richardson
@@ -254,28 +261,21 @@ pageSections:
       propSource: /src/assets/images/embellishments/cocktail.png
       propWidth: 31
       propAlt: ''
-    heading: A CMS to build, not babysit
-    subtext: >-
-      Git underneath, a visual editor on top, with code and content running on one engine. Start
-      free in minutes, or book a demo and we’ll walk you through the real thing.
-    subtextSize: lg
-    backgroundColor: light-sand
-    subtextWidth: 489
-    headingSize: lg
     buttonSections:
       - _component: building-blocks/core-elements/button
-        variant: primary
         text: Start your free trial
+        variant: primary
       - _component: building-blocks/core-elements/button
-        variant: text
+        text: Book a demo
         iconName: arrow-right
         iconPosition: after
-        text: Book a demo
+        variant: text
+    backgroundColor: light-sand
   - _component: page-sections/conversion/cta-banner
     scratch: pacific
     heading: Wanna learn more about our product?
+    headingSize: lg
     linkText: Explore visual editing
     imageSource: /src/assets/images/marketing/rocks-corner-3806-70523.png
     imageAlt: ''
-    headingSize: lg
 ---

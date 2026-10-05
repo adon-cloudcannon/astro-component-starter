@@ -15,10 +15,10 @@ value:
       label: Option 3
   placeholder: null
   value: null
-  iconName: null
-  iconColor: default
   hint: null
   autocomplete: null
+  iconName: null
+  iconColor: default
 preview:
   text:
     - Select

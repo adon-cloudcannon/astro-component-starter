@@ -46,7 +46,6 @@ _structures:
           title: Entry title
           body: ""
           iconName: ""
-
         preview:
           text:
             - key: title
@@ -59,7 +58,9 @@ _structures:
             comment: Optional. Set the same year on consecutive entries to group them (month goes in Date).
           date:
             type: text
-            comment: The date shown beside the rail — a year (`2019`), a quarter (`Q3 2026`), or a month when Year is set.
+            comment: >-
+              The date shown beside the rail — a year (`2019`), a quarter (`Q3 2026`), or a month
+              when Year is set.
           title:
             type: text
             comment: What happened.

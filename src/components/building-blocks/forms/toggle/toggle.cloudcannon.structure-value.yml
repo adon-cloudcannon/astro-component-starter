@@ -7,7 +7,7 @@ value:
   name: my_toggle
   checked: false
   required: false
-  value: on
+  value: "on"
 preview:
   text:
     - Toggle

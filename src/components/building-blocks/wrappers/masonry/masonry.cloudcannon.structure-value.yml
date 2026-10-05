@@ -32,7 +32,10 @@ value:
               level: h3
               size: xs
             - _component: building-blocks/core-elements/text
-              text: Every color, radius, and font resolves through a design token, so a client theme is a token swap and nothing else. Change the file once and the whole library follows — no per-component edits.
+              text: >-
+                Every color, radius, and font resolves through a design token, so a client theme is
+                a token swap and nothing else. Change the file once and the whole library follows —
+                no per-component edits.
     - contentSections:
         - _component: building-blocks/wrappers/card
           border: true
@@ -58,7 +61,9 @@ value:
               level: h3
               size: xs
             - _component: building-blocks/core-elements/text
-              text: Every component ships with a reference page, live examples, and a props table generated from the same files the editor reads.
+              text: >-
+                Every component ships with a reference page, live examples, and a props table
+                generated from the same files the editor reads.
     - contentSections:
         - _component: building-blocks/wrappers/card
           border: true
@@ -84,7 +89,9 @@ value:
               level: h3
               size: xs
             - _component: building-blocks/core-elements/text
-              text: Keyboard, focus, and screen-reader behavior are part of each component's definition of done, not an afterthought.
+              text: >-
+                Keyboard, focus, and screen-reader behavior are part of each component's definition
+                of done, not an afterthought.
 preview:
   text:
     - Masonry

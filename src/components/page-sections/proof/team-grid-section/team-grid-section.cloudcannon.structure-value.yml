@@ -3,17 +3,18 @@ icon: groups
 description: A wall of team member cards beside a line about the team.
 value:
   _component: page-sections/proof/team-grid-section
-  sectionLabel: ""
   eyebrow: ""
   heading: ""
-  headingLevel: h2
   headingSize: lg
+  headingLevel: h2
   subtext: ""
   subtextSize: lg
+  subtextWidth: ""
   linkText: ""
   link: ""
   members: []
   columns: 2
+  sectionLabel: ""
   maxContentWidth: xl
   paddingHorizontal: gutter
   paddingVertical: 4xl
