@@ -26,6 +26,7 @@ import Text from "@core-elements/text/Text.astro";
 import ButtonGroup from "@wrappers/button-group/ButtonGroup.astro";
 import Split from "@wrappers/split/Split.astro";
 import PhotoStackCard from "./PhotoStackCard.astro";
+import StoryPanel from "./StoryPanel.astro";
 
 const {
   eyebrow = "",
@@ -38,6 +39,16 @@ const {
   /** The deck, front first. Two in the design; the cycle takes any number. */
   photos = [],
   buttonSections = [],
+  /**
+   * The two columns under the headline, each with its own fill.
+   *
+   * Part of this section rather than a band below it because the design
+   * changes colour at two different heights: the left column's fill starts
+   * 200 above the right one's, which no horizontal boundary can draw.
+   */
+  panels = [],
+  /** How far the first panel starts above the second, in pixels. */
+  panelRaise = 200,
   /**
    * A drawing laid over the deck's bottom corner, like the frond the design
    * puts there. Decoration: it is never the subject and carries no alt.
@@ -72,6 +83,9 @@ const backgroundPattern =
 const hazePool = { x: reverse ? 0.68 : 0.2, y: "48%", rx: "45%", ry: "60%" };
 
 const cards = (Array.isArray(photos) ? photos : []).filter((photo) => photo?.source);
+const columns = (Array.isArray(panels) ? panels : []).filter(
+  (panel) => panel?.eyebrow || panel?.heading || panel?.body,
+);
 const interactive = cards.length > 1;
 
 /* A deck you can click is a button; one print is not a control. Rendering the
@@ -94,7 +108,7 @@ const Stack = interactive ? "button" : "div";
 >
   <Split
     distributionMode="half"
-    alignmentVertical="center"
+    alignmentVertical="start"
     reverse={reverse}
     minSplitWidth={800}
     gap="2xl"
@@ -149,6 +163,26 @@ const Stack = interactive ? "button" : "div";
       </div>
     </Fragment>
   </Split>
+
+  {columns.length > 0 && (
+    <div
+      class="story-panels"
+      style={`--story-panel-raise: ${Number(panelRaise) || 0}px`}
+      data-editable="array"
+      data-prop="panels"
+    >
+      {columns.map((panel, index) => (
+        <StoryPanel
+          {...panel}
+          side={index === 0 ? "start" : "end"}
+          raised={index === 0 && columns.length > 1}
+          data-editable="array-item"
+          data-id="page-sections/heroes/hero-photo-stack/story-panel"
+          data-component="page-sections/heroes/hero-photo-stack/story-panel"
+        />
+      ))}
+    </div>
+  )}
 </CustomSection>
 
 <style is:global>
@@ -160,8 +194,25 @@ const Stack = interactive ? "button" : "div";
       --photo-stack-turn: 3.2deg;
     }
 
+    /* The copy starts level with the deck rather than centred against it: the
+       design drops the headline 81 below the first print's top edge, and
+       centred it sat 90 too low once the deck filled its column.
+
+       On the pane, not on the heading. Split wraps each slot in `.pane`, so a
+       rule written against the heading matched nothing; and the pane is a
+       flow container, which writes its children's `margin-block-start` from
+       `--space-before` and would have won anyway. */
+    .hero-photo-stack-layout .pane.first {
+      padding-block-start: 81px;
+    }
+
     .photo-stack-frame {
+      /* The deck is 477 in the design and its column here is wider, so it is
+         capped rather than stretched: a print blown up past its own size
+         reads as a different object. */
       inline-size: 100%;
+      margin-inline-start: auto;
+      max-inline-size: 478px;
       position: relative;
     }
 
@@ -280,6 +331,111 @@ const Stack = interactive ? "button" : "div";
 
     .photo-stack-embellishment img {
       inline-size: 100%;
+    }
+
+    /* --- the two columns under the headline ------------------------- */
+
+    .story-panels {
+      display: grid;
+      gap: 0;
+      grid-template-columns: 1fr 1fr;
+      /* Up into the band above: the design runs the left column's fill over
+         the pattern while the right one keeps it, which is the whole reason
+         these are in here rather than in a band of their own.
+
+         80 is what the design leaves between the deck's foot and the second
+         column's top edge, measured rather than chosen.
+
+         As `--space-before`, not as a margin: the row sits in a flow
+         container, which writes `margin-block-start` from that property out
+         of the `utils` layer and beats a margin written here. Set as a margin
+         alone it came out 24 and the whole lower half sat 51 high. */
+      --space-before: 80px;
+
+      margin-block-start: 80px;
+    }
+
+    .story-panel {
+      isolation: isolate;
+      /* The copy sits a long way down inside its block: 91 on the raised
+         column, 76 on the other, against the design's own edges. The foot is
+         the band's, which is why the fill runs on well past the last line. */
+      padding-block: 76px 0;
+      position: relative;
+    }
+
+    .story-panel[data-raised] {
+      padding-block-start: 91px;
+    }
+
+    /* The fill runs to its own page edge, not to the column's. Drawn as a
+       layer rather than by stretching the panel, so the copy stays in the
+       content column where the design keeps it. */
+    .story-panel::before {
+      background: var(--story-panel-fill);
+      content: "";
+      inset-block: 0;
+      inset-inline-end: 0;
+      inset-inline-start: 0;
+      position: absolute;
+      z-index: -1;
+    }
+
+    .story-panel[data-side="start"]::before {
+      inset-inline-start: calc(50% - 50vw);
+    }
+
+    .story-panel[data-side="end"]::before {
+      inset-inline-end: calc(50% - 50vw);
+    }
+
+    .story-panel[data-raised] {
+      margin-block-start: calc(var(--story-panel-raise, 200px) * -1);
+    }
+
+    .story-panel[data-tone="light-sand"] {
+      --story-panel-fill: var(--light-sand, #fffcf3);
+    }
+
+    .story-panel[data-tone="sand"] {
+      --story-panel-fill: var(--sand, #fbf6e9);
+    }
+
+    .story-panel[data-tone="dark-sand"] {
+      --story-panel-fill: var(--dark-sand, #ebe1c9);
+    }
+
+    .story-panel[data-tone="none"] {
+      --story-panel-fill: transparent;
+    }
+
+    /* The design insets the second column's copy from its own edge by about
+       93, where the first column's sits on the content column. */
+    .story-panel[data-side="end"] .story-panel-content {
+      padding-inline-start: var(--space-2xl, 64px);
+    }
+
+    .story-panel-body {
+      max-inline-size: 28rem;
+    }
+
+    @media (width < 800px) {
+      .story-panels {
+        grid-template-columns: 1fr;
+      }
+
+      /* Stacked, the raise would pull the second column over the first. */
+      .story-panel[data-raised] {
+        margin-block-start: 0;
+      }
+
+      .story-panel[data-side="end"] .story-panel-content {
+        padding-inline-start: 0;
+      }
+
+      .story-panel::before {
+        inset-inline: calc(50% - 50vw);
+      }
     }
 
     @media (prefers-reduced-motion: reduce) {

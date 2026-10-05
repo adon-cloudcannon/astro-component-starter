@@ -67,6 +67,19 @@ photos:
     clickable.
   options:
     structures: _structures.photoStackPhotos
+panels:
+  type: array
+  label: Story columns
+  comment: >-
+    The two columns under the headline, each painted in its own colour and run
+    to its own edge of the page. The first starts higher than the second,
+    which is what the design draws.
+  options:
+    structures: _structures.photoStackPanels
+panelRaise:
+  type: number
+  label: Column stagger
+  comment: How far the first column starts above the second, in pixels.
 buttonSections:
   type: array
   comment: Buttons under the copy. Optional.

@@ -18,6 +18,23 @@ pageSections:
       - _component: page-sections/heroes/hero-photo-stack/photo-stack-card
         source: /src/assets/images/marketing/our-story-picnic.jpg
         alt: Two of the team at a picnic in the Dunedin Botanic Garden
+    panels:
+      - _component: page-sections/heroes/hero-photo-stack/story-panel
+        eyebrow: OUR ORIGIN STORY
+        heading: “We don’t think a website should need this much looking after.”
+        body: >-
+          Working as developers, we were seeing the shortcomings of most CMS firsthand. We
+          envisioned a better for non-technical teams to edit static sites - without needing a
+          developer.
+        tone: light-sand
+      - _component: page-sections/heroes/hero-photo-stack/story-panel
+        eyebrow: SHAPED BY BUILDERS EVERYWHERE
+        body: >-
+          CloudCannon has grown alongside the people using it. Our platform is always improving
+          thanks to input from design and development agencies around the world, and in-house
+          teams at places like Twitch.
+        tone: sand
+    panelRaise: 200
     embellishmentSource: /src/assets/images/marketing/frond.png
     embellishmentWidth: 36
     backgroundColor: light-sand

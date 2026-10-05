@@ -17,6 +17,18 @@ value:
     - _component: page-sections/heroes/hero-photo-stack/photo-stack-card
       source: ""
       alt: ""
+  panels:
+    - _component: page-sections/heroes/hero-photo-stack/story-panel
+      eyebrow: ""
+      heading: ""
+      body: ""
+      tone: light-sand
+    - _component: page-sections/heroes/hero-photo-stack/story-panel
+      eyebrow: ""
+      heading: ""
+      body: ""
+      tone: sand
+  panelRaise: 200
   buttonSections: []
   embellishmentSource: ""
   embellishmentWidth: 55
@@ -29,6 +41,10 @@ value:
   pattern: grid
   haze: true
 _inputs:
+  panels:
+    type: array
+    options:
+      structures: _structures.photoStackPanels
   photos:
     type: array
     options:

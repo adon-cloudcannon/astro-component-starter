@@ -1,0 +1,58 @@
+---
+/**
+ * One of the two columns under the headline.
+ *
+ * The design gives each its own fill and runs it to its own page edge, and
+ * starts the left one 200 higher than the right, so the band changes colour
+ * at two different heights. That stagger is the reason this is one section
+ * rather than a hero with a split under it: a horizontal boundary between two
+ * stacked bands cannot draw it.
+ */
+import Heading from "@core-elements/heading/Heading.astro";
+import SimpleText from "@core-elements/simple-text/SimpleText.astro";
+import Text from "@core-elements/text/Text.astro";
+import { rootMirror } from "@component-utils/rootMirror.mjs";
+
+const {
+  eyebrow = "",
+  /** Header 5, which is what the design sets the origin story's quote in. */
+  heading = "",
+  headingLevel = "h2",
+  body = "",
+  /** The panel's own colour, by the name the design calls it. */
+  tone = "light-sand",
+  /** Which page edge the fill runs to. */
+  side = "start",
+  /** Whether this panel starts above the other one. */
+  raised = false,
+  class: className,
+  _component,
+  ...htmlAttributes
+} = Astro.props;
+
+/* The tone, the side and the raise all key off the panel's own root, which is
+   a region root in the editor, so they ride on a child and are copied back. */
+const mirror = rootMirror({
+  "data-tone": tone,
+  "data-side": side,
+  "data-raised": raised ? "" : null,
+});
+---
+
+<div
+  class:list={["story-panel", className]}
+  data-tone={tone}
+  data-side={side}
+  data-raised={raised ? "" : undefined}
+  {...htmlAttributes}
+>
+  <div class="story-panel-content" {...mirror}>
+    {eyebrow && <SimpleText class="eyebrow" text={eyebrow} data-prop="eyebrow" />}
+    {heading && (
+      <Heading level={headingLevel} size="sm" data-prop="heading">
+        {heading}
+      </Heading>
+    )}
+    <Text class="story-panel-body" size="xl" text={body} data-prop="body" />
+  </div>
+</div>

@@ -1,0 +1,22 @@
+# A column under the Our Story headline.
+#
+# Here rather than inside the component's structure-value file, for the same
+# reason as every other shared list: a `_structures` block there reaches only
+# the component it sits in.
+photoStackPanels:
+  values:
+    - label: Story column
+      icon: view_column
+      value:
+        _component: page-sections/heroes/hero-photo-stack/story-panel
+        eyebrow: ""
+        heading: ""
+        body: ""
+        tone: light-sand
+      preview:
+        text:
+          - key: eyebrow
+          - key: heading
+          - Story column
+        subtext:
+          - key: body
