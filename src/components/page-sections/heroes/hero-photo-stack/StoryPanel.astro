@@ -52,11 +52,34 @@ const mirror = rootMirror({
       gets comes from that layer rather than from the components. */}
   <div class="story-panel-content flow" {...mirror}>
     {eyebrow && <SimpleText class="eyebrow" size="sm" text={eyebrow} data-prop="eyebrow" />}
+    {/* The gap is set inline, as a custom property, because nothing else
+        reaches it. Two rules in `utils` pull these blocks together: an
+        eyebrow followed by a heading is tightened to 8 site-wide, and the
+        copy under a heading takes the same. `utils` layers over
+        `page-sections`, so a rule here loses whatever its specificity, and
+        the `spaceBefore` prop only speaks none, tight, snug and loose, none
+        of which is the number this wants.
+
+        28 is one step for both columns. The design draws 31 under the
+        eyebrow, 26 under the quote and 24 under the other column's eyebrow;
+        one value within 4 of all three keeps the two columns level with each
+        other, which three separate values would not. */}
     {heading && (
-      <Heading level={headingLevel} size="sm" data-prop="heading">
+      <Heading
+        level={headingLevel}
+        size="sm"
+        style="--space-before: var(--story-panel-gap)"
+        data-prop="heading"
+      >
         {heading}
       </Heading>
     )}
-    <Text class="story-panel-body" size="xl" text={body} data-prop="body" />
+    <Text
+      class="story-panel-body"
+      size="xl"
+      style="--space-before: var(--story-panel-gap)"
+      text={body}
+      data-prop="body"
+    />
   </div>
 </div>

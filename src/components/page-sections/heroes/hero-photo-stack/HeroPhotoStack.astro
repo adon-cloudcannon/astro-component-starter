@@ -438,6 +438,11 @@ const Stack = interactive ? "button" : "div";
     }
 
     .story-panel {
+      /* What separates the eyebrow, the quote and the copy. One value for
+         both columns; see the note in StoryPanel for why it cannot be a rule
+         in this layer. */
+      --story-panel-gap: 28px;
+
       isolation: isolate;
       /* The copy sits a long way down inside its block: 91 on the raised
          column, 76 on the other, measured against the design's own edges.
