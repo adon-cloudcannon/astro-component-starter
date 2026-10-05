@@ -19,7 +19,28 @@ value:
   maxContentWidth: xl
   paddingHorizontal: gutter
   paddingVertical: 2xl
+  background:
+    type: image
+    imageSource: ""
+  haze: false
   backgroundColor: dark
+groups:
+  - heading: Content
+    inputs:
+      - images
+      - imageWidth
+      - aspectRatio
+  - heading: Section settings
+    comment: Width, spacing, colour and background for this band.
+    collapsed: true
+    inputs:
+      - sectionLabel
+      - maxContentWidth
+      - paddingHorizontal
+      - paddingVertical
+      - backgroundColor
+      - background
+      - haze
 _inputs:
   images:
     type: array
