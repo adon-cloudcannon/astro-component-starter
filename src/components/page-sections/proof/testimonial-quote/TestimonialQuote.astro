@@ -536,6 +536,73 @@ const cardScheme = tone === "plain" ? undefined : tone === "light" ? "light" : "
 
       /* --- the splits ------------------------------------------------ */
 
+      /* The rule is the column's own border rather than an element between
+         them, so it runs the height of the taller side without being measured.
+
+         22/78 is the sheet's: a 219 person column against a 771 quote in an
+         1104 content box. */
+      .testimonial-quote-card[data-layout="split-person"] .testimonial-quote-slide,
+      .testimonial-quote-card[data-layout="split-quote"] .testimonial-quote-slide {
+        /* Stretch, not start.
+
+           The rule is the column's own border, so its length is that column's
+           height: top-aligned, it stopped where the shorter side's text
+           stopped and left a different amount of card under it than over it.
+           Stretched, it runs the row, which puts the card's own padding above
+           and below it equally. The content inside each column is held at the
+           top separately. */
+        align-items: stretch;
+        column-gap: var(--testimonial-quote-pad);
+        display: grid;
+      }
+
+      .testimonial-quote-card[data-layout="split-person"] .testimonial-quote-slide {
+        grid-template-columns: minmax(0, 22%) minmax(0, 1fr);
+      }
+
+      .testimonial-quote-card[data-layout="split-quote"] .testimonial-quote-slide {
+        grid-template-columns: minmax(0, 1fr) minmax(0, 22%);
+      }
+
+      /* Column order. The person is written after the quote in the markup
+         either way, so the quote stays first for a reader and for a copy. */
+      .testimonial-quote-card[data-layout="split-person"] .testimonial-quote-text {
+        border-inline-start: var(--border-width-sm) solid var(--testimonial-quote-edge);
+        grid-column: 2;
+        padding-inline-start: var(--testimonial-quote-pad);
+      }
+
+      .testimonial-quote-card[data-layout="split-person"] .testimonial-quote-who {
+        grid-column: 1;
+        grid-row: 1;
+      }
+
+      .testimonial-quote-card[data-layout="split-quote"] .testimonial-quote-who {
+        border-inline-start: var(--border-width-sm) solid var(--testimonial-quote-edge);
+        grid-column: 2;
+        padding-inline-start: var(--testimonial-quote-pad);
+      }
+
+      /* In a column of its own the person stacks, with a bigger face: the
+         sheet draws 98 against the foot row's 78. Beside a quote this is the
+         block's own heading rather than a byline under it. */
+      .testimonial-quote-card[data-layout="split-person"] .testimonial-quote-who,
+      .testimonial-quote-card[data-layout="split-quote"] .testimonial-quote-who {
+        /* `align-content` as well as `align-items`: a grid's auto rows absorb
+           the spare height a stretched column now has, so without it the face
+           and the name drift apart to fill the card. */
+        align-content: start;
+        align-items: start;
+        display: grid;
+        gap: var(--spacing-lg);
+      }
+
+      .testimonial-quote-card[data-layout="split-person"] .testimonial-quote-avatar,
+      .testimonial-quote-card[data-layout="split-quote"] .testimonial-quote-avatar {
+        block-size: 72px;
+        inline-size: 72px;
+      }
+
       /* --- the carousel's controls ----------------------------------- */
 
       /* Placed against the card rather than inside a slide, because the
