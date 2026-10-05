@@ -50,11 +50,18 @@ const pictures = (Array.isArray(images) ? images : []).filter((image) => image?.
     background={background}
     haze={haze}
     class:list={["photo-strip", className]}
-    style={`--photo-strip-image-width: ${Number(imageWidth) || 393}px; --photo-strip-aspect: ${aspectRatio}`}
     useDefaultEditableBinding={useDefaultEditableBinding}
     {...htmlAttributes}
   >
-    <div class="photo-strip-row" data-editable="array" data-prop="images">
+    {/* The sizes land on the row, not on the section. The section is the
+        region root the editor keeps while it swaps the contents, so a style
+        written from a prop there never changes when the prop does. */}
+    <div
+      class="photo-strip-row"
+      style={`--photo-strip-image-width: ${Number(imageWidth) || 393}px; --photo-strip-aspect: ${aspectRatio}`}
+      data-editable="array"
+      data-prop="images"
+    >
       {pictures.map((image) => (
         <PhotoStripImage
           {...image}
