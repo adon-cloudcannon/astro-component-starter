@@ -134,7 +134,7 @@ pageSections:
         role: Solutions Architect
         imageSource: /src/assets/images/marketing/container-9-3806-69524-1.png
         imageAlt: Tom Richardson, Solutions Architect at CloudCannon
-        backgroundColor: coral
+        backgroundColor: peachy
       - _component: building-blocks/wrappers/team-member
         name: Olivia Nicholson
         role: Head of Content
