@@ -40,4 +40,18 @@ pageSections:
     backgroundColor: light-sand
     pattern: grid
     haze: true
+  - _component: page-sections/proof/photo-strip
+    images:
+      - _component: page-sections/proof/photo-strip/photo-strip-image
+        source: /src/assets/images/marketing/our-story-desk.jpg
+        alt: A CloudCannon developer laughing at her desk
+      - _component: page-sections/proof/photo-strip/photo-strip-image
+        source: /src/assets/images/marketing/our-story-table.jpg
+        alt: The team around a long table at lunch
+      - _component: page-sections/proof/photo-strip/photo-strip-image
+        source: /src/assets/images/marketing/our-story-studio.jpg
+        alt: Two of the team working together at a monitor
+    imageWidth: 393
+    aspectRatio: 393 / 275
+    backgroundColor: dark
 ---

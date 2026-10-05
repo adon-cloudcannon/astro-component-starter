@@ -1,0 +1,113 @@
+images:
+  type: array
+  comment: >-
+    The photographs, left to right. They keep their size and the band crops
+    them: on a narrow window the middle one stays centred and the outer two
+    show as much as there is room for.
+  options:
+    structures: _structures.photoStripImages
+imageWidth:
+  type: number
+  label: Photo width
+  comment: How wide each photograph is drawn, in pixels. The design draws 393.
+aspectRatio:
+  type: text
+  label: Photo shape
+  comment: The shape of each photograph, as a CSS ratio. The design draws 393 / 275.
+
+# --- section wrapper inputs
+sectionLabel:
+  type: text
+  comment: Accessible name for the section, used by screen readers.
+maxContentWidth:
+  hidden: true
+  # Set from the design, not by an editor.
+  type: select
+  comment: Maximum width of the content.
+  options:
+    values:
+      - id: lg
+        name: Large
+      - id: xl
+        name: Extra Large
+      - id: 2xl
+        name: 2xl
+paddingHorizontal:
+  hidden: true
+  # Set from the design, not by an editor.
+  type: select
+  comment: Horizontal padding around the content.
+  options:
+    values:
+      - id: none
+        name: None
+      - id: gutter
+        name: Page gutter
+      - id: lg
+        name: Large
+paddingVertical:
+  hidden: true
+  # Set from the design, not by an editor.
+  type: select
+  comment: Vertical padding around the content.
+  options:
+    values:
+      - id: 2xl
+        name: 2xl
+      - id: 3xl
+        name: 3xl
+      - id: 4xl
+        name: 4xl
+colorScheme:
+  hidden: true
+  # Carried by the band colour.
+  type: select
+  comment: Light or dark scheme for the section.
+  options:
+    values:
+      - id: inherit
+        name: Inherit
+      - id: light
+        name: Light
+      - id: dark
+        name: Dark
+lockColorScheme:
+  hidden: true
+  # Carried by the band colour.
+  type: switch
+  label: Lock color scheme
+  comment: Ignores the site theme toggle.
+backgroundColor:
+  type: select
+  label: Background colour
+  comment: The colour this band is painted, and the ink that goes with it.
+  options:
+    values:
+      - id: light-sand
+        name: Light sand
+        swatch: square
+        color: "#FFFCF3"
+      - id: sand
+        name: Sand
+        swatch: square
+        color: "#FBF6E9"
+      - id: dark-sand
+        name: Dark sand
+        swatch: square
+        color: "#EBE1C9"
+      - id: dark
+        name: Dark
+        swatch: square
+        color: "#1D1B17"
+      - id: pacific
+        name: Pacific
+        swatch: square
+        color: "#034AD8"
+    picker_view: card
+    preview:
+      icon:
+        - key: swatch
+      icon_color:
+        - key: color
+      text:
+        - key: name

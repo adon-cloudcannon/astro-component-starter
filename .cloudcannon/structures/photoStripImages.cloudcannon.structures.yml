@@ -1,0 +1,18 @@
+# A photograph in a photo strip.
+#
+# Here rather than inside the component's structure-value file: a `_structures`
+# block there reaches only the component it sits in.
+photoStripImages:
+  values:
+    - label: Photo
+      icon: photo_camera
+      value:
+        _component: page-sections/proof/photo-strip/photo-strip-image
+        source: ""
+        alt: ""
+      preview:
+        text:
+          - key: alt
+          - Photo
+        image:
+          - key: source

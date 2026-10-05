@@ -1,0 +1,27 @@
+---
+/**
+ * One photograph in the strip.
+ *
+ * Its own file so the editor can redraw a single card when its picture
+ * changes, rather than the whole band.
+ */
+import Image from "@core-elements/image/Image.astro";
+
+const {
+  source = "",
+  alt = "",
+  class: className,
+  _component,
+  ...htmlAttributes
+} = Astro.props;
+---
+
+<figure class:list={["photo-strip-image", className]} {...htmlAttributes}>
+  <Image
+    source={source}
+    alt={alt}
+    decorative={!alt}
+    data-prop-src="source"
+    data-prop-alt="alt"
+  />
+</figure>

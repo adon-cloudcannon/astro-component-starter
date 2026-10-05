@@ -1,0 +1,31 @@
+label: Photo Strip
+icon: panorama
+description: A row of photographs across a band, cropped by the page rather than wrapped.
+value:
+  _component: page-sections/proof/photo-strip
+  images:
+    - _component: page-sections/proof/photo-strip/photo-strip-image
+      source: ""
+      alt: ""
+    - _component: page-sections/proof/photo-strip/photo-strip-image
+      source: ""
+      alt: ""
+    - _component: page-sections/proof/photo-strip/photo-strip-image
+      source: ""
+      alt: ""
+  imageWidth: 393
+  aspectRatio: 393 / 275
+  sectionLabel: ""
+  maxContentWidth: xl
+  paddingHorizontal: gutter
+  paddingVertical: 2xl
+  backgroundColor: dark
+_inputs:
+  images:
+    type: array
+    options:
+      structures: _structures.photoStripImages
+_inputs_from_glob:
+  - /src/components/page-sections/proof/photo-strip/photo-strip.cloudcannon.inputs.yml
+  - /.cloudcannon/inputs/background.yml
+  - /.cloudcannon/inputs/haze.yml

@@ -1,0 +1,113 @@
+---
+/**
+ * A row of photographs across a band, cropped by the page rather than wrapped.
+ *
+ * The design draws three on the dark band under Our Story: 393x275 each, 28
+ * from the page's edges and 22 apart, at the card radius. They are a band of
+ * their own rather than part of anything above, and they run the full width
+ * rather than the content column.
+ *
+ * Narrower than the row needs, the band clips instead of wrapping or
+ * shrinking: the middle photograph stays centred and the outer two show as
+ * much as there is room for. A row of three that reflows into a column at
+ * 900px stops being a strip.
+ */
+import CustomSection from "@builders/custom-section/CustomSection.astro";
+import PhotoStripImage from "./PhotoStripImage.astro";
+
+const {
+  /** The photographs, left to right. */
+  images = [],
+  /** How wide each photograph is drawn, in pixels. 393 in the design. */
+  imageWidth = 393,
+  /** The shape of each one. 393x275 in the design, near enough 10:7. */
+  aspectRatio = "393 / 275",
+  sectionLabel,
+  maxContentWidth = "xl",
+  paddingHorizontal = "gutter",
+  paddingVertical = "2xl",
+  colorScheme = "inherit",
+  lockColorScheme = false,
+  backgroundColor = "dark",
+  background,
+  haze = false,
+  class: className,
+  useDefaultEditableBinding = false,
+  _component,
+  ...htmlAttributes
+} = Astro.props;
+
+const pictures = (Array.isArray(images) ? images : []).filter((image) => image?.source);
+---
+
+{pictures.length > 0 && (
+  <CustomSection
+    label={sectionLabel}
+    maxContentWidth={maxContentWidth}
+    paddingHorizontal={paddingHorizontal}
+    paddingVertical={paddingVertical}
+    backgroundColor={backgroundColor}
+    background={background}
+    haze={haze}
+    class:list={["photo-strip", className]}
+    style={`--photo-strip-image-width: ${Number(imageWidth) || 393}px; --photo-strip-aspect: ${aspectRatio}`}
+    useDefaultEditableBinding={useDefaultEditableBinding}
+    {...htmlAttributes}
+  >
+    <div class="photo-strip-row" data-editable="array" data-prop="images">
+      {pictures.map((image) => (
+        <PhotoStripImage
+          {...image}
+          data-editable="array-item"
+          data-id="page-sections/proof/photo-strip/photo-strip-image"
+          data-component="page-sections/proof/photo-strip/photo-strip-image"
+        />
+      ))}
+    </div>
+  </CustomSection>
+)}
+
+<style is:global>
+  @layer page-sections {
+    /* The row runs the page, not the content column, so it reaches out of the
+       column it is rendered in by the gutter either side. */
+    .photo-strip .photo-strip-row {
+      --photo-strip-bleed: max(0px, calc((100vw - var(--content-width-xl, 1040px)) / 2 - 28px));
+
+      display: flex;
+      gap: 22px;
+      justify-content: center;
+      margin-inline: calc(var(--photo-strip-bleed) * -1);
+    }
+
+    /* Clipped, not wrapped or squeezed. */
+    .photo-strip {
+      overflow-x: clip;
+    }
+
+    .photo-strip-image {
+      aspect-ratio: var(--photo-strip-aspect, 393 / 275);
+      border-radius: var(--radius-card, 18px);
+      flex: 0 0 var(--photo-strip-image-width, 393px);
+      margin: 0;
+      overflow: hidden;
+    }
+
+    /* Image's own wrappers are auto-height, so the picture has to be told to
+       fill the box at every level between the two. Flat, not nested: a rule
+       three deep is dropped by the build. */
+    .photo-strip-image .image,
+    .photo-strip-image .image-inner,
+    .photo-strip-image picture {
+      block-size: 100%;
+      display: block;
+      inline-size: 100%;
+    }
+
+    .photo-strip-image img {
+      block-size: 100%;
+      inline-size: 100%;
+      object-fit: cover;
+    }
+  }
+</style>
