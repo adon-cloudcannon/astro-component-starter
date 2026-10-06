@@ -40,29 +40,6 @@ value:
     imageSource: ""
   haze: false
   backgroundColor: light-sand
-groups:
-  - heading: Content
-    inputs:
-      - eyebrow
-      - heading
-      - headingLevel
-      - headingSize
-      - subtext
-      - subtextSize
-      - subtextWidth
-      - leads
-      - members
-  - heading: Section settings
-    comment: Width, spacing, colour and background for this band.
-    collapsed: true
-    inputs:
-      - sectionLabel
-      - maxContentWidth
-      - paddingHorizontal
-      - paddingVertical
-      - backgroundColor
-      - background
-      - haze
 _inputs:
   leads:
     type: array

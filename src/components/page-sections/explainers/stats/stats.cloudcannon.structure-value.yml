@@ -98,23 +98,3 @@ _structures:
           sublabel:
             type: text
             comment: Optional smaller line under the label.
-groups:
-  - heading: Content
-    inputs:
-      - eyebrow
-      - heading
-      - subtext
-      - stats
-      - dividers
-  - heading: Section settings
-    comment: Width, spacing, color scheme, and background for this section.
-    collapsed: true
-    inputs:
-      - sectionLabel
-      - headingLevel
-      - maxContentWidth
-      - paddingHorizontal
-      - paddingVertical
-      - backgroundColor
-      - background
-      - haze

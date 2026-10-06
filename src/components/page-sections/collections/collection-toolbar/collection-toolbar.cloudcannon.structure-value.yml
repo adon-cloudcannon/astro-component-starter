@@ -81,22 +81,3 @@ _structures:
           name:
             type: text
             comment: What the reader sees.
-groups:
-  - heading: Content
-    inputs:
-      - collection
-      - searchLabel
-      - searchPlaceholder
-      - sortLabel
-      - filters
-  - heading: Section settings
-    comment: Width, spacing and background for this section.
-    collapsed: true
-    inputs:
-      - sectionLabel
-      - maxContentWidth
-      - paddingHorizontal
-      - paddingVertical
-      - paddingVerticalStart
-      - paddingVerticalEnd
-      - backgroundColor

@@ -147,26 +147,3 @@ _structures:
               structures: _structures.cardSections
         _structures_from_glob:
           - /.cloudcannon/structures/cardSections.cloudcannon.structures.yml
-groups:
-  - heading: Content
-    inputs:
-      - eyebrow
-      - heading
-      - subtext
-      - items
-      - layout
-      - columns
-      - gap
-      - aspectRatio
-  - heading: Section settings
-    comment: Width, spacing, color scheme, and background for this section.
-    collapsed: true
-    inputs:
-      - sectionLabel
-      - headingLevel
-      - maxContentWidth
-      - paddingHorizontal
-      - paddingVertical
-      - backgroundColor
-      - background
-      - haze

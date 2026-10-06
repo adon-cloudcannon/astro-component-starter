@@ -119,24 +119,3 @@ _structures:
               structures: _structures.stepsItemSections
         _structures_from_glob:
           - /.cloudcannon/structures/stepsItemSections.cloudcannon.structures.yml
-groups:
-  - heading: Content
-    inputs:
-      - eyebrow
-      - heading
-      - subtext
-      - items
-      - orientation
-      - imageAspectRatio
-  - heading: Section settings
-    comment: Width, spacing, color scheme, and background for this section.
-    collapsed: true
-    inputs:
-      - sectionLabel
-      - headingLevel
-      - maxContentWidth
-      - paddingHorizontal
-      - paddingVertical
-      - backgroundColor
-      - background
-      - haze

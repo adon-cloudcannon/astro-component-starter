@@ -41,35 +41,6 @@ value:
   backgroundColor: light-sand
   pattern: grid
   haze: true
-groups:
-  - heading: Content
-    inputs:
-      - eyebrow
-      - heading
-      - headingLevel
-      - headingSize
-      - subtext
-      - subtextSize
-      - subtextWidth
-      - photos
-      - panels
-      - buttonSections
-      - embellishmentSource
-      - embellishmentWidth
-      - embellishmentPlacement
-      - reverse
-      - panelRaise
-  - heading: Section settings
-    comment: Width, spacing, colour and texture for this band.
-    collapsed: true
-    inputs:
-      - sectionLabel
-      - maxContentWidth
-      - paddingHorizontal
-      - paddingVertical
-      - backgroundColor
-      - pattern
-      - haze
 _inputs:
   panels:
     type: array

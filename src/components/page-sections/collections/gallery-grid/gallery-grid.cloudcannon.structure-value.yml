@@ -95,28 +95,3 @@ _structures:
           caption:
             type: text
             comment: Optional caption shown under the tile and in the lightbox.
-groups:
-  - heading: Content
-    inputs:
-      - eyebrow
-      - heading
-      - subtext
-      - images
-      - layout
-      - columns
-      - gap
-      - aspectRatio
-      - lightbox
-      - showThumbnails
-  - heading: Section settings
-    comment: Width, spacing, color scheme, and background for this section.
-    collapsed: true
-    inputs:
-      - sectionLabel
-      - headingLevel
-      - maxContentWidth
-      - paddingHorizontal
-      - paddingVertical
-      - backgroundColor
-      - background
-      - haze

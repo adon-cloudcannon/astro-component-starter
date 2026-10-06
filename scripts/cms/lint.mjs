@@ -251,43 +251,16 @@ for (const [dir, { astroAbs, parsed }] of mainByDir) {
   else ok(`defaults    ${rel(valueAbs)}`);
 }
 
-// Check 3b — Input-group coverage (FAIL): page-section structure values group
-// their inputs (Content first, then a collapsed "Section settings" group) so
-// shell config doesn't present as a peer of the content. When a `groups` block
-// is present, every `value:` key except `_component` must sit in exactly one
-// group, and every listed input must exist under `value:` — otherwise a newly
-// added prop silently lands wherever the editor defaults ungrouped inputs.
-// A page section with no `groups` at all is a WARN, so new sections adopt the
-// pattern (the scaffold template ships it).
-
-for (const relYaml of yamlPaths.filter(
-  (p) => p.startsWith("page-sections/") && p.endsWith(".structure-value.yml")
-)) {
-  const yamlAbs = join(componentsDir, relYaml);
-  const doc = loadYaml(yamlAbs) || {};
-
-  if (!Array.isArray(doc.groups)) {
-    warn(
-      rel(yamlAbs),
-      "page section has no `groups` block — settings inputs present as peers of content"
-    );
-    continue;
-  }
-  const valueKeys = Object.keys(doc.value || {}).filter((k) => k !== "_component");
-  const listed = doc.groups.flatMap((g) => g.inputs || []);
-  const seen = new Set();
-  const dupes = [...new Set(listed.filter((k) => (seen.has(k) ? true : (seen.add(k), false))))];
-  const ungrouped = valueKeys.filter((k) => !seen.has(k));
-  const unknown = listed.filter((k) => !valueKeys.includes(k));
-  const problems = [];
-
-  if (ungrouped.length) problems.push(`value key(s) in no group: ${ungrouped.join(", ")}`);
-  if (unknown.length) problems.push(`group input(s) with no value key: ${unknown.join(", ")}`);
-  if (dupes.length) problems.push(`input(s) listed in two groups: ${dupes.join(", ")}`);
-
-  if (problems.length) fail(rel(yamlAbs), problems.join("; "));
-  else ok(`group cover ${rel(yamlAbs)}`);
-}
+// Check 3b — Input groups: retired 2026-10-07.
+//
+// Page-section structure values used to carry a `groups` block, Content first
+// and a collapsed "Section settings" after it, and this checked that every
+// `value:` key sat in exactly one group. Adon asked for the split to go: every
+// input presents as a peer now, in the order the data holds its keys. There is
+// no `groups` block anywhere under page-sections, so there is nothing to cover.
+//
+// If one comes back, a prop missing from it is invisible to an editor and
+// nothing else says so — put this check back rather than trusting the YAML.
 
 // Check 4 — `_component` resolution (FAIL): every `_component` value found in
 // structure YAML (co-located + .cloudcannon/structures) and in content

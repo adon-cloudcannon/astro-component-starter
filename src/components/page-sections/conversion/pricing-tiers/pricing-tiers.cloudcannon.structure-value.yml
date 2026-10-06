@@ -203,29 +203,3 @@ _structures:
           included:
             type: switch
             comment: Whether this plan includes the feature.
-groups:
-  - heading: Content
-    inputs:
-      - eyebrow
-      - heading
-      - subtext
-      - subtextSize
-      - subtextWidth
-      - showAnnualPricing
-      - monthlyLabel
-      - annualLabel
-      - annualBadge
-      - defaultInterval
-      - tiers
-  - heading: Section settings
-    comment: Width, spacing, color scheme, and background for this section.
-    collapsed: true
-    inputs:
-      - sectionLabel
-      - headingLevel
-      - maxContentWidth
-      - paddingHorizontal
-      - paddingVertical
-      - backgroundColor
-      - background
-      - haze

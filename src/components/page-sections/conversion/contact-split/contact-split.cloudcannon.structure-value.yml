@@ -118,25 +118,3 @@ _structures:
           url:
             type: text
             comment: Optional link — use tel:… for phone numbers and mailto:… for email addresses.
-groups:
-  - heading: Content
-    inputs:
-      - eyebrow
-      - heading
-      - subtext
-      - details
-      - formAction
-      - formBlocks
-      - mapEmbedUrl
-  - heading: Section settings
-    comment: Width, spacing, color scheme, and background for this section.
-    collapsed: true
-    inputs:
-      - sectionLabel
-      - headingLevel
-      - maxContentWidth
-      - paddingHorizontal
-      - paddingVertical
-      - backgroundColor
-      - background
-      - haze

@@ -235,26 +235,3 @@ _structures:
           link:
             type: url
             comment: Where the card's link goes.
-groups:
-  - heading: Content
-    inputs:
-      - eyebrow
-      - heading
-      - subtext
-      - subtextSize
-      - subtextWidth
-      - alignmentHorizontal
-      - columns
-      - features
-  - heading: Section settings
-    comment: Width, spacing, color scheme, and background for this section.
-    collapsed: true
-    inputs:
-      - sectionLabel
-      - headingLevel
-      - maxContentWidth
-      - paddingHorizontal
-      - paddingVertical
-      - backgroundColor
-      - background
-      - haze

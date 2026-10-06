@@ -122,26 +122,3 @@ _structures:
               paths:
                 static: ""
                 uploads: src/assets/images
-groups:
-  - heading: Content
-    inputs:
-      - eyebrow
-      - heading
-      - subtext
-      - subtextSize
-      - subtextWidth
-      - testimonials
-      - columns
-      - layout
-  - heading: Section settings
-    comment: Width, spacing, color scheme, and background for this section.
-    collapsed: true
-    inputs:
-      - sectionLabel
-      - headingLevel
-      - maxContentWidth
-      - paddingHorizontal
-      - paddingVertical
-      - backgroundColor
-      - background
-      - haze

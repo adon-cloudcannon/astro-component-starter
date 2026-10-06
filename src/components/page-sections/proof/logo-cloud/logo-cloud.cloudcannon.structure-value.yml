@@ -112,22 +112,3 @@ _structures:
           height:
             type: number
             comment: The matching height in pixels. 28 for most of the row.
-groups:
-  - heading: Content
-    inputs:
-      - heading
-      - logos
-      - grayscale
-      - headingPlacement
-      - scrolling
-  - heading: Section settings
-    comment: Width, spacing, color scheme, and background for this section.
-    collapsed: true
-    inputs:
-      - sectionLabel
-      - maxContentWidth
-      - paddingHorizontal
-      - paddingVertical
-      - backgroundColor
-      - background
-      - haze

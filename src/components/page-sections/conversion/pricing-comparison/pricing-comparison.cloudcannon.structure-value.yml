@@ -155,24 +155,3 @@ _structures:
           values[*]:
             type: text
             comment: Enter "yes" or "no" for a tick or a dash, or any text (e.g. "5 seats") to show as-is.
-groups:
-  - heading: Content
-    inputs:
-      - eyebrow
-      - heading
-      - subtext
-      - plans
-      - rows
-      - striped
-  - heading: Section settings
-    comment: Width, spacing, color scheme, and background for this section.
-    collapsed: true
-    inputs:
-      - sectionLabel
-      - headingLevel
-      - maxContentWidth
-      - paddingHorizontal
-      - paddingVertical
-      - backgroundColor
-      - background
-      - haze

@@ -62,27 +62,3 @@ picker_preview:
 # over the top of the simpler ones.
 _inputs_from_glob:
   - /src/components/page-sections/heroes/hero-split/hero-split.cloudcannon.inputs.yml
-groups:
-  - heading: Content
-    inputs:
-      - heading
-      - headingSize
-      - headingLevel
-      - subtext
-      - imageSource
-      - imageAlt
-      - imageAspectRatio
-      - imageRounded
-      - imageBleed
-      - imageOverflow
-      - buttonSections
-      - note
-      - reverse
-  - heading: Section settings
-    comment: Width, spacing, color scheme, and background for this section.
-    collapsed: true
-    inputs:
-      - sectionLabel
-      - backgroundColor
-      - pattern
-      - haze
