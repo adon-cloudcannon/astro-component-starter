@@ -39,6 +39,26 @@ const {
    * beside the text and the heading on the left.
    */
   imageSource = "",
+  /**
+   * How wide the picture is drawn under the copy.
+   *
+   * `intrinsic` is what this has always done: `Image` sizes its inner box to
+   * the picture and the section's `inline-size: 100%` lands on that rather
+   * than on the column, so a 1600-wide ribbon comes out around 300. That is
+   * fine for a mark under a closing line and wrong for anything with detail
+   * in it. `full` runs the picture to the content column, which is what the
+   * Git page's "own-content-combined" frame is drawn at: 1000 wide.
+   */
+  imageWidth = "intrinsic",
+  /**
+   * A scratched panel behind the picture, in this colour.
+   *
+   * A palette name or a literal hex, the same shape `cta-banner` takes for
+   * its band. Empty draws no panel, which is what every other instance does.
+   * The sheet is painted by the `.scratched` utility rather than loaded, so
+   * it costs nothing and takes any colour.
+   */
+  imageScratch = "",
   imageAlt = "",
   /**
    * Drawings hung off the band's own bottom corners.
@@ -143,30 +163,73 @@ const subtextCap = subtextMeasure(subtextWidth);
     data-children-prop="buttonSections"
   />
   {imageSource && (
-    <Image
-      class="cta-center-image"
-      source={imageSource}
-      alt={imageAlt}
-      rounded={true}
-      sizes="100vw"
-      widths={[640, 1280, 1920]}
-      width={1280}
-      data-prop-src="imageSource"
-      data-prop-alt="imageAlt"
-    />
+    <div
+      class:list={["cta-center-media", imageScratch && "scratched"]}
+      style={imageScratch
+        ? `--scratch-fill: ${String(imageScratch).startsWith("#") ? imageScratch : `var(--${imageScratch})`}`
+        : undefined}
+    >
+      <Image
+        class:list={["cta-center-image", imageWidth === "full" && "is-full"]}
+        source={imageSource}
+        alt={imageAlt}
+        rounded={true}
+        sizes="100vw"
+        widths={[640, 1280, 1920]}
+        width={1280}
+        data-prop-src="imageSource"
+        data-prop-alt="imageAlt"
+      />
+    </div>
   )}
 </CustomSection>
 
 <style is:global>
   @layer page-sections {
-    /* Full width of the column, under the copy. */
-    .cta-center .cta-center-image {
+    /* Full width of the column, under the copy. The gap moved to the wrapper
+       when one went in, so a scratched panel pushes off the copy rather than
+       the picture inside it doing so. */
+    .cta-center .cta-center-media {
       inline-size: 100%;
       margin-block-start: var(--spacing-2xl);
     }
 
+    .cta-center .cta-center-image {
+      inline-size: 100%;
+    }
+
+    /* The design draws the Git composite 1000 wide in a 600-tall frame, so
+       the panel is about 46 deeper than the picture top and bottom. */
+    .cta-center .cta-center-media.scratched {
+      border-radius: var(--radius-card);
+      padding: 46px;
+    }
+
+    /* The picture carried a 48px top margin inside the panel, which pushed it
+       off the sheet's head and left the backing showing along one edge only.
+       `--space-before` as well as the margin: the flow layer writes
+       `margin-block-start` from that property and `utils` out-ranks this
+       layer, so a plain margin here loses to it. */
+    .cta-center .cta-center-media .cta-center-image {
+      --space-before: 0;
+
+      margin-block: 0;
+    }
+
     .cta-center .cta-center-image img {
       block-size: auto;
+      inline-size: 100%;
+    }
+
+    /* Every wrapper, not just the outer one.
+
+       `Image` draws `.image > .image-inner.intrinsic > picture > img`, and
+       the inner box is the one that sizes itself to the picture. The section
+       was already asking for 100% on the outer div and on the picture, and
+       getting 100% of a 300px inner — which measures as applied and draws a
+       thumbnail. */
+    .cta-center .cta-center-image.is-full .image-inner,
+    .cta-center .cta-center-image.is-full picture {
       inline-size: 100%;
     }
   }

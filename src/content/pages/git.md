@@ -236,8 +236,10 @@ pageSections:
         text: Get skills repo
         variant: primary
     backgroundColor: light-sand
-    imageSource: /src/assets/images/marketing/ribbon-01-1.png
-    imageAlt: ''
+    imageWidth: full
+    imageScratch: kiwi
+    imageSource: /src/assets/images/marketing/own-content-combined.png
+    imageAlt: A commit history beside a card listing content, code and commits
   - _component: page-sections/explainers/feature-grid
     heading: Fits the way you already build
     headingSize: lg

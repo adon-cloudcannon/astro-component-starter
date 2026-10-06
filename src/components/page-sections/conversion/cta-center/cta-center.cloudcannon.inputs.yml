@@ -276,7 +276,26 @@ backgroundColor:
         - key: name
 imageSource:
   type: image
-  comment: A picture beneath the call to action, running the width of the column.
+  comment: A picture beneath the call to action.
+imageWidth:
+  type: select
+  label: Picture width
+  comment: >-
+    Intrinsic draws the picture at its own size, which suits a small mark
+    under a closing line. Full runs it to the content column, which is what
+    anything with detail in it needs.
+  options:
+    values:
+      - id: intrinsic
+        name: Its own size
+      - id: full
+        name: Full column
+imageScratch:
+  type: text
+  label: Picture backing
+  comment: >-
+    A scratched panel behind the picture, by palette name (kiwi, pacific,
+    moss...) or as a hex. Empty draws no panel.
 imageAlt:
   type: text
   comment: Alt text for that picture.

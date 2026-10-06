@@ -27,6 +27,8 @@ value:
   background:
     type: image
     imageSource: ""
+    imageWidth: intrinsic
+    imageScratch: ""
     imageAlt: ""
     positionVertical: top
     positionHorizontal: center
