@@ -121,7 +121,7 @@ pageSections:
       - title: Everything is a commit
         body: Branch it, review it, roll it back.
         accentColor: golden
-        iconName: terminal
+        iconName: rotate-ccw-clock
     backgroundColor: dark
   - _component: page-sections/explainers/pinned-steps
     eyebrow: ''
