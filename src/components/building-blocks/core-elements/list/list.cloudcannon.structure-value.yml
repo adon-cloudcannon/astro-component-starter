@@ -10,7 +10,7 @@ value:
       iconColor: default
       link: null
     - text: List item 2
-      iconName: lock-closed
+      iconName: lock
       iconColor: default
       link: null
     - text: List item 3

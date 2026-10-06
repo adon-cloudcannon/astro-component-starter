@@ -21,7 +21,7 @@ pageSections:
         variant: primary
       - _component: building-blocks/core-elements/button
         text: Book a demo
-        iconName: arrow-right
+        iconName: move-right
         iconPosition: after
         variant: text
     pattern: grid
@@ -192,7 +192,7 @@ pageSections:
             size: lg
           - _component: building-blocks/core-elements/button
             text: Learn more
-            iconName: arrow-right
+            iconName: move-right
             textColor: sunset
             iconPosition: after
             variant: text
@@ -210,7 +210,7 @@ pageSections:
             size: lg
           - _component: building-blocks/core-elements/button
             text: Learn more
-            iconName: arrow-right
+            iconName: move-right
             textColor: sunset
             iconPosition: after
             variant: text
@@ -228,7 +228,7 @@ pageSections:
             size: lg
           - _component: building-blocks/core-elements/button
             text: Learn more
-            iconName: arrow-right
+            iconName: move-right
             textColor: sunset
             iconPosition: after
             variant: text
@@ -300,7 +300,7 @@ pageSections:
         variant: primary
       - _component: building-blocks/core-elements/button
         text: Book a demo
-        iconName: arrow-right
+        iconName: move-right
         iconPosition: after
         variant: text
     backgroundColor: light-sand

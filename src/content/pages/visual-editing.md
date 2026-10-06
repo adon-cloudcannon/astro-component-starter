@@ -19,7 +19,7 @@ pageSections:
         variant: primary
       - _component: building-blocks/core-elements/button
         text: Book a demo
-        iconName: arrow-right
+        iconName: move-right
         iconPosition: after
         variant: text
     reverse: true
@@ -135,7 +135,7 @@ pageSections:
     buttonSections:
       - _component: building-blocks/core-elements/button
         text: Learn more
-        iconName: arrow-right
+        iconName: move-right
         textColor: sunset
         iconPosition: after
         variant: text

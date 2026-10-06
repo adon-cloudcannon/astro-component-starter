@@ -28,7 +28,7 @@ pageSections:
       - _component: building-blocks/core-elements/button
         text: Our values
         link: /our-values/
-        iconName: arrow-right
+        iconName: move-right
         iconPosition: after
         variant: text
     panels: []
@@ -60,7 +60,7 @@ pageSections:
           We trust in the work you do, and we know that productivity isn't always measured by time
           at your desk. Our four-day work week (32 hours per week) means more time with your family
           and friends, and more energy for the work we love.
-        iconName: face-smile
+        iconName: smile
         iconColor: golden
         iconBackground: true
         iconSolid: true
@@ -72,7 +72,7 @@ pageSections:
         description: >-
           When you have a stake in the product you're making, we all win. All CloudCannon employees
           receive generous stock options, so we're all working towards the same goal.
-        iconName: arrow-trending-up
+        iconName: trending-up
         iconColor: sunset
         iconBackground: true
         iconSolid: true
@@ -146,7 +146,7 @@ pageSections:
           We offer different options for how you work, to help you stay healthy. We have adjustable
           standing desks and monitors, comfortable chairs, and even wobble boards for those who
           want to keep a bit more active at work.
-        iconName: computer-desktop
+        iconName: monitor
         iconColor: sunset
         iconBackground: true
         iconSolid: true
@@ -159,7 +159,7 @@ pageSections:
           We provide all the tools and software you need to get your job done. This includes
           MacBook Pros and accessories, dual monitors, and a range of useful software
           subscriptions.
-        iconName: wrench-screwdriver
+        iconName: wrench
         iconColor: harbour
         iconBackground: true
         iconSolid: true
@@ -194,7 +194,7 @@ pageSections:
       - _component: building-blocks/core-elements/button
         text: Send resume
         link: mailto:careers@cloudcannon.com
-        iconName: arrow-right
+        iconName: move-right
         iconPosition: after
         variant: primary
     imageSource: /src/assets/images/marketing/camera-01-1.png

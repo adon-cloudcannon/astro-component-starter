@@ -1,11 +1,11 @@
 /**
  * Fail when a third-party icon doesn't say where it came from and under what license.
  *
- * Heroicons are covered as a set: the 324 files carrying the Heroicons v2 signature
- * (`data-slot="icon"`) are redistributed under the MIT license in
- * `LICENSE-heroicons.txt`. Every other SVG under `src/icons/` — the social brand
- * marks and the two InstUI direction icons — is a one-off, and each must open with a
- * comment naming its source and its license:
+ * Lucide is covered as a set: every file carrying the Lucide signature
+ * (`@license lucide-static`) is redistributed under the ISC license in
+ * `LICENSE-lucide.txt`. Every other SVG under `src/icons/` — the social brand
+ * marks, the two InstUI direction icons and the CloudCannon app marks — is a
+ * one-off, and each must open with a comment naming its source and its license:
  *
  *   <!-- Source: Simple Icons (https://simpleicons.org) | License: CC0-1.0 -->
  *
@@ -22,8 +22,8 @@ import { dirname, join, relative, sep } from "node:path";
 const root = join(dirname(new URL(import.meta.url).pathname), "..", "..");
 const iconsDir = join(root, "src", "icons");
 
-/** How a Heroicons file identifies itself; the rest carry their own provenance. */
-const HEROICONS_SIGNATURE = 'data-slot="icon"';
+/** How a Lucide file identifies itself; the rest carry their own provenance. */
+const LUCIDE_SIGNATURE = "@license lucide-static";
 
 /** A leading `<!-- Source: … | License: … -->` immediately above the root `<svg>`. */
 const HEADER = /^\s*<!--\s*Source:\s*([^|]+?)\s*\|\s*License:\s*(.+?)\s*-->\s*<svg\b/;
@@ -51,7 +51,7 @@ let recorded = 0;
 for (const path of listSvgs(iconsDir)) {
   const source = readFileSync(join(iconsDir, path), "utf8");
 
-  if (source.includes(HEROICONS_SIGNATURE)) continue;
+  if (source.includes(LUCIDE_SIGNATURE)) continue;
 
   const header = HEADER.exec(source);
 

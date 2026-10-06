@@ -18,6 +18,6 @@ blocks:
       text: 'Shipped'
     - _component: 'building-blocks/core-elements/badge'
       variant: warning
-      iconName: exclamation-triangle
+      iconName: triangle-alert526
       text: 'Deprecated'
 ---

@@ -5,7 +5,7 @@ blocks:
   _component: 'building-blocks/wrappers/button-group'
   buttonSections:
     - _component: 'building-blocks/core-elements/button'
-      iconName: hand-thumb-up
+      iconName: thumbs-up183
       iconColor: default
       text: 'Default'
       variant: tertiary
@@ -15,7 +15,7 @@ blocks:
       text: 'Blue'
       variant: tertiary
     - _component: 'building-blocks/core-elements/button'
-      iconName: swatch
+      iconName: swatch-book486
       iconColor: harbour
       text: 'Cyan'
       variant: tertiary
@@ -30,7 +30,7 @@ blocks:
       text: 'Yellow'
       variant: tertiary
     - _component: 'building-blocks/core-elements/button'
-      iconName: fire
+      iconName: flame941
       iconColor: peachy
       text: 'Orange'
       variant: tertiary

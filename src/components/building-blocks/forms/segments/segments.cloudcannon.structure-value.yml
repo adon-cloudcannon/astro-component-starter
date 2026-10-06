@@ -44,7 +44,7 @@ _structures:
           value: null
           label: Item
           checked: null
-          icon: bolt
+          icon: zap
         preview:
           icon: radio_button_partial
           image:

@@ -46,7 +46,7 @@ blocks:
       size: lg
       text: Search
       hideText: true
-      iconName: magnifying-glass
+      iconName: search1169
     - _component: building-blocks/core-elements/button
       link: '#'
       text: 'Careers'

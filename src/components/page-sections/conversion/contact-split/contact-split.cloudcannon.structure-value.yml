@@ -16,7 +16,7 @@ value:
       label: Phone
       value: +64 3 555 0142
       url: tel:+6435550142
-    - icon: envelope
+    - icon: mail497
       label: Email
       value: hello@example.com
       url: mailto:hello@example.com

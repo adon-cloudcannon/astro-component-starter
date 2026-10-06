@@ -21,7 +21,7 @@ pageSections:
         variant: primary
       - _component: building-blocks/core-elements/button
         text: Book a demo
-        iconName: arrow-right
+        iconName: move-right
         iconPosition: after
         variant: text
     pattern: grid
@@ -83,7 +83,7 @@ pageSections:
       - number: 100
         suffix: x
         label: publishing velocity
-        iconName: bolt
+        iconName: zap
         iconColor: moss
       - number: 90
         suffix: +
@@ -93,7 +93,7 @@ pageSections:
       - number: 98
         suffix: '%'
         label: web pages migrated
-        iconName: window
+        iconName: app-window
         iconColor: moss
   - _component: page-sections/explainers/feature-grid
     heading: Built for how large teams actually work
@@ -259,7 +259,7 @@ pageSections:
         variant: primary
       - _component: building-blocks/core-elements/button
         text: Talk with us
-        iconName: arrow-right
+        iconName: move-right
         iconPosition: after
         variant: text
     backgroundColor: light-sand

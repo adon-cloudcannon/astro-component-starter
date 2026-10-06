@@ -70,7 +70,7 @@ const list: Filter[] = (Array.isArray(filters) ? filters : []).filter((f) => f?.
         Each half carries its own edge and the shared one is dropped, so
         focus is a colour swap on the field and nothing moves. */}
     <div class="collection-toolbar-search">
-      <Icon class="collection-toolbar-search-icon" name="magnifying-glass" size="md" />
+      <Icon class="collection-toolbar-search-icon" name="search" size="md" />
       <input
         class="collection-toolbar-input"
         type="search"
@@ -80,7 +80,7 @@ const list: Filter[] = (Array.isArray(filters) ? filters : []).filter((f) => f?.
       />
       {sortLabel && (
         <button class="collection-toolbar-sort" type="button" data-collection-sort>
-          <Icon name="bars-arrow-down" size="sm" />
+          <Icon name="arrow-down-wide-narrow" size="sm" />
           <span>{sortLabel}</span>
         </button>
       )}

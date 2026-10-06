@@ -90,7 +90,7 @@ const {
     {
       title: "Text Block",
       subtitle: "Headline & Description",
-      iconName: "document-text",
+      iconName: "file-text",
       fields: [
         { type: "text", label: "Headline", binds: "heading" },
         { type: "textarea", label: "Description", binds: "subtext" },
@@ -99,7 +99,7 @@ const {
     {
       title: "Image",
       subtitle: "Hero Image",
-      iconName: "photo",
+      iconName: "image",
       fields: [
         {
           type: "image",
@@ -123,7 +123,7 @@ const {
     {
       title: "Text Block",
       description: "A headline and a line of copy beneath it.",
-      iconName: "document-text",
+      iconName: "file-text",
       subtitle: "Headline & Description",
       fields: [
         { type: "text", label: "Headline", binds: "heading" },
@@ -137,7 +137,7 @@ const {
     {
       title: "Image",
       description: "A picture, sized to the space it is given.",
-      iconName: "photo",
+      iconName: "image",
       subtitle: "Hero Image",
       fields: [
         {
@@ -584,7 +584,7 @@ const addList = ((Array.isArray(addOptions) ? addOptions : []) as (Block & {
          </div>
 
          <button class="editor-demo-menu-item" data-menu="duplicate" role="menuitem" type="button">
-           <Icon name="document-duplicate" size="none" aria-hidden="true" />
+           <Icon name="copy" size="none" aria-hidden="true" />
            <span class="editor-demo-menu-label">{menuLabels.duplicate}</span>
          </button>
 

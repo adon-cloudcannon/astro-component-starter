@@ -17,5 +17,5 @@ value:
       prefix: ""
       suffix: x
       label: publishing velocity
-      iconName: bolt
+      iconName: zap
       iconColor: moss

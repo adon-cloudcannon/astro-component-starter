@@ -21,7 +21,7 @@ pageSections:
         variant: primary
       - _component: building-blocks/core-elements/button
         text: Book a demo
-        iconName: arrow-right
+        iconName: move-right
         iconPosition: after
         variant: text
     reverse: true
@@ -424,7 +424,7 @@ pageSections:
         variant: primary
       - _component: building-blocks/core-elements/button
         text: Our values
-        iconName: arrow-right
+        iconName: move-right
         iconPosition: after
         variant: text
     paddingVertical: 2xl

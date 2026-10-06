@@ -21,7 +21,7 @@ pageSections:
         variant: primary
       - _component: building-blocks/core-elements/button
         text: Book a demo
-        iconName: arrow-right
+        iconName: move-right
         iconPosition: after
         variant: text
     pattern: grid
@@ -109,19 +109,19 @@ pageSections:
       - title: Connect your Git repo.
         body: Every push builds your site.
         accentColor: moss
-        iconName: code-bracket
+        iconName: git-pull-request-arrow
       - title: Build your components
         body: Set what's editable, down to the field.
         accentColor: harbour
-        iconName: rectangle-group
+        iconName: component
       - title: Hand it over.
         body: Content teams edit on the page, with a live preview they can share.
         accentColor: sunset
-        iconName: window
+        iconName: app-window-mac
       - title: Everything is a commit
         body: Branch it, review it, roll it back.
         accentColor: golden
-        iconName: command-line
+        iconName: terminal
     backgroundColor: dark
   - _component: page-sections/explainers/pinned-steps
     eyebrow: ''
@@ -145,7 +145,7 @@ pageSections:
             size: lg
           - _component: building-blocks/core-elements/button
             text: Learn more
-            iconName: arrow-right
+            iconName: move-right
             textColor: sunset
             iconPosition: after
             variant: text
@@ -167,7 +167,7 @@ pageSections:
             size: lg
           - _component: building-blocks/core-elements/button
             text: Learn more
-            iconName: arrow-right
+            iconName: move-right
             textColor: sunset
             iconPosition: after
             variant: text
@@ -189,7 +189,7 @@ pageSections:
             size: lg
           - _component: building-blocks/core-elements/button
             text: Learn more
-            iconName: arrow-right
+            iconName: move-right
             textColor: sunset
             iconPosition: after
             variant: text
@@ -301,7 +301,7 @@ pageSections:
         variant: primary
       - _component: building-blocks/core-elements/button
         text: Book a demo
-        iconName: arrow-right
+        iconName: move-right
         iconPosition: after
         variant: text
     backgroundColor: pacific

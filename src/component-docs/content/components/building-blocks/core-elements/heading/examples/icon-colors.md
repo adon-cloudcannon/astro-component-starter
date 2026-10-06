@@ -5,7 +5,7 @@ blocks:
   - _component: 'building-blocks/core-elements/heading'
     text: Blue icon heading
     level: h3
-    iconName: information-circle
+    iconName: info152
     iconColor: pacific
   - _component: 'building-blocks/core-elements/heading'
     text: Green icon heading
@@ -15,6 +15,6 @@ blocks:
   - _component: 'building-blocks/core-elements/heading'
     text: Red icon heading
     level: h3
-    iconName: exclamation-triangle
+    iconName: triangle-alert451
     iconColor: sunset
 ---

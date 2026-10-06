@@ -67,7 +67,7 @@ pageSections:
           - _component: building-blocks/core-elements/button
             text: Learn more
             variant: text
-            iconName: arrow-right
+            iconName: move-right
             iconPosition: after
             size: sm
       - image: /src/assets/images/marketing/template-astro-component-starter.jpg
@@ -85,7 +85,7 @@ pageSections:
           - _component: building-blocks/core-elements/button
             text: Learn more
             variant: text
-            iconName: arrow-right
+            iconName: move-right
             iconPosition: after
             size: sm
       - image: /src/assets/images/marketing/template-astro-minimal.jpg
@@ -103,7 +103,7 @@ pageSections:
           - _component: building-blocks/core-elements/button
             text: Learn more
             variant: text
-            iconName: arrow-right
+            iconName: move-right
             iconPosition: after
             size: sm
       - image: /src/assets/images/marketing/template-sendit.jpg
@@ -121,7 +121,7 @@ pageSections:
           - _component: building-blocks/core-elements/button
             text: Learn more
             variant: text
-            iconName: arrow-right
+            iconName: move-right
             iconPosition: after
             size: sm
       - image: /src/assets/images/marketing/template-venture.jpg
@@ -139,7 +139,7 @@ pageSections:
           - _component: building-blocks/core-elements/button
             text: Learn more
             variant: text
-            iconName: arrow-right
+            iconName: move-right
             iconPosition: after
             size: sm
       - image: /src/assets/images/marketing/template-essentia.jpg
@@ -157,7 +157,7 @@ pageSections:
           - _component: building-blocks/core-elements/button
             text: Learn more
             variant: text
-            iconName: arrow-right
+            iconName: move-right
             iconPosition: after
             size: sm
     paddingVertical: 4xl
