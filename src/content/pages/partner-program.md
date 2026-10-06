@@ -12,7 +12,7 @@ pageSections:
       Welcome to a Partner Program that rewards good work. Get better margins and less overhead as
       you grow your portfolio.
     subtextSize: xl
-    imageSource: /src/assets/images/marketing/screenshot-2026-08-17-at-12-00-53-1.png
+    imageSource: /src/assets/images/marketing/hero-partner-program.png
     imageAlt: ''
     imageOverflow: 59
     buttonSections:

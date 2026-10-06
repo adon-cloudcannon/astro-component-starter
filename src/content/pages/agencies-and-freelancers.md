@@ -12,7 +12,7 @@ pageSections:
       Here, agencies spend less time on maintenance and more time on billable work, with websites
       your clients love to edit.
     subtextSize: xl
-    imageSource: /src/assets/images/marketing/cloudcannon-hero-portfolio-01-1.png
+    imageSource: /src/assets/images/marketing/hero-agencies-and-freelancers.png
     imageAlt: ''
     imageOverflow: 63
     buttonSections:

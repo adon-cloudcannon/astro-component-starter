@@ -12,7 +12,7 @@ pageSections:
       CloudCannon reads and writes directly to your Git repo, so every change is tracked, every
       version is recoverable, access it with any tool.
     subtextSize: xl
-    imageSource: /src/assets/images/marketing/hero-gitbasedcms-01-1.png
+    imageSource: /src/assets/images/marketing/hero-git.png
     imageAlt: ''
     imageOverflow: 119
     buttonSections:

@@ -12,7 +12,7 @@ pageSections:
       Connect CloudCannon to your repo and keep working locally. Editors manage content visually,
       and everyone's changes sync automatically.
     subtextSize: xl
-    imageSource: /src/assets/images/marketing/hero-developers-01-1.png
+    imageSource: /src/assets/images/marketing/hero-developers-page.png
     imageAlt: ''
     imageOverflow: 217
     buttonSections:

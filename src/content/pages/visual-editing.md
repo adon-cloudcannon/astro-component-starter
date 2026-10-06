@@ -10,7 +10,7 @@ pageSections:
     headingSize: xl
     subtext: Code, content, and config all sit in one repo as plain files, so agents get the full picture.
     subtextSize: xl
-    imageSource: /src/assets/images/marketing/hero-visualediting-01-1.png
+    imageSource: /src/assets/images/marketing/hero-visual-editing.png
     imageAlt: ''
     imageOverflow: 15
     buttonSections:
