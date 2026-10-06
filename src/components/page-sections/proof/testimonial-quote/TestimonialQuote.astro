@@ -672,44 +672,47 @@ const align = alignment === "center" && !isSplit ? "center" : undefined;
         grid-row: 1;
       }
 
-      /* Placed, not auto-flowed. A third child in a two-column grid drops into
-         a new row under the person, which is the narrow column and the wrong
-         end of the card: the link belongs under the quote it follows. */
-      /* `--space-before` as well as the margin: the flow layer writes
+      /* The whole row, whichever side the quote is on.
+
+         `1 / -1` is "every column there is", so one rule covers both splits
+         and goes on working if the card is ever drawn in one column. Named
+         columns meant a rule each, and each of them was the wrong end of the
+         card for the other layout. Right-aligned, so the link lands on the
+         card's own edge either way.
+
+         `--space-before` as well as the margin: the flow layer writes
          `margin-block-start` from that property and `utils` out-ranks this
          layer, so a plain margin loses to it. */
       .testimonial-quote-card[data-layout="split-person"] .testimonial-quote-tail,
       .testimonial-quote-card[data-layout="split-quote"] .testimonial-quote-tail {
-        --space-before: var(--spacing-md);
+        --space-before: var(--spacing-xl);
 
-        margin-block-start: var(--spacing-md);
-      }
-
-      .testimonial-quote-card[data-layout="split-person"] .testimonial-quote-tail {
-        grid-column: 2;
+        grid-column: 1 / -1;
         grid-row: 2;
-        padding-inline-start: var(--testimonial-quote-pad);
+        justify-self: end;
+        margin-block-start: var(--spacing-xl);
       }
 
-      .testimonial-quote-card[data-layout="split-quote"] .testimonial-quote-tail {
-        grid-column: 1;
-        grid-row: 2;
-      }
+      /* Whichever column carries the rule spans both rows, so the rule still
+         runs the card's full height with the link row under it.
 
-      /* The quote column keeps its height and the link sits under it, so the
-         rule between the columns still runs the full card. */
+         It is the column with the border on it that has to span, and that is
+         not the same column in both layouts: `split-person` rules the quote
+         and `split-quote` rules the person. Spanning the other one left the
+         rule stopping 115 short of the card's foot, which reads as a line
+         that ran out rather than as an edge between two columns. */
       .testimonial-quote-card[data-layout="split-person"] .testimonial-quote-slide,
       .testimonial-quote-card[data-layout="split-quote"] .testimonial-quote-slide {
         grid-template-rows: 1fr auto;
       }
 
-      .testimonial-quote-card[data-layout="split-person"] .testimonial-quote-text,
-      .testimonial-quote-card[data-layout="split-quote"] .testimonial-quote-who {
+      .testimonial-quote-card[data-layout="split-person"] .testimonial-quote-who,
+      .testimonial-quote-card[data-layout="split-quote"] .testimonial-quote-text {
         grid-row: 1;
       }
 
-      .testimonial-quote-card[data-layout="split-person"] .testimonial-quote-who,
-      .testimonial-quote-card[data-layout="split-quote"] .testimonial-quote-text {
+      .testimonial-quote-card[data-layout="split-person"] .testimonial-quote-text,
+      .testimonial-quote-card[data-layout="split-quote"] .testimonial-quote-who {
         grid-row: 1 / span 2;
       }
 
