@@ -632,16 +632,37 @@ const align = alignment === "center" && !isSplit ? "center" : undefined;
         padding-block-start: 24px;
       }
 
-      /* The reference draws the mark 81x40 at the foot's far end. Height is
-         what holds across marks of different proportions: a width would draw a
-         wide wordmark and a square monogram at wildly different sizes. */
+      /* One box every client mark fits inside, whatever shape it is.
+
+         Height alone does not hold: the marks are drawn at 239x50, 213x70 and
+         201x66 in the design, so a single height gives a wide wordmark nearly
+         twice the footprint of a squarer one — Firebrand came out 191 across
+         against Insight's 120.
+
+         So both dimensions are capped and whichever binds first wins. The
+         width is the definite one and the height is left auto, because
+         `aspect-ratio` only re-derives the other dimension while one of them
+         is auto: set both and the cap squashes the mask instead of scaling
+         it. A wide mark lands on the width cap, a tall one on the height,
+         and neither leaves the box. */
       .testimonial-quote-logo {
+        --logo-mark-width: 132px;
+        --logo-mark-height: 34px;
+
         aspect-ratio: var(--logo-mark-aspect, 81 / 40);
         background-color: var(--testimonial-quote-quiet);
-        block-size: 40px;
+        /* The height is the definite one and the width follows from the
+           ratio, so the mark always scales. Which cap binds is decided here
+           rather than by `max-inline-size`: clamping a definite width against
+           `aspect-ratio` does not re-derive the height, it just squashes —
+           Insight Creative came out 132x34 where its own proportions want
+           132x44. */
+        block-size: min(
+          var(--logo-mark-height),
+          calc(var(--logo-mark-width) / var(--logo-mark-ratio, 2.025))
+        );
         flex-shrink: 0;
         inline-size: auto;
-        max-inline-size: 200px;
       }
 
       /* A card with nothing drawn behind it.

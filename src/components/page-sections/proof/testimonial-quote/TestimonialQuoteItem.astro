@@ -50,6 +50,13 @@ const {
 } = Astro.props;
 
 const isSplit = String(layout).startsWith("split");
+
+/* `239 / 50` as 4.78. Returns 0 when the aspect is missing or unreadable, and
+   the mark then falls back to the height cap alone. */
+const markRatio = (() => {
+  const [w, h] = String(logoAspect).split("/").map((part) => Number(part.trim()));
+  return Number.isFinite(w) && Number.isFinite(h) && h > 0 ? w / h : 0;
+})();
 const body = text ? renderMarkdown(text) : "";
 const marks = quoteMarks !== false;
 
@@ -199,6 +206,11 @@ const mirror = rootMirror({
                 style={{
                   "--logo-mark-source": `url("${resolveImageSource(logoSource)}")`,
                   ...(logoAspect ? { "--logo-mark-aspect": logoAspect } : {}),
+                  /* The same proportion as a plain number, which the width
+                     cap needs: `min()` cannot divide by "239 / 50", and
+                     clamping a definite width against `aspect-ratio` squashes
+                     the mask rather than scaling it. */
+                  ...(markRatio ? { "--logo-mark-ratio": String(markRatio) } : {}),
                 }}
                 data-prop-src="logoSource"
                 data-prop-alt="logoAlt"
