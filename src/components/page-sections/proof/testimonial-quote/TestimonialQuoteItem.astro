@@ -120,23 +120,6 @@ const mirror = rootMirror({
       </Button>
     ) : null;
 
-    /* The client's mark, which the design puts at the head of the person's
-       column in a split and in the foot's end otherwise. Drawn the same way
-       either way: a mask, not a picture, so it takes the card's own ink. */
-    const mark = logoSource ? (
-      <span
-        class="testimonial-quote-logo logo-mark"
-        role="img"
-        aria-label={logoAlt || company}
-        style={{
-          "--logo-mark-source": `url("${resolveImageSource(logoSource)}")`,
-          ...(logoAspect ? { "--logo-mark-aspect": logoAspect } : {}),
-        }}
-        data-prop-src="logoSource"
-        data-prop-alt="logoAlt"
-      />
-    ) : null;
-
     const person = (
       <div class="testimonial-quote-who">
         {/* Always a disc, even with nothing in it: the design's card has a
@@ -167,30 +150,34 @@ const mirror = rootMirror({
               )}
             </p>
           )}
-          {!isSplit && linkButton}
+          {linkButton}
         </div>
       </div>
     );
 
-    if (isSplit) {
-      return (
-        <>
-          <div class="testimonial-quote-column">
-            {mark}
-            {person}
-          </div>
-          {/* Under the quote, which is where the design puts it in a split:
-              beside a name it reads as part of the attribution, under the
-              words it reads as what to do about them. */}
-          {linkButton && <div class="testimonial-quote-aside">{linkButton}</div>}
-        </>
-      );
-    }
+    if (isSplit) return person;
 
     return (
       <div class="testimonial-quote-foot">
         {person}
-        {mark}
+        {logoSource && (
+          /* The repo's mask utility rather than a picture. A client mark has
+             its fills baked in, so an `<img>` of a white one is invisible on a
+             light card and a dark one is invisible on a dark card; as a mask
+             it takes the card's own quiet ink either way. Same mechanism the
+             logo row uses. */
+          <span
+            class="testimonial-quote-logo logo-mark"
+            role="img"
+            aria-label={logoAlt || company}
+            style={{
+              "--logo-mark-source": `url("${resolveImageSource(logoSource)}")`,
+              ...(logoAspect ? { "--logo-mark-aspect": logoAspect } : {}),
+            }}
+            data-prop-src="logoSource"
+            data-prop-alt="logoAlt"
+          />
+        )}
       </div>
     );
   })()}
