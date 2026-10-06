@@ -133,7 +133,8 @@ pageSections:
           the first page.** And we hadn’t even added fresh content to
           it yet.
         authorName: Roy Gabriel
-        authorDescription: Vice President Operations, Gabriel Maggio Construction
+        authorDescription: Vice President Operations,
+        company: Gabriel Maggio Construction
         linkText: Read case study
         accentColor: sunset
         size: wide
@@ -144,13 +145,14 @@ pageSections:
           CloudCannon is the ideal CMS for us — editors can update their content easily, and it’s
           saved back to our Git repo, so we never feel locked in.
         authorName: Cayvon Morady
-        authorDescription: Senior Technical Program Manager, Twitch
+        authorDescription: Senior Technical Program Manager,
+        company: Twitch
         linkText: Read case study
         size: standard
       - company: Firebrand
         text: When we show the Visual Editor during our meetings, their eyes light up.
         authorName: Alex Murray
-        authorDescription: Digital Design Director, Firebrand
+        authorDescription: Digital Design Director,
         linkText: Read case study
         size: standard
       - logo: /src/assets/images/marketing/logos/DX.svg
@@ -160,7 +162,8 @@ pageSections:
           **400% increase in leads. $150,000 saved.** That is the
           equivalent of a full-time developer’s salary.
         authorName: Abi Noda
-        authorDescription: CEO, DX
+        authorDescription: CEO,
+        company: DX
         linkText: Read case study
         accentColor: golden
         size: wide
