@@ -130,7 +130,7 @@ pageSections:
       mask: fade
     centreColor: '#26262F'
     centreMinHeight: 366
-    centreIconName: git-branch
+    centreIconName: git-pull-request-arrow
     centreTitle: Your Git repo
     centreBranch: main
     centreRows:
