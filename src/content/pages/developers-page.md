@@ -167,7 +167,8 @@ pageSections:
         linkText: Read case study
         accentColor: golden
         size: wide
-    columns: 3
+    columns: 2
+    stagger: true
     backgroundColor: dark
     background:
       type: pattern
