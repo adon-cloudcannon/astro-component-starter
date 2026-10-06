@@ -87,7 +87,7 @@
                 "name": "Partner program",
                 "description": "Earn points for every launch",
                 "path": "/partner-program/",
-                "icon": "users"
+                "icon": "handshake"
               }
             ]
           },
@@ -98,7 +98,7 @@
                 "name": "Developers",
                 "description": "Your stack + editing",
                 "path": "/developers-page/",
-                "icon": "code"
+                "icon": "code-xml"
               },
               {
                 "name": "Content editors",
@@ -183,13 +183,13 @@
                 "name": "Case studies",
                 "description": "See how real teams build",
                 "path": "/case-studies/",
-                "icon": "folder"
+                "icon": "folders"
               },
               {
                 "name": "Blog",
                 "description": "News, updates, and best practices",
                 "path": "/blog/",
-                "icon": "message-circle"
+                "icon": "message-square"
               }
             ]
           }
