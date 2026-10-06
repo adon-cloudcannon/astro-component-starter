@@ -33,12 +33,6 @@ type PanelProps = {
   heading?: string;
   items?: { text?: string }[];
   buttonSections?: Record<string, unknown>[];
-  /* The flat shape a page written before the panels were split still uses. */
-  imageSource?: string;
-  imageAlt?: string;
-  imageOverlap?: number;
-  linkText?: string;
-  link?: string;
 };
 
 /* `content` and `style` are the editor's tabs, flattened straight back into
@@ -81,46 +75,6 @@ const {
   rightPanel,
   /** Everything the middle card draws, in one place. */
   middlePanel,
-  /* The array the pages used before the split, still read where it is set. */
-  panels = [],
-  centreImageSource = "",
-  centreImageAlt = "",
-  /**
-   * The panel between the two workflows, which is the common ground they both
-   * land in. The design draws it 330x366 in #26262F against the pair's 323x321
-   * tints, sharing their bottom edge and reaching 45px higher, so it is a card
-   * in its own right rather than a picture of one.
-   *
-   * Its colour is a value rather than a token on purpose: #26262F is not in
-   * the palette, and the nearest thing to it, --gray-900 at #252423, is a
-   * different colour by about 12.
-   */
-  centreColor = "",
-  centreMinHeight = 0,
-  /**
-   * The line across the top of the middle panel. The design draws an icon and
-   * a title in 14/700 white, which is its own small scale rather than a rung
-   * on the heading ramp — that starts at 20 — so these are their own props and
-   * not a heading block inside `centreSections`.
-   */
-  centreIconName = "",
-  centreTitle = "",
-  /**
-   * The branch the panel is showing, with a status light before it. Closing
-   * the header row the way a Git client does.
-   */
-  centreBranch = "",
-  /**
-   * The commit rows down the panel. Each is a kind, an author, a message and a
-   * hash, which is the four parts the design gives them: 290x30 on a 37 pitch,
-   * rounded 8, on white at 5% over the card.
-   *
-   * `kind` rather than a pair of colours per row: the design draws exactly two
-   * of these, an editor in blue and a dev in Sunset, and each sets its dot and
-   * its label together.
-   */
-  centreRows = [],
-  centreSections = [],
   sectionLabel,
   maxContentWidth = "xl",
   paddingHorizontal = "gutter",
@@ -140,50 +94,28 @@ const {
 /* The measure the subtext is set in, as a length. */
 const subtextCap = subtextMeasure(subtextWidth);
 
-/* The named pair wins; the array is what a page written before them has. */
-const sidePanels: PanelProps[] = [leftPanel, rightPanel].filter(Boolean) as PanelProps[];
-const panelList: PanelProps[] = sidePanels.length
-  ? sidePanels
-  : Array.isArray(panels)
-    ? panels
-    : [];
+const panelList: PanelProps[] = [leftPanel, rightPanel].filter(Boolean) as PanelProps[];
 
 /** Where a panel's own fields live, for the editor. */
-const panelPath = (index: number) =>
-  sidePanels.length ? at(index === 0 ? "leftPanel" : "rightPanel") : null;
+const panelPath = (index: number) => at(index === 0 ? "leftPanel" : "rightPanel");
 
-/* A panel's picture and its link, in whichever shape the page carries. */
-const panelImage = (panel: PanelProps) => panel.image ?? panel;
-const panelButtons = (panel: PanelProps) =>
-  panel.buttonSections?.length
-    ? panel.buttonSections
-    : panel.linkText
-      ? [{
-          _component: "building-blocks/core-elements/button",
-          text: panel.linkText,
-          link: panel.link ?? "",
-          variant: "text",
-          iconName: "move-right",
-          iconPosition: "after",
-          size: "md",
-        }]
-      : [];
+
 
 /* The middle card's fields, which sit in `middlePanel` now and were loose
    `centre*` props before it. */
 const centre = {
-  imageSource: middlePanel?.centreImageSource ?? centreImageSource,
-  imageAlt: middlePanel?.centreImageAlt ?? centreImageAlt,
-  color: middlePanel?.centreColor ?? centreColor,
-  minHeight: middlePanel?.centreMinHeight ?? centreMinHeight,
-  iconName: middlePanel?.centreIconName ?? centreIconName,
-  title: middlePanel?.centreTitle ?? centreTitle,
-  branch: middlePanel?.centreBranch ?? centreBranch,
-  rows: middlePanel?.centreRows ?? centreRows ?? [],
-  sections: middlePanel?.centreSections ?? centreSections ?? [],
+  imageSource: middlePanel?.centreImageSource ?? "",
+  imageAlt: middlePanel?.centreImageAlt ?? "",
+  color: middlePanel?.centreColor ?? "",
+  minHeight: middlePanel?.centreMinHeight ?? 0,
+  iconName: middlePanel?.centreIconName ?? "",
+  title: middlePanel?.centreTitle ?? "",
+  branch: middlePanel?.centreBranch ?? "",
+  rows: middlePanel?.centreRows ?? [],
+  sections: middlePanel?.centreSections ?? [],
 };
 const centrePath = (key: string) =>
-  middlePanel ? `${at("middlePanel")}.centre${key[0].toUpperCase()}${key.slice(1)}` : at(`centre${key[0].toUpperCase()}${key.slice(1)}`);
+  `${at("middlePanel")}.centre${key[0].toUpperCase()}${key.slice(1)}`;
 
 /**
  * The commit feed's timing, and the keyframes that drive it.
@@ -288,16 +220,16 @@ const panelsProp = childrenDataProp ?? (useDefaultEditableBinding ? at("panels")
           class="workflow-panel"
           data-editable="array-item"
         >
-          {panelImage(panel).imageSource && (
+          {(panel.image ?? {}).imageSource && (
             <Image
               class="workflow-illustration"
-              source={panelImage(panel).imageSource}
-              alt={panelImage(panel).imageAlt}
-              style={panelImage(panel).imageOverlap
-                ? { "--illustration-overlap": `${panelImage(panel).imageOverlap}px` }
+              source={(panel.image ?? {}).imageSource}
+              alt={(panel.image ?? {}).imageAlt}
+              style={(panel.image ?? {}).imageOverlap
+                ? { "--illustration-overlap": `${(panel.image ?? {}).imageOverlap}px` }
                 : undefined}
-              data-prop-src={panelPath(index) ? `${panelPath(index)}.image.imageSource` : "imageSource"}
-              data-prop-alt={panelPath(index) ? `${panelPath(index)}.image.imageAlt` : "imageAlt"}
+              data-prop-src={`${panelPath(index)}.image.imageSource`}
+              data-prop-alt={`${panelPath(index)}.image.imageAlt`}
             />
           )}
           {/* The line that runs from this panel's card into the one between
@@ -318,13 +250,13 @@ const panelsProp = childrenDataProp ?? (useDefaultEditableBinding ? at("panels")
             <SimpleText
               class="eyebrow"
               size="sm"
-              data-prop={panelPath(index) ? `${panelPath(index)}.eyebrow` : "eyebrow"}
+              data-prop={`${panelPath(index)}.eyebrow`}
               text={panel.eyebrow}
             />
             <Heading
               level="h3"
               size="xs"
-              data-prop={panelPath(index) ? `${panelPath(index)}.heading` : "heading"}
+              data-prop={`${panelPath(index)}.heading`}
             >
               {panel.heading}
             </Heading>
@@ -333,16 +265,16 @@ const panelsProp = childrenDataProp ?? (useDefaultEditableBinding ? at("panels")
               items={panel.items}
               listType="icon"
               size="md"
-              data-children-prop={panelPath(index) ? `${panelPath(index)}.items` : "items"}
+              data-children-prop={`${panelPath(index)}.items`}
             />
             {/* The link is a Button, which is the project's rule for one: it
                 carries where it goes as well as what it says, and the editor
                 gets the same fields it gets everywhere else. */}
-            {panelButtons(panel).length > 0 && (
+            {(panel.buttonSections ?? []).length > 0 && (
               <ButtonGroup
                 class="workflow-link"
-                buttonSections={panelButtons(panel)}
-                data-children-prop={panelPath(index) ? `${panelPath(index)}.buttonSections` : "buttonSections"}
+                buttonSections={(panel.buttonSections ?? [])}
+                data-children-prop={`${panelPath(index)}.buttonSections`}
               />
             )}
           </Card>

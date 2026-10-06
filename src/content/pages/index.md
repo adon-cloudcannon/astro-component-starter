@@ -11,9 +11,9 @@ pageSections:
         heading: Build freely. Edit easily.
         headingLevel: h1
         headingSize: 2xl
-      subtext: Welcome to the Git-based CMS that doesn't fight your workflow. Your
-        site lives in Git, your team edits visually, and everything stays in
-        sync.
+      subtext: >-
+        Welcome to the Git-based CMS that doesn't fight your workflow. Your site lives in Git, your
+        team edits visually, and everything stays in sync.
       image:
         imageSource: /src/assets/images/marketing/hero-index.png
         imageAlt: A person reaching up to edit content blocks, with their dog
@@ -104,8 +104,9 @@ pageSections:
       eyebrow: ''
       heading: Your content team edits. You stop getting pinged.
       headingLevel: h2
-      subtext: CloudCannon keeps your website’s code, content and config in Git and
-        gives content teams a visual interface to edit it.
+      subtext: >-
+        CloudCannon keeps your website’s code, content and config in Git and gives content teams a
+        visual interface to edit it.
       subtextSize: lg
       subtextWidth: md
       alignmentHorizontal: center
@@ -149,8 +150,9 @@ pageSections:
         headingLevel: h2
         headingSize: lg
       subtext:
-        subtext: Editors edit visually, developers stay in code — and every change lands
-          in the same Git repository.
+        subtext: >-
+          Editors edit visually, developers stay in code — and every change lands in the same Git
+          repository.
         subtextSize: lg
         subtextWidth: md
       buttonSections:
@@ -164,82 +166,100 @@ pageSections:
           hideText: false
           variant: text
           size: md
-      panels:
-        - accentColor: pacific
+      leftPanel:
+        accentColor: pacific
+        eyebrow: EDITORS
+        heading: Work visually
+        image:
           imageSource: /src/assets/images/marketing/kiwi-1.png
           imageAlt: ''
           imageOverlap: 23
-          eyebrow: EDITORS
-          heading: Work visually
-          items:
-            - text: Make changes visually on the page
-              iconName: check
-              iconColor: default
-            - text: Build new pages from existing components
-              iconName: check
-              iconColor: default
-            - text: Draft, review and share for approval before publishing
-              iconName: check
-              iconColor: default
-          linkText: Learn more
-        - accentColor: sunset
+        items:
+          - text: Make changes visually on the page
+            iconName: check
+            iconColor: default
+          - text: Build new pages from existing components
+            iconName: check
+            iconColor: default
+          - text: Draft, review and share for approval before publishing
+            iconName: check
+            iconColor: default
+        buttonSections:
+          - _component: building-blocks/core-elements/button
+            text: Learn more
+            link: ''
+            variant: text
+            iconName: move-right
+            iconPosition: after
+            size: md
+      middlePanel:
+        centreImageSource: ''
+        centreImageAlt: ''
+        centreColor: '#26262F'
+        centreMinHeight: 366
+        centreIconName: git-pull-request-arrow
+        centreTitle: Your Git repo
+        centreBranch: main
+        centreRows:
+          - kind: editor
+            author: editor
+            message: 'content: hero copy'
+            hash: a3f9c2
+          - kind: dev
+            author: dev
+            message: 'feat: pricing component'
+            hash: 7b1e44
+          - kind: editor
+            author: editor
+            message: 'content: new blog post'
+            hash: c0d8f1
+          - kind: dev
+            author: dev
+            message: 'refactor: nav links'
+            hash: 2f90ab
+          - kind: editor
+            author: editor
+            message: 'content: new team member'
+            hash: c0d8f1
+          - kind: dev
+            author: dev
+            message: 'feat: new page'
+            hash: 7b1e44
+          - kind: editor
+            author: editor
+            message: 'content: new blog post'
+            hash: c0d8f1
+          - kind: dev
+            author: dev
+            message: 'feat: chatbot install'
+            hash: 7b1e44
+        centreSections: []
+      rightPanel:
+        accentColor: sunset
+        eyebrow: DEVELOPERS
+        heading: Stay in code
+        image:
           imageSource: /src/assets/images/marketing/kiwi-2.png
           imageAlt: ''
           imageOverlap: 10
-          eyebrow: DEVELOPERS
-          heading: Stay in code
-          items:
-            - text: Build with any static site generator
-              iconName: check
-              iconColor: default
-            - text: Build components and easily set what’s editable
-              iconName: check
-              iconColor: default
-            - text: Commit and deploy straight from Git
-              iconName: check
-              iconColor: default
-          linkText: Learn more
-      centreImageSource: ''
-      centreImageAlt: ''
-      centreColor: '#26262F'
-      centreMinHeight: 366
-      centreSections: []
-      centreIconName: git-pull-request-arrow
-      centreTitle: Your Git repo
-      centreBranch: main
-      centreRows:
-        - kind: editor
-          author: editor
-          message: 'content: hero copy'
-          hash: a3f9c2
-        - kind: dev
-          author: dev
-          message: 'feat: pricing component'
-          hash: 7b1e44
-        - kind: editor
-          author: editor
-          message: 'content: new blog post'
-          hash: c0d8f1
-        - kind: dev
-          author: dev
-          message: 'refactor: nav links'
-          hash: 2f90ab
-        - kind: editor
-          author: editor
-          message: 'content: new team member'
-          hash: c0d8f1
-        - kind: dev
-          author: dev
-          message: 'feat: new page'
-          hash: 7b1e44
-        - kind: editor
-          author: editor
-          message: 'content: new blog post'
-          hash: c0d8f1
-        - kind: dev
-          author: dev
-          message: 'feat: chatbot install'
-          hash: 7b1e44
+        items:
+          - text: Build with any static site generator
+            iconName: check
+            iconColor: default
+          - text: Build components and easily set what’s editable
+            iconName: check
+            iconColor: default
+          - text: Commit and deploy straight from Git
+            iconName: check
+            iconColor: default
+        buttonSections:
+          - _component: building-blocks/core-elements/button
+            text: Learn more
+            link: ''
+            variant: text
+            iconName: move-right
+            iconPosition: after
+            size: md
     style:
       backgroundColor: light-sand
       background:
@@ -253,7 +273,7 @@ pageSections:
       haze:
         - x: 0.5086
           rx: 844px
-          y: 19%
+          'y': 19%
           ry: 31.5%
   - _component: page-sections/explainers/feature-deck
     content:
@@ -282,8 +302,7 @@ pageSections:
               iconColor: default
               iconPosition: before
             - _component: building-blocks/core-elements/text
-              text: Code, content, and config live together in Git. The whole project, in
-                plain files.
+              text: Code, content, and config live together in Git. The whole project, in plain files.
               alignmentHorizontal: center
               size: lg
             - _component: building-blocks/wrappers/grid
@@ -391,8 +410,7 @@ pageSections:
               iconColor: default
               iconPosition: before
             - _component: building-blocks/core-elements/text
-              text: Forget update queues, plugin conflicts, and things breaking while you
-                sleep.
+              text: Forget update queues, plugin conflicts, and things breaking while you sleep.
               alignmentHorizontal: center
               size: lg
             - _component: building-blocks/wrappers/grid
@@ -500,8 +518,7 @@ pageSections:
               iconColor: default
               iconPosition: before
             - _component: building-blocks/core-elements/text
-              text: Pages are pre-built and served from a CDN, so sites load fast anywhere in
-                the world.
+              text: Pages are pre-built and served from a CDN, so sites load fast anywhere in the world.
               alignmentHorizontal: center
               size: lg
             - _component: building-blocks/wrappers/grid
@@ -652,8 +669,7 @@ pageSections:
       heading: Grow your sites, not your headcount.
       headingLevel: h2
       headingSize: lg
-      subtext: From fast-moving startups to multi-site agencies, teams ship more with
-        CloudCannon.
+      subtext: From fast-moving startups to multi-site agencies, teams ship more with CloudCannon.
       subtextSize: lg
       subtextWidth: md
       stories:
@@ -724,10 +740,10 @@ pageSections:
       heading: Made for the work, not for the upsell
       headingSize: lg
       headingLevel: h2
-      subtext: We’re a tight-knit team based in Dunedin, New Zealand, working with web
-        teams all over the world. We started CloudCannon because every CMS we
-        tried gave editors a better experience by giving developers a worse one.
-        So we built a CMS that works for both.
+      subtext: >-
+        We’re a tight-knit team based in Dunedin, New Zealand, working with web teams all over the
+        world. We started CloudCannon because every CMS we tried gave editors a better experience by
+        giving developers a worse one. So we built a CMS that works for both.
       subtextSize: lg
       subtextWidth: sm
       linkText: Meet the team
@@ -814,9 +830,9 @@ pageSections:
       sectionLabel: ''
       heading: Take a peek under the hood
       headingLevel: h2
-      subtext: Git underneath, a visual editor on top, with code and content running
-        on one engine. Start free in minutes, or book a demo and we’ll walk you
-        through the real thing.
+      subtext: >-
+        Git underneath, a visual editor on top, with code and content running on one engine. Start
+        free in minutes, or book a demo and we’ll walk you through the real thing.
       subtextSize: lg
       subtextWidth: ''
       imageSource: /src/assets/images/marketing/cloudcannon-truck-closed-1.png
