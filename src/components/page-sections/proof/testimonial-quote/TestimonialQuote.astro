@@ -597,10 +597,17 @@ const cardScheme = tone === "plain" ? undefined : tone === "light" ? "light" : "
         gap: var(--spacing-lg);
       }
 
+      /* The whole column, not a disc in it.
+
+         In a column of its own the face is the block's own heading rather
+         than a byline's thumbnail, so it takes the width it has: 72 in a 144
+         column left more empty column than face. Square, so it stays a circle
+         at whatever the column turns out to be. */
       .testimonial-quote-card[data-layout="split-person"] .testimonial-quote-avatar,
       .testimonial-quote-card[data-layout="split-quote"] .testimonial-quote-avatar {
-        block-size: 72px;
-        inline-size: 72px;
+        aspect-ratio: 1;
+        block-size: auto;
+        inline-size: 100%;
       }
 
       /* --- the carousel's controls ----------------------------------- */
