@@ -80,17 +80,11 @@ preview:
     - key: content.heading
   image: public/component-previews/page-sections/conversion/pricing-comparison.svg
   icon: table_chart
-  gallery:
-    image: public/component-previews/page-sections/conversion/pricing-comparison.svg
-    fit: cover
 picker_preview:
   text: Pricing Comparison
   subtext: A feature-by-feature comparison table across plans.
   image: public/component-previews/page-sections/conversion/pricing-comparison.svg
   icon: table_chart
-  gallery:
-    image: public/component-previews/page-sections/conversion/pricing-comparison.svg
-    fit: cover
 _inputs_from_glob:
   - /src/components/page-sections/conversion/pricing-comparison/pricing-comparison.cloudcannon.inputs.yml
   - /.cloudcannon/inputs/background.yml

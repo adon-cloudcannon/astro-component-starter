@@ -22,16 +22,10 @@ preview:
     - key: title
   image: public/component-previews/building-blocks/wrappers/video-modal.svg
   icon: play_circle
-  gallery:
-    image: public/component-previews/building-blocks/wrappers/video-modal.svg
-    fit: cover
 picker_preview:
   text: Video Modal
   subtext: Local or consent-gated hosted video mounted only while open.
   image: public/component-previews/building-blocks/wrappers/video-modal.svg
-  gallery:
-    image: public/component-previews/building-blocks/wrappers/video-modal.svg
-    fit: cover
 _inputs_from_glob:
   - /src/components/building-blocks/wrappers/video-modal/video-modal.cloudcannon.inputs.yml
   - /.cloudcannon/inputs/space-before.yml

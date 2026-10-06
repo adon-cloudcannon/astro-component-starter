@@ -66,17 +66,11 @@ preview:
     - key: content.heading
   image: public/component-previews/page-sections/proof/testimonial-wall.svg
   icon: reviews
-  gallery:
-    image: public/component-previews/page-sections/proof/testimonial-wall.svg
-    fit: cover
 picker_preview:
   text: Testimonial Wall
   subtext: Several customer quotes as cards in a masonry wall.
   image: public/component-previews/page-sections/proof/testimonial-wall.svg
   icon: reviews
-  gallery:
-    image: public/component-previews/page-sections/proof/testimonial-wall.svg
-    fit: cover
 _inputs_from_glob:
   - /src/components/page-sections/proof/testimonial-wall/testimonial-wall.cloudcannon.inputs.yml
   - /.cloudcannon/inputs/background.yml

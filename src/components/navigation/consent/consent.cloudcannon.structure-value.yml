@@ -31,16 +31,10 @@ preview:
     - Consent
   image: public/component-previews/navigation/consent.svg
   icon: privacy_tip
-  gallery:
-    image: public/component-previews/navigation/consent.svg
-    fit: cover
 picker_preview:
   text: Consent
   subtext: Site-wide privacy choices for analytics and external media.
   image: public/component-previews/navigation/consent.svg
   icon: privacy_tip
-  gallery:
-    image: public/component-previews/navigation/consent.svg
-    fit: cover
 _inputs_from_glob:
   - /src/components/navigation/consent/consent.cloudcannon.inputs.yml

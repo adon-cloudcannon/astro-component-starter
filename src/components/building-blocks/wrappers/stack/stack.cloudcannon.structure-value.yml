@@ -19,16 +19,10 @@ preview:
     - key: label
   image: public/component-previews/building-blocks/wrappers/stack.svg
   icon: view_agenda
-  gallery:
-    image: public/component-previews/building-blocks/wrappers/stack.svg
-    fit: cover
 picker_preview:
   text: Stack
   subtext: A few different blocks in a row or column, one even gap.
   image: public/component-previews/building-blocks/wrappers/stack.svg
-  gallery:
-    image: public/component-previews/building-blocks/wrappers/stack.svg
-    fit: cover
 _inputs_from_glob:
   - /src/components/building-blocks/wrappers/stack/stack.cloudcannon.inputs.yml
   - /.cloudcannon/inputs/space-before.yml

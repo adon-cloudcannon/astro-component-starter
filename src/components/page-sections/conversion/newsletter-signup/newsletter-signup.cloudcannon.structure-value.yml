@@ -42,16 +42,10 @@ preview:
     - key: content.heading
   image: public/component-previews/page-sections/conversion/newsletter-signup.svg
   icon: mark_email_read
-  gallery:
-    image: public/component-previews/page-sections/conversion/newsletter-signup.svg
-    fit: cover
 picker_preview:
   text: Newsletter Signup
   subtext: Email signup form with consent copy and band or card layout.
   image: public/component-previews/page-sections/conversion/newsletter-signup.svg
-  gallery:
-    image: public/component-previews/page-sections/conversion/newsletter-signup.svg
-    fit: cover
 _inputs_from_glob:
   - /src/components/page-sections/conversion/newsletter-signup/newsletter-signup.cloudcannon.inputs.yml
   - /.cloudcannon/inputs/background.yml

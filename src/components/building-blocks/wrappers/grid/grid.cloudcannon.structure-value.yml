@@ -16,16 +16,10 @@ preview:
     - key: label
   image: public/component-previews/building-blocks/wrappers/grid.svg
   icon: grid_on
-  gallery:
-    image: public/component-previews/building-blocks/wrappers/grid.svg
-    fit: cover
 picker_preview:
   text: Grid
   subtext: Many items of the same kind, in as many columns as fit.
   image: public/component-previews/building-blocks/wrappers/grid.svg
-  gallery:
-    image: public/component-previews/building-blocks/wrappers/grid.svg
-    fit: cover
 _inputs_from_glob:
   - /src/components/building-blocks/wrappers/grid/grid.cloudcannon.inputs.yml
   - /.cloudcannon/inputs/space-before.yml

@@ -64,17 +64,11 @@ preview:
     - key: content.heading
   image: public/component-previews/page-sections/proof/testimonial-bento.svg
   icon: dashboard
-  gallery:
-    image: public/component-previews/page-sections/proof/testimonial-bento.svg
-    fit: cover
 picker_preview:
   text: Testimonial Bento
   subtext: Customer quotes in a bento grid, led by one featured quote.
   image: public/component-previews/page-sections/proof/testimonial-bento.svg
   icon: dashboard
-  gallery:
-    image: public/component-previews/page-sections/proof/testimonial-bento.svg
-    fit: cover
 _inputs_from_glob:
   - /src/components/page-sections/proof/testimonial-bento/testimonial-bento.cloudcannon.inputs.yml
   - /.cloudcannon/inputs/background.yml

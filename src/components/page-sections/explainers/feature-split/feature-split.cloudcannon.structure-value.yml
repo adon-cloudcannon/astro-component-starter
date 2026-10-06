@@ -47,16 +47,10 @@ preview:
     - key: content.heading
   image: public/component-previews/page-sections/explainers/feature-split.svg
   icon: view_week
-  gallery:
-    image: public/component-previews/page-sections/explainers/feature-split.svg
-    fit: cover
 picker_preview:
   text: Feature Split
   subtext: Copy and buttons beside a supporting image.
   image: public/component-previews/page-sections/explainers/feature-split.svg
-  gallery:
-    image: public/component-previews/page-sections/explainers/feature-split.svg
-    fit: cover
 _inputs_from_glob:
   - /src/components/page-sections/explainers/feature-split/feature-split.cloudcannon.inputs.yml
   - /.cloudcannon/inputs/background.yml

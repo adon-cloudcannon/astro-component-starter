@@ -45,16 +45,10 @@ preview:
     - key: content.heading
   image: public/component-previews/page-sections/explainers/timeline-section.svg
   icon: timeline
-  gallery:
-    image: public/component-previews/page-sections/explainers/timeline-section.svg
-    fit: cover
 picker_preview:
   text: Timeline Section
   subtext: A dated sequence on a rail. Vertical, split, or horizontal.
   image: public/component-previews/page-sections/explainers/timeline-section.svg
-  gallery:
-    image: public/component-previews/page-sections/explainers/timeline-section.svg
-    fit: cover
 _inputs_from_glob:
   - /src/components/page-sections/explainers/timeline-section/timeline-section.cloudcannon.inputs.yml
   - /.cloudcannon/inputs/background.yml

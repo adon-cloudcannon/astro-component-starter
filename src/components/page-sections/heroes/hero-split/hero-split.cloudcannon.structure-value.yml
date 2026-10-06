@@ -56,16 +56,10 @@ preview:
     - key: content.heading
   image: public/component-previews/page-sections/heroes/hero-split.svg
   icon: web_asset
-  gallery:
-    image: public/component-previews/page-sections/heroes/hero-split.svg
-    fit: cover
 picker_preview:
   text: Hero Split
   subtext: Prominent section block for landing pages.
   image: public/component-previews/page-sections/heroes/hero-split.svg
-  gallery:
-    image: public/component-previews/page-sections/heroes/hero-split.svg
-    fit: cover
 # No background.yml or haze.yml. The hero writes both itself, from `pattern`
 # and a switch, and a later glob entry would put the shared definitions back
 # over the top of the simpler ones.

@@ -61,16 +61,10 @@ preview:
     - key: label
   image: public/component-previews/building-blocks/wrappers/scroll-deck.svg
   icon: layers
-  gallery:
-    image: public/component-previews/building-blocks/wrappers/scroll-deck.svg
-    fit: cover
 picker_preview:
   text: Scroll Deck
   subtext: Equal-height cards that pin and stack as the wrapper scrolls.
   image: public/component-previews/building-blocks/wrappers/scroll-deck.svg
-  gallery:
-    image: public/component-previews/building-blocks/wrappers/scroll-deck.svg
-    fit: cover
 _inputs_from_glob:
   - /src/components/building-blocks/wrappers/scroll-deck/scroll-deck.cloudcannon.inputs.yml
   - /.cloudcannon/inputs/space-before.yml

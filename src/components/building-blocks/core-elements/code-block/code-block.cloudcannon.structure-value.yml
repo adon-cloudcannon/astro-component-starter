@@ -23,16 +23,10 @@ preview:
     - key: text
   image: public/component-previews/building-blocks/core-elements/code-block.svg
   icon: extension
-  gallery:
-    image: public/component-previews/building-blocks/core-elements/code-block.svg
-    fit: cover
 picker_preview:
   text: Code Block
   subtext: Tabbed, escaped code with optional line numbers and a copy button.
   image: public/component-previews/building-blocks/core-elements/code-block.svg
-  gallery:
-    image: public/component-previews/building-blocks/core-elements/code-block.svg
-    fit: cover
 _inputs_from_glob:
   - /src/components/building-blocks/core-elements/code-block/code-block.cloudcannon.inputs.yml
   - /.cloudcannon/inputs/space-before.yml

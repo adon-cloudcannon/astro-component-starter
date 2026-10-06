@@ -101,18 +101,12 @@ preview:
     - key: content.heading
   image: public/component-previews/page-sections/conversion/pricing-tiers.svg
   icon: payments
-  gallery:
-    image: public/component-previews/page-sections/conversion/pricing-tiers.svg
-    fit: cover
 picker_preview:
   text: Pricing Tiers
   subtext: >-
     Plan comparison cards with feature checklists, a highlighted tier, and an optional
     monthly/annual billing switch.
   image: public/component-previews/page-sections/conversion/pricing-tiers.svg
-  gallery:
-    image: public/component-previews/page-sections/conversion/pricing-tiers.svg
-    fit: cover
 _inputs_from_glob:
   - /src/components/page-sections/conversion/pricing-tiers/pricing-tiers.cloudcannon.inputs.yml
   - /.cloudcannon/inputs/background.yml

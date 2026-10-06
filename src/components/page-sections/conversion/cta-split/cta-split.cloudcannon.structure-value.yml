@@ -46,16 +46,10 @@ preview:
     - key: content.heading
   image: public/component-previews/page-sections/conversion/cta-split.svg
   icon: call_to_action
-  gallery:
-    image: public/component-previews/page-sections/conversion/cta-split.svg
-    fit: cover
 picker_preview:
   text: CTA Split
   subtext: Split layout CTA with button stack.
   image: public/component-previews/page-sections/conversion/cta-split.svg
-  gallery:
-    image: public/component-previews/page-sections/conversion/cta-split.svg
-    fit: cover
 _inputs_from_glob:
   - /src/components/page-sections/conversion/cta-split/cta-split.cloudcannon.inputs.yml
   - /.cloudcannon/inputs/background.yml

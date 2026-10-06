@@ -65,16 +65,10 @@ preview:
     - key: content.heading
   image: public/component-previews/page-sections/explainers/steps-section.svg
   icon: format_list_numbered
-  gallery:
-    image: public/component-previews/page-sections/explainers/steps-section.svg
-    fit: cover
 picker_preview:
   text: Steps Section
   subtext: A numbered "how it works" sequence with connected step markers.
   image: public/component-previews/page-sections/explainers/steps-section.svg
-  gallery:
-    image: public/component-previews/page-sections/explainers/steps-section.svg
-    fit: cover
 _inputs_from_glob:
   - /src/components/page-sections/explainers/steps-section/steps-section.cloudcannon.inputs.yml
   - /.cloudcannon/inputs/background.yml

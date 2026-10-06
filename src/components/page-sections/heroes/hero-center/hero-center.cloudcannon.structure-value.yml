@@ -44,17 +44,11 @@ preview:
     - key: content.heading
   image: public/component-previews/page-sections/heroes/hero-center.svg
   icon: web_asset
-  gallery:
-    image: public/component-previews/page-sections/heroes/hero-center.svg
-    fit: cover
 picker_preview:
   text: Hero Center
   subtext: Centered hero with heading, subtext, and buttons.
   image: public/component-previews/page-sections/heroes/hero-center.svg
   icon: web_asset
-  gallery:
-    image: public/component-previews/page-sections/heroes/hero-center.svg
-    fit: cover
 _inputs_from_glob:
   - /src/components/page-sections/heroes/hero-center/hero-center.cloudcannon.inputs.yml
   - /.cloudcannon/inputs/background.yml

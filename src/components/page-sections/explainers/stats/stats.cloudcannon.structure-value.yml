@@ -54,16 +54,10 @@ preview:
     - key: content.heading
   image: public/component-previews/page-sections/explainers/stats.svg
   icon: monitoring
-  gallery:
-    image: public/component-previews/page-sections/explainers/stats.svg
-    fit: cover
 picker_preview:
   text: Stats
   subtext: A row of big numbers with labels — the confident-metrics section.
   image: public/component-previews/page-sections/explainers/stats.svg
-  gallery:
-    image: public/component-previews/page-sections/explainers/stats.svg
-    fit: cover
 _inputs_from_glob:
   - /src/components/page-sections/explainers/stats/stats.cloudcannon.inputs.yml
   - /.cloudcannon/inputs/background.yml
