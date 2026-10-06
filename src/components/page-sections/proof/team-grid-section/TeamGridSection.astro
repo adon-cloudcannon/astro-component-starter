@@ -211,7 +211,19 @@ const offsetAt = (index: number) => (index % laneCount) % 2 === 1;
        odd ones down the first column on its own, which is what the lanes were
        doing by hand. */
     .team-grid .team-grid-lanes {
+      /* How far a column drifts either way, and the lift that keeps the drift
+         inside the wall.
+
+         The wall clips its columns, so a column that drifts down uncovers the
+         band at the top: at the moment the band enters, the rising column was
+         36 lower than it rests and a strip of band showed over the first
+         card. Lifting the whole grid by that same 36 means the drift's lowest
+         point is where the cards used to rest, and the top edge stays covered
+         the whole way past. The JS reads the range from here. */
+      --team-grid-range: 72px;
+
       display: grid;
+      translate: 0 calc(var(--team-grid-range) / -2);
       gap: 1rem;
       grid-template-columns: repeat(var(--team-grid-lanes, 2), minmax(0, 1fr));
       inset-block-start: 0;

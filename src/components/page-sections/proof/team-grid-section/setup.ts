@@ -13,6 +13,8 @@
  * card's column is its index modulo the lane count, which is all the drift
  * needs to know.
  */
+/* The fallback only; the lanes carry the real one so the CSS lift and the
+   drift cannot drift apart. */
 const RANGE = 72;
 
 type Wall = HTMLElement & { __teamGridDrift?: () => void };
@@ -24,10 +26,9 @@ export function setupTeamGrid(wall: Wall): void {
   if (!lanes) return;
 
   const cards = [...lanes.children] as HTMLElement[];
-  const laneCount = Math.max(
-    1,
-    Number(getComputedStyle(lanes).getPropertyValue("--team-grid-lanes")) || 1,
-  );
+  const styles = getComputedStyle(lanes);
+  const laneCount = Math.max(1, Number(styles.getPropertyValue("--team-grid-lanes")) || 1);
+  const range = parseFloat(styles.getPropertyValue("--team-grid-range")) || RANGE;
   if (cards.length < 2 || laneCount < 2) return;
 
   wall.dataset.drifting = "";
@@ -53,7 +54,7 @@ export function setupTeamGrid(wall: Wall): void {
       /* The left column rises and the right one falls, which is the way
          round it was asked for. */
       const direction = index % laneCount === 0 ? -1 : 1;
-      card.style.setProperty("--team-grid-drift", `${(progress * RANGE * direction).toFixed(1)}px`);
+      card.style.setProperty("--team-grid-drift", `${(progress * range * direction).toFixed(1)}px`);
     });
   };
 
