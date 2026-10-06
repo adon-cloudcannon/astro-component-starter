@@ -17,10 +17,10 @@ style:
 content.eyebrow:
   type: text
   comment: Short label above the heading.
-content.heading:
+content.heading.heading:
   type: text
   comment: The section's title.
-content.headingLevel:
+content.heading.headingLevel:
   type: select
   comment: Heading level for the title.
   options:
@@ -28,7 +28,7 @@ content.headingLevel:
       - h1
       - h2
       - h3
-content.headingSize:
+content.heading.headingSize:
   type: select
   comment: Size of the title, independent of its level.
   options:
@@ -92,6 +92,13 @@ content.centreImageAlt:
   comment: Alt text for the middle image.
 
 # --- section wrapper inputs
+# The heading's level and size belong with the heading, the way the hero's do.
+content.heading:
+  type: object
+  label: Heading
+  options:
+    subtype: object
+
 content.sectionLabel:
   type: text
   comment: Accessible name for the section, used by screen readers.

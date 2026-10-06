@@ -7,9 +7,10 @@ value:
   content:
     sectionLabel: ""
     eyebrow: ""
-    heading: Two workflows. One source of truth.
-    headingLevel: h2
-    headingSize: lg
+    heading:
+      heading: Two workflows. One source of truth.
+      headingLevel: h2
+      headingSize: lg
     subtext: Editors edit visually, developers stay in code.
     subtextSize: md
     subtextWidth: ""

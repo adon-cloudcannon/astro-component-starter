@@ -57,6 +57,7 @@ pageSections:
       paddingVertical: 4xl
   - _component: page-sections/proof/logo-cloud
     content:
+      sectionLabel: ''
       heading: BUILT BY DEVS. RUN BY EDITORS.
       logos:
         - image: /src/assets/images/marketing/logos/twitch.svg
@@ -92,6 +93,11 @@ pageSections:
     style:
       backgroundColor: sand
       headingPlacement: inline
+      grayscale: true
+      scrolling: false
+      maxContentWidth: xl
+      paddingHorizontal: gutter
+      paddingVertical: 2xl
   - _component: page-sections/conversion/cta-center
     content:
       sectionLabel: ''
@@ -138,9 +144,10 @@ pageSections:
     content:
       sectionLabel: ''
       eyebrow: ''
-      heading: Two workflows. One source of truth.
-      headingLevel: h2
-      headingSize: lg
+      heading:
+        heading: Two workflows. One source of truth.
+        headingLevel: h2
+        headingSize: lg
       subtext: Editors edit visually, developers stay in code — and every change lands
         in the same Git repository.
       subtextSize: lg

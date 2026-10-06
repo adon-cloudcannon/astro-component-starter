@@ -40,7 +40,11 @@ type PanelProps = {
 
 /* `content` and `style` are the editor's tabs, flattened straight back into
    the names below. `at()` writes the frontmatter path a binding needs. */
-const { props, at } = nestedProps(Astro.props);
+const { props, at } = nestedProps(Astro.props, {
+  /* The heading's level and size belong with the heading, the way the hero's
+     do. The panels keep their own `heading` — that one is an item's. */
+  nest: { heading: ["heading", "headingLevel", "headingSize"] },
+});
 
 const {
   eyebrow = "",
