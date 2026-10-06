@@ -28,6 +28,17 @@ const {
   ],
   /** What the button announces, since the picture itself is decorative. */
   label = "Take a picture",
+  /**
+   * How a shot sits in its window.
+   *
+   * `contain` is the default and is right for the illustrations this was
+   * built for: they are cut-outs, so they sit *on* the scratched colour with
+   * a margin and the colour is half the picture. A photograph has its own
+   * edges, so contained it reads as a thumbnail pasted on a coloured card
+   * with bars down two sides. `cover` fills the window and crops, which is
+   * what a print is.
+   */
+  fit = "contain",
   class: className,
   _component,
   ...htmlAttributes
@@ -68,8 +79,11 @@ const roll = (Array.isArray(shots) ? shots : []).filter((shot) => shot?.source);
             palette colour per shot. A near-white window left the frame
             invisible: a polaroid is its border, and the border only reads
             against something. */}
+        {/* The modifier goes on the window rather than on this component's
+            root, so nothing prop-driven lands on an element CloudCannon keeps
+            while swapping its contents. */}
         <span
-          class="polaroid-window scratched"
+          class:list={["polaroid-window", "scratched", fit === "cover" && "fills"]}
           style={`--scratch-fill: ${shot.color || FILMS[at % FILMS.length]}`}
         >
           <Image source={shot.source} alt={shot.alt} decorative={!shot.alt} />
@@ -182,6 +196,51 @@ const roll = (Array.isArray(shots) ? shots : []).filter((shot) => shot?.source);
       inline-size: 100%;
       object-fit: contain;
       padding: 0.35rem;
+    }
+
+    /* A photograph fills its window and is cropped by it, the whole square,
+       including the inset the illustrations need. The scratched colour is
+       still painted underneath: it is what the print is backed with while the
+       picture decodes, and it goes on showing through the frame. */
+    .polaroid-window.fills {
+      /* Stretch, not centre. The window is a grid and `place-items: center`
+         leaves its track sized to its content, so the picture's `block-size:
+         100%` resolved against an auto height and fell back to its own: the
+         fit was `cover` and measured as applied while the print still drew a
+         123x73 letterbox. */
+      place-items: stretch;
+    }
+
+    /* Every wrapper between the window and the picture.
+
+       `Image` draws a `.image > .image-inner > picture > img`, and the grid
+       item is the outer div: stretched, it filled the window while the
+       `.image-inner` inside it stayed at the picture's own 123x73 and the
+       `cover` had nothing to cover. Each of them has to be told to fill, or
+       the fit measures as applied and the print still draws a letterbox. */
+    .polaroid-window.fills .image,
+    .polaroid-window.fills .image-inner,
+    .polaroid-window.fills picture {
+      block-size: 100%;
+      display: block;
+      inline-size: 100%;
+    }
+
+    /* Out of flow, against the window itself.
+
+       `block-size: 100%` on the picture loses to `Image`'s own rule — same
+       specificity, later in the layer — so the wrappers filled the window
+       while the picture inside them kept its own height and `cover` had a
+       123x73 box to cover. Pinned to the window's edges there is no height to
+       argue about: the window is the containing block, and it is already
+       `position: relative` for the scratched sheet. */
+    .polaroid-window.fills img {
+      block-size: 100%;
+      inline-size: 100%;
+      inset: 0;
+      object-fit: cover;
+      padding: 0;
+      position: absolute;
     }
 
 

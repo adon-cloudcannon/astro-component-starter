@@ -192,6 +192,7 @@ pageSections:
     imageAlt: ""
     camera:
       label: Take a picture
+      fit: cover
       shots:
         - source: /src/assets/images/marketing/careers-team-hill.jpg
           alt: ""
