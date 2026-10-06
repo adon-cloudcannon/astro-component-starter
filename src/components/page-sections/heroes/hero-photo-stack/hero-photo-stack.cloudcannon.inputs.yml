@@ -149,7 +149,7 @@ style.maxContentWidth:
     values:
       - id: xl
         name: Full
-      - id: md
+      - id: lg
         name: Compact
 style.paddingHorizontal:
   hidden: true

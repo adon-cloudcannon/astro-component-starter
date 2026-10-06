@@ -95,9 +95,9 @@ pageSections:
       headingPlacement: inline
       grayscale: true
       scrolling: false
-      maxContentWidth: md
+      maxContentWidth: xl
       paddingHorizontal: gutter
-      paddingVertical: md
+      paddingVertical: 2xl
   - _component: page-sections/conversion/cta-center
     content:
       sectionLabel: ''

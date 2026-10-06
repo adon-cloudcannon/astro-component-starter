@@ -161,12 +161,14 @@ content.sectionLabel:
   comment: Names the section in the editor and sets its anchor id.
 style.maxContentWidth:
   type: select
-  comment: How wide the band's content runs. Full is the 1040 content column.
+  comment: >-
+    How wide the band's content runs. Full is the 1040 content column; compact
+    is 768, which still holds a heading beside a row of marks.
   options:
     values:
       - id: xl
         name: Full
-      - id: md
+      - id: lg
         name: Compact
 style.paddingHorizontal:
   type: select
