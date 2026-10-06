@@ -87,7 +87,6 @@ const {
   class: className,
   useDefaultEditableBinding = false,
   _component,
-  "data-children-prop": childrenDataProp,
   ...htmlAttributes
 } = props;
 
@@ -157,7 +156,6 @@ const feedKeyframes = feedSteps
   : "";
 
 /* One name for both halves of the region, so they cannot disagree. */
-const panelsProp = childrenDataProp ?? (useDefaultEditableBinding ? at("panels") : undefined);
 ---
 
 <CustomSection
@@ -204,22 +202,14 @@ const panelsProp = childrenDataProp ?? (useDefaultEditableBinding ? at("panels")
     data-children-prop={at("buttonSections")}
   />
 
-    {/* Both halves together. `data-editable="array"` with no `data-prop` is
-        not a weaker region, it is a fatal one: the editor replaces the whole
-        thing with "Array editable regions require a 'data-prop' HTML
-        attribute but none was provided". The prop is conditional, so the
-        region has to be. */}
-  <div
-    class="workflow-columns"
-    data-editable={panelsProp ? "array" : undefined}
-    data-prop={panelsProp}
-  >
+  {/* No array region here any more. The columns are three named objects, so
+      there is nothing to add to or reorder — each field binds where it lives,
+      and an array region pointed at a key that no longer exists is fatal
+      rather than weak: the editor replaces the whole thing with its error. */}
+  <div class="workflow-columns">
     {panelList.map((panel, index) => (
       <Fragment>
-        <div
-          class="workflow-panel"
-          data-editable="array-item"
-        >
+        <div class="workflow-panel">
           {(panel.image ?? {}).imageSource && (
             <Image
               class="workflow-illustration"
