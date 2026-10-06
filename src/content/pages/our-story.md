@@ -49,8 +49,8 @@ pageSections:
         source: /src/assets/images/marketing/our-story-huddle.jpg
         alt: The team crowded around a pair of laptops at a long table
       - _component: page-sections/proof/photo-strip/photo-strip-image
-        source: /src/assets/images/marketing/our-story-lakeside.jpg
-        alt: The team talking over drinks on a deck above the lake
+        source: /src/assets/images/marketing/our-story-spread.jpg
+        alt: Someone laying out a spread of food for the team
     imageWidth: 393
     aspectRatio: 393 / 275
     backgroundColor: dark
