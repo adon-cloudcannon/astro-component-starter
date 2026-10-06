@@ -353,7 +353,10 @@ const mirror = rootMirror({
       border: 0;
       margin-inline: auto;
       max-inline-size: min(100%, 749px);
-      padding: var(--spacing-3xl) var(--spacing-2xl);
+      /* Sides only. With 64 at the top as well, the eyebrow sat 88 above the
+         words where the design draws 24: the band's own padding is what holds
+         the air, and the box is only here to hold the measure. */
+      padding: 0 var(--spacing-2xl);
     }
 
     /* The quote's own card padding is the centred form's; split, the card is
@@ -372,7 +375,9 @@ const mirror = rootMirror({
        measured as applied because the measurement was taken on the wrong
        element. */
     .testimonial-section.is-split .quote,
-    .testimonial-section.is-split .quote :is(p, blockquote) {
+    .testimonial-section.is-split .quote :is(p, blockquote),
+    .testimonial-section:not(.is-split) .quote,
+    .testimonial-section:not(.is-split) .quote :is(p, blockquote) {
       font-size: var(--font-size-heading-sm);
       font-weight: var(--font-weight-semibold);
       line-height: 1.285;
