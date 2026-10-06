@@ -20,7 +20,7 @@
  */
 import { chromium } from "playwright-core";
 
-const [url, out, width = "1280", height = "900", selector] = process.argv.slice(2);
+const [url, out, width = "1280", height = "900", selector, evaluate] = process.argv.slice(2);
 
 if (!url || !out) {
   console.error("usage: npm run shot -- <url> <out.png> [width] [height] [selector]");
@@ -38,6 +38,13 @@ try {
     /* Astro transcodes each image on its first request, so a fresh server
        serves a page whose pictures are still being made. */
     await page.waitForTimeout(600);
+  }
+
+  /* An optional snippet run in the page before the shot, for isolating what
+     is painting something: hide a layer, toggle a class, force a state. */
+  if (evaluate) {
+    await page.evaluate(evaluate);
+    await page.waitForTimeout(300);
   }
 
   await page.screenshot({ path: out });

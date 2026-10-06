@@ -62,6 +62,14 @@
        without any host having to declare one. */
     container-type: inline-size;
     isolation: isolate;
+    /* The sheet is an absolutely positioned `::before` with `inset: 0`, so it
+       sizes itself against the nearest POSITIONED ancestor — not against the
+       host, unless the host is one. On a static host it escaped to whatever
+       section wrapper happened to be `relative` and painted the whole band:
+       `isolation` clamps where it lands in the paint order but not how big it
+       is, so the scratches came out over a button two blocks above it.
+       Every host that worked was one that happened to set this itself. */
+    position: relative;
   }
 
   /**
