@@ -54,6 +54,7 @@ _inputs_from_glob:
 groups:
   - heading: Content
     inputs:
+      - eyebrow
       - text
       - authorName
       - authorDescription
