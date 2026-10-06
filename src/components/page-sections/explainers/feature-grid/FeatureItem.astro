@@ -63,6 +63,15 @@ const {
    * changes nothing", sets 17 and can say so.
    */
   descriptionSize = "lg",
+  /**
+   * A hairline between the card's head and its line.
+   *
+   * Careers draws one across all nine of its benefit cards, the full inner
+   * width, in the same dark sand the signpost card already rules with. It is
+   * off everywhere else, so it is asked for rather than inferred: a rule
+   * under a one-line title on a card with no body reads as a strikethrough.
+   */
+  divider = false,
   alignmentHorizontal = "start",
   class: className,
   useDefaultEditableBinding: _useDefaultEditableBinding = false,
@@ -137,6 +146,7 @@ const headingSize = titleSize ?? (signpost ? "lg" : imageSource || !iconName ? "
         {title}
       </Heading>
     </div>
+    {divider && description && <div class="feature-rule feature-divider"></div>}
     <Text
       class="feature-description"
       alignmentHorizontal={alignmentHorizontal}
@@ -315,6 +325,23 @@ const headingSize = titleSize ?? (signpost ? "lg" : imageSource || !iconName ? "
       max-block-size: none;
       max-inline-size: 100%;
       object-fit: contain;
+    }
+
+    /* The design draws it 26 under the icon disc and 22 over the line, which
+       is the card's own rhythm rather than the signpost's 24. The rule runs
+       the card's inner width, so it needs nothing of its own to stretch. */
+    .feature-item .feature-divider {
+      background-color: var(--dark-sand);
+      block-size: var(--border-width-sm, 1px);
+      /* A 1px div has no width of its own, so in a centred card it collapsed
+         to nothing and measured as applied while drawing no rule at all. */
+      align-self: stretch;
+      inline-size: 100%;
+      --space-before: 1.625rem;
+    }
+
+    .feature-item .feature-divider + .feature-description {
+      --space-before: 1.375rem;
     }
 
     .feature-item.is-signpost .feature-rule {
