@@ -198,11 +198,31 @@ const subtextCap = subtextMeasure(subtextWidth);
       inline-size: 100%;
     }
 
-    /* The design draws the Git composite 1000 wide in a 600-tall frame, so
-       the panel is about 46 deeper than the picture top and bottom. */
+    /* The picture sits on the panel's floor rather than inside a margin.
+
+       The composite is drawn cut off at its foot — the commit list runs out
+       of the frame rather than ending — so a gap under it turns a list that
+       carries on into a list that stops, and the sheet shows through where
+       the picture should still be going. 46 at the head and the sides, none
+       at the foot.
+
+       `overflow: hidden` because the panel is rounded and the picture is
+       square where the two meet: without it the picture's bottom corners sit
+       outside the panel's. */
     .cta-center .cta-center-media.scratched {
       border-radius: var(--radius-card);
-      padding: 46px;
+      overflow: hidden;
+      padding: 46px 46px 0;
+    }
+
+    /* All four corners, not the two being changed: a single-corner radius
+       leaves the others carrying whatever they had, and `Image` rounds all
+       four. */
+    .cta-center .cta-center-media.scratched .cta-center-image img {
+      border-end-end-radius: 0;
+      border-end-start-radius: 0;
+      border-start-end-radius: var(--radius-card);
+      border-start-start-radius: var(--radius-card);
     }
 
     /* The picture carried a 48px top margin inside the panel, which pushed it
