@@ -3,10 +3,12 @@ icon: format_quote
 description: One customer quote on a card, in any of the four layouts the design draws.
 value:
   _component: page-sections/proof/testimonial-quote
+  eyebrow: ""
   variant: static
   quoteSize: sm
   tone: base
   cardWidth: full
+  alignment: start
   bordered: false
   quotes:
     - text: >-
@@ -166,10 +168,12 @@ _structures:
 groups:
   - heading: Content
     inputs:
+      - eyebrow
       - variant
       - quoteSize
       - tone
       - cardWidth
+      - alignment
       - bordered
       - quotes
   - heading: Section settings

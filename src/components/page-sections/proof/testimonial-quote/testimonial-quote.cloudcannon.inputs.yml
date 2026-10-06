@@ -1,3 +1,9 @@
+eyebrow:
+  type: text
+  label: Eyebrow
+  comment: >-
+    A small label over the card, in the band rather than on it. Leave empty
+    for none.
 variant:
   type: select
   label: Layout
@@ -57,6 +63,18 @@ cardWidth:
         name: Medium
       - id: narrow
         name: Narrow
+alignment:
+  type: select
+  label: Alignment
+  comment: >-
+    Which way the card sets its words. Centred is for a band given over to a
+    statement; it does nothing on the two split layouts.
+  options:
+    values:
+      - id: start
+        name: Left
+      - id: center
+        name: Centred
 bordered:
   type: switch
   label: Outline the card

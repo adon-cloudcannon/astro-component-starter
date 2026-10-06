@@ -23,6 +23,7 @@
  * card's own accent, a rule between the quote and the person.
  */
 import CustomSection from "@builders/custom-section/CustomSection.astro";
+import SimpleText from "@core-elements/simple-text/SimpleText.astro";
 import TestimonialQuoteItem from "./TestimonialQuoteItem.astro";
 
 type Quote = {
@@ -48,6 +49,26 @@ const {
    * `carousel` is the only one that reads more than the first quote.
    */
   variant = "static",
+  /**
+   * A label over the card, in the band rather than on it.
+   *
+   * Our Values puts "WE BELIEVE" above its statement. It sits outside the
+   * card on purpose: with `plain` there is no card to sit on, and on the
+   * other tones a label inside the surface reads as part of the quote.
+   */
+  eyebrow = "",
+  /**
+   * Which way the card sets its words.
+   *
+   * `start` is the card as the sheet draws it, and is what every quote with
+   * a person wants: the face and the name hang off the left edge. `center`
+   * is the band given over to a statement, where the design centres the
+   * words under a centred label.
+   *
+   * It does nothing on the splits. There the quote and the person are two
+   * columns against a rule, and centring either one pulls it off that rule.
+   */
+  alignment = "start",
   quotes = [],
   /**
    * The quote's size, which the sheet steps down as the quote gets longer:
@@ -134,6 +155,11 @@ const items: Quote[] = quotes as Quote[];
    A comment cannot go between the attributes themselves: a JSX comment in
    attribute position is a parse error in Astro, not a comment. */
 const cardScheme = tone === "plain" ? undefined : tone === "light" ? "light" : "dark";
+
+/* See the note on the prop: a split is two columns against a rule and has
+   nothing to centre. */
+const isSplit = layout === "split-person" || layout === "split-quote";
+const align = alignment === "center" && !isSplit ? "center" : undefined;
 ---
 
 {items.length > 0 && (
@@ -153,9 +179,24 @@ const cardScheme = tone === "plain" ? undefined : tone === "light" ? "light" : "
     useDefaultEditableBinding={useDefaultEditableBinding}
     {...htmlAttributes}
   >
-    <div class="testimonial-quote-frame" data-width={cardWidth === "full" ? undefined : cardWidth}>
+    {eyebrow && (
+      <SimpleText
+        class="eyebrow testimonial-quote-eyebrow"
+        size="sm"
+        alignmentHorizontal={align === "center" ? "center" : "start"}
+        text={eyebrow}
+        data-prop="eyebrow"
+      />
+    )}
+
+    <div
+      class="testimonial-quote-frame"
+      data-width={cardWidth === "full" ? undefined : cardWidth}
+      data-align={align}
+    >
     <div
       class="testimonial-quote-card"
+      data-align={align}
       data-layout={layout}
       data-quote-size={quoteSize === "lg" ? "lg" : undefined}
       data-bordered={bordered ? "" : undefined}
@@ -327,6 +368,48 @@ const cardScheme = tone === "plain" ? undefined : tone === "light" ? "light" : "
         --space-before: var(--testimonial-quote-pad);
 
         margin-block-start: var(--testimonial-quote-pad);
+      }
+
+      /* --- the label -------------------------------------------------- */
+
+      /* The gap under it is flow's own 24, which is what the design draws
+         between the label and the words. Nothing to set: the eyebrow and the
+         frame are both children of CustomSection's flow container, and the
+         site-wide rule that pulls an eyebrow tight to a heading only fires on
+         a heading, which the card is not. */
+      .testimonial-quote-eyebrow {
+        /* Centred, it is centred against the band, not against a card that
+           may be 72% of it. The frame below does its own centring. */
+        inline-size: 100%;
+      }
+
+      /* --- centred ------------------------------------------------------ */
+
+      /* A band given over to a statement rather than to something somebody
+         said. The words centre, and so does everything that hangs off them:
+         left where they were, a centred quote came out with its face and its
+         name tucked against the left edge of a card they were no longer
+         anywhere near. */
+      .testimonial-quote-card[data-align="center"] {
+        text-align: center;
+      }
+
+      .testimonial-quote-card[data-align="center"] .testimonial-quote-foot,
+      .testimonial-quote-card[data-align="center"] .testimonial-quote-who {
+        justify-content: center;
+      }
+
+      /* The foot is a row with the mark pushed to its far end, which is what
+         `space-between` is for and is wrong once the row is centred: with two
+         things in it the person went left and the mark right, either side of
+         the space they were meant to share. */
+      .testimonial-quote-card[data-align="center"] .testimonial-quote-foot {
+        flex-wrap: wrap;
+      }
+
+      .testimonial-quote-card[data-align="center"] .testimonial-quote-link {
+        display: flex;
+        justify-content: center;
       }
 
       /* --- the quote ------------------------------------------------- */

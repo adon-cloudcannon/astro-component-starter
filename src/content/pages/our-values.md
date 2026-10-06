@@ -88,10 +88,12 @@ pageSections:
             imageAlt: ""
     backgroundColor: light-sand
   - _component: page-sections/proof/testimonial-quote
+    eyebrow: WE BELIEVE
     variant: static
     quoteSize: sm
     tone: plain
-    cardWidth: full
+    cardWidth: medium
+    alignment: center
     quotes:
       - text: >-
           Editors shouldn't need a developer to fix a typo. Developers shouldn't lose a week to
