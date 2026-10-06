@@ -1,86 +1,89 @@
 label: Card Collection
 icon: grid_view
 description: Grid of linked cards for services, case studies, projects, or resources.
+tabbed: true
 value:
   _component: page-sections/collections/card-collection
-  collection: ""
-  eyebrow: What we do
-  heading: Services built for the long run
-  headingLevel: h2
-  subtext: ""
-  items:
-    - image: /src/assets/images/component-docs/dunedin-cliff.jpg
-      imageAlt: Sea cliffs above a turquoise bay
-      link: "#"
-      contentSections:
-        - _component: building-blocks/core-elements/badge
-          text: Strategy
-          variant: plain
-          size: sm
-          showArrow: false
-        - _component: building-blocks/core-elements/heading
-          text: Discovery and planning
-          level: h3
-          size: xs
-        - _component: building-blocks/core-elements/simple-text
-          text: Two weeks of research, content audit, and a sitemap you can actually build against.
-          size: sm
-    - image: /src/assets/images/component-docs/castle.jpg
-      imageAlt: Ruined stone castle under a starry night sky
-      link: "#"
-      contentSections:
-        - _component: building-blocks/core-elements/badge
-          text: Design
-          variant: plain
-          size: sm
-          showArrow: false
-        - _component: building-blocks/core-elements/heading
-          text: Design systems
-          level: h3
-          size: xs
-        - _component: building-blocks/core-elements/simple-text
-          text: A component library and token set your team can extend without a redesign.
-          size: sm
-    - image: /src/assets/images/component-docs/sunset.jpg
-      imageAlt: Coastal cliffs at dusk with the sun low over the sea
-      link: "#"
-      contentSections:
-        - _component: building-blocks/core-elements/badge
-          text: Build
-          variant: plain
-          size: sm
-          showArrow: false
-        - _component: building-blocks/core-elements/heading
-          text: Site build and migration
-          level: h3
-          size: xs
-        - _component: building-blocks/core-elements/simple-text
-          text: Your content moved across, page by page, with redirects and no lost search rankings.
-          size: sm
-  layout: grid
-  columns: 3
-  gap: lg
-  aspectRatio: landscape
-  sectionLabel: ""
-  maxContentWidth: xl
-  paddingHorizontal: gutter
-  paddingVertical: 4xl
-  backgroundColor: light-sand
-  background:
-    type: image
-    imageSource: ""
-    imageAlt: ""
-    positionVertical: top
-    positionHorizontal: center
-    fixed: false
-    priority: false
-    mask: none
-    overlay: 0
+  content:
+    sectionLabel: ""
+    collection: ""
+    eyebrow: What we do
+    heading: Services built for the long run
+    headingLevel: h2
+    subtext: ""
+    items:
+      - image: /src/assets/images/component-docs/dunedin-cliff.jpg
+        imageAlt: Sea cliffs above a turquoise bay
+        link: "#"
+        contentSections:
+          - _component: building-blocks/core-elements/badge
+            text: Strategy
+            variant: plain
+            size: sm
+            showArrow: false
+          - _component: building-blocks/core-elements/heading
+            text: Discovery and planning
+            level: h3
+            size: xs
+          - _component: building-blocks/core-elements/simple-text
+            text: Two weeks of research, content audit, and a sitemap you can actually build against.
+            size: sm
+      - image: /src/assets/images/component-docs/castle.jpg
+        imageAlt: Ruined stone castle under a starry night sky
+        link: "#"
+        contentSections:
+          - _component: building-blocks/core-elements/badge
+            text: Design
+            variant: plain
+            size: sm
+            showArrow: false
+          - _component: building-blocks/core-elements/heading
+            text: Design systems
+            level: h3
+            size: xs
+          - _component: building-blocks/core-elements/simple-text
+            text: A component library and token set your team can extend without a redesign.
+            size: sm
+      - image: /src/assets/images/component-docs/sunset.jpg
+        imageAlt: Coastal cliffs at dusk with the sun low over the sea
+        link: "#"
+        contentSections:
+          - _component: building-blocks/core-elements/badge
+            text: Build
+            variant: plain
+            size: sm
+            showArrow: false
+          - _component: building-blocks/core-elements/heading
+            text: Site build and migration
+            level: h3
+            size: xs
+          - _component: building-blocks/core-elements/simple-text
+            text: Your content moved across, page by page, with redirects and no lost search rankings.
+            size: sm
+    layout: grid
+    columns: 3
+    gap: lg
+    aspectRatio: landscape
+    maxContentWidth: xl
+    paddingHorizontal: gutter
+    paddingVertical: 4xl
+  style:
+    backgroundColor: light-sand
+    background:
+      type: image
+      imageSource: ""
+      imageAlt: ""
+      positionVertical: top
+      positionHorizontal: center
+      fixed: false
+      priority: false
+      mask: none
+      overlay: 0
 preview:
   text:
     - Card Collection
   subtext:
-    - key: heading
+    - key: content.heading
   image: public/component-previews/page-sections/collections/card-collection.svg
   icon: grid_view
   gallery:

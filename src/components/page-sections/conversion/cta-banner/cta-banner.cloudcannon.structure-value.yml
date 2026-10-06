@@ -1,33 +1,36 @@
 label: CTA Banner
 icon: campaign
 description: A short full-width band with a heading, a link, and a drawing in the corner.
+tabbed: true
 value:
   _component: page-sections/conversion/cta-banner
-  heading: ""
-  headingSize: lg
-  headingLevel: h2
-  linkText: ""
-  link: ""
-  imageSource: ""
-  imageAlt: ""
-  sectionLabel: ""
-  maxContentWidth: xl
-  paddingHorizontal: gutter
-  paddingVertical: 2xl
-  backgroundColor: pacific
-  background:
-    type: image
+  content:
+    sectionLabel: ""
+    heading: ""
+    headingSize: lg
+    headingLevel: h2
+    linkText: ""
+    link: ""
     imageSource: ""
     imageAlt: ""
-    positionVertical: top
-    positionHorizontal: center
-    fixed: false
-    priority: false
-    mask: none
-    overlay: 0
+    maxContentWidth: xl
+    paddingHorizontal: gutter
+    paddingVertical: 2xl
+  style:
+    backgroundColor: pacific
+    background:
+      type: image
+      imageSource: ""
+      imageAlt: ""
+      positionVertical: top
+      positionHorizontal: center
+      fixed: false
+      priority: false
+      mask: none
+      overlay: 0
 preview:
   text:
-    - key: heading
+    - key: content.heading
     - CTA Banner
   icon: campaign
 picker_preview:

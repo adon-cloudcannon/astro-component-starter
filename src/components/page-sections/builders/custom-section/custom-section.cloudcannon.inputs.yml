@@ -1,12 +1,28 @@
-label:
+# The two tabs. A structure value draws its first-level nested keys as tabs
+# when it sets `tabbed: true`; `groups` only ever draws as accordions. The
+# subtype is pinned so the tabbing stops here — left unsaid these inherit it,
+# and then every field inside them has to be an object too.
+content:
+  type: object
+  label: Content
+  options:
+    subtype: object
+style:
+  type: object
+  label: Style
+  comment: What paints the band.
+  options:
+    subtype: object
+
+content.label:
   type: text
   comment: Names the section in the editor and sets its anchor id.
-contentSections:
+content.contentSections:
   type: array
   comment: Content blocks inside the section.
   options:
     structures: _structures.containerSections
-maxContentWidth:
+content.maxContentWidth:
   type: select
   comment: Maximum width of the content.
   options:
@@ -27,7 +43,7 @@ maxContentWidth:
         name: 2xl
       - id: 3xl
         name: 3xl
-paddingHorizontal:
+content.paddingHorizontal:
   type: select
   comment: Horizontal padding around the content.
   options:
@@ -56,7 +72,7 @@ paddingHorizontal:
         name: 5xl
       - id: 6xl
         name: 6xl
-paddingVertical:
+content.paddingVertical:
   type: select
   comment: Vertical padding around the content.
   options:
@@ -83,7 +99,7 @@ paddingVertical:
         name: 5xl
       - id: 6xl
         name: 6xl
-colorScheme:
+style.colorScheme:
   hidden: true
   # Carried by the band colour. Every band the design draws names its own ink,
   # and `base` on its own does not say whether you get the cream band or the
@@ -99,14 +115,14 @@ colorScheme:
         name: Light
       - id: dark
         name: Dark
-lockColorScheme:
+style.lockColorScheme:
   hidden: true
   # Carried by the band colour: every named band locks, because there is no
   # dark mode here for an unlocked one to follow.
   type: switch
   label: Lock color scheme
   comment: Ignores the site theme toggle. Only applies when Color Scheme is Light or Dark.
-backgroundColor:
+style.backgroundColor:
   type: select
   label: Background colour
   comment: The colour this band is painted, and the ink that goes with it.
@@ -143,10 +159,10 @@ backgroundColor:
         - key: color
       text:
         - key: name
-rounded:
+content.rounded:
   type: switch
   comment: Rounds the section's corners.
-useDefaultEditableBinding:
+content.useDefaultEditableBinding:
   type: switch
   comment: Enables adding and reordering content blocks on the canvas.
   hidden: true

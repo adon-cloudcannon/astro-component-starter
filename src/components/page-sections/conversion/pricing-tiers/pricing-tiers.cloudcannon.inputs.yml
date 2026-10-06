@@ -1,10 +1,26 @@
-accent:
+# The two tabs. A structure value draws its first-level nested keys as tabs
+# when it sets `tabbed: true`; `groups` only ever draws as accordions. The
+# subtype is pinned so the tabbing stops here — left unsaid these inherit it,
+# and then every field inside them has to be an object too.
+content:
+  type: object
+  label: Content
+  options:
+    subtype: object
+style:
+  type: object
+  label: Style
+  comment: What paints the band.
+  options:
+    subtype: object
+
+content.accent:
   type: text
   comment: >-
     A palette colour for this tier, mixed into the card at 12% so the ladder
     reads as a ladder. Empty leaves the card the same sand as its neighbours,
     which is what the design draws.
-cardColor:
+content.cardColor:
   type: select
   comment: >-
     Which of the two sands the cards are. A card is a shade off its band, and
@@ -17,13 +33,13 @@ cardColor:
         name: Light sand
       - id: muted
         name: Dark sand
-eyebrow:
+content.eyebrow:
   type: text
   comment: Short label above the heading.
-heading:
+content.heading:
   type: text
   comment: Main heading for the section.
-headingSize:
+content.headingSize:
   type: select
   comment: Size of the title, independent of its level.
   options:
@@ -40,7 +56,7 @@ headingSize:
         name: Header 5
       - id: xs
         name: Header 6
-headingLevel:
+content.headingLevel:
   type: select
   comment: Heading level for the title. Use h1 once per page, on the first section.
   options:
@@ -48,7 +64,7 @@ headingLevel:
       - h1
       - h2
       - h3
-subtext:
+content.subtext:
   type: markdown
   comment: Supporting copy beneath the heading.
   options:
@@ -63,7 +79,7 @@ subtext:
     underline: false
     bulletedlist: false
     numberedlist: false
-alignmentHorizontal:
+content.alignmentHorizontal:
   type: select
   comment: Whether the header is centred over the tiers or runs from the left.
   options:
@@ -72,7 +88,7 @@ alignmentHorizontal:
         name: Center
       - id: start
         name: Start
-subtextSize:
+content.subtextSize:
   type: select
   comment: >-
     How big the supporting line under the heading is. Regular is the size the
@@ -85,7 +101,7 @@ subtextSize:
         name: Regular
       - id: xl
         name: Large
-subtextWidth:
+content.subtextWidth:
   type: select
   label: Subtext width
   comment: >-
@@ -104,22 +120,22 @@ subtextWidth:
         name: Wide
       - id: xl
         name: Extra wide
-showAnnualPricing:
+content.showAnnualPricing:
   type: switch
   comment: Shows a Monthly/Annual toggle above the cards. Tiers can then set an annual price.
-monthlyLabel:
+content.monthlyLabel:
   type: text
   comment: Label before the billing toggle, for monthly pricing.
   hidden: "!showAnnualPricing"
-annualLabel:
+content.annualLabel:
   type: text
   comment: Label after the billing toggle, for annual pricing.
   hidden: "!showAnnualPricing"
-annualBadge:
+content.annualBadge:
   type: text
   comment: Saving shown in brackets after the annual label, e.g. "save 17%".
   hidden: "!showAnnualPricing"
-defaultInterval:
+content.defaultInterval:
   type: select
   comment: Which billing option is selected when the page loads.
   hidden: "!showAnnualPricing"
@@ -129,7 +145,7 @@ defaultInterval:
         name: Monthly
       - id: annual
         name: Annual
-garden:
+content.garden:
   type: switch
   label: Plant a garden
   comment: >-
@@ -137,7 +153,7 @@ garden:
     foot of the first, a vine up the next, flowers on the one after, and a
     cabbage tree out of the top of the tallest. Drawn from the cards
     themselves, so it follows however many tiers there are.
-tiers:
+content.tiers:
   type: array
   label: Tiers
   comment: Plan cards rendered in the grid.
@@ -148,10 +164,10 @@ tiers:
 # Configures the CustomSection wrapper, not this section's own content. Inline
 # per component so a project can trim the size/padding lists in place.
 # `new:component` slices from this marker down — keep the marker line verbatim.
-sectionLabel:
+content.sectionLabel:
   type: text
   comment: Names the section in the editor and sets its anchor id.
-maxContentWidth:
+content.maxContentWidth:
   type: select
   comment: Maximum width of the content.
   options:
@@ -172,7 +188,7 @@ maxContentWidth:
         name: 2xl
       - id: 3xl
         name: 3xl
-paddingHorizontal:
+content.paddingHorizontal:
   type: select
   comment: Horizontal padding around the content.
   options:
@@ -195,7 +211,7 @@ paddingHorizontal:
         name: 2xl
       - id: 3xl
         name: 3xl
-paddingVertical:
+content.paddingVertical:
   type: select
   comment: Vertical padding around the content.
   options:
@@ -222,7 +238,7 @@ paddingVertical:
         name: 5xl
       - id: 6xl
         name: 6xl
-colorScheme:
+style.colorScheme:
   hidden: true
   # Carried by the band colour. Every band the design draws names its own ink,
   # and `base` on its own does not say whether you get the cream band or the
@@ -238,14 +254,14 @@ colorScheme:
         name: Light
       - id: dark
         name: Dark
-lockColorScheme:
+style.lockColorScheme:
   hidden: true
   # Carried by the band colour: every named band locks, because there is no
   # dark mode here for an unlocked one to follow.
   type: switch
   label: Lock color scheme
   comment: Ignores the site theme toggle. Only applies when Color Scheme is Light or Dark.
-backgroundColor:
+style.backgroundColor:
   type: select
   label: Background colour
   comment: The colour this band is painted, and the ink that goes with it.

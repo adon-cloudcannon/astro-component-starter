@@ -1,4 +1,5 @@
 ---
+import { nestedProps } from "@component-utils/nestedProps.mjs";
 import CustomSection from "@builders/custom-section/CustomSection.astro";
 import Button from "@core-elements/button/Button.astro";
 import Heading from "@core-elements/heading/Heading.astro";
@@ -6,6 +7,10 @@ import SimpleText from "@core-elements/simple-text/SimpleText.astro";
 import Text from "@core-elements/text/Text.astro";
 import { renderMarkdownInline } from "@component-utils/markdown";
 import { slugifyLabel } from "@component-utils/slugify";
+
+/* `content` and `style` are the editor's tabs, flattened straight back into
+   the names below. `at()` writes the frontmatter path a binding needs. */
+const { props, at } = nestedProps(Astro.props);
 
 const {
   eyebrow = "",
@@ -35,7 +40,7 @@ const {
   useDefaultEditableBinding = false,
   _component,
   ...htmlAttributes
-} = Astro.props;
+} = props;
 
 const isCard = layout === "card";
 const emailId = `${slugifyLabel(formName || sectionLabel || "newsletter")}-email`;
@@ -63,7 +68,7 @@ const emailId = `${slugifyLabel(formName || sectionLabel || "newsletter")}-email
       <SimpleText
         alignmentHorizontal={isCard ? "center" : "start"}
         class="eyebrow"
-        data-prop="eyebrow"
+        data-prop={at("eyebrow")}
         text={eyebrow}
         size="sm"
       />
@@ -71,14 +76,14 @@ const emailId = `${slugifyLabel(formName || sectionLabel || "newsletter")}-email
         alignmentHorizontal={isCard ? "center" : "start"}
         level={headingLevel}
         size="md"
-        data-prop="heading"
+        data-prop={at("heading")}
       >
         {heading}
       </Heading>
       <Text
         alignmentHorizontal={isCard ? "center" : "start"}
         class="newsletter-signup-subtext"
-        data-prop="subtext"
+        data-prop={at("subtext")}
         text={subtext}
       />
     </div>
@@ -91,7 +96,7 @@ const emailId = `${slugifyLabel(formName || sectionLabel || "newsletter")}-email
       <label
         class="visually-hidden"
         for={emailId}
-        data-prop="emailLabel"
+        data-prop={at("emailLabel")}
       >
         {emailLabel}
       </label>
@@ -102,7 +107,7 @@ const emailId = `${slugifyLabel(formName || sectionLabel || "newsletter")}-email
         placeholder={emailPlaceholder}
         autocomplete="email"
         required
-        data-prop="emailPlaceholder"
+        data-prop={at("emailPlaceholder")}
       />
       <Button
         element="button"
@@ -110,12 +115,12 @@ const emailId = `${slugifyLabel(formName || sectionLabel || "newsletter")}-email
         text={buttonText}
         variant="primary"
         size="md"
-        data-prop="buttonText"
+        data-prop={at("buttonText")}
       />
       {disclaimer && (
         <p
           class="newsletter-signup-disclaimer"
-          data-prop="disclaimer"
+          data-prop={at("disclaimer")}
         >
           <Fragment set:html={renderMarkdownInline(disclaimer)} />
         </p>

@@ -1,10 +1,26 @@
-eyebrow:
+# The two tabs. A structure value draws its first-level nested keys as tabs
+# when it sets `tabbed: true`; `groups` only ever draws as accordions. The
+# subtype is pinned so the tabbing stops here — left unsaid these inherit it,
+# and then every field inside them has to be an object too.
+content:
+  type: object
+  label: Content
+  options:
+    subtype: object
+style:
+  type: object
+  label: Style
+  comment: What paints the band.
+  options:
+    subtype: object
+
+content.eyebrow:
   type: text
   comment: Short label above the heading. Optional.
-heading:
+content.heading:
   type: text
   comment: The section's title. Optional; the deck can stand on its own.
-headingLevel:
+content.headingLevel:
   type: select
   comment: Heading level for the title.
   options:
@@ -12,7 +28,7 @@ headingLevel:
       - h1
       - h2
       - h3
-headingSize:
+content.headingSize:
   type: select
   comment: Size of the title, independent of its level.
   options:
@@ -25,10 +41,10 @@ headingSize:
         name: Header 3
       - id: md
         name: Header 4
-subtext:
+content.subtext:
   type: markdown
   comment: Supporting copy beneath the heading.
-subtextSize:
+content.subtextSize:
   type: select
   comment: >-
     How big the supporting line under the heading is. Regular is the size the
@@ -41,7 +57,7 @@ subtextSize:
         name: Regular
       - id: xl
         name: Large
-subtextWidth:
+content.subtextWidth:
   type: select
   label: Subtext width
   comment: >-
@@ -60,12 +76,12 @@ subtextWidth:
         name: Wide
       - id: xl
         name: Extra wide
-cards:
+content.cards:
   type: array
   comment: >-
     The cards in the deck, in the order they stack. Each holds ordinary content
     blocks, so a card can carry whatever a section can.
-stickyOffset:
+content.stickyOffset:
   type: select
   comment: How far below the top of the screen a card pins.
   options:
@@ -78,7 +94,7 @@ stickyOffset:
         name: Medium
       - id: lg
         name: Large
-cardColorScheme:
+content.cardColorScheme:
   hidden: true
   # The cards are cream on every deck the design draws, and a card that
   # takes its own scheme independently of the band is a way to get a dark
@@ -93,7 +109,7 @@ cardColorScheme:
         name: Light
       - id: dark
         name: Dark
-showRail:
+content.showRail:
   hidden: true
   # The rail is what tells a reader where they are in the stack, so a deck
   # without it is a deck missing a part rather than a variant.
@@ -101,10 +117,10 @@ showRail:
   comment: Shows the jump links beside the deck.
 
 # --- section wrapper inputs
-sectionLabel:
+content.sectionLabel:
   type: text
   comment: Accessible name for the section, used by screen readers.
-maxContentWidth:
+content.maxContentWidth:
   hidden: true
   # Set from the design, not by an editor: every band on the site uses the
   # same column and the same rhythm, and a section that drifts from it reads
@@ -119,7 +135,7 @@ maxContentWidth:
         name: Extra Large
       - id: 2xl
         name: 2xl
-paddingHorizontal:
+content.paddingHorizontal:
   hidden: true
   # Set from the design, not by an editor: every band on the site uses the
   # same column and the same rhythm, and a section that drifts from it reads
@@ -134,7 +150,7 @@ paddingHorizontal:
         name: Page gutter
       - id: lg
         name: Large
-paddingVertical:
+content.paddingVertical:
   hidden: true
   # Set from the design, not by an editor: every band on the site uses the
   # same column and the same rhythm, and a section that drifts from it reads
@@ -149,7 +165,7 @@ paddingVertical:
         name: 3xl
       - id: 4xl
         name: 4xl
-colorScheme:
+style.colorScheme:
   hidden: true
   # Carried by the band colour. Every band the design draws names its own ink,
   # and `base` on its own does not say whether you get the cream band or the
@@ -165,14 +181,14 @@ colorScheme:
         name: Light
       - id: dark
         name: Dark
-lockColorScheme:
+style.lockColorScheme:
   hidden: true
   # Carried by the band colour: every named band locks, because there is no
   # dark mode here for an unlocked one to follow.
   type: switch
   label: Lock color scheme
   comment: Ignores the site theme toggle. Only applies when Color Scheme is Light or Dark.
-backgroundColor:
+style.backgroundColor:
   type: select
   label: Background colour
   comment: The colour this band is painted, and the ink that goes with it.
@@ -209,7 +225,7 @@ backgroundColor:
         - key: color
       text:
         - key: name
-background:
+style.background:
   type: object
   comment: Background image, video or pattern for the section.
 

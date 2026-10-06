@@ -1,80 +1,83 @@
 label: Pricing Comparison
 icon: table_chart
 description: Table that compares features across plans.
+tabbed: true
 value:
   _component: page-sections/conversion/pricing-comparison
-  eyebrow: Pricing
-  heading: Compare plans feature by feature
-  headingLevel: h2
-  subtext: ""
-  plans:
-    - name: Starter
-      price: $19/mo
-      highlight: false
-      buttonText: Choose Starter
-      buttonLink: "#"
-    - name: Team
-      price: $49/mo
-      highlight: true
-      buttonText: Choose Team
-      buttonLink: "#"
-    - name: Enterprise
-      price: Custom
-      highlight: false
-      buttonText: Talk to sales
-      buttonLink: "#"
-  rows:
-    - feature: Editors
-      values:
-        - "3"
-        - "15"
-        - Unlimited
-    - feature: Visual editing
-      values:
-        - "yes"
-        - "yes"
-        - "yes"
-    - feature: Scheduled publishing
-      values:
-        - "no"
-        - "yes"
-        - "yes"
-    - feature: Custom domains
-      values:
-        - "1"
-        - "10"
-        - Unlimited
-    - feature: SSO and audit log
-      values:
-        - "no"
-        - "no"
-        - "yes"
-    - feature: Support
-      values:
-        - Email
-        - Priority email
-        - Dedicated manager
-  striped: true
-  sectionLabel: ""
-  maxContentWidth: xl
-  paddingHorizontal: gutter
-  paddingVertical: 4xl
-  backgroundColor: light-sand
-  background:
-    type: image
-    imageSource: ""
-    imageAlt: ""
-    positionVertical: top
-    positionHorizontal: center
-    fixed: false
-    priority: false
-    mask: none
-    overlay: 0
+  content:
+    sectionLabel: ""
+    eyebrow: Pricing
+    heading: Compare plans feature by feature
+    headingLevel: h2
+    subtext: ""
+    plans:
+      - name: Starter
+        price: $19/mo
+        highlight: false
+        buttonText: Choose Starter
+        buttonLink: "#"
+      - name: Team
+        price: $49/mo
+        highlight: true
+        buttonText: Choose Team
+        buttonLink: "#"
+      - name: Enterprise
+        price: Custom
+        highlight: false
+        buttonText: Talk to sales
+        buttonLink: "#"
+    rows:
+      - feature: Editors
+        values:
+          - "3"
+          - "15"
+          - Unlimited
+      - feature: Visual editing
+        values:
+          - "yes"
+          - "yes"
+          - "yes"
+      - feature: Scheduled publishing
+        values:
+          - "no"
+          - "yes"
+          - "yes"
+      - feature: Custom domains
+        values:
+          - "1"
+          - "10"
+          - Unlimited
+      - feature: SSO and audit log
+        values:
+          - "no"
+          - "no"
+          - "yes"
+      - feature: Support
+        values:
+          - Email
+          - Priority email
+          - Dedicated manager
+    striped: true
+    maxContentWidth: xl
+    paddingHorizontal: gutter
+    paddingVertical: 4xl
+  style:
+    backgroundColor: light-sand
+    background:
+      type: image
+      imageSource: ""
+      imageAlt: ""
+      positionVertical: top
+      positionHorizontal: center
+      fixed: false
+      priority: false
+      mask: none
+      overlay: 0
 preview:
   text:
     - Pricing Comparison
   subtext:
-    - key: heading
+    - key: content.heading
   image: public/component-previews/page-sections/conversion/pricing-comparison.svg
   icon: table_chart
   gallery:

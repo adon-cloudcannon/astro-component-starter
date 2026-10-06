@@ -11,6 +11,7 @@ tabbed: true
 value:
   _component: page-sections/heroes/hero-split
   content:
+    sectionLabel: ""
     heading: A clear promise in one line
     headingLevel: h1
     headingSize: 2xl
@@ -41,7 +42,6 @@ value:
         iconName: check
         iconColor: default
         link: null
-    sectionLabel: ""
     maxContentWidth: xl
     paddingHorizontal: gutter
     paddingVertical: 4xl

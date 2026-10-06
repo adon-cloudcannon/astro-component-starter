@@ -1,10 +1,26 @@
-eyebrow:
+# The two tabs. A structure value draws its first-level nested keys as tabs
+# when it sets `tabbed: true`; `groups` only ever draws as accordions. The
+# subtype is pinned so the tabbing stops here — left unsaid these inherit it,
+# and then every field inside them has to be an object too.
+content:
+  type: object
+  label: Content
+  options:
+    subtype: object
+style:
+  type: object
+  label: Style
+  comment: What paints the band.
+  options:
+    subtype: object
+
+content.eyebrow:
   type: text
   comment: The small label above the heading.
-heading:
+content.heading:
   type: text
   comment: The section's heading.
-headingLevel:
+content.headingLevel:
   type: select
   comment: The heading level.
   options:
@@ -13,7 +29,7 @@ headingLevel:
         name: H2
       - id: h3
         name: H3
-headingSize:
+content.headingSize:
   type: select
   comment: The size of the heading.
   options:
@@ -26,10 +42,10 @@ headingSize:
         name: Large
       - id: xl
         name: Extra Large
-subtext:
+content.subtext:
   type: markdown
   comment: The supporting line under the heading.
-subtextSize:
+content.subtextSize:
   type: select
   comment: >-
     How big the supporting line under the heading is. Regular is the size the
@@ -42,7 +58,7 @@ subtextSize:
         name: Regular
       - id: xl
         name: Large
-subtextWidth:
+content.subtextWidth:
   type: select
   label: Subtext width
   comment: >-
@@ -61,7 +77,7 @@ subtextWidth:
         name: Wide
       - id: xl
         name: Extra wide
-alignmentHorizontal:
+content.alignmentHorizontal:
   type: select
   comment: How the header is aligned.
   options:
@@ -70,10 +86,10 @@ alignmentHorizontal:
         name: Start
       - id: center
         name: Centre
-frameLabel:
+content.frameLabel:
   type: text
   comment: The address shown in the window's bar. Empty leaves only the dots.
-frameTone:
+style.frameTone:
   type: select
   comment: How the window is lit.
   options:
@@ -82,7 +98,7 @@ frameTone:
         name: Light
       - id: dark
         name: Dark
-frameWidth:
+content.frameWidth:
   type: number
   comment: >-
     How wide the window is, in pixels. Empty fills the content column, which
@@ -92,10 +108,10 @@ frameWidth:
 # Configures the CustomSection wrapper, not this section's own content. Inline
 # per component so a project can trim the size/padding lists in place.
 # `new:component` slices from this marker down — keep the marker line verbatim.
-sectionLabel:
+content.sectionLabel:
   type: text
   comment: Names the section in the editor and sets its anchor id.
-maxContentWidth:
+content.maxContentWidth:
   type: select
   comment: Maximum width of the content.
   options:
@@ -116,7 +132,7 @@ maxContentWidth:
         name: 2xl
       - id: 3xl
         name: 3xl
-paddingHorizontal:
+content.paddingHorizontal:
   type: select
   comment: Horizontal padding around the content.
   options:
@@ -139,7 +155,7 @@ paddingHorizontal:
         name: 2xl
       - id: 3xl
         name: 3xl
-paddingVertical:
+content.paddingVertical:
   type: select
   comment: Vertical padding around the content.
   options:
@@ -166,7 +182,7 @@ paddingVertical:
         name: 5xl
       - id: 6xl
         name: 6xl
-colorScheme:
+style.colorScheme:
   hidden: true
   # Carried by the band colour. Every band the design draws names its own ink,
   # and `base` on its own does not say whether you get the cream band or the
@@ -182,14 +198,14 @@ colorScheme:
         name: Light
       - id: dark
         name: Dark
-lockColorScheme:
+style.lockColorScheme:
   hidden: true
   # Carried by the band colour: every named band locks, because there is no
   # dark mode here for an unlocked one to follow.
   type: switch
   label: Lock color scheme
   comment: Ignores the site theme toggle. Only applies when Color Scheme is Light or Dark.
-backgroundColor:
+style.backgroundColor:
   type: select
   label: Background colour
   comment: The colour this band is painted, and the ink that goes with it.
@@ -226,9 +242,9 @@ backgroundColor:
         - key: color
       text:
         - key: name
-imageSource:
+content.imageSource:
   type: image
   comment: A picture beneath the call to action, running the width of the column.
-imageAlt:
+content.imageAlt:
   type: text
   comment: Alt text for that picture.

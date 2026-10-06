@@ -1,13 +1,29 @@
-heading:
+# The two tabs. A structure value draws its first-level nested keys as tabs
+# when it sets `tabbed: true`; `groups` only ever draws as accordions. The
+# subtype is pinned so the tabbing stops here — left unsaid these inherit it,
+# and then every field inside them has to be an object too.
+content:
+  type: object
+  label: Content
+  options:
+    subtype: object
+style:
+  type: object
+  label: Style
+  comment: What paints the band.
+  options:
+    subtype: object
+
+content.heading:
   type: text
   comment: Short muted line above the logos, e.g. "Trusted by…".
-logos:
+content.logos:
   type: array
   label: Logos
   comment: Client logos shown in the strip.
   options:
     structures: _structures.logoCloudLogos
-headingPlacement:
+content.headingPlacement:
   type: select
   comment: >-
     Where the label sits. Above stacks it over the marks; inline runs it along
@@ -18,10 +34,10 @@ headingPlacement:
         name: Above the logos
       - id: inline
         name: Inline, to the left
-grayscale:
+content.grayscale:
   type: switch
   comment: Render logos in muted grayscale. Linked logos restore color on hover.
-scrolling:
+content.scrolling:
   type: switch
   comment: Scrolls the logos as a continuous marquee instead of a static row.
 
@@ -29,10 +45,10 @@ scrolling:
 # Configures the CustomSection wrapper, not this section's own content. Inline
 # per component so a project can trim the size/padding lists in place.
 # `new:component` slices from this marker down — keep the marker line verbatim.
-sectionLabel:
+content.sectionLabel:
   type: text
   comment: Names the section in the editor and sets its anchor id.
-maxContentWidth:
+content.maxContentWidth:
   type: select
   comment: Maximum width of the content.
   options:
@@ -53,7 +69,7 @@ maxContentWidth:
         name: 2xl
       - id: 3xl
         name: 3xl
-paddingHorizontal:
+content.paddingHorizontal:
   type: select
   comment: Horizontal padding around the content.
   options:
@@ -76,7 +92,7 @@ paddingHorizontal:
         name: 2xl
       - id: 3xl
         name: 3xl
-paddingVertical:
+content.paddingVertical:
   type: select
   comment: Vertical padding around the content.
   options:
@@ -103,7 +119,7 @@ paddingVertical:
         name: 5xl
       - id: 6xl
         name: 6xl
-colorScheme:
+style.colorScheme:
   hidden: true
   # Carried by the band colour. Every band the design draws names its own ink,
   # and `base` on its own does not say whether you get the cream band or the
@@ -119,14 +135,14 @@ colorScheme:
         name: Light
       - id: dark
         name: Dark
-lockColorScheme:
+style.lockColorScheme:
   hidden: true
   # Carried by the band colour: every named band locks, because there is no
   # dark mode here for an unlocked one to follow.
   type: switch
   label: Lock color scheme
   comment: Ignores the site theme toggle. Only applies when Color Scheme is Light or Dark.
-backgroundColor:
+style.backgroundColor:
   type: select
   label: Background colour
   comment: The colour this band is painted, and the ink that goes with it.

@@ -1,4 +1,5 @@
 ---
+import { nestedProps } from "@component-utils/nestedProps.mjs";
 import CustomSection from "@builders/custom-section/CustomSection.astro";
 import { subtextMeasure } from "@component-utils/subtextMeasure.mjs";
 import Heading from "@core-elements/heading/Heading.astro";
@@ -9,6 +10,10 @@ import Grid from "@wrappers/grid/Grid.astro";
 import { nextHeadingLevel } from "@component-utils/headingLevel";
 
 type FeatureProps = Record<string, unknown>;
+
+/* `content` and `style` are the editor's tabs, flattened straight back into
+   the names below. `at()` writes the frontmatter path a binding needs. */
+const { props, at } = nestedProps(Astro.props);
 
 const {
   eyebrow = "",
@@ -60,7 +65,7 @@ const {
   useDefaultEditableBinding = false,
   _component,
   ...htmlAttributes
-} = Astro.props;
+} = props;
 
 /* The measure the subtext is set in, as a length. */
 const subtextCap = subtextMeasure(subtextWidth);
@@ -111,7 +116,7 @@ const artRow = Math.max(0, ...features.map((feature: FeatureProps) => Number(fea
   <SimpleText
     alignmentHorizontal={alignmentHorizontal}
     class="eyebrow"
-    data-prop="eyebrow"
+    data-prop={at("eyebrow")}
     text={eyebrow}
     size="sm"
   />
@@ -122,7 +127,7 @@ const artRow = Math.max(0, ...features.map((feature: FeatureProps) => Number(fea
       level={headingLevel}
       size={headingSize}
       alignmentHorizontal={alignmentHorizontal}
-      data-prop="heading"
+      data-prop={at("heading")}
     >
       {heading}
     </Heading>
@@ -131,7 +136,7 @@ const artRow = Math.max(0, ...features.map((feature: FeatureProps) => Number(fea
     class="feature-grid-subtext"
     alignmentHorizontal={alignmentHorizontal}
     style={subtextCap ? `max-inline-size: ${subtextCap}; margin-inline: auto; justify-self: center` : undefined}    size={subtextSize}
-    data-prop="subtext"
+    data-prop={at("subtext")}
     text={subtext}
   />
   <Grid
@@ -144,7 +149,7 @@ const artRow = Math.max(0, ...features.map((feature: FeatureProps) => Number(fea
       .filter(Boolean)
       .join("; ") || undefined}
     class:list={["feature-grid-grid", `feature-grid-${columns}-up`]}
-    data-children-prop="features"
+    data-children-prop={at("features")}
   >
     {features?.map((feature: FeatureProps) => (
       <FeatureItem

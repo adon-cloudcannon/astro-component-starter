@@ -1,46 +1,49 @@
 label: Hero Photo Stack
 icon: photo_library
 description: Hero with copy on one side and a deck of photos you can click through on the other.
+tabbed: true
 value:
   _component: page-sections/heroes/hero-photo-stack
-  eyebrow: ""
-  heading: A clear promise in one line
-  headingLevel: h1
-  headingSize: 2xl
-  subtext: One or two sentences on who this is for and what they get.
-  subtextSize: xl
-  subtextWidth: ""
-  photos:
-    - _component: page-sections/heroes/hero-photo-stack/photo-stack-card
-      source: ""
-      alt: ""
-    - _component: page-sections/heroes/hero-photo-stack/photo-stack-card
-      source: ""
-      alt: ""
-  panels:
-    - _component: page-sections/heroes/hero-photo-stack/story-panel
-      eyebrow: ""
-      heading: ""
-      body: ""
-      tone: light-sand
-    - _component: page-sections/heroes/hero-photo-stack/story-panel
-      eyebrow: ""
-      heading: ""
-      body: ""
-      tone: sand
-  panelRaise: 200
-  buttonSections: []
-  embellishmentSource: ""
-  embellishmentWidth: 55
-  embellishmentPlacement: deck
-  reverse: false
-  sectionLabel: ""
-  maxContentWidth: xl
-  paddingHorizontal: gutter
-  paddingVertical: 4xl
-  backgroundColor: light-sand
-  pattern: grid
-  haze: true
+  content:
+    sectionLabel: ""
+    eyebrow: ""
+    heading: A clear promise in one line
+    headingLevel: h1
+    headingSize: 2xl
+    subtext: One or two sentences on who this is for and what they get.
+    subtextSize: xl
+    subtextWidth: ""
+    photos:
+      - _component: page-sections/heroes/hero-photo-stack/photo-stack-card
+        source: ""
+        alt: ""
+      - _component: page-sections/heroes/hero-photo-stack/photo-stack-card
+        source: ""
+        alt: ""
+    panels:
+      - _component: page-sections/heroes/hero-photo-stack/story-panel
+        eyebrow: ""
+        heading: ""
+        body: ""
+        tone: light-sand
+      - _component: page-sections/heroes/hero-photo-stack/story-panel
+        eyebrow: ""
+        heading: ""
+        body: ""
+        tone: sand
+    panelRaise: 200
+    buttonSections: []
+    embellishmentSource: ""
+    embellishmentWidth: 55
+    embellishmentPlacement: deck
+    reverse: false
+    maxContentWidth: xl
+    paddingHorizontal: gutter
+    paddingVertical: 4xl
+  style:
+    backgroundColor: light-sand
+    pattern: grid
+    haze: true
 _inputs:
   panels:
     type: array

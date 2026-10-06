@@ -1,54 +1,57 @@
 label: Gallery Grid
 icon: photo_library
 description: Image grid with captions. Click a photo to view it full size.
+tabbed: true
 value:
   _component: page-sections/collections/gallery-grid
-  eyebrow: Gallery
-  heading: Field notes from the coast
-  headingLevel: h2
-  subtext: ""
-  images:
-    - image: /src/assets/images/component-docs/dunedin-cliff.jpg
-      alt: Sea cliffs above a turquoise bay, gorse flowering in the foreground
-      caption: Tunnel Beach cliffs
-    - image: /src/assets/images/component-docs/sheep.jpg
-      alt: Two sheep grazing on a headland high above the ocean
-      caption: Grazing above the break
-    - image: /src/assets/images/component-docs/castle.jpg
-      alt: Ruined stone castle under a starry night sky
-      caption: Cargill's Castle at night
-    - image: /src/assets/images/component-docs/sunset.jpg
-      alt: Coastal cliffs at dusk with the sun low over the sea
-      caption: Last light on the cliffs
-    - image: /src/assets/images/component-docs/quiet-street.jpg
-      alt: Quiet hillside street with flowering rhododendrons and a no-exit sign
-      caption: Spring in the suburbs
-  layout: grid
-  columns: 3
-  gap: md
-  aspectRatio: square
-  lightbox: true
-  showThumbnails: false
-  sectionLabel: ""
-  maxContentWidth: xl
-  paddingHorizontal: gutter
-  paddingVertical: 4xl
-  backgroundColor: light-sand
-  background:
-    type: image
-    imageSource: ""
-    imageAlt: ""
-    positionVertical: top
-    positionHorizontal: center
-    fixed: false
-    priority: false
-    mask: none
-    overlay: 0
+  content:
+    sectionLabel: ""
+    eyebrow: Gallery
+    heading: Field notes from the coast
+    headingLevel: h2
+    subtext: ""
+    images:
+      - image: /src/assets/images/component-docs/dunedin-cliff.jpg
+        alt: Sea cliffs above a turquoise bay, gorse flowering in the foreground
+        caption: Tunnel Beach cliffs
+      - image: /src/assets/images/component-docs/sheep.jpg
+        alt: Two sheep grazing on a headland high above the ocean
+        caption: Grazing above the break
+      - image: /src/assets/images/component-docs/castle.jpg
+        alt: Ruined stone castle under a starry night sky
+        caption: Cargill's Castle at night
+      - image: /src/assets/images/component-docs/sunset.jpg
+        alt: Coastal cliffs at dusk with the sun low over the sea
+        caption: Last light on the cliffs
+      - image: /src/assets/images/component-docs/quiet-street.jpg
+        alt: Quiet hillside street with flowering rhododendrons and a no-exit sign
+        caption: Spring in the suburbs
+    layout: grid
+    columns: 3
+    gap: md
+    aspectRatio: square
+    lightbox: true
+    showThumbnails: false
+    maxContentWidth: xl
+    paddingHorizontal: gutter
+    paddingVertical: 4xl
+  style:
+    backgroundColor: light-sand
+    background:
+      type: image
+      imageSource: ""
+      imageAlt: ""
+      positionVertical: top
+      positionHorizontal: center
+      fixed: false
+      priority: false
+      mask: none
+      overlay: 0
 preview:
   text:
     - Gallery Grid
   subtext:
-    - key: heading
+    - key: content.heading
   image: public/component-previews/page-sections/collections/gallery-grid.svg
   icon: photo_library
   gallery:

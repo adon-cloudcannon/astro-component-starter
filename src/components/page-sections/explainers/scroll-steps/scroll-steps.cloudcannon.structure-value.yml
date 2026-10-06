@@ -1,41 +1,44 @@
 label: Scroll Steps
 icon: view_day
 description: Steps that advance as the page scrolls, with the picture beside them changing.
+tabbed: true
 value:
   _component: page-sections/explainers/scroll-steps
-  eyebrow: ""
-  heading: ""
-  headingSize: lg
-  headingLevel: h2
-  subtext: ""
-  subtextSize: md
-  subtextWidth: ""
-  steps: []
-  reverse: false
-  mediaWidth: half
-  progressStyle: bar
-  sectionLabel: ""
-  maxContentWidth: xl
-  paddingHorizontal: gutter
-  paddingVertical: 4xl
-  backgroundColor: light-sand
-  alignmentHorizontal: start
-  background:
-    type: image
-    imageSource: ""
-    imageAlt: ""
-    positionVertical: top
-    positionHorizontal: center
-    fixed: false
-    priority: false
-    mask: none
-    overlay: 0
+  content:
+    sectionLabel: ""
+    eyebrow: ""
+    heading: ""
+    headingSize: lg
+    headingLevel: h2
+    subtext: ""
+    subtextSize: md
+    subtextWidth: ""
+    steps: []
+    reverse: false
+    mediaWidth: half
+    progressStyle: bar
+    maxContentWidth: xl
+    paddingHorizontal: gutter
+    paddingVertical: 4xl
+    alignmentHorizontal: start
+  style:
+    backgroundColor: light-sand
+    background:
+      type: image
+      imageSource: ""
+      imageAlt: ""
+      positionVertical: top
+      positionHorizontal: center
+      fixed: false
+      priority: false
+      mask: none
+      overlay: 0
 preview:
   text:
-    - key: heading
+    - key: content.heading
     - Scroll Steps
   subtext:
-    - key: eyebrow
+    - key: content.eyebrow
   icon: view_day
 picker_preview:
   text: Scroll Steps

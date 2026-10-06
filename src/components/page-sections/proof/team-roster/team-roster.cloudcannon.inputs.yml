@@ -1,17 +1,33 @@
-eyebrow:
+# The two tabs. A structure value draws its first-level nested keys as tabs
+# when it sets `tabbed: true`; `groups` only ever draws as accordions. The
+# subtype is pinned so the tabbing stops here — left unsaid these inherit it,
+# and then every field inside them has to be an object too.
+content:
+  type: object
+  label: Content
+  options:
+    subtype: object
+style:
+  type: object
+  label: Style
+  comment: What paints the band.
+  options:
+    subtype: object
+
+content.eyebrow:
   type: text
   comment: Short label above the heading. Optional.
-heading:
+content.heading:
   type: text
   comment: The section's title, centred.
-headingLevel:
+content.headingLevel:
   type: select
   comment: Heading level for the title.
   options:
     values:
       - h2
       - h3
-headingSize:
+content.headingSize:
   type: select
   comment: >-
     Size of the title, independent of its level. The design draws Header 3
@@ -24,10 +40,10 @@ headingSize:
         name: Header 3
       - id: md
         name: Header 4
-subtext:
+content.subtext:
   type: markdown
   comment: Supporting copy beneath the heading.
-subtextSize:
+content.subtextSize:
   type: select
   comment: >-
     How big the supporting line under the heading is. Regular is the size the
@@ -40,7 +56,7 @@ subtextSize:
         name: Regular
       - id: xl
         name: Large
-subtextWidth:
+content.subtextWidth:
   type: select
   label: Subtext width
   comment: >-
@@ -59,7 +75,7 @@ subtextWidth:
         name: Wide
       - id: xl
         name: Extra wide
-leads:
+content.leads:
   type: array
   label: With a biography
   comment: >-
@@ -67,7 +83,7 @@ leads:
     the design.
   options:
     structures: _structures.teamMember
-members:
+content.members:
   type: array
   comment: >-
     Everyone else, with the name on a badge over the card. Four across in the
@@ -76,10 +92,10 @@ members:
     structures: _structures.teamMember
 
 # --- section wrapper inputs
-sectionLabel:
+content.sectionLabel:
   type: text
   comment: Accessible name for the section, used by screen readers.
-maxContentWidth:
+content.maxContentWidth:
   hidden: true
   # Set from the design, not by an editor.
   type: select
@@ -92,7 +108,7 @@ maxContentWidth:
         name: Extra Large
       - id: 2xl
         name: 2xl
-paddingHorizontal:
+content.paddingHorizontal:
   hidden: true
   # Set from the design, not by an editor.
   type: select
@@ -105,7 +121,7 @@ paddingHorizontal:
         name: Page gutter
       - id: lg
         name: Large
-paddingVertical:
+content.paddingVertical:
   hidden: true
   # Set from the design, not by an editor.
   type: select
@@ -118,7 +134,7 @@ paddingVertical:
         name: 3xl
       - id: 4xl
         name: 4xl
-colorScheme:
+style.colorScheme:
   hidden: true
   # Carried by the band colour.
   type: select
@@ -131,13 +147,13 @@ colorScheme:
         name: Light
       - id: dark
         name: Dark
-lockColorScheme:
+style.lockColorScheme:
   hidden: true
   # Carried by the band colour.
   type: switch
   label: Lock color scheme
   comment: Ignores the site theme toggle.
-backgroundColor:
+style.backgroundColor:
   type: select
   label: Background colour
   comment: The colour this band is painted, and the ink that goes with it.

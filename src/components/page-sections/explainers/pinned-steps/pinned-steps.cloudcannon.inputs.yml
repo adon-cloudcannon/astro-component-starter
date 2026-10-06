@@ -1,12 +1,28 @@
-eyebrow:
+# The two tabs. A structure value draws its first-level nested keys as tabs
+# when it sets `tabbed: true`; `groups` only ever draws as accordions. The
+# subtype is pinned so the tabbing stops here — left unsaid these inherit it,
+# and then every field inside them has to be an object too.
+content:
+  type: object
+  label: Content
+  options:
+    subtype: object
+style:
+  type: object
+  label: Style
+  comment: What paints the band.
+  options:
+    subtype: object
+
+content.eyebrow:
   type: text
   comment: Small label above the heading.
 
-heading:
+content.heading:
   type: text
   comment: The band's own heading, above the steps. Each step keeps its own.
 
-headingLevel:
+content.headingLevel:
   type: select
   comment: Heading rank in the page outline. Pick by position, not by size.
   options:
@@ -18,7 +34,7 @@ headingLevel:
       - id: h4
         name: H4
 
-headingSize:
+content.headingSize:
   type: select
   comment: Visual size, independent of the rank above.
   options:
@@ -32,11 +48,11 @@ headingSize:
       - id: sm
         name: Small
 
-subtext:
+content.subtext:
   type: markdown
   comment: Supporting line under the heading.
 
-subtextSize:
+content.subtextSize:
   type: select
   comment: >-
     How big the supporting line under the heading is. Regular is the size the
@@ -50,7 +66,7 @@ subtextSize:
       - id: xl
         name: Large
 
-subtextWidth:
+content.subtextWidth:
   type: select
   label: Subtext width
   comment: >-
@@ -70,7 +86,7 @@ subtextWidth:
       - id: xl
         name: Extra wide
 
-alignmentHorizontal:
+content.alignmentHorizontal:
   type: select
   label: Header alignment
   comment: >-
@@ -83,7 +99,7 @@ alignmentHorizontal:
       - id: center
         name: Centered
 
-steps:
+content.steps:
   type: array
   comment: >-
     One per state of the band. The band holds still for a screen of scroll per
@@ -116,11 +132,11 @@ steps:
               options:
                 structures: _structures.scrollStepperSections
 
-reverse:
+content.reverse:
   type: switch
   comment: Put the picture on the left and the copy on the right.
 
-mediaWidth:
+content.mediaWidth:
   type: select
   comment: How much of the band the picture takes.
   options:
@@ -132,7 +148,7 @@ mediaWidth:
       - id: narrow
         name: Narrow
 
-showProgress:
+content.showProgress:
   type: switch
   label: Progress bar
   comment: >-
@@ -142,10 +158,10 @@ showProgress:
 
 # The band-level inputs, same set and same wording as every other page
 # section carries, so this one is configured the way the rest are.
-sectionLabel:
+content.sectionLabel:
   type: text
   comment: Names the section in the editor and sets its anchor id.
-maxContentWidth:
+content.maxContentWidth:
   type: select
   comment: Maximum width of the content.
   options:
@@ -166,7 +182,7 @@ maxContentWidth:
         name: 2xl
       - id: 3xl
         name: 3xl
-paddingHorizontal:
+content.paddingHorizontal:
   type: select
   comment: Horizontal padding around the content.
   options:
@@ -189,7 +205,7 @@ paddingHorizontal:
         name: 2xl
       - id: 3xl
         name: 3xl
-paddingVertical:
+content.paddingVertical:
   type: select
   comment: Vertical padding around the content.
   options:
@@ -216,7 +232,7 @@ paddingVertical:
         name: 5xl
       - id: 6xl
         name: 6xl
-colorScheme:
+style.colorScheme:
   hidden: true
   # Carried by the band colour. Every band the design draws names its own ink,
   # and `base` on its own does not say whether you get the cream band or the
@@ -232,14 +248,14 @@ colorScheme:
         name: Light
       - id: dark
         name: Dark
-lockColorScheme:
+style.lockColorScheme:
   hidden: true
   # Carried by the band colour: every named band locks, because there is no
   # dark mode here for an unlocked one to follow.
   type: switch
   label: Lock color scheme
   comment: Ignores the site theme toggle. Only applies when Color Scheme is Light or Dark.
-backgroundColor:
+style.backgroundColor:
   type: select
   label: Background colour
   comment: The colour this band is painted, and the ink that goes with it.
@@ -276,33 +292,33 @@ backgroundColor:
         - key: color
       text:
         - key: name
-progressColor:
+content.progressColor:
   type: text
   comment: The palette colour the progress fill is drawn in, e.g. sunset, pacific-300.
-copyColor:
+content.copyColor:
   type: text
   comment: >-
     A palette colour painted behind the copy half of the band, from the page's
     edge to the middle, top to bottom. Empty leaves the copy on the band's own
     colour.
-stepScroll:
+content.stepScroll:
   type: number
   comment: >-
     Screens of scrolling each step holds for. Higher is slower, and the band
     is pinned for all of it, so high values read as the page not responding.
     1.1 is the default.
-number:
+content.number:
   type: text
   comment: >-
     A step number shown above the copy. Decorative — it is hidden from screen
     readers, which have the step's own label already.
-progressTrackColor:
+content.progressTrackColor:
   type: text
   comment: >-
     The colour behind the progress fill, as a palette name or a hex. The design
     picks one per band rather than tinting the fill. Leave empty for the fill
     at 22%.
-numbered:
+content.numbered:
   type: switch
   comment: >-
     Numbers the steps from their place in the list, drawn in the design's ring:

@@ -1,52 +1,55 @@
 label: Workflow split
 icon: alt_route
 description: Two ways of working either side of what they share.
+tabbed: true
 value:
   _component: page-sections/explainers/workflow-split
-  eyebrow: ""
-  heading: Two workflows. One source of truth.
-  headingLevel: h2
-  headingSize: lg
-  subtext: Editors edit visually, developers stay in code.
-  subtextSize: md
-  subtextWidth: ""
-  buttonSections: []
-  panels:
-    - accentColor: pacific
+  content:
+    sectionLabel: ""
+    eyebrow: ""
+    heading: Two workflows. One source of truth.
+    headingLevel: h2
+    headingSize: lg
+    subtext: Editors edit visually, developers stay in code.
+    subtextSize: md
+    subtextWidth: ""
+    buttonSections: []
+    panels:
+      - accentColor: pacific
+        imageSource: ""
+        imageAlt: ""
+        eyebrow: EDITORS
+        heading: Work visually
+        items:
+          - text: Make changes visually on the page
+        linkText: Learn more
+        link: ""
+      - accentColor: sunset
+        imageSource: ""
+        imageAlt: ""
+        eyebrow: DEVELOPERS
+        heading: Stay in code
+        items:
+          - text: Build with any static site generator
+        linkText: Learn more
+        link: ""
+    centreImageSource: ""
+    centreImageAlt: ""
+    maxContentWidth: xl
+    paddingHorizontal: gutter
+    paddingVertical: 4xl
+    centreColor: ""
+    centreMinHeight: 0
+    centreSections: []
+    centreIconName: ""
+    centreTitle: ""
+    centreBranch: ""
+    centreRows: []
+  style:
+    backgroundColor: light-sand
+    background:
+      type: image
       imageSource: ""
-      imageAlt: ""
-      eyebrow: EDITORS
-      heading: Work visually
-      items:
-        - text: Make changes visually on the page
-      linkText: Learn more
-      link: ""
-    - accentColor: sunset
-      imageSource: ""
-      imageAlt: ""
-      eyebrow: DEVELOPERS
-      heading: Stay in code
-      items:
-        - text: Build with any static site generator
-      linkText: Learn more
-      link: ""
-  centreImageSource: ""
-  centreImageAlt: ""
-  sectionLabel: ""
-  maxContentWidth: xl
-  paddingHorizontal: gutter
-  paddingVertical: 4xl
-  backgroundColor: light-sand
-  background:
-    type: image
-    imageSource: ""
-  centreColor: ""
-  centreMinHeight: 0
-  centreSections: []
-  centreIconName: ""
-  centreTitle: ""
-  centreBranch: ""
-  centreRows: []
 _inputs:
   panels:
     type: array

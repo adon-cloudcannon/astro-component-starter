@@ -1,101 +1,104 @@
 label: Pricing Tiers
 icon: payments
 description: Plan cards with features, a highlighted plan, and a monthly/annual switch.
+tabbed: true
 value:
   _component: page-sections/conversion/pricing-tiers
-  eyebrow: Plans
-  heading: Simple pricing that scales with you
-  headingLevel: h2
-  subtext: Every plan includes global CDN hosting and automatic SSL.
-  subtextSize: md
-  subtextWidth: ""
-  showAnnualPricing: false
-  monthlyLabel: Monthly
-  annualLabel: Annual
-  annualBadge: ""
-  defaultInterval: monthly
-  tiers:
-    - name: Starter
-      price: $19
-      priceSuffix: /month
-      annualPrice: ""
-      annualPriceSuffix: /year
-      description: For a single marketing site.
-      features:
-        - text: 1 site
-          included: true
-        - text: 1 seat
-          included: true
-        - text: CDN + SSL
-          included: true
-        - text: Form endpoints
-          included: false
-        - text: Staging environment
-          included: false
-      buttonText: Get started
-      buttonLink: "#"
-      highlight: false
-      badgeText: ""
-    - name: Studio
-      price: $59
-      priceSuffix: /month
-      annualPrice: ""
-      annualPriceSuffix: /year
-      description: For small teams shipping several sites.
-      features:
-        - text: 10 sites
-          included: true
-        - text: 5 seats
-          included: true
-        - text: Form endpoints
-          included: true
-        - text: Staging environment
-          included: true
-        - text: SSO
-          included: false
-      buttonText: Get started
-      buttonLink: "#"
-      highlight: true
-      badgeText: Most popular
-    - name: Agency
-      price: $149
-      priceSuffix: /month
-      annualPrice: ""
-      annualPriceSuffix: /year
-      description: For agencies running client fleets.
-      features:
-        - text: Unlimited sites
-          included: true
-        - text: SSO + audit log
-          included: true
-        - text: Named support contact
-          included: true
-        - text: 99.95% uptime SLA
-          included: true
-      buttonText: Talk to sales
-      buttonLink: "#"
-      highlight: false
-      badgeText: ""
-  sectionLabel: ""
-  maxContentWidth: xl
-  paddingHorizontal: gutter
-  paddingVertical: 4xl
-  backgroundColor: light-sand
-  background:
-    type: image
-    imageSource: ""
-    imageAlt: ""
-    positionVertical: top
-    positionHorizontal: center
-    fixed: false
-    priority: false
-    mask: none
-    overlay: 0
+  content:
+    sectionLabel: ""
+    eyebrow: Plans
+    heading: Simple pricing that scales with you
+    headingLevel: h2
+    subtext: Every plan includes global CDN hosting and automatic SSL.
+    subtextSize: md
+    subtextWidth: ""
+    showAnnualPricing: false
+    monthlyLabel: Monthly
+    annualLabel: Annual
+    annualBadge: ""
+    defaultInterval: monthly
+    tiers:
+      - name: Starter
+        price: $19
+        priceSuffix: /month
+        annualPrice: ""
+        annualPriceSuffix: /year
+        description: For a single marketing site.
+        features:
+          - text: 1 site
+            included: true
+          - text: 1 seat
+            included: true
+          - text: CDN + SSL
+            included: true
+          - text: Form endpoints
+            included: false
+          - text: Staging environment
+            included: false
+        buttonText: Get started
+        buttonLink: "#"
+        highlight: false
+        badgeText: ""
+      - name: Studio
+        price: $59
+        priceSuffix: /month
+        annualPrice: ""
+        annualPriceSuffix: /year
+        description: For small teams shipping several sites.
+        features:
+          - text: 10 sites
+            included: true
+          - text: 5 seats
+            included: true
+          - text: Form endpoints
+            included: true
+          - text: Staging environment
+            included: true
+          - text: SSO
+            included: false
+        buttonText: Get started
+        buttonLink: "#"
+        highlight: true
+        badgeText: Most popular
+      - name: Agency
+        price: $149
+        priceSuffix: /month
+        annualPrice: ""
+        annualPriceSuffix: /year
+        description: For agencies running client fleets.
+        features:
+          - text: Unlimited sites
+            included: true
+          - text: SSO + audit log
+            included: true
+          - text: Named support contact
+            included: true
+          - text: 99.95% uptime SLA
+            included: true
+        buttonText: Talk to sales
+        buttonLink: "#"
+        highlight: false
+        badgeText: ""
+    maxContentWidth: xl
+    paddingHorizontal: gutter
+    paddingVertical: 4xl
+  style:
+    backgroundColor: light-sand
+    background:
+      type: image
+      imageSource: ""
+      imageAlt: ""
+      positionVertical: top
+      positionHorizontal: center
+      fixed: false
+      priority: false
+      mask: none
+      overlay: 0
 preview:
   text:
     - Pricing Tiers
   subtext:
-    - key: heading
+    - key: content.heading
   image: public/component-previews/page-sections/conversion/pricing-tiers.svg
   icon: payments
   gallery:

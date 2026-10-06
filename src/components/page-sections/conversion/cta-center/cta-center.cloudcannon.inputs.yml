@@ -1,4 +1,20 @@
-paddingVerticalStart:
+# The two tabs. A structure value draws its first-level nested keys as tabs
+# when it sets `tabbed: true`; `groups` only ever draws as accordions. The
+# subtype is pinned so the tabbing stops here — left unsaid these inherit it,
+# and then every field inside them has to be an object too.
+content:
+  type: object
+  label: Content
+  options:
+    subtype: object
+style:
+  type: object
+  label: Style
+  comment: What paints the band.
+  options:
+    subtype: object
+
+content.paddingVerticalStart:
   type: select
   comment: >-
     Overrides the top of the vertical padding on its own. Empty follows
@@ -25,7 +41,7 @@ paddingVerticalStart:
         name: 5xl
       - id: 6xl
         name: 6xl
-paddingVerticalEnd:
+content.paddingVerticalEnd:
   type: select
   comment: >-
     Overrides the bottom of the vertical padding on its own. Empty follows
@@ -52,13 +68,13 @@ paddingVerticalEnd:
         name: 5xl
       - id: 6xl
         name: 6xl
-eyebrow:
+content.eyebrow:
   type: text
   comment: Short label above the heading.
-heading:
+content.heading:
   type: text
   comment: Main heading for the section.
-headingSize:
+content.headingSize:
   type: select
   comment: Size of the title, independent of its level.
   options:
@@ -75,7 +91,7 @@ headingSize:
         name: Header 5
       - id: xs
         name: Header 6
-headingLevel:
+content.headingLevel:
   type: select
   comment: Heading level for the title. Use h1 once per page, on the first section.
   options:
@@ -83,7 +99,7 @@ headingLevel:
       - h1
       - h2
       - h3
-subtext:
+content.subtext:
   type: markdown
   comment: Supporting copy beneath the heading.
   options:
@@ -98,7 +114,7 @@ subtext:
     underline: false
     bulletedlist: false
     numberedlist: false
-subtextSize:
+content.subtextSize:
   type: select
   comment: >-
     How big the supporting line under the heading is. Regular is the size the
@@ -111,7 +127,7 @@ subtextSize:
         name: Regular
       - id: xl
         name: Large
-subtextWidth:
+content.subtextWidth:
   type: select
   label: Subtext width
   comment: >-
@@ -130,7 +146,7 @@ subtextWidth:
         name: Wide
       - id: xl
         name: Extra wide
-buttonSections:
+content.buttonSections:
   type: array
   comment: Call-to-action buttons.
   options:
@@ -140,10 +156,10 @@ buttonSections:
 # Configures the CustomSection wrapper, not this section's own content. Inline
 # per component so a project can trim the size/padding lists in place.
 # `new:component` slices from this marker down — keep the marker line verbatim.
-sectionLabel:
+content.sectionLabel:
   type: text
   comment: Names the section in the editor and sets its anchor id.
-maxContentWidth:
+content.maxContentWidth:
   type: select
   comment: Maximum width of the content.
   options:
@@ -164,7 +180,7 @@ maxContentWidth:
         name: 2xl
       - id: 3xl
         name: 3xl
-paddingHorizontal:
+content.paddingHorizontal:
   type: select
   comment: Horizontal padding around the content.
   options:
@@ -187,7 +203,7 @@ paddingHorizontal:
         name: 2xl
       - id: 3xl
         name: 3xl
-paddingVertical:
+content.paddingVertical:
   type: select
   comment: Vertical padding around the content.
   options:
@@ -214,7 +230,7 @@ paddingVertical:
         name: 5xl
       - id: 6xl
         name: 6xl
-colorScheme:
+style.colorScheme:
   hidden: true
   # Carried by the band colour. Every band the design draws names its own ink,
   # and `base` on its own does not say whether you get the cream band or the
@@ -230,14 +246,14 @@ colorScheme:
         name: Light
       - id: dark
         name: Dark
-lockColorScheme:
+style.lockColorScheme:
   hidden: true
   # Carried by the band colour: every named band locks, because there is no
   # dark mode here for an unlocked one to follow.
   type: switch
   label: Lock color scheme
   comment: Ignores the site theme toggle. Only applies when Color Scheme is Light or Dark.
-backgroundColor:
+style.backgroundColor:
   type: select
   label: Background colour
   comment: The colour this band is painted, and the ink that goes with it.
@@ -274,7 +290,7 @@ backgroundColor:
         - key: color
       text:
         - key: name
-alignmentHorizontal:
+content.alignmentHorizontal:
   type: select
   label: Alignment
   comment: >-
@@ -286,10 +302,10 @@ alignmentHorizontal:
       - id: center
         name: Centered
 
-imageSource:
+content.imageSource:
   type: image
   comment: A picture beneath the call to action.
-imageWidth:
+content.imageWidth:
   type: select
   label: Picture width
   comment: >-
@@ -302,21 +318,21 @@ imageWidth:
         name: Its own size
       - id: full
         name: Full column
-imageScratch:
+content.imageScratch:
   type: text
   label: Picture backing
   comment: >-
     A scratched panel behind the picture, by palette name (kiwi, pacific,
     moss...) or as a hex. Empty draws no panel.
-imageAlt:
+content.imageAlt:
   type: text
   comment: Alt text for that picture.
-cornerStart:
+content.cornerStart:
   type: object
   comment: >-
     A drawing hung off the band's bottom-left corner. Source, alt, and `width`
     and `drop` as percentages of the band: how wide it is, and how far it runs
     past the foot before the band cuts it off.
-cornerEnd:
+content.cornerEnd:
   type: object
   comment: The same for the band's bottom-right corner.

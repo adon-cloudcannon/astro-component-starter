@@ -1,4 +1,5 @@
 ---
+import { nestedProps } from "@component-utils/nestedProps.mjs";
 import CustomSection from "@builders/custom-section/CustomSection.astro";
 import { slugifyLabel } from "@component-utils/slugify";
 import Button from "@core-elements/button/Button.astro";
@@ -8,6 +9,10 @@ import Text from "@core-elements/text/Text.astro";
 import ButtonGroup from "@wrappers/button-group/ButtonGroup.astro";
 import CardGrid from "@wrappers/card-grid/CardGrid.astro";
 import { formatPostDate } from "@component-utils/formatPostDate";
+
+/* `content` and `style` are the editor's tabs, flattened straight back into
+   the names below. `at()` writes the frontmatter path a binding needs. */
+const { props, at } = nestedProps(Astro.props);
 
 const {
   eyebrow = "",
@@ -32,7 +37,7 @@ const {
   useDefaultEditableBinding = false,
   _component,
   ...htmlAttributes
-} = Astro.props;
+} = props;
 
 const postCount = Math.max(1, Math.round(Number(count) || 3));
 
@@ -150,7 +155,7 @@ const cards = showingPlaceholders
   <SimpleText
     alignmentHorizontal="center"
     class="eyebrow"
-    data-prop="eyebrow"
+    data-prop={at("eyebrow")}
     text={eyebrow}
     size="sm"
   />
@@ -158,14 +163,14 @@ const cards = showingPlaceholders
     level={headingLevel}
     size={headingSize}
     alignmentHorizontal="center"
-    data-prop="heading"
+    data-prop={at("heading")}
   >
     {heading}
   </Heading>
   <Text
     class="latest-posts-subtext"
     alignmentHorizontal="center"
-    data-prop="subtext"
+    data-prop={at("subtext")}
     text={subtext}
   />
   {showingPlaceholders ? (
@@ -208,7 +213,7 @@ const cards = showingPlaceholders
         text={viewAllLabel}
         link="/blog/"
         variant="tertiary"
-        data-prop="viewAllLabel"
+        data-prop={at("viewAllLabel")}
       />
     </ButtonGroup>
   )}

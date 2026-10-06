@@ -1,10 +1,26 @@
-eyebrow:
+# The two tabs. A structure value draws its first-level nested keys as tabs
+# when it sets `tabbed: true`; `groups` only ever draws as accordions. The
+# subtype is pinned so the tabbing stops here — left unsaid these inherit it,
+# and then every field inside them has to be an object too.
+content:
+  type: object
+  label: Content
+  options:
+    subtype: object
+style:
+  type: object
+  label: Style
+  comment: What paints the band.
+  options:
+    subtype: object
+
+content.eyebrow:
   type: text
   comment: Short label above the heading.
-heading:
+content.heading:
   type: text
   comment: Main heading for the section.
-headingLevel:
+content.headingLevel:
   type: select
   comment: Heading level for the title. Use h1 once per page, on the first section.
   options:
@@ -12,7 +28,7 @@ headingLevel:
       - h1
       - h2
       - h3
-subtext:
+content.subtext:
   type: markdown
   comment: Supporting copy beneath the heading.
   options:
@@ -27,11 +43,11 @@ subtext:
     underline: false
     bulletedlist: false
     numberedlist: false
-formAction:
+content.formAction:
   type: url
   label: Form action
   comment: URL that receives the email address. Leave empty to submit to the current page.
-formMethod:
+content.formMethod:
   type: select
   label: Form method
   comment: Use the method required by the service receiving the signup.
@@ -41,27 +57,27 @@ formMethod:
         name: POST
       - id: get
         name: GET
-formName:
+content.formName:
   type: text
   label: Form name
   comment: Name sent with the form for services that identify forms by name.
-emailName:
+content.emailName:
   type: text
   label: Email field name
   comment: Name sent for the email address. Check your email provider's requirements.
-emailLabel:
+content.emailLabel:
   type: text
   label: Email label
   comment: Accessible label for the email field. It is not shown visually.
-emailPlaceholder:
+content.emailPlaceholder:
   type: text
   label: Email placeholder
   comment: Example address shown inside the email field.
-buttonText:
+content.buttonText:
   type: text
   label: Button text
   comment: Label on the submit button.
-disclaimer:
+content.disclaimer:
   type: markdown
   comment: Consent or privacy note below the form.
   options:
@@ -76,7 +92,7 @@ disclaimer:
     underline: false
     bulletedlist: false
     numberedlist: false
-layout:
+content.layout:
   type: select
   comment: Band places the form beside the copy. Card stacks them in a centred panel.
   options:
@@ -85,7 +101,7 @@ layout:
         name: Band
       - id: card
         name: Card
-panelBackgroundColor:
+style.panelBackgroundColor:
   type: select
   label: Panel background color
   comment: Background of the panel around the copy and form. None shows the section behind.
@@ -106,10 +122,10 @@ panelBackgroundColor:
 # Configures the CustomSection wrapper, not this section's own content. Inline
 # per component so a project can trim the size/padding lists in place.
 # `new:component` slices from this marker down — keep the marker line verbatim.
-sectionLabel:
+content.sectionLabel:
   type: text
   comment: Names the section in the editor and sets its anchor id.
-maxContentWidth:
+content.maxContentWidth:
   type: select
   comment: Maximum width of the content.
   options:
@@ -130,7 +146,7 @@ maxContentWidth:
         name: 2xl
       - id: 3xl
         name: 3xl
-paddingHorizontal:
+content.paddingHorizontal:
   type: select
   comment: Horizontal padding around the content.
   options:
@@ -153,7 +169,7 @@ paddingHorizontal:
         name: 2xl
       - id: 3xl
         name: 3xl
-paddingVertical:
+content.paddingVertical:
   type: select
   comment: Vertical padding around the content.
   options:
@@ -180,7 +196,7 @@ paddingVertical:
         name: 5xl
       - id: 6xl
         name: 6xl
-colorScheme:
+style.colorScheme:
   hidden: true
   # Carried by the band colour. Every band the design draws names its own ink,
   # and `base` on its own does not say whether you get the cream band or the
@@ -196,14 +212,14 @@ colorScheme:
         name: Light
       - id: dark
         name: Dark
-lockColorScheme:
+style.lockColorScheme:
   hidden: true
   # Carried by the band colour: every named band locks, because there is no
   # dark mode here for an unlocked one to follow.
   type: switch
   label: Lock color scheme
   comment: Ignores the site theme toggle. Only applies when Color Scheme is Light or Dark.
-backgroundColor:
+style.backgroundColor:
   type: select
   label: Background colour
   comment: The colour this band is painted, and the ink that goes with it.

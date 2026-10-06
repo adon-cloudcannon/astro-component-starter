@@ -1,14 +1,17 @@
 label: Step Selector
 description: Numbered steps as tabs, with the selected step's content beneath.
+tabbed: true
 value:
   _component: page-sections/explainers/step-selector
-  eyebrow: ""
-  heading: ""
-  subtext: ""
-  subtextSize: md
-  subtextWidth: ""
-  items: []
-  backgroundColor: light-sand
+  content:
+    eyebrow: ""
+    heading: ""
+    subtext: ""
+    subtextSize: md
+    subtextWidth: ""
+    items: []
+  style:
+    backgroundColor: light-sand
 _inputs:
   $:
     preview:

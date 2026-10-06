@@ -1,10 +1,26 @@
-eyebrow:
+# The two tabs. A structure value draws its first-level nested keys as tabs
+# when it sets `tabbed: true`; `groups` only ever draws as accordions. The
+# subtype is pinned so the tabbing stops here — left unsaid these inherit it,
+# and then every field inside them has to be an object too.
+content:
+  type: object
+  label: Content
+  options:
+    subtype: object
+style:
+  type: object
+  label: Style
+  comment: What paints the band.
+  options:
+    subtype: object
+
+content.eyebrow:
   type: text
   comment: Short label above the heading. Optional.
-heading:
+content.heading:
   type: text
   comment: The hero's title.
-headingLevel:
+content.headingLevel:
   type: select
   comment: Heading level for the title. A page's hero is usually h1.
   options:
@@ -12,7 +28,7 @@ headingLevel:
       - h1
       - h2
       - h3
-headingSize:
+content.headingSize:
   type: select
   comment: >-
     Size of the title, independent of its level. The design opens a page on
@@ -23,10 +39,10 @@ headingSize:
         name: Header 1
       - id: xl
         name: Header 2
-subtext:
+content.subtext:
   type: markdown
   comment: Supporting copy beneath the heading.
-subtextSize:
+content.subtextSize:
   type: select
   comment: >-
     How big the supporting line under the heading is. Regular is the size the
@@ -39,7 +55,7 @@ subtextSize:
         name: Regular
       - id: xl
         name: Large
-subtextWidth:
+content.subtextWidth:
   type: select
   label: Subtext width
   comment: >-
@@ -58,7 +74,7 @@ subtextWidth:
         name: Wide
       - id: xl
         name: Extra wide
-photos:
+content.photos:
   type: array
   comment: >-
     The deck, front photo first. Two is what the design draws: clicking the
@@ -67,7 +83,7 @@ photos:
     clickable.
   options:
     structures: _structures.photoStackPhotos
-panels:
+content.panels:
   type: array
   label: Story columns
   comment: >-
@@ -76,23 +92,23 @@ panels:
     which is what the design draws.
   options:
     structures: _structures.photoStackPanels
-panelRaise:
+content.panelRaise:
   type: number
   label: Column stagger
   comment: How far the first column starts above the second, in pixels.
-buttonSections:
+content.buttonSections:
   type: array
   comment: Buttons under the copy. Optional.
   options:
     structures: _structures.buttonSections
-embellishmentSource:
+content.embellishmentSource:
   type: image
   label: Drawing
   comment: >-
     A drawing over the deck's bottom corner, like the frond the design puts
     there, or hung off the band itself. Decoration, so it is hidden from
     screen readers.
-embellishmentWidth:
+content.embellishmentWidth:
   type: range
   label: Drawing width
   comment: >-
@@ -101,7 +117,7 @@ embellishmentWidth:
     min: 10
     max: 120
     step: 5
-embellishmentPlacement:
+content.embellishmentPlacement:
   type: select
   label: Drawing placement
   comment: >-
@@ -114,15 +130,15 @@ embellishmentPlacement:
         name: On the deck
       - id: band
         name: Off the band
-reverse:
+content.reverse:
   type: switch
   comment: Puts the deck on the left and the copy on the right.
 
 # --- section wrapper inputs
-sectionLabel:
+content.sectionLabel:
   type: text
   comment: Accessible name for the section, used by screen readers.
-maxContentWidth:
+content.maxContentWidth:
   hidden: true
   # Set from the design, not by an editor: every band on the site uses the
   # same column and the same rhythm, and a section that drifts from it reads
@@ -137,7 +153,7 @@ maxContentWidth:
         name: Extra Large
       - id: 2xl
         name: 2xl
-paddingHorizontal:
+content.paddingHorizontal:
   hidden: true
   # Set from the design, not by an editor.
   type: select
@@ -150,7 +166,7 @@ paddingHorizontal:
         name: Page gutter
       - id: lg
         name: Large
-paddingVertical:
+content.paddingVertical:
   hidden: true
   # Set from the design, not by an editor.
   type: select
@@ -163,7 +179,7 @@ paddingVertical:
         name: 3xl
       - id: 4xl
         name: 4xl
-colorScheme:
+style.colorScheme:
   hidden: true
   # Carried by the band colour.
   type: select
@@ -176,13 +192,13 @@ colorScheme:
         name: Light
       - id: dark
         name: Dark
-lockColorScheme:
+style.lockColorScheme:
   hidden: true
   # Carried by the band colour.
   type: switch
   label: Lock color scheme
   comment: Ignores the site theme toggle.
-backgroundColor:
+style.backgroundColor:
   type: select
   label: Background colour
   comment: The colour this band is painted, and the ink that goes with it.
@@ -216,7 +232,7 @@ backgroundColor:
         - key: color
       text:
         - key: name
-pattern:
+style.pattern:
   type: select
   label: Texture
   comment: The texture drawn behind the band.
@@ -228,7 +244,7 @@ pattern:
         name: Grid
       - id: pegboard
         name: Peg board
-haze:
+style.haze:
   type: switch
   comment: >-
     Pools the band's own colour behind the heading, which is what keeps the

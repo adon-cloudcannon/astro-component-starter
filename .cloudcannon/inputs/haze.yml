@@ -6,7 +6,7 @@
 # cannot round-trip what is in the files: toggling one would replace the
 # measured geometry with `true` and drop every pool back to the default centre.
 # An empty item is that default, which is what `true` used to mean.
-haze:
+style.haze:
   type: array
   label: Haze
   comment: >-

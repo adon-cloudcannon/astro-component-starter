@@ -1,65 +1,68 @@
 label: Steps Section
 icon: format_list_numbered
 description: Numbered how-it-works sequence with optional images.
+tabbed: true
 value:
   _component: page-sections/explainers/steps-section
-  eyebrow: How it works
-  heading: From order to doorstep
-  headingLevel: h2
-  subtext: ""
-  items:
-    - image: ""
+  content:
+    sectionLabel: ""
+    eyebrow: How it works
+    heading: From order to doorstep
+    headingLevel: h2
+    subtext: ""
+    items:
+      - image: ""
+        imageAlt: ""
+        contentSections:
+          - _component: building-blocks/core-elements/heading
+            text: Place your order
+            level: h3
+            size: xs
+          - _component: building-blocks/core-elements/simple-text
+            text: Choose a size, add it to the cart, and check out in a couple of minutes.
+            size: sm
+      - image: ""
+        imageAlt: ""
+        contentSections:
+          - _component: building-blocks/core-elements/heading
+            text: We pack and ship
+            level: h3
+            size: xs
+          - _component: building-blocks/core-elements/simple-text
+            text: Orders placed before 2pm leave the warehouse the same day.
+            size: sm
+      - image: ""
+        imageAlt: ""
+        contentSections:
+          - _component: building-blocks/core-elements/heading
+            text: Track delivery
+            level: h3
+            size: xs
+          - _component: building-blocks/core-elements/simple-text
+            text: A tracking link arrives by email as soon as the parcel is scanned.
+            size: sm
+    orientation: horizontal
+    imageAspectRatio: landscape
+    maxContentWidth: xl
+    paddingHorizontal: gutter
+    paddingVertical: 4xl
+  style:
+    backgroundColor: light-sand
+    background:
+      type: image
+      imageSource: ""
       imageAlt: ""
-      contentSections:
-        - _component: building-blocks/core-elements/heading
-          text: Place your order
-          level: h3
-          size: xs
-        - _component: building-blocks/core-elements/simple-text
-          text: Choose a size, add it to the cart, and check out in a couple of minutes.
-          size: sm
-    - image: ""
-      imageAlt: ""
-      contentSections:
-        - _component: building-blocks/core-elements/heading
-          text: We pack and ship
-          level: h3
-          size: xs
-        - _component: building-blocks/core-elements/simple-text
-          text: Orders placed before 2pm leave the warehouse the same day.
-          size: sm
-    - image: ""
-      imageAlt: ""
-      contentSections:
-        - _component: building-blocks/core-elements/heading
-          text: Track delivery
-          level: h3
-          size: xs
-        - _component: building-blocks/core-elements/simple-text
-          text: A tracking link arrives by email as soon as the parcel is scanned.
-          size: sm
-  orientation: horizontal
-  imageAspectRatio: landscape
-  sectionLabel: ""
-  maxContentWidth: xl
-  paddingHorizontal: gutter
-  paddingVertical: 4xl
-  backgroundColor: light-sand
-  background:
-    type: image
-    imageSource: ""
-    imageAlt: ""
-    positionVertical: top
-    positionHorizontal: center
-    fixed: false
-    priority: false
-    mask: none
-    overlay: 0
+      positionVertical: top
+      positionHorizontal: center
+      fixed: false
+      priority: false
+      mask: none
+      overlay: 0
 preview:
   text:
     - Steps Section
   subtext:
-    - key: heading
+    - key: content.heading
   image: public/component-previews/page-sections/explainers/steps-section.svg
   icon: format_list_numbered
   gallery:

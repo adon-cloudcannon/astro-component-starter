@@ -1,4 +1,5 @@
 ---
+import { nestedProps } from "@component-utils/nestedProps.mjs";
 import { rootMirror } from "@component-utils/rootMirror.mjs";
 import CustomSection from "@builders/custom-section/CustomSection.astro";
 import { subtextMeasure } from "@component-utils/subtextMeasure.mjs";
@@ -6,6 +7,10 @@ import Heading from "@core-elements/heading/Heading.astro";
 import SimpleText from "@core-elements/simple-text/SimpleText.astro";
 import Text from "@core-elements/text/Text.astro";
 import Timeline from "@wrappers/timeline/Timeline.astro";
+
+/* `content` and `style` are the editor's tabs, flattened straight back into
+   the names below. `at()` writes the frontmatter path a binding needs. */
+const { props, at } = nestedProps(Astro.props);
 
 const {
   eyebrow = "",
@@ -38,7 +43,7 @@ const {
   useDefaultEditableBinding = false,
   _component,
   ...htmlAttributes
-} = Astro.props;
+} = props;
 
 /* The measure the subtext is set in, as a length. */
 const subtextCap = subtextMeasure(subtextWidth);
@@ -82,7 +87,7 @@ const mirror = rootMirror({ "data-no-header": !hasHeader ? "" : null });
       <SimpleText
         alignmentHorizontal="center"
         class="eyebrow"
-        data-prop="eyebrow"
+        data-prop={at("eyebrow")}
         text={eyebrow}
         size="sm"
       />
@@ -90,14 +95,14 @@ const mirror = rootMirror({ "data-no-header": !hasHeader ? "" : null });
         level={headingLevel}
         size={headingSize}
         alignmentHorizontal="center"
-        data-prop="heading"
+        data-prop={at("heading")}
       >
         {heading}
       </Heading>
       <Text
         class="section-subtext timeline-section-subtext"
         alignmentHorizontal="center"
-        data-prop="subtext"
+        data-prop={at("subtext")}
         style={subtextCap ? `max-inline-size: ${subtextCap}; margin-inline: auto; justify-self: center` : undefined}        size={subtextSize}        text={subtext}
       />
     </Fragment>
@@ -106,7 +111,7 @@ const mirror = rootMirror({ "data-no-header": !hasHeader ? "" : null });
     entries={entries}
     spaceBefore="loose"
     layout={layout}
-    data-children-prop="entries"
+    data-children-prop={at("entries")}
     style={`--timeline-gutter: ${gutter}`}
   />
 </CustomSection>

@@ -14,6 +14,7 @@
  * forty times across the site in light and dark, so it stays in Card and this
  * section only arranges them.
  */
+import { nestedProps } from "@component-utils/nestedProps.mjs";
 import CustomSection from "@builders/custom-section/CustomSection.astro";
 import { subtextMeasure } from "@component-utils/subtextMeasure.mjs";
 import { resolveImageSource } from "@component-utils/resolveImageSource";
@@ -39,6 +40,10 @@ type StoryProps = {
   linkText?: string;
   link?: string;
 };
+
+/* `content` and `style` are the editor's tabs, flattened straight back into
+   the names below. `at()` writes the frontmatter path a binding needs. */
+const { props, at } = nestedProps(Astro.props);
 
 const {
   eyebrow = "",
@@ -73,7 +78,7 @@ const {
   _component,
   "data-children-prop": childrenDataProp,
   ...htmlAttributes
-} = Astro.props;
+} = props;
 
 /* The measure the subtext is set in, as a length. */
 const subtextCap = subtextMeasure(subtextWidth);
@@ -97,14 +102,14 @@ const subtextCap = subtextMeasure(subtextWidth);
     class="eyebrow"
     size="sm"
     alignmentHorizontal="center"
-    data-prop="eyebrow"
+    data-prop={at("eyebrow")}
     text={eyebrow}
   />
   <Heading
     level={headingLevel}
     size={headingSize}
     alignmentHorizontal="center"
-    data-prop="heading"
+    data-prop={at("heading")}
   >
     {heading}
   </Heading>
@@ -112,7 +117,7 @@ const subtextCap = subtextMeasure(subtextWidth);
     class="subtext"
     style={subtextCap ? `max-inline-size: ${subtextCap}; margin-inline: auto; justify-self: center` : undefined}    size={subtextSize}
     alignmentHorizontal="center"
-    data-prop="subtext"
+    data-prop={at("subtext")}
     text={subtext}
   />
 
@@ -130,7 +135,7 @@ const subtextCap = subtextMeasure(subtextWidth);
       gap="lg"
       alignmentHorizontal="start"
       showIndicators={false}
-      data-children-prop="stories"
+      data-children-prop={at("stories")}
     >
       {stories.map((story: StoryProps) => (
         <CarouselSlide data-editable="array-item">
@@ -197,7 +202,7 @@ const subtextCap = subtextMeasure(subtextWidth);
     buttonSections={buttonSections}
     direction="row"
     alignmentHorizontal="center"
-    data-children-prop="buttonSections"
+    data-children-prop={at("buttonSections")}
   />
 </CustomSection>
 

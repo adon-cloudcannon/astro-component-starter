@@ -1,30 +1,33 @@
 label: Custom Section
 icon: star
 description: Groups and styles a large section of a page.
+tabbed: true
 value:
   _component: page-sections/builders/custom-section
-  label: ""
-  contentSections: []
-  maxContentWidth: xl
-  paddingHorizontal: md
-  paddingVertical: 4xl
-  backgroundColor: light-sand
-  rounded: false
-  background:
-    type: image
-    imageSource: ""
-    imageAlt: ""
-    positionVertical: top
-    positionHorizontal: center
-    fixed: false
-    priority: false
-    mask: none
-    overlay: 0
+  content:
+    label: ""
+    contentSections: []
+    maxContentWidth: xl
+    paddingHorizontal: md
+    paddingVertical: 4xl
+    rounded: false
+  style:
+    backgroundColor: light-sand
+    background:
+      type: image
+      imageSource: ""
+      imageAlt: ""
+      positionVertical: top
+      positionHorizontal: center
+      fixed: false
+      priority: false
+      mask: none
+      overlay: 0
 preview:
   text:
     - Custom Section
   subtext:
-    - key: label
+    - key: content.label
   image: public/component-previews/page-sections/builders/custom-section.svg
   icon: width_full
   gallery:

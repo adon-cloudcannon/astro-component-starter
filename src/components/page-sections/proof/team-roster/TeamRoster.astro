@@ -15,12 +15,17 @@
  * The column is 1160 here against the site's usual 1040, measured off the
  * design: the cards start 60 from the page's edges.
  */
+import { nestedProps } from "@component-utils/nestedProps.mjs";
 import CustomSection from "@builders/custom-section/CustomSection.astro";
 import { subtextMeasure } from "@component-utils/subtextMeasure.mjs";
 import Heading from "@core-elements/heading/Heading.astro";
 import SimpleText from "@core-elements/simple-text/SimpleText.astro";
 import Text from "@core-elements/text/Text.astro";
 import TeamMember from "@wrappers/team-member/TeamMember.astro";
+
+/* `content` and `style` are the editor's tabs, flattened straight back into
+   the names below. `at()` writes the frontmatter path a binding needs. */
+const { props, at } = nestedProps(Astro.props);
 
 const {
   eyebrow = "",
@@ -47,7 +52,7 @@ const {
   useDefaultEditableBinding = false,
   _component,
   ...htmlAttributes
-} = Astro.props;
+} = props;
 
 /* `flow` on the header, so its three blocks space themselves the way every
    other section's copy does: without it they sat flush, the heading's foot
@@ -80,13 +85,13 @@ const hasHeader = Boolean(eyebrow || heading || subtext);
       can see. */}
   {hasHeader && (
     <div class="team-roster-header flow">
-      {eyebrow && <SimpleText class="eyebrow" size="sm" text={eyebrow} data-prop="eyebrow" />}
+      {eyebrow && <SimpleText class="eyebrow" size="sm" text={eyebrow} data-prop={at("eyebrow")} />}
       {heading && (
         <Heading
           level={headingLevel}
           size={headingSize}
           alignmentHorizontal="center"
-          data-prop="heading"
+          data-prop={at("heading")}
           text={heading}
         />
       )}
@@ -97,7 +102,7 @@ const hasHeader = Boolean(eyebrow || heading || subtext);
           size={subtextSize}
           alignmentHorizontal="center"
           spaceBefore="snug"
-          data-prop="subtext"
+          data-prop={at("subtext")}
           text={subtext}
         />
       )}
@@ -105,7 +110,7 @@ const hasHeader = Boolean(eyebrow || heading || subtext);
   )}
 
   {leadList.length > 0 && (
-    <div class="team-roster-leads" data-editable="array" data-prop="leads">
+    <div class="team-roster-leads" data-editable="array" data-prop={at("leads")}>
       {leadList.map((person) => (
         <TeamMember
           {...person}
@@ -119,7 +124,7 @@ const hasHeader = Boolean(eyebrow || heading || subtext);
   )}
 
   {memberList.length > 0 && (
-    <div class="team-roster-members" data-editable="array" data-prop="members">
+    <div class="team-roster-members" data-editable="array" data-prop={at("members")}>
       {memberList.map((person) => (
         <TeamMember
           {...person}

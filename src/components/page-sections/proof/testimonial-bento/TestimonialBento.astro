@@ -1,4 +1,5 @@
 ---
+import { nestedProps } from "@component-utils/nestedProps.mjs";
 import CustomSection from "@builders/custom-section/CustomSection.astro";
 import { subtextMeasure } from "@component-utils/subtextMeasure.mjs";
 import Heading from "@core-elements/heading/Heading.astro";
@@ -7,6 +8,10 @@ import Text from "@core-elements/text/Text.astro";
 import TestimonialBentoItem from "./TestimonialBentoItem.astro";
 
 type TestimonialProps = Record<string, unknown>;
+
+/* `content` and `style` are the editor's tabs, flattened straight back into
+   the names below. `at()` writes the frontmatter path a binding needs. */
+const { props, at } = nestedProps(Astro.props);
 
 const {
   eyebrow = "",
@@ -48,7 +53,7 @@ const {
   useDefaultEditableBinding = false,
   _component,
   ...htmlAttributes
-} = Astro.props;
+} = props;
 
 /* The measure the subtext is set in, as a length. */
 const subtextCap = subtextMeasure(subtextWidth);
@@ -75,7 +80,7 @@ const columnCount = ["2", "4"].includes(String(columns)) ? String(columns) : "3"
   <SimpleText
     alignmentHorizontal="center"
     class="eyebrow"
-    data-prop="eyebrow"
+    data-prop={at("eyebrow")}
     text={eyebrow}
     size="sm"
   />
@@ -83,14 +88,14 @@ const columnCount = ["2", "4"].includes(String(columns)) ? String(columns) : "3"
     level={headingLevel}
     size={headingSize}
     alignmentHorizontal="center"
-    data-prop="heading"
+    data-prop={at("heading")}
   >
     {heading}
   </Heading>
   <Text
     class="section-subtext testimonial-bento-subtext"
     alignmentHorizontal="center"
-    data-prop="subtext"
+    data-prop={at("subtext")}
     style={subtextCap ? `max-inline-size: ${subtextCap}; margin-inline: auto; justify-self: center` : undefined}    size={subtextSize}    text={subtext}
   />
 
@@ -101,7 +106,7 @@ const columnCount = ["2", "4"].includes(String(columns)) ? String(columns) : "3"
         data-columns={columnCount}
         data-stagger={stagger && columnCount === "2" ? "" : undefined}
         data-editable="array"
-        data-prop="testimonials"
+        data-prop={at("testimonials")}
         data-direction="row"
       >
         {testimonials.map((testimonial: TestimonialProps) => (

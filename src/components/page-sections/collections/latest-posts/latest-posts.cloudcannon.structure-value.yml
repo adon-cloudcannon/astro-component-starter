@@ -1,36 +1,39 @@
 label: Latest Posts
 icon: newsmode
 description: Newest blog posts as cards, loaded automatically when the site builds.
+tabbed: true
 value:
   _component: page-sections/collections/latest-posts
-  eyebrow: Writing
-  heading: From the blog
-  headingLevel: h2
-  subtext: ""
-  count: 3
-  tag: ""
-  showViewAllButton: true
-  viewAllLabel: View all posts
-  sectionLabel: ""
-  maxContentWidth: xl
-  paddingHorizontal: gutter
-  paddingVertical: 4xl
-  backgroundColor: light-sand
-  background:
-    type: image
-    imageSource: ""
-    imageAlt: ""
-    positionVertical: top
-    positionHorizontal: center
-    fixed: false
-    priority: false
-    mask: none
-    overlay: 0
+  content:
+    sectionLabel: ""
+    eyebrow: Writing
+    heading: From the blog
+    headingLevel: h2
+    subtext: ""
+    count: 3
+    tag: ""
+    showViewAllButton: true
+    viewAllLabel: View all posts
+    maxContentWidth: xl
+    paddingHorizontal: gutter
+    paddingVertical: 4xl
+  style:
+    backgroundColor: light-sand
+    background:
+      type: image
+      imageSource: ""
+      imageAlt: ""
+      positionVertical: top
+      positionHorizontal: center
+      fixed: false
+      priority: false
+      mask: none
+      overlay: 0
 preview:
   text:
     - Latest Posts
   subtext:
-    - key: heading
+    - key: content.heading
   image: public/component-previews/page-sections/collections/latest-posts.svg
   icon: newsmode
   gallery:

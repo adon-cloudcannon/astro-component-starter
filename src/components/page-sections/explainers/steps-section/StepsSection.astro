@@ -1,9 +1,14 @@
 ---
+import { nestedProps } from "@component-utils/nestedProps.mjs";
 import CustomSection from "@builders/custom-section/CustomSection.astro";
 import Heading from "@core-elements/heading/Heading.astro";
 import SimpleText from "@core-elements/simple-text/SimpleText.astro";
 import Text from "@core-elements/text/Text.astro";
 import Steps from "@wrappers/steps/Steps.astro";
+
+/* `content` and `style` are the editor's tabs, flattened straight back into
+   the names below. `at()` writes the frontmatter path a binding needs. */
+const { props, at } = nestedProps(Astro.props);
 
 const {
   eyebrow = "",
@@ -27,7 +32,7 @@ const {
   useDefaultEditableBinding = false,
   _component,
   ...htmlAttributes
-} = Astro.props;
+} = props;
 ---
 
 <CustomSection
@@ -47,7 +52,7 @@ const {
   <SimpleText
     alignmentHorizontal="center"
     class="eyebrow"
-    data-prop="eyebrow"
+    data-prop={at("eyebrow")}
     text={eyebrow}
     size="sm"
   />
@@ -55,14 +60,14 @@ const {
     level={headingLevel}
     size={headingSize}
     alignmentHorizontal="center"
-    data-prop="heading"
+    data-prop={at("heading")}
   >
     {heading}
   </Heading>
   <Text
     class="section-subtext steps-section-subtext"
     alignmentHorizontal="center"
-    data-prop="subtext"
+    data-prop={at("subtext")}
     text={subtext}
   />
   <Steps
@@ -70,7 +75,7 @@ const {
     spaceBefore="loose"
     orientation={orientation}
     imageAspectRatio={imageAspectRatio}
-    data-children-prop="items"
+    data-children-prop={at("items")}
   />
 </CustomSection>
 

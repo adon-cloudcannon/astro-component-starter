@@ -241,7 +241,7 @@ content.paddingVertical:
         name: 5xl
       - id: 6xl
         name: 6xl
-content.colorScheme:
+style.colorScheme:
   hidden: true
   # Carried by the band colour: picking Dark brings its ink with it.
   type: select
@@ -254,7 +254,7 @@ content.colorScheme:
         name: Light
       - id: dark
         name: Dark
-content.lockColorScheme:
+style.lockColorScheme:
   hidden: true
   # Carried by the band colour: picking Dark brings its ink with it.
   type: switch

@@ -1,4 +1,5 @@
 ---
+import { nestedProps } from "@component-utils/nestedProps.mjs";
 import { slugifyLabel } from "@component-utils/slugify";
 import { uniqueId } from "@component-utils/uniqueId";
 import CustomSection from "@builders/custom-section/CustomSection.astro";
@@ -8,6 +9,10 @@ import SimpleText from "@core-elements/simple-text/SimpleText.astro";
 import Text from "@core-elements/text/Text.astro";
 import Masonry from "@wrappers/masonry/Masonry.astro";
 import GalleryItem from "./GalleryItem.astro";
+
+/* `content` and `style` are the editor's tabs, flattened straight back into
+   the names below. `at()` writes the frontmatter path a binding needs. */
+const { props, at } = nestedProps(Astro.props);
 
 const {
   eyebrow = "",
@@ -35,7 +40,7 @@ const {
   useDefaultEditableBinding = false,
   _component,
   ...htmlAttributes
-} = Astro.props;
+} = props;
 
 const items = (images || []).filter((item: any) => item?.image);
 const columnCount = Math.min(5, Math.max(2, Math.round(Number(columns) || 3)));
@@ -83,7 +88,7 @@ const itemsAttributes = masonry
   <SimpleText
     alignmentHorizontal="center"
     class="eyebrow"
-    data-prop="eyebrow"
+    data-prop={at("eyebrow")}
     text={eyebrow}
     size="sm"
   />
@@ -91,14 +96,14 @@ const itemsAttributes = masonry
     level={headingLevel}
     size={headingSize}
     alignmentHorizontal="center"
-    data-prop="heading"
+    data-prop={at("heading")}
   >
     {heading}
   </Heading>
   <Text
     class="gallery-subtext"
     alignmentHorizontal="center"
-    data-prop="subtext"
+    data-prop={at("subtext")}
     text={subtext}
   />
 

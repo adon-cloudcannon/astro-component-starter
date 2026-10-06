@@ -1,10 +1,26 @@
-eyebrow:
+# The two tabs. A structure value draws its first-level nested keys as tabs
+# when it sets `tabbed: true`; `groups` only ever draws as accordions. The
+# subtype is pinned so the tabbing stops here — left unsaid these inherit it,
+# and then every field inside them has to be an object too.
+content:
+  type: object
+  label: Content
+  options:
+    subtype: object
+style:
+  type: object
+  label: Style
+  comment: What paints the band.
+  options:
+    subtype: object
+
+content.eyebrow:
   type: text
   comment: Short label above the heading.
-heading:
+content.heading:
   type: text
   comment: Main heading for the section.
-headingSize:
+content.headingSize:
   type: select
   comment: Size of the title, independent of its level.
   options:
@@ -21,7 +37,7 @@ headingSize:
         name: Header 5
       - id: xs
         name: Header 6
-headingLevel:
+content.headingLevel:
   type: select
   comment: Heading level for the title. Use h1 once per page, on the first section.
   options:
@@ -29,16 +45,16 @@ headingLevel:
       - h1
       - h2
       - h3
-subtext:
+content.subtext:
   type: markdown
   comment: Supporting copy beneath the heading.
-images:
+content.images:
   type: array
   label: Images
   comment: The photos in the grid, in display order.
   options:
     structures: _structures.galleryImages
-layout:
+content.layout:
   type: select
   comment: Grid crops every tile to one shape. Masonry keeps each photo's own shape.
   options:
@@ -47,14 +63,14 @@ layout:
         name: Grid
       - id: masonry
         name: Masonry
-columns:
+content.columns:
   type: range
   comment: Number of columns on screens 640px and up (small screens always show two).
   options:
     min: 2
     max: 5
     step: 1
-gap:
+content.gap:
   type: select
   comment: The gap between tiles.
   options:
@@ -75,7 +91,7 @@ gap:
         name: 2xl
       - id: 3xl
         name: 3xl
-aspectRatio:
+content.aspectRatio:
   type: select
   comment: Crops every tile. Only applies when Layout is Grid.
   options:
@@ -88,10 +104,10 @@ aspectRatio:
         name: Portrait (3:4)
       - id: widescreen
         name: Widescreen (16:9)
-lightbox:
+content.lightbox:
   type: switch
   comment: Opens images full size in an overlay when a tile is clicked.
-showThumbnails:
+content.showThumbnails:
   type: switch
   comment: Shows clickable thumbnails in the lightbox. Only applies when Lightbox is on.
   hidden: "!lightbox"
@@ -100,10 +116,10 @@ showThumbnails:
 # Configures the CustomSection wrapper, not this section's own content. Inline
 # per component so a project can trim the size/padding lists in place.
 # `new:component` slices from this marker down — keep the marker line verbatim.
-sectionLabel:
+content.sectionLabel:
   type: text
   comment: Names the section in the editor and sets its anchor id.
-maxContentWidth:
+content.maxContentWidth:
   type: select
   comment: Maximum width of the content.
   options:
@@ -124,7 +140,7 @@ maxContentWidth:
         name: 2xl
       - id: 3xl
         name: 3xl
-paddingHorizontal:
+content.paddingHorizontal:
   type: select
   comment: Horizontal padding around the content.
   options:
@@ -147,7 +163,7 @@ paddingHorizontal:
         name: 2xl
       - id: 3xl
         name: 3xl
-paddingVertical:
+content.paddingVertical:
   type: select
   comment: Vertical padding around the content.
   options:
@@ -174,7 +190,7 @@ paddingVertical:
         name: 5xl
       - id: 6xl
         name: 6xl
-colorScheme:
+style.colorScheme:
   hidden: true
   # Carried by the band colour. Every band the design draws names its own ink,
   # and `base` on its own does not say whether you get the cream band or the
@@ -190,14 +206,14 @@ colorScheme:
         name: Light
       - id: dark
         name: Dark
-lockColorScheme:
+style.lockColorScheme:
   hidden: true
   # Carried by the band colour: every named band locks, because there is no
   # dark mode here for an unlocked one to follow.
   type: switch
   label: Lock color scheme
   comment: Ignores the site theme toggle. Only applies when Color Scheme is Light or Dark.
-backgroundColor:
+style.backgroundColor:
   type: select
   label: Background colour
   comment: The colour this band is painted, and the ink that goes with it.

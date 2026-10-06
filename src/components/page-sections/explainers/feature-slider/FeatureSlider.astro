@@ -1,4 +1,5 @@
 ---
+import { nestedProps } from "@component-utils/nestedProps.mjs";
 import SimpleText from "@core-elements/simple-text/SimpleText.astro";
 import Text from "@core-elements/text/Text.astro";
 import Heading from "@core-elements/heading/Heading.astro";
@@ -7,6 +8,10 @@ import FeatureSliderItem from "@explainers/feature-slider/FeatureSliderItem.astr
 import Carousel from "@wrappers/carousel/Carousel.astro";
 
 type SlideProps = Record<string, unknown>;
+
+/* `content` and `style` are the editor's tabs, flattened straight back into
+   the names below. `at()` writes the frontmatter path a binding needs. */
+const { props, at } = nestedProps(Astro.props);
 
 const {
   eyebrow = "",
@@ -28,7 +33,7 @@ const {
   useDefaultEditableBinding = false,
   _component,
   ...htmlAttributes
-} = Astro.props;
+} = props;
 ---
 
 <CustomSection
@@ -74,7 +79,7 @@ const {
     minSlideWidth={0}
     autoPlay={false}
     autoScroll={false}
-    data-children-prop="slides"
+    data-children-prop={at("slides")}
   >
     {slides?.map((slide: SlideProps, index: number) => (
       <FeatureSliderItem

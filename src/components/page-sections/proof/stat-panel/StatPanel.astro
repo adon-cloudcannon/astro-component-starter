@@ -13,6 +13,7 @@
  * the same `number`/`prefix`/`suffix` the Stats section takes, so the two
  * describe a statistic the same way.
  */
+import { nestedProps } from "@component-utils/nestedProps.mjs";
 import CustomSection from "@builders/custom-section/CustomSection.astro";
 import { subtextMeasure } from "@component-utils/subtextMeasure.mjs";
 import ButtonGroup from "@wrappers/button-group/ButtonGroup.astro";
@@ -30,6 +31,10 @@ type StatProps = {
   /** A palette colour for the mark, e.g. moss, sunset, pacific. */
   iconColor?: string;
 };
+
+/* `content` and `style` are the editor's tabs, flattened straight back into
+   the names below. `at()` writes the frontmatter path a binding needs. */
+const { props, at } = nestedProps(Astro.props);
 
 const {
   eyebrow = "",
@@ -77,7 +82,7 @@ const {
   _component,
   "data-children-prop": childrenDataProp,
   ...htmlAttributes
-} = Astro.props;
+} = props;
 
 /* The measure the subtext is set in, as a length. */
 const subtextCap = subtextMeasure(subtextWidth);
@@ -105,14 +110,14 @@ const hasHeader = Boolean(eyebrow || heading || subtext || buttonSections?.lengt
         class="eyebrow"
         size="sm"
         alignmentHorizontal="center"
-        data-prop="eyebrow"
+        data-prop={at("eyebrow")}
         text={eyebrow}
       />
       <Heading
         level={headingLevel}
         size={headingSize}
         alignmentHorizontal="center"
-        data-prop="heading"
+        data-prop={at("heading")}
       >
         {heading}
       </Heading>
@@ -123,14 +128,14 @@ const hasHeader = Boolean(eyebrow || heading || subtext || buttonSections?.lengt
           : undefined}
         size={subtextSize}
         alignmentHorizontal="center"
-        data-prop="subtext"
+        data-prop={at("subtext")}
         text={subtext}
       />
       <ButtonGroup
         buttonSections={buttonSections}
         direction="row"
         alignmentHorizontal="center"
-        data-children-prop="buttonSections"
+        data-children-prop={at("buttonSections")}
       />
     </Fragment>
   )}

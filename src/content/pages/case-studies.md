@@ -6,9 +6,11 @@ title: Case studies
 description: See how real teams build.
 pageSections:
   - _component: page-sections/heroes/page-header
-    heading: Case studies
-    subtext: See how real teams build.
-    showBreadcrumbs: true
-    alignmentHorizontal: start
-    backgroundColor: light-sand
+    content:
+      heading: Case studies
+      subtext: See how real teams build.
+      showBreadcrumbs: true
+      alignmentHorizontal: start
+    style:
+      backgroundColor: light-sand
 ---

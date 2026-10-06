@@ -1,10 +1,26 @@
-eyebrow:
+# The two tabs. A structure value draws its first-level nested keys as tabs
+# when it sets `tabbed: true`; `groups` only ever draws as accordions. The
+# subtype is pinned so the tabbing stops here — left unsaid these inherit it,
+# and then every field inside them has to be an object too.
+content:
+  type: object
+  label: Content
+  options:
+    subtype: object
+style:
+  type: object
+  label: Style
+  comment: What paints the band.
+  options:
+    subtype: object
+
+content.eyebrow:
   type: text
   comment: Short label above the heading.
-heading:
+content.heading:
   type: text
   comment: Main heading for the section.
-headingSize:
+content.headingSize:
   type: select
   comment: Size of the title, independent of its level.
   options:
@@ -17,15 +33,15 @@ headingSize:
         name: Header 4
       - id: sm
         name: Header 5
-headingLevel:
+content.headingLevel:
   type: select
   comment: Heading level for the title. Use h1 once per page, on the first section.
   options:
     values: [h1, h2, h3]
-subtext:
+content.subtext:
   type: markdown
   comment: Supporting copy beneath the heading.
-subtextSize:
+content.subtextSize:
   type: select
   comment: >-
     How big the supporting line under the heading is. Regular is the size the
@@ -38,7 +54,7 @@ subtextSize:
         name: Regular
       - id: xl
         name: Large
-subtextWidth:
+content.subtextWidth:
   type: select
   label: Subtext width
   comment: >-
@@ -57,20 +73,20 @@ subtextWidth:
         name: Wide
       - id: xl
         name: Extra wide
-buttonSections:
+content.buttonSections:
   type: array
   comment: Actions under the copy.
-imageSource:
+content.imageSource:
   type: image
   comment: The picture shown on the panel.
   options:
     paths:
       uploads: src/assets/images
       static: ""
-imageAlt:
+content.imageAlt:
   type: text
   comment: Alternative text for the picture.
-imageAnchor:
+content.imageAnchor:
   type: select
   comment: >-
     Where the picture ends. To the foot runs it down to the panel's bottom
@@ -81,7 +97,7 @@ imageAnchor:
         name: Down to the foot
       - id: top
         name: Its own height
-panelImage:
+style.panelImage:
   type: image
   comment: >-
     A picture for the panel itself, behind everything — the scratched sheet the
@@ -90,25 +106,25 @@ panelImage:
     paths:
       uploads: src/assets/images
       static: ""
-panelColor:
+style.panelColor:
   type: text
   comment: >-
     A palette colour for the panel when it carries no picture, e.g. moss,
     pacific, sunset.
-panelScratch:
+content.panelScratch:
   type: text
   comment: >-
     Draws the panel's scratched sheet in this colour instead of loading an
     export. A palette name or a hex.
-panelScratchInk:
+content.panelScratchInk:
   type: text
   comment: >-
     What a scratch shows. Left empty it is the panel colour lifted toward
     white.
-stats:
+content.stats:
   type: array
   comment: The callouts laid over the panel.
-statsPosition:
+content.statsPosition:
   type: select
   comment: Which side of the panel they sit on.
   options:
@@ -117,7 +133,7 @@ statsPosition:
         name: Right
       - id: start
         name: Left
-statsAlign:
+content.statsAlign:
   type: select
   comment: >-
     How they distribute down the panel. Centre suits one, apart suits two,
@@ -132,19 +148,19 @@ statsAlign:
         name: From the bottom
       - id: between
         name: Apart
-number:
+content.number:
   type: number
   comment: The figure. It counts up to this when the panel is scrolled to.
-prefix:
+content.prefix:
   type: text
   comment: Shown before the figure, e.g. a currency mark.
-suffix:
+content.suffix:
   type: text
   comment: Shown after the figure, e.g. x, %, +.
-label:
+content.label:
   type: text
   comment: What the figure measures.
-iconName:
+content.iconName:
   type: select
   comment: The mark shown beside the figure. Sourced from [Heroicons](https://heroicons.com/).
   options:
@@ -154,7 +170,7 @@ iconName:
         - key: name
       image:
         - template: src/icons/{id}.svg
-iconColor:
+content.iconColor:
   type: select
   comment: A palette colour for the mark.
   hidden: "!iconName"

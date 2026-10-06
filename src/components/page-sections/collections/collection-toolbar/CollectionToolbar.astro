@@ -16,10 +16,15 @@
  * drawn and inert — they need each card to declare its category and its
  * generator, which is a content change rather than a markup one.
  */
+import { nestedProps } from "@component-utils/nestedProps.mjs";
 import CustomSection from "@builders/custom-section/CustomSection.astro";
 import Icon from "@core-elements/icon/Icon.astro";
 
 type Filter = { label?: string; name?: string; options?: { id?: string; name?: string }[] };
+
+/* `content` and `style` are the editor's tabs, flattened straight back into
+   the names below. `at()` writes the frontmatter path a binding needs. */
+const { props, at } = nestedProps(Astro.props);
 
 const {
   /** The collection this filters, matched against a card grid's own name. */
@@ -43,7 +48,7 @@ const {
   useDefaultEditableBinding = false,
   _component,
   ...htmlAttributes
-} = Astro.props;
+} = props;
 
 const list: Filter[] = (Array.isArray(filters) ? filters : []).filter((f) => f?.label);
 ---

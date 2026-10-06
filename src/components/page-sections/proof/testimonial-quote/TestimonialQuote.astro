@@ -22,6 +22,7 @@
  * 18, the role and company 13 in mono, the marks and the emphasis in the
  * card's own accent, a rule between the quote and the person.
  */
+import { nestedProps } from "@component-utils/nestedProps.mjs";
 import CustomSection from "@builders/custom-section/CustomSection.astro";
 import SimpleText from "@core-elements/simple-text/SimpleText.astro";
 import TestimonialQuoteItem from "./TestimonialQuoteItem.astro";
@@ -41,6 +42,10 @@ type Quote = {
   accentColor?: string;
   quoteMarks?: boolean;
 };
+
+/* `content` and `style` are the editor's tabs, flattened straight back into
+   the names below. `at()` writes the frontmatter path a binding needs. */
+const { props, at } = nestedProps(Astro.props);
 
 const {
   /**
@@ -131,7 +136,7 @@ const {
   useDefaultEditableBinding = false,
   _component,
   ...htmlAttributes
-} = Astro.props;
+} = props;
 
 const LAYOUTS = ["static", "carousel", "split-person", "split-quote"];
 const layout = LAYOUTS.includes(String(variant)) ? String(variant) : "static";
@@ -185,7 +190,7 @@ const align = alignment === "center" && !isSplit ? "center" : undefined;
         size="sm"
         alignmentHorizontal={align === "center" ? "center" : "start"}
         text={eyebrow}
-        data-prop="eyebrow"
+        data-prop={at("eyebrow")}
       />
     )}
 
@@ -203,7 +208,7 @@ const align = alignment === "center" && !isSplit ? "center" : undefined;
       data-tone={tone !== "base" ? tone : undefined}
       data-theme={cardScheme}
       data-editable="array"
-      data-prop="quotes"
+      data-prop={at("quotes")}
     >
       {items.map((quote, index) => (
         <TestimonialQuoteItem

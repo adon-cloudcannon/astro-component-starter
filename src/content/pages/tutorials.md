@@ -6,9 +6,11 @@ title: Tutorials
 description: Step-by-step guides.
 pageSections:
   - _component: page-sections/heroes/page-header
-    heading: Tutorials
-    subtext: Step-by-step guides.
-    showBreadcrumbs: true
-    alignmentHorizontal: start
-    backgroundColor: light-sand
+    content:
+      heading: Tutorials
+      subtext: Step-by-step guides.
+      showBreadcrumbs: true
+      alignmentHorizontal: start
+    style:
+      backgroundColor: light-sand
 ---

@@ -1,4 +1,5 @@
 ---
+import { nestedProps } from "@component-utils/nestedProps.mjs";
 import { isNonEmptyString } from "@component-utils/isNonEmptyString";
 import { slugifyLabel } from "@component-utils/slugify";
 import CustomSection from "@builders/custom-section/CustomSection.astro";
@@ -13,6 +14,10 @@ import Grid from "@wrappers/grid/Grid.astro";
 import { nextHeadingLevel } from "@component-utils/headingLevel";
 
 type TierProps = Record<string, unknown>;
+
+/* `content` and `style` are the editor's tabs, flattened straight back into
+   the names below. `at()` writes the frontmatter path a binding needs. */
+const { props, at } = nestedProps(Astro.props);
 
 const {
   eyebrow = "",
@@ -74,7 +79,7 @@ const {
   useDefaultEditableBinding = false,
   _component,
   ...htmlAttributes
-} = Astro.props;
+} = props;
 
 /* The measure the subtext is set in, as a length. */
 const subtextCap = subtextMeasure(subtextWidth);
@@ -105,7 +110,7 @@ const annualSelected = defaultInterval === "annual";
   <SimpleText
     alignmentHorizontal={alignmentHorizontal}
     class="eyebrow"
-    data-prop="eyebrow"
+    data-prop={at("eyebrow")}
     text={eyebrow}
     size="sm"
   />
@@ -113,7 +118,7 @@ const annualSelected = defaultInterval === "annual";
     level={headingLevel}
     size={headingSize}
     alignmentHorizontal={alignmentHorizontal}
-    data-prop="heading"
+    data-prop={at("heading")}
   >
     {heading}
   </Heading>
@@ -125,7 +130,7 @@ const annualSelected = defaultInterval === "annual";
           alignmentHorizontal === "center" ? " margin-inline: auto; justify-self: center" : ""
         }`
       : undefined}    size={subtextSize}
-    data-prop="subtext"
+    data-prop={at("subtext")}
     text={subtext}
   />
   {showAnnualPricing && (
@@ -144,7 +149,7 @@ const annualSelected = defaultInterval === "annual";
             {" "}
             <span
               class="pricing-tiers-billing-saving"
-              data-prop="annualBadge"
+              data-prop={at("annualBadge")}
             >
               ({annualBadge})
             </span>
@@ -160,7 +165,7 @@ const annualSelected = defaultInterval === "annual";
     minItemWidth={tiers.length >= 4 ? 240 : 272}
     class:list={["pricing-tiers-grid", tiers.length >= 4 && "pricing-tiers-wide"]}
     spaceBefore="loose"
-    data-children-prop="tiers"
+    data-children-prop={at("tiers")}
   >
     {tiers?.map((tier: TierProps) => (
       <PricingTiersItem

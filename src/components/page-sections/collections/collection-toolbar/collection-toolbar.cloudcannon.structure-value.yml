@@ -1,32 +1,35 @@
 label: Collection Toolbar
 icon: filter_list
 description: Search, sort and filter controls above a grid of cards.
+tabbed: true
 value:
   _component: page-sections/collections/collection-toolbar
-  collection: ""
-  searchLabel: Search
-  searchPlaceholder: Search...
-  sortLabel: Sort
-  filters:
-    - label: Filter by category
-      name: category
-      options:
-        - id: starter
-          name: Starter
-        - id: editor-friendly
-          name: Editor-friendly
-  sectionLabel: ""
-  maxContentWidth: xl
-  paddingHorizontal: gutter
-  paddingVertical: lg
-  paddingVerticalStart: ""
-  paddingVerticalEnd: ""
-  backgroundColor: light-sand
+  content:
+    sectionLabel: ""
+    collection: ""
+    searchLabel: Search
+    searchPlaceholder: Search...
+    sortLabel: Sort
+    filters:
+      - label: Filter by category
+        name: category
+        options:
+          - id: starter
+            name: Starter
+          - id: editor-friendly
+            name: Editor-friendly
+    maxContentWidth: xl
+    paddingHorizontal: gutter
+    paddingVertical: lg
+    paddingVerticalStart: ""
+    paddingVerticalEnd: ""
+  style:
+    backgroundColor: light-sand
 preview:
   text:
     - Collection Toolbar
   subtext:
-    - key: searchPlaceholder
+    - key: content.searchPlaceholder
   icon: filter_list
 picker_preview:
   text: Collection Toolbar

@@ -1,22 +1,38 @@
-eyebrow:
+# The two tabs. A structure value draws its first-level nested keys as tabs
+# when it sets `tabbed: true`; `groups` only ever draws as accordions. The
+# subtype is pinned so the tabbing stops here — left unsaid these inherit it,
+# and then every field inside them has to be an object too.
+content:
+  type: object
+  label: Content
+  options:
+    subtype: object
+style:
+  type: object
+  label: Style
+  comment: What paints the band.
+  options:
+    subtype: object
+
+content.eyebrow:
   type: text
   comment: Small label above the heading.
-heading:
+content.heading:
   type: text
   comment: The section's heading.
-headingLevel:
+content.headingLevel:
   type: select
   options:
     values:
       - h2
       - h3
-headingSize:
+content.headingSize:
   type: text
   comment: Heading size slot.
-subtext:
+content.subtext:
   type: markdown
   comment: Supporting copy beneath the heading.
-subtextSize:
+content.subtextSize:
   type: select
   comment: >-
     How big the supporting line under the heading is. Regular is the size the
@@ -29,7 +45,7 @@ subtextSize:
         name: Regular
       - id: xl
         name: Large
-subtextWidth:
+content.subtextWidth:
   type: select
   label: Subtext width
   comment: >-
@@ -48,7 +64,7 @@ subtextWidth:
         name: Wide
       - id: xl
         name: Extra wide
-items:
+content.items:
   type: array
   label: Steps
   comment: >-

@@ -1,48 +1,51 @@
 label: Logo Cloud
 icon: workspaces
 description: Row of client logos, with an optional heading.
+tabbed: true
 value:
   _component: page-sections/proof/logo-cloud
-  heading: Trusted by teams shipping every day
-  logos:
-    - image: /src/assets/images/component-docs/logo-acme.svg
-      alt: Acme
-      url: ""
-    - image: /src/assets/images/component-docs/logo-northwind.svg
-      alt: Northwind
-      url: ""
-    - image: /src/assets/images/component-docs/logo-globex.svg
-      alt: Globex
-      url: ""
-    - image: /src/assets/images/component-docs/logo-vertex.svg
-      alt: Vertex
-      url: ""
-    - image: /src/assets/images/component-docs/logo-umbra.svg
-      alt: Umbra
-      url: ""
-  headingPlacement: above
-  grayscale: true
-  scrolling: false
-  sectionLabel: ""
-  maxContentWidth: xl
-  paddingHorizontal: gutter
-  paddingVertical: 2xl
-  backgroundColor: light-sand
-  background:
-    type: image
-    imageSource: ""
-    imageAlt: ""
-    positionVertical: top
-    positionHorizontal: center
-    fixed: false
-    priority: false
-    mask: none
-    overlay: 0
+  content:
+    sectionLabel: ""
+    heading: Trusted by teams shipping every day
+    logos:
+      - image: /src/assets/images/component-docs/logo-acme.svg
+        alt: Acme
+        url: ""
+      - image: /src/assets/images/component-docs/logo-northwind.svg
+        alt: Northwind
+        url: ""
+      - image: /src/assets/images/component-docs/logo-globex.svg
+        alt: Globex
+        url: ""
+      - image: /src/assets/images/component-docs/logo-vertex.svg
+        alt: Vertex
+        url: ""
+      - image: /src/assets/images/component-docs/logo-umbra.svg
+        alt: Umbra
+        url: ""
+    headingPlacement: above
+    grayscale: true
+    scrolling: false
+    maxContentWidth: xl
+    paddingHorizontal: gutter
+    paddingVertical: 2xl
+  style:
+    backgroundColor: light-sand
+    background:
+      type: image
+      imageSource: ""
+      imageAlt: ""
+      positionVertical: top
+      positionHorizontal: center
+      fixed: false
+      priority: false
+      mask: none
+      overlay: 0
 preview:
   text:
     - Logo Cloud
   subtext:
-    - key: heading
+    - key: content.heading
   image: public/component-previews/page-sections/proof/logo-cloud.svg
   icon: workspaces
   gallery:

@@ -1,64 +1,67 @@
 label: Testimonial Bento
 icon: dashboard
 description: Customer quotes in a bento grid, led by a featured quote.
+tabbed: true
 value:
   _component: page-sections/proof/testimonial-bento
-  eyebrow: Testimonials
-  heading: Loved by the teams who use it
-  headingLevel: h2
-  subtext: ""
-  subtextSize: md
-  subtextWidth: ""
-  testimonials:
-    - text: >-
-        We handed the site to our marketing team on a Friday and they had three new landing pages
-        live by Monday. No tickets, no deploys, nothing broken.
-      authorName: Priya Raman
-      authorDescription: Head of Marketing, Northwind
-      authorImage: /src/assets/images/component-docs/profile1.jpg
-      size: featured
-      tone: light
-    - text: Our Lighthouse scores went up without anyone working on performance.
-      authorName: Dana Whitfield
-      authorDescription: Engineering Lead, Cascade
-      authorImage: /src/assets/images/component-docs/profile3.jpg
-      size: standard
-      tone: base
-    - text: The guardrails mean nobody can wreck the design.
-      authorName: Tom Alvarez
-      authorDescription: Founder, Fieldnote
-      authorImage: /src/assets/images/component-docs/profile2.jpg
-      size: standard
-      tone: base
-    - text: >-
-        Two weeks from kickoff to launch, including content. The component library did most of the
-        work for us.
-      authorName: Sam Okafor
-      authorDescription: Design Director, Loam Studio
-      authorImage: /src/assets/images/component-docs/profile4.jpg
-      size: full
-      tone: base
-  columns: "3"
-  sectionLabel: ""
-  maxContentWidth: xl
-  paddingHorizontal: gutter
-  paddingVertical: 4xl
-  backgroundColor: light-sand
-  background:
-    type: image
-    imageSource: ""
-    imageAlt: ""
-    positionVertical: top
-    positionHorizontal: center
-    fixed: false
-    priority: false
-    mask: none
-    overlay: 0
+  content:
+    sectionLabel: ""
+    eyebrow: Testimonials
+    heading: Loved by the teams who use it
+    headingLevel: h2
+    subtext: ""
+    subtextSize: md
+    subtextWidth: ""
+    testimonials:
+      - text: >-
+          We handed the site to our marketing team on a Friday and they had three new landing pages
+          live by Monday. No tickets, no deploys, nothing broken.
+        authorName: Priya Raman
+        authorDescription: Head of Marketing, Northwind
+        authorImage: /src/assets/images/component-docs/profile1.jpg
+        size: featured
+        tone: light
+      - text: Our Lighthouse scores went up without anyone working on performance.
+        authorName: Dana Whitfield
+        authorDescription: Engineering Lead, Cascade
+        authorImage: /src/assets/images/component-docs/profile3.jpg
+        size: standard
+        tone: base
+      - text: The guardrails mean nobody can wreck the design.
+        authorName: Tom Alvarez
+        authorDescription: Founder, Fieldnote
+        authorImage: /src/assets/images/component-docs/profile2.jpg
+        size: standard
+        tone: base
+      - text: >-
+          Two weeks from kickoff to launch, including content. The component library did most of the
+          work for us.
+        authorName: Sam Okafor
+        authorDescription: Design Director, Loam Studio
+        authorImage: /src/assets/images/component-docs/profile4.jpg
+        size: full
+        tone: base
+    columns: "3"
+    maxContentWidth: xl
+    paddingHorizontal: gutter
+    paddingVertical: 4xl
+  style:
+    backgroundColor: light-sand
+    background:
+      type: image
+      imageSource: ""
+      imageAlt: ""
+      positionVertical: top
+      positionHorizontal: center
+      fixed: false
+      priority: false
+      mask: none
+      overlay: 0
 preview:
   text:
     - Testimonial Bento
   subtext:
-    - key: heading
+    - key: content.heading
   image: public/component-previews/page-sections/proof/testimonial-bento.svg
   icon: dashboard
   gallery:

@@ -12,6 +12,7 @@
  * be a picture or a third panel of its own: on the homepage the design draws a
  * dark card there, taller than the pair and sharing their bottom edge.
  */
+import { nestedProps } from "@component-utils/nestedProps.mjs";
 import Component from "@component-utils/renderBlock.astro";
 import CustomSection from "@builders/custom-section/CustomSection.astro";
 import { subtextMeasure } from "@component-utils/subtextMeasure.mjs";
@@ -36,6 +37,10 @@ type PanelProps = {
   link?: string;
   imageOverlap?: number;
 };
+
+/* `content` and `style` are the editor's tabs, flattened straight back into
+   the names below. `at()` writes the frontmatter path a binding needs. */
+const { props, at } = nestedProps(Astro.props);
 
 const {
   eyebrow = "",
@@ -108,7 +113,7 @@ const {
   _component,
   "data-children-prop": childrenDataProp,
   ...htmlAttributes
-} = Astro.props;
+} = props;
 
 /* The measure the subtext is set in, as a length. */
 const subtextCap = subtextMeasure(subtextWidth);
@@ -176,14 +181,14 @@ const panelsProp = childrenDataProp ?? (useDefaultEditableBinding ? "panels" : u
     class="eyebrow"
     size="sm"
     alignmentHorizontal="center"
-    data-prop="eyebrow"
+    data-prop={at("eyebrow")}
     text={eyebrow}
   />
   <Heading
     level={headingLevel}
     size={headingSize}
     alignmentHorizontal="center"
-    data-prop="heading"
+    data-prop={at("heading")}
   >
     {heading}
   </Heading>
@@ -191,7 +196,7 @@ const panelsProp = childrenDataProp ?? (useDefaultEditableBinding ? "panels" : u
     class="subtext"
     style={subtextCap ? `max-inline-size: ${subtextCap}; margin-inline: auto; justify-self: center` : undefined}    size={subtextSize}
     alignmentHorizontal="center"
-    data-prop="subtext"
+    data-prop={at("subtext")}
     text={subtext}
   />
   <ButtonGroup
@@ -199,7 +204,7 @@ const panelsProp = childrenDataProp ?? (useDefaultEditableBinding ? "panels" : u
     buttonSections={buttonSections}
     direction="row"
     alignmentHorizontal="center"
-    data-children-prop="buttonSections"
+    data-children-prop={at("buttonSections")}
   />
 
     {/* Both halves together. `data-editable="array"` with no `data-prop` is
@@ -304,16 +309,16 @@ const panelsProp = childrenDataProp ?? (useDefaultEditableBinding ? "panels" : u
                 ...(centreMinHeight ? { "--workflow-centre-height": `${Number(centreMinHeight)}px` } : {}),
               }}
               data-editable="array"
-              data-prop="centreSections"
+              data-prop={at("centreSections")}
             >
               {(centreIconName || centreTitle) && (
                 <p class="workflow-centre-title">
                   {centreIconName && <Icon name={centreIconName} size="md" />}
-                  {centreTitle && <span data-prop="centreTitle">{centreTitle}</span>}
+                  {centreTitle && <span data-prop={at("centreTitle")}>{centreTitle}</span>}
                   {centreBranch && (
                     <span class="workflow-centre-branch">
                       <span class="workflow-centre-light" aria-hidden="true" />
-                      <span data-prop="centreBranch">{centreBranch}</span>
+                      <span data-prop={at("centreBranch")}>{centreBranch}</span>
                     </span>
                   )}
                 </p>
@@ -349,8 +354,8 @@ const panelsProp = childrenDataProp ?? (useDefaultEditableBinding ? "panels" : u
               class="workflow-centre"
               source={centreImageSource}
               alt={centreImageAlt}
-              data-prop-src="centreImageSource"
-              data-prop-alt="centreImageAlt"
+              data-prop-src={at("centreImageSource")}
+              data-prop-alt={at("centreImageAlt")}
             />
           ) : (
             <div class="workflow-centre-empty" aria-hidden="true"></div>

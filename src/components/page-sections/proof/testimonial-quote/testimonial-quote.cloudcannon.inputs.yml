@@ -1,10 +1,26 @@
-eyebrow:
+# The two tabs. A structure value draws its first-level nested keys as tabs
+# when it sets `tabbed: true`; `groups` only ever draws as accordions. The
+# subtype is pinned so the tabbing stops here — left unsaid these inherit it,
+# and then every field inside them has to be an object too.
+content:
+  type: object
+  label: Content
+  options:
+    subtype: object
+style:
+  type: object
+  label: Style
+  comment: What paints the band.
+  options:
+    subtype: object
+
+content.eyebrow:
   type: text
   label: Eyebrow
   comment: >-
     A small label over the card, in the band rather than on it. Leave empty
     for none.
-variant:
+content.variant:
   type: select
   label: Layout
   comment: >-
@@ -20,7 +36,7 @@ variant:
         name: Split, person left
       - id: split-quote
         name: Split, quote left
-quoteSize:
+content.quoteSize:
   type: select
   label: Quote size
   comment: >-
@@ -32,7 +48,7 @@ quoteSize:
         name: Header 5
       - id: lg
         name: Header 4
-tone:
+content.tone:
   type: select
   label: Card tone
   comment: >-
@@ -48,7 +64,7 @@ tone:
         name: Light
       - id: plain
         name: No card
-cardWidth:
+content.cardWidth:
   type: select
   label: Card width
   comment: >-
@@ -63,7 +79,7 @@ cardWidth:
         name: Medium
       - id: narrow
         name: Narrow
-alignment:
+content.alignment:
   type: select
   label: Alignment
   comment: >-
@@ -75,13 +91,13 @@ alignment:
         name: Left
       - id: center
         name: Centred
-bordered:
+content.bordered:
   type: switch
   label: Outline the card
   comment: >-
     Draws a hairline around the card. Off by default: on a patterned band it
     reads as a box around the quote rather than as the edge of a surface.
-quotes:
+content.quotes:
   type: array
   label: Quotes
   comment: >-
@@ -93,10 +109,10 @@ quotes:
 # Configures the CustomSection wrapper, not this section's own content. Inline
 # per component so a project can trim the size/padding lists in place.
 # `new:component` slices from this marker down — keep the marker line verbatim.
-sectionLabel:
+content.sectionLabel:
   type: text
   comment: Names the section in the editor and sets its anchor id.
-maxContentWidth:
+content.maxContentWidth:
   type: select
   comment: Maximum width of the content.
   options:
@@ -117,7 +133,7 @@ maxContentWidth:
         name: 2xl
       - id: 3xl
         name: 3xl
-paddingHorizontal:
+content.paddingHorizontal:
   type: select
   comment: Horizontal padding around the content.
   options:
@@ -140,7 +156,7 @@ paddingHorizontal:
         name: 2xl
       - id: 3xl
         name: 3xl
-paddingVertical:
+content.paddingVertical:
   type: select
   comment: Vertical padding around the content.
   options:
@@ -167,7 +183,7 @@ paddingVertical:
         name: 5xl
       - id: 6xl
         name: 6xl
-colorScheme:
+style.colorScheme:
   hidden: true
   # Carried by the band colour. Every band the design draws names its own ink,
   # and `base` on its own does not say whether you get the cream band or the
@@ -183,14 +199,14 @@ colorScheme:
         name: Light
       - id: dark
         name: Dark
-lockColorScheme:
+style.lockColorScheme:
   hidden: true
   # Carried by the band colour: every named band locks, because there is no
   # dark mode here for an unlocked one to follow.
   type: switch
   label: Lock color scheme
   comment: Ignores the site theme toggle. Only applies when Color Scheme is Light or Dark.
-backgroundColor:
+style.backgroundColor:
   type: select
   label: Background colour
   comment: The colour this band is painted, and the ink that goes with it.
@@ -227,19 +243,19 @@ backgroundColor:
         - key: color
       text:
         - key: name
-logoAspect:
+content.logoAspect:
   type: text
   comment: >-
     The client mark's own proportions, as `width / height`, for the case-study
     layout. Taken from the SVG's viewBox.
-paddingVerticalStart:
+content.paddingVerticalStart:
   type: select
   comment: >-
     Overrides the padding above the card. Useful where the band above already
     carries its own, and the two stack into a gap neither asked for.
   options:
     values: [none, xs, sm, md, lg, xl, 2xl, 3xl, 4xl, 5xl, 6xl]
-paddingVerticalEnd:
+content.paddingVerticalEnd:
   type: select
   comment: Overrides the padding below the card.
   options:

@@ -12,8 +12,13 @@
  * much as there is room for. A row of three that reflows into a column at
  * 900px stops being a strip.
  */
+import { nestedProps } from "@component-utils/nestedProps.mjs";
 import CustomSection from "@builders/custom-section/CustomSection.astro";
 import PhotoStripImage from "./PhotoStripImage.astro";
+
+/* `content` and `style` are the editor's tabs, flattened straight back into
+   the names below. `at()` writes the frontmatter path a binding needs. */
+const { props, at } = nestedProps(Astro.props);
 
 const {
   /** The photographs, left to right. */
@@ -35,7 +40,7 @@ const {
   useDefaultEditableBinding = false,
   _component,
   ...htmlAttributes
-} = Astro.props;
+} = props;
 
 const pictures = (Array.isArray(images) ? images : []).filter((image) => image?.source);
 ---
@@ -60,7 +65,7 @@ const pictures = (Array.isArray(images) ? images : []).filter((image) => image?.
       class="photo-strip-row"
       style={`--photo-strip-image-width: ${Number(imageWidth) || 393}px; --photo-strip-aspect: ${aspectRatio}`}
       data-editable="array"
-      data-prop="images"
+      data-prop={at("images")}
     >
       {pictures.map((image) => (
         <PhotoStripImage

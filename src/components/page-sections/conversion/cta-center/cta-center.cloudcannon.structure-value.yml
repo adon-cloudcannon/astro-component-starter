@@ -1,49 +1,52 @@
 label: CTA Center
 icon: call_to_action
 description: Centered call to action with a headline, supporting text, and buttons.
+tabbed: true
 value:
   _component: page-sections/conversion/cta-center
-  eyebrow: ""
-  heading: Ready to get started?
-  headingLevel: h2
-  subtext: One line that makes the next step obvious.
-  subtextSize: md
-  subtextWidth: ""
-  alignmentHorizontal: center
-  buttonSections:
-    - _component: building-blocks/core-elements/button
-      text: Get started
-      hideText: false
-      link: /
-      iconName: ""
-      iconColor: default
-      iconPosition: before
-      variant: primary
-      size: md
-  imageSource: ""
-  imageWidth: intrinsic
-  imageScratch: ""
-  imageAlt: ""
-  sectionLabel: ""
-  maxContentWidth: lg
-  paddingHorizontal: gutter
-  paddingVertical: 4xl
-  backgroundColor: light-sand
-  background:
-    type: image
+  content:
+    sectionLabel: ""
+    eyebrow: ""
+    heading: Ready to get started?
+    headingLevel: h2
+    subtext: One line that makes the next step obvious.
+    subtextSize: md
+    subtextWidth: ""
+    alignmentHorizontal: center
+    buttonSections:
+      - _component: building-blocks/core-elements/button
+        text: Get started
+        hideText: false
+        link: /
+        iconName: ""
+        iconColor: default
+        iconPosition: before
+        variant: primary
+        size: md
     imageSource: ""
+    imageWidth: intrinsic
+    imageScratch: ""
     imageAlt: ""
-    positionVertical: top
-    positionHorizontal: center
-    fixed: false
-    priority: false
-    mask: none
-    overlay: 0
+    maxContentWidth: lg
+    paddingHorizontal: gutter
+    paddingVertical: 4xl
+  style:
+    backgroundColor: light-sand
+    background:
+      type: image
+      imageSource: ""
+      imageAlt: ""
+      positionVertical: top
+      positionHorizontal: center
+      fixed: false
+      priority: false
+      mask: none
+      overlay: 0
 preview:
   text:
     - CTA Center
   subtext:
-    - key: heading
+    - key: content.heading
   image: public/component-previews/page-sections/conversion/cta-center.svg
   icon: call_to_action
   gallery:

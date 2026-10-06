@@ -1,36 +1,39 @@
 label: Page Header
 icon: title
 description: Slim title block for inner pages, with optional breadcrumbs.
+tabbed: true
 value:
   _component: page-sections/heroes/page-header
-  eyebrow: ""
-  heading: About us
-  headingLevel: h1
-  subtext: A short introduction to the page, one or two lines long.
-  subtextSize: md
-  subtextWidth: ""
-  showBreadcrumbs: true
-  alignmentHorizontal: start
-  sectionLabel: ""
-  maxContentWidth: xl
-  paddingHorizontal: gutter
-  paddingVertical: 2xl
-  backgroundColor: light-sand
-  background:
-    type: image
-    imageSource: ""
-    imageAlt: ""
-    positionVertical: top
-    positionHorizontal: center
-    fixed: false
-    priority: false
-    mask: none
-    overlay: 0
+  content:
+    sectionLabel: ""
+    eyebrow: ""
+    heading: About us
+    headingLevel: h1
+    subtext: A short introduction to the page, one or two lines long.
+    subtextSize: md
+    subtextWidth: ""
+    showBreadcrumbs: true
+    alignmentHorizontal: start
+    maxContentWidth: xl
+    paddingHorizontal: gutter
+    paddingVertical: 2xl
+  style:
+    backgroundColor: light-sand
+    background:
+      type: image
+      imageSource: ""
+      imageAlt: ""
+      positionVertical: top
+      positionHorizontal: center
+      fixed: false
+      priority: false
+      mask: none
+      overlay: 0
 preview:
   text:
     - Page Header
   subtext:
-    - key: heading
+    - key: content.heading
   image: public/component-previews/page-sections/heroes/page-header.svg
   icon: title
   gallery:

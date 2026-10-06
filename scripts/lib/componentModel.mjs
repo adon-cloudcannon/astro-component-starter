@@ -64,6 +64,11 @@ function mergedPropNames(source) {
     }
   }
 
+  /* The shared helper does the same merge behind a call, which is how every
+     tabbed section takes its props: `const { props, at } = nestedProps(...)`. */
+  for (const [, name] of source.matchAll(/const\s*\{[^}]*\bprops\s*:\s*(\w+)[^}]*\}\s*=\s*nestedProps\(/g)) names.add(name);
+  if (/const\s*\{[^}]*\bprops\b[^}]*\}\s*=\s*nestedProps\(/.test(source)) names.add("props");
+
   return names;
 }
 

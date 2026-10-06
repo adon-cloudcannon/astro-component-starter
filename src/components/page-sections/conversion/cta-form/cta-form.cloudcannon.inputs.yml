@@ -1,4 +1,20 @@
-paddingVerticalStart:
+# The two tabs. A structure value draws its first-level nested keys as tabs
+# when it sets `tabbed: true`; `groups` only ever draws as accordions. The
+# subtype is pinned so the tabbing stops here — left unsaid these inherit it,
+# and then every field inside them has to be an object too.
+content:
+  type: object
+  label: Content
+  options:
+    subtype: object
+style:
+  type: object
+  label: Style
+  comment: What paints the band.
+  options:
+    subtype: object
+
+content.paddingVerticalStart:
   type: select
   comment: >-
     Overrides the top of the vertical padding on its own. Empty follows
@@ -25,7 +41,7 @@ paddingVerticalStart:
         name: 5xl
       - id: 6xl
         name: 6xl
-paddingVerticalEnd:
+content.paddingVerticalEnd:
   type: select
   comment: >-
     Overrides the bottom of the vertical padding on its own. Empty follows
@@ -52,10 +68,10 @@ paddingVerticalEnd:
         name: 5xl
       - id: 6xl
         name: 6xl
-heading:
+content.heading:
   type: text
   comment: Main heading for the section.
-headingSize:
+content.headingSize:
   type: select
   comment: Size of the title, independent of its level.
   options:
@@ -72,7 +88,7 @@ headingSize:
         name: Header 5
       - id: xs
         name: Header 6
-headingLevel:
+content.headingLevel:
   type: select
   comment: Heading level for the title. Use h1 once per page, on the first section.
   options:
@@ -80,7 +96,7 @@ headingLevel:
       - h1
       - h2
       - h3
-subtext:
+content.subtext:
   type: markdown
   comment: Supporting copy beneath the heading.
   options:
@@ -95,7 +111,7 @@ subtext:
     underline: false
     bulletedlist: false
     numberedlist: false
-subtextSize:
+content.subtextSize:
   type: select
   comment: >-
     How big the supporting line under the heading is. Regular is the size the
@@ -108,7 +124,7 @@ subtextSize:
         name: Regular
       - id: xl
         name: Large
-subtextWidth:
+content.subtextWidth:
   type: select
   label: Subtext width
   comment: >-
@@ -127,20 +143,20 @@ subtextWidth:
         name: Wide
       - id: xl
         name: Extra wide
-steps:
+content.steps:
   type: array
   label: Steps
   comment: >-
     A numbered strip above the form. Leave empty for none.
-formAction:
+content.formAction:
   type: url
   comment: URL that receives the form submission.
-formBlocks:
+content.formBlocks:
   type: array
   comment: Form fields and buttons inside the form.
   options:
     structures: _structures.formBlocks
-imageSource:
+content.imageSource:
   type: image
   comment: Image shown beside the form.
   options:
@@ -150,10 +166,10 @@ imageSource:
     resize_style: contain
     width: 1920
     height: 1280
-imageAlt:
+content.imageAlt:
   type: text
   comment: Alt text describing the image.
-reverse:
+content.reverse:
   type: switch
   comment: Flips the columns so the image comes before the form.
 
@@ -161,10 +177,10 @@ reverse:
 # Configures the CustomSection wrapper, not this section's own content. Inline
 # per component so a project can trim the size/padding lists in place.
 # `new:component` slices from this marker down — keep the marker line verbatim.
-sectionLabel:
+content.sectionLabel:
   type: text
   comment: Names the section in the editor and sets its anchor id.
-maxContentWidth:
+content.maxContentWidth:
   type: select
   comment: Maximum width of the content.
   options:
@@ -185,7 +201,7 @@ maxContentWidth:
         name: 2xl
       - id: 3xl
         name: 3xl
-paddingHorizontal:
+content.paddingHorizontal:
   type: select
   comment: Horizontal padding around the content.
   options:
@@ -208,7 +224,7 @@ paddingHorizontal:
         name: 2xl
       - id: 3xl
         name: 3xl
-paddingVertical:
+content.paddingVertical:
   type: select
   comment: Vertical padding around the content.
   options:
@@ -235,7 +251,7 @@ paddingVertical:
         name: 5xl
       - id: 6xl
         name: 6xl
-colorScheme:
+style.colorScheme:
   hidden: true
   # Carried by the band colour. Every band the design draws names its own ink,
   # and `base` on its own does not say whether you get the cream band or the
@@ -251,14 +267,14 @@ colorScheme:
         name: Light
       - id: dark
         name: Dark
-lockColorScheme:
+style.lockColorScheme:
   hidden: true
   # Carried by the band colour: every named band locks, because there is no
   # dark mode here for an unlocked one to follow.
   type: switch
   label: Lock color scheme
   comment: Ignores the site theme toggle. Only applies when Color Scheme is Light or Dark.
-backgroundColor:
+style.backgroundColor:
   type: select
   label: Background colour
   comment: The colour this band is painted, and the ink that goes with it.

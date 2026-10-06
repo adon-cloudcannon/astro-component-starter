@@ -1,38 +1,41 @@
 label: Feature deck
 icon: layers
 description: Cards that pin and stack as the page scrolls.
+tabbed: true
 value:
   _component: page-sections/explainers/feature-deck
-  eyebrow: ""
-  heading: ""
-  headingLevel: h2
-  headingSize: lg
-  subtext: ""
-  subtextSize: md
-  subtextWidth: ""
-  cards:
-    - _component: building-blocks/wrappers/scroll-deck/scroll-deck-card
-      label: AI-ready
-      contentSections:
-        - _component: building-blocks/core-elements/simple-text
-          text: AI-READY
-        - _component: building-blocks/core-elements/heading
-          text: The stack AI already knows
-          level: h3
-          size: lg
-        - _component: building-blocks/core-elements/text
-          text: Code, content and config live together in Git.
-  stickyOffset: md
-  cardColorScheme: light
-  showRail: true
-  sectionLabel: ""
-  maxContentWidth: xl
-  paddingHorizontal: gutter
-  paddingVertical: 4xl
-  backgroundColor: light-sand
-  background:
-    type: image
-    imageSource: ""
+  content:
+    sectionLabel: ""
+    eyebrow: ""
+    heading: ""
+    headingLevel: h2
+    headingSize: lg
+    subtext: ""
+    subtextSize: md
+    subtextWidth: ""
+    cards:
+      - _component: building-blocks/wrappers/scroll-deck/scroll-deck-card
+        label: AI-ready
+        contentSections:
+          - _component: building-blocks/core-elements/simple-text
+            text: AI-READY
+          - _component: building-blocks/core-elements/heading
+            text: The stack AI already knows
+            level: h3
+            size: lg
+          - _component: building-blocks/core-elements/text
+            text: Code, content and config live together in Git.
+    stickyOffset: md
+    cardColorScheme: light
+    showRail: true
+    maxContentWidth: xl
+    paddingHorizontal: gutter
+    paddingVertical: 4xl
+  style:
+    backgroundColor: light-sand
+    background:
+      type: image
+      imageSource: ""
 _inputs:
   cards:
     type: array

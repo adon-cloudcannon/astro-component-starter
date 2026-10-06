@@ -6,9 +6,11 @@ title: Pricing
 description: Plans and pricing for CloudCannon.
 pageSections:
   - _component: page-sections/heroes/page-header
-    heading: Pricing
-    subtext: Plans and pricing for CloudCannon.
-    showBreadcrumbs: true
-    alignmentHorizontal: start
-    backgroundColor: light-sand
+    content:
+      heading: Pricing
+      subtext: Plans and pricing for CloudCannon.
+      showBreadcrumbs: true
+      alignmentHorizontal: start
+    style:
+      backgroundColor: light-sand
 ---

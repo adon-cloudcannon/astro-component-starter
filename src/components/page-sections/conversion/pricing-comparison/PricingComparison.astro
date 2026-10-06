@@ -1,4 +1,5 @@
 ---
+import { nestedProps } from "@component-utils/nestedProps.mjs";
 import CustomSection from "@builders/custom-section/CustomSection.astro";
 import Button from "@core-elements/button/Button.astro";
 import Heading from "@core-elements/heading/Heading.astro";
@@ -14,6 +15,10 @@ type Plan = {
   buttonLink?: string;
 };
 type Row = { feature?: string; values?: (string | null)[] };
+
+/* `content` and `style` are the editor's tabs, flattened straight back into
+   the names below. `at()` writes the frontmatter path a binding needs. */
+const { props, at } = nestedProps(Astro.props);
 
 const {
   eyebrow = "",
@@ -37,7 +42,7 @@ const {
   useDefaultEditableBinding = false,
   _component,
   ...htmlAttributes
-} = Astro.props;
+} = props;
 
 // Not filtered: a row's `values` are positional, so dropping an unnamed plan
 // would shift every later column's cells onto the wrong plan.
@@ -85,7 +90,7 @@ const hasTable = planList.length > 0 && rows?.length > 0;
   <SimpleText
     alignmentHorizontal="center"
     class="eyebrow"
-    data-prop="eyebrow"
+    data-prop={at("eyebrow")}
     text={eyebrow}
     size="sm"
   />
@@ -93,14 +98,14 @@ const hasTable = planList.length > 0 && rows?.length > 0;
     level={headingLevel}
     size={headingSize}
     alignmentHorizontal="center"
-    data-prop="heading"
+    data-prop={at("heading")}
   >
     {heading}
   </Heading>
   <Text
     class="section-subtext pricing-comparison-subtext"
     alignmentHorizontal="center"
-    data-prop="subtext"
+    data-prop={at("subtext")}
     text={subtext}
   />
 
@@ -125,7 +130,7 @@ const hasTable = planList.length > 0 && rows?.length > 0;
                   for the same rows on the canvas. */}
             <tr
               data-editable="array"
-              data-prop="plans"
+              data-prop={at("plans")}
               data-direction="row"
             >
               <td />
@@ -157,7 +162,7 @@ const hasTable = planList.length > 0 && rows?.length > 0;
           </thead>
           <tbody
             data-editable="array"
-            data-prop="rows"
+            data-prop={at("rows")}
           >
             {rows?.map((row: Row) => (
               <tr data-editable="array-item">

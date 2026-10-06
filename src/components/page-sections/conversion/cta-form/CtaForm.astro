@@ -1,4 +1,5 @@
 ---
+import { nestedProps } from "@component-utils/nestedProps.mjs";
 import CustomSection from "@builders/custom-section/CustomSection.astro";
 import { subtextMeasure } from "@component-utils/subtextMeasure.mjs";
 import Heading from "@core-elements/heading/Heading.astro";
@@ -7,6 +8,10 @@ import Text from "@core-elements/text/Text.astro";
 import Form from "@forms/form/Form.astro";
 import Split from "@wrappers/split/Split.astro";
 import Steps from "@wrappers/steps/Steps.astro";
+
+/* `content` and `style` are the editor's tabs, flattened straight back into
+   the names below. `at()` writes the frontmatter path a binding needs. */
+const { props, at } = nestedProps(Astro.props);
 
 const {
   heading = "",
@@ -53,7 +58,7 @@ const {
   useDefaultEditableBinding = false,
   _component,
   ...htmlAttributes
-} = Astro.props;
+} = props;
 
 /* The measure the subtext is set in, as a length. */
 const subtextCap = subtextMeasure(subtextWidth);
@@ -102,7 +107,7 @@ const subtextCap = subtextMeasure(subtextWidth);
           <Heading
             level={headingLevel}
             size={headingSize}
-            data-prop="heading"
+            data-prop={at("heading")}
           >
             {heading}
           </Heading>
@@ -110,12 +115,12 @@ const subtextCap = subtextMeasure(subtextWidth);
         <Text
           style={subtextCap ? `max-inline-size: ${subtextCap}; margin-inline: auto; justify-self: center` : undefined}
           size={subtextSize}
-          data-prop="subtext"
+          data-prop={at("subtext")}
           text={subtext}
         />
         <Form
           action={formAction}
-          data-children-prop="formBlocks"
+          data-children-prop={at("formBlocks")}
           formBlocks={formBlocks}
         />
       </Fragment>
@@ -125,8 +130,8 @@ const subtextCap = subtextMeasure(subtextWidth);
           rounded={true}
           alt={imageAlt}
           aspectRatio="landscape"
-          data-prop-src="imageSource"
-          data-prop-alt="imageAlt"
+          data-prop-src={at("imageSource")}
+          data-prop-alt={at("imageAlt")}
         />
       </Fragment>
     </Split>
@@ -141,7 +146,7 @@ const subtextCap = subtextMeasure(subtextWidth);
         <Heading
           level={headingLevel}
           size={headingSize}
-          data-prop="heading"
+          data-prop={at("heading")}
         >
           {heading}
         </Heading>
@@ -149,12 +154,12 @@ const subtextCap = subtextMeasure(subtextWidth);
       <Text
         style={subtextCap ? `max-inline-size: ${subtextCap}` : undefined}
         size={subtextSize}
-        data-prop="subtext"
+        data-prop={at("subtext")}
         text={subtext}
       />
       <Form
         action={formAction}
-        data-children-prop="formBlocks"
+        data-children-prop={at("formBlocks")}
         formBlocks={formBlocks}
       />
     </div>

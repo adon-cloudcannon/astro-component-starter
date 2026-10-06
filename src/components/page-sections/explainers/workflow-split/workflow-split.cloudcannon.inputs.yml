@@ -1,10 +1,26 @@
-eyebrow:
+# The two tabs. A structure value draws its first-level nested keys as tabs
+# when it sets `tabbed: true`; `groups` only ever draws as accordions. The
+# subtype is pinned so the tabbing stops here — left unsaid these inherit it,
+# and then every field inside them has to be an object too.
+content:
+  type: object
+  label: Content
+  options:
+    subtype: object
+style:
+  type: object
+  label: Style
+  comment: What paints the band.
+  options:
+    subtype: object
+
+content.eyebrow:
   type: text
   comment: Short label above the heading.
-heading:
+content.heading:
   type: text
   comment: The section's title.
-headingLevel:
+content.headingLevel:
   type: select
   comment: Heading level for the title.
   options:
@@ -12,7 +28,7 @@ headingLevel:
       - h1
       - h2
       - h3
-headingSize:
+content.headingSize:
   type: select
   comment: Size of the title, independent of its level.
   options:
@@ -23,10 +39,10 @@ headingSize:
         name: Header 3
       - id: md
         name: Header 4
-subtext:
+content.subtext:
   type: markdown
   comment: Supporting copy beneath the heading.
-subtextSize:
+content.subtextSize:
   type: select
   comment: >-
     How big the supporting line under the heading is. Regular is the size the
@@ -39,7 +55,7 @@ subtextSize:
         name: Regular
       - id: xl
         name: Large
-subtextWidth:
+content.subtextWidth:
   type: select
   label: Subtext width
   comment: >-
@@ -58,28 +74,28 @@ subtextWidth:
         name: Wide
       - id: xl
         name: Extra wide
-buttonSections:
+content.buttonSections:
   type: array
   comment: A link or button under the heading.
-panels:
+content.panels:
   type: array
   comment: >-
     One panel per way of working, side by side. Each carries its own accent
     colour, which colours its list markers, its rule and its link, so a reader
     can tell the columns apart before reading them. A panel's imageOverlap is
     how far its drawing dips into the card below it, in pixels.
-centreImageSource:
+content.centreImageSource:
   type: image
   comment: The thing both panels share, shown between them.
-centreImageAlt:
+content.centreImageAlt:
   type: text
   comment: Alt text for the middle image.
 
 # --- section wrapper inputs
-sectionLabel:
+content.sectionLabel:
   type: text
   comment: Accessible name for the section, used by screen readers.
-maxContentWidth:
+content.maxContentWidth:
   type: select
   comment: Maximum width of the section's content.
   options:
@@ -90,7 +106,7 @@ maxContentWidth:
         name: Extra Large
       - id: 2xl
         name: 2xl
-paddingHorizontal:
+content.paddingHorizontal:
   type: select
   comment: Horizontal padding around the content.
   options:
@@ -101,7 +117,7 @@ paddingHorizontal:
         name: Page gutter
       - id: lg
         name: Large
-paddingVertical:
+content.paddingVertical:
   type: select
   comment: Vertical padding around the content.
   options:
@@ -112,7 +128,7 @@ paddingVertical:
         name: 3xl
       - id: 4xl
         name: 4xl
-colorScheme:
+style.colorScheme:
   hidden: true
   # Carried by the band colour. Every band the design draws names its own ink,
   # and `base` on its own does not say whether you get the cream band or the
@@ -128,14 +144,14 @@ colorScheme:
         name: Light
       - id: dark
         name: Dark
-lockColorScheme:
+style.lockColorScheme:
   hidden: true
   # Carried by the band colour: every named band locks, because there is no
   # dark mode here for an unlocked one to follow.
   type: switch
   label: Lock color scheme
   comment: Ignores the site theme toggle. Only applies when Color Scheme is Light or Dark.
-backgroundColor:
+style.backgroundColor:
   type: select
   label: Background colour
   comment: The colour this band is painted, and the ink that goes with it.
@@ -172,11 +188,11 @@ backgroundColor:
         - key: color
       text:
         - key: name
-background:
+style.background:
   type: object
   comment: Background image, video or pattern for the section.
 
-centreColor:
+content.centreColor:
   type: color
   label: Middle panel colour
   comment: >-
@@ -184,7 +200,7 @@ centreColor:
     The design uses #26262F, which is not in the palette: the nearest token,
     --gray-900, is a different colour by about 12.
 
-centreMinHeight:
+content.centreMinHeight:
   type: number
   label: Middle panel height
   comment: >-
@@ -192,7 +208,7 @@ centreMinHeight:
     either side and grows upward, so the design's 366 against their 321 is what
     makes it stand a little proud of them.
 
-centreSections:
+content.centreSections:
   type: array
   label: Middle panel content
   comment: What goes inside the middle panel.
@@ -205,7 +221,7 @@ centreSections:
 # nothing here an editor would want to reach for. Declared rather than
 # hardcoded so the words stay out of the component and sit in the mapping with
 # everything else the design sets.
-centreIconName:
+content.centreIconName:
   type: select
   hidden: true
   label: Middle panel icon
@@ -213,13 +229,13 @@ centreIconName:
   options:
     values: data.icons
 
-centreTitle:
+content.centreTitle:
   type: text
   hidden: true
   label: Middle panel title
   comment: The line beside that icon, set in 14/700 white.
 
-centreBranch:
+content.centreBranch:
   type: text
   hidden: true
   label: Middle panel branch
@@ -227,7 +243,7 @@ centreBranch:
     Closes the header row with a status light and the branch name, set in the
     mono face at 10.5 the way a Git client shows it.
 
-centreRows:
+content.centreRows:
   type: array
   hidden: true
   label: Middle panel rows

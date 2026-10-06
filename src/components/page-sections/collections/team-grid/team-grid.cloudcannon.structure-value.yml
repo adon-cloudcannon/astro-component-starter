@@ -1,48 +1,51 @@
 label: Team Grid
 icon: groups
 description: Team member cards in a three-column grid.
+tabbed: true
 value:
   _component: page-sections/collections/team-grid
-  eyebrow: Our team
-  heading: Meet the team
-  headingLevel: h2
-  subtext: Get to know the people behind our work.
-  teamMembers:
-    - name: Michael Chen
-      role: CEO & Founder
-      bio: Michael brings over 15 years of experience in product development and team leadership.
-      imageSource: /src/assets/images/component-docs/profile.jpg
-      imageAlt: Michael Chen
-    - name: Sarah Johnson
-      role: Lead Developer
-      bio: Sarah specializes in building scalable applications and mentoring engineering teams.
-      imageSource: /src/assets/images/component-docs/profile1.jpg
-      imageAlt: Sarah Johnson
-    - name: David Kim
-      role: Design Director
-      bio: David creates beautiful, user-centered designs that solve real problems.
-      imageSource: /src/assets/images/component-docs/profile2.jpg
-      imageAlt: David Kim
-  sectionLabel: ""
-  maxContentWidth: xl
-  paddingHorizontal: gutter
-  paddingVertical: 4xl
-  backgroundColor: light-sand
-  background:
-    type: image
-    imageSource: ""
-    imageAlt: ""
-    positionVertical: top
-    positionHorizontal: center
-    fixed: false
-    priority: false
-    mask: none
-    overlay: 0
+  content:
+    sectionLabel: ""
+    eyebrow: Our team
+    heading: Meet the team
+    headingLevel: h2
+    subtext: Get to know the people behind our work.
+    teamMembers:
+      - name: Michael Chen
+        role: CEO & Founder
+        bio: Michael brings over 15 years of experience in product development and team leadership.
+        imageSource: /src/assets/images/component-docs/profile.jpg
+        imageAlt: Michael Chen
+      - name: Sarah Johnson
+        role: Lead Developer
+        bio: Sarah specializes in building scalable applications and mentoring engineering teams.
+        imageSource: /src/assets/images/component-docs/profile1.jpg
+        imageAlt: Sarah Johnson
+      - name: David Kim
+        role: Design Director
+        bio: David creates beautiful, user-centered designs that solve real problems.
+        imageSource: /src/assets/images/component-docs/profile2.jpg
+        imageAlt: David Kim
+    maxContentWidth: xl
+    paddingHorizontal: gutter
+    paddingVertical: 4xl
+  style:
+    backgroundColor: light-sand
+    background:
+      type: image
+      imageSource: ""
+      imageAlt: ""
+      positionVertical: top
+      positionHorizontal: center
+      fixed: false
+      priority: false
+      mask: none
+      overlay: 0
 preview:
   text:
     - Team Grid
   subtext:
-    - key: subtext
+    - key: content.subtext
   image: public/component-previews/page-sections/collections/team-grid.svg
   icon: groups
   gallery:

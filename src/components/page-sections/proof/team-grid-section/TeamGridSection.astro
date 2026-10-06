@@ -10,6 +10,7 @@
  * The cards are the same block the team member CTA uses, so a person shown
  * here and a person shown there are one thing described once.
  */
+import { nestedProps } from "@component-utils/nestedProps.mjs";
 import CustomSection from "@builders/custom-section/CustomSection.astro";
 import { subtextMeasure } from "@component-utils/subtextMeasure.mjs";
 import Heading from "@core-elements/heading/Heading.astro";
@@ -19,6 +20,10 @@ import Button from "@core-elements/button/Button.astro";
 import TeamMember from "@wrappers/team-member/TeamMember.astro";
 
 type Member = Record<string, unknown>;
+
+/* `content` and `style` are the editor's tabs, flattened straight back into
+   the names below. `at()` writes the frontmatter path a binding needs. */
+const { props, at } = nestedProps(Astro.props);
 
 const {
   eyebrow = "",
@@ -51,7 +56,7 @@ const {
   useDefaultEditableBinding = false,
   _component,
   ...htmlAttributes
-} = Astro.props;
+} = props;
 
 /* The measure the subtext is set in, as a length. */
 const subtextCap = subtextMeasure(subtextWidth);
@@ -98,21 +103,21 @@ const offsetAt = (index: number) => (index % laneCount) % 2 === 1;
   <div class="team-grid-copy">
     <SimpleText
       class="eyebrow"
-      data-prop="eyebrow"
+      data-prop={at("eyebrow")}
       text={eyebrow}
     />
     <Heading
       level={headingLevel}
       size={headingSize}
       alignmentHorizontal="start"
-      data-prop="heading"
+      data-prop={at("heading")}
       text={heading}
     />
     <Text
       class="subtext"
       style={subtextCap ? `max-inline-size: ${subtextCap}` : undefined}      size={subtextSize}
       alignmentHorizontal="start"
-      data-prop="subtext"
+      data-prop={at("subtext")}
       text={subtext}
     />
     {linkText && (
@@ -123,7 +128,7 @@ const offsetAt = (index: number) => (index % laneCount) % 2 === 1;
         iconPosition="after"
         text={linkText}
         link={link}
-        data-prop="linkText"
+        data-prop={at("linkText")}
       />
     )}
   </div>

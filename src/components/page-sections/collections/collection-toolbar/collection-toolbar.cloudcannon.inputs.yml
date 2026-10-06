@@ -1,19 +1,35 @@
-collection:
+# The two tabs. A structure value draws its first-level nested keys as tabs
+# when it sets `tabbed: true`; `groups` only ever draws as accordions. The
+# subtype is pinned so the tabbing stops here — left unsaid these inherit it,
+# and then every field inside them has to be an object too.
+content:
+  type: object
+  label: Content
+  options:
+    subtype: object
+style:
+  type: object
+  label: Style
+  comment: What paints the band.
+  options:
+    subtype: object
+
+content.collection:
   type: text
   label: Collection name
   comment: >-
     The name of the card grid this filters. The grid carries the same name, so
     the two can sit in different sections and still find each other.
-searchLabel:
+content.searchLabel:
   type: text
   comment: What the search field is announced as. Not shown.
-searchPlaceholder:
+content.searchPlaceholder:
   type: text
   comment: The grey text in the empty search field.
-sortLabel:
+content.sortLabel:
   type: text
   comment: The label on the button at the end of the search field. Leave empty for none.
-filters:
+content.filters:
   type: array
   label: Filters
   comment: One dropdown each, drawn after the search field.
@@ -21,37 +37,37 @@ filters:
     structures: _structures.collectionFilters
 
 # --- section wrapper inputs (CustomSection) ---
-sectionLabel:
+content.sectionLabel:
   type: text
   comment: Names the section in the editor and sets its anchor id.
-maxContentWidth:
+content.maxContentWidth:
   type: select
   comment: Maximum width of the content.
   options:
     values: [none, xs, sm, md, lg, xl, 2xl, 3xl]
-paddingHorizontal:
+content.paddingHorizontal:
   type: select
   comment: Horizontal padding around the content.
   options:
     values: [none, gutter, xs, sm, md, lg, xl, 2xl, 3xl]
-paddingVertical:
+content.paddingVertical:
   type: select
   comment: Vertical padding around the content.
   options:
     values: [none, xs, sm, md, lg, xl, 2xl, 3xl, 4xl, 5xl, 6xl]
-paddingVerticalStart:
+content.paddingVerticalStart:
   type: select
   comment: >-
     Overrides the padding above the row. `none` runs it straight on from the
     band above, which is how the design joins it to the hero.
   options:
     values: [none, xs, sm, md, lg, xl, 2xl, 3xl, 4xl, 5xl, 6xl]
-paddingVerticalEnd:
+content.paddingVerticalEnd:
   type: select
   comment: Overrides the padding below the row.
   options:
     values: [none, xs, sm, md, lg, xl, 2xl, 3xl, 4xl, 5xl, 6xl]
-backgroundColor:
+style.backgroundColor:
   type: select
   label: Background colour
   comment: The colour this band is painted, and the ink that goes with it.

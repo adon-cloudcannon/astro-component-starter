@@ -1,37 +1,40 @@
 label: Team Grid
 icon: groups
 description: A wall of team member cards beside a line about the team.
+tabbed: true
 value:
   _component: page-sections/proof/team-grid-section
-  eyebrow: ""
-  heading: ""
-  headingSize: lg
-  headingLevel: h2
-  subtext: ""
-  subtextSize: lg
-  subtextWidth: ""
-  linkText: ""
-  link: ""
-  members: []
-  columns: 2
-  sectionLabel: ""
-  maxContentWidth: xl
-  paddingHorizontal: gutter
-  paddingVertical: 4xl
-  backgroundColor: light-sand
-  background:
-    type: image
-    imageSource: ""
-    imageAlt: ""
-    positionVertical: top
-    positionHorizontal: center
-    fixed: false
-    priority: false
-    mask: none
-    overlay: 0
+  content:
+    sectionLabel: ""
+    eyebrow: ""
+    heading: ""
+    headingSize: lg
+    headingLevel: h2
+    subtext: ""
+    subtextSize: lg
+    subtextWidth: ""
+    linkText: ""
+    link: ""
+    members: []
+    columns: 2
+    maxContentWidth: xl
+    paddingHorizontal: gutter
+    paddingVertical: 4xl
+  style:
+    backgroundColor: light-sand
+    background:
+      type: image
+      imageSource: ""
+      imageAlt: ""
+      positionVertical: top
+      positionHorizontal: center
+      fixed: false
+      priority: false
+      mask: none
+      overlay: 0
 preview:
   text:
-    - key: heading
+    - key: content.heading
     - Team Grid
   icon: groups
 picker_preview:

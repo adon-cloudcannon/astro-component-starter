@@ -1,4 +1,5 @@
 ---
+import { nestedProps } from "@component-utils/nestedProps.mjs";
 import { rootMirror } from "@component-utils/rootMirror.mjs";
 /**
  * A call to action with a real person beside it.
@@ -18,6 +19,10 @@ import Heading from "@core-elements/heading/Heading.astro";
 import Text from "@core-elements/text/Text.astro";
 import ButtonGroup from "@wrappers/button-group/ButtonGroup.astro";
 import TeamMember from "@wrappers/team-member/TeamMember.astro";
+
+/* `content` and `style` are the editor's tabs, flattened straight back into
+   the names below. `at()` writes the frontmatter path a binding needs. */
+const { props, at } = nestedProps(Astro.props);
 
 const {
   heading = "",
@@ -49,7 +54,7 @@ const {
   useDefaultEditableBinding = false,
   _component,
   ...htmlAttributes
-} = Astro.props;
+} = props;
 
 /* The measure the subtext is set in, as a length. */
 const subtextCap = subtextMeasure(subtextWidth);
@@ -86,21 +91,21 @@ const mirror = rootMirror({ "data-member-end": reverse ? "" : null });
       level={headingLevel}
       size={headingSize}
       alignmentHorizontal="start"
-      data-prop="heading"
+      data-prop={at("heading")}
       text={heading}
     />
     <Text
       class="subtext"
       style={subtextCap ? `max-inline-size: ${subtextCap}` : undefined}      size={subtextSize}
       alignmentHorizontal="start"
-      data-prop="subtext"
+      data-prop={at("subtext")}
       text={subtext}
     />
     <ButtonGroup
       buttonSections={buttonSections}
       direction="row"
       alignmentHorizontal="start"
-      data-children-prop="buttonSections"
+      data-children-prop={at("buttonSections")}
     />
   </div>
 </CustomSection>

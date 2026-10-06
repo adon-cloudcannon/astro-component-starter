@@ -1,10 +1,15 @@
 ---
+import { nestedProps } from "@component-utils/nestedProps.mjs";
 import CustomSection from "@builders/custom-section/CustomSection.astro";
 import { subtextMeasure } from "@component-utils/subtextMeasure.mjs";
 import Heading from "@core-elements/heading/Heading.astro";
 import SimpleText from "@core-elements/simple-text/SimpleText.astro";
 import Text from "@core-elements/text/Text.astro";
 import ButtonGroup from "@wrappers/button-group/ButtonGroup.astro";
+
+/* `content` and `style` are the editor's tabs, flattened straight back into
+   the names below. `at()` writes the frontmatter path a binding needs. */
+const { props, at } = nestedProps(Astro.props);
 
 const {
   eyebrow = "",
@@ -35,7 +40,7 @@ const {
   useDefaultEditableBinding = false,
   _component,
   ...htmlAttributes
-} = Astro.props;
+} = props;
 
 const subtextCap = subtextMeasure(subtextWidth);
 ---
@@ -57,7 +62,7 @@ const subtextCap = subtextMeasure(subtextWidth);
   <SimpleText
     alignmentHorizontal="center"
     class="eyebrow"
-    data-prop="eyebrow"
+    data-prop={at("eyebrow")}
     text={eyebrow}
     size="sm"
   />
@@ -65,7 +70,7 @@ const subtextCap = subtextMeasure(subtextWidth);
     level={headingLevel}
     size={headingSize}
     alignmentHorizontal="center"
-    data-prop="heading"
+    data-prop={at("heading")}
   >
     {heading}
   </Heading>
@@ -74,12 +79,12 @@ const subtextCap = subtextMeasure(subtextWidth);
     class="subtext"
     style={subtextCap ? `max-inline-size: ${subtextCap}; margin-inline: auto` : undefined}
     size={subtextSize}
-    data-prop="subtext"
+    data-prop={at("subtext")}
     text={subtext}
   />
   <ButtonGroup
     buttonSections={buttonSections}
     alignmentHorizontal="center"
-    data-children-prop="buttonSections"
+    data-children-prop={at("buttonSections")}
   />
 </CustomSection>

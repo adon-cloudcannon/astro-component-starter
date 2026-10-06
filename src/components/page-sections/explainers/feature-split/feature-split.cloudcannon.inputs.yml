@@ -1,10 +1,26 @@
-eyebrow:
+# The two tabs. A structure value draws its first-level nested keys as tabs
+# when it sets `tabbed: true`; `groups` only ever draws as accordions. The
+# subtype is pinned so the tabbing stops here — left unsaid these inherit it,
+# and then every field inside them has to be an object too.
+content:
+  type: object
+  label: Content
+  options:
+    subtype: object
+style:
+  type: object
+  label: Style
+  comment: What paints the band.
+  options:
+    subtype: object
+
+content.eyebrow:
   type: text
   comment: Short label above the heading.
-heading:
+content.heading:
   type: text
   comment: Main heading for the section.
-headingSize:
+content.headingSize:
   type: select
   comment: Size of the title, independent of its level.
   options:
@@ -21,7 +37,7 @@ headingSize:
         name: Header 5
       - id: xs
         name: Header 6
-headingLevel:
+content.headingLevel:
   type: select
   comment: Heading level for the title. Use h1 once per page, on the first section.
   options:
@@ -29,7 +45,7 @@ headingLevel:
       - h1
       - h2
       - h3
-subtext:
+content.subtext:
   type: markdown
   comment: Supporting copy beneath the heading.
   options:
@@ -44,7 +60,7 @@ subtext:
     underline: false
     bulletedlist: false
     numberedlist: false
-subtextSize:
+content.subtextSize:
   type: select
   comment: >-
     How big the supporting line under the heading is. Regular is the size the
@@ -57,7 +73,7 @@ subtextSize:
         name: Regular
       - id: xl
         name: Large
-subtextWidth:
+content.subtextWidth:
   type: select
   label: Subtext width
   comment: >-
@@ -76,40 +92,40 @@ subtextWidth:
         name: Wide
       - id: xl
         name: Extra wide
-buttonSections:
+content.buttonSections:
   type: array
   comment: Call-to-action buttons.
   options:
     structures: _structures.buttonSections
-shapes:
+content.shapes:
   type: array
   comment: >-
     A pile of labelled shapes in place of the picture. Leave empty for a normal
     split.
   options:
     structures: _structures.shapePileShapes
-pileWidth:
+content.pileWidth:
   type: number
   comment: The width the pile's own positions are measured in. Rarely changed.
-pileHeight:
+content.pileHeight:
   type: number
   comment: The height the pile's own positions are measured in. Rarely changed.
-pileFall:
+content.pileFall:
   type: switch
   comment: >-
     Drop the pile into place when it is scrolled to. Off leaves it standing,
     for a pile that is a picture beside the copy rather than an arrival.
-pileRadius:
+content.pileRadius:
   type: number
   comment: The corner radius of a square shape in the pile, in pixels.
-siteCards:
+content.siteCards:
   type: object
   comment: >-
     The stack of environment cards, in place of the picture. Leave empty for a
     normal split.
   options:
     structures: _structures.siteCardsPanel
-imageSource:
+content.imageSource:
   type: image
   comment: Image shown beside the copy. Leave empty for a copy-only section.
   options:
@@ -119,10 +135,10 @@ imageSource:
     resize_style: contain
     width: 1920
     height: 1280
-imageAlt:
+content.imageAlt:
   type: text
   comment: Alt text describing the image.
-imageAspectRatio:
+content.imageAspectRatio:
   type: select
   comment: Crops the image to a fixed aspect ratio.
   options:
@@ -137,13 +153,13 @@ imageAspectRatio:
         name: Landscape
       - id: widescreen
         name: Widescreen
-imageRounded:
+content.imageRounded:
   type: switch
   comment: Rounds the image's corners.
-imageBleed:
+content.imageBleed:
   type: switch
   comment: Runs the image to the page edge. Landscape or Square aspect ratios work best.
-reverse:
+content.reverse:
   type: switch
   comment: Flips the columns so the image comes before the copy.
 
@@ -151,10 +167,10 @@ reverse:
 # Configures the CustomSection wrapper, not this section's own content. Inline
 # per component so a project can trim the size/padding lists in place.
 # `new:component` slices from this marker down — keep the marker line verbatim.
-sectionLabel:
+content.sectionLabel:
   type: text
   comment: Names the section in the editor and sets its anchor id.
-maxContentWidth:
+content.maxContentWidth:
   type: select
   comment: Maximum width of the content.
   options:
@@ -175,7 +191,7 @@ maxContentWidth:
         name: 2xl
       - id: 3xl
         name: 3xl
-paddingHorizontal:
+content.paddingHorizontal:
   type: select
   comment: Horizontal padding around the content.
   options:
@@ -198,7 +214,7 @@ paddingHorizontal:
         name: 2xl
       - id: 3xl
         name: 3xl
-paddingVertical:
+content.paddingVertical:
   type: select
   comment: Vertical padding around the content.
   options:
@@ -225,7 +241,7 @@ paddingVertical:
         name: 5xl
       - id: 6xl
         name: 6xl
-colorScheme:
+style.colorScheme:
   hidden: true
   # Carried by the band colour. Every band the design draws names its own ink,
   # and `base` on its own does not say whether you get the cream band or the
@@ -241,14 +257,14 @@ colorScheme:
         name: Light
       - id: dark
         name: Dark
-lockColorScheme:
+style.lockColorScheme:
   hidden: true
   # Carried by the band colour: every named band locks, because there is no
   # dark mode here for an unlocked one to follow.
   type: switch
   label: Lock color scheme
   comment: Ignores the site theme toggle. Only applies when Color Scheme is Light or Dark.
-backgroundColor:
+style.backgroundColor:
   type: select
   label: Background colour
   comment: The colour this band is painted, and the ink that goes with it.
@@ -285,7 +301,7 @@ backgroundColor:
         - key: color
       text:
         - key: name
-mediaWidth:
+content.mediaWidth:
   type: number
   comment: >-
     How wide the picture's column is drawn, in pixels. Defaults to 400. The

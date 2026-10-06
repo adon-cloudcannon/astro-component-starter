@@ -1,4 +1,5 @@
 ---
+import { nestedProps } from "@component-utils/nestedProps.mjs";
 import { rootMirror } from "@component-utils/rootMirror.mjs";
 import CustomSection from "@builders/custom-section/CustomSection.astro";
 import { resolveImageSource } from "@component-utils/resolveImageSource";
@@ -21,6 +22,10 @@ type LogoProps = {
   height?: number;
 };
 
+/* `content` and `style` are the editor's tabs, flattened straight back into
+   the names below. `at()` writes the frontmatter path a binding needs. */
+const { props, at } = nestedProps(Astro.props);
+
 const {
   heading = "",
   logos = [],
@@ -40,7 +45,7 @@ const {
   useDefaultEditableBinding = false,
   _component,
   ...htmlAttributes
-} = Astro.props;
+} = props;
 
 /* Mirrored onto the builder's `.content`, because the flag lands on the
    section's root and the editor never rewrites a region root. */
@@ -67,7 +72,7 @@ const mirror = rootMirror({ "data-heading-inline": headingPlacement === "inline"
     class="eyebrow"
     size="md"
     alignmentHorizontal={headingPlacement === "inline" ? "start" : "center"}
-    data-prop="heading"
+    data-prop={at("heading")}
     text={heading}
   />
   {logos?.length > 0 &&
@@ -83,7 +88,7 @@ const mirror = rootMirror({ "data-heading-inline": headingPlacement === "inline"
         slideWidthPercent={20}
         minSlideWidth={150}
         alignmentHorizontal="start"
-        data-children-prop="logos"
+        data-children-prop={at("logos")}
       >
         {logos?.map((logo: LogoProps) => {
           const LogoWrapper = logo.url ? "a" : "span";
@@ -132,7 +137,7 @@ const mirror = rootMirror({ "data-heading-inline": headingPlacement === "inline"
       <ul
         class:list={["logo-cloud-grid", grayscale && "grayscale"]}
         data-editable="array"
-        data-prop="logos"
+        data-prop={at("logos")}
         data-direction="row"
       >
         {logos?.map((logo: LogoProps) => {

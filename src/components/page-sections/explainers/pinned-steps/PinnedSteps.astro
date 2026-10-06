@@ -1,4 +1,5 @@
 ---
+import { nestedProps } from "@component-utils/nestedProps.mjs";
 import { subtextMeasure } from "@component-utils/subtextMeasure.mjs";
 import { rootMirror } from "@component-utils/rootMirror.mjs";
 /**
@@ -34,6 +35,10 @@ type Step = Record<string, unknown> & {
   contentSections?: ContentBlock[];
   mediaSections?: ContentBlock[];
 };
+
+/* `content` and `style` are the editor's tabs, flattened straight back into
+   the names below. `at()` writes the frontmatter path a binding needs. */
+const { props, at } = nestedProps(Astro.props);
 
 const {
   eyebrow = "",
@@ -116,7 +121,7 @@ const {
   _component,
   "data-children-prop": childrenDataProp,
   ...htmlAttributes
-} = Astro.props;
+} = props;
 
 /* The measure the subtext is set in, as a length. */
 const subtextCap = subtextMeasure(subtextWidth);

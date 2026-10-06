@@ -1,50 +1,53 @@
 label: Pinned Steps
 icon: web_stories
 description: A band that holds still while its steps and pictures change.
+tabbed: true
 value:
   _component: page-sections/explainers/pinned-steps
-  eyebrow: ""
-  heading: ""
-  headingLevel: h2
-  headingSize: lg
-  subtext: ""
-  subtextSize: md
-  subtextWidth: ""
-  alignmentHorizontal: center
-  steps:
-    - contentSections:
-        - _component: building-blocks/core-elements/heading
-          text: The first thing it does
-          level: h3
-          size: sm
-        - _component: building-blocks/core-elements/text
-          text: A line about it, in the copy column beside the picture.
-      mediaSections: []
-    - contentSections:
-        - _component: building-blocks/core-elements/heading
-          text: And then the next
-          level: h3
-          size: sm
-        - _component: building-blocks/core-elements/text
-          text: The band holds still while this replaces the line above it.
-      mediaSections: []
-  reverse: false
-  mediaWidth: half
-  copyColor: ""
-  showProgress: true
-  sectionLabel: ""
-  maxContentWidth: xl
-  paddingHorizontal: gutter
-  paddingVertical: 4xl
-  backgroundColor: light-sand
-  background:
-    type: image
-    imageSource: ""
+  content:
+    sectionLabel: ""
+    eyebrow: ""
+    heading: ""
+    headingLevel: h2
+    headingSize: lg
+    subtext: ""
+    subtextSize: md
+    subtextWidth: ""
+    alignmentHorizontal: center
+    steps:
+      - contentSections:
+          - _component: building-blocks/core-elements/heading
+            text: The first thing it does
+            level: h3
+            size: sm
+          - _component: building-blocks/core-elements/text
+            text: A line about it, in the copy column beside the picture.
+        mediaSections: []
+      - contentSections:
+          - _component: building-blocks/core-elements/heading
+            text: And then the next
+            level: h3
+            size: sm
+          - _component: building-blocks/core-elements/text
+            text: The band holds still while this replaces the line above it.
+        mediaSections: []
+    reverse: false
+    mediaWidth: half
+    copyColor: ""
+    showProgress: true
+    maxContentWidth: xl
+    paddingHorizontal: gutter
+    paddingVertical: 4xl
+  style:
+    backgroundColor: light-sand
+    background:
+      type: image
+      imageSource: ""
 preview:
   text:
     - Pinned Steps
   subtext:
-    - key: heading
+    - key: content.heading
   icon: web_stories
 picker_preview:
   text: Pinned Steps

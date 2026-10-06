@@ -1,39 +1,42 @@
 label: Testimonial Quote
 icon: format_quote
 description: One customer quote on a card, in any of the four layouts the design draws.
+tabbed: true
 value:
   _component: page-sections/proof/testimonial-quote
-  eyebrow: ""
-  variant: static
-  quoteSize: sm
-  tone: base
-  cardWidth: full
-  alignment: start
-  bordered: false
-  quotes:
-    - text: >-
-        We handed the site to our marketing team on a Friday and they had three new landing pages
-        live by Monday. **No tickets, no deploys**, nothing broken.
-      authorName: Priya Raman
-      authorDescription: Head of Marketing,
-      company: Northwind
-      authorImage: /src/assets/images/component-docs/profile1.jpg
-      accentColor: sunset
-  sectionLabel: ""
-  maxContentWidth: xl
-  paddingHorizontal: gutter
-  paddingVertical: 4xl
-  backgroundColor: light-sand
-  background:
-    type: image
-    imageSource: ""
-    imageAlt: ""
-    positionVertical: top
-    positionHorizontal: center
-    fixed: false
-    priority: false
-    mask: none
-    overlay: 0
+  content:
+    sectionLabel: ""
+    eyebrow: ""
+    variant: static
+    quoteSize: sm
+    tone: base
+    cardWidth: full
+    alignment: start
+    bordered: false
+    quotes:
+      - text: >-
+          We handed the site to our marketing team on a Friday and they had three new landing pages
+          live by Monday. **No tickets, no deploys**, nothing broken.
+        authorName: Priya Raman
+        authorDescription: Head of Marketing,
+        company: Northwind
+        authorImage: /src/assets/images/component-docs/profile1.jpg
+        accentColor: sunset
+    maxContentWidth: xl
+    paddingHorizontal: gutter
+    paddingVertical: 4xl
+  style:
+    backgroundColor: light-sand
+    background:
+      type: image
+      imageSource: ""
+      imageAlt: ""
+      positionVertical: top
+      positionHorizontal: center
+      fixed: false
+      priority: false
+      mask: none
+      overlay: 0
 preview:
   text:
     - Testimonial Quote

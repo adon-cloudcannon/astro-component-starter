@@ -1,4 +1,5 @@
 ---
+import { nestedProps } from "@component-utils/nestedProps.mjs";
 import { rootMirror } from "@component-utils/rootMirror.mjs";
 import CustomSection from "@builders/custom-section/CustomSection.astro";
 import { subtextMeasure } from "@component-utils/subtextMeasure.mjs";
@@ -10,6 +11,10 @@ import SimpleText from "@core-elements/simple-text/SimpleText.astro";
 import Text from "@core-elements/text/Text.astro";
 import ButtonGroup from "@wrappers/button-group/ButtonGroup.astro";
 import Split from "@wrappers/split/Split.astro";
+
+/* `content` and `style` are the editor's tabs, flattened straight back into
+   the names below. `at()` writes the frontmatter path a binding needs. */
+const { props, at } = nestedProps(Astro.props);
 
 const {
   eyebrow = "",
@@ -89,7 +94,7 @@ const {
   useDefaultEditableBinding = false,
   _component,
   ...htmlAttributes
-} = Astro.props;
+} = props;
 
 /* The measure the subtext is set in, as a length. */
 const subtextCap = subtextMeasure(subtextWidth);
@@ -139,14 +144,14 @@ const mirror = rootMirror({ class: { "has-pile": shapes?.length > 0 } });
     <Fragment slot="first">
       <SimpleText
         class="eyebrow"
-        data-prop="eyebrow"
+        data-prop={at("eyebrow")}
         text={eyebrow}
         size="sm"
       />
       <Heading
         level={headingLevel}
         size={headingSize}
-        data-prop="heading"
+        data-prop={at("heading")}
       >
         {heading}
       </Heading>
@@ -159,7 +164,7 @@ const mirror = rootMirror({ class: { "has-pile": shapes?.length > 0 } });
             575 — straight under the pile. */}
         style={subtextCap ? `max-inline-size: ${subtextCap}` : undefined}
         size={subtextSize}
-        data-prop="subtext"
+        data-prop={at("subtext")}
         text={subtext}
       />
       <ButtonGroup
@@ -167,7 +172,7 @@ const mirror = rootMirror({ class: { "has-pile": shapes?.length > 0 } });
         buttonSections={buttonSections}
         direction="row"
         alignmentHorizontal="start"
-        data-children-prop="buttonSections"
+        data-children-prop={at("buttonSections")}
       />
     </Fragment>
     {siteCards?.cards?.length > 0 ? (
@@ -189,7 +194,7 @@ const mirror = rootMirror({ class: { "has-pile": shapes?.length > 0 } });
         designHeight={pileHeight}
         fall={pileFall}
         radius={pileRadius}
-        data-children-prop="shapes"
+        data-children-prop={at("shapes")}
       />
     ) : (
     <Image
@@ -203,8 +208,8 @@ const mirror = rootMirror({ class: { "has-pile": shapes?.length > 0 } });
       positionVertical={imagePositionVertical}
       sizes={imageBleed ? "(max-width: 800px) 100vw, 60vw" : undefined}
       widths={imageBleed ? [640, 1280, 1920, 2560] : undefined}
-      data-prop-src="imageSource"
-      data-prop-alt="imageAlt"
+      data-prop-src={at("imageSource")}
+      data-prop-alt={at("imageAlt")}
     />
     )}
   </Split>

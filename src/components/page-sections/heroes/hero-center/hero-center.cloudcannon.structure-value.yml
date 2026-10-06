@@ -1,44 +1,47 @@
 label: Hero Center
 icon: web_asset
 description: Centered hero with a heading, supporting text, and buttons.
+tabbed: true
 value:
   _component: page-sections/heroes/hero-center
-  eyebrow: Introducing
-  heading: A clear promise in one line
-  headingLevel: h1
-  subtext: One or two sentences on who this is for and what they get.
-  subtextSize: lg
-  subtextWidth: \"\"
-  buttonSections:
-    - _component: building-blocks/core-elements/button
-      text: Get started
-      hideText: false
-      link: /
-      iconName: ""
-      iconColor: default
-      iconPosition: before
-      variant: primary
-      size: md
-  sectionLabel: ""
-  maxContentWidth: xl
-  paddingHorizontal: gutter
-  paddingVertical: 4xl
-  backgroundColor: light-sand
-  background:
-    type: image
-    imageSource: ""
-    imageAlt: ""
-    positionVertical: top
-    positionHorizontal: center
-    fixed: false
-    priority: false
-    mask: none
-    overlay: 0
+  content:
+    sectionLabel: ""
+    eyebrow: Introducing
+    heading: A clear promise in one line
+    headingLevel: h1
+    subtext: One or two sentences on who this is for and what they get.
+    subtextSize: lg
+    subtextWidth: \"\"
+    buttonSections:
+      - _component: building-blocks/core-elements/button
+        text: Get started
+        hideText: false
+        link: /
+        iconName: ""
+        iconColor: default
+        iconPosition: before
+        variant: primary
+        size: md
+    maxContentWidth: xl
+    paddingHorizontal: gutter
+    paddingVertical: 4xl
+  style:
+    backgroundColor: light-sand
+    background:
+      type: image
+      imageSource: ""
+      imageAlt: ""
+      positionVertical: top
+      positionHorizontal: center
+      fixed: false
+      priority: false
+      mask: none
+      overlay: 0
 preview:
   text:
     - Hero Center
   subtext:
-    - key: heading
+    - key: content.heading
   image: public/component-previews/page-sections/heroes/hero-center.svg
   icon: web_asset
   gallery:

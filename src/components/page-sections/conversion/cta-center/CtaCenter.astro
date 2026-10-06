@@ -1,4 +1,5 @@
 ---
+import { nestedProps } from "@component-utils/nestedProps.mjs";
 import { rootMirror } from "@component-utils/rootMirror.mjs";
 import Image from "@core-elements/image/Image.astro";
 import CustomSection from "@builders/custom-section/CustomSection.astro";
@@ -7,6 +8,10 @@ import Heading from "@core-elements/heading/Heading.astro";
 import SimpleText from "@core-elements/simple-text/SimpleText.astro";
 import Text from "@core-elements/text/Text.astro";
 import ButtonGroup from "@wrappers/button-group/ButtonGroup.astro";
+
+/* `content` and `style` are the editor's tabs, flattened straight back into
+   the names below. `at()` writes the frontmatter path a binding needs. */
+const { props, at } = nestedProps(Astro.props);
 
 const {
   /**
@@ -100,7 +105,7 @@ const {
   useDefaultEditableBinding = false,
   _component,
   ...htmlAttributes
-} = Astro.props;
+} = props;
 
 /* The measure the subtext is set in, as a length. */
 const subtextCap = subtextMeasure(subtextWidth);
@@ -155,14 +160,14 @@ const mirror = rootMirror({ class: { [`align-${alignmentHorizontal}`]: true } })
     class="eyebrow"
     size="sm"
     alignmentHorizontal={alignmentHorizontal}
-    data-prop="eyebrow"
+    data-prop={at("eyebrow")}
     text={eyebrow}
   />
   <Heading
     level={headingLevel}
     size={headingSize}
     alignmentHorizontal={alignmentHorizontal}
-    data-prop="heading"
+    data-prop={at("heading")}
     text={heading}
   />
   <Text
@@ -170,13 +175,13 @@ const mirror = rootMirror({ class: { [`align-${alignmentHorizontal}`]: true } })
     style={subtextCap ? `max-inline-size: ${subtextCap}; margin-inline: auto; justify-self: center` : undefined}
     size={subtextSize}
     alignmentHorizontal={alignmentHorizontal}
-    data-prop="subtext"
+    data-prop={at("subtext")}
     text={subtext}
   />
   <ButtonGroup
     buttonSections={buttonSections}
     alignmentHorizontal={alignmentHorizontal}
-    data-children-prop="buttonSections"
+    data-children-prop={at("buttonSections")}
   />
   {imageSource && (
     <div
@@ -193,8 +198,8 @@ const mirror = rootMirror({ class: { [`align-${alignmentHorizontal}`]: true } })
         sizes="100vw"
         widths={[640, 1280, 1920]}
         width={1280}
-        data-prop-src="imageSource"
-        data-prop-alt="imageAlt"
+        data-prop-src={at("imageSource")}
+        data-prop-alt={at("imageAlt")}
       />
     </div>
   )}

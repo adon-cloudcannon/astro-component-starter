@@ -1,4 +1,5 @@
 ---
+import { nestedProps } from "@component-utils/nestedProps.mjs";
 import CustomSection from "@builders/custom-section/CustomSection.astro";
 import Heading from "@core-elements/heading/Heading.astro";
 import SimpleText from "@core-elements/simple-text/SimpleText.astro";
@@ -8,6 +9,10 @@ import CardGrid from "@wrappers/card-grid/CardGrid.astro";
 import { nextHeadingLevel } from "@component-utils/headingLevel";
 
 type MemberProps = Record<string, unknown>;
+
+/* `content` and `style` are the editor's tabs, flattened straight back into
+   the names below. `at()` writes the frontmatter path a binding needs. */
+const { props, at } = nestedProps(Astro.props);
 
 const {
   eyebrow = "",
@@ -28,7 +33,7 @@ const {
   _component,
   class: className,
   ...htmlAttributes
-} = Astro.props;
+} = props;
 
 const itemHeadingLevel = nextHeadingLevel(headingLevel);
 ---
@@ -50,7 +55,7 @@ const itemHeadingLevel = nextHeadingLevel(headingLevel);
   <SimpleText
     alignmentHorizontal="center"
     class="eyebrow"
-    data-prop="eyebrow"
+    data-prop={at("eyebrow")}
     text={eyebrow}
     size="sm"
   />
@@ -59,21 +64,21 @@ const itemHeadingLevel = nextHeadingLevel(headingLevel);
     level={headingLevel}
     size="lg"
     alignmentHorizontal="center"
-    data-prop="heading"
+    data-prop={at("heading")}
   >
     {heading}
   </Heading>
   <Text
     class="section-subtext"
     alignmentHorizontal="center"
-    data-prop="subtext"
+    data-prop={at("subtext")}
     text={subtext}
   />
   <CardGrid
     columns={3}
     gap="md"
     aspectRatio="square"
-    data-children-prop="teamMembers"
+    data-children-prop={at("teamMembers")}
   >
     {teamMembers?.map((member: MemberProps) => (
       <TeamItem
