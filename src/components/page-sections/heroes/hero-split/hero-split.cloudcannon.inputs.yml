@@ -10,10 +10,10 @@ style:
   label: Style
   comment: What paints the band behind it.
 
-heading:
+content.heading:
   type: text
   comment: Main heading for the section.
-headingLevel:
+content.headingLevel:
   type: select
   comment: Heading level for the title. Use h1 once per page, on the first section.
   options:
@@ -21,7 +21,7 @@ headingLevel:
       - h1
       - h2
       - h3
-headingSize:
+content.headingSize:
   type: select
   # Two, not six. The design opens the homepage on Header 1 and every other
   # page on Header 2, and that is what all thirteen heroes draw. A hero set to
@@ -35,7 +35,7 @@ headingSize:
         name: Header 1
       - id: xl
         name: Header 2
-subtext:
+content.subtext:
   type: markdown
   comment: Supporting copy beneath the heading.
   options:
@@ -50,7 +50,7 @@ subtext:
     underline: false
     bulletedlist: false
     numberedlist: false
-subtextSize:
+content.subtextSize:
   hidden: true
   # One size on every hero, so it is the component's decision rather than
   # a field an editor has to get right.
@@ -66,7 +66,7 @@ subtextSize:
         name: Regular
       - id: xl
         name: Large
-subtextWidth:
+content.subtextWidth:
   hidden: true
   # Never set on a hero: the measure is the split's own column.
   type: select
@@ -87,7 +87,7 @@ subtextWidth:
         name: Wide
       - id: xl
         name: Extra wide
-imageSource:
+content.imageSource:
   type: image
   comment: Image shown beside the copy.
   options:
@@ -97,10 +97,10 @@ imageSource:
     resize_style: contain
     width: 1920
     height: 1280
-imageAlt:
+content.imageAlt:
   type: text
   comment: Alt text describing the image.
-imageAspectRatio:
+content.imageAspectRatio:
   type: select
   comment: Crops the image to a fixed aspect ratio.
   options:
@@ -115,27 +115,27 @@ imageAspectRatio:
         name: Portrait (3:4)
       - id: widescreen
         name: Widescreen (16:9)
-imageOverflow:
+content.imageOverflow:
   type: number
   comment: >-
     How far the image may spill past its column, in pixels, measured from the
     design. Capped at the page edge, so it can never reach further than a full
     bleed. Leave at 0 to keep the image inside its column.
-imageBleed:
+content.imageBleed:
   type: switch
   comment: Runs the image to the page edge. Landscape or Square aspect ratios work best.
-buttonSections:
+content.buttonSections:
   type: array
   comment: Call-to-action buttons.
   options:
     structures: _structures.buttonSections
-reverse:
+content.reverse:
   type: switch
   comment: Flips the columns so the image comes before the copy.
-imageRounded:
+content.imageRounded:
   type: switch
   comment: Rounds the image's corners.
-note:
+content.note:
   type: array
   comment: Small print beneath the buttons, such as trial or pricing reassurances.
   options:
@@ -145,10 +145,10 @@ note:
 # Configures the CustomSection wrapper, not this section's own content. Inline
 # per component so a project can trim the size/padding lists in place.
 # `new:component` slices from this marker down — keep the marker line verbatim.
-sectionLabel:
+content.sectionLabel:
   type: text
   comment: Names the section in the editor and sets its anchor id.
-maxContentWidth:
+content.maxContentWidth:
   hidden: true
   # Set from the design, not by an editor: every band on the site uses the
   # same column and the same rhythm, and a section that drifts from it reads
@@ -173,7 +173,7 @@ maxContentWidth:
         name: 2xl
       - id: 3xl
         name: 3xl
-paddingHorizontal:
+content.paddingHorizontal:
   hidden: true
   # Set from the design, not by an editor: every band on the site uses the
   # same column and the same rhythm, and a section that drifts from it reads
@@ -200,7 +200,7 @@ paddingHorizontal:
         name: 2xl
       - id: 3xl
         name: 3xl
-paddingVertical:
+content.paddingVertical:
   hidden: true
   # Set from the design, not by an editor: every band on the site uses the
   # same column and the same rhythm, and a section that drifts from it reads
@@ -231,7 +231,7 @@ paddingVertical:
         name: 5xl
       - id: 6xl
         name: 6xl
-colorScheme:
+content.colorScheme:
   hidden: true
   # Carried by the band colour: picking Dark brings its ink with it.
   type: select
@@ -244,13 +244,13 @@ colorScheme:
         name: Light
       - id: dark
         name: Dark
-lockColorScheme:
+content.lockColorScheme:
   hidden: true
   # Carried by the band colour: picking Dark brings its ink with it.
   type: switch
   label: Lock color scheme
   comment: Ignores the site theme toggle. Only applies when Color Scheme is Light or Dark.
-pattern:
+style.pattern:
   type: select
   label: Texture
   comment: The pattern drawn behind the band. Both are inked from the band's own colours.
@@ -271,14 +271,14 @@ pattern:
         - key: swatch
       text:
         - key: name
-haze:
+style.haze:
   type: switch
   label: Haze behind the heading
   comment: >-
     Pools the band's own colour behind the copy and blurs it, so the heading
     stays readable where the pattern runs under it. Where it sits and how big
     it is follow the copy column.
-backgroundColor:
+style.backgroundColor:
   type: select
   label: Background colour
   comment: The colour this band is painted, and the ink that goes with it.
