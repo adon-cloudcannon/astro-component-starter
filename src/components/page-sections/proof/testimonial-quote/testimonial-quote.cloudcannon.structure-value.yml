@@ -22,9 +22,6 @@ value:
         company: Northwind
         authorImage: /src/assets/images/component-docs/profile1.jpg
         accentColor: sunset
-    maxContentWidth: xl
-    paddingHorizontal: gutter
-    paddingVertical: 4xl
   style:
     backgroundColor: light-sand
     background:
@@ -37,6 +34,9 @@ value:
       priority: false
       mask: none
       overlay: 0
+    maxContentWidth: xl
+    paddingHorizontal: gutter
+    paddingVertical: 4xl
 preview:
   text:
     - Testimonial Quote

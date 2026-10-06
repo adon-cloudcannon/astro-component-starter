@@ -106,9 +106,9 @@ pageSections:
             whole job.**
           quoteMarks: false
           accentColor: harbour
-      paddingVertical: 4xl
     style:
       backgroundColor: dark
+      paddingVertical: 4xl
   - _component: page-sections/proof/team-grid-section
     content:
       eyebrow: Who we are
@@ -158,7 +158,7 @@ pageSections:
           imageSource: /src/assets/images/marketing/chris-profile-1.png
           imageAlt: Chris Wingate, CRO at CloudCannon
           backgroundColor: moss
-      paddingVertical: none
     style:
       backgroundColor: light-sand
+      paddingVertical: none
 ---

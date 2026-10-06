@@ -172,7 +172,7 @@ content.image:
 content.sectionLabel:
   type: text
   comment: Names the section in the editor and sets its anchor id.
-content.maxContentWidth:
+style.maxContentWidth:
   hidden: true
   # Set from the design, not by an editor: every band on the site uses the
   # same column and the same rhythm, and a section that drifts from it reads
@@ -197,7 +197,7 @@ content.maxContentWidth:
         name: 2xl
       - id: 3xl
         name: 3xl
-content.paddingHorizontal:
+style.paddingHorizontal:
   hidden: true
   # Set from the design, not by an editor: every band on the site uses the
   # same column and the same rhythm, and a section that drifts from it reads
@@ -224,7 +224,7 @@ content.paddingHorizontal:
         name: 2xl
       - id: 3xl
         name: 3xl
-content.paddingVertical:
+style.paddingVertical:
   hidden: true
   # Set from the design, not by an editor: every band on the site uses the
   # same column and the same rhythm, and a section that drifts from it reads

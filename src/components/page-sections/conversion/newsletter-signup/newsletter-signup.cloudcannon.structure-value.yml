@@ -19,9 +19,6 @@ value:
     buttonText: Subscribe
     disclaimer: By subscribing, you agree to our [privacy policy](/privacy/).
     layout: band
-    maxContentWidth: xl
-    paddingHorizontal: gutter
-    paddingVertical: 3xl
   style:
     panelBackgroundColor: surface
     backgroundColor: light-sand
@@ -35,6 +32,9 @@ value:
       priority: false
       mask: none
       overlay: 0
+    maxContentWidth: xl
+    paddingHorizontal: gutter
+    paddingVertical: 3xl
 preview:
   text:
     - Newsletter Signup

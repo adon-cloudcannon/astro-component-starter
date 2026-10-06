@@ -25,7 +25,14 @@
  * block, and prefixing one points it at a key that does not exist.
  */
 
-/** What goes in `style`. Everything else is content. */
+/**
+ * What goes in `style`. Everything else is content.
+ *
+ * Two kinds: what paints the band, and how much room it takes. The width and
+ * the paddings are settings rather than copy wherever they appear, so they
+ * are here rather than cherry-picked per section — some sections may end up
+ * hiding them, which is a different question from where they belong.
+ */
 export const STYLE_KEYS = new Set([
   "background",
   "backgroundColor",
@@ -34,6 +41,11 @@ export const STYLE_KEYS = new Set([
   "lockColorScheme",
   "pattern",
   "panelBackgroundColor",
+  "maxContentWidth",
+  "paddingHorizontal",
+  "paddingVertical",
+  "paddingVerticalStart",
+  "paddingVerticalEnd",
 ]);
 
 export function nestedProps(astroProps, options = {}) {

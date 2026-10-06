@@ -17,9 +17,6 @@ value:
     reverse: false
     mediaWidth: half
     progressStyle: bar
-    maxContentWidth: xl
-    paddingHorizontal: gutter
-    paddingVertical: 4xl
     alignmentHorizontal: start
   style:
     backgroundColor: light-sand
@@ -33,6 +30,9 @@ value:
       priority: false
       mask: none
       overlay: 0
+    maxContentWidth: xl
+    paddingHorizontal: gutter
+    paddingVertical: 4xl
 preview:
   text:
     - key: content.heading

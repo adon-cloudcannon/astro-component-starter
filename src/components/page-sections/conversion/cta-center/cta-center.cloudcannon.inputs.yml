@@ -14,7 +14,7 @@ style:
   options:
     subtype: object
 
-content.paddingVerticalStart:
+style.paddingVerticalStart:
   type: select
   comment: >-
     Overrides the top of the vertical padding on its own. Empty follows
@@ -41,7 +41,7 @@ content.paddingVerticalStart:
         name: 5xl
       - id: 6xl
         name: 6xl
-content.paddingVerticalEnd:
+style.paddingVerticalEnd:
   type: select
   comment: >-
     Overrides the bottom of the vertical padding on its own. Empty follows
@@ -159,7 +159,7 @@ content.buttonSections:
 content.sectionLabel:
   type: text
   comment: Names the section in the editor and sets its anchor id.
-content.maxContentWidth:
+style.maxContentWidth:
   type: select
   comment: Maximum width of the content.
   options:
@@ -180,7 +180,7 @@ content.maxContentWidth:
         name: 2xl
       - id: 3xl
         name: 3xl
-content.paddingHorizontal:
+style.paddingHorizontal:
   type: select
   comment: Horizontal padding around the content.
   options:
@@ -203,7 +203,7 @@ content.paddingHorizontal:
         name: 2xl
       - id: 3xl
         name: 3xl
-content.paddingVertical:
+style.paddingVertical:
   type: select
   comment: Vertical padding around the content.
   options:

@@ -18,15 +18,15 @@ value:
         alt: ""
     imageWidth: 393
     aspectRatio: 393 / 275
-    maxContentWidth: xl
-    paddingHorizontal: gutter
-    paddingVertical: 2xl
   style:
     background:
       type: image
       imageSource: ""
     haze: false
     backgroundColor: dark
+    maxContentWidth: xl
+    paddingHorizontal: gutter
+    paddingVertical: 2xl
 _inputs:
   images:
     type: array

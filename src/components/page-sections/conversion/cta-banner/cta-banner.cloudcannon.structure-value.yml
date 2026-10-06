@@ -13,9 +13,6 @@ value:
     link: ""
     imageSource: ""
     imageAlt: ""
-    maxContentWidth: xl
-    paddingHorizontal: gutter
-    paddingVertical: 2xl
   style:
     backgroundColor: pacific
     background:
@@ -28,6 +25,9 @@ value:
       priority: false
       mask: none
       overlay: 0
+    maxContentWidth: xl
+    paddingHorizontal: gutter
+    paddingVertical: 2xl
 preview:
   text:
     - key: content.heading

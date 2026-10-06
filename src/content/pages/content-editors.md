@@ -63,9 +63,9 @@ pageSections:
           authorImageAlt: Alex Murray
           linkText: Read case study
           accentColor: pacific
-      paddingVerticalStart: lg
     style:
       backgroundColor: light-sand
+      paddingVerticalStart: lg
   - _component: page-sections/explainers/pinned-steps
     content:
       eyebrow: ''

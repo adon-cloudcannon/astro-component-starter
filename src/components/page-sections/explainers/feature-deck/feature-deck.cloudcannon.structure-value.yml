@@ -28,14 +28,14 @@ value:
     stickyOffset: md
     cardColorScheme: light
     showRail: true
-    maxContentWidth: xl
-    paddingHorizontal: gutter
-    paddingVertical: 4xl
   style:
     backgroundColor: light-sand
     background:
       type: image
       imageSource: ""
+    maxContentWidth: xl
+    paddingHorizontal: gutter
+    paddingVertical: 4xl
 _inputs:
   cards:
     type: array

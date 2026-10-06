@@ -24,9 +24,6 @@ value:
           - _component: building-blocks/core-elements/text
             text: You own the repository and the content. We stay on call for the first month.
             size: md
-    maxContentWidth: xl
-    paddingHorizontal: gutter
-    paddingVertical: 4xl
   style:
     backgroundColor: light-sand
     background:
@@ -39,6 +36,9 @@ value:
       priority: false
       mask: none
       overlay: 0
+    maxContentWidth: xl
+    paddingHorizontal: gutter
+    paddingVertical: 4xl
 preview:
   text:
     - FAQ Section

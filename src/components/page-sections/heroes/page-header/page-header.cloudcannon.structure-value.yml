@@ -14,9 +14,6 @@ value:
     subtextWidth: ""
     showBreadcrumbs: true
     alignmentHorizontal: start
-    maxContentWidth: xl
-    paddingHorizontal: gutter
-    paddingVertical: 2xl
   style:
     backgroundColor: light-sand
     background:
@@ -29,6 +26,9 @@ value:
       priority: false
       mask: none
       overlay: 0
+    maxContentWidth: xl
+    paddingHorizontal: gutter
+    paddingVertical: 2xl
 preview:
   text:
     - Page Header

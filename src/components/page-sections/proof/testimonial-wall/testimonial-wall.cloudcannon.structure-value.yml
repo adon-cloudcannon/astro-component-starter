@@ -44,9 +44,6 @@ value:
         authorDescription: Design Director, Loam Studio
         authorImage: /src/assets/images/component-docs/profile4.jpg
     columns: 3
-    maxContentWidth: xl
-    paddingHorizontal: gutter
-    paddingVertical: 4xl
   style:
     backgroundColor: light-sand
     background:
@@ -59,6 +56,9 @@ value:
       priority: false
       mask: none
       overlay: 0
+    maxContentWidth: xl
+    paddingHorizontal: gutter
+    paddingVertical: 4xl
 preview:
   text:
     - Testimonial Wall

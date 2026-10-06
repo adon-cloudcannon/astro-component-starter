@@ -44,10 +44,10 @@ pageSections:
               name: Hugo
             - id: eleventy
               name: Eleventy
-      paddingVerticalStart: none
-      paddingVerticalEnd: 2xl
     style:
       backgroundColor: light-sand
+      paddingVerticalStart: none
+      paddingVerticalEnd: 2xl
   - _component: page-sections/collections/card-collection
     content:
       collection: templates
@@ -165,13 +165,13 @@ pageSections:
               iconName: move-right
               iconPosition: after
               size: sm
-      paddingVertical: 4xl
     style:
       backgroundColor: light-sand
       background:
         type: pattern
         pattern: grid
         mask: fade
+      paddingVertical: 4xl
   - _component: page-sections/conversion/cta-banner
     content:
       scratch: pacific

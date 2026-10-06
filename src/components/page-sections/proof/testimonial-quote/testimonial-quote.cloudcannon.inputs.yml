@@ -112,7 +112,7 @@ content.quotes:
 content.sectionLabel:
   type: text
   comment: Names the section in the editor and sets its anchor id.
-content.maxContentWidth:
+style.maxContentWidth:
   type: select
   comment: Maximum width of the content.
   options:
@@ -133,7 +133,7 @@ content.maxContentWidth:
         name: 2xl
       - id: 3xl
         name: 3xl
-content.paddingHorizontal:
+style.paddingHorizontal:
   type: select
   comment: Horizontal padding around the content.
   options:
@@ -156,7 +156,7 @@ content.paddingHorizontal:
         name: 2xl
       - id: 3xl
         name: 3xl
-content.paddingVertical:
+style.paddingVertical:
   type: select
   comment: Vertical padding around the content.
   options:
@@ -248,14 +248,14 @@ content.logoAspect:
   comment: >-
     The client mark's own proportions, as `width / height`, for the case-study
     layout. Taken from the SVG's viewBox.
-content.paddingVerticalStart:
+style.paddingVerticalStart:
   type: select
   comment: >-
     Overrides the padding above the card. Useful where the band above already
     carries its own, and the two stack into a gap neither asked for.
   options:
     values: [none, xs, sm, md, lg, xl, 2xl, 3xl, 4xl, 5xl, 6xl]
-content.paddingVerticalEnd:
+style.paddingVerticalEnd:
   type: select
   comment: Overrides the padding below the card.
   options:

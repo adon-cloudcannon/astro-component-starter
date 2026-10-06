@@ -169,9 +169,9 @@ pageSections:
           divider: true
           alignmentHorizontal: start
           accentColor: harbour
-      paddingVertical: 4xl
     style:
       backgroundColor: light-sand
+      paddingVertical: 4xl
   - _component: page-sections/explainers/feature-grid
     content:
       heading: Open positions
@@ -182,13 +182,13 @@ pageSections:
       alignmentHorizontal: center
       columns: 3
       features: []
-      paddingVertical: 3xl
     style:
       backgroundColor: dark
       background:
         type: pattern
         pattern: pegboard
         mask: fade
+      paddingVertical: 3xl
   - _component: page-sections/conversion/cta-split
     content:
       heading: Show us what you've got
@@ -224,10 +224,10 @@ pageSections:
             color: var(--light-sand)
       contentCard: true
       contentCardColor: white
-      paddingVertical: 4xl
     style:
       backgroundColor: dark-sand
       background:
         type: pattern
         pattern: grid
+      paddingVertical: 4xl
 ---

@@ -22,7 +22,7 @@ content.contentSections:
   comment: Content blocks inside the section.
   options:
     structures: _structures.containerSections
-content.maxContentWidth:
+style.maxContentWidth:
   type: select
   comment: Maximum width of the content.
   options:
@@ -43,7 +43,7 @@ content.maxContentWidth:
         name: 2xl
       - id: 3xl
         name: 3xl
-content.paddingHorizontal:
+style.paddingHorizontal:
   type: select
   comment: Horizontal padding around the content.
   options:
@@ -72,7 +72,7 @@ content.paddingHorizontal:
         name: 5xl
       - id: 6xl
         name: 6xl
-content.paddingVertical:
+style.paddingVertical:
   type: select
   comment: Vertical padding around the content.
   options:

@@ -35,9 +35,6 @@ value:
         link: ""
     centreImageSource: ""
     centreImageAlt: ""
-    maxContentWidth: xl
-    paddingHorizontal: gutter
-    paddingVertical: 4xl
     centreColor: ""
     centreMinHeight: 0
     centreSections: []
@@ -50,6 +47,9 @@ value:
     background:
       type: image
       imageSource: ""
+    maxContentWidth: xl
+    paddingHorizontal: gutter
+    paddingVertical: 4xl
 _inputs:
   panels:
     type: array

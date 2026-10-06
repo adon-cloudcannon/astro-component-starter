@@ -37,13 +37,13 @@ value:
     embellishmentWidth: 55
     embellishmentPlacement: deck
     reverse: false
-    maxContentWidth: xl
-    paddingHorizontal: gutter
-    paddingVertical: 4xl
   style:
     backgroundColor: light-sand
     pattern: grid
     haze: true
+    maxContentWidth: xl
+    paddingHorizontal: gutter
+    paddingVertical: 4xl
 _inputs:
   panels:
     type: array

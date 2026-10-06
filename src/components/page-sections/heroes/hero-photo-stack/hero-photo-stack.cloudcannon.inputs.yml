@@ -138,7 +138,7 @@ content.reverse:
 content.sectionLabel:
   type: text
   comment: Accessible name for the section, used by screen readers.
-content.maxContentWidth:
+style.maxContentWidth:
   hidden: true
   # Set from the design, not by an editor: every band on the site uses the
   # same column and the same rhythm, and a section that drifts from it reads
@@ -153,7 +153,7 @@ content.maxContentWidth:
         name: Extra Large
       - id: 2xl
         name: 2xl
-content.paddingHorizontal:
+style.paddingHorizontal:
   hidden: true
   # Set from the design, not by an editor.
   type: select
@@ -166,7 +166,7 @@ content.paddingHorizontal:
         name: Page gutter
       - id: lg
         name: Large
-content.paddingVertical:
+style.paddingVertical:
   hidden: true
   # Set from the design, not by an editor.
   type: select

@@ -95,7 +95,7 @@ content.centreImageAlt:
 content.sectionLabel:
   type: text
   comment: Accessible name for the section, used by screen readers.
-content.maxContentWidth:
+style.maxContentWidth:
   type: select
   comment: Maximum width of the section's content.
   options:
@@ -106,7 +106,7 @@ content.maxContentWidth:
         name: Extra Large
       - id: 2xl
         name: 2xl
-content.paddingHorizontal:
+style.paddingHorizontal:
   type: select
   comment: Horizontal padding around the content.
   options:
@@ -117,7 +117,7 @@ content.paddingHorizontal:
         name: Page gutter
       - id: lg
         name: Large
-content.paddingVertical:
+style.paddingVertical:
   type: select
   comment: Vertical padding around the content.
   options:

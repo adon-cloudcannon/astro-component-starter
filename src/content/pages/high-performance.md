@@ -190,11 +190,11 @@ pageSections:
           iconName: move-right
           iconPosition: after
           variant: text
-      paddingVertical: 5xl
     style:
       backgroundColor: sand
       background:
         type: pattern
         pattern: pegboard
         mask: none
+      paddingVertical: 5xl
 ---

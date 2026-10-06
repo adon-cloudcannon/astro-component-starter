@@ -323,12 +323,11 @@ pageSections:
         - _component: building-blocks/core-elements/button
           text: Join the Partner Program
           variant: primary
-      paddingVertical: 2xl
     style:
       backgroundColor: sand
+      paddingVertical: 2xl
   - _component: page-sections/conversion/cta-center
     content:
-      paddingVerticalEnd: 3xl
       heading: Become a CloudCannon Partner
       headingSize: lg
     style:
@@ -345,9 +344,9 @@ pageSections:
           rx: 387px
           'y': 54.4%
           ry: 36%
+      paddingVerticalEnd: 3xl
   - _component: page-sections/conversion/cta-form
     content:
-      paddingVerticalStart: lg
       steps:
         - contentSections:
             - _component: building-blocks/core-elements/simple-text
@@ -436,6 +435,7 @@ pageSections:
       imageSource: ''
     style:
       backgroundColor: light-sand
+      paddingVerticalStart: lg
   - _component: page-sections/conversion/cta-center
     content:
       heading: Keen to collaborate?
@@ -449,7 +449,6 @@ pageSections:
           iconName: move-right
           iconPosition: after
           variant: text
-      paddingVertical: 2xl
       cornerStart:
         source: /src/assets/images/marketing/ferns-corner-3806-72622.png
         alt: ''
@@ -462,4 +461,5 @@ pageSections:
         drop: 0.3
     style:
       backgroundColor: dark
+      paddingVertical: 2xl
 ---

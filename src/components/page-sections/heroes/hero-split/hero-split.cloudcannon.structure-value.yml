@@ -43,14 +43,14 @@ value:
         iconName: check
         iconColor: default
         link: null
-    maxContentWidth: xl
-    paddingHorizontal: gutter
-    paddingVertical: 4xl
   style:
     pattern: grid
     haze: true
     backgroundColor: light-sand
     reverse: false
+    maxContentWidth: xl
+    paddingHorizontal: gutter
+    paddingVertical: 4xl
 preview:
   text:
     - Hero Split

@@ -35,14 +35,14 @@ value:
     mediaWidth: half
     copyColor: ""
     showProgress: true
-    maxContentWidth: xl
-    paddingHorizontal: gutter
-    paddingVertical: 4xl
   style:
     backgroundColor: light-sand
     background:
       type: image
       imageSource: ""
+    maxContentWidth: xl
+    paddingHorizontal: gutter
+    paddingVertical: 4xl
 preview:
   text:
     - Pinned Steps

@@ -165,7 +165,6 @@ pageSections:
           iconName: move-right
           iconPosition: after
           variant: text
-      paddingVertical: 2xl
       cornerStart:
         source: /src/assets/images/marketing/ferns-corner-3806-72622.png
         alt: ""
@@ -178,4 +177,5 @@ pageSections:
         drop: 0.3
     style:
       backgroundColor: dark
+      paddingVertical: 2xl
 ---

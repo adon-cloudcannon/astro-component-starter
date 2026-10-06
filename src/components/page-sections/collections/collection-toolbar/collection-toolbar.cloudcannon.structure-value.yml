@@ -18,13 +18,13 @@ value:
             name: Starter
           - id: editor-friendly
             name: Editor-friendly
+  style:
+    backgroundColor: light-sand
     maxContentWidth: xl
     paddingHorizontal: gutter
     paddingVertical: lg
     paddingVerticalStart: ""
     paddingVerticalEnd: ""
-  style:
-    backgroundColor: light-sand
 preview:
   text:
     - Collection Toolbar

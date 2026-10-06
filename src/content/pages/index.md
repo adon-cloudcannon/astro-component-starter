@@ -46,15 +46,15 @@ pageSections:
         - text: No credit card · 14-day free trial · No lock-in
           iconName: check
           iconColor: default
-      maxContentWidth: xl
-      paddingHorizontal: gutter
-      paddingVertical: 4xl
       subtextSize: xl
     style:
       pattern: grid
       haze: true
       backgroundColor: light-sand
       reverse: false
+      maxContentWidth: xl
+      paddingHorizontal: gutter
+      paddingVertical: 4xl
   - _component: page-sections/proof/logo-cloud
     content:
       sectionLabel: ''
@@ -95,7 +95,7 @@ pageSections:
       headingPlacement: inline
       grayscale: true
       scrolling: false
-      maxContentWidth: xl
+      maxContentWidth: md
       paddingHorizontal: gutter
       paddingVertical: 2xl
   - _component: page-sections/conversion/cta-center
@@ -124,9 +124,6 @@ pageSections:
       imageWidth: intrinsic
       imageScratch: ''
       imageAlt: ''
-      maxContentWidth: lg
-      paddingHorizontal: gutter
-      paddingVertical: 4xl
       headingSize: lg
     style:
       backgroundColor: light-sand
@@ -140,6 +137,9 @@ pageSections:
         priority: false
         mask: none
         overlay: 0
+      maxContentWidth: lg
+      paddingHorizontal: gutter
+      paddingVertical: 4xl
   - _component: page-sections/explainers/workflow-split
     content:
       sectionLabel: ''
@@ -199,9 +199,6 @@ pageSections:
           linkText: Learn more
       centreImageSource: ''
       centreImageAlt: ''
-      maxContentWidth: xl
-      paddingHorizontal: gutter
-      paddingVertical: 4xl
       centreColor: '#26262F'
       centreMinHeight: 366
       centreSections: []
@@ -248,6 +245,9 @@ pageSections:
         imageSource: ''
         pattern: pegboard
         mask: fade
+      maxContentWidth: xl
+      paddingHorizontal: gutter
+      paddingVertical: 4xl
       haze:
         - x: 0.5086
           rx: 844px
@@ -594,9 +594,6 @@ pageSections:
       stickyOffset: md
       cardColorScheme: light
       showRail: true
-      maxContentWidth: xl
-      paddingHorizontal: gutter
-      paddingVertical: 4xl
     style:
       backgroundColor: dark
       background:
@@ -605,6 +602,9 @@ pageSections:
         pattern: grid
         mask: fade
         fixed: true
+      maxContentWidth: xl
+      paddingHorizontal: gutter
+      paddingVertical: 4xl
   - _component: page-sections/proof/testimonial-quote
     content:
       sectionLabel: ''
@@ -628,9 +628,6 @@ pageSections:
           link: ''
           accentColor: harbour
           quoteMarks: true
-      maxContentWidth: xl
-      paddingHorizontal: gutter
-      paddingVertical: 4xl
     style:
       backgroundColor: dark
       background:
@@ -643,6 +640,9 @@ pageSections:
         priority: false
         mask: none
         overlay: 0
+      maxContentWidth: xl
+      paddingHorizontal: gutter
+      paddingVertical: 4xl
   - _component: page-sections/proof/story-carousel
     content:
       sectionLabel: ''
@@ -705,9 +705,6 @@ pageSections:
           hideText: false
           variant: primary
           size: md
-      maxContentWidth: xl
-      paddingHorizontal: gutter
-      paddingVertical: 4xl
     style:
       backgroundColor: dark
       background:
@@ -715,6 +712,9 @@ pageSections:
         imageSource: ''
         pattern: grid
         mask: top
+      maxContentWidth: xl
+      paddingHorizontal: gutter
+      paddingVertical: 4xl
   - _component: page-sections/proof/team-grid-section
     content:
       sectionLabel: ''
@@ -792,9 +792,6 @@ pageSections:
           propWidth: 40
           propAlt: ''
       columns: 2
-      maxContentWidth: xl
-      paddingHorizontal: gutter
-      paddingVertical: none
     style:
       backgroundColor: sand
       background:
@@ -807,6 +804,9 @@ pageSections:
         priority: false
         mask: none
         overlay: 0
+      maxContentWidth: xl
+      paddingHorizontal: gutter
+      paddingVertical: none
   - _component: page-sections/conversion/cta-split
     content:
       sectionLabel: ''
@@ -841,9 +841,6 @@ pageSections:
           variant: text
           size: md
       reverse: false
-      maxContentWidth: xl
-      paddingHorizontal: gutter
-      paddingVertical: 4xl
       headingSize: lg
       imageRevealLabel: Open and close the truck's hood
       imageReveal: /src/assets/images/marketing/cloudcannon-truck-open-1.png
@@ -860,4 +857,7 @@ pageSections:
         priority: false
         mask: none
         overlay: 0
+      maxContentWidth: xl
+      paddingHorizontal: gutter
+      paddingVertical: 4xl
 ---

@@ -34,15 +34,15 @@ value:
         propSource: ""
         propWidth: 40
         propAlt: ""
-    maxContentWidth: xl
-    paddingHorizontal: gutter
-    paddingVertical: 4xl
   style:
     background:
       type: image
       imageSource: ""
     haze: false
     backgroundColor: light-sand
+    maxContentWidth: xl
+    paddingHorizontal: gutter
+    paddingVertical: 4xl
 _inputs:
   leads:
     type: array

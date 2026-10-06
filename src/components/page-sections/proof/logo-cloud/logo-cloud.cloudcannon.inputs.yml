@@ -70,6 +70,9 @@ style.maxContentWidth:
       - id: 3xl
         name: 3xl
 style.paddingHorizontal:
+  hidden: true
+  # The row runs its marks to the gutter and nowhere else; a narrower one
+  # bunches them and a wider one has nothing to reach.
   type: select
   comment: Horizontal padding around the content.
   options:

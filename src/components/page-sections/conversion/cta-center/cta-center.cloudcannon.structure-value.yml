@@ -27,9 +27,6 @@ value:
     imageWidth: intrinsic
     imageScratch: ""
     imageAlt: ""
-    maxContentWidth: lg
-    paddingHorizontal: gutter
-    paddingVertical: 4xl
   style:
     backgroundColor: light-sand
     background:
@@ -42,6 +39,9 @@ value:
       priority: false
       mask: none
       overlay: 0
+    maxContentWidth: lg
+    paddingHorizontal: gutter
+    paddingVertical: 4xl
 preview:
   text:
     - CTA Center

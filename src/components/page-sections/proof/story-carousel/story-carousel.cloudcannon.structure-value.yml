@@ -46,14 +46,14 @@ value:
       - _component: building-blocks/core-elements/button
         text: See how others did it
         variant: primary
-    maxContentWidth: xl
-    paddingHorizontal: gutter
-    paddingVertical: 4xl
   style:
     backgroundColor: light-sand
     background:
       type: image
       imageSource: ""
+    maxContentWidth: xl
+    paddingHorizontal: gutter
+    paddingVertical: 4xl
 _inputs:
   stories:
     type: array

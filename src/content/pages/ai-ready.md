@@ -200,7 +200,6 @@ pageSections:
           iconName: move-right
           iconPosition: after
           variant: text
-      paddingVertical: 5xl
       camera:
         label: Take a picture
         shots:
@@ -222,4 +221,5 @@ pageSections:
         type: pattern
         pattern: grid
         mask: none
+      paddingVertical: 5xl
 ---
