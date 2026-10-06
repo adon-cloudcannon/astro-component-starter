@@ -71,7 +71,7 @@ pageSections:
     subtextSize: lg
     subtextWidth: xl
   - _component: page-sections/proof/testimonial-quote
-    variant: split-person
+    variant: static
     quoteSize: sm
     cardWidth: full
     quotes:
@@ -82,6 +82,9 @@ pageSections:
         authorName: Justin Parsons
         authorDescription: Director of Front-End Development,
         company: Insight Creative, Inc
+        logoSource: /src/assets/images/marketing/logos/insight-creative.svg
+        logoAlt: Insight Creative
+        logoAspect: 214 / 71
         linkText: Read case study
         accentColor: sunset
     backgroundColor: dark
