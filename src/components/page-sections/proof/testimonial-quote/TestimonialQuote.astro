@@ -522,7 +522,16 @@ const align = alignment === "center" && !isSplit ? "center" : undefined;
         object-fit: cover;
       }
 
+      /* The name and the role sit in a measure, not in whatever the foot has
+         left over.
+
+         Unbounded, "Director of Front-End Development, Insight Creative, Inc"
+         ran 428 wide across the card's foot, which reads as a second line of
+         copy rather than as a byline. The design sets these between 234 and
+         330 — 271 for this one — so 21rem holds every one of them in the two
+         lines it draws without wrapping the shorter ones. */
       .testimonial-quote-attribution {
+        max-inline-size: 21rem;
         min-inline-size: 0;
       }
 
@@ -834,6 +843,21 @@ const align = alignment === "center" && !isSplit ? "center" : undefined;
         .testimonial-quote-card {
           --testimonial-quote-pad: 24px;
           --testimonial-quote-pad-y: 32px;
+        }
+
+        /* The foot wraps rather than crushing the person.
+
+           `nowrap` with a shrinkable `who` meant the mark and the link kept
+           their width and the attribution gave up all of its: at 390 it came
+           out 61 wide with the role over nine lines, one word to a line. The
+           stack drops under the person instead. */
+        .testimonial-quote-foot {
+          flex-wrap: wrap;
+          row-gap: var(--spacing-lg);
+        }
+
+        .testimonial-quote-foot-end {
+          margin-inline-start: 0;
         }
 
         .testimonial-quote-card[data-layout="split-person"] .testimonial-quote-slide,
