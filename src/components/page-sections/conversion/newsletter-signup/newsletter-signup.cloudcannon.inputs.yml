@@ -150,7 +150,7 @@ style.paddingVertical:
   comment: The space above and below the content.
   options:
     values:
-      - id: 4xl
+      - id: 3xl
         name: Default
       - id: md
         name: Compact
