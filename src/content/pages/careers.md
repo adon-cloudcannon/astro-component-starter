@@ -15,11 +15,11 @@ pageSections:
     subtextWidth: sm
     photos:
       - _component: page-sections/heroes/hero-photo-stack/photo-stack-card
-        source: /src/assets/images/marketing/careers-team-hill.jpg
-        alt: The CloudCannon team lined up in front of the hills on a company retreat
+        source: /src/assets/images/marketing/careers-lineup.jpg
+        alt: The CloudCannon team lined up across the office floor
       - _component: page-sections/heroes/hero-photo-stack/photo-stack-card
-        source: /src/assets/images/marketing/careers-picnic.jpg
-        alt: Two of the team on a picnic rug under the trees
+        source: /src/assets/images/marketing/careers-gathering.jpg
+        alt: The team gathered outdoors on a sunny afternoon
     buttonSections:
       - _component: building-blocks/core-elements/button
         text: Our team
@@ -33,7 +33,8 @@ pageSections:
         variant: text
     panels: []
     embellishmentSource: /src/assets/images/marketing/careers-fern.png
-    embellishmentWidth: 46
+    embellishmentWidth: 50
+    embellishmentPlacement: band
     reverse: true
     backgroundColor: light-sand
     pattern: pegboard
@@ -187,8 +188,23 @@ pageSections:
         iconName: arrow-right
         iconPosition: after
         variant: primary
-    imageSource: /src/assets/images/marketing/careers-camera.png
+    imageSource: /src/assets/images/marketing/camera-01-1.png
     imageAlt: ""
+    camera:
+      label: Take a picture
+      shots:
+        - source: /src/assets/images/marketing/careers-team-hill.jpg
+          alt: ""
+          color: var(--light-sand)
+        - source: /src/assets/images/marketing/careers-office.jpg
+          alt: ""
+          color: var(--light-sand)
+        - source: /src/assets/images/marketing/careers-picnic.jpg
+          alt: ""
+          color: var(--light-sand)
+        - source: /src/assets/images/marketing/our-story-lake.jpg
+          alt: ""
+          color: var(--light-sand)
     contentCard: true
     contentCardColor: white
     paddingVertical: 4xl

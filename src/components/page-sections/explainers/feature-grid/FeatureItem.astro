@@ -176,8 +176,14 @@ const headingSize = titleSize ?? (signpost ? "lg" : imageSource || !iconName ? "
 
 <style is:global>
   @layer page-sections {
+    /* The title sits level with the icon, not hung from its top.
+
+       The design centres the two against each other on every icon card it
+       draws: Careers' disc runs 36 to 96 inside the card and both a one-line
+       and a two-line title centre on 66. Hung from the top, a title that
+       wraps leaves the disc stranded against its first line. */
     .feature-item-heading {
-      align-items: start;
+      align-items: center;
       display: flex;
       gap: var(--spacing-sm);
     }

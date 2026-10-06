@@ -54,8 +54,17 @@ const {
    * puts there. Decoration: it is never the subject and carries no alt.
    */
   embellishmentSource = "",
-  /** How wide the drawing is drawn, as a share of the deck. */
+  /** How wide the drawing is drawn, as a share of whatever it hangs off. */
   embellishmentWidth = 55,
+  /**
+   * What the drawing hangs off.
+   *
+   * `deck` tucks it under the deck's outer corner, which is where Our Story's
+   * frond sits. `band` hangs it off the band's own bottom corner on the copy
+   * side and lets it run off both edges, which is what Careers draws: a fern
+   * about half the band wide, under the buttons, leaving the page.
+   */
+  embellishmentPlacement = "deck",
   reverse = false,
   sectionLabel,
   maxContentWidth = "xl",
@@ -113,7 +122,11 @@ const Stack = interactive ? "button" : "div";
     reverse={reverse}
     minSplitWidth={800}
     gap="2xl"
-    class="hero-photo-stack-layout"
+    /* On the layout, not on the section: the section is this component's
+       editable region root, and CloudCannon keeps a region's element while
+       swapping its contents, so a class driven by a prop goes stale there.
+       `lint:roots` is what catches it. */
+    class:list={["hero-photo-stack-layout", columns.length === 0 && "leads-copy"]}
   >
     <Fragment slot="first">
       {eyebrow && <SimpleText class="eyebrow" text={eyebrow} data-prop="eyebrow" />}
@@ -153,7 +166,7 @@ const Stack = interactive ? "button" : "div";
             />
           ))}
         </Stack>
-        {embellishmentSource && (
+        {embellishmentSource && embellishmentPlacement !== "band" && (
           <span
             class="photo-stack-embellishment"
             style={`--photo-stack-embellishment-width: ${Number(embellishmentWidth) || 55}%`}
@@ -164,6 +177,18 @@ const Stack = interactive ? "button" : "div";
       </div>
     </Fragment>
   </Split>
+
+  {embellishmentSource && embellishmentPlacement === "band" && (
+    /* Outside the Split, because it hangs off the band rather than off the
+       deck, and the band is what it has to be able to leave. */
+    <span
+      class="photo-stack-embellishment is-band"
+      data-side={reverse ? "end" : "start"}
+      style={`--photo-stack-embellishment-width: ${Number(embellishmentWidth) || 55}%`}
+    >
+      <Image source={embellishmentSource} alt="" decorative={true} />
+    </span>
+  )}
 
   {columns.length > 0 && (
     <div
@@ -192,7 +217,16 @@ const Stack = interactive ? "button" : "div";
       /* The design's card, and the turn between the two prints. */
       --photo-stack-card-width: 440;
       --photo-stack-card-height: 488;
-      --photo-stack-turn: 3.2deg;
+      /* Which way the deck leans, staggers and shuffles.
+
+         Everything horizontal in the deck is written once and multiplied by
+         this, because all of it has to mirror together: the design draws the
+         whole deck turned away from the copy, and a hero with the copy on the
+         right is that picture flipped, not that picture with one part of it
+         moved. Reversed, the lean, the stagger behind the front print, the
+         swing out and the card parting under it all change hand at once. */
+      --photo-stack-hand: 1;
+      --photo-stack-turn: calc(3.2deg * var(--photo-stack-hand));
       /* How far each column's fill has to reach to meet the page edge: the
          gutter either side of the content column.
 
@@ -217,6 +251,27 @@ const Stack = interactive ? "button" : "div";
        `--space-before` and would have won anyway. */
     .hero-photo-stack-layout .pane.first {
       padding-block-start: 81px;
+    }
+
+    /* Which column takes the lead depends on which way round the design puts
+       them, and the two heroes differ.
+
+       Our Story drops the deck 81 so the headline clears its top edge, which
+       is the rule above. Careers draws it the other way: the first print's
+       top edge is 20 ABOVE the eyebrow, with the deck hard against the band's
+       own padding, so the lead belongs to the copy instead. Left on the deck
+       it pushed the band 80 taller and put the headline 140 below the print,
+       which is the space above the text.
+
+       Keyed off having no panels rather than off `reverse`, because the
+       panels are what make the deck the column that has to give way: they
+       run under both columns and the deck's lead is what lines them up. */
+    .hero-photo-stack-layout.leads-copy .pane.first {
+      padding-block-start: 0;
+    }
+
+    .hero-photo-stack-layout.leads-copy .pane.second {
+      padding-block-start: 20px;
     }
 
     /* Above the columns, which come after it in the document and paint over
@@ -297,18 +352,18 @@ const Stack = interactive ? "button" : "div";
     }
 
     .photo-stack-card[data-depth="1"] {
-      --photo-stack-resting: translate3d(-2.4%, -2.4%, -40px);
+      --photo-stack-resting: translate3d(calc(-2.4% * var(--photo-stack-hand)), -2.4%, -40px);
     }
 
     .photo-stack-card[data-depth="2"] {
-      --photo-stack-resting: translate3d(-4.8%, -4.8%, -80px)
+      --photo-stack-resting: translate3d(calc(-4.8% * var(--photo-stack-hand)), -4.8%, -80px)
         rotate(calc(var(--photo-stack-turn) * -0.6));
     }
 
     /* Anything deeper than the third sits behind the deck rather than fanned
        out: the design draws two and a fan of five is a different picture. */
     .photo-stack-card:not([data-depth="0"]):not([data-depth="1"]):not([data-depth="2"]) {
-      --photo-stack-resting: translate3d(-4.8%, -4.8%, -120px);
+      --photo-stack-resting: translate3d(calc(-4.8% * var(--photo-stack-hand)), -4.8%, -120px);
     }
 
     /* The print that was on top goes to the back the long way: out to the
@@ -317,10 +372,13 @@ const Stack = interactive ? "button" : "div";
        the keyframes carry it from where it was, and the pass under happens in
        Z where the browser draws it rather than in a property swap.
 
-       Right, not left. Left ran it over the origin-story column, which paints
-       in its own stacking context, so the print slid under a block of colour
-       on its way past. There is 120 of page to the right of the deck and
-       nothing in it. */
+       Out to the deck's own outer side, never across the copy. On Our Story
+       the deck is on the right and the swing goes right: left ran it over the
+       origin-story column, which paints in its own stacking context, so the
+       print slid under a block of colour on its way past. With the deck on
+       the left the same swing would cross the headline instead, so `--photo-
+       stack-hand` turns it round and it leaves to the left. Either way it
+       travels into the page's own margin, where there is nothing. */
     .photo-stack-card[data-shuffling] {
       animation: photo-stack-shuffle 620ms var(--ease-in-out, cubic-bezier(0.65, 0, 0.35, 1)) both;
     }
@@ -338,11 +396,13 @@ const Stack = interactive ? "button" : "div";
            print that is also turned and lifted grows past its own box, so a
            bigger swing put 48 of it off the page. The travel it loses
            sideways it takes downward, where there is room. */
-        transform: translate3d(16%, 10%, 40px) rotate(calc(var(--photo-stack-turn) * 2.2));
+        transform: translate3d(calc(16% * var(--photo-stack-hand)), 10%, 40px)
+          rotate(calc(var(--photo-stack-turn) * 2.2));
       }
 
       66% {
-        transform: translate3d(12%, 7%, -70px) rotate(calc(var(--photo-stack-turn) * 1.3));
+        transform: translate3d(calc(12% * var(--photo-stack-hand)), 7%, -70px)
+          rotate(calc(var(--photo-stack-turn) * 1.3));
       }
 
       100% {
@@ -362,16 +422,23 @@ const Stack = interactive ? "button" : "div";
 
     @keyframes photo-stack-part {
       0% {
-        transform: translate3d(-2.4%, -2.4%, -40px);
+        transform: translate3d(calc(-2.4% * var(--photo-stack-hand)), -2.4%, -40px);
       }
 
       38% {
-        transform: translate3d(-11%, -1%, -40px) rotate(calc(var(--photo-stack-turn) * -0.9));
+        transform: translate3d(calc(-11% * var(--photo-stack-hand)), -1%, -40px)
+          rotate(calc(var(--photo-stack-turn) * -0.9));
       }
 
       100% {
         transform: var(--photo-stack-resting);
       }
+    }
+
+    /* Copy on the right means the deck is on the left, so its outer side is
+       the left one and everything horizontal changes hand. */
+    .hero-photo-stack:has(.split-inner.reversed) {
+      --photo-stack-hand: -1;
     }
 
     .photo-stack-card-photo {
@@ -410,6 +477,53 @@ const Stack = interactive ? "button" : "div";
       position: absolute;
       z-index: 4;
     }
+
+    /* Hung off the band's bottom corner on the copy's side, running off both
+       the foot and the outer edge, which is how the design draws the fern:
+       about half the band wide, starting under the buttons and leaving the
+       page. The section clips nothing, so the only thing holding it in is the
+       band's own height.
+
+       Measured off the copy side rather than the deck's, since that is where
+       the design puts it and `reverse` is what says which side that is. */
+    /* It leaves the band at the corner, mostly sideways.
+
+       The design draws the fern 606x541 with its foot 266 below a band ending
+       at 691, so about half of it is off the bottom. Taken literally here the
+       tail swept down and across the heading of the band underneath, because
+       the leaf widens as it descends and this band's heading is centred where
+       the design's sits right. So the drop is cut to a fifth and the leaf
+       leaves mainly through the side, which is the part that reads: a blade
+       sweeping up to its tip and out of the page.
+
+       A translate rather than a negative inset, because the drop has to be a
+       share of the drawing's own height and an inset resolves against the
+       band. */
+    .photo-stack-embellishment.is-band {
+      inset-block-end: 0;
+      inset-inline-end: -18%;
+      inset-inline-start: auto;
+      translate: 0 20%;
+      z-index: 1;
+    }
+
+    /* Turned half round, not mirrored.
+
+       The drawing is supplied with its tip at the top left and its leaflets
+       hanging off the underside of the spine. The design draws it the other
+       way up: the spine climbing from the lower left to a tip at the upper
+       right, with the leaflets standing along the top edge and their blue
+       ends catching the band. A horizontal mirror alone gives the climb and
+       keeps the leaflets underneath, which is a different plant. */
+    .photo-stack-embellishment.is-band img {
+      scale: -1 -1;
+    }
+
+    .photo-stack-embellishment.is-band[data-side="start"] {
+      inset-inline-end: auto;
+      inset-inline-start: -18%;
+    }
+
 
     .photo-stack-embellishment img {
       inline-size: 100%;

@@ -43,14 +43,14 @@ pageSections:
   - _component: page-sections/proof/photo-strip
     images:
       - _component: page-sections/proof/photo-strip/photo-strip-image
-        source: /src/assets/images/marketing/our-story-desk.jpg
-        alt: A CloudCannon developer laughing at her desk
+        source: /src/assets/images/marketing/our-story-archery.jpg
+        alt: A member of the team drawing a bow at a company retreat
       - _component: page-sections/proof/photo-strip/photo-strip-image
-        source: /src/assets/images/marketing/our-story-table.jpg
-        alt: The team around a long table at lunch
+        source: /src/assets/images/marketing/our-story-huddle.jpg
+        alt: The team crowded around a pair of laptops at a long table
       - _component: page-sections/proof/photo-strip/photo-strip-image
-        source: /src/assets/images/marketing/our-story-studio.jpg
-        alt: Two of the team working together at a monitor
+        source: /src/assets/images/marketing/our-story-lakeside.jpg
+        alt: The team talking over drinks on a deck above the lake
     imageWidth: 393
     aspectRatio: 393 / 275
     backgroundColor: dark

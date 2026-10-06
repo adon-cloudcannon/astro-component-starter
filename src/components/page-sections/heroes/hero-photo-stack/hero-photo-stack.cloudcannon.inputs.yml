@@ -89,16 +89,31 @@ embellishmentSource:
   type: image
   label: Drawing
   comment: >-
-    A drawing laid over the deck's bottom corner, like the frond the design
-    puts there. Decoration, so it is hidden from screen readers.
+    A drawing over the deck's bottom corner, like the frond the design puts
+    there, or hung off the band itself. Decoration, so it is hidden from
+    screen readers.
 embellishmentWidth:
   type: range
   label: Drawing width
-  comment: How wide the drawing is drawn, as a percentage of the deck.
+  comment: >-
+    How wide the drawing is drawn, as a percentage of whatever it hangs off.
   options:
     min: 10
     max: 120
     step: 5
+embellishmentPlacement:
+  type: select
+  label: Drawing placement
+  comment: >-
+    Deck tucks it under the deck's outer corner. Band hangs it off the band's
+    own bottom corner on the copy's side and lets it run off the page, which
+    is how the Careers fern is drawn.
+  options:
+    values:
+      - id: deck
+        name: On the deck
+      - id: band
+        name: Off the band
 reverse:
   type: switch
   comment: Puts the deck on the left and the copy on the right.
