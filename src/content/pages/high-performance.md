@@ -103,7 +103,7 @@ pageSections:
               - number: 100
                 suffix: x
                 label: publishing velocity
-                iconName: zap
+                iconName: gauge
                 iconColor: blush
     reverse: false
     mediaWidth: wide

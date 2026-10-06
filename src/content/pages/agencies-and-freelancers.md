@@ -210,7 +210,7 @@ pageSections:
               - number: 10
                 suffix: x
                 label: overall site speed
-                iconName: zap
+                iconName: gauge
                 iconColor: sunset
     reverse: true
     mediaWidth: wide

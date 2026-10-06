@@ -83,7 +83,7 @@ pageSections:
       - number: 100
         suffix: x
         label: publishing velocity
-        iconName: zap
+        iconName: gauge
         iconColor: moss
       - number: 90
         suffix: +
