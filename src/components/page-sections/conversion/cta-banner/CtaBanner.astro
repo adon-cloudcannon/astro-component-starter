@@ -182,6 +182,37 @@ const mirror = rootMirror({
       padding-inline: 0;
     }
 
+    /* The link keeps its colour under the pointer and takes a rule instead.
+
+       `variant-text` hovers to the brand colour, which is right for a link on
+       a cream page and exactly wrong on the brand itself: this one sits on
+       the Pacific band, so hovering took a cream label to a muted blue and
+       sank it into the ground behind it. It read as the link fading out
+       rather than lighting up, and the ease-out made it look like it was
+       still going long after it had stopped.
+
+       Pinned rather than pointed somewhere else, because there is nowhere
+       brighter to go from cream. The underline is what answers the pointer. */
+    .cta-banner .cta-banner-link:hover .button-inner,
+    .cta-banner .cta-banner-link:focus-visible .button-inner {
+      color: inherit;
+    }
+
+    /* The arrow brightens to meet it, so the whole link answers rather than
+       half of it. */
+    .cta-banner .cta-banner-link:hover .icon,
+    .cta-banner .cta-banner-link:focus-visible .icon {
+      color: inherit;
+    }
+
+    /* Only the words are ruled. Ruled across the whole link the line runs
+       under the arrow as well, which reads as struck out. */
+    .cta-banner .cta-banner-link:hover .label-text,
+    .cta-banner .cta-banner-link:focus-visible .label-text {
+      text-decoration: underline;
+      text-underline-offset: 0.35em;
+    }
+
     /* Bottom-right, hanging over the foot of the band by about 10. The design
        draws it 263 wide against 1281, so it is a corner flourish rather than a
        column: it takes its own size and is pinned, not laid out. */

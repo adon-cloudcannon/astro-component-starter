@@ -172,6 +172,6 @@ pageSections:
     headingSize: lg
     linkText: Check out our documentation or contact us with any questions you have
     link: /support/
-    imageSource: /src/assets/images/marketing/ferns-rocks-corner.png
+    imageSource: /src/assets/images/marketing/rocks-corner-3806-70523.png
     imageAlt: ""
 ---
