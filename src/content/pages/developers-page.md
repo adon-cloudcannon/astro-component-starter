@@ -6,27 +6,29 @@ title: Developers Page
 description: A CMS that uses Git, just like you do
 pageSections:
   - _component: page-sections/heroes/hero-split
-    heading: A CMS that uses Git, just like you do
-    headingSize: xl
-    subtext: >-
-      Connect CloudCannon to your repo and keep working locally. Editors manage content visually,
-      and everyone's changes sync automatically.
-    subtextSize: xl
-    imageSource: /src/assets/images/marketing/hero-developers-page.png
-    imageAlt: ''
-    imageOverflow: 217
-    buttonSections:
-      - _component: building-blocks/core-elements/button
-        text: Start your free trial
-        variant: primary
-      - _component: building-blocks/core-elements/button
-        text: Book a demo
-        iconName: move-right
-        iconPosition: after
-        variant: text
-    pattern: grid
-    haze: false
-    backgroundColor: dark
+    content:
+      heading: A CMS that uses Git, just like you do
+      headingSize: xl
+      subtext: >-
+        Connect CloudCannon to your repo and keep working locally. Editors manage content visually,
+        and everyone's changes sync automatically.
+      subtextSize: xl
+      imageSource: /src/assets/images/marketing/hero-developers-page.png
+      imageAlt: ''
+      imageOverflow: 217
+      buttonSections:
+        - _component: building-blocks/core-elements/button
+          text: Start your free trial
+          variant: primary
+        - _component: building-blocks/core-elements/button
+          text: Book a demo
+          iconName: move-right
+          iconPosition: after
+          variant: text
+    style:
+      pattern: grid
+      haze: false
+      backgroundColor: dark
   - _component: page-sections/proof/logo-cloud
     heading: STATIC SITE GENERATORS
     logos:

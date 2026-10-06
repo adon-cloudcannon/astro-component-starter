@@ -6,29 +6,31 @@ title: AI Ready
 description: The CMS your AI tools can actually read
 pageSections:
   - _component: page-sections/heroes/hero-split
-    heading: The CMS your AI tools can actually read
-    headingSize: xl
-    subtext: Code, content, and config all sit in one repo as plain files, so agents get the full picture.
-    subtextSize: xl
-    imageSource: /src/assets/images/marketing/hero-ai-ready.png
-    imageAlt: ''
-    imageOverflow: 42
-    buttonSections:
-      - _component: building-blocks/core-elements/button
-        text: Start your free trial
-        variant: primary
-      - _component: building-blocks/core-elements/button
-        text: Book a demo
-        iconName: move-right
-        iconPosition: after
-        variant: text
-    note:
-      - text: No credit card · 14-day free trial · No lock-in
-        iconName: check
-        iconColor: default
-    pattern: grid
-    haze: true
-    backgroundColor: light-sand
+    content:
+      heading: The CMS your AI tools can actually read
+      headingSize: xl
+      subtext: Code, content, and config all sit in one repo as plain files, so agents get the full picture.
+      subtextSize: xl
+      imageSource: /src/assets/images/marketing/hero-ai-ready.png
+      imageAlt: ''
+      imageOverflow: 42
+      buttonSections:
+        - _component: building-blocks/core-elements/button
+          text: Start your free trial
+          variant: primary
+        - _component: building-blocks/core-elements/button
+          text: Book a demo
+          iconName: move-right
+          iconPosition: after
+          variant: text
+      note:
+        - text: No credit card · 14-day free trial · No lock-in
+          iconName: check
+          iconColor: default
+    style:
+      pattern: grid
+      haze: true
+      backgroundColor: light-sand
   - _component: page-sections/proof/logo-cloud
     heading: WE WORK WITH ALL MODELS
     logos:

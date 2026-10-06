@@ -27,7 +27,48 @@ import { componentKeyFromPath, pascalToKebab } from "../../src/components/utils/
  *   destructure was found (component takes no props).
  */
 export function parseDestructure(source) {
-  const marker = "= Astro.props";
+  const primary = parseDestructureAt(source, "= Astro.props");
+
+  if (!primary) return null;
+
+  /* A component may take its props in two steps: pull the nested groups off
+     `Astro.props`, merge them back into one object, and destructure that. The
+     hero-split does, because CloudCannon only draws tabs over nested keys. The
+     props are read either way, so the names from the second destructure are
+     part of the component's surface and the drift check has to see them. */
+  for (const name of mergedPropNames(source)) {
+    const extra = parseDestructureAt(source, `= ${name}`);
+
+    if (!extra) continue;
+    for (const key of extra.props) primary.props.add(key);
+    for (const [key, value] of extra.defaults) if (!primary.defaults.has(key)) primary.defaults.set(key, value);
+    primary.hasRest = primary.hasRest || extra.hasRest;
+  }
+
+  return primary;
+}
+
+/**
+ * Names of consts built by spreading `Astro.props` (or a rest taken off it)
+ * into an object literal — the "merged props" step described above.
+ */
+function mergedPropNames(source) {
+  const names = new Set();
+  const rests = new Set(["Astro.props"]);
+
+  for (const [, rest] of source.matchAll(/\.\.\.\s*(\w+)\s*\}\s*=\s*Astro\.props/g)) rests.add(rest);
+
+  for (const [, name, body] of source.matchAll(/const\s+(\w+)\s*=\s*\{([^}]*)\}\s*;/g)) {
+    for (const spread of body.matchAll(/\.\.\.\s*([\w.]+)/g)) {
+      if (rests.has(spread[1])) names.add(name);
+    }
+  }
+
+  return names;
+}
+
+/** The original single-destructure parse, against whatever marker is given. */
+function parseDestructureAt(source, marker) {
   const markerIdx = source.indexOf(marker);
 
   if (markerIdx === -1) return null;

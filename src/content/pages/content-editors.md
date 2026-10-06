@@ -6,31 +6,33 @@ title: Content Editors
 description: Draft. Edit. Publish. No problem.
 pageSections:
   - _component: page-sections/heroes/hero-split
-    heading: Draft. Edit. Publish. No problem.
-    headingSize: xl
-    subtext: >-
-      Publish your best content with visual editing, custom components, and a flexible review
-      process for your whole team.
-    subtextSize: xl
-    imageSource: /src/assets/images/marketing/hero-content-editors.png
-    imageAlt: ''
-    imageOverflow: 83
-    buttonSections:
-      - _component: building-blocks/core-elements/button
-        text: Start your free trial
-        variant: primary
-      - _component: building-blocks/core-elements/button
-        text: Book a demo
-        iconName: move-right
-        iconPosition: after
-        variant: text
-    note:
-      - text: No credit card · 14-day free trial · No lock-in
-        iconName: check
-        iconColor: default
-    pattern: pegboard
-    haze: true
-    backgroundColor: light-sand
+    content:
+      heading: Draft. Edit. Publish. No problem.
+      headingSize: xl
+      subtext: >-
+        Publish your best content with visual editing, custom components, and a flexible review
+        process for your whole team.
+      subtextSize: xl
+      imageSource: /src/assets/images/marketing/hero-content-editors.png
+      imageAlt: ''
+      imageOverflow: 83
+      buttonSections:
+        - _component: building-blocks/core-elements/button
+          text: Start your free trial
+          variant: primary
+        - _component: building-blocks/core-elements/button
+          text: Book a demo
+          iconName: move-right
+          iconPosition: after
+          variant: text
+      note:
+        - text: No credit card · 14-day free trial · No lock-in
+          iconName: check
+          iconColor: default
+    style:
+      pattern: pegboard
+      haze: true
+      backgroundColor: light-sand
   - _component: page-sections/explainers/editor-demo
     eyebrow: INTERACTIVE DEMO
     heading: Here’s what you’re working with

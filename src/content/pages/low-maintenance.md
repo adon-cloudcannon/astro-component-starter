@@ -6,31 +6,33 @@ title: Low Maintenance
 description: No database. No 2 a.m. panic.
 pageSections:
   - _component: page-sections/heroes/hero-split
-    heading: No database. No 2 a.m. panic.
-    headingSize: xl
-    subtext: >-
-      Skip the forced updates, security patches, and midnight outages. Your site keeps running while
-      your team spends time building what's next.
-    subtextSize: xl
-    imageSource: /src/assets/images/marketing/hero-low-maintenance.png
-    imageAlt: ''
-    imageOverflow: 107
-    buttonSections:
-      - _component: building-blocks/core-elements/button
-        text: Start your free trial
-        variant: primary
-      - _component: building-blocks/core-elements/button
-        text: Book a demo
-        iconName: move-right
-        iconPosition: after
-        variant: text
-    note:
-      - text: No credit card · 14-day free trial · No lock-in
-        iconName: check
-        iconColor: default
-    pattern: pegboard
-    haze: true
-    backgroundColor: sand
+    content:
+      heading: No database. No 2 a.m. panic.
+      headingSize: xl
+      subtext: >-
+        Skip the forced updates, security patches, and midnight outages. Your site keeps running while
+        your team spends time building what's next.
+      subtextSize: xl
+      imageSource: /src/assets/images/marketing/hero-low-maintenance.png
+      imageAlt: ''
+      imageOverflow: 107
+      buttonSections:
+        - _component: building-blocks/core-elements/button
+          text: Start your free trial
+          variant: primary
+        - _component: building-blocks/core-elements/button
+          text: Book a demo
+          iconName: move-right
+          iconPosition: after
+          variant: text
+      note:
+        - text: No credit card · 14-day free trial · No lock-in
+          iconName: check
+          iconColor: default
+    style:
+      pattern: pegboard
+      haze: true
+      backgroundColor: sand
   - _component: page-sections/proof/logo-cloud
     heading: BUILT BY DEVS. RUN BY EDITORS.
     logos:

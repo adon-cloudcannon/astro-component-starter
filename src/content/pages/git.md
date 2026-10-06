@@ -6,27 +6,29 @@ title: Git
 description: Everything lives in the repo, not a database.
 pageSections:
   - _component: page-sections/heroes/hero-split
-    heading: Everything lives in the repo, not a database.
-    headingSize: xl
-    subtext: >-
-      CloudCannon reads and writes directly to your Git repo, so every change is tracked, every
-      version is recoverable, access it with any tool.
-    subtextSize: xl
-    imageSource: /src/assets/images/marketing/hero-git.png
-    imageAlt: ''
-    imageOverflow: 119
-    buttonSections:
-      - _component: building-blocks/core-elements/button
-        text: Start your free trial
-        variant: primary
-      - _component: building-blocks/core-elements/button
-        text: Book a demo
-        iconName: move-right
-        iconPosition: after
-        variant: text
-    pattern: grid
-    haze: true
-    backgroundColor: light-sand
+    content:
+      heading: Everything lives in the repo, not a database.
+      headingSize: xl
+      subtext: >-
+        CloudCannon reads and writes directly to your Git repo, so every change is tracked, every
+        version is recoverable, access it with any tool.
+      subtextSize: xl
+      imageSource: /src/assets/images/marketing/hero-git.png
+      imageAlt: ''
+      imageOverflow: 119
+      buttonSections:
+        - _component: building-blocks/core-elements/button
+          text: Start your free trial
+          variant: primary
+        - _component: building-blocks/core-elements/button
+          text: Book a demo
+          iconName: move-right
+          iconPosition: after
+          variant: text
+    style:
+      pattern: grid
+      haze: true
+      backgroundColor: light-sand
   - _component: page-sections/proof/logo-cloud
     heading: 20,000+ sites shipped
     logos:

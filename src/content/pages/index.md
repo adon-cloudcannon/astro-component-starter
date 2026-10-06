@@ -6,31 +6,33 @@ title: Homepage
 description: Build freely. Edit easily.
 pageSections:
   - _component: page-sections/heroes/hero-split
-    heading: Build freely. Edit easily.
-    headingSize: 2xl
-    subtext: >-
-      Welcome to the Git-based CMS that doesn't fight your workflow. Your site lives in Git, your
-      team edits visually, and everything stays in sync.
-    subtextSize: xl
-    imageSource: /src/assets/images/marketing/hero-index.png
-    imageAlt: A person reaching up to edit content blocks, with their dog
-    imageOverflow: 29
-    buttonSections:
-      - _component: building-blocks/core-elements/button
-        text: Start your free trial
-        variant: primary
-      - _component: building-blocks/core-elements/button
-        text: Book a demo
-        iconName: move-right
-        iconPosition: after
-        variant: text
-    note:
-      - text: No credit card · 14-day free trial · No lock-in
-        iconName: check
-        iconColor: default
-    pattern: grid
-    haze: true
-    backgroundColor: light-sand
+    content:
+      heading: Build freely. Edit easily.
+      headingSize: 2xl
+      subtext: >-
+        Welcome to the Git-based CMS that doesn't fight your workflow. Your site lives in Git, your
+        team edits visually, and everything stays in sync.
+      subtextSize: xl
+      imageSource: /src/assets/images/marketing/hero-index.png
+      imageAlt: A person reaching up to edit content blocks, with their dog
+      imageOverflow: 29
+      buttonSections:
+        - _component: building-blocks/core-elements/button
+          text: Start your free trial
+          variant: primary
+        - _component: building-blocks/core-elements/button
+          text: Book a demo
+          iconName: move-right
+          iconPosition: after
+          variant: text
+      note:
+        - text: No credit card · 14-day free trial · No lock-in
+          iconName: check
+          iconColor: default
+    style:
+      pattern: grid
+      haze: true
+      backgroundColor: light-sand
   - _component: page-sections/proof/logo-cloud
     heading: BUILT BY DEVS. RUN BY EDITORS.
     logos:

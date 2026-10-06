@@ -6,28 +6,30 @@ title: Partner Program
 description: The more you launch, the more you unlock
 pageSections:
   - _component: page-sections/heroes/hero-split
-    heading: The more you launch, the more you unlock
-    headingSize: xl
-    subtext: >-
-      Welcome to a Partner Program that rewards good work. Get better margins and less overhead as
-      you grow your portfolio.
-    subtextSize: xl
-    imageSource: /src/assets/images/marketing/hero-partner-program.png
-    imageAlt: ''
-    imageOverflow: 59
-    buttonSections:
-      - _component: building-blocks/core-elements/button
-        text: Start your free trial
-        variant: primary
-      - _component: building-blocks/core-elements/button
-        text: Book a demo
-        iconName: move-right
-        iconPosition: after
-        variant: text
-    reverse: true
-    pattern: pegboard
-    haze: true
-    backgroundColor: sand
+    content:
+      heading: The more you launch, the more you unlock
+      headingSize: xl
+      subtext: >-
+        Welcome to a Partner Program that rewards good work. Get better margins and less overhead as
+        you grow your portfolio.
+      subtextSize: xl
+      imageSource: /src/assets/images/marketing/hero-partner-program.png
+      imageAlt: ''
+      imageOverflow: 59
+      buttonSections:
+        - _component: building-blocks/core-elements/button
+          text: Start your free trial
+          variant: primary
+        - _component: building-blocks/core-elements/button
+          text: Book a demo
+          iconName: move-right
+          iconPosition: after
+          variant: text
+      reverse: true
+    style:
+      pattern: pegboard
+      haze: true
+      backgroundColor: sand
   - _component: page-sections/proof/logo-cloud
     heading: 20,000+ sites shipped
     logos:

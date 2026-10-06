@@ -6,31 +6,33 @@ title: High Performance
 description: Load instantly. Rank higher.
 pageSections:
   - _component: page-sections/heroes/hero-split
-    heading: Load instantly. Rank higher.
-    headingSize: xl
-    subtext: >-
-      Pre-rendered pages, global delivery, and structured content that search engines love. Speed is
-      built into the architecture, not bolted on.
-    subtextSize: xl
-    imageSource: /src/assets/images/marketing/hero-high-performance.png
-    imageAlt: ''
-    imageOverflow: 5
-    buttonSections:
-      - _component: building-blocks/core-elements/button
-        text: Start your free trial
-        variant: primary
-      - _component: building-blocks/core-elements/button
-        text: Book a demo
-        iconName: move-right
-        iconPosition: after
-        variant: text
-    note:
-      - text: No credit card · 14-day free trial · No lock-in
-        iconName: check
-        iconColor: default
-    pattern: grid
-    haze: true
-    backgroundColor: light-sand
+    content:
+      heading: Load instantly. Rank higher.
+      headingSize: xl
+      subtext: >-
+        Pre-rendered pages, global delivery, and structured content that search engines love. Speed is
+        built into the architecture, not bolted on.
+      subtextSize: xl
+      imageSource: /src/assets/images/marketing/hero-high-performance.png
+      imageAlt: ''
+      imageOverflow: 5
+      buttonSections:
+        - _component: building-blocks/core-elements/button
+          text: Start your free trial
+          variant: primary
+        - _component: building-blocks/core-elements/button
+          text: Book a demo
+          iconName: move-right
+          iconPosition: after
+          variant: text
+      note:
+        - text: No credit card · 14-day free trial · No lock-in
+          iconName: check
+          iconColor: default
+    style:
+      pattern: grid
+      haze: true
+      backgroundColor: light-sand
   - _component: page-sections/conversion/cta-center
     heading: High speed whether you have 10 visitors or 10 million
     headingSize: lg

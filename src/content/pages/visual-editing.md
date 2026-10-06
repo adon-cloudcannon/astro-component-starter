@@ -6,30 +6,32 @@ title: Visual Editing
 description: Visual editing that commits to your repo
 pageSections:
   - _component: page-sections/heroes/hero-split
-    heading: Visual editing that commits to your repo
-    headingSize: xl
-    subtext: Code, content, and config all sit in one repo as plain files, so agents get the full picture.
-    subtextSize: xl
-    imageSource: /src/assets/images/marketing/hero-visual-editing.png
-    imageAlt: ''
-    imageOverflow: 15
-    buttonSections:
-      - _component: building-blocks/core-elements/button
-        text: Start your free trial
-        variant: primary
-      - _component: building-blocks/core-elements/button
-        text: Book a demo
-        iconName: move-right
-        iconPosition: after
-        variant: text
-    reverse: true
-    note:
-      - text: No credit card · 14-day free trial · No lock-in
-        iconName: check
-        iconColor: default
-    pattern: pegboard
-    haze: true
-    backgroundColor: sand
+    content:
+      heading: Visual editing that commits to your repo
+      headingSize: xl
+      subtext: Code, content, and config all sit in one repo as plain files, so agents get the full picture.
+      subtextSize: xl
+      imageSource: /src/assets/images/marketing/hero-visual-editing.png
+      imageAlt: ''
+      imageOverflow: 15
+      buttonSections:
+        - _component: building-blocks/core-elements/button
+          text: Start your free trial
+          variant: primary
+        - _component: building-blocks/core-elements/button
+          text: Book a demo
+          iconName: move-right
+          iconPosition: after
+          variant: text
+      reverse: true
+      note:
+        - text: No credit card · 14-day free trial · No lock-in
+          iconName: check
+          iconColor: default
+    style:
+      pattern: pegboard
+      haze: true
+      backgroundColor: sand
   - _component: page-sections/explainers/editor-demo
     eyebrow: INTERACTIVE DEMO
     heading: Try it out, and see if it’s right for you and your team.

@@ -1,50 +1,59 @@
 label: Hero Split
 icon: web_asset
 description: Hero with text on one side and an image on the other.
+# `tabbed` draws the first-level nested keys of `value:` as tabs. It is the
+# only way to get them — `groups` renders as accordions whatever it is given,
+# so the tabs are a shape in the data rather than a presentation option.
+#
+# `style` is the three that paint the band, which is the split Adon asked for.
+# Everything else, including the width and padding, is content.
+tabbed: true
 value:
   _component: page-sections/heroes/hero-split
-  heading: A clear promise in one line
-  headingLevel: h1
-  headingSize: 2xl
-  subtext: One or two sentences on who this is for and what they get.
-  imageSource: /src/assets/images/component-docs/dunedin-cliff.jpg
-  imageAlt: Sea cliffs above a bay
-  imageAspectRatio: none
-  imageOverflow: 0
-  imageBleed: false
-  buttonSections:
-    - _component: building-blocks/core-elements/button
-      text: Get started
-      hideText: false
-      link: /
-      iconName: ""
-      iconColor: default
-      iconPosition: before
-      variant: primary
-      size: md
-  reverse: false
-  imageRounded: true
-  note:
-    - text: No credit card
-      iconName: check
-      iconColor: default
-      link: null
-    - text: 14-day free trial
-      iconName: check
-      iconColor: default
-      link: null
-  sectionLabel: ""
-  maxContentWidth: xl
-  paddingHorizontal: gutter
-  paddingVertical: 4xl
-  pattern: grid
-  haze: true
-  backgroundColor: light-sand
+  content:
+    heading: A clear promise in one line
+    headingLevel: h1
+    headingSize: 2xl
+    subtext: One or two sentences on who this is for and what they get.
+    imageSource: /src/assets/images/component-docs/dunedin-cliff.jpg
+    imageAlt: Sea cliffs above a bay
+    imageAspectRatio: none
+    imageOverflow: 0
+    imageBleed: false
+    buttonSections:
+      - _component: building-blocks/core-elements/button
+        text: Get started
+        hideText: false
+        link: /
+        iconName: ""
+        iconColor: default
+        iconPosition: before
+        variant: primary
+        size: md
+    reverse: false
+    imageRounded: true
+    note:
+      - text: No credit card
+        iconName: check
+        iconColor: default
+        link: null
+      - text: 14-day free trial
+        iconName: check
+        iconColor: default
+        link: null
+    sectionLabel: ""
+    maxContentWidth: xl
+    paddingHorizontal: gutter
+    paddingVertical: 4xl
+  style:
+    pattern: grid
+    haze: true
+    backgroundColor: light-sand
 preview:
   text:
     - Hero Split
   subtext:
-    - key: heading
+    - key: content.heading
   image: public/component-previews/page-sections/heroes/hero-split.svg
   icon: web_asset
   gallery:

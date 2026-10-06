@@ -6,27 +6,29 @@ title: Agencies & Freelancers
 description: Faster launches. Happier clients. Less support.
 pageSections:
   - _component: page-sections/heroes/hero-split
-    heading: Faster launches. Happier clients. Less support.
-    headingSize: xl
-    subtext: >-
-      Here, agencies spend less time on maintenance and more time on billable work, with websites
-      your clients love to edit.
-    subtextSize: xl
-    imageSource: /src/assets/images/marketing/hero-agencies-and-freelancers.png
-    imageAlt: ''
-    imageOverflow: 63
-    buttonSections:
-      - _component: building-blocks/core-elements/button
-        text: Start your free trial
-        variant: primary
-      - _component: building-blocks/core-elements/button
-        text: Book a demo
-        iconName: move-right
-        iconPosition: after
-        variant: text
-    pattern: grid
-    haze: true
-    backgroundColor: light-sand
+    content:
+      heading: Faster launches. Happier clients. Less support.
+      headingSize: xl
+      subtext: >-
+        Here, agencies spend less time on maintenance and more time on billable work, with websites
+        your clients love to edit.
+      subtextSize: xl
+      imageSource: /src/assets/images/marketing/hero-agencies-and-freelancers.png
+      imageAlt: ''
+      imageOverflow: 63
+      buttonSections:
+        - _component: building-blocks/core-elements/button
+          text: Start your free trial
+          variant: primary
+        - _component: building-blocks/core-elements/button
+          text: Book a demo
+          iconName: move-right
+          iconPosition: after
+          variant: text
+    style:
+      pattern: grid
+      haze: true
+      backgroundColor: light-sand
   - _component: page-sections/proof/logo-cloud
     heading: PARTNERS TO BE PROUD OF
     logos:

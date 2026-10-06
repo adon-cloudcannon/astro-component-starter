@@ -6,27 +6,29 @@ title: Enterprise
 description: Stop juggling websites. Start managing them.
 pageSections:
   - _component: page-sections/heroes/hero-split
-    heading: Stop juggling websites. Start managing them.
-    headingSize: xl
-    subtext: >-
-      CloudCannon lets you have a high-impact web presence without the maintenance burden. Static
-      architecture keeps things fast, secure, and quiet.
-    subtextSize: xl
-    imageSource: /src/assets/images/marketing/hero-enterprise.png
-    imageAlt: ''
-    imageOverflow: 151
-    buttonSections:
-      - _component: building-blocks/core-elements/button
-        text: Start your free trial
-        variant: primary
-      - _component: building-blocks/core-elements/button
-        text: Book a demo
-        iconName: move-right
-        iconPosition: after
-        variant: text
-    pattern: grid
-    haze: true
-    backgroundColor: light-sand
+    content:
+      heading: Stop juggling websites. Start managing them.
+      headingSize: xl
+      subtext: >-
+        CloudCannon lets you have a high-impact web presence without the maintenance burden. Static
+        architecture keeps things fast, secure, and quiet.
+      subtextSize: xl
+      imageSource: /src/assets/images/marketing/hero-enterprise.png
+      imageAlt: ''
+      imageOverflow: 151
+      buttonSections:
+        - _component: building-blocks/core-elements/button
+          text: Start your free trial
+          variant: primary
+        - _component: building-blocks/core-elements/button
+          text: Book a demo
+          iconName: move-right
+          iconPosition: after
+          variant: text
+    style:
+      pattern: grid
+      haze: true
+      backgroundColor: light-sand
   - _component: page-sections/proof/logo-cloud
     heading: SERVING CLIENTS LIKE
     logos:

@@ -387,6 +387,21 @@ const hasPath = (obj, path) => {
   return true;
 };
 
+/* A tabbed structure nests its props one level, under keys that become the
+   tabs, so a seed sits at `content.heading` rather than `heading`. The input
+   is still keyed by the bare name, so look in the groups as well as at the
+   top. Only one level: a deeper nest is a real object input, whose fields the
+   `options.structures` branch below already covers. */
+const seededAnywhere = (value, key, tabbed) => {
+  if (hasPath(value, key)) return true;
+  if (!tabbed) return false;
+
+  return Object.entries(value || {}).some(
+    ([name, group]) =>
+      name !== "_component" && group && typeof group === "object" && !Array.isArray(group) && hasPath(group, key)
+  );
+};
+
 for (const [dir] of mainByDir) {
   const slug = dir.split("/").pop();
   const inputsAbs = join(dir, `${slug}.cloudcannon.inputs.yml`);
@@ -394,7 +409,8 @@ for (const [dir] of mainByDir) {
 
   if (!existsSync(inputsAbs) || !existsSync(valueAbs)) continue;
 
-  const value = (loadYaml(valueAbs) || {}).value || {};
+  const valueDoc = loadYaml(valueAbs) || {};
+  const value = valueDoc.value || {};
   const inputs = loadYaml(inputsAbs) || {};
   const seededByStructure = (key) => {
     const dot = key.lastIndexOf(".");
@@ -412,7 +428,7 @@ for (const [dir] of mainByDir) {
         !NON_PROP_KEY(key) &&
         !key.endsWith("[*]") &&
         cfg?.hidden !== true &&
-        !hasPath(value, key) &&
+        !seededAnywhere(value, key, valueDoc.tabbed === true) &&
         !seededByStructure(key)
     )
     .map(([key]) => key);
