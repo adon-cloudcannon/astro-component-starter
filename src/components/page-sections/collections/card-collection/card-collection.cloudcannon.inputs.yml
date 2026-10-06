@@ -1,3 +1,10 @@
+collection:
+  type: text
+  label: Collection name
+  comment: >-
+    A name a Collection Toolbar can find this grid by, so the two can sit in
+    different sections and still filter together. Leave empty for a grid
+    nothing filters.
 eyebrow:
   type: text
   comment: Short label above the heading.

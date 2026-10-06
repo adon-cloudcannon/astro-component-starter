@@ -1,0 +1,102 @@
+label: Collection Toolbar
+icon: filter_list
+description: Search, sort and filter controls above a grid of cards.
+value:
+  _component: page-sections/collections/collection-toolbar
+  collection: ""
+  searchLabel: Search
+  searchPlaceholder: Search...
+  sortLabel: Sort
+  filters:
+    - label: Filter by category
+      name: category
+      options:
+        - id: starter
+          name: Starter
+        - id: editor-friendly
+          name: Editor-friendly
+  sectionLabel: ""
+  maxContentWidth: xl
+  paddingHorizontal: gutter
+  paddingVertical: lg
+  paddingVerticalStart: ""
+  paddingVerticalEnd: ""
+  backgroundColor: light-sand
+preview:
+  text:
+    - Collection Toolbar
+  subtext:
+    - key: searchPlaceholder
+  icon: filter_list
+picker_preview:
+  text: Collection Toolbar
+  subtext: A search field, a sort button and a filter or two, above a card grid.
+  icon: filter_list
+_inputs_from_glob:
+  - /src/components/page-sections/collections/collection-toolbar/collection-toolbar.cloudcannon.inputs.yml
+_structures:
+  collectionFilters:
+    values:
+      - label: Filter
+        icon: filter_alt
+        value:
+          label: Filter by category
+          name: category
+          options: []
+        preview:
+          text:
+            - key: label
+            - Filter
+          icon: filter_alt
+        _inputs:
+          label:
+            type: text
+            comment: Shown as the dropdown's first, unselected option.
+          name:
+            type: text
+            comment: >-
+              Which field on a card this filters. Drawn but not yet wired: the
+              cards have to carry the field first.
+          options:
+            type: array
+            comment: The choices in the dropdown.
+            options:
+              structures: _structures.collectionFilterOptions
+  collectionFilterOptions:
+    values:
+      - label: Option
+        icon: label
+        value:
+          id: ""
+          name: ""
+        preview:
+          text:
+            - key: name
+            - Option
+          icon: label
+        _inputs:
+          id:
+            type: text
+            comment: The value this option matches on a card.
+          name:
+            type: text
+            comment: What the reader sees.
+groups:
+  - heading: Content
+    inputs:
+      - collection
+      - searchLabel
+      - searchPlaceholder
+      - sortLabel
+      - filters
+  - heading: Section settings
+    comment: Width, spacing and background for this section.
+    collapsed: true
+    inputs:
+      - sectionLabel
+      - maxContentWidth
+      - paddingHorizontal
+      - paddingVertical
+      - paddingVerticalStart
+      - paddingVerticalEnd
+      - backgroundColor

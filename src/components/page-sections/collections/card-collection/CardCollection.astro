@@ -12,6 +12,14 @@ const {
   headingSize = "lg",
   subtext = "",
   items = [],
+  /**
+   * A name a `collection-toolbar` can find this grid by.
+   *
+   * The toolbar and the grid it filters are two sections, so the tie between
+   * them is a name rather than a wrapper. Empty leaves the grid unfindable,
+   * which is right for a grid nothing filters.
+   */
+  collection = "",
   layout = "grid",
   columns = 3,
   gap = "lg",
@@ -70,6 +78,7 @@ const {
 
   <CardGrid
     class="card-collection-grid"
+    data-collection={collection || undefined}
     items={items}
     layout={layout}
     columns={columns}

@@ -1,0 +1,236 @@
+---
+/**
+ * The row of controls above a collection: search, sort, and a filter or two.
+ *
+ * Drawn at the foot of the Templates hero rather than as a band of its own —
+ * same cream, no rule between them — so it is a section here only because
+ * that is how a page is assembled. Give it `paddingVerticalStart: none` and
+ * it reads as part of the hero above it.
+ *
+ * Geometry off 4146:41579: a 1040 row of 53-tall controls, the search field
+ * white against the band's cream with the sort button sitting inside its
+ * right end, and each filter a cream select with a hairline and a chevron.
+ *
+ * What works: the search box filters the cards in the collection named by
+ * `collection`, on whatever text those cards carry. Sort and the filters are
+ * drawn and inert — they need each card to declare its category and its
+ * generator, which is a content change rather than a markup one.
+ */
+import CustomSection from "@builders/custom-section/CustomSection.astro";
+import Icon from "@core-elements/icon/Icon.astro";
+
+type Filter = { label?: string; name?: string; options?: { id?: string; name?: string }[] };
+
+const {
+  /** The collection this filters, matched against a card grid's own name. */
+  collection = "",
+  searchPlaceholder = "Search...",
+  searchLabel = "Search",
+  sortLabel = "Sort",
+  filters = [],
+  sectionLabel,
+  maxContentWidth = "xl",
+  paddingHorizontal = "gutter",
+  paddingVertical = "lg",
+  paddingVerticalStart = "",
+  paddingVerticalEnd = "",
+  colorScheme = "inherit",
+  lockColorScheme = false,
+  backgroundColor = "light-sand",
+  background,
+  haze = false,
+  class: className,
+  useDefaultEditableBinding = false,
+  _component,
+  ...htmlAttributes
+} = Astro.props;
+
+const list: Filter[] = (Array.isArray(filters) ? filters : []).filter((f) => f?.label);
+---
+
+<CustomSection
+  class:list={["collection-toolbar", className]}
+  label={sectionLabel}
+  maxContentWidth={maxContentWidth}
+  paddingHorizontal={paddingHorizontal}
+  paddingVertical={paddingVertical}
+  paddingVerticalStart={paddingVerticalStart}
+  paddingVerticalEnd={paddingVerticalEnd}
+  colorScheme={colorScheme}
+  lockColorScheme={lockColorScheme}
+  backgroundColor={backgroundColor}
+  background={background}
+  haze={haze}
+  useDefaultEditableBinding={useDefaultEditableBinding}
+  {...htmlAttributes}
+>
+  <div class="collection-toolbar-row" data-collection-toolbar={collection || undefined}>
+    {/* One shell holding the field and the sort button, because the design
+        draws them as a single control with the button filling its right end.
+        Each half carries its own edge and the shared one is dropped, so
+        focus is a colour swap on the field and nothing moves. */}
+    <div class="collection-toolbar-search">
+      <Icon class="collection-toolbar-search-icon" name="magnifying-glass" size="md" />
+      <input
+        class="collection-toolbar-input"
+        type="search"
+        aria-label={searchLabel}
+        placeholder={searchPlaceholder}
+        data-collection-search
+      />
+      {sortLabel && (
+        <button class="collection-toolbar-sort" type="button" data-collection-sort>
+          <Icon name="bars-arrow-down" size="sm" />
+          <span>{sortLabel}</span>
+        </button>
+      )}
+    </div>
+
+    {list.map((filter) => (
+      <label class="collection-toolbar-filter">
+        <span class="visually-hidden">{filter.label}</span>
+        <select class="collection-toolbar-select" data-collection-filter={filter.name}>
+          <option value="">{filter.label}</option>
+          {(filter.options ?? []).map((option) => (
+            <option value={option.id ?? option.name}>{option.name ?? option.id}</option>
+          ))}
+        </select>
+        <Icon class="collection-toolbar-chevron" name="chevron-down" size="sm" />
+      </label>
+    ))}
+  </div>
+</CustomSection>
+
+<style is:global>
+  @layer page-sections {
+    .collection-toolbar {
+      /* The row is the content column: 120 to 1160 on the design's frame. */
+      .collection-toolbar-row {
+        --toolbar-height: 53px;
+        --toolbar-edge: var(--dark-sand, #ebe1c9);
+
+        align-items: center;
+        display: flex;
+        gap: var(--spacing-xl);
+      }
+
+      /* The field takes what is left, which is the 618 the design draws once
+         the two filters have theirs. */
+      .collection-toolbar-search {
+        align-items: center;
+        background: var(--white, #fff);
+        border: var(--border-width-sm) solid var(--toolbar-edge);
+        border-radius: 10px;
+        block-size: var(--toolbar-height);
+        display: flex;
+        flex: 1 1 auto;
+        min-inline-size: 0;
+        overflow: hidden;
+        padding-inline-start: 1.25rem;
+      }
+
+      .collection-toolbar-search:focus-within {
+        border-color: var(--color-brand, var(--pacific));
+      }
+
+      .collection-toolbar-search-icon {
+        color: var(--earth, #6b6157);
+        flex-shrink: 0;
+      }
+
+      /* No ring of its own: the shell above takes the focus colour, so a
+         second outline inside it would read as a border drawn twice. */
+      .collection-toolbar-input {
+        background: none;
+        border: 0;
+        color: var(--color-text);
+        flex: 1 1 auto;
+        font-family: inherit;
+        font-size: var(--font-size-md);
+        min-inline-size: 0;
+        outline: none;
+        padding-inline: 0.75rem;
+      }
+
+      .collection-toolbar-input::placeholder {
+        color: var(--earth, #6b6157);
+      }
+
+      /* Fills the shell's right end, top to bottom, which is what makes the
+         two read as one control rather than as a button beside a box. */
+      .collection-toolbar-sort {
+        align-items: center;
+        align-self: stretch;
+        background: var(--pacific);
+        border: 0;
+        color: var(--white, #fff);
+        cursor: pointer;
+        display: flex;
+        flex-shrink: 0;
+        font-family: inherit;
+        font-size: var(--font-size-md);
+        font-weight: var(--font-weight-semibold, 600);
+        gap: 0.5rem;
+        padding-inline: 1.25rem;
+      }
+
+      .collection-toolbar-filter {
+        align-items: center;
+        background: var(--light-sand);
+        border: var(--border-width-sm) solid var(--toolbar-edge);
+        border-radius: 10px;
+        block-size: var(--toolbar-height);
+        display: flex;
+        flex-shrink: 0;
+        padding-inline: 1.0625rem;
+        position: relative;
+      }
+
+      .collection-toolbar-filter:focus-within {
+        border-color: var(--color-brand, var(--pacific));
+      }
+
+      /* The chevron is drawn rather than the browser's, so it is the design's
+         glyph and it takes the band's ink. The select keeps its own arrow off
+         with `appearance: none`. */
+      .collection-toolbar-select {
+        appearance: none;
+        background: none;
+        border: 0;
+        color: var(--earth, #6b6157);
+        cursor: pointer;
+        font-family: inherit;
+        font-size: var(--font-size-md);
+        font-weight: var(--font-weight-semibold, 600);
+        outline: none;
+        padding-inline-end: 2rem;
+      }
+
+      .collection-toolbar-chevron {
+        color: var(--earth, #6b6157);
+        pointer-events: none;
+        position: absolute;
+        inset-inline-end: 1.0625rem;
+      }
+
+      /* A card the search has ruled out. Kept in the DOM so the editor's
+         bindings still line up with the array it came from. */
+      @media (width < 48rem) {
+        .collection-toolbar-row {
+          flex-wrap: wrap;
+        }
+
+        .collection-toolbar-search {
+          flex-basis: 100%;
+        }
+      }
+    }
+  }
+</style>
+
+<script>
+  import { onPageLoad } from "@component-utils/onPageLoad";
+  import { setupAllCollectionToolbars } from "./setup";
+
+  onPageLoad(() => setupAllCollectionToolbars());
+</script>

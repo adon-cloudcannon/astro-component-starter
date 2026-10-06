@@ -19,6 +19,7 @@
 
 import { setupAllPhotoStacks } from "./src/components/page-sections/heroes/hero-photo-stack/setup";
 import { setupAllTeamGrids } from "./src/components/page-sections/proof/team-grid-section/setup";
+import { setupAllCollectionToolbars } from "./src/components/page-sections/collections/collection-toolbar/setup";
 import {
   destroyCarousel,
   setupAllCarousels,
@@ -496,6 +497,7 @@ setupAllMasonry();
 setupAllScrollDecks();
 setupAllPhotoStacks();
 setupAllTeamGrids();
+setupAllCollectionToolbars();
 setupAllVideos();
 setupAllTabs();
 setupAllCodeBlocks();

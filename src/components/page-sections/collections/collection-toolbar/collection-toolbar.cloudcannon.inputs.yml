@@ -1,0 +1,90 @@
+collection:
+  type: text
+  label: Collection name
+  comment: >-
+    The name of the card grid this filters. The grid carries the same name, so
+    the two can sit in different sections and still find each other.
+searchLabel:
+  type: text
+  comment: What the search field is announced as. Not shown.
+searchPlaceholder:
+  type: text
+  comment: The grey text in the empty search field.
+sortLabel:
+  type: text
+  comment: The label on the button at the end of the search field. Leave empty for none.
+filters:
+  type: array
+  label: Filters
+  comment: One dropdown each, drawn after the search field.
+  options:
+    structures: _structures.collectionFilters
+
+# --- section wrapper inputs (CustomSection) ---
+sectionLabel:
+  type: text
+  comment: Names the section in the editor and sets its anchor id.
+maxContentWidth:
+  type: select
+  comment: Maximum width of the content.
+  options:
+    values: [none, xs, sm, md, lg, xl, 2xl, 3xl]
+paddingHorizontal:
+  type: select
+  comment: Horizontal padding around the content.
+  options:
+    values: [none, gutter, xs, sm, md, lg, xl, 2xl, 3xl]
+paddingVertical:
+  type: select
+  comment: Vertical padding around the content.
+  options:
+    values: [none, xs, sm, md, lg, xl, 2xl, 3xl, 4xl, 5xl, 6xl]
+paddingVerticalStart:
+  type: select
+  comment: >-
+    Overrides the padding above the row. `none` runs it straight on from the
+    band above, which is how the design joins it to the hero.
+  options:
+    values: [none, xs, sm, md, lg, xl, 2xl, 3xl, 4xl, 5xl, 6xl]
+paddingVerticalEnd:
+  type: select
+  comment: Overrides the padding below the row.
+  options:
+    values: [none, xs, sm, md, lg, xl, 2xl, 3xl, 4xl, 5xl, 6xl]
+backgroundColor:
+  type: select
+  label: Background colour
+  comment: The colour this band is painted, and the ink that goes with it.
+  options:
+    values:
+      - id: none
+        name: None
+        swatch: check_box_outline_blank
+      - id: light-sand
+        name: Light sand
+        swatch: square
+        color: "#FFFCF3"
+      - id: sand
+        name: Sand
+        swatch: square
+        color: "#FBF6E9"
+      - id: dark-sand
+        name: Dark sand
+        swatch: square
+        color: "#EBE1C9"
+      - id: dark
+        name: Dark
+        swatch: square
+        color: "#1D1B17"
+      - id: pacific
+        name: Pacific
+        swatch: square
+        color: "#034AD8"
+    picker_view: card
+    preview:
+      icon:
+        - key: swatch
+      icon_color:
+        - key: color
+      text:
+        - key: name

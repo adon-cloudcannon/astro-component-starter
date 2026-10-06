@@ -3,6 +3,7 @@ icon: grid_view
 description: Grid of linked cards for services, case studies, projects, or resources.
 value:
   _component: page-sections/collections/card-collection
+  collection: ""
   eyebrow: What we do
   heading: Services built for the long run
   headingLevel: h2
