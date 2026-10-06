@@ -109,7 +109,7 @@ pageSections:
           We offer up to 52 weeks of parental leave, 26 of which are fully paid. This includes
           biological, adoptive, and foster parents. Partners can also receive up to 4 weeks of paid
           leave.
-        iconName: heart
+        iconName: baby
         iconColor: peachy
         iconBackground: true
         iconSolid: true
