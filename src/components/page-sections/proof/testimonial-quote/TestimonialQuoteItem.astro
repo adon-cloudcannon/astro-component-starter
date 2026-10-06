@@ -155,11 +155,19 @@ const mirror = rootMirror({
       </div>
     );
 
-    if (isSplit) return person;
+    /* No one to attribute it to, so no attribution. The disc is drawn even
+       when it is empty, which is right for a card whose name has no picture
+       and wrong for a statement with no name at all: on Our Values it left a
+       grey circle under the words with nothing beside it. */
+    const attributed = Boolean(authorName || authorDescription || company || authorImage);
+
+    if (isSplit) return attributed ? person : null;
+
+    if (!attributed && !logoSource && !linkButton) return null;
 
     return (
       <div class="testimonial-quote-foot">
-        {person}
+        {attributed && person}
         {logoSource && (
           /* The repo's mask utility rather than a picture. A client mark has
              its fills baked in, so an `<img>` of a white one is invisible on a

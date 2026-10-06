@@ -78,18 +78,22 @@ pageSections:
         text: Why should you cheese?
         variant: primary
     backgroundColor: light-sand
-  - _component: page-sections/proof/testimonial-section
-    layout: split
-    company: Absoluttweb
-    text: >-
-      I almost forgot that website maintenance was a thing. That’s something you just don’t need to
-      do when you have this static tech stack.
-    authorName: Sindre Gusdal
-    authorDescription: General Manager · Absoluttweb
-    authorImage: /src/assets/images/marketing/ellipse-287.jpg
+  - _component: page-sections/proof/testimonial-quote
+    variant: static
+    quoteSize: sm
+    tone: light
+    cardWidth: medium
+    quotes:
+      - text: >-
+          I almost **forgot that website maintenance was a thing.** That's something you just don't
+          need to do when you have this static tech stack.
+        authorName: Sindre Gusdal
+        authorDescription: General Manager,
+        company: Absoluttweb
+        authorImage: /src/assets/images/marketing/ellipse-287.jpg
+        authorImageAlt: Sindre Gusdal
+        accentColor: sunset
     backgroundColor: light-sand
-    markPosition: start
-    markStyle: card
   - _component: page-sections/explainers/feature-split
     heading: We don’t think a website should need this much looking after
     headingSize: lg
@@ -224,10 +228,17 @@ pageSections:
     backgroundColor: dark
     progressColor: pacific-300
     progressTrackColor: midnight
-  - _component: page-sections/proof/testimonial-section
-    layout: split
-    company: Absoluttweb
-    text: Absoluttweb went from days per new client site to around an hour.
+  - _component: page-sections/proof/testimonial-quote
+    variant: static
+    quoteSize: lg
+    tone: plain
+    cardWidth: medium
+    quotes:
+      - text: Absoluttweb went from days per new client site to **around an hour.**
+        quoteMarks: false
+        company: Absoluttweb
+        linkText: Read case study
+        accentColor: harbour
     backgroundColor: dark
     background:
       type: pattern
@@ -238,11 +249,6 @@ pageSections:
         rx: 933px
         'y': 54.5%
         ry: 74.4%
-    markPosition: end
-    markStyle: card
-    quoted: false
-    quoteSize: md
-    linkText: Read case study
   - _component: page-sections/conversion/cta-team-member
     heading: A CMS to build, not babysit
     headingSize: lg

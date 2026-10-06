@@ -117,16 +117,22 @@ pageSections:
     backgroundColor: dark
     progressColor: pacific
     progressTrackColor: midnight
-  - _component: page-sections/proof/testimonial-section
-    layout: split
-    company: Nomio
-    text: >-
-      You can have lots of concurrent pieces of work: a solutions page, a new case study layout, new
-      terms and conditions, a legal section, all on different branches with different agents working
-      on them in isolation, without corrupting your main site.
-    authorName: Ed Stennett
-    authorDescription: Head of Growth · Nomio
-    authorImage: /src/assets/images/marketing/ellipse-287.jpg
+  - _component: page-sections/proof/testimonial-quote
+    variant: static
+    quoteSize: sm
+    tone: base
+    cardWidth: medium
+    quotes:
+      - text: >-
+          You can have lots of concurrent pieces of work: a solutions page, a new case study layout,
+          new terms and conditions, a legal section, all on different branches with different agents
+          working on them in isolation, **without corrupting your main site.**
+        authorName: Ed Stennett
+        authorDescription: Head of Growth,
+        company: Nomio
+        authorImage: /src/assets/images/marketing/ellipse-287.jpg
+        authorImageAlt: Ed Stennett
+        accentColor: harbour
     backgroundColor: dark
     background:
       type: pattern
@@ -137,9 +143,6 @@ pageSections:
         rx: 933px
         'y': 49.8%
         ry: 74.8%
-    markPosition: start
-    markStyle: plain
-    linkText: Read case study
   - _component: page-sections/conversion/cta-split
     heading: We've already taught agents how to use CloudCannon
     headingSize: lg

@@ -87,15 +87,18 @@ pageSections:
             panelFit: fill
             imageAlt: ""
     backgroundColor: light-sand
-  - _component: page-sections/proof/testimonial-section
-    eyebrow: WE BELIEVE
-    text: >-
-      Editors shouldn't need a developer to fix a typo. Developers shouldn't lose a week to content
-      updates. **That gap is the reason we started in 2013, and closing it is still the whole job.**
-    layout: centered
-    quoted: false
+  - _component: page-sections/proof/testimonial-quote
+    variant: static
     quoteSize: sm
-    accentColor: harbour
+    tone: plain
+    cardWidth: full
+    quotes:
+      - text: >-
+          Editors shouldn't need a developer to fix a typo. Developers shouldn't lose a week to
+          content updates. **That gap is the reason we started in 2013, and closing it is still the
+          whole job.**
+        quoteMarks: false
+        accentColor: harbour
     paddingVertical: 4xl
     backgroundColor: dark
   - _component: page-sections/proof/team-grid-section
