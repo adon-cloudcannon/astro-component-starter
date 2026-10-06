@@ -344,6 +344,18 @@ const mirror = rootMirror({
       max-inline-size: 100%;
     }
 
+    /* Centred, the quote sits in a box of the band's own colour: it is there
+       for the padding, not to be seen. The block paints it `--color-bg` with
+       a rule round it and 24 of padding at the full 1040, which on a dark
+       band drew a lighter panel with a visible edge. No edge, the band's own
+       colour, and about 749 with the padding every other quote card uses. */
+    .testimonial-section:not(.is-split) .testimonial-inner {
+      border: 0;
+      margin-inline: auto;
+      max-inline-size: min(100%, 749px);
+      padding: var(--spacing-3xl) var(--spacing-2xl);
+    }
+
     /* The quote's own card padding is the centred form's; split, the card is
        the mark beside it and the quote sits plain on the band. */
     .testimonial-section.is-split .testimonial-inner {

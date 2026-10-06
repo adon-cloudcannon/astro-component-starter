@@ -13,6 +13,7 @@ pageSections:
       edit it.
     subtextSize: xl
     subtextWidth: md
+    haze: true
     backgroundColor: light-sand
     background:
       type: pattern
@@ -28,11 +29,12 @@ pageSections:
       - contentSections:
           - _component: building-blocks/core-elements/simple-text
             class: eyebrow
+            size: sm
             text: Freedom with accountability
           - _component: building-blocks/core-elements/heading
             text: Entrepreneurial spirit
             level: h2
-            size: lg
+            size: sm
           - _component: building-blocks/core-elements/text
             text: >-
               We value people above all, and strive to be genuinely warm and welcoming to our
@@ -40,17 +42,19 @@ pageSections:
               our team is honestly excited about empowering others to grow.
             size: lg
         mediaSections:
-          - _component: building-blocks/core-elements/image
-            source: /src/assets/images/marketing/values-spirit.png
-            alt: ""
+          - _component: building-blocks/wrappers/stat-overlay
+            panelImage: /src/assets/images/marketing/values-spirit.png
+            panelFit: fill
+            imageAlt: ""
       - contentSections:
           - _component: building-blocks/core-elements/simple-text
             class: eyebrow
+            size: sm
             text: We rise by lifting others
           - _component: building-blocks/core-elements/heading
             text: Manaakitanga
             level: h2
-            size: lg
+            size: sm
           - _component: building-blocks/core-elements/text
             text: >-
               We value people above all, and strive to be genuinely warm and welcoming to our
@@ -58,17 +62,19 @@ pageSections:
               our team is honestly excited about empowering others to grow.
             size: lg
         mediaSections:
-          - _component: building-blocks/core-elements/image
-            source: /src/assets/images/marketing/values-manaakitanga.png
-            alt: ""
+          - _component: building-blocks/wrappers/stat-overlay
+            panelImage: /src/assets/images/marketing/values-manaakitanga.png
+            panelFit: fill
+            imageAlt: ""
       - contentSections:
           - _component: building-blocks/core-elements/simple-text
             class: eyebrow
+            size: sm
             text: Listen first
           - _component: building-blocks/core-elements/heading
             text: Wearing the customer's jandals
             level: h2
-            size: lg
+            size: sm
           - _component: building-blocks/core-elements/text
             text: >-
               We build real relationships with our customers, and deeply understand their needs. Our
@@ -76,9 +82,10 @@ pageSections:
               them at every opportunity.
             size: lg
         mediaSections:
-          - _component: building-blocks/core-elements/image
-            source: /src/assets/images/marketing/values-jandals.png
-            alt: ""
+          - _component: building-blocks/wrappers/stat-overlay
+            panelImage: /src/assets/images/marketing/values-jandals.png
+            panelFit: fill
+            imageAlt: ""
     backgroundColor: light-sand
   - _component: page-sections/proof/testimonial-section
     eyebrow: WE BELIEVE
@@ -89,6 +96,7 @@ pageSections:
     quoted: false
     quoteSize: sm
     accentColor: harbour
+    paddingVertical: 4xl
     backgroundColor: dark
   - _component: page-sections/proof/team-grid-section
     eyebrow: Who we are
@@ -139,5 +147,5 @@ pageSections:
         imageAlt: Chris Wingate, CRO at CloudCannon
         backgroundColor: moss
     paddingVertical: none
-    backgroundColor: sand
+    backgroundColor: light-sand
 ---
