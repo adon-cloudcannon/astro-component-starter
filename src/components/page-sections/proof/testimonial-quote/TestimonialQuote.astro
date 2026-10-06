@@ -545,7 +545,15 @@ const align = alignment === "center" && !isSplit ? "center" : undefined;
 
       /* Mono, which is what the design sets on the role: it reads as a label
          rather than as more of the quote. */
+      /* The role and the company take a line each.
+
+         Run together they wrapped wherever the measure happened to fall, so
+         "Insight Creative, Inc" broke across two lines with "Development,"
+         stranded beside it. A column breaks them where the meaning does. */
       .testimonial-quote-role {
+        display: flex;
+        flex-direction: column;
+
         color: var(--testimonial-quote-quiet);
         font-family: var(--font-monospace, ui-monospace, monospace);
         font-size: var(--testimonial-quote-meta);

@@ -142,11 +142,11 @@ const mirror = rootMirror({
           {(authorDescription || company) && (
             <p class="testimonial-quote-role">
               <span data-prop="authorDescription">{authorDescription}</span>
+              {/* No separator between them: the two are flex items now, and a
+                  space between them is an anonymous item of its own, which
+                  draws as a blank line between the role and the company. */}
               {company && (
-                <>
-                  {authorDescription && " "}
-                  <span class="testimonial-quote-company" data-prop="company">{company}</span>
-                </>
+                <span class="testimonial-quote-company" data-prop="company">{company}</span>
               )}
             </p>
           )}
