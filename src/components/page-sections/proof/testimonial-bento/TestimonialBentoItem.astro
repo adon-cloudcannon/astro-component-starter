@@ -149,11 +149,11 @@ const mirror = rootMirror({
         {(authorDescription || company) && (
           <p class="testimonial-bento-role">
             <span data-prop="authorDescription">{authorDescription}</span>
+            {/* No separator: the two are flex items, and a space between flex
+                items is an anonymous item of its own, which draws as a blank
+                line rather than as a gap. */}
             {company && (
-              <>
-                {authorDescription && " "}
-                <span class="testimonial-bento-company" data-prop="company">{company}</span>
-              </>
+              <span class="testimonial-bento-company" data-prop="company">{company}</span>
             )}
           </p>
         )}
@@ -403,8 +403,16 @@ const mirror = rootMirror({
     }
 
     /* Mono, which is what the design sets on the role: it reads as a label
-       rather than as more of the quote. */
+       rather than as more of the quote.
+
+       The role and the company take a line each, as they do on the quote
+       card: run together in a card this narrow they wrapped wherever the
+       measure fell, breaking a company name across two lines with the end of
+       the role stranded beside it. */
     .testimonial-bento-role {
+      display: flex;
+      flex-direction: column;
+
       color: var(--testimonial-bento-quiet);
       font-family: var(--font-monospace, ui-monospace, monospace);
       font-size: var(--testimonial-bento-meta);
