@@ -97,7 +97,7 @@ pageSections:
       scrolling: false
       maxContentWidth: md
       paddingHorizontal: gutter
-      paddingVertical: 2xl
+      paddingVertical: md
   - _component: page-sections/conversion/cta-center
     content:
       sectionLabel: ''
