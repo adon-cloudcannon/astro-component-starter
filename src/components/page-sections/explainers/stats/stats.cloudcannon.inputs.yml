@@ -79,75 +79,31 @@ content.sectionLabel:
   comment: Names the section in the editor and sets its anchor id.
 style.maxContentWidth:
   type: select
-  comment: Maximum width of the content.
+  comment: How wide the band's content runs. Full is the 1040 content column.
   options:
     values:
-      - id: none
-        name: None
-      - id: xs
-        name: Extra Small
-      - id: sm
-        name: Small
-      - id: md
-        name: Medium
-      - id: lg
-        name: Large
       - id: xl
-        name: Extra Large
-      - id: 2xl
-        name: 2xl
-      - id: 3xl
-        name: 3xl
+        name: Full
+      - id: md
+        name: Compact
 style.paddingHorizontal:
   type: select
-  comment: Horizontal padding around the content.
+  comment: The space either side of the content.
   options:
     values:
+      - id: gutter
+        name: Default page gutter
       - id: none
         name: None
-      - id: gutter
-        name: Page gutter
-      - id: xs
-        name: Extra Small
-      - id: sm
-        name: Small
-      - id: md
-        name: Medium
-      - id: lg
-        name: Large
-      - id: xl
-        name: Extra Large
-      - id: 2xl
-        name: 2xl
-      - id: 3xl
-        name: 3xl
 style.paddingVertical:
   type: select
-  comment: Vertical padding around the content.
+  comment: The space above and below the content.
   options:
     values:
-      - id: none
-        name: None
-      - id: xs
-        name: Extra Small
-      - id: sm
-        name: Small
-      - id: md
-        name: Medium
-      - id: lg
-        name: Large
-      - id: xl
-        name: Extra Large
-      - id: 2xl
-        name: 2xl
-      - id: 3xl
-        name: 3xl
       - id: 4xl
-        name: 4xl
-      - id: 5xl
-        name: 5xl
-      - id: 6xl
-        name: 6xl
+        name: Default
+      - id: md
+        name: Compact
 style.colorScheme:
   hidden: true
   # Carried by the band colour. Every band the design draws names its own ink,

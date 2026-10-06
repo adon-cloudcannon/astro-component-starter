@@ -126,45 +126,39 @@ style.maxContentWidth:
   # same column and the same rhythm, and a section that drifts from it reads
   # as a mistake rather than a choice.
   type: select
-  comment: Maximum width of the section's content.
+  comment: How wide the band's content runs. Full is the 1040 content column.
   options:
     values:
-      - id: lg
-        name: Large
       - id: xl
-        name: Extra Large
-      - id: 2xl
-        name: 2xl
+        name: Full
+      - id: md
+        name: Compact
 style.paddingHorizontal:
   hidden: true
   # Set from the design, not by an editor: every band on the site uses the
   # same column and the same rhythm, and a section that drifts from it reads
   # as a mistake rather than a choice.
   type: select
-  comment: Horizontal padding around the content.
+  comment: The space either side of the content.
   options:
     values:
+      - id: gutter
+        name: Default page gutter
       - id: none
         name: None
-      - id: gutter
-        name: Page gutter
-      - id: lg
-        name: Large
 style.paddingVertical:
   hidden: true
   # Set from the design, not by an editor: every band on the site uses the
   # same column and the same rhythm, and a section that drifts from it reads
   # as a mistake rather than a choice.
   type: select
-  comment: Vertical padding around the content.
+  comment: The space above and below the content.
   options:
     values:
-      - id: 2xl
-        name: 2xl
-      - id: 3xl
-        name: 3xl
       - id: 4xl
-        name: 4xl
+        name: Default
+      - id: md
+        name: Compact
 style.colorScheme:
   hidden: true
   # Carried by the band colour. Every band the design draws names its own ink,
