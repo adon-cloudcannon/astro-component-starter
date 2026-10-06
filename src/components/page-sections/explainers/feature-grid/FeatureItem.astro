@@ -16,6 +16,15 @@ const {
   iconColor = "default",
   iconBackground = true,
   /**
+   * The plate behind the icon, filled rather than tinted.
+   *
+   * The design's benefit cards draw a disc of the card's own colour at full
+   * strength with the glyph knocked out of it, where the plate everywhere
+   * else is that colour at its 100 step. Off by default: every other grid on
+   * the site draws the tinted one.
+   */
+  iconSolid = false,
+  /**
    * The colour of the card's rule.
    *
    * Enterprise's "Custom plans" keeps its accent there and nowhere else — one
@@ -132,7 +141,7 @@ const headingSize = titleSize ?? (signpost ? "lg" : imageSource || !iconName ? "
           name={iconName}
           size="lg"
           color={iconColor}
-          background={iconBackground}
+          background={iconBackground ? (iconSolid ? "solid" : true) : false}
           alignmentHorizontal="start"
         />
       )}
@@ -190,6 +199,16 @@ const headingSize = titleSize ?? (signpost ? "lg" : imageSource || !iconName ? "
 
     .feature-item-heading .feature-icon {
       flex-shrink: 0;
+    }
+
+    /* The design's disc is 60 across with a 35 glyph in it, and the disc is
+       drawn from the glyph — 0.36em of padding either side — so the size to
+       set is the glyph's. Left at the icon's own `lg` it came out 46, which
+       beside a 20px title reads as a bullet rather than as the card's mark.
+       This rule is in `page-sections`, so it out-ranks the size class the
+       icon sets on itself without having to out-specify it. */
+    .feature-item .feature-icon .background-solid {
+      font-size: 2.1875rem;
     }
 
     .feature-title {

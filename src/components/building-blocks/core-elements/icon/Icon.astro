@@ -6,6 +6,14 @@ const {
   name,
   size = "lg",
   color = "default",
+  /**
+   * What sits behind the glyph.
+   *
+   * `true` is the tinted plate this has always drawn: the colour at its 100
+   * step with the glyph at 500, which is a label. `"solid"` is the disc the
+   * design draws on a benefit card — the colour at full strength, round, with
+   * the glyph in whatever reads on it.
+   */
   background = false,
   alignmentHorizontal = "",
   class: className,
@@ -41,6 +49,7 @@ if (!icon) {
       `size-${size}`,
       `color-${color}`,
       background && "background",
+      background === "solid" && "background-solid",
       alignmentHorizontal && alignmentHorizontal !== "none" && `align-${alignmentHorizontal}`,
     ]}
   >
@@ -69,6 +78,74 @@ if (!icon) {
           background-color: var(--icon-accent-bg, var(--color-bg-surface));
           padding: var(--spacing-em-xs);
           width: fit-content;
+        }
+
+        /* The colour at full strength, in a circle, with the glyph in the
+           ink that reads on it.
+
+           The split is the design's own and is not a tint of anything: a
+           sunset or a moss disc takes a near-white glyph, a golden, peachy or
+           harbour one takes near-black. Written out rather than computed,
+           because CSS has no contrast function that ships everywhere, and
+           because the four dark ones are a fact about this palette rather
+           than a threshold worth guessing at.
+
+           The disc is sized off the glyph, so one rule holds at every icon
+           size: 0.36em either side of a 35px glyph is the 60 the design
+           draws. */
+        &.background-solid {
+          /* Each pairing below names its own ink: a bare `.background-solid`
+             ties with `.color-pacific` on specificity and loses on order, so
+             a disc that only set the fill here drew a pacific glyph on a
+             pacific ground. */
+          --icon-accent: var(--white, #fff);
+          --icon-accent-bg: var(--color-bg-surface);
+
+          aspect-ratio: 1;
+          border-radius: 50%;
+          display: grid;
+          padding: 0.36em;
+          place-items: center;
+        }
+
+        &.background-solid.color-pacific {
+          --icon-accent: var(--white, #fff);
+          --icon-accent-bg: var(--pacific);
+        }
+
+        &.background-solid.color-moss {
+          --icon-accent: var(--white, #fff);
+          --icon-accent-bg: var(--moss);
+        }
+
+        &.background-solid.color-sunset {
+          --icon-accent: var(--white, #fff);
+          --icon-accent-bg: var(--sunset);
+        }
+
+        &.background-solid.color-kiwi {
+          --icon-accent: var(--white, #fff);
+          --icon-accent-bg: var(--kiwi);
+        }
+
+        &.background-solid.color-golden {
+          --icon-accent: var(--color-text-strong, #393939);
+          --icon-accent-bg: var(--golden);
+        }
+
+        &.background-solid.color-peachy {
+          --icon-accent: var(--color-text-strong, #393939);
+          --icon-accent-bg: var(--peachy);
+        }
+
+        &.background-solid.color-harbour {
+          --icon-accent: var(--color-text-strong, #393939);
+          --icon-accent-bg: var(--harbour);
+        }
+
+        &.background-solid.color-blush {
+          --icon-accent: var(--color-text-strong, #393939);
+          --icon-accent-bg: var(--blush);
         }
 
         &.color-pacific {

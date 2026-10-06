@@ -63,6 +63,7 @@ pageSections:
         iconName: face-smile
         iconColor: golden
         iconBackground: true
+        iconSolid: true
         divider: true
         alignmentHorizontal: start
         accentColor: golden
@@ -74,6 +75,7 @@ pageSections:
         iconName: arrow-trending-up
         iconColor: sunset
         iconBackground: true
+        iconSolid: true
         divider: true
         alignmentHorizontal: start
         accentColor: sunset
@@ -85,6 +87,7 @@ pageSections:
         iconName: truck
         iconColor: moss
         iconBackground: true
+        iconSolid: true
         divider: true
         alignmentHorizontal: start
         accentColor: moss
@@ -96,6 +99,7 @@ pageSections:
         iconName: sun
         iconColor: harbour
         iconBackground: true
+        iconSolid: true
         divider: true
         alignmentHorizontal: start
         accentColor: harbour
@@ -108,6 +112,7 @@ pageSections:
         iconName: heart
         iconColor: peachy
         iconBackground: true
+        iconSolid: true
         divider: true
         alignmentHorizontal: start
         accentColor: peachy
@@ -119,6 +124,7 @@ pageSections:
         iconName: cake
         iconColor: golden
         iconBackground: true
+        iconSolid: true
         divider: true
         alignmentHorizontal: start
         accentColor: golden
@@ -130,6 +136,7 @@ pageSections:
         iconName: map-pin
         iconColor: moss
         iconBackground: true
+        iconSolid: true
         divider: true
         alignmentHorizontal: start
         accentColor: moss
@@ -142,6 +149,7 @@ pageSections:
         iconName: computer-desktop
         iconColor: sunset
         iconBackground: true
+        iconSolid: true
         divider: true
         alignmentHorizontal: start
         accentColor: sunset
@@ -154,6 +162,7 @@ pageSections:
         iconName: wrench-screwdriver
         iconColor: harbour
         iconBackground: true
+        iconSolid: true
         divider: true
         alignmentHorizontal: start
         accentColor: harbour

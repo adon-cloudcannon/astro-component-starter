@@ -166,7 +166,13 @@ _structures:
                   - key: name
           iconBackground:
             type: switch
-            comment: Draw a tinted plate behind the icon.
+            comment: Draw a plate behind the icon.
+          iconSolid:
+            type: switch
+            comment: >-
+              Fill that plate with the colour itself rather than tinting it, and round it to a
+              disc. The glyph is knocked out in whatever reads on the colour. This is the shape
+              Careers draws; everywhere else uses the tint.
           divider:
             type: switch
             comment: >-
