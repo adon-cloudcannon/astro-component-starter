@@ -186,6 +186,21 @@ const subtextCap = subtextMeasure(subtextWidth);
 
 <style is:global>
   @layer page-sections {
+    /* The line under the heading, at the gap the design draws.
+
+       `Text` pins every `.text` to `--space-before-tight`, which beats both
+       flow's own default and this component's `spaceBefore="default"` —
+       "default" is silently dropped, so it sets no attribute to win with.
+       That left 8 under a 46px heading where the design draws 24: measured
+       box to box on the Git frame, "What is a Git-based CMS?" is 24 and the
+       other headers of this shape are 18.
+
+       Scoped here rather than fixed in `Text`, because that rule is every
+       paragraph on the site. */
+    .cta-center .subtext {
+      --space-before: var(--space-before-default);
+    }
+
     /* Full width of the column, under the copy. The gap moved to the wrapper
        when one went in, so a scratched panel pushes off the copy rather than
        the picture inside it doing so. */
