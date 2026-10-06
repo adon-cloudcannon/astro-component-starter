@@ -227,8 +227,15 @@ const offsetAt = (index: number) => (index % laneCount) % 2 === 1;
        as lifting the whole column, and it leaves the grid's own rows where
        they are. The wall is out of flow and clipped, so the height it reports
        is not load-bearing either way. */
+    /* The design's offset and the drift compose in one translate: a second
+       `translate` on the same element replaces the first rather than adding
+       to it. */
+    .team-grid .team-grid-lanes > * {
+      translate: 0 calc(var(--team-grid-offset, 0px) + var(--team-grid-drift, 0px));
+    }
+
     .team-grid .team-grid-lanes > .is-offset {
-      translate: 0 -7.6875rem;
+      --team-grid-offset: -7.6875rem;
     }
   }
 
@@ -243,8 +250,10 @@ const offsetAt = (index: number) => (index % laneCount) % 2 === 1;
         row-gap: var(--spacing-2xl);
       }
 
-      .team-grid .team-grid-lanes > .is-offset {
-        translate: none;
+      /* Stacked, the columns are one column: no offset and no drift. */
+      .team-grid .team-grid-lanes > * {
+        --team-grid-drift: 0px;
+        --team-grid-offset: 0px;
       }
 
       .team-grid .team-grid-lanes {
@@ -266,3 +275,10 @@ const offsetAt = (index: number) => (index % laneCount) % 2 === 1;
     }
   }
 </style>
+
+<script>
+  import { onPageLoad } from "@component-utils/onPageLoad";
+  import { setupAllTeamGrids } from "./setup";
+
+  onPageLoad(() => setupAllTeamGrids());
+</script>
