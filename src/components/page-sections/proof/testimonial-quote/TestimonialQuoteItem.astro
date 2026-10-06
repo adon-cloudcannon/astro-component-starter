@@ -180,25 +180,33 @@ const mirror = rootMirror({
     return (
       <div class="testimonial-quote-foot">
         {attributed && person}
-        {logoSource && (
-          /* The repo's mask utility rather than a picture. A client mark has
-             its fills baked in, so an `<img>` of a white one is invisible on a
-             light card and a dark one is invisible on a dark card; as a mask
-             it takes the card's own quiet ink either way. Same mechanism the
-             logo row uses. */
-          <span
-            class="testimonial-quote-logo logo-mark"
-            role="img"
-            aria-label={logoAlt || company}
-            style={{
-              "--logo-mark-source": `url("${resolveImageSource(logoSource)}")`,
-              ...(logoAspect ? { "--logo-mark-aspect": logoAspect } : {}),
-            }}
-            data-prop-src="logoSource"
-            data-prop-alt="logoAlt"
-          />
+        {(logoSource || linkButton) && (
+          /* The mark and the link share the foot's right end, stacked: the
+             mark over the link, both hard against the card's edge. Side by
+             side they read as two unrelated things at the same height, and
+             the link stops being the last thing in the card. */
+          <div class="testimonial-quote-foot-end">
+            {logoSource && (
+              /* The repo's mask utility rather than a picture. A client mark
+                 has its fills baked in, so an `<img>` of a white one is
+                 invisible on a light card and a dark one is invisible on a
+                 dark card; as a mask it takes the card's own quiet ink either
+                 way. Same mechanism the logo row uses. */
+              <span
+                class="testimonial-quote-logo logo-mark"
+                role="img"
+                aria-label={logoAlt || company}
+                style={{
+                  "--logo-mark-source": `url("${resolveImageSource(logoSource)}")`,
+                  ...(logoAspect ? { "--logo-mark-aspect": logoAspect } : {}),
+                }}
+                data-prop-src="logoSource"
+                data-prop-alt="logoAlt"
+              />
+            )}
+            {linkButton && <div class="testimonial-quote-tail">{linkButton}</div>}
+          </div>
         )}
-        {linkButton && <div class="testimonial-quote-tail">{linkButton}</div>}
       </div>
     );
   })()}

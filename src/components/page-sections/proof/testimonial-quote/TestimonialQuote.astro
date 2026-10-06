@@ -562,6 +562,16 @@ const align = alignment === "center" && !isSplit ? "center" : undefined;
         margin-inline-start: auto;
       }
 
+      /* The right-hand end of the foot: the client's mark over the link,
+         both aligned to the card's edge. The person keeps the left end and
+         this takes whatever is left, so the two never meet in the middle. */
+      .testimonial-quote-foot-end {
+        display: grid;
+        gap: var(--spacing-md);
+        justify-items: end;
+        margin-inline-start: auto;
+      }
+
       .testimonial-quote-link {
         margin-block-start: 0;
       }
