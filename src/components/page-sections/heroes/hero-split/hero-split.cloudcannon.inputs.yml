@@ -1,14 +1,24 @@
 # The two tabs. CloudCannon draws a structure value's first-level nested keys
 # as tabs when it sets `tabbed: true`, and takes the tab's name from the key
 # unless the input gives it a label.
+#
+# `subtype: object` is not decoration. An object input takes `object`, `tabbed`
+# or `mutable`, and left unsaid these two were drawing their own children as
+# tabs — which means every child has to be an object, and production said so
+# once per field: "heading is not an object", and the same for the other
+# twenty. Pinned, the tabs stop at this level, where they were asked for.
 content:
   type: object
   label: Content
   comment: The copy, the picture, and how the two sit together.
+  options:
+    subtype: object
 style:
   type: object
   label: Style
   comment: What paints the band behind it.
+  options:
+    subtype: object
 
 content.heading:
   type: text
