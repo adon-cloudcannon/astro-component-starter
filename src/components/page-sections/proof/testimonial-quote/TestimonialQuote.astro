@@ -672,23 +672,6 @@ const align = alignment === "center" && !isSplit ? "center" : undefined;
         grid-row: 1;
       }
 
-      /* The mark heads the person's column and the person sits at its foot,
-         which is how the design spreads them: the Git frame draws the mark at
-         the column's top and the name 107 below it, in a column that runs the
-         card's height. `start` kept them stacked together at the top. */
-      .testimonial-quote-card[data-layout="split-person"] .testimonial-quote-who:has(.testimonial-quote-logo),
-      .testimonial-quote-card[data-layout="split-quote"] .testimonial-quote-who:has(.testimonial-quote-logo) {
-        align-content: space-between;
-        block-size: 100%;
-      }
-
-      /* Left where it starts rather than filling the column, so the mark keeps
-         its own proportions instead of stretching to the column's width. */
-      .testimonial-quote-card[data-layout="split-person"] .testimonial-quote-logo,
-      .testimonial-quote-card[data-layout="split-quote"] .testimonial-quote-logo {
-        justify-self: start;
-      }
-
       /* The whole row, whichever side the quote is on.
 
          `1 / -1` is "every column there is", so one rule covers both splits

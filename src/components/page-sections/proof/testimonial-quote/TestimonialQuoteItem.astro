@@ -120,36 +120,8 @@ const mirror = rootMirror({
       </Button>
     ) : null;
 
-    /* The client's mark, built once: the static card puts it at the foot's far
-       end and the split puts it under the person, and it is the same mark
-       either way.
-
-       The repo's mask utility rather than a picture. A client mark has its
-       fills baked in, so an `<img>` of a white one is invisible on a light
-       card and a dark one is invisible on a dark card; as a mask it takes the
-       card's own quiet ink whichever way the card goes. Same mechanism the
-       logo row uses. */
-    const mark = logoSource ? (
-      <span
-        class="testimonial-quote-logo logo-mark"
-        role="img"
-        aria-label={logoAlt || company}
-        style={{
-          "--logo-mark-source": `url("${resolveImageSource(logoSource)}")`,
-          ...(logoAspect ? { "--logo-mark-aspect": logoAspect } : {}),
-        }}
-        data-prop-src="logoSource"
-        data-prop-alt="logoAlt"
-      />
-    ) : null;
-
     const person = (
       <div class="testimonial-quote-who">
-        {/* On a split the client's mark heads this column, above the face.
-            The design puts it at the column's top with the person at its
-            foot: on the Git frame the mark sits at y=1941 and the name at
-            y=2118, a long way apart in a column that runs the card. */}
-        {isSplit && mark}
         {/* Always a disc, even with nothing in it: the design's card has a
             face at the head of its column, and without one the name starts
             hard against the card's edge and the whole block reads as a
@@ -194,7 +166,7 @@ const mirror = rootMirror({
        with the client's mark below and to the right of it, so the eye left
        the card before it ever reached the link. */
     if (isSplit) {
-      if (!attributed && !linkButton && !mark) return null;
+      if (!attributed && !linkButton) return null;
       return (
         <>
           {attributed && person}
@@ -208,7 +180,24 @@ const mirror = rootMirror({
     return (
       <div class="testimonial-quote-foot">
         {attributed && person}
-        {mark}
+        {logoSource && (
+          /* The repo's mask utility rather than a picture. A client mark has
+             its fills baked in, so an `<img>` of a white one is invisible on a
+             light card and a dark one is invisible on a dark card; as a mask
+             it takes the card's own quiet ink either way. Same mechanism the
+             logo row uses. */
+          <span
+            class="testimonial-quote-logo logo-mark"
+            role="img"
+            aria-label={logoAlt || company}
+            style={{
+              "--logo-mark-source": `url("${resolveImageSource(logoSource)}")`,
+              ...(logoAspect ? { "--logo-mark-aspect": logoAspect } : {}),
+            }}
+            data-prop-src="logoSource"
+            data-prop-alt="logoAlt"
+          />
+        )}
         {linkButton && <div class="testimonial-quote-tail">{linkButton}</div>}
       </div>
     );
