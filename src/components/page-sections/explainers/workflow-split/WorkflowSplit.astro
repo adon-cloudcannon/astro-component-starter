@@ -43,7 +43,10 @@ type PanelProps = {
 const { props, at } = nestedProps(Astro.props, {
   /* The heading's level and size belong with the heading, the way the hero's
      do. The panels keep their own `heading` — that one is an item's. */
-  nest: { heading: ["heading", "headingLevel", "headingSize"] },
+  nest: {
+    heading: ["eyebrow", "heading", "headingLevel", "headingSize"],
+    subtext: ["subtext", "subtextSize", "subtextWidth"],
+  },
 });
 
 const {

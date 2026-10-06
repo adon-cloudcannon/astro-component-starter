@@ -14,7 +14,7 @@ style:
   options:
     subtype: object
 
-content.eyebrow:
+content.heading.eyebrow:
   type: text
   comment: Short label above the heading.
 content.heading.heading:
@@ -39,10 +39,10 @@ content.heading.headingSize:
         name: Header 3
       - id: md
         name: Header 4
-content.subtext:
+content.subtext.subtext:
   type: markdown
   comment: Supporting copy beneath the heading.
-content.subtextSize:
+content.subtext.subtextSize:
   type: select
   comment: >-
     How big the supporting line under the heading is. Regular is the size the
@@ -55,7 +55,7 @@ content.subtextSize:
         name: Regular
       - id: xl
         name: Large
-content.subtextWidth:
+content.subtext.subtextWidth:
   type: select
   label: Subtext width
   comment: >-
@@ -93,6 +93,11 @@ content.centreImageAlt:
 
 # --- section wrapper inputs
 # The heading's level and size belong with the heading, the way the hero's do.
+content.subtext:
+  type: object
+  label: Subtext
+  options:
+    subtype: object
 content.heading:
   type: object
   label: Heading

@@ -6,14 +6,15 @@ value:
   _component: page-sections/explainers/workflow-split
   content:
     sectionLabel: ""
-    eyebrow: ""
     heading:
+      eyebrow: ""
       heading: Two workflows. One source of truth.
       headingLevel: h2
       headingSize: lg
-    subtext: Editors edit visually, developers stay in code.
-    subtextSize: md
-    subtextWidth: ""
+    subtext:
+      subtext: Editors edit visually, developers stay in code.
+      subtextSize: md
+      subtextWidth: ""
     buttonSections: []
     panels:
       - accentColor: pacific

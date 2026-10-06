@@ -143,15 +143,16 @@ pageSections:
   - _component: page-sections/explainers/workflow-split
     content:
       sectionLabel: ''
-      eyebrow: ''
       heading:
+        eyebrow: ''
         heading: Two workflows. One source of truth.
         headingLevel: h2
         headingSize: lg
-      subtext: Editors edit visually, developers stay in code — and every change lands
-        in the same Git repository.
-      subtextSize: lg
-      subtextWidth: md
+      subtext:
+        subtext: Editors edit visually, developers stay in code — and every change lands
+          in the same Git repository.
+        subtextSize: lg
+        subtextWidth: md
       buttonSections:
         - _component: building-blocks/core-elements/button
           text: Learn about Git-based CMS
