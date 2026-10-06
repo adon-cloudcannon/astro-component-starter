@@ -219,7 +219,3 @@ style.backgroundColor:
         - key: color
       text:
         - key: name
-style.background:
-  type: object
-  comment: Background image, video or pattern for the section.
-

@@ -5,129 +5,79 @@ tabbed: true
 value:
   _component: page-sections/explainers/workflow-split
   content:
-    sectionLabel: ""
+    sectionLabel: ''
     heading:
-      eyebrow: ""
+      eyebrow: ''
       heading: Two workflows. One source of truth.
       headingLevel: h2
       headingSize: lg
     subtext:
       subtext: Editors edit visually, developers stay in code.
       subtextSize: md
-      subtextWidth: ""
+      subtextWidth: ''
     buttonSections: []
-    panels:
-      - accentColor: pacific
-        imageSource: ""
-        imageAlt: ""
-        eyebrow: EDITORS
-        heading: Work visually
-        items:
-          - text: Make changes visually on the page
-        linkText: Learn more
-        link: ""
-      - accentColor: sunset
-        imageSource: ""
-        imageAlt: ""
-        eyebrow: DEVELOPERS
-        heading: Stay in code
-        items:
-          - text: Build with any static site generator
-        linkText: Learn more
-        link: ""
-    centreImageSource: ""
-    centreImageAlt: ""
-    centreColor: ""
-    centreMinHeight: 0
-    centreSections: []
-    centreIconName: ""
-    centreTitle: ""
-    centreBranch: ""
-    centreRows: []
+    leftPanel:
+      accentColor: pacific
+      eyebrow: EDITORS
+      heading: Work visually
+      image:
+        imageSource: ''
+        imageAlt: ''
+        imageOverlap: 0
+      items:
+        - text: Make changes visually on the page
+      buttonSections:
+        - _component: building-blocks/core-elements/button
+          text: Learn more
+          link: ''
+          variant: text
+          iconName: move-right
+          iconPosition: after
+          size: md
+    middlePanel:
+      centreImageSource: ''
+      centreImageAlt: ''
+      centreColor: ''
+      centreMinHeight: 0
+      centreIconName: ''
+      centreTitle: ''
+      centreBranch: ''
+      centreRows:
+        - kind: editor
+          author: editor
+          message: 'content: new blog post'
+          hash: c0d8f1
+        - kind: dev
+          author: dev
+          message: 'feat: pricing component'
+          hash: 7b1e44
+      centreSections: []
+    rightPanel:
+      accentColor: sunset
+      eyebrow: DEVELOPERS
+      heading: Stay in code
+      image:
+        imageSource: ''
+        imageAlt: ''
+        imageOverlap: 0
+      items:
+        - text: Build with any static site generator
+      buttonSections:
+        - _component: building-blocks/core-elements/button
+          text: Learn more
+          link: ''
+          variant: text
+          iconName: move-right
+          iconPosition: after
+          size: md
   style:
     backgroundColor: light-sand
     background:
       type: image
-      imageSource: ""
+      imageSource: ''
     maxContentWidth: xl
     paddingHorizontal: gutter
     paddingVertical: 4xl
-_inputs:
-  panels:
-    type: array
-    options:
-      structures: _structures.workflow_panel
-_structures:
-  workflow_panel:
-    values:
-      - label: Workflow panel
-        icon: alt_route
-        value:
-          accentColor: pacific
-          imageSource: ""
-          imageAlt: ""
-          eyebrow: EDITORS
-          heading: Work visually
-          items: []
-          linkText: Learn more
-          link: ""
-        _inputs:
-          accentColor:
-            type: select
-            comment: >-
-              Colours the rule on the panel, its list markers and its link, so one choice marks the
-              whole column.
-            options:
-              values:
-                - id: pacific
-                  name: Pacific
-                  swatch: square
-                  color: "#034AD8"
-                - id: sunset
-                  name: Sunset
-                  swatch: square
-                  color: "#D85A2C"
-                - id: golden
-                  name: Golden
-                  swatch: square
-                  color: "#FFAA00"
-                - id: moss
-                  name: Moss
-                  swatch: square
-                  color: "#687E00"
-                - id: harbour
-                  name: Harbour
-                  swatch: square
-                  color: "#A6C1FA"
-              picker_view: card
-              preview:
-                icon:
-                  - key: swatch
-                icon_color:
-                  - key: color
-                text:
-                  - key: name
-          imageSource:
-            type: image
-            comment: Illustration above the panel.
-          imageAlt:
-            type: text
-            comment: Alt text for the illustration.
-          eyebrow:
-            type: text
-            comment: Who this column is for.
-          heading:
-            type: text
-            comment: What they do.
-          items:
-            type: array
-            comment: What that way of working gets you.
-          linkText:
-            type: text
-            comment: Text for the link at the foot of the panel.
-          link:
-            type: url
-            comment: Where the panel links to.
 _inputs_from_glob:
   - /src/components/page-sections/explainers/workflow-split/workflow-split.cloudcannon.inputs.yml
   - /.cloudcannon/inputs/background.yml

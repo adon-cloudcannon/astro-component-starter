@@ -28,14 +28,17 @@ import ButtonGroup from "@wrappers/button-group/ButtonGroup.astro";
 
 type PanelProps = {
   accentColor?: string;
-  imageSource?: string;
-  imageAlt?: string;
+  image?: { imageSource?: string; imageAlt?: string; imageOverlap?: number };
   eyebrow?: string;
   heading?: string;
   items?: { text?: string }[];
+  buttonSections?: Record<string, unknown>[];
+  /* The flat shape a page written before the panels were split still uses. */
+  imageSource?: string;
+  imageAlt?: string;
+  imageOverlap?: number;
   linkText?: string;
   link?: string;
-  imageOverlap?: number;
 };
 
 /* `content` and `style` are the editor's tabs, flattened straight back into
@@ -67,6 +70,18 @@ const {
    */
   subtextWidth,
   buttonSections = [],
+  /**
+   * One object per column rather than an array of two.
+   *
+   * An array asks an editor which index is which, and answers nothing: the
+   * left panel is the left panel. Named, each column's fields sit under its
+   * own heading in the editor and a page cannot accidentally carry three.
+   */
+  leftPanel,
+  rightPanel,
+  /** Everything the middle card draws, in one place. */
+  middlePanel,
+  /* The array the pages used before the split, still read where it is set. */
   panels = [],
   centreImageSource = "",
   centreImageAlt = "",
@@ -125,7 +140,50 @@ const {
 /* The measure the subtext is set in, as a length. */
 const subtextCap = subtextMeasure(subtextWidth);
 
-const panelList: PanelProps[] = Array.isArray(panels) ? panels : [];
+/* The named pair wins; the array is what a page written before them has. */
+const sidePanels: PanelProps[] = [leftPanel, rightPanel].filter(Boolean) as PanelProps[];
+const panelList: PanelProps[] = sidePanels.length
+  ? sidePanels
+  : Array.isArray(panels)
+    ? panels
+    : [];
+
+/** Where a panel's own fields live, for the editor. */
+const panelPath = (index: number) =>
+  sidePanels.length ? at(index === 0 ? "leftPanel" : "rightPanel") : null;
+
+/* A panel's picture and its link, in whichever shape the page carries. */
+const panelImage = (panel: PanelProps) => panel.image ?? panel;
+const panelButtons = (panel: PanelProps) =>
+  panel.buttonSections?.length
+    ? panel.buttonSections
+    : panel.linkText
+      ? [{
+          _component: "building-blocks/core-elements/button",
+          text: panel.linkText,
+          link: panel.link ?? "",
+          variant: "text",
+          iconName: "move-right",
+          iconPosition: "after",
+          size: "md",
+        }]
+      : [];
+
+/* The middle card's fields, which sit in `middlePanel` now and were loose
+   `centre*` props before it. */
+const centre = {
+  imageSource: middlePanel?.centreImageSource ?? centreImageSource,
+  imageAlt: middlePanel?.centreImageAlt ?? centreImageAlt,
+  color: middlePanel?.centreColor ?? centreColor,
+  minHeight: middlePanel?.centreMinHeight ?? centreMinHeight,
+  iconName: middlePanel?.centreIconName ?? centreIconName,
+  title: middlePanel?.centreTitle ?? centreTitle,
+  branch: middlePanel?.centreBranch ?? centreBranch,
+  rows: middlePanel?.centreRows ?? centreRows ?? [],
+  sections: middlePanel?.centreSections ?? centreSections ?? [],
+};
+const centrePath = (key: string) =>
+  middlePanel ? `${at("middlePanel")}.centre${key[0].toUpperCase()}${key.slice(1)}` : at(`centre${key[0].toUpperCase()}${key.slice(1)}`);
 
 /**
  * The commit feed's timing, and the keyframes that drive it.
@@ -146,7 +204,7 @@ const CYCLE_MS = 2900;
 const LANDS_MS = 652;
 const SLIDE_MS = 450;
 
-const feedRows: Record<string, unknown>[] = Array.isArray(centreRows) ? centreRows : [];
+const feedRows: Record<string, unknown>[] = Array.isArray(centre.rows) ? centre.rows : [];
 const feedSteps = feedRows.length;
 const feedName = `workflow-feed-${feedSteps}`;
 const feedPeriod = feedSteps * CYCLE_MS;
@@ -230,14 +288,16 @@ const panelsProp = childrenDataProp ?? (useDefaultEditableBinding ? at("panels")
           class="workflow-panel"
           data-editable="array-item"
         >
-          {panel.imageSource && (
+          {panelImage(panel).imageSource && (
             <Image
               class="workflow-illustration"
-              source={panel.imageSource}
-              alt={panel.imageAlt}
-              style={panel.imageOverlap ? { "--illustration-overlap": `${panel.imageOverlap}px` } : undefined}
-              data-prop-src="imageSource"
-              data-prop-alt="imageAlt"
+              source={panelImage(panel).imageSource}
+              alt={panelImage(panel).imageAlt}
+              style={panelImage(panel).imageOverlap
+                ? { "--illustration-overlap": `${panelImage(panel).imageOverlap}px` }
+                : undefined}
+              data-prop-src={panelPath(index) ? `${panelPath(index)}.image.imageSource` : "imageSource"}
+              data-prop-alt={panelPath(index) ? `${panelPath(index)}.image.imageAlt` : "imageAlt"}
             />
           )}
           {/* The line that runs from this panel's card into the one between
@@ -258,13 +318,13 @@ const panelsProp = childrenDataProp ?? (useDefaultEditableBinding ? at("panels")
             <SimpleText
               class="eyebrow"
               size="sm"
-              data-prop="eyebrow"
+              data-prop={panelPath(index) ? `${panelPath(index)}.eyebrow` : "eyebrow"}
               text={panel.eyebrow}
             />
             <Heading
               level="h3"
               size="xs"
-              data-prop="heading"
+              data-prop={panelPath(index) ? `${panelPath(index)}.heading` : "heading"}
             >
               {panel.heading}
             </Heading>
@@ -273,17 +333,16 @@ const panelsProp = childrenDataProp ?? (useDefaultEditableBinding ? at("panels")
               items={panel.items}
               listType="icon"
               size="md"
-              data-children-prop="items"
+              data-children-prop={panelPath(index) ? `${panelPath(index)}.items` : "items"}
             />
-            {panel.linkText && (
-              <Button
+            {/* The link is a Button, which is the project's rule for one: it
+                carries where it goes as well as what it says, and the editor
+                gets the same fields it gets everywhere else. */}
+            {panelButtons(panel).length > 0 && (
+              <ButtonGroup
                 class="workflow-link"
-                variant="text"
-                iconName="move-right"
-                iconPosition="after"
-                text={panel.linkText}
-                link={panel.link}
-                data-prop="linkText"
+                buttonSections={panelButtons(panel)}
+                data-children-prop={panelPath(index) ? `${panelPath(index)}.buttonSections` : "buttonSections"}
               />
             )}
           </Card>
@@ -308,29 +367,29 @@ const panelsProp = childrenDataProp ?? (useDefaultEditableBinding ? at("panels")
             yet: without it the second panel slides into the middle column and
             the row reads as two columns of the wrong width. */}
         {index === 0 &&
-          (centreColor || centreSections.length ? (
+          (centre.color || centre.sections?.length ? (
             <div
               class="workflow-centre-card"
               style={{
-                ...(centreColor ? { "--workflow-centre-color": centreColor } : {}),
-                ...(centreMinHeight ? { "--workflow-centre-height": `${Number(centreMinHeight)}px` } : {}),
+                ...(centre.color ? { "--workflow-centre-color": centre.color } : {}),
+                ...(centre.minHeight ? { "--workflow-centre-height": `${Number(centre.minHeight)}px` } : {}),
               }}
               data-editable="array"
-              data-prop={at("centreSections")}
+              data-prop={centrePath("sections")}
             >
-              {(centreIconName || centreTitle) && (
+              {(centre.iconName || centre.title) && (
                 <p class="workflow-centre-title">
-                  {centreIconName && <Icon name={centreIconName} size="md" />}
-                  {centreTitle && <span data-prop={at("centreTitle")}>{centreTitle}</span>}
-                  {centreBranch && (
+                  {centre.iconName && <Icon name={centre.iconName} size="md" />}
+                  {centre.title && <span data-prop={centrePath("title")}>{centre.title}</span>}
+                  {centre.branch && (
                     <span class="workflow-centre-branch">
                       <span class="workflow-centre-light" aria-hidden="true" />
-                      <span data-prop={at("centreBranch")}>{centreBranch}</span>
+                      <span data-prop={centrePath("branch")}>{centre.branch}</span>
                     </span>
                   )}
                 </p>
               )}
-              {centreRows.length > 0 && (
+              {centre.rows?.length > 0 && (
                 <div class="workflow-centre-feed">
                   {/* Twice. The track slides by exactly the length of one
                       copy and then repeats, and because the second copy sits
@@ -354,15 +413,15 @@ const panelsProp = childrenDataProp ?? (useDefaultEditableBinding ? at("panels")
                   </ul>
                 </div>
               )}
-              <Component contentSections={centreSections} />
+              <Component contentSections={centre.sections} />
             </div>
-          ) : centreImageSource ? (
+          ) : centre.imageSource ? (
             <Image
               class="workflow-centre"
-              source={centreImageSource}
-              alt={centreImageAlt}
-              data-prop-src={at("centreImageSource")}
-              data-prop-alt={at("centreImageAlt")}
+              source={centre.imageSource}
+              alt={centre.imageAlt}
+              data-prop-src={centrePath("imageSource")}
+              data-prop-alt={centrePath("imageAlt")}
             />
           ) : (
             <div class="workflow-centre-empty" aria-hidden="true"></div>

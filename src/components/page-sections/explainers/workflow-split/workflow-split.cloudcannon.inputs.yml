@@ -77,19 +77,232 @@ content.subtext.subtextWidth:
 content.buttonSections:
   type: array
   comment: A link or button under the heading.
-content.panels:
+  options:
+    structures: _structures.buttonSections
+# One object per column. An array asked an editor which index was which and
+# answered nothing; named, each column's fields sit under its own heading.
+content.leftPanel:
+  type: object
+  label: Left panel
+  options:
+    subtype: object
+content.rightPanel:
+  type: object
+  label: Right panel
+  options:
+    subtype: object
+content.middlePanel:
+  type: object
+  label: Middle panel
+  comment: The common ground both columns land in.
+  options:
+    subtype: object
+
+content.leftPanel.accentColor:
+  type: select
+  label: Card colour
+  comment: >-
+    The colour this column is read by: it tints the card, colours the ticks in
+    the list and draws the line running into the middle.
+  options:
+    values:
+      - id: pacific
+        name: Pacific
+        swatch: square
+        color: "#034AD8"
+      - id: sunset
+        name: Sunset
+        swatch: square
+        color: "#D85A2C"
+      - id: moss
+        name: Moss
+        swatch: square
+        color: "#687E00"
+      - id: golden
+        name: Golden
+        swatch: square
+        color: "#FFAA00"
+      - id: harbour
+        name: Harbour
+        swatch: square
+        color: "#A6C1FA"
+      - id: blush
+        name: Blush
+        swatch: square
+        color: "#E7B0B9"
+      - id: kiwi
+        name: Kiwi
+        swatch: square
+        color: "#7C3442"
+    picker_view: card
+    preview:
+      icon:
+        - key: swatch
+      icon_color:
+        - key: color
+      text:
+        - key: name
+content.leftPanel.eyebrow:
+  type: text
+  comment: The small label above this column's title.
+content.leftPanel.heading:
+  type: text
+  comment: This column's title.
+content.leftPanel.image:
+  type: object
+  label: Image
+  options:
+    subtype: object
+content.leftPanel.image.imageSource:
+  type: image
+  comment: The drawing that sits above the card.
+content.leftPanel.image.imageAlt:
+  type: text
+  comment: Alt text for the drawing.
+content.leftPanel.image.imageOverlap:
+  type: number
+  comment: How far the drawing dips into the card below it, in pixels.
+content.leftPanel.items:
+  type: array
+  comment: What someone working this way does.
+  options:
+    structures: _structures.listItems
+content.leftPanel.buttonSections:
+  type: array
+  comment: Where this column goes next. One text link is the usual.
+  options:
+    structures: _structures.buttonSections
+
+content.rightPanel.accentColor:
+  type: select
+  label: Card colour
+  comment: >-
+    The colour this column is read by: it tints the card, colours the ticks in
+    the list and draws the line running into the middle.
+  options:
+    values:
+      - id: pacific
+        name: Pacific
+        swatch: square
+        color: "#034AD8"
+      - id: sunset
+        name: Sunset
+        swatch: square
+        color: "#D85A2C"
+      - id: moss
+        name: Moss
+        swatch: square
+        color: "#687E00"
+      - id: golden
+        name: Golden
+        swatch: square
+        color: "#FFAA00"
+      - id: harbour
+        name: Harbour
+        swatch: square
+        color: "#A6C1FA"
+      - id: blush
+        name: Blush
+        swatch: square
+        color: "#E7B0B9"
+      - id: kiwi
+        name: Kiwi
+        swatch: square
+        color: "#7C3442"
+    picker_view: card
+    preview:
+      icon:
+        - key: swatch
+      icon_color:
+        - key: color
+      text:
+        - key: name
+content.rightPanel.eyebrow:
+  type: text
+  comment: The small label above this column's title.
+content.rightPanel.heading:
+  type: text
+  comment: This column's title.
+content.rightPanel.image:
+  type: object
+  label: Image
+  options:
+    subtype: object
+content.rightPanel.image.imageSource:
+  type: image
+  comment: The drawing that sits above the card.
+content.rightPanel.image.imageAlt:
+  type: text
+  comment: Alt text for the drawing.
+content.rightPanel.image.imageOverlap:
+  type: number
+  comment: How far the drawing dips into the card below it, in pixels.
+content.rightPanel.items:
+  type: array
+  comment: What someone working this way does.
+  options:
+    structures: _structures.listItems
+content.rightPanel.buttonSections:
+  type: array
+  comment: Where this column goes next. One text link is the usual.
+  options:
+    structures: _structures.buttonSections
+
+content.middlePanel.centreImageSource:
+  type: image
+  comment: A picture for the middle, where it is not drawn as a card.
+content.middlePanel.centreImageAlt:
+  type: text
+  comment: Alt text for that picture.
+content.middlePanel.centreColor:
+  type: text
+  comment: >-
+    The middle card's own colour, as a hex. #26262F on the homepage, which is
+    not a palette entry — the nearest, Gray 900, is a different colour by 12.
+content.middlePanel.centreMinHeight:
+  type: number
+  comment: How tall the middle card stands, in pixels.
+content.middlePanel.centreIconName:
+  type: text
+  comment: The icon on the middle card's top line.
+content.middlePanel.centreTitle:
+  type: text
+  comment: The middle card's title.
+content.middlePanel.centreBranch:
+  type: text
+  comment: The branch shown after the title, with a status light before it.
+content.middlePanel.centreRows:
   type: array
   comment: >-
-    One panel per way of working, side by side. Each carries its own accent
-    colour, which colours its list markers, its rule and its link, so a reader
-    can tell the columns apart before reading them. A panel's imageOverlap is
-    how far its drawing dips into the card below it, in pixels.
-content.centreImageSource:
-  type: image
-  comment: The thing both panels share, shown between them.
-content.centreImageAlt:
+    The commit rows down the card. `kind` is editor or dev, and it sets both
+    the dot's colour and the label's — the design draws exactly those two.
+content.middlePanel.centreRows[*]:
+  type: object
+  options:
+    subtype: object
+content.middlePanel.centreRows[*].kind:
+  type: select
+  comment: Which side made this commit.
+  options:
+    values:
+      - id: editor
+        name: Editor
+      - id: dev
+        name: Developer
+content.middlePanel.centreRows[*].author:
   type: text
-  comment: Alt text for the middle image.
+  comment: The label after the dot.
+content.middlePanel.centreRows[*].message:
+  type: text
+  comment: The commit message.
+content.middlePanel.centreRows[*].hash:
+  type: text
+  comment: The short hash at the end of the row.
+content.middlePanel.centreSections:
+  type: array
+  comment: Anything else to put in the middle card.
+  options:
+    structures: _structures.containerSections
 
 # --- section wrapper inputs
 # The heading's level and size belong with the heading, the way the hero's do.
@@ -196,63 +409,9 @@ style.backgroundColor:
         - key: color
       text:
         - key: name
-style.background:
-  type: object
-  comment: Background image, video or pattern for the section.
-
-content.centreColor:
-  type: color
-  label: Middle panel colour
-  comment: >-
-    Draws the middle of the row as a panel of its own rather than a picture.
-    The design uses #26262F, which is not in the palette: the nearest token,
-    --gray-900, is a different colour by about 12.
-
-content.centreMinHeight:
-  type: number
-  label: Middle panel height
-  comment: >-
-    The least it can be, in pixels. It shares the bottom edge of the pair
-    either side and grows upward, so the design's 366 against their 321 is what
-    makes it stand a little proud of them.
-
-content.centreSections:
-  type: array
-  label: Middle panel content
-  comment: What goes inside the middle panel.
-  options:
-    structures: _structures.scrollStepperSections
-
 # The middle panel's chrome: set from the mapping, hidden from the editor.
 # It is furniture rather than copy — the icon, the title and the branch light
 # are the panel's own title bar, the way a Git client's is — so there is
 # nothing here an editor would want to reach for. Declared rather than
 # hardcoded so the words stay out of the component and sit in the mapping with
 # everything else the design sets.
-content.centreIconName:
-  type: select
-  hidden: true
-  label: Middle panel icon
-  comment: The mark at the head of the middle panel.
-  options:
-    values: data.icons
-
-content.centreTitle:
-  type: text
-  hidden: true
-  label: Middle panel title
-  comment: The line beside that icon, set in 14/700 white.
-
-content.centreBranch:
-  type: text
-  hidden: true
-  label: Middle panel branch
-  comment: >-
-    Closes the header row with a status light and the branch name, set in the
-    mono face at 10.5 the way a Git client shows it.
-
-content.centreRows:
-  type: array
-  hidden: true
-  label: Middle panel rows
-  comment: The commit rows down the panel. Chrome, like the header above them.
