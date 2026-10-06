@@ -150,7 +150,6 @@ const mirror = rootMirror({
               )}
             </p>
           )}
-          {linkButton}
         </div>
       </div>
     );
@@ -161,7 +160,20 @@ const mirror = rootMirror({
        grey circle under the words with nothing beside it. */
     const attributed = Boolean(authorName || authorDescription || company || authorImage);
 
-    if (isSplit) return attributed ? person : null;
+    /* The link goes last and goes right, wherever the card puts everything
+       else: you read the quote, then who said it, and you finish on the one
+       thing there is to do. Under the role line it was halfway up the card
+       with the client's mark below and to the right of it, so the eye left
+       the card before it ever reached the link. */
+    if (isSplit) {
+      if (!attributed && !linkButton) return null;
+      return (
+        <>
+          {attributed && person}
+          {linkButton && <div class="testimonial-quote-tail">{linkButton}</div>}
+        </>
+      );
+    }
 
     if (!attributed && !logoSource && !linkButton) return null;
 
@@ -186,6 +198,7 @@ const mirror = rootMirror({
             data-prop-alt="logoAlt"
           />
         )}
+        {linkButton && <div class="testimonial-quote-tail">{linkButton}</div>}
       </div>
     );
   })()}

@@ -550,8 +550,20 @@ const align = alignment === "center" && !isSplit ? "center" : undefined;
         color: var(--testimonial-quote-ink);
       }
 
+      /* The link is the last thing in the card and it hangs off the right.
+
+         The foot is a row with the person at one end and the client's mark at
+         the other, so the link joins that row as its final item and the mark
+         moves in beside it. On a card with no mark the link is simply the
+         right-hand end. */
+      .testimonial-quote-tail {
+        display: flex;
+        justify-content: flex-end;
+        margin-inline-start: auto;
+      }
+
       .testimonial-quote-link {
-        margin-block-start: var(--spacing-sm);
+        margin-block-start: 0;
       }
 
       /* The card's own colour and size, over the Button's. This file is in
@@ -658,6 +670,47 @@ const align = alignment === "center" && !isSplit ? "center" : undefined;
       .testimonial-quote-card[data-layout="split-person"] .testimonial-quote-who {
         grid-column: 1;
         grid-row: 1;
+      }
+
+      /* Placed, not auto-flowed. A third child in a two-column grid drops into
+         a new row under the person, which is the narrow column and the wrong
+         end of the card: the link belongs under the quote it follows. */
+      /* `--space-before` as well as the margin: the flow layer writes
+         `margin-block-start` from that property and `utils` out-ranks this
+         layer, so a plain margin loses to it. */
+      .testimonial-quote-card[data-layout="split-person"] .testimonial-quote-tail,
+      .testimonial-quote-card[data-layout="split-quote"] .testimonial-quote-tail {
+        --space-before: var(--spacing-md);
+
+        margin-block-start: var(--spacing-md);
+      }
+
+      .testimonial-quote-card[data-layout="split-person"] .testimonial-quote-tail {
+        grid-column: 2;
+        grid-row: 2;
+        padding-inline-start: var(--testimonial-quote-pad);
+      }
+
+      .testimonial-quote-card[data-layout="split-quote"] .testimonial-quote-tail {
+        grid-column: 1;
+        grid-row: 2;
+      }
+
+      /* The quote column keeps its height and the link sits under it, so the
+         rule between the columns still runs the full card. */
+      .testimonial-quote-card[data-layout="split-person"] .testimonial-quote-slide,
+      .testimonial-quote-card[data-layout="split-quote"] .testimonial-quote-slide {
+        grid-template-rows: 1fr auto;
+      }
+
+      .testimonial-quote-card[data-layout="split-person"] .testimonial-quote-text,
+      .testimonial-quote-card[data-layout="split-quote"] .testimonial-quote-who {
+        grid-row: 1;
+      }
+
+      .testimonial-quote-card[data-layout="split-person"] .testimonial-quote-who,
+      .testimonial-quote-card[data-layout="split-quote"] .testimonial-quote-text {
+        grid-row: 1 / span 2;
       }
 
       .testimonial-quote-card[data-layout="split-quote"] .testimonial-quote-who {
