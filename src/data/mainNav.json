@@ -150,12 +150,6 @@
                 "description": "Step-by-step guides",
                 "path": "/tutorials/",
                 "icon": "play-circle"
-              },
-              {
-                "name": "Templates",
-                "description": "A head start on your next site",
-                "path": "/templates/",
-                "icon": "rectangle-group"
               }
             ]
           },
