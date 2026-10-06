@@ -27,25 +27,36 @@ import { componentKeyFromPath, pascalToKebab } from "../../src/components/utils/
  *   destructure was found (component takes no props).
  */
 export function parseDestructure(source) {
-  const primary = parseDestructureAt(source, "= Astro.props");
+  /* A section takes its props in two steps: the tabs come off `Astro.props`
+     and are merged back into one object, which is what the body destructures.
+     So the names may be on either, and on a migrated component the second is
+     the only one that carries them — looking solely for `= Astro.props` found
+     the two-key preamble and read the whole component as taking no props,
+     which made the drift check skip it in silence. */
+  const sources = ["= Astro.props", ...[...mergedPropNames(source)].map((name) => `= ${name};`)];
 
-  if (!primary) return null;
+  let merged = null;
+  for (const marker of sources) {
+    const part = parseDestructureAt(source, marker);
 
-  /* A component may take its props in two steps: pull the nested groups off
-     `Astro.props`, merge them back into one object, and destructure that. The
-     hero-split does, because CloudCannon only draws tabs over nested keys. The
-     props are read either way, so the names from the second destructure are
-     part of the component's surface and the drift check has to see them. */
-  for (const name of mergedPropNames(source)) {
-    const extra = parseDestructureAt(source, `= ${name}`);
-
-    if (!extra) continue;
-    for (const key of extra.props) primary.props.add(key);
-    for (const [key, value] of extra.defaults) if (!primary.defaults.has(key)) primary.defaults.set(key, value);
-    primary.hasRest = primary.hasRest || extra.hasRest;
+    if (!part) continue;
+    if (!merged) {
+      merged = part;
+      continue;
+    }
+    for (const key of part.props) merged.props.add(key);
+    for (const [key, value] of part.defaults) if (!merged.defaults.has(key)) merged.defaults.set(key, value);
+    merged.hasRest = merged.hasRest || part.hasRest;
   }
 
-  return primary;
+  /* The two tabs are props of the section even though no section names them:
+     the helper takes them off `Astro.props` and hands back the flat merge. */
+  if (merged && /nestedProps\(\s*Astro\.props/.test(source)) {
+    merged.props.add("content");
+    merged.props.add("style");
+  }
+
+  return merged;
 }
 
 /**

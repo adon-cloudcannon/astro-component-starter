@@ -160,7 +160,7 @@ const feedKeyframes = feedSteps
   : "";
 
 /* One name for both halves of the region, so they cannot disagree. */
-const panelsProp = childrenDataProp ?? (useDefaultEditableBinding ? "panels" : undefined);
+const panelsProp = childrenDataProp ?? (useDefaultEditableBinding ? at("panels") : undefined);
 ---
 
 <CustomSection

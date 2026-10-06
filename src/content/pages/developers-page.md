@@ -7,15 +7,16 @@ description: A CMS that uses Git, just like you do
 pageSections:
   - _component: page-sections/heroes/hero-split
     content:
-      heading: A CMS that uses Git, just like you do
-      headingSize: xl
+      heading:
+        heading: A CMS that uses Git, just like you do
+        headingSize: xl
       subtext: >-
         Connect CloudCannon to your repo and keep working locally. Editors manage content visually,
         and everyone's changes sync automatically.
-      subtextSize: xl
-      imageSource: /src/assets/images/marketing/hero-developers-page.png
-      imageAlt: ''
-      imageOverflow: 217
+      image:
+        imageSource: /src/assets/images/marketing/hero-developers-page.png
+        imageAlt: ''
+        imageOverflow: 217
       buttonSections:
         - _component: building-blocks/core-elements/button
           text: Start your free trial
@@ -25,6 +26,7 @@ pageSections:
           iconName: move-right
           iconPosition: after
           variant: text
+      subtextSize: xl
     style:
       pattern: grid
       haze: false

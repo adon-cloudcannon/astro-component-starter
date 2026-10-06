@@ -131,7 +131,7 @@ const blocks = (sections: unknown): ContentBlock[] =>
   Array.isArray(sections) ? (sections as ContentBlock[]) : [];
 
 const hasHeader = Boolean(eyebrow || heading || subtext);
-const effectiveChildrenProp = childrenDataProp ?? (useDefaultEditableBinding ? "steps" : null);
+const effectiveChildrenProp = childrenDataProp ?? (useDefaultEditableBinding ? at("steps") : null);
 /* The blocks inside a step are their own array, nested under the step's own
    index. They were rendered with `data-editable="array-item"` and nothing
    around them saying `array`, which is the one shape the editor rejects

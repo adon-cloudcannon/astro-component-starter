@@ -133,7 +133,7 @@ const hasHeader = Boolean(eyebrow || heading || subtext);
     reverse={reverse}
     mediaWidth={mediaWidth}
     progressStyle={progressStyle}
-    data-children-prop={childrenDataProp ?? (useDefaultEditableBinding ? "steps" : undefined)}
+    data-children-prop={childrenDataProp ?? (useDefaultEditableBinding ? at("steps") : undefined)}
   />
 </CustomSection>
 

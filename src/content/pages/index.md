@@ -7,15 +7,16 @@ description: Build freely. Edit easily.
 pageSections:
   - _component: page-sections/heroes/hero-split
     content:
-      heading: Build freely. Edit easily.
-      headingSize: 2xl
+      heading:
+        heading: Build freely. Edit easily.
+        headingSize: 2xl
       subtext: >-
         Welcome to the Git-based CMS that doesn't fight your workflow. Your site lives in Git, your
         team edits visually, and everything stays in sync.
-      subtextSize: xl
-      imageSource: /src/assets/images/marketing/hero-index.png
-      imageAlt: A person reaching up to edit content blocks, with their dog
-      imageOverflow: 29
+      image:
+        imageSource: /src/assets/images/marketing/hero-index.png
+        imageAlt: A person reaching up to edit content blocks, with their dog
+        imageOverflow: 29
       buttonSections:
         - _component: building-blocks/core-elements/button
           text: Start your free trial
@@ -29,6 +30,7 @@ pageSections:
         - text: No credit card · 14-day free trial · No lock-in
           iconName: check
           iconColor: default
+      subtextSize: xl
     style:
       pattern: grid
       haze: true

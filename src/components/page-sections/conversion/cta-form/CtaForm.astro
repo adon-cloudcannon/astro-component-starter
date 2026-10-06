@@ -86,7 +86,7 @@ const subtextCap = subtextMeasure(subtextWidth);
       orientation="horizontal"
       items={steps}
       style={`--step-count: ${steps.length}`}
-      data-children-prop="steps"
+      data-children-prop={at("steps")}
     />
   )}
   {imageSource ? (

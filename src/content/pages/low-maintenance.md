@@ -7,15 +7,16 @@ description: No database. No 2 a.m. panic.
 pageSections:
   - _component: page-sections/heroes/hero-split
     content:
-      heading: No database. No 2 a.m. panic.
-      headingSize: xl
+      heading:
+        heading: No database. No 2 a.m. panic.
+        headingSize: xl
       subtext: >-
         Skip the forced updates, security patches, and midnight outages. Your site keeps running while
         your team spends time building what's next.
-      subtextSize: xl
-      imageSource: /src/assets/images/marketing/hero-low-maintenance.png
-      imageAlt: ''
-      imageOverflow: 107
+      image:
+        imageSource: /src/assets/images/marketing/hero-low-maintenance.png
+        imageAlt: ''
+        imageOverflow: 107
       buttonSections:
         - _component: building-blocks/core-elements/button
           text: Start your free trial
@@ -29,6 +30,7 @@ pageSections:
         - text: No credit card · 14-day free trial · No lock-in
           iconName: check
           iconColor: default
+      subtextSize: xl
     style:
       pattern: pegboard
       haze: true

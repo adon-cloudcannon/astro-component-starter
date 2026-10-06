@@ -255,8 +255,8 @@ const mirror = rootMirror({ "data-picture-first": reverse ? "" : null });
             alt={imageBackdropAlt}
             rounded={true}
             aspectRatio="square"
-            data-prop-src="imageBackdrop"
-            data-prop-alt="imageBackdropAlt"
+            data-prop-src={at("imageBackdrop")}
+            data-prop-alt={at("imageBackdropAlt")}
           />
           <Image
             class="cta-split-subject"
@@ -298,7 +298,7 @@ const mirror = rootMirror({ "data-picture-first": reverse ? "" : null });
             rounded={true}
             decorative={true}
             aspectRatio={imageAspectRatio}
-            data-prop-src="imageReveal"
+            data-prop-src={at("imageReveal")}
           />
         </button>
       ) : (

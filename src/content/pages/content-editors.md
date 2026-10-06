@@ -7,15 +7,16 @@ description: Draft. Edit. Publish. No problem.
 pageSections:
   - _component: page-sections/heroes/hero-split
     content:
-      heading: Draft. Edit. Publish. No problem.
-      headingSize: xl
+      heading:
+        heading: Draft. Edit. Publish. No problem.
+        headingSize: xl
       subtext: >-
         Publish your best content with visual editing, custom components, and a flexible review
         process for your whole team.
-      subtextSize: xl
-      imageSource: /src/assets/images/marketing/hero-content-editors.png
-      imageAlt: ''
-      imageOverflow: 83
+      image:
+        imageSource: /src/assets/images/marketing/hero-content-editors.png
+        imageAlt: ''
+        imageOverflow: 83
       buttonSections:
         - _component: building-blocks/core-elements/button
           text: Start your free trial
@@ -29,6 +30,7 @@ pageSections:
         - text: No credit card · 14-day free trial · No lock-in
           iconName: check
           iconColor: default
+      subtextSize: xl
     style:
       pattern: pegboard
       haze: true

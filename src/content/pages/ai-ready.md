@@ -7,13 +7,14 @@ description: The CMS your AI tools can actually read
 pageSections:
   - _component: page-sections/heroes/hero-split
     content:
-      heading: The CMS your AI tools can actually read
-      headingSize: xl
+      heading:
+        heading: The CMS your AI tools can actually read
+        headingSize: xl
       subtext: Code, content, and config all sit in one repo as plain files, so agents get the full picture.
-      subtextSize: xl
-      imageSource: /src/assets/images/marketing/hero-ai-ready.png
-      imageAlt: ''
-      imageOverflow: 42
+      image:
+        imageSource: /src/assets/images/marketing/hero-ai-ready.png
+        imageAlt: ''
+        imageOverflow: 42
       buttonSections:
         - _component: building-blocks/core-elements/button
           text: Start your free trial
@@ -27,6 +28,7 @@ pageSections:
         - text: No credit card · 14-day free trial · No lock-in
           iconName: check
           iconColor: default
+      subtextSize: xl
     style:
       pattern: grid
       haze: true

@@ -7,15 +7,16 @@ description: Faster launches. Happier clients. Less support.
 pageSections:
   - _component: page-sections/heroes/hero-split
     content:
-      heading: Faster launches. Happier clients. Less support.
-      headingSize: xl
+      heading:
+        heading: Faster launches. Happier clients. Less support.
+        headingSize: xl
       subtext: >-
         Here, agencies spend less time on maintenance and more time on billable work, with websites
         your clients love to edit.
-      subtextSize: xl
-      imageSource: /src/assets/images/marketing/hero-agencies-and-freelancers.png
-      imageAlt: ''
-      imageOverflow: 63
+      image:
+        imageSource: /src/assets/images/marketing/hero-agencies-and-freelancers.png
+        imageAlt: ''
+        imageOverflow: 63
       buttonSections:
         - _component: building-blocks/core-elements/button
           text: Start your free trial
@@ -25,6 +26,7 @@ pageSections:
           iconName: move-right
           iconPosition: after
           variant: text
+      subtextSize: xl
     style:
       pattern: grid
       haze: true

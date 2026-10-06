@@ -101,7 +101,7 @@ const subtextCap = subtextMeasure(subtextWidth);
     navigationPosition="top"
     label={sectionLabel || heading || "Steps"}
     style={{ "--step-count": String((items as unknown[])?.length || 1) }}
-    data-children-prop={childrenDataProp ?? (useDefaultEditableBinding ? "items" : undefined)}
+    data-children-prop={childrenDataProp ?? (useDefaultEditableBinding ? at("items") : undefined)}
   />
 </CustomSection>
 

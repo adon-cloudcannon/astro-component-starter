@@ -7,15 +7,16 @@ description: Load instantly. Rank higher.
 pageSections:
   - _component: page-sections/heroes/hero-split
     content:
-      heading: Load instantly. Rank higher.
-      headingSize: xl
+      heading:
+        heading: Load instantly. Rank higher.
+        headingSize: xl
       subtext: >-
         Pre-rendered pages, global delivery, and structured content that search engines love. Speed is
         built into the architecture, not bolted on.
-      subtextSize: xl
-      imageSource: /src/assets/images/marketing/hero-high-performance.png
-      imageAlt: ''
-      imageOverflow: 5
+      image:
+        imageSource: /src/assets/images/marketing/hero-high-performance.png
+        imageAlt: ''
+        imageOverflow: 5
       buttonSections:
         - _component: building-blocks/core-elements/button
           text: Start your free trial
@@ -29,6 +30,7 @@ pageSections:
         - text: No credit card · 14-day free trial · No lock-in
           iconName: check
           iconColor: default
+      subtextSize: xl
     style:
       pattern: grid
       haze: true

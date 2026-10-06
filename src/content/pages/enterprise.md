@@ -7,15 +7,16 @@ description: Stop juggling websites. Start managing them.
 pageSections:
   - _component: page-sections/heroes/hero-split
     content:
-      heading: Stop juggling websites. Start managing them.
-      headingSize: xl
+      heading:
+        heading: Stop juggling websites. Start managing them.
+        headingSize: xl
       subtext: >-
         CloudCannon lets you have a high-impact web presence without the maintenance burden. Static
         architecture keeps things fast, secure, and quiet.
-      subtextSize: xl
-      imageSource: /src/assets/images/marketing/hero-enterprise.png
-      imageAlt: ''
-      imageOverflow: 151
+      image:
+        imageSource: /src/assets/images/marketing/hero-enterprise.png
+        imageAlt: ''
+        imageOverflow: 151
       buttonSections:
         - _component: building-blocks/core-elements/button
           text: Start your free trial
@@ -25,6 +26,7 @@ pageSections:
           iconName: move-right
           iconPosition: after
           variant: text
+      subtextSize: xl
     style:
       pattern: grid
       haze: true

@@ -36,17 +36,47 @@ export const STYLE_KEYS = new Set([
   "panelBackgroundColor",
 ]);
 
-export function nestedProps(astroProps, extraStyleKeys = []) {
+export function nestedProps(astroProps, options = {}) {
+  const { extraStyleKeys = [], nest = {} } = Array.isArray(options)
+    ? { extraStyleKeys: options }
+    : options;
+
   const { content, style, ...rest } = astroProps;
   const grouped = content !== undefined || style !== undefined;
-  const props = grouped ? { ...rest, ...(content ?? {}), ...(style ?? {}) } : astroProps;
   const styleKeys = extraStyleKeys.length
     ? new Set([...STYLE_KEYS, ...extraStyleKeys])
     : STYLE_KEYS;
 
+  /* A group may hold objects of its own — the heading's level and size sit
+     with the heading itself — so flatten one level further wherever `nest`
+     names a key. Only the names it lists: a prop whose value is genuinely an
+     object, like `background`, has to arrive whole. */
+  const flatten = (group) => {
+    const out = {};
+    for (const [key, value] of Object.entries(group ?? {})) {
+      if (key in nest && value && typeof value === "object" && !Array.isArray(value)) {
+        Object.assign(out, value);
+      } else {
+        out[key] = value;
+      }
+    }
+    return out;
+  };
+
+  const props = grouped
+    ? { ...rest, ...flatten(content), ...flatten(style) }
+    : astroProps;
+
+  /* Which sub-object a prop belongs to, from the declaration rather than from
+     the data, so a prop the page has not set still resolves. */
+  const subGroup = new Map();
+  for (const [name, keys] of Object.entries(nest)) for (const key of keys) subGroup.set(key, name);
+
   const at = (key) => {
     if (!grouped) return key;
-    return `${styleKeys.has(key) ? "style" : "content"}.${key}`;
+    const group = styleKeys.has(key) ? "style" : "content";
+    const sub = subGroup.get(key);
+    return sub ? `${group}.${sub}.${key}` : `${group}.${key}`;
   };
 
   return { props, at };

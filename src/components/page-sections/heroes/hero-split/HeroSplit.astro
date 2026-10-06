@@ -11,7 +11,24 @@ import Split from "@wrappers/split/Split.astro";
 
 /* `content` and `style` are the editor's tabs, flattened straight back into
    the names below. `at()` writes the frontmatter path a binding needs. */
-const { props, at } = nestedProps(Astro.props);
+const { props, at } = nestedProps(Astro.props, {
+  /* `reverse` paints the band's two halves the other way round, so it sits
+     with the rest of the band's look rather than with the copy. */
+  extraStyleKeys: ["reverse"],
+  /* The heading's level and size belong with the heading, and everything
+     about the picture with the picture. */
+  nest: {
+    heading: ["heading", "headingLevel", "headingSize"],
+    image: [
+      "imageSource",
+      "imageAlt",
+      "imageAspectRatio",
+      "imageOverflow",
+      "imageBleed",
+      "imageRounded",
+    ],
+  },
+});
 
 const {
   heading = "",

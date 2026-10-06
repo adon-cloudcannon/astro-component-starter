@@ -141,7 +141,7 @@ const offsetAt = (index: number) => (index % laneCount) % 2 === 1;
   <div
     class="team-grid-wall"
     data-editable={useDefaultEditableBinding ? "array" : undefined}
-    data-prop={useDefaultEditableBinding ? "members" : undefined}
+    data-prop={useDefaultEditableBinding ? at("members") : undefined}
   >
     <div class="team-grid-lanes" style={`--team-grid-lanes: ${laneCount}`}>
       {list.map((member, index) => (

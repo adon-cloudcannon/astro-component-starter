@@ -20,10 +20,10 @@ style:
   options:
     subtype: object
 
-content.heading:
+content.heading.heading:
   type: text
   comment: Main heading for the section.
-content.headingLevel:
+content.heading.headingLevel:
   type: select
   comment: Heading level for the title. Use h1 once per page, on the first section.
   options:
@@ -31,7 +31,7 @@ content.headingLevel:
       - h1
       - h2
       - h3
-content.headingSize:
+content.heading.headingSize:
   type: select
   # Two, not six. The design opens the homepage on Header 1 and every other
   # page on Header 2, and that is what all thirteen heroes draw. A hero set to
@@ -97,7 +97,7 @@ content.subtextWidth:
         name: Wide
       - id: xl
         name: Extra wide
-content.imageSource:
+content.image.imageSource:
   type: image
   comment: Image shown beside the copy.
   options:
@@ -107,10 +107,10 @@ content.imageSource:
     resize_style: contain
     width: 1920
     height: 1280
-content.imageAlt:
+content.image.imageAlt:
   type: text
   comment: Alt text describing the image.
-content.imageAspectRatio:
+content.image.imageAspectRatio:
   type: select
   comment: Crops the image to a fixed aspect ratio.
   options:
@@ -125,13 +125,13 @@ content.imageAspectRatio:
         name: Portrait (3:4)
       - id: widescreen
         name: Widescreen (16:9)
-content.imageOverflow:
+content.image.imageOverflow:
   type: number
   comment: >-
     How far the image may spill past its column, in pixels, measured from the
     design. Capped at the page edge, so it can never reach further than a full
     bleed. Leave at 0 to keep the image inside its column.
-content.imageBleed:
+content.image.imageBleed:
   type: switch
   comment: Runs the image to the page edge. Landscape or Square aspect ratios work best.
 content.buttonSections:
@@ -139,10 +139,10 @@ content.buttonSections:
   comment: Call-to-action buttons.
   options:
     structures: _structures.buttonSections
-content.reverse:
+style.reverse:
   type: switch
   comment: Flips the columns so the image comes before the copy.
-content.imageRounded:
+content.image.imageRounded:
   type: switch
   comment: Rounds the image's corners.
 content.note:
@@ -155,6 +155,20 @@ content.note:
 # Configures the CustomSection wrapper, not this section's own content. Inline
 # per component so a project can trim the size/padding lists in place.
 # `new:component` slices from this marker down — keep the marker line verbatim.
+# The sub-objects inside the Content tab. An object input nests as deep as the
+# data does; `subtype: object` keeps each one a plain group rather than a
+# second row of tabs.
+content.heading:
+  type: object
+  label: Heading
+  options:
+    subtype: object
+content.image:
+  type: object
+  label: Image
+  options:
+    subtype: object
+
 content.sectionLabel:
   type: text
   comment: Names the section in the editor and sets its anchor id.
