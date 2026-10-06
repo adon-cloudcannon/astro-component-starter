@@ -1,4 +1,5 @@
 ---
+import { rootMirror } from "@component-utils/rootMirror.mjs";
 import Image from "@core-elements/image/Image.astro";
 import CustomSection from "@builders/custom-section/CustomSection.astro";
 import { subtextMeasure } from "@component-utils/subtextMeasure.mjs";
@@ -103,9 +104,15 @@ const {
 
 /* The measure the subtext is set in, as a length. */
 const subtextCap = subtextMeasure(subtextWidth);
+
+/* Mirrored onto the builder's `.content`: a prop-driven class on a region's
+   root goes stale in the Visual Editor, which keeps the root and swaps only
+   what is inside it. Same pattern as feature-split's `has-pile`. */
+const mirror = rootMirror({ class: { [`align-${alignmentHorizontal}`]: true } });
 ---
 
 <CustomSection
+  mirror={mirror}
   class:list={["cta-center", `align-${alignmentHorizontal}`, className]}
   label={sectionLabel}
   maxContentWidth={maxContentWidth}

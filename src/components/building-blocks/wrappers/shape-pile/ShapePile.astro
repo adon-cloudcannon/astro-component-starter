@@ -1,5 +1,6 @@
 ---
 import { rootMirror } from "@component-utils/rootMirror.mjs";
+import { resolveImageSource } from "@component-utils/resolveImageSource";
 /**
  * A pile of labelled shapes that fall into place.
  *
@@ -16,11 +17,34 @@ import { rootMirror } from "@component-utils/rootMirror.mjs";
  *
  * Positions are in the design's own units, inside a box the section scales as a
  * whole, so the arrangement holds at any width.
+ *
+ * A shape carries either a label or a mark. The Developers page's pile is the
+ * second kind: seven tool marks in palette colours, at rest. `fall: false`
+ * leaves the pile standing, which is what that one wants — it sits beside the
+ * copy as a picture rather than arriving.
  */
 type Shape = {
   text?: string;
+  /**
+   * A single-colour mark in place of the label, drawn as a mask so one file
+   * takes whatever colour the shape gives it. Centred in the shape.
+   */
+  image?: string;
+  imageAlt?: string;
+  /** The mark's box, in the same design units as the shape's own. */
+  imageWidth?: number;
+  imageHeight?: number;
+  /** The mark's colour, by palette name or as a hex. */
+  imageColor?: string;
   /** Which of the three scratched sheets colours it. */
   tone?: string;
+  /**
+   * The sheet's colour by palette name or hex, for a pile outside those three.
+   * Out-ranks `tone`, which stays for the piles already built on it.
+   */
+  color?: string;
+  /** The wedge's own colour, which is a tint of the shape it falls on. */
+  shadowColor?: string;
   /** Design units, from the top left of the pile box. */
   x?: number;
   y?: number;
@@ -57,7 +81,21 @@ const {
   /** The box the positions above are measured in. */
   designWidth = 664,
   designHeight = 340,
+  /**
+   * Whether the pile drops into place when it is scrolled to.
+   *
+   * The Low Maintenance pile is the fall; the Developers one is the same
+   * arrangement standing still. Off, nothing is held back and no observer is
+   * attached, so the shapes are simply there.
+   */
+  fall = true,
+  /** The corner radius of a square shape, in pixels. */
+  radius = 19,
   class: className,
+  /* Taken rather than spread: the root writes a style of its own, and an
+     explicit attribute wins over `...htmlAttributes`, so a host's style was
+     being dropped without a word. */
+  style: hostStyle = "",
   "data-children-prop": childrenDataProp,
   useDefaultEditableBinding = false,
   _component,
@@ -65,6 +103,11 @@ const {
 } = Astro.props;
 
 const list: Shape[] = Array.isArray(shapes) ? shapes : [];
+
+/* A palette name or a hex. Named colours go through the token so a theme
+   change carries, which a copied hex would not. */
+const paint = (value?: string) =>
+  !value ? undefined : value.startsWith("#") ? value : `var(--${value})`;
 
 /**
  * Lowest edge falls first, which is the whole trick: a card that comes to rest
@@ -96,10 +139,23 @@ const settled = Math.round((list.length - 1) * STAGGER_MS + FALL_MS);
 /* The root's own prop-driven attributes, mirrored for the Visual Editor.
    CloudCannon keeps a region's root element and swaps only its contents, so
    these never change there without it. */
+/* The host's own custom properties, as a map: the mirror takes `style` as one
+   so a component only replaces the properties it knows about. */
+const hostStyleMap = Object.fromEntries(
+  String(hostStyle)
+    .split(";")
+    .map((pair) => pair.split(":"))
+    .filter(([name, value]) => name?.trim() && value !== undefined)
+    .map(([name, ...rest]) => [name.trim(), rest.join(":").trim()]),
+);
+
 const mirror = rootMirror({
+  class: { falls: fall !== false },
   style: {
+    ...hostStyleMap,
     "--pile-design-width": String(designWidth),
     "--pile-design-height": String(designHeight),
+    "--pile-radius": `${Number(radius) || 19}px`,
   },
 });
 
@@ -114,8 +170,15 @@ const arrayDataAttributes = effectiveChildrenProp
 ---
 
 <div
-  class:list={["shape-pile", className]}
-  style={`--pile-design-width: ${designWidth}; --pile-design-height: ${designHeight}`}
+  class:list={["shape-pile", fall !== false && "falls", className]}
+  style={[
+    `--pile-design-width: ${designWidth}`,
+    `--pile-design-height: ${designHeight}`,
+    `--pile-radius: ${Number(radius) || 19}px`,
+    hostStyle,
+  ]
+    .filter(Boolean)
+    .join("; ")}
   {...arrayDataAttributes}
   {...htmlAttributes}
 >
@@ -135,6 +198,9 @@ const arrayDataAttributes = effectiveChildrenProp
       ]}
       data-editable={effectiveChildrenProp ? "array-item" : undefined}
       style={[
+        shape.color ? `--scratch-fill: ${paint(shape.color)}` : "",
+        shape.shadowColor ? `--pile-shadow-color: ${paint(shape.shadowColor)}` : "",
+        shape.imageColor ? `--pile-mark-color: ${paint(shape.imageColor)}` : "",
         `--pile-x: ${((Number(shape.x) || 0) / designWidth) * 100}%`,
         `--pile-y: ${((Number(shape.y) || 0) / designHeight) * 100}%`,
         `--pile-w: ${((Number(shape.width) || 0) / designWidth) * 100}%`,
@@ -149,14 +215,33 @@ const arrayDataAttributes = effectiveChildrenProp
         `--pile-tilt: ${(Number(shape.rotation) || 0) - 9}deg`,
         `--pile-rise: ${-RISE}px`,
         `--pile-delay: ${(rank.get(index) ?? 0) * STAGGER_MS}ms`,
-      ].join("; ")}
+      ]
+        .filter(Boolean)
+        .join("; ")}
     >
-      <span
-        class="shape-pile-text"
-        data-prop="text"
-      >
-        {shape.text}
-      </span>
+      {shape.image ? (
+        /* A mask, not a picture: the marks are single-colour and the colour
+           belongs to the shape under them, so one file serves a white rose on
+           sunset and a dark bookshelf on blush. */
+        <span
+          class="shape-pile-mark logo-mark"
+          role={shape.imageAlt ? "img" : undefined}
+          aria-label={shape.imageAlt || undefined}
+          aria-hidden={shape.imageAlt ? undefined : "true"}
+          style={[
+            `--logo-mark-source: url("${resolveImageSource(shape.image)}")`,
+            `--mark-w: ${((Number(shape.imageWidth) || 0) / (Number(shape.width) || 1)) * 100}%`,
+            `--mark-h: ${((Number(shape.imageHeight) || 0) / (Number(shape.height) || 1)) * 100}%`,
+          ].join("; ")}
+        />
+      ) : (
+        <span
+          class="shape-pile-text"
+          data-prop="text"
+        >
+          {shape.text}
+        </span>
+      )}
       {Number(shape.shadowWidth) > 0 && (
         <span
           class="shape-pile-shadow"
@@ -213,7 +298,7 @@ const arrayDataAttributes = effectiveChildrenProp
          which out-ranks this. */
       --scratch-ink: var(--pile-backing, #f9e6df);
       block-size: var(--pile-h);
-      border-radius: 19px;
+      border-radius: var(--pile-radius, 19px);
       display: flex;
       inline-size: var(--pile-w);
       inset-block-start: var(--pile-y);
@@ -224,6 +309,10 @@ const arrayDataAttributes = effectiveChildrenProp
          triangle in the same place, duplicated into neighbouring cards, and it
          is the clipping that makes them read as one shadow crossing both. */
       overflow: hidden;
+      /* `.scratched` positions its host so the sheet cannot escape it, and
+         `utils` out-ranks this layer, so the arrangement is stated through
+         the token that rule reads rather than by repeating `position`. */
+      --scratch-position: absolute;
       /* The padding is on the label, not here.
 
          `cqi` measures a container's content box, so 8px of padding on the
@@ -238,6 +327,15 @@ const arrayDataAttributes = effectiveChildrenProp
 
     .shape-pile-shape.is-round {
       border-radius: var(--radius-full);
+    }
+
+    /* Sized as a share of its own shape, which is the container here, the same
+       way the label's size is. `.logo-mark` paints it in `currentColor`, so
+       the colour is one declaration rather than a second file per tile. */
+    .shape-pile-mark {
+      block-size: var(--mark-h, 60%);
+      color: var(--pile-mark-color, #1d1b17);
+      inline-size: var(--mark-w, 60%);
     }
 
     .shape-pile-text {
@@ -305,11 +403,13 @@ const arrayDataAttributes = effectiveChildrenProp
        pile would be invisible to a reader with no scripting, and gating it on a
        class the script adds instead shows the pile first and then hides it. */
     @media (scripting: enabled) {
-      .shape-pile-shape {
+      /* Only a pile that falls is held back. One that does not never gets
+         `data-fallen`, so without this gate it would stay invisible. */
+      .shape-pile.falls > .shape-pile-shape {
         opacity: 0;
       }
 
-      .shape-pile[data-fallen] > .shape-pile-shape {
+      .shape-pile.falls[data-fallen] > .shape-pile-shape {
         animation: shape-pile-drop 620ms var(--pile-delay) both;
       }
 
@@ -320,20 +420,20 @@ const arrayDataAttributes = effectiveChildrenProp
 
          Quick, too. A shadow appears because something hit — 320ms read as it
          being faded up by hand. */
-      .shape-pile-shadow {
+      .shape-pile.falls .shape-pile-shadow {
         opacity: 0;
       }
 
-      .shape-pile[data-fallen] .shape-pile-shadow {
+      .shape-pile.falls[data-fallen] .shape-pile-shadow {
         animation: shape-pile-shadow-in 150ms var(--shadow-delay, 1100ms) both;
       }
     }
 
     @media (prefers-reduced-motion: reduce) {
-      .shape-pile-shape,
-      .shape-pile[data-fallen] > .shape-pile-shape,
-      .shape-pile-shadow,
-      .shape-pile[data-fallen] .shape-pile-shadow {
+      .shape-pile.falls > .shape-pile-shape,
+      .shape-pile.falls[data-fallen] > .shape-pile-shape,
+      .shape-pile.falls .shape-pile-shadow,
+      .shape-pile.falls[data-fallen] .shape-pile-shadow {
         animation: none;
         opacity: 1;
       }

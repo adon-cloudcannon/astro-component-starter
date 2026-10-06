@@ -15,7 +15,13 @@ value:
   imageAspectRatio: portrait
   imageRounded: true
   imageBleed: false
+  mediaWidth: ""
   reverse: false
+  shapes: []
+  pileWidth: 664
+  pileHeight: 340
+  pileFall: true
+  pileRadius: 19
   sectionLabel: ""
   maxContentWidth: xl
   paddingHorizontal: gutter
@@ -66,7 +72,17 @@ groups:
       - imageAspectRatio
       - imageRounded
       - imageBleed
+      - mediaWidth
       - reverse
+  - heading: Pile
+    comment: A pile of shapes in place of the picture. Leave the list empty for a normal split.
+    collapsed: true
+    inputs:
+      - shapes
+      - pileWidth
+      - pileHeight
+      - pileFall
+      - pileRadius
   - heading: Section settings
     comment: Width, spacing, color scheme, and background for this section.
     collapsed: true

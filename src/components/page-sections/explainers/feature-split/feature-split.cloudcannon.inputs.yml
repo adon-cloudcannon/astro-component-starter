@@ -88,6 +88,20 @@ shapes:
     split.
   options:
     structures: _structures.shapePileShapes
+pileWidth:
+  type: number
+  comment: The width the pile's own positions are measured in. Rarely changed.
+pileHeight:
+  type: number
+  comment: The height the pile's own positions are measured in. Rarely changed.
+pileFall:
+  type: switch
+  comment: >-
+    Drop the pile into place when it is scrolled to. Off leaves it standing,
+    for a pile that is a picture beside the copy rather than an arrival.
+pileRadius:
+  type: number
+  comment: The corner radius of a square shape in the pile, in pixels.
 siteCards:
   type: object
   comment: >-

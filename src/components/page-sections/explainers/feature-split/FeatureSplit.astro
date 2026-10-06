@@ -37,6 +37,27 @@ const {
    */
   shapes = [],
   /**
+   * The box the pile's own positions are measured in, and whether it drops
+   * into place. Low Maintenance's pile is 664x340 and falls, which is where
+   * the defaults come from; the Developers one is 481x402 and stands still.
+   */
+  pileWidth = 664,
+  pileHeight = 340,
+  pileFall = true,
+  /** The corner radius of a square shape in the pile, in pixels. */
+  pileRadius = 19,
+  /**
+   * How far the pile reaches back across the copy column, as a share of the
+   * media pane, and how far its head sits below the band's own top padding.
+   *
+   * Low Maintenance's pile is drawn 664 wide against a 400 pane and starts
+   * 107 down, which is where the defaults come from. A pile drawn inside its
+   * own half — the Developers one is 679 to 1160 of a 1280 band — wants both
+   * at nothing, or it slides under the copy and leaves a hole above itself.
+   */
+  pileOverhang = 66,
+  pileHeadroom = 107,
+  /**
    * The stack of environment cards the design draws beside "Publish when
    * you're ready". Takes the media half in place of a picture.
    */
@@ -160,7 +181,14 @@ const mirror = rootMirror({ class: { "has-pile": shapes?.length > 0 } });
       <ShapePile
         slot="second"
         class="feature-split-pile"
+        style={`--pile-overhang: ${Number(pileOverhang) || 0}%; --pile-headroom: ${
+          Number(pileHeadroom) || 0
+        }px`}
         shapes={shapes}
+        designWidth={pileWidth}
+        designHeight={pileHeight}
+        fall={pileFall}
+        radius={pileRadius}
         data-children-prop="shapes"
       />
     ) : (
@@ -210,18 +238,17 @@ const mirror = rootMirror({ class: { "has-pile": shapes?.length > 0 } });
       text-wrap: wrap;
     }
 
-    .feature-split .feature-split-pile {
-      /* A share of the pane, not a length: the panes shrink with the column
-         below 1096 and a fixed overhang would eat the copy. The media pane is
-         400 of the 1040 column, so 66% of it is the 264 that takes the pile to
-         the design's 664 starting at 496. */
-      --pile-overhang: 66%;
-      /* The design's band is 527 with the 340 pile on its foot, so 187 sits
-         above it, of which the band's own top padding is 80. Without the rest
-         the band came out 420, the pile rode up into the copy, and the heading
-         ran behind the card that reaches furthest back. */
-      --pile-headroom: 107px;
+    /* `--pile-overhang` and `--pile-headroom` come from the props, inline.
 
+       A share of the pane, not a length: the panes shrink with the column
+       below 1096 and a fixed overhang would eat the copy. Low Maintenance's
+       media pane is 400 of the 1040 column, so 66% of it is the 264 that
+       takes the pile to the design's 664 starting at 496. Its band is 527
+       with the 340 pile on its foot, so 187 sits above it, of which the
+       band's own top padding is 80 — the other 107 is the headroom. Without
+       it that band came out 420, the pile rode up into the copy, and the
+       heading ran behind the card that reaches furthest back. */
+    .feature-split .feature-split-pile {
       align-self: end;
       margin-block-start: var(--pile-headroom);
       inline-size: calc(100% + var(--pile-overhang));
@@ -229,10 +256,11 @@ const mirror = rootMirror({ class: { "has-pile": shapes?.length > 0 } });
       margin-inline-start: calc(-1 * var(--pile-overhang));
     }
 
-    /* Stacked, there is no copy column to reach back into. */
+    /* Stacked, there is no copy column to reach back into. The inline style
+       the prop writes is on the element, so this has to out-rank it. */
     @media (max-width: 699px) {
       .feature-split .feature-split-pile {
-        --pile-overhang: 0%;
+        --pile-overhang: 0% !important;
       }
     }
 

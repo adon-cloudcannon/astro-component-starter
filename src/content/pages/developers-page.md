@@ -275,6 +275,91 @@ pageSections:
       - _component: building-blocks/core-elements/button
         text: Explore open-source tools
         variant: primary
+    mediaWidth: 481
+    pileWidth: 481
+    pileHeight: 402
+    pileFall: false
+    pileRadius: 15
+    pileOverhang: 0
+    pileHeadroom: 0
+    shapes:
+      - image: /src/assets/images/marketing/tools/tool-rosey.png
+        imageWidth: 89
+        imageHeight: 93
+        imageColor: light-sand
+        color: sunset
+        x: 220
+        'y': 0
+        width: 147
+        height: 147
+      - image: /src/assets/images/marketing/tools/tool-bookshelf.png
+        imageWidth: 61
+        imageHeight: 95
+        color: blush
+        shadowColor: '#ffecef'
+        shadowX: -71
+        shadowY: 0
+        shadowWidth: 228
+        shadowHeight: 29
+        x: 295
+        'y': 147
+        width: 146
+        height: 125
+      - image: /src/assets/images/marketing/tools/tool-trough.png
+        imageWidth: 69
+        imageHeight: 46
+        imageColor: light-sand
+        color: '#1c1b17'
+        x: 169
+        'y': 271
+        width: 170
+        height: 131
+      - image: /src/assets/images/marketing/tools/tool-acorn.png
+        imageWidth: 97
+        imageHeight: 110
+        imageColor: light-sand
+        color: pacific
+        shadowColor: harbour
+        shadowX: 65
+        shadowY: 0
+        shadowWidth: 113
+        shadowHeight: 29
+        x: 0
+        'y': 246
+        width: 169
+        height: 156
+      - image: /src/assets/images/marketing/tools/tool-compass.png
+        imageWidth: 75
+        imageHeight: 50
+        color: golden
+        shadowColor: harbour
+        shadowX: -55
+        shadowY: 0
+        shadowWidth: 228
+        shadowHeight: 29
+        x: 339
+        'y': 271
+        width: 142
+        height: 131
+      - image: /src/assets/images/marketing/tools/tool-sparkles.png
+        imageWidth: 66
+        imageHeight: 66
+        color: harbour
+        round: true
+        x: 169
+        'y': 145
+        width: 126
+        height: 126
+      - image: /src/assets/images/marketing/tools/tool-handyman.png
+        imageWidth: 67
+        imageHeight: 67
+        imageColor: light-sand
+        color: moss
+        round: true
+        x: 43
+        'y': 116
+        width: 131
+        height: 131
     backgroundColor: sand
     background:
       type: pattern

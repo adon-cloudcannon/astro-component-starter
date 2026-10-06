@@ -1,6 +1,8 @@
 _component: building-blocks/wrappers/shape-pile
 designWidth: 664
 designHeight: 340
+fall: true
+radius: 19
 shapes:
   - text: A thing you no longer worry about
     tone: golden

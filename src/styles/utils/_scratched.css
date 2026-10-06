@@ -68,8 +68,13 @@
        section wrapper happened to be `relative` and painted the whole band:
        `isolation` clamps where it lands in the paint order but not how big it
        is, so the scratches came out over a button two blocks above it.
-       Every host that worked was one that happened to set this itself. */
-    position: relative;
+       Every host that worked was one that happened to set this itself.
+
+       Through a token, because `utils` out-ranks `components` and a host that
+       positions itself cannot out-specify this: stating it flat made every
+       shape in the pile `relative` and the arrangement collapsed into a
+       column. A host that needs its own says so by setting the property. */
+    position: var(--scratch-position, relative);
   }
 
   /**

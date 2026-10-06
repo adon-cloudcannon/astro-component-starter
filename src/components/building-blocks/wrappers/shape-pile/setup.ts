@@ -11,6 +11,8 @@
 const THRESHOLD = 0.55;
 
 export function setupShapePile(pile: HTMLElement): void {
+  // A pile that does not fall has nothing to wait for.
+  if (!pile.classList.contains("falls")) return;
   if (pile.hasAttribute("data-pile-initialized")) return;
   pile.setAttribute("data-pile-initialized", "");
 

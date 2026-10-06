@@ -7,9 +7,45 @@ designWidth:
 designHeight:
   type: number
   comment: The height the positions below are measured in. Rarely changed.
+fall:
+  type: switch
+  comment: >-
+    Drop the shapes into place when the pile is scrolled to. Off leaves the
+    pile standing, for one that is a picture beside the copy rather than an
+    arrival.
+radius:
+  type: number
+  comment: The corner radius of a square shape, in pixels.
 text:
   type: text
   comment: The label on the shape.
+image:
+  type: image
+  comment: >-
+    A single-colour mark in place of the label, drawn as a mask so one file
+    takes whatever colour the shape gives it.
+imageAlt:
+  type: text
+  comment: What the mark is, for a screen reader. Empty makes it decoration.
+imageWidth:
+  type: number
+  comment: The mark's width, in the same design units as the shape's own.
+imageHeight:
+  type: number
+  comment: The mark's height, in design units.
+imageColor:
+  type: text
+  comment: The mark's colour, by palette name (light-sand, sunset...) or as a hex.
+color:
+  type: text
+  comment: >-
+    The sheet's colour by palette name or hex. Out-ranks the three tones
+    below, which stay for the piles already built on them.
+shadowColor:
+  type: text
+  comment: >-
+    The cast wedge's colour, by palette name or hex. It multiplies into the
+    shape under it, so it is a tint rather than a grey.
 tone:
   type: select
   comment: Which scratched sheet colours the shape.
