@@ -507,16 +507,21 @@ const Stack = interactive ? "button" : "div";
       z-index: 1;
     }
 
-    /* Turned half round, not mirrored.
+    /* Turned 200 degrees: half round, and 20 flatter.
 
-       The drawing is supplied with its tip at the top left and its leaflets
-       hanging off the underside of the spine. The design draws it the other
-       way up: the spine climbing from the lower left to a tip at the upper
-       right, with the leaflets standing along the top edge and their blue
-       ends catching the band. A horizontal mirror alone gives the climb and
-       keeps the leaflets underneath, which is a different plant. */
+       Half round because the drawing is supplied tip-up-left with its
+       leaflets hanging under the spine, and the design draws it the other way
+       up — the spine climbing from the lower left to a tip at the upper
+       right, leaflets standing along the top edge with their blue ends
+       catching the band. A horizontal mirror gives the climb and keeps the
+       leaflets underneath, which is a different plant.
+
+       The extra 20 is measured rather than judged. Fitting a line to the top
+       edge of the blade puts the design's at -11.8 degrees and the drawing's
+       own at -31.6, so turned only half round the leaf dives across the band
+       where the design lays it nearly flat. */
     .photo-stack-embellishment.is-band img {
-      scale: -1 -1;
+      rotate: 200deg;
     }
 
     .photo-stack-embellishment.is-band[data-side="start"] {
