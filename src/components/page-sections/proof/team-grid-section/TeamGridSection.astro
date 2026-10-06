@@ -211,19 +211,11 @@ const offsetAt = (index: number) => (index % laneCount) % 2 === 1;
        odd ones down the first column on its own, which is what the lanes were
        doing by hand. */
     .team-grid .team-grid-lanes {
-      /* How far a column drifts either way, and the lift that keeps the drift
-         inside the wall.
-
-         The wall clips its columns, so a column that drifts down uncovers the
-         band at the top: at the moment the band enters, the rising column was
-         36 lower than it rests and a strip of band showed over the first
-         card. Lifting the whole grid by that same 36 means the drift's lowest
-         point is where the cards used to rest, and the top edge stays covered
-         the whole way past. The JS reads the range from here. */
+      /* How far a column drifts either way. The JS reads it from here, and
+         the bias below is half of it, so the two cannot come apart. */
       --team-grid-range: 72px;
 
       display: grid;
-      translate: 0 calc(var(--team-grid-range) / -2);
       gap: 1rem;
       grid-template-columns: repeat(var(--team-grid-lanes, 2), minmax(0, 1fr));
       inset-block-start: 0;
@@ -239,14 +231,40 @@ const offsetAt = (index: number) => (index % laneCount) % 2 === 1;
        as lifting the whole column, and it leaves the grid's own rows where
        they are. The wall is out of flow and clipped, so the height it reports
        is not load-bearing either way. */
-    /* The design's offset and the drift compose in one translate: a second
-       `translate` on the same element replaces the first rather than adding
-       to it. */
+    /* The design's offset, the bias and the drift compose in one translate: a
+       second `translate` on the same element replaces the first rather than
+       adding to it. */
     .team-grid .team-grid-lanes > * {
-      translate: 0 calc(var(--team-grid-offset, 0px) + var(--team-grid-drift, 0px));
+      translate: 0
+        calc(var(--team-grid-offset, 0px) + var(--team-grid-bias, 0px) + var(--team-grid-drift, 0px));
     }
 
+    /* Each column sits half a range away from the end it would otherwise
+       uncover, so neither edge of the wall is ever bare.
+
+       The wall clips its columns and each one travels half a range either
+       way, so a column has to overhang by that much at both ends. Neither
+       does on its own. The rising column starts half a range low and showed
+       a strip of band over its first card; the falling column ends half a
+       range high and showed one under its last, which was 60px of empty band
+       under Chris. One lift for the whole grid can only fix one of those, and
+       fixing the top made the bottom worse by the same amount.
+
+       So the bias goes per column, against that column's own travel: the
+       rising one starts half a range up, the falling one half a range down,
+       and each is at its resting place at the end it has least room at. The
+       room is there for both — the grid runs 135 past the wall's foot, and
+       the offset column starts 123 above its head — so this holds without
+       touching the range or the design's offset. It is also why a shorter
+       column than this needs a shorter range, not a bigger lift. */
+    .team-grid .team-grid-lanes > * {
+      --team-grid-bias: calc(var(--team-grid-range) / -2);
+    }
+
+    /* `offsetAt` marks the odd lanes and the drift falls on those same lanes,
+       so this selector is the falling column by construction. */
     .team-grid .team-grid-lanes > .is-offset {
+      --team-grid-bias: calc(var(--team-grid-range) / 2);
       --team-grid-offset: -7.6875rem;
     }
   }
@@ -264,6 +282,7 @@ const offsetAt = (index: number) => (index % laneCount) % 2 === 1;
 
       /* Stacked, the columns are one column: no offset and no drift. */
       .team-grid .team-grid-lanes > * {
+        --team-grid-bias: 0px;
         --team-grid-drift: 0px;
         --team-grid-offset: 0px;
       }
