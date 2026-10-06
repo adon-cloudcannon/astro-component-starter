@@ -371,7 +371,20 @@ const mirror = rootMirror({
 
     /* A flex item will not shrink below its content without this, so the role
        would otherwise set the width of the row. */
+    /* The name and the byline sit in a measure, not in whatever the foot has
+       left over.
+
+       Unbounded, "Vice President Operations, Gabriel Maggio Construction" ran
+       339 across before it broke, which reads as a line of copy rather than
+       as a byline — and it broke late, leaving one word on the second line.
+       15rem makes it break nearer the middle.
+
+       Sized off the design, which draws these bylines at 356 on one line,
+       217 over two and 141 over two: 240 is inside the widest of the wrapped
+       ones, so the long bylines take two lines and a short one like "CEO, DX"
+       still takes one. */
     .testimonial-bento-attribution {
+      max-inline-size: 15rem;
       min-inline-size: 0;
     }
 
