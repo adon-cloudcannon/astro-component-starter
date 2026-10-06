@@ -9,6 +9,7 @@ value:
   subtext: One line that makes the next step obvious.
   subtextSize: md
   subtextWidth: ""
+  alignmentHorizontal: center
   buttonSections:
     - _component: building-blocks/core-elements/button
       text: Get started
@@ -19,6 +20,10 @@ value:
       iconPosition: before
       variant: primary
       size: md
+  imageSource: ""
+  imageWidth: intrinsic
+  imageScratch: ""
+  imageAlt: ""
   sectionLabel: ""
   maxContentWidth: lg
   paddingHorizontal: gutter
@@ -27,8 +32,6 @@ value:
   background:
     type: image
     imageSource: ""
-    imageWidth: intrinsic
-    imageScratch: ""
     imageAlt: ""
     positionVertical: top
     positionHorizontal: center
@@ -65,7 +68,16 @@ groups:
       - subtext
       - subtextSize
       - subtextWidth
+      - alignmentHorizontal
       - buttonSections
+  - heading: Picture
+    comment: A picture beneath the call to action, and how it is drawn.
+    collapsed: true
+    inputs:
+      - imageSource
+      - imageWidth
+      - imageScratch
+      - imageAlt
   - heading: Section settings
     comment: Width, spacing, color scheme, and background for this section.
     collapsed: true

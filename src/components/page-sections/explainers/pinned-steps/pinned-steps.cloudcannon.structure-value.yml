@@ -30,6 +30,7 @@ value:
       mediaSections: []
   reverse: false
   mediaWidth: half
+  copyColor: ""
   showProgress: true
   sectionLabel: ""
   maxContentWidth: xl
@@ -68,6 +69,7 @@ groups:
     inputs:
       - reverse
       - mediaWidth
+      - copyColor
       - showProgress
       - maxContentWidth
       - paddingHorizontal

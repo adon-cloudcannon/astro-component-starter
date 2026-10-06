@@ -177,11 +177,13 @@ pageSections:
   - _component: page-sections/conversion/cta-center
     heading: The tool you’ve been looking for
     headingSize: lg
+    alignmentHorizontal: start
     backgroundColor: light-sand
   - _component: page-sections/explainers/pinned-steps
     eyebrow: ''
     heading: ''
     subtext: ''
+    copyColor: light-sand
     steps:
       - contentSections:
           - _component: building-blocks/core-elements/heading
@@ -258,8 +260,10 @@ pageSections:
         text: Get skills repo
         variant: primary
     backgroundColor: light-sand
-    imageSource: /src/assets/images/marketing/ribbon-01-1.png
-    imageAlt: ''
+    imageWidth: full
+    imageScratch: kiwi
+    imageSource: /src/assets/images/marketing/own-content-combined.png
+    imageAlt: A commit history beside a card listing content, code and commits
   - _component: page-sections/explainers/feature-split
     heading: Open-source ecosystem
     headingSize: lg

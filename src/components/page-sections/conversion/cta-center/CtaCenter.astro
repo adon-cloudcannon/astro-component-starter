@@ -59,6 +59,14 @@ const {
    * it costs nothing and takes any colour.
    */
   imageScratch = "",
+  /**
+   * Which way the band sets its words.
+   *
+   * Centred is the shape this section is named for and is the default. The
+   * Developers page draws one of these left: the heading sits at the content
+   * column's own edge, x=120, with `align=LEFT` on the node.
+   */
+  alignmentHorizontal = "center",
   imageAlt = "",
   /**
    * Drawings hung off the band's own bottom corners.
@@ -98,7 +106,7 @@ const subtextCap = subtextMeasure(subtextWidth);
 ---
 
 <CustomSection
-  class:list={["cta-center", className]}
+  class:list={["cta-center", `align-${alignmentHorizontal}`, className]}
   label={sectionLabel}
   maxContentWidth={maxContentWidth}
   paddingHorizontal={paddingHorizontal}
@@ -139,27 +147,28 @@ const subtextCap = subtextMeasure(subtextWidth);
   <SimpleText
     class="eyebrow"
     size="sm"
-    alignmentHorizontal="center"
+    alignmentHorizontal={alignmentHorizontal}
     data-prop="eyebrow"
     text={eyebrow}
   />
   <Heading
     level={headingLevel}
     size={headingSize}
-    alignmentHorizontal="center"
+    alignmentHorizontal={alignmentHorizontal}
     data-prop="heading"
     text={heading}
   />
   <Text
     class="subtext"
-    style={subtextCap ? `max-inline-size: ${subtextCap}; margin-inline: auto; justify-self: center` : undefined}    size={subtextSize}
-    alignmentHorizontal="center"
+    style={subtextCap ? `max-inline-size: ${subtextCap}; margin-inline: auto; justify-self: center` : undefined}
+    size={subtextSize}
+    alignmentHorizontal={alignmentHorizontal}
     data-prop="subtext"
     text={subtext}
   />
   <ButtonGroup
     buttonSections={buttonSections}
-    alignmentHorizontal="center"
+    alignmentHorizontal={alignmentHorizontal}
     data-children-prop="buttonSections"
   />
   {imageSource && (
@@ -199,6 +208,15 @@ const subtextCap = subtextMeasure(subtextWidth);
        paragraph on the site. */
     .cta-center .subtext {
       --space-before: var(--space-before-default);
+    }
+
+    /* Left-aligned, the measure that centres the line is what pushes it off
+       the column's edge: `subtextWidth` sets `margin-inline: auto` so it can
+       sit in the middle of the band. Run from the start instead. */
+    .cta-center.align-start .subtext,
+    .cta-center.align-start .cta-center-media {
+      justify-self: start;
+      margin-inline: 0;
     }
 
     /* Full width of the column, under the copy. The gap moved to the wrapper

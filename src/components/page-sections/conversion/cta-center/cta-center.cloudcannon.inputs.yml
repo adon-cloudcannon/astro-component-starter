@@ -274,6 +274,18 @@ backgroundColor:
         - key: color
       text:
         - key: name
+alignmentHorizontal:
+  type: select
+  label: Alignment
+  comment: >-
+    Whether the band's words are centred or run from the column's left edge.
+  options:
+    values:
+      - id: start
+        name: Left
+      - id: center
+        name: Centered
+
 imageSource:
   type: image
   comment: A picture beneath the call to action.

@@ -279,6 +279,12 @@ backgroundColor:
 progressColor:
   type: text
   comment: The palette colour the progress fill is drawn in, e.g. sunset, pacific-300.
+copyColor:
+  type: text
+  comment: >-
+    A palette colour painted behind the copy half of the band, from the page's
+    edge to the middle, top to bottom. Empty leaves the copy on the band's own
+    colour.
 stepScroll:
   type: number
   comment: >-

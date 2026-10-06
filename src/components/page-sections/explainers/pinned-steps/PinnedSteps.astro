@@ -62,6 +62,15 @@ const {
    * editor, and carrying them meant a size travelling with every stepper.
    * Same decision as the one pitch and one dot the patterns settled on.
    */
+  /**
+   * A solid block of colour behind the copy column, run to the page edge.
+   *
+   * The design paints the Developers band this way: a 513-wide rectangle of
+   * #FFFCF3 from x=0, the band's full height, with the media and its pattern
+   * on the other side of it. Empty leaves the copy on the band's own colour,
+   * which is what every other stepper does.
+   */
+  copyColor = "",
   numbered = false,
   showProgress = true,
   /**
@@ -176,6 +185,7 @@ const mirror = rootMirror({
 
   <CustomSection
     class="pinned-steps-stage"
+    style={copyColor ? `--pinned-steps-copy-color: var(--${copyColor})` : undefined}
     label={sectionLabel}
     maxContentWidth={maxContentWidth}
     paddingHorizontal={paddingHorizontal}
@@ -186,6 +196,11 @@ const mirror = rootMirror({
     background={background}
     haze={haze}
   >
+    {/* The band slot, so the panel is drawn against the section's full width
+        rather than inside its 1040 content column. A comment inside a
+        `{cond && (` is a parse error, not a comment, so it lives here. */}
+    {copyColor && <div class="pinned-steps-copy-panel" slot="band" aria-hidden="true"></div>}
+
     {hasHeader && (
       <div class="pinned-steps-header flow">
         {/* Each guarded on its own content. An empty element is still a
@@ -425,6 +440,40 @@ const mirror = rootMirror({
       display: grid;
     }
 
+    /* The band's own half, painted on the stage.
+
+       The stage is the pinned band itself — 1280 by 820 here — so a panel in
+       it is top to bottom and edge to edge without any bleed arithmetic. The
+       copy element could not do this job: it is only as wide as its own text,
+       325 of a 520 track, and only as tall as the text in it. */
+    .pinned-steps-copy-panel {
+      background-color: var(--pinned-steps-copy-color);
+      inset-block: 0;
+      inset-inline-end: 50%;
+      inset-inline-start: 0;
+      pointer-events: none;
+      position: absolute;
+      /* Above the band's own pattern layer, which is what it has to cover:
+         the panel and the band are the same colour, so the only thing that
+         reads is the grid stopping at the halfway line. CustomSection draws
+         that pattern at z-index 10, so 1 sat under it and the grid carried
+         straight across. */
+      z-index: 11;
+    }
+
+    .pinned-steps-layout.reversed ~ .pinned-steps-copy-panel,
+    .pinned-steps-stage:has(.pinned-steps-layout.reversed) > .pinned-steps-copy-panel {
+      inset-inline-end: 0;
+      inset-inline-start: 50%;
+    }
+
+    /* Above the panel. The band slot is drawn before the content, so the
+       content only needs a stacking position of its own to sit on top. */
+    .pinned-steps-stage:has(.pinned-steps-copy-panel) > .outer-content > .content {
+      position: relative;
+      z-index: 12;
+    }
+
     /* A media that carries a full-bleed panel is not a picture in a column:
        the design paints that half of the band, corner to corner. So the row
        stretches, the column takes the band's whole height, and the panel
@@ -620,6 +669,11 @@ const mirror = rootMirror({
         &.reversed {
           direction: ltr;
         }
+      }
+
+      /* One column, so there is no half of the band to paint. */
+      .pinned-steps-copy-panel {
+        display: none;
       }
 
       .pinned-steps-media,
