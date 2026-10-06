@@ -524,6 +524,16 @@ const Stack = interactive ? "button" : "div";
       rotate: 200deg;
     }
 
+    /* The turn makes the drawing bigger than the box it was laid out in — a
+       548x428 leaf turned 200 degrees needs 661x590 — and `Image` wraps every
+       picture in two elements that both clip. So the leaf came out with a
+       straight vertical cut 56px in from its left end, which reads as a badly
+       cropped file rather than as a box being too small for its contents. */
+    .photo-stack-embellishment.is-band .image,
+    .photo-stack-embellishment.is-band .image-inner {
+      overflow: visible;
+    }
+
     .photo-stack-embellishment.is-band[data-side="start"] {
       inset-inline-end: auto;
       inset-inline-start: -18%;
