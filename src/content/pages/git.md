@@ -73,6 +73,7 @@ pageSections:
   - _component: page-sections/proof/testimonial-quote
     variant: split-person
     quoteSize: sm
+    cardWidth: full
     quotes:
       - text: >-
           Having that flexibility of having everything live in a Git repository is pretty amazing.

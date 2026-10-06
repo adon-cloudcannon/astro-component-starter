@@ -556,12 +556,19 @@ const cardScheme = tone === "plain" ? undefined : tone === "light" ? "light" : "
         display: grid;
       }
 
+      /* 30/70, not the sheet's 22/78.
+
+         22 is what the comparison sheet draws, where the name sits under the
+         face and has the column to itself. The page puts the name beside the
+         face, so 22 left 80px for it: "Justin Parsons" broke over two lines
+         and his role over six. The page's own columns are a 270 person
+         against a 626 quote, which is 30/70. */
       .testimonial-quote-card[data-layout="split-person"] .testimonial-quote-slide {
-        grid-template-columns: minmax(0, 22%) minmax(0, 1fr);
+        grid-template-columns: minmax(0, 30%) minmax(0, 1fr);
       }
 
       .testimonial-quote-card[data-layout="split-quote"] .testimonial-quote-slide {
-        grid-template-columns: minmax(0, 1fr) minmax(0, 22%);
+        grid-template-columns: minmax(0, 1fr) minmax(0, 30%);
       }
 
       /* Column order. The person is written after the quote in the markup
@@ -572,35 +579,65 @@ const cardScheme = tone === "plain" ? undefined : tone === "light" ? "light" : "
         padding-inline-start: var(--testimonial-quote-pad);
       }
 
-      .testimonial-quote-card[data-layout="split-person"] .testimonial-quote-who {
+      .testimonial-quote-card[data-layout="split-quote"] .testimonial-quote-column {
+        border-inline-start: var(--border-width-sm) solid var(--testimonial-quote-edge);
+        padding-inline-start: var(--testimonial-quote-pad);
+      }
+
+      /* The link sits in the quote's column, under the words. */
+      .testimonial-quote-aside {
+        grid-column: 2;
+        margin-block-start: var(--spacing-lg);
+        padding-inline-start: var(--testimonial-quote-pad);
+      }
+
+      .testimonial-quote-card[data-layout="split-quote"] .testimonial-quote-aside {
+        grid-column: 1;
+        padding-inline-start: 0;
+      }
+
+      /* The column holds the client's mark at the top and the person at the
+         foot, with the card's own height between them. */
+      .testimonial-quote-column {
+        align-content: space-between;
+        display: grid;
+        gap: var(--spacing-xl);
         grid-column: 1;
         grid-row: 1;
       }
 
-      .testimonial-quote-card[data-layout="split-quote"] .testimonial-quote-who {
-        border-inline-start: var(--border-width-sm) solid var(--testimonial-quote-edge);
+      .testimonial-quote-card[data-layout="split-quote"] .testimonial-quote-column {
         grid-column: 2;
-        padding-inline-start: var(--testimonial-quote-pad);
       }
 
-      /* In a column of its own the person stacks, with a bigger face: the
-         sheet draws 98 against the foot row's 78. Beside a quote this is the
-         block's own heading rather than a byline under it. */
+      /* The face sits beside the name, not above it.
+      
+         The comparison sheet stacks them under a 98 disc and this followed it
+         at 72. The page draws neither: a 48 disc with the name and role to its
+         right, under the client's mark. The sheet is a study of the layouts,
+         the page is the design. */
       .testimonial-quote-card[data-layout="split-person"] .testimonial-quote-who,
       .testimonial-quote-card[data-layout="split-quote"] .testimonial-quote-who {
-        /* `align-content` as well as `align-items`: a grid's auto rows absorb
-           the spare height a stretched column now has, so without it the face
-           and the name drift apart to fill the card. */
-        align-content: start;
-        align-items: start;
+        align-items: center;
+        column-gap: var(--spacing-md);
         display: grid;
-        gap: var(--spacing-lg);
+        grid-template-columns: auto minmax(0, 1fr);
       }
 
       .testimonial-quote-card[data-layout="split-person"] .testimonial-quote-avatar,
       .testimonial-quote-card[data-layout="split-quote"] .testimonial-quote-avatar {
-        block-size: 72px;
-        inline-size: 72px;
+        block-size: 48px;
+        inline-size: 48px;
+      }
+
+      /* The mark runs the column's width rather than the foot's fixed height,
+         since it is the first thing in the column rather than a trailing
+         detail. */
+      .testimonial-quote-card[data-layout="split-person"] .testimonial-quote-logo,
+      .testimonial-quote-card[data-layout="split-quote"] .testimonial-quote-logo {
+        block-size: auto;
+        inline-size: 100%;
+        max-inline-size: 213px;
       }
 
       /* --- the carousel's controls ----------------------------------- */
