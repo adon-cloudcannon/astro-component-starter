@@ -44,6 +44,38 @@ subtext:
     underline: false
     bulletedlist: false
     numberedlist: false
+subtextSize:
+  type: select
+  comment: >-
+    How big the supporting line under the heading is. Regular is the size the
+    design uses on most sections.
+  options:
+    values:
+      - id: md
+        name: Small
+      - id: lg
+        name: Regular
+      - id: xl
+        name: Large
+subtextWidth:
+  type: select
+  label: Subtext width
+  comment: >-
+    How wide the supporting line is allowed to run before it wraps. The design
+    keeps a centred one around Medium rather than letting it run the full
+    width of the section.
+  options:
+    values:
+      - id: ""
+        name: Full width
+      - id: sm
+        name: Narrow
+      - id: md
+        name: Medium
+      - id: lg
+        name: Wide
+      - id: xl
+        name: Extra wide
 buttonSections:
   type: array
   comment: Call-to-action buttons.

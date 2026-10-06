@@ -4,8 +4,11 @@ import Button from "@core-elements/button/Button.astro";
 import CustomSection from "@builders/custom-section/CustomSection.astro";
 import Testimonial from "@core-elements/testimonial/Testimonial.astro";
 import Image from "@core-elements/image/Image.astro";
+import SimpleText from "@core-elements/simple-text/SimpleText.astro";
 
 const {
+  /** A label over the quote. Our Values puts "WE BELIEVE" above its statement. */
+  eyebrow = "",
   text = "",
   authorName = "",
   authorDescription = "",
@@ -177,6 +180,16 @@ const mirror = rootMirror({
         </div>
       )}
     </div>
+  )}
+
+  {eyebrow && (
+    <SimpleText
+      class="eyebrow"
+      size="sm"
+      alignmentHorizontal={isSplit ? "start" : "center"}
+      text={eyebrow}
+      data-prop="eyebrow"
+    />
   )}
 
   {/* The accent is on the quote, not the band.

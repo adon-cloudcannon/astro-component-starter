@@ -1,3 +1,6 @@
+eyebrow:
+  type: text
+  comment: A short label over the quote. Optional.
 layout:
   type: select
   comment: Centred on its own, or split with the customer's mark beside it.

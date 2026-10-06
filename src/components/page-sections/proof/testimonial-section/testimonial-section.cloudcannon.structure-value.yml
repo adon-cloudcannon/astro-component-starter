@@ -3,6 +3,7 @@ icon: format_quote
 description: Customer quote with the author's name and photo.
 value:
   _component: page-sections/proof/testimonial-section
+  eyebrow: \"\"
   layout: centered
   company: ""
   logoSource: ""
