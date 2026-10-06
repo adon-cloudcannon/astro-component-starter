@@ -62,9 +62,9 @@ pageSections:
           width: 40
           height: 34
           monochrome: true
-      headingPlacement: inline
     style:
       backgroundColor: sand
+      headingPlacement: inline
   - _component: page-sections/conversion/cta-center
     content:
       heading: Ready, set, code

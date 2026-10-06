@@ -23,7 +23,7 @@ content.logos:
   comment: Client logos shown in the strip.
   options:
     structures: _structures.logoCloudLogos
-content.headingPlacement:
+style.headingPlacement:
   type: select
   comment: >-
     Where the label sits. Above stacks it over the marks; inline runs it along
@@ -34,10 +34,10 @@ content.headingPlacement:
         name: Above the logos
       - id: inline
         name: Inline, to the left
-content.grayscale:
+style.grayscale:
   type: switch
   comment: Render logos in muted grayscale. Linked logos restore color on hover.
-content.scrolling:
+style.scrolling:
   type: switch
   comment: Scrolls the logos as a continuous marquee instead of a static row.
 
@@ -48,7 +48,7 @@ content.scrolling:
 content.sectionLabel:
   type: text
   comment: Names the section in the editor and sets its anchor id.
-content.maxContentWidth:
+style.maxContentWidth:
   type: select
   comment: Maximum width of the content.
   options:
@@ -69,7 +69,7 @@ content.maxContentWidth:
         name: 2xl
       - id: 3xl
         name: 3xl
-content.paddingHorizontal:
+style.paddingHorizontal:
   type: select
   comment: Horizontal padding around the content.
   options:
@@ -92,7 +92,7 @@ content.paddingHorizontal:
         name: 2xl
       - id: 3xl
         name: 3xl
-content.paddingVertical:
+style.paddingVertical:
   type: select
   comment: Vertical padding around the content.
   options:

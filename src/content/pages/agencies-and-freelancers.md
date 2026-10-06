@@ -63,9 +63,9 @@ pageSections:
           height: 31
           monochrome: true
           aspect: 90 / 28
-      headingPlacement: inline
     style:
       backgroundColor: sand
+      headingPlacement: inline
   - _component: page-sections/proof/testimonial-wall
     content:
       eyebrow: SUCCESS STORIES

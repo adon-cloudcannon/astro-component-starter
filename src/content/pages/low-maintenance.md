@@ -67,9 +67,9 @@ pageSections:
           height: 31
           monochrome: true
           aspect: 90 / 28
-      headingPlacement: inline
     style:
       backgroundColor: sand
+      headingPlacement: inline
   - _component: page-sections/conversion/cta-center
     content:
       heading: Give editors a CMS, keep a static site

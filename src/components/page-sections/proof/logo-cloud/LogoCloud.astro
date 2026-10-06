@@ -24,7 +24,20 @@ type LogoProps = {
 
 /* `content` and `style` are the editor's tabs, flattened straight back into
    the names below. `at()` writes the frontmatter path a binding needs. */
-const { props, at } = nestedProps(Astro.props);
+const { props, at } = nestedProps(Astro.props, {
+  /* How the row is laid out and finished is part of its look, not its copy:
+     the band holds a heading and the marks, and everything else about it is
+     a setting. `background` is gone — the row is never a backdrop for one,
+     and the colour is enough. */
+  extraStyleKeys: [
+    "headingPlacement",
+    "grayscale",
+    "scrolling",
+    "maxContentWidth",
+    "paddingHorizontal",
+    "paddingVertical",
+  ],
+});
 
 const {
   heading = "",
@@ -39,7 +52,6 @@ const {
   colorScheme = "inherit",
   lockColorScheme = false,
   backgroundColor = "light-sand",
-  background,
   haze = false,
   class: className,
   useDefaultEditableBinding = false,
@@ -63,7 +75,6 @@ const mirror = rootMirror({ "data-heading-inline": headingPlacement === "inline"
   colorScheme={colorScheme}
   lockColorScheme={lockColorScheme}
   backgroundColor={backgroundColor}
-  background={background}
   haze={haze}
   useDefaultEditableBinding={useDefaultEditableBinding}
   {...htmlAttributes}
