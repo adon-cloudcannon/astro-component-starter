@@ -281,6 +281,7 @@ pageSections:
     heading: Wanna learn more about our product?
     headingSize: lg
     linkText: Explore visual editing
+    link: /visual-editing/
     imageSource: /src/assets/images/marketing/rocks-corner-3806-70523.png
     imageAlt: ''
 ---
