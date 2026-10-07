@@ -45,11 +45,6 @@ pageSections:
       backgroundColor: light-sand
   - _component: page-sections/proof/testimonial-quote
     content:
-      variant: static
-      quoteSize: sm
-      tone: light
-      cardWidth: medium
-      bordered: true
       quotes:
         - text: When we show clients the Visual Editor during our meetings, **their eyes
             light up.**
@@ -67,6 +62,11 @@ pageSections:
       backgroundColor: sand
       pattern: pegboard
       fade: bottom
+      variant: static
+      quoteSize: sm
+      tone: light
+      cardWidth: medium
+      bordered: true
   - _component: page-sections/conversion/cta-center
     content:
       heading:

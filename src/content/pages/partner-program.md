@@ -88,9 +88,6 @@ pageSections:
       mediaWidth: 628
   - _component: page-sections/proof/testimonial-quote
     content:
-      variant: static
-      quoteSize: lg
-      tone: base
       quotes:
         - text: New client sites shipped in **60 minutes** instead of days.
           logoSource: /src/assets/images/marketing/logos/DX.svg
@@ -104,6 +101,9 @@ pageSections:
       backgroundColor: dark
       pattern: pegboard
       haze: true
+      variant: static
+      quoteSize: lg
+      tone: base
   - _component: page-sections/explainers/feature-grid
     content:
       heading:

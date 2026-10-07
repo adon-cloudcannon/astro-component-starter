@@ -89,11 +89,6 @@ pageSections:
   - _component: page-sections/proof/testimonial-quote
     content:
       eyebrow: WE BELIEVE
-      variant: static
-      quoteSize: sm
-      tone: plain
-      cardWidth: medium
-      alignment: center
       quotes:
         - text: >-
             Editors shouldn't need a developer to fix a typo. Developers
@@ -104,6 +99,11 @@ pageSections:
     style:
       backgroundColor: dark
       paddingVertical: 4xl
+      variant: static
+      quoteSize: sm
+      tone: plain
+      cardWidth: medium
+      alignment: center
   - _component: page-sections/proof/team-grid-section
     content:
       heading:

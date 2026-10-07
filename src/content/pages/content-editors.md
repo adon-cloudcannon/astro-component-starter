@@ -49,9 +49,6 @@ pageSections:
       backgroundColor: light-sand
   - _component: page-sections/proof/testimonial-quote
     content:
-      variant: static
-      quoteSize: lg
-      tone: light
       quotes:
         - text: When we show clients the Visual Editor during our meetings, **their eyes
             light up.**
@@ -68,6 +65,9 @@ pageSections:
     style:
       backgroundColor: light-sand
       paddingVerticalStart: lg
+      variant: static
+      quoteSize: lg
+      tone: light
   - _component: page-sections/explainers/pinned-steps
     content:
       heading:
@@ -121,11 +121,6 @@ pageSections:
       haze: true
   - _component: page-sections/proof/testimonial-quote
     content:
-      variant: static
-      quoteSize: sm
-      tone: base
-      cardWidth: medium
-      bordered: true
       quotes:
         - text: >-
             You can have lots of **concurrent pieces of work**: a solutions
@@ -146,6 +141,11 @@ pageSections:
       backgroundColor: dark
       pattern: pegboard
       haze: true
+      variant: static
+      quoteSize: sm
+      tone: base
+      cardWidth: medium
+      bordered: true
   - _component: page-sections/conversion/cta-center
     content:
       heading:

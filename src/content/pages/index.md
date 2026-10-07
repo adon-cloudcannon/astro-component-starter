@@ -616,12 +616,6 @@ pageSections:
     content:
       sectionLabel: ''
       eyebrow: ''
-      variant: static
-      quoteSize: lg
-      tone: base
-      cardWidth: medium
-      alignment: start
-      bordered: false
       quotes:
         - text: I almost **forgot** that website maintenance was a thing.
           authorName: Sindre Gusdal
@@ -643,6 +637,12 @@ pageSections:
       paddingHorizontal: gutter
       paddingVertical: 4xl
       haze: false
+      variant: static
+      quoteSize: lg
+      tone: base
+      cardWidth: medium
+      alignment: start
+      bordered: false
   - _component: page-sections/proof/story-carousel
     content:
       sectionLabel: ''

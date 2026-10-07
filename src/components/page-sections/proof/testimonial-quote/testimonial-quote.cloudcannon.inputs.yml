@@ -20,7 +20,7 @@ content.eyebrow:
   comment: >-
     A small label over the card, in the band rather than on it. Leave empty
     for none.
-content.variant:
+style.variant:
   type: select
   label: Layout
   comment: Carousel is the only one that shows more than the first quote.
@@ -34,7 +34,7 @@ content.variant:
         name: Split, person left
       - id: split-quote
         name: Split, quote left
-content.quoteSize:
+style.quoteSize:
   type: select
   label: Quote size
   comment: Header 5 is the smaller of the two.
@@ -44,7 +44,7 @@ content.quoteSize:
         name: Header 5
       - id: lg
         name: Header 4
-content.tone:
+style.tone:
   type: select
   label: Card tone
   comment: >-
@@ -60,7 +60,7 @@ content.tone:
         name: Light
       - id: plain
         name: No card
-content.cardWidth:
+style.cardWidth:
   type: select
   label: Card width
   comment: >-
@@ -75,7 +75,7 @@ content.cardWidth:
         name: Medium
       - id: narrow
         name: Narrow
-content.alignment:
+style.alignment:
   type: select
   label: Alignment
   comment: >-
@@ -87,7 +87,7 @@ content.alignment:
         name: Left
       - id: center
         name: Centred
-content.bordered:
+style.bordered:
   type: switch
   label: Outline the card
   comment: >-

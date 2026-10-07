@@ -5,14 +5,8 @@ tabbed: true
 value:
   _component: page-sections/proof/testimonial-quote
   content:
-    sectionLabel: ''
-    eyebrow: ''
-    variant: static
-    quoteSize: sm
-    tone: base
-    cardWidth: full
-    alignment: start
-    bordered: false
+    sectionLabel: ""
+    eyebrow: ""
     quotes:
       - text: >-
           We handed the site to our marketing team on a Friday and they had three new landing pages
@@ -23,6 +17,12 @@ value:
         authorImage: /src/assets/images/component-docs/profile1.jpg
         accentColor: sunset
   style:
+    variant: static
+    quoteSize: sm
+    tone: base
+    cardWidth: full
+    alignment: start
+    bordered: false
     backgroundColor: light-sand
     pattern: none
     fade: none
@@ -48,17 +48,17 @@ _structures:
       - label: Quote
         icon: format_quote
         value:
-          text: ''
-          authorName: ''
-          authorDescription: ''
-          company: ''
-          authorImage: ''
-          authorImageAlt: ''
-          logoSource: ''
-          logoAlt: ''
-          linkText: ''
-          link: ''
-          accentColor: ''
+          text: ""
+          authorName: ""
+          authorDescription: ""
+          company: ""
+          authorImage: ""
+          authorImageAlt: ""
+          logoSource: ""
+          logoAlt: ""
+          linkText: ""
+          link: ""
+          accentColor: ""
           quoteMarks: true
         preview:
           text:
@@ -87,7 +87,7 @@ _structures:
             comment: Their headshot. The circle is drawn either way.
             options:
               paths:
-                static: ''
+                static: ""
                 uploads: src/assets/images
           authorImageAlt:
             type: text
@@ -97,7 +97,7 @@ _structures:
             comment: The customer's wordmark, shown at the end of the foot. Static layout only.
             options:
               paths:
-                static: ''
+                static: ""
                 uploads: src/assets/images
           logoAlt:
             type: text
@@ -120,37 +120,37 @@ _structures:
               it, the quote marks are drawn in it, and the link turns to it on hover.
             options:
               values:
-                - id: ''
+                - id: ""
                   name: None
                   swatch: check_box_outline_blank
                 - id: sunset
                   name: Sunset
                   swatch: square
-                  color: '#D85A2C'
+                  color: "#D85A2C"
                 - id: golden
                   name: Golden
                   swatch: square
-                  color: '#FFAA00'
+                  color: "#FFAA00"
                 - id: pacific
                   name: Pacific
                   swatch: square
-                  color: '#034AD8'
+                  color: "#034AD8"
                 - id: moss
                   name: Moss
                   swatch: square
-                  color: '#687E00'
+                  color: "#687E00"
                 - id: peachy
                   name: Peachy
                   swatch: square
-                  color: '#F39B7B'
+                  color: "#F39B7B"
                 - id: harbour
                   name: Harbour
                   swatch: square
-                  color: '#A6C1FA'
+                  color: "#A6C1FA"
                 - id: blush
                   name: Blush
                   swatch: square
-                  color: '#E7B0B9'
+                  color: "#E7B0B9"
               picker_view: card
               preview:
                 icon:

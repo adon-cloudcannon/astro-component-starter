@@ -87,10 +87,6 @@ pageSections:
       backgroundColor: light-sand
   - _component: page-sections/proof/testimonial-quote
     content:
-      variant: static
-      quoteSize: sm
-      tone: light
-      cardWidth: medium
       quotes:
         - text: >-
             I almost **forgot that website maintenance was a thing.** That's
@@ -104,6 +100,10 @@ pageSections:
           accentColor: sunset
     style:
       backgroundColor: light-sand
+      variant: static
+      quoteSize: sm
+      tone: light
+      cardWidth: medium
   - _component: page-sections/explainers/feature-split
     content:
       heading:
@@ -246,10 +246,6 @@ pageSections:
       backgroundColor: dark
   - _component: page-sections/proof/testimonial-quote
     content:
-      variant: static
-      quoteSize: lg
-      tone: plain
-      cardWidth: medium
       quotes:
         - text: Absoluttweb went from days per new client site to **around an hour.**
           quoteMarks: false
@@ -260,6 +256,10 @@ pageSections:
       backgroundColor: dark
       pattern: pegboard
       haze: true
+      variant: static
+      quoteSize: lg
+      tone: plain
+      cardWidth: medium
   - _component: page-sections/conversion/cta-team-member
     content:
       heading:

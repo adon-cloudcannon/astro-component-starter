@@ -134,10 +134,6 @@ pageSections:
       backgroundColor: dark
   - _component: page-sections/proof/testimonial-quote
     content:
-      variant: static
-      quoteSize: sm
-      tone: base
-      cardWidth: medium
       quotes:
         - text: >-
             You can have lots of concurrent pieces of work: a solutions page, a
@@ -154,6 +150,10 @@ pageSections:
       backgroundColor: dark
       pattern: pegboard
       haze: true
+      variant: static
+      quoteSize: sm
+      tone: base
+      cardWidth: medium
   - _component: page-sections/conversion/cta-split
     content:
       heading:

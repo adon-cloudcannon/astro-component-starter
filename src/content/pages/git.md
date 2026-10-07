@@ -79,9 +79,6 @@ pageSections:
         subtextWidth: xl
   - _component: page-sections/proof/testimonial-quote
     content:
-      variant: static
-      quoteSize: sm
-      cardWidth: medium
       quotes:
         - text: >-
             Having that flexibility of having everything live in a Git
@@ -99,6 +96,9 @@ pageSections:
     style:
       backgroundColor: dark
       haze: true
+      variant: static
+      quoteSize: sm
+      cardWidth: medium
   - _component: page-sections/conversion/cta-center
     content:
       heading:
@@ -211,11 +211,6 @@ pageSections:
       fade: bottom
   - _component: page-sections/proof/testimonial-quote
     content:
-      variant: static
-      quoteSize: sm
-      tone: light
-      cardWidth: medium
-      bordered: true
       quotes:
         - text: >-
             It’s important to me that CloudCannon is a Git-based CMS. I hate
@@ -231,6 +226,11 @@ pageSections:
       backgroundColor: sand
       pattern: pegboard
       fade: bottom
+      variant: static
+      quoteSize: sm
+      tone: light
+      cardWidth: medium
+      bordered: true
   - _component: page-sections/conversion/cta-center
     content:
       heading:
