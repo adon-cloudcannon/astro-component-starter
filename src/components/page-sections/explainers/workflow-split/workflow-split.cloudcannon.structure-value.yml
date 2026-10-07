@@ -35,8 +35,6 @@ value:
           iconPosition: after
           size: md
     middlePanel:
-      centreImageSource: ''
-      centreImageAlt: ''
       centreColor: ''
       centreMinHeight: 0
       centreIconName: ''

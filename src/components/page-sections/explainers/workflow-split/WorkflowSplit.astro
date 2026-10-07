@@ -108,8 +108,6 @@ const panelPath = (index: number) => at(index === 0 ? "leftPanel" : "rightPanel"
 /* The middle card's fields, which sit in `middlePanel` now and were loose
    `centre*` props before it. */
 const centre = {
-  imageSource: middlePanel?.centreImageSource ?? "",
-  imageAlt: middlePanel?.centreImageAlt ?? "",
   color: middlePanel?.centreColor ?? "",
   minHeight: middlePanel?.centreMinHeight ?? 0,
   iconName: middlePanel?.centreIconName ?? "",
@@ -342,14 +340,6 @@ const feedKeyframes = feedSteps
               )}
               <Component contentSections={centre.sections} />
             </div>
-          ) : centre.imageSource ? (
-            <Image
-              class="workflow-centre"
-              source={centre.imageSource}
-              alt={centre.imageAlt}
-              data-prop-src={centrePath("imageSource")}
-              data-prop-alt={centrePath("imageAlt")}
-            />
           ) : (
             <div class="workflow-centre-empty" aria-hidden="true"></div>
           ))}

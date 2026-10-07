@@ -243,25 +243,24 @@ content.rightPanel.buttonSections:
   options:
     structures: _structures.buttonSections
 
-content.middlePanel.centreImageSource:
-  type: image
-  comment: A picture for the middle, where it is not drawn as a card.
-content.middlePanel.centreImageAlt:
-  type: text
-  comment: Alt text for that picture.
 content.middlePanel.centreColor:
+  hidden: true
   type: text
   comment: The middle card's own colour, as a hex.
 content.middlePanel.centreMinHeight:
+  hidden: true
   type: number
   comment: How tall the middle card stands, in pixels.
 content.middlePanel.centreIconName:
+  hidden: true
   type: text
   comment: The icon on the middle card's top line.
 content.middlePanel.centreTitle:
+  hidden: true
   type: text
   comment: The middle card's title.
 content.middlePanel.centreBranch:
+  hidden: true
   type: text
   comment: The branch shown after the title, with a status light before it.
 content.middlePanel.centreRows:
@@ -294,7 +293,6 @@ content.middlePanel.centreSections:
   comment: Anything else to put in the middle card.
   options:
     structures: _structures.containerSections
-
 # --- section wrapper inputs
 # The heading's level and size belong with the heading, the way the hero's do.
 content.subtext:

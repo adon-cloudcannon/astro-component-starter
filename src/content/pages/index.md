@@ -189,8 +189,6 @@ pageSections:
             variant: text
             size: md
       middlePanel:
-        centreImageSource: ''
-        centreImageAlt: ''
         centreColor: '#26262F'
         centreMinHeight: 366
         centreIconName: git-pull-request-arrow
