@@ -184,10 +184,7 @@ pageSections:
         subtext: See how CloudCannon's static-first approach delivers the speed boost
           your business needs.
         subtextSize: lg
-      imageReveal: ''
-      imageSource: /src/assets/images/marketing/motorcycle-01-1.png
       contentCard: true
-      imageAlt: ''
       buttonSections:
         - _component: building-blocks/core-elements/button
           text: Start your free trial
@@ -197,6 +194,12 @@ pageSections:
           iconName: move-right
           iconPosition: after
           variant: text
+      mediaSections:
+        - _component: building-blocks/core-elements/image
+          source: /src/assets/images/marketing/motorcycle-01-1.png
+          alt: ''
+          rounded: true
+          aspectRatio: none
     style:
       backgroundColor: sand
       pattern: pegboard

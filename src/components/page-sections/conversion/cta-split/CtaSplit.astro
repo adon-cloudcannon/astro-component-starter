@@ -1,14 +1,11 @@
 ---
+import Component from "@component-utils/renderBlock.astro";
 import { bandPattern, bandHaze } from "@component-utils/bandStyle.mjs";
 import { nestedProps } from "@component-utils/nestedProps.mjs";
 import { rootMirror } from "@component-utils/rootMirror.mjs";
 import CustomSection from "@builders/custom-section/CustomSection.astro";
 import { subtextMeasure } from "@component-utils/subtextMeasure.mjs";
 import Heading from "@core-elements/heading/Heading.astro";
-import AgentTerminal from "@wrappers/agent-terminal/AgentTerminal.astro";
-import PolaroidCamera from "@wrappers/polaroid-camera/PolaroidCamera.astro";
-import CharacterChat from "@wrappers/character-chat/CharacterChat.astro";
-import Image from "@core-elements/image/Image.astro";
 import Text from "@core-elements/text/Text.astro";
 import ButtonGroup from "@wrappers/button-group/ButtonGroup.astro";
 import Split from "@wrappers/split/Split.astro";
@@ -38,7 +35,14 @@ const {
    */
   subtextWidth,
   buttonSections = [],
-  imageSource = "",
+  /**
+   * The media column, as blocks.
+   *
+   * One Image is the usual; an Image Reveal where the band has a before and
+   * after of the same subject. Anything else a block can be works too, which
+   * is the point of it not being a prop per kind.
+   */
+  mediaSections = [],
   /**
    * A terminal session in place of the picture.
    *
@@ -46,14 +50,12 @@ const {
    * `{ path, script, loop }`. Present and carrying a script, it takes the
    * media side; absent, nothing about this section changes.
    */
-  terminal,
   /**
    * Turns the picture into a camera you can take a picture with.
    *
    * `{ shots: [{ source, alt }], label }`. Present, the media side becomes the
    * camera and its pile; absent, nothing about this section changes.
    */
-  camera,
   /**
    * Two characters in conversation in place of the picture.
    *
@@ -62,7 +64,6 @@ const {
    * it; placed separately they hold their proportions whatever shape the card
    * takes. Absent, nothing about this section changes.
    */
-  characters,
   /**
    * A second picture of the same subject, crossfaded in when the section is
    * scrolled to. The two have to be the same size with their artwork on the
@@ -70,10 +71,7 @@ const {
    * changing: the truck's two hoods are one 1600x746 upload each, and both
    * draw the body between x 7 and 1591.
    */
-  imageReveal = "",
   /** What a reader who cannot see the swap is told the control does. */
-  imageRevealLabel = "Show the other view of this picture",
-  imageAlt = "",
   reverse = false,
   /**
    * A card behind the picture.
@@ -82,8 +80,6 @@ const {
    * not one. Taken as a single picture the generator picked the panel and blew
    * it up to fill the column, which is a large yellow rectangle and no person.
    */
-  imageBackdrop = "",
-  imageBackdropAlt = "",
   /**
    * How far past the content column the drawing runs.
    *
@@ -124,7 +120,6 @@ const {
    * card 268 tall, so they run to the foot and the card cuts them off. Boxed
    * into the padding they float with a gap under them.
    */
-  imageFlush = false,
   sectionLabel,
   maxContentWidth = "xl",
   paddingHorizontal = "gutter",
@@ -134,7 +129,6 @@ const {
   // Was hardcoded to landscape, which crops anything that is not 4:3. The
   // design places these at their own proportions: the truck is 915x427, so a
   // 4:3 frame cuts a third of it away.
-  imageAspectRatio = "none",
   backgroundColor = "light-sand",
   /** The texture behind the band, by name. */
   pattern = "none",
@@ -151,6 +145,8 @@ const {
 /* The measure the subtext is set in, as a length. */
 const subtextCap = subtextMeasure(subtextWidth);
 
+const mediaBlocks = Array.isArray(mediaSections) ? mediaSections : [];
+
 /* Astro takes a component expression here, so the wrapper can be a real
    element or nothing at all. Rendering the div either way and styling it only
    when it is a card would put a flow child between the section and the split,
@@ -158,7 +154,7 @@ const subtextCap = subtextMeasure(subtextWidth);
 const Wrapper = contentCard ? "div" : Fragment;
 const wrapperProps = contentCard
   ? {
-      class: imageFlush ? "cta-split-card image-flush" : "cta-split-card",
+      class: "cta-split-card",
       style: `--cta-split-card-bg: var(--${contentCardColor === "base" ? "color-bg" : contentCardColor})`,
     }
   : {};
@@ -232,112 +228,24 @@ const mirror = rootMirror({ "data-picture-first": reverse ? "" : null });
         />
       </Fragment>
       <Fragment slot="second">
-        {characters?.characters?.length ? (
-          <CharacterChat
-            class="cta-split-media cta-split-characters"
-            characters={characters.characters}
-            conversation={characters.conversation}
-            conversationLabel={characters.conversationLabel}
-            seed={characters.seed}
-            threadHeight={characters.threadHeight}
-            insetStart={characters.insetStart}
-            insetEnd={characters.insetEnd}
-            castInsetStart={characters.castInsetStart}
-            castInsetEnd={characters.castInsetEnd}
-            scale={characters.scale}
-          />
-        ) : camera?.shots?.length ? (
-          <PolaroidCamera
-            alt={imageAlt}
-            class="cta-split-camera"
-            fit={camera.fit}
-            label={camera.label}
-            shots={camera.shots}
-            source={imageSource}
-          />
-        ) : terminal?.script?.length ? (
-          <AgentTerminal
-            class="cta-split-terminal"
-            loop={terminal.loop !== false}
-            path={terminal.path}
-            script={terminal.script}
-          />
-        ) : imageBackdrop ? (
-          <div class="cta-split-portrait">
-            <Image
-              class="cta-split-backdrop"
-              source={imageBackdrop}
-              alt={imageBackdropAlt}
-              rounded={true}
-              aspectRatio="square"
-              data-prop-src={at("imageBackdrop")}
-              data-prop-alt={at("imageBackdropAlt")}
-            />
-            <Image
-              class="cta-split-subject"
-              source={imageSource}
-              alt={imageAlt}
-              data-prop-src={at("imageSource")}
-              data-prop-alt={at("imageAlt")}
-            />
-          </div>
-        ) : imageReveal ? (
-          <button
-            type="button"
-            class="cta-split-reveal"
-            aria-pressed="false"
-            aria-label={imageRevealLabel}
-          >
-            {/* A button rather than a div with a handler: it is a real toggle, so
-              it has to be reachable by keyboard and announce its state.
-              `aria-pressed` carries that state and the CSS reads the same
-              attribute, so there is one source of truth rather than a data
-              attribute sitting beside it.
+        {/* Whatever the band puts here, rather than a branch over six kinds
+            of media.
 
-              The comment lives in here rather than above the element: a JSX
-              expression takes one root, and a comment before it is a second
-              one — "Expected `,` or `)` but found `type`". */}
-            <Image
-              source={imageSource}
-              rounded={true}
-              alt={imageAlt}
-              aspectRatio={imageAspectRatio}
-              data-prop-src={at("imageSource")}
-              data-prop-alt={at("imageAlt")}
-            />
-            {/* Decorative on purpose: it is the same subject as the one above,
-              so a reader who cannot see the change should be told once. */}
-            <Image
-              class="cta-split-reveal-top"
-              source={imageReveal}
-              rounded={true}
-              decorative={true}
-              aspectRatio={imageAspectRatio}
-              data-prop-src={at("imageReveal")}
-            />
-          </button>
-        ) : (
-          <Image
-            class="cta-split-media"
-            source={imageSource}
-            rounded={true}
-            alt={imageAlt}
-            aspectRatio={imageAspectRatio}
-            data-prop-src={at("imageSource")}
-            data-prop-alt={at("imageAlt")}
-          />
-        )}
+            It used to be a chain: characters, then a camera, then a terminal,
+            then a backdrop portrait, then a two-picture reveal, then a plain
+            image — each with its own props sitting on the section whether the
+            band used them or not. Five of those ten image props were set on no
+            page at all, and the backdrop arm on none. A CTA that wants a
+            picture drops in an Image; the three that want the truck drop in an
+            Image Reveal. */}
+        <Component
+          contentSections={mediaBlocks}
+          useDefaultEditableBinding={false}
+        />
       </Fragment>
     </Split>
   </Wrapper>
 </CustomSection>
-
-<script>
-  import { onPageLoad } from "@component-utils/onPageLoad";
-  import { setupAllCtaSplitReveals } from "./setup";
-
-  onPageLoad(setupAllCtaSplitReveals);
-</script>
 
 <style is:global>
   /* A cut-out on a card. The design draws the panel 366 square with the person
@@ -367,99 +275,11 @@ const mirror = rootMirror({ "data-picture-first": reverse ? "" : null });
       overflow: visible;
     }
 
-    /* The drawing stands on the card's bottom edge.
-    
-       Two rules, because the grid item is the pane and not the picture: an
-       `align-self` on the image did nothing, since the pane is an ordinary
-       block, and the picture hung 24px short off the centred pane's foot
-       rather than the card's. The pane goes to the end of the row and the
-       picture then sinks through the card's own bottom padding. The copy
-       beside it is untouched. */
-    .cta-split .cta-split-card.image-flush .split-inner > .pane:has(.cta-split-media) {
-      align-self: end;
-    }
-
-    .cta-split .cta-split-card.image-flush .cta-split-media {
-      margin-block-end: calc(-1 * var(--spacing-2xl));
-    }
-
     /* flow's space-before is what sets the gap from the section above, and on
        a card it would print inside the rule instead. */
     .cta-split .cta-split-card > .split {
       --space-before: 0;
       margin-block: 0;
-    }
-
-    /* Two pictures of one subject in a single box. They are the same size with
-       their artwork on the same pixels, so nothing moves across the change:
-       only the hood opens. Stacked in one grid cell rather than positioned, so
-       the box still takes its height from the picture. */
-    .cta-split .cta-split-reveal {
-      appearance: none;
-      background: none;
-      border: 0;
-      color: inherit;
-      cursor: pointer;
-      display: grid;
-      font: inherit;
-      /* A button shrinks to its content where the div it replaced filled the
-         column, which left the picture at its own width and off to one side. */
-      inline-size: 100%;
-      padding: 0;
-      text-align: inherit;
-    }
-
-    .cta-split .cta-split-reveal:focus-visible {
-      outline: var(--focus-ring-width) var(--focus-ring-style) var(--color-focus-ring);
-      outline-offset: var(--spacing-xs);
-    }
-
-    /* flow puts a space-before on every child after the first, which here is
-       the whole point of the stack undone: the second picture would sit a
-       margin below the first instead of on top of it. */
-    .cta-split .cta-split-reveal > * {
-      --space-before: 0;
-      grid-area: 1 / 1;
-      margin-block: 0;
-    }
-
-    /* A cut, not a fade. These are flat line illustrations, so a dissolve
-       shows both bonnet outlines at once for the length of it and reads as a
-       double exposure rather than as a hood opening. The two frames are
-       pixel-aligned, so a straight swap reads as the thing popping open.
-
-       Nothing to soften for reduced motion either: a cut is not motion. */
-    .cta-split .cta-split-reveal > .cta-split-reveal-top {
-      opacity: 0;
-    }
-
-    .cta-split .cta-split-reveal[aria-pressed="true"] > .cta-split-reveal-top {
-      opacity: 1;
-    }
-
-    .cta-split .cta-split-portrait {
-      max-inline-size: 22.875rem;
-      position: relative;
-    }
-
-    .cta-split .cta-split-subject {
-      --space-before: 0;
-      inset-block-end: 0;
-      inset-inline: 0;
-      margin: 0;
-      position: absolute;
-    }
-
-    .cta-split .cta-split-subject img {
-      block-size: auto;
-      inline-size: 100%;
-      object-fit: contain;
-    }
-
-    .cta-split .cta-split-backdrop img {
-      block-size: 100%;
-      inline-size: 100%;
-      object-fit: cover;
     }
   }
 </style>

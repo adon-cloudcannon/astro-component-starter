@@ -17,6 +17,7 @@
  * Logs editor mutations to the console in dev; silent in production.
  */
 
+import { setupAllImageReveals } from "./src/components/building-blocks/wrappers/image-reveal/setup";
 import { setupAllPhotoStacks } from "./src/components/page-sections/heroes/hero-photo-stack/setup";
 import { setupAllTeamGrids } from "./src/components/page-sections/proof/team-grid-section/setup";
 import { setupAllCollectionToolbars } from "./src/components/page-sections/collections/collection-toolbar/setup";
@@ -149,7 +150,6 @@ function syncRootMirror(target) {
 }
 
 const ROOT_MIRROR_ATTRS = ["data-root-mirror"];
-
 
 /**
  * Carousel config is read from attributes on `.carousel-inner` at
@@ -496,6 +496,7 @@ setupAllGalleries();
 setupAllMasonry();
 setupAllScrollDecks();
 setupAllPhotoStacks();
+setupAllImageReveals();
 setupAllTeamGrids();
 setupAllCollectionToolbars();
 setupAllVideos();

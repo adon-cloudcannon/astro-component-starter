@@ -14,11 +14,6 @@ style:
   options:
     subtype: object
 
-content.imageFlush:
-  type: switch
-  comment: >-
-    Stands the drawing on the card's bottom edge instead of inside its
-    padding, and lets the card cut it off. Needs contentCard.
 content.contentCardColor:
   type: text
   comment: >-
@@ -106,36 +101,6 @@ content.subtext.subtextWidth:
         name: Wide
       - id: xl
         name: Extra wide
-content.imageRevealLabel:
-  type: text
-  comment: >-
-    What the picture's toggle is called for anyone who cannot see it change.
-    Only used when a second picture is set.
-content.imageReveal:
-  type: image
-  comment: >-
-    A second picture that fades in over the first when the section is scrolled
-    to. Use the same size and framing as the image beside the copy, or the
-    change reads as a jump.
-  options:
-    paths:
-      uploads: src/assets/images
-      static: ""
-    resize_style: contain
-    width: 1920
-content.characters:
-  type: object
-  comment: Two characters in conversation in place of the picture.
-content.imageSource:
-  type: image
-  comment: Image shown beside the copy.
-  options:
-    paths:
-      uploads: src/assets/images
-      static: ""
-    resize_style: contain
-    width: 1920
-    height: 1280
 content.contentCard:
   type: switch
   comment: The card splits its width evenly rather than fixing one column.
@@ -144,14 +109,20 @@ content.imageOverflow:
   comment: >-
     How far past the content column the drawing runs, in pixels. It is capped
     at the page edge, so a large number means "all the way".
-content.imageAlt:
-  type: text
-  comment: Alt text describing the image.
 content.buttonSections:
   type: array
   comment: Call-to-action buttons.
   options:
     structures: _structures.buttonSections
+content.mediaSections:
+  type: array
+  label: Media
+  comment: >-
+    What fills the other half of the band. One picture is the usual; an Image
+    Reveal where there is a before and an after of the same subject, or any
+    other block the band wants beside its copy.
+  options:
+    structures: _structures.ctaSplitMedia
 content.reverse:
   type: switch
   comment: Flips the columns so the image comes before the copy.
@@ -206,21 +177,6 @@ style.colorScheme:
         name: Light
       - id: dark
         name: Dark
-content.imageAspectRatio:
-  type: select
-  comment: Crops the image to a fixed shape. None keeps its own proportions.
-  options:
-    values:
-      - id: none
-        name: None
-      - id: square
-        name: Square
-      - id: landscape
-        name: Landscape
-      - id: portrait
-        name: Portrait
-      - id: widescreen
-        name: Widescreen
 style.lockColorScheme:
   hidden: true
   # Carried by the band colour: every named band locks, because there is no

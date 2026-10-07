@@ -1,0 +1,36 @@
+source:
+  type: image
+  label: First picture
+  comment: What shows before the swap.
+alt:
+  type: text
+  label: Alt text
+  comment: >-
+    What both pictures show, for a reader who cannot see them. The second one
+    is decorative: it is the same subject, so it is described once.
+revealSource:
+  type: image
+  label: Second picture
+  comment: >-
+    What it swaps to. Framed the same as the first, so the change reads as the
+    subject moving rather than as a different photograph.
+label:
+  type: text
+  label: Button label
+  comment: What a screen reader announces for the toggle, such as "Open and close the truck's hood".
+aspectRatio:
+  type: select
+  comment: The shape both pictures are drawn in.
+  options:
+    values:
+      - id: none
+        name: Their own
+      - id: square
+        name: Square
+      - id: landscape
+        name: Landscape
+      - id: portrait
+        name: Portrait
+rounded:
+  type: switch
+  comment: Round the corners.

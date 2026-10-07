@@ -1,0 +1,124 @@
+---
+/**
+ * Two pictures of one subject, and a tap to go between them.
+ *
+ * The design uses it for the truck with its hood open and shut, but nothing
+ * here is about trucks: it is any before and after of the same framing — a
+ * screenshot before a change and after it, a mockup light and dark. The
+ * second picture arrives on its own when the band is scrolled to, and from
+ * then on it is the reader's to open and close.
+ *
+ * It lived inside CtaSplit as one arm of a six-way branch over the media
+ * column, which put `imageReveal` and its label on every CTA on the site
+ * whether or not that CTA had two pictures. Out here it is a block, so a
+ * section drops one in where it wants one.
+ */
+import Image from "@core-elements/image/Image.astro";
+
+const {
+  source = "",
+  alt = "",
+  revealSource = "",
+  label = "Show the other view of this picture",
+  aspectRatio = "none",
+  rounded = true,
+  class: className,
+  useDefaultEditableBinding = false,
+  _component,
+  ...htmlAttributes
+} = Astro.props;
+
+if (!source && !revealSource) return;
+
+const bind = (name: string) => (useDefaultEditableBinding ? name : undefined);
+---
+
+<button
+  type="button"
+  class:list={["image-reveal", "stackable", className]}
+  aria-pressed="false"
+  aria-label={label}
+  {...htmlAttributes}
+>
+  {/* A button rather than a div with a handler: it is a real toggle, so it has
+      to be reachable by keyboard and announce its state. `aria-pressed`
+      carries that state and the CSS reads the same attribute, so there is one
+      source of truth rather than a data attribute sitting beside it.
+
+      The comment lives in here rather than above the element: a JSX
+      expression takes one root, and a comment before it is a second one —
+      "Expected `,` or `)` but found `type`". */}
+  <Image
+    source={source}
+    alt={alt}
+    rounded={rounded}
+    aspectRatio={aspectRatio}
+    data-prop-src={bind("source")}
+    data-prop-alt={bind("alt")}
+  />
+  {/* Decorative on purpose: it is the same subject as the one above, so a
+      reader who cannot see the change should be told once. */}
+  <Image
+    class="image-reveal-top"
+    source={revealSource}
+    rounded={rounded}
+    decorative={true}
+    aspectRatio={aspectRatio}
+    data-prop-src={bind("revealSource")}
+  />
+</button>
+
+<style is:global>
+  @layer components {
+    .image-reveal {
+      appearance: none;
+      background: none;
+      border: 0;
+      color: inherit;
+      cursor: pointer;
+      display: grid;
+      font: inherit;
+      /* A button shrinks to its content where a div would fill the column,
+         which left the picture at its own width and off to one side. */
+      inline-size: 100%;
+      padding: 0;
+      text-align: inherit;
+    }
+
+    .image-reveal:focus-visible {
+      outline: var(--focus-ring-width) var(--focus-ring-style) var(--color-focus-ring);
+      outline-offset: var(--spacing-xs);
+    }
+
+    /* flow puts a space-before on every child after the first, which here is
+       the whole point of the stack undone: the second picture would sit a
+       margin below the first instead of on top of it. */
+    .image-reveal > * {
+      --space-before: 0;
+
+      grid-area: 1 / 1;
+      margin-block: 0;
+    }
+
+    /* A cut, not a fade. These are flat line illustrations, so a dissolve
+       shows both outlines at once for the length of it and reads as a double
+       exposure rather than as a hood opening. The two frames are
+       pixel-aligned, so a straight swap reads as the thing popping open.
+
+       Nothing to soften for reduced motion either: a cut is not motion. */
+    .image-reveal > .image-reveal-top {
+      opacity: 0;
+    }
+
+    .image-reveal[aria-pressed="true"] > .image-reveal-top {
+      opacity: 1;
+    }
+  }
+</style>
+
+<script>
+  import { onPageLoad } from "@component-utils/onPageLoad";
+  import { setupAllImageReveals } from "./setup";
+
+  onPageLoad(setupAllImageReveals);
+</script>

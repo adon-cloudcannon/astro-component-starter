@@ -1,0 +1,25 @@
+path:
+  type: text
+  label: Working directory
+  comment: What shows before the prompt, such as ~/marketing-site.
+loop:
+  type: switch
+  comment: Start again once the last line has run.
+script:
+  type: array
+  label: Commands
+  comment: Each one is typed out, then its results appear under it.
+script[*]:
+  type: object
+  options:
+    subtype: object
+script[*].run:
+  type: text
+  label: Command
+  comment: What is typed at the prompt.
+script[*].done:
+  type: array
+  label: Results
+  comment: The lines reported under the command once it has run.
+script[*].done[*]:
+  type: text

@@ -1,0 +1,23 @@
+label: Image Reveal
+icon: compare
+description: Two pictures of one subject, with a tap to go between them.
+value:
+  _component: building-blocks/wrappers/image-reveal
+  source: /src/assets/images/placeholder.jpg
+  alt: ""
+  revealSource: /src/assets/images/placeholder.jpg
+  label: Show the other view of this picture
+  aspectRatio: none
+  rounded: true
+preview:
+  text:
+    - Image Reveal
+  subtext:
+    - key: alt
+  icon: compare
+picker_preview:
+  text: Image Reveal
+  subtext: A before and after of the same framing, swapped on scroll or on tap.
+  icon: compare
+_inputs_from_glob:
+  - /src/components/building-blocks/wrappers/image-reveal/image-reveal.cloudcannon.inputs.yml

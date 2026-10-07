@@ -1,0 +1,15 @@
+# What can fill the other half of a CTA split.
+#
+# The band used to branch over six kinds of media, each with its own props on
+# the section whether that band used them or not. The half is a slot now, and
+# this is what goes in it: a picture for most, and the handful of built things
+# the design puts beside a CTA.
+ctaSplitMedia:
+  id_key: _component
+  style: modal
+  values_from_glob:
+    - /src/components/building-blocks/core-elements/image/image.cloudcannon.structure-value.yml
+    - /src/components/building-blocks/wrappers/image-reveal/image-reveal.cloudcannon.structure-value.yml
+    - /src/components/building-blocks/wrappers/polaroid-camera/polaroid-camera.cloudcannon.structure-value.yml
+    - /src/components/building-blocks/wrappers/agent-terminal/agent-terminal.cloudcannon.structure-value.yml
+    - /src/components/building-blocks/wrappers/character-chat/character-chat.cloudcannon.structure-value.yml

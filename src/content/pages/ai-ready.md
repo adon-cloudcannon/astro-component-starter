@@ -168,17 +168,18 @@ pageSections:
         - _component: building-blocks/core-elements/button
           text: Get skills repo
           variant: primary
-      terminal:
-        path: ~/marketing-site
-        loop: true
-        script:
-          - run: npx skills add cloudcannon/agent-skills
-            done:
-              - migrate · configure · visual-editing
-          - run: '"add visual editing to this site"'
-            done:
-              - cloudcannon.config.yaml
-              - 12 components made editable
+      mediaSections:
+        - _component: building-blocks/wrappers/agent-terminal
+          path: ~/marketing-site
+          loop: true
+          script:
+            - run: npx skills add cloudcannon/agent-skills
+              done:
+                - migrate · configure · visual-editing
+            - run: '"add visual editing to this site"'
+              done:
+                - cloudcannon.config.yaml
+                - 12 components made editable
     style:
       backgroundColor: light-sand
   - _component: page-sections/conversion/cta-split
@@ -190,10 +191,7 @@ pageSections:
         subtext: With CloudCannon the code and content stay in Git, and the repo stays
           yours.
         subtextSize: lg
-      imageReveal: ''
-      imageSource: /src/assets/images/marketing/camera-01-1.png
       contentCard: true
-      imageAlt: ''
       buttonSections:
         - _component: building-blocks/core-elements/button
           text: Start your free trial
@@ -203,21 +201,24 @@ pageSections:
           iconName: move-right
           iconPosition: after
           variant: text
-      camera:
-        label: Take a picture
-        shots:
-          - source: /src/assets/images/marketing/hero-lowmaintenance-01-1.png
-            alt: ''
-            color: var(--dark-sand)
-          - source: /src/assets/images/marketing/screenshot-2026-08-15-at-15-46-59-1-3806-68971.png
-            alt: ''
-            color: var(--dark-sand)
-          - source: /src/assets/images/marketing/screenshot-2026-08-15-at-15-52-30-1-3806-70839.png
-            alt: ''
-            color: var(--dark-sand)
-          - source: /src/assets/images/marketing/thumbsup-01-1.png
-            alt: ''
-            color: var(--dark-sand)
+      mediaSections:
+        - _component: building-blocks/wrappers/polaroid-camera
+          label: Take a picture
+          shots:
+            - source: /src/assets/images/marketing/hero-lowmaintenance-01-1.png
+              alt: ''
+              color: var(--dark-sand)
+            - source: /src/assets/images/marketing/screenshot-2026-08-15-at-15-46-59-1-3806-68971.png
+              alt: ''
+              color: var(--dark-sand)
+            - source: /src/assets/images/marketing/screenshot-2026-08-15-at-15-52-30-1-3806-70839.png
+              alt: ''
+              color: var(--dark-sand)
+            - source: /src/assets/images/marketing/thumbsup-01-1.png
+              alt: ''
+              color: var(--dark-sand)
+          source: /src/assets/images/marketing/camera-01-1.png
+          alt: ''
     style:
       backgroundColor: dark-sand
       pattern: grid

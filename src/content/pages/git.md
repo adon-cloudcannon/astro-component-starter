@@ -303,11 +303,7 @@ pageSections:
           on one engine. Start free in minutes, or book a demo and we’ll walk
           you through the real thing.
         subtextSize: lg
-      imageRevealLabel: Open and close the truck's hood
-      imageReveal: /src/assets/images/marketing/cloudcannon-truck-open-1.png
-      imageSource: /src/assets/images/marketing/cloudcannon-truck-closed-1.png
       imageOverflow: 334
-      imageAlt: ''
       buttonSections:
         - _component: building-blocks/core-elements/button
           text: Start your free trial
@@ -317,6 +313,14 @@ pageSections:
           iconName: move-right
           iconPosition: after
           variant: text
+      mediaSections:
+        - _component: building-blocks/wrappers/image-reveal
+          source: /src/assets/images/marketing/cloudcannon-truck-closed-1.png
+          alt: ''
+          revealSource: /src/assets/images/marketing/cloudcannon-truck-open-1.png
+          label: Open and close the truck's hood
+          aspectRatio: none
+          rounded: true
     style:
       backgroundColor: pacific
 ---

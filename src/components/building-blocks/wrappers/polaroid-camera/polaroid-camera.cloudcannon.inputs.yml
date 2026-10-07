@@ -1,0 +1,38 @@
+label:
+  type: text
+  label: Button label
+  comment: What a screen reader announces for the shutter.
+fit:
+  type: select
+  comment: How a picture sits in the print.
+  options:
+    values:
+      - id: contain
+        name: Whole picture
+      - id: cover
+        name: Filled
+shots:
+  type: array
+  label: Pictures
+  comment: Printed in order, one per press.
+shots[*]:
+  type: object
+  options:
+    subtype: object
+shots[*].source:
+  type: image
+  label: Picture
+shots[*].alt:
+  type: text
+  label: Alt text
+shots[*].color:
+  type: text
+  label: Print colour
+  comment: The paper behind the picture, as a token such as var(--light-sand).
+source:
+  type: image
+  label: Picture in the camera
+  comment: Optional. What shows in the viewfinder before the first press.
+alt:
+  type: text
+  label: Alt text for that picture

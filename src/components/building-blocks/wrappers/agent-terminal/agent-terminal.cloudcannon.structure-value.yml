@@ -1,0 +1,23 @@
+label: Agent Terminal
+icon: terminal
+description: A terminal typing a command and reporting what it did.
+value:
+  _component: building-blocks/wrappers/agent-terminal
+  path: ~/marketing-site
+  loop: true
+  script:
+    - run: npx skills add cloudcannon/agent-skills
+      done:
+        - migrate · configure · visual-editing
+preview:
+  text:
+    - Agent Terminal
+  subtext:
+    - key: path
+  icon: terminal
+picker_preview:
+  text: Agent Terminal
+  subtext: A terminal typing a command and reporting what it did.
+  icon: terminal
+_inputs_from_glob:
+  - /src/components/building-blocks/wrappers/agent-terminal/agent-terminal.cloudcannon.inputs.yml

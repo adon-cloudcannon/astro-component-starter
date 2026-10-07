@@ -282,7 +282,6 @@ pageSections:
       backgroundColor: sand
   - _component: page-sections/conversion/cta-split
     content:
-      imageFlush: false
       contentCardColor: base
       heading:
         heading: Enterprise
@@ -291,40 +290,39 @@ pageSections:
         subtext: We’ll work with you to craft a plan that fits your particular client’s
           needs.
         subtextSize: lg
-      imageReveal: ''
-      characters:
-        scale: 116
-        threadHeight: 34
-        insetStart: 27
-        insetEnd: 22
-        castInsetStart: 14
-        castInsetEnd: 8
-        seed: 7
-        conversationLabel: A client and a developer talking over a plan.
-        characters:
-          - source: /src/assets/images/marketing/kea.png
-            alt: ''
-            width: 29
-            drop: 0
-          - source: /src/assets/images/marketing/tuatara.png
-            alt: ''
-            width: 31
-            drop: 0
-        conversation:
-          - side: start
-            words: 5
-          - side: end
-            words: 3
-          - side: start
-            words: 6
-          - side: end
-            words: 4
-      imageSource: ''
       contentCard: true
       buttonSections:
         - _component: building-blocks/core-elements/button
           text: Join the Partner Program
           variant: primary
+      mediaSections:
+        - _component: building-blocks/wrappers/character-chat
+          scale: 116
+          threadHeight: 34
+          insetStart: 27
+          insetEnd: 22
+          castInsetStart: 14
+          castInsetEnd: 8
+          seed: 7
+          conversationLabel: A client and a developer talking over a plan.
+          characters:
+            - source: /src/assets/images/marketing/kea.png
+              alt: ''
+              width: 29
+              drop: 0
+            - source: /src/assets/images/marketing/tuatara.png
+              alt: ''
+              width: 31
+              drop: 0
+          conversation:
+            - side: start
+              words: 5
+            - side: end
+              words: 3
+            - side: start
+              words: 6
+            - side: end
+              words: 4
     style:
       backgroundColor: sand
       paddingVertical: 2xl

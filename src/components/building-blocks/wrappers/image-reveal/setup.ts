@@ -1,10 +1,10 @@
 /**
- * Swap in a CTA Split's second picture when the section is scrolled to, and
- * let it be swapped back by hand after that.
+ * Swap in the second picture when the block is scrolled to, and let it be
+ * swapped back by hand after that.
  *
- * Used by `CtaSplit.astro`'s inline script and by `editor-live-sync.js`, where
- * inline scripts don't run. Without it the section shows the first picture and
- * nothing else happens, which is the right thing to degrade to.
+ * Used by `ImageReveal.astro`'s inline script and by `editor-live-sync.js`,
+ * where inline scripts don't run. Without it the block shows the first
+ * picture and nothing else happens, which is the right thing to degrade to.
  *
  * An IntersectionObserver rather than a `view()` timeline: the scroll opens it
  * once, and from then on it is the reader's to open and close. A view timeline
@@ -32,7 +32,7 @@ function reachableThreshold(reveal: HTMLElement): number {
   return Math.min(THRESHOLD, (window.innerHeight * MOST_OF_SCREEN) / height);
 }
 
-export function setupCtaSplitReveal(reveal: HTMLElement): void {
+export function setupImageReveal(reveal: HTMLElement): void {
   if (reveal.hasAttribute("data-reveal-initialized")) return;
   reveal.setAttribute("data-reveal-initialized", "");
 
@@ -52,7 +52,7 @@ export function setupCtaSplitReveal(reveal: HTMLElement): void {
    * clicked. A click flips it now and wears the odd first frame.
    */
   const openWhenReady = () => {
-    const image = reveal.querySelector<HTMLImageElement>(".cta-split-reveal-top img");
+    const image = reveal.querySelector<HTMLImageElement>(".image-reveal-top img");
 
     Promise.resolve(image?.decode?.())
       .catch(() => {})
@@ -70,7 +70,7 @@ export function setupCtaSplitReveal(reveal: HTMLElement): void {
         openWhenReady();
       }
     },
-    { threshold: reachableThreshold(reveal) },
+    { threshold: reachableThreshold(reveal) }
   );
 
   observer.observe(reveal);
@@ -80,6 +80,6 @@ export function setupCtaSplitReveal(reveal: HTMLElement): void {
   });
 }
 
-export function setupAllCtaSplitReveals(root: ParentNode = document): void {
-  root.querySelectorAll<HTMLElement>(".cta-split-reveal").forEach(setupCtaSplitReveal);
+export function setupAllImageReveals(root: ParentNode = document): void {
+  root.querySelectorAll<HTMLElement>(".image-reveal").forEach(setupImageReveal);
 }
