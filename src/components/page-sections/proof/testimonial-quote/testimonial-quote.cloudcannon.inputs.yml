@@ -23,9 +23,7 @@ content.eyebrow:
 content.variant:
   type: select
   label: Layout
-  comment: >-
-    The four the design draws. Carousel is the only one that shows more than
-    the first quote.
+  comment: Carousel is the only one that shows more than the first quote.
   options:
     values:
       - id: static
@@ -39,9 +37,7 @@ content.variant:
 content.quoteSize:
   type: select
   label: Quote size
-  comment: >-
-    The design steps the quote down a size as it gets longer. Header 5 is the
-    smaller of the two.
+  comment: Header 5 is the smaller of the two.
   options:
     values:
       - id: sm

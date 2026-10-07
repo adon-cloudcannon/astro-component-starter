@@ -70,9 +70,7 @@ content.subtext:
     numberedlist: false
 content.subtextSize:
   type: select
-  comment: >-
-    How big the supporting line under the heading is. Regular is the size the
-    design uses on most sections.
+  comment: How big the supporting line under the heading is.
   options:
     values:
       - id: md
@@ -84,10 +82,7 @@ content.subtextSize:
 content.subtextWidth:
   type: select
   label: Subtext width
-  comment: >-
-    How wide the supporting line is allowed to run before it wraps. The design
-    keeps a centred one around Medium rather than letting it run the full
-    width of the section.
+  comment: How wide the supporting line is allowed to run before it wraps.
   options:
     values:
       - id: ""
@@ -119,10 +114,7 @@ content.imageReveal:
     width: 1920
 content.characters:
   type: object
-  comment: >-
-    Two characters in conversation in place of the picture. The design draws
-    the Enterprise pair as one bitmap with their speech bubble baked in; placed
-    separately they hold their proportions whatever shape the card takes.
+  comment: Two characters in conversation in place of the picture.
 content.imageSource:
   type: image
   comment: Image shown beside the copy.
@@ -135,10 +127,7 @@ content.imageSource:
     height: 1280
 content.contentCard:
   type: switch
-  comment: >-
-    Draws the copy and the drawing on a white card instead of straight on the
-    band, which is how the design floats a closing CTA on a patterned one. The
-    card splits its width evenly rather than fixing one column.
+  comment: The card splits its width evenly rather than fixing one column.
 content.imageOverflow:
   type: number
   comment: >-

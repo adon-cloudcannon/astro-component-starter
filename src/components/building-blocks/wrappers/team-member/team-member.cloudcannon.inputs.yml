@@ -172,9 +172,7 @@ propSource:
 propWidth:
   label: Embellishment width
   type: number
-  comment: >-
-    How wide the drawing is, as a percentage of the panel. The design draws
-    the cocktail at 31 and the telephone at 47.
+  comment: How wide the drawing is, as a percentage of the panel.
   hidden: "!propSource"
 propAlt:
   label: Embellishment alt text

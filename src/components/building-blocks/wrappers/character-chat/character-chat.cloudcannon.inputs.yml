@@ -1,8 +1,6 @@
 characters:
   type: array
-  comment: >-
-    The characters, left to right. Two is what the design draws: a kea and a
-    tuatara, cut out of the one drawing they were painted in.
+  comment: The characters, left to right.
 source:
   type: image
   comment: The character's cut-out, on a transparent ground.
@@ -57,10 +55,7 @@ threadHeight:
   comment: How tall the thread is, as a percentage of the row's width.
 scale:
   type: number
-  comment: >-
-    How wide the row is drawn, as a percentage of its column. Over 100 grows it
-    past the column's start, towards the copy, which is where the design draws
-    the pair.
+  comment: How wide the row is drawn, as a percentage of its column.
 insetStart:
   type: number
   comment: >-

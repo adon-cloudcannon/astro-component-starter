@@ -10,9 +10,7 @@ imageAlt:
   comment: Alternative text for the picture.
 imageAnchor:
   type: select
-  comment: >-
-    Where the picture ends. To the foot runs it down to the panel's bottom edge
-    and lets the panel cut it off, which is how the design draws it.
+  comment: Where the picture ends.
   options:
     values:
       - id: foot
@@ -90,7 +88,7 @@ panelFit:
         name: Edge to edge
 ratioWidth:
   type: number
-  comment: The panel's shape as a card, width. The design draws it 1160 by 679.
+  comment: The panel's shape as a card, width.
 ratioHeight:
   type: number
   comment: The panel's shape as a card, height.
@@ -108,7 +106,7 @@ label:
   comment: What the figure measures.
 iconName:
   type: select
-  comment: The mark shown beside the figure. Sourced from [Heroicons](https://heroicons.com/).
+  comment: The mark shown beside the figure. Sourced from [Lucide](https://lucide.dev/icons/).
   options:
     values: data.icons
     preview:

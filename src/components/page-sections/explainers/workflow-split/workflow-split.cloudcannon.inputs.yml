@@ -44,9 +44,7 @@ content.subtext.subtext:
   comment: Supporting copy beneath the heading.
 content.subtext.subtextSize:
   type: select
-  comment: >-
-    How big the supporting line under the heading is. Regular is the size the
-    design uses on most sections.
+  comment: How big the supporting line under the heading is.
   options:
     values:
       - id: md
@@ -58,10 +56,7 @@ content.subtext.subtextSize:
 content.subtext.subtextWidth:
   type: select
   label: Subtext width
-  comment: >-
-    How wide the supporting line is allowed to run before it wraps. The design
-    keeps a centred one around Medium rather than letting it run the full
-    width of the section.
+  comment: How wide the supporting line is allowed to run before it wraps.
   options:
     values:
       - id: ""
@@ -273,9 +268,7 @@ content.middlePanel.centreBranch:
   comment: The branch shown after the title, with a status light before it.
 content.middlePanel.centreRows:
   type: array
-  comment: >-
-    The commit rows down the card. `kind` is editor or dev, and it sets both
-    the dot's colour and the label's — the design draws exactly those two.
+  comment: The commit rows down the card.
 content.middlePanel.centreRows[*]:
   type: object
   options:

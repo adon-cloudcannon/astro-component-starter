@@ -6,7 +6,7 @@ link:
   comment: The URL to which the button should link.
 iconName:
   type: select
-  comment: Icon to display, from [Heroicons](https://heroicons.com/).
+  comment: Icon to display, from [Lucide](https://lucide.dev/icons/).
   options:
     values: data.icons
     preview:
@@ -66,9 +66,7 @@ iconColor:
 textColor:
   type: select
   label: Label color
-  comment: >-
-    Colours the label and the icon together. The design draws an arrow link as
-    one colour rather than a coloured arrow beside a base-coloured word.
+  comment: Colours the label and the icon together.
   options:
     values:
       - id: default

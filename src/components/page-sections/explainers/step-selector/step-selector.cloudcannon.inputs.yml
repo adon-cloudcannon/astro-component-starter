@@ -34,9 +34,7 @@ content.subtext:
   comment: Supporting copy beneath the heading.
 content.subtextSize:
   type: select
-  comment: >-
-    How big the supporting line under the heading is. Regular is the size the
-    design uses on most sections.
+  comment: How big the supporting line under the heading is.
   options:
     values:
       - id: md
@@ -48,10 +46,7 @@ content.subtextSize:
 content.subtextWidth:
   type: select
   label: Subtext width
-  comment: >-
-    How wide the supporting line is allowed to run before it wraps. The design
-    keeps a centred one around Medium rather than letting it run the full
-    width of the section.
+  comment: How wide the supporting line is allowed to run before it wraps.
   options:
     values:
       - id: ""

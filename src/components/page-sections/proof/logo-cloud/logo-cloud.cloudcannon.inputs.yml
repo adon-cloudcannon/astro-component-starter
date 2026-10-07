@@ -25,9 +25,7 @@ content.logos:
     structures: _structures.logoCloudLogos
 style.headingPlacement:
   type: select
-  comment: >-
-    Where the label sits. Above stacks it over the marks; inline runs it along
-    the same line, to their left, which is how the design draws the strip.
+  comment: Where the label sits.
   options:
     values:
       - id: above

@@ -36,9 +36,7 @@ content.heading.headingSize:
   # Two, not six. The design opens the homepage on Header 1 and every other
   # page on Header 2, and that is what all thirteen heroes draw. A hero set to
   # Header 5 is a mistake that looks like a choice.
-  comment: >-
-    Size of the title, independent of its level. The design opens the homepage
-    on Header 1 and every other page on Header 2.
+  comment: Size of the title, independent of its level.
   options:
     values:
       - id: 2xl
@@ -65,9 +63,7 @@ content.subtextSize:
   # One size on every hero, so it is the component's decision rather than
   # a field an editor has to get right.
   type: select
-  comment: >-
-    How big the supporting line under the heading is. Regular is the size the
-    design uses on most sections.
+  comment: How big the supporting line under the heading is.
   options:
     values:
       - id: md
@@ -81,10 +77,7 @@ content.subtextWidth:
   # Never set on a hero: the measure is the split's own column.
   type: select
   label: Subtext width
-  comment: >-
-    How wide the supporting line is allowed to run before it wraps. The design
-    keeps a centred one around Medium rather than letting it run the full
-    width of the section.
+  comment: How wide the supporting line is allowed to run before it wraps.
   options:
     values:
       - id: ""
@@ -128,9 +121,8 @@ content.image.imageAspectRatio:
 content.image.imageOverflow:
   type: number
   comment: >-
-    How far the image may spill past its column, in pixels, measured from the
-    design. Capped at the page edge, so it can never reach further than a full
-    bleed. Leave at 0 to keep the image inside its column.
+    Capped at the page edge, so it can never reach further than a full bleed.
+    Leave at 0 to keep the image inside its column.
 content.image.imageBleed:
   type: switch
   comment: Runs the image to the page edge. Landscape or Square aspect ratios work best.

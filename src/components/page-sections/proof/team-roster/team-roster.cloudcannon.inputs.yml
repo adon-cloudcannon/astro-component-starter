@@ -29,9 +29,7 @@ content.headingLevel:
       - h3
 content.headingSize:
   type: select
-  comment: >-
-    Size of the title, independent of its level. The design draws Header 3
-    here.
+  comment: Size of the title, independent of its level.
   options:
     values:
       - id: xl
@@ -45,9 +43,7 @@ content.subtext:
   comment: Supporting copy beneath the heading.
 content.subtextSize:
   type: select
-  comment: >-
-    How big the supporting line under the heading is. Regular is the size the
-    design uses on most sections.
+  comment: How big the supporting line under the heading is.
   options:
     values:
       - id: md
@@ -59,10 +55,7 @@ content.subtextSize:
 content.subtextWidth:
   type: select
   label: Subtext width
-  comment: >-
-    How wide the supporting line is allowed to run before it wraps. The design
-    keeps a centred one around Medium rather than letting it run the full
-    width of the section.
+  comment: How wide the supporting line is allowed to run before it wraps.
   options:
     values:
       - id: ""
@@ -78,16 +71,12 @@ content.subtextWidth:
 content.leads:
   type: array
   label: With a biography
-  comment: >-
-    The people drawn larger, with a paragraph under the name. Three across in
-    the design.
+  comment: The people drawn larger, with a paragraph under the name.
   options:
     structures: _structures.teamMember
 content.members:
   type: array
-  comment: >-
-    Everyone else, with the name on a badge over the card. Four across in the
-    design.
+  comment: Everyone else, with the name on a badge over the card.
   options:
     structures: _structures.teamMember
 

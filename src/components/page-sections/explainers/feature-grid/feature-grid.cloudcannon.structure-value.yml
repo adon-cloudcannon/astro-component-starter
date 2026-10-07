@@ -105,7 +105,7 @@ _structures:
               numberedlist: false
           iconName:
             type: select
-            comment: Icon displayed with the feature. Sourced from [Heroicons](https://heroicons.com/).
+            comment: Icon displayed with the feature. Sourced from [Lucide](https://lucide.dev/icons/).
             options:
               values: data.icons
               preview:

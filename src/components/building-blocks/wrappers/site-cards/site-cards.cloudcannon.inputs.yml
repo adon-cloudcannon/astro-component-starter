@@ -1,9 +1,8 @@
 cards:
   type: array
   comment: >-
-    The environments, in the order they stack: live site, then staging, then
-    the branch. Three is what the design draws; a fourth would sit on the
-    third.
+    The environments, in the order they stack: live site, then staging, then the
+    branch.
 buttonLabel:
   type: text
   comment: >-
@@ -14,9 +13,6 @@ badge:
   comment: The letter in the dark square, e.g. P, T or B.
 title:
   type: text
-  comment: >-
-    The environment's name, as the design writes it: "Production - Live Site",
-    "Staging: Testing Site".
 subtitle:
   type: text
   comment: The site the environment belongs to.
@@ -38,9 +34,7 @@ imageAlt:
   comment: Alt text for it. Leave empty to treat it as decorative.
 x:
   type: number
-  comment: >-
-    Distance from the left of the stack, as a fraction of its width. Leave
-    empty for the design's own place for this card.
+  comment: Distance from the left of the stack, as a fraction of its width.
 'y':
   type: number
   comment: Distance from the top, as a fraction of the stack's height.

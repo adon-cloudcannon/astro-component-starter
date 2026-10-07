@@ -18,13 +18,10 @@ content.accent:
   type: text
   comment: >-
     A palette colour for this tier, mixed into the card at 12% so the ladder
-    reads as a ladder. Empty leaves the card the same sand as its neighbours,
-    which is what the design draws.
+    reads as a ladder.
 content.cardColor:
   type: select
-  comment: >-
-    Which of the two sands the cards are. A card is a shade off its band, and
-    the design goes both ways with it, so this is stated per section.
+  comment: Which of the two sands the cards are.
   options:
     values:
       - id: surface
@@ -90,9 +87,7 @@ content.alignmentHorizontal:
         name: Start
 content.subtextSize:
   type: select
-  comment: >-
-    How big the supporting line under the heading is. Regular is the size the
-    design uses on most sections.
+  comment: How big the supporting line under the heading is.
   options:
     values:
       - id: md
@@ -104,10 +99,7 @@ content.subtextSize:
 content.subtextWidth:
   type: select
   label: Subtext width
-  comment: >-
-    How wide the supporting line is allowed to run before it wraps. The design
-    keeps a centred one around Medium rather than letting it run the full
-    width of the section.
+  comment: How wide the supporting line is allowed to run before it wraps.
   options:
     values:
       - id: ""

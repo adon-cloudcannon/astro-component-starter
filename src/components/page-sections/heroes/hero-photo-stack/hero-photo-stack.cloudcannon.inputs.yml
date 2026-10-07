@@ -30,9 +30,7 @@ content.headingLevel:
       - h3
 content.headingSize:
   type: select
-  comment: >-
-    Size of the title, independent of its level. The design opens a page on
-    Header 1 and a section on Header 2.
+  comment: Size of the title, independent of its level.
   options:
     values:
       - id: 2xl
@@ -44,9 +42,7 @@ content.subtext:
   comment: Supporting copy beneath the heading.
 content.subtextSize:
   type: select
-  comment: >-
-    How big the supporting line under the heading is. Regular is the size the
-    design uses on most sections.
+  comment: How big the supporting line under the heading is.
   options:
     values:
       - id: md
@@ -58,10 +54,7 @@ content.subtextSize:
 content.subtextWidth:
   type: select
   label: Subtext width
-  comment: >-
-    How wide the supporting line is allowed to run before it wraps. The design
-    keeps a centred one around Medium rather than letting it run the full
-    width of the section.
+  comment: How wide the supporting line is allowed to run before it wraps.
   options:
     values:
       - id: ""
@@ -77,10 +70,8 @@ content.subtextWidth:
 content.photos:
   type: array
   comment: >-
-    The deck, front photo first. Two is what the design draws: clicking the
-    deck sends the front one to the back, so a pair trades places and three or
-    more run as a cycle. One photo on its own is drawn as a print and is not
-    clickable.
+    The deck, front photo first. One photo on its own is drawn as a print and is
+    not clickable.
   options:
     structures: _structures.photoStackPhotos
 content.panels:
@@ -88,8 +79,7 @@ content.panels:
   label: Story columns
   comment: >-
     The two columns under the headline, each painted in its own colour and run
-    to its own edge of the page. The first starts higher than the second,
-    which is what the design draws.
+    to its own edge of the page.
   options:
     structures: _structures.photoStackPanels
 content.panelRaise:
@@ -104,10 +94,7 @@ content.buttonSections:
 content.embellishmentSource:
   type: image
   label: Drawing
-  comment: >-
-    A drawing over the deck's bottom corner, like the frond the design puts
-    there, or hung off the band itself. Decoration, so it is hidden from
-    screen readers.
+  comment: Decoration, so it is hidden from screen readers.
 content.embellishmentWidth:
   type: range
   label: Drawing width

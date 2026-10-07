@@ -54,9 +54,7 @@ content.subtext:
 
 content.subtextSize:
   type: select
-  comment: >-
-    How big the supporting line under the heading is. Regular is the size the
-    design uses on most sections.
+  comment: How big the supporting line under the heading is.
   options:
     values:
       - id: md
@@ -69,10 +67,7 @@ content.subtextSize:
 content.subtextWidth:
   type: select
   label: Subtext width
-  comment: >-
-    How wide the supporting line is allowed to run before it wraps. The design
-    keeps a centred one around Medium rather than letting it run the full
-    width of the section.
+  comment: How wide the supporting line is allowed to run before it wraps.
   options:
     values:
       - id: ""
@@ -155,7 +150,6 @@ content.showProgress:
     A bar along the foot of the band, one segment per step, filling as you
     advance. Hidden below the tablet breakpoint, where every step is shown at
     once.
-
 # The band-level inputs, same set and same wording as every other page
 # section carries, so this one is configured the way the rest are.
 content.sectionLabel:
@@ -273,12 +267,8 @@ content.number:
 content.progressTrackColor:
   type: text
   comment: >-
-    The colour behind the progress fill, as a palette name or a hex. The design
-    picks one per band rather than tinting the fill. Leave empty for the fill
-    at 22%.
+    The colour behind the progress fill, as a palette name or a hex. Leave empty
+    for the fill at 22%.
 content.numbered:
   type: switch
-  comment: >-
-    Numbers the steps from their place in the list, drawn in the design's ring:
-    a 77px circle with a 1px rule and the figure in the mono face. Leave off to
-    set each step's number by hand.
+  comment: Leave off to set each step's number by hand.

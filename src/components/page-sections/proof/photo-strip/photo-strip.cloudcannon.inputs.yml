@@ -25,11 +25,11 @@ content.images:
 content.imageWidth:
   type: number
   label: Photo width
-  comment: How wide each photograph is drawn, in pixels. The design draws 393.
+  comment: How wide each photograph is drawn, in pixels.
 content.aspectRatio:
   type: text
   label: Photo shape
-  comment: The shape of each photograph, as a CSS ratio. The design draws 393 / 275.
+  comment: The shape of each photograph, as a CSS ratio.
 
 # --- section wrapper inputs
 content.sectionLabel:

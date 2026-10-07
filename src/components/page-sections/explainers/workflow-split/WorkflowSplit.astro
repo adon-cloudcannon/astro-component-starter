@@ -780,9 +780,19 @@ const feedKeyframes = feedSteps
   @layer page-sections {
     .workflow-split .workflow-panel .eyebrow,
     .workflow-split .workflow-panel .eyebrow :where(.simple-text-content, .simple-text-inner, p, span),
-    .workflow-split .workflow-points .icon,
-    .workflow-split .workflow-link .button-inner,
-    .workflow-split .workflow-link .icon {
+    .workflow-split .workflow-points .icon {
+      color: var(--card-accent, var(--color-brand));
+    }
+
+    /* The accent is the link's colour until the link asks for one of its own.
+
+       `page-sections` out-ranks `components`, so this wins over Button's own
+       `text-*` rule however the selectors are weighted — which made the
+       button's Label colour field do nothing here, with no way to tell from
+       the editor that the panel had already decided. `:not([class*="text-"])`
+       hands it back: unset, the accent still colours the link. */
+    .workflow-split .workflow-link .button-inner:not([class*="text-"]),
+    .workflow-split .workflow-link .button-inner:not([class*="text-"]) .icon {
       color: var(--card-accent, var(--color-brand));
     }
 

@@ -43,9 +43,7 @@ content.subtext:
   comment: Supporting copy beneath the heading.
 content.subtextSize:
   type: select
-  comment: >-
-    How big the supporting line under the heading is. Regular is the size the
-    design uses on most sections.
+  comment: How big the supporting line under the heading is.
   options:
     values:
       - id: md
@@ -57,10 +55,7 @@ content.subtextSize:
 content.subtextWidth:
   type: select
   label: Subtext width
-  comment: >-
-    How wide the supporting line is allowed to run before it wraps. The design
-    keeps a centred one around Medium rather than letting it run the full
-    width of the section.
+  comment: How wide the supporting line is allowed to run before it wraps.
   options:
     values:
       - id: ""
@@ -88,9 +83,7 @@ content.imageAlt:
   comment: Alternative text for the picture.
 content.imageAnchor:
   type: select
-  comment: >-
-    Where the picture ends. To the foot runs it down to the panel's bottom
-    edge and lets the panel cut it off, which is how the design draws it.
+  comment: Where the picture ends.
   options:
     values:
       - id: foot
@@ -99,9 +92,7 @@ content.imageAnchor:
         name: Its own height
 style.panelImage:
   type: image
-  comment: >-
-    A picture for the panel itself, behind everything — the scratched sheet the
-    design paints it with. Leave empty to use a flat colour instead.
+  comment: Leave empty to use a flat colour instead.
   options:
     paths:
       uploads: src/assets/images
@@ -162,7 +153,7 @@ content.label:
   comment: What the figure measures.
 content.iconName:
   type: select
-  comment: The mark shown beside the figure. Sourced from [Heroicons](https://heroicons.com/).
+  comment: The mark shown beside the figure. Sourced from [Lucide](https://lucide.dev/icons/).
   options:
     values: data.icons
     preview:

@@ -26,9 +26,7 @@ socials:
 columns:
   type: array
   label: Link columns
-  comment: >-
-    One per column of the footer. The design draws five; more will wrap onto a
-    second row rather than squeezing.
+  comment: One per column of the footer.
   options:
     structures: _structures.footerColumns
 legalText:
