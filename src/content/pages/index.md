@@ -11,9 +11,9 @@ pageSections:
         heading: Build freely. Edit easily.
         headingLevel: h1
         headingSize: 2xl
-      subtext: Welcome to the Git-based CMS that doesn't fight your workflow. Your
-        site lives in Git, your team edits visually, and everything stays in
-        sync.
+      subtext: >-
+        Welcome to the Git-based CMS that doesn't fight your workflow. Your site lives in Git, your
+        team edits visually, and everything stays in sync.
       image:
         imageSource: /src/assets/images/marketing/hero-index.png
         imageAlt: A person reaching up to edit content blocks, with their dog
@@ -49,6 +49,7 @@ pageSections:
       subtextSize: xl
     style:
       pattern: grid
+      fade: none
       haze: true
       backgroundColor: light-sand
       reverse: false
@@ -104,8 +105,9 @@ pageSections:
       eyebrow: ''
       heading: Your content team edits. You stop getting pinged.
       headingLevel: h2
-      subtext: CloudCannon keeps your website’s code, content and config in Git and
-        gives content teams a visual interface to edit it.
+      subtext: >-
+        CloudCannon keeps your website’s code, content and config in Git and gives content teams a
+        visual interface to edit it.
       subtextSize: lg
       subtextWidth: md
       alignmentHorizontal: center
@@ -127,19 +129,11 @@ pageSections:
       headingSize: lg
     style:
       backgroundColor: light-sand
-      background:
-        type: image
-        imageSource: ''
-        imageAlt: ''
-        positionVertical: top
-        positionHorizontal: center
-        fixed: false
-        priority: false
-        mask: none
-        overlay: 0
       maxContentWidth: lg
       paddingHorizontal: gutter
       paddingVertical: 4xl
+      haze: false
+      pattern: none
   - _component: page-sections/explainers/workflow-split
     content:
       sectionLabel: ''
@@ -149,8 +143,9 @@ pageSections:
         headingLevel: h2
         headingSize: lg
       subtext:
-        subtext: Editors edit visually, developers stay in code — and every change lands
-          in the same Git repository.
+        subtext: >-
+          Editors edit visually, developers stay in code — and every change lands in the same Git
+          repository.
         subtextSize: lg
         subtextWidth: md
       buttonSections:
@@ -266,19 +261,12 @@ pageSections:
             size: md
     style:
       backgroundColor: light-sand
-      background:
-        type: pattern
-        imageSource: ''
-        pattern: pegboard
-        mask: fade
       maxContentWidth: xl
       paddingHorizontal: gutter
       paddingVertical: 4xl
-      haze:
-        - x: 0.5086
-          rx: 844px
-          y: 19%
-          ry: 31.5%
+      haze: true
+      pattern: pegboard
+      fade: bottom
   - _component: page-sections/explainers/feature-deck
     content:
       sectionLabel: ''
@@ -306,8 +294,7 @@ pageSections:
               iconColor: default
               iconPosition: before
             - _component: building-blocks/core-elements/text
-              text: Code, content, and config live together in Git. The whole project, in
-                plain files.
+              text: Code, content, and config live together in Git. The whole project, in plain files.
               alignmentHorizontal: center
               size: lg
             - _component: building-blocks/wrappers/grid
@@ -415,8 +402,7 @@ pageSections:
               iconColor: default
               iconPosition: before
             - _component: building-blocks/core-elements/text
-              text: Forget update queues, plugin conflicts, and things breaking while you
-                sleep.
+              text: Forget update queues, plugin conflicts, and things breaking while you sleep.
               alignmentHorizontal: center
               size: lg
             - _component: building-blocks/wrappers/grid
@@ -524,8 +510,7 @@ pageSections:
               iconColor: default
               iconPosition: before
             - _component: building-blocks/core-elements/text
-              text: Pages are pre-built and served from a CDN, so sites load fast anywhere in
-                the world.
+              text: Pages are pre-built and served from a CDN, so sites load fast anywhere in the world.
               alignmentHorizontal: center
               size: lg
             - _component: building-blocks/wrappers/grid
@@ -622,15 +607,12 @@ pageSections:
       showRail: true
     style:
       backgroundColor: dark
-      background:
-        type: pattern
-        imageSource: ''
-        pattern: grid
-        mask: fade
-        fixed: true
       maxContentWidth: xl
       paddingHorizontal: gutter
       paddingVertical: 4xl
+      haze: false
+      pattern: grid
+      fade: bottom
   - _component: page-sections/proof/testimonial-quote
     content:
       sectionLabel: ''
@@ -656,19 +638,11 @@ pageSections:
           quoteMarks: true
     style:
       backgroundColor: dark
-      background:
-        type: image
-        imageSource: ''
-        imageAlt: ''
-        positionVertical: top
-        positionHorizontal: center
-        fixed: false
-        priority: false
-        mask: none
-        overlay: 0
       maxContentWidth: xl
       paddingHorizontal: gutter
       paddingVertical: 4xl
+      haze: false
+      pattern: none
   - _component: page-sections/proof/story-carousel
     content:
       sectionLabel: ''
@@ -676,8 +650,7 @@ pageSections:
       heading: Grow your sites, not your headcount.
       headingLevel: h2
       headingSize: lg
-      subtext: From fast-moving startups to multi-site agencies, teams ship more with
-        CloudCannon.
+      subtext: From fast-moving startups to multi-site agencies, teams ship more with CloudCannon.
       subtextSize: lg
       subtextWidth: md
       stories:
@@ -733,14 +706,12 @@ pageSections:
           size: md
     style:
       backgroundColor: dark
-      background:
-        type: pattern
-        imageSource: ''
-        pattern: grid
-        mask: top
       maxContentWidth: xl
       paddingHorizontal: gutter
       paddingVertical: 4xl
+      haze: false
+      pattern: grid
+      fade: top
   - _component: page-sections/proof/team-grid-section
     content:
       sectionLabel: ''
@@ -748,10 +719,10 @@ pageSections:
       heading: Made for the work, not for the upsell
       headingSize: lg
       headingLevel: h2
-      subtext: We’re a tight-knit team based in Dunedin, New Zealand, working with web
-        teams all over the world. We started CloudCannon because every CMS we
-        tried gave editors a better experience by giving developers a worse one.
-        So we built a CMS that works for both.
+      subtext: >-
+        We’re a tight-knit team based in Dunedin, New Zealand, working with web teams all over the
+        world. We started CloudCannon because every CMS we tried gave editors a better experience by
+        giving developers a worse one. So we built a CMS that works for both.
       subtextSize: lg
       subtextWidth: sm
       linkText: Meet the team
@@ -820,27 +791,19 @@ pageSections:
       columns: 2
     style:
       backgroundColor: sand
-      background:
-        type: image
-        imageSource: ''
-        imageAlt: ''
-        positionVertical: top
-        positionHorizontal: center
-        fixed: false
-        priority: false
-        mask: none
-        overlay: 0
       maxContentWidth: xl
       paddingHorizontal: gutter
       paddingVertical: none
+      haze: false
+      pattern: none
   - _component: page-sections/conversion/cta-split
     content:
       sectionLabel: ''
       heading: Take a peek under the hood
       headingLevel: h2
-      subtext: Git underneath, a visual editor on top, with code and content running
-        on one engine. Start free in minutes, or book a demo and we’ll walk you
-        through the real thing.
+      subtext: >-
+        Git underneath, a visual editor on top, with code and content running on one engine. Start
+        free in minutes, or book a demo and we’ll walk you through the real thing.
       subtextSize: lg
       subtextWidth: ''
       imageSource: /src/assets/images/marketing/cloudcannon-truck-closed-1.png
@@ -873,17 +836,9 @@ pageSections:
       imageOverflow: 333
     style:
       backgroundColor: pacific
-      background:
-        type: image
-        imageSource: ''
-        imageAlt: ''
-        positionVertical: top
-        positionHorizontal: center
-        fixed: false
-        priority: false
-        mask: none
-        overlay: 0
       maxContentWidth: xl
       paddingHorizontal: gutter
       paddingVertical: 4xl
+      haze: false
+      pattern: none
 ---
