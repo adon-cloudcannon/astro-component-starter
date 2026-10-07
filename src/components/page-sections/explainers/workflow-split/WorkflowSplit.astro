@@ -147,36 +147,38 @@ const feedPeriod = feedSteps * CYCLE_MS;
 const stop = (ms: number): string => `${((ms / feedPeriod) * 100).toFixed(4)}%`;
 
 /**
- * Hold, slide, hold, slide, and the newest commit arrives at the **top**.
- *
- * It used to run the other way, with the track sliding up and each commit
- * joining at the foot. Both ends of a clipped list move when it does, so a
- * dot could only ever be in step with one of them: with eight rows that
- * alternate, whatever lands at the foot is the opposite colour to whatever
- * takes the top slot. The foot was the one in step, and the top was the one
- * being read — a blue dot ran in and the row that took first place was
- * orange. A commit list is read from the top, which is where the newest
- * belongs, so that is the end the dots answer to now.
+ * Hold, slide, hold, slide. The track runs upward and each commit joins at
+ * the foot, which is the motion the band has always had.
  *
  * At the end the track has moved by exactly the length of the list, and the
- * second copy of the rows above means that position is identical to the
+ * second copy of the rows underneath means that position is identical to the
  * start — so it repeats with nothing to reset.
  */
 const trackAt = (rows: number): string => `translateY(${-rows * ROW_PITCH}px)`;
 const feedKeyframes = feedSteps
-  ? `@keyframes ${feedName}{0%{transform:${trackAt(feedSteps)}}${Array.from(
+  ? `@keyframes ${feedName}{0%{transform:${trackAt(0)}}${Array.from(
       { length: feedSteps },
       (_unused, index) =>
-        `${stop(index * CYCLE_MS + LANDS_MS)}{transform:${trackAt(feedSteps - index)}}` +
-        `${stop(index * CYCLE_MS + LANDS_MS + SLIDE_MS)}{transform:${trackAt(feedSteps - index - 1)}}`
-    ).join("")}100%{transform:${trackAt(0)}}}`
+        `${stop(index * CYCLE_MS + LANDS_MS)}{transform:${trackAt(index)}}` +
+        `${stop(index * CYCLE_MS + LANDS_MS + SLIDE_MS)}{transform:${trackAt(index + 1)}}`
+    ).join("")}100%{transform:${trackAt(feedSteps)}}}`
   : "";
 
 /**
  * When each dot sets off, read off the commits rather than written down.
  *
- * Step `index` puts `feedSteps - 1 - index` at the top, so the first step
- * that lands a given column's commit is the delay that column's dot wants.
+ * Both ends of a clipped list move when it slides, and with rows that
+ * alternate they can never be the same colour at once: the row taking the
+ * top slot and the row joining the foot are always eight apart, which is an
+ * even number of alternations. So a dot can only be in step with one end.
+ *
+ * It answers to the **top**, because that is the end a commit list is read
+ * from. In step with the foot instead — which is where this started, the
+ * foot being where the new row physically arrives — a blue dot ran in and
+ * the row that took first place was orange, which is what gets noticed.
+ *
+ * Step `index` slides `index + 1` into the top slot, so the first step that
+ * puts a given column's commit there is the delay that column's dot wants.
  * Hardcoded, the pair only stayed in step for as long as the rows alternated
  * starting with the left — reorder them in the editor and the dots went on
  * running to the old schedule.
@@ -187,7 +189,7 @@ const feedKeyframes = feedSteps
 const PULSE_PERIOD_MS = 2 * CYCLE_MS;
 const pulseDelay = (kind: string): number => {
   const step = Array.from({ length: feedSteps }).findIndex(
-    (_unused, index) => (feedRows[feedSteps - 1 - index]?.kind ?? "left") === kind
+    (_unused, index) => (feedRows[(index + 1) % feedSteps]?.kind ?? "left") === kind
   );
   return step < 0 ? 0 : (step * CYCLE_MS) % PULSE_PERIOD_MS;
 };

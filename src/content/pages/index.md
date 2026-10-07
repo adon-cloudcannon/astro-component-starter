@@ -16,6 +16,7 @@ pageSections:
           site lives in Git, your team edits visually, and everything stays in
           sync.
         subtextSize: xl
+        subtextWidth: ''
       image:
         imageSource: /src/assets/images/marketing/hero-index.png
         imageAlt: A person reaching up to edit content blocks, with their dog
@@ -282,12 +283,13 @@ pageSections:
               text: AI-READY
               alignmentHorizontal: center
               size: md
-              class: eyebrow
+              class:
             - _component: building-blocks/core-elements/heading
               text: The stack AI already knows
               level: h3
               size: lg
               alignmentHorizontal: center
+              iconName: ''
               iconColor: default
               iconPosition: before
             - _component: building-blocks/core-elements/text
