@@ -309,7 +309,11 @@ const subtextCap = subtextMeasure(subtextWidth);
          and a wide wordmark ends up the same width as a square monogram. */
       .story-logo.logo-mark {
         aspect-ratio: var(--logo-mark-aspect, 4 / 1);
-        mask-position: left center;
+        /* The design sets each mark against the card's left edge. Written as
+           the property the utility reads, since a `mask-position` here loses
+           to `utils` however it is weighted. Inert while every mark's box is
+           its own size, and right the moment a wide one hits the width cap. */
+        --logo-mark-position: left center;
       }
 
       /* The figure carries the card's own accent, which is the one thing that

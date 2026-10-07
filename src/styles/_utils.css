@@ -20,7 +20,16 @@
     background-color: currentColor;
     display: block;
     mask-image: var(--logo-mark-source);
-    mask-position: center;
+
+    /* Where the mark sits when its box is bigger than it is, which `contain`
+       allows whenever a width cap binds before the ratio does.
+
+       Read from a property rather than set outright, because this sits in
+       `utils` and every caller is a page section: a plain `mask-position`
+       there is out-ranked whatever the selector, so the story card's own
+       `left center` never applied. Setting the property wins regardless of
+       layer, the way a section redefines a content width. */
+    mask-position: var(--logo-mark-position, center);
     mask-repeat: no-repeat;
     mask-size: contain;
   }
