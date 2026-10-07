@@ -147,18 +147,50 @@ const feedPeriod = feedSteps * CYCLE_MS;
 const stop = (ms: number): string => `${((ms / feedPeriod) * 100).toFixed(4)}%`;
 
 /**
- * Hold, slide, hold, slide. At the end the track has moved by exactly the
- * length of the list, and the second copy of the rows underneath means that
- * position is identical to the start — so it repeats with nothing to reset.
+ * Hold, slide, hold, slide, and the newest commit arrives at the **top**.
+ *
+ * It used to run the other way, with the track sliding up and each commit
+ * joining at the foot. Both ends of a clipped list move when it does, so a
+ * dot could only ever be in step with one of them: with eight rows that
+ * alternate, whatever lands at the foot is the opposite colour to whatever
+ * takes the top slot. The foot was the one in step, and the top was the one
+ * being read — a blue dot ran in and the row that took first place was
+ * orange. A commit list is read from the top, which is where the newest
+ * belongs, so that is the end the dots answer to now.
+ *
+ * At the end the track has moved by exactly the length of the list, and the
+ * second copy of the rows above means that position is identical to the
+ * start — so it repeats with nothing to reset.
  */
+const trackAt = (rows: number): string => `translateY(${-rows * ROW_PITCH}px)`;
 const feedKeyframes = feedSteps
-  ? `@keyframes ${feedName}{0%{transform:translateY(0)}${Array.from(
+  ? `@keyframes ${feedName}{0%{transform:${trackAt(feedSteps)}}${Array.from(
       { length: feedSteps },
       (_unused, index) =>
-        `${stop(index * CYCLE_MS + LANDS_MS)}{transform:translateY(${-index * ROW_PITCH}px)}` +
-        `${stop(index * CYCLE_MS + LANDS_MS + SLIDE_MS)}{transform:translateY(${-(index + 1) * ROW_PITCH}px)}`
-    ).join("")}100%{transform:translateY(${-feedSteps * ROW_PITCH}px)}}`
+        `${stop(index * CYCLE_MS + LANDS_MS)}{transform:${trackAt(feedSteps - index)}}` +
+        `${stop(index * CYCLE_MS + LANDS_MS + SLIDE_MS)}{transform:${trackAt(feedSteps - index - 1)}}`
+    ).join("")}100%{transform:${trackAt(0)}}}`
   : "";
+
+/**
+ * When each dot sets off, read off the commits rather than written down.
+ *
+ * Step `index` puts `feedSteps - 1 - index` at the top, so the first step
+ * that lands a given column's commit is the delay that column's dot wants.
+ * Hardcoded, the pair only stayed in step for as long as the rows alternated
+ * starting with the left — reorder them in the editor and the dots went on
+ * running to the old schedule.
+ *
+ * The dots run a two-commit period, so the delay wraps into that: it is the
+ * phase within the pair, not a position in the list.
+ */
+const PULSE_PERIOD_MS = 2 * CYCLE_MS;
+const pulseDelay = (kind: string): number => {
+  const step = Array.from({ length: feedSteps }).findIndex(
+    (_unused, index) => (feedRows[feedSteps - 1 - index]?.kind ?? "left") === kind
+  );
+  return step < 0 ? 0 : (step * CYCLE_MS) % PULSE_PERIOD_MS;
+};
 
 /* One name for both halves of the region, so they cannot disagree. */
 ---
@@ -294,7 +326,10 @@ const feedKeyframes = feedSteps
                 {/* Which panel feeds which commit is the design's own reading:
                     the editors' column is the blue one and its commits are
                     blue, the developers' is Sunset and so are theirs. */}
-                <span class="workflow-pulse" />
+                <span
+                  class="workflow-pulse"
+                  style={{ animationDelay: `${pulseDelay(index === 0 ? "left" : "right")}ms` }}
+                />
               </span>
             )}
           </div>
@@ -468,7 +503,11 @@ const feedKeyframes = feedSteps
         --workflow-centre-rule: #32333d;
         --workflow-centre-row-bg: rgb(255 255 255 / 5%);
         --workflow-centre-row-text: #cfd2e8;
-        --workflow-centre-hash: #5a6080;
+        /* Lifted off the design's #5A6080, which draws the hash at 2.5:1
+           on the row behind it — under AA at any size, and this is 11px. Same
+           hue, raised until it clears 4.5, so it still reads as the quietest
+           thing in the row without disappearing into it. */
+        --workflow-centre-hash: #828bba;
         --workflow-branch-color: #cfd2e8;
       }
 
@@ -633,8 +672,11 @@ const feedKeyframes = feedSteps
         --workflow-row-author: var(--pacific);
       }
 
+      /* Sunset 600, not Sunset. The palette entry draws 3.3:1 on the light
+         row and the label is 11px, so it goes down the ramp until it clears
+         AA. The blue needs none of this — Pacific is already past it. */
       .centre-light .workflow-centre-row.kind-right {
-        --workflow-row-author: var(--sunset);
+        --workflow-row-author: var(--sunset-600);
       }
 
       .workflow-centre-dot {
@@ -779,8 +821,9 @@ const feedKeyframes = feedSteps
       }
 
       /* The two dots run on the same clock as the feed: a period of two
-         commits each, the right one half a period behind, so they alternate
-         without anything telling them to. The distances are the 64 of the grid
+         commits each, half a period apart, so they alternate without anything
+         telling them to. Which one leads is read off the rows rather than
+         fixed here. The distances are the 64 of the grid
          gap plus the 44 it carries on under the card; 18.966% of the period is
          the 1100ms run inside the 5800ms of two commits, and 12.328% is where
          it crosses the card's edge. */
@@ -794,8 +837,9 @@ const feedKeyframes = feedSteps
         animation-name: workflow-pulse-to-end;
       }
 
+      /* No delay here: each dot carries its own, worked out from the commits
+         it is running alongside. */
       .to-start .workflow-pulse {
-        animation-delay: 2900ms;
         animation-name: workflow-pulse-to-start;
       }
 

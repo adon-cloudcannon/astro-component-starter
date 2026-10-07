@@ -251,9 +251,9 @@ content.middlePanel.iconName:
     values: data.icons
     preview:
       text:
-        - key: iconName
+        - key: name
       image:
-        - template: src/icons/{iconName}.svg
+        - template: src/icons/{id}.svg
 content.middlePanel.title:
   type: text
   label: Repo name
