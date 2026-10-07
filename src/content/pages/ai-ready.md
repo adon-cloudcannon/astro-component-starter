@@ -149,7 +149,6 @@ pageSections:
     style:
       backgroundColor: dark
       pattern: pegboard
-      haze: true
       variant: static
       quoteSize: sm
       tone: base

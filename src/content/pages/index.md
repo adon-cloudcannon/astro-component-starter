@@ -630,19 +630,16 @@ pageSections:
           accentColor: harbour
           quoteMarks: true
     style:
-      backgroundColor: dark
-      pattern: none
-      fade: none
-      maxContentWidth: xl
-      paddingHorizontal: gutter
-      paddingVertical: 4xl
-      haze: false
       variant: static
       quoteSize: lg
       tone: base
       cardWidth: medium
       alignment: start
       bordered: false
+      backgroundColor: dark
+      pattern: none
+      fade: none
+      paddingVertical: 4xl
   - _component: page-sections/proof/story-carousel
     content:
       sectionLabel: ''

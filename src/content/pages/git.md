@@ -95,7 +95,6 @@ pageSections:
           accentColor: sunset
     style:
       backgroundColor: dark
-      haze: true
       variant: static
       quoteSize: sm
       cardWidth: medium
