@@ -92,6 +92,7 @@ if (htmlAttributes.id) {
 }
 
 const effectiveDataProp = customDataProp ?? (useDefaultEditableBinding ? "text" : null);
+const effectiveEyebrowProp = eyebrowDataProp ?? (useDefaultEditableBinding ? "eyebrow" : null);
 const textDataAttributes = effectiveDataProp
   ? { "data-editable": "text", "data-prop": effectiveDataProp }
   : {};
@@ -112,60 +113,102 @@ const hasHeading = hasText || hasSlotContent || Boolean(_component);
 if (!_component && !hasText && !hasSlotContent && !hasEyebrow) return;
 
 const eyebrowClasses = ["eyebrow", eyebrowClass].filter(Boolean).join(" ");
+
+/**
+ * An array item needs one root, and with an eyebrow this has two.
+ *
+ * A block inside `contentSections` is drawn by renderBlock, which hands it
+ * `data-editable="array-item"` and a `data-id`. Those land on whichever
+ * element takes `htmlAttributes`, and the editor scopes a region's `data-prop`
+ * to the nearest such ancestor — so an eyebrow emitted as the `<h_>`'s
+ * preceding sibling falls outside the item and resolves against the page
+ * instead, which is no binding at all.
+ *
+ * So a block that has an eyebrow gets a wrapper, and the wrapper is the item.
+ * A section needs none: it passes a whole path like
+ * `content.heading.eyebrow`, which resolves wherever it is drawn, and its
+ * markup is better off unchanged.
+ */
+const wrapped = hasEyebrow && useDefaultEditableBinding;
+const Wrapper = wrapped ? "div" : Fragment;
+
+/* Only the editor's own attributes move out to the wrapper. The anchor id
+   stays on the `<h_>`, which is what `#section` links and the table of
+   contents point at — hoisted with the rest it left the heading unlinkable. */
+const EDITOR_ATTRS = ["data-editable", "data-id", "data-component"];
+const [wrapperAttrs, tagAttrs] = wrapped
+  ? Object.entries(htmlAttributes).reduce(
+      (split, [key, value]) => {
+        split[EDITOR_ATTRS.includes(key) ? 0 : 1][key] = value;
+        return split;
+      },
+      [{ class: "heading-block stackable" }, {}] as Record<string, unknown>[]
+    )
+  : [{}, htmlAttributes];
 ---
 
-{hasEyebrow && (
-  <SimpleText
-    class={eyebrowClasses}
-    size={eyebrowSize}
-    alignmentHorizontal={eyebrowAlignment ?? alignmentHorizontal}
-    data-prop={eyebrowDataProp}
-    text={eyebrow}
-  />
-)}
-{hasHeading && (
-  <Tag
-    class:list={["heading", "stackable", className]}
-    {...htmlAttributes}
-  >
-    <span
-      class:list={[
-        "heading-inner",
-        size && size !== "default" && `size-${size}`,
-        `align-${alignmentHorizontal}`,
-      ]}
-      data-space-before={spaceBeforeAttr(spaceBefore)}
+<Wrapper {...wrapperAttrs}>
+  {hasEyebrow && (
+    <SimpleText
+      class={eyebrowClasses}
+      size={eyebrowSize}
+      alignmentHorizontal={eyebrowAlignment ?? alignmentHorizontal}
+      data-prop={effectiveEyebrowProp}
+      text={eyebrow}
+    />
+  )}
+  {hasHeading && (
+    <Tag
+      class:list={["heading", "stackable", className]}
+      {...tagAttrs}
     >
-      {iconPosition == "before" && (
-        <Icon
-          name={iconName}
-          color={iconColor}
-          size="none"
-          class="heading-icon"
-          aria-hidden="true"
-        />
-      )}
       <span
-        class="heading-text"
-        {...textDataAttributes}
+        class:list={[
+          "heading-inner",
+          size && size !== "default" && `size-${size}`,
+          `align-${alignmentHorizontal}`,
+        ]}
+        data-space-before={spaceBeforeAttr(spaceBefore)}
       >
-        <slot>{text && <Fragment set:html={MarkdownText} />}</slot>
+        {iconPosition == "before" && (
+          <Icon
+            name={iconName}
+            color={iconColor}
+            size="none"
+            class="heading-icon"
+            aria-hidden="true"
+          />
+        )}
+        <span
+          class="heading-text"
+          {...textDataAttributes}
+        >
+          <slot>{text && <Fragment set:html={MarkdownText} />}</slot>
+        </span>
+        {iconPosition === "after" && (
+          <Icon
+            name={iconName}
+            color={iconColor}
+            size="none"
+            class="heading-icon heading-icon-after"
+            aria-hidden="true"
+          />
+        )}
       </span>
-      {iconPosition === "after" && (
-        <Icon
-          name={iconName}
-          color={iconColor}
-          size="none"
-          class="heading-icon heading-icon-after"
-          aria-hidden="true"
-        />
-      )}
-    </span>
-  </Tag>
-)}
+    </Tag>
+  )}
+</Wrapper>
 
 <style is:global>
   @layer components {
+    /* The wrapper is the array item, not a layout box: it stands where the
+       `<h_>` stood, so the flow layer spaces it the same. What it does take
+       over is the gap between the eyebrow and the heading, which flow sets
+       from a direct-child selector and so no longer reaches inside. */
+    .heading-block > .eyebrow + .heading {
+      margin-block-start: var(--space-before-tight);
+    }
+
     .heading {
       --space-before: var(--space-before-loose);
 

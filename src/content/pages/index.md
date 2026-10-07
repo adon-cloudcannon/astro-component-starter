@@ -279,12 +279,8 @@ pageSections:
         - _component: building-blocks/wrappers/scroll-deck/scroll-deck-card
           label: The stack AI already knows
           contentSections:
-            - _component: building-blocks/core-elements/simple-text
-              text: AI-READY
-              alignmentHorizontal: center
-              size: md
-              class:
             - _component: building-blocks/core-elements/heading
+              eyebrow: AI-READY
               text: The stack AI already knows
               level: h3
               size: lg
@@ -315,6 +311,7 @@ pageSections:
                       width: 175
                       height: 145
                     - _component: building-blocks/core-elements/heading
+                      eyebrow: ''
                       text: Complete context
                       level: h4
                       size: xs
@@ -338,6 +335,7 @@ pageSections:
                       width: 213
                       height: 141
                     - _component: building-blocks/core-elements/heading
+                      eyebrow: ''
                       text: Familiar workflow
                       level: h4
                       size: xs
@@ -361,6 +359,7 @@ pageSections:
                       width: 177
                       height: 160
                     - _component: building-blocks/core-elements/heading
+                      eyebrow: ''
                       text: No learning curve
                       level: h4
                       size: xs
@@ -390,13 +389,13 @@ pageSections:
           label: No forced upgrades or surprise migrations
           contentSections:
             - _component: building-blocks/core-elements/heading
+              eyebrow: LOW MAINTENANCE
               text: Your sites just run
               level: h3
               size: lg
               alignmentHorizontal: center
               iconColor: default
               iconPosition: before
-              eyebrow: LOW MAINTENANCE
             - _component: building-blocks/core-elements/text
               text: Forget update queues, plugin conflicts, and things breaking while you
                 sleep.
@@ -420,6 +419,7 @@ pageSections:
                       width: 121
                       height: 128
                     - _component: building-blocks/core-elements/heading
+                      eyebrow: ''
                       text: Upgrade when ready
                       level: h4
                       size: xs
@@ -443,6 +443,7 @@ pageSections:
                       width: 157
                       height: 144
                     - _component: building-blocks/core-elements/heading
+                      eyebrow: ''
                       text: Smaller surface
                       level: h4
                       size: xs
@@ -466,6 +467,7 @@ pageSections:
                       width: 148
                       height: 116
                     - _component: building-blocks/core-elements/heading
+                      eyebrow: ''
                       text: Off your plate
                       level: h4
                       size: xs
@@ -495,13 +497,13 @@ pageSections:
           label: Scale changes nothing
           contentSections:
             - _component: building-blocks/core-elements/heading
+              eyebrow: HIGH PERFORMANCE
               text: Fast everywhere
               level: h3
               size: lg
               alignmentHorizontal: center
               iconColor: default
               iconPosition: before
-              eyebrow: HIGH PERFORMANCE
             - _component: building-blocks/core-elements/text
               text: Pages are pre-built and served from a CDN, so sites load fast anywhere in
                 the world.
@@ -525,6 +527,7 @@ pageSections:
                       width: 164
                       height: 117
                     - _component: building-blocks/core-elements/heading
+                      eyebrow: ''
                       text: Scale changes nothing
                       level: h4
                       size: xs
@@ -548,6 +551,7 @@ pageSections:
                       width: 131
                       height: 109
                     - _component: building-blocks/core-elements/heading
+                      eyebrow: ''
                       text: Any distance
                       level: h4
                       size: xs
@@ -571,6 +575,7 @@ pageSections:
                       width: 150
                       height: 151
                     - _component: building-blocks/core-elements/heading
+                      eyebrow: ''
                       text: Ranks higher
                       level: h4
                       size: xs
