@@ -106,7 +106,7 @@ pageSections:
       sectionLabel: ''
       heading:
         eyebrow: ''
-        heading: Ready to get started?
+        heading: Your content team edits. You stop getting pinged.
         headingLevel: h2
         headingSize: lg
       subtext:
@@ -706,7 +706,7 @@ pageSections:
       sectionLabel: ''
       heading:
         eyebrow: Who we are
-        heading: ''
+        heading: 'Made for the work, not for the upsell'
         headingLevel: h2
         headingSize: lg
       subtext:
@@ -792,7 +792,7 @@ pageSections:
     content:
       sectionLabel: ''
       heading:
-        heading: Ready to get started?
+        heading: Take a peek under the hood
         headingLevel: h2
         headingSize: lg
       subtext:

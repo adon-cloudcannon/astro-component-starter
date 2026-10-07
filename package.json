@@ -3,14 +3,7 @@
   "type": "module",
   "version": "2.0.0",
   "description": "An Astro component starter for building visually editable marketing sites with CloudCannon's visual editing",
-  "keywords": [
-    "cloudcannon",
-    "astro",
-    "starter",
-    "template",
-    "visual-editing",
-    "components"
-  ],
+  "keywords": ["cloudcannon", "astro", "starter", "template", "visual-editing", "components"],
   "private": true,
   "author": "CloudCannon",
   "license": "MIT",
@@ -32,6 +25,7 @@
     "check": "npm run lint && npm run format && npm run typecheck && npm run previews:check && npm run docs:catalog:check && npm run agents:check && npm run icons:check && npm run icons:licenses:check && npm run lint:cms && npm run lint:roots && npm run lint:nesting && npm run docs:check && npm run lint:schema && npm run check:placeholders",
     "check:quick": "npm run lint:cms && npm run lint:css-vars && npm run typecheck",
     "check:placeholders": "node scripts/check/placeholders.mjs",
+    "check:page-copy": "node scripts/check/page-copy.mjs",
     "editor": "node scripts/setup/editor.mjs",
     "reset:starter": "node scripts/setup/reset-starter.mjs",
     "check:fix": "npm run lint:fix && npm run format:fix",
