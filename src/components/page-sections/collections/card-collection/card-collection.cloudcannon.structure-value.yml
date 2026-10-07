@@ -5,17 +5,17 @@ tabbed: true
 value:
   _component: page-sections/collections/card-collection
   content:
-    sectionLabel: ''
-    collection: ''
+    sectionLabel: ""
+    collection: ""
     heading:
       eyebrow: What we do
       heading: Services built for the long run
       headingLevel: h2
-    subtext: ''
+    subtext: ""
     items:
       - image: /src/assets/images/component-docs/dunedin-cliff.jpg
         imageAlt: Sea cliffs above a turquoise bay
-        link: '#'
+        link: "#"
         contentSections:
           - _component: building-blocks/core-elements/badge
             text: Strategy
@@ -31,7 +31,7 @@ value:
             size: sm
       - image: /src/assets/images/component-docs/castle.jpg
         imageAlt: Ruined stone castle under a starry night sky
-        link: '#'
+        link: "#"
         contentSections:
           - _component: building-blocks/core-elements/badge
             text: Design
@@ -47,7 +47,7 @@ value:
             size: sm
       - image: /src/assets/images/component-docs/sunset.jpg
         imageAlt: Coastal cliffs at dusk with the sun low over the sea
-        link: '#'
+        link: "#"
         contentSections:
           - _component: building-blocks/core-elements/badge
             text: Build
@@ -77,7 +77,7 @@ preview:
   text:
     - Card Collection
   subtext:
-    - key: content.heading
+    - key: content.heading.heading
   image: public/component-previews/page-sections/collections/card-collection.svg
   icon: grid_view
 picker_preview:
@@ -93,9 +93,9 @@ _structures:
       - label: Card
         icon: article
         value:
-          image: ''
-          imageAlt: ''
-          link: ''
+          image: ""
+          imageAlt: ""
+          link: ""
           contentSections: []
         preview:
           text:
@@ -114,7 +114,7 @@ _structures:
             comment: Cover image for the card. Leave empty for a text-only card.
             options:
               paths:
-                static: ''
+                static: ""
                 uploads: src/assets/images
           imageAlt:
             type: text

@@ -5,15 +5,15 @@ tabbed: true
 value:
   _component: page-sections/conversion/cta-banner
   content:
-    sectionLabel: ''
+    sectionLabel: ""
     heading:
-      heading: ''
+      heading: ""
       headingLevel: h2
       headingSize: lg
-    linkText: ''
-    link: ''
-    imageSource: ''
-    imageAlt: ''
+    linkText: ""
+    link: ""
+    imageSource: ""
+    imageAlt: ""
   style:
     backgroundColor: pacific
     pattern: none
@@ -24,7 +24,7 @@ value:
     haze: false
 preview:
   text:
-    - key: content.heading
+    - key: content.heading.heading
     - CTA Banner
   icon: campaign
 picker_preview:

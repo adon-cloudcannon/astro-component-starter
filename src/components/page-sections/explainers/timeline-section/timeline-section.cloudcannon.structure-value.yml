@@ -5,23 +5,23 @@ tabbed: true
 value:
   _component: page-sections/explainers/timeline-section
   content:
-    sectionLabel: ''
+    sectionLabel: ""
     heading:
       eyebrow: Our story
       heading: How we got here
       headingLevel: h2
-    subtext: ''
+    subtext: ""
     subtextSize: md
-    subtextWidth: ''
+    subtextWidth: ""
     layout: vertical
     entries:
-      - date: '2019'
+      - date: "2019"
         title: Founded
         body: Opened the studio and shipped the first client project.
-      - date: '2022'
+      - date: "2022"
         title: First hires
         body: The team grew to eight and moved into a permanent office.
-      - date: '2025'
+      - date: "2025"
         title: New markets
         body: Took on the first clients outside the country.
   style:
@@ -36,7 +36,7 @@ preview:
   text:
     - Timeline Section
   subtext:
-    - key: content.heading
+    - key: content.heading.heading
   image: public/component-previews/page-sections/explainers/timeline-section.svg
   icon: timeline
 picker_preview:
@@ -51,12 +51,12 @@ _structures:
       - label: Entry
         icon: timeline
         value:
-          year: ''
-          date: '2024'
+          year: ""
+          date: "2024"
           title: Entry title
-          body: ''
-          iconName: ''
-          accentColor: ''
+          body: ""
+          iconName: ""
+          accentColor: ""
         preview:
           text:
             - key: title
@@ -84,33 +84,33 @@ _structures:
             comment: Fills the marker in Split and Rail layouts. Leave blank for the section's own color.
             options:
               values:
-                - id: ''
+                - id: ""
                   name: Default
                   swatch: check_box_outline_blank
                 - id: moss
                   name: Moss
                   swatch: square
-                  color: '#687E00'
+                  color: "#687E00"
                 - id: pacific
                   name: Pacific
                   swatch: square
-                  color: '#034AD8'
+                  color: "#034AD8"
                 - id: sunset
                   name: Sunset
                   swatch: square
-                  color: '#D85A2C'
+                  color: "#D85A2C"
                 - id: golden
                   name: Golden
                   swatch: square
-                  color: '#FFAA00'
+                  color: "#FFAA00"
                 - id: peachy
                   name: Peachy
                   swatch: square
-                  color: '#F39B7B'
+                  color: "#F39B7B"
                 - id: harbour
                   name: Harbour
                   swatch: square
-                  color: '#A6C1FA'
+                  color: "#A6C1FA"
               picker_view: card
               preview:
                 icon:

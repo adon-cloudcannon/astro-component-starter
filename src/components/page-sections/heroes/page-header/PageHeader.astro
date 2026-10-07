@@ -11,12 +11,16 @@ import { trailFromPathname } from "@component-utils/breadcrumbTrail";
 
 /* `content` and `style` are the editor's tabs, flattened straight back into
    the names below. `at()` writes the frontmatter path a binding needs. */
-const { props, at } = nestedProps(Astro.props);
+const { props, at } = nestedProps(Astro.props, {
+  nest: { heading: ["eyebrow", "heading", "headingLevel", "headingSize"] },
+});
 
 const {
   eyebrow = "",
   heading = "",
   headingLevel = "h1",
+  /** Size of the title, independent of its level. */
+  headingSize = "lg",
   subtext = "",
   // Body 3 at 19 or Subtitle 1 at 22 in the design; `md` keeps the 16 every
   // section rendered before either was carried through.
@@ -94,7 +98,7 @@ const trail = showBreadcrumbs && pathname ? trailFromPathname(pathname, heading)
   <Heading
     class="page-header-heading"
     level={headingLevel}
-    size="lg"
+    size={headingSize}
     alignmentHorizontal={alignmentHorizontal}
     data-prop={at("heading")}
   >

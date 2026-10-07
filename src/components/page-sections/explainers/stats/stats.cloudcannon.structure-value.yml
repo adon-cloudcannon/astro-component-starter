@@ -5,31 +5,31 @@ tabbed: true
 value:
   _component: page-sections/explainers/stats
   content:
-    sectionLabel: ''
+    sectionLabel: ""
     heading:
-      eyebrow: ''
+      eyebrow: ""
       heading: Numbers that hold up
       headingLevel: h2
-    subtext: ''
+    subtext: ""
     stats:
       - number: 12
-        prefix: ''
+        prefix: ""
         suffix: k+
         label: Customers
-        sublabel: ''
+        sublabel: ""
       - number: 99.95
-        prefix: ''
-        suffix: '%'
+        prefix: ""
+        suffix: "%"
         label: Uptime
         sublabel: Last 12 months
       - number: 1.4
-        prefix: ''
+        prefix: ""
         suffix: s
         label: Median build
-        sublabel: ''
+        sublabel: ""
       - number: 4.9
-        prefix: ''
-        suffix: ''
+        prefix: ""
+        suffix: ""
         label: Support score
         sublabel: Out of 5
     dividers: true
@@ -45,7 +45,7 @@ preview:
   text:
     - Stats
   subtext:
-    - key: content.heading
+    - key: content.heading.heading
   image: public/component-previews/page-sections/explainers/stats.svg
   icon: monitoring
 picker_preview:
@@ -61,10 +61,10 @@ _structures:
         icon: monitoring
         value:
           number: 100
-          prefix: ''
-          suffix: ''
+          prefix: ""
+          suffix: ""
           label: Label
-          sublabel: ''
+          sublabel: ""
         preview:
           text:
             - key: label

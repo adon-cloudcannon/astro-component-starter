@@ -11,12 +11,16 @@ import { slugifyLabel } from "@component-utils/slugify";
 
 /* `content` and `style` are the editor's tabs, flattened straight back into
    the names below. `at()` writes the frontmatter path a binding needs. */
-const { props, at } = nestedProps(Astro.props);
+const { props, at } = nestedProps(Astro.props, {
+  nest: { heading: ["eyebrow", "heading", "headingLevel", "headingSize"] },
+});
 
 const {
   eyebrow = "",
   heading = "",
   headingLevel = "h2",
+  /** Size of the title, independent of its level. */
+  headingSize = "md",
   subtext = "",
   formAction = "",
   formMethod = "post",
@@ -80,7 +84,7 @@ const emailId = `${slugifyLabel(formName || sectionLabel || "newsletter")}-email
       <Heading
         alignmentHorizontal={isCard ? "center" : "start"}
         level={headingLevel}
-        size="md"
+        size={headingSize}
         data-prop={at("heading")}
       >
         {heading}

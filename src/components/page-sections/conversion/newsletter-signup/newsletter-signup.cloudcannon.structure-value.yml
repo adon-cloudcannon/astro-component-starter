@@ -5,12 +5,14 @@ tabbed: true
 value:
   _component: page-sections/conversion/newsletter-signup
   content:
-    sectionLabel: ''
-    eyebrow: Stay in the loop
-    heading: Get useful updates in your inbox
-    headingLevel: h2
+    sectionLabel: ""
+    heading:
+      eyebrow: Stay in the loop
+      heading: Get useful updates in your inbox
+      headingLevel: h2
+      headingSize: md
     subtext: Occasional notes, practical ideas, and no clutter.
-    formAction: ''
+    formAction: ""
     formMethod: post
     formName: newsletter
     emailName: email
@@ -32,7 +34,7 @@ preview:
   text:
     - Newsletter Signup
   subtext:
-    - key: content.heading
+    - key: content.heading.heading
   image: public/component-previews/page-sections/conversion/newsletter-signup.svg
   icon: mark_email_read
 picker_preview:

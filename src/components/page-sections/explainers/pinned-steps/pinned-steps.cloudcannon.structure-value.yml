@@ -5,15 +5,15 @@ tabbed: true
 value:
   _component: page-sections/explainers/pinned-steps
   content:
-    sectionLabel: ''
+    sectionLabel: ""
     heading:
-      eyebrow: ''
-      heading: ''
+      eyebrow: ""
+      heading: ""
       headingLevel: h2
       headingSize: lg
-    subtext: ''
+    subtext: ""
     subtextSize: md
-    subtextWidth: ''
+    subtextWidth: ""
     alignmentHorizontal: center
     steps:
       - contentSections:
@@ -34,7 +34,7 @@ value:
         mediaSections: []
     reverse: false
     mediaWidth: half
-    copyColor: ''
+    copyColor: ""
     showProgress: true
   style:
     backgroundColor: light-sand
@@ -48,7 +48,7 @@ preview:
   text:
     - Pinned Steps
   subtext:
-    - key: content.heading
+    - key: content.heading.heading
   icon: web_stories
 picker_preview:
   text: Pinned Steps

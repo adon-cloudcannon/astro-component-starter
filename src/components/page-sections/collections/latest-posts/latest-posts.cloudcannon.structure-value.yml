@@ -5,14 +5,14 @@ tabbed: true
 value:
   _component: page-sections/collections/latest-posts
   content:
-    sectionLabel: ''
+    sectionLabel: ""
     heading:
       eyebrow: Writing
       heading: From the blog
       headingLevel: h2
-    subtext: ''
+    subtext: ""
     count: 3
-    tag: ''
+    tag: ""
     showViewAllButton: true
     viewAllLabel: View all posts
   style:
@@ -27,7 +27,7 @@ preview:
   text:
     - Latest Posts
   subtext:
-    - key: content.heading
+    - key: content.heading.heading
   image: public/component-previews/page-sections/collections/latest-posts.svg
   icon: newsmode
 picker_preview:

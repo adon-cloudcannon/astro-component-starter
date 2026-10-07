@@ -5,13 +5,13 @@ tabbed: true
 value:
   _component: page-sections/conversion/cta-form
   content:
-    sectionLabel: ''
+    sectionLabel: ""
     heading:
       heading: Get in touch
       headingLevel: h2
     subtext: Fill out the form below and we'll get back to you as soon as possible.
     subtextSize: md
-    subtextWidth: ''
+    subtextWidth: ""
     formAction: ./
     formBlocks:
       - _component: building-blocks/forms/input
@@ -46,7 +46,7 @@ preview:
   text:
     - CTA Form
   subtext:
-    - key: content.heading
+    - key: content.heading.heading
   image: public/component-previews/page-sections/conversion/cta-form.svg
   icon: call_to_action
 picker_preview:

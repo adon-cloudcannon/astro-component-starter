@@ -5,7 +5,7 @@ tabbed: true
 value:
   _component: page-sections/conversion/contact-split
   content:
-    sectionLabel: ''
+    sectionLabel: ""
     heading:
       eyebrow: Contact
       heading: Talk to a human
@@ -15,7 +15,7 @@ value:
       - icon: map-pin
         label: Address
         value: 12 Vogel Street, Dunedin 9016, New Zealand
-        url: ''
+        url: ""
       - icon: phone
         label: Phone
         value: +64 3 555 0142
@@ -27,7 +27,7 @@ value:
       - icon: clock
         label: Hours
         value: Mon–Fri, 9am–5pm NZST
-        url: ''
+        url: ""
     formAction: ./
     formBlocks:
       - _component: building-blocks/forms/input
@@ -47,7 +47,7 @@ value:
       - _component: building-blocks/forms/submit
         text: Send message
         variant: primary
-    mapEmbedUrl: ''
+    mapEmbedUrl: ""
   style:
     backgroundColor: light-sand
     pattern: none
@@ -60,7 +60,7 @@ preview:
   text:
     - Contact Split
   subtext:
-    - key: content.heading
+    - key: content.heading.heading
   image: public/component-previews/page-sections/conversion/contact-split.svg
   icon: contact_mail
 picker_preview:
@@ -78,7 +78,7 @@ _structures:
           icon: map-pin
           label: Label
           value: The detail itself
-          url: ''
+          url: ""
         preview:
           text:
             - key: label

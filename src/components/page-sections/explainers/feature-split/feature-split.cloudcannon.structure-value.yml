@@ -5,21 +5,21 @@ tabbed: true
 value:
   _component: page-sections/explainers/feature-split
   content:
-    sectionLabel: ''
+    sectionLabel: ""
     heading:
       eyebrow: How it works
       heading: One idea, shown beside it
       headingLevel: h2
     subtext: A short paragraph that explains the idea in the image next to it.
     subtextSize: lg
-    subtextWidth: ''
+    subtextWidth: ""
     buttonSections: []
     imageSource: /src/assets/images/component-docs/quiet-street.jpg
     imageAlt: A quiet residential street
     imageAspectRatio: portrait
     imageRounded: true
     imageBleed: false
-    mediaWidth: ''
+    mediaWidth: ""
     reverse: false
     shapes: []
     pileWidth: 664
@@ -38,7 +38,7 @@ preview:
   text:
     - Feature Split
   subtext:
-    - key: content.heading
+    - key: content.heading.heading
   image: public/component-previews/page-sections/explainers/feature-split.svg
   icon: view_week
 picker_preview:

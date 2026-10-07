@@ -5,13 +5,13 @@ tabbed: true
 value:
   _component: page-sections/conversion/cta-split
   content:
-    sectionLabel: ''
+    sectionLabel: ""
     heading:
       heading: Ready to get started?
       headingLevel: h2
     subtext: One line that makes the next step obvious.
     subtextSize: md
-    subtextWidth: ''
+    subtextWidth: ""
     imageSource: /src/assets/images/component-docs/dunedin-cliff.jpg
     imageAlt: Sea cliffs above a bay
     buttonSections:
@@ -19,7 +19,7 @@ value:
         text: Get started
         hideText: false
         link: /
-        iconName: ''
+        iconName: ""
         iconColor: default
         iconPosition: before
         variant: primary
@@ -37,7 +37,7 @@ preview:
   text:
     - CTA Split
   subtext:
-    - key: content.heading
+    - key: content.heading.heading
   image: public/component-previews/page-sections/conversion/cta-split.svg
   icon: call_to_action
 picker_preview:

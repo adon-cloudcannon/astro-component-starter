@@ -5,54 +5,54 @@ tabbed: true
 value:
   _component: page-sections/conversion/pricing-comparison
   content:
-    sectionLabel: ''
+    sectionLabel: ""
     heading:
       eyebrow: Pricing
       heading: Compare plans feature by feature
       headingLevel: h2
-    subtext: ''
+    subtext: ""
     plans:
       - name: Starter
         price: $19/mo
         highlight: false
         buttonText: Choose Starter
-        buttonLink: '#'
+        buttonLink: "#"
       - name: Team
         price: $49/mo
         highlight: true
         buttonText: Choose Team
-        buttonLink: '#'
+        buttonLink: "#"
       - name: Enterprise
         price: Custom
         highlight: false
         buttonText: Talk to sales
-        buttonLink: '#'
+        buttonLink: "#"
     rows:
       - feature: Editors
         values:
-          - '3'
-          - '15'
+          - "3"
+          - "15"
           - Unlimited
       - feature: Visual editing
         values:
-          - 'yes'
-          - 'yes'
-          - 'yes'
+          - "yes"
+          - "yes"
+          - "yes"
       - feature: Scheduled publishing
         values:
-          - 'no'
-          - 'yes'
-          - 'yes'
+          - "no"
+          - "yes"
+          - "yes"
       - feature: Custom domains
         values:
-          - '1'
-          - '10'
+          - "1"
+          - "10"
           - Unlimited
       - feature: SSO and audit log
         values:
-          - 'no'
-          - 'no'
-          - 'yes'
+          - "no"
+          - "no"
+          - "yes"
       - feature: Support
         values:
           - Email
@@ -71,7 +71,7 @@ preview:
   text:
     - Pricing Comparison
   subtext:
-    - key: content.heading
+    - key: content.heading.heading
   image: public/component-previews/page-sections/conversion/pricing-comparison.svg
   icon: table_chart
 picker_preview:
@@ -87,11 +87,11 @@ _structures:
       - label: Plan
         icon: sell
         value:
-          name: ''
-          price: ''
+          name: ""
+          price: ""
           highlight: false
-          buttonText: ''
-          buttonLink: ''
+          buttonText: ""
+          buttonLink: ""
         preview:
           text:
             - key: name
@@ -122,9 +122,9 @@ _structures:
       - label: Feature row
         icon: check_circle
         value:
-          feature: ''
+          feature: ""
           values:
-            - ''
+            - ""
         preview:
           text:
             - key: feature

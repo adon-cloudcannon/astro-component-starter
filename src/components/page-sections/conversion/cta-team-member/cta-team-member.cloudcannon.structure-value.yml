@@ -5,23 +5,23 @@ tabbed: true
 value:
   _component: page-sections/conversion/cta-team-member
   content:
-    sectionLabel: ''
+    sectionLabel: ""
     heading:
-      heading: ''
+      heading: ""
       headingLevel: h2
       headingSize: lg
-    subtext: ''
+    subtext: ""
     subtextSize: lg
-    subtextWidth: ''
+    subtextWidth: ""
     member:
       _component: building-blocks/wrappers/team-member
-      name: ''
-      role: ''
-      imageSource: ''
-      imageAlt: ''
+      name: ""
+      role: ""
+      imageSource: ""
+      imageAlt: ""
       backgroundColor: sunset
-      propSource: ''
-      propAlt: ''
+      propSource: ""
+      propAlt: ""
     buttonSections: []
     reverse: false
   style:
@@ -34,7 +34,7 @@ value:
     haze: false
 preview:
   text:
-    - key: content.heading
+    - key: content.heading.heading
     - Team Member CTA
   icon: record_voice_over
 picker_preview:

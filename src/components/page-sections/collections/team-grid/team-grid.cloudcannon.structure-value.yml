@@ -5,10 +5,12 @@ tabbed: true
 value:
   _component: page-sections/collections/team-grid
   content:
-    sectionLabel: ''
-    eyebrow: Our team
-    heading: Meet the team
-    headingLevel: h2
+    sectionLabel: ""
+    heading:
+      eyebrow: Our team
+      heading: Meet the team
+      headingLevel: h2
+      headingSize: lg
     subtext: Get to know the people behind our work.
     teamMembers:
       - name: Michael Chen
@@ -83,7 +85,7 @@ _structures:
             options:
               paths:
                 uploads: src/assets/images
-                static: ''
+                static: ""
               resize_style: contain
               width: 1920
               height: 1280

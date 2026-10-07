@@ -5,14 +5,14 @@ tabbed: true
 value:
   _component: page-sections/proof/testimonial-wall
   content:
-    sectionLabel: ''
+    sectionLabel: ""
     heading:
       eyebrow: Testimonials
       heading: What teams say after shipping
       headingLevel: h2
-    subtext: ''
+    subtext: ""
     subtextSize: md
-    subtextWidth: ''
+    subtextWidth: ""
     testimonials:
       - text: >-
           This framework has completely changed the way we build. The sites come together fast, they
@@ -57,7 +57,7 @@ preview:
   text:
     - Testimonial Wall
   subtext:
-    - key: content.heading
+    - key: content.heading.heading
   image: public/component-previews/page-sections/proof/testimonial-wall.svg
   icon: reviews
 picker_preview:
@@ -73,10 +73,10 @@ _structures:
       - label: Testimonial
         icon: format_quote
         value:
-          text: ''
-          authorName: ''
-          authorDescription: ''
-          authorImage: ''
+          text: ""
+          authorName: ""
+          authorDescription: ""
+          authorImage: ""
         preview:
           text:
             - key: authorName
@@ -109,5 +109,5 @@ _structures:
             comment: Optional headshot. Falls back to the author's initials.
             options:
               paths:
-                static: ''
+                static: ""
                 uploads: src/assets/images

@@ -5,7 +5,7 @@ tabbed: true
 value:
   _component: page-sections/explainers/faq-section
   content:
-    sectionLabel: ''
+    sectionLabel: ""
     heading:
       heading: Frequently Asked Questions
       headingLevel: h2
@@ -37,7 +37,7 @@ preview:
   text:
     - FAQ Section
   subtext:
-    - key: content.heading
+    - key: content.heading.heading
   image: public/component-previews/page-sections/explainers/faq-section.svg
   icon: help
 picker_preview:

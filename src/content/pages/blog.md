@@ -5,8 +5,9 @@ description: Articles on web development, design, and shipping sites — demo po
 pageSections:
   - _component: page-sections/heroes/page-header
     content:
-      eyebrow: Example
-      heading: Blog
+      heading:
+        eyebrow: Example
+        heading: Blog
       subtext: Example listing page. Copy it as a starting point. The posts themselves are demo content.
       showBreadcrumbs: true
       alignmentHorizontal: start

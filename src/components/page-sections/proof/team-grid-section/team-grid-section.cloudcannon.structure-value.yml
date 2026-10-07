@@ -5,17 +5,17 @@ tabbed: true
 value:
   _component: page-sections/proof/team-grid-section
   content:
-    sectionLabel: ''
+    sectionLabel: ""
     heading:
-      eyebrow: ''
-      heading: ''
+      eyebrow: ""
+      heading: ""
       headingLevel: h2
       headingSize: lg
-    subtext: ''
+    subtext: ""
     subtextSize: lg
-    subtextWidth: ''
-    linkText: ''
-    link: ''
+    subtextWidth: ""
+    linkText: ""
+    link: ""
     members: []
     columns: 2
   style:
@@ -28,7 +28,7 @@ value:
     haze: false
 preview:
   text:
-    - key: content.heading
+    - key: content.heading.heading
     - Team Grid
   icon: groups
 picker_preview:

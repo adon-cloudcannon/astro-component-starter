@@ -5,14 +5,14 @@ tabbed: true
 value:
   _component: page-sections/explainers/feature-grid
   content:
-    sectionLabel: ''
+    sectionLabel: ""
     heading:
       eyebrow: What you get
       heading: Three things worth knowing
       headingLevel: h2
     subtext: One line that frames the points below.
     subtextSize: md
-    subtextWidth: ''
+    subtextWidth: ""
     alignmentHorizontal: center
     columns: 3
     features:
@@ -43,7 +43,7 @@ preview:
   text:
     - Feature Grid
   subtext:
-    - key: content.heading
+    - key: content.heading.heading
   image: public/component-previews/page-sections/explainers/feature-grid.svg
   icon: apps
 picker_preview:
@@ -116,35 +116,35 @@ _structures:
                 - id: pacific
                   name: Pacific
                   swatch: square
-                  color: '#034AD8'
+                  color: "#034AD8"
                 - id: moss
                   name: Moss
                   swatch: square
-                  color: '#687E00'
+                  color: "#687E00"
                 - id: golden
                   name: Golden
                   swatch: square
-                  color: '#FFAA00'
+                  color: "#FFAA00"
                 - id: peachy
                   name: Peachy
                   swatch: square
-                  color: '#F39B7B'
+                  color: "#F39B7B"
                 - id: sunset
                   name: Sunset
                   swatch: square
-                  color: '#D85A2C'
+                  color: "#D85A2C"
                 - id: kiwi
                   name: Kiwi
                   swatch: square
-                  color: '#7C3442'
+                  color: "#7C3442"
                 - id: blush
                   name: Blush
                   swatch: square
-                  color: '#E7B0B9'
+                  color: "#E7B0B9"
                 - id: harbour
                   name: Harbour
                   swatch: square
-                  color: '#A6C1FA'
+                  color: "#A6C1FA"
               picker_view: card
               preview:
                 icon:
@@ -178,27 +178,27 @@ _structures:
                 - id: pacific
                   name: Pacific
                   swatch: square
-                  color: '#034AD8'
+                  color: "#034AD8"
                 - id: moss
                   name: Moss
                   swatch: square
-                  color: '#687E00'
+                  color: "#687E00"
                 - id: golden
                   name: Golden
                   swatch: square
-                  color: '#FFAA00'
+                  color: "#FFAA00"
                 - id: peachy
                   name: Peachy
                   swatch: square
-                  color: '#F39B7B'
+                  color: "#F39B7B"
                 - id: sunset
                   name: Sunset
                   swatch: square
-                  color: '#D85A2C'
+                  color: "#D85A2C"
                 - id: harbour
                   name: Harbour
                   swatch: square
-                  color: '#A6C1FA'
+                  color: "#A6C1FA"
               picker_view: card
               preview:
                 icon:

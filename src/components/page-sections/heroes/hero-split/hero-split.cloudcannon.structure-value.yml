@@ -5,7 +5,7 @@ tabbed: true
 value:
   _component: page-sections/heroes/hero-split
   content:
-    sectionLabel: ''
+    sectionLabel: ""
     heading:
       heading: A clear promise in one line
       headingLevel: h1
@@ -23,7 +23,7 @@ value:
         text: Get started
         hideText: false
         link: /
-        iconName: ''
+        iconName: ""
         iconColor: default
         iconPosition: before
         variant: primary
@@ -50,7 +50,7 @@ preview:
   text:
     - Hero Split
   subtext:
-    - key: content.heading
+    - key: content.heading.heading
   image: public/component-previews/page-sections/heroes/hero-split.svg
   icon: web_asset
 picker_preview:

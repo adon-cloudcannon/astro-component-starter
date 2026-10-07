@@ -5,7 +5,7 @@ tabbed: true
 value:
   _component: page-sections/heroes/hero-center
   content:
-    sectionLabel: ''
+    sectionLabel: ""
     heading:
       eyebrow: Introducing
       heading: A clear promise in one line
@@ -18,7 +18,7 @@ value:
         text: Get started
         hideText: false
         link: /
-        iconName: ''
+        iconName: ""
         iconColor: default
         iconPosition: before
         variant: primary
@@ -35,7 +35,7 @@ preview:
   text:
     - Hero Center
   subtext:
-    - key: content.heading
+    - key: content.heading.heading
   image: public/component-previews/page-sections/heroes/hero-center.svg
   icon: web_asset
 picker_preview:

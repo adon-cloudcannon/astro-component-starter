@@ -5,13 +5,15 @@ tabbed: true
 value:
   _component: page-sections/heroes/page-header
   content:
-    sectionLabel: ''
-    eyebrow: ''
-    heading: About us
-    headingLevel: h1
+    sectionLabel: ""
+    heading:
+      eyebrow: ""
+      heading: About us
+      headingLevel: h1
+      headingSize: lg
     subtext: A short introduction to the page, one or two lines long.
     subtextSize: md
-    subtextWidth: ''
+    subtextWidth: ""
     showBreadcrumbs: true
     alignmentHorizontal: start
   style:
@@ -26,7 +28,7 @@ preview:
   text:
     - Page Header
   subtext:
-    - key: content.heading
+    - key: content.heading.heading
   image: public/component-previews/page-sections/heroes/page-header.svg
   icon: title
 picker_preview:

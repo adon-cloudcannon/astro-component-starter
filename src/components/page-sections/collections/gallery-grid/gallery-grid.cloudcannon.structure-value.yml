@@ -5,12 +5,12 @@ tabbed: true
 value:
   _component: page-sections/collections/gallery-grid
   content:
-    sectionLabel: ''
+    sectionLabel: ""
     heading:
       eyebrow: Gallery
       heading: Field notes from the coast
       headingLevel: h2
-    subtext: ''
+    subtext: ""
     images:
       - image: /src/assets/images/component-docs/dunedin-cliff.jpg
         alt: Sea cliffs above a turquoise bay, gorse flowering in the foreground
@@ -45,7 +45,7 @@ preview:
   text:
     - Gallery Grid
   subtext:
-    - key: content.heading
+    - key: content.heading.heading
   image: public/component-previews/page-sections/collections/gallery-grid.svg
   icon: photo_library
 picker_preview:
@@ -60,9 +60,9 @@ _structures:
       - label: Image
         icon: photo_library
         value:
-          image: ''
-          alt: ''
-          caption: ''
+          image: ""
+          alt: ""
+          caption: ""
         preview:
           text:
             - key: caption
@@ -76,7 +76,7 @@ _structures:
             comment: The photo shown in the grid and, full size, in the lightbox.
             options:
               paths:
-                static: ''
+                static: ""
                 uploads: src/assets/images
           alt:
             type: text

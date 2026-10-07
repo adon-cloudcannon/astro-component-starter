@@ -5,29 +5,29 @@ tabbed: true
 value:
   _component: page-sections/conversion/cta-center
   content:
-    sectionLabel: ''
+    sectionLabel: ""
     heading:
-      eyebrow: ''
+      eyebrow: ""
       heading: Ready to get started?
       headingLevel: h2
     subtext: One line that makes the next step obvious.
     subtextSize: md
-    subtextWidth: ''
+    subtextWidth: ""
     alignmentHorizontal: center
     buttonSections:
       - _component: building-blocks/core-elements/button
         text: Get started
         hideText: false
         link: /
-        iconName: ''
+        iconName: ""
         iconColor: default
         iconPosition: before
         variant: primary
         size: md
-    imageSource: ''
+    imageSource: ""
     imageWidth: intrinsic
-    imageScratch: ''
-    imageAlt: ''
+    imageScratch: ""
+    imageAlt: ""
   style:
     backgroundColor: light-sand
     pattern: none
@@ -40,7 +40,7 @@ preview:
   text:
     - CTA Center
   subtext:
-    - key: content.heading
+    - key: content.heading.heading
   image: public/component-previews/page-sections/conversion/cta-center.svg
   icon: call_to_action
 picker_preview:
