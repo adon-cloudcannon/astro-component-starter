@@ -790,7 +790,7 @@ pageSections:
       paddingHorizontal: gutter
       paddingVertical: none
       haze: false
-  - _component: page-sections/conversion/cta-split
+  - _component: page-sections/conversion/cta-showcase
     content:
       sectionLabel: ''
       heading:
@@ -825,7 +825,6 @@ pageSections:
           variant: text
           size: md
       reverse: false
-      imageOverflow: 333
       mediaSections:
         - _component: building-blocks/wrappers/image-reveal
           source: /src/assets/images/marketing/cloudcannon-truck-closed-1.png
@@ -838,8 +837,6 @@ pageSections:
       backgroundColor: pacific
       pattern: none
       fade: none
-      maxContentWidth: xl
-      paddingHorizontal: gutter
       paddingVertical: 4xl
       haze: false
 ---

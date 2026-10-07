@@ -153,7 +153,7 @@ pageSections:
       quoteSize: sm
       tone: base
       cardWidth: medium
-  - _component: page-sections/conversion/cta-split
+  - _component: page-sections/conversion/cta-showcase
     content:
       heading:
         heading: We've already taught agents how to use CloudCannon
@@ -182,7 +182,7 @@ pageSections:
                 - 12 components made editable
     style:
       backgroundColor: light-sand
-  - _component: page-sections/conversion/cta-split
+  - _component: page-sections/conversion/cta-showcase
     content:
       heading:
         heading: Give AI the full picture
@@ -191,7 +191,6 @@ pageSections:
         subtext: With CloudCannon the code and content stay in Git, and the repo stays
           yours.
         subtextSize: lg
-      contentCard: true
       buttonSections:
         - _component: building-blocks/core-elements/button
           text: Start your free trial

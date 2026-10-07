@@ -1,0 +1,14 @@
+# The built things that can fill a CTA Showcase's other half.
+#
+# Each was drawn to its own width and the band was built around it, so picking
+# one picks the band's shape with it. A plain picture or a video is not in this
+# list on purpose: that is what the generic CTA Split is for, and that one
+# takes a layout.
+ctaShowcaseMedia:
+  id_key: _component
+  style: modal
+  values_from_glob:
+    - /src/components/building-blocks/wrappers/image-reveal/image-reveal.cloudcannon.structure-value.yml
+    - /src/components/building-blocks/wrappers/polaroid-camera/polaroid-camera.cloudcannon.structure-value.yml
+    - /src/components/building-blocks/wrappers/agent-terminal/agent-terminal.cloudcannon.structure-value.yml
+    - /src/components/building-blocks/wrappers/character-chat/character-chat.cloudcannon.structure-value.yml

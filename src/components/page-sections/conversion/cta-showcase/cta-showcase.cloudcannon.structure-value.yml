@@ -1,0 +1,55 @@
+label: CTA Showcase
+icon: call_to_action
+description: Call to action with copy and buttons beside an image.
+tabbed: true
+value:
+  _component: page-sections/conversion/cta-showcase
+  content:
+    sectionLabel: ""
+    heading:
+      heading: Ready to get started?
+      headingLevel: h2
+      headingSize: xl
+    subtext:
+      subtext: One line that makes the next step obvious.
+      subtextSize: md
+      subtextWidth: ""
+    contentCardColor: white
+    mediaSections:
+      - _component: building-blocks/wrappers/image-reveal
+        source: /src/assets/images/placeholder.jpg
+        alt: ""
+        revealSource: /src/assets/images/placeholder.jpg
+        label: Show the other view of this picture
+        aspectRatio: none
+        rounded: true
+    buttonSections:
+      - _component: building-blocks/core-elements/button
+        text: Get started
+        hideText: false
+        link: /
+        iconName: ""
+        iconColor: default
+        iconPosition: before
+        variant: primary
+        size: md
+    reverse: false
+  style:
+    backgroundColor: light-sand
+    pattern: none
+    fade: none
+    paddingVertical: 4xl
+    haze: false
+preview:
+  text:
+    - CTA Showcase
+  subtext:
+    - key: content.heading.heading
+  image: public/component-previews/page-sections/conversion/cta-showcase.svg
+  icon: call_to_action
+picker_preview:
+  text: CTA Showcase
+  subtext: Split layout CTA with button stack.
+  image: public/component-previews/page-sections/conversion/cta-showcase.svg
+_inputs_from_glob:
+  - /src/components/page-sections/conversion/cta-showcase/cta-showcase.cloudcannon.inputs.yml

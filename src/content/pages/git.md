@@ -293,7 +293,7 @@ pageSections:
           imageAlt: ''
     style:
       backgroundColor: light-sand
-  - _component: page-sections/conversion/cta-split
+  - _component: page-sections/conversion/cta-showcase
     content:
       heading:
         heading: Take a peek under the hood
@@ -303,7 +303,6 @@ pageSections:
           on one engine. Start free in minutes, or book a demo and we’ll walk
           you through the real thing.
         subtextSize: lg
-      imageOverflow: 334
       buttonSections:
         - _component: building-blocks/core-elements/button
           text: Start your free trial

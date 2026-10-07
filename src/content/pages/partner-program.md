@@ -280,7 +280,7 @@ pageSections:
           height: 454
     style:
       backgroundColor: sand
-  - _component: page-sections/conversion/cta-split
+  - _component: page-sections/conversion/cta-showcase
     content:
       contentCardColor: base
       heading:
@@ -290,7 +290,6 @@ pageSections:
         subtext: We’ll work with you to craft a plan that fits your particular client’s
           needs.
         subtextSize: lg
-      contentCard: true
       buttonSections:
         - _component: building-blocks/core-elements/button
           text: Join the Partner Program

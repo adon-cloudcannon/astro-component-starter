@@ -1,0 +1,246 @@
+# The two tabs. A structure value draws its first-level nested keys as tabs
+# when it sets `tabbed: true`; `groups` only ever draws as accordions. The
+# subtype is pinned so the tabbing stops here — left unsaid these inherit it,
+# and then every field inside them has to be an object too.
+content:
+  type: object
+  label: Content
+  options:
+    subtype: object
+style:
+  type: object
+  label: Style
+  comment: What paints the band.
+  options:
+    subtype: object
+
+# The heading, its eyebrow, its level and its size are one decision.
+content.heading:
+  type: object
+  label: Heading
+  options:
+    subtype: object
+content.heading.heading:
+  type: text
+  comment: Main heading for the section.
+content.heading.headingSize:
+  type: select
+  comment: Size of the title, independent of its level.
+  options:
+    values:
+      - id: 2xl
+        name: Header 1
+      - id: xl
+        name: Header 2
+      - id: lg
+        name: Header 3
+      - id: md
+        name: Header 4
+      - id: sm
+        name: Header 5
+      - id: xs
+        name: Header 6
+content.heading.headingLevel:
+  type: select
+  comment: Heading level for the title. Use h1 once per page, on the first section.
+  options:
+    values:
+      - h1
+      - h2
+      - h3
+content.subtext:
+  type: object
+  label: Subtext
+  options:
+    subtype: object
+content.subtext.subtext:
+  type: markdown
+  comment: Supporting copy beneath the heading.
+  options:
+    blockquote: false
+    bold: true
+    format:
+    italic: true
+    link: true
+    strike: false
+    subscript: true
+    superscript: true
+    underline: false
+    bulletedlist: false
+    numberedlist: false
+content.subtext.subtextSize:
+  type: select
+  comment: How big the supporting line under the heading is.
+  options:
+    values:
+      - id: md
+        name: Small
+      - id: lg
+        name: Regular
+      - id: xl
+        name: Large
+content.subtext.subtextWidth:
+  type: select
+  label: Subtext width
+  comment: How wide the supporting line is allowed to run before it wraps.
+  options:
+    values:
+      - id: ""
+        name: Full width
+      - id: sm
+        name: Narrow
+      - id: md
+        name: Medium
+      - id: lg
+        name: Wide
+      - id: xl
+        name: Extra wide
+content.buttonSections:
+  type: array
+  comment: Call-to-action buttons.
+  options:
+    structures: _structures.buttonSections
+content.mediaSections:
+  type: array
+  label: The thing
+  comment: >-
+    Which of the built things fills the other half. It sets the band's shape
+    too: each was drawn to its own width, so the columns and the overhang come
+    with the choice rather than being set here.
+  options:
+    structures: _structures.ctaShowcaseMedia
+content.contentCardColor:
+  type: select
+  label: Panel colour
+  comment: >-
+    The panel behind the band, where the chosen thing sits on one. A panel is
+    a shade off its band.
+  options:
+    values:
+      - id: white
+        name: White
+        swatch: square
+        color: "#FFFFFF"
+      - id: base
+        name: The page's own
+        swatch: square
+        color: "#FFFCF3"
+content.reverse:
+  type: switch
+  comment: Flips the columns so the image comes before the copy.
+
+# --- section wrapper inputs (CustomSection) ---
+# Configures the CustomSection wrapper, not this section's own content. Inline
+# per component so a project can trim the size/padding lists in place.
+# `new:component` slices from this marker down — keep the marker line verbatim.
+content.sectionLabel:
+  type: text
+  comment: Names the section in the editor and sets its anchor id.
+style.paddingVertical:
+  type: select
+  comment: The space above and below the content.
+  options:
+    values:
+      - id: 4xl
+        name: Default
+      - id: md
+        name: Compact
+style.colorScheme:
+  hidden: true
+  # Carried by the band colour. Every band the design draws names its own ink,
+  # and `base` on its own does not say whether you get the cream band or the
+  # near-black one — which is why this and the lock had to agree with a third
+  # field on every dark section.
+  type: select
+  comment: Light or dark scheme for the section. Inherit follows the page.
+  options:
+    values:
+      - id: inherit
+        name: Inherit
+      - id: light
+        name: Light
+      - id: dark
+        name: Dark
+style.lockColorScheme:
+  hidden: true
+  # Carried by the band colour: every named band locks, because there is no
+  # dark mode here for an unlocked one to follow.
+  type: switch
+  label: Lock color scheme
+  comment: Ignores the site theme toggle. Only applies when Color Scheme is Light or Dark.
+style.pattern:
+  type: select
+  label: Texture
+  comment: The pattern drawn behind the band, inked from the band's own colours.
+  options:
+    values:
+      - id: none
+        name: None
+        swatch: check_box_outline_blank
+      - id: grid
+        name: Grid
+        swatch: grid_4x4
+      - id: pegboard
+        name: Peg board
+        swatch: blur_linear
+    picker_view: card
+    preview:
+      icon:
+        - key: swatch
+      text:
+        - key: name
+style.fade:
+  type: select
+  label: Texture fade
+  comment: Which edge the texture fades out towards. Only applies where there is one.
+  options:
+    values:
+      - id: none
+        name: None
+      - id: top
+        name: Fade out at the top
+      - id: bottom
+        name: Fade out at the bottom
+style.haze:
+  type: switch
+  label: Haze behind the heading
+  comment: >-
+    Pools the band's own colour behind the copy and blurs it, so the heading
+    stays readable where the pattern runs under it.
+style.backgroundColor:
+  type: select
+  label: Background colour
+  comment: The colour this band is painted, and the ink that goes with it.
+  options:
+    values:
+      - id: none
+        name: None
+        swatch: check_box_outline_blank
+      - id: light-sand
+        name: Light sand
+        swatch: square
+        color: "#FFFCF3"
+      - id: sand
+        name: Sand
+        swatch: square
+        color: "#FBF6E9"
+      - id: dark-sand
+        name: Dark sand
+        swatch: square
+        color: "#EBE1C9"
+      - id: dark
+        name: Dark
+        swatch: square
+        color: "#1D1B17"
+      - id: pacific
+        name: Pacific
+        swatch: square
+        color: "#034AD8"
+    picker_view: card
+    preview:
+      icon:
+        - key: swatch
+      icon_color:
+        - key: color
+      text:
+        - key: name

@@ -199,7 +199,7 @@ pageSections:
       pattern: pegboard
       fade: bottom
       paddingVertical: 3xl
-  - _component: page-sections/conversion/cta-split
+  - _component: page-sections/conversion/cta-showcase
     content:
       heading:
         heading: Show us what you've got
@@ -234,7 +234,6 @@ pageSections:
               color: var(--light-sand)
           source: /src/assets/images/marketing/camera-01-1.png
           alt: ''
-      contentCard: true
       contentCardColor: white
     style:
       backgroundColor: dark-sand
