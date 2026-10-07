@@ -33,7 +33,7 @@ const load = (text) => {
 };
 
 /** The groups a field may be sitting in, so flat and grouped read the same. */
-const GROUPS = ["heading", "subtext", "image", "member"];
+const GROUPS = ["heading", "subtext", "image", "member", "leftColumn", "rightColumn"];
 const FIELDS = [
   "sectionLabel",
   "eyebrow",
@@ -58,7 +58,9 @@ const field = (block, name) => {
 /** Every array's length, keyed by leaf name so a move does not read as a loss. */
 const listSizes = (node, path, out = {}) => {
   if (Array.isArray(node)) {
-    out[path] = node.length;
+    /* Added to, not overwritten: two columns both hold a `members` list, and
+       the pair of them is what the one list before them held. */
+    out[path] = (out[path] ?? 0) + node.length;
     for (const item of node) listSizes(item, `${path}[]`, out);
     return out;
   }

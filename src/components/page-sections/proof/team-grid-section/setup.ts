@@ -6,12 +6,10 @@
  * wall would sit still in the Visual Editor. `editor-live-sync.js` calls this
  * too.
  *
- * Per card, not per column. The cards are dealt into one grid in the order
- * they are written, which is a decision this project already made once: DOM
- * order is what CloudCannon maps its array items by, so wrapping each column
- * in an element of its own would put the names back on the wrong cards. A
- * card's column is its index modulo the lane count, which is all the drift
- * needs to know.
+ * Per column, which is what it always was. The cards used to be dealt into
+ * one grid and a card's column worked out from its index modulo the lane
+ * count; each column is its own element now, so there are two things to move
+ * and no arithmetic to get wrong.
  */
 /* The fallback only; the lanes carry the real one so the CSS lift and the
    drift cannot drift apart. */
@@ -23,13 +21,13 @@ export function setupTeamGrid(wall: Wall): void {
   if (wall.dataset.drifting !== undefined) return;
 
   const lanes = wall.querySelector<HTMLElement>(".team-grid-lanes");
+
   if (!lanes) return;
 
-  const cards = [...lanes.children] as HTMLElement[];
-  const styles = getComputedStyle(lanes);
-  const laneCount = Math.max(1, Number(styles.getPropertyValue("--team-grid-lanes")) || 1);
-  const range = parseFloat(styles.getPropertyValue("--team-grid-range")) || RANGE;
-  if (cards.length < 2 || laneCount < 2) return;
+  const columns = [...lanes.querySelectorAll<HTMLElement>(".team-grid-column")];
+  const range = parseFloat(getComputedStyle(lanes).getPropertyValue("--team-grid-range")) || RANGE;
+
+  if (columns.length < 2) return;
 
   wall.dataset.drifting = "";
 
@@ -40,8 +38,9 @@ export function setupTeamGrid(wall: Wall): void {
   let frame = 0;
   const update = () => {
     frame = 0;
+
     if (still.matches) {
-      for (const card of cards) card.style.removeProperty("--team-grid-drift");
+      for (const column of columns) column.style.removeProperty("--team-grid-drift");
       return;
     }
 
@@ -50,11 +49,15 @@ export function setupTeamGrid(wall: Wall): void {
     const travel = window.innerHeight + box.height;
     const progress = (window.innerHeight / 2 - (box.top + box.height / 2)) / travel;
 
-    cards.forEach((card, index) => {
-      /* The left column rises and the right one falls, which is the way
-         round it was asked for. */
-      const direction = index % laneCount === 0 ? -1 : 1;
-      card.style.setProperty("--team-grid-drift", `${(progress * range * direction).toFixed(1)}px`);
+    columns.forEach((column, index) => {
+      /* The left column rises and the right one falls, which is the way round
+         it was asked for. */
+      const direction = index === 0 ? -1 : 1;
+
+      column.style.setProperty(
+        "--team-grid-drift",
+        `${(progress * range * direction).toFixed(1)}px`
+      );
     });
   };
 

@@ -706,7 +706,7 @@ pageSections:
       sectionLabel: ''
       heading:
         eyebrow: Who we are
-        heading: 'Made for the work, not for the upsell'
+        heading: Made for the work, not for the upsell
         headingLevel: h2
         headingSize: lg
       subtext:
@@ -718,68 +718,70 @@ pageSections:
         subtextWidth: sm
       linkText: Meet the team
       link: ''
-      members:
-        - _component: building-blocks/wrappers/team-member
-          name: George Phillips
-          role: Co-founder & CTO
-          bio: ''
-          imageSource: /src/assets/images/marketing/george-profile-1.png
-          imageAlt: George Phillips, Co-founder & CTO at CloudCannon
-          backgroundColor: moss
-          propSource: ''
-          propWidth: 40
-          propAlt: ''
-        - _component: building-blocks/wrappers/team-member
-          name: Mike Neumegen
-          role: Co-founder & CEO
-          bio: ''
-          imageSource: /src/assets/images/marketing/screenshot-2026-06-09-at-7-38-38-pm-background-r-3806-69478.png
-          imageAlt: Mike Neumegen, Co-founder & CEO at CloudCannon
-          backgroundColor: peachy
-          propSource: ''
-          propWidth: 40
-          propAlt: ''
-        - _component: building-blocks/wrappers/team-member
-          name: Olivia Nicholson
-          role: Head of Content
-          bio: ''
-          imageSource: /src/assets/images/marketing/container-5-3806-69485-2.png
-          imageAlt: Olivia Nicholson, Head of Content at CloudCannon
-          backgroundColor: pacific
-          propSource: ''
-          propWidth: 40
-          propAlt: ''
-        - _component: building-blocks/wrappers/team-member
-          name: Sam Whitfield
-          role: Product Design
-          bio: ''
-          imageSource: /src/assets/images/marketing/container-7-3806-69515-2.png
-          imageAlt: Sam Whitfield, Product Design at CloudCannon
-          backgroundColor: sunset
-          propSource: ''
-          propWidth: 40
-          propAlt: ''
-        - _component: building-blocks/wrappers/team-member
-          name: Tom Richardson
-          role: Solutions Architect
-          bio: ''
-          imageSource: /src/assets/images/marketing/container-9-3806-69524-1.png
-          imageAlt: Tom Richardson, Solutions Architect at CloudCannon
-          backgroundColor: golden
-          propSource: ''
-          propWidth: 40
-          propAlt: ''
-        - _component: building-blocks/wrappers/team-member
-          name: Chris Wingate
-          role: CRO
-          bio: ''
-          imageSource: /src/assets/images/marketing/chris-profile-1.png
-          imageAlt: Chris Wingate, CRO at CloudCannon
-          backgroundColor: moss
-          propSource: ''
-          propWidth: 40
-          propAlt: ''
-      columns: 2
+      leftColumn:
+        members:
+          - _component: building-blocks/wrappers/team-member
+            name: George Phillips
+            role: Co-founder & CTO
+            bio: ''
+            imageSource: /src/assets/images/marketing/george-profile-1.png
+            imageAlt: George Phillips, Co-founder & CTO at CloudCannon
+            backgroundColor: moss
+            propSource: ''
+            propWidth: 40
+            propAlt: ''
+          - _component: building-blocks/wrappers/team-member
+            name: Olivia Nicholson
+            role: Head of Content
+            bio: ''
+            imageSource: /src/assets/images/marketing/container-5-3806-69485-2.png
+            imageAlt: Olivia Nicholson, Head of Content at CloudCannon
+            backgroundColor: pacific
+            propSource: ''
+            propWidth: 40
+            propAlt: ''
+          - _component: building-blocks/wrappers/team-member
+            name: Tom Richardson
+            role: Solutions Architect
+            bio: ''
+            imageSource: /src/assets/images/marketing/container-9-3806-69524-1.png
+            imageAlt: Tom Richardson, Solutions Architect at CloudCannon
+            backgroundColor: golden
+            propSource: ''
+            propWidth: 40
+            propAlt: ''
+      rightColumn:
+        members:
+          - _component: building-blocks/wrappers/team-member
+            name: Mike Neumegen
+            role: Co-founder & CEO
+            bio: ''
+            imageSource: /src/assets/images/marketing/screenshot-2026-06-09-at-7-38-38-pm-background-r-3806-69478.png
+            imageAlt: Mike Neumegen, Co-founder & CEO at CloudCannon
+            backgroundColor: peachy
+            propSource: ''
+            propWidth: 40
+            propAlt: ''
+          - _component: building-blocks/wrappers/team-member
+            name: Sam Whitfield
+            role: Product Design
+            bio: ''
+            imageSource: /src/assets/images/marketing/container-7-3806-69515-2.png
+            imageAlt: Sam Whitfield, Product Design at CloudCannon
+            backgroundColor: sunset
+            propSource: ''
+            propWidth: 40
+            propAlt: ''
+          - _component: building-blocks/wrappers/team-member
+            name: Chris Wingate
+            role: CRO
+            bio: ''
+            imageSource: /src/assets/images/marketing/chris-profile-1.png
+            imageAlt: Chris Wingate, CRO at CloudCannon
+            backgroundColor: moss
+            propSource: ''
+            propWidth: 40
+            propAlt: ''
     style:
       backgroundColor: sand
       pattern: none

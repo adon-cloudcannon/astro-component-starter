@@ -20,6 +20,7 @@ import Button from "@core-elements/button/Button.astro";
 import TeamMember from "@wrappers/team-member/TeamMember.astro";
 
 type Member = Record<string, unknown>;
+type Column = { members?: Member[] };
 
 /* `content` and `style` are the editor's tabs, flattened straight back into
    the names below. `at()` writes the frontmatter path a binding needs. */
@@ -46,8 +47,23 @@ const {
   subtextWidth,
   linkText = "",
   link = "",
-  members = [] as Member[],
-  columns = 2,
+  /**
+   * The two columns, each holding its own people.
+   *
+   * One list dealt into lanes before this, with a card's column worked out
+   * from its index. That made the column a fact about arithmetic rather than
+   * about the card: an editor had no way to see which side anyone was on, let
+   * alone move them, and the layout only held because a row-major grid's
+   * order happens to match the DOM's. It did not always hold — reordering the
+   * list once put a name on the wrong card, because the editor maps array
+   * items by DOM order and the panel colour did not move with them.
+   *
+   * Two columns say it outright. Nothing derives a side, nothing may reorder,
+   * and the offset and the drift become one value each per column instead of
+   * a modulo over a flat index.
+   */
+  leftColumn = {} as Column,
+  rightColumn = {} as Column,
   sectionLabel,
   maxContentWidth = "xl",
   paddingHorizontal = "gutter",
@@ -70,29 +86,14 @@ const {
 /* The measure the subtext is set in, as a length. */
 const subtextCap = subtextMeasure(subtextWidth);
 
-const list: Member[] = Array.isArray(members) ? members : [];
-const laneCount = Math.max(1, Number(columns) || 1);
-
-/**
- * Laid out in the order they are written, never dealt into lanes.
- *
- * The cards used to be pushed round the columns and rendered lane by lane,
- * which put six members into the DOM as 1, 3, 5, 2, 4, 6. A row-major grid
- * reaches the same picture from the order they are written, because it
- * already sends items 1, 3 and 5 down the left column.
- *
- * The reorder is what broke CloudCannon. The wall is `data-editable="array"`
- * and each card an `array-item`, and the editor maps those children onto
- * `members` by walking them in DOM order, so it wrote the second member's
- * name, role and portrait onto the third member's card. The panel colour is
- * an inline custom property rather than a bound prop, so it stayed where it
- * was drawn and the two came apart: Mike's name on Olivia's Pacific panel.
- * The first and last cards sit at the same index in both orders, which is
- * why the ends looked right.
- *
- * Nothing may reorder this list. A card's place is its index.
- */
-const offsetAt = (index: number) => (index % laneCount) % 2 === 1;
+/** Two of them, always: the design draws two and nothing here wants a dial. */
+const columns = [
+  { key: "leftColumn", column: leftColumn },
+  { key: "rightColumn", column: rightColumn },
+].map(({ key, column }) => ({
+  key,
+  members: Array.isArray(column?.members) ? (column.members as Member[]) : [],
+}));
 ---
 
 <CustomSection
@@ -142,28 +143,30 @@ const offsetAt = (index: number) => (index % laneCount) % 2 === 1;
     )}
   </div>
 
-  {/* Both halves together. `data-editable="array"` with no `data-prop` is
-        not a weaker region, it is a fatal one: the editor replaces the whole
-        thing with "Array editable regions require a 'data-prop' HTML
-        attribute but none was provided". The prop is conditional, so the
-        region has to be. */}
-  <div
-    class="team-grid-wall"
-    data-editable={useDefaultEditableBinding ? "array" : undefined}
-    data-prop={useDefaultEditableBinding ? at("members") : undefined}
-  >
-    <div
-      class="team-grid-lanes"
-      style={`--team-grid-lanes: ${laneCount}`}
-    >
-      {list.map((member, index) => (
-        <TeamMember
-          class:list={[offsetAt(index) && "is-offset"]}
-          data-editable="array-item"
-          data-id="building-blocks/wrappers/team-member"
-          data-component="building-blocks/wrappers/team-member"
-          {...member}
-        />
+  <div class="team-grid-wall">
+    <div class="team-grid-lanes">
+      {/* Each column is its own region, so the editor maps its cards onto its
+          own list and the two can never be read across each other.
+
+          `data-editable="array"` with no `data-prop` is not a weaker region,
+          it is a fatal one: the editor replaces the whole thing with "Array
+          editable regions require a 'data-prop' HTML attribute but none was
+          provided". The prop is conditional, so the region has to be. */}
+      {columns.map(({ key, members }, index) => (
+        <div
+          class:list={["team-grid-column", index === 1 && "is-offset"]}
+          data-editable={useDefaultEditableBinding ? "array" : undefined}
+          data-prop={useDefaultEditableBinding ? `${at(key)}.members` : undefined}
+        >
+          {members.map((member) => (
+            <TeamMember
+              data-editable="array-item"
+              data-id="building-blocks/wrappers/team-member"
+              data-component="building-blocks/wrappers/team-member"
+              {...member}
+            />
+          ))}
+        </div>
       ))}
     </div>
   </div>
@@ -232,26 +235,33 @@ const offsetAt = (index: number) => (index % laneCount) % 2 === 1;
          the bias below is half of it, so the two cannot come apart. */
       --team-grid-range: 72px;
 
+      column-gap: 1rem;
       display: grid;
-      gap: 1rem;
-      grid-template-columns: repeat(var(--team-grid-lanes, 2), minmax(0, 1fr));
+      grid-template-columns: repeat(2, minmax(0, 1fr));
       inset-block-start: 0;
       inset-inline: 0;
       position: absolute;
     }
 
+    /* A column stacks its own people. The cards used to be the grid's items
+       and carried the lift one by one; the column is one element now, so one
+       translate moves the whole thing. */
+    .team-grid .team-grid-column {
+      display: grid;
+      gap: 1rem;
+      grid-auto-rows: max-content;
+    }
+
     /* Every other column starts half a card further down, which is the offset
        the design draws between them.
 
-       A translate, not a margin: the cards all share the 410/412 ratio, so
-       lifting each card in those columns by half a card is the same picture
-       as lifting the whole column, and it leaves the grid's own rows where
-       they are. The wall is out of flow and clipped, so the height it reports
+       A translate, not a margin: it leaves the grid's own rows where they
+       are, and the wall is out of flow and clipped, so the height it reports
        is not load-bearing either way. */
     /* The design's offset, the bias and the drift compose in one translate: a
        second `translate` on the same element replaces the first rather than
        adding to it. */
-    .team-grid .team-grid-lanes > * {
+    .team-grid .team-grid-column {
       translate: 0
         calc(
           var(--team-grid-offset, 0px) + var(--team-grid-bias, 0px) + var(--team-grid-drift, 0px)
@@ -276,13 +286,13 @@ const offsetAt = (index: number) => (index % laneCount) % 2 === 1;
        the offset column starts 123 above its head — so this holds without
        touching the range or the design's offset. It is also why a shorter
        column than this needs a shorter range, not a bigger lift. */
-    .team-grid .team-grid-lanes > * {
+    .team-grid .team-grid-column {
       --team-grid-bias: calc(var(--team-grid-range) / -2);
     }
 
-    /* `offsetAt` marks the odd lanes and the drift falls on those same lanes,
-       so this selector is the falling column by construction. */
-    .team-grid .team-grid-lanes > .is-offset {
+    /* The right column is the offset one, and the drift falls the same way,
+       so this is the falling column. */
+    .team-grid .team-grid-column.is-offset {
       --team-grid-bias: calc(var(--team-grid-range) / 2);
       --team-grid-offset: -7.6875rem;
     }
@@ -300,7 +310,7 @@ const offsetAt = (index: number) => (index % laneCount) % 2 === 1;
       }
 
       /* Stacked, the columns are one column: no offset and no drift. */
-      .team-grid .team-grid-lanes > * {
+      .team-grid .team-grid-column {
         --team-grid-bias: 0px;
         --team-grid-drift: 0px;
         --team-grid-offset: 0px;

@@ -90,18 +90,30 @@ content.linkText:
 content.link:
   type: url
   comment: Where that link points.
-content.members:
+content.leftColumn:
+  type: object
+  label: Left column
+  comment: The people down the near side of the wall, in the order they appear.
+  options:
+    subtype: object
+content.leftColumn.members:
   type: array
   label: Team
-  comment: >-
-    The people on the wall. They are dealt round the columns in order, so the
-    first goes at the top of the first column and the second at the top of the
-    next.
   options:
     structures: _structures.teamMember
-content.columns:
-  type: number
-  comment: How many columns the wall is dealt into.
+content.rightColumn:
+  type: object
+  label: Right column
+  comment: >-
+    The people down the far side. It is drawn half a card lower than the near
+    side, and the two drift against each other as the band passes.
+  options:
+    subtype: object
+content.rightColumn.members:
+  type: array
+  label: Team
+  options:
+    structures: _structures.teamMember
 content.sectionLabel:
   type: text
   comment: Names the section in the editor and sets its anchor id.

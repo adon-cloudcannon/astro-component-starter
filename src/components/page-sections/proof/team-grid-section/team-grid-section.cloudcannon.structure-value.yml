@@ -17,8 +17,10 @@ value:
       subtextWidth: ""
     linkText: ""
     link: ""
-    members: []
-    columns: 2
+    leftColumn:
+      members: []
+    rightColumn:
+      members: []
   style:
     backgroundColor: light-sand
     pattern: none
