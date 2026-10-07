@@ -10,9 +10,10 @@ value:
       eyebrow: Our story
       heading: How we got here
       headingLevel: h2
-    subtext: ""
-    subtextSize: md
-    subtextWidth: ""
+    subtext:
+      subtext: ""
+      subtextSize: md
+      subtextWidth: ""
     layout: vertical
     entries:
       - date: "2019"
@@ -127,6 +128,6 @@ _structures:
               values: data.icons
               preview:
                 text:
-                  - key: iconName
+                  - key: name
                 image:
-                  - template: src/icons/{iconName}.svg
+                  - template: src/icons/{id}.svg
