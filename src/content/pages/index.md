@@ -261,9 +261,6 @@ pageSections:
             size: md
     style:
       backgroundColor: light-sand
-      maxContentWidth: xl
-      paddingHorizontal: gutter
-      paddingVertical: 4xl
       haze: true
       pattern: pegboard
       fade: bottom

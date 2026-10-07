@@ -311,33 +311,6 @@ content.heading:
 content.sectionLabel:
   type: text
   comment: Accessible name for the section, used by screen readers.
-style.maxContentWidth:
-  type: select
-  comment: How wide the band's content runs.
-  options:
-    values:
-      - id: xl
-        name: Full
-      - id: lg
-        name: Compact
-style.paddingHorizontal:
-  type: select
-  comment: The space either side of the content.
-  options:
-    values:
-      - id: gutter
-        name: Default page gutter
-      - id: none
-        name: None
-style.paddingVertical:
-  type: select
-  comment: The space above and below the content.
-  options:
-    values:
-      - id: 4xl
-        name: Default
-      - id: md
-        name: Compact
 style.colorScheme:
   hidden: true
   # Carried by the band colour. Every band the design draws names its own ink,
