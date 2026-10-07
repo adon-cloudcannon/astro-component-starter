@@ -6,9 +6,10 @@ value:
   _component: page-sections/conversion/contact-split
   content:
     sectionLabel: ''
-    eyebrow: Contact
-    heading: Talk to a human
-    headingLevel: h2
+    heading:
+      eyebrow: Contact
+      heading: Talk to a human
+      headingLevel: h2
     subtext: We answer within one business day.
     details:
       - icon: map-pin

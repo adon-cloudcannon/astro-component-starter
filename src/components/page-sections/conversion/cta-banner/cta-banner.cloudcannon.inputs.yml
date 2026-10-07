@@ -19,10 +19,16 @@ content.scratch:
   comment: >-
     Draws the band's scratched sheet in this colour instead of loading an
     export. A palette name or a hex.
+# The heading, its eyebrow, its level and its size are one decision.
 content.heading:
+  type: object
+  label: Heading
+  options:
+    subtype: object
+content.heading.heading:
   type: text
   comment: The banner's heading.
-content.headingSize:
+content.heading.headingSize:
   type: select
   comment: Size of the heading, independent of its level.
   options:
@@ -39,7 +45,7 @@ content.headingSize:
         name: Header 5
       - id: xs
         name: Header 6
-content.headingLevel:
+content.heading.headingLevel:
   type: select
   options:
     values:

@@ -6,9 +6,10 @@ value:
   _component: page-sections/explainers/stats
   content:
     sectionLabel: ''
-    eyebrow: ''
-    heading: Numbers that hold up
-    headingLevel: h2
+    heading:
+      eyebrow: ''
+      heading: Numbers that hold up
+      headingLevel: h2
     subtext: ''
     stats:
       - number: 12

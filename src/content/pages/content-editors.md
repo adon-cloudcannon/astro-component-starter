@@ -35,13 +35,14 @@ pageSections:
       backgroundColor: light-sand
   - _component: page-sections/explainers/editor-demo
     content:
-      eyebrow: INTERACTIVE DEMO
-      heading: Here’s what you’re working with
+      heading:
+        eyebrow: INTERACTIVE DEMO
+        heading: Here’s what you’re working with
+        headingSize: lg
       subtext: Click a heading and change it. See what’s possible with the Visual Editor.
       subtextSize: lg
       subtextWidth: md
       alignmentHorizontal: center
-      headingSize: lg
     style:
       backgroundColor: light-sand
   - _component: page-sections/proof/testimonial-quote
@@ -66,9 +67,10 @@ pageSections:
       paddingVerticalStart: lg
   - _component: page-sections/explainers/pinned-steps
     content:
-      eyebrow: ''
-      heading: No more waiting on tickets
-      headingSize: lg
+      heading:
+        eyebrow: ''
+        heading: No more waiting on tickets
+        headingSize: lg
       subtext: ''
       alignmentHorizontal: start
       steps:
@@ -141,8 +143,9 @@ pageSections:
       haze: true
   - _component: page-sections/conversion/cta-center
     content:
-      heading: Room for everyone to work at once
-      headingSize: lg
+      heading:
+        heading: Room for everyone to work at once
+        headingSize: lg
       subtext: >-
         Every piece of work happens on its own branched site, so a new blog post, a landing page
         redesign, and a navigation update can all run at once without anyone treading on toes.
@@ -152,8 +155,9 @@ pageSections:
       backgroundColor: light-sand
   - _component: page-sections/explainers/feature-grid
     content:
-      heading: Built for the work
-      headingSize: lg
+      heading:
+        heading: Built for the work
+        headingSize: lg
       alignmentHorizontal: center
       columns: 3
       cardHeight: 334
@@ -177,8 +181,9 @@ pageSections:
       backgroundColor: light-sand
   - _component: page-sections/conversion/cta-split
     content:
-      heading: Take a peek under the hood
-      headingSize: lg
+      heading:
+        heading: Take a peek under the hood
+        headingSize: lg
       subtext: >-
         Git underneath, a visual editor on top, with code and content running on one engine. Start
         free in minutes, or book a demo and we’ll walk you through the real thing.

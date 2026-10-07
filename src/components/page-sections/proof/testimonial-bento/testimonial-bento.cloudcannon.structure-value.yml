@@ -6,9 +6,10 @@ value:
   _component: page-sections/proof/testimonial-bento
   content:
     sectionLabel: ''
-    eyebrow: Testimonials
-    heading: Loved by the teams who use it
-    headingLevel: h2
+    heading:
+      eyebrow: Testimonials
+      heading: Loved by the teams who use it
+      headingLevel: h2
     subtext: ''
     subtextSize: md
     subtextWidth: ''

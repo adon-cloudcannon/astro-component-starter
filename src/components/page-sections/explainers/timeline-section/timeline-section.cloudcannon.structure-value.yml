@@ -6,9 +6,10 @@ value:
   _component: page-sections/explainers/timeline-section
   content:
     sectionLabel: ''
-    eyebrow: Our story
-    heading: How we got here
-    headingLevel: h2
+    heading:
+      eyebrow: Our story
+      heading: How we got here
+      headingLevel: h2
     subtext: ''
     subtextSize: md
     subtextWidth: ''

@@ -6,9 +6,10 @@ value:
   _component: page-sections/conversion/pricing-tiers
   content:
     sectionLabel: ''
-    eyebrow: Plans
-    heading: Simple pricing that scales with you
-    headingLevel: h2
+    heading:
+      eyebrow: Plans
+      heading: Simple pricing that scales with you
+      headingLevel: h2
     subtext: Every plan includes global CDN hosting and automatic SSL.
     subtextSize: md
     subtextWidth: ''

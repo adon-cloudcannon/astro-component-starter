@@ -6,10 +6,11 @@ value:
   _component: page-sections/explainers/scroll-steps
   content:
     sectionLabel: ''
-    eyebrow: ''
-    heading: ''
-    headingSize: lg
-    headingLevel: h2
+    heading:
+      eyebrow: ''
+      heading: ''
+      headingLevel: h2
+      headingSize: lg
     subtext: ''
     subtextSize: md
     subtextWidth: ''

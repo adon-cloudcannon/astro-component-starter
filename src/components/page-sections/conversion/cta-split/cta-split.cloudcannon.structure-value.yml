@@ -6,8 +6,9 @@ value:
   _component: page-sections/conversion/cta-split
   content:
     sectionLabel: ''
-    heading: Ready to get started?
-    headingLevel: h2
+    heading:
+      heading: Ready to get started?
+      headingLevel: h2
     subtext: One line that makes the next step obvious.
     subtextSize: md
     subtextWidth: ''

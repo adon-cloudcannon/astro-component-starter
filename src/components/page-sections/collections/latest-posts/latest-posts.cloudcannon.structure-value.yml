@@ -6,9 +6,10 @@ value:
   _component: page-sections/collections/latest-posts
   content:
     sectionLabel: ''
-    eyebrow: Writing
-    heading: From the blog
-    headingLevel: h2
+    heading:
+      eyebrow: Writing
+      heading: From the blog
+      headingLevel: h2
     subtext: ''
     count: 3
     tag: ''

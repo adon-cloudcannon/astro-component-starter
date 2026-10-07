@@ -66,9 +66,10 @@ pageSections:
       headingPlacement: inline
   - _component: page-sections/proof/testimonial-wall
     content:
-      eyebrow: SUCCESS STORIES
-      heading: Here to help you succeed
-      headingSize: lg
+      heading:
+        eyebrow: SUCCESS STORIES
+        heading: Here to help you succeed
+        headingSize: lg
       subtext: >-
         Grow your portfolio, not your overhead. Ship faster, hand over confidently, and get on with
         what’s next.
@@ -138,8 +139,9 @@ pageSections:
       backgroundColor: light-sand
   - _component: page-sections/explainers/feature-split
     content:
-      heading: A platform that wins pitches
-      headingSize: sm
+      heading:
+        heading: A platform that wins pitches
+        headingSize: sm
       subtext: >-
         Clients own their content outright. It lives in their repo as files, not locked in a
         database. They’re never tied to a platform, and neither are you.
@@ -158,9 +160,10 @@ pageSections:
       haze: true
   - _component: page-sections/explainers/pinned-steps
     content:
-      eyebrow: ''
-      heading: Happy developers
-      headingSize: lg
+      heading:
+        eyebrow: ''
+        heading: Happy developers
+        headingSize: lg
       subtext: ''
       alignmentHorizontal: center
       steps:
@@ -221,8 +224,9 @@ pageSections:
       fade: top
   - _component: page-sections/conversion/cta-center
     content:
-      heading: Join a Partner Program that rewards good work
-      headingSize: lg
+      heading:
+        heading: Join a Partner Program that rewards good work
+        headingSize: lg
       subtext: As you bring in new clients, you’ll gain points and more benefits.
       subtextSize: lg
       buttonSections:

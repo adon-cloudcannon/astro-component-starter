@@ -6,8 +6,9 @@ value:
   _component: page-sections/conversion/cta-form
   content:
     sectionLabel: ''
-    heading: Get in touch
-    headingLevel: h2
+    heading:
+      heading: Get in touch
+      headingLevel: h2
     subtext: Fill out the form below and we'll get back to you as soon as possible.
     subtextSize: md
     subtextWidth: ''

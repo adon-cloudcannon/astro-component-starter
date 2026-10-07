@@ -66,9 +66,10 @@ pageSections:
       headingPlacement: inline
   - _component: page-sections/conversion/cta-center
     content:
-      eyebrow: INTERACTIVE DEMO
-      heading: Here’s how to set up visual editing in minutes
-      headingSize: lg
+      heading:
+        eyebrow: INTERACTIVE DEMO
+        heading: Here’s how to set up visual editing in minutes
+        headingSize: lg
       subtext: >-
         This demo walks you through the process of adding Editable Regions to your code, so your
         editors can visually change text, structured data, and images. Save your changes to proceed
@@ -81,9 +82,10 @@ pageSections:
       backgroundColor: light-sand
   - _component: page-sections/explainers/pinned-steps
     content:
-      eyebrow: ''
-      heading: Your stack, plus an editing layer
-      headingSize: lg
+      heading:
+        eyebrow: ''
+        heading: Your stack, plus an editing layer
+        headingSize: lg
       subtext: ''
       alignmentHorizontal: start
       steps:
@@ -132,9 +134,10 @@ pageSections:
       backgroundColor: dark
   - _component: page-sections/proof/testimonial-bento
     content:
-      eyebrow: SUCCESS STORIES
-      heading: What clients are saying
-      headingSize: md
+      heading:
+        eyebrow: SUCCESS STORIES
+        heading: What clients are saying
+        headingSize: md
       testimonials:
         - text: |-
             Within the first few weeks after CloudCannon migrated the
@@ -184,15 +187,17 @@ pageSections:
       fade: bottom
   - _component: page-sections/conversion/cta-center
     content:
-      heading: The tool you’ve been looking for
-      headingSize: lg
+      heading:
+        heading: The tool you’ve been looking for
+        headingSize: lg
       alignmentHorizontal: start
     style:
       backgroundColor: light-sand
   - _component: page-sections/explainers/pinned-steps
     content:
-      eyebrow: ''
-      heading: ''
+      heading:
+        eyebrow: ''
+        heading: ''
       subtext: ''
       copyColor: light-sand
       steps:
@@ -258,8 +263,9 @@ pageSections:
       pattern: grid
   - _component: page-sections/conversion/cta-center
     content:
-      heading: Own your content, always
-      headingSize: lg
+      heading:
+        heading: Own your content, always
+        headingSize: lg
       subtext: >-
         Content lives in the repository along with the complete history of every change. If you ever
         leave CloudCannon, you leave with everything: your content, your code, your commits.
@@ -277,8 +283,9 @@ pageSections:
       backgroundColor: light-sand
   - _component: page-sections/explainers/feature-split
     content:
-      heading: Open-source ecosystem
-      headingSize: lg
+      heading:
+        heading: Open-source ecosystem
+        headingSize: lg
       subtext: >-
         We won’t upsell tools that don’t need to exist, and we’ll often point to open source
         instead. These are ours, and they work on any static site.
@@ -378,8 +385,9 @@ pageSections:
       haze: true
   - _component: page-sections/conversion/cta-team-member
     content:
-      heading: We’re here to help
-      headingSize: lg
+      heading:
+        heading: We’re here to help
+        headingSize: lg
       subtext: >-
         We're a small team with a lot of knowledge, so you'll talk to someone who knows what they're
         talking about and can give you hands-on help whatever the problem.

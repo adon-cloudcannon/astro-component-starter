@@ -70,8 +70,9 @@ pageSections:
       headingPlacement: inline
   - _component: page-sections/conversion/cta-center
     content:
-      heading: Give editors a CMS, keep a static site
-      headingSize: lg
+      heading:
+        heading: Give editors a CMS, keep a static site
+        headingSize: lg
       subtext: >-
         At CloudCannon the editing interface sits as a layer on top of your site. Your team gets
         somewhere to work, your site stays as a set of static files, and neither one needs looking
@@ -104,8 +105,9 @@ pageSections:
       backgroundColor: light-sand
   - _component: page-sections/explainers/feature-split
     content:
-      heading: We don’t think a website should need this much looking after
-      headingSize: lg
+      heading:
+        heading: We don’t think a website should need this much looking after
+        headingSize: lg
       subtext: 'With a static site and Git you won’t need to worry about:'
       subtextSize: xl
       subtextWidth: sm
@@ -178,8 +180,9 @@ pageSections:
       haze: true
   - _component: page-sections/conversion/cta-center
     content:
-      heading: Maintenance that doesn’t multiply
-      headingSize: lg
+      heading:
+        heading: Maintenance that doesn’t multiply
+        headingSize: lg
       subtext: >-
         Whether it's three client sites or three hundred, another site is another repo. The
         maintenance doesn't come with it.
@@ -191,8 +194,9 @@ pageSections:
       fade: bottom
   - _component: page-sections/explainers/pinned-steps
     content:
-      eyebrow: ''
-      heading: ''
+      heading:
+        eyebrow: ''
+        heading: ''
       subtext: ''
       steps:
         - contentSections:
@@ -252,8 +256,9 @@ pageSections:
       haze: true
   - _component: page-sections/conversion/cta-team-member
     content:
-      heading: A CMS to build, not babysit
-      headingSize: lg
+      heading:
+        heading: A CMS to build, not babysit
+        headingSize: lg
       subtext: >-
         Git underneath, a visual editor on top, with code and content running on one engine. Start
         free in minutes, or book a demo and we’ll walk you through the real thing.
@@ -282,8 +287,9 @@ pageSections:
   - _component: page-sections/conversion/cta-banner
     content:
       scratch: pacific
-      heading: Wanna learn more about our product?
-      headingSize: lg
+      heading:
+        heading: Wanna learn more about our product?
+        headingSize: lg
       linkText: Explore visual editing
       link: /visual-editing/
       imageSource: /src/assets/images/marketing/rocks-corner-3806-70523.png

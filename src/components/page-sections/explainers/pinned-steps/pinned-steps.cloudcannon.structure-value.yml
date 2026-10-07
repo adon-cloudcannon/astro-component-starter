@@ -6,10 +6,11 @@ value:
   _component: page-sections/explainers/pinned-steps
   content:
     sectionLabel: ''
-    eyebrow: ''
-    heading: ''
-    headingLevel: h2
-    headingSize: lg
+    heading:
+      eyebrow: ''
+      heading: ''
+      headingLevel: h2
+      headingSize: lg
     subtext: ''
     subtextSize: md
     subtextWidth: ''

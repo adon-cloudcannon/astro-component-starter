@@ -5,10 +5,11 @@ description: Join our growing team of innovative developers, designers, and thou
 pageSections:
   - _component: page-sections/heroes/hero-photo-stack
     content:
-      eyebrow: CAREERS
-      heading: Haere mai!
-      headingLevel: h1
-      headingSize: xl
+      heading:
+        eyebrow: CAREERS
+        heading: Haere mai!
+        headingLevel: h1
+        headingSize: xl
       subtext: >-
         Join our growing team of innovative developers, designers, and thought leaders, and help us
         build and plan for the future of collaboration on digital content.
@@ -43,10 +44,11 @@ pageSections:
       haze: true
   - _component: page-sections/explainers/feature-grid
     content:
-      eyebrow: BENEFITS
-      heading: Life at CloudCannon
-      headingLevel: h2
-      headingSize: lg
+      heading:
+        eyebrow: BENEFITS
+        heading: Life at CloudCannon
+        headingLevel: h2
+        headingSize: lg
       subtext: >-
         We're a friendly team who value lifestyle, work/life balance, and self-direction. We're
         passionate about evangelizing static websites and working with others who do the same.
@@ -175,9 +177,10 @@ pageSections:
       paddingVertical: 4xl
   - _component: page-sections/explainers/feature-grid
     content:
-      heading: Open positions
-      headingLevel: h2
-      headingSize: lg
+      heading:
+        heading: Open positions
+        headingLevel: h2
+        headingSize: lg
       subtext: None right now!
       subtextSize: lg
       alignmentHorizontal: center
@@ -190,8 +193,9 @@ pageSections:
       paddingVertical: 3xl
   - _component: page-sections/conversion/cta-split
     content:
-      heading: Show us what you've got
-      headingSize: lg
+      heading:
+        heading: Show us what you've got
+        headingSize: lg
       subtext: >-
         If you love the sound of what we're doing, but there's nothing here that fits your unique
         skills, send your resume! We're happy to keep your details on hand as new positions open in

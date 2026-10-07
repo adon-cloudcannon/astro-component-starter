@@ -5,10 +5,11 @@ description: A better web, where editors and developers work side by side.
 pageSections:
   - _component: page-sections/heroes/hero-center
     content:
-      eyebrow: our values
-      heading: A better web, where editors and developers work side by side
-      headingLevel: h1
-      headingSize: xl
+      heading:
+        eyebrow: our values
+        heading: A better web, where editors and developers work side by side
+        headingLevel: h1
+        headingSize: xl
       subtext: >-
         We've spent since 2013 closing the gap between people who build the web and the people who
         edit it.
@@ -21,8 +22,9 @@ pageSections:
       fade: bottom
   - _component: page-sections/explainers/pinned-steps
     content:
-      eyebrow: ''
-      heading: ''
+      heading:
+        eyebrow: ''
+        heading: ''
       subtext: ''
       progressColor: pacific
       reverse: true
@@ -109,9 +111,10 @@ pageSections:
       paddingVertical: 4xl
   - _component: page-sections/proof/team-grid-section
     content:
-      eyebrow: Who we are
-      heading: Made for the work, not for the upsell
-      headingSize: lg
+      heading:
+        eyebrow: Who we are
+        heading: Made for the work, not for the upsell
+        headingSize: lg
       subtext: >-
         We’re a tight-knit team based in Dunedin, New Zealand, working with web teams all over the
         world. We started CloudCannon because every CMS we tried gave editors a better experience by

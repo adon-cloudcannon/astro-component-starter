@@ -7,9 +7,10 @@ description: >-
 pageSections:
   - _component: page-sections/heroes/hero-photo-stack
     content:
-      heading: Who we are
-      headingLevel: h1
-      headingSize: 2xl
+      heading:
+        heading: Who we are
+        headingLevel: h1
+        headingSize: 2xl
       subtext: >-
         Dunedin, New Zealand, 2013. A couple of developers who couldn't find a CMS that worked the
         way we did... so we built it.
@@ -62,9 +63,10 @@ pageSections:
       backgroundColor: dark
   - _component: page-sections/proof/team-roster
     content:
-      heading: Our team
-      headingLevel: h2
-      headingSize: lg
+      heading:
+        heading: Our team
+        headingLevel: h2
+        headingSize: lg
       subtext: We're on a mission to enable everyone, everywhere, to collaborate without compromise.
       subtextSize: lg
       subtextWidth: sm
@@ -154,8 +156,9 @@ pageSections:
       fade: bottom
   - _component: page-sections/conversion/cta-center
     content:
-      heading: Keen to collaborate?
-      headingSize: lg
+      heading:
+        heading: Keen to collaborate?
+        headingSize: lg
       buttonSections:
         - _component: building-blocks/core-elements/button
           text: Work with us

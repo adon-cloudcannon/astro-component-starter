@@ -6,9 +6,10 @@ value:
   _component: page-sections/conversion/pricing-comparison
   content:
     sectionLabel: ''
-    eyebrow: Pricing
-    heading: Compare plans feature by feature
-    headingLevel: h2
+    heading:
+      eyebrow: Pricing
+      heading: Compare plans feature by feature
+      headingLevel: h2
     subtext: ''
     plans:
       - name: Starter

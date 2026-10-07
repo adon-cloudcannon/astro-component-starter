@@ -6,9 +6,10 @@ value:
   _component: page-sections/conversion/cta-center
   content:
     sectionLabel: ''
-    eyebrow: ''
-    heading: Ready to get started?
-    headingLevel: h2
+    heading:
+      eyebrow: ''
+      heading: Ready to get started?
+      headingLevel: h2
     subtext: One line that makes the next step obvious.
     subtextSize: md
     subtextWidth: ''

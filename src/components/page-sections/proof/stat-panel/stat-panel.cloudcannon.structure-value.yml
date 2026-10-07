@@ -5,26 +5,27 @@ tabbed: true
 value:
   _component: page-sections/proof/stat-panel
   content:
-    sectionLabel: ""
-    eyebrow: SUCCESS STORY
-    heading: A result worth showing
-    headingLevel: h2
-    headingSize: lg
+    sectionLabel: ''
+    heading:
+      eyebrow: SUCCESS STORY
+      heading: A result worth showing
+      headingLevel: h2
+      headingSize: lg
     subtext: One line on what changed, and for whom.
     subtextSize: lg
-    imageSource: ""
-    imageAlt: ""
+    imageSource: ''
+    imageAlt: ''
     imageAnchor: foot
     statsPosition: end
     statsAlign: start
     stats:
       - number: 100
-        prefix: ""
+        prefix: ''
         suffix: x
         label: publishing velocity
         iconName: zap
         iconColor: moss
     buttonSections: []
   style:
-    panelImage: ""
+    panelImage: ''
     panelColor: moss

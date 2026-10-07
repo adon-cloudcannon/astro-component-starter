@@ -5,10 +5,11 @@ description: Learn about static sites, Git workflows, and content management for
 pageSections:
   - _component: page-sections/heroes/hero-center
     content:
-      eyebrow: TUTORIALS
-      heading: Templates with static site generators
-      headingLevel: h1
-      headingSize: xl
+      heading:
+        eyebrow: TUTORIALS
+        heading: Templates with static site generators
+        headingLevel: h1
+        headingSize: xl
       subtext: Learn about static sites, Git workflows, and content management for your next project.
       subtextSize: xl
       subtextWidth: md
@@ -48,7 +49,8 @@ pageSections:
   - _component: page-sections/collections/card-collection
     content:
       collection: templates
-      eyebrow: EXPLORE BY COLLECTION
+      heading:
+        eyebrow: EXPLORE BY COLLECTION
       subtext: >-
         Choose a template that's optimized for editing in CloudCannon, and get a head start on your
         next project.
@@ -166,8 +168,9 @@ pageSections:
   - _component: page-sections/conversion/cta-banner
     content:
       scratch: pacific
-      heading: Any questions about CloudCannon?
-      headingSize: lg
+      heading:
+        heading: Any questions about CloudCannon?
+        headingSize: lg
       linkText: Check out our documentation or contact us with any questions you have
       link: /support/
       imageSource: /src/assets/images/marketing/rocks-corner-3806-70523.png

@@ -67,9 +67,10 @@ pageSections:
       headingPlacement: inline
   - _component: page-sections/explainers/feature-split
     content:
-      eyebrow: THE PROGRAM
-      heading: What is the Partner Program?
-      headingSize: lg
+      heading:
+        eyebrow: THE PROGRAM
+        heading: What is the Partner Program?
+        headingSize: lg
       subtext: >-
         We want to reward good work. Every new client you bring on earns points, and the more you
         have, the more benefits you unlock.
@@ -105,8 +106,9 @@ pageSections:
       haze: true
   - _component: page-sections/explainers/feature-grid
     content:
-      heading: What are the perks?
-      headingSize: lg
+      heading:
+        heading: What are the perks?
+        headingSize: lg
       alignmentHorizontal: center
       columns: 3
       cardHeight: 334
@@ -145,9 +147,10 @@ pageSections:
       backgroundColor: dark
   - _component: page-sections/conversion/pricing-tiers
     content:
-      eyebrow: PARTNER TIERS
-      heading: Climb as your portfolio grows
-      headingSize: lg
+      heading:
+        eyebrow: PARTNER TIERS
+        heading: Climb as your portfolio grows
+        headingSize: lg
       subtext: >-
         Bring on new clients, move up the tiers, and unlock bigger discounts, dedicated support, and
         more exposure to new leads.
@@ -213,8 +216,9 @@ pageSections:
   - _component: page-sections/conversion/pricing-tiers
     content:
       cardColor: base
-      heading: Pricing plans designed for your clients
-      headingSize: lg
+      heading:
+        heading: Pricing plans designed for your clients
+        headingSize: lg
       subtext: Handle billing yourself or pass it on to clients, whatever fits the workflow.
       alignmentHorizontal: center
       subtextSize: lg
@@ -278,8 +282,9 @@ pageSections:
     content:
       imageFlush: false
       contentCardColor: base
-      heading: Enterprise
-      headingSize: md
+      heading:
+        heading: Enterprise
+        headingSize: md
       subtext: We’ll work with you to craft a plan that fits your particular client’s needs.
       subtextSize: lg
       imageReveal: ''
@@ -321,8 +326,9 @@ pageSections:
       paddingVertical: 2xl
   - _component: page-sections/conversion/cta-center
     content:
-      heading: Become a CloudCannon Partner
-      headingSize: lg
+      heading:
+        heading: Become a CloudCannon Partner
+        headingSize: lg
     style:
       pattern: grid
       fade: bottom
@@ -421,8 +427,9 @@ pageSections:
       paddingVerticalStart: lg
   - _component: page-sections/conversion/cta-center
     content:
-      heading: Keen to collaborate?
-      headingSize: lg
+      heading:
+        heading: Keen to collaborate?
+        headingSize: lg
       buttonSections:
         - _component: building-blocks/core-elements/button
           text: Our team

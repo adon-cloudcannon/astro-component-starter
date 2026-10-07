@@ -6,9 +6,10 @@ value:
   _component: page-sections/conversion/cta-team-member
   content:
     sectionLabel: ''
-    heading: ''
-    headingSize: lg
-    headingLevel: h2
+    heading:
+      heading: ''
+      headingLevel: h2
+      headingSize: lg
     subtext: ''
     subtextSize: lg
     subtextWidth: ''

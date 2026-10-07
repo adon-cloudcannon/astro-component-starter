@@ -67,8 +67,9 @@ pageSections:
       headingPlacement: inline
   - _component: page-sections/conversion/cta-center
     content:
-      heading: Ready, set, code
-      headingSize: lg
+      heading:
+        heading: Ready, set, code
+        headingSize: lg
       subtext: AI agents working on the site have complete context
       subtextSize: lg
       subtextWidth: md
@@ -78,8 +79,9 @@ pageSections:
       fade: bottom
   - _component: page-sections/explainers/pinned-steps
     content:
-      eyebrow: ''
-      heading: ''
+      heading:
+        eyebrow: ''
+        heading: ''
       subtext: ''
       alignmentHorizontal: start
       steps:
@@ -148,8 +150,9 @@ pageSections:
       haze: true
   - _component: page-sections/conversion/cta-split
     content:
-      heading: We've already taught agents how to use CloudCannon
-      headingSize: lg
+      heading:
+        heading: We've already taught agents how to use CloudCannon
+        headingSize: lg
       subtext: >-
         Our agent skills are open source. Point your agent at them and it can help to migrate an
         existing site onto CloudCannon, write the config, and set up visual editing, without you
@@ -174,8 +177,9 @@ pageSections:
       backgroundColor: light-sand
   - _component: page-sections/conversion/cta-split
     content:
-      heading: Give AI the full picture
-      headingSize: lg
+      heading:
+        heading: Give AI the full picture
+        headingSize: lg
       subtext: With CloudCannon the code and content stay in Git, and the repo stays yours.
       subtextSize: lg
       imageReveal: ''

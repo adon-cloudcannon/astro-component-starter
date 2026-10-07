@@ -66,9 +66,10 @@ pageSections:
       headingPlacement: inline
   - _component: page-sections/proof/stat-panel
     content:
-      eyebrow: SUCCESS STORY
-      heading: Publishing took up to five weeks. Now it takes minutes.
-      headingSize: lg
+      heading:
+        eyebrow: SUCCESS STORY
+        heading: Publishing took up to five weeks. Now it takes minutes.
+        headingSize: lg
       subtext: >-
         PaperCut moved 4,000 pages and 110 editors onto CloudCannon, and lifted their performance
         score from 14 to 90+.
@@ -103,8 +104,9 @@ pageSections:
       panelImage: ''
   - _component: page-sections/explainers/feature-grid
     content:
-      heading: Built for how large teams actually work
-      headingSize: lg
+      heading:
+        heading: Built for how large teams actually work
+        headingSize: lg
       subtext: Benefit from more uptime, faster sites, better SEO, enterprise- grade security, and more.
       subtextSize: lg
       subtextWidth: md
@@ -145,8 +147,9 @@ pageSections:
       backgroundColor: light-sand
   - _component: page-sections/proof/story-carousel
     content:
-      heading: Grow your sites, not your headcount.
-      headingSize: lg
+      heading:
+        heading: Grow your sites, not your headcount.
+        headingSize: lg
       subtext: From fast-moving startups to multi-site agencies, teams ship more with CloudCannon.
       subtextSize: lg
       subtextWidth: md
@@ -197,8 +200,9 @@ pageSections:
       fade: top
   - _component: page-sections/explainers/feature-grid
     content:
-      heading: Custom plans for enterprise needs
-      headingSize: lg
+      heading:
+        heading: Custom plans for enterprise needs
+        headingSize: lg
       subtext: >-
         To support the large scale and speed your enterprise needs, we'll tailor your plan to your
         exact specifications so you can enjoy the features that are right for you.
@@ -242,8 +246,9 @@ pageSections:
       haze: true
   - _component: page-sections/conversion/cta-team-member
     content:
-      heading: Real humans on support, always
-      headingSize: lg
+      heading:
+        heading: Real humans on support, always
+        headingSize: lg
       subtext: >-
         Git underneath, a visual editor on top, with code and content running on one engine. Start
         free in minutes, or book a demo and we’ll walk you through the real thing.

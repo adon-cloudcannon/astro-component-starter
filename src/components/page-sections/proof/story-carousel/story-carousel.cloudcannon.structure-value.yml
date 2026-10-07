@@ -6,10 +6,11 @@ value:
   _component: page-sections/proof/story-carousel
   content:
     sectionLabel: ''
-    eyebrow: ''
-    heading: Grow your sites, not your headcount.
-    headingLevel: h2
-    headingSize: lg
+    heading:
+      eyebrow: ''
+      heading: Grow your sites, not your headcount.
+      headingLevel: h2
+      headingSize: lg
     subtext: From fast-moving startups to multi-site agencies, teams ship more.
     subtextSize: md
     subtextWidth: ''

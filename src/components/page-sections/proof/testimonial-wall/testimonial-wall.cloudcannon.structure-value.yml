@@ -6,9 +6,10 @@ value:
   _component: page-sections/proof/testimonial-wall
   content:
     sectionLabel: ''
-    eyebrow: Testimonials
-    heading: What teams say after shipping
-    headingLevel: h2
+    heading:
+      eyebrow: Testimonials
+      heading: What teams say after shipping
+      headingLevel: h2
     subtext: ''
     subtextSize: md
     subtextWidth: ''

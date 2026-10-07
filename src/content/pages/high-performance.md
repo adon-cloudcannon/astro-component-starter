@@ -35,14 +35,16 @@ pageSections:
       backgroundColor: light-sand
   - _component: page-sections/conversion/cta-center
     content:
-      heading: High speed whether you have 10 visitors or 10 million
-      headingSize: lg
+      heading:
+        heading: High speed whether you have 10 visitors or 10 million
+        headingSize: lg
     style:
       backgroundColor: light-sand
   - _component: page-sections/explainers/pinned-steps
     content:
-      eyebrow: ''
-      heading: ''
+      heading:
+        eyebrow: ''
+        heading: ''
       subtext: ''
       steps:
         - contentSections:
@@ -118,9 +120,10 @@ pageSections:
       backgroundColor: sand
   - _component: page-sections/proof/testimonial-bento
     content:
-      eyebrow: SUCCESS STORIES
-      heading: What clients are saying
-      headingSize: md
+      heading:
+        eyebrow: SUCCESS STORIES
+        heading: What clients are saying
+        headingSize: md
       testimonials:
         - text: |-
             Within the first few weeks after CloudCannon migrated the
@@ -169,8 +172,9 @@ pageSections:
       fade: bottom
   - _component: page-sections/conversion/cta-split
     content:
-      heading: See how fast your site could be
-      headingSize: lg
+      heading:
+        heading: See how fast your site could be
+        headingSize: lg
       subtext: See how CloudCannon's static-first approach delivers the speed boost your business needs.
       subtextSize: lg
       imageReveal: ''

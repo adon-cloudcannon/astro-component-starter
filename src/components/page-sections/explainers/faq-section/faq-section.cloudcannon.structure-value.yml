@@ -6,8 +6,9 @@ value:
   _component: page-sections/explainers/faq-section
   content:
     sectionLabel: ''
-    heading: Frequently Asked Questions
-    headingLevel: h2
+    heading:
+      heading: Frequently Asked Questions
+      headingLevel: h2
     items:
       - title: How long does a build take?
         contentSections:

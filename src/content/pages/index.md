@@ -102,9 +102,11 @@ pageSections:
   - _component: page-sections/conversion/cta-center
     content:
       sectionLabel: ''
-      eyebrow: ''
-      heading: Your content team edits. You stop getting pinged.
-      headingLevel: h2
+      heading:
+        eyebrow: ''
+        heading: Your content team edits. You stop getting pinged.
+        headingLevel: h2
+        headingSize: lg
       subtext: >-
         CloudCannon keeps your website’s code, content and config in Git and gives content teams a
         visual interface to edit it.
@@ -126,7 +128,6 @@ pageSections:
       imageWidth: intrinsic
       imageScratch: ''
       imageAlt: ''
-      headingSize: lg
     style:
       backgroundColor: light-sand
       maxContentWidth: lg
@@ -259,10 +260,11 @@ pageSections:
   - _component: page-sections/explainers/feature-deck
     content:
       sectionLabel: ''
-      eyebrow: ''
-      heading: ''
-      headingLevel: h2
-      headingSize: lg
+      heading:
+        eyebrow: ''
+        heading: ''
+        headingLevel: h2
+        headingSize: lg
       subtext: ''
       subtextSize: lg
       subtextWidth: sm
@@ -635,10 +637,11 @@ pageSections:
   - _component: page-sections/proof/story-carousel
     content:
       sectionLabel: ''
-      eyebrow: ''
-      heading: Grow your sites, not your headcount.
-      headingLevel: h2
-      headingSize: lg
+      heading:
+        eyebrow: ''
+        heading: Grow your sites, not your headcount.
+        headingLevel: h2
+        headingSize: lg
       subtext: From fast-moving startups to multi-site agencies, teams ship more with CloudCannon.
       subtextSize: lg
       subtextWidth: md
@@ -704,10 +707,11 @@ pageSections:
   - _component: page-sections/proof/team-grid-section
     content:
       sectionLabel: ''
-      eyebrow: Who we are
-      heading: Made for the work, not for the upsell
-      headingSize: lg
-      headingLevel: h2
+      heading:
+        eyebrow: Who we are
+        heading: Made for the work, not for the upsell
+        headingLevel: h2
+        headingSize: lg
       subtext: >-
         We’re a tight-knit team based in Dunedin, New Zealand, working with web teams all over the
         world. We started CloudCannon because every CMS we tried gave editors a better experience by
@@ -788,8 +792,10 @@ pageSections:
   - _component: page-sections/conversion/cta-split
     content:
       sectionLabel: ''
-      heading: Take a peek under the hood
-      headingLevel: h2
+      heading:
+        heading: Take a peek under the hood
+        headingLevel: h2
+        headingSize: lg
       subtext: >-
         Git underneath, a visual editor on top, with code and content running on one engine. Start
         free in minutes, or book a demo and we’ll walk you through the real thing.
@@ -819,7 +825,6 @@ pageSections:
           variant: text
           size: md
       reverse: false
-      headingSize: lg
       imageRevealLabel: Open and close the truck's hood
       imageReveal: /src/assets/images/marketing/cloudcannon-truck-open-1.png
       imageOverflow: 333

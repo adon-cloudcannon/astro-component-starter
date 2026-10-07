@@ -66,8 +66,9 @@ pageSections:
       headingPlacement: inline
   - _component: page-sections/conversion/cta-center
     content:
-      heading: What is a Git-based CMS?
-      headingSize: lg
+      heading:
+        heading: What is a Git-based CMS?
+        headingSize: lg
       subtext: >-
         A Git-based CMS stores your content as files in a Git repository instead of in a database.
         Your team edits through a visual interface, and every change is committed to the repo like
@@ -98,9 +99,10 @@ pageSections:
       haze: true
   - _component: page-sections/conversion/cta-center
     content:
-      eyebrow: HOW IT WORKS
-      heading: Here’s the whole setup
-      headingSize: lg
+      heading:
+        eyebrow: HOW IT WORKS
+        heading: Here’s the whole setup
+        headingSize: lg
       subtext: >-
         Whether it's three client sites or three hundred, another site is another repo. The
         maintenance doesn't come with it.
@@ -132,8 +134,9 @@ pageSections:
       backgroundColor: dark
   - _component: page-sections/explainers/pinned-steps
     content:
-      eyebrow: ''
-      heading: ''
+      heading:
+        eyebrow: ''
+        heading: ''
       subtext: ''
       steps:
         - contentSections:
@@ -234,8 +237,9 @@ pageSections:
       fade: bottom
   - _component: page-sections/conversion/cta-center
     content:
-      heading: Your content is yours
-      headingSize: lg
+      heading:
+        heading: Your content is yours
+        headingSize: lg
       subtext: >-
         Markdown, YAML and JSON, in a repo you already own. You stay because it works, not because
         you're stuck.
@@ -253,8 +257,9 @@ pageSections:
       backgroundColor: light-sand
   - _component: page-sections/explainers/feature-grid
     content:
-      heading: Fits the way you already build
-      headingSize: lg
+      heading:
+        heading: Fits the way you already build
+        headingSize: lg
       subtext: Connect your repo, keep your tooling, and add a visual editor on top.
       subtextSize: lg
       subtextWidth: md
@@ -295,8 +300,9 @@ pageSections:
       backgroundColor: light-sand
   - _component: page-sections/conversion/cta-split
     content:
-      heading: Take a peek under the hood
-      headingSize: lg
+      heading:
+        heading: Take a peek under the hood
+        headingSize: lg
       subtext: >-
         Git underneath, a visual editor on top, with code and content running on one engine. Start
         free in minutes, or book a demo and we’ll walk you through the real thing.

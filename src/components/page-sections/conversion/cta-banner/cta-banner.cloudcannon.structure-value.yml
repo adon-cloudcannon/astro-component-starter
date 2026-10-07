@@ -6,9 +6,10 @@ value:
   _component: page-sections/conversion/cta-banner
   content:
     sectionLabel: ''
-    heading: ''
-    headingSize: lg
-    headingLevel: h2
+    heading:
+      heading: ''
+      headingLevel: h2
+      headingSize: lg
     linkText: ''
     link: ''
     imageSource: ''

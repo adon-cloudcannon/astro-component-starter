@@ -7,9 +7,10 @@ value:
   content:
     sectionLabel: ''
     collection: ''
-    eyebrow: What we do
-    heading: Services built for the long run
-    headingLevel: h2
+    heading:
+      eyebrow: What we do
+      heading: Services built for the long run
+      headingLevel: h2
     subtext: ''
     items:
       - image: /src/assets/images/component-docs/dunedin-cliff.jpg

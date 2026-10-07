@@ -4,11 +4,12 @@ tabbed: true
 value:
   _component: page-sections/explainers/step-selector
   content:
-    eyebrow: ""
-    heading: ""
-    subtext: ""
+    heading:
+      eyebrow: ''
+      heading: ''
+    subtext: ''
     subtextSize: md
-    subtextWidth: ""
+    subtextWidth: ''
     items: []
   style:
     backgroundColor: light-sand

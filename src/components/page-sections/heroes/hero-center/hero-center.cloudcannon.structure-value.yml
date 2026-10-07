@@ -6,9 +6,10 @@ value:
   _component: page-sections/heroes/hero-center
   content:
     sectionLabel: ''
-    eyebrow: Introducing
-    heading: A clear promise in one line
-    headingLevel: h1
+    heading:
+      eyebrow: Introducing
+      heading: A clear promise in one line
+      headingLevel: h1
     subtext: One or two sentences on who this is for and what they get.
     subtextSize: lg
     subtextWidth: \"\"

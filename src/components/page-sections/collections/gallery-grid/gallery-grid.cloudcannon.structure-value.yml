@@ -6,9 +6,10 @@ value:
   _component: page-sections/collections/gallery-grid
   content:
     sectionLabel: ''
-    eyebrow: Gallery
-    heading: Field notes from the coast
-    headingLevel: h2
+    heading:
+      eyebrow: Gallery
+      heading: Field notes from the coast
+      headingLevel: h2
     subtext: ''
     images:
       - image: /src/assets/images/component-docs/dunedin-cliff.jpg

@@ -26,7 +26,9 @@ import TeamMember from "@wrappers/team-member/TeamMember.astro";
 
 /* `content` and `style` are the editor's tabs, flattened straight back into
    the names below. `at()` writes the frontmatter path a binding needs. */
-const { props, at } = nestedProps(Astro.props);
+const { props, at } = nestedProps(Astro.props, {
+  nest: { heading: ["eyebrow", "heading", "headingLevel", "headingSize"] },
+});
 
 const {
   eyebrow = "",

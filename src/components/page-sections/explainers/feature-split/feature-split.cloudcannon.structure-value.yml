@@ -6,9 +6,10 @@ value:
   _component: page-sections/explainers/feature-split
   content:
     sectionLabel: ''
-    eyebrow: How it works
-    heading: One idea, shown beside it
-    headingLevel: h2
+    heading:
+      eyebrow: How it works
+      heading: One idea, shown beside it
+      headingLevel: h2
     subtext: A short paragraph that explains the idea in the image next to it.
     subtextSize: lg
     subtextWidth: ''

@@ -6,10 +6,11 @@ value:
   _component: page-sections/proof/team-roster
   content:
     sectionLabel: ''
-    eyebrow: ''
-    heading: Our team
-    headingLevel: h2
-    headingSize: lg
+    heading:
+      eyebrow: ''
+      heading: Our team
+      headingLevel: h2
+      headingSize: lg
     subtext: One or two lines on what the team is for.
     subtextSize: lg
     subtextWidth: sm

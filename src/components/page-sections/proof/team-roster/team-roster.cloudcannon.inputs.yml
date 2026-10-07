@@ -14,20 +14,26 @@ style:
   options:
     subtype: object
 
-content.eyebrow:
+# The heading, its eyebrow, its level and its size are one decision.
+content.heading:
+  type: object
+  label: Heading
+  options:
+    subtype: object
+content.heading.eyebrow:
   type: text
   comment: Short label above the heading. Optional.
-content.heading:
+content.heading.heading:
   type: text
   comment: The section's title, centred.
-content.headingLevel:
+content.heading.headingLevel:
   type: select
   comment: Heading level for the title.
   options:
     values:
       - h2
       - h3
-content.headingSize:
+content.heading.headingSize:
   type: select
   comment: Size of the title, independent of its level.
   options:

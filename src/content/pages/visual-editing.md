@@ -36,10 +36,11 @@ pageSections:
       reverse: true
   - _component: page-sections/explainers/editor-demo
     content:
-      eyebrow: INTERACTIVE DEMO
-      heading: Try it out, and see if it’s right for you and your team.
+      heading:
+        eyebrow: INTERACTIVE DEMO
+        heading: Try it out, and see if it’s right for you and your team.
+        headingSize: lg
       alignmentHorizontal: center
-      headingSize: lg
     style:
       backgroundColor: light-sand
   - _component: page-sections/proof/testimonial-quote
@@ -67,8 +68,9 @@ pageSections:
       fade: bottom
   - _component: page-sections/conversion/cta-center
     content:
-      heading: Here, you don’t need to wait to make changes
-      headingSize: lg
+      heading:
+        heading: Here, you don’t need to wait to make changes
+        headingSize: lg
       subtext: When something on the site needs updating, the person who noticed can just fix it.
       subtextSize: xl
       subtextWidth: md
@@ -120,8 +122,9 @@ pageSections:
         iconColor: default
   - _component: page-sections/conversion/cta-center
     content:
-      heading: You decide what’s editable
-      headingSize: lg
+      heading:
+        heading: You decide what’s editable
+        headingSize: lg
       subtext: >-
         Developers build custom components that define exactly what editors can change, add and
         rearrange. Editors get room to work, and nobody can break a layout by accident.
@@ -133,8 +136,9 @@ pageSections:
       backgroundColor: sand
   - _component: page-sections/explainers/feature-split
     content:
-      heading: Publish when you’re ready
-      headingSize: lg
+      heading:
+        heading: Publish when you’re ready
+        headingSize: lg
       subtext: >-
         Make changes on a branch and share a hosted preview with whoever needs to see it first.
         Publish once it's approved, or schedule it to go live later.

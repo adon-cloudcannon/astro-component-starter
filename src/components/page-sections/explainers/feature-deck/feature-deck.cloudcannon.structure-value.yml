@@ -6,10 +6,11 @@ value:
   _component: page-sections/explainers/feature-deck
   content:
     sectionLabel: ''
-    eyebrow: ''
-    heading: ''
-    headingLevel: h2
-    headingSize: lg
+    heading:
+      eyebrow: ''
+      heading: ''
+      headingLevel: h2
+      headingSize: lg
     subtext: ''
     subtextSize: md
     subtextWidth: ''
