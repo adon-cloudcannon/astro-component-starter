@@ -7,7 +7,8 @@ pageSections:
     content:
       heading:
         heading: Get started
-      subtext: Start building with CloudCannon.
+      subtext:
+        subtext: Start building with CloudCannon.
       showBreadcrumbs: true
       alignmentHorizontal: start
     style:

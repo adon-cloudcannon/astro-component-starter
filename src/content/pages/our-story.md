@@ -2,8 +2,8 @@
 _schema: default
 title: Our Story
 description: >-
-  Dunedin, New Zealand, 2013. A couple of developers who couldn't find a CMS that worked the way we
-  did.
+  Dunedin, New Zealand, 2013. A couple of developers who couldn't find a CMS
+  that worked the way we did.
 pageSections:
   - _component: page-sections/heroes/hero-photo-stack
     content:
@@ -11,10 +11,10 @@ pageSections:
         heading: Who we are
         headingLevel: h1
         headingSize: 2xl
-      subtext: >-
-        Dunedin, New Zealand, 2013. A couple of developers who couldn't find a CMS that worked the
-        way we did... so we built it.
-      subtextSize: xl
+      subtext:
+        subtext: Dunedin, New Zealand, 2013. A couple of developers who couldn't find a
+          CMS that worked the way we did... so we built it.
+        subtextSize: xl
       photos:
         - _component: page-sections/heroes/hero-photo-stack/photo-stack-card
           source: /src/assets/images/marketing/our-story-lake.jpg
@@ -27,16 +27,16 @@ pageSections:
           eyebrow: OUR ORIGIN STORY
           heading: “We don’t think a website should need this much looking after.”
           body: >-
-            Working as developers, we were seeing the shortcomings of most CMS firsthand. We
-            envisioned a better for non-technical teams to edit static sites - without needing a
-            developer.
+            Working as developers, we were seeing the shortcomings of most CMS
+            firsthand. We envisioned a better for non-technical teams to edit
+            static sites - without needing a developer.
           tone: light-sand
         - _component: page-sections/heroes/hero-photo-stack/story-panel
           eyebrow: SHAPED BY BUILDERS EVERYWHERE
           body: >-
-            CloudCannon has grown alongside the people using it. Our platform is always improving
-            thanks to input from design and development agencies around the world, and in-house
-            teams at places like Twitch.
+            CloudCannon has grown alongside the people using it. Our platform is
+            always improving thanks to input from design and development
+            agencies around the world, and in-house teams at places like Twitch.
           tone: sand
       panelRaise: 200
       embellishmentSource: /src/assets/images/marketing/frond.png
@@ -67,17 +67,20 @@ pageSections:
         heading: Our team
         headingLevel: h2
         headingSize: lg
-      subtext: We're on a mission to enable everyone, everywhere, to collaborate without compromise.
-      subtextSize: lg
-      subtextWidth: sm
+      subtext:
+        subtext: We're on a mission to enable everyone, everywhere, to collaborate
+          without compromise.
+        subtextSize: lg
+        subtextWidth: sm
       leads:
         - _component: building-blocks/wrappers/team-member
           name: Mike Neumegen
           role: Co-founder & CEO
           bio: >-
-            Born and raised in New Zealand, Mike attended the University of Otago, where he studied
-            Computer Science. Mike worked for a number of small New Zealand start-ups before
-            cofounding CloudCannon with George. He is based in San Francisco.
+            Born and raised in New Zealand, Mike attended the University of
+            Otago, where he studied Computer Science. Mike worked for a number
+            of small New Zealand start-ups before cofounding CloudCannon with
+            George. He is based in San Francisco.
           imageSource: /src/assets/images/marketing/screenshot-2026-06-09-at-7-38-38-pm-background-r-3806-69478.png
           imageAlt: Mike Neumegen, Co-founder & CEO at CloudCannon
           backgroundColor: peachy
@@ -85,9 +88,10 @@ pageSections:
           name: George Phillips
           role: Co-founder & CTO
           bio: >-
-            George, CTO of CloudCannon, was born in NZ, graduated from the University of Otago with
-            a Computer Science degree. He worked for innovative Kiwi start-ups before cofounding
-            CloudCannon with Mike. He is based in Dunedin, New Zealand.
+            George, CTO of CloudCannon, was born in NZ, graduated from the
+            University of Otago with a Computer Science degree. He worked for
+            innovative Kiwi start-ups before cofounding CloudCannon with Mike.
+            He is based in Dunedin, New Zealand.
           imageSource: /src/assets/images/marketing/george-profile-1.png
           imageAlt: George Phillips, Co-founder & CTO at CloudCannon
           backgroundColor: moss
@@ -95,9 +99,10 @@ pageSections:
           name: Chris Wingate
           role: CRO
           bio: >-
-            Chris, based in Norway, holds an MBA and Bachelor's in Finance and Business Analytics
-            from the University of New Hampshire. He joined CloudCannon in 2019 to drive company
-            growth after a successful career as a professional footballer.
+            Chris, based in Norway, holds an MBA and Bachelor's in Finance and
+            Business Analytics from the University of New Hampshire. He joined
+            CloudCannon in 2019 to drive company growth after a successful
+            career as a professional footballer.
           imageSource: /src/assets/images/marketing/chris-profile-1.png
           imageAlt: Chris Wingate, CRO at CloudCannon
           backgroundColor: golden

@@ -10,9 +10,10 @@ value:
       eyebrow: Testimonials
       heading: What teams say after shipping
       headingLevel: h2
-    subtext: ""
-    subtextSize: md
-    subtextWidth: ""
+    subtext:
+      subtext: ""
+      subtextSize: md
+      subtextWidth: ""
     testimonials:
       - text: >-
           This framework has completely changed the way we build. The sites come together fast, they

@@ -28,6 +28,7 @@ const { props, at } = nestedProps(Astro.props, {
       "imageBleed",
       "imageRounded",
     ],
+    subtext: ["subtext", "subtextSize", "subtextWidth"],
   },
 });
 
@@ -115,7 +116,6 @@ const {
 /* The measure the subtext is set in, as a length. */
 const subtextCap = subtextMeasure(subtextWidth);
 
-
 /**
  * The pattern, as the builder's own background object.
  *
@@ -181,7 +181,12 @@ const imagePositionVertical = imageBleed ? "top" : "center";
       </Heading>
       <Text
         class="subtext"
-        style={subtextCap ? `max-inline-size: ${subtextCap}; margin-inline: auto; justify-self: center` : undefined}        size={subtextSize}
+        style={
+          subtextCap
+            ? `max-inline-size: ${subtextCap}; margin-inline: auto; justify-self: center`
+            : undefined
+        }
+        size={subtextSize}
         data-prop={at("subtext")}
         text={subtext}
         size="xl"

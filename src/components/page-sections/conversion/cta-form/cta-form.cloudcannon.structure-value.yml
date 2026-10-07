@@ -9,9 +9,10 @@ value:
     heading:
       heading: Get in touch
       headingLevel: h2
-    subtext: Fill out the form below and we'll get back to you as soon as possible.
-    subtextSize: md
-    subtextWidth: ""
+    subtext:
+      subtext: Fill out the form below and we'll get back to you as soon as possible.
+      subtextSize: md
+      subtextWidth: ""
     formAction: ./
     formBlocks:
       - _component: building-blocks/forms/input

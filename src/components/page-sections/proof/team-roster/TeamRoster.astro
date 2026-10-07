@@ -27,7 +27,10 @@ import TeamMember from "@wrappers/team-member/TeamMember.astro";
 /* `content` and `style` are the editor's tabs, flattened straight back into
    the names below. `at()` writes the frontmatter path a binding needs. */
 const { props, at } = nestedProps(Astro.props, {
-  nest: { heading: ["eyebrow", "heading", "headingLevel", "headingSize"] },
+  nest: {
+    heading: ["eyebrow", "heading", "headingLevel", "headingSize"],
+    subtext: ["subtext", "subtextSize", "subtextWidth"],
+  },
 });
 
 const {
@@ -70,8 +73,12 @@ const {
    heading with the copy under it at 8. A comment cannot go between the
    attributes themselves: in Astro that is a parse error, not a comment. */
 const subtextCap = subtextMeasure(subtextWidth);
-const leadList = (Array.isArray(leads) ? leads : []).filter((person) => person?.name || person?.imageSource);
-const memberList = (Array.isArray(members) ? members : []).filter((person) => person?.name || person?.imageSource);
+const leadList = (Array.isArray(leads) ? leads : []).filter(
+  (person) => person?.name || person?.imageSource
+);
+const memberList = (Array.isArray(members) ? members : []).filter(
+  (person) => person?.name || person?.imageSource
+);
 const hasHeader = Boolean(eyebrow || heading || subtext);
 ---
 
@@ -92,7 +99,14 @@ const hasHeader = Boolean(eyebrow || heading || subtext);
       can see. */}
   {hasHeader && (
     <div class="team-roster-header flow">
-      {eyebrow && <SimpleText class="eyebrow" size="sm" text={eyebrow} data-prop={at("eyebrow")} />}
+      {eyebrow && (
+        <SimpleText
+          class="eyebrow"
+          size="sm"
+          text={eyebrow}
+          data-prop={at("eyebrow")}
+        />
+      )}
       {heading && (
         <Heading
           level={headingLevel}
@@ -117,7 +131,11 @@ const hasHeader = Boolean(eyebrow || heading || subtext);
   )}
 
   {leadList.length > 0 && (
-    <div class="team-roster-leads" data-editable="array" data-prop={at("leads")}>
+    <div
+      class="team-roster-leads"
+      data-editable="array"
+      data-prop={at("leads")}
+    >
       {leadList.map((person) => (
         <TeamMember
           {...person}
@@ -131,7 +149,11 @@ const hasHeader = Boolean(eyebrow || heading || subtext);
   )}
 
   {memberList.length > 0 && (
-    <div class="team-roster-members" data-editable="array" data-prop={at("members")}>
+    <div
+      class="team-roster-members"
+      data-editable="array"
+      data-prop={at("members")}
+    >
       {memberList.map((person) => (
         <TeamMember
           {...person}

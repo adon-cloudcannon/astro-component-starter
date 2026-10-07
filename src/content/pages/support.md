@@ -7,7 +7,8 @@ pageSections:
     content:
       heading:
         heading: Support
-      subtext: Get help from our team fast.
+      subtext:
+        subtext: Get help from our team fast.
       showBreadcrumbs: true
       alignmentHorizontal: start
     style:

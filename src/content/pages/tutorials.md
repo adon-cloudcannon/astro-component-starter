@@ -7,7 +7,8 @@ pageSections:
     content:
       heading:
         heading: Tutorials
-      subtext: Step-by-step guides.
+      subtext:
+        subtext: Step-by-step guides.
       showBreadcrumbs: true
       alignmentHorizontal: start
     style:

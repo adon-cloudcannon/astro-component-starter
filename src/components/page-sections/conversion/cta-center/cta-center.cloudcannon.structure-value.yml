@@ -10,9 +10,10 @@ value:
       eyebrow: ""
       heading: Ready to get started?
       headingLevel: h2
-    subtext: One line that makes the next step obvious.
-    subtextSize: md
-    subtextWidth: ""
+    subtext:
+      subtext: One line that makes the next step obvious.
+      subtextSize: md
+      subtextWidth: ""
     alignmentHorizontal: center
     buttonSections:
       - _component: building-blocks/core-elements/button

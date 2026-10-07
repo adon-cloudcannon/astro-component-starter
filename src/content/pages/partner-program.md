@@ -8,9 +8,10 @@ pageSections:
       heading:
         heading: The more you launch, the more you unlock
         headingSize: xl
-      subtext: >-
-        Welcome to a Partner Program that rewards good work. Get better margins and less overhead as
-        you grow your portfolio.
+      subtext:
+        subtext: Welcome to a Partner Program that rewards good work. Get better margins
+          and less overhead as you grow your portfolio.
+        subtextSize: xl
       image:
         imageSource: /src/assets/images/marketing/hero-partner-program.png
         imageAlt: ''
@@ -24,7 +25,6 @@ pageSections:
           iconName: move-right
           iconPosition: after
           variant: text
-      subtextSize: xl
     style:
       pattern: pegboard
       haze: true
@@ -71,18 +71,18 @@ pageSections:
         eyebrow: THE PROGRAM
         heading: What is the Partner Program?
         headingSize: lg
-      subtext: >-
-        We want to reward good work. Every new client you bring on earns points, and the more you
-        have, the more benefits you unlock.
-      subtextSize: lg
+      subtext:
+        subtext: We want to reward good work. Every new client you bring on earns
+          points, and the more you have, the more benefits you unlock.
+        subtextSize: lg
       buttonSections:
         - _component: building-blocks/core-elements/button
           text: Join the Partner Program
           variant: primary
       imageSource: /src/assets/images/marketing/partner-dashboard-panel.png
       imageAlt: >-
-        The partner dashboard, with a Gold Partner badge on its corner and a card reading 101
-        points.
+        The partner dashboard, with a Gold Partner badge on its corner and a
+        card reading 101 points.
       imageAspectRatio: none
       imageRounded: false
       mediaWidth: 628
@@ -114,7 +114,8 @@ pageSections:
       cardHeight: 334
       features:
         - title: Partner dashboard
-          description: Track site health, errors, usage and billing for every client from one place.
+          description: Track site health, errors, usage and billing for every client from
+            one place.
           imageSource: /src/assets/images/marketing/partner-dashboard-1.png
           imageHeight: 153
           imageAlt: ''
@@ -129,7 +130,8 @@ pageSections:
           imageHeight: 138
           imageAlt: ''
         - title: Dedicated support
-          description: Silver partners can join a private Slack channel with our support and engineering team.
+          description: Silver partners can join a private Slack channel with our support
+            and engineering team.
           imageSource: /src/assets/images/marketing/slack-1.png
           imageHeight: 175
           imageAlt: ''
@@ -151,12 +153,12 @@ pageSections:
         eyebrow: PARTNER TIERS
         heading: Climb as your portfolio grows
         headingSize: lg
-      subtext: >-
-        Bring on new clients, move up the tiers, and unlock bigger discounts, dedicated support, and
-        more exposure to new leads.
+      subtext:
+        subtext: Bring on new clients, move up the tiers, and unlock bigger discounts,
+          dedicated support, and more exposure to new leads.
+        subtextSize: lg
+        subtextWidth: md
       alignmentHorizontal: start
-      subtextSize: lg
-      subtextWidth: md
       garden: true
       tiers:
         - name: Bronze
@@ -219,10 +221,12 @@ pageSections:
       heading:
         heading: Pricing plans designed for your clients
         headingSize: lg
-      subtext: Handle billing yourself or pass it on to clients, whatever fits the workflow.
+      subtext:
+        subtext: Handle billing yourself or pass it on to clients, whatever fits the
+          workflow.
+        subtextSize: lg
+        subtextWidth: sm
       alignmentHorizontal: center
-      subtextSize: lg
-      subtextWidth: sm
       tiers:
         - name: Lite
           description: A pay-as-you-go plan for smaller clients
@@ -285,8 +289,10 @@ pageSections:
       heading:
         heading: Enterprise
         headingSize: md
-      subtext: We’ll work with you to craft a plan that fits your particular client’s needs.
-      subtextSize: lg
+      subtext:
+        subtext: We’ll work with you to craft a plan that fits your particular client’s
+          needs.
+        subtextSize: lg
       imageReveal: ''
       characters:
         scale: 116

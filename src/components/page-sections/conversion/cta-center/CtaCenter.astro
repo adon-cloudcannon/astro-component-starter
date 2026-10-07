@@ -13,7 +13,10 @@ import ButtonGroup from "@wrappers/button-group/ButtonGroup.astro";
 /* `content` and `style` are the editor's tabs, flattened straight back into
    the names below. `at()` writes the frontmatter path a binding needs. */
 const { props, at } = nestedProps(Astro.props, {
-  nest: { heading: ["eyebrow", "heading", "headingLevel", "headingSize"] },
+  nest: {
+    heading: ["eyebrow", "heading", "headingLevel", "headingSize"],
+    subtext: ["subtext", "subtextSize", "subtextWidth"],
+  },
 });
 
 const {
@@ -140,7 +143,6 @@ const mirror = rootMirror({ class: { [`align-${alignmentHorizontal}`]: true } })
   useDefaultEditableBinding={useDefaultEditableBinding}
   {...htmlAttributes}
 >
-
   {(cornerStart?.source || cornerEnd?.source) && (
     <Fragment slot="band">
       {cornerStart?.source && (
@@ -179,7 +181,11 @@ const mirror = rootMirror({ class: { [`align-${alignmentHorizontal}`]: true } })
   />
   <Text
     class="subtext"
-    style={subtextCap ? `max-inline-size: ${subtextCap}; margin-inline: auto; justify-self: center` : undefined}
+    style={
+      subtextCap
+        ? `max-inline-size: ${subtextCap}; margin-inline: auto; justify-self: center`
+        : undefined
+    }
     size={subtextSize}
     alignmentHorizontal={alignmentHorizontal}
     data-prop={at("subtext")}
@@ -193,9 +199,11 @@ const mirror = rootMirror({ class: { [`align-${alignmentHorizontal}`]: true } })
   {imageSource && (
     <div
       class:list={["cta-center-media", imageScratch && "scratched"]}
-      style={imageScratch
-        ? `--scratch-fill: ${String(imageScratch).startsWith("#") ? imageScratch : `var(--${imageScratch})`}`
-        : undefined}
+      style={
+        imageScratch
+          ? `--scratch-fill: ${String(imageScratch).startsWith("#") ? imageScratch : `var(--${imageScratch})`}`
+          : undefined
+      }
     >
       <Image
         class:list={["cta-center-image", imageWidth === "full" && "is-full"]}

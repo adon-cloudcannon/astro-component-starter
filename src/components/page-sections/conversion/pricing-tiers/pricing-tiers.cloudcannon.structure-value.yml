@@ -10,9 +10,10 @@ value:
       eyebrow: Plans
       heading: Simple pricing that scales with you
       headingLevel: h2
-    subtext: Every plan includes global CDN hosting and automatic SSL.
-    subtextSize: md
-    subtextWidth: ""
+    subtext:
+      subtext: Every plan includes global CDN hosting and automatic SSL.
+      subtextSize: md
+      subtextWidth: ""
     showAnnualPricing: false
     monthlyLabel: Monthly
     annualLabel: Annual

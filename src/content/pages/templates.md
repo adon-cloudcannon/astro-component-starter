@@ -1,7 +1,8 @@
 ---
 _schema: default
 title: Templates
-description: Learn about static sites, Git workflows, and content management for your next project.
+description: Learn about static sites, Git workflows, and content management for
+  your next project.
 pageSections:
   - _component: page-sections/heroes/hero-center
     content:
@@ -10,9 +11,11 @@ pageSections:
         heading: Templates with static site generators
         headingLevel: h1
         headingSize: xl
-      subtext: Learn about static sites, Git workflows, and content management for your next project.
-      subtextSize: xl
-      subtextWidth: md
+      subtext:
+        subtext: Learn about static sites, Git workflows, and content management for
+          your next project.
+        subtextSize: xl
+        subtextWidth: md
     style:
       backgroundColor: light-sand
       pattern: pegboard
@@ -51,9 +54,10 @@ pageSections:
       collection: templates
       heading:
         eyebrow: EXPLORE BY COLLECTION
+        heading: ''
       subtext: >-
-        Choose a template that's optimized for editing in CloudCannon, and get a head start on your
-        next project.
+        Choose a template that's optimized for editing in CloudCannon, and get a
+        head start on your next project.
       columns: 3
       items:
         - image: /src/assets/images/marketing/template-jetstream.jpg
@@ -65,7 +69,8 @@ pageSections:
               level: h3
               size: xs
             - _component: building-blocks/core-elements/simple-text
-              text: A flexible Astro template built with Astro 6 and Astro Component Starter components.
+              text: A flexible Astro template built with Astro 6 and Astro Component Starter
+                components.
               size: sm
             - _component: building-blocks/core-elements/button
               text: Learn more
@@ -100,8 +105,8 @@ pageSections:
               size: xs
             - _component: building-blocks/core-elements/simple-text
               text: >-
-                The Astro Starter provides developers with everything they need to quickly get
-                going.
+                The Astro Starter provides developers with everything they need
+                to quickly get going.
               size: sm
             - _component: building-blocks/core-elements/button
               text: Learn more
@@ -135,7 +140,8 @@ pageSections:
               level: h3
               size: xs
             - _component: building-blocks/core-elements/simple-text
-              text: The Hugo Starter serves as an ideal template for developers who want to move fast.
+              text: The Hugo Starter serves as an ideal template for developers who want to
+                move fast.
               size: sm
             - _component: building-blocks/core-elements/button
               text: Learn more
@@ -152,7 +158,8 @@ pageSections:
               level: h3
               size: xs
             - _component: building-blocks/core-elements/simple-text
-              text: The Eleventy Starter provides developers with everything they need to get started.
+              text: The Eleventy Starter provides developers with everything they need to get
+                started.
               size: sm
             - _component: building-blocks/core-elements/button
               text: Learn more

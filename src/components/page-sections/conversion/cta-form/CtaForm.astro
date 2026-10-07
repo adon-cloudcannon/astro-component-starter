@@ -13,7 +13,10 @@ import Steps from "@wrappers/steps/Steps.astro";
 /* `content` and `style` are the editor's tabs, flattened straight back into
    the names below. `at()` writes the frontmatter path a binding needs. */
 const { props, at } = nestedProps(Astro.props, {
-  nest: { heading: ["heading", "headingLevel", "headingSize"] },
+  nest: {
+    heading: ["heading", "headingLevel", "headingSize"],
+    subtext: ["subtext", "subtextSize", "subtextWidth"],
+  },
 });
 
 const {
@@ -120,7 +123,11 @@ const subtextCap = subtextMeasure(subtextWidth);
           </Heading>
         )}
         <Text
-          style={subtextCap ? `max-inline-size: ${subtextCap}; margin-inline: auto; justify-self: center` : undefined}
+          style={
+            subtextCap
+              ? `max-inline-size: ${subtextCap}; margin-inline: auto; justify-self: center`
+              : undefined
+          }
           size={subtextSize}
           data-prop={at("subtext")}
           text={subtext}
@@ -255,11 +262,7 @@ const subtextCap = subtextMeasure(subtextWidth);
     /* Ring centre to ring centre: with `--step-count` equal columns and the
        ring centred in each, the first sits at half a column in. */
     .cta-form .cta-form-steps .steps-list.orientation-horizontal::before {
-      background-image: repeating-linear-gradient(
-        to right,
-        #333333 0 4px,
-        transparent 4px 8px
-      );
+      background-image: repeating-linear-gradient(to right, #333333 0 4px, transparent 4px 8px);
       block-size: var(--border-width-sm);
       content: "";
       inset-block-start: calc(var(--step-marker-size) / 2);

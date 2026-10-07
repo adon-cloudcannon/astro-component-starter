@@ -10,9 +10,10 @@ value:
       eyebrow: Testimonials
       heading: Loved by the teams who use it
       headingLevel: h2
-    subtext: ""
-    subtextSize: md
-    subtextWidth: ""
+    subtext:
+      subtext: ""
+      subtextSize: md
+      subtextWidth: ""
     testimonials:
       - text: >-
           We handed the site to our marketing team on a Friday and they had three new landing pages

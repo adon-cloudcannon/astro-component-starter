@@ -15,7 +15,10 @@ type TestimonialProps = Record<string, unknown>;
 /* `content` and `style` are the editor's tabs, flattened straight back into
    the names below. `at()` writes the frontmatter path a binding needs. */
 const { props, at } = nestedProps(Astro.props, {
-  nest: { heading: ["eyebrow", "heading", "headingLevel", "headingSize"] },
+  nest: {
+    heading: ["eyebrow", "heading", "headingLevel", "headingSize"],
+    subtext: ["subtext", "subtextSize", "subtextWidth"],
+  },
 });
 
 const {
@@ -100,14 +103,20 @@ const subtextCap = subtextMeasure(subtextWidth);
     class="section-subtext testimonial-wall-subtext"
     alignmentHorizontal="center"
     data-prop={at("subtext")}
-    style={subtextCap ? `max-inline-size: ${subtextCap}; margin-inline: auto; justify-self: center` : undefined}    size={subtextSize}    text={subtext}
+    style={
+      subtextCap
+        ? `max-inline-size: ${subtextCap}; margin-inline: auto; justify-self: center`
+        : undefined
+    }
+    size={subtextSize}
+    text={subtext}
   />
 
-  {testimonials?.length > 0 && (
+  {testimonials?.length > 0 &&
     /* Quotes are uneven by nature, so the wall is a Masonry by default — the
          wrapper's JS enhancement keeps reading order while packing the
          columns. A row is for where the design draws one height. */
-    layout === "row" ? (
+    (layout === "row" ? (
       <Grid
         class="testimonial-wall-row"
         columns={columns}
@@ -139,8 +148,7 @@ const subtextCap = subtextMeasure(subtextWidth);
           />
         ))}
       </Masonry>
-    )
-  )}
+    ))}
 </CustomSection>
 
 <style is:global>

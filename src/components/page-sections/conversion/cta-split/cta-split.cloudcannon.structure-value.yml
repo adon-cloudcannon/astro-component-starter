@@ -9,9 +9,10 @@ value:
     heading:
       heading: Ready to get started?
       headingLevel: h2
-    subtext: One line that makes the next step obvious.
-    subtextSize: md
-    subtextWidth: ""
+    subtext:
+      subtext: One line that makes the next step obvious.
+      subtextSize: md
+      subtextWidth: ""
     imageSource: /src/assets/images/component-docs/dunedin-cliff.jpg
     imageAlt: Sea cliffs above a bay
     buttonSections:

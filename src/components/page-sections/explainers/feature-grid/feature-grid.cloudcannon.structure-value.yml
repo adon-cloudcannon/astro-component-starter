@@ -10,9 +10,10 @@ value:
       eyebrow: What you get
       heading: Three things worth knowing
       headingLevel: h2
-    subtext: One line that frames the points below.
-    subtextSize: md
-    subtextWidth: ""
+    subtext:
+      subtext: One line that frames the points below.
+      subtextSize: md
+      subtextWidth: ""
     alignmentHorizontal: center
     columns: 3
     features:

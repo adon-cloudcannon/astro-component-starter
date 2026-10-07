@@ -7,7 +7,8 @@ pageSections:
     content:
       heading:
         heading: Experts directory
-      subtext: Find a partner to build your site.
+      subtext:
+        subtext: Find a partner to build your site.
       showBreadcrumbs: true
       alignmentHorizontal: start
     style:

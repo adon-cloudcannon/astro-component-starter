@@ -5,36 +5,37 @@ tabbed: true
 value:
   _component: page-sections/proof/team-roster
   content:
-    sectionLabel: ''
+    sectionLabel: ""
     heading:
-      eyebrow: ''
+      eyebrow: ""
       heading: Our team
       headingLevel: h2
       headingSize: lg
-    subtext: One or two lines on what the team is for.
-    subtextSize: lg
-    subtextWidth: sm
+    subtext:
+      subtext: One or two lines on what the team is for.
+      subtextSize: lg
+      subtextWidth: sm
     leads:
       - _component: building-blocks/wrappers/team-member
-        name: ''
-        role: ''
-        bio: ''
-        imageSource: ''
-        imageAlt: ''
+        name: ""
+        role: ""
+        bio: ""
+        imageSource: ""
+        imageAlt: ""
         backgroundColor: sunset
-        propSource: ''
+        propSource: ""
         propWidth: 40
-        propAlt: ''
+        propAlt: ""
     members:
       - _component: building-blocks/wrappers/team-member
-        name: ''
-        role: ''
-        imageSource: ''
-        imageAlt: ''
+        name: ""
+        role: ""
+        imageSource: ""
+        imageAlt: ""
         backgroundColor: pacific
-        propSource: ''
+        propSource: ""
         propWidth: 40
-        propAlt: ''
+        propAlt: ""
   style:
     pattern: none
     fade: none

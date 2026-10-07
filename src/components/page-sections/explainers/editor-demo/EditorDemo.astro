@@ -48,7 +48,10 @@ type Swatch = { label?: string; color?: string };
 /* `content` and `style` are the editor's tabs, flattened straight back into
    the names below. `at()` writes the frontmatter path a binding needs. */
 const { props, at } = nestedProps(Astro.props, {
-  nest: { heading: ["eyebrow", "heading", "headingLevel", "headingSize"] },
+  nest: {
+    heading: ["eyebrow", "heading", "headingLevel", "headingSize"],
+    subtext: ["subtext", "subtextSize", "subtextWidth"],
+  },
 });
 
 const {
@@ -169,8 +172,7 @@ const {
   previewImage = "/src/assets/images/marketing/hero-lowmaintenance-01-1.png",
   previewImageAlt = "",
   /** The line under the headline on the page being edited. */
-  previewSubtext =
-    "Change the headline or this line in the sidebar, and the page updates as you type.",
+  previewSubtext = "Change the headline or this line in the sidebar, and the page updates as you type.",
   /** The link back out of a block's own panel. */
   backLabel = "Back",
   /** What the six dots on a block offer. */
@@ -252,10 +254,12 @@ const blockValues = blockList.map(valuesFor);
    just a label: the template it renders has to produce a row, a panel, a copy
    of the fields for the popup and the content on the page, and all four come
    from the same shape the starting blocks use. */
-const addList = ((Array.isArray(addOptions) ? addOptions : []) as (Block & {
-  description?: string;
-  values?: Record<string, string>;
-})[]).map((option) => ({
+const addList = (
+  (Array.isArray(addOptions) ? addOptions : []) as (Block & {
+    description?: string;
+    values?: Record<string, string>;
+  })[]
+).map((option) => ({
   ...option,
   /* A field with nothing of its own takes the section's default for that
      name, which is how an added Image arrives carrying a picture rather than
@@ -265,7 +269,7 @@ const addList = ((Array.isArray(addOptions) ? addOptions : []) as (Block & {
      which of the starting blocks gets the prop. */
   values: {
     ...Object.fromEntries(
-      (option.fields ?? []).map((field) => [field.binds ?? "", seeds[field.binds ?? ""] ?? ""]),
+      (option.fields ?? []).map((field) => [field.binds ?? "", seeds[field.binds ?? ""] ?? ""])
     ),
     ...(option.values ?? {}),
   },
@@ -309,9 +313,7 @@ const addList = ((Array.isArray(addOptions) ? addOptions : []) as (Block & {
           alignmentHorizontal={alignmentHorizontal}
           class="subtext"
           size={subtextSize}
-          style={subtextCap
-            ? `max-inline-size: ${subtextCap}; margin-inline: auto`
-            : undefined}
+          style={subtextCap ? `max-inline-size: ${subtextCap}; margin-inline: auto` : undefined}
           text={subtext}
         />
       )}
@@ -335,140 +337,160 @@ const addList = ((Array.isArray(addOptions) ? addOptions : []) as (Block & {
         class="editor-demo-sidebar"
         data-editor-demo-panes
       >
-       <div class="editor-demo-panes">
-        <div class="editor-demo-pane" data-pane="root">
-        <p class="editor-demo-panel-title">{panelTitle}</p>
+        <div class="editor-demo-panes">
+          <div
+            class="editor-demo-pane"
+            data-pane="root"
+          >
+            <p class="editor-demo-panel-title">{panelTitle}</p>
 
-        {colorList.length > 0 && (
-          <div class="editor-demo-field">
-            <p
-              class="editor-demo-label"
-              id="editor-demo-color-label"
-            >
-              {colorLabel}
-            </p>
-            {/* Built rather than a native <select>: the app draws its own, and
+            {colorList.length > 0 && (
+              <div class="editor-demo-field">
+                <p
+                  class="editor-demo-label"
+                  id="editor-demo-color-label"
+                >
+                  {colorLabel}
+                </p>
+                {/* Built rather than a native <select>: the app draws its own, and
                 a system dropdown cannot be styled to match it. A button and a
                 listbox, with the ARIA a real combobox needs, so it stays
                 operable by keyboard and by a screen reader. */}
-            <div class="editor-demo-select" data-editor-demo-select>
-              <button
-                aria-controls="editor-demo-color-list"
-                aria-expanded="false"
-                aria-haspopup="listbox"
-                aria-labelledby="editor-demo-color-label editor-demo-color-value"
-                class="editor-demo-select-trigger"
-                type="button"
-              >
-                <span
-                  class="editor-demo-select-value"
-                  id="editor-demo-color-value"
+                <div
+                  class="editor-demo-select"
+                  data-editor-demo-select
                 >
-                  {colorList[0]?.label}
-                </span>
-                <Icon
-                  name="chevron-down"
-                  size="none"
-                  aria-hidden="true"
-                />
-              </button>
-              <ul
-                aria-labelledby="editor-demo-color-label"
-                class="editor-demo-select-list"
-                hidden
-                id="editor-demo-color-list"
-                role="listbox"
-                tabindex="-1"
-              >
-                {colorList.map((option, index) => (
-                  <li
-                    aria-selected={index === 0 ? "true" : "false"}
-                    class="editor-demo-select-option"
-                    data-color={option.color ? paint(option.color) : undefined}
-                    data-value={option.label}
-                    id={`editor-demo-color-option-${index}`}
-                    role="option"
+                  <button
+                    aria-controls="editor-demo-color-list"
+                    aria-expanded="false"
+                    aria-haspopup="listbox"
+                    aria-labelledby="editor-demo-color-label editor-demo-color-value"
+                    class="editor-demo-select-trigger"
+                    type="button"
                   >
-                    {option.label}
-                  </li>
-                ))}
-              </ul>
-            </div>
-          </div>
-        )}
-
-        {(blockList.length > 0 || addLabel) && (
-          <div class="editor-demo-blocks-group">
-        {blockList.length > 0 && (
-          <div class="editor-demo-field">
-            <p
-              class="editor-demo-label"
-              id="editor-demo-blocks-label"
-            >
-              {blocksLabel}
-            </p>
-            <ul
-              class="editor-demo-blocks"
-              aria-labelledby="editor-demo-blocks-label"
-            >
-              {blockList.map((block, index) => (
-                <Row block={block} id={blockId(index)} />
-              ))}
-            </ul>
-          </div>
-        )}
-
-        {addLabel && (
-          /* The button and its list are one box, so the list can be placed
-             against the button rather than against the pane. */
-          <div class="editor-demo-add-menu" data-editor-demo-add>
-            <button
-              aria-controls="editor-demo-add-list"
-              aria-expanded="false"
-              aria-haspopup="menu"
-              class="editor-demo-add"
-              type="button"
-            >
-              <Icon
-                name="plus"
-                size="none"
-                aria-hidden="true"
-              />
-              {addLabel}
-            </button>
-
-            {/* A menu rather than a listbox: picking one does something,
-                it does not set a value. */}
-            <ul
-              aria-label={addLabel}
-              class="editor-demo-add-list"
-              hidden
-              id="editor-demo-add-list"
-              role="menu"
-            >
-              {addList.map((option) => (
-                <li role="none">
-                  <button class="editor-demo-add-option" role="menuitem" type="button">
-                    <span class="editor-demo-add-icon">
-                      <Icon name={option.iconName || "squares-2x2"} size="none" aria-hidden="true" />
+                    <span
+                      class="editor-demo-select-value"
+                      id="editor-demo-color-value"
+                    >
+                      {colorList[0]?.label}
                     </span>
-                    <span class="editor-demo-add-text">
-                      <span class="editor-demo-add-name">{option.title}</span>
-                      {option.description && (
-                        <span class="editor-demo-add-line">{option.description}</span>
-                      )}
-                    </span>
+                    <Icon
+                      name="chevron-down"
+                      size="none"
+                      aria-hidden="true"
+                    />
                   </button>
-                </li>
-              ))}
-            </ul>
-          </div>
-        )}
-          </div>
-        )}
-        </div>
+                  <ul
+                    aria-labelledby="editor-demo-color-label"
+                    class="editor-demo-select-list"
+                    hidden
+                    id="editor-demo-color-list"
+                    role="listbox"
+                    tabindex="-1"
+                  >
+                    {colorList.map((option, index) => (
+                      <li
+                        aria-selected={index === 0 ? "true" : "false"}
+                        class="editor-demo-select-option"
+                        data-color={option.color ? paint(option.color) : undefined}
+                        data-value={option.label}
+                        id={`editor-demo-color-option-${index}`}
+                        role="option"
+                      >
+                        {option.label}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              </div>
+            )}
 
-        {/* A panel per block, not one panel that changes its fields: the
+            {(blockList.length > 0 || addLabel) && (
+              <div class="editor-demo-blocks-group">
+                {blockList.length > 0 && (
+                  <div class="editor-demo-field">
+                    <p
+                      class="editor-demo-label"
+                      id="editor-demo-blocks-label"
+                    >
+                      {blocksLabel}
+                    </p>
+                    <ul
+                      class="editor-demo-blocks"
+                      aria-labelledby="editor-demo-blocks-label"
+                    >
+                      {blockList.map((block, index) => (
+                        <Row
+                          block={block}
+                          id={blockId(index)}
+                        />
+                      ))}
+                    </ul>
+                  </div>
+                )}
+
+                {addLabel && (
+                  /* The button and its list are one box, so the list can be placed
+             against the button rather than against the pane. */
+                  <div
+                    class="editor-demo-add-menu"
+                    data-editor-demo-add
+                  >
+                    <button
+                      aria-controls="editor-demo-add-list"
+                      aria-expanded="false"
+                      aria-haspopup="menu"
+                      class="editor-demo-add"
+                      type="button"
+                    >
+                      <Icon
+                        name="plus"
+                        size="none"
+                        aria-hidden="true"
+                      />
+                      {addLabel}
+                    </button>
+
+                    {/* A menu rather than a listbox: picking one does something,
+                it does not set a value. */}
+                    <ul
+                      aria-label={addLabel}
+                      class="editor-demo-add-list"
+                      hidden
+                      id="editor-demo-add-list"
+                      role="menu"
+                    >
+                      {addList.map((option) => (
+                        <li role="none">
+                          <button
+                            class="editor-demo-add-option"
+                            role="menuitem"
+                            type="button"
+                          >
+                            <span class="editor-demo-add-icon">
+                              <Icon
+                                name={option.iconName || "squares-2x2"}
+                                size="none"
+                                aria-hidden="true"
+                              />
+                            </span>
+                            <span class="editor-demo-add-text">
+                              <span class="editor-demo-add-name">{option.title}</span>
+                              {option.description && (
+                                <span class="editor-demo-add-line">{option.description}</span>
+                              )}
+                            </span>
+                          </button>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                )}
+              </div>
+            )}
+          </div>
+
+          {/* A panel per block, not one panel that changes its fields: the
             Image block's is a different thing from the Text Block's, and
             swapping contents in place meant the pane sliding in still showed
             the last block's for a frame.
@@ -476,16 +498,15 @@ const addList = ((Array.isArray(addOptions) ? addOptions : []) as (Block & {
             `inert` while off-screen, so nothing in a hidden pane is tabbable
             or readable: a pane that has merely been translated away is still
             in the tab order and still in the accessibility tree. */}
-        {blockList.map((block, index) => (
-          <Pane
-            backLabel={backLabel}
-            block={block}
-            id={blockId(index)}
-            values={blockValues[index]}
-          />
-        ))}
-       </div>
-
+          {blockList.map((block, index) => (
+            <Pane
+              backLabel={backLabel}
+              block={block}
+              id={blockId(index)}
+              values={blockValues[index]}
+            />
+          ))}
+        </div>
       </div>
 
       {/* Painted by the dropdown. It starts on the first option's colour, so
@@ -503,8 +524,16 @@ const addList = ((Array.isArray(addOptions) ? addOptions : []) as (Block & {
           role="dialog"
         >
           <div class="editor-demo-popup-head">
-            <span class="editor-demo-grip-dots" aria-hidden="true">
-              <i></i><i></i><i></i><i></i><i></i><i></i>
+            <span
+              class="editor-demo-grip-dots"
+              aria-hidden="true"
+            >
+              <i></i>
+              <i></i>
+              <i></i>
+              <i></i>
+              <i></i>
+              <i></i>
             </span>
             <p
               class="editor-demo-panel-title editor-demo-popup-title"
@@ -515,7 +544,11 @@ const addList = ((Array.isArray(addOptions) ? addOptions : []) as (Block & {
               class="editor-demo-popup-close"
               type="button"
             >
-              <Icon name="x-mark" size="none" aria-hidden="true" />
+              <Icon
+                name="x-mark"
+                size="none"
+                aria-hidden="true"
+              />
             </button>
           </div>
           {/* A copy per block, not the sidebar's moved across. Both are real
@@ -541,7 +574,11 @@ const addList = ((Array.isArray(addOptions) ? addOptions : []) as (Block & {
             it, which is why the two are siblings rather than nested. */}
         <div class="editor-demo-page">
           {blockList.map((block, index) => (
-            <Preview block={block} id={blockId(index)} values={blockValues[index]} />
+            <Preview
+              block={block}
+              id={blockId(index)}
+              values={blockValues[index]}
+            />
           ))}
         </div>
       </div>
@@ -554,69 +591,120 @@ const addList = ((Array.isArray(addOptions) ? addOptions : []) as (Block & {
           its horizontal overflow, to clip the panes sliding through it, which
           also clipped anything trying to fly out of it sideways. Out here the
           submenu can open over the page, which is where the editor puts it. */}
-       <div
-         aria-label={menuLabels.duplicate}
-         class="editor-demo-menu"
-         hidden
-         role="menu"
-       >
-         <button
-           aria-expanded="false"
-           class="editor-demo-menu-item"
-           data-menu="add"
-           role="menuitem"
-           type="button"
-         >
-           <Icon name="plus" size="none" aria-hidden="true" />
-           <span class="editor-demo-menu-label">{addLabel}</span>
-           {/* Turns to point down when it is open, the way the colour
+      <div
+        aria-label={menuLabels.duplicate}
+        class="editor-demo-menu"
+        hidden
+        role="menu"
+      >
+        <button
+          aria-expanded="false"
+          class="editor-demo-menu-item"
+          data-menu="add"
+          role="menuitem"
+          type="button"
+        >
+          <Icon
+            name="plus"
+            size="none"
+            aria-hidden="true"
+          />
+          <span class="editor-demo-menu-label">{addLabel}</span>
+          {/* Turns to point down when it is open, the way the colour
                dropdown's does. */}
-           <span class="editor-demo-menu-more">
-             <Icon name="chevron-right" size="none" aria-hidden="true" />
-           </span>
-         </button>
+          <span class="editor-demo-menu-more">
+            <Icon
+              name="chevron-right"
+              size="none"
+              aria-hidden="true"
+            />
+          </span>
+        </button>
 
-         {/* Opened beneath rather than out to the side. The app has room to
+        {/* Opened beneath rather than out to the side. The app has room to
              fly a submenu out next to the menu; a 340 sidebar does not, and a
              panel hanging off its edge would be clipped by the slide's own
              overflow. */}
-         <div class="editor-demo-menu-sub" hidden>
-           {addList.map((option, index) => (
-             <button
-               class="editor-demo-menu-item editor-demo-menu-child"
-               data-menu="add-one"
-               data-which={String(index)}
-               role="menuitem"
-               type="button"
-             >
-               <Icon name={option.iconName || "squares-2x2"} size="none" aria-hidden="true" />
-               <span class="editor-demo-menu-label">{`Add ${option.title}`}</span>
-             </button>
-           ))}
-         </div>
+        <div
+          class="editor-demo-menu-sub"
+          hidden
+        >
+          {addList.map((option, index) => (
+            <button
+              class="editor-demo-menu-item editor-demo-menu-child"
+              data-menu="add-one"
+              data-which={String(index)}
+              role="menuitem"
+              type="button"
+            >
+              <Icon
+                name={option.iconName || "squares-2x2"}
+                size="none"
+                aria-hidden="true"
+              />
+              <span class="editor-demo-menu-label">{`Add ${option.title}`}</span>
+            </button>
+          ))}
+        </div>
 
-         <button class="editor-demo-menu-item" data-menu="duplicate" role="menuitem" type="button">
-           <Icon name="copy" size="none" aria-hidden="true" />
-           <span class="editor-demo-menu-label">{menuLabels.duplicate}</span>
-         </button>
+        <button
+          class="editor-demo-menu-item"
+          data-menu="duplicate"
+          role="menuitem"
+          type="button"
+        >
+          <Icon
+            name="copy"
+            size="none"
+            aria-hidden="true"
+          />
+          <span class="editor-demo-menu-label">{menuLabels.duplicate}</span>
+        </button>
 
-         <hr class="editor-demo-menu-rule" />
+        <hr class="editor-demo-menu-rule" />
 
-         <button class="editor-demo-menu-item" data-menu="up" role="menuitem" type="button">
-           <Icon name="arrow-up" size="none" aria-hidden="true" />
-           <span class="editor-demo-menu-label">{menuLabels.moveUp}</span>
-         </button>
-         <button class="editor-demo-menu-item" data-menu="down" role="menuitem" type="button">
-           <Icon name="arrow-down" size="none" aria-hidden="true" />
-           <span class="editor-demo-menu-label">{menuLabels.moveDown}</span>
-         </button>
+        <button
+          class="editor-demo-menu-item"
+          data-menu="up"
+          role="menuitem"
+          type="button"
+        >
+          <Icon
+            name="arrow-up"
+            size="none"
+            aria-hidden="true"
+          />
+          <span class="editor-demo-menu-label">{menuLabels.moveUp}</span>
+        </button>
+        <button
+          class="editor-demo-menu-item"
+          data-menu="down"
+          role="menuitem"
+          type="button"
+        >
+          <Icon
+            name="arrow-down"
+            size="none"
+            aria-hidden="true"
+          />
+          <span class="editor-demo-menu-label">{menuLabels.moveDown}</span>
+        </button>
 
-         <hr class="editor-demo-menu-rule" />
+        <hr class="editor-demo-menu-rule" />
 
-         <button class="editor-demo-menu-item" data-menu="remove" role="menuitem" type="button">
-           <Icon name="trash" size="none" aria-hidden="true" />
-           <span class="editor-demo-menu-label">{menuLabels.remove}</span>
-         </button>
+        <button
+          class="editor-demo-menu-item"
+          data-menu="remove"
+          role="menuitem"
+          type="button"
+        >
+          <Icon
+            name="trash"
+            size="none"
+            aria-hidden="true"
+          />
+          <span class="editor-demo-menu-label">{menuLabels.remove}</span>
+        </button>
       </div>
 
       {/* What the add menu clones.
@@ -629,10 +717,28 @@ const addList = ((Array.isArray(addOptions) ? addOptions : []) as (Block & {
           the way in. */}
       {addList.map((option, index) => (
         <template data-add-template={String(index)}>
-          <Row block={option} id="__ID__" />
-          <Pane backLabel={backLabel} block={option} id="__ID__" values={option.values ?? {}} />
-          <Fields block={option} hidden id="__ID__" scope="popup" values={option.values ?? {}} />
-          <Preview block={option} id="__ID__" values={option.values ?? {}} />
+          <Row
+            block={option}
+            id="__ID__"
+          />
+          <Pane
+            backLabel={backLabel}
+            block={option}
+            id="__ID__"
+            values={option.values ?? {}}
+          />
+          <Fields
+            block={option}
+            hidden
+            id="__ID__"
+            scope="popup"
+            values={option.values ?? {}}
+          />
+          <Preview
+            block={option}
+            id="__ID__"
+            values={option.values ?? {}}
+          />
         </template>
       ))}
     </div>
@@ -656,40 +762,39 @@ const addList = ((Array.isArray(addOptions) ? addOptions : []) as (Block & {
 
 <style is:global>
   @layer page-sections {
-
-  /* The stack the editor itself uses. */
-  .editor-demo {
-    /* 15.5, which is what the app sets. Stated as a variable and set on each
+    /* The stack the editor itself uses. */
+    .editor-demo {
+      /* 15.5, which is what the app sets. Stated as a variable and set on each
        text element rather than inherited: base rules for p, li and the like
        set their own 1rem, so inheritance alone left the rows at 16 and the
        panel title in the site's warm Earth. */
-    --editor-demo-size: 0.96875rem;
-    /* The app's own rule: 2px of #CFCFCF, which is heavier and cooler than
+      --editor-demo-size: 0.96875rem;
+      /* The app's own rule: 2px of #CFCFCF, which is heavier and cooler than
        the site's 1px border token. Every box inside the window uses it. */
-    --editor-demo-line-width: 2px;
-    --editor-demo-line-color: #cfcfcf;
-    /* An open dropdown swaps the light rule for the dark one, which is what
+      --editor-demo-line-width: 2px;
+      --editor-demo-line-color: #cfcfcf;
+      /* An open dropdown swaps the light rule for the dark one, which is what
        lifts it off the panel behind: sampled at #393939 on both the trigger
        and the list, 2px each, with a 2px divider of the same between them. */
-    --editor-demo-line-strong: #393939;
-    /* The one already chosen, which the app fades rather than marks. */
-    --editor-demo-ink-faded: #9c9c9c;
-    /* The navy the app puts on its actions, sampled at #00284E. Pacific 800
+      --editor-demo-line-strong: #393939;
+      /* The one already chosen, which the app fades rather than marks. */
+      --editor-demo-ink-faded: #9c9c9c;
+      /* The navy the app puts on its actions, sampled at #00284E. Pacific 800
        is #011E56 and reads a touch more violet. */
-    --editor-demo-accent: #00284e;
-    /* What that navy fades to behind a hovered action. */
-    --editor-demo-accent-bed: #e5e9ed;
-    /* The editor's two outlines, sampled off a capture of it. The region you
+      --editor-demo-accent: #00284e;
+      /* What that navy fades to behind a hovered action. */
+      --editor-demo-accent-bed: #e5e9ed;
+      /* The editor's two outlines, sampled off a capture of it. The region you
        are over is yellow, the element you can actually change is green.
        Everything but the peak pixel of each line is lighter than this: the
        capture was resized, so a 1px rule came through blended with the white
        behind it. */
-    --editor-demo-edit-region: #f3df68;
-    --editor-demo-edit-element: #3d9f17;
-    --editor-demo-font:
-      -apple-system, blinkmacsystemfont, "Segoe UI", "Noto Sans", arial, helvetica, sans-serif,
-      "Apple Color Emoji", "Segoe UI Emoji";
-  }
+      --editor-demo-edit-region: #f3df68;
+      --editor-demo-edit-element: #3d9f17;
+      --editor-demo-font:
+        -apple-system, blinkmacsystemfont, "Segoe UI", "Noto Sans", arial, helvetica, sans-serif,
+        "Apple Color Emoji", "Segoe UI Emoji";
+    }
 
     /* The content column by default, so it lines up with every other section
        on the page rather than carrying a number out of a screenshot.

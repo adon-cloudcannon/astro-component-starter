@@ -11,9 +11,11 @@ pageSections:
         heading: Build freely. Edit easily.
         headingLevel: h1
         headingSize: 2xl
-      subtext: Welcome to the Git-based CMS that doesn't fight your workflow. Your
-        site lives in Git, your team edits visually, and everything stays in
-        sync.
+      subtext:
+        subtext: Welcome to the Git-based CMS that doesn't fight your workflow. Your
+          site lives in Git, your team edits visually, and everything stays in
+          sync.
+        subtextSize: xl
       image:
         imageSource: /src/assets/images/marketing/hero-index.png
         imageAlt: A person reaching up to edit content blocks, with their dog
@@ -46,7 +48,6 @@ pageSections:
         - text: No credit card · 14-day free trial · No lock-in
           iconName: check
           iconColor: default
-      subtextSize: xl
     style:
       pattern: grid
       fade: none
@@ -102,13 +103,16 @@ pageSections:
   - _component: page-sections/conversion/cta-center
     content:
       sectionLabel: ''
-      eyebrow: ''
-      heading: Your content team edits. You stop getting pinged.
-      headingLevel: h2
-      subtext: CloudCannon keeps your website’s code, content and config in Git and
-        gives content teams a visual interface to edit it.
-      subtextSize: lg
-      subtextWidth: md
+      heading:
+        eyebrow: ''
+        heading: Ready to get started?
+        headingLevel: h2
+        headingSize: lg
+      subtext:
+        subtext: CloudCannon keeps your website’s code, content and config in Git and
+          gives content teams a visual interface to edit it.
+        subtextSize: lg
+        subtextWidth: md
       alignmentHorizontal: center
       buttonSections:
         - _component: building-blocks/core-elements/button
@@ -125,7 +129,6 @@ pageSections:
       imageWidth: intrinsic
       imageScratch: ''
       imageAlt: ''
-      headingSize: lg
     style:
       backgroundColor: light-sand
       pattern: none
@@ -262,13 +265,15 @@ pageSections:
   - _component: page-sections/explainers/feature-deck
     content:
       sectionLabel: ''
-      eyebrow: ''
-      heading: ''
-      headingLevel: h2
-      headingSize: lg
-      subtext: ''
-      subtextSize: lg
-      subtextWidth: sm
+      heading:
+        eyebrow: ''
+        heading: ''
+        headingLevel: h2
+        headingSize: lg
+      subtext:
+        subtext: ''
+        subtextSize: lg
+        subtextWidth: sm
       cards:
         - _component: building-blocks/wrappers/scroll-deck/scroll-deck-card
           label: The stack AI already knows
@@ -597,10 +602,10 @@ pageSections:
                   size: md
               direction: row
               alignmentHorizontal: center
-      stickyOffset: md
       cardColorScheme: light
       showRail: true
     style:
+      stickyOffset: md
       backgroundColor: dark
       pattern: grid
       fade: bottom
@@ -642,14 +647,16 @@ pageSections:
   - _component: page-sections/proof/story-carousel
     content:
       sectionLabel: ''
-      eyebrow: ''
-      heading: Grow your sites, not your headcount.
-      headingLevel: h2
-      headingSize: lg
-      subtext: From fast-moving startups to multi-site agencies, teams ship more with
-        CloudCannon.
-      subtextSize: lg
-      subtextWidth: md
+      heading:
+        eyebrow: ''
+        heading: Grow your sites, not your headcount.
+        headingLevel: h2
+        headingSize: lg
+      subtext:
+        subtext: From fast-moving startups to multi-site agencies, teams ship more with
+          CloudCannon.
+        subtextSize: lg
+        subtextWidth: md
       stories:
         - accentColor: golden
           logoSource: /src/assets/images/marketing/logos/hnry.svg
@@ -712,22 +719,24 @@ pageSections:
   - _component: page-sections/proof/team-grid-section
     content:
       sectionLabel: ''
-      eyebrow: Who we are
-      heading: Made for the work, not for the upsell
-      headingSize: lg
-      headingLevel: h2
-      subtext: We’re a tight-knit team based in Dunedin, New Zealand, working with web
-        teams all over the world. We started CloudCannon because every CMS we
-        tried gave editors a better experience by giving developers a worse one.
-        So we built a CMS that works for both.
-      subtextSize: lg
-      subtextWidth: sm
+      heading:
+        eyebrow: Who we are
+        heading: ''
+        headingLevel: h2
+        headingSize: lg
+      subtext:
+        subtext: We’re a tight-knit team based in Dunedin, New Zealand, working with web
+          teams all over the world. We started CloudCannon because every CMS we
+          tried gave editors a better experience by giving developers a worse
+          one. So we built a CMS that works for both.
+        subtextSize: lg
+        subtextWidth: sm
       linkText: Meet the team
       link: ''
       members:
         - _component: building-blocks/wrappers/team-member
           name: George Phillips
-          role: Co-founder &amp; CTO
+          role: Co-founder & CTO
           bio: ''
           imageSource: /src/assets/images/marketing/george-profile-1.png
           imageAlt: George Phillips, Co-founder & CTO at CloudCannon
@@ -737,7 +746,7 @@ pageSections:
           propAlt: ''
         - _component: building-blocks/wrappers/team-member
           name: Mike Neumegen
-          role: Co-founder &amp; CEO
+          role: Co-founder & CEO
           bio: ''
           imageSource: /src/assets/images/marketing/screenshot-2026-06-09-at-7-38-38-pm-background-r-3806-69478.png
           imageAlt: Mike Neumegen, Co-founder & CEO at CloudCannon
@@ -797,13 +806,16 @@ pageSections:
   - _component: page-sections/conversion/cta-split
     content:
       sectionLabel: ''
-      heading: Take a peek under the hood
-      headingLevel: h2
-      subtext: Git underneath, a visual editor on top, with code and content running
-        on one engine. Start free in minutes, or book a demo and we’ll walk you
-        through the real thing.
-      subtextSize: lg
-      subtextWidth: ''
+      heading:
+        heading: Ready to get started?
+        headingLevel: h2
+        headingSize: lg
+      subtext:
+        subtext: Git underneath, a visual editor on top, with code and content running
+          on one engine. Start free in minutes, or book a demo and we’ll walk
+          you through the real thing.
+        subtextSize: lg
+        subtextWidth: ''
       imageSource: /src/assets/images/marketing/cloudcannon-truck-closed-1.png
       imageAlt: ''
       buttonSections:
@@ -828,7 +840,6 @@ pageSections:
           variant: text
           size: md
       reverse: false
-      headingSize: lg
       imageRevealLabel: Open and close the truck's hood
       imageReveal: /src/assets/images/marketing/cloudcannon-truck-open-1.png
       imageOverflow: 333

@@ -32,7 +32,10 @@ import StoryPanel from "./StoryPanel.astro";
 /* `content` and `style` are the editor's tabs, flattened straight back into
    the names below. `at()` writes the frontmatter path a binding needs. */
 const { props, at } = nestedProps(Astro.props, {
-  nest: { heading: ["eyebrow", "heading", "headingLevel", "headingSize"] },
+  nest: {
+    heading: ["eyebrow", "heading", "headingLevel", "headingSize"],
+    subtext: ["subtext", "subtextSize", "subtextWidth"],
+  },
 });
 
 const {
@@ -100,7 +103,7 @@ const hazePool = { x: reverse ? 0.68 : 0.2, y: "48%", rx: "45%", ry: "60%" };
 
 const cards = (Array.isArray(photos) ? photos : []).filter((photo) => photo?.source);
 const columns = (Array.isArray(panels) ? panels : []).filter(
-  (panel) => panel?.eyebrow || panel?.heading || panel?.body,
+  (panel) => panel?.eyebrow || panel?.heading || panel?.body
 );
 const interactive = cards.length > 1;
 
@@ -136,8 +139,18 @@ const Stack = interactive ? "button" : "div";
     class:list={["hero-photo-stack-layout", columns.length === 0 && "leads-copy"]}
   >
     <Fragment slot="first">
-      {eyebrow && <SimpleText class="eyebrow" text={eyebrow} data-prop={at("eyebrow")} />}
-      <Heading level={headingLevel} size={headingSize} data-prop={at("heading")}>
+      {eyebrow && (
+        <SimpleText
+          class="eyebrow"
+          text={eyebrow}
+          data-prop={at("eyebrow")}
+        />
+      )}
+      <Heading
+        level={headingLevel}
+        size={headingSize}
+        data-prop={at("heading")}
+      >
         {heading}
       </Heading>
       <Text
@@ -178,7 +191,11 @@ const Stack = interactive ? "button" : "div";
             class="photo-stack-embellishment"
             style={`--photo-stack-embellishment-width: ${Number(embellishmentWidth) || 55}%`}
           >
-            <Image source={embellishmentSource} alt="" decorative={true} />
+            <Image
+              source={embellishmentSource}
+              alt=""
+              decorative={true}
+            />
           </span>
         )}
       </div>
@@ -193,7 +210,11 @@ const Stack = interactive ? "button" : "div";
       data-side={reverse ? "end" : "start"}
       style={`--photo-stack-embellishment-width: ${Number(embellishmentWidth) || 55}%`}
     >
-      <Image source={embellishmentSource} alt="" decorative={true} />
+      <Image
+        source={embellishmentSource}
+        alt=""
+        decorative={true}
+      />
     </span>
   )}
 
@@ -545,7 +566,6 @@ const Stack = interactive ? "button" : "div";
       inset-inline-end: auto;
       inset-inline-start: -18%;
     }
-
 
     .photo-stack-embellishment img {
       inline-size: 100%;

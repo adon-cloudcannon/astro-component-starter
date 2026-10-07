@@ -7,7 +7,8 @@ pageSections:
     content:
       heading:
         heading: Pricing
-      subtext: Plans and pricing for CloudCannon.
+      subtext:
+        subtext: Plans and pricing for CloudCannon.
       showBreadcrumbs: true
       alignmentHorizontal: start
     style:

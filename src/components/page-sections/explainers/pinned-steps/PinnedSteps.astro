@@ -40,7 +40,10 @@ type Step = Record<string, unknown> & {
 /* `content` and `style` are the editor's tabs, flattened straight back into
    the names below. `at()` writes the frontmatter path a binding needs. */
 const { props, at } = nestedProps(Astro.props, {
-  nest: { heading: ["eyebrow", "heading", "headingLevel", "headingSize"] },
+  nest: {
+    heading: ["eyebrow", "heading", "headingLevel", "headingSize"],
+    subtext: ["subtext", "subtextSize", "subtextWidth"],
+  },
 });
 
 const {
@@ -171,12 +174,15 @@ const mirror = rootMirror({
 ---
 
 <div
-  class:list={["pinned-steps", `media-${mediaWidth}`, className]}
-  {/* One `style`, not two. A second style attribute on the same element wins
+  class:list={[
+    "pinned-steps",
+    `media-${mediaWidth}`,
+    className,
+  ]} /* One `style`, not two. A second style attribute on the same element wins
       outright and drops the first: adding the accent this way quietly took the
       step count with it, and the runway was then built for a single step — all
       three advanced inside 1800px instead of 5220, which reads as the whole
-      thing scrolling past far too fast. */}
+      thing scrolling past far too fast. */
   style={{
     "--pinned-steps-accent": `var(--${progressColor})`,
     ...(progressTrackColor
@@ -193,7 +199,11 @@ const mirror = rootMirror({
 >
   {/* Carries this component's own root attributes for the Visual Editor,
       which never rewrites a region root. See utils/rootMirror.mjs. */}
-  <span class="root-mirror" hidden {...mirror} />
+  <span
+    class="root-mirror"
+    hidden
+    {...mirror}
+  />
 
   <CustomSection
     class="pinned-steps-stage"
@@ -211,7 +221,13 @@ const mirror = rootMirror({
     {/* The band slot, so the panel is drawn against the section's full width
         rather than inside its 1040 content column. A comment inside a
         `{cond && (` is a parse error, not a comment, so it lives here. */}
-    {copyColor && <div class="pinned-steps-copy-panel" slot="band" aria-hidden="true"></div>}
+    {copyColor && (
+      <div
+        class="pinned-steps-copy-panel"
+        slot="band"
+        aria-hidden="true"
+      ></div>
+    )}
 
     {hasHeader && (
       <div class="pinned-steps-header flow">
@@ -239,9 +255,7 @@ const mirror = rootMirror({
             alignmentHorizontal={alignmentHorizontal}
             class="subtext"
             size={subtextSize}
-            style={subtextCap
-              ? `max-inline-size: ${subtextCap}; margin-inline: auto`
-              : undefined}
+            style={subtextCap ? `max-inline-size: ${subtextCap}; margin-inline: auto` : undefined}
             text={subtext}
           />
         )}

@@ -16,7 +16,10 @@ import Split from "@wrappers/split/Split.astro";
 /* `content` and `style` are the editor's tabs, flattened straight back into
    the names below. `at()` writes the frontmatter path a binding needs. */
 const { props, at } = nestedProps(Astro.props, {
-  nest: { heading: ["eyebrow", "heading", "headingLevel", "headingSize"] },
+  nest: {
+    heading: ["eyebrow", "heading", "headingLevel", "headingSize"],
+    subtext: ["subtext", "subtextSize", "subtextWidth"],
+  },
 });
 
 const {
@@ -134,12 +137,13 @@ const mirror = rootMirror({ class: { "has-pile": shapes?.length > 0 } });
 >
   <Split
     class="feature-split-layout"
-    distributionMode={imageBleed ? "half" : "flexible-fixed"}
-    {/* 708 for the site cards, which is the width the design draws that art
+    distributionMode={
+      imageBleed ? "half" : "flexible-fixed"
+    } /* 708 for the site cards, which is the width the design draws that art
         group at: 492 to 1200 of a 1280 frame, against a copy column that is
         only 300 wide and wraps its heading onto two lines because of it. The
         400 every other split uses would shrink the mockup's own type with
-        it, since the whole stack scales off its container. */}
+        it, since the whole stack scales off its container. */
     fixedWidth={siteCards?.cards?.length ? "708" : String(Number(mediaWidth) || 400)}
     data-bleed={bleedSide}
     minSplitWidth={minSplitWidth}
@@ -163,12 +167,11 @@ const mirror = rootMirror({ class: { "has-pile": shapes?.length > 0 } });
         {heading}
       </Heading>
       <Text
-        class="subtext feature-split-subtext"
-        {/* A measure, not a centred block. The auto margins came from the
+        class="subtext feature-split-subtext" /* A measure, not a centred block. The auto margins came from the
             centred sections and are wrong in a split, where the header runs
             from the column's left edge: they pushed the line in by half the
             slack, so a 342 measure in a 592 column started at 245 and ran to
-            575 — straight under the pile. */}
+            575 — straight under the pile. */
         style={subtextCap ? `max-inline-size: ${subtextCap}` : undefined}
         size={subtextSize}
         data-prop={at("subtext")}
@@ -204,20 +207,20 @@ const mirror = rootMirror({ class: { "has-pile": shapes?.length > 0 } });
         data-children-prop={at("shapes")}
       />
     ) : (
-    <Image
-      slot="second"
-      class="feature-split-image"
-      source={imageSource}
-      alt={imageAlt}
-      rounded={imageRounded}
-      aspectRatio={imageAspectRatio}
-      positionHorizontal={imagePositionHorizontal}
-      positionVertical={imagePositionVertical}
-      sizes={imageBleed ? "(max-width: 800px) 100vw, 60vw" : undefined}
-      widths={imageBleed ? [640, 1280, 1920, 2560] : undefined}
-      data-prop-src={at("imageSource")}
-      data-prop-alt={at("imageAlt")}
-    />
+      <Image
+        slot="second"
+        class="feature-split-image"
+        source={imageSource}
+        alt={imageAlt}
+        rounded={imageRounded}
+        aspectRatio={imageAspectRatio}
+        positionHorizontal={imagePositionHorizontal}
+        positionVertical={imagePositionVertical}
+        sizes={imageBleed ? "(max-width: 800px) 100vw, 60vw" : undefined}
+        widths={imageBleed ? [640, 1280, 1920, 2560] : undefined}
+        data-prop-src={at("imageSource")}
+        data-prop-alt={at("imageAlt")}
+      />
     )}
   </Split>
 </CustomSection>

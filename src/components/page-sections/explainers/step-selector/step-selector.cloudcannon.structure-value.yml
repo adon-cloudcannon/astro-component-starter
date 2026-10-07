@@ -5,11 +5,12 @@ value:
   _component: page-sections/explainers/step-selector
   content:
     heading:
-      eyebrow: ''
-      heading: ''
-    subtext: ''
-    subtextSize: md
-    subtextWidth: ''
+      eyebrow: ""
+      heading: ""
+    subtext:
+      subtext: ""
+      subtextSize: md
+      subtextWidth: ""
     items: []
   style:
     backgroundColor: light-sand

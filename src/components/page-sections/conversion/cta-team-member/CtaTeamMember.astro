@@ -24,7 +24,10 @@ import TeamMember from "@wrappers/team-member/TeamMember.astro";
 /* `content` and `style` are the editor's tabs, flattened straight back into
    the names below. `at()` writes the frontmatter path a binding needs. */
 const { props, at } = nestedProps(Astro.props, {
-  nest: { heading: ["heading", "headingLevel", "headingSize"] },
+  nest: {
+    heading: ["heading", "headingLevel", "headingSize"],
+    subtext: ["subtext", "subtextSize", "subtextWidth"],
+  },
 });
 
 const {
@@ -103,7 +106,8 @@ const mirror = rootMirror({ "data-member-end": reverse ? "" : null });
     />
     <Text
       class="subtext"
-      style={subtextCap ? `max-inline-size: ${subtextCap}` : undefined}      size={subtextSize}
+      style={subtextCap ? `max-inline-size: ${subtextCap}` : undefined}
+      size={subtextSize}
       alignmentHorizontal="start"
       data-prop={at("subtext")}
       text={subtext}

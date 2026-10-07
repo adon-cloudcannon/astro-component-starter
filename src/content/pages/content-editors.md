@@ -8,9 +8,10 @@ pageSections:
       heading:
         heading: Draft. Edit. Publish. No problem.
         headingSize: xl
-      subtext: >-
-        Publish your best content with visual editing, custom components, and a flexible review
-        process for your whole team.
+      subtext:
+        subtext: Publish your best content with visual editing, custom components, and a
+          flexible review process for your whole team.
+        subtextSize: xl
       image:
         imageSource: /src/assets/images/marketing/hero-content-editors.png
         imageAlt: ''
@@ -28,7 +29,6 @@ pageSections:
         - text: No credit card · 14-day free trial · No lock-in
           iconName: check
           iconColor: default
-      subtextSize: xl
     style:
       pattern: pegboard
       haze: true
@@ -39,9 +39,11 @@ pageSections:
         eyebrow: INTERACTIVE DEMO
         heading: Here’s what you’re working with
         headingSize: lg
-      subtext: Click a heading and change it. See what’s possible with the Visual Editor.
-      subtextSize: lg
-      subtextWidth: md
+      subtext:
+        subtext: Click a heading and change it. See what’s possible with the Visual
+          Editor.
+        subtextSize: lg
+        subtextWidth: md
       alignmentHorizontal: center
     style:
       backgroundColor: light-sand
@@ -51,7 +53,8 @@ pageSections:
       quoteSize: lg
       tone: light
       quotes:
-        - text: When we show clients the Visual Editor during our meetings, **their eyes light up.**
+        - text: When we show clients the Visual Editor during our meetings, **their eyes
+            light up.**
           logoSource: /src/assets/images/marketing/logos/firebrand.svg
           logoAlt: Firebrand
           logoAspect: 239 / 50
@@ -71,7 +74,8 @@ pageSections:
         eyebrow: ''
         heading: No more waiting on tickets
         headingSize: lg
-      subtext: ''
+      subtext:
+        subtext: ''
       alignmentHorizontal: start
       steps:
         - contentSections:
@@ -81,8 +85,8 @@ pageSections:
               size: sm
             - _component: building-blocks/core-elements/text
               text: >-
-                Change a headline, swap an image, or build a whole new page from components your
-                developers already built.
+                Change a headline, swap an image, or build a whole new page from
+                components your developers already built.
               size: lg
           mediaSections: []
         - contentSections:
@@ -92,8 +96,8 @@ pageSections:
               size: sm
             - _component: building-blocks/core-elements/text
               text: >-
-                Every change gets a live preview. Share it, gather feedback, and sort things out
-                while the page is still private.
+                Every change gets a live preview. Share it, gather feedback, and
+                sort things out while the page is still private.
               size: lg
           mediaSections: []
         - contentSections:
@@ -124,9 +128,10 @@ pageSections:
       bordered: true
       quotes:
         - text: >-
-            You can have lots of **concurrent pieces of work**: a solutions page, a new case study
-            layout, new terms and conditions, a legal section, all on different branches with
-            different agents working on them in isolation, without corrupting your main site.
+            You can have lots of **concurrent pieces of work**: a solutions
+            page, a new case study layout, new terms and conditions, a legal
+            section, all on different branches with different agents working on
+            them in isolation, without corrupting your main site.
           logoSource: /src/assets/images/marketing/logos/nomio.svg
           logoAlt: Nomio
           logoAspect: 275 / 63
@@ -146,11 +151,12 @@ pageSections:
       heading:
         heading: Room for everyone to work at once
         headingSize: lg
-      subtext: >-
-        Every piece of work happens on its own branched site, so a new blog post, a landing page
-        redesign, and a navigation update can all run at once without anyone treading on toes.
-      subtextSize: lg
-      subtextWidth: md
+      subtext:
+        subtext: Every piece of work happens on its own branched site, so a new blog
+          post, a landing page redesign, and a navigation update can all run at
+          once without anyone treading on toes.
+        subtextSize: lg
+        subtextWidth: md
     style:
       backgroundColor: light-sand
   - _component: page-sections/explainers/feature-grid
@@ -184,10 +190,11 @@ pageSections:
       heading:
         heading: Take a peek under the hood
         headingSize: lg
-      subtext: >-
-        Git underneath, a visual editor on top, with code and content running on one engine. Start
-        free in minutes, or book a demo and we’ll walk you through the real thing.
-      subtextSize: lg
+      subtext:
+        subtext: Git underneath, a visual editor on top, with code and content running
+          on one engine. Start free in minutes, or book a demo and we’ll walk
+          you through the real thing.
+        subtextSize: lg
       imageRevealLabel: Open and close the truck's hood
       imageReveal: /src/assets/images/marketing/cloudcannon-truck-open-1.png
       imageSource: /src/assets/images/marketing/cloudcannon-truck-closed-1.png

@@ -45,7 +45,10 @@ type StoryProps = {
 /* `content` and `style` are the editor's tabs, flattened straight back into
    the names below. `at()` writes the frontmatter path a binding needs. */
 const { props, at } = nestedProps(Astro.props, {
-  nest: { heading: ["eyebrow", "heading", "headingLevel", "headingSize"] },
+  nest: {
+    heading: ["eyebrow", "heading", "headingLevel", "headingSize"],
+    subtext: ["subtext", "subtextSize", "subtextWidth"],
+  },
 });
 
 const {
@@ -122,7 +125,12 @@ const subtextCap = subtextMeasure(subtextWidth);
   </Heading>
   <Text
     class="subtext"
-    style={subtextCap ? `max-inline-size: ${subtextCap}; margin-inline: auto; justify-self: center` : undefined}    size={subtextSize}
+    style={
+      subtextCap
+        ? `max-inline-size: ${subtextCap}; margin-inline: auto; justify-self: center`
+        : undefined
+    }
+    size={subtextSize}
     alignmentHorizontal="center"
     data-prop={at("subtext")}
     text={subtext}
@@ -131,12 +139,13 @@ const subtextCap = subtextMeasure(subtextWidth);
   {stories?.length > 0 && (
     <Carousel
       class="story-slides"
-      label={sectionLabel || heading || "Customer stories"}
-      {/* The design draws these at a fixed 300 with 20 between, four across a
+      label={
+        sectionLabel || heading || "Customer stories"
+      } /* The design draws these at a fixed 300 with 20 between, four across a
           1040 column and the fourth running off the edge. The carousel spends
           its gap as padding on the slide, so the slide is the card plus the
           gap: 324 for a 300 card. The slide takes the larger of the
-          percentage and the minimum, and 25% of the column is 260. */}
+          percentage and the minimum, and 25% of the column is 260. */
       slideWidthPercent={25}
       minSlideWidth={324}
       gap="lg"

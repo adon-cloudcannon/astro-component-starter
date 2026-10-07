@@ -55,10 +55,15 @@ content.heading.headingSize:
         name: Small
 
 content.subtext:
+  type: object
+  label: Subtext
+  options:
+    subtype: object
+content.subtext.subtext:
   type: markdown
   comment: Supporting line under the heading.
 
-content.subtextSize:
+content.subtext.subtextSize:
   type: select
   comment: How big the supporting line under the heading is.
   options:
@@ -70,7 +75,7 @@ content.subtextSize:
       - id: xl
         name: Large
 
-content.subtextWidth:
+content.subtext.subtextWidth:
   type: select
   label: Subtext width
   comment: How wide the supporting line is allowed to run before it wraps.

@@ -8,9 +8,10 @@ pageSections:
       heading:
         heading: A CMS that uses Git, just like you do
         headingSize: xl
-      subtext: >-
-        Connect CloudCannon to your repo and keep working locally. Editors manage content visually,
-        and everyone's changes sync automatically.
+      subtext:
+        subtext: Connect CloudCannon to your repo and keep working locally. Editors
+          manage content visually, and everyone's changes sync automatically.
+        subtextSize: xl
       image:
         imageSource: /src/assets/images/marketing/hero-developers-page.png
         imageAlt: ''
@@ -24,7 +25,6 @@ pageSections:
           iconName: move-right
           iconPosition: after
           variant: text
-      subtextSize: xl
     style:
       pattern: grid
       haze: false
@@ -70,12 +70,12 @@ pageSections:
         eyebrow: INTERACTIVE DEMO
         heading: Here’s how to set up visual editing in minutes
         headingSize: lg
-      subtext: >-
-        This demo walks you through the process of adding Editable Regions to your code, so your
-        editors can visually change text, structured data, and images. Save your changes to proceed
-        through the demo.
-      subtextSize: lg
-      subtextWidth: md
+      subtext:
+        subtext: This demo walks you through the process of adding Editable Regions to
+          your code, so your editors can visually change text, structured data,
+          and images. Save your changes to proceed through the demo.
+        subtextSize: lg
+        subtextWidth: md
       imageSource: /src/assets/images/marketing/screenshot-2026-08-11-at-17-25-56-1.png
       imageAlt: ''
     style:
@@ -86,7 +86,8 @@ pageSections:
         eyebrow: ''
         heading: Your stack, plus an editing layer
         headingSize: lg
-      subtext: ''
+      subtext:
+        subtext: ''
       alignmentHorizontal: start
       steps:
         - contentSections:
@@ -96,8 +97,8 @@ pageSections:
               size: sm
             - _component: building-blocks/core-elements/text
               text: >-
-                Choose from the most popular static site generators: Astro, Hugo, Eleventy, Next.js,
-                Jekyll, SvelteKit, and more.
+                Choose from the most popular static site generators: Astro,
+                Hugo, Eleventy, Next.js, Jekyll, SvelteKit, and more.
               size: lg
           mediaSections: []
         - number: '2'
@@ -108,8 +109,8 @@ pageSections:
               size: sm
             - _component: building-blocks/core-elements/text
               text: >-
-                Configure exactly what editors can touch, from a single line of text to whole
-                sections of custom built blocks.
+                Configure exactly what editors can touch, from a single line of
+                text to whole sections of custom built blocks.
               size: lg
           mediaSections: []
         - number: '3'
@@ -120,9 +121,10 @@ pageSections:
               size: sm
             - _component: building-blocks/core-elements/text
               text: >-
-                Everything developers push is pulled in by CloudCannon and built automatically.
-                Everything editors change is committed back to the repo. They can branch and merge
-                in the CMS, no command line needed.
+                Everything developers push is pulled in by CloudCannon and built
+                automatically. Everything editors change is committed back to
+                the repo. They can branch and merge in the CMS, no command line
+                needed.
               size: lg
           mediaSections: []
       reverse: true
@@ -154,8 +156,9 @@ pageSections:
           logoMonochrome: true
           logoAlt: Twitch
           text: >-
-            CloudCannon is the ideal CMS for us — editors can update their content easily, and it’s
-            saved back to our Git repo, so we never feel locked in.
+            CloudCannon is the ideal CMS for us — editors can update their
+            content easily, and it’s saved back to our Git repo, so we never
+            feel locked in.
           authorName: Cayvon Morady
           authorDescription: Senior Technical Program Manager,
           company: Twitch
@@ -198,7 +201,8 @@ pageSections:
       heading:
         eyebrow: ''
         heading: ''
-      subtext: ''
+      subtext:
+        subtext: ''
       copyColor: light-sand
       steps:
         - contentSections:
@@ -208,9 +212,9 @@ pageSections:
               size: sm
             - _component: building-blocks/core-elements/text
               text: >-
-                Projects are local-first and Git-based, so the tools already in use just work. Open
-                the repo in any IDE and the agent has full project context: code, content, config,
-                the lot.
+                Projects are local-first and Git-based, so the tools already in
+                use just work. Open the repo in any IDE and the agent has full
+                project context: code, content, config, the lot.
               size: lg
             - _component: building-blocks/core-elements/button
               text: Learn more
@@ -226,9 +230,10 @@ pageSections:
               size: sm
             - _component: building-blocks/core-elements/text
               text: >-
-                Editors shouldn’t need a developer to update a headline or swap an image. They
-                manage content themselves using the components already built, so there are no urgent
-                requests from marketing and no developer hours lost to copy tweaks.
+                Editors shouldn’t need a developer to update a headline or swap
+                an image. They manage content themselves using the components
+                already built, so there are no urgent requests from marketing
+                and no developer hours lost to copy tweaks.
               size: lg
             - _component: building-blocks/core-elements/button
               text: Learn more
@@ -244,9 +249,9 @@ pageSections:
               size: sm
             - _component: building-blocks/core-elements/text
               text: >-
-                Complete control over how the team manages content. Customize inputs with a full
-                range of field types, and fine-tune roles and permissions for a secure, autonomous
-                editing experience.
+                Complete control over how the team manages content. Customize
+                inputs with a full range of field types, and fine-tune roles and
+                permissions for a secure, autonomous editing experience.
               size: lg
             - _component: building-blocks/core-elements/button
               text: Learn more
@@ -266,11 +271,12 @@ pageSections:
       heading:
         heading: Own your content, always
         headingSize: lg
-      subtext: >-
-        Content lives in the repository along with the complete history of every change. If you ever
-        leave CloudCannon, you leave with everything: your content, your code, your commits.
-      subtextSize: lg
-      subtextWidth: xl
+      subtext:
+        subtext: 'Content lives in the repository along with the complete history of
+          every change. If you ever leave CloudCannon, you leave with
+          everything: your content, your code, your commits.'
+        subtextSize: lg
+        subtextWidth: xl
       buttonSections:
         - _component: building-blocks/core-elements/button
           text: Get skills repo
@@ -286,10 +292,11 @@ pageSections:
       heading:
         heading: Open-source ecosystem
         headingSize: lg
-      subtext: >-
-        We won’t upsell tools that don’t need to exist, and we’ll often point to open source
-        instead. These are ours, and they work on any static site.
-      subtextSize: xl
+      subtext:
+        subtext: We won’t upsell tools that don’t need to exist, and we’ll often point
+          to open source instead. These are ours, and they work on any static
+          site.
+        subtextSize: xl
       buttonSections:
         - _component: building-blocks/core-elements/button
           text: Explore open-source tools
@@ -388,10 +395,11 @@ pageSections:
       heading:
         heading: We’re here to help
         headingSize: lg
-      subtext: >-
-        We're a small team with a lot of knowledge, so you'll talk to someone who knows what they're
-        talking about and can give you hands-on help whatever the problem.
-      subtextSize: lg
+      subtext:
+        subtext: We're a small team with a lot of knowledge, so you'll talk to someone
+          who knows what they're talking about and can give you hands-on help
+          whatever the problem.
+        subtextSize: lg
       member:
         _component: building-blocks/wrappers/team-member
         name: Olivia Nicholson

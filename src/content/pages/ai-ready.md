@@ -8,9 +8,10 @@ pageSections:
       heading:
         heading: The CMS your AI tools can actually read
         headingSize: xl
-      subtext: >-
-        Code, content, and config all sit in one repo as plain files, so agents get the full
-        picture.
+      subtext:
+        subtext: Code, content, and config all sit in one repo as plain files, so agents
+          get the full picture.
+        subtextSize: xl
       image:
         imageSource: /src/assets/images/marketing/hero-ai-ready.png
         imageAlt: ''
@@ -28,7 +29,6 @@ pageSections:
         - text: No credit card · 14-day free trial · No lock-in
           iconName: check
           iconColor: default
-      subtextSize: xl
     style:
       pattern: grid
       haze: true
@@ -70,9 +70,10 @@ pageSections:
       heading:
         heading: Ready, set, code
         headingSize: lg
-      subtext: AI agents working on the site have complete context
-      subtextSize: lg
-      subtextWidth: md
+      subtext:
+        subtext: AI agents working on the site have complete context
+        subtextSize: lg
+        subtextWidth: md
     style:
       backgroundColor: dark
       pattern: grid
@@ -82,7 +83,8 @@ pageSections:
       heading:
         eyebrow: ''
         heading: ''
-      subtext: ''
+      subtext:
+        subtext: ''
       alignmentHorizontal: start
       steps:
         - number: ''
@@ -93,10 +95,11 @@ pageSections:
               size: sm
             - _component: building-blocks/core-elements/text
               text: >-
-                Point an agent at a CloudCannon project and it sees templates, content,
-                configuration and styles sitting next to each other in Git. Markdown, frontmatter,
-                YAML, folder structures, and diffs: models have seen it all before, and know how the
-                pieces fit together.
+                Point an agent at a CloudCannon project and it sees templates,
+                content, configuration and styles sitting next to each other in
+                Git. Markdown, frontmatter, YAML, folder structures, and diffs:
+                models have seen it all before, and know how the pieces fit
+                together.
               size: lg
           mediaSections:
             - _component: building-blocks/core-elements/image
@@ -111,10 +114,12 @@ pageSections:
               size: sm
             - _component: building-blocks/core-elements/text
               text: >-
-                With an API-based CMS, reading your content library means authentication,
-                pagination, and a separate call for every cross-reference. Relationships between
-                content types have to be inferred from responses. That's tokens and time spent
-                reconstructing a picture that, in a CloudCannon repo, is already sitting there.
+                With an API-based CMS, reading your content library means
+                authentication, pagination, and a separate call for every
+                cross-reference. Relationships between content types have to be
+                inferred from responses. That's tokens and time spent
+                reconstructing a picture that, in a CloudCannon repo, is already
+                sitting there.
               size: lg
           mediaSections:
             - _component: building-blocks/core-elements/image
@@ -135,9 +140,10 @@ pageSections:
       cardWidth: medium
       quotes:
         - text: >-
-            You can have lots of concurrent pieces of work: a solutions page, a new case study
-            layout, new terms and conditions, a legal section, all on different branches with
-            different agents working on them in isolation, **without corrupting your main site.**
+            You can have lots of concurrent pieces of work: a solutions page, a
+            new case study layout, new terms and conditions, a legal section,
+            all on different branches with different agents working on them in
+            isolation, **without corrupting your main site.**
           authorName: Ed Stennett
           authorDescription: Head of Growth,
           company: Nomio
@@ -153,11 +159,12 @@ pageSections:
       heading:
         heading: We've already taught agents how to use CloudCannon
         headingSize: lg
-      subtext: >-
-        Our agent skills are open source. Point your agent at them and it can help to migrate an
-        existing site onto CloudCannon, write the config, and set up visual editing, without you
-        needing to explain how any of it works first.
-      subtextSize: lg
+      subtext:
+        subtext: Our agent skills are open source. Point your agent at them and it can
+          help to migrate an existing site onto CloudCannon, write the config,
+          and set up visual editing, without you needing to explain how any of
+          it works first.
+        subtextSize: lg
       buttonSections:
         - _component: building-blocks/core-elements/button
           text: Get skills repo
@@ -180,8 +187,10 @@ pageSections:
       heading:
         heading: Give AI the full picture
         headingSize: lg
-      subtext: With CloudCannon the code and content stay in Git, and the repo stays yours.
-      subtextSize: lg
+      subtext:
+        subtext: With CloudCannon the code and content stay in Git, and the repo stays
+          yours.
+        subtextSize: lg
       imageReveal: ''
       imageSource: /src/assets/images/marketing/camera-01-1.png
       contentCard: true

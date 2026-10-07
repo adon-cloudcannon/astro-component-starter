@@ -10,9 +10,10 @@ value:
       heading: ""
       headingLevel: h2
       headingSize: lg
-    subtext: ""
-    subtextSize: lg
-    subtextWidth: ""
+    subtext:
+      subtext: ""
+      subtextSize: lg
+      subtextWidth: ""
     member:
       _component: building-blocks/wrappers/team-member
       name: ""

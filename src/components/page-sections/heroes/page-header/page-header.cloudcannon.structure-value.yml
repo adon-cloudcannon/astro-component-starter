@@ -11,9 +11,10 @@ value:
       heading: About us
       headingLevel: h1
       headingSize: lg
-    subtext: A short introduction to the page, one or two lines long.
-    subtextSize: md
-    subtextWidth: ""
+    subtext:
+      subtext: A short introduction to the page, one or two lines long.
+      subtextSize: md
+      subtextWidth: ""
     showBreadcrumbs: true
     alignmentHorizontal: start
   style:

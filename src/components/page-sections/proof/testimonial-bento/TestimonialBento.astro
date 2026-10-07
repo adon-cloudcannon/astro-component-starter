@@ -13,7 +13,10 @@ type TestimonialProps = Record<string, unknown>;
 /* `content` and `style` are the editor's tabs, flattened straight back into
    the names below. `at()` writes the frontmatter path a binding needs. */
 const { props, at } = nestedProps(Astro.props, {
-  nest: { heading: ["eyebrow", "heading", "headingLevel", "headingSize"] },
+  nest: {
+    heading: ["eyebrow", "heading", "headingLevel", "headingSize"],
+    subtext: ["subtext", "subtextSize", "subtextWidth"],
+  },
 });
 
 const {
@@ -103,7 +106,13 @@ const columnCount = ["2", "4"].includes(String(columns)) ? String(columns) : "3"
     class="section-subtext testimonial-bento-subtext"
     alignmentHorizontal="center"
     data-prop={at("subtext")}
-    style={subtextCap ? `max-inline-size: ${subtextCap}; margin-inline: auto; justify-self: center` : undefined}    size={subtextSize}    text={subtext}
+    style={
+      subtextCap
+        ? `max-inline-size: ${subtextCap}; margin-inline: auto; justify-self: center`
+        : undefined
+    }
+    size={subtextSize}
+    text={subtext}
   />
 
   {testimonials?.length > 0 && (

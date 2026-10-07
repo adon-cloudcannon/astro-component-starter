@@ -8,9 +8,10 @@ pageSections:
       heading:
         heading: Visual editing that commits to your repo
         headingSize: xl
-      subtext: >-
-        Code, content, and config all sit in one repo as plain files, so agents get the full
-        picture.
+      subtext:
+        subtext: Code, content, and config all sit in one repo as plain files, so agents
+          get the full picture.
+        subtextSize: xl
       image:
         imageSource: /src/assets/images/marketing/hero-visual-editing.png
         imageAlt: ''
@@ -28,7 +29,6 @@ pageSections:
         - text: No credit card · 14-day free trial · No lock-in
           iconName: check
           iconColor: default
-      subtextSize: xl
     style:
       pattern: pegboard
       haze: true
@@ -51,7 +51,8 @@ pageSections:
       cardWidth: medium
       bordered: true
       quotes:
-        - text: When we show clients the Visual Editor during our meetings, **their eyes light up.**
+        - text: When we show clients the Visual Editor during our meetings, **their eyes
+            light up.**
           authorName: Alex Murray
           authorDescription: Digital Design Director,
           company: Firebrand
@@ -71,9 +72,11 @@ pageSections:
       heading:
         heading: Here, you don’t need to wait to make changes
         headingSize: lg
-      subtext: When something on the site needs updating, the person who noticed can just fix it.
-      subtextSize: xl
-      subtextWidth: md
+      subtext:
+        subtext: When something on the site needs updating, the person who noticed can
+          just fix it.
+        subtextSize: xl
+        subtextWidth: md
     style:
       backgroundColor: light-sand
       pattern: grid
@@ -81,8 +84,9 @@ pageSections:
   - _component: building-blocks/wrappers/content-selector
     items:
       - text: >-
-          CloudCannon loads your site in the Visual Editor, so content teams change words and images
-          right where they see them, exactly as visitors will.
+          CloudCannon loads your site in the Visual Editor, so content teams
+          change words and images right where they see them, exactly as visitors
+          will.
         iconName: check
         iconColor: default
       - text: Ship and iterate
@@ -112,12 +116,14 @@ pageSections:
       - text: Ship and iterate
         iconName: check
         iconColor: default
-      - text: Build a website with no compromises, from development team to content team.
+      - text: Build a website with no compromises, from development team to content
+          team.
         iconName: check
         iconColor: default
       - text: >-
-          Developers build custom components that define exactly what editors can change, add and
-          rearrange. Editors get room to work, and nobody can break a layout by accident.
+          Developers build custom components that define exactly what editors
+          can change, add and rearrange. Editors get room to work, and nobody
+          can break a layout by accident.
         iconName: check
         iconColor: default
   - _component: page-sections/conversion/cta-center
@@ -125,11 +131,12 @@ pageSections:
       heading:
         heading: You decide what’s editable
         headingSize: lg
-      subtext: >-
-        Developers build custom components that define exactly what editors can change, add and
-        rearrange. Editors get room to work, and nobody can break a layout by accident.
-      subtextSize: lg
-      subtextWidth: lg
+      subtext:
+        subtext: Developers build custom components that define exactly what editors can
+          change, add and rearrange. Editors get room to work, and nobody can
+          break a layout by accident.
+        subtextSize: lg
+        subtextWidth: lg
       imageSource: /src/assets/images/marketing/rectangle-856-3806-72794.png
       imageAlt: ''
     style:
@@ -139,10 +146,11 @@ pageSections:
       heading:
         heading: Publish when you’re ready
         headingSize: lg
-      subtext: >-
-        Make changes on a branch and share a hosted preview with whoever needs to see it first.
-        Publish once it's approved, or schedule it to go live later.
-      subtextSize: lg
+      subtext:
+        subtext: Make changes on a branch and share a hosted preview with whoever needs
+          to see it first. Publish once it's approved, or schedule it to go live
+          later.
+        subtextSize: lg
       buttonSections:
         - _component: building-blocks/core-elements/button
           text: Learn more
@@ -186,7 +194,8 @@ pageSections:
       features:
         - eyebrow: For AGENCIES
           title: Build it once, hand it over safely
-          description: Set up the component library, then let clients work inside the limits you define.
+          description: Set up the component library, then let clients work inside the
+            limits you define.
           linkText: Learn more
           link: ''
           imageSource: /src/assets/images/marketing/screenshot-2026-08-19-at-12-59-24-1.png
@@ -195,8 +204,8 @@ pageSections:
         - eyebrow: For ENTERPRISE
           title: Every change accounted for
           description: >-
-            Set the permissions once, then let teams work with every change recorded in your own
-            repo.
+            Set the permissions once, then let teams work with every change
+            recorded in your own repo.
           linkText: Learn more
           link: ''
           imageSource: /src/assets/images/marketing/screenshot-2026-08-18-at-14-16-52-1-3806-72940.png

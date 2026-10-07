@@ -8,9 +8,11 @@ pageSections:
       heading:
         heading: Stop juggling websites. Start managing them.
         headingSize: xl
-      subtext: >-
-        CloudCannon lets you have a high-impact web presence without the maintenance burden. Static
-        architecture keeps things fast, secure, and quiet.
+      subtext:
+        subtext: CloudCannon lets you have a high-impact web presence without the
+          maintenance burden. Static architecture keeps things fast, secure, and
+          quiet.
+        subtextSize: xl
       image:
         imageSource: /src/assets/images/marketing/hero-enterprise.png
         imageAlt: ''
@@ -24,7 +26,6 @@ pageSections:
           iconName: move-right
           iconPosition: after
           variant: text
-      subtextSize: xl
     style:
       pattern: grid
       haze: true
@@ -70,11 +71,11 @@ pageSections:
         eyebrow: SUCCESS STORY
         heading: Publishing took up to five weeks. Now it takes minutes.
         headingSize: lg
-      subtext: >-
-        PaperCut moved 4,000 pages and 110 editors onto CloudCannon, and lifted their performance
-        score from 14 to 90+.
-      subtextSize: lg
-      subtextWidth: md
+      subtext:
+        subtext: PaperCut moved 4,000 pages and 110 editors onto CloudCannon, and lifted
+          their performance score from 14 to 90+.
+        subtextSize: lg
+        subtextWidth: md
       buttonSections:
         - _component: building-blocks/core-elements/button
           text: View case study
@@ -107,9 +108,11 @@ pageSections:
       heading:
         heading: Built for how large teams actually work
         headingSize: lg
-      subtext: Benefit from more uptime, faster sites, better SEO, enterprise- grade security, and more.
-      subtextSize: lg
-      subtextWidth: md
+      subtext:
+        subtext: Benefit from more uptime, faster sites, better SEO, enterprise- grade
+          security, and more.
+        subtextSize: lg
+        subtextWidth: md
       alignmentHorizontal: center
       cardHeight: 334
       features:
@@ -150,9 +153,11 @@ pageSections:
       heading:
         heading: Grow your sites, not your headcount.
         headingSize: lg
-      subtext: From fast-moving startups to multi-site agencies, teams ship more with CloudCannon.
-      subtextSize: lg
-      subtextWidth: md
+      subtext:
+        subtext: From fast-moving startups to multi-site agencies, teams ship more with
+          CloudCannon.
+        subtextSize: lg
+        subtextWidth: md
       stories:
         - accentColor: golden
           logoSource: /src/assets/images/marketing/logos/hnry.svg
@@ -203,19 +208,20 @@ pageSections:
       heading:
         heading: Custom plans for enterprise needs
         headingSize: lg
-      subtext: >-
-        To support the large scale and speed your enterprise needs, we'll tailor your plan to your
-        exact specifications so you can enjoy the features that are right for you.
-      subtextSize: lg
-      subtextWidth: lg
+      subtext:
+        subtext: To support the large scale and speed your enterprise needs, we'll
+          tailor your plan to your exact specifications so you can enjoy the
+          features that are right for you.
+        subtextSize: lg
+        subtextWidth: lg
       alignmentHorizontal: center
       columns: 3
       cardHeight: 247
       features:
         - title: Onboarding services
           description: >-
-            We’ll guide you through onboarding, with migration help, training, and best-practice
-            advice from our engineers.
+            We’ll guide you through onboarding, with migration help, training,
+            and best-practice advice from our engineers.
           accentColor: golden
           imageAlt: ''
         - title: Uptime SLA
@@ -224,8 +230,8 @@ pageSections:
           imageAlt: ''
         - title: Priority support
           description: >-
-            Your questions go to the top of the queue, with our support team and engineers in a
-            dedicated Slack channel.
+            Your questions go to the top of the queue, with our support team and
+            engineers in a dedicated Slack channel.
           accentColor: sunset
           imageAlt: ''
         - title: Custom permissions
@@ -233,7 +239,8 @@ pageSections:
           accentColor: harbour
           imageAlt: ''
         - title: Custom edge logic
-          description: Dynamic functionality, from geotargeting to A/B testing, with custom edge rules.
+          description: Dynamic functionality, from geotargeting to A/B testing, with
+            custom edge rules.
           accentColor: pacific
           imageAlt: ''
         - title: Professional services
@@ -249,10 +256,11 @@ pageSections:
       heading:
         heading: Real humans on support, always
         headingSize: lg
-      subtext: >-
-        Git underneath, a visual editor on top, with code and content running on one engine. Start
-        free in minutes, or book a demo and we’ll walk you through the real thing.
-      subtextSize: lg
+      subtext:
+        subtext: Git underneath, a visual editor on top, with code and content running
+          on one engine. Start free in minutes, or book a demo and we’ll walk
+          you through the real thing.
+        subtextSize: lg
       member:
         _component: building-blocks/wrappers/team-member
         name: Olivia Nicholson

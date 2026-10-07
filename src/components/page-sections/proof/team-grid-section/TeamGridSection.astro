@@ -25,7 +25,10 @@ type Member = Record<string, unknown>;
 /* `content` and `style` are the editor's tabs, flattened straight back into
    the names below. `at()` writes the frontmatter path a binding needs. */
 const { props, at } = nestedProps(Astro.props, {
-  nest: { heading: ["eyebrow", "heading", "headingLevel", "headingSize"] },
+  nest: {
+    heading: ["eyebrow", "heading", "headingLevel", "headingSize"],
+    subtext: ["subtext", "subtextSize", "subtextWidth"],
+  },
 });
 
 const {
@@ -122,7 +125,8 @@ const offsetAt = (index: number) => (index % laneCount) % 2 === 1;
     />
     <Text
       class="subtext"
-      style={subtextCap ? `max-inline-size: ${subtextCap}` : undefined}      size={subtextSize}
+      style={subtextCap ? `max-inline-size: ${subtextCap}` : undefined}
+      size={subtextSize}
       alignmentHorizontal="start"
       data-prop={at("subtext")}
       text={subtext}
@@ -140,7 +144,7 @@ const offsetAt = (index: number) => (index % laneCount) % 2 === 1;
     )}
   </div>
 
-    {/* Both halves together. `data-editable="array"` with no `data-prop` is
+  {/* Both halves together. `data-editable="array"` with no `data-prop` is
         not a weaker region, it is a fatal one: the editor replaces the whole
         thing with "Array editable regions require a 'data-prop' HTML
         attribute but none was provided". The prop is conditional, so the
@@ -150,7 +154,10 @@ const offsetAt = (index: number) => (index % laneCount) % 2 === 1;
     data-editable={useDefaultEditableBinding ? "array" : undefined}
     data-prop={useDefaultEditableBinding ? at("members") : undefined}
   >
-    <div class="team-grid-lanes" style={`--team-grid-lanes: ${laneCount}`}>
+    <div
+      class="team-grid-lanes"
+      style={`--team-grid-lanes: ${laneCount}`}
+    >
       {list.map((member, index) => (
         <TeamMember
           class:list={[offsetAt(index) && "is-offset"]}
@@ -248,7 +255,9 @@ const offsetAt = (index: number) => (index % laneCount) % 2 === 1;
        adding to it. */
     .team-grid .team-grid-lanes > * {
       translate: 0
-        calc(var(--team-grid-offset, 0px) + var(--team-grid-bias, 0px) + var(--team-grid-drift, 0px));
+        calc(
+          var(--team-grid-offset, 0px) + var(--team-grid-bias, 0px) + var(--team-grid-drift, 0px)
+        );
     }
 
     /* Each column sits half a range away from the end it would otherwise

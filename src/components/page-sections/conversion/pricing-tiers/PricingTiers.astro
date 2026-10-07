@@ -19,7 +19,10 @@ type TierProps = Record<string, unknown>;
 /* `content` and `style` are the editor's tabs, flattened straight back into
    the names below. `at()` writes the frontmatter path a binding needs. */
 const { props, at } = nestedProps(Astro.props, {
-  nest: { heading: ["eyebrow", "heading", "headingLevel", "headingSize"] },
+  nest: {
+    heading: ["eyebrow", "heading", "headingLevel", "headingSize"],
+    subtext: ["subtext", "subtextSize", "subtextWidth"],
+  },
 });
 
 const {
@@ -132,11 +135,14 @@ const annualSelected = defaultInterval === "annual";
   <Text
     class="pricing-tiers-subtext"
     alignmentHorizontal={alignmentHorizontal}
-    style={subtextCap
-      ? `max-inline-size: ${subtextCap};${
-          alignmentHorizontal === "center" ? " margin-inline: auto; justify-self: center" : ""
-        }`
-      : undefined}    size={subtextSize}
+    style={
+      subtextCap
+        ? `max-inline-size: ${subtextCap};${
+            alignmentHorizontal === "center" ? " margin-inline: auto; justify-self: center" : ""
+          }`
+        : undefined
+    }
+    size={subtextSize}
     data-prop={at("subtext")}
     text={subtext}
   />
@@ -166,26 +172,26 @@ const annualSelected = defaultInterval === "annual";
     </div>
   )}
   <div class="pricing-tiers-bed">
-  {garden && <TierGarden cards=".pricing-tier" />}
-  <Grid
-    gap="lg"
-    minItemWidth={tiers.length >= 4 ? 240 : 272}
-    class:list={["pricing-tiers-grid", tiers.length >= 4 && "pricing-tiers-wide"]}
-    spaceBefore="loose"
-    data-children-prop={at("tiers")}
-  >
-    {tiers?.map((tier: TierProps) => (
-      <PricingTiersItem
-        data-id="page-sections/conversion/pricing-tiers/pricing-tiers-item"
-        data-component="page-sections/conversion/pricing-tiers/pricing-tiers-item"
-        data-editable="array-item"
-        cardColor={cardColor}
-        {...tier}
-        headingLevel={itemHeadingLevel}
-        showAnnualPricing={showAnnualPricing}
-      />
-    ))}
-  </Grid>
+    {garden && <TierGarden cards=".pricing-tier" />}
+    <Grid
+      gap="lg"
+      minItemWidth={tiers.length >= 4 ? 240 : 272}
+      class:list={["pricing-tiers-grid", tiers.length >= 4 && "pricing-tiers-wide"]}
+      spaceBefore="loose"
+      data-children-prop={at("tiers")}
+    >
+      {tiers?.map((tier: TierProps) => (
+        <PricingTiersItem
+          data-id="page-sections/conversion/pricing-tiers/pricing-tiers-item"
+          data-component="page-sections/conversion/pricing-tiers/pricing-tiers-item"
+          data-editable="array-item"
+          cardColor={cardColor}
+          {...tier}
+          headingLevel={itemHeadingLevel}
+          showAnnualPricing={showAnnualPricing}
+        />
+      ))}
+    </Grid>
   </div>
 </CustomSection>
 

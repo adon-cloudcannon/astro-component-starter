@@ -7,7 +7,8 @@ pageSections:
     content:
       heading:
         heading: Case studies
-      subtext: See how real teams build.
+      subtext:
+        subtext: See how real teams build.
       showBreadcrumbs: true
       alignmentHorizontal: start
     style:

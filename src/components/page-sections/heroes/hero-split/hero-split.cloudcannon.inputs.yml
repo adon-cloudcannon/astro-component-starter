@@ -44,6 +44,11 @@ content.heading.headingSize:
       - id: xl
         name: Header 2
 content.subtext:
+  type: object
+  label: Subtext
+  options:
+    subtype: object
+content.subtext.subtext:
   type: markdown
   comment: Supporting copy beneath the heading.
   options:
@@ -58,7 +63,7 @@ content.subtext:
     underline: false
     bulletedlist: false
     numberedlist: false
-content.subtextSize:
+content.subtext.subtextSize:
   hidden: true
   # One size on every hero, so it is the component's decision rather than
   # a field an editor has to get right.
@@ -72,7 +77,7 @@ content.subtextSize:
         name: Regular
       - id: xl
         name: Large
-content.subtextWidth:
+content.subtext.subtextWidth:
   hidden: true
   # Never set on a hero: the measure is the split's own column.
   type: select
@@ -296,4 +301,3 @@ style.backgroundColor:
         - key: color
       text:
         - key: name
-

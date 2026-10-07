@@ -8,8 +8,11 @@ value:
     heading:
       eyebrow: INTERACTIVE DEMO
       heading: Here's what you're working with
-    subtext: Click a heading and change it. See what's possible with the Visual Editor.
-    frameLabel: ''
+    subtext:
+      subtext: Click a heading and change it. See what's possible with the Visual Editor.
+      subtextSize: md
+      subtextWidth: ""
+    frameLabel: ""
     frameWidth: 0
   style:
     frameTone: light

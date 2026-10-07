@@ -8,9 +8,10 @@ pageSections:
       heading:
         heading: Everything lives in the repo, not a database.
         headingSize: xl
-      subtext: >-
-        CloudCannon reads and writes directly to your Git repo, so every change is tracked, every
-        version is recoverable, access it with any tool.
+      subtext:
+        subtext: CloudCannon reads and writes directly to your Git repo, so every change
+          is tracked, every version is recoverable, access it with any tool.
+        subtextSize: xl
       image:
         imageSource: /src/assets/images/marketing/hero-git.png
         imageAlt: ''
@@ -24,7 +25,6 @@ pageSections:
           iconName: move-right
           iconPosition: after
           variant: text
-      subtextSize: xl
     style:
       pattern: grid
       haze: true
@@ -69,13 +69,14 @@ pageSections:
       heading:
         heading: What is a Git-based CMS?
         headingSize: lg
-      subtext: >-
-        A Git-based CMS stores your content as files in a Git repository instead of in a database.
-        Your team edits through a visual interface, and every change is committed to the repo like
-        any other work. The site builds from those files using whatever static site generator you
-        already use.
-      subtextSize: lg
-      subtextWidth: xl
+      subtext:
+        subtext: A Git-based CMS stores your content as files in a Git repository
+          instead of in a database. Your team edits through a visual interface,
+          and every change is committed to the repo like any other work. The
+          site builds from those files using whatever static site generator you
+          already use.
+        subtextSize: lg
+        subtextWidth: xl
   - _component: page-sections/proof/testimonial-quote
     content:
       variant: static
@@ -83,9 +84,10 @@ pageSections:
       cardWidth: medium
       quotes:
         - text: >-
-            Having that flexibility of having everything live in a Git repository is pretty amazing.
-            **We don’t have to worry about a separate database**, or any other pieces in the mix,
-            it’s dead simple.
+            Having that flexibility of having everything live in a Git
+            repository is pretty amazing. **We don’t have to worry about a
+            separate database**, or any other pieces in the mix, it’s dead
+            simple.
           authorName: Justin Parsons
           authorDescription: Director of Front-End Development,
           company: Insight Creative, Inc
@@ -103,11 +105,11 @@ pageSections:
         eyebrow: HOW IT WORKS
         heading: Here’s the whole setup
         headingSize: lg
-      subtext: >-
-        Whether it's three client sites or three hundred, another site is another repo. The
-        maintenance doesn't come with it.
-      subtextSize: lg
-      subtextWidth: md
+      subtext:
+        subtext: Whether it's three client sites or three hundred, another site is
+          another repo. The maintenance doesn't come with it.
+        subtextSize: lg
+        subtextWidth: md
     style:
       backgroundColor: dark
   - _component: page-sections/explainers/timeline-section
@@ -137,7 +139,8 @@ pageSections:
       heading:
         eyebrow: ''
         heading: ''
-      subtext: ''
+      subtext:
+        subtext: ''
       steps:
         - contentSections:
             - _component: building-blocks/core-elements/simple-text
@@ -150,9 +153,9 @@ pageSections:
               size: sm
             - _component: building-blocks/core-elements/text
               text: >-
-                Your content gets the same treatment: branches, commits, reviews, and a history you
-                can walk back through. You keep building locally, with the SSG and tooling you
-                already use.
+                Your content gets the same treatment: branches, commits,
+                reviews, and a history you can walk back through. You keep
+                building locally, with the SSG and tooling you already use.
               size: lg
             - _component: building-blocks/core-elements/button
               text: Learn more
@@ -172,9 +175,10 @@ pageSections:
               size: sm
             - _component: building-blocks/core-elements/text
               text: >-
-                Editors work on the page itself and see the change before it goes live. On the
-                surface it’s just a page with editable parts. Underneath it’s all branches and
-                commits, and every version sits in Git.
+                Editors work on the page itself and see the change before it
+                goes live. On the surface it’s just a page with editable parts.
+                Underneath it’s all branches and commits, and every version sits
+                in Git.
               size: lg
             - _component: building-blocks/core-elements/button
               text: Learn more
@@ -194,9 +198,9 @@ pageSections:
               size: sm
             - _component: building-blocks/core-elements/text
               text: >-
-                Point your coding agent at the project and it sees everything: code, content and
-                config as plain files in one repo. No API to learn first, no content stuck behind an
-                endpoint.
+                Point your coding agent at the project and it sees everything:
+                code, content and config as plain files in one repo. No API to
+                learn first, no content stuck behind an endpoint.
               size: lg
             - _component: building-blocks/core-elements/button
               text: Learn more
@@ -223,8 +227,9 @@ pageSections:
       bordered: true
       quotes:
         - text: >-
-            It’s important to me that CloudCannon is a Git-based CMS. I hate having a vendor lock
-            with API-based CMSs — **how can I trust anyone else with our data?**
+            It’s important to me that CloudCannon is a Git-based CMS. I hate
+            having a vendor lock with API-based CMSs — **how can I trust anyone
+            else with our data?**
           authorName: Alexander Luttringer
           authorDescription: Technical Director,
           company: Croissant & Baguette
@@ -240,11 +245,11 @@ pageSections:
       heading:
         heading: Your content is yours
         headingSize: lg
-      subtext: >-
-        Markdown, YAML and JSON, in a repo you already own. You stay because it works, not because
-        you're stuck.
-      subtextSize: lg
-      subtextWidth: md
+      subtext:
+        subtext: Markdown, YAML and JSON, in a repo you already own. You stay because it
+          works, not because you're stuck.
+        subtextSize: lg
+        subtextWidth: md
       buttonSections:
         - _component: building-blocks/core-elements/button
           text: Get skills repo
@@ -260,9 +265,10 @@ pageSections:
       heading:
         heading: Fits the way you already build
         headingSize: lg
-      subtext: Connect your repo, keep your tooling, and add a visual editor on top.
-      subtextSize: lg
-      subtextWidth: md
+      subtext:
+        subtext: Connect your repo, keep your tooling, and add a visual editor on top.
+        subtextSize: lg
+        subtextWidth: md
       alignmentHorizontal: center
       cardHeight: 334
       features:
@@ -303,10 +309,11 @@ pageSections:
       heading:
         heading: Take a peek under the hood
         headingSize: lg
-      subtext: >-
-        Git underneath, a visual editor on top, with code and content running on one engine. Start
-        free in minutes, or book a demo and we’ll walk you through the real thing.
-      subtextSize: lg
+      subtext:
+        subtext: Git underneath, a visual editor on top, with code and content running
+          on one engine. Start free in minutes, or book a demo and we’ll walk
+          you through the real thing.
+        subtextSize: lg
       imageRevealLabel: Open and close the truck's hood
       imageReveal: /src/assets/images/marketing/cloudcannon-truck-open-1.png
       imageSource: /src/assets/images/marketing/cloudcannon-truck-closed-1.png

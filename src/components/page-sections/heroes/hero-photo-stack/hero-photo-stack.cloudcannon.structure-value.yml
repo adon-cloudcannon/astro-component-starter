@@ -5,36 +5,37 @@ tabbed: true
 value:
   _component: page-sections/heroes/hero-photo-stack
   content:
-    sectionLabel: ''
+    sectionLabel: ""
     heading:
-      eyebrow: ''
+      eyebrow: ""
       heading: A clear promise in one line
       headingLevel: h1
       headingSize: 2xl
-    subtext: One or two sentences on who this is for and what they get.
-    subtextSize: xl
-    subtextWidth: ''
+    subtext:
+      subtext: One or two sentences on who this is for and what they get.
+      subtextSize: xl
+      subtextWidth: ""
     photos:
       - _component: page-sections/heroes/hero-photo-stack/photo-stack-card
-        source: ''
-        alt: ''
+        source: ""
+        alt: ""
       - _component: page-sections/heroes/hero-photo-stack/photo-stack-card
-        source: ''
-        alt: ''
+        source: ""
+        alt: ""
     panels:
       - _component: page-sections/heroes/hero-photo-stack/story-panel
-        eyebrow: ''
-        heading: ''
-        body: ''
+        eyebrow: ""
+        heading: ""
+        body: ""
         tone: light-sand
       - _component: page-sections/heroes/hero-photo-stack/story-panel
-        eyebrow: ''
-        heading: ''
-        body: ''
+        eyebrow: ""
+        heading: ""
+        body: ""
         tone: sand
     panelRaise: 200
     buttonSections: []
-    embellishmentSource: ''
+    embellishmentSource: ""
     embellishmentWidth: 55
     embellishmentPlacement: deck
     reverse: false

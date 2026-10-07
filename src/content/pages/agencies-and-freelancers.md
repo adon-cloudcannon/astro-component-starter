@@ -8,9 +8,10 @@ pageSections:
       heading:
         heading: Faster launches. Happier clients. Less support.
         headingSize: xl
-      subtext: >-
-        Here, agencies spend less time on maintenance and more time on billable work, with websites
-        your clients love to edit.
+      subtext:
+        subtext: Here, agencies spend less time on maintenance and more time on billable
+          work, with websites your clients love to edit.
+        subtextSize: xl
       image:
         imageSource: /src/assets/images/marketing/hero-agencies-and-freelancers.png
         imageAlt: ''
@@ -24,7 +25,6 @@ pageSections:
           iconName: move-right
           iconPosition: after
           variant: text
-      subtextSize: xl
     style:
       pattern: grid
       haze: true
@@ -70,11 +70,11 @@ pageSections:
         eyebrow: SUCCESS STORIES
         heading: Here to help you succeed
         headingSize: lg
-      subtext: >-
-        Grow your portfolio, not your overhead. Ship faster, hand over confidently, and get on with
-        what’s next.
-      subtextSize: xl
-      subtextWidth: md
+      subtext:
+        subtext: Grow your portfolio, not your overhead. Ship faster, hand over
+          confidently, and get on with what’s next.
+        subtextSize: xl
+        subtextWidth: md
       layout: row
       testimonials:
         - text: Absoluttweb can deploy a client website in just 1 hour
@@ -84,8 +84,8 @@ pageSections:
           authorDescription: General Manager, Absoluttweb
           authorImage: /src/assets/images/marketing/ellipse-287.jpg
         - text: >-
-            I was looking for a company that understood that or got that and were willing to work on
-            top of what we had — and around what we had.
+            I was looking for a company that understood that or got that and
+            were willing to work on top of what we had — and around what we had.
           quoted: false
           quoteSize: 19
           authorName: Grayson Campbell
@@ -116,8 +116,8 @@ pageSections:
           alignmentHorizontal: center
         - _component: building-blocks/core-elements/text
           text: >-
-            Build with the static site generator you already use. Define components once and reuse
-            them across every client site.
+            Build with the static site generator you already use. Define
+            components once and reuse them across every client site.
           alignmentHorizontal: center
           size: lg
           style: 'max-inline-size: 527px; margin-inline: auto'
@@ -142,10 +142,11 @@ pageSections:
       heading:
         heading: A platform that wins pitches
         headingSize: sm
-      subtext: >-
-        Clients own their content outright. It lives in their repo as files, not locked in a
-        database. They’re never tied to a platform, and neither are you.
-      subtextSize: lg
+      subtext:
+        subtext: Clients own their content outright. It lives in their repo as files,
+          not locked in a database. They’re never tied to a platform, and
+          neither are you.
+        subtextSize: lg
       buttonSections:
         - _component: building-blocks/core-elements/button
           text: Learn more
@@ -164,7 +165,8 @@ pageSections:
         eyebrow: ''
         heading: Happy developers
         headingSize: lg
-      subtext: ''
+      subtext:
+        subtext: ''
       alignmentHorizontal: center
       steps:
         - contentSections:
@@ -174,8 +176,8 @@ pageSections:
               size: sm
             - _component: building-blocks/core-elements/text
               text: >-
-                Build with the static site generator you already use. Define components once and
-                reuse them across every client site.
+                Build with the static site generator you already use. Define
+                components once and reuse them across every client site.
               size: lg
             - _component: building-blocks/core-elements/button
               text: Learn more
@@ -191,8 +193,8 @@ pageSections:
               size: sm
             - _component: building-blocks/core-elements/text
               text: >-
-                Ship custom sites that are fast, secure, and built to rank. Then, because they're
-                static, there's nothing to maintain.
+                Ship custom sites that are fast, secure, and built to rank.
+                Then, because they're static, there's nothing to maintain.
               size: lg
             - _component: building-blocks/core-elements/button
               text: Learn more
@@ -227,8 +229,9 @@ pageSections:
       heading:
         heading: Join a Partner Program that rewards good work
         headingSize: lg
-      subtext: As you bring in new clients, you’ll gain points and more benefits.
-      subtextSize: lg
+      subtext:
+        subtext: As you bring in new clients, you’ll gain points and more benefits.
+        subtextSize: lg
       buttonSections:
         - _component: building-blocks/core-elements/button
           text: Learn more about the Partner Program

@@ -8,9 +8,10 @@ pageSections:
       heading:
         heading: Load instantly. Rank higher.
         headingSize: xl
-      subtext: >-
-        Pre-rendered pages, global delivery, and structured content that search engines love. Speed
-        is built into the architecture, not bolted on.
+      subtext:
+        subtext: Pre-rendered pages, global delivery, and structured content that search
+          engines love. Speed is built into the architecture, not bolted on.
+        subtextSize: xl
       image:
         imageSource: /src/assets/images/marketing/hero-high-performance.png
         imageAlt: ''
@@ -28,7 +29,6 @@ pageSections:
         - text: No credit card · 14-day free trial · No lock-in
           iconName: check
           iconColor: default
-      subtextSize: xl
     style:
       pattern: grid
       haze: true
@@ -45,7 +45,8 @@ pageSections:
       heading:
         eyebrow: ''
         heading: ''
-      subtext: ''
+      subtext:
+        subtext: ''
       steps:
         - contentSections:
             - _component: building-blocks/core-elements/heading
@@ -54,8 +55,9 @@ pageSections:
               size: sm
             - _component: building-blocks/core-elements/text
               text: >-
-                Nothing gets assembled while a visitor waits. Your site is built when you push, then
-                served as finished files from wherever is closest to the person reading it.
+                Nothing gets assembled while a visitor waits. Your site is built
+                when you push, then served as finished files from wherever is
+                closest to the person reading it.
               size: lg
           mediaSections:
             - _component: building-blocks/wrappers/stat-overlay
@@ -71,8 +73,8 @@ pageSections:
               size: sm
             - _component: building-blocks/core-elements/text
               text: >-
-                No SEO plugin needed. Build titles, meta tags, and structured data directly into
-                your templates for clean HTML that ranks.
+                No SEO plugin needed. Build titles, meta tags, and structured
+                data directly into your templates for clean HTML that ranks.
               size: lg
           mediaSections:
             - _component: building-blocks/wrappers/stat-overlay
@@ -88,9 +90,10 @@ pageSections:
               size: sm
             - _component: building-blocks/core-elements/text
               text: >-
-                Static sites handle a traffic spike the same way they handle a quiet afternoon.
-                There's no database to fall over and no server to patch, so pages keep being served
-                from the closest location whatever the load looks like.
+                Static sites handle a traffic spike the same way they handle a
+                quiet afternoon. There's no database to fall over and no server
+                to patch, so pages keep being served from the closest location
+                whatever the load looks like.
               size: lg
           mediaSections:
             - _component: building-blocks/wrappers/stat-overlay
@@ -137,15 +140,17 @@ pageSections:
           accentColor: harbour
           size: wide
         - text: >-
-            CloudCannon is the ideal CMS for us — editors can update their content easily, and it’s
-            saved back to our Git repo, so we **never feel locked in.**
+            CloudCannon is the ideal CMS for us — editors can update their
+            content easily, and it’s saved back to our Git repo, so we **never
+            feel locked in.**
           authorName: Cayvon Morady
           authorDescription: Senior Technical Program Manager,
           company: Twitch
           linkText: Read case study
           accentColor: sunset
           size: standard
-        - text: When we show the Visual Editor during our meetings, **their eyes light up.**
+        - text: When we show the Visual Editor during our meetings, **their eyes light
+            up.**
           authorName: Alex Murray
           quoteSize: large
           authorDescription: Digital Design Director,
@@ -175,8 +180,10 @@ pageSections:
       heading:
         heading: See how fast your site could be
         headingSize: lg
-      subtext: See how CloudCannon's static-first approach delivers the speed boost your business needs.
-      subtextSize: lg
+      subtext:
+        subtext: See how CloudCannon's static-first approach delivers the speed boost
+          your business needs.
+        subtextSize: lg
       imageReveal: ''
       imageSource: /src/assets/images/marketing/motorcycle-01-1.png
       contentCard: true

@@ -16,7 +16,10 @@ import Split from "@wrappers/split/Split.astro";
 /* `content` and `style` are the editor's tabs, flattened straight back into
    the names below. `at()` writes the frontmatter path a binding needs. */
 const { props, at } = nestedProps(Astro.props, {
-  nest: { heading: ["heading", "headingLevel", "headingSize"] },
+  nest: {
+    heading: ["heading", "headingLevel", "headingSize"],
+    subtext: ["subtext", "subtextSize", "subtextWidth"],
+  },
 });
 
 const {
@@ -194,93 +197,98 @@ const mirror = rootMirror({ "data-picture-first": reverse ? "" : null });
       Asking for the opposite mode lands it back on fixed-flexible, so the
       fixed width travels with the picture. */}
   <Wrapper {...wrapperProps}>
-  <Split
-    distributionMode={contentCard ? "half" : reverse ? "flexible-fixed" : "fixed-flexible"}
-    fixedWidth={contentCard ? undefined : "400"}
-    data-bleed={bleedSide}
-    style={bleedLimit ? { "--split-bleed-limit": bleedLimit } : undefined}
-    alignmentVertical="center"
-    reverse={reverse}
-    minSplitWidth={640}
-  >
-    <Fragment slot="first">
-      <Heading
-        level={headingLevel}
-        size={headingSize}
-        data-prop={at("heading")}
-      >
-        {heading}
-      </Heading>
-      <Text
-        style={subtextCap ? `max-inline-size: ${subtextCap}; margin-inline: auto; justify-self: center` : undefined}        size={subtextSize}
-        data-prop={at("subtext")}
-        text={subtext}
-      />
-      <ButtonGroup
-        buttonSections={buttonSections}
-        direction="row"
-        alignmentHorizontal="start"
-        data-children-prop={at("buttonSections")}
-      />
-    </Fragment>
-    <Fragment slot="second">
-      {characters?.characters?.length ? (
-        <CharacterChat
-          class="cta-split-media cta-split-characters"
-          characters={characters.characters}
-          conversation={characters.conversation}
-          conversationLabel={characters.conversationLabel}
-          seed={characters.seed}
-          threadHeight={characters.threadHeight}
-          insetStart={characters.insetStart}
-          insetEnd={characters.insetEnd}
-          castInsetStart={characters.castInsetStart}
-          castInsetEnd={characters.castInsetEnd}
-          scale={characters.scale}
-        />
-      ) : camera?.shots?.length ? (
-        <PolaroidCamera
-          alt={imageAlt}
-          class="cta-split-camera"
-          fit={camera.fit}
-          label={camera.label}
-          shots={camera.shots}
-          source={imageSource}
-        />
-      ) : terminal?.script?.length ? (
-        <AgentTerminal
-          class="cta-split-terminal"
-          loop={terminal.loop !== false}
-          path={terminal.path}
-          script={terminal.script}
-        />
-      ) : imageBackdrop ? (
-        <div class="cta-split-portrait">
-          <Image
-            class="cta-split-backdrop"
-            source={imageBackdrop}
-            alt={imageBackdropAlt}
-            rounded={true}
-            aspectRatio="square"
-            data-prop-src={at("imageBackdrop")}
-            data-prop-alt={at("imageBackdropAlt")}
-          />
-          <Image
-            class="cta-split-subject"
-            source={imageSource}
-            alt={imageAlt}
-            data-prop-src={at("imageSource")}
-            data-prop-alt={at("imageAlt")}
-          />
-        </div>
-      ) : imageReveal ? (
-        <button
-          type="button"
-          class="cta-split-reveal"
-          aria-pressed="false"
-          aria-label={imageRevealLabel}
+    <Split
+      distributionMode={contentCard ? "half" : reverse ? "flexible-fixed" : "fixed-flexible"}
+      fixedWidth={contentCard ? undefined : "400"}
+      data-bleed={bleedSide}
+      style={bleedLimit ? { "--split-bleed-limit": bleedLimit } : undefined}
+      alignmentVertical="center"
+      reverse={reverse}
+      minSplitWidth={640}
+    >
+      <Fragment slot="first">
+        <Heading
+          level={headingLevel}
+          size={headingSize}
+          data-prop={at("heading")}
         >
-          {/* A button rather than a div with a handler: it is a real toggle, so
+          {heading}
+        </Heading>
+        <Text
+          style={
+            subtextCap
+              ? `max-inline-size: ${subtextCap}; margin-inline: auto; justify-self: center`
+              : undefined
+          }
+          size={subtextSize}
+          data-prop={at("subtext")}
+          text={subtext}
+        />
+        <ButtonGroup
+          buttonSections={buttonSections}
+          direction="row"
+          alignmentHorizontal="start"
+          data-children-prop={at("buttonSections")}
+        />
+      </Fragment>
+      <Fragment slot="second">
+        {characters?.characters?.length ? (
+          <CharacterChat
+            class="cta-split-media cta-split-characters"
+            characters={characters.characters}
+            conversation={characters.conversation}
+            conversationLabel={characters.conversationLabel}
+            seed={characters.seed}
+            threadHeight={characters.threadHeight}
+            insetStart={characters.insetStart}
+            insetEnd={characters.insetEnd}
+            castInsetStart={characters.castInsetStart}
+            castInsetEnd={characters.castInsetEnd}
+            scale={characters.scale}
+          />
+        ) : camera?.shots?.length ? (
+          <PolaroidCamera
+            alt={imageAlt}
+            class="cta-split-camera"
+            fit={camera.fit}
+            label={camera.label}
+            shots={camera.shots}
+            source={imageSource}
+          />
+        ) : terminal?.script?.length ? (
+          <AgentTerminal
+            class="cta-split-terminal"
+            loop={terminal.loop !== false}
+            path={terminal.path}
+            script={terminal.script}
+          />
+        ) : imageBackdrop ? (
+          <div class="cta-split-portrait">
+            <Image
+              class="cta-split-backdrop"
+              source={imageBackdrop}
+              alt={imageBackdropAlt}
+              rounded={true}
+              aspectRatio="square"
+              data-prop-src={at("imageBackdrop")}
+              data-prop-alt={at("imageBackdropAlt")}
+            />
+            <Image
+              class="cta-split-subject"
+              source={imageSource}
+              alt={imageAlt}
+              data-prop-src={at("imageSource")}
+              data-prop-alt={at("imageAlt")}
+            />
+          </div>
+        ) : imageReveal ? (
+          <button
+            type="button"
+            class="cta-split-reveal"
+            aria-pressed="false"
+            aria-label={imageRevealLabel}
+          >
+            {/* A button rather than a div with a handler: it is a real toggle, so
               it has to be reachable by keyboard and announce its state.
               `aria-pressed` carries that state and the CSS reads the same
               attribute, so there is one source of truth rather than a data
@@ -289,7 +297,28 @@ const mirror = rootMirror({ "data-picture-first": reverse ? "" : null });
               The comment lives in here rather than above the element: a JSX
               expression takes one root, and a comment before it is a second
               one — "Expected `,` or `)` but found `type`". */}
+            <Image
+              source={imageSource}
+              rounded={true}
+              alt={imageAlt}
+              aspectRatio={imageAspectRatio}
+              data-prop-src={at("imageSource")}
+              data-prop-alt={at("imageAlt")}
+            />
+            {/* Decorative on purpose: it is the same subject as the one above,
+              so a reader who cannot see the change should be told once. */}
+            <Image
+              class="cta-split-reveal-top"
+              source={imageReveal}
+              rounded={true}
+              decorative={true}
+              aspectRatio={imageAspectRatio}
+              data-prop-src={at("imageReveal")}
+            />
+          </button>
+        ) : (
           <Image
+            class="cta-split-media"
             source={imageSource}
             rounded={true}
             alt={imageAlt}
@@ -297,30 +326,9 @@ const mirror = rootMirror({ "data-picture-first": reverse ? "" : null });
             data-prop-src={at("imageSource")}
             data-prop-alt={at("imageAlt")}
           />
-          {/* Decorative on purpose: it is the same subject as the one above,
-              so a reader who cannot see the change should be told once. */}
-          <Image
-            class="cta-split-reveal-top"
-            source={imageReveal}
-            rounded={true}
-            decorative={true}
-            aspectRatio={imageAspectRatio}
-            data-prop-src={at("imageReveal")}
-          />
-        </button>
-      ) : (
-        <Image
-          class="cta-split-media"
-          source={imageSource}
-          rounded={true}
-          alt={imageAlt}
-          aspectRatio={imageAspectRatio}
-          data-prop-src={at("imageSource")}
-          data-prop-alt={at("imageAlt")}
-        />
-      )}
-    </Fragment>
-  </Split>
+        )}
+      </Fragment>
+    </Split>
   </Wrapper>
 </CustomSection>
 

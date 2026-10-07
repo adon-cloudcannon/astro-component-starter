@@ -11,9 +11,10 @@ value:
       heading: ""
       headingLevel: h2
       headingSize: lg
-    subtext: ""
-    subtextSize: lg
-    subtextWidth: ""
+    subtext:
+      subtext: ""
+      subtextSize: lg
+      subtextWidth: ""
     linkText: ""
     link: ""
     members: []

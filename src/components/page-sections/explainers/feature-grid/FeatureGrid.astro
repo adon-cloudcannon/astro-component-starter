@@ -15,7 +15,10 @@ type FeatureProps = Record<string, unknown>;
 /* `content` and `style` are the editor's tabs, flattened straight back into
    the names below. `at()` writes the frontmatter path a binding needs. */
 const { props, at } = nestedProps(Astro.props, {
-  nest: { heading: ["eyebrow", "heading", "headingLevel", "headingSize"] },
+  nest: {
+    heading: ["eyebrow", "heading", "headingLevel", "headingSize"],
+    subtext: ["subtext", "subtextSize", "subtextWidth"],
+  },
 });
 
 const {
@@ -103,7 +106,10 @@ const cardColor =
  * the art sits in a shared box and hangs from its foot. Sized to each drawing
  * the titles stepped up and down across the row.
  */
-const artRow = Math.max(0, ...features.map((feature: FeatureProps) => Number(feature.imageHeight) || 0));
+const artRow = Math.max(
+  0,
+  ...features.map((feature: FeatureProps) => Number(feature.imageHeight) || 0)
+);
 ---
 
 <CustomSection
@@ -142,19 +148,26 @@ const artRow = Math.max(0, ...features.map((feature: FeatureProps) => Number(fea
   <Text
     class="feature-grid-subtext"
     alignmentHorizontal={alignmentHorizontal}
-    style={subtextCap ? `max-inline-size: ${subtextCap}; margin-inline: auto; justify-self: center` : undefined}    size={subtextSize}
+    style={
+      subtextCap
+        ? `max-inline-size: ${subtextCap}; margin-inline: auto; justify-self: center`
+        : undefined
+    }
+    size={subtextSize}
     data-prop={at("subtext")}
     text={subtext}
   />
   <Grid
     gap="lg"
     columns={columns}
-    style={[
-      artRow ? `--feature-art-row: ${artRow}px` : null,
-      cardHeight ? `--feature-card-height: ${Number(cardHeight)}px` : null,
-    ]
-      .filter(Boolean)
-      .join("; ") || undefined}
+    style={
+      [
+        artRow ? `--feature-art-row: ${artRow}px` : null,
+        cardHeight ? `--feature-card-height: ${Number(cardHeight)}px` : null,
+      ]
+        .filter(Boolean)
+        .join("; ") || undefined
+    }
     class:list={["feature-grid-grid", `feature-grid-${columns}-up`]}
     data-children-prop={at("features")}
   >
