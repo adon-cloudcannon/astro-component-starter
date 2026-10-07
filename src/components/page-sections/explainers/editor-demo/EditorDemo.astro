@@ -23,7 +23,6 @@ import Row from "./Row.astro";
 import Heading from "@core-elements/heading/Heading.astro";
 import Icon from "@core-elements/icon/Icon.astro";
 import Image from "@core-elements/image/Image.astro";
-import SimpleText from "@core-elements/simple-text/SimpleText.astro";
 import Text from "@core-elements/text/Text.astro";
 
 type Field = {
@@ -291,23 +290,15 @@ const addList = (
 >
   {hasHeader && (
     <div class="editor-demo-header flow">
-      {eyebrow && (
-        <SimpleText
-          alignmentHorizontal={alignmentHorizontal}
-          class="eyebrow"
-          size="sm"
-          text={eyebrow}
-        />
-      )}
-      {heading && (
-        <Heading
-          alignmentHorizontal={alignmentHorizontal}
-          level={headingLevel}
-          size={headingSize}
-        >
-          {heading}
-        </Heading>
-      )}
+      <Heading
+        eyebrow={eyebrow}
+        data-eyebrow-prop={at("eyebrow")}
+        alignmentHorizontal={alignmentHorizontal}
+        level={headingLevel}
+        size={headingSize}
+      >
+        {heading}
+      </Heading>
       {subtext && (
         <Text
           alignmentHorizontal={alignmentHorizontal}

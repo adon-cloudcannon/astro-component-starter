@@ -1,7 +1,6 @@
 ---
 import Heading from "@core-elements/heading/Heading.astro";
 import Icon from "@core-elements/icon/Icon.astro";
-import SimpleText from "@core-elements/simple-text/SimpleText.astro";
 import Text from "@core-elements/text/Text.astro";
 import Button from "@core-elements/button/Button.astro";
 import Card from "@wrappers/card/Card.astro";
@@ -125,15 +124,6 @@ const headingSize = titleSize ?? (signpost ? "lg" : imageSource || !iconName ? "
       />
     )}
     {signpost && imageSource && <div class="feature-rule"></div>}
-    {eyebrow && (
-      <SimpleText
-        class="eyebrow feature-eyebrow"
-        alignmentHorizontal={alignmentHorizontal}
-        data-prop="eyebrow"
-        text={eyebrow}
-        size="sm"
-      />
-    )}
     <div class="feature-item-heading">
       {!imageSource && !signpost && iconName && (
         <Icon
@@ -146,6 +136,9 @@ const headingSize = titleSize ?? (signpost ? "lg" : imageSource || !iconName ? "
         />
       )}
       <Heading
+        eyebrow={eyebrow}
+        data-eyebrow-prop="eyebrow"
+        eyebrowClass="feature-eyebrow"
         class="feature-title"
         level={headingLevel}
         size={headingSize}

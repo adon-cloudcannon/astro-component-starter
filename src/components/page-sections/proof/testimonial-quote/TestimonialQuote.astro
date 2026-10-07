@@ -25,7 +25,7 @@
 import { bandPattern, bandHaze } from "@component-utils/bandStyle.mjs";
 import { nestedProps } from "@component-utils/nestedProps.mjs";
 import CustomSection from "@builders/custom-section/CustomSection.astro";
-import SimpleText from "@core-elements/simple-text/SimpleText.astro";
+import Heading from "@core-elements/heading/Heading.astro";
 import TestimonialQuoteItem from "./TestimonialQuoteItem.astro";
 
 type Quote = {
@@ -189,72 +189,86 @@ const align = alignment === "center" && !isSplit ? "center" : undefined;
     useDefaultEditableBinding={useDefaultEditableBinding}
     {...htmlAttributes}
   >
-    {eyebrow && (
-      <SimpleText
-        class="eyebrow testimonial-quote-eyebrow"
-        size="sm"
-        alignmentHorizontal={align === "center" ? "center" : "start"}
-        text={eyebrow}
-        data-prop={at("eyebrow")}
-      />
-    )}
+    {/* The card has no title, so this is a heading that is only its own
+        eyebrow. It still goes through Heading: nothing else on the site
+        draws one, which is what keeps the class off the frontmatter. */}
+    <Heading
+      eyebrow={eyebrow}
+      eyebrowClass="testimonial-quote-eyebrow"
+      eyebrowAlignment={align === "center" ? "center" : "start"}
+      data-eyebrow-prop={at("eyebrow")}
+    />
 
     <div
       class="testimonial-quote-frame"
       data-width={cardWidth === "full" ? undefined : cardWidth}
       data-align={align}
     >
-    <div
-      class="testimonial-quote-card"
-      data-align={align}
-      data-layout={layout}
-      data-quote-size={quoteSize === "lg" ? "lg" : undefined}
-      data-bordered={bordered ? "" : undefined}
-      data-tone={tone !== "base" ? tone : undefined}
-      data-theme={cardScheme}
-      data-editable="array"
-      data-prop={at("quotes")}
-    >
-      {items.map((quote, index) => (
-        <TestimonialQuoteItem
-          {...quote}
-          layout={layout}
-          index={index}
-          isCarousel={isCarousel}
-          slideCount={items.length}
-          data-editable="array-item"
-          data-id="page-sections/proof/testimonial-quote/testimonial-quote-item"
-          data-component="page-sections/proof/testimonial-quote/testimonial-quote-item"
-        />
-      ))}
+      <div
+        class="testimonial-quote-card"
+        data-align={align}
+        data-layout={layout}
+        data-quote-size={quoteSize === "lg" ? "lg" : undefined}
+        data-bordered={bordered ? "" : undefined}
+        data-tone={tone !== "base" ? tone : undefined}
+        data-theme={cardScheme}
+        data-editable="array"
+        data-prop={at("quotes")}
+      >
+        {items.map((quote, index) => (
+          <TestimonialQuoteItem
+            {...quote}
+            layout={layout}
+            index={index}
+            isCarousel={isCarousel}
+            slideCount={items.length}
+            data-editable="array-item"
+            data-id="page-sections/proof/testimonial-quote/testimonial-quote-item"
+            data-component="page-sections/proof/testimonial-quote/testimonial-quote-item"
+          />
+        ))}
 
-      {isCarousel && items.length > 1 && (
-        /* One set of controls for the card rather than one per slide: the
+        {isCarousel && items.length > 1 && (
+          /* One set of controls for the card rather than one per slide: the
            slides swap, the controls do not. */
-        <div class="testimonial-quote-nav">
-          <div class="testimonial-quote-dots" role="tablist" aria-label="Quotes">
-            {items.map((_, index) => (
+          <div class="testimonial-quote-nav">
+            <div
+              class="testimonial-quote-dots"
+              role="tablist"
+              aria-label="Quotes"
+            >
+              {items.map((_, index) => (
+                <button
+                  type="button"
+                  class="testimonial-quote-dot"
+                  role="tab"
+                  data-goto={index}
+                  aria-selected={index === 0 ? "true" : "false"}
+                  aria-label={`Quote ${index + 1}`}
+                ></button>
+              ))}
+            </div>
+            <div class="testimonial-quote-arrows">
               <button
                 type="button"
-                class="testimonial-quote-dot"
-                role="tab"
-                data-goto={index}
-                aria-selected={index === 0 ? "true" : "false"}
-                aria-label={`Quote ${index + 1}`}
-              ></button>
-            ))}
+                class="testimonial-quote-arrow"
+                data-step="-1"
+                aria-label="Previous quote"
+              >
+                <span aria-hidden="true">&lsaquo;</span>
+              </button>
+              <button
+                type="button"
+                class="testimonial-quote-arrow"
+                data-step="1"
+                aria-label="Next quote"
+              >
+                <span aria-hidden="true">&rsaquo;</span>
+              </button>
+            </div>
           </div>
-          <div class="testimonial-quote-arrows">
-            <button type="button" class="testimonial-quote-arrow" data-step="-1" aria-label="Previous quote">
-              <span aria-hidden="true">&lsaquo;</span>
-            </button>
-            <button type="button" class="testimonial-quote-arrow" data-step="1" aria-label="Next quote">
-              <span aria-hidden="true">&rsaquo;</span>
-            </button>
-          </div>
-        </div>
-      )}
-    </div>
+        )}
+      </div>
     </div>
   </CustomSection>
 )}
@@ -331,7 +345,8 @@ const align = alignment === "center" && !isSplit ? "center" : undefined;
         background: var(--testimonial-quote-surface);
         border: 0;
         border-radius: var(--radius-card);
-        padding: var(--testimonial-quote-pad-y, var(--testimonial-quote-pad)) var(--testimonial-quote-pad);
+        padding: var(--testimonial-quote-pad-y, var(--testimonial-quote-pad))
+          var(--testimonial-quote-pad);
         position: relative;
       }
 

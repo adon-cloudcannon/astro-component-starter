@@ -6,7 +6,6 @@ import { uniqueId } from "@component-utils/uniqueId";
 import CustomSection from "@builders/custom-section/CustomSection.astro";
 import Heading from "@core-elements/heading/Heading.astro";
 import Image from "@core-elements/image/Image.astro";
-import SimpleText from "@core-elements/simple-text/SimpleText.astro";
 import Text from "@core-elements/text/Text.astro";
 import Masonry from "@wrappers/masonry/Masonry.astro";
 import GalleryItem from "./GalleryItem.astro";
@@ -92,14 +91,9 @@ const itemsAttributes = masonry
   useDefaultEditableBinding={useDefaultEditableBinding}
   {...htmlAttributes}
 >
-  <SimpleText
-    alignmentHorizontal="center"
-    class="eyebrow"
-    data-prop={at("eyebrow")}
-    text={eyebrow}
-    size="sm"
-  />
   <Heading
+    eyebrow={eyebrow}
+    data-eyebrow-prop={at("eyebrow")}
     level={headingLevel}
     size={headingSize}
     alignmentHorizontal="center"

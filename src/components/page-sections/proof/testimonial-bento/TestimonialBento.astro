@@ -4,7 +4,6 @@ import { nestedProps } from "@component-utils/nestedProps.mjs";
 import CustomSection from "@builders/custom-section/CustomSection.astro";
 import { subtextMeasure } from "@component-utils/subtextMeasure.mjs";
 import Heading from "@core-elements/heading/Heading.astro";
-import SimpleText from "@core-elements/simple-text/SimpleText.astro";
 import Text from "@core-elements/text/Text.astro";
 import TestimonialBentoItem from "./TestimonialBentoItem.astro";
 
@@ -87,14 +86,9 @@ const columnCount = ["2", "4"].includes(String(columns)) ? String(columns) : "3"
   useDefaultEditableBinding={useDefaultEditableBinding}
   {...htmlAttributes}
 >
-  <SimpleText
-    alignmentHorizontal="center"
-    class="eyebrow"
-    data-prop={at("eyebrow")}
-    text={eyebrow}
-    size="sm"
-  />
   <Heading
+    eyebrow={eyebrow}
+    data-eyebrow-prop={at("eyebrow")}
     level={headingLevel}
     size={headingSize}
     alignmentHorizontal="center"

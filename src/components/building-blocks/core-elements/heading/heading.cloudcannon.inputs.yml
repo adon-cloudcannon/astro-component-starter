@@ -1,3 +1,6 @@
+eyebrow:
+  comment: Short label above the heading. Optional.
+  type: text
 text:
   comment: The text content of the heading.
   type: textarea

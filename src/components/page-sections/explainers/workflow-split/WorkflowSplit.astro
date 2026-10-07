@@ -20,7 +20,6 @@ import { subtextMeasure } from "@component-utils/subtextMeasure.mjs";
 import Card from "@wrappers/card/Card.astro";
 import Heading from "@core-elements/heading/Heading.astro";
 import Text from "@core-elements/text/Text.astro";
-import SimpleText from "@core-elements/simple-text/SimpleText.astro";
 import Icon from "@core-elements/icon/Icon.astro";
 import Image from "@core-elements/image/Image.astro";
 import List from "@core-elements/list/List.astro";
@@ -211,14 +210,9 @@ const pulseDelay = (kind: string): number => {
   useDefaultEditableBinding={useDefaultEditableBinding}
   {...htmlAttributes}
 >
-  <SimpleText
-    class="eyebrow"
-    size="sm"
-    alignmentHorizontal="center"
-    data-prop={at("eyebrow")}
-    text={eyebrow}
-  />
   <Heading
+    eyebrow={eyebrow}
+    data-eyebrow-prop={at("eyebrow")}
     level={headingLevel}
     size={headingSize}
     alignmentHorizontal="center"
@@ -283,13 +277,9 @@ const pulseDelay = (kind: string): number => {
               paddingHorizontal="lg"
               paddingVertical="lg"
             >
-              <SimpleText
-                class="eyebrow"
-                size="sm"
-                data-prop={`${panelPath(index)}.eyebrow`}
-                text={panel.eyebrow}
-              />
               <Heading
+                eyebrow={panel.eyebrow}
+                data-eyebrow-prop={`${panelPath(index)}.eyebrow`}
                 level="h3"
                 size="xs"
                 data-prop={`${panelPath(index)}.heading`}

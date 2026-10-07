@@ -3,6 +3,7 @@ icon: title
 description: Heading from h1 to h6.
 value:
   _component: building-blocks/core-elements/heading
+  eyebrow: ""
   text: My Heading
   level: h2
   size: default

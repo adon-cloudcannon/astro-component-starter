@@ -9,7 +9,6 @@
  * stacked bands cannot draw it.
  */
 import Heading from "@core-elements/heading/Heading.astro";
-import SimpleText from "@core-elements/simple-text/SimpleText.astro";
 import Text from "@core-elements/text/Text.astro";
 import { rootMirror } from "@component-utils/rootMirror.mjs";
 
@@ -50,8 +49,10 @@ const mirror = rootMirror({
       had no rhythm at all: the eyebrow, the quote and the copy sat flush
       against each other, because the spacing every other block on the site
       gets comes from that layer rather than from the components. */}
-  <div class="story-panel-content flow" {...mirror}>
-    {eyebrow && <SimpleText class="eyebrow" size="sm" text={eyebrow} data-prop="eyebrow" />}
+  <div
+    class="story-panel-content flow"
+    {...mirror}
+  >
     {/* The gap is set inline, as a custom property, because nothing else
         reaches it. Two rules in `utils` pull these blocks together: an
         eyebrow followed by a heading is tightened to 8 site-wide, and the
@@ -64,16 +65,20 @@ const mirror = rootMirror({
         eyebrow, 26 under the quote and 24 under the other column's eyebrow;
         one value within 4 of all three keeps the two columns level with each
         other, which three separate values would not. */}
-    {heading && (
-      <Heading
-        level={headingLevel}
-        size="sm"
-        style="--space-before: var(--story-panel-gap)"
-        data-prop="heading"
-      >
-        {heading}
-      </Heading>
-    )}
+    {/* Not guarded on `heading` any more: the eyebrow travels with it now,
+        and Heading draws whichever of the two it is given. The gap stays on
+        the `<h_>`, so an eyebrow leading the column is still the flow
+        layer's first child and takes no margin. */}
+    <Heading
+      eyebrow={eyebrow}
+      data-eyebrow-prop="eyebrow"
+      level={headingLevel}
+      size="sm"
+      style="--space-before: var(--story-panel-gap)"
+      data-prop="heading"
+    >
+      {heading}
+    </Heading>
     <Text
       class="story-panel-body"
       size="xl"

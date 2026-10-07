@@ -4,7 +4,6 @@ import { nestedProps } from "@component-utils/nestedProps.mjs";
 import CustomSection from "@builders/custom-section/CustomSection.astro";
 import { subtextMeasure } from "@component-utils/subtextMeasure.mjs";
 import Heading from "@core-elements/heading/Heading.astro";
-import SimpleText from "@core-elements/simple-text/SimpleText.astro";
 import Text from "@core-elements/text/Text.astro";
 import FeatureItem from "@explainers/feature-grid/FeatureItem.astro";
 import Grid from "@wrappers/grid/Grid.astro";
@@ -126,25 +125,18 @@ const artRow = Math.max(
   useDefaultEditableBinding={useDefaultEditableBinding}
   {...htmlAttributes}
 >
-  <SimpleText
-    alignmentHorizontal={alignmentHorizontal}
-    class="eyebrow"
-    data-prop={at("eyebrow")}
-    text={eyebrow}
-    size="sm"
-  />
   {/* Only when there is one. A bound region with nothing behind it is an
       error card in the Visual Editor and an empty heading on the page. */}
-  {heading && (
-    <Heading
-      level={headingLevel}
-      size={headingSize}
-      alignmentHorizontal={alignmentHorizontal}
-      data-prop={at("heading")}
-    >
-      {heading}
-    </Heading>
-  )}
+  <Heading
+    eyebrow={eyebrow}
+    data-eyebrow-prop={at("eyebrow")}
+    level={headingLevel}
+    size={headingSize}
+    alignmentHorizontal={alignmentHorizontal}
+    data-prop={at("heading")}
+  >
+    {heading}
+  </Heading>
   <Text
     class="feature-grid-subtext"
     alignmentHorizontal={alignmentHorizontal}

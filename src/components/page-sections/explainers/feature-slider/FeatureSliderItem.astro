@@ -1,7 +1,6 @@
 ---
 import Heading from "@core-elements/heading/Heading.astro";
 import Image from "@core-elements/image/Image.astro";
-import SimpleText from "@core-elements/simple-text/SimpleText.astro";
 import Text from "@core-elements/text/Text.astro";
 import Card from "@wrappers/card/Card.astro";
 import CarouselSlide from "@wrappers/carousel/CarouselSlide.astro";
@@ -34,13 +33,9 @@ const {
       alignmentVertical="center"
     >
       <Fragment slot="first">
-        <SimpleText
-          class="eyebrow"
-          data-prop="eyebrow"
-          text={eyebrow}
-          size="sm"
-        />
         <Heading
+          eyebrow={eyebrow}
+          data-eyebrow-prop="eyebrow"
           level="h2"
           size="lg"
           spaceBefore="none"

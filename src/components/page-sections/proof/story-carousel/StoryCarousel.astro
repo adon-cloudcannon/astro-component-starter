@@ -108,14 +108,9 @@ const subtextCap = subtextMeasure(subtextWidth);
   useDefaultEditableBinding={useDefaultEditableBinding}
   {...htmlAttributes}
 >
-  <SimpleText
-    class="eyebrow"
-    size="sm"
-    alignmentHorizontal="center"
-    data-prop={at("eyebrow")}
-    text={eyebrow}
-  />
   <Heading
+    eyebrow={eyebrow}
+    data-eyebrow-prop={at("eyebrow")}
     level={headingLevel}
     size={headingSize}
     alignmentHorizontal="center"

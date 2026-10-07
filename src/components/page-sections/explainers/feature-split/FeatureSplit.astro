@@ -8,7 +8,6 @@ import Heading from "@core-elements/heading/Heading.astro";
 import Image from "@core-elements/image/Image.astro";
 import ShapePile from "@wrappers/shape-pile/ShapePile.astro";
 import SiteCards from "@wrappers/site-cards/SiteCards.astro";
-import SimpleText from "@core-elements/simple-text/SimpleText.astro";
 import Text from "@core-elements/text/Text.astro";
 import ButtonGroup from "@wrappers/button-group/ButtonGroup.astro";
 import Split from "@wrappers/split/Split.astro";
@@ -153,13 +152,9 @@ const mirror = rootMirror({ class: { "has-pile": shapes?.length > 0 } });
     reverseOrderOnMobile={true}
   >
     <Fragment slot="first">
-      <SimpleText
-        class="eyebrow"
-        data-prop={at("eyebrow")}
-        text={eyebrow}
-        size="sm"
-      />
       <Heading
+        eyebrow={eyebrow}
+        data-eyebrow-prop={at("eyebrow")}
         level={headingLevel}
         size={headingSize}
         data-prop={at("heading")}

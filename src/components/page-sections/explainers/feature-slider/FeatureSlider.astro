@@ -1,7 +1,6 @@
 ---
 import { bandPattern, bandHaze } from "@component-utils/bandStyle.mjs";
 import { nestedProps } from "@component-utils/nestedProps.mjs";
-import SimpleText from "@core-elements/simple-text/SimpleText.astro";
 import Text from "@core-elements/text/Text.astro";
 import Heading from "@core-elements/heading/Heading.astro";
 import CustomSection from "@builders/custom-section/CustomSection.astro";
@@ -59,13 +58,9 @@ const {
 >
   {(eyebrow || heading || subtext) && (
     <Fragment>
-      <SimpleText
-        class="eyebrow"
-        size="sm"
-        data-prop={at("eyebrow")}
-        text={eyebrow}
-      />
       <Heading
+        eyebrow={eyebrow}
+        data-eyebrow-prop={at("eyebrow")}
         level={headingLevel}
         size={headingSize}
         data-prop={at("heading")}

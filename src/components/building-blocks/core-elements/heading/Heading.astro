@@ -4,12 +4,35 @@ import { spaceBeforeAttr } from "@component-utils/spaceBefore.mjs";
 import { renderMarkdownInline } from "@component-utils/markdown";
 import { slugifyLabel } from "@component-utils/slugify";
 import Icon from "@core-elements/icon/Icon.astro";
+import SimpleText from "@core-elements/simple-text/SimpleText.astro";
 
+/**
+ * The eyebrow belongs to the heading it labels, so this draws it.
+ *
+ * It used to be whatever the author put above a heading: 33 sections each
+ * rendered their own SimpleText with `class="eyebrow"` on it, and inside a
+ * card or a step it was a loose text block with the class typed into the
+ * frontmatter by hand — which no input declared, so an editor could neither
+ * see it nor remove it.
+ *
+ * It is still drawn as a sibling rather than inside the `<h_>`: an eyebrow
+ * nested in a heading joins its accessible name, so a screen reader would
+ * announce "OUR TEAM Meet the team" as one title. Sibling also keeps the
+ * `.eyebrow + .heading` rules that zero the heading's top margin, and makes
+ * the markup identical to what the sections emitted before this.
+ *
+ * `eyebrowAlignment` is its own prop because one band wants the two apart:
+ * the team roster centres its heading over a left-aligned eyebrow.
+ */
 const {
   text,
   level = "h2",
   size = "default",
   alignmentHorizontal = "start",
+  eyebrow,
+  eyebrowSize = "sm",
+  eyebrowAlignment,
+  eyebrowClass,
   iconName,
   iconColor = "default",
   iconPosition = "before",
@@ -17,6 +40,7 @@ const {
   class: className,
   useDefaultEditableBinding = false,
   "data-prop": customDataProp,
+  "data-eyebrow-prop": eyebrowDataProp,
   _component,
   ...htmlAttributes
 } = Astro.props;
@@ -79,48 +103,66 @@ const Tag = level;
 
 const hasText = isNonEmptyString(text);
 const hasSlotContent = Astro.slots.has("default");
+const hasEyebrow = isNonEmptyString(eyebrow);
+const hasHeading = hasText || hasSlotContent || Boolean(_component);
 
-if (!_component && !hasText && !hasSlotContent) return;
+/* An eyebrow with nothing under it is still worth drawing: a band can label
+   itself and carry its title further down. The `<h_>` is what drops when
+   there is no title, not the component. */
+if (!_component && !hasText && !hasSlotContent && !hasEyebrow) return;
+
+const eyebrowClasses = ["eyebrow", eyebrowClass].filter(Boolean).join(" ");
 ---
 
-<Tag
-  class:list={["heading", "stackable", className]}
-  {...htmlAttributes}
->
-  <span
-    class:list={[
-      "heading-inner",
-      size && size !== "default" && `size-${size}`,
-      `align-${alignmentHorizontal}`,
-    ]}
-    data-space-before={spaceBeforeAttr(spaceBefore)}
+{hasEyebrow && (
+  <SimpleText
+    class={eyebrowClasses}
+    size={eyebrowSize}
+    alignmentHorizontal={eyebrowAlignment ?? alignmentHorizontal}
+    data-prop={eyebrowDataProp}
+    text={eyebrow}
+  />
+)}
+{hasHeading && (
+  <Tag
+    class:list={["heading", "stackable", className]}
+    {...htmlAttributes}
   >
-    {iconPosition == "before" && (
-      <Icon
-        name={iconName}
-        color={iconColor}
-        size="none"
-        class="heading-icon"
-        aria-hidden="true"
-      />
-    )}
     <span
-      class="heading-text"
-      {...textDataAttributes}
+      class:list={[
+        "heading-inner",
+        size && size !== "default" && `size-${size}`,
+        `align-${alignmentHorizontal}`,
+      ]}
+      data-space-before={spaceBeforeAttr(spaceBefore)}
     >
-      <slot>{text && <Fragment set:html={MarkdownText} />}</slot>
+      {iconPosition == "before" && (
+        <Icon
+          name={iconName}
+          color={iconColor}
+          size="none"
+          class="heading-icon"
+          aria-hidden="true"
+        />
+      )}
+      <span
+        class="heading-text"
+        {...textDataAttributes}
+      >
+        <slot>{text && <Fragment set:html={MarkdownText} />}</slot>
+      </span>
+      {iconPosition === "after" && (
+        <Icon
+          name={iconName}
+          color={iconColor}
+          size="none"
+          class="heading-icon heading-icon-after"
+          aria-hidden="true"
+        />
+      )}
     </span>
-    {iconPosition === "after" && (
-      <Icon
-        name={iconName}
-        color={iconColor}
-        size="none"
-        class="heading-icon heading-icon-after"
-        aria-hidden="true"
-      />
-    )}
-  </span>
-</Tag>
+  </Tag>
+)}
 
 <style is:global>
   @layer components {

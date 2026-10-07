@@ -7,7 +7,6 @@ import CustomSection from "@builders/custom-section/CustomSection.astro";
 import { subtextMeasure } from "@component-utils/subtextMeasure.mjs";
 import TierGarden from "@wrappers/tier-garden/TierGarden.astro";
 import Heading from "@core-elements/heading/Heading.astro";
-import SimpleText from "@core-elements/simple-text/SimpleText.astro";
 import Text from "@core-elements/text/Text.astro";
 import Toggle from "@forms/toggle/Toggle.astro";
 import PricingTiersItem from "@page-sections/conversion/pricing-tiers/PricingTiersItem.astro";
@@ -117,14 +116,9 @@ const annualSelected = defaultInterval === "annual";
   useDefaultEditableBinding={useDefaultEditableBinding}
   {...htmlAttributes}
 >
-  <SimpleText
-    alignmentHorizontal={alignmentHorizontal}
-    class="eyebrow"
-    data-prop={at("eyebrow")}
-    text={eyebrow}
-    size="sm"
-  />
   <Heading
+    eyebrow={eyebrow}
+    data-eyebrow-prop={at("eyebrow")}
     level={headingLevel}
     size={headingSize}
     alignmentHorizontal={alignmentHorizontal}

@@ -6,7 +6,6 @@ import Image from "@core-elements/image/Image.astro";
 import CustomSection from "@builders/custom-section/CustomSection.astro";
 import { subtextMeasure } from "@component-utils/subtextMeasure.mjs";
 import Heading from "@core-elements/heading/Heading.astro";
-import SimpleText from "@core-elements/simple-text/SimpleText.astro";
 import Text from "@core-elements/text/Text.astro";
 import ButtonGroup from "@wrappers/button-group/ButtonGroup.astro";
 
@@ -165,14 +164,9 @@ const mirror = rootMirror({ class: { [`align-${alignmentHorizontal}`]: true } })
       )}
     </Fragment>
   )}
-  <SimpleText
-    class="eyebrow"
-    size="sm"
-    alignmentHorizontal={alignmentHorizontal}
-    data-prop={at("eyebrow")}
-    text={eyebrow}
-  />
   <Heading
+    eyebrow={eyebrow}
+    data-eyebrow-prop={at("eyebrow")}
     level={headingLevel}
     size={headingSize}
     alignmentHorizontal={alignmentHorizontal}

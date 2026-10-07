@@ -22,7 +22,6 @@ import CustomSection from "@builders/custom-section/CustomSection.astro";
 import { subtextMeasure } from "@component-utils/subtextMeasure.mjs";
 import Heading from "@core-elements/heading/Heading.astro";
 import Image from "@core-elements/image/Image.astro";
-import SimpleText from "@core-elements/simple-text/SimpleText.astro";
 import Text from "@core-elements/text/Text.astro";
 import ButtonGroup from "@wrappers/button-group/ButtonGroup.astro";
 import Split from "@wrappers/split/Split.astro";
@@ -139,14 +138,10 @@ const Stack = interactive ? "button" : "div";
     class:list={["hero-photo-stack-layout", columns.length === 0 && "leads-copy"]}
   >
     <Fragment slot="first">
-      {eyebrow && (
-        <SimpleText
-          class="eyebrow"
-          text={eyebrow}
-          data-prop={at("eyebrow")}
-        />
-      )}
       <Heading
+        eyebrow={eyebrow}
+        data-eyebrow-prop={at("eyebrow")}
+        eyebrowSize="md"
         level={headingLevel}
         size={headingSize}
         data-prop={at("heading")}

@@ -5,7 +5,6 @@ import CustomSection from "@builders/custom-section/CustomSection.astro";
 import Button from "@core-elements/button/Button.astro";
 import Heading from "@core-elements/heading/Heading.astro";
 import Icon from "@core-elements/icon/Icon.astro";
-import SimpleText from "@core-elements/simple-text/SimpleText.astro";
 import Text from "@core-elements/text/Text.astro";
 
 type Plan = {
@@ -94,14 +93,9 @@ const hasTable = planList.length > 0 && rows?.length > 0;
   useDefaultEditableBinding={useDefaultEditableBinding}
   {...htmlAttributes}
 >
-  <SimpleText
-    alignmentHorizontal="center"
-    class="eyebrow"
-    data-prop={at("eyebrow")}
-    text={eyebrow}
-    size="sm"
-  />
   <Heading
+    eyebrow={eyebrow}
+    data-eyebrow-prop={at("eyebrow")}
     level={headingLevel}
     size={headingSize}
     alignmentHorizontal="center"

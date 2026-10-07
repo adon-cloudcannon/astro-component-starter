@@ -20,7 +20,6 @@ import { subtextMeasure } from "@component-utils/subtextMeasure.mjs";
 import ButtonGroup from "@wrappers/button-group/ButtonGroup.astro";
 import StatOverlay from "@wrappers/stat-overlay/StatOverlay.astro";
 import Heading from "@core-elements/heading/Heading.astro";
-import SimpleText from "@core-elements/simple-text/SimpleText.astro";
 import Text from "@core-elements/text/Text.astro";
 
 type StatProps = {
@@ -116,14 +115,9 @@ const hasHeader = Boolean(eyebrow || heading || subtext || buttonSections?.lengt
 >
   {hasHeader && (
     <Fragment>
-      <SimpleText
-        class="eyebrow"
-        size="sm"
-        alignmentHorizontal="center"
-        data-prop={at("eyebrow")}
-        text={eyebrow}
-      />
       <Heading
+        eyebrow={eyebrow}
+        data-eyebrow-prop={at("eyebrow")}
         level={headingLevel}
         size={headingSize}
         alignmentHorizontal="center"

@@ -15,7 +15,6 @@ import { nestedProps } from "@component-utils/nestedProps.mjs";
 import CustomSection from "@builders/custom-section/CustomSection.astro";
 import { subtextMeasure } from "@component-utils/subtextMeasure.mjs";
 import Heading from "@core-elements/heading/Heading.astro";
-import SimpleText from "@core-elements/simple-text/SimpleText.astro";
 import Text from "@core-elements/text/Text.astro";
 import Button from "@core-elements/button/Button.astro";
 import TeamMember from "@wrappers/team-member/TeamMember.astro";
@@ -111,12 +110,11 @@ const offsetAt = (index: number) => (index % laneCount) % 2 === 1;
   {...htmlAttributes}
 >
   <div class="team-grid-copy">
-    <SimpleText
-      class="eyebrow"
-      data-prop={at("eyebrow")}
-      text={eyebrow}
-    />
     <Heading
+      eyebrow={eyebrow}
+      data-eyebrow-prop={at("eyebrow")}
+      eyebrowSize="md"
+      eyebrowAlignment="start"
       level={headingLevel}
       size={headingSize}
       alignmentHorizontal="start"

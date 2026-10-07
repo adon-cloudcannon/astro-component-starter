@@ -31,14 +31,11 @@ pageSections:
       reverse: true
       steps:
         - contentSections:
-            - _component: building-blocks/core-elements/simple-text
-              class: eyebrow
-              size: sm
-              text: Freedom with accountability
             - _component: building-blocks/core-elements/heading
               text: Entrepreneurial spirit
               level: h2
               size: sm
+              eyebrow: Freedom with accountability
             - _component: building-blocks/core-elements/text
               text: >-
                 We value people above all, and strive to be genuinely warm and
@@ -52,14 +49,11 @@ pageSections:
               panelFit: fill
               imageAlt: ''
         - contentSections:
-            - _component: building-blocks/core-elements/simple-text
-              class: eyebrow
-              size: sm
-              text: We rise by lifting others
             - _component: building-blocks/core-elements/heading
               text: Manaakitanga
               level: h2
               size: sm
+              eyebrow: We rise by lifting others
             - _component: building-blocks/core-elements/text
               text: >-
                 We value people above all, and strive to be genuinely warm and
@@ -73,14 +67,11 @@ pageSections:
               panelFit: fill
               imageAlt: ''
         - contentSections:
-            - _component: building-blocks/core-elements/simple-text
-              class: eyebrow
-              size: sm
-              text: Listen first
             - _component: building-blocks/core-elements/heading
               text: Wearing the customer's jandals
               level: h2
               size: sm
+              eyebrow: Listen first
             - _component: building-blocks/core-elements/text
               text: >-
                 We build real relationships with our customers, and deeply

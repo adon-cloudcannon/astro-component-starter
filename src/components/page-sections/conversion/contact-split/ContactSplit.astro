@@ -4,7 +4,6 @@ import { nestedProps } from "@component-utils/nestedProps.mjs";
 import CustomSection from "@builders/custom-section/CustomSection.astro";
 import Heading from "@core-elements/heading/Heading.astro";
 import Icon from "@core-elements/icon/Icon.astro";
-import SimpleText from "@core-elements/simple-text/SimpleText.astro";
 import Text from "@core-elements/text/Text.astro";
 import Form from "@forms/form/Form.astro";
 import Split from "@wrappers/split/Split.astro";
@@ -80,13 +79,9 @@ const allowedMapEmbedUrl = isAllowedExternalMediaUrl(mapEmbedUrl) ? mapEmbedUrl 
         gap="2xl"
       >
         <Fragment slot="first">
-          <SimpleText
-            class="eyebrow"
-            size="sm"
-            data-prop={at("eyebrow")}
-            text={eyebrow}
-          />
           <Heading
+            eyebrow={eyebrow}
+            data-eyebrow-prop={at("eyebrow")}
             level={headingLevel}
             size={headingSize}
             data-prop={at("heading")}

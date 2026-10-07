@@ -143,14 +143,11 @@ pageSections:
         subtext: ''
       steps:
         - contentSections:
-            - _component: building-blocks/core-elements/simple-text
-              text: GIT FOR DEVELOPERS
-              size: sm
-              class: eyebrow
             - _component: building-blocks/core-elements/heading
               text: You already trust Git with your code
               level: h2
               size: sm
+              eyebrow: GIT FOR DEVELOPERS
             - _component: building-blocks/core-elements/text
               text: >-
                 Your content gets the same treatment: branches, commits,
@@ -165,14 +162,11 @@ pageSections:
               variant: text
           mediaSections: []
         - contentSections:
-            - _component: building-blocks/core-elements/simple-text
-              text: GIT FOR EDITORS
-              size: sm
-              class: eyebrow
             - _component: building-blocks/core-elements/heading
               text: They don’t want to learn Git. They don’t have to.
               level: h2
               size: sm
+              eyebrow: GIT FOR EDITORS
             - _component: building-blocks/core-elements/text
               text: >-
                 Editors work on the page itself and see the change before it
@@ -188,14 +182,11 @@ pageSections:
               variant: text
           mediaSections: []
         - contentSections:
-            - _component: building-blocks/core-elements/simple-text
-              text: GIT FOR AI AGENTS
-              size: sm
-              class: eyebrow
             - _component: building-blocks/core-elements/heading
               text: Agents have full context
               level: h2
               size: sm
+              eyebrow: GIT FOR AI AGENTS
             - _component: building-blocks/core-elements/text
               text: >-
                 Point your coding agent at the project and it sees everything:

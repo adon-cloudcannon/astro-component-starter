@@ -389,11 +389,6 @@ pageSections:
         - _component: building-blocks/wrappers/scroll-deck/scroll-deck-card
           label: No forced upgrades or surprise migrations
           contentSections:
-            - _component: building-blocks/core-elements/simple-text
-              text: LOW MAINTENANCE
-              alignmentHorizontal: center
-              size: md
-              class: eyebrow
             - _component: building-blocks/core-elements/heading
               text: Your sites just run
               level: h3
@@ -401,6 +396,7 @@ pageSections:
               alignmentHorizontal: center
               iconColor: default
               iconPosition: before
+              eyebrow: LOW MAINTENANCE
             - _component: building-blocks/core-elements/text
               text: Forget update queues, plugin conflicts, and things breaking while you
                 sleep.
@@ -498,11 +494,6 @@ pageSections:
         - _component: building-blocks/wrappers/scroll-deck/scroll-deck-card
           label: Scale changes nothing
           contentSections:
-            - _component: building-blocks/core-elements/simple-text
-              text: HIGH PERFORMANCE
-              alignmentHorizontal: center
-              size: md
-              class: eyebrow
             - _component: building-blocks/core-elements/heading
               text: Fast everywhere
               level: h3
@@ -510,6 +501,7 @@ pageSections:
               alignmentHorizontal: center
               iconColor: default
               iconPosition: before
+              eyebrow: HIGH PERFORMANCE
             - _component: building-blocks/core-elements/text
               text: Pages are pre-built and served from a CDN, so sites load fast anywhere in
                 the world.

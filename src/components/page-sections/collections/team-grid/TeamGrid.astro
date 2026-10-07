@@ -3,7 +3,6 @@ import { bandPattern, bandHaze } from "@component-utils/bandStyle.mjs";
 import { nestedProps } from "@component-utils/nestedProps.mjs";
 import CustomSection from "@builders/custom-section/CustomSection.astro";
 import Heading from "@core-elements/heading/Heading.astro";
-import SimpleText from "@core-elements/simple-text/SimpleText.astro";
 import Text from "@core-elements/text/Text.astro";
 import TeamItem from "@page-sections/collections/team-grid/TeamItem.astro";
 import CardGrid from "@wrappers/card-grid/CardGrid.astro";
@@ -61,14 +60,9 @@ const itemHeadingLevel = nextHeadingLevel(headingLevel);
   useDefaultEditableBinding={useDefaultEditableBinding}
   {...htmlAttributes}
 >
-  <SimpleText
-    alignmentHorizontal="center"
-    class="eyebrow"
-    data-prop={at("eyebrow")}
-    text={eyebrow}
-    size="sm"
-  />
   <Heading
+    eyebrow={eyebrow}
+    data-eyebrow-prop={at("eyebrow")}
     class="team-grid-heading"
     level={headingLevel}
     size={headingSize}

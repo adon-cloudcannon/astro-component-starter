@@ -28,7 +28,6 @@ import { rootMirror } from "@component-utils/rootMirror.mjs";
 import CustomSection from "@page-sections/builders/custom-section/CustomSection.astro";
 import Component from "@component-utils/renderBlock.astro";
 import Heading from "@core-elements/heading/Heading.astro";
-import SimpleText from "@core-elements/simple-text/SimpleText.astro";
 import Text from "@core-elements/text/Text.astro";
 import type { ContentBlock } from "../../../../types";
 
@@ -233,23 +232,15 @@ const mirror = rootMirror({
       <div class="pinned-steps-header flow">
         {/* Each guarded on its own content. An empty element is still a
             sibling, and the flow layer pays for every one after the first. */}
-        {eyebrow && (
-          <SimpleText
-            alignmentHorizontal={alignmentHorizontal}
-            class="eyebrow"
-            size="sm"
-            text={eyebrow}
-          />
-        )}
-        {heading && (
-          <Heading
-            alignmentHorizontal={alignmentHorizontal}
-            level={headingLevel}
-            size={headingSize}
-          >
-            {heading}
-          </Heading>
-        )}
+        <Heading
+          eyebrow={eyebrow}
+          data-eyebrow-prop={at("eyebrow")}
+          alignmentHorizontal={alignmentHorizontal}
+          level={headingLevel}
+          size={headingSize}
+        >
+          {heading}
+        </Heading>
         {subtext && (
           <Text
             alignmentHorizontal={alignmentHorizontal}

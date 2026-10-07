@@ -19,7 +19,6 @@ import { subtextMeasure } from "@component-utils/subtextMeasure.mjs";
 import ScrollStepper from "@wrappers/scroll-stepper/ScrollStepper.astro";
 import Heading from "@core-elements/heading/Heading.astro";
 import Text from "@core-elements/text/Text.astro";
-import SimpleText from "@core-elements/simple-text/SimpleText.astro";
 
 /* `content` and `style` are the editor's tabs, flattened straight back into
    the names below. `at()` writes the frontmatter path a binding needs. */
@@ -106,25 +105,16 @@ const hasHeader = Boolean(eyebrow || heading || subtext);
           first a space-before — so a band with a heading and nothing else was
           drawing an empty eyebrow and an empty subtext around it and paying
           for both in spacing. */}
-      {eyebrow && (
-        <SimpleText
-          alignmentHorizontal={alignmentHorizontal}
-          class="eyebrow"
-          size="sm"
-          data-prop={at("eyebrow")}
-          text={eyebrow}
-        />
-      )}
-      {heading && (
-        <Heading
-          alignmentHorizontal={alignmentHorizontal}
-          level={headingLevel}
-          size={headingSize}
-          data-prop={at("heading")}
-        >
-          {heading}
-        </Heading>
-      )}
+      <Heading
+        eyebrow={eyebrow}
+        data-eyebrow-prop={at("eyebrow")}
+        alignmentHorizontal={alignmentHorizontal}
+        level={headingLevel}
+        size={headingSize}
+        data-prop={at("heading")}
+      >
+        {heading}
+      </Heading>
       {subtext && (
         <Text
           alignmentHorizontal={alignmentHorizontal}
