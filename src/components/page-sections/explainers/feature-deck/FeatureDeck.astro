@@ -23,7 +23,13 @@ import SimpleText from "@core-elements/simple-text/SimpleText.astro";
 /* `content` and `style` are the editor's tabs, flattened straight back into
    the names below. `at()` writes the frontmatter path a binding needs. */
 const { props, at } = nestedProps(Astro.props, {
-  nest: { heading: ["eyebrow", "heading", "headingLevel", "headingSize"] },
+  /* How far below the top a card pins is a property of the band, not of what
+     the band says, so it sits with the rest of the band's chrome. */
+  extraStyleKeys: ["stickyOffset"],
+  nest: {
+    heading: ["eyebrow", "heading", "headingLevel", "headingSize"],
+    subtext: ["subtext", "subtextSize", "subtextWidth"],
+  },
 });
 
 const {
@@ -108,7 +114,13 @@ const subtextCap = subtextMeasure(subtextWidth);
   <Text
     class="subtext"
     data-prop={at("subtext")}
-    style={subtextCap ? `max-inline-size: ${subtextCap}; margin-inline: auto; justify-self: center` : undefined}    size={subtextSize}    text={subtext}
+    style={
+      subtextCap
+        ? `max-inline-size: ${subtextCap}; margin-inline: auto; justify-self: center`
+        : undefined
+    }
+    size={subtextSize}
+    text={subtext}
   />
 
   <ScrollDeck

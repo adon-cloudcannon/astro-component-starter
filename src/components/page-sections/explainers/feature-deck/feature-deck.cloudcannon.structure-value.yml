@@ -5,15 +5,16 @@ tabbed: true
 value:
   _component: page-sections/explainers/feature-deck
   content:
-    sectionLabel: ''
+    sectionLabel: ""
     heading:
-      eyebrow: ''
-      heading: ''
+      eyebrow: ""
+      heading: ""
       headingLevel: h2
       headingSize: lg
-    subtext: ''
-    subtextSize: md
-    subtextWidth: ''
+    subtext:
+      subtext: ""
+      subtextSize: md
+      subtextWidth: ""
     cards:
       - _component: building-blocks/wrappers/scroll-deck/scroll-deck-card
         label: AI-ready
@@ -26,10 +27,10 @@ value:
             size: lg
           - _component: building-blocks/core-elements/text
             text: Code, content and config live together in Git.
-    stickyOffset: md
     cardColorScheme: light
     showRail: true
   style:
+    stickyOffset: md
     backgroundColor: light-sand
     pattern: none
     fade: none

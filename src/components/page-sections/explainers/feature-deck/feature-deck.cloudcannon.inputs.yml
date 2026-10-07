@@ -48,9 +48,14 @@ content.heading.headingSize:
       - id: md
         name: Header 4
 content.subtext:
+  type: object
+  label: Subtext
+  options:
+    subtype: object
+content.subtext.subtext:
   type: markdown
   comment: Supporting copy beneath the heading.
-content.subtextSize:
+content.subtext.subtextSize:
   type: select
   comment: How big the supporting line under the heading is.
   options:
@@ -61,7 +66,7 @@ content.subtextSize:
         name: Regular
       - id: xl
         name: Large
-content.subtextWidth:
+content.subtext.subtextWidth:
   type: select
   label: Subtext width
   comment: How wide the supporting line is allowed to run before it wraps.
@@ -82,7 +87,7 @@ content.cards:
   comment: >-
     The cards in the deck, in the order they stack. Each holds ordinary content
     blocks, so a card can carry whatever a section can.
-content.stickyOffset:
+style.stickyOffset:
   type: select
   comment: How far below the top of the screen a card pins.
   options:
