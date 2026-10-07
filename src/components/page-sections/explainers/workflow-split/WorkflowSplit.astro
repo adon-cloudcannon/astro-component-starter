@@ -103,25 +103,21 @@ const panelList: PanelProps[] = [leftPanel, rightPanel].filter(Boolean) as Panel
 /** Where a panel's own fields live, for the editor. */
 const panelPath = (index: number) => at(index === 0 ? "leftPanel" : "rightPanel");
 
-
-
 /* The middle card's fields, which sit in `middlePanel` now and were loose
-   `centre*` props before it. */
-/**
- * The middle card's chrome, which is the same wherever this band is drawn.
+ * `centre*` props before it.
  *
- * It was in the page's frontmatter and hidden from the editor, which made it
- * look like content that happened to be locked. It is not content: the card
- * is a picture of a Git repo and these are what make it look like one.
- *
- * The colour is a value rather than a token on purpose. It is not in the
- * palette, and the nearest token is a different colour by enough to see.
+ * The card is a picture of a Git repo, so most of its chrome is furniture
+ * rather than copy and stays below as constants. The four an editor can reach
+ * are the ones that change what repo it is a picture of: the mark, the name,
+ * whether the branch light shows, and which way the card is painted.
  */
-const CENTRE_COLOR = "#26262F";
 const CENTRE_MIN_HEIGHT = 366;
-const CENTRE_ICON = "git-pull-request-arrow";
-const CENTRE_TITLE = "Your Git repo";
 const CENTRE_BRANCH = "main";
+
+const centreIcon = middlePanel?.iconName ?? "git-pull-request-arrow";
+const centreTitle = middlePanel?.title ?? "Your Git repo";
+const centreBranch = middlePanel?.showBranch ?? true;
+const centreColor = middlePanel?.cardColor === "light" ? "light" : "dark";
 
 /* The one thing the middle card takes from the page: its commit rows. */
 const centreRows = middlePanel?.centreRows ?? [];
@@ -160,7 +156,7 @@ const feedKeyframes = feedSteps
       { length: feedSteps },
       (_unused, index) =>
         `${stop(index * CYCLE_MS + LANDS_MS)}{transform:translateY(${-index * ROW_PITCH}px)}` +
-        `${stop(index * CYCLE_MS + LANDS_MS + SLIDE_MS)}{transform:translateY(${-(index + 1) * ROW_PITCH}px)}`,
+        `${stop(index * CYCLE_MS + LANDS_MS + SLIDE_MS)}{transform:translateY(${-(index + 1) * ROW_PITCH}px)}`
     ).join("")}100%{transform:translateY(${-feedSteps * ROW_PITCH}px)}}`
   : "";
 
@@ -198,7 +194,12 @@ const feedKeyframes = feedSteps
   </Heading>
   <Text
     class="subtext"
-    style={subtextCap ? `max-inline-size: ${subtextCap}; margin-inline: auto; justify-self: center` : undefined}    size={subtextSize}
+    style={
+      subtextCap
+        ? `max-inline-size: ${subtextCap}; margin-inline: auto; justify-self: center`
+        : undefined
+    }
+    size={subtextSize}
     alignmentHorizontal="center"
     data-prop={at("subtext")}
     text={subtext}
@@ -224,9 +225,11 @@ const feedKeyframes = feedSteps
               class="workflow-illustration"
               source={(panel.image ?? {}).imageSource}
               alt={(panel.image ?? {}).imageAlt}
-              style={(panel.image ?? {}).imageOverlap
-                ? { "--illustration-overlap": `${(panel.image ?? {}).imageOverlap}px` }
-                : undefined}
+              style={
+                (panel.image ?? {}).imageOverlap
+                  ? { "--illustration-overlap": `${(panel.image ?? {}).imageOverlap}px` }
+                  : undefined
+              }
               data-prop-src={`${panelPath(index)}.image.imageSource`}
               data-prop-alt={`${panelPath(index)}.image.imageAlt`}
             />
@@ -238,49 +241,53 @@ const feedKeyframes = feedSteps
               — the panel's own centre is higher, since the illustration takes
               the row above. */}
           <div class="workflow-card-slot">
-          <Card
-            accentColor={panel.accentColor || "none"}
-            backgroundColor="accent-tint"
-            border={true}
-            rounded={true}
-            paddingHorizontal="lg"
-            paddingVertical="lg"
-          >
-            <SimpleText
-              class="eyebrow"
-              size="sm"
-              data-prop={`${panelPath(index)}.eyebrow`}
-              text={panel.eyebrow}
-            />
-            <Heading
-              level="h3"
-              size="xs"
-              data-prop={`${panelPath(index)}.heading`}
+            <Card
+              accentColor={panel.accentColor || "none"}
+              backgroundColor="accent-tint"
+              border={true}
+              rounded={true}
+              paddingHorizontal="lg"
+              paddingVertical="lg"
             >
-              {panel.heading}
-            </Heading>
-            <List
-              class="workflow-points"
-              items={panel.items}
-              listType="icon"
-              size="md"
-              data-children-prop={`${panelPath(index)}.items`}
-            />
-            {/* The link is a Button, which is the project's rule for one: it
+              <SimpleText
+                class="eyebrow"
+                size="sm"
+                data-prop={`${panelPath(index)}.eyebrow`}
+                text={panel.eyebrow}
+              />
+              <Heading
+                level="h3"
+                size="xs"
+                data-prop={`${panelPath(index)}.heading`}
+              >
+                {panel.heading}
+              </Heading>
+              <List
+                class="workflow-points"
+                items={panel.items}
+                listType="icon"
+                size="md"
+                data-children-prop={`${panelPath(index)}.items`}
+              />
+              {/* The link is a Button, which is the project's rule for one: it
                 carries where it goes as well as what it says, and the editor
                 gets the same fields it gets everywhere else. */}
-            {(panel.buttonSections ?? []).length > 0 && (
-              <ButtonGroup
-                class="workflow-link"
-                buttonSections={(panel.buttonSections ?? [])}
-                data-children-prop={`${panelPath(index)}.buttonSections`}
-              />
-            )}
-          </Card>
+              {(panel.buttonSections ?? []).length > 0 && (
+                <ButtonGroup
+                  class="workflow-link"
+                  buttonSections={panel.buttonSections ?? []}
+                  data-children-prop={`${panelPath(index)}.buttonSections`}
+                />
+              )}
+            </Card>
             {index < 2 && (
               <span
                 class:list={["workflow-connector", index === 0 ? "to-end" : "to-start"]}
-                style={panel.accentColor ? { "--workflow-connector": `var(--${panel.accentColor})` } : undefined}
+                style={
+                  panel.accentColor
+                    ? { "--workflow-connector": `var(--${panel.accentColor})` }
+                    : undefined
+                }
                 data-kind={index === 0 ? "left" : "right"}
                 aria-hidden="true"
               >
@@ -300,44 +307,54 @@ const feedKeyframes = feedSteps
             the wrong width. */}
         {index === 0 && (
           <div
-            class="workflow-centre-card"
+            class:list={["workflow-centre-card", `centre-${centreColor}`]}
             style={{
-              "--workflow-centre-color": CENTRE_COLOR,
               "--workflow-centre-height": `${CENTRE_MIN_HEIGHT}px`,
             }}
           >
             <p class="workflow-centre-title">
-              <Icon name={CENTRE_ICON} size="md" />
-              <span>{CENTRE_TITLE}</span>
-              <span class="workflow-centre-branch">
-                <span class="workflow-centre-light" aria-hidden="true" />
-                <span>{CENTRE_BRANCH}</span>
-              </span>
+              <Icon
+                name={centreIcon}
+                size="md"
+              />
+              <span>{centreTitle}</span>
+              {centreBranch && (
+                <span class="workflow-centre-branch">
+                  <span
+                    class="workflow-centre-light"
+                    aria-hidden="true"
+                  />
+                  <span>{CENTRE_BRANCH}</span>
+                </span>
+              )}
             </p>
-              {centreRows.length > 0 && (
-                <div class="workflow-centre-feed">
-                  {/* Twice. The track slides by exactly the length of one
+            {centreRows.length > 0 && (
+              <div class="workflow-centre-feed">
+                {/* Twice. The track slides by exactly the length of one
                       copy and then repeats, and because the second copy sits
                       where the first started there is nothing to reset and no
                       seam to hide — which is what lets this be CSS at all. */}
-                  <ul
-                    class="workflow-centre-rows"
-                    style={{ animationName: feedName, animationDuration: `${feedPeriod}ms` }}
-                  >
-                    {[...feedRows, ...feedRows].map((row: Record<string, unknown>, index: number) => (
-                      <li
-                        class:list={["workflow-centre-row", `kind-${row.kind ?? "left"}`]}
-                        aria-hidden={index >= feedSteps ? "true" : undefined}
-                      >
-                        <span class="workflow-centre-dot" aria-hidden="true" />
-                        <span class="workflow-centre-author">{row.author}</span>
-                        <span class="workflow-centre-message">{row.message}</span>
-                        <span class="workflow-centre-hash">{row.hash}</span>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-              )}
+                <ul
+                  class="workflow-centre-rows"
+                  style={{ animationName: feedName, animationDuration: `${feedPeriod}ms` }}
+                >
+                  {[...feedRows, ...feedRows].map((row: Record<string, unknown>, index: number) => (
+                    <li
+                      class:list={["workflow-centre-row", `kind-${row.kind ?? "left"}`]}
+                      aria-hidden={index >= feedSteps ? "true" : undefined}
+                    >
+                      <span
+                        class="workflow-centre-dot"
+                        aria-hidden="true"
+                      />
+                      <span class="workflow-centre-author">{row.author}</span>
+                      <span class="workflow-centre-message">{row.message}</span>
+                      <span class="workflow-centre-hash">{row.hash}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            )}
           </div>
         )}
       </Fragment>
@@ -345,7 +362,10 @@ const feedKeyframes = feedSteps
   </div>
 </CustomSection>
 
-<style is:inline set:html={feedKeyframes} />
+<style
+  is:inline
+  set:html={feedKeyframes}
+></style>
 
 <!-- Top level on purpose. @keyframes cannot be nested inside a style rule:
      written inside `.workflow-split { … }` they are dropped without warning,
@@ -434,6 +454,38 @@ const feedKeyframes = feedSteps
          design draws it: all three finish at the same line, and this one is 45
          taller. Bottom-aligned rather than given a top offset, so it stays put
          however tall the illustrations above the other two turn out. */
+      /* The card is painted one of two ways, and everything inside it is a
+         colour of that painting rather than of the site: a Git client's rows,
+         rule, hash and branch light all sit on its own surface. Both sets are
+         written here as one token each so the markup below never branches.
+
+         The dark one is the band's own inverse colour, the same one the
+         background picker calls Dark. It was a literal before, #26262F, which
+         is close enough to read as the same card and far enough to not be. */
+      .workflow-centre-card.centre-dark {
+        --workflow-centre-color: var(--black);
+        --workflow-centre-title: var(--white);
+        --workflow-centre-rule: #32333d;
+        --workflow-centre-row-bg: rgb(255 255 255 / 5%);
+        --workflow-centre-row-text: #cfd2e8;
+        --workflow-centre-hash: #5a6080;
+        --workflow-branch-color: #cfd2e8;
+      }
+
+      /* Sand, the same colour the cards either side of this one are drawn on.
+         The row fill and the rule are tints of the card rather than colours of
+         their own, so they follow it the way the pattern ink follows its
+         band. */
+      .workflow-centre-card.centre-light {
+        --workflow-centre-color: var(--sand);
+        --workflow-centre-title: var(--color-text-strong);
+        --workflow-centre-rule: color-mix(in srgb, var(--black) 14%, transparent);
+        --workflow-centre-row-bg: color-mix(in srgb, var(--black) 4%, transparent);
+        --workflow-centre-row-text: var(--color-text);
+        --workflow-centre-hash: color-mix(in srgb, var(--color-text) 55%, transparent);
+        --workflow-branch-color: var(--color-text-muted);
+      }
+
       .workflow-centre-card {
         align-self: end;
         /* Positioned *and* lifted, so it takes part in z-order and wins.
@@ -443,7 +495,7 @@ const feedKeyframes = feedSteps
            The pulse has to disappear beneath this from either side. */
         position: relative;
         z-index: 1;
-        background-color: var(--workflow-centre-color, var(--color-bg-muted));
+        background-color: var(--workflow-centre-color);
         /* --radius-card, not --radius-lg: the cards either side of it round
            at 18 and the generic large radius is 16, so the middle panel was a
            touch squarer than its neighbours. */
@@ -463,8 +515,8 @@ const feedKeyframes = feedSteps
            pixel tall. It runs the content column, inset 20 each side, not the
            card's full width — the first reading said it reached the right edge
            and that was the card's own edge highlight, not the line. */
-        border-block-end: 1px solid var(--workflow-panel-rule, #32333d);
-        color: var(--white);
+        border-block-end: 1px solid var(--workflow-centre-rule);
+        color: var(--workflow-centre-title);
         display: flex;
         font-size: 14px;
         font-weight: 700;
@@ -495,7 +547,7 @@ const feedKeyframes = feedSteps
          away from this traffic-light green. */
       .workflow-centre-branch {
         align-items: center;
-        color: var(--workflow-branch-color, #cfd2e8);
+        color: var(--workflow-branch-color);
         display: flex;
         font-family: var(--font-mono);
         font-size: 10.5px;
@@ -521,9 +573,8 @@ const feedKeyframes = feedSteps
            stands in for pausing the animation, now that there is no script to
            pause it with. */
         content-visibility: auto;
-        contain-intrinsic-size: auto calc(
-          var(--workflow-rows-visible) * 30px + (var(--workflow-rows-visible) - 1) * 7px
-        );
+        contain-intrinsic-size: auto
+          calc(var(--workflow-rows-visible) * 30px + (var(--workflow-rows-visible) - 1) * 7px);
         overflow: hidden;
       }
 
@@ -546,10 +597,10 @@ const feedKeyframes = feedSteps
          gives a white bar where the design has a barely-lifted panel. */
       .workflow-centre-row {
         align-items: center;
-        background-color: rgb(255 255 255 / 5%);
+        background-color: var(--workflow-centre-row-bg);
         block-size: 30px;
         border-radius: 8px;
-        color: #cfd2e8;
+        color: var(--workflow-centre-row-text);
         display: flex;
         font-family: var(--font-mono);
         font-size: 11px;
@@ -572,6 +623,18 @@ const feedKeyframes = feedSteps
       .workflow-centre-row.kind-right {
         --workflow-row-dot: var(--sunset);
         --workflow-row-author: #f0a07a;
+      }
+
+      /* The author colours above are lifted off a dark surface, so on the
+         light card they are the same hues read the other way: the dot keeps
+         its colour, since a 6px mark wants to stay bright, and the label takes
+         the palette entry rather than the lightened version of it. */
+      .centre-light .workflow-centre-row.kind-left {
+        --workflow-row-author: var(--pacific);
+      }
+
+      .centre-light .workflow-centre-row.kind-right {
+        --workflow-row-author: var(--sunset);
       }
 
       .workflow-centre-dot {
@@ -600,7 +663,7 @@ const feedKeyframes = feedSteps
       }
 
       .workflow-centre-hash {
-        color: #5a6080;
+        color: var(--workflow-centre-hash);
         flex: none;
         margin-inline-start: auto;
       }
@@ -640,7 +703,11 @@ const feedKeyframes = feedSteps
          workflow panels' own rules and the mega menu's backing were the
          others. */
       .workflow-connector {
-        background-color: color-mix(in srgb, var(--workflow-connector, var(--color-brand)) 26%, transparent);
+        background-color: color-mix(
+          in srgb,
+          var(--workflow-connector, var(--color-brand)) 26%,
+          transparent
+        );
         block-size: 2px;
         border-radius: 1px;
         inline-size: var(--scroll-stepper-gap, 4rem);
@@ -695,7 +762,8 @@ const feedKeyframes = feedSteps
         /* The glow the design gives the connector's own dots: a drop shadow
            with no offset at radius 8, 0.7 on the blue and 0.6 on the orange.
            One value here — at this size the difference is not visible. */
-        box-shadow: 0 0 8px color-mix(in srgb, var(--workflow-connector, var(--color-brand)) 65%, transparent);
+        box-shadow: 0 0 8px
+          color-mix(in srgb, var(--workflow-connector, var(--color-brand)) 65%, transparent);
         inline-size: var(--workflow-pulse-size);
         /* Centred on the line's start, not butted against it. Left at 0 its
            left edge sat on the card and its centre was 6px into the gap, so it
@@ -746,7 +814,11 @@ const feedKeyframes = feedSteps
 
       .workflow-connector.to-end::before,
       .workflow-connector.to-start::after {
-        background-color: color-mix(in srgb, var(--workflow-connector, var(--color-brand)) 33%, transparent);
+        background-color: color-mix(
+          in srgb,
+          var(--workflow-connector, var(--color-brand)) 33%,
+          transparent
+        );
       }
 
       /* The drawing sits on the card's top edge and dips into it: 24px on the
@@ -760,7 +832,6 @@ const feedKeyframes = feedSteps
         justify-self: center;
         margin-block-end: calc(-1 * var(--illustration-overlap, 0px));
       }
-
     }
   }
 
@@ -771,7 +842,10 @@ const feedKeyframes = feedSteps
      for the blue column. */
   @layer page-sections {
     .workflow-split .workflow-panel .eyebrow,
-    .workflow-split .workflow-panel .eyebrow :where(.simple-text-content, .simple-text-inner, p, span),
+    .workflow-split
+      .workflow-panel
+      .eyebrow
+      :where(.simple-text-content, .simple-text-inner, p, span),
     .workflow-split .workflow-points .icon {
       color: var(--card-accent, var(--color-brand));
     }
@@ -852,4 +926,3 @@ const feedKeyframes = feedSteps
     }
   }
 </style>
-

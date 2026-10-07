@@ -243,6 +243,47 @@ content.rightPanel.buttonSections:
   options:
     structures: _structures.buttonSections
 
+content.middlePanel.iconName:
+  type: select
+  label: Repo mark
+  comment: The icon in the card's title bar.
+  options:
+    values: data.icons
+    preview:
+      text:
+        - key: iconName
+      image:
+        - template: src/icons/{iconName}.svg
+content.middlePanel.title:
+  type: text
+  label: Repo name
+  comment: The name beside the mark, in the card's title bar.
+content.middlePanel.showBranch:
+  type: switch
+  label: Show the branch
+  comment: Closes the title bar with a status light and the branch name.
+content.middlePanel.cardColor:
+  type: select
+  label: Card colour
+  comment: Which way the card is painted. Everything inside it follows.
+  options:
+    values:
+      - id: dark
+        name: Dark
+        swatch: square
+        color: "#1D1B17"
+      - id: light
+        name: Sand
+        swatch: square
+        color: "#FBF6E9"
+    picker_view: card
+    preview:
+      icon:
+        - key: swatch
+      icon_color:
+        - key: color
+      text:
+        - key: name
 content.middlePanel.centreRows:
   type: array
   comment: The commit rows down the card.

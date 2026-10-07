@@ -5,59 +5,63 @@ tabbed: true
 value:
   _component: page-sections/explainers/workflow-split
   content:
-    sectionLabel: ''
+    sectionLabel: ""
     heading:
-      eyebrow: ''
+      eyebrow: ""
       heading: Two workflows. One source of truth.
       headingLevel: h2
       headingSize: lg
     subtext:
       subtext: Editors edit visually, developers stay in code.
       subtextSize: md
-      subtextWidth: ''
+      subtextWidth: ""
     buttonSections: []
     leftPanel:
       accentColor: pacific
       eyebrow: EDITORS
       heading: Work visually
       image:
-        imageSource: ''
-        imageAlt: ''
+        imageSource: ""
+        imageAlt: ""
         imageOverlap: 0
       items:
         - text: Make changes visually on the page
       buttonSections:
         - _component: building-blocks/core-elements/button
           text: Learn more
-          link: ''
+          link: ""
           variant: text
           iconName: move-right
           iconPosition: after
           size: md
     middlePanel:
+      iconName: git-pull-request-arrow
+      title: Your Git repo
+      showBranch: true
+      cardColor: dark
       centreRows:
         - kind: left
           author: editor
-          message: 'content: new blog post'
+          message: "content: new blog post"
           hash: c0d8f1
         - kind: right
           author: dev
-          message: 'feat: pricing component'
+          message: "feat: pricing component"
           hash: 7b1e44
     rightPanel:
       accentColor: sunset
       eyebrow: DEVELOPERS
       heading: Stay in code
       image:
-        imageSource: ''
-        imageAlt: ''
+        imageSource: ""
+        imageAlt: ""
         imageOverlap: 0
       items:
         - text: Build with any static site generator
       buttonSections:
         - _component: building-blocks/core-elements/button
           text: Learn more
-          link: ''
+          link: ""
           variant: text
           iconName: move-right
           iconPosition: after
