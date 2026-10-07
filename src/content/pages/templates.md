@@ -9,15 +9,12 @@ pageSections:
       heading: Templates with static site generators
       headingLevel: h1
       headingSize: xl
-      subtext: >-
-        Learn about static sites, Git workflows, and content management for your next project.
+      subtext: Learn about static sites, Git workflows, and content management for your next project.
       subtextSize: xl
       subtextWidth: md
     style:
       backgroundColor: light-sand
-      background:
-        type: pattern
-        pattern: pegboard
+      pattern: pegboard
       haze: true
   - _component: page-sections/collections/collection-toolbar
     content:
@@ -66,8 +63,7 @@ pageSections:
               level: h3
               size: xs
             - _component: building-blocks/core-elements/simple-text
-              text: >-
-                A flexible Astro template built with Astro 6 and Astro Component Starter components.
+              text: A flexible Astro template built with Astro 6 and Astro Component Starter components.
               size: sm
             - _component: building-blocks/core-elements/button
               text: Learn more
@@ -84,8 +80,7 @@ pageSections:
               level: h3
               size: xs
             - _component: building-blocks/core-elements/simple-text
-              text: >-
-                The Astro Component Starter is easy to customize and simple to maintain.
+              text: The Astro Component Starter is easy to customize and simple to maintain.
               size: sm
             - _component: building-blocks/core-elements/button
               text: Learn more
@@ -103,7 +98,8 @@ pageSections:
               size: xs
             - _component: building-blocks/core-elements/simple-text
               text: >-
-                The Astro Starter provides developers with everything they need to quickly get going.
+                The Astro Starter provides developers with everything they need to quickly get
+                going.
               size: sm
             - _component: building-blocks/core-elements/button
               text: Learn more
@@ -120,8 +116,7 @@ pageSections:
               level: h3
               size: xs
             - _component: building-blocks/core-elements/simple-text
-              text: >-
-                A starting point for developers looking to build a multilingual website.
+              text: A starting point for developers looking to build a multilingual website.
               size: sm
             - _component: building-blocks/core-elements/button
               text: Learn more
@@ -138,8 +133,7 @@ pageSections:
               level: h3
               size: xs
             - _component: building-blocks/core-elements/simple-text
-              text: >-
-                The Hugo Starter serves as an ideal template for developers who want to move fast.
+              text: The Hugo Starter serves as an ideal template for developers who want to move fast.
               size: sm
             - _component: building-blocks/core-elements/button
               text: Learn more
@@ -156,8 +150,7 @@ pageSections:
               level: h3
               size: xs
             - _component: building-blocks/core-elements/simple-text
-              text: >-
-                The Eleventy Starter provides developers with everything they need to get started.
+              text: The Eleventy Starter provides developers with everything they need to get started.
               size: sm
             - _component: building-blocks/core-elements/button
               text: Learn more
@@ -167,10 +160,7 @@ pageSections:
               size: sm
     style:
       backgroundColor: light-sand
-      background:
-        type: pattern
-        pattern: grid
-        mask: fade
+      pattern: grid-fade
       paddingVertical: 4xl
   - _component: page-sections/conversion/cta-banner
     content:
@@ -180,5 +170,5 @@ pageSections:
       linkText: Check out our documentation or contact us with any questions you have
       link: /support/
       imageSource: /src/assets/images/marketing/rocks-corner-3806-70523.png
-      imageAlt: ""
+      imageAlt: ''
 ---

@@ -16,6 +16,7 @@
  * drawn and inert — they need each card to declare its category and its
  * generator, which is a content change rather than a markup one.
  */
+import { bandPattern, bandHaze } from "@component-utils/bandStyle.mjs";
 import { nestedProps } from "@component-utils/nestedProps.mjs";
 import CustomSection from "@builders/custom-section/CustomSection.astro";
 import Icon from "@core-elements/icon/Icon.astro";
@@ -42,7 +43,9 @@ const {
   colorScheme = "inherit",
   lockColorScheme = false,
   backgroundColor = "light-sand",
-  background,
+  /** The texture behind the band, by name. */
+  pattern = "none",
+  /** Whether the heading sits on a pool of the band’s own colour. */
   haze = false,
   class: className,
   useDefaultEditableBinding = false,
@@ -64,8 +67,8 @@ const list: Filter[] = (Array.isArray(filters) ? filters : []).filter((f) => f?.
   colorScheme={colorScheme}
   lockColorScheme={lockColorScheme}
   backgroundColor={backgroundColor}
-  background={background}
-  haze={haze}
+  background={bandPattern(pattern)}
+  haze={bandHaze(haze)}
   useDefaultEditableBinding={useDefaultEditableBinding}
   {...htmlAttributes}
 >

@@ -61,8 +61,8 @@ pageSections:
           titleSize: xs
           description: >-
             We trust in the work you do, and we know that productivity isn't always measured by time
-            at your desk. Our four-day work week (32 hours per week) means more time with your family
-            and friends, and more energy for the work we love.
+            at your desk. Our four-day work week (32 hours per week) means more time with your
+            family and friends, and more energy for the work we love.
           iconName: smile
           iconColor: golden
           iconBackground: true
@@ -73,8 +73,8 @@ pageSections:
         - title: Employee stock options
           titleSize: xs
           description: >-
-            When you have a stake in the product you're making, we all win. All CloudCannon employees
-            receive generous stock options, so we're all working towards the same goal.
+            When you have a stake in the product you're making, we all win. All CloudCannon
+            employees receive generous stock options, so we're all working towards the same goal.
           iconName: trending-up
           iconColor: sunset
           iconBackground: true
@@ -98,7 +98,8 @@ pageSections:
           titleSize: xs
           description: >-
             The longer you're with us, the more you can take time to relax. With every year of
-            employment, you'll gain an extra day of annual leave to add to your total, up to 25 days.
+            employment, you'll gain an extra day of annual leave to add to your total, up to 25
+            days.
           iconName: sun
           iconColor: harbour
           iconBackground: true
@@ -110,8 +111,8 @@ pageSections:
           titleSize: xs
           description: >-
             We offer up to 52 weeks of parental leave, 26 of which are fully paid. This includes
-            biological, adoptive, and foster parents. Partners can also receive up to 4 weeks of paid
-            leave.
+            biological, adoptive, and foster parents. Partners can also receive up to 4 weeks of
+            paid leave.
           iconName: baby
           iconColor: peachy
           iconBackground: true
@@ -146,9 +147,9 @@ pageSections:
         - title: Comfortable setup
           titleSize: xs
           description: >-
-            We offer different options for how you work, to help you stay healthy. We have adjustable
-            standing desks and monitors, comfortable chairs, and even wobble boards for those who
-            want to keep a bit more active at work.
+            We offer different options for how you work, to help you stay healthy. We have
+            adjustable standing desks and monitors, comfortable chairs, and even wobble boards for
+            those who want to keep a bit more active at work.
           iconName: monitor
           iconColor: sunset
           iconBackground: true
@@ -184,10 +185,7 @@ pageSections:
       features: []
     style:
       backgroundColor: dark
-      background:
-        type: pattern
-        pattern: pegboard
-        mask: fade
+      pattern: pegboard-fade
       paddingVertical: 3xl
   - _component: page-sections/conversion/cta-split
     content:
@@ -205,29 +203,27 @@ pageSections:
           iconPosition: after
           variant: primary
       imageSource: /src/assets/images/marketing/camera-01-1.png
-      imageAlt: ""
+      imageAlt: ''
       camera:
         label: Take a picture
         fit: cover
         shots:
           - source: /src/assets/images/marketing/careers-team-hill.jpg
-            alt: ""
+            alt: ''
             color: var(--light-sand)
           - source: /src/assets/images/marketing/careers-office.jpg
-            alt: ""
+            alt: ''
             color: var(--light-sand)
           - source: /src/assets/images/marketing/careers-picnic.jpg
-            alt: ""
+            alt: ''
             color: var(--light-sand)
           - source: /src/assets/images/marketing/our-story-lake.jpg
-            alt: ""
+            alt: ''
             color: var(--light-sand)
       contentCard: true
       contentCardColor: white
     style:
       backgroundColor: dark-sand
-      background:
-        type: pattern
-        pattern: grid
+      pattern: grid
       paddingVertical: 4xl
 ---

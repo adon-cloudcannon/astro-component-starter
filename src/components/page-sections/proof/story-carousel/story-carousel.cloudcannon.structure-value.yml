@@ -5,55 +5,54 @@ tabbed: true
 value:
   _component: page-sections/proof/story-carousel
   content:
-    sectionLabel: ""
-    eyebrow: ""
+    sectionLabel: ''
+    eyebrow: ''
     heading: Grow your sites, not your headcount.
     headingLevel: h2
     headingSize: lg
     subtext: From fast-moving startups to multi-site agencies, teams ship more.
     subtextSize: md
-    subtextWidth: ""
+    subtextWidth: ''
     stories:
       - accentColor: golden
-        logoSource: ""
-        logoAlt: ""
+        logoSource: ''
+        logoAlt: ''
         figure: 8x
         label: faster content builds
         linkText: Read story
-        link: ""
+        link: ''
       - accentColor: harbour
-        logoSource: ""
-        logoAlt: ""
+        logoSource: ''
+        logoAlt: ''
         figure: 15+
         label: marketing sites
         linkText: Read story
-        link: ""
+        link: ''
       - accentColor: peachy
-        logoSource: ""
-        logoAlt: ""
+        logoSource: ''
+        logoAlt: ''
         figure: 400%
         label: increase in leads generated
         linkText: Read story
-        link: ""
+        link: ''
       - accentColor: moss-350
-        logoSource: ""
-        logoAlt: ""
+        logoSource: ''
+        logoAlt: ''
         figure: 100x
         label: publishing velocity
         linkText: Read story
-        link: ""
+        link: ''
     buttonSections:
       - _component: building-blocks/core-elements/button
         text: See how others did it
         variant: primary
   style:
     backgroundColor: light-sand
-    background:
-      type: image
-      imageSource: ""
+    pattern: none
     maxContentWidth: xl
     paddingHorizontal: gutter
     paddingVertical: 4xl
+    haze: false
 _inputs:
   stories:
     type: array
@@ -70,12 +69,12 @@ _structures:
         icon: bar_chart
         value:
           accentColor: golden
-          logoSource: ""
-          logoAlt: ""
+          logoSource: ''
+          logoAlt: ''
           figure: 8x
           label: faster content builds
           linkText: Read story
-          link: ""
+          link: ''
         _inputs:
           accentColor:
             type: select
@@ -87,31 +86,31 @@ _structures:
                 - id: golden
                   name: Golden
                   swatch: square
-                  color: "#FFAA00"
+                  color: '#FFAA00'
                 - id: harbour
                   name: Harbour
                   swatch: square
-                  color: "#A6C1FA"
+                  color: '#A6C1FA'
                 - id: peachy
                   name: Peachy
                   swatch: square
-                  color: "#F39B7B"
+                  color: '#F39B7B'
                 - id: moss-350
                   name: Moss
                   swatch: square
-                  color: "#95A54D"
+                  color: '#95A54D'
                 - id: pacific
                   name: Pacific
                   swatch: square
-                  color: "#034AD8"
+                  color: '#034AD8'
                 - id: sunset
                   name: Sunset
                   swatch: square
-                  color: "#D85A2C"
+                  color: '#D85A2C'
                 - id: blush
                   name: Blush
                   swatch: square
-                  color: "#E7B0B9"
+                  color: '#E7B0B9'
               picker_view: card
               preview:
                 icon:
@@ -145,5 +144,3 @@ _editables:
     link: true
 _inputs_from_glob:
   - /src/components/page-sections/proof/story-carousel/story-carousel.cloudcannon.inputs.yml
-  - /.cloudcannon/inputs/background.yml
-  - /.cloudcannon/inputs/haze.yml

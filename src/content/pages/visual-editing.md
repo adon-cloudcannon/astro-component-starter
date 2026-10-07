@@ -1,6 +1,4 @@
 ---
-# Generated from the Figma mapping. 3 of 8 blocks are
-# confirmed decisions; the rest are proposals to review on the page.
 _schema: default
 title: Visual Editing
 description: Visual editing that commits to your repo
@@ -10,7 +8,9 @@ pageSections:
       heading:
         heading: Visual editing that commits to your repo
         headingSize: xl
-      subtext: Code, content, and config all sit in one repo as plain files, so agents get the full picture.
+      subtext: >-
+        Code, content, and config all sit in one repo as plain files, so agents get the full
+        picture.
       image:
         imageSource: /src/assets/images/marketing/hero-visual-editing.png
         imageAlt: ''
@@ -63,10 +63,7 @@ pageSections:
           accentColor: sunset
     style:
       backgroundColor: sand
-      background:
-        type: pattern
-        pattern: pegboard
-        mask: fade
+      pattern: pegboard-fade
   - _component: page-sections/conversion/cta-center
     content:
       heading: Here, you don’t need to wait to make changes
@@ -76,15 +73,8 @@ pageSections:
       subtextWidth: md
     style:
       backgroundColor: light-sand
-      background:
-        type: pattern
-        pattern: grid
-        mask: none
-      haze:
-        - x: 0.5357
-          rx: 735px
-          'y': 92.4%
-          ry: 132.5%
+      pattern: grid
+      haze: true
   - _component: building-blocks/wrappers/content-selector
     items:
       - text: >-
@@ -199,7 +189,9 @@ pageSections:
           imageAlt: ''
         - eyebrow: For ENTERPRISE
           title: Every change accounted for
-          description: Set the permissions once, then let teams work with every change recorded in your own repo.
+          description: >-
+            Set the permissions once, then let teams work with every change recorded in your own
+            repo.
           linkText: Learn more
           link: ''
           imageSource: /src/assets/images/marketing/screenshot-2026-08-18-at-14-16-52-1-3806-72940.png
@@ -207,8 +199,5 @@ pageSections:
           imageAlt: ''
     style:
       backgroundColor: sand
-      background:
-        type: pattern
-        pattern: pegboard
-        mask: none
+      pattern: pegboard
 ---

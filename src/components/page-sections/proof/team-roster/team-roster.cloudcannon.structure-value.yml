@@ -5,8 +5,8 @@ tabbed: true
 value:
   _component: page-sections/proof/team-roster
   content:
-    sectionLabel: ""
-    eyebrow: ""
+    sectionLabel: ''
+    eyebrow: ''
     heading: Our team
     headingLevel: h2
     headingSize: lg
@@ -15,29 +15,27 @@ value:
     subtextWidth: sm
     leads:
       - _component: building-blocks/wrappers/team-member
-        name: ""
-        role: ""
-        bio: ""
-        imageSource: ""
-        imageAlt: ""
+        name: ''
+        role: ''
+        bio: ''
+        imageSource: ''
+        imageAlt: ''
         backgroundColor: sunset
-        propSource: ""
+        propSource: ''
         propWidth: 40
-        propAlt: ""
+        propAlt: ''
     members:
       - _component: building-blocks/wrappers/team-member
-        name: ""
-        role: ""
-        imageSource: ""
-        imageAlt: ""
+        name: ''
+        role: ''
+        imageSource: ''
+        imageAlt: ''
         backgroundColor: pacific
-        propSource: ""
+        propSource: ''
         propWidth: 40
-        propAlt: ""
+        propAlt: ''
   style:
-    background:
-      type: image
-      imageSource: ""
+    pattern: none
     haze: false
     backgroundColor: light-sand
     maxContentWidth: xl
@@ -54,5 +52,3 @@ _inputs:
       structures: _structures.teamMember
 _inputs_from_glob:
   - /src/components/page-sections/proof/team-roster/team-roster.cloudcannon.inputs.yml
-  - /.cloudcannon/inputs/background.yml
-  - /.cloudcannon/inputs/haze.yml

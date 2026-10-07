@@ -1,4 +1,5 @@
 ---
+import { bandPattern, bandHaze } from "@component-utils/bandStyle.mjs";
 import { nestedProps } from "@component-utils/nestedProps.mjs";
 import CustomSection from "@builders/custom-section/CustomSection.astro";
 import { subtextMeasure } from "@component-utils/subtextMeasure.mjs";
@@ -34,7 +35,9 @@ const {
   colorScheme = "inherit",
   lockColorScheme = false,
   backgroundColor = "light-sand",
-  background,
+  /** The texture behind the band, by name. */
+  pattern = "none",
+  /** Whether the heading sits on a pool of the band’s own colour. */
   haze = false,
   class: className,
   useDefaultEditableBinding = false,
@@ -54,8 +57,8 @@ const subtextCap = subtextMeasure(subtextWidth);
   colorScheme={colorScheme}
   lockColorScheme={lockColorScheme}
   backgroundColor={backgroundColor}
-  background={background}
-  haze={haze}
+  background={bandPattern(pattern)}
+  haze={bandHaze(haze)}
   useDefaultEditableBinding={useDefaultEditableBinding}
   {...htmlAttributes}
 >

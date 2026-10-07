@@ -11,6 +11,7 @@
  * Shell first. The window chrome is its own component so the same frame can
  * hold a mockup elsewhere, and the demo inside it lands next.
  */
+import { bandPattern, bandHaze } from "@component-utils/bandStyle.mjs";
 import { nestedProps } from "@component-utils/nestedProps.mjs";
 import BrowserFrame from "@wrappers/browser-frame/BrowserFrame.astro";
 import CustomSection from "@builders/custom-section/CustomSection.astro";
@@ -184,7 +185,9 @@ const {
   colorScheme = "inherit",
   lockColorScheme = false,
   backgroundColor = "light-sand",
-  background,
+  /** The texture behind the band, by name. */
+  pattern = "none",
+  /** Whether the heading sits on a pool of the band’s own colour. */
   haze = false,
   class: className,
   _component,
@@ -274,8 +277,8 @@ const addList = ((Array.isArray(addOptions) ? addOptions : []) as (Block & {
   colorScheme={colorScheme}
   lockColorScheme={lockColorScheme}
   backgroundColor={backgroundColor}
-  background={background}
-  haze={haze}
+  background={bandPattern(pattern)}
+  haze={bandHaze(haze)}
   {...htmlAttributes}
 >
   {hasHeader && (

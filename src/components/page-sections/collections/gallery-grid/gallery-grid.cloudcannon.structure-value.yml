@@ -5,11 +5,11 @@ tabbed: true
 value:
   _component: page-sections/collections/gallery-grid
   content:
-    sectionLabel: ""
+    sectionLabel: ''
     eyebrow: Gallery
     heading: Field notes from the coast
     headingLevel: h2
-    subtext: ""
+    subtext: ''
     images:
       - image: /src/assets/images/component-docs/dunedin-cliff.jpg
         alt: Sea cliffs above a turquoise bay, gorse flowering in the foreground
@@ -34,19 +34,11 @@ value:
     showThumbnails: false
   style:
     backgroundColor: light-sand
-    background:
-      type: image
-      imageSource: ""
-      imageAlt: ""
-      positionVertical: top
-      positionHorizontal: center
-      fixed: false
-      priority: false
-      mask: none
-      overlay: 0
+    pattern: none
     maxContentWidth: xl
     paddingHorizontal: gutter
     paddingVertical: 4xl
+    haze: false
 preview:
   text:
     - Gallery Grid
@@ -60,17 +52,15 @@ picker_preview:
   image: public/component-previews/page-sections/collections/gallery-grid.svg
 _inputs_from_glob:
   - /src/components/page-sections/collections/gallery-grid/gallery-grid.cloudcannon.inputs.yml
-  - /.cloudcannon/inputs/background.yml
-  - /.cloudcannon/inputs/haze.yml
 _structures:
   galleryImages:
     values:
       - label: Image
         icon: photo_library
         value:
-          image: ""
-          alt: ""
-          caption: ""
+          image: ''
+          alt: ''
+          caption: ''
         preview:
           text:
             - key: caption
@@ -84,7 +74,7 @@ _structures:
             comment: The photo shown in the grid and, full size, in the lightbox.
             options:
               paths:
-                static: ""
+                static: ''
                 uploads: src/assets/images
           alt:
             type: text

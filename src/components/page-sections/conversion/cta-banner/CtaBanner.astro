@@ -1,4 +1,5 @@
 ---
+import { bandPattern, bandHaze } from "@component-utils/bandStyle.mjs";
 import { nestedProps } from "@component-utils/nestedProps.mjs";
 import { rootMirror } from "@component-utils/rootMirror.mjs";
 /**
@@ -46,7 +47,9 @@ const {
    * scratches were holes: painted, that whole dance goes away.
    */
   scratch = "",
-  background,
+  /** The texture behind the band, by name. */
+  pattern = "none",
+  /** Whether the heading sits on a pool of the band’s own colour. */
   haze = false,
   class: className,
   useDefaultEditableBinding = false,
@@ -73,7 +76,7 @@ const scratchScheme = DARK_SCRATCH.has(String(scratch).toLowerCase()) ? "dark" :
    root, which is the element CloudCannon binds the region to and never
    rewrites, so without this they are whatever the page was built with. */
 const mirror = rootMirror({
-  class: { "has-sheet": background?.type === "image", scratched: Boolean(scratch) },
+  class: { scratched: Boolean(scratch) },
   style: {
     "--scratch-fill": scratch
       ? scratch.startsWith("#")
@@ -88,7 +91,6 @@ const mirror = rootMirror({
   mirror={mirror}
   class:list={[
     "cta-banner",
-    background?.type === "image" && "has-sheet",
     { scratched: scratch },
     className,
   ]}
@@ -102,8 +104,8 @@ const mirror = rootMirror({
   colorScheme={scratch ? scratchScheme : colorScheme}
   lockColorScheme={scratch ? true : lockColorScheme}
   backgroundColor={scratch ? "none" : backgroundColor}
-  background={background}
-  haze={haze}
+  background={bandPattern(pattern)}
+  haze={bandHaze(haze)}
   useDefaultEditableBinding={useDefaultEditableBinding}
   {...htmlAttributes}
 >
@@ -149,29 +151,6 @@ const mirror = rootMirror({
       position: relative;
     }
 
-    /* The band's fill is a sheet of brand blue with the scratches punched
-       clean through it, so whatever sits behind becomes the scratches. Backed
-       with the band's own blue they disappear; backed with the dark base they
-       come out black, which is what `backgroundColor: base` gives here because
-       the scheme is locked dark and `base` resolves with it. It wants the
-       page's own light ground, the way the design has the sheet sitting on the
-       cream page.
-
-       Two rules, because the colour layer is drawn AFTER the picture and so
-       paints over it — any background image under a background colour is
-       hidden. The sheet has to come back up on top of its own backing. */
-    .cta-banner.has-sheet .background {
-      background-color: var(--cta-banner-backing, #fffcf3);
-    }
-
-    .cta-banner.has-sheet .background-image {
-      position: absolute;
-      z-index: 1;
-    }
-
-    /* The drawing pins to the band, not to the column, so `.content` stays
-       static: positioned, it became the containing block and the art sat a
-       gutter's width in from the edge. The copy is lifted instead. */
     .cta-banner .heading,
     .cta-banner .cta-banner-link {
       position: relative;

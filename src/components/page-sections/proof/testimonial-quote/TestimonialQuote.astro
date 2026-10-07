@@ -22,6 +22,7 @@
  * 18, the role and company 13 in mono, the marks and the emphasis in the
  * card's own accent, a rule between the quote and the person.
  */
+import { bandPattern, bandHaze } from "@component-utils/bandStyle.mjs";
 import { nestedProps } from "@component-utils/nestedProps.mjs";
 import CustomSection from "@builders/custom-section/CustomSection.astro";
 import SimpleText from "@core-elements/simple-text/SimpleText.astro";
@@ -130,7 +131,9 @@ const {
   colorScheme = "inherit",
   lockColorScheme = false,
   backgroundColor = "light-sand",
-  background,
+  /** The texture behind the band, by name. */
+  pattern = "none",
+  /** Whether the heading sits on a pool of the band’s own colour. */
   haze = false,
   class: className,
   useDefaultEditableBinding = false,
@@ -179,8 +182,8 @@ const align = alignment === "center" && !isSplit ? "center" : undefined;
     colorScheme={colorScheme}
     lockColorScheme={lockColorScheme}
     backgroundColor={backgroundColor}
-    background={background}
-    haze={haze}
+    background={bandPattern(pattern)}
+    haze={bandHaze(haze)}
     useDefaultEditableBinding={useDefaultEditableBinding}
     {...htmlAttributes}
   >

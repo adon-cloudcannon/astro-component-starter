@@ -17,15 +17,12 @@ pageSections:
     style:
       haze: true
       backgroundColor: light-sand
-      background:
-        type: pattern
-        pattern: grid
-        mask: fade
+      pattern: grid-fade
   - _component: page-sections/explainers/pinned-steps
     content:
-      eyebrow: ""
-      heading: ""
-      subtext: ""
+      eyebrow: ''
+      heading: ''
+      subtext: ''
       progressColor: pacific
       reverse: true
       steps:
@@ -41,14 +38,14 @@ pageSections:
             - _component: building-blocks/core-elements/text
               text: >-
                 We value people above all, and strive to be genuinely warm and welcoming to our
-                customers. Our company culture is based on trust, help, and kindness, and everyone on
-                our team is honestly excited about empowering others to grow.
+                customers. Our company culture is based on trust, help, and kindness, and everyone
+                on our team is honestly excited about empowering others to grow.
               size: lg
           mediaSections:
             - _component: building-blocks/wrappers/stat-overlay
               panelImage: /src/assets/images/marketing/values-spirit.png
               panelFit: fill
-              imageAlt: ""
+              imageAlt: ''
         - contentSections:
             - _component: building-blocks/core-elements/simple-text
               class: eyebrow
@@ -61,14 +58,14 @@ pageSections:
             - _component: building-blocks/core-elements/text
               text: >-
                 We value people above all, and strive to be genuinely warm and welcoming to our
-                customers. Our company culture is based on trust, help, and kindness, and everyone on
-                our team is honestly excited about empowering others to grow.
+                customers. Our company culture is based on trust, help, and kindness, and everyone
+                on our team is honestly excited about empowering others to grow.
               size: lg
           mediaSections:
             - _component: building-blocks/wrappers/stat-overlay
               panelImage: /src/assets/images/marketing/values-manaakitanga.png
               panelFit: fill
-              imageAlt: ""
+              imageAlt: ''
         - contentSections:
             - _component: building-blocks/core-elements/simple-text
               class: eyebrow
@@ -80,15 +77,15 @@ pageSections:
               size: sm
             - _component: building-blocks/core-elements/text
               text: >-
-                We build real relationships with our customers, and deeply understand their needs. Our
-                primary goal is to walk alongside our users, experience their journey, and delight
-                them at every opportunity.
+                We build real relationships with our customers, and deeply understand their needs.
+                Our primary goal is to walk alongside our users, experience their journey, and
+                delight them at every opportunity.
               size: lg
           mediaSections:
             - _component: building-blocks/wrappers/stat-overlay
               panelImage: /src/assets/images/marketing/values-jandals.png
               panelFit: fill
-              imageAlt: ""
+              imageAlt: ''
     style:
       backgroundColor: light-sand
   - _component: page-sections/proof/testimonial-quote
@@ -102,8 +99,8 @@ pageSections:
       quotes:
         - text: >-
             Editors shouldn't need a developer to fix a typo. Developers shouldn't lose a week to
-            content updates. **That gap is the reason we started in 2013, and closing it is still the
-            whole job.**
+            content updates. **That gap is the reason we started in 2013, and closing it is still
+            the whole job.**
           quoteMarks: false
           accentColor: harbour
     style:

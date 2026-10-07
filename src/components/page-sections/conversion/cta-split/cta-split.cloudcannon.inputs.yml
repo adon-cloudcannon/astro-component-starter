@@ -219,6 +219,42 @@ style.lockColorScheme:
   type: switch
   label: Lock color scheme
   comment: Ignores the site theme toggle. Only applies when Color Scheme is Light or Dark.
+style.pattern:
+  type: select
+  label: Texture
+  comment: The pattern drawn behind the band, inked from the band's own colours.
+  options:
+    values:
+      - id: none
+        name: None
+        swatch: check_box_outline_blank
+      - id: grid
+        name: Grid
+        swatch: grid_4x4
+      - id: grid-fade
+        name: Grid, fading out
+        swatch: grid_4x4
+      - id: grid-top
+        name: Grid, top only
+        swatch: grid_4x4
+      - id: pegboard
+        name: Peg board
+        swatch: blur_linear
+      - id: pegboard-fade
+        name: Peg board, fading out
+        swatch: blur_linear
+    picker_view: card
+    preview:
+      icon:
+        - key: swatch
+      text:
+        - key: name
+style.haze:
+  type: switch
+  label: Haze behind the heading
+  comment: >-
+    Pools the band's own colour behind the copy and blurs it, so the heading
+    stays readable where the pattern runs under it.
 style.backgroundColor:
   type: select
   label: Background colour

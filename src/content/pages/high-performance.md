@@ -1,6 +1,4 @@
 ---
-# Generated from the Figma mapping. 4 of 5 blocks are
-# confirmed decisions; the rest are proposals to review on the page.
 _schema: default
 title: High Performance
 description: Load instantly. Rank higher.
@@ -11,8 +9,8 @@ pageSections:
         heading: Load instantly. Rank higher.
         headingSize: xl
       subtext: >-
-        Pre-rendered pages, global delivery, and structured content that search engines love. Speed is
-        built into the architecture, not bolted on.
+        Pre-rendered pages, global delivery, and structured content that search engines love. Speed
+        is built into the architecture, not bolted on.
       image:
         imageSource: /src/assets/images/marketing/hero-high-performance.png
         imageAlt: ''
@@ -71,8 +69,8 @@ pageSections:
               size: sm
             - _component: building-blocks/core-elements/text
               text: >-
-                No SEO plugin needed. Build titles, meta tags, and structured data directly into your
-                templates for clean HTML that ranks.
+                No SEO plugin needed. Build titles, meta tags, and structured data directly into
+                your templates for clean HTML that ranks.
               size: lg
           mediaSections:
             - _component: building-blocks/wrappers/stat-overlay
@@ -167,10 +165,7 @@ pageSections:
       stagger: true
     style:
       backgroundColor: dark
-      background:
-        type: pattern
-        pattern: grid
-        mask: fade
+      pattern: grid-fade
   - _component: page-sections/conversion/cta-split
     content:
       heading: See how fast your site could be
@@ -192,9 +187,6 @@ pageSections:
           variant: text
     style:
       backgroundColor: sand
-      background:
-        type: pattern
-        pattern: pegboard
-        mask: none
+      pattern: pegboard
       paddingVertical: 5xl
 ---

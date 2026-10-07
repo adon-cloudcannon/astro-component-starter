@@ -1,4 +1,5 @@
 ---
+import { bandPattern, bandHaze } from "@component-utils/bandStyle.mjs";
 import { nestedProps } from "@component-utils/nestedProps.mjs";
 import { rootMirror } from "@component-utils/rootMirror.mjs";
 import CustomSection from "@builders/custom-section/CustomSection.astro";
@@ -45,6 +46,7 @@ const {
   colorScheme = "inherit",
   lockColorScheme = false,
   backgroundColor = "light-sand",
+  /** Whether the heading sits on a pool of the band’s own colour. */
   haze = false,
   class: className,
   useDefaultEditableBinding = false,
@@ -68,7 +70,7 @@ const mirror = rootMirror({ "data-heading-inline": headingPlacement === "inline"
   colorScheme={colorScheme}
   lockColorScheme={lockColorScheme}
   backgroundColor={backgroundColor}
-  haze={haze}
+  haze={bandHaze(haze)}
   useDefaultEditableBinding={useDefaultEditableBinding}
   {...htmlAttributes}
 >

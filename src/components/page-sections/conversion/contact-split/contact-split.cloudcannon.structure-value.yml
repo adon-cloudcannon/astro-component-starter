@@ -5,7 +5,7 @@ tabbed: true
 value:
   _component: page-sections/conversion/contact-split
   content:
-    sectionLabel: ""
+    sectionLabel: ''
     eyebrow: Contact
     heading: Talk to a human
     headingLevel: h2
@@ -14,7 +14,7 @@ value:
       - icon: map-pin
         label: Address
         value: 12 Vogel Street, Dunedin 9016, New Zealand
-        url: ""
+        url: ''
       - icon: phone
         label: Phone
         value: +64 3 555 0142
@@ -26,7 +26,7 @@ value:
       - icon: clock
         label: Hours
         value: Mon–Fri, 9am–5pm NZST
-        url: ""
+        url: ''
     formAction: ./
     formBlocks:
       - _component: building-blocks/forms/input
@@ -46,22 +46,14 @@ value:
       - _component: building-blocks/forms/submit
         text: Send message
         variant: primary
-    mapEmbedUrl: ""
+    mapEmbedUrl: ''
   style:
     backgroundColor: light-sand
-    background:
-      type: image
-      imageSource: ""
-      imageAlt: ""
-      positionVertical: top
-      positionHorizontal: center
-      fixed: false
-      priority: false
-      mask: none
-      overlay: 0
+    pattern: none
     maxContentWidth: xl
     paddingHorizontal: gutter
     paddingVertical: 4xl
+    haze: false
 preview:
   text:
     - Contact Split
@@ -75,8 +67,6 @@ picker_preview:
   image: public/component-previews/page-sections/conversion/contact-split.svg
 _inputs_from_glob:
   - /src/components/page-sections/conversion/contact-split/contact-split.cloudcannon.inputs.yml
-  - /.cloudcannon/inputs/background.yml
-  - /.cloudcannon/inputs/haze.yml
 _structures:
   contactDetails:
     values:
@@ -86,7 +76,7 @@ _structures:
           icon: map-pin
           label: Label
           value: The detail itself
-          url: ""
+          url: ''
         preview:
           text:
             - key: label

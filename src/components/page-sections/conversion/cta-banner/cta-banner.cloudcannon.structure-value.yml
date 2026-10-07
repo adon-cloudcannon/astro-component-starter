@@ -5,29 +5,21 @@ tabbed: true
 value:
   _component: page-sections/conversion/cta-banner
   content:
-    sectionLabel: ""
-    heading: ""
+    sectionLabel: ''
+    heading: ''
     headingSize: lg
     headingLevel: h2
-    linkText: ""
-    link: ""
-    imageSource: ""
-    imageAlt: ""
+    linkText: ''
+    link: ''
+    imageSource: ''
+    imageAlt: ''
   style:
     backgroundColor: pacific
-    background:
-      type: image
-      imageSource: ""
-      imageAlt: ""
-      positionVertical: top
-      positionHorizontal: center
-      fixed: false
-      priority: false
-      mask: none
-      overlay: 0
+    pattern: none
     maxContentWidth: xl
     paddingHorizontal: gutter
     paddingVertical: 2xl
+    haze: false
 preview:
   text:
     - key: content.heading
@@ -39,5 +31,3 @@ picker_preview:
   icon: campaign
 _inputs_from_glob:
   - /src/components/page-sections/conversion/cta-banner/cta-banner.cloudcannon.inputs.yml
-  - /.cloudcannon/inputs/background.yml
-  - /.cloudcannon/inputs/haze.yml

@@ -5,24 +5,16 @@ tabbed: true
 value:
   _component: page-sections/builders/custom-section
   content:
-    label: ""
+    label: ''
     contentSections: []
     rounded: false
   style:
     backgroundColor: light-sand
-    background:
-      type: image
-      imageSource: ""
-      imageAlt: ""
-      positionVertical: top
-      positionHorizontal: center
-      fixed: false
-      priority: false
-      mask: none
-      overlay: 0
+    pattern: none
     maxContentWidth: xl
     paddingHorizontal: md
     paddingVertical: 4xl
+    haze: false
 preview:
   text:
     - Custom Section
@@ -36,5 +28,3 @@ picker_preview:
   image: public/component-previews/page-sections/builders/custom-section.svg
 _inputs_from_glob:
   - /src/components/page-sections/builders/custom-section/custom-section.cloudcannon.inputs.yml
-  - /.cloudcannon/inputs/background.yml
-  - /.cloudcannon/inputs/haze.yml

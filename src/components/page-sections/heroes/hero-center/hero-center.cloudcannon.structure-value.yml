@@ -5,7 +5,7 @@ tabbed: true
 value:
   _component: page-sections/heroes/hero-center
   content:
-    sectionLabel: ""
+    sectionLabel: ''
     eyebrow: Introducing
     heading: A clear promise in one line
     headingLevel: h1
@@ -17,26 +17,18 @@ value:
         text: Get started
         hideText: false
         link: /
-        iconName: ""
+        iconName: ''
         iconColor: default
         iconPosition: before
         variant: primary
         size: md
   style:
     backgroundColor: light-sand
-    background:
-      type: image
-      imageSource: ""
-      imageAlt: ""
-      positionVertical: top
-      positionHorizontal: center
-      fixed: false
-      priority: false
-      mask: none
-      overlay: 0
+    pattern: none
     maxContentWidth: xl
     paddingHorizontal: gutter
     paddingVertical: 4xl
+    haze: false
 preview:
   text:
     - Hero Center
@@ -51,5 +43,3 @@ picker_preview:
   icon: web_asset
 _inputs_from_glob:
   - /src/components/page-sections/heroes/hero-center/hero-center.cloudcannon.inputs.yml
-  - /.cloudcannon/inputs/background.yml
-  - /.cloudcannon/inputs/haze.yml

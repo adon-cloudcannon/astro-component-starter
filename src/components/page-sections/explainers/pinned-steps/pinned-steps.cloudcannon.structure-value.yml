@@ -5,14 +5,14 @@ tabbed: true
 value:
   _component: page-sections/explainers/pinned-steps
   content:
-    sectionLabel: ""
-    eyebrow: ""
-    heading: ""
+    sectionLabel: ''
+    eyebrow: ''
+    heading: ''
     headingLevel: h2
     headingSize: lg
-    subtext: ""
+    subtext: ''
     subtextSize: md
-    subtextWidth: ""
+    subtextWidth: ''
     alignmentHorizontal: center
     steps:
       - contentSections:
@@ -33,16 +33,15 @@ value:
         mediaSections: []
     reverse: false
     mediaWidth: half
-    copyColor: ""
+    copyColor: ''
     showProgress: true
   style:
     backgroundColor: light-sand
-    background:
-      type: image
-      imageSource: ""
+    pattern: none
     maxContentWidth: xl
     paddingHorizontal: gutter
     paddingVertical: 4xl
+    haze: false
 preview:
   text:
     - Pinned Steps
@@ -54,5 +53,3 @@ picker_preview:
   subtext: A band that holds still while its steps and pictures change.
 _inputs_from_glob:
   - /src/components/page-sections/explainers/pinned-steps/pinned-steps.cloudcannon.inputs.yml
-  - /.cloudcannon/inputs/background.yml
-  - /.cloudcannon/inputs/haze.yml

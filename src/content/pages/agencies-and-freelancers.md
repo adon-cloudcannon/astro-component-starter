@@ -1,6 +1,4 @@
 ---
-# Generated from the Figma mapping. 0 of 8 blocks are
-# confirmed decisions; the rest are proposals to review on the page.
 _schema: default
 title: Agencies & Freelancers
 description: Faster launches. Happier clients. Less support.
@@ -99,15 +97,8 @@ pageSections:
           authorDescription: Digital Design Director, Croissant & Baguette
     style:
       backgroundColor: light-sand
-      background:
-        type: pattern
-        pattern: pegboard
-        mask: fade
-      haze:
-        - x: 0.4951
-          rx: 531px
-          'y': 27.6%
-          ry: 36.2%
+      pattern: pegboard-fade
+      haze: true
   - _component: page-sections/builders/custom-section
     content:
       contentSections:
@@ -149,8 +140,8 @@ pageSections:
       heading: A platform that wins pitches
       headingSize: sm
       subtext: >-
-        Clients own their content outright. It lives in their repo as files, not locked in a database.
-        They’re never tied to a platform, and neither are you.
+        Clients own their content outright. It lives in their repo as files, not locked in a
+        database. They’re never tied to a platform, and neither are you.
       subtextSize: lg
       buttonSections:
         - _component: building-blocks/core-elements/button
@@ -162,15 +153,8 @@ pageSections:
       imageSource: ''
     style:
       backgroundColor: light-sand
-      background:
-        type: pattern
-        pattern: grid
-        mask: none
-      haze:
-        - x: 0.2342
-          rx: 453px
-          'y': 45.2%
-          ry: 45.6%
+      pattern: grid
+      haze: true
   - _component: page-sections/explainers/pinned-steps
     content:
       eyebrow: ''
@@ -186,8 +170,8 @@ pageSections:
               size: sm
             - _component: building-blocks/core-elements/text
               text: >-
-                Build with the static site generator you already use. Define components once and reuse
-                them across every client site.
+                Build with the static site generator you already use. Define components once and
+                reuse them across every client site.
               size: lg
             - _component: building-blocks/core-elements/button
               text: Learn more
@@ -232,10 +216,7 @@ pageSections:
       progressTrackColor: '#674A3F'
     style:
       backgroundColor: dark
-      background:
-        type: pattern
-        pattern: grid
-        mask: top
+      pattern: grid-top
   - _component: page-sections/conversion/cta-center
     content:
       heading: Join a Partner Program that rewards good work

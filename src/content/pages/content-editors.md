@@ -1,6 +1,4 @@
 ---
-# Generated from the Figma mapping. 3 of 8 blocks are
-# confirmed decisions; the rest are proposals to review on the page.
 _schema: default
 title: Content Editors
 description: Draft. Edit. Publish. No problem.
@@ -92,8 +90,8 @@ pageSections:
               size: sm
             - _component: building-blocks/core-elements/text
               text: >-
-                Every change gets a live preview. Share it, gather feedback, and sort things out while
-                the page is still private.
+                Every change gets a live preview. Share it, gather feedback, and sort things out
+                while the page is still private.
               size: lg
           mediaSections: []
         - contentSections:
@@ -112,19 +110,8 @@ pageSections:
       numbered: true
     style:
       backgroundColor: dark
-      background:
-        type: pattern
-        pattern: grid
-        mask: fade
-      haze:
-        - x: -0.4009
-          rx: 186px
-          'y': 165.5%
-          ry: 19.5%
-        - x: -0.3997
-          rx: 186px
-          'y': 165.6%
-          ry: 19.5%
+      pattern: grid-fade
+      haze: true
   - _component: page-sections/proof/testimonial-quote
     content:
       variant: static
@@ -149,15 +136,8 @@ pageSections:
           accentColor: sunset
     style:
       backgroundColor: dark
-      background:
-        type: pattern
-        pattern: pegboard
-        mask: none
-      haze:
-        - x: 0.4938
-          rx: 933px
-          'y': 49.8%
-          ry: 74.8%
+      pattern: pegboard
+      haze: true
   - _component: page-sections/conversion/cta-center
     content:
       heading: Room for everyone to work at once
@@ -169,7 +149,6 @@ pageSections:
       subtextWidth: md
     style:
       backgroundColor: light-sand
-      background: ''
   - _component: page-sections/explainers/feature-grid
     content:
       heading: Built for the work

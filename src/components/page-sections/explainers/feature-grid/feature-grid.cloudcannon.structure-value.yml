@@ -5,13 +5,13 @@ tabbed: true
 value:
   _component: page-sections/explainers/feature-grid
   content:
-    sectionLabel: ""
+    sectionLabel: ''
     eyebrow: What you get
     heading: Three things worth knowing
     headingLevel: h2
     subtext: One line that frames the points below.
     subtextSize: md
-    subtextWidth: ""
+    subtextWidth: ''
     alignmentHorizontal: center
     columns: 3
     features:
@@ -32,19 +32,11 @@ value:
         iconBackground: true
   style:
     backgroundColor: light-sand
-    background:
-      type: image
-      imageSource: ""
-      imageAlt: ""
-      positionVertical: top
-      positionHorizontal: center
-      fixed: false
-      priority: false
-      mask: none
-      overlay: 0
+    pattern: none
     maxContentWidth: xl
     paddingHorizontal: gutter
     paddingVertical: 4xl
+    haze: false
 preview:
   text:
     - Feature Grid
@@ -58,8 +50,6 @@ picker_preview:
   image: public/component-previews/page-sections/explainers/feature-grid.svg
 _inputs_from_glob:
   - /src/components/page-sections/explainers/feature-grid/feature-grid.cloudcannon.inputs.yml
-  - /.cloudcannon/inputs/background.yml
-  - /.cloudcannon/inputs/haze.yml
 _structures:
   featureGridItems:
     values:
@@ -124,35 +114,35 @@ _structures:
                 - id: pacific
                   name: Pacific
                   swatch: square
-                  color: "#034AD8"
+                  color: '#034AD8'
                 - id: moss
                   name: Moss
                   swatch: square
-                  color: "#687E00"
+                  color: '#687E00'
                 - id: golden
                   name: Golden
                   swatch: square
-                  color: "#FFAA00"
+                  color: '#FFAA00'
                 - id: peachy
                   name: Peachy
                   swatch: square
-                  color: "#F39B7B"
+                  color: '#F39B7B'
                 - id: sunset
                   name: Sunset
                   swatch: square
-                  color: "#D85A2C"
+                  color: '#D85A2C'
                 - id: kiwi
                   name: Kiwi
                   swatch: square
-                  color: "#7C3442"
+                  color: '#7C3442'
                 - id: blush
                   name: Blush
                   swatch: square
-                  color: "#E7B0B9"
+                  color: '#E7B0B9'
                 - id: harbour
                   name: Harbour
                   swatch: square
-                  color: "#A6C1FA"
+                  color: '#A6C1FA'
               picker_view: card
               preview:
                 icon:
@@ -167,9 +157,9 @@ _structures:
           iconSolid:
             type: switch
             comment: >-
-              Fill that plate with the colour itself rather than tinting it, and round it to a
-              disc. The glyph is knocked out in whatever reads on the colour. This is the shape
-              Careers draws; everywhere else uses the tint.
+              Fill that plate with the colour itself rather than tinting it, and round it to a disc.
+              The glyph is knocked out in whatever reads on the colour. This is the shape Careers
+              draws; everywhere else uses the tint.
           divider:
             type: switch
             comment: >-
@@ -186,27 +176,27 @@ _structures:
                 - id: pacific
                   name: Pacific
                   swatch: square
-                  color: "#034AD8"
+                  color: '#034AD8'
                 - id: moss
                   name: Moss
                   swatch: square
-                  color: "#687E00"
+                  color: '#687E00'
                 - id: golden
                   name: Golden
                   swatch: square
-                  color: "#FFAA00"
+                  color: '#FFAA00'
                 - id: peachy
                   name: Peachy
                   swatch: square
-                  color: "#F39B7B"
+                  color: '#F39B7B'
                 - id: sunset
                   name: Sunset
                   swatch: square
-                  color: "#D85A2C"
+                  color: '#D85A2C'
                 - id: harbour
                   name: Harbour
                   swatch: square
-                  color: "#A6C1FA"
+                  color: '#A6C1FA'
               picker_view: card
               preview:
                 icon:

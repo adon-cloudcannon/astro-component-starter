@@ -5,39 +5,31 @@ tabbed: true
 value:
   _component: page-sections/conversion/cta-team-member
   content:
-    sectionLabel: ""
-    heading: ""
+    sectionLabel: ''
+    heading: ''
     headingSize: lg
     headingLevel: h2
-    subtext: ""
+    subtext: ''
     subtextSize: lg
-    subtextWidth: ""
+    subtextWidth: ''
     member:
       _component: building-blocks/wrappers/team-member
-      name: ""
-      role: ""
-      imageSource: ""
-      imageAlt: ""
+      name: ''
+      role: ''
+      imageSource: ''
+      imageAlt: ''
       backgroundColor: sunset
-      propSource: ""
-      propAlt: ""
+      propSource: ''
+      propAlt: ''
     buttonSections: []
     reverse: false
   style:
     backgroundColor: light-sand
-    background:
-      type: image
-      imageSource: ""
-      imageAlt: ""
-      positionVertical: top
-      positionHorizontal: center
-      fixed: false
-      priority: false
-      mask: none
-      overlay: 0
+    pattern: none
     maxContentWidth: xl
     paddingHorizontal: gutter
     paddingVertical: 4xl
+    haze: false
 preview:
   text:
     - key: content.heading
@@ -49,5 +41,3 @@ picker_preview:
   icon: record_voice_over
 _inputs_from_glob:
   - /src/components/page-sections/conversion/cta-team-member/cta-team-member.cloudcannon.inputs.yml
-  - /.cloudcannon/inputs/background.yml
-  - /.cloudcannon/inputs/haze.yml

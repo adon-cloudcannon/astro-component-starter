@@ -1,6 +1,4 @@
 ---
-# Generated from the Figma mapping. 6 of 11 blocks are
-# confirmed decisions; the rest are proposals to review on the page.
 _schema: default
 title: Git
 description: Everything lives in the repo, not a database.
@@ -72,9 +70,9 @@ pageSections:
       headingSize: lg
       subtext: >-
         A Git-based CMS stores your content as files in a Git repository instead of in a database.
-        Your team edits through a visual interface, and every change is committed to the repo like any
-        other work. The site builds from those files using whatever static site generator you already
-        use.
+        Your team edits through a visual interface, and every change is committed to the repo like
+        any other work. The site builds from those files using whatever static site generator you
+        already use.
       subtextSize: lg
       subtextWidth: xl
   - _component: page-sections/proof/testimonial-quote
@@ -85,8 +83,8 @@ pageSections:
       quotes:
         - text: >-
             Having that flexibility of having everything live in a Git repository is pretty amazing.
-            **We don’t have to worry about a separate database**, or any other pieces in the mix, it’s
-            dead simple.
+            **We don’t have to worry about a separate database**, or any other pieces in the mix,
+            it’s dead simple.
           authorName: Justin Parsons
           authorDescription: Director of Front-End Development,
           company: Insight Creative, Inc
@@ -97,11 +95,7 @@ pageSections:
           accentColor: sunset
     style:
       backgroundColor: dark
-      haze:
-        - x: 0.4975
-          rx: 938px
-          'y': 49.7%
-          ry: 74.8%
+      haze: true
   - _component: page-sections/conversion/cta-center
     content:
       eyebrow: HOW IT WORKS
@@ -154,8 +148,8 @@ pageSections:
             - _component: building-blocks/core-elements/text
               text: >-
                 Your content gets the same treatment: branches, commits, reviews, and a history you
-                can walk back through. You keep building locally, with the SSG and tooling you already
-                use.
+                can walk back through. You keep building locally, with the SSG and tooling you
+                already use.
               size: lg
             - _component: building-blocks/core-elements/button
               text: Learn more
@@ -175,9 +169,9 @@ pageSections:
               size: sm
             - _component: building-blocks/core-elements/text
               text: >-
-                Editors work on the page itself and see the change before it goes live. On the surface
-                it’s just a page with editable parts. Underneath it’s all branches and commits, and
-                every version sits in Git.
+                Editors work on the page itself and see the change before it goes live. On the
+                surface it’s just a page with editable parts. Underneath it’s all branches and
+                commits, and every version sits in Git.
               size: lg
             - _component: building-blocks/core-elements/button
               text: Learn more
@@ -215,11 +209,7 @@ pageSections:
       numbered: true
     style:
       backgroundColor: dark
-      background:
-        type: pattern
-        pattern: grid
-        mask: fade
-        fixed: true
+      pattern: grid-fade
   - _component: page-sections/proof/testimonial-quote
     content:
       variant: static
@@ -229,8 +219,8 @@ pageSections:
       bordered: true
       quotes:
         - text: >-
-            It’s important to me that CloudCannon is a Git-based CMS. I hate having a vendor lock with
-            API-based CMSs — **how can I trust anyone else with our data?**
+            It’s important to me that CloudCannon is a Git-based CMS. I hate having a vendor lock
+            with API-based CMSs — **how can I trust anyone else with our data?**
           authorName: Alexander Luttringer
           authorDescription: Technical Director,
           company: Croissant & Baguette
@@ -239,10 +229,7 @@ pageSections:
           accentColor: pacific
     style:
       backgroundColor: sand
-      background:
-        type: pattern
-        pattern: pegboard
-        mask: fade
+      pattern: pegboard-fade
   - _component: page-sections/conversion/cta-center
     content:
       heading: Your content is yours

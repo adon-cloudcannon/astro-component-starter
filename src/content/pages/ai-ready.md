@@ -1,6 +1,4 @@
 ---
-# Generated from the Figma mapping. 3 of 7 blocks are
-# confirmed decisions; the rest are proposals to review on the page.
 _schema: default
 title: AI Ready
 description: The CMS your AI tools can actually read
@@ -10,7 +8,9 @@ pageSections:
       heading:
         heading: The CMS your AI tools can actually read
         headingSize: xl
-      subtext: Code, content, and config all sit in one repo as plain files, so agents get the full picture.
+      subtext: >-
+        Code, content, and config all sit in one repo as plain files, so agents get the full
+        picture.
       image:
         imageSource: /src/assets/images/marketing/hero-ai-ready.png
         imageAlt: ''
@@ -74,10 +74,7 @@ pageSections:
       subtextWidth: md
     style:
       backgroundColor: dark
-      background:
-        type: pattern
-        pattern: grid
-        mask: fade
+      pattern: grid-fade
   - _component: page-sections/explainers/pinned-steps
     content:
       eyebrow: ''
@@ -93,10 +90,10 @@ pageSections:
               size: sm
             - _component: building-blocks/core-elements/text
               text: >-
-                Point an agent at a CloudCannon project and it sees templates, content, configuration
-                and styles sitting next to each other in Git. Markdown, frontmatter, YAML, folder
-                structures, and diffs: models have seen it all before, and know how the pieces fit
-                together.
+                Point an agent at a CloudCannon project and it sees templates, content,
+                configuration and styles sitting next to each other in Git. Markdown, frontmatter,
+                YAML, folder structures, and diffs: models have seen it all before, and know how the
+                pieces fit together.
               size: lg
           mediaSections:
             - _component: building-blocks/core-elements/image
@@ -111,10 +108,10 @@ pageSections:
               size: sm
             - _component: building-blocks/core-elements/text
               text: >-
-                With an API-based CMS, reading your content library means authentication, pagination,
-                and a separate call for every cross-reference. Relationships between content types
-                have to be inferred from responses. That's tokens and time spent reconstructing a
-                picture that, in a CloudCannon repo, is already sitting there.
+                With an API-based CMS, reading your content library means authentication,
+                pagination, and a separate call for every cross-reference. Relationships between
+                content types have to be inferred from responses. That's tokens and time spent
+                reconstructing a picture that, in a CloudCannon repo, is already sitting there.
               size: lg
           mediaSections:
             - _component: building-blocks/core-elements/image
@@ -135,9 +132,9 @@ pageSections:
       cardWidth: medium
       quotes:
         - text: >-
-            You can have lots of concurrent pieces of work: a solutions page, a new case study layout,
-            new terms and conditions, a legal section, all on different branches with different agents
-            working on them in isolation, **without corrupting your main site.**
+            You can have lots of concurrent pieces of work: a solutions page, a new case study
+            layout, new terms and conditions, a legal section, all on different branches with
+            different agents working on them in isolation, **without corrupting your main site.**
           authorName: Ed Stennett
           authorDescription: Head of Growth,
           company: Nomio
@@ -146,15 +143,8 @@ pageSections:
           accentColor: harbour
     style:
       backgroundColor: dark
-      background:
-        type: pattern
-        pattern: pegboard
-        mask: none
-      haze:
-        - x: 0.4938
-          rx: 933px
-          'y': 49.8%
-          ry: 74.8%
+      pattern: pegboard
+      haze: true
   - _component: page-sections/conversion/cta-split
     content:
       heading: We've already taught agents how to use CloudCannon
@@ -217,9 +207,6 @@ pageSections:
             color: var(--dark-sand)
     style:
       backgroundColor: dark-sand
-      background:
-        type: pattern
-        pattern: grid
-        mask: none
+      pattern: grid
       paddingVertical: 5xl
 ---

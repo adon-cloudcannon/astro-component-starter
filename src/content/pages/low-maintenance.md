@@ -1,6 +1,4 @@
 ---
-# Generated from the Figma mapping. 7 of 10 blocks are
-# confirmed decisions; the rest are proposals to review on the page.
 _schema: default
 title: Low Maintenance
 description: No database. No 2 a.m. panic.
@@ -11,8 +9,8 @@ pageSections:
         heading: No database. No 2 a.m. panic.
         headingSize: xl
       subtext: >-
-        Skip the forced updates, security patches, and midnight outages. Your site keeps running while
-        your team spends time building what's next.
+        Skip the forced updates, security patches, and midnight outages. Your site keeps running
+        while your team spends time building what's next.
       image:
         imageSource: /src/assets/images/marketing/hero-low-maintenance.png
         imageAlt: ''
@@ -94,8 +92,8 @@ pageSections:
       cardWidth: medium
       quotes:
         - text: >-
-            I almost **forgot that website maintenance was a thing.** That's something you just don't
-            need to do when you have this static tech stack.
+            I almost **forgot that website maintenance was a thing.** That's something you just
+            don't need to do when you have this static tech stack.
           authorName: Sindre Gusdal
           authorDescription: General Manager,
           company: Absoluttweb
@@ -176,15 +174,8 @@ pageSections:
           rotation: 0
     style:
       backgroundColor: light-sand
-      background:
-        type: pattern
-        pattern: grid
-        mask: none
-      haze:
-        - x: 0.2342
-          rx: 453px
-          'y': 45.2%
-          ry: 45.6%
+      pattern: grid
+      haze: true
   - _component: page-sections/conversion/cta-center
     content:
       heading: Maintenance that doesn’t multiply
@@ -196,10 +187,7 @@ pageSections:
       subtextWidth: md
     style:
       backgroundColor: dark
-      background:
-        type: pattern
-        pattern: grid
-        mask: fade
+      pattern: grid-fade
   - _component: page-sections/explainers/pinned-steps
     content:
       eyebrow: ''
@@ -215,7 +203,8 @@ pageSections:
               text: >-
                 Most CMS vulnerabilities live in databases, plugins and server-side code. A static
                 site puts none of those in front of visitors, so there’s very little left to attack.
-                Your content sits in your own repo, and the platform itself is SOC 2 Type 2 compliant.
+                Your content sits in your own repo, and the platform itself is SOC 2 Type 2
+                compliant.
               size: lg
           mediaSections: []
         - contentSections:
@@ -258,15 +247,8 @@ pageSections:
           accentColor: harbour
     style:
       backgroundColor: dark
-      background:
-        type: pattern
-        pattern: pegboard
-        mask: none
-      haze:
-        - x: 0.4791
-          rx: 933px
-          'y': 54.5%
-          ry: 74.4%
+      pattern: pegboard
+      haze: true
   - _component: page-sections/conversion/cta-team-member
     content:
       heading: A CMS to build, not babysit

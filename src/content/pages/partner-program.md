@@ -1,6 +1,4 @@
 ---
-# Generated from the Figma mapping. 1 of 11 blocks are
-# confirmed decisions; the rest are proposals to review on the page.
 _schema: default
 title: Partner Program
 description: The more you launch, the more you unlock
@@ -81,7 +79,9 @@ pageSections:
           text: Join the Partner Program
           variant: primary
       imageSource: /src/assets/images/marketing/partner-dashboard-panel.png
-      imageAlt: The partner dashboard, with a Gold Partner badge on its corner and a card reading 101 points.
+      imageAlt: >-
+        The partner dashboard, with a Gold Partner badge on its corner and a card reading 101
+        points.
       imageAspectRatio: none
       imageRounded: false
       mediaWidth: 628
@@ -101,15 +101,8 @@ pageSections:
           quoteMarks: false
     style:
       backgroundColor: dark
-      background:
-        type: pattern
-        pattern: pegboard
-        mask: none
-      haze:
-        - x: 0.4791
-          rx: 933px
-          'y': 49.8%
-          ry: 74.8%
+      pattern: pegboard
+      haze: true
   - _component: page-sections/explainers/feature-grid
     content:
       heading: What are the perks?
@@ -331,19 +324,8 @@ pageSections:
       heading: Become a CloudCannon Partner
       headingSize: lg
     style:
-      background:
-        type: pattern
-        pattern: grid
-        mask: fade
-      haze:
-        - x: 0.5
-          rx: 640px
-          'y': 55.9%
-          ry: 55.9%
-        - x: 0.5
-          rx: 387px
-          'y': 54.4%
-          ry: 36%
+      pattern: grid-fade
+      haze: true
       paddingVerticalEnd: 3xl
   - _component: page-sections/conversion/cta-form
     content:

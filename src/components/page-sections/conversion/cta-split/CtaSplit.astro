@@ -1,4 +1,5 @@
 ---
+import { bandPattern, bandHaze } from "@component-utils/bandStyle.mjs";
 import { nestedProps } from "@component-utils/nestedProps.mjs";
 import { rootMirror } from "@component-utils/rootMirror.mjs";
 import CustomSection from "@builders/custom-section/CustomSection.astro";
@@ -130,7 +131,9 @@ const {
   // 4:3 frame cuts a third of it away.
   imageAspectRatio = "none",
   backgroundColor = "light-sand",
-  background,
+  /** The texture behind the band, by name. */
+  pattern = "none",
+  /** Whether the heading sits on a pool of the band’s own colour. */
   haze = false,
   class: className,
   useDefaultEditableBinding = false,
@@ -174,8 +177,8 @@ const mirror = rootMirror({ "data-picture-first": reverse ? "" : null });
   colorScheme={colorScheme}
   lockColorScheme={lockColorScheme}
   backgroundColor={backgroundColor}
-  background={background}
-  haze={haze}
+  background={bandPattern(pattern)}
+  haze={bandHaze(haze, { reverse, split: true })}
   useDefaultEditableBinding={useDefaultEditableBinding}
   {...htmlAttributes}
 >

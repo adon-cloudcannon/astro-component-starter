@@ -5,53 +5,53 @@ tabbed: true
 value:
   _component: page-sections/conversion/pricing-comparison
   content:
-    sectionLabel: ""
+    sectionLabel: ''
     eyebrow: Pricing
     heading: Compare plans feature by feature
     headingLevel: h2
-    subtext: ""
+    subtext: ''
     plans:
       - name: Starter
         price: $19/mo
         highlight: false
         buttonText: Choose Starter
-        buttonLink: "#"
+        buttonLink: '#'
       - name: Team
         price: $49/mo
         highlight: true
         buttonText: Choose Team
-        buttonLink: "#"
+        buttonLink: '#'
       - name: Enterprise
         price: Custom
         highlight: false
         buttonText: Talk to sales
-        buttonLink: "#"
+        buttonLink: '#'
     rows:
       - feature: Editors
         values:
-          - "3"
-          - "15"
+          - '3'
+          - '15'
           - Unlimited
       - feature: Visual editing
         values:
-          - "yes"
-          - "yes"
-          - "yes"
+          - 'yes'
+          - 'yes'
+          - 'yes'
       - feature: Scheduled publishing
         values:
-          - "no"
-          - "yes"
-          - "yes"
+          - 'no'
+          - 'yes'
+          - 'yes'
       - feature: Custom domains
         values:
-          - "1"
-          - "10"
+          - '1'
+          - '10'
           - Unlimited
       - feature: SSO and audit log
         values:
-          - "no"
-          - "no"
-          - "yes"
+          - 'no'
+          - 'no'
+          - 'yes'
       - feature: Support
         values:
           - Email
@@ -60,19 +60,11 @@ value:
     striped: true
   style:
     backgroundColor: light-sand
-    background:
-      type: image
-      imageSource: ""
-      imageAlt: ""
-      positionVertical: top
-      positionHorizontal: center
-      fixed: false
-      priority: false
-      mask: none
-      overlay: 0
+    pattern: none
     maxContentWidth: xl
     paddingHorizontal: gutter
     paddingVertical: 4xl
+    haze: false
 preview:
   text:
     - Pricing Comparison
@@ -87,19 +79,17 @@ picker_preview:
   icon: table_chart
 _inputs_from_glob:
   - /src/components/page-sections/conversion/pricing-comparison/pricing-comparison.cloudcannon.inputs.yml
-  - /.cloudcannon/inputs/background.yml
-  - /.cloudcannon/inputs/haze.yml
 _structures:
   pricingComparisonPlans:
     values:
       - label: Plan
         icon: sell
         value:
-          name: ""
-          price: ""
+          name: ''
+          price: ''
           highlight: false
-          buttonText: ""
-          buttonLink: ""
+          buttonText: ''
+          buttonLink: ''
         preview:
           text:
             - key: name
@@ -130,9 +120,9 @@ _structures:
       - label: Feature row
         icon: check_circle
         value:
-          feature: ""
+          feature: ''
           values:
-            - ""
+            - ''
         preview:
           text:
             - key: feature

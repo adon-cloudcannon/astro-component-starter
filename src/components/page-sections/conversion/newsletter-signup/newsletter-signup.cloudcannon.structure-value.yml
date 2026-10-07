@@ -5,12 +5,12 @@ tabbed: true
 value:
   _component: page-sections/conversion/newsletter-signup
   content:
-    sectionLabel: ""
+    sectionLabel: ''
     eyebrow: Stay in the loop
     heading: Get useful updates in your inbox
     headingLevel: h2
     subtext: Occasional notes, practical ideas, and no clutter.
-    formAction: ""
+    formAction: ''
     formMethod: post
     formName: newsletter
     emailName: email
@@ -22,19 +22,11 @@ value:
   style:
     panelBackgroundColor: surface
     backgroundColor: light-sand
-    background:
-      type: image
-      imageSource: ""
-      imageAlt: ""
-      positionVertical: top
-      positionHorizontal: center
-      fixed: false
-      priority: false
-      mask: none
-      overlay: 0
+    pattern: none
     maxContentWidth: xl
     paddingHorizontal: gutter
     paddingVertical: 3xl
+    haze: false
 preview:
   text:
     - Newsletter Signup
@@ -48,5 +40,3 @@ picker_preview:
   image: public/component-previews/page-sections/conversion/newsletter-signup.svg
 _inputs_from_glob:
   - /src/components/page-sections/conversion/newsletter-signup/newsletter-signup.cloudcannon.inputs.yml
-  - /.cloudcannon/inputs/background.yml
-  - /.cloudcannon/inputs/haze.yml

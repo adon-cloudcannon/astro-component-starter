@@ -5,13 +5,13 @@ tabbed: true
 value:
   _component: page-sections/proof/testimonial-bento
   content:
-    sectionLabel: ""
+    sectionLabel: ''
     eyebrow: Testimonials
     heading: Loved by the teams who use it
     headingLevel: h2
-    subtext: ""
+    subtext: ''
     subtextSize: md
-    subtextWidth: ""
+    subtextWidth: ''
     testimonials:
       - text: >-
           We handed the site to our marketing team on a Friday and they had three new landing pages
@@ -41,22 +41,14 @@ value:
         authorImage: /src/assets/images/component-docs/profile4.jpg
         size: full
         tone: base
-    columns: "3"
+    columns: '3'
   style:
     backgroundColor: light-sand
-    background:
-      type: image
-      imageSource: ""
-      imageAlt: ""
-      positionVertical: top
-      positionHorizontal: center
-      fixed: false
-      priority: false
-      mask: none
-      overlay: 0
+    pattern: none
     maxContentWidth: xl
     paddingHorizontal: gutter
     paddingVertical: 4xl
+    haze: false
 preview:
   text:
     - Testimonial Bento
@@ -71,24 +63,22 @@ picker_preview:
   icon: dashboard
 _inputs_from_glob:
   - /src/components/page-sections/proof/testimonial-bento/testimonial-bento.cloudcannon.inputs.yml
-  - /.cloudcannon/inputs/background.yml
-  - /.cloudcannon/inputs/haze.yml
 _structures:
   testimonialBentoItems:
     values:
       - label: Testimonial
         icon: format_quote
         value:
-          company: ""
-          logo: ""
-          logoAlt: ""
-          text: ""
-          authorName: ""
-          authorDescription: ""
-          authorImage: ""
-          linkText: ""
-          link: ""
-          accentColor: ""
+          company: ''
+          logo: ''
+          logoAlt: ''
+          text: ''
+          authorName: ''
+          authorDescription: ''
+          authorImage: ''
+          linkText: ''
+          link: ''
+          accentColor: ''
           size: standard
           quoteSize: standard
           tone: base
@@ -116,33 +106,33 @@ _structures:
               it, the card's border shows in it on hover, and the link turns to it on hover.
             options:
               values:
-                - id: ""
+                - id: ''
                   name: None
                   swatch: check_box_outline_blank
                 - id: sunset
                   name: Sunset
                   swatch: square
-                  color: "#D85A2C"
+                  color: '#D85A2C'
                 - id: golden
                   name: Golden
                   swatch: square
-                  color: "#FFAA00"
+                  color: '#FFAA00'
                 - id: pacific
                   name: Pacific
                   swatch: square
-                  color: "#034AD8"
+                  color: '#034AD8'
                 - id: moss
                   name: Moss
                   swatch: square
-                  color: "#687E00"
+                  color: '#687E00'
                 - id: peachy
                   name: Peachy
                   swatch: square
-                  color: "#F39B7B"
+                  color: '#F39B7B'
                 - id: harbour
                   name: Harbour
                   swatch: square
-                  color: "#A6C1FA"
+                  color: '#A6C1FA'
               picker_view: card
               preview:
                 icon:
@@ -173,7 +163,7 @@ _structures:
             comment: Optional headshot. Falls back to the author's initials.
             options:
               paths:
-                static: ""
+                static: ''
                 uploads: src/assets/images
           quoteSize:
             type: select
@@ -213,11 +203,11 @@ _structures:
                 - id: base
                   name: Dark
                   swatch: square
-                  color: "#252423"
+                  color: '#252423'
                 - id: light
                   name: Light
                   swatch: square
-                  color: "#FFFCF3"
+                  color: '#FFFCF3'
               picker_view: card
               preview:
                 icon:

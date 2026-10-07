@@ -12,6 +12,7 @@
  * Thin: ScrollStepper does the scroll binding, the pinning and the bar, so
  * this gives it a band, a heading and the section's padding.
  */
+import { bandPattern, bandHaze } from "@component-utils/bandStyle.mjs";
 import { nestedProps } from "@component-utils/nestedProps.mjs";
 import CustomSection from "@builders/custom-section/CustomSection.astro";
 import { subtextMeasure } from "@component-utils/subtextMeasure.mjs";
@@ -60,7 +61,9 @@ const {
   colorScheme = "inherit",
   lockColorScheme = false,
   backgroundColor = "light-sand",
-  background,
+  /** The texture behind the band, by name. */
+  pattern = "none",
+  /** Whether the heading sits on a pool of the band’s own colour. */
   haze = false,
   class: className,
   useDefaultEditableBinding = false,
@@ -83,8 +86,8 @@ const hasHeader = Boolean(eyebrow || heading || subtext);
   colorScheme={colorScheme}
   lockColorScheme={lockColorScheme}
   backgroundColor={backgroundColor}
-  background={background}
-  haze={haze}
+  background={bandPattern(pattern)}
+  haze={bandHaze(haze, { reverse, split: true })}
   class:list={["scroll-steps", className]}
   useDefaultEditableBinding={useDefaultEditableBinding}
   {...htmlAttributes}

@@ -5,13 +5,13 @@ tabbed: true
 value:
   _component: page-sections/proof/testimonial-wall
   content:
-    sectionLabel: ""
+    sectionLabel: ''
     eyebrow: Testimonials
     heading: What teams say after shipping
     headingLevel: h2
-    subtext: ""
+    subtext: ''
     subtextSize: md
-    subtextWidth: ""
+    subtextWidth: ''
     testimonials:
       - text: >-
           This framework has completely changed the way we build. The sites come together fast, they
@@ -32,8 +32,8 @@ value:
         authorDescription: Founder, Fieldnote
         authorImage: /src/assets/images/component-docs/profile2.jpg
       - text: >-
-          Our Lighthouse scores went up without anyone working on performance. That never happens on a
-          redesign.
+          Our Lighthouse scores went up without anyone working on performance. That never happens on
+          a redesign.
         authorName: Dana Whitfield
         authorDescription: Engineering Lead, Cascade
         authorImage: /src/assets/images/component-docs/profile3.jpg
@@ -46,19 +46,11 @@ value:
     columns: 3
   style:
     backgroundColor: light-sand
-    background:
-      type: image
-      imageSource: ""
-      imageAlt: ""
-      positionVertical: top
-      positionHorizontal: center
-      fixed: false
-      priority: false
-      mask: none
-      overlay: 0
+    pattern: none
     maxContentWidth: xl
     paddingHorizontal: gutter
     paddingVertical: 4xl
+    haze: false
 preview:
   text:
     - Testimonial Wall
@@ -73,18 +65,16 @@ picker_preview:
   icon: reviews
 _inputs_from_glob:
   - /src/components/page-sections/proof/testimonial-wall/testimonial-wall.cloudcannon.inputs.yml
-  - /.cloudcannon/inputs/background.yml
-  - /.cloudcannon/inputs/haze.yml
 _structures:
   testimonialWallItems:
     values:
       - label: Testimonial
         icon: format_quote
         value:
-          text: ""
-          authorName: ""
-          authorDescription: ""
-          authorImage: ""
+          text: ''
+          authorName: ''
+          authorDescription: ''
+          authorImage: ''
         preview:
           text:
             - key: authorName
@@ -117,5 +107,5 @@ _structures:
             comment: Optional headshot. Falls back to the author's initials.
             options:
               paths:
-                static: ""
+                static: ''
                 uploads: src/assets/images

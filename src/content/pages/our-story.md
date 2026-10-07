@@ -1,7 +1,9 @@
 ---
 _schema: default
 title: Our Story
-description: Dunedin, New Zealand, 2013. A couple of developers who couldn't find a CMS that worked the way we did.
+description: >-
+  Dunedin, New Zealand, 2013. A couple of developers who couldn't find a CMS that worked the way we
+  did.
 pageSections:
   - _component: page-sections/heroes/hero-photo-stack
     content:
@@ -81,8 +83,8 @@ pageSections:
           name: George Phillips
           role: Co-founder & CTO
           bio: >-
-            George, CTO of CloudCannon, was born in NZ, graduated from the University of Otago with a
-            Computer Science degree. He worked for innovative Kiwi start-ups before cofounding
+            George, CTO of CloudCannon, was born in NZ, graduated from the University of Otago with
+            a Computer Science degree. He worked for innovative Kiwi start-ups before cofounding
             CloudCannon with Mike. He is based in Dunedin, New Zealand.
           imageSource: /src/assets/images/marketing/george-profile-1.png
           imageAlt: George Phillips, Co-founder & CTO at CloudCannon
@@ -91,9 +93,9 @@ pageSections:
           name: Chris Wingate
           role: CRO
           bio: >-
-            Chris, based in Norway, holds an MBA and Bachelor's in Finance and Business Analytics from
-            the University of New Hampshire. He joined CloudCannon in 2019 to drive company growth
-            after a successful career as a professional footballer.
+            Chris, based in Norway, holds an MBA and Bachelor's in Finance and Business Analytics
+            from the University of New Hampshire. He joined CloudCannon in 2019 to drive company
+            growth after a successful career as a professional footballer.
           imageSource: /src/assets/images/marketing/chris-profile-1.png
           imageAlt: Chris Wingate, CRO at CloudCannon
           backgroundColor: golden
@@ -148,10 +150,7 @@ pageSections:
           backgroundColor: pacific
     style:
       backgroundColor: light-sand
-      background:
-        type: pattern
-        pattern: grid
-        mask: fade
+      pattern: grid-fade
   - _component: page-sections/conversion/cta-center
     content:
       heading: Keen to collaborate?
@@ -167,12 +166,12 @@ pageSections:
           variant: text
       cornerStart:
         source: /src/assets/images/marketing/ferns-corner-3806-72622.png
-        alt: ""
+        alt: ''
         width: 23.4
         drop: 4
       cornerEnd:
         source: /src/assets/images/marketing/rocks-corner-3806-72621.png
-        alt: ""
+        alt: ''
         width: 18
         drop: 0.3
     style:

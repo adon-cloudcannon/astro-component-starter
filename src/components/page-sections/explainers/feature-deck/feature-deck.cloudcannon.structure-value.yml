@@ -5,14 +5,14 @@ tabbed: true
 value:
   _component: page-sections/explainers/feature-deck
   content:
-    sectionLabel: ""
-    eyebrow: ""
-    heading: ""
+    sectionLabel: ''
+    eyebrow: ''
+    heading: ''
     headingLevel: h2
     headingSize: lg
-    subtext: ""
+    subtext: ''
     subtextSize: md
-    subtextWidth: ""
+    subtextWidth: ''
     cards:
       - _component: building-blocks/wrappers/scroll-deck/scroll-deck-card
         label: AI-ready
@@ -30,12 +30,11 @@ value:
     showRail: true
   style:
     backgroundColor: light-sand
-    background:
-      type: image
-      imageSource: ""
+    pattern: none
     maxContentWidth: xl
     paddingHorizontal: gutter
     paddingVertical: 4xl
+    haze: false
 _inputs:
   cards:
     type: array
@@ -43,5 +42,3 @@ _inputs:
       structures: _structures.scrollDeckCards
 _inputs_from_glob:
   - /src/components/page-sections/explainers/feature-deck/feature-deck.cloudcannon.inputs.yml
-  - /.cloudcannon/inputs/background.yml
-  - /.cloudcannon/inputs/haze.yml

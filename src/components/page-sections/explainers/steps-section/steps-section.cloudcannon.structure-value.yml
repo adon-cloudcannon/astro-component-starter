@@ -5,14 +5,14 @@ tabbed: true
 value:
   _component: page-sections/explainers/steps-section
   content:
-    sectionLabel: ""
+    sectionLabel: ''
     eyebrow: How it works
     heading: From order to doorstep
     headingLevel: h2
-    subtext: ""
+    subtext: ''
     items:
-      - image: ""
-        imageAlt: ""
+      - image: ''
+        imageAlt: ''
         contentSections:
           - _component: building-blocks/core-elements/heading
             text: Place your order
@@ -21,8 +21,8 @@ value:
           - _component: building-blocks/core-elements/simple-text
             text: Choose a size, add it to the cart, and check out in a couple of minutes.
             size: sm
-      - image: ""
-        imageAlt: ""
+      - image: ''
+        imageAlt: ''
         contentSections:
           - _component: building-blocks/core-elements/heading
             text: We pack and ship
@@ -31,8 +31,8 @@ value:
           - _component: building-blocks/core-elements/simple-text
             text: Orders placed before 2pm leave the warehouse the same day.
             size: sm
-      - image: ""
-        imageAlt: ""
+      - image: ''
+        imageAlt: ''
         contentSections:
           - _component: building-blocks/core-elements/heading
             text: Track delivery
@@ -45,19 +45,11 @@ value:
     imageAspectRatio: landscape
   style:
     backgroundColor: light-sand
-    background:
-      type: image
-      imageSource: ""
-      imageAlt: ""
-      positionVertical: top
-      positionHorizontal: center
-      fixed: false
-      priority: false
-      mask: none
-      overlay: 0
+    pattern: none
     maxContentWidth: xl
     paddingHorizontal: gutter
     paddingVertical: 4xl
+    haze: false
 preview:
   text:
     - Steps Section
@@ -71,16 +63,14 @@ picker_preview:
   image: public/component-previews/page-sections/explainers/steps-section.svg
 _inputs_from_glob:
   - /src/components/page-sections/explainers/steps-section/steps-section.cloudcannon.inputs.yml
-  - /.cloudcannon/inputs/background.yml
-  - /.cloudcannon/inputs/haze.yml
 _structures:
   explainerStepsItems:
     values:
       - label: Step
         icon: format_list_numbered
         value:
-          image: ""
-          imageAlt: ""
+          image: ''
+          imageAlt: ''
           contentSections:
             - _component: building-blocks/core-elements/heading
               text: Step heading
@@ -103,7 +93,7 @@ _structures:
             comment: Optional product or process photo. Every step shares the section's image aspect ratio.
             options:
               paths:
-                static: ""
+                static: ''
                 uploads: src/assets/images
           imageAlt:
             type: text

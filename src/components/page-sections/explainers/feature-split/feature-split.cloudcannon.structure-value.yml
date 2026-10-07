@@ -5,20 +5,20 @@ tabbed: true
 value:
   _component: page-sections/explainers/feature-split
   content:
-    sectionLabel: ""
+    sectionLabel: ''
     eyebrow: How it works
     heading: One idea, shown beside it
     headingLevel: h2
     subtext: A short paragraph that explains the idea in the image next to it.
     subtextSize: lg
-    subtextWidth: ""
+    subtextWidth: ''
     buttonSections: []
     imageSource: /src/assets/images/component-docs/quiet-street.jpg
     imageAlt: A quiet residential street
     imageAspectRatio: portrait
     imageRounded: true
     imageBleed: false
-    mediaWidth: ""
+    mediaWidth: ''
     reverse: false
     shapes: []
     pileWidth: 664
@@ -27,19 +27,11 @@ value:
     pileRadius: 19
   style:
     backgroundColor: light-sand
-    background:
-      type: image
-      imageSource: ""
-      imageAlt: ""
-      positionVertical: top
-      positionHorizontal: center
-      fixed: false
-      priority: false
-      mask: none
-      overlay: 0
+    pattern: none
     maxContentWidth: xl
     paddingHorizontal: gutter
     paddingVertical: 4xl
+    haze: false
 preview:
   text:
     - Feature Split
@@ -53,5 +45,3 @@ picker_preview:
   image: public/component-previews/page-sections/explainers/feature-split.svg
 _inputs_from_glob:
   - /src/components/page-sections/explainers/feature-split/feature-split.cloudcannon.inputs.yml
-  - /.cloudcannon/inputs/background.yml
-  - /.cloudcannon/inputs/haze.yml

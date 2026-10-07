@@ -5,23 +5,23 @@ tabbed: true
 value:
   _component: page-sections/conversion/pricing-tiers
   content:
-    sectionLabel: ""
+    sectionLabel: ''
     eyebrow: Plans
     heading: Simple pricing that scales with you
     headingLevel: h2
     subtext: Every plan includes global CDN hosting and automatic SSL.
     subtextSize: md
-    subtextWidth: ""
+    subtextWidth: ''
     showAnnualPricing: false
     monthlyLabel: Monthly
     annualLabel: Annual
-    annualBadge: ""
+    annualBadge: ''
     defaultInterval: monthly
     tiers:
       - name: Starter
         price: $19
         priceSuffix: /month
-        annualPrice: ""
+        annualPrice: ''
         annualPriceSuffix: /year
         description: For a single marketing site.
         features:
@@ -36,13 +36,13 @@ value:
           - text: Staging environment
             included: false
         buttonText: Get started
-        buttonLink: "#"
+        buttonLink: '#'
         highlight: false
-        badgeText: ""
+        badgeText: ''
       - name: Studio
         price: $59
         priceSuffix: /month
-        annualPrice: ""
+        annualPrice: ''
         annualPriceSuffix: /year
         description: For small teams shipping several sites.
         features:
@@ -57,13 +57,13 @@ value:
           - text: SSO
             included: false
         buttonText: Get started
-        buttonLink: "#"
+        buttonLink: '#'
         highlight: true
         badgeText: Most popular
       - name: Agency
         price: $149
         priceSuffix: /month
-        annualPrice: ""
+        annualPrice: ''
         annualPriceSuffix: /year
         description: For agencies running client fleets.
         features:
@@ -76,24 +76,16 @@ value:
           - text: 99.95% uptime SLA
             included: true
         buttonText: Talk to sales
-        buttonLink: "#"
+        buttonLink: '#'
         highlight: false
-        badgeText: ""
+        badgeText: ''
   style:
     backgroundColor: light-sand
-    background:
-      type: image
-      imageSource: ""
-      imageAlt: ""
-      positionVertical: top
-      positionHorizontal: center
-      fixed: false
-      priority: false
-      mask: none
-      overlay: 0
+    pattern: none
     maxContentWidth: xl
     paddingHorizontal: gutter
     paddingVertical: 4xl
+    haze: false
 preview:
   text:
     - Pricing Tiers
@@ -109,8 +101,6 @@ picker_preview:
   image: public/component-previews/page-sections/conversion/pricing-tiers.svg
 _inputs_from_glob:
   - /src/components/page-sections/conversion/pricing-tiers/pricing-tiers.cloudcannon.inputs.yml
-  - /.cloudcannon/inputs/background.yml
-  - /.cloudcannon/inputs/haze.yml
 _structures:
   pricingTiers:
     values:
@@ -120,17 +110,17 @@ _structures:
           name: Plan name
           price: $29
           priceSuffix: /month
-          annualPrice: ""
+          annualPrice: ''
           annualPriceSuffix: /year
           description: Who this plan is for.
           features:
             - text: Included feature
               included: true
           buttonText: Get started
-          buttonLink: "#"
+          buttonLink: '#'
           highlight: false
-          badgeText: ""
-          accent: ""
+          badgeText: ''
+          accent: ''
         preview:
           text:
             - key: name
@@ -157,7 +147,7 @@ _structures:
           annualPriceSuffix:
             type: text
             comment: Billing period shown after the annual price (e.g. /year). Leave empty to hide.
-            hidden: "!annualPrice"
+            hidden: '!annualPrice'
           description:
             type: text
             comment: One line on who the plan is for.
@@ -181,7 +171,7 @@ _structures:
           badgeText:
             type: text
             comment: Badge shown atop the card (e.g. Most popular).
-            hidden: "!highlight"
+            hidden: '!highlight'
   pricingTierFeatures:
     values:
       - label: Feature

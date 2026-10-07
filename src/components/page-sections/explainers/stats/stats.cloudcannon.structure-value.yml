@@ -5,48 +5,40 @@ tabbed: true
 value:
   _component: page-sections/explainers/stats
   content:
-    sectionLabel: ""
-    eyebrow: ""
+    sectionLabel: ''
+    eyebrow: ''
     heading: Numbers that hold up
     headingLevel: h2
-    subtext: ""
+    subtext: ''
     stats:
       - number: 12
-        prefix: ""
+        prefix: ''
         suffix: k+
         label: Customers
-        sublabel: ""
+        sublabel: ''
       - number: 99.95
-        prefix: ""
-        suffix: "%"
+        prefix: ''
+        suffix: '%'
         label: Uptime
         sublabel: Last 12 months
       - number: 1.4
-        prefix: ""
+        prefix: ''
         suffix: s
         label: Median build
-        sublabel: ""
+        sublabel: ''
       - number: 4.9
-        prefix: ""
-        suffix: ""
+        prefix: ''
+        suffix: ''
         label: Support score
         sublabel: Out of 5
     dividers: true
   style:
     backgroundColor: light-sand
-    background:
-      type: image
-      imageSource: ""
-      imageAlt: ""
-      positionVertical: top
-      positionHorizontal: center
-      fixed: false
-      priority: false
-      mask: none
-      overlay: 0
+    pattern: none
     maxContentWidth: xl
     paddingHorizontal: gutter
     paddingVertical: 4xl
+    haze: false
 preview:
   text:
     - Stats
@@ -60,8 +52,6 @@ picker_preview:
   image: public/component-previews/page-sections/explainers/stats.svg
 _inputs_from_glob:
   - /src/components/page-sections/explainers/stats/stats.cloudcannon.inputs.yml
-  - /.cloudcannon/inputs/background.yml
-  - /.cloudcannon/inputs/haze.yml
 _structures:
   statsItems:
     values:
@@ -69,10 +59,10 @@ _structures:
         icon: monitoring
         value:
           number: 100
-          prefix: ""
-          suffix: ""
+          prefix: ''
+          suffix: ''
           label: Label
-          sublabel: ""
+          sublabel: ''
         preview:
           text:
             - key: label

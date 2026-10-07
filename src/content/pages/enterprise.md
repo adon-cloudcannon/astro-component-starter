@@ -1,6 +1,4 @@
 ---
-# Generated from the Figma mapping. 2 of 7 blocks are
-# confirmed decisions; the rest are proposals to review on the page.
 _schema: default
 title: Enterprise
 description: Stop juggling websites. Start managing them.
@@ -195,10 +193,7 @@ pageSections:
           variant: primary
     style:
       backgroundColor: dark
-      background:
-        type: pattern
-        pattern: grid
-        mask: top
+      pattern: grid-top
   - _component: page-sections/explainers/feature-grid
     content:
       heading: Custom plans for enterprise needs
@@ -241,15 +236,8 @@ pageSections:
           accentColor: moss
           imageAlt: ''
     style:
-      background:
-        type: pattern
-        pattern: grid
-        mask: fade
-      haze:
-        - x: 0.4889
-          rx: 366px
-          'y': 17.5%
-          ry: 16.4%
+      pattern: grid-fade
+      haze: true
   - _component: page-sections/conversion/cta-team-member
     content:
       heading: Real humans on support, always

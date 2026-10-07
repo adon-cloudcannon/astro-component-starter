@@ -1,6 +1,4 @@
 ---
-# Generated from the Figma mapping. 3 of 10 blocks are
-# confirmed decisions; the rest are proposals to review on the page.
 _schema: default
 title: Developers Page
 description: A CMS that uses Git, just like you do
@@ -108,8 +106,8 @@ pageSections:
               size: sm
             - _component: building-blocks/core-elements/text
               text: >-
-                Configure exactly what editors can touch, from a single line of text to whole sections
-                of custom built blocks.
+                Configure exactly what editors can touch, from a single line of text to whole
+                sections of custom built blocks.
               size: lg
           mediaSections: []
         - number: '3'
@@ -121,8 +119,8 @@ pageSections:
             - _component: building-blocks/core-elements/text
               text: >-
                 Everything developers push is pulled in by CloudCannon and built automatically.
-                Everything editors change is committed back to the repo. They can branch and merge in
-                the CMS, no command line needed.
+                Everything editors change is committed back to the repo. They can branch and merge
+                in the CMS, no command line needed.
               size: lg
           mediaSections: []
       reverse: true
@@ -182,10 +180,7 @@ pageSections:
       stagger: true
     style:
       backgroundColor: dark
-      background:
-        type: pattern
-        pattern: grid
-        mask: fade
+      pattern: grid-fade
   - _component: page-sections/conversion/cta-center
     content:
       heading: The tool you’ve been looking for
@@ -208,8 +203,8 @@ pageSections:
             - _component: building-blocks/core-elements/text
               text: >-
                 Projects are local-first and Git-based, so the tools already in use just work. Open
-                the repo in any IDE and the agent has full project context: code, content, config, the
-                lot.
+                the repo in any IDE and the agent has full project context: code, content, config,
+                the lot.
               size: lg
             - _component: building-blocks/core-elements/button
               text: Learn more
@@ -225,9 +220,9 @@ pageSections:
               size: sm
             - _component: building-blocks/core-elements/text
               text: >-
-                Editors shouldn’t need a developer to update a headline or swap an image. They manage
-                content themselves using the components already built, so there are no urgent requests
-                from marketing and no developer hours lost to copy tweaks.
+                Editors shouldn’t need a developer to update a headline or swap an image. They
+                manage content themselves using the components already built, so there are no urgent
+                requests from marketing and no developer hours lost to copy tweaks.
               size: lg
             - _component: building-blocks/core-elements/button
               text: Learn more
@@ -243,9 +238,9 @@ pageSections:
               size: sm
             - _component: building-blocks/core-elements/text
               text: >-
-                Complete control over how the team manages content. Customize inputs with a full range
-                of field types, and fine-tune roles and permissions for a secure, autonomous editing
-                experience.
+                Complete control over how the team manages content. Customize inputs with a full
+                range of field types, and fine-tune roles and permissions for a secure, autonomous
+                editing experience.
               size: lg
             - _component: building-blocks/core-elements/button
               text: Learn more
@@ -259,10 +254,7 @@ pageSections:
       progressColor: pacific
       progressTrackColor: pacific-100
     style:
-      background:
-        type: pattern
-        pattern: grid
-        mask: none
+      pattern: grid
   - _component: page-sections/conversion/cta-center
     content:
       heading: Own your content, always
@@ -287,8 +279,8 @@ pageSections:
       heading: Open-source ecosystem
       headingSize: lg
       subtext: >-
-        We won’t upsell tools that don’t need to exist, and we’ll often point to open source instead.
-        These are ours, and they work on any static site.
+        We won’t upsell tools that don’t need to exist, and we’ll often point to open source
+        instead. These are ours, and they work on any static site.
       subtextSize: xl
       buttonSections:
         - _component: building-blocks/core-elements/button
@@ -381,15 +373,8 @@ pageSections:
           height: 131
     style:
       backgroundColor: sand
-      background:
-        type: pattern
-        pattern: grid
-        mask: none
-      haze:
-        - x: 0.1923
-          rx: 399px
-          'y': 49.4%
-          ry: 49.9%
+      pattern: grid
+      haze: true
   - _component: page-sections/conversion/cta-team-member
     content:
       heading: We’re here to help

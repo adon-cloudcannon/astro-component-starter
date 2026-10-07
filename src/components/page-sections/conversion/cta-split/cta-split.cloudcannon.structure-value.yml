@@ -5,12 +5,12 @@ tabbed: true
 value:
   _component: page-sections/conversion/cta-split
   content:
-    sectionLabel: ""
+    sectionLabel: ''
     heading: Ready to get started?
     headingLevel: h2
     subtext: One line that makes the next step obvious.
     subtextSize: md
-    subtextWidth: ""
+    subtextWidth: ''
     imageSource: /src/assets/images/component-docs/dunedin-cliff.jpg
     imageAlt: Sea cliffs above a bay
     buttonSections:
@@ -18,7 +18,7 @@ value:
         text: Get started
         hideText: false
         link: /
-        iconName: ""
+        iconName: ''
         iconColor: default
         iconPosition: before
         variant: primary
@@ -26,19 +26,11 @@ value:
     reverse: false
   style:
     backgroundColor: light-sand
-    background:
-      type: image
-      imageSource: ""
-      imageAlt: ""
-      positionVertical: top
-      positionHorizontal: center
-      fixed: false
-      priority: false
-      mask: none
-      overlay: 0
+    pattern: none
     maxContentWidth: xl
     paddingHorizontal: gutter
     paddingVertical: 4xl
+    haze: false
 preview:
   text:
     - CTA Split
@@ -52,5 +44,3 @@ picker_preview:
   image: public/component-previews/page-sections/conversion/cta-split.svg
 _inputs_from_glob:
   - /src/components/page-sections/conversion/cta-split/cta-split.cloudcannon.inputs.yml
-  - /.cloudcannon/inputs/background.yml
-  - /.cloudcannon/inputs/haze.yml

@@ -5,23 +5,21 @@ tabbed: true
 value:
   _component: page-sections/proof/photo-strip
   content:
-    sectionLabel: ""
+    sectionLabel: ''
     images:
       - _component: page-sections/proof/photo-strip/photo-strip-image
-        source: ""
-        alt: ""
+        source: ''
+        alt: ''
       - _component: page-sections/proof/photo-strip/photo-strip-image
-        source: ""
-        alt: ""
+        source: ''
+        alt: ''
       - _component: page-sections/proof/photo-strip/photo-strip-image
-        source: ""
-        alt: ""
+        source: ''
+        alt: ''
     imageWidth: 393
     aspectRatio: 393 / 275
   style:
-    background:
-      type: image
-      imageSource: ""
+    pattern: none
     haze: false
     backgroundColor: dark
     maxContentWidth: xl
@@ -34,5 +32,3 @@ _inputs:
       structures: _structures.photoStripImages
 _inputs_from_glob:
   - /src/components/page-sections/proof/photo-strip/photo-strip.cloudcannon.inputs.yml
-  - /.cloudcannon/inputs/background.yml
-  - /.cloudcannon/inputs/haze.yml

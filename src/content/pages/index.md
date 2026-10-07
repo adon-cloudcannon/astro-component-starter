@@ -128,16 +128,6 @@ pageSections:
       headingSize: lg
     style:
       backgroundColor: light-sand
-      background:
-        type: image
-        imageSource: ''
-        imageAlt: ''
-        positionVertical: top
-        positionHorizontal: center
-        fixed: false
-        priority: false
-        mask: none
-        overlay: 0
       maxContentWidth: lg
       paddingHorizontal: gutter
       paddingVertical: 4xl
@@ -262,19 +252,11 @@ pageSections:
             size: md
     style:
       backgroundColor: light-sand
-      background:
-        type: pattern
-        imageSource: ''
-        pattern: pegboard
-        mask: fade
+      pattern: pegboard-fade
       maxContentWidth: xl
       paddingHorizontal: gutter
       paddingVertical: 4xl
-      haze:
-        - x: 0.5086
-          rx: 844px
-          'y': 19%
-          ry: 31.5%
+      haze: true
   - _component: page-sections/explainers/feature-deck
     content:
       sectionLabel: ''
@@ -615,12 +597,7 @@ pageSections:
       showRail: true
     style:
       backgroundColor: dark
-      background:
-        type: pattern
-        imageSource: ''
-        pattern: grid
-        mask: fade
-        fixed: true
+      pattern: grid-fade
       maxContentWidth: xl
       paddingHorizontal: gutter
       paddingVertical: 4xl
@@ -649,16 +626,6 @@ pageSections:
           quoteMarks: true
     style:
       backgroundColor: dark
-      background:
-        type: image
-        imageSource: ''
-        imageAlt: ''
-        positionVertical: top
-        positionHorizontal: center
-        fixed: false
-        priority: false
-        mask: none
-        overlay: 0
       maxContentWidth: xl
       paddingHorizontal: gutter
       paddingVertical: 4xl
@@ -725,11 +692,7 @@ pageSections:
           size: md
     style:
       backgroundColor: dark
-      background:
-        type: pattern
-        imageSource: ''
-        pattern: grid
-        mask: top
+      pattern: grid-top
       maxContentWidth: xl
       paddingHorizontal: gutter
       paddingVertical: 4xl
@@ -812,16 +775,6 @@ pageSections:
       columns: 2
     style:
       backgroundColor: sand
-      background:
-        type: image
-        imageSource: ''
-        imageAlt: ''
-        positionVertical: top
-        positionHorizontal: center
-        fixed: false
-        priority: false
-        mask: none
-        overlay: 0
       maxContentWidth: xl
       paddingHorizontal: gutter
       paddingVertical: none
@@ -865,16 +818,6 @@ pageSections:
       imageOverflow: 333
     style:
       backgroundColor: pacific
-      background:
-        type: image
-        imageSource: ''
-        imageAlt: ''
-        positionVertical: top
-        positionHorizontal: center
-        fixed: false
-        priority: false
-        mask: none
-        overlay: 0
       maxContentWidth: xl
       paddingHorizontal: gutter
       paddingVertical: 4xl

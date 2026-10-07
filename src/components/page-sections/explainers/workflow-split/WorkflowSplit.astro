@@ -12,6 +12,7 @@
  * be a picture or a third panel of its own: on the homepage the design draws a
  * dark card there, taller than the pair and sharing their bottom edge.
  */
+import { bandPattern, bandHaze } from "@component-utils/bandStyle.mjs";
 import { nestedProps } from "@component-utils/nestedProps.mjs";
 import Component from "@component-utils/renderBlock.astro";
 import CustomSection from "@builders/custom-section/CustomSection.astro";
@@ -82,7 +83,9 @@ const {
   colorScheme = "inherit",
   lockColorScheme = false,
   backgroundColor = "light-sand",
-  background,
+  /** The texture behind the band, by name. */
+  pattern = "none",
+  /** Whether the heading sits on a pool of the band’s own colour. */
   haze = false,
   class: className,
   useDefaultEditableBinding = false,
@@ -166,8 +169,8 @@ const feedKeyframes = feedSteps
   colorScheme={colorScheme}
   lockColorScheme={lockColorScheme}
   backgroundColor={backgroundColor}
-  background={background}
-  haze={haze}
+  background={bandPattern(pattern)}
+  haze={bandHaze(haze)}
   class:list={["workflow-split", className]}
   useDefaultEditableBinding={useDefaultEditableBinding}
   {...htmlAttributes}

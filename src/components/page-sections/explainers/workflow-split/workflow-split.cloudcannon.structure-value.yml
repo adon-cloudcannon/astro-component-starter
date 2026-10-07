@@ -72,13 +72,10 @@ value:
           size: md
   style:
     backgroundColor: light-sand
-    background:
-      type: image
-      imageSource: ''
+    pattern: none
     maxContentWidth: xl
     paddingHorizontal: gutter
     paddingVertical: 4xl
+    haze: false
 _inputs_from_glob:
   - /src/components/page-sections/explainers/workflow-split/workflow-split.cloudcannon.inputs.yml
-  - /.cloudcannon/inputs/background.yml
-  - /.cloudcannon/inputs/haze.yml
