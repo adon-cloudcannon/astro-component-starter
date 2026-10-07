@@ -324,7 +324,8 @@ pageSections:
       heading: Become a CloudCannon Partner
       headingSize: lg
     style:
-      pattern: grid-fade
+      pattern: grid
+      fade: bottom
       haze: true
       paddingVerticalEnd: 3xl
   - _component: page-sections/conversion/cta-form

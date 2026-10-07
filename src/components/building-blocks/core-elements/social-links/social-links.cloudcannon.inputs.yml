@@ -17,7 +17,7 @@ variant:
         name: Solid
 size:
   type: select
-  comment: The hit-area size. Medium is the 44px touch-target minimum; small suits footer rows.
+  comment: The hit-area size.
   options:
     values:
       - id: sm

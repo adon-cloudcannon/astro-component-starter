@@ -74,7 +74,8 @@ pageSections:
       subtextWidth: md
     style:
       backgroundColor: dark
-      pattern: grid-fade
+      pattern: grid
+      fade: bottom
   - _component: page-sections/explainers/pinned-steps
     content:
       eyebrow: ''

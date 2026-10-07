@@ -63,7 +63,8 @@ pageSections:
           accentColor: sunset
     style:
       backgroundColor: sand
-      pattern: pegboard-fade
+      pattern: pegboard
+      fade: bottom
   - _component: page-sections/conversion/cta-center
     content:
       heading: Here, you don’t need to wait to make changes

@@ -185,7 +185,8 @@ pageSections:
       features: []
     style:
       backgroundColor: dark
-      pattern: pegboard-fade
+      pattern: pegboard
+      fade: bottom
       paddingVertical: 3xl
   - _component: page-sections/conversion/cta-split
     content:

@@ -1,17 +1,11 @@
 label: Hero Split
 icon: web_asset
 description: Hero with text on one side and an image on the other.
-# `tabbed` draws the first-level nested keys of `value:` as tabs. It is the
-# only way to get them — `groups` renders as accordions whatever it is given,
-# so the tabs are a shape in the data rather than a presentation option.
-#
-# `style` is the three that paint the band, which is the split Adon asked for.
-# Everything else, including the width and padding, is content.
 tabbed: true
 value:
   _component: page-sections/heroes/hero-split
   content:
-    sectionLabel: ""
+    sectionLabel: ''
     heading:
       heading: A clear promise in one line
       headingLevel: h1
@@ -29,7 +23,7 @@ value:
         text: Get started
         hideText: false
         link: /
-        iconName: ""
+        iconName: ''
         iconColor: default
         iconPosition: before
         variant: primary
@@ -45,6 +39,7 @@ value:
         link: null
   style:
     pattern: grid
+    fade: none
     haze: true
     backgroundColor: light-sand
     reverse: false
@@ -62,8 +57,5 @@ picker_preview:
   text: Hero Split
   subtext: Prominent section block for landing pages.
   image: public/component-previews/page-sections/heroes/hero-split.svg
-# No background.yml or haze.yml. The hero writes both itself, from `pattern`
-# and a switch, and a later glob entry would put the shared definitions back
-# over the top of the simpler ones.
 _inputs_from_glob:
   - /src/components/page-sections/heroes/hero-split/hero-split.cloudcannon.inputs.yml

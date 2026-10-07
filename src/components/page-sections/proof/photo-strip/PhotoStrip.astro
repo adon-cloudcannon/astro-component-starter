@@ -37,6 +37,8 @@ const {
   backgroundColor = "dark",
   /** The texture behind the band, by name. */
   pattern = "none",
+  /** Which edge the texture fades out towards. */
+  fade = "none",
   /** Whether the heading sits on a pool of the band’s own colour. */
   haze = false,
   class: className,
@@ -55,7 +57,7 @@ const pictures = (Array.isArray(images) ? images : []).filter((image) => image?.
     paddingHorizontal={paddingHorizontal}
     paddingVertical={paddingVertical}
     backgroundColor={backgroundColor}
-    background={bandPattern(pattern)}
+    background={bandPattern(pattern, fade)}
     haze={bandHaze(haze)}
     class:list={["photo-strip", className]}
     useDefaultEditableBinding={useDefaultEditableBinding}

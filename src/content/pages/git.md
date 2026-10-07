@@ -209,7 +209,8 @@ pageSections:
       numbered: true
     style:
       backgroundColor: dark
-      pattern: grid-fade
+      pattern: grid
+      fade: bottom
   - _component: page-sections/proof/testimonial-quote
     content:
       variant: static
@@ -229,7 +230,8 @@ pageSections:
           accentColor: pacific
     style:
       backgroundColor: sand
-      pattern: pegboard-fade
+      pattern: pegboard
+      fade: bottom
   - _component: page-sections/conversion/cta-center
     content:
       heading: Your content is yours

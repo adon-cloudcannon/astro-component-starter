@@ -20,6 +20,7 @@ value:
     aspectRatio: 393 / 275
   style:
     pattern: none
+    fade: none
     haze: false
     backgroundColor: dark
     maxContentWidth: xl

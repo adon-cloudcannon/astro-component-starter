@@ -150,7 +150,8 @@ pageSections:
           backgroundColor: pacific
     style:
       backgroundColor: light-sand
-      pattern: grid-fade
+      pattern: grid
+      fade: bottom
   - _component: page-sections/conversion/cta-center
     content:
       heading: Keen to collaborate?

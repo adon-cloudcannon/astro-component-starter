@@ -30,6 +30,7 @@ value:
   style:
     backgroundColor: light-sand
     pattern: none
+    fade: none
     maxContentWidth: lg
     paddingHorizontal: gutter
     paddingVertical: 4xl

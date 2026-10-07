@@ -165,7 +165,8 @@ pageSections:
       stagger: true
     style:
       backgroundColor: dark
-      pattern: grid-fade
+      pattern: grid
+      fade: bottom
   - _component: page-sections/conversion/cta-split
     content:
       heading: See how fast your site could be

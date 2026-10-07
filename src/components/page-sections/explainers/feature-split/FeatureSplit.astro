@@ -91,6 +91,8 @@ const {
   backgroundColor = "light-sand",
   /** The texture behind the band, by name. */
   pattern = "none",
+  /** Which edge the texture fades out towards. */
+  fade = "none",
   /** Whether the heading sits on a pool of the band’s own colour. */
   haze = false,
   class: className,
@@ -123,7 +125,7 @@ const mirror = rootMirror({ class: { "has-pile": shapes?.length > 0 } });
   colorScheme={colorScheme}
   lockColorScheme={lockColorScheme}
   backgroundColor={backgroundColor}
-  background={bandPattern(pattern)}
+  background={bandPattern(pattern, fade)}
   haze={bandHaze(haze, { reverse, split: true })}
   useDefaultEditableBinding={useDefaultEditableBinding}
   {...htmlAttributes}

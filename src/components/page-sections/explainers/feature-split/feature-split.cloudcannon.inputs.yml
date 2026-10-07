@@ -167,9 +167,7 @@ content.sectionLabel:
   comment: Names the section in the editor and sets its anchor id.
 style.maxContentWidth:
   type: select
-  comment: >-
-    How wide the band's content runs. Full is the 1040 content column; compact
-    is 768, which still holds a heading beside a row of marks.
+  comment: How wide the band's content runs.
   options:
     values:
       - id: xl
@@ -229,17 +227,8 @@ style.pattern:
       - id: grid
         name: Grid
         swatch: grid_4x4
-      - id: grid-fade
-        name: Grid, fading out
-        swatch: grid_4x4
-      - id: grid-top
-        name: Grid, top only
-        swatch: grid_4x4
       - id: pegboard
         name: Peg board
-        swatch: blur_linear
-      - id: pegboard-fade
-        name: Peg board, fading out
         swatch: blur_linear
     picker_view: card
     preview:
@@ -247,6 +236,18 @@ style.pattern:
         - key: swatch
       text:
         - key: name
+style.fade:
+  type: select
+  label: Texture fade
+  comment: Which edge the texture fades out towards. Only applies where there is one.
+  options:
+    values:
+      - id: none
+        name: None
+      - id: top
+        name: Fade out at the top
+      - id: bottom
+        name: Fade out at the bottom
 style.haze:
   type: switch
   label: Haze behind the heading
@@ -292,4 +293,4 @@ style.backgroundColor:
         - key: name
 content.mediaWidth:
   type: number
-  comment: How wide the picture's column is drawn, in pixels. Defaults to 400.
+  comment: How wide the picture's column is drawn, in pixels.

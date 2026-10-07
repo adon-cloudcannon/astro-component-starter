@@ -1,4 +1,5 @@
 ---
+import { bandPattern } from "@component-utils/bandStyle.mjs";
 import { nestedProps } from "@component-utils/nestedProps.mjs";
 import CustomSection from "@builders/custom-section/CustomSection.astro";
 import { subtextMeasure } from "@component-utils/subtextMeasure.mjs";
@@ -89,6 +90,8 @@ const {
    * token.
    */
   pattern = "grid",
+  /** Which edge the texture fades out towards. */
+  fade = "none",
   /**
    * Whether the heading sits on a pool of the band's own colour.
    *
@@ -120,10 +123,7 @@ const subtextCap = subtextMeasure(subtextWidth);
  * switching a hero's pattern cannot leave a stale key behind from whatever it
  * was before.
  */
-const backgroundPattern =
-  pattern && pattern !== "none"
-    ? { type: "pattern", pattern, fixed: false, mask: "none", overlay: 0 }
-    : undefined;
+const backgroundPattern = bandPattern(pattern, fade);
 
 /**
  * One pool, behind the copy.

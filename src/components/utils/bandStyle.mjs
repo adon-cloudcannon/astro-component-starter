@@ -1,5 +1,5 @@
 /**
- * A band's texture and its haze, from one choice each.
+ * A band's texture, where it fades, and its haze.
  *
  * The builder's `background` is an image, a video or a tiled pattern, each
  * with a focal point, a fade, an overlay and a tile size — nine fields for a
@@ -8,28 +8,30 @@
  *
  * So a section offers a texture by name and a switch, and writes the rest.
  *
- * The fade is part of the name rather than a field of its own. The design
- * fades a pattern out on about half the bands that carry one, and dropping it
- * would have flattened twenty of them — a visible loss for a field nobody
- * wanted to set. Picking "Grid, faded" keeps it without adding a second
- * control.
+ * Three choices, each a plain list: which texture, where it fades out, and
+ * whether the heading sits on a pool.
  */
-const MASKS = { "grid-fade": "fade", "pegboard-fade": "fade", "grid-top": "top" };
-const TILES = {
-  grid: "grid",
-  "grid-fade": "grid",
-  "grid-top": "grid",
-  pegboard: "pegboard",
-  "pegboard-fade": "pegboard",
-};
+/**
+ * Where a texture fades out.
+ *
+ * `bottom` maps to the builder's `fade` rather than its `bottom`: both ramp
+ * downward, but `bottom` holds full strength through the first 30% and reads
+ * heavy through the middle, where the design's gradient is a straight ramp.
+ * That choice was made once already and is kept here.
+ */
+const MASKS = { top: "top", bottom: "fade" };
 
 /** The builder's background object, or nothing where the band is bare. */
-export function bandPattern(pattern) {
-  const tile = TILES[pattern];
+export function bandPattern(pattern, fade = "none") {
+  if (!pattern || pattern === "none") return undefined;
 
-  if (!tile) return undefined;
-
-  return { type: "pattern", pattern: tile, fixed: false, mask: MASKS[pattern] ?? "none", overlay: 0 };
+  return {
+    type: "pattern",
+    pattern,
+    fixed: false,
+    mask: MASKS[fade] ?? "none",
+    overlay: 0,
+  };
 }
 
 /**

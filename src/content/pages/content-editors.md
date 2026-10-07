@@ -110,7 +110,8 @@ pageSections:
       numbered: true
     style:
       backgroundColor: dark
-      pattern: grid-fade
+      pattern: grid
+      fade: bottom
       haze: true
   - _component: page-sections/proof/testimonial-quote
     content:

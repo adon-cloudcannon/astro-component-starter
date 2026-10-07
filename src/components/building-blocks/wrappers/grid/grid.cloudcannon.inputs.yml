@@ -2,7 +2,7 @@ label:
   comment: Names this block in the editor and sets its anchor id.
   type: text
 columns:
-  comment: Columns from 640px up; one below. Auto fits as many items as space allows.
+  comment: Auto fits as many items as space allows.
   type: select
   options:
     values:

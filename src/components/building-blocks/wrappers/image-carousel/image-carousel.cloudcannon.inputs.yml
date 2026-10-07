@@ -31,9 +31,9 @@ aspectRatio:
         name: Horizontal Strip (16:5)
 sizes:
   type: text
-  comment: 'Sizes attribute for main images (e.g. "(max-width: 1280px) 100vw, 1280px").'
+  comment: The sizes attribute for the main images.
   hidden: true
 widths:
   type: array
-  comment: Widths to generate for responsive main images (e.g. 640, 1280, 2560).
+  comment: The widths to generate for the responsive main images.
   hidden: true

@@ -97,7 +97,8 @@ pageSections:
           authorDescription: Digital Design Director, Croissant & Baguette
     style:
       backgroundColor: light-sand
-      pattern: pegboard-fade
+      pattern: pegboard
+      fade: bottom
       haze: true
   - _component: page-sections/builders/custom-section
     content:
@@ -216,7 +217,8 @@ pageSections:
       progressTrackColor: '#674A3F'
     style:
       backgroundColor: dark
-      pattern: grid-top
+      pattern: grid
+      fade: top
   - _component: page-sections/conversion/cta-center
     content:
       heading: Join a Partner Program that rewards good work

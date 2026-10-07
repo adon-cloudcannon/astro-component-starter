@@ -11,6 +11,7 @@ value:
   style:
     backgroundColor: light-sand
     pattern: none
+    fade: none
     maxContentWidth: xl
     paddingHorizontal: md
     paddingVertical: 4xl

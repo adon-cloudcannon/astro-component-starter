@@ -17,7 +17,8 @@ pageSections:
     style:
       haze: true
       backgroundColor: light-sand
-      pattern: grid-fade
+      pattern: grid
+      fade: bottom
   - _component: page-sections/explainers/pinned-steps
     content:
       eyebrow: ''

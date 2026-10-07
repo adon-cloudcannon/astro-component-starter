@@ -170,7 +170,7 @@ style.maxContentWidth:
   # same column and the same rhythm, and a section that drifts from it reads
   # as a mistake rather than a choice.
   type: select
-  comment: How wide the band's content runs. Full is the 1040 content column.
+  comment: How wide the band's content runs.
   options:
     values:
       - id: xl
@@ -225,7 +225,7 @@ style.lockColorScheme:
 style.pattern:
   type: select
   label: Texture
-  comment: The pattern drawn behind the band. Both are inked from the band's own colours.
+  comment: The pattern drawn behind the band, inked from the band's own colours.
   options:
     values:
       - id: none
@@ -243,6 +243,18 @@ style.pattern:
         - key: swatch
       text:
         - key: name
+style.fade:
+  type: select
+  label: Texture fade
+  comment: Which edge the texture fades out towards. Only applies where there is one.
+  options:
+    values:
+      - id: none
+        name: None
+      - id: top
+        name: Fade out at the top
+      - id: bottom
+        name: Fade out at the bottom
 style.haze:
   type: switch
   label: Haze behind the heading

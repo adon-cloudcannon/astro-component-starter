@@ -3,7 +3,6 @@ label:
   comment: Names this block in the editor and sets its anchor id.
 columns:
   type: select
-  comment: Columns from 640px up; two below.
   options:
     values:
       - id: "2"

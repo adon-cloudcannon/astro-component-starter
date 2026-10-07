@@ -193,7 +193,8 @@ pageSections:
           variant: primary
     style:
       backgroundColor: dark
-      pattern: grid-top
+      pattern: grid
+      fade: top
   - _component: page-sections/explainers/feature-grid
     content:
       heading: Custom plans for enterprise needs
@@ -236,7 +237,8 @@ pageSections:
           accentColor: moss
           imageAlt: ''
     style:
-      pattern: grid-fade
+      pattern: grid
+      fade: bottom
       haze: true
   - _component: page-sections/conversion/cta-team-member
     content:

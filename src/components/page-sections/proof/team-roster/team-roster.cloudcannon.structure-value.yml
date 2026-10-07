@@ -36,6 +36,7 @@ value:
         propAlt: ''
   style:
     pattern: none
+    fade: none
     haze: false
     backgroundColor: light-sand
     maxContentWidth: xl

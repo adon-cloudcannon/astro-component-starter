@@ -16,6 +16,7 @@ value:
   style:
     backgroundColor: pacific
     pattern: none
+    fade: none
     maxContentWidth: xl
     paddingHorizontal: gutter
     paddingVertical: 2xl

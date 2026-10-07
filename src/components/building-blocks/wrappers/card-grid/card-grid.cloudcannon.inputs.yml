@@ -12,7 +12,6 @@ layout:
         name: Masonry
 columns:
   type: range
-  comment: Columns from 640px up; one below in Grid layout.
   options:
     min: 2
     max: 4

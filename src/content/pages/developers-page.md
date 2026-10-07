@@ -180,7 +180,8 @@ pageSections:
       stagger: true
     style:
       backgroundColor: dark
-      pattern: grid-fade
+      pattern: grid
+      fade: bottom
   - _component: page-sections/conversion/cta-center
     content:
       heading: The tool you’ve been looking for

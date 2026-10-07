@@ -160,7 +160,8 @@ pageSections:
               size: sm
     style:
       backgroundColor: light-sand
-      pattern: grid-fade
+      pattern: grid
+      fade: bottom
       paddingVertical: 4xl
   - _component: page-sections/conversion/cta-banner
     content:
