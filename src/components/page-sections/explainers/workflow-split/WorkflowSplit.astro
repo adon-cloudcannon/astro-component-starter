@@ -107,18 +107,24 @@ const panelPath = (index: number) => at(index === 0 ? "leftPanel" : "rightPanel"
 
 /* The middle card's fields, which sit in `middlePanel` now and were loose
    `centre*` props before it. */
-const centre = {
-  color: middlePanel?.centreColor ?? "",
-  minHeight: middlePanel?.centreMinHeight ?? 0,
-  iconName: middlePanel?.centreIconName ?? "",
-  title: middlePanel?.centreTitle ?? "",
-  branch: middlePanel?.centreBranch ?? "",
-  rows: middlePanel?.centreRows ?? [],
-  sections: middlePanel?.centreSections ?? [],
-};
-const centrePath = (key: string) =>
-  `${at("middlePanel")}.centre${key[0].toUpperCase()}${key.slice(1)}`;
+/**
+ * The middle card's chrome, which is the same wherever this band is drawn.
+ *
+ * It was in the page's frontmatter and hidden from the editor, which made it
+ * look like content that happened to be locked. It is not content: the card
+ * is a picture of a Git repo and these are what make it look like one.
+ *
+ * The colour is a value rather than a token on purpose. It is not in the
+ * palette, and the nearest token is a different colour by enough to see.
+ */
+const CENTRE_COLOR = "#26262F";
+const CENTRE_MIN_HEIGHT = 366;
+const CENTRE_ICON = "git-pull-request-arrow";
+const CENTRE_TITLE = "Your Git repo";
+const CENTRE_BRANCH = "main";
 
+/* The one thing the middle card takes from the page: its commit rows. */
+const centreRows = middlePanel?.centreRows ?? [];
 /**
  * The commit feed's timing, and the keyframes that drive it.
  *
@@ -138,7 +144,7 @@ const CYCLE_MS = 2900;
 const LANDS_MS = 652;
 const SLIDE_MS = 450;
 
-const feedRows: Record<string, unknown>[] = Array.isArray(centre.rows) ? centre.rows : [];
+const feedRows: Record<string, unknown>[] = Array.isArray(centreRows) ? centreRows : [];
 const feedSteps = feedRows.length;
 const feedName = `workflow-feed-${feedSteps}`;
 const feedPeriod = feedSteps * CYCLE_MS;
@@ -275,7 +281,7 @@ const feedKeyframes = feedSteps
               <span
                 class:list={["workflow-connector", index === 0 ? "to-end" : "to-start"]}
                 style={panel.accentColor ? { "--workflow-connector": `var(--${panel.accentColor})` } : undefined}
-                data-kind={index === 0 ? "editor" : "dev"}
+                data-kind={index === 0 ? "left" : "right"}
                 aria-hidden="true"
               >
                 {/* Which panel feeds which commit is the design's own reading:
@@ -288,33 +294,27 @@ const feedKeyframes = feedSteps
         </div>
 
         {/* The common ground goes between the first pair, which is where the
-            design puts it. The cell is held even when there is no art for it
-            yet: without it the second panel slides into the middle column and
-            the row reads as two columns of the wrong width. */}
-        {index === 0 &&
-          (centre.color || centre.sections?.length ? (
-            <div
-              class="workflow-centre-card"
-              style={{
-                ...(centre.color ? { "--workflow-centre-color": centre.color } : {}),
-                ...(centre.minHeight ? { "--workflow-centre-height": `${Number(centre.minHeight)}px` } : {}),
-              }}
-              data-editable="array"
-              data-prop={centrePath("sections")}
-            >
-              {(centre.iconName || centre.title) && (
-                <p class="workflow-centre-title">
-                  {centre.iconName && <Icon name={centre.iconName} size="md" />}
-                  {centre.title && <span data-prop={centrePath("title")}>{centre.title}</span>}
-                  {centre.branch && (
-                    <span class="workflow-centre-branch">
-                      <span class="workflow-centre-light" aria-hidden="true" />
-                      <span data-prop={centrePath("branch")}>{centre.branch}</span>
-                    </span>
-                  )}
-                </p>
-              )}
-              {centre.rows?.length > 0 && (
+            design puts it. Always drawn: the card is the band's subject, not
+            something a page opts into, and without the cell the second panel
+            slides into the middle column and the row reads as two columns of
+            the wrong width. */}
+        {index === 0 && (
+          <div
+            class="workflow-centre-card"
+            style={{
+              "--workflow-centre-color": CENTRE_COLOR,
+              "--workflow-centre-height": `${CENTRE_MIN_HEIGHT}px`,
+            }}
+          >
+            <p class="workflow-centre-title">
+              <Icon name={CENTRE_ICON} size="md" />
+              <span>{CENTRE_TITLE}</span>
+              <span class="workflow-centre-branch">
+                <span class="workflow-centre-light" aria-hidden="true" />
+                <span>{CENTRE_BRANCH}</span>
+              </span>
+            </p>
+              {centreRows.length > 0 && (
                 <div class="workflow-centre-feed">
                   {/* Twice. The track slides by exactly the length of one
                       copy and then repeats, and because the second copy sits
@@ -326,7 +326,7 @@ const feedKeyframes = feedSteps
                   >
                     {[...feedRows, ...feedRows].map((row: Record<string, unknown>, index: number) => (
                       <li
-                        class:list={["workflow-centre-row", `kind-${row.kind ?? "editor"}`]}
+                        class:list={["workflow-centre-row", `kind-${row.kind ?? "left"}`]}
                         aria-hidden={index >= feedSteps ? "true" : undefined}
                       >
                         <span class="workflow-centre-dot" aria-hidden="true" />
@@ -338,11 +338,8 @@ const feedKeyframes = feedSteps
                   </ul>
                 </div>
               )}
-              <Component contentSections={centre.sections} />
-            </div>
-          ) : (
-            <div class="workflow-centre-empty" aria-hidden="true"></div>
-          ))}
+          </div>
+        )}
       </Fragment>
     ))}
   </div>
@@ -567,12 +564,12 @@ const feedKeyframes = feedSteps
         padding-inline: 10px;
       }
 
-      .workflow-centre-row.kind-editor {
+      .workflow-centre-row.kind-left {
         --workflow-row-dot: #4d7dff;
         --workflow-row-author: #7ea6ff;
       }
 
-      .workflow-centre-row.kind-dev {
+      .workflow-centre-row.kind-right {
         --workflow-row-dot: var(--sunset);
         --workflow-row-author: #f0a07a;
       }

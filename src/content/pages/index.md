@@ -189,45 +189,39 @@ pageSections:
             variant: text
             size: md
       middlePanel:
-        centreColor: '#26262F'
-        centreMinHeight: 366
-        centreIconName: git-pull-request-arrow
-        centreTitle: Your Git repo
-        centreBranch: main
         centreRows:
-          - kind: editor
+          - kind: left
             author: editor
             message: 'content: hero copy'
             hash: a3f9c2
-          - kind: dev
+          - kind: right
             author: dev
             message: 'feat: pricing component'
             hash: 7b1e44
-          - kind: editor
+          - kind: left
             author: editor
             message: 'content: new blog post'
             hash: c0d8f1
-          - kind: dev
+          - kind: right
             author: dev
             message: 'refactor: nav links'
             hash: 2f90ab
-          - kind: editor
+          - kind: left
             author: editor
             message: 'content: new team member'
             hash: c0d8f1
-          - kind: dev
+          - kind: right
             author: dev
             message: 'feat: new page'
             hash: 7b1e44
-          - kind: editor
+          - kind: left
             author: editor
             message: 'content: new blog post'
             hash: c0d8f1
-          - kind: dev
+          - kind: right
             author: dev
             message: 'feat: chatbot install'
             hash: 7b1e44
-        centreSections: []
       rightPanel:
         accentColor: sunset
         eyebrow: DEVELOPERS

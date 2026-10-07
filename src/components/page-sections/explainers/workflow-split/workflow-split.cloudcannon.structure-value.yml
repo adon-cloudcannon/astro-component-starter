@@ -35,21 +35,15 @@ value:
           iconPosition: after
           size: md
     middlePanel:
-      centreColor: ''
-      centreMinHeight: 0
-      centreIconName: ''
-      centreTitle: ''
-      centreBranch: ''
       centreRows:
-        - kind: editor
+        - kind: left
           author: editor
           message: 'content: new blog post'
           hash: c0d8f1
-        - kind: dev
+        - kind: right
           author: dev
           message: 'feat: pricing component'
           hash: 7b1e44
-      centreSections: []
     rightPanel:
       accentColor: sunset
       eyebrow: DEVELOPERS

@@ -243,26 +243,6 @@ content.rightPanel.buttonSections:
   options:
     structures: _structures.buttonSections
 
-content.middlePanel.centreColor:
-  hidden: true
-  type: text
-  comment: The middle card's own colour, as a hex.
-content.middlePanel.centreMinHeight:
-  hidden: true
-  type: number
-  comment: How tall the middle card stands, in pixels.
-content.middlePanel.centreIconName:
-  hidden: true
-  type: text
-  comment: The icon on the middle card's top line.
-content.middlePanel.centreTitle:
-  hidden: true
-  type: text
-  comment: The middle card's title.
-content.middlePanel.centreBranch:
-  hidden: true
-  type: text
-  comment: The branch shown after the title, with a status light before it.
 content.middlePanel.centreRows:
   type: array
   comment: The commit rows down the card.
@@ -272,13 +252,13 @@ content.middlePanel.centreRows[*]:
     subtype: object
 content.middlePanel.centreRows[*].kind:
   type: select
-  comment: Which side made this commit.
+  comment: Which panel this commit came from. It colours the row's dot and label.
   options:
     values:
-      - id: editor
-        name: Editor
-      - id: dev
-        name: Developer
+      - id: left
+        name: Left panel
+      - id: right
+        name: Right panel
 content.middlePanel.centreRows[*].author:
   type: text
   comment: The label after the dot.
@@ -288,11 +268,6 @@ content.middlePanel.centreRows[*].message:
 content.middlePanel.centreRows[*].hash:
   type: text
   comment: The short hash at the end of the row.
-content.middlePanel.centreSections:
-  type: array
-  comment: Anything else to put in the middle card.
-  options:
-    structures: _structures.containerSections
 # --- section wrapper inputs
 # The heading's level and size belong with the heading, the way the hero's do.
 content.subtext:
