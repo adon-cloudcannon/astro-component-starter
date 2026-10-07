@@ -19,6 +19,8 @@ value:
       - accentColor: golden
         logoSource: ""
         logoAlt: ""
+        logoMonochrome: true
+        logoAspect: ""
         figure: 8x
         label: faster content builds
         linkText: Read story
@@ -26,6 +28,8 @@ value:
       - accentColor: harbour
         logoSource: ""
         logoAlt: ""
+        logoMonochrome: true
+        logoAspect: ""
         figure: 15+
         label: marketing sites
         linkText: Read story
@@ -33,6 +37,8 @@ value:
       - accentColor: peachy
         logoSource: ""
         logoAlt: ""
+        logoMonochrome: true
+        logoAspect: ""
         figure: 400%
         label: increase in leads generated
         linkText: Read story
@@ -40,6 +46,8 @@ value:
       - accentColor: moss-350
         logoSource: ""
         logoAlt: ""
+        logoMonochrome: true
+        logoAspect: ""
         figure: 100x
         label: publishing velocity
         linkText: Read story
@@ -56,15 +64,6 @@ value:
     paddingHorizontal: gutter
     paddingVertical: 4xl
     haze: false
-_inputs:
-  stories:
-    type: array
-    options:
-      structures: _structures.story_card
-  buttonSections:
-    type: array
-    options:
-      structures: _structures.buttonSections
 _structures:
   story_card:
     values:
@@ -74,72 +73,12 @@ _structures:
           accentColor: golden
           logoSource: ""
           logoAlt: ""
+          logoMonochrome: true
+          logoAspect: ""
           figure: 8x
           label: faster content builds
           linkText: Read story
           link: ""
-        _inputs:
-          accentColor:
-            type: select
-            comment: >-
-              Drives both the rule at the top of the card and the figure below it, so one choice
-              colours the whole card.
-            options:
-              values:
-                - id: golden
-                  name: Golden
-                  swatch: square
-                  color: "#FFAA00"
-                - id: harbour
-                  name: Harbour
-                  swatch: square
-                  color: "#A6C1FA"
-                - id: peachy
-                  name: Peachy
-                  swatch: square
-                  color: "#F39B7B"
-                - id: moss-350
-                  name: Moss
-                  swatch: square
-                  color: "#95A54D"
-                - id: pacific
-                  name: Pacific
-                  swatch: square
-                  color: "#034AD8"
-                - id: sunset
-                  name: Sunset
-                  swatch: square
-                  color: "#D85A2C"
-                - id: blush
-                  name: Blush
-                  swatch: square
-                  color: "#E7B0B9"
-              picker_view: card
-              preview:
-                icon:
-                  - key: swatch
-                icon_color:
-                  - key: color
-                text:
-                  - key: name
-          logoSource:
-            type: image
-            comment: The client's logo.
-          logoAlt:
-            type: text
-            comment: Alt text for the logo.
-          figure:
-            type: text
-            comment: The number this story turns on, such as 8x or 400%.
-          label:
-            type: text
-            comment: What the figure measures.
-          linkText:
-            type: text
-            comment: Text for the link at the foot of the card.
-          link:
-            type: url
-            comment: Where the card links to.
 _editables:
   content:
     bold: true

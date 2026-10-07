@@ -5,17 +5,17 @@ tabbed: true
 value:
   _component: page-sections/proof/photo-strip
   content:
-    sectionLabel: ''
+    sectionLabel: ""
     images:
       - _component: page-sections/proof/photo-strip/photo-strip-image
-        source: ''
-        alt: ''
+        source: ""
+        alt: ""
       - _component: page-sections/proof/photo-strip/photo-strip-image
-        source: ''
-        alt: ''
+        source: ""
+        alt: ""
       - _component: page-sections/proof/photo-strip/photo-strip-image
-        source: ''
-        alt: ''
+        source: ""
+        alt: ""
     imageWidth: 393
     aspectRatio: 393 / 275
   style:
@@ -27,7 +27,7 @@ value:
     paddingHorizontal: gutter
     paddingVertical: 2xl
 _inputs:
-  images:
+  content.images:
     type: array
     options:
       structures: _structures.photoStripImages

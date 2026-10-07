@@ -26,6 +26,7 @@ import Heading from "@core-elements/heading/Heading.astro";
 import Text from "@core-elements/text/Text.astro";
 import SimpleText from "@core-elements/simple-text/SimpleText.astro";
 import Image from "@core-elements/image/Image.astro";
+import Button from "@core-elements/button/Button.astro";
 import ButtonGroup from "@wrappers/button-group/ButtonGroup.astro";
 
 type StoryProps = {
@@ -158,7 +159,6 @@ const subtextCap = subtextMeasure(subtextWidth);
             rounded={true}
             paddingHorizontal="lg"
             paddingVertical="lg"
-            link={story.link}
           >
             {story.logoSource &&
               (story.logoMonochrome ? (
@@ -194,13 +194,24 @@ const subtextCap = subtextMeasure(subtextWidth);
               data-prop="label"
               text={story.label}
             />
+            {/* The Button, like every other arrow link on the site, so a
+                change to the button changes this one too. It carries the
+                href rather than the card: Card draws its link as an overlay
+                covering the whole face, which would sit on top of this and
+                swallow it. */}
             {story.linkText && (
-              <SimpleText
+              <Button
                 class="story-link"
+                variant="text"
                 size="sm"
+                iconName="move-right"
+                iconPosition="after"
+                link={story.link || undefined}
                 data-prop="linkText"
-                text={story.linkText}
-              />
+              >
+                {story.linkText}
+                {story.logoAlt && <span class="visually-hidden"> about {story.logoAlt}</span>}
+              </Button>
             )}
           </Card>
         </CarouselSlide>

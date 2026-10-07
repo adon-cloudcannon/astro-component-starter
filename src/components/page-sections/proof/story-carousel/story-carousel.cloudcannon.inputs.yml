@@ -96,10 +96,96 @@ content.stories:
   comment: >-
     One card per customer story. Each carries its own accent colour, which the
     figure takes as well, so a row reads as a set rather than a repeat.
+# Declared field by field rather than through a structure. A structure's own
+# `_inputs` only reach an item the editor can match to that structure, and
+# these carry two keys the structure never listed, so every field fell back to
+# a guessed type: the palette select came through as a colour picker.
+content.stories[*]:
+  type: object
+  options:
+    subtype: object
+content.stories[*].accentColor:
+  type: select
+  label: Accent colour
+  comment: >-
+    Drives both the rule at the top of the card and the figure below it, so one
+    choice colours the whole card.
+  options:
+    values:
+      - id: golden
+        name: Golden
+        swatch: square
+        color: "#FFAA00"
+      - id: harbour
+        name: Harbour
+        swatch: square
+        color: "#A6C1FA"
+      - id: peachy
+        name: Peachy
+        swatch: square
+        color: "#F39B7B"
+      - id: moss-350
+        name: Moss
+        swatch: square
+        color: "#95A54D"
+      - id: pacific
+        name: Pacific
+        swatch: square
+        color: "#034AD8"
+      - id: sunset
+        name: Sunset
+        swatch: square
+        color: "#D85A2C"
+      - id: blush
+        name: Blush
+        swatch: square
+        color: "#E7B0B9"
+    picker_view: card
+    preview:
+      icon:
+        - key: swatch
+      icon_color:
+        - key: color
+      text:
+        - key: name
+content.stories[*].logoSource:
+  type: image
+  label: Logo
+  comment: The client's logo, drawn at the head of the card.
+content.stories[*].logoAlt:
+  type: text
+  label: Logo alt text
+  comment: What the logo says, for a reader who cannot see it.
+content.stories[*].logoMonochrome:
+  type: switch
+  label: Draw the logo in one colour
+  comment: >-
+    Paints the logo as a mask so it takes the card's own ink. Wanted where the
+    file is a full-colour mark and the card is dark.
+content.stories[*].logoAspect:
+  type: text
+  label: Logo proportions
+  comment: The logo's width over its height, such as 78 / 28, so it is not squashed.
+content.stories[*].figure:
+  type: text
+  label: Figure
+  comment: The number this story turns on, such as 8x or 400%.
+content.stories[*].label:
+  type: text
+  label: What the figure measures
+content.stories[*].linkText:
+  type: text
+  label: Link text
+  comment: The link at the foot of the card.
+content.stories[*].link:
+  type: url
+  label: Link
+  comment: Where that link goes.
 content.buttonSections:
   type: array
   comment: Call-to-action buttons below the row.
-
+  options:
+    structures: _structures.buttonSections
 # --- section wrapper inputs
 content.sectionLabel:
   type: text

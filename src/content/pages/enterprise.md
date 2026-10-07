@@ -191,10 +191,6 @@ pageSections:
           figure: 100x
           label: publishing velocity
           linkText: Read story
-        - accentColor: golden
-          figure: '90'
-          label: average Lighthouse score
-          linkText: Read story
       buttonSections:
         - _component: building-blocks/core-elements/button
           text: See how others did it

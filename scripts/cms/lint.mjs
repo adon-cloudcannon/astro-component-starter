@@ -381,12 +381,22 @@ const hasPath = (obj, path) => {
   let cursor = obj;
 
   for (const part of path.split(".")) {
-    if (cursor == null || typeof cursor !== "object" || !(part in cursor)) return false;
-    cursor = cursor[part];
+    /* `foo[*].bar` declares every item of `foo`, so it is seeded when the
+       first seeded item carries the key. Walked literally this looked for a
+       key called `foo[*]`, which never exists — so every array declared field
+       by field reported as unseeded when the data was right there. */
+    const item = part.endsWith("[*]");
+    const key = item ? part.slice(0, -3) : part;
+
+    if (cursor == null || typeof cursor !== "object" || !(key in cursor)) return false;
+    cursor = cursor[key];
+    if (item) {
+      if (!Array.isArray(cursor) || !cursor.length) return false;
+      cursor = cursor[0];
+    }
   }
   return true;
 };
-
 
 for (const [dir] of mainByDir) {
   const slug = dir.split("/").pop();

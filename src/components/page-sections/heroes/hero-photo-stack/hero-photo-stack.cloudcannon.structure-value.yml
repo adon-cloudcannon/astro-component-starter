@@ -48,11 +48,11 @@ value:
     paddingHorizontal: gutter
     paddingVertical: 4xl
 _inputs:
-  panels:
+  content.panels:
     type: array
     options:
       structures: _structures.photoStackPanels
-  photos:
+  content.photos:
     type: array
     options:
       structures: _structures.photoStackPhotos

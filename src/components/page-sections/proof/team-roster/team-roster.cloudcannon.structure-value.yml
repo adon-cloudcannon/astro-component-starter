@@ -45,11 +45,11 @@ value:
     paddingHorizontal: gutter
     paddingVertical: 4xl
 _inputs:
-  leads:
+  content.leads:
     type: array
     options:
       structures: _structures.teamMember
-  members:
+  content.members:
     type: array
     options:
       structures: _structures.teamMember

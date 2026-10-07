@@ -39,7 +39,7 @@ value:
     paddingVertical: 4xl
     haze: false
 _inputs:
-  cards:
+  content.cards:
     type: array
     options:
       structures: _structures.scrollDeckCards
