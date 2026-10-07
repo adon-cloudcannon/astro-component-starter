@@ -162,10 +162,6 @@ content.stories[*].logoMonochrome:
   comment: >-
     Paints the logo as a mask so it takes the card's own ink. Wanted where the
     file is a full-colour mark and the card is dark.
-content.stories[*].logoAspect:
-  type: text
-  label: Logo proportions
-  comment: The logo's width over its height, such as 78 / 28, so it is not squashed.
 content.stories[*].figure:
   type: text
   label: Figure

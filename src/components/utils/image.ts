@@ -175,6 +175,26 @@ export function resolveShareImage(source: string): ShareImage {
   };
 }
 
+/**
+ * A local image's own proportions, as an `aspect-ratio` value.
+ *
+ * A masked mark has no intrinsic size — the mask is a paint, not content — so
+ * the element has to be told its shape or it collapses. That shape was a field
+ * an editor had to fill in by measuring the file, and every value in the data
+ * was just the file's own numbers typed out again. The file already states
+ * them, so read them.
+ *
+ * Null for anything not resolvable to a local asset, which is the caller's cue
+ * to fall back rather than draw a mark at the wrong shape.
+ */
+export function resolveImageAspect(source: string): string | null {
+  if (!source) return null;
+
+  const { width, height } = resolveShareImage(source);
+
+  return width && height ? `${width} / ${height}` : null;
+}
+
 /** Site-relative src plus width/height for Open Graph. Local photos become a 1200×630 cover crop. */
 export async function resolveOpenGraphImage(source: string): Promise<{
   src: string;

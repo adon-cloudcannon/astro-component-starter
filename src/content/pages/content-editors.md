@@ -54,7 +54,6 @@ pageSections:
             light up.**
           logoSource: /src/assets/images/marketing/logos/firebrand.svg
           logoAlt: Firebrand
-          logoAspect: 239 / 50
           authorName: Alex Murray
           authorDescription: Digital Design Director ·
           company: Firebrand
@@ -129,7 +128,6 @@ pageSections:
             them in isolation, without corrupting your main site.
           logoSource: /src/assets/images/marketing/logos/nomio.svg
           logoAlt: Nomio
-          logoAspect: 275 / 63
           authorName: Ed Stennett
           authorDescription: Head of Growth ·
           company: Nomio

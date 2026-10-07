@@ -658,7 +658,6 @@ pageSections:
           logoSource: /src/assets/images/marketing/logos/hnry.svg
           logoAlt: Hnry
           logoMonochrome: true
-          logoAspect: 78 / 28
           figure: 8x
           label: faster content builds
           linkText: Read story
@@ -666,7 +665,6 @@ pageSections:
           logoSource: /src/assets/images/marketing/logos/twitch.svg
           logoAlt: Twitch
           logoMonochrome: true
-          logoAspect: 126 / 28
           figure: 15+
           label: marketing sites on CloudCannon
           linkText: Read story
@@ -674,7 +672,6 @@ pageSections:
           logoSource: /src/assets/images/marketing/logos/DX.svg
           logoAlt: DX Developer Experience Insights Platform
           logoMonochrome: true
-          logoAspect: 49 / 28
           figure: 400%
           label: increase in leads generated
           linkText: Read story
@@ -682,7 +679,6 @@ pageSections:
           logoSource: /src/assets/images/marketing/logos/Papercut.svg
           logoAlt: PaperCut
           logoMonochrome: true
-          logoAspect: 90 / 28
           figure: 100x
           label: publishing velocity
           linkText: Read story

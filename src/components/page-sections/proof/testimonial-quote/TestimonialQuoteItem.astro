@@ -17,7 +17,7 @@
  * the card's, and splitting them across two files would mean reading both to
  * know what one of them draws.
  */
-import { resolveImageSource } from "@component-utils/resolveImageSource";
+import { resolveImageSource, resolveImageAspect } from "@component-utils/resolveImageSource";
 import { rootMirror } from "@component-utils/rootMirror.mjs";
 import Button from "@core-elements/button/Button.astro";
 import Image from "@core-elements/image/Image.astro";
@@ -51,10 +51,18 @@ const {
 
 const isSplit = String(layout).startsWith("split");
 
+/* The file's own proportions. It used to be a field an editor filled in by
+   measuring the logo, and every value in the data was the file's numbers
+   typed out again; the stated one is still read where the source is not a
+   local asset. */
+const markAspect = resolveImageAspect(logoSource) || logoAspect;
+
 /* `239 / 50` as 4.78. Returns 0 when the aspect is missing or unreadable, and
    the mark then falls back to the height cap alone. */
 const markRatio = (() => {
-  const [w, h] = String(logoAspect).split("/").map((part) => Number(part.trim()));
+  const [w, h] = String(markAspect)
+    .split("/")
+    .map((part) => Number(part.trim()));
   return Number.isFinite(w) && Number.isFinite(h) && h > 0 ? w / h : 0;
 })();
 const body = text ? renderMarkdown(text) : "";
@@ -145,7 +153,14 @@ const mirror = rootMirror({
           )}
         </span>
         <div class="testimonial-quote-attribution">
-          {authorName && <p class="testimonial-quote-name" data-prop="authorName">{authorName}</p>}
+          {authorName && (
+            <p
+              class="testimonial-quote-name"
+              data-prop="authorName"
+            >
+              {authorName}
+            </p>
+          )}
           {(authorDescription || company) && (
             <p class="testimonial-quote-role">
               <span data-prop="authorDescription">{authorDescription}</span>
@@ -153,7 +168,12 @@ const mirror = rootMirror({
                   space between them is an anonymous item of its own, which
                   draws as a blank line between the role and the company. */}
               {company && (
-                <span class="testimonial-quote-company" data-prop="company">{company}</span>
+                <span
+                  class="testimonial-quote-company"
+                  data-prop="company"
+                >
+                  {company}
+                </span>
               )}
             </p>
           )}
@@ -205,7 +225,7 @@ const mirror = rootMirror({
                 aria-label={logoAlt || company}
                 style={{
                   "--logo-mark-source": `url("${resolveImageSource(logoSource)}")`,
-                  ...(logoAspect ? { "--logo-mark-aspect": logoAspect } : {}),
+                  ...(markAspect ? { "--logo-mark-aspect": markAspect } : {}),
                   /* The same proportion as a plain number, which the width
                      cap needs: `min()` cannot divide by "239 / 50", and
                      clamping a definite width against `aspect-ratio` squashes

@@ -92,7 +92,6 @@ pageSections:
         - text: New client sites shipped in **60 minutes** instead of days.
           logoSource: /src/assets/images/marketing/logos/DX.svg
           logoAlt: DX
-          logoAspect: 49 / 28
           company: DX
           linkText: Read case study
           accentColor: sunset

@@ -18,7 +18,7 @@ import { bandPattern, bandHaze } from "@component-utils/bandStyle.mjs";
 import { nestedProps } from "@component-utils/nestedProps.mjs";
 import CustomSection from "@builders/custom-section/CustomSection.astro";
 import { subtextMeasure } from "@component-utils/subtextMeasure.mjs";
-import { resolveImageSource } from "@component-utils/resolveImageSource";
+import { resolveImageSource, resolveImageAspect } from "@component-utils/resolveImageSource";
 import Carousel from "@wrappers/carousel/Carousel.astro";
 import CarouselSlide from "@wrappers/carousel/CarouselSlide.astro";
 import Card from "@wrappers/card/Card.astro";
@@ -168,7 +168,13 @@ const subtextCap = subtextMeasure(subtextWidth);
                   aria-label={story.logoAlt}
                   style={{
                     "--logo-mark-source": `url("${resolveImageSource(story.logoSource)}")`,
-                    ...(story.logoAspect ? { "--logo-mark-aspect": story.logoAspect } : {}),
+                    /* The file's own proportions. It used to be a field an
+                       editor filled in by measuring the logo, and every value
+                       in the data was the file's numbers typed out again. */
+                    ...(() => {
+                      const aspect = resolveImageAspect(story.logoSource) ?? story.logoAspect;
+                      return aspect ? { "--logo-mark-aspect": aspect } : {};
+                    })(),
                   }}
                   data-prop-src="logoSource"
                   data-prop-alt="logoAlt"

@@ -90,7 +90,6 @@ pageSections:
           company: Insight Creative, Inc
           logoSource: /src/assets/images/marketing/logos/insight-creative.svg
           logoAlt: Insight Creative
-          logoAspect: 214 / 71
           linkText: Read case study
           accentColor: sunset
     style:

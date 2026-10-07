@@ -210,11 +210,6 @@ style.backgroundColor:
         - key: color
       text:
         - key: name
-content.logoAspect:
-  type: text
-  comment: >-
-    The client mark's own proportions, as `width / height`, for the case-study
-    layout. Taken from the SVG's viewBox.
 style.paddingVerticalStart:
   type: select
   comment: >-

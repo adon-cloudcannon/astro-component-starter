@@ -55,7 +55,6 @@ pageSections:
           authorImageAlt: Alex Murray
           logoSource: /src/assets/images/marketing/logos/firebrand.svg
           logoAlt: Firebrand
-          logoAspect: 239 / 50
           linkText: Read case study
           accentColor: sunset
     style:
