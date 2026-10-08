@@ -86,11 +86,17 @@ const {
    * The site's own, rather than the design's "Purple": each carries the
    * palette name it paints with, so the preview is a real colour from the
    * theme and not a word standing in for one.
+   *
+   * Blush and Harbour take the palette's `-100` tone rather than the base.
+   * The preview's subtext is Earth, and against the full-strength accents
+   * that measures 3.26 and 3.35, under AA, while Sand and Golden 200 sit at
+   * 5.60 and 4.62. The `-100`s both land at 5.34, so every swatch in the
+   * list is now legible. The labels stay "Blush" and "Harbour".
    */
   colorOptions = [
     { label: "Sand", color: "sand" },
-    { label: "Blush", color: "blush" },
-    { label: "Harbour", color: "harbour" },
+    { label: "Blush", color: "blush-100" },
+    { label: "Harbour", color: "harbour-100" },
     { label: "Golden", color: "golden-200" },
   ],
   /** The label over the block list. */
