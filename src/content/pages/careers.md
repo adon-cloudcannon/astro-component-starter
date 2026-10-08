@@ -215,25 +215,25 @@ pageSections:
           iconName: move-right
           iconPosition: after
           variant: primary
-      mediaSections:
-        - _component: building-blocks/wrappers/polaroid-camera
-          label: Take a picture
-          fit: cover
-          shots:
-            - source: /src/assets/images/marketing/careers-team-hill.jpg
-              alt: ''
-              color: var(--light-sand)
-            - source: /src/assets/images/marketing/careers-office.jpg
-              alt: ''
-              color: var(--light-sand)
-            - source: /src/assets/images/marketing/careers-picnic.jpg
-              alt: ''
-              color: var(--light-sand)
-            - source: /src/assets/images/marketing/our-story-lake.jpg
-              alt: ''
-              color: var(--light-sand)
-          source: /src/assets/images/marketing/camera-01-1.png
-          alt: ''
+      illustration:
+        _component: building-blocks/wrappers/polaroid-camera
+        label: Take a picture
+        fit: cover
+        shots:
+          - source: /src/assets/images/marketing/careers-team-hill.jpg
+            alt: ''
+            color: var(--light-sand)
+          - source: /src/assets/images/marketing/careers-office.jpg
+            alt: ''
+            color: var(--light-sand)
+          - source: /src/assets/images/marketing/careers-picnic.jpg
+            alt: ''
+            color: var(--light-sand)
+          - source: /src/assets/images/marketing/our-story-lake.jpg
+            alt: ''
+            color: var(--light-sand)
+        source: /src/assets/images/marketing/camera-01-1.png
+        alt: ''
     style:
       backgroundColor: dark-sand
       pattern: grid

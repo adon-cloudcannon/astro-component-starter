@@ -14,14 +14,14 @@ value:
       subtext: One line that makes the next step obvious.
       subtextSize: md
       subtextWidth: ""
-    mediaSections:
-      - _component: building-blocks/wrappers/image-reveal
-        source: /src/assets/images/placeholder.jpg
-        alt: ""
-        revealSource: /src/assets/images/placeholder.jpg
-        label: Show the other view of this picture
-        aspectRatio: none
-        rounded: true
+    illustration:
+      _component: building-blocks/wrappers/image-reveal
+      source: /src/assets/images/placeholder.jpg
+      alt: ""
+      revealSource: /src/assets/images/placeholder.jpg
+      label: Show the other view of this picture
+      aspectRatio: none
+      rounded: true
     buttonSections:
       - _component: building-blocks/core-elements/button
         text: Get started

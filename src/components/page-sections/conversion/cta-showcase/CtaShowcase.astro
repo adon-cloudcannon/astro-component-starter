@@ -1,5 +1,6 @@
 ---
 import Component from "@component-utils/renderBlock.astro";
+import type { ContentBlock } from "../../../../types";
 import { bandPattern, bandHaze } from "@component-utils/bandStyle.mjs";
 import { nestedProps } from "@component-utils/nestedProps.mjs";
 import { rootMirror } from "@component-utils/rootMirror.mjs";
@@ -46,13 +47,14 @@ const {
   subtextWidth,
   buttonSections = [],
   /**
-   * The media column, as blocks.
+   * The one thing in the other half.
    *
-   * One Image is the usual; an Image Reveal where the band has a before and
-   * after of the same subject. Anything else a block can be works too, which
-   * is the point of it not being a prop per kind.
+   * An object rather than a list of one: there is exactly one of these per
+   * band, and a list said otherwise. It still arrives through the structures
+   * picker, so it is chosen the same way and can be cleared again — the shape
+   * just matches what it is.
    */
-  mediaSections = [],
+  illustration = null,
   /**
    * A terminal session in place of the picture.
    *
@@ -115,7 +117,10 @@ const {
 /* The measure the subtext is set in, as a length. */
 const subtextCap = subtextMeasure(subtextWidth);
 
-const mediaBlocks = Array.isArray(mediaSections) ? mediaSections : [];
+const block: ContentBlock | null =
+  illustration && typeof illustration === "object" && !Array.isArray(illustration)
+    ? (illustration as ContentBlock)
+    : null;
 
 /**
  * The band's shape, read off what is in the media half.
@@ -145,7 +150,7 @@ const MEDIA_LAYOUT: Record<string, { panel: false | string; overflow: number }> 
 };
 const DEFAULT_LAYOUT = { panel: "white" as const, overflow: 0 };
 
-const layout = MEDIA_LAYOUT[String(mediaBlocks[0]?._component ?? "")] ?? DEFAULT_LAYOUT;
+const layout = MEDIA_LAYOUT[String(block?._component ?? "")] ?? DEFAULT_LAYOUT;
 
 /* Astro takes a component expression here, so the wrapper can be a real
    element or nothing at all. Rendering the div either way and styling it only
@@ -237,7 +242,7 @@ const mirror = rootMirror({ "data-picture-first": reverse ? "" : null });
             picture drops in an Image; the three that want the truck drop in an
             Image Reveal. */}
         <Component
-          contentSections={mediaBlocks}
+          contentSections={block ? [block] : []}
           useDefaultEditableBinding={false}
         />
       </Fragment>

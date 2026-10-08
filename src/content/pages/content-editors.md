@@ -201,14 +201,14 @@ pageSections:
           iconName: move-right
           iconPosition: after
           variant: text
-      mediaSections:
-        - _component: building-blocks/wrappers/image-reveal
-          source: /src/assets/images/marketing/cloudcannon-truck-closed-1.png
-          alt: ''
-          revealSource: /src/assets/images/marketing/cloudcannon-truck-open-1.png
-          label: Open and close the truck's hood
-          aspectRatio: none
-          rounded: true
+      illustration:
+        _component: building-blocks/wrappers/image-reveal
+        source: /src/assets/images/marketing/cloudcannon-truck-closed-1.png
+        alt: ''
+        revealSource: /src/assets/images/marketing/cloudcannon-truck-open-1.png
+        label: Open and close the truck's hood
+        aspectRatio: none
+        rounded: true
     style:
       backgroundColor: pacific
 ---
