@@ -19,7 +19,7 @@ const {
   source = "",
   alt = "",
   revealSource = "",
-  label = "Show the other view of this picture",
+  toggleLabel = "Show the other view of this picture",
   aspectRatio = "none",
   rounded = true,
   class: className,
@@ -37,7 +37,7 @@ const bind = (name: string) => (useDefaultEditableBinding ? name : undefined);
   type="button"
   class:list={["image-reveal", "stackable", className]}
   aria-pressed="false"
-  aria-label={label}
+  aria-label={toggleLabel}
   {...htmlAttributes}
 >
   {/* A button rather than a div with a handler: it is a real toggle, so it has
