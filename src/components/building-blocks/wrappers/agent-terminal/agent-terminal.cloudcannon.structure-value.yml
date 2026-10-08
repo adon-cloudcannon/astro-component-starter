@@ -14,6 +14,7 @@ preview:
     - Agent Terminal
   subtext:
     - key: path
+    - Agent Terminal
   icon: terminal
 picker_preview:
   text: Agent Terminal

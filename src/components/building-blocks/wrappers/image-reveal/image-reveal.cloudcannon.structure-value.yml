@@ -13,7 +13,8 @@ preview:
   text:
     - Image Reveal
   subtext:
-    - key: alt
+    - key: label
+    - Image Reveal
   icon: compare
 picker_preview:
   text: Image Reveal

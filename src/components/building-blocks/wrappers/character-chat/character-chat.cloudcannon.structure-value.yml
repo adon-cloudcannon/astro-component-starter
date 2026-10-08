@@ -1,27 +1,44 @@
-_component: building-blocks/wrappers/character-chat
-scale: 100
-threadHeight: 34
-insetStart: 27
-insetEnd: 22
-castInsetStart: 14
-castInsetEnd: 8
-seed: 7
-conversationLabel: Two characters talking.
-characters:
-  - source: /src/assets/images/marketing/kea.png
-    alt: ""
-    width: 29
-    drop: 0
-  - source: /src/assets/images/marketing/tuatara.png
-    alt: ""
-    width: 31
-    drop: 0
-conversation:
-  - side: start
-    words: 5
-  - side: end
-    words: 3
-  - side: start
-    words: 6
-  - side: end
-    words: 4
+label: Character Chat
+icon: forum
+description: Two illustrated characters talking over a thread of messages.
+value:
+  _component: building-blocks/wrappers/character-chat
+  scale: 100
+  threadHeight: 36
+  insetStart: 27
+  insetEnd: 22
+  castInsetStart: 14
+  castInsetEnd: 8
+  seed: 7
+  conversationLabel: Two characters talking.
+  characters:
+    - source: /src/assets/images/marketing/kea.png
+      alt: ""
+      width: 29
+      drop: 0
+    - source: /src/assets/images/marketing/tuatara.png
+      alt: ""
+      width: 31
+      drop: 0
+  conversation:
+    - side: start
+      words: 5
+    - side: end
+      words: 3
+    - side: start
+      words: 6
+    - side: end
+      words: 4
+preview:
+  text:
+    - Character Chat
+  subtext:
+    - key: conversationLabel
+    - Character Chat
+  icon: forum
+picker_preview:
+  text: Character Chat
+  subtext: Two illustrated characters talking over a thread of messages.
+  icon: forum
+_inputs_from_glob:
+  - /src/components/building-blocks/wrappers/character-chat/character-chat.cloudcannon.inputs.yml
