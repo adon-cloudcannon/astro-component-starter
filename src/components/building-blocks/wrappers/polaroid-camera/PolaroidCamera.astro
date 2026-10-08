@@ -190,7 +190,14 @@ const roll = (Array.isArray(shots) ? shots : []).filter((shot) => shot?.source);
 
     /* Inset a little, so the drawing sits on the colour rather than running
        to the window's own edges. */
-    .polaroid-window img {
+    /* `.image .image-inner` in the selector, not for the elements but for the
+       weight: `Image` sets `height: auto` from `.image > .image-inner img`,
+       which is the same specificity as a bare `.polaroid-window img`, so
+       which one wins came down to which was concatenated last. Dev put the
+       polaroid's last and the print filled; the build put Image's last and
+       the picture fell back to its own ratio — a 123x73 letterbox in a
+       128x128 window, live only. Out-specified, the order stops mattering. */
+    .polaroid-window .image .image-inner img {
       block-size: 100%;
       display: block;
       inline-size: 100%;
@@ -234,7 +241,7 @@ const roll = (Array.isArray(shots) ? shots : []).filter((shot) => shot?.source);
        123x73 box to cover. Pinned to the window's edges there is no height to
        argue about: the window is the containing block, and it is already
        `position: relative` for the scratched sheet. */
-    .polaroid-window.fills img {
+    .polaroid-window.fills .image .image-inner img {
       block-size: 100%;
       inline-size: 100%;
       inset: 0;
