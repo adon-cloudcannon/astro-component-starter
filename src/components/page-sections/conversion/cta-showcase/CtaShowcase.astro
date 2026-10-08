@@ -82,14 +82,6 @@ const {
    * draw the body between x 7 and 1591.
    */
   /** What a reader who cannot see the swap is told the control does. */
-  /**
-   * The panel's colour, where the variant draws one.
-   *
-   * Still a field: a colour is the band's own look rather than part of the
-   * thing's geometry, and the two panels here are not the same — the camera
-   * sits on white, the chat on the page's own cream against a Sand band.
-   */
-  contentCardColor = "white",
   reverse = false,
   /**
    * A card behind the picture.
@@ -134,17 +126,24 @@ const mediaBlocks = Array.isArray(mediaSections) ? mediaSections : [];
  * what makes the band that band, and there is nothing in them an editor would
  * want to reach for.
  *
- * `overflow` is how far the media runs past its column. The truck was drawn
- * at 333, 334 and 336 on the three bands that carry it; one value for the
- * variant is the same intent measured three times.
+ * `overflow` is how far it runs past its column. The truck was drawn at 333,
+ * 334 and 336 on the three bands that carry it; one value for the variant is
+ * the same intent measured three times.
+ *
+ * `panel` is the colour of the panel it sits on, or false where it sits
+ * straight on the band. It was a field, and on the three truck bands it was
+ * set to white while the truck draws no panel at all — a colour for something
+ * that is not there. The two that do draw one disagree and always will: the
+ * camera is on white, the chat on the page's own cream against a Sand band.
+ * So it goes with the shape, which is what it is part of.
  */
-const MEDIA_LAYOUT: Record<string, { panel: boolean; overflow: number }> = {
+const MEDIA_LAYOUT: Record<string, { panel: false | string; overflow: number }> = {
   "building-blocks/wrappers/image-reveal": { panel: false, overflow: 334 },
   "building-blocks/wrappers/agent-terminal": { panel: false, overflow: 0 },
-  "building-blocks/wrappers/polaroid-camera": { panel: true, overflow: 0 },
-  "building-blocks/wrappers/character-chat": { panel: true, overflow: 0 },
+  "building-blocks/wrappers/polaroid-camera": { panel: "white", overflow: 0 },
+  "building-blocks/wrappers/character-chat": { panel: "color-bg", overflow: 0 },
 };
-const DEFAULT_LAYOUT = { panel: true, overflow: 0 };
+const DEFAULT_LAYOUT = { panel: "white" as const, overflow: 0 };
 
 const layout = MEDIA_LAYOUT[String(mediaBlocks[0]?._component ?? "")] ?? DEFAULT_LAYOUT;
 
@@ -156,7 +155,7 @@ const Wrapper = layout.panel ? "div" : Fragment;
 const wrapperProps = layout.panel
   ? {
       class: "cta-showcase-card",
-      style: `--cta-showcase-card-bg: var(--${contentCardColor === "base" ? "color-bg" : contentCardColor})`,
+      style: `--cta-showcase-card-bg: var(--${layout.panel})`,
     }
   : {};
 

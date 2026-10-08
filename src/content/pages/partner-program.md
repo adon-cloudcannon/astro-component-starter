@@ -282,7 +282,6 @@ pageSections:
       backgroundColor: sand
   - _component: page-sections/conversion/cta-showcase
     content:
-      contentCardColor: base
       heading:
         heading: Enterprise
         headingSize: md

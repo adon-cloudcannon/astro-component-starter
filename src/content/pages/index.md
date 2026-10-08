@@ -803,6 +803,14 @@ pageSections:
           you through the real thing.
         subtextSize: lg
         subtextWidth: ''
+      mediaSections:
+        - _component: building-blocks/wrappers/image-reveal
+          source: /src/assets/images/marketing/cloudcannon-truck-closed-1.png
+          alt: ''
+          revealSource: /src/assets/images/marketing/cloudcannon-truck-open-1.png
+          label: Open and close the truck's hood
+          aspectRatio: none
+          rounded: true
       buttonSections:
         - _component: building-blocks/core-elements/button
           text: Start your free trial
@@ -825,14 +833,6 @@ pageSections:
           variant: text
           size: md
       reverse: false
-      mediaSections:
-        - _component: building-blocks/wrappers/image-reveal
-          source: /src/assets/images/marketing/cloudcannon-truck-closed-1.png
-          alt: ''
-          revealSource: /src/assets/images/marketing/cloudcannon-truck-open-1.png
-          label: Open and close the truck's hood
-          aspectRatio: none
-          rounded: true
     style:
       backgroundColor: pacific
       pattern: none

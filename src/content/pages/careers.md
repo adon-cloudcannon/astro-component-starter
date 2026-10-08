@@ -234,7 +234,6 @@ pageSections:
               color: var(--light-sand)
           source: /src/assets/images/marketing/camera-01-1.png
           alt: ''
-      contentCardColor: white
     style:
       backgroundColor: dark-sand
       pattern: grid

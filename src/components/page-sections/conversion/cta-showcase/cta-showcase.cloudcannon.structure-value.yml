@@ -14,7 +14,6 @@ value:
       subtext: One line that makes the next step obvious.
       subtextSize: md
       subtextWidth: ""
-    contentCardColor: white
     mediaSections:
       - _component: building-blocks/wrappers/image-reveal
         source: /src/assets/images/placeholder.jpg

@@ -102,29 +102,14 @@ content.buttonSections:
     structures: _structures.buttonSections
 content.mediaSections:
   type: array
-  label: The thing
+  label: Interactive illustration
   comment: >-
-    Which of the built things fills the other half. It sets the band's shape
-    too: each was drawn to its own width, so the columns and the overhang come
-    with the choice rather than being set here.
+    Which one fills the other half: the truck whose hood opens, the camera that
+    prints, the terminal that types, or the two characters talking. The choice
+    sets the band's shape as well, since each was drawn to its own width.
   options:
+    max_items: 1
     structures: _structures.ctaShowcaseMedia
-content.contentCardColor:
-  type: select
-  label: Panel colour
-  comment: >-
-    The panel behind the band, where the chosen thing sits on one. A panel is
-    a shade off its band.
-  options:
-    values:
-      - id: white
-        name: White
-        swatch: square
-        color: "#FFFFFF"
-      - id: base
-        name: The page's own
-        swatch: square
-        color: "#FFFCF3"
 content.reverse:
   type: switch
   comment: Flips the columns so the image comes before the copy.
