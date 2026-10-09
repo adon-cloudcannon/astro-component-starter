@@ -14,7 +14,7 @@ revealSource:
   comment: >-
     What it swaps to. Framed the same as the first, so the change reads as the
     subject moving rather than as a different photograph.
-toggleLabel:
+label:
   type: text
   label: Button label
   comment: What a screen reader announces for the toggle, such as "Open and close the truck's hood".

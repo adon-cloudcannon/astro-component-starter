@@ -6,14 +6,14 @@ value:
   source: /src/assets/images/placeholder.jpg
   alt: ""
   revealSource: /src/assets/images/placeholder.jpg
-  toggleLabel: Show the other view of this picture
+  label: Show the other view of this picture
   aspectRatio: none
   rounded: true
 preview:
   text:
     - Image Reveal
   subtext:
-    - key: toggleLabel
+    - key: label
     - Image Reveal
   icon: compare
 picker_preview:

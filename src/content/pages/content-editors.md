@@ -206,7 +206,7 @@ pageSections:
         source: /src/assets/images/marketing/cloudcannon-truck-closed-1.png
         alt: ''
         revealSource: /src/assets/images/marketing/cloudcannon-truck-open-1.png
-        toggleLabel: Open and close the truck's hood
+        label: Open and close the truck's hood
         aspectRatio: none
         rounded: true
     style:
