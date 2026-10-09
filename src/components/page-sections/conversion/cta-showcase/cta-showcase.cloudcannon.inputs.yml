@@ -100,6 +100,24 @@ content.buttonSections:
   comment: Call-to-action buttons.
   options:
     structures: _structures.buttonSections
+# The structures have to be declared on the bare key as well as the dotted
+# one. The dotted entry is what puts the field in the content tab and gives it
+# its label and comment, but the editor looks an object's structures up by its
+# bare key: `data-model.ts` calls `dataCascade.getInput('illustration')`, which
+# only ever sees a bare `_inputs` entry. With just `content.illustration` no
+# structure matched any of the four, so the panel kept the input's own label,
+# "Interactive illustration", and every field inside fell back to guessing a
+# type from its name. That is why `path` looked right on the terminal and
+# nothing else did anywhere.
+#
+# Arrays do not have this problem, which is why every other structured field on
+# the site is fine: an array's children read the structures off the parent's
+# own config, resolved from the full path. This is the first object with
+# structures here.
+illustration:
+  type: object
+  options:
+    structures: _structures.ctaShowcaseMedia
 content.illustration:
   type: object
   label: Interactive illustration

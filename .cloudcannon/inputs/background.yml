@@ -11,7 +11,7 @@ style.background:
         - Background
       subtext:
         - key: type
-    structures:
+    structures: &background-structures
       id_key: type
       reorder_inputs: true
       remove_extra_inputs: true
@@ -174,3 +174,18 @@ style.background.pattern:
         name: Grid
       - id: pegboard
         name: Peg board
+
+# An object's structures are looked up by its bare key, never its dotted path:
+# the editor calls `dataCascade.getInput('background')`, which only ever sees a
+# bare `_inputs` entry. Declared solely as `style.background`, no structure
+# matched, so the panel showed this input's own label rather than the chosen
+# type, and every field inside fell back to guessing from its name. Arrays are
+# unaffected, which is why only object-valued fields were broken.
+#
+# The dotted entry above still carries the label, comment and preview, and wins
+# where both define a key: `merge()` walks the selector's suffixes and lets the
+# more specific one through last.
+background:
+  type: object
+  options:
+    structures: *background-structures

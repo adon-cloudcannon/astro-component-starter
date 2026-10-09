@@ -81,6 +81,16 @@ content.subtext.subtextWidth:
         name: Wide
       - id: xl
         name: Extra wide
+# An object's structures are looked up by its bare key, never its dotted path:
+# the editor calls `dataCascade.getInput('member')`, which only sees a bare
+# `_inputs` entry. Declared solely as `content.member`, no structure matched, so the
+# panel showed this input's own label instead of the chosen one and every field
+# inside fell back to guessing a type from its name. Arrays are unaffected,
+# which is why only the object-valued fields were broken.
+member:
+  type: object
+  options:
+    structures: _structures.teamMember
 content.member:
   type: object
   label: Team member

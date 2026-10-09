@@ -804,13 +804,15 @@ pageSections:
         subtextSize: lg
         subtextWidth: ''
       illustration:
-        _component: building-blocks/wrappers/image-reveal
-        source: /src/assets/images/marketing/cloudcannon-truck-closed-1.png
+        _component: building-blocks/wrappers/polaroid-camera
+        label: Take a picture
+        fit: contain
+        source: ''
         alt: ''
-        revealSource: /src/assets/images/marketing/cloudcannon-truck-open-1.png
-        label: Open and close the truck's hood
-        aspectRatio: none
-        rounded: true
+        shots:
+          - source: /src/assets/images/placeholder.jpg
+            alt: ''
+            color: var(--light-sand)
       buttonSections:
         - _component: building-blocks/core-elements/button
           text: Start your free trial

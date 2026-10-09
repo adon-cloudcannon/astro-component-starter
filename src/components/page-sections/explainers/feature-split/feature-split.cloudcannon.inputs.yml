@@ -124,6 +124,16 @@ content.pileFall:
 content.pileRadius:
   type: number
   comment: The corner radius of a square shape in the pile, in pixels.
+# An object's structures are looked up by its bare key, never its dotted path:
+# the editor calls `dataCascade.getInput('siteCards')`, which only sees a bare
+# `_inputs` entry. Declared solely as `content.siteCards`, no structure matched, so the
+# panel showed this input's own label instead of the chosen one and every field
+# inside fell back to guessing a type from its name. Arrays are unaffected,
+# which is why only the object-valued fields were broken.
+siteCards:
+  type: object
+  options:
+    structures: _structures.siteCardsPanel
 content.siteCards:
   type: object
   comment: >-
