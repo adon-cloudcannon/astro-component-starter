@@ -153,8 +153,13 @@ if (!htmlAttributes.id && label) {
 }
 
 const hasContentSections = contentSections !== undefined;
+/* `at()`, not the bare key: used directly as a page section the props arrive
+   under `content`, so the binding has to say `content.contentSections` or the
+   editor resolves it against the block root and finds nothing. Wrapped inside
+   another component the props are flat and `at()` hands back the plain key, so
+   both ways through here are covered. */
 const effectiveChildrenProp =
-  childrenDataProp ?? (useDefaultEditableBinding ? "contentSections" : null);
+  childrenDataProp ?? (useDefaultEditableBinding ? at("contentSections") : null);
 const arrayDataAttributes =
   effectiveChildrenProp && hasContentSections
     ? { "data-editable": "array", "data-prop": effectiveChildrenProp }
