@@ -50,7 +50,6 @@ const {
    * one height across the whole section — 247 on "Custom plans", 334 on the
    * three illustrated ones — while the lines inside run from one to three.
    */
-  cardHeight,
   sectionLabel,
   maxContentWidth = "xl",
   paddingHorizontal = "gutter",
@@ -155,7 +154,6 @@ const artRow = Math.max(
     style={
       [
         artRow ? `--feature-art-row: ${artRow}px` : null,
-        cardHeight ? `--feature-card-height: ${Number(cardHeight)}px` : null,
       ]
         .filter(Boolean)
         .join("; ") || undefined

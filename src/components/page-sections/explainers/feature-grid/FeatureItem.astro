@@ -281,14 +281,12 @@ const headingSize = titleSize ?? (signpost ? "lg" : imageSource || !iconName ? "
       border-color: var(--card-accent);
     }
 
-    /* A set height, not one that follows the copy. */
-    .feature-item .card-inner {
-      min-block-size: var(--feature-card-height, auto);
-    }
 
-    /* With a set height the copy would hang from the top of it. The design
-       centres it in the card, which is what makes six cards of one height with
-       one to three lines in them read as a set. */
+    /* The copy would otherwise hang from the top of a card that is taller
+       than it. `grid-auto-rows: 1fr` draws every card in the section at one
+       height, so the short ones have room under them; the design centres the
+       copy in that, which is what makes cards of one to three lines read as a
+       set. */
     .feature-item.align-center .card-outer-content,
     .feature-item.align-center .card-content {
       block-size: 100%;

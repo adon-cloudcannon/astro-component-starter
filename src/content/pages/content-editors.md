@@ -163,7 +163,6 @@ pageSections:
         headingSize: lg
       alignmentHorizontal: center
       columns: "3"
-      cardHeight: 334
       features:
         - title: Custom permissions
           description: Define roles and groups to match your organization structure.

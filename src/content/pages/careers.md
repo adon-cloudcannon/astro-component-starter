@@ -186,7 +186,6 @@ pageSections:
           divider: true
           alignmentHorizontal: start
           accentColor: harbour
-      cardHeight: 0
       descriptionSize: sm
     style:
       backgroundColor: light-sand

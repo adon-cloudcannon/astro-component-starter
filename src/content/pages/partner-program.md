@@ -109,7 +109,6 @@ pageSections:
         headingSize: lg
       alignmentHorizontal: center
       columns: "3"
-      cardHeight: 334
       features:
         - title: Partner dashboard
           description: Track site health, errors, usage and billing for every client from

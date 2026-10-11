@@ -259,7 +259,6 @@ pageSections:
         subtextSize: lg
         subtextWidth: md
       alignmentHorizontal: center
-      cardHeight: 334
       features:
         - title: Git providers
           description: Connect to GitHub, GitLab, or Bitbucket

@@ -114,7 +114,6 @@ pageSections:
         subtextSize: lg
         subtextWidth: md
       alignmentHorizontal: center
-      cardHeight: 334
       features:
         - title: Site security
           description: SOC2 Type 2 certified for enterprise-grade security
@@ -208,7 +207,6 @@ pageSections:
         subtextWidth: lg
       alignmentHorizontal: center
       columns: "3"
-      cardHeight: 247
       features:
         - title: Onboarding services
           description: >-

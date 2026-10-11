@@ -133,9 +133,6 @@ content.columns:
         name: Three across
       - id: "2"
         name: Two across
-content.cardHeight:
-  type: number
-  comment: How tall to draw every card, in pixels. Leave empty to follow the copy.
 content.features:
   type: array
   label: Features
