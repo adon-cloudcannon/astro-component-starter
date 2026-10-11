@@ -615,7 +615,11 @@ pageSections:
   - _component: page-sections/proof/testimonial-quote
     content:
       sectionLabel: ''
-      eyebrow: ''
+      heading:
+        eyebrow: ''
+        heading: ''
+        headingLevel: h2
+        headingSize: lg
       quotes:
         - text: I almost **forgot** that website maintenance was a thing.
           authorName: Sindre Gusdal

@@ -88,7 +88,11 @@ pageSections:
       backgroundColor: light-sand
   - _component: page-sections/proof/testimonial-quote
     content:
-      eyebrow: WE BELIEVE
+      heading:
+        eyebrow: WE BELIEVE
+        heading: ''
+        headingLevel: h2
+        headingSize: lg
       quotes:
         - text: >-
             Editors shouldn't need a developer to fix a typo. Developers

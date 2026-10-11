@@ -26,6 +26,8 @@ import { bandPattern, bandHaze } from "@component-utils/bandStyle.mjs";
 import { nestedProps } from "@component-utils/nestedProps.mjs";
 import CustomSection from "@builders/custom-section/CustomSection.astro";
 import Heading from "@core-elements/heading/Heading.astro";
+import Text from "@core-elements/text/Text.astro";
+import { subtextMeasure } from "@component-utils/subtextMeasure.mjs";
 import TestimonialQuoteItem from "./TestimonialQuoteItem.astro";
 
 type Quote = {
@@ -50,6 +52,10 @@ const { props, at } = nestedProps(Astro.props, {
   /* How the card is laid out, sized, toned, aligned and edged is all setting
      rather than copy, so it sits in Style with the band's own chrome. */
   extraStyleKeys: ["variant", "quoteSize", "tone", "cardWidth", "alignment", "bordered"],
+  nest: {
+    heading: ["eyebrow", "heading", "headingLevel", "headingSize"],
+    subtext: ["subtext", "subtextSize", "subtextWidth"],
+  },
 });
 
 const {
@@ -67,6 +73,20 @@ const {
    * other tones a label inside the surface reads as part of the quote.
    */
   eyebrow = "",
+  /**
+   * A heading over the card, in the band beside the eyebrow.
+   *
+   * The card carries no title of its own, so until now this section was the
+   * only one on the site whose header was an eyebrow and nothing else. It
+   * takes the same bundle as every other section, so a band can be given a
+   * heading without the eyebrow moving or changing size.
+   */
+  heading = "",
+  headingLevel = "h2",
+  headingSize = "lg",
+  subtext = "",
+  subtextSize = "md",
+  subtextWidth = "",
   /**
    * Which way the card sets its words.
    *
@@ -172,6 +192,13 @@ const cardScheme = tone === "plain" ? undefined : tone === "light" ? "light" : "
 
 /* See the note on the prop: a split is two columns against a rule and has
    nothing to centre. */
+const subtextCap = subtextMeasure(subtextWidth);
+
+/* Guarded as a whole rather than per element. An empty `<h2>` is still a
+   sibling, and the flow layer then gives the card after it a space-before it
+   has not earned. */
+const hasHeader = Boolean(eyebrow || heading || subtext);
+
 const isSplit = layout === "split-person" || layout === "split-quote";
 const align = alignment === "center" && !isSplit ? "center" : undefined;
 ---
@@ -193,15 +220,43 @@ const align = alignment === "center" && !isSplit ? "center" : undefined;
     useDefaultEditableBinding={useDefaultEditableBinding}
     {...htmlAttributes}
   >
-    {/* The card has no title, so this is a heading that is only its own
-        eyebrow. It still goes through Heading: nothing else on the site
-        draws one, which is what keeps the class off the frontmatter. */}
-    <Heading
-      eyebrow={eyebrow}
-      eyebrowClass="testimonial-quote-eyebrow"
-      eyebrowAlignment={align === "center" ? "center" : "start"}
-      data-eyebrow-prop={at("eyebrow")}
-    />
+    {/* The eyebrow keeps its own class and its own alignment, which is what
+        it had when this header was an eyebrow and nothing else: the rule that
+        pulls an eyebrow tight to a heading only fires when there is one, so
+        a band with no heading draws exactly what it drew before.
+
+        The title goes in `text` rather than as a child: `Astro.slots.has`
+        is true for a slot passed as an empty string, so `{heading}` drew an
+        empty `<h2>` on every band that has only an eyebrow, and the flow
+        layer then spaced the card off it. `text` falls through the same
+        slot and renders the same inline markdown. */}
+    {hasHeader && (
+      <Heading
+        eyebrow={eyebrow}
+        eyebrowClass="testimonial-quote-eyebrow"
+        eyebrowAlignment={align === "center" ? "center" : "start"}
+        data-eyebrow-prop={at("eyebrow")}
+        level={headingLevel}
+        size={headingSize}
+        alignmentHorizontal={align === "center" ? "center" : "start"}
+        data-prop={at("heading")}
+        text={heading}
+      />
+    )}
+    {hasHeader && subtext && (
+      <Text
+        class="section-subtext testimonial-quote-subtext"
+        alignmentHorizontal={align === "center" ? "center" : "start"}
+        data-prop={at("subtext")}
+        style={
+          subtextCap
+            ? `max-inline-size: ${subtextCap}${align === "center" ? "; margin-inline: auto; justify-self: center" : ""}`
+            : undefined
+        }
+        size={subtextSize}
+        text={subtext}
+      />
+    )}
 
     <div
       class="testimonial-quote-frame"
