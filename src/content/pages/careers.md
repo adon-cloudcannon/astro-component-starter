@@ -2,9 +2,11 @@
 _schema: default
 title: Careers
 description: Join our growing team of innovative developers, designers, and thought leaders.
+keywords: []
 pageSections:
   - _component: page-sections/heroes/hero-photo-stack
     content:
+      sectionLabel: ''
       heading:
         eyebrow: CAREERS
         heading: Haere mai!
@@ -23,18 +25,29 @@ pageSections:
         - _component: page-sections/heroes/hero-photo-stack/photo-stack-card
           source: /src/assets/images/marketing/careers-gathering.jpg
           alt: The team gathered outdoors on a sunny afternoon
+      panels: []
+      panelRaise: 200
       buttonSections:
         - _component: building-blocks/core-elements/button
           text: Our team
           link: /our-story/
+          iconName: ''
+          iconColor: default
+          textColor: default
+          iconPosition: before
+          hideText: false
           variant: primary
+          size: md
         - _component: building-blocks/core-elements/button
           text: Our values
           link: /our-values/
           iconName: move-right
+          iconColor: default
+          textColor: default
           iconPosition: after
+          hideText: false
           variant: text
-      panels: []
+          size: md
       embellishmentSource: /src/assets/images/marketing/careers-fern.png
       embellishmentWidth: 50
       embellishmentPlacement: band
@@ -42,9 +55,14 @@ pageSections:
     style:
       backgroundColor: light-sand
       pattern: pegboard
+      fade: none
       haze: true
+      maxContentWidth: xl
+      paddingHorizontal: gutter
+      paddingVertical: 4xl
   - _component: page-sections/explainers/feature-grid
     content:
+      sectionLabel: ''
       heading:
         eyebrow: BENEFITS
         heading: Life at CloudCannon
@@ -57,14 +75,11 @@ pageSections:
         subtextSize: lg
         subtextWidth: lg
       alignmentHorizontal: center
-      columns: 3
-      cardHeight: 312
-      descriptionSize: sm
+      columns: '3'
       features:
         - title: Four-day work week at full pay
           titleSize: xs
-          description: >-
-            We trust in the work you do, and we know that productivity isn't
+          description: We trust in the work you do, and we know that productivity isn't
             always measured by time at your desk. Our four-day work week (32
             hours per week) means more time with your family and friends, and
             more energy for the work we love.
@@ -77,8 +92,7 @@ pageSections:
           accentColor: golden
         - title: Employee stock options
           titleSize: xs
-          description: >-
-            When you have a stake in the product you're making, we all win. All
+          description: When you have a stake in the product you're making, we all win. All
             CloudCannon employees receive generous stock options, so we're all
             working towards the same goal.
           iconName: trending-up
@@ -90,8 +104,7 @@ pageSections:
           accentColor: sunset
         - title: Transportation subsidy
           titleSize: xs
-          description: >-
-            However you're coming in to work — by foot, bus, bike, scooter,
+          description: However you're coming in to work — by foot, bus, bike, scooter,
             skateboard, or car — we'll help subsidize your transportation costs.
           iconName: truck
           iconColor: moss
@@ -102,10 +115,9 @@ pageSections:
           accentColor: moss
         - title: Annual leave
           titleSize: xs
-          description: >-
-            The longer you're with us, the more you can take time to relax. With
-            every year of employment, you'll gain an extra day of annual leave
-            to add to your total, up to 25 days.
+          description: The longer you're with us, the more you can take time to relax.
+            With every year of employment, you'll gain an extra day of annual
+            leave to add to your total, up to 25 days.
           iconName: sun
           iconColor: harbour
           iconBackground: true
@@ -115,8 +127,7 @@ pageSections:
           accentColor: harbour
         - title: Parental leave
           titleSize: xs
-          description: >-
-            We offer up to 52 weeks of parental leave, 26 of which are fully
+          description: We offer up to 52 weeks of parental leave, 26 of which are fully
             paid. This includes biological, adoptive, and foster parents.
             Partners can also receive up to 4 weeks of paid leave.
           iconName: baby
@@ -128,8 +139,7 @@ pageSections:
           accentColor: peachy
         - title: Happy Birthday to you!
           titleSize: xs
-          description: >-
-            Have your (birthday) cake and eat it too — all employees receive an
+          description: Have your (birthday) cake and eat it too — all employees receive an
             additional day of annual leave on their birthdays, to be taken when
             it suits you best.
           iconName: cake
@@ -141,8 +151,7 @@ pageSections:
           accentColor: golden
         - title: Flexible work
           titleSize: xs
-          description: >-
-            We want to support you to do the best work you can, so we offer
+          description: We want to support you to do the best work you can, so we offer
             working hours that suit you, as well as flexible arrangements and
             subsidies for working from home.
           iconName: map-pin
@@ -154,8 +163,7 @@ pageSections:
           accentColor: moss
         - title: Comfortable setup
           titleSize: xs
-          description: >-
-            We offer different options for how you work, to help you stay
+          description: We offer different options for how you work, to help you stay
             healthy. We have adjustable standing desks and monitors, comfortable
             chairs, and even wobble boards for those who want to keep a bit more
             active at work.
@@ -168,10 +176,9 @@ pageSections:
           accentColor: sunset
         - title: All the tools you need
           titleSize: xs
-          description: >-
-            We provide all the tools and software you need to get your job done.
-            This includes MacBook Pros and accessories, dual monitors, and a
-            range of useful software subscriptions.
+          description: We provide all the tools and software you need to get your job
+            done. This includes MacBook Pros and accessories, dual monitors, and
+            a range of useful software subscriptions.
           iconName: wrench
           iconColor: harbour
           iconBackground: true
@@ -179,46 +186,58 @@ pageSections:
           divider: true
           alignmentHorizontal: start
           accentColor: harbour
+      cardHeight: 0
+      descriptionSize: sm
     style:
       backgroundColor: light-sand
+      pattern: none
+      fade: none
+      maxContentWidth: xl
+      paddingHorizontal: gutter
       paddingVertical: 4xl
+      haze: false
   - _component: page-sections/explainers/feature-grid
     content:
+      sectionLabel: ''
       heading:
+        eyebrow: What you get
         heading: Open positions
         headingLevel: h2
         headingSize: lg
       subtext:
         subtext: None right now!
         subtextSize: lg
+        subtextWidth: ''
       alignmentHorizontal: center
-      columns: 3
+      columns: '3'
       features: []
     style:
       backgroundColor: dark
       pattern: pegboard
       fade: bottom
+      maxContentWidth: xl
+      paddingHorizontal: gutter
       paddingVertical: 3xl
+      haze: false
   - _component: page-sections/conversion/cta-showcase
     content:
+      sectionLabel: ''
       heading:
         heading: Show us what you've got
+        headingLevel: h2
         headingSize: lg
       subtext:
         subtext: If you love the sound of what we're doing, but there's nothing here
           that fits your unique skills, send your resume! We're happy to keep
           your details on hand as new positions open in the future.
-      buttonSections:
-        - _component: building-blocks/core-elements/button
-          text: Send resume
-          link: mailto:careers@cloudcannon.com
-          iconName: move-right
-          iconPosition: after
-          variant: primary
+        subtextSize: md
+        subtextWidth: ''
       illustration:
         _component: building-blocks/wrappers/polaroid-camera
         label: Take a picture
         fit: cover
+        source: /src/assets/images/marketing/camera-01-1.png
+        alt: ''
         shots:
           - source: /src/assets/images/marketing/careers-team-hill.jpg
             alt: ''
@@ -232,10 +251,22 @@ pageSections:
           - source: /src/assets/images/marketing/our-story-lake.jpg
             alt: ''
             color: var(--light-sand)
-        source: /src/assets/images/marketing/camera-01-1.png
-        alt: ''
+      buttonSections:
+        - _component: building-blocks/core-elements/button
+          text: Send resume
+          link: mailto:careers@cloudcannon.com
+          iconName: move-right
+          iconColor: default
+          textColor: default
+          iconPosition: after
+          hideText: false
+          variant: primary
+          size: md
+      reverse: false
     style:
       backgroundColor: dark-sand
       pattern: grid
+      fade: none
       paddingVertical: 4xl
+      haze: false
 ---

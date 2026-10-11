@@ -120,14 +120,18 @@ content.alignmentHorizontal:
         name: Start
       - id: center
         name: Center
+# Quoted. A select's values have to be text: unquoted these are YAML
+# integers, and the editor rejected the input outright with "this input must
+# have a text value" rather than falling back. Grid runs `Number()` over it
+# and the class interpolates the same either way, so nothing downstream cares.
 content.columns:
   type: select
   comment: Three small cards across, or two large ones with their own art.
   options:
     values:
-      - id: 3
+      - id: "3"
         name: Three across
-      - id: 2
+      - id: "2"
         name: Two across
 content.cardHeight:
   type: number

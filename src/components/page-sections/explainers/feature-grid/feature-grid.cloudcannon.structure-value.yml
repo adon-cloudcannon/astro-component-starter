@@ -15,7 +15,7 @@ value:
       subtextSize: md
       subtextWidth: ""
     alignmentHorizontal: center
-    columns: 3
+    columns: "3"
     features:
       - title: Fast
         description: Static HTML and CSS, so a page renders before any JavaScript runs.

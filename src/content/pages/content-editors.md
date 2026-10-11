@@ -162,7 +162,7 @@ pageSections:
         heading: Built for the work
         headingSize: lg
       alignmentHorizontal: center
-      columns: 3
+      columns: "3"
       cardHeight: 334
       features:
         - title: Custom permissions

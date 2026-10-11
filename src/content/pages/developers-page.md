@@ -182,7 +182,7 @@ pageSections:
           linkText: Read case study
           accentColor: golden
           size: wide
-      columns: 2
+      columns: "2"
       stagger: true
     style:
       backgroundColor: dark

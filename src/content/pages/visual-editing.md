@@ -189,7 +189,7 @@ pageSections:
   - _component: page-sections/explainers/feature-grid
     content:
       alignmentHorizontal: start
-      columns: 2
+      columns: "2"
       features:
         - eyebrow: For AGENCIES
           title: Build it once, hand it over safely

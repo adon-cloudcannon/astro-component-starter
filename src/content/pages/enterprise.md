@@ -207,7 +207,7 @@ pageSections:
         subtextSize: lg
         subtextWidth: lg
       alignmentHorizontal: center
-      columns: 3
+      columns: "3"
       cardHeight: 247
       features:
         - title: Onboarding services

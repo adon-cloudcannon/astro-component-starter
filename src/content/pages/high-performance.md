@@ -169,7 +169,7 @@ pageSections:
           accentColor: golden
           quoteMarks: false
           size: wide
-      columns: 2
+      columns: "2"
       stagger: true
     style:
       backgroundColor: dark
