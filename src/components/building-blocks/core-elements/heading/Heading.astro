@@ -103,7 +103,13 @@ MarkdownText = MarkdownText.replace(/\n/g, "<br />");
 const Tag = level;
 
 const hasText = isNonEmptyString(text);
-const hasSlotContent = Astro.slots.has("default");
+/* Not `Astro.slots.has`: that is true for a slot passed an empty string, so
+   every caller writing `<Heading>{heading}</Heading>` drew an empty `<h_>` on
+   a band whose heading is blank, and the flow layer then spaced whatever came
+   next off it. Rendering the slot is what tells the two apart. The `<slot />`
+   below still renders normally; this only looks at what it would produce. */
+const slotHtml = Astro.slots.has("default") ? await Astro.slots.render("default") : "";
+const hasSlotContent = slotHtml.trim().length > 0;
 const hasEyebrow = isNonEmptyString(eyebrow);
 const hasHeading = hasText || hasSlotContent || Boolean(_component);
 
