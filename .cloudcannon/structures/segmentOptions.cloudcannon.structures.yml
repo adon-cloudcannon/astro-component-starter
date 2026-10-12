@@ -1,0 +1,45 @@
+# segmentOptions, lifted out of segments.cloudcannon.structure-value.yml.
+#
+# Must live here. `_structures_from_glob` in cloudcannon.config.yml only picks
+# up this folder, so a `_structures` block written inside a component's
+# structure-value file reaches nothing: the array that referenced it resolved
+# to `values: []`, no item matched a structure, and every field in the item
+# fell back to CloudCannon guessing a type from its key. That is why a card's
+# Title Size drew a text box and its Icon Color a hex picker.
+segmentOptions:
+  values:
+    - value:
+        value: null
+        label: Item
+        checked: null
+        icon: zap
+      preview:
+        icon: radio_button_partial
+        image:
+          - template: src/icons/{icon}.svg
+        text:
+          - key: label
+          - Segment Option
+        subtext:
+          - key: value
+          - Add a value for the option.
+      _inputs:
+        value:
+          type: text
+          comment: The value entered by the user when the option is selected.
+        label:
+          type: text
+          comment: The label text for the option.
+        checked:
+          type: switch
+          comment: Whether the field is checked by default.
+        icon:
+          type: select
+          comment: Icon next to the segment option. Sourced from [Lucide](https://lucide.dev/icons/).
+          options:
+            values: data.icons
+            preview:
+              text:
+                - key: name
+              image:
+                - template: src/icons/{id}.svg

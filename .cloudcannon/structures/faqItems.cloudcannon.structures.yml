@@ -1,0 +1,37 @@
+# faqItems, lifted out of faq-section.cloudcannon.structure-value.yml.
+#
+# Must live here. `_structures_from_glob` in cloudcannon.config.yml only picks
+# up this folder, so a `_structures` block written inside a component's
+# structure-value file reaches nothing: the array that referenced it resolved
+# to `values: []`, no item matched a structure, and every field in the item
+# fell back to CloudCannon guessing a type from its key. That is why a card's
+# Title Size drew a text box and its Icon Color a hex picker.
+faqItems:
+  values:
+    - label: FAQ Item
+      icon: help
+      value:
+        title: Question text
+        contentSections:
+          - _component: building-blocks/core-elements/text
+            text: Answer text goes here.
+            size: md
+      preview:
+        text:
+          - key: title
+          - FAQ Item
+        subtext:
+          - key: contentSections.0.text
+          - Add answer text
+      _inputs:
+        title:
+          type: text
+          comment: The question text.
+        contentSections:
+          type: array
+          label: Answer Content
+          comment: Content sections for the answer (typically text).
+          options:
+            structures: _structures.accordionSections
+      _structures_from_glob:
+        - /.cloudcannon/structures/accordionSections.cloudcannon.structures.yml

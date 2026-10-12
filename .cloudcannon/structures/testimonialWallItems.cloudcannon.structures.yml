@@ -1,0 +1,51 @@
+# testimonialWallItems, lifted out of testimonial-wall.cloudcannon.structure-value.yml.
+#
+# Must live here. `_structures_from_glob` in cloudcannon.config.yml only picks
+# up this folder, so a `_structures` block written inside a component's
+# structure-value file reaches nothing: the array that referenced it resolved
+# to `values: []`, no item matched a structure, and every field in the item
+# fell back to CloudCannon guessing a type from its key. That is why a card's
+# Title Size drew a text box and its Icon Color a hex picker.
+testimonialWallItems:
+  values:
+    - label: Testimonial
+      icon: format_quote
+      value:
+        text: ""
+        authorName: ""
+        authorDescription: ""
+        authorImage: ""
+      preview:
+        text:
+          - key: authorName
+          - Testimonial
+        subtext:
+          - key: text
+        icon: format_quote
+      _inputs:
+        text:
+          type: markdown
+          comment: The quote itself.
+        authorName:
+          type: text
+          comment: Who said it.
+        authorDescription:
+          type: text
+          comment: Their role and company. Leave empty to hide.
+        quoted:
+          type: switch
+          comment: >-
+            Draw quotation marks around it. Off for a line that is a statement rather than
+            something said.
+        quoteSize:
+          type: number
+          comment: >-
+            Size of this card's quote, in pixels. The design varies it per card so cards of
+            different lengths come out the same height. Leave empty for the default.
+        authorImage:
+          type: image
+          comment: Optional headshot. Falls back to the author's initials.
+          options:
+            paths:
+              static: ""
+              uploads: src/assets/images

@@ -1,0 +1,49 @@
+# featureSlides, lifted out of feature-slider.cloudcannon.structure-value.yml.
+#
+# Must live here. `_structures_from_glob` in cloudcannon.config.yml only picks
+# up this folder, so a `_structures` block written inside a component's
+# structure-value file reaches nothing: the array that referenced it resolved
+# to `values: []`, no item matched a structure, and every field in the item
+# fell back to CloudCannon guessing a type from its key. That is why a card's
+# Title Size drew a text box and its Icon Color a hex picker.
+featureSlides:
+  values:
+    - label: Feature slide
+      icon: view_carousel
+      value:
+        _component: page-sections/explainers/feature-slider/feature-slider-item
+        eyebrow: ''
+        title: Slide title
+        description: Short description for this slide.
+        imageSource: /src/assets/images/component-docs/sunset.jpg
+        imageAlt: Slide image alt text
+      preview:
+        text:
+          - key: title
+          - Feature slide
+        subtext:
+          - key: description
+          - Add description for this slide
+      _inputs:
+        eyebrow:
+          type: text
+          comment: Optional eyebrow text displayed above the title.
+        title:
+          type: text
+          comment: Heading text shown on the slide.
+        description:
+          type: markdown
+          comment: Supporting body copy shown on the slide.
+        imageSource:
+          type: image
+          comment: Image shown on the side of the slide.
+          options:
+            paths:
+              uploads: src/assets/images
+              static: ''
+            resize_style: contain
+            width: 1920
+            height: 1280
+        imageAlt:
+          type: text
+          comment: Alt text describing the slide image.

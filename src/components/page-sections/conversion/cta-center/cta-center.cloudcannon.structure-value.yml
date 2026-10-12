@@ -10,6 +10,7 @@ value:
       eyebrow: ""
       heading: Ready to get started?
       headingLevel: h2
+      headingSize: xl
     subtext:
       subtext: One line that makes the next step obvious.
       subtextSize: md

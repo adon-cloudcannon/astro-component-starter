@@ -186,8 +186,8 @@ pageSections:
           divider: true
           alignmentHorizontal: start
           accentColor: harbour
-      descriptionSize: sm
     style:
+      descriptionSize: sm
       backgroundColor: light-sand
       pattern: none
       fade: none

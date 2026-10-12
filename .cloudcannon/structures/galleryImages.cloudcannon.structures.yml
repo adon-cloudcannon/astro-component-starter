@@ -1,0 +1,37 @@
+# galleryImages, lifted out of gallery-grid.cloudcannon.structure-value.yml.
+#
+# Must live here. `_structures_from_glob` in cloudcannon.config.yml only picks
+# up this folder, so a `_structures` block written inside a component's
+# structure-value file reaches nothing: the array that referenced it resolved
+# to `values: []`, no item matched a structure, and every field in the item
+# fell back to CloudCannon guessing a type from its key. That is why a card's
+# Title Size drew a text box and its Icon Color a hex picker.
+galleryImages:
+  values:
+    - label: Image
+      icon: photo_library
+      value:
+        image: ""
+        alt: ""
+        caption: ""
+      preview:
+        text:
+          - key: caption
+          - key: alt
+          - Image
+        image:
+          - key: image
+      _inputs:
+        image:
+          type: image
+          comment: The photo shown in the grid and, full size, in the lightbox.
+          options:
+            paths:
+              static: ""
+              uploads: src/assets/images
+        alt:
+          type: text
+          comment: Accessible description of what the photo shows.
+        caption:
+          type: text
+          comment: Optional caption shown under the tile and in the lightbox.

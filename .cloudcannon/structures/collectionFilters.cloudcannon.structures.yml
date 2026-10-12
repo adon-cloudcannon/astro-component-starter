@@ -1,0 +1,54 @@
+# collectionFilters, lifted out of collection-toolbar.cloudcannon.structure-value.yml.
+#
+# Must live here. `_structures_from_glob` in cloudcannon.config.yml only picks
+# up this folder, so a `_structures` block written inside a component's
+# structure-value file reaches nothing: the array that referenced it resolved
+# to `values: []`, no item matched a structure, and every field in the item
+# fell back to CloudCannon guessing a type from its key. That is why a card's
+# Title Size drew a text box and its Icon Color a hex picker.
+collectionFilters:
+  values:
+    - label: Filter
+      icon: filter_alt
+      value:
+        label: Filter by category
+        name: category
+        options: []
+      preview:
+        text:
+          - key: label
+          - Filter
+        icon: filter_alt
+      _inputs:
+        label:
+          type: text
+          comment: Shown as the dropdown's first, unselected option.
+        name:
+          type: text
+          comment: >-
+            Which field on a card this filters. Drawn but not yet wired: the
+            cards have to carry the field first.
+        options:
+          type: array
+          comment: The choices in the dropdown.
+          options:
+            structures: _structures.collectionFilterOptions
+collectionFilterOptions:
+  values:
+    - label: Option
+      icon: label
+      value:
+        id: ""
+        name: ""
+      preview:
+        text:
+          - key: name
+          - Option
+        icon: label
+      _inputs:
+        id:
+          type: text
+          comment: The value this option matches on a card.
+        name:
+          type: text
+          comment: What the reader sees.

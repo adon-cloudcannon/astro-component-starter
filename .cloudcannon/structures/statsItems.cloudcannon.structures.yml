@@ -1,0 +1,40 @@
+# statsItems, lifted out of stats.cloudcannon.structure-value.yml.
+#
+# Must live here. `_structures_from_glob` in cloudcannon.config.yml only picks
+# up this folder, so a `_structures` block written inside a component's
+# structure-value file reaches nothing: the array that referenced it resolved
+# to `values: []`, no item matched a structure, and every field in the item
+# fell back to CloudCannon guessing a type from its key. That is why a card's
+# Title Size drew a text box and its Icon Color a hex picker.
+statsItems:
+  values:
+    - label: Stat
+      icon: monitoring
+      value:
+        number: 100
+        prefix: ""
+        suffix: ""
+        label: Label
+        sublabel: ""
+      preview:
+        text:
+          - key: label
+          - Stat
+        subtext:
+          - key: number
+      _inputs:
+        number:
+          type: number
+          comment: The number that counts up when scrolled into view. Decimals are kept (e.g. 99.95).
+        prefix:
+          type: text
+          comment: Text shown before the number (e.g. $).
+        suffix:
+          type: text
+          comment: Text shown after the number (e.g. k+, %).
+        label:
+          type: text
+          comment: What the number measures.
+        sublabel:
+          type: text
+          comment: Optional smaller line under the label.

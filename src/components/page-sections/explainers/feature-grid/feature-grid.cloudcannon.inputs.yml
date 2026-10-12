@@ -14,21 +14,6 @@ style:
   options:
     subtype: object
 
-content.descriptionSize:
-  type: select
-  comment: >-
-    The size of every card's line in the grid. A card can override it on its
-    own Line size field.
-  options:
-    values:
-      - id: sm
-        name: Small
-      - id: md
-        name: Medium
-      - id: lg
-        name: Large
-      - id: xl
-        name: Extra Large
 # The heading, its eyebrow, its level and its size are one decision.
 content.heading:
   type: object
@@ -149,6 +134,21 @@ content.features:
 content.sectionLabel:
   type: text
   comment: Names the section in the editor and sets its anchor id.
+style.descriptionSize:
+  type: select
+  comment: >-
+    The size of every card's line in the grid. A card can override it on its
+    own Line size field.
+  options:
+    values:
+      - id: sm
+        name: Small
+      - id: md
+        name: Medium
+      - id: lg
+        name: Large
+      - id: xl
+        name: Extra Large
 style.maxContentWidth:
   type: select
   comment: How wide the band's content runs.

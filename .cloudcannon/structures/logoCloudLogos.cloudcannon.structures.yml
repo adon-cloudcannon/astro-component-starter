@@ -1,0 +1,60 @@
+# logoCloudLogos, lifted out of logo-cloud.cloudcannon.structure-value.yml.
+#
+# Must live here. `_structures_from_glob` in cloudcannon.config.yml only picks
+# up this folder, so a `_structures` block written inside a component's
+# structure-value file reaches nothing: the array that referenced it resolved
+# to `values: []`, no item matched a structure, and every field in the item
+# fell back to CloudCannon guessing a type from its key. That is why a card's
+# Title Size drew a text box and its Icon Color a hex picker.
+logoCloudLogos:
+  values:
+    - label: Logo
+      icon: workspaces
+      value:
+        image: ""
+        alt: Company name
+        url: ""
+        monochrome: true
+        width: 120
+        height: 28
+      preview:
+        text:
+          - key: alt
+          - Logo
+        image:
+          - key: image
+      _inputs:
+        image:
+          type: image
+          comment: The logo image. Constrained by height, so any aspect ratio works.
+          options:
+            paths:
+              static: ""
+              uploads: src/assets/images
+        alt:
+          type: text
+          comment: Accessible name for the logo (the company name).
+          options:
+            required: true
+            required_message: A linked logo with no alt text is a link with no name.
+        url:
+          type: url
+          comment: >-
+            Optional link to the company's site. Linked logos show a hover affordance — color
+            restore in grayscale, a slight scale in full color.
+        monochrome:
+          type: switch
+          comment: >-
+            Draws the mark in the strip's own grey instead of its own colours, which is how the
+            design sets this row. It silhouettes the file, so leave it off for a logo that needs
+            more than one colour. A mark saved in white needs it on, or it is invisible on the
+            cream strip.
+        width:
+          type: number
+          comment: >-
+            The width the mark is drawn at, in pixels, measured off the design. Marks sit on one
+            line and are capped by height, so this mostly sets how the mark reads against its
+            neighbours.
+        height:
+          type: number
+          comment: The matching height in pixels. 28 for most of the row.

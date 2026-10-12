@@ -32,24 +32,3 @@ picker_preview:
   image: public/component-previews/building-blocks/forms/select.svg
 _inputs_from_glob:
   - /src/components/building-blocks/forms/select/select.cloudcannon.inputs.yml
-_structures:
-  selectOptions:
-    values:
-      - value:
-          value: null
-          label: null
-        preview:
-          icon: check_circle
-          text:
-            - key: label
-            - Add a label for the select item
-          subtext:
-            - key: value
-            - Add a value for the select item
-        _inputs:
-          label:
-            type: text
-            comment: The label text for the select option.
-          value:
-            type: text
-            comment: The value to add to the form when the option is selected.

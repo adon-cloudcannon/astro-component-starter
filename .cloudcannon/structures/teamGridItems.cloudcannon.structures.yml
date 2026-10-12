@@ -1,0 +1,50 @@
+# teamGridItems, lifted out of team-grid.cloudcannon.structure-value.yml.
+#
+# Must live here. `_structures_from_glob` in cloudcannon.config.yml only picks
+# up this folder, so a `_structures` block written inside a component's
+# structure-value file reaches nothing: the array that referenced it resolved
+# to `values: []`, no item matched a structure, and every field in the item
+# fell back to CloudCannon guessing a type from its key. That is why a card's
+# Title Size drew a text box and its Icon Color a hex picker.
+teamGridItems:
+  values:
+    - label: Team Member
+      icon: person
+      value:
+        name: Team member name
+        role: Job title
+        bio: Brief bio or description of the team member.
+        imageSource: /src/assets/images/component-docs/profile.jpg
+        imageAlt: Team member photo
+      preview:
+        text:
+          - key: name
+          - Team Member
+        subtext:
+          - key: role
+          - Job title
+        image:
+          - key: imageSource
+      _inputs:
+        name:
+          type: text
+          comment: Full name of the team member.
+        role:
+          type: text
+          comment: Job title or role of the team member.
+        bio:
+          type: textarea
+          comment: Brief biography or description of the team member.
+        imageSource:
+          type: image
+          comment: Photo of the team member.
+          options:
+            paths:
+              uploads: src/assets/images
+              static: ""
+            resize_style: contain
+            width: 1920
+            height: 1280
+        imageAlt:
+          type: text
+          comment: Alt text describing the team member photo.

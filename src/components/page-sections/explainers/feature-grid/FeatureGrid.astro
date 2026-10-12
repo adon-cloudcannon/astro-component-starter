@@ -14,6 +14,9 @@ type FeatureProps = Record<string, unknown>;
 /* `content` and `style` are the editor's tabs, flattened straight back into
    the names below. `at()` writes the frontmatter path a binding needs. */
 const { props, at } = nestedProps(Astro.props, {
+  /* How big the cards' lines are set is a setting rather than copy, so it
+     sits in Style with the band's own chrome. */
+  extraStyleKeys: ["descriptionSize"],
   nest: {
     heading: ["eyebrow", "heading", "headingLevel", "headingSize"],
     subtext: ["subtext", "subtextSize", "subtextWidth"],

@@ -60,20 +60,6 @@ value:
     paddingHorizontal: gutter
     paddingVertical: 4xl
     haze: false
-_structures:
-  story_card:
-    values:
-      - label: Story card
-        icon: bar_chart
-        value:
-          accentColor: golden
-          logoSource: ""
-          logoAlt: ""
-          logoMonochrome: true
-          figure: 8x
-          label: faster content builds
-          linkText: Read story
-          link: ""
 _editables:
   content:
     bold: true

@@ -10,6 +10,7 @@ value:
       eyebrow: Pricing
       heading: Compare plans feature by feature
       headingLevel: h2
+      headingSize: lg
     subtext: ""
     plans:
       - name: Starter
@@ -81,66 +82,3 @@ picker_preview:
   icon: table_chart
 _inputs_from_glob:
   - /src/components/page-sections/conversion/pricing-comparison/pricing-comparison.cloudcannon.inputs.yml
-_structures:
-  pricingComparisonPlans:
-    values:
-      - label: Plan
-        icon: sell
-        value:
-          name: ""
-          price: ""
-          highlight: false
-          buttonText: ""
-          buttonLink: ""
-        preview:
-          text:
-            - key: name
-            - Plan
-          subtext:
-            - key: price
-          icon: sell
-        _inputs:
-          name:
-            type: text
-            comment: The plan's name, shown as the column header.
-          price:
-            type: text
-            comment: Price line under the name (e.g. "$49/mo" or "Custom"). Leave empty to hide.
-          highlight:
-            type: switch
-            comment: >-
-              Marks this plan as the recommended one, giving its call-to-action the primary button
-              style.
-          buttonText:
-            type: text
-            comment: Call to action under the column. Leave empty for no button.
-          buttonLink:
-            type: url
-            comment: Where the button goes.
-  pricingComparisonRows:
-    values:
-      - label: Feature row
-        icon: check_circle
-        value:
-          feature: ""
-          values:
-            - ""
-        preview:
-          text:
-            - key: feature
-            - Feature row
-          subtext:
-            - key: values
-          icon: check_circle
-        _inputs:
-          feature:
-            type: text
-            comment: The feature being compared, shown in the first column.
-          values:
-            type: array
-            comment: >-
-              One value per plan, in the same order as the plans. Missing values render as an empty
-              cell.
-          values[*]:
-            type: text
-            comment: Enter "yes" or "no" for a tick or a dash, or any text (e.g. "5 seats") to show as-is.

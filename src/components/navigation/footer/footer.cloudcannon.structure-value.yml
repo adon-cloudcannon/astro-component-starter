@@ -27,23 +27,3 @@ picker_preview:
   icon: dock_to_bottom
 _inputs_from_glob:
   - /src/components/navigation/footer/footer.cloudcannon.inputs.yml
-_structures:
-  footerColumns:
-    values:
-      - label: Column
-        icon: list
-        value:
-          heading: ""
-          links: []
-        preview:
-          text:
-            - key: heading
-            - Column
-        _inputs:
-          heading:
-            type: text
-            comment: The column's heading. Shown in caps, above a rule.
-          links:
-            type: array
-            options:
-              structures: _structures.linkItems

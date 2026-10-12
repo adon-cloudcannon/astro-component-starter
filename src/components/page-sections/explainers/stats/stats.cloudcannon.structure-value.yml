@@ -10,6 +10,7 @@ value:
       eyebrow: ""
       heading: Numbers that hold up
       headingLevel: h2
+      headingSize: lg
     subtext: ""
     stats:
       - number: 12
@@ -54,36 +55,3 @@ picker_preview:
   image: public/component-previews/page-sections/explainers/stats.svg
 _inputs_from_glob:
   - /src/components/page-sections/explainers/stats/stats.cloudcannon.inputs.yml
-_structures:
-  statsItems:
-    values:
-      - label: Stat
-        icon: monitoring
-        value:
-          number: 100
-          prefix: ""
-          suffix: ""
-          label: Label
-          sublabel: ""
-        preview:
-          text:
-            - key: label
-            - Stat
-          subtext:
-            - key: number
-        _inputs:
-          number:
-            type: number
-            comment: The number that counts up when scrolled into view. Decimals are kept (e.g. 99.95).
-          prefix:
-            type: text
-            comment: Text shown before the number (e.g. $).
-          suffix:
-            type: text
-            comment: Text shown after the number (e.g. k+, %).
-          label:
-            type: text
-            comment: What the number measures.
-          sublabel:
-            type: text
-            comment: Optional smaller line under the label.

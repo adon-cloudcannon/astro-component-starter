@@ -1,0 +1,45 @@
+# codeBlockTabs, lifted out of code-block.cloudcannon.structure-value.yml.
+#
+# Must live here. `_structures_from_glob` in cloudcannon.config.yml only picks
+# up this folder, so a `_structures` block written inside a component's
+# structure-value file reaches nothing: the array that referenced it resolved
+# to `values: []`, no item matched a structure, and every field in the item
+# fell back to CloudCannon guessing a type from its key. That is why a card's
+# Title Size drew a text box and its Icon Color a hex picker.
+codeBlockTabs:
+  values:
+    - label: Code tab
+      icon: code
+      value:
+        label: HTML
+        language: HTML
+        code: |-
+          <img
+            src="/images/workshop.jpg"
+            alt="A woodworker shaping a chair leg"
+          />
+        filename: workshop.html
+        description: A semantic image with alternative text.
+      preview:
+        text:
+          - key: label
+          - Code tab
+        subtext:
+          - key: filename
+          - Add a filename or description
+      _inputs:
+        label:
+          type: text
+          comment: The tab control label, such as YAML, JSON, Astro, or React.
+        language:
+          type: text
+          comment: Syntax-highlighting grammar for this tab, such as HTML, YAML, JSON, or JavaScript.
+        code:
+          type: code
+          comment: Escaped code shown when this tab is active.
+        filename:
+          type: text
+          comment: Optional technical filename shown in the footer.
+        description:
+          type: text
+          comment: Optional plain-language context shown in the footer.

@@ -1,0 +1,219 @@
+# featureGridItems, lifted out of feature-grid.cloudcannon.structure-value.yml.
+#
+# Must live here. `_structures_from_glob` in cloudcannon.config.yml only picks
+# up this folder, so a `_structures` block written inside a component's
+# structure-value file reaches nothing: the array that referenced it resolved
+# to `values: []`, no item matched a structure, and every field in the item
+# fell back to CloudCannon guessing a type from its key. That is why a card's
+# Title Size drew a text box and its Icon Color a hex picker.
+featureGridItems:
+  values:
+    - label: Feature
+      icon: apps
+      value:
+        title: Feature title
+        description: Feature description placeholder text that will be replaced with actual content.
+        iconName: zap
+        iconColor: golden
+        iconBackground: true
+      preview:
+        text:
+          - key: title
+          - Feature
+        subtext:
+          - key: description
+        image:
+          - template: src/icons/{iconName}.svg
+      _inputs:
+        eyebrow:
+          type: text
+          comment: >-
+            Short label above the title. Setting one turns the card into a signpost: bigger title,
+            a rule under the art, and a link out.
+        title:
+          type: text
+          comment: Name of the feature.
+        titleSize:
+          type: select
+          comment: >-
+            The card's title size. Left on Automatic the shape decides it:
+            46 for a signpost, 29 for an illustrated or plain card, and the
+            icon card's own size otherwise.
+          options:
+            values:
+              - id: ""
+                name: Automatic
+              - id: xl
+                name: Header 2
+              - id: lg
+                name: Header 3
+              - id: md
+                name: Header 4
+              - id: sm
+                name: Header 5
+              - id: xs
+                name: Header 6
+        descriptionSize:
+          type: select
+          comment: >-
+            This card's line size. Left on Automatic it follows the size set
+            for the whole grid.
+          options:
+            values:
+              - id: ""
+                name: Automatic
+              - id: sm
+                name: Small
+              - id: md
+                name: Medium
+              - id: lg
+                name: Large
+              - id: xl
+                name: Extra Large
+        description:
+          type: markdown
+          comment: Supporting description for the feature.
+          options:
+            blockquote: false
+            bold: true
+            format: null
+            italic: true
+            link: true
+            strike: false
+            subscript: true
+            superscript: true
+            underline: false
+            bulletedlist: false
+            numberedlist: false
+        iconName:
+          type: select
+          comment: Icon displayed with the feature. Sourced from [Lucide](https://lucide.dev/icons/).
+          options:
+            values: data.icons
+            preview:
+              text:
+                - key: name
+              image:
+                - template: src/icons/{id}.svg
+        iconColor:
+          type: select
+          comment: Color accent applied to the icon.
+          hidden: "!iconName"
+          options:
+            values:
+              - id: default
+                name: Default
+                swatch: check_box_outline_blank
+              - id: pacific
+                name: Pacific
+                swatch: square
+                color: "#034AD8"
+              - id: moss
+                name: Moss
+                swatch: square
+                color: "#687E00"
+              - id: golden
+                name: Golden
+                swatch: square
+                color: "#FFAA00"
+              - id: peachy
+                name: Peachy
+                swatch: square
+                color: "#F39B7B"
+              - id: sunset
+                name: Sunset
+                swatch: square
+                color: "#D85A2C"
+              - id: kiwi
+                name: Kiwi
+                swatch: square
+                color: "#7C3442"
+              - id: blush
+                name: Blush
+                swatch: square
+                color: "#E7B0B9"
+              - id: harbour
+                name: Harbour
+                swatch: square
+                color: "#A6C1FA"
+            picker_view: card
+            preview:
+              icon:
+                - key: swatch
+              icon_color:
+                - key: color
+              text:
+                - key: name
+        iconBackground:
+          type: switch
+          comment: Draw a plate behind the icon.
+          hidden: "!iconName"
+        iconSolid:
+          type: switch
+          hidden: "!iconBackground"
+          comment: >-
+            Fill that plate with the colour itself rather than tinting it, and round it to a disc.
+            The glyph is knocked out in whatever reads on the colour. This is the shape Careers
+            draws; everywhere else uses the tint.
+        divider:
+          type: switch
+          comment: >-
+            A hairline between the card's head and its line. Careers draws one on all nine of its
+            benefit cards; nothing else does.
+        accentColor:
+          type: select
+          comment: Colour of the card's rule. The design gives each card its own.
+          options:
+            values:
+              - id: none
+                name: None
+                swatch: check_box_outline_blank
+              - id: pacific
+                name: Pacific
+                swatch: square
+                color: "#034AD8"
+              - id: moss
+                name: Moss
+                swatch: square
+                color: "#687E00"
+              - id: golden
+                name: Golden
+                swatch: square
+                color: "#FFAA00"
+              - id: peachy
+                name: Peachy
+                swatch: square
+                color: "#F39B7B"
+              - id: sunset
+                name: Sunset
+                swatch: square
+                color: "#D85A2C"
+              - id: harbour
+                name: Harbour
+                swatch: square
+                color: "#A6C1FA"
+            picker_view: card
+            preview:
+              icon:
+                - key: swatch
+              icon_color:
+                - key: color
+              text:
+                - key: name
+        imageSource:
+          type: image
+          comment: A drawing above the title, in place of the icon.
+        imageAlt:
+          type: text
+          comment: Alternative text for the drawing.
+        imageHeight:
+          type: number
+          comment: >-
+            How tall to draw the illustration, in pixels. The design gives each one its own box.
+            Leave empty for the default.
+        linkText:
+          type: text
+          comment: Label for the link out of the card. Leave empty for no link.
+        link:
+          type: url
+          comment: Where the card's link goes.

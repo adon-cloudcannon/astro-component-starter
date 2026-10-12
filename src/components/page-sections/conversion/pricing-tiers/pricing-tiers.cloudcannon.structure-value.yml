@@ -10,6 +10,7 @@ value:
       eyebrow: Plans
       heading: Simple pricing that scales with you
       headingLevel: h2
+      headingSize: lg
     subtext:
       subtext: Every plan includes global CDN hosting and automatic SSL.
       subtextSize: md
@@ -104,92 +105,3 @@ picker_preview:
   image: public/component-previews/page-sections/conversion/pricing-tiers.svg
 _inputs_from_glob:
   - /src/components/page-sections/conversion/pricing-tiers/pricing-tiers.cloudcannon.inputs.yml
-_structures:
-  pricingTiers:
-    values:
-      - label: Tier
-        icon: payments
-        value:
-          name: Plan name
-          price: $29
-          priceSuffix: /month
-          annualPrice: ""
-          annualPriceSuffix: /year
-          description: Who this plan is for.
-          features:
-            - text: Included feature
-              included: true
-          buttonText: Get started
-          buttonLink: "#"
-          highlight: false
-          badgeText: ""
-          accent: ""
-        preview:
-          text:
-            - key: name
-            - Tier
-          subtext:
-            - key: price
-        _inputs:
-          name:
-            type: text
-            comment: Name of the plan.
-          price:
-            type: text
-            comment: >-
-              The price, including the currency symbol (e.g. $19). Shown on the monthly option, and
-              whenever annual pricing is off.
-          priceSuffix:
-            type: text
-            comment: Billing period shown after the price (e.g. /month). Leave empty to hide.
-          annualPrice:
-            type: text
-            comment: >-
-              Optional annual price (e.g. $190). Used when Annual pricing is on. Leave empty to keep
-              showing the monthly price in both modes.
-          annualPriceSuffix:
-            type: text
-            comment: Billing period shown after the annual price (e.g. /year). Leave empty to hide.
-            hidden: "!annualPrice"
-          description:
-            type: text
-            comment: One line on who the plan is for.
-          features:
-            type: array
-            label: Features
-            comment: >-
-              Feature checklist. Excluded rows render muted with a dash so the lists align across
-              tiers.
-            options:
-              structures: _structures.pricingTierFeatures
-          buttonText:
-            type: text
-            comment: Call-to-action button label.
-          buttonLink:
-            type: url
-            comment: Where the call-to-action button links.
-          highlight:
-            type: switch
-            comment: Emphasize this tier with a stronger border, shadow, filled button, and the badge.
-          badgeText:
-            type: text
-            comment: Badge shown atop the card (e.g. Most popular).
-            hidden: "!highlight"
-  pricingTierFeatures:
-    values:
-      - label: Feature
-        icon: check
-        value:
-          text: Feature
-          included: true
-        preview:
-          text:
-            - key: text
-            - Feature
-        _inputs:
-          text:
-            type: text
-            comment: The feature name.
-          included:
-            type: switch
-            comment: Whether this plan includes the feature.

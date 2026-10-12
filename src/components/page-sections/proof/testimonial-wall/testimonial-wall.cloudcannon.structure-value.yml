@@ -10,6 +10,7 @@ value:
       eyebrow: Testimonials
       heading: What teams say after shipping
       headingLevel: h2
+      headingSize: lg
     subtext:
       subtext: ""
       subtextSize: md
@@ -68,47 +69,3 @@ picker_preview:
   icon: reviews
 _inputs_from_glob:
   - /src/components/page-sections/proof/testimonial-wall/testimonial-wall.cloudcannon.inputs.yml
-_structures:
-  testimonialWallItems:
-    values:
-      - label: Testimonial
-        icon: format_quote
-        value:
-          text: ""
-          authorName: ""
-          authorDescription: ""
-          authorImage: ""
-        preview:
-          text:
-            - key: authorName
-            - Testimonial
-          subtext:
-            - key: text
-          icon: format_quote
-        _inputs:
-          text:
-            type: markdown
-            comment: The quote itself.
-          authorName:
-            type: text
-            comment: Who said it.
-          authorDescription:
-            type: text
-            comment: Their role and company. Leave empty to hide.
-          quoted:
-            type: switch
-            comment: >-
-              Draw quotation marks around it. Off for a line that is a statement rather than
-              something said.
-          quoteSize:
-            type: number
-            comment: >-
-              Size of this card's quote, in pixels. The design varies it per card so cards of
-              different lengths come out the same height. Leave empty for the default.
-          authorImage:
-            type: image
-            comment: Optional headshot. Falls back to the author's initials.
-            options:
-              paths:
-                static: ""
-                uploads: src/assets/images

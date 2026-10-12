@@ -1,0 +1,25 @@
+# gridItems, lifted out of grid.cloudcannon.structure-value.yml.
+#
+# Must live here. `_structures_from_glob` in cloudcannon.config.yml only picks
+# up this folder, so a `_structures` block written inside a component's
+# structure-value file reaches nothing: the array that referenced it resolved
+# to `values: []`, no item matched a structure, and every field in the item
+# fell back to CloudCannon guessing a type from its key. That is why a card's
+# Title Size drew a text box and its Icon Color a hex picker.
+gridItems:
+  values:
+    - label: Grid Item
+      value:
+        contentSections: []
+      preview:
+        icon: grid_view
+        text: Grid Item
+        subtext:
+          - template: Contains {contentSections|array_length} content {"block"|pluralize=contentSections}
+          - Add one or more content blocks to the grid item
+      _inputs:
+        contentSections:
+          type: array
+          comment: Content sections to render within this grid item.
+          options:
+            structures: _structures.gridItemSections

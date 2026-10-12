@@ -9,6 +9,7 @@ value:
     heading:
       heading: Get in touch
       headingLevel: h2
+      headingSize: lg
     subtext:
       subtext: Fill out the form below and we'll get back to you as soon as possible.
       subtextSize: md

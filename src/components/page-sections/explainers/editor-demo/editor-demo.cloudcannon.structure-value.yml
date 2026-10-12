@@ -8,6 +8,7 @@ value:
     heading:
       eyebrow: INTERACTIVE DEMO
       heading: Here's what you're working with
+      headingSize: lg
     subtext:
       subtext: Click a heading and change it. See what's possible with the Visual Editor.
       subtextSize: md

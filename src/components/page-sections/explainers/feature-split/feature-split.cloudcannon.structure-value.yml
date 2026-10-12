@@ -10,6 +10,7 @@ value:
       eyebrow: How it works
       heading: One idea, shown beside it
       headingLevel: h2
+      headingSize: lg
     subtext:
       subtext: A short paragraph that explains the idea in the image next to it.
       subtextSize: lg

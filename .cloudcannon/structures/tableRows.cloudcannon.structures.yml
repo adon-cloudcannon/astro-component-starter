@@ -1,0 +1,26 @@
+# tableRows, lifted out of table.cloudcannon.structure-value.yml.
+#
+# Must live here. `_structures_from_glob` in cloudcannon.config.yml only picks
+# up this folder, so a `_structures` block written inside a component's
+# structure-value file reaches nothing: the array that referenced it resolved
+# to `values: []`, no item matched a structure, and every field in the item
+# fell back to CloudCannon guessing a type from its key. That is why a card's
+# Title Size drew a text box and its Icon Color a hex picker.
+tableRows:
+  values:
+    - label: Row
+      icon: table_rows
+      value:
+        cells:
+          - ""
+      preview:
+        text:
+          - key: cells
+          - Row
+      _inputs:
+        cells:
+          type: array
+          comment: One cell per column, in order. Missing cells render empty.
+        cells[*]:
+          type: text
+          comment: The cell contents.

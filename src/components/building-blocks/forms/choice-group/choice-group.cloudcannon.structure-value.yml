@@ -30,28 +30,3 @@ picker_preview:
   image: public/component-previews/building-blocks/forms/choice-group.svg
 _inputs_from_glob:
   - /src/components/building-blocks/forms/choice-group/choice-group.cloudcannon.inputs.yml
-_structures:
-  choiceOptions:
-    values:
-      - value:
-          value: null
-          label: null
-          checked: null
-        preview:
-          icon: check_box
-          text:
-            - key: label
-            - Choice Option
-          subtext:
-            - key: value
-            - Add a value for the option.
-        _inputs:
-          value:
-            type: text
-            comment: The value entered by the user when the option is selected.
-          label:
-            type: text
-            comment: The label text for the option.
-          checked:
-            type: switch
-            comment: Whether the field is checked by default.
