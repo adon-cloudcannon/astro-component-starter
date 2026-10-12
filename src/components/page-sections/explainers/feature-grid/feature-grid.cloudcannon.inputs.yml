@@ -16,7 +16,9 @@ style:
 
 content.descriptionSize:
   type: select
-  comment: The size of every card's line in the grid. A card can override it.
+  comment: >-
+    The size of every card's line in the grid. A card can override it on its
+    own Line size field.
   options:
     values:
       - id: sm

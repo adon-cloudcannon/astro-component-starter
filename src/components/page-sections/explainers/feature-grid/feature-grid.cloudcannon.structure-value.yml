@@ -81,6 +81,43 @@ _structures:
           title:
             type: text
             comment: Name of the feature.
+          titleSize:
+            type: select
+            comment: >-
+              The card's title size. Left on Automatic the shape decides it:
+              46 for a signpost, 29 for an illustrated or plain card, and the
+              icon card's own size otherwise.
+            options:
+              values:
+                - id: ""
+                  name: Automatic
+                - id: xl
+                  name: Header 2
+                - id: lg
+                  name: Header 3
+                - id: md
+                  name: Header 4
+                - id: sm
+                  name: Header 5
+                - id: xs
+                  name: Header 6
+          descriptionSize:
+            type: select
+            comment: >-
+              This card's line size. Left on Automatic it follows the size set
+              for the whole grid.
+            options:
+              values:
+                - id: ""
+                  name: Automatic
+                - id: sm
+                  name: Small
+                - id: md
+                  name: Medium
+                - id: lg
+                  name: Large
+                - id: xl
+                  name: Extra Large
           description:
             type: markdown
             comment: Supporting description for the feature.

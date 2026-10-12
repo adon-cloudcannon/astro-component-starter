@@ -108,6 +108,16 @@ const artRow = Math.max(
   0,
   ...features.map((feature: FeatureProps) => Number(feature.imageHeight) || 0)
 );
+
+/* A card's own size fields are optional: left on Automatic the editor writes
+   an empty string, which has to read as "not set" rather than as a value. */
+const inherit = <T extends Record<string, unknown>>(feature: T): T => {
+  const out = { ...feature };
+  for (const key of ["titleSize", "descriptionSize"]) {
+    if (out[key] === "" || out[key] === null) delete out[key];
+  }
+  return out;
+};
 ---
 
 <CustomSection
@@ -162,6 +172,10 @@ const artRow = Math.max(
     data-children-prop={at("features")}
   >
     {features?.map((feature: FeatureProps) => (
+      /* `inherit` drops the keys a card has left on Automatic. The editor
+         writes those as "", and an empty string spread over the section's own
+         value is not the same as not setting one: `??` does not catch it, so
+         the card would take an empty size rather than the grid's. */
       <FeatureItem
         data-id="page-sections/explainers/feature-grid/feature-item"
         data-component="page-sections/explainers/feature-grid/feature-item"
@@ -169,7 +183,7 @@ const artRow = Math.max(
         alignmentHorizontal={alignmentHorizontal}
         backgroundColor={cardColor}
         descriptionSize={descriptionSize}
-        {...feature}
+        {...inherit(feature)}
         headingLevel={itemHeadingLevel}
       />
     ))}

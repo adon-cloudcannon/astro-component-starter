@@ -91,7 +91,7 @@ const signpost = Boolean(eyebrow || linkText);
 // A card with neither a drawing nor an icon is plain copy, and the design sets
 // its title at the same 29 as the illustrated ones rather than the larger size
 // an icon card takes.
-const headingSize = titleSize ?? (signpost ? "lg" : imageSource || !iconName ? "sm" : "md");
+const headingSize = titleSize || (signpost ? "lg" : imageSource || !iconName ? "sm" : "md");
 ---
 
 <GridItem
