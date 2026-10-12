@@ -221,12 +221,58 @@ const annualSelected = defaultInterval === "annual";
       }
     }
 
+    /* A segmented pill, not a switch. The design draws two labels in one sand
+       track with the live one filled Pacific, which reads as "pick one of two"
+       where a switch reads as "turn a thing on". Toggle's own markup is kept —
+       the input still carries `toggle-input`, which is what the price rows
+       key off — and only its chrome is restyled from here, where
+       `page-sections` out-ranks `components`. */
     .pricing-tiers-billing {
       display: flex;
       justify-content: center;
 
       > .pricing-tiers-billing-toggle {
         width: auto;
+      }
+
+      .toggle-container {
+        align-items: center;
+        background-color: var(--sand);
+        border: var(--border-width-sm, 1px) solid var(--dark-sand);
+        border-radius: 999px;
+        display: inline-flex;
+        gap: 0;
+        padding: 4px;
+      }
+
+      /* The switch itself is the control; the labels are the UI. */
+      .toggle-switch {
+        display: none;
+      }
+
+      .toggle-off-label,
+      .toggle-label {
+        border-radius: 999px;
+        color: var(--color-text-strong);
+        cursor: pointer;
+        font-weight: var(--font-weight-semibold);
+        line-height: 1;
+        opacity: 1;
+        padding: 0.875rem 1.5rem;
+        transition: background-color 0.15s ease, color 0.15s ease;
+      }
+
+      /* Unchecked is Monthly, checked is the annual label. */
+      .toggle-container:not(:has(.toggle-input:checked)) .toggle-off-label,
+      .toggle-container:has(.toggle-input:checked) .toggle-label {
+        background-color: var(--pacific);
+        color: var(--white);
+      }
+
+      .toggle-container:has(.toggle-input:focus-visible) .toggle-off-label,
+      .toggle-container:has(.toggle-input:focus-visible) .toggle-label {
+        outline: 2px solid var(--pacific);
+        outline-offset: 2px;
       }
 
       .pricing-tiers-billing-saving {

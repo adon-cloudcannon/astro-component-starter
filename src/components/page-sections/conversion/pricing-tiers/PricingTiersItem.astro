@@ -134,6 +134,14 @@ const priceRows = [
         )}
       </p>
     ))}
+    <Button
+      class="pricing-tier-button"
+      text={buttonText}
+      link={buttonLink}
+      variant={highlight ? "primary" : "tertiary"}
+      data-outline={highlight ? undefined : ""}
+      data-prop="buttonText"
+    />
     {features?.length > 0 && (
       <ul
         class="pricing-tier-features"
@@ -148,6 +156,7 @@ const priceRows = [
             <Icon
               name={feature.included === false ? "minus-circle" : "check-circle"}
               size="sm"
+              color={feature.included === false ? "default" : "moss"}
             />
             <span
               data-editable="text"
@@ -159,13 +168,6 @@ const priceRows = [
         ))}
       </ul>
     )}
-    <Button
-      class="pricing-tier-button"
-      text={buttonText}
-      link={buttonLink}
-      variant={highlight ? "primary" : "tertiary"}
-      data-prop="buttonText"
-    />
   </article>
 </GridItem>
 
@@ -187,10 +189,12 @@ const priceRows = [
 
       &.highlight {
         /* Inset ring doubles the border to 2px without shifting layout
-           against the sibling cards. */
-        border-color: var(--color-border-strong);
+           against the sibling cards. Pacific rather than the neutral strong
+           border: the design marks the recommended plan in the brand colour,
+           and a near-black ring reads as a disabled card beside the others. */
+        border-color: var(--pacific);
         box-shadow:
-          inset 0 0 0 1px var(--color-border-strong),
+          inset 0 0 0 1px var(--pacific),
           var(--shadow-md);
       }
 
@@ -259,15 +263,41 @@ const priceRows = [
         }
       }
 
+      /* Under the price, above the rule, which is where the design draws it:
+         the list is what runs to the card's foot. `price-bottom` puts the
+         price last and the action after it, so there it does hang off the
+         foot and the rule stays with the list. */
       .pricing-tier-button {
         display: flex;
-        margin-top: auto;
-        padding-top: var(--spacing-xl);
+        padding-block-start: var(--spacing-lg);
 
         > .button-inner {
           flex: 1;
         }
       }
+
+      /* Pacific, not the neutral rule a tertiary draws: beside the filled
+         action on the recommended card a grey outline reads as disabled. */
+      .pricing-tier-button[data-outline] > .button-inner {
+        border-color: var(--pacific);
+        color: var(--pacific);
+      }
+
+      .pricing-tier-button[data-outline] > .button-inner:hover,
+      .pricing-tier-button[data-outline] > .button-inner:focus-visible {
+        background-color: color-mix(in srgb, var(--pacific) 8%, transparent);
+        border-color: var(--pacific);
+        color: var(--pacific);
+      }
+
+      /* The list is what reaches the foot now the action does not. */
+      .pricing-tier-features {
+        margin-block-end: auto;
+      }
+
+      /* The tick's colour is the Icon's own `color` prop, not a rule here:
+         the paint lands on `.icon-inner`, so a rule on `.icon` sets a colour
+         on a wrapper that draws nothing. */
     }
 
     .pricing-tiers:has(.pricing-tiers-billing .toggle-input:checked) {
@@ -307,7 +337,12 @@ const priceRows = [
     }
 
     .pricing-tier.price-bottom .pricing-tier-button {
+      margin-block-start: 0;
       order: 3;
+    }
+
+    .pricing-tier.price-bottom .pricing-tier-features {
+      margin-block-end: 0;
     }
   }
 
