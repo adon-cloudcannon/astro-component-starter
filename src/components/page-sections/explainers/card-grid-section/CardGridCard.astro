@@ -14,6 +14,9 @@ import { nestedProps } from "@component-utils/nestedProps.mjs";
    relative to the card because the card is the array item. */
 const { props, at } = nestedProps(Astro.props, {
   extraStyleKeys: ["accentColor", "iconSolid", "iconBackground", "divider", "alignmentHorizontal"],
+  /* The title and its size are one decision, so they are one object, the same
+     way a section bundles its heading with its level and size. */
+  nest: { heading: ["title", "titleSize"] },
 });
 
 const {

@@ -109,10 +109,11 @@ const cardColor =
 const inherit = <T extends Record<string, unknown>>(card: T): T => {
   const out = { ...card };
   const content = { ...((out.content ?? {}) as Record<string, unknown>) };
+  const heading = { ...((content.heading ?? {}) as Record<string, unknown>) };
   let touched = false;
 
   for (const key of ["titleSize", "descriptionSize"]) {
-    for (const bag of [out, content]) {
+    for (const bag of [out, content, heading]) {
       if (bag[key] === "" || bag[key] === "auto" || bag[key] === null) {
         delete bag[key];
         touched = true;
@@ -120,7 +121,10 @@ const inherit = <T extends Record<string, unknown>>(card: T): T => {
     }
   }
 
-  if (touched) out.content = content;
+  if (touched) {
+    content.heading = heading;
+    out.content = content;
+  }
   return out;
 };
 ---

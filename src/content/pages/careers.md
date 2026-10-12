@@ -77,8 +77,9 @@ pageSections:
         subtextWidth: lg
       cards:
         - content:
-            title: Four-day work week at full pay
-            titleSize: xs
+            heading:
+              title: Four-day work week at full pay
+              titleSize: xs
             description: >-
               We trust in the work you do, and we know that productivity isn't always
               measured by time at your desk. Our four-day work week (32 hours per week)
@@ -93,8 +94,9 @@ pageSections:
             alignmentHorizontal: start
             iconBackground: true
         - content:
-            title: Employee stock options
-            titleSize: xs
+            heading:
+              title: Employee stock options
+              titleSize: xs
             description: >-
               When you have a stake in the product you're making, we all win. All
               CloudCannon employees receive generous stock options, so we're all working
@@ -108,8 +110,9 @@ pageSections:
             alignmentHorizontal: start
             iconBackground: true
         - content:
-            title: Transportation subsidy
-            titleSize: xs
+            heading:
+              title: Transportation subsidy
+              titleSize: xs
             description: >-
               However you're coming in to work — by foot, bus, bike, scooter, skateboard, or
               car — we'll help subsidize your transportation costs.
@@ -122,8 +125,9 @@ pageSections:
             alignmentHorizontal: start
             iconBackground: true
         - content:
-            title: Annual leave
-            titleSize: xs
+            heading:
+              title: Annual leave
+              titleSize: xs
             description: >-
               The longer you're with us, the more you can take time to relax. With every
               year of employment, you'll gain an extra day of annual leave to add to your
@@ -137,8 +141,9 @@ pageSections:
             alignmentHorizontal: start
             iconBackground: true
         - content:
-            title: Parental leave
-            titleSize: xs
+            heading:
+              title: Parental leave
+              titleSize: xs
             description: >-
               We offer up to 52 weeks of parental leave, 26 of which are fully paid. This
               includes biological, adoptive, and foster parents. Partners can also receive
@@ -152,8 +157,9 @@ pageSections:
             alignmentHorizontal: start
             iconBackground: true
         - content:
-            title: Happy Birthday to you!
-            titleSize: xs
+            heading:
+              title: Happy Birthday to you!
+              titleSize: xs
             description: >-
               Have your (birthday) cake and eat it too — all employees receive an additional
               day of annual leave on their birthdays, to be taken when it suits you best.
@@ -166,8 +172,9 @@ pageSections:
             alignmentHorizontal: start
             iconBackground: true
         - content:
-            title: Flexible work
-            titleSize: xs
+            heading:
+              title: Flexible work
+              titleSize: xs
             description: >-
               We want to support you to do the best work you can, so we offer working hours
               that suit you, as well as flexible arrangements and subsidies for working from
@@ -181,8 +188,9 @@ pageSections:
             alignmentHorizontal: start
             iconBackground: true
         - content:
-            title: Comfortable setup
-            titleSize: xs
+            heading:
+              title: Comfortable setup
+              titleSize: xs
             description: >-
               We offer different options for how you work, to help you stay healthy. We have
               adjustable standing desks and monitors, comfortable chairs, and even wobble
@@ -196,8 +204,9 @@ pageSections:
             alignmentHorizontal: start
             iconBackground: true
         - content:
-            title: All the tools you need
-            titleSize: xs
+            heading:
+              title: All the tools you need
+              titleSize: xs
             description: >-
               We provide all the tools and software you need to get your job done. This
               includes MacBook Pros and accessories, dual monitors, and a range of useful
@@ -235,8 +244,9 @@ pageSections:
         subtextWidth: ''
       cards:
         - content:
-            title: Feature title
-            titleSize: ''
+            heading:
+              title: Feature title
+              titleSize: ''
             description: >-
               Feature description placeholder text that will be replaced with actual
               content.

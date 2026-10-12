@@ -19,8 +19,9 @@ cardGridCards:
         # chrome, which is where the section keeps its own. On a card the two
         # are one decision: you pick the words and how big they are together.
         content:
-          title: Card title
-          titleSize: auto
+          heading:
+            title: Card title
+            titleSize: auto
           description: A line about this point, a sentence or two long.
           descriptionSize: auto
           iconName: zap
@@ -32,17 +33,22 @@ cardGridCards:
           iconBackground: true
       preview:
         text:
-          - key: content.title
+          - key: content.heading.title
           - Card
         subtext:
           - key: content.description
         image:
           - template: src/icons/{content.iconName}.svg
       _inputs:
-        content.title:
+        content.heading:
+          type: object
+          label: Heading
+          options:
+            subtype: object
+        content.heading.title:
           type: text
           comment: The card's title.
-        content.titleSize:
+        content.heading.titleSize:
           type: select
           comment: >-
             The card's title size. Left on Automatic it takes the size this
