@@ -78,14 +78,15 @@ pageSections:
       cards:
         - content:
             heading:
-              title: Four-day work week at full pay
-              titleSize: xs
-            description: >-
-              We trust in the work you do, and we know that productivity isn't always
-              measured by time at your desk. Our four-day work week (32 hours per week)
-              means more time with your family and friends, and more energy for the work we
-              love.
-            descriptionSize: ''
+              heading: Four-day work week at full pay
+              headingSize: xs
+            subtext:
+              subtext: >-
+                We trust in the work you do, and we know that productivity isn't always
+                measured by time at your desk. Our four-day work week (32 hours per week)
+                means more time with your family and friends, and more energy for the work
+                we love.
+              subtextSize: auto
             iconName: smile
           style:
             accentColor: golden
@@ -95,13 +96,14 @@ pageSections:
             iconBackground: true
         - content:
             heading:
-              title: Employee stock options
-              titleSize: xs
-            description: >-
-              When you have a stake in the product you're making, we all win. All
-              CloudCannon employees receive generous stock options, so we're all working
-              towards the same goal.
-            descriptionSize: ''
+              heading: Employee stock options
+              headingSize: xs
+            subtext:
+              subtext: >-
+                When you have a stake in the product you're making, we all win. All
+                CloudCannon employees receive generous stock options, so we're all working
+                towards the same goal.
+              subtextSize: auto
             iconName: trending-up
           style:
             accentColor: sunset
@@ -111,12 +113,13 @@ pageSections:
             iconBackground: true
         - content:
             heading:
-              title: Transportation subsidy
-              titleSize: xs
-            description: >-
-              However you're coming in to work — by foot, bus, bike, scooter, skateboard, or
-              car — we'll help subsidize your transportation costs.
-            descriptionSize: ''
+              heading: Transportation subsidy
+              headingSize: xs
+            subtext:
+              subtext: >-
+                However you're coming in to work — by foot, bus, bike, scooter, skateboard,
+                or car — we'll help subsidize your transportation costs.
+              subtextSize: auto
             iconName: truck
           style:
             accentColor: moss
@@ -126,13 +129,14 @@ pageSections:
             iconBackground: true
         - content:
             heading:
-              title: Annual leave
-              titleSize: xs
-            description: >-
-              The longer you're with us, the more you can take time to relax. With every
-              year of employment, you'll gain an extra day of annual leave to add to your
-              total, up to 25 days.
-            descriptionSize: ''
+              heading: Annual leave
+              headingSize: xs
+            subtext:
+              subtext: >-
+                The longer you're with us, the more you can take time to relax. With every
+                year of employment, you'll gain an extra day of annual leave to add to your
+                total, up to 25 days.
+              subtextSize: auto
             iconName: sun
           style:
             accentColor: harbour
@@ -142,13 +146,14 @@ pageSections:
             iconBackground: true
         - content:
             heading:
-              title: Parental leave
-              titleSize: xs
-            description: >-
-              We offer up to 52 weeks of parental leave, 26 of which are fully paid. This
-              includes biological, adoptive, and foster parents. Partners can also receive
-              up to 4 weeks of paid leave.
-            descriptionSize: ''
+              heading: Parental leave
+              headingSize: xs
+            subtext:
+              subtext: >-
+                We offer up to 52 weeks of parental leave, 26 of which are fully paid. This
+                includes biological, adoptive, and foster parents. Partners can also receive
+                up to 4 weeks of paid leave.
+              subtextSize: auto
             iconName: baby
           style:
             accentColor: peachy
@@ -158,12 +163,14 @@ pageSections:
             iconBackground: true
         - content:
             heading:
-              title: Happy Birthday to you!
-              titleSize: xs
-            description: >-
-              Have your (birthday) cake and eat it too — all employees receive an additional
-              day of annual leave on their birthdays, to be taken when it suits you best.
-            descriptionSize: ''
+              heading: Happy Birthday to you!
+              headingSize: xs
+            subtext:
+              subtext: >-
+                Have your (birthday) cake and eat it too — all employees receive an
+                additional day of annual leave on their birthdays, to be taken when it suits
+                you best.
+              subtextSize: auto
             iconName: cake
           style:
             accentColor: golden
@@ -173,13 +180,14 @@ pageSections:
             iconBackground: true
         - content:
             heading:
-              title: Flexible work
-              titleSize: xs
-            description: >-
-              We want to support you to do the best work you can, so we offer working hours
-              that suit you, as well as flexible arrangements and subsidies for working from
-              home.
-            descriptionSize: ''
+              heading: Flexible work
+              headingSize: xs
+            subtext:
+              subtext: >-
+                We want to support you to do the best work you can, so we offer working
+                hours that suit you, as well as flexible arrangements and subsidies for
+                working from home.
+              subtextSize: auto
             iconName: map-pin
           style:
             accentColor: moss
@@ -189,13 +197,14 @@ pageSections:
             iconBackground: true
         - content:
             heading:
-              title: Comfortable setup
-              titleSize: xs
-            description: >-
-              We offer different options for how you work, to help you stay healthy. We have
-              adjustable standing desks and monitors, comfortable chairs, and even wobble
-              boards for those who want to keep a bit more active at work.
-            descriptionSize: ''
+              heading: Comfortable setup
+              headingSize: xs
+            subtext:
+              subtext: >-
+                We offer different options for how you work, to help you stay healthy. We
+                have adjustable standing desks and monitors, comfortable chairs, and even
+                wobble boards for those who want to keep a bit more active at work.
+              subtextSize: auto
             iconName: monitor
           style:
             accentColor: sunset
@@ -205,13 +214,14 @@ pageSections:
             iconBackground: true
         - content:
             heading:
-              title: All the tools you need
-              titleSize: xs
-            description: >-
-              We provide all the tools and software you need to get your job done. This
-              includes MacBook Pros and accessories, dual monitors, and a range of useful
-              software subscriptions.
-            descriptionSize: ''
+              heading: All the tools you need
+              headingSize: xs
+            subtext:
+              subtext: >-
+                We provide all the tools and software you need to get your job done. This
+                includes MacBook Pros and accessories, dual monitors, and a range of useful
+                software subscriptions.
+              subtextSize: auto
             iconName: wrench
           style:
             accentColor: harbour
@@ -245,12 +255,13 @@ pageSections:
       cards:
         - content:
             heading:
-              title: Feature title
-              titleSize: ''
-            description: >-
-              Feature description placeholder text that will be replaced with actual
-              content.
-            descriptionSize: ''
+              heading: Feature title
+              headingSize: auto
+            subtext:
+              subtext: >-
+                Feature description placeholder text that will be replaced with actual
+                content.
+              subtextSize: auto
             iconName: zap
           style:
             accentColor: none

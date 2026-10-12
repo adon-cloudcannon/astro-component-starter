@@ -14,15 +14,17 @@ import { nestedProps } from "@component-utils/nestedProps.mjs";
    relative to the card because the card is the array item. */
 const { props, at } = nestedProps(Astro.props, {
   extraStyleKeys: ["accentColor", "iconSolid", "iconBackground", "divider", "alignmentHorizontal"],
-  /* The title and its size are one decision, so they are one object, the same
-     way a section bundles its heading with its level and size. */
-  nest: { heading: ["title", "titleSize"] },
+  /* A heading with its size, and a line with its size: each pair is one
+     decision, so each is one object, the same way a section bundles its own.
+     The names are the section's too — heading and subtext, not title and
+     description — so a card reads like everything else on the site. */
+  nest: { heading: ["heading", "headingSize"], subtext: ["subtext", "subtextSize"] },
 });
 
 const {
-  title = "",
+  heading = "",
   headingLevel = "h3",
-  description = "",
+  subtext = "",
   iconName = "",
   iconColor = "default",
   iconBackground = true,
@@ -49,14 +51,14 @@ const {
    * project overrides the starter's heading scale, where the same name is 65,
    * so the size has to be read off the page rather than off the token file.
    */
-  titleSize,
+  headingSize,
   /**
    * The card's line, which the design sets at 19 rather than the 16 this was
    * rendering. Six of the seven feature grids in the file put their card body
    * at 19px, which is `lg` in this theme; the seventh, Agencies' "Scale
    * changes nothing", sets 17 and can say so.
    */
-  descriptionSize = "lg",
+  subtextSize = "lg",
   /**
    * A hairline between the card's head and its line.
    *
@@ -79,7 +81,7 @@ const {
 /* `auto` is the editor's word for "let the card decide", and an older block
    may still say "". Both mean the same here. */
 const chosen = (value?: string) => (value && value !== "auto" ? value : undefined);
-const headingSize = chosen(titleSize) ?? (iconName ? "md" : "sm");
+const drawnHeadingSize = chosen(headingSize) ?? (iconName ? "md" : "sm");
 ---
 
 <GridItem
@@ -114,20 +116,20 @@ const headingSize = chosen(titleSize) ?? (iconName ? "md" : "sm");
       <Heading
         class="card-grid-title"
         level={headingLevel}
-        size={headingSize}
+        size={drawnHeadingSize}
         alignmentHorizontal={alignmentHorizontal}
-        data-prop={at("title")}
+        data-prop={at("heading")}
       >
-        {title}
+        {heading}
       </Heading>
     </div>
-    {divider && description && <div class="card-grid-rule card-grid-divider"></div>}
+    {divider && subtext && <div class="card-grid-rule card-grid-divider"></div>}
     <Text
       class="card-grid-description"
       alignmentHorizontal={alignmentHorizontal}
-      size={chosen(descriptionSize) ?? "lg"}
-      data-prop={at("description")}
-      text={description}
+      size={chosen(subtextSize) ?? "lg"}
+      data-prop={at("subtext")}
+      text={subtext}
     />
   </Card>
 </GridItem>

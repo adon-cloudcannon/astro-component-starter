@@ -20,10 +20,11 @@ cardGridCards:
         # are one decision: you pick the words and how big they are together.
         content:
           heading:
-            title: Card title
-            titleSize: auto
-          description: A line about this point, a sentence or two long.
-          descriptionSize: auto
+            heading: Card title
+            headingSize: auto
+          subtext:
+            subtext: A line about this point, a sentence or two long.
+            subtextSize: auto
           iconName: zap
         style:
           accentColor: golden
@@ -33,10 +34,10 @@ cardGridCards:
           iconBackground: true
       preview:
         text:
-          - key: content.heading.title
+          - key: content.heading.heading
           - Card
         subtext:
-          - key: content.description
+          - key: content.subtext.subtext
         image:
           - template: src/icons/{content.iconName}.svg
       _inputs:
@@ -45,13 +46,18 @@ cardGridCards:
           label: Heading
           options:
             subtype: object
-        content.heading.title:
+        content.subtext:
+          type: object
+          label: Description
+          options:
+            subtype: object
+        content.heading.heading:
           type: text
-          comment: The card's title.
-        content.heading.titleSize:
+          comment: The card's heading.
+        content.heading.headingSize:
           type: select
           comment: >-
-            The card's title size. Left on Automatic it takes the size this
+            The heading's size. Left on Automatic it takes the size this
             card's shape draws.
           options:
             values:
@@ -67,9 +73,9 @@ cardGridCards:
                 name: Header 5
               - id: xs
                 name: Header 6
-        content.description:
+        content.subtext.subtext:
           type: markdown
-          comment: The line under the title.
+          comment: The line under the heading.
           options:
             blockquote: false
             bold: true
@@ -82,7 +88,7 @@ cardGridCards:
             underline: false
             bulletedlist: false
             numberedlist: false
-        content.descriptionSize:
+        content.subtext.subtextSize:
           type: select
           comment: >-
             This card's line size. Left on Automatic it follows the size set

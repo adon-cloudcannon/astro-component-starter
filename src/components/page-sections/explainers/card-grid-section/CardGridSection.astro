@@ -101,31 +101,30 @@ const itemHeadingLevel = nextHeadingLevel(headingLevel);
 const cardColor =
   colorScheme === "dark" ? "muted" : alignmentHorizontal === "center" ? "surface" : "base";
 
-/* A card's own size fields are optional: left on Automatic the editor writes
-   `auto`, which has to read as "not set" rather than as a value, or the card
-   would take it instead of the grid's. Older blocks say "" for the same
-   thing, so both go. The sizes live under the card's `content` tab, so this
-   reaches inside it rather than looking at the top level. */
+/* A card's own sizes are optional: left on Automatic the editor writes `auto`,
+   which has to read as "not set" rather than as a value, or the card would
+   take it instead of the grid's. Older blocks say "" for the same thing, so
+   both go. Each size sits in its own group under the card's Content tab, so
+   this reaches into them rather than looking at the top level. */
+const PAIRS: Record<string, string> = { heading: "headingSize", subtext: "subtextSize" };
+const isAuto = (value: unknown) => value === "" || value === "auto" || value === null;
+
 const inherit = <T extends Record<string, unknown>>(card: T): T => {
-  const out = { ...card };
+  const out: Record<string, unknown> = { ...card };
   const content = { ...((out.content ?? {}) as Record<string, unknown>) };
-  const heading = { ...((content.heading ?? {}) as Record<string, unknown>) };
   let touched = false;
 
-  for (const key of ["titleSize", "descriptionSize"]) {
-    for (const bag of [out, content, heading]) {
-      if (bag[key] === "" || bag[key] === "auto" || bag[key] === null) {
-        delete bag[key];
-        touched = true;
-      }
+  for (const [group, key] of Object.entries(PAIRS)) {
+    const bag = { ...((content[group] ?? {}) as Record<string, unknown>) };
+    if (isAuto(bag[key])) {
+      delete bag[key];
+      content[group] = bag;
+      touched = true;
     }
   }
 
-  if (touched) {
-    content.heading = heading;
-    out.content = content;
-  }
-  return out;
+  if (touched) out.content = content;
+  return out as T;
 };
 ---
 
@@ -190,7 +189,7 @@ const inherit = <T extends Record<string, unknown>>(card: T): T => {
         data-editable="array-item"
         alignmentHorizontal={alignmentHorizontal}
         backgroundColor={cardColor}
-        descriptionSize={descriptionSize}
+        subtextSize={descriptionSize}
         {...inherit(card)}
         headingLevel={itemHeadingLevel}
       />
