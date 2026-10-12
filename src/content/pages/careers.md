@@ -211,6 +211,7 @@ pageSections:
       columns: '3'
       features: []
     style:
+      descriptionSize: lg
       backgroundColor: dark
       pattern: pegboard
       fade: bottom

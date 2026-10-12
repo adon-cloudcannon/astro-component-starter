@@ -25,6 +25,8 @@ pricingTiers:
         highlight: false
         badgeText: ""
         accent: ""
+        height:
+        pricePosition: "top"
       preview:
         text:
           - key: name

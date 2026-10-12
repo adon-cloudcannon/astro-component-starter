@@ -17,6 +17,7 @@ logoCloudLogos:
         monochrome: true
         width: 120
         height: 28
+        aspect: ""
       preview:
         text:
           - key: alt

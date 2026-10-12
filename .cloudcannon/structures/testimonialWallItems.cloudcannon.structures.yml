@@ -15,6 +15,8 @@ testimonialWallItems:
         authorName: ""
         authorDescription: ""
         authorImage: ""
+        quoted: true
+        quoteSize: ""
       preview:
         text:
           - key: authorName

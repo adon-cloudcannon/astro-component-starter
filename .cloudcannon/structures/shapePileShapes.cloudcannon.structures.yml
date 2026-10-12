@@ -16,6 +16,21 @@ shapePileShapes:
         width: 221
         height: 132
         rotation: 0
+        image: ""
+        imageWidth: ""
+        imageHeight:
+        imageColor: ""
+        color: ""
+        shadowColor: ""
+        shadowX:
+        shadowY:
+        shadowWidth:
+        shadowHeight:
+        round: false
+        lightText: false
+        fontSize:
+        strong: false
+        shadowFrom:
       preview:
         text:
           - key: text

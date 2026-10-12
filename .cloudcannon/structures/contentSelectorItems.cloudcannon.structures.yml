@@ -15,6 +15,7 @@ contentSelectorItems:
         iconName: ""
         iconColor: default
         contentSections: []
+        text: ""
       preview:
         text:
           - key: title

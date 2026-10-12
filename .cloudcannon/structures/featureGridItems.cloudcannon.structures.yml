@@ -16,6 +16,18 @@ featureGridItems:
         iconName: zap
         iconColor: golden
         iconBackground: true
+        titleSize: ""
+        iconSolid: false
+        divider: false
+        alignmentHorizontal: "center"
+        accentColor: "none"
+        imageSource: ""
+        imageHeight:
+        imageAlt: ""
+        eyebrow: ""
+        linkText: ""
+        link: ""
+        descriptionSize: ""
       preview:
         text:
           - key: title

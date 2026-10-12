@@ -24,6 +24,8 @@ testimonialBentoItems:
         size: standard
         quoteSize: standard
         tone: base
+        logoMonochrome: false
+        quoteMarks: true
       preview:
         text:
           - key: authorName
