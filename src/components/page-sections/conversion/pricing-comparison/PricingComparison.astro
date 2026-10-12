@@ -93,16 +93,6 @@ const hasTable = planList.length > 0 && rows?.length > 0;
   useDefaultEditableBinding={useDefaultEditableBinding}
   {...htmlAttributes}
 >
-  <Heading
-    eyebrow={eyebrow}
-    data-eyebrow-prop={at("eyebrow")}
-    level={headingLevel}
-    size={headingSize}
-    alignmentHorizontal="center"
-    data-prop={at("heading")}
-  >
-    {heading}
-  </Heading>
   <Text
     class="section-subtext pricing-comparison-subtext"
     alignmentHorizontal="center"
@@ -134,7 +124,22 @@ const hasTable = planList.length > 0 && rows?.length > 0;
               data-prop={at("plans")}
               data-direction="row"
             >
-              <td />
+              {/* The heading sits in the table's corner cell rather than
+                  centred above it: the design levels "Features" with the plan
+                  names, because the left column labels the rows under it and
+                  is not a heading for the whole band. */}
+              <td class="pricing-comparison-corner">
+                <Heading
+                  eyebrow={eyebrow}
+                  data-eyebrow-prop={at("eyebrow")}
+                  level={headingLevel}
+                  size={headingSize}
+                  alignmentHorizontal="start"
+                  data-prop={at("heading")}
+                >
+                  {heading}
+                </Heading>
+              </td>
               {planList.map((plan) => (
                 <th
                   scope="col"
@@ -156,6 +161,17 @@ const hasTable = planList.length > 0 && rows?.length > 0;
                     >
                       {plan.price}
                     </span>
+                  )}
+                  {plan.buttonText && (
+                    <Button
+                      class="pricing-comparison-action"
+                      text={plan.buttonText}
+                      link={plan.buttonLink}
+                      variant={plan.highlight ? "primary" : "tertiary"}
+                      size="sm"
+                      data-outline={plan.highlight ? undefined : ""}
+                      data-prop="buttonText"
+                    />
                   )}
                 </th>
               ))}
@@ -199,27 +215,6 @@ const hasTable = planList.length > 0 && rows?.length > 0;
               </tr>
             ))}
           </tbody>
-          {/* In `tfoot`, not `tbody`: the CTA row is not one of `rows`, and a
-                non-item child inside the array region confuses row insertion. */}
-          {planList.some((plan) => plan.buttonText) && (
-            <tfoot>
-              <tr class="pricing-comparison-actions">
-                <td />
-                {planList.map((plan) => (
-                  <td class:list={[plan.highlight && "highlight"]}>
-                    {plan.buttonText && (
-                      <Button
-                        text={plan.buttonText}
-                        link={plan.buttonLink}
-                        variant={plan.highlight ? "primary" : "tertiary"}
-                        size="sm"
-                      />
-                    )}
-                  </td>
-                ))}
-              </tr>
-            </tfoot>
-          )}
         </table>
       </div>
     </div>
@@ -228,6 +223,47 @@ const hasTable = planList.length > 0 && rows?.length > 0;
 
 <style is:global>
   @layer page-sections {
+    /* The design's table, measured off 4146:56867.
+
+       "Features" sits in the left column level with the plan names rather than
+       centred above the whole table: the left column is a label for the rows
+       under it, not a heading for the band. The plan columns are ruled from
+       each other, and the action sits under its own price. */
+    .pricing-comparison-corner {
+      vertical-align: bottom;
+    }
+
+    .pricing-comparison-corner .heading {
+      --space-before: 0;
+      margin-block: 0;
+    }
+
+    .pricing-comparison-action {
+      display: flex;
+      justify-content: center;
+      padding-block-start: var(--spacing-md);
+    }
+
+    .pricing-comparison-action[data-outline] > .button-inner {
+      border-color: var(--pacific);
+      color: var(--pacific);
+    }
+
+    .pricing-comparison-action[data-outline] > .button-inner:hover,
+    .pricing-comparison-action[data-outline] > .button-inner:focus-visible {
+      background-color: color-mix(in srgb, var(--pacific) 8%, transparent);
+      border-color: var(--pacific);
+      color: var(--pacific);
+    }
+
+    /* A rule between the plan columns, which is what separates three columns
+       of ticks into three readable plans. Not on the first cell: the feature
+       names are a column of labels, not a plan. */
+    .pricing-comparison thead th + th,
+    .pricing-comparison tbody td + td + td {
+      border-inline-start: var(--border-width-sm, 1px) solid var(--dark-sand);
+    }
+
     .pricing-comparison {
       /* One transparent gray on even rows only. The same mix over --color-bg
          is used on the sticky feature column so it matches on screen and
