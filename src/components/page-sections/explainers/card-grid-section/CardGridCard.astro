@@ -6,6 +6,15 @@ import Button from "@core-elements/button/Button.astro";
 import Card from "@wrappers/card/Card.astro";
 import Image from "@core-elements/image/Image.astro";
 import GridItem from "@wrappers/grid/GridItem.astro";
+import { nestedProps } from "@component-utils/nestedProps.mjs";
+
+/* The card carries its own `content` and `style`, the same two tabs the block
+   has, so `tabbed: true` on its structure draws them. They arrive nested and
+   this body wants them flat; `at()` writes the path a binding needs, which is
+   relative to the card because the card is the array item. */
+const { props, at } = nestedProps(Astro.props, {
+  extraStyleKeys: ["accentColor", "iconSolid", "iconBackground", "divider", "alignmentHorizontal"],
+});
 
 const {
   title = "",
@@ -59,7 +68,7 @@ const {
   useDefaultEditableBinding: _useDefaultEditableBinding = false,
   _component,
   ...htmlAttributes
-} = Astro.props;
+} = props;
 
 // A card with neither a drawing nor an icon is plain copy, and the design sets
 // its title at the same 29 as the illustrated ones rather than the larger size
@@ -104,7 +113,7 @@ const headingSize = chosen(titleSize) ?? (iconName ? "md" : "sm");
         level={headingLevel}
         size={headingSize}
         alignmentHorizontal={alignmentHorizontal}
-        data-prop="title"
+        data-prop={at("title")}
       >
         {title}
       </Heading>
@@ -114,7 +123,7 @@ const headingSize = chosen(titleSize) ?? (iconName ? "md" : "sm");
       class="card-grid-description"
       alignmentHorizontal={alignmentHorizontal}
       size={chosen(descriptionSize) ?? "lg"}
-      data-prop="description"
+      data-prop={at("description")}
       text={description}
     />
   </Card>

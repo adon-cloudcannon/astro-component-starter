@@ -102,13 +102,25 @@ const cardColor =
   colorScheme === "dark" ? "muted" : alignmentHorizontal === "center" ? "surface" : "base";
 
 /* A card's own size fields are optional: left on Automatic the editor writes
-   `auto`, which has to read as "not set" rather than as a value. Older blocks
-   say "" for the same thing, so both go. */
+   `auto`, which has to read as "not set" rather than as a value, or the card
+   would take it instead of the grid's. Older blocks say "" for the same
+   thing, so both go. The sizes live under the card's `content` tab, so this
+   reaches inside it rather than looking at the top level. */
 const inherit = <T extends Record<string, unknown>>(card: T): T => {
   const out = { ...card };
+  const content = { ...((out.content ?? {}) as Record<string, unknown>) };
+  let touched = false;
+
   for (const key of ["titleSize", "descriptionSize"]) {
-    if (out[key] === "" || out[key] === "auto" || out[key] === null) delete out[key];
+    for (const bag of [out, content]) {
+      if (bag[key] === "" || bag[key] === "auto" || bag[key] === null) {
+        delete bag[key];
+        touched = true;
+      }
+    }
   }
+
+  if (touched) out.content = content;
   return out;
 };
 ---

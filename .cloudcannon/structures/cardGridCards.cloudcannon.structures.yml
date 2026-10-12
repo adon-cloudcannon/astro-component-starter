@@ -8,30 +8,41 @@ cardGridCards:
   values:
     - label: Card
       icon: apps
+      tabbed: true
       value:
-        title: Card title
-        description: A line about this point, a sentence or two long.
-        iconName: zap
-        iconBackground: true
-        iconSolid: true
-        titleSize: auto
-        descriptionSize: auto
-        divider: true
-        alignmentHorizontal: start
-        accentColor: golden
+        # `tabbed: true` draws these two as the card's own tabs, nested inside
+        # the block's. Within a tab the order here is the order the editor
+        # draws: `reorder_inputs` defaults to true, which sorts a block's keys
+        # as the structure's first and anything else after.
+        #
+        # A size sits with the text it sizes rather than with the band's
+        # chrome, which is where the section keeps its own. On a card the two
+        # are one decision: you pick the words and how big they are together.
+        content:
+          title: Card title
+          titleSize: auto
+          description: A line about this point, a sentence or two long.
+          descriptionSize: auto
+          iconName: zap
+        style:
+          accentColor: golden
+          iconSolid: true
+          divider: true
+          alignmentHorizontal: start
+          iconBackground: true
       preview:
         text:
-          - key: title
+          - key: content.title
           - Card
         subtext:
-          - key: description
+          - key: content.description
         image:
-          - template: src/icons/{iconName}.svg
+          - template: src/icons/{content.iconName}.svg
       _inputs:
-        title:
+        content.title:
           type: text
           comment: The card's title.
-        titleSize:
+        content.titleSize:
           type: select
           comment: >-
             The card's title size. Left on Automatic it takes the size this
@@ -50,7 +61,7 @@ cardGridCards:
                 name: Header 5
               - id: xs
                 name: Header 6
-        description:
+        content.description:
           type: markdown
           comment: The line under the title.
           options:
@@ -65,7 +76,7 @@ cardGridCards:
             underline: false
             bulletedlist: false
             numberedlist: false
-        descriptionSize:
+        content.descriptionSize:
           type: select
           comment: >-
             This card's line size. Left on Automatic it follows the size set
@@ -82,7 +93,7 @@ cardGridCards:
                 name: Large
               - id: xl
                 name: Extra Large
-        iconName:
+        content.iconName:
           type: select
           comment: The card's icon. Sourced from [Lucide](https://lucide.dev/icons/).
           options:
@@ -92,19 +103,19 @@ cardGridCards:
                 - key: name
               image:
                 - template: src/icons/{id}.svg
-        iconBackground:
+        style.iconBackground:
           # Hidden rather than removed: the key stays in the value so an item
           # still matches this structure, and the component no longer reads it.
           # A card has two looks, not four, and that is the switch below.
           hidden: true
           type: switch
-        iconSolid:
+        style.iconSolid:
           type: switch
           hidden: "!iconName"
           comment: >-
             Draw the icon on a filled disc rather than as a coloured glyph on
             its own. The glyph is knocked out in whatever reads on the colour.
-        accentColor:
+        style.accentColor:
           type: select
           comment: The card's colour, drawn on its rule and on its icon.
           options:
@@ -144,10 +155,10 @@ cardGridCards:
                 - key: color
               text:
                 - key: name
-        divider:
+        style.divider:
           type: switch
           comment: A hairline between the card's head and its line.
-        alignmentHorizontal:
+        style.alignmentHorizontal:
           type: select
           comment: Which way the card sets its copy.
           options:

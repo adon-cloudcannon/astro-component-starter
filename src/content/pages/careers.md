@@ -13,9 +13,9 @@ pageSections:
         headingLevel: h1
         headingSize: xl
       subtext:
-        subtext: Join our growing team of innovative developers, designers, and thought
-          leaders, and help us build and plan for the future of collaboration on
-          digital content.
+        subtext: >-
+          Join our growing team of innovative developers, designers, and thought leaders,
+          and help us build and plan for the future of collaboration on digital content.
         subtextSize: xl
         subtextWidth: sm
       photos:
@@ -69,121 +69,147 @@ pageSections:
         headingLevel: h2
         headingSize: lg
       subtext:
-        subtext: We're a friendly team who value lifestyle, work/life balance, and
-          self-direction. We're passionate about evangelizing static websites
-          and working with others who do the same.
+        subtext: >-
+          We're a friendly team who value lifestyle, work/life balance, and self-direction.
+          We're passionate about evangelizing static websites and working with others who do
+          the same.
         subtextSize: lg
         subtextWidth: lg
       cards:
-        - title: Four-day work week at full pay
-          description: We trust in the work you do, and we know that productivity isn't
-            always measured by time at your desk. Our four-day work week (32
-            hours per week) means more time with your family and friends, and
-            more energy for the work we love.
-          iconName: smile
-          iconBackground: true
-          titleSize: xs
-          iconSolid: true
-          divider: true
-          alignmentHorizontal: start
-          accentColor: golden
-          descriptionSize: ''
-        - title: Employee stock options
-          description: When you have a stake in the product you're making, we all win. All
-            CloudCannon employees receive generous stock options, so we're all
-            working towards the same goal.
-          iconName: trending-up
-          iconBackground: true
-          titleSize: xs
-          iconSolid: true
-          divider: true
-          alignmentHorizontal: start
-          accentColor: sunset
-          descriptionSize: ''
-        - title: Transportation subsidy
-          description: However you're coming in to work — by foot, bus, bike, scooter,
-            skateboard, or car — we'll help subsidize your transportation costs.
-          iconName: truck
-          iconBackground: true
-          titleSize: xs
-          iconSolid: true
-          divider: true
-          alignmentHorizontal: start
-          accentColor: moss
-          descriptionSize: ''
-        - title: Annual leave
-          description: The longer you're with us, the more you can take time to relax.
-            With every year of employment, you'll gain an extra day of annual
-            leave to add to your total, up to 25 days.
-          iconName: sun
-          iconBackground: true
-          titleSize: xs
-          iconSolid: true
-          divider: true
-          alignmentHorizontal: start
-          accentColor: harbour
-          descriptionSize: ''
-        - title: Parental leave
-          description: We offer up to 52 weeks of parental leave, 26 of which are fully
-            paid. This includes biological, adoptive, and foster parents.
-            Partners can also receive up to 4 weeks of paid leave.
-          iconName: baby
-          iconBackground: true
-          titleSize: xs
-          iconSolid: true
-          divider: true
-          alignmentHorizontal: start
-          accentColor: peachy
-          descriptionSize: ''
-        - title: Happy Birthday to you!
-          description: Have your (birthday) cake and eat it too — all employees receive an
-            additional day of annual leave on their birthdays, to be taken when
-            it suits you best.
-          iconName: cake
-          iconBackground: true
-          titleSize: xs
-          iconSolid: true
-          divider: true
-          alignmentHorizontal: start
-          accentColor: golden
-          descriptionSize: ''
-        - title: Flexible work
-          description: We want to support you to do the best work you can, so we offer
-            working hours that suit you, as well as flexible arrangements and
-            subsidies for working from home.
-          iconName: map-pin
-          iconBackground: true
-          titleSize: xs
-          iconSolid: true
-          divider: true
-          alignmentHorizontal: start
-          accentColor: moss
-          descriptionSize: ''
-        - title: Comfortable setup
-          description: We offer different options for how you work, to help you stay
-            healthy. We have adjustable standing desks and monitors, comfortable
-            chairs, and even wobble boards for those who want to keep a bit more
-            active at work.
-          iconName: monitor
-          iconBackground: true
-          titleSize: xs
-          iconSolid: true
-          divider: true
-          alignmentHorizontal: start
-          accentColor: sunset
-          descriptionSize: ''
-        - title: All the tools you need
-          description: We provide all the tools and software you need to get your job
-            done. This includes MacBook Pros and accessories, dual monitors, and
-            a range of useful software subscriptions.
-          iconName: wrench
-          iconBackground: true
-          titleSize: xs
-          iconSolid: true
-          divider: true
-          alignmentHorizontal: start
-          accentColor: harbour
-          descriptionSize: ''
+        - content:
+            title: Four-day work week at full pay
+            titleSize: xs
+            description: >-
+              We trust in the work you do, and we know that productivity isn't always
+              measured by time at your desk. Our four-day work week (32 hours per week)
+              means more time with your family and friends, and more energy for the work we
+              love.
+            descriptionSize: ''
+            iconName: smile
+          style:
+            accentColor: golden
+            iconSolid: true
+            divider: true
+            alignmentHorizontal: start
+            iconBackground: true
+        - content:
+            title: Employee stock options
+            titleSize: xs
+            description: >-
+              When you have a stake in the product you're making, we all win. All
+              CloudCannon employees receive generous stock options, so we're all working
+              towards the same goal.
+            descriptionSize: ''
+            iconName: trending-up
+          style:
+            accentColor: sunset
+            iconSolid: true
+            divider: true
+            alignmentHorizontal: start
+            iconBackground: true
+        - content:
+            title: Transportation subsidy
+            titleSize: xs
+            description: >-
+              However you're coming in to work — by foot, bus, bike, scooter, skateboard, or
+              car — we'll help subsidize your transportation costs.
+            descriptionSize: ''
+            iconName: truck
+          style:
+            accentColor: moss
+            iconSolid: true
+            divider: true
+            alignmentHorizontal: start
+            iconBackground: true
+        - content:
+            title: Annual leave
+            titleSize: xs
+            description: >-
+              The longer you're with us, the more you can take time to relax. With every
+              year of employment, you'll gain an extra day of annual leave to add to your
+              total, up to 25 days.
+            descriptionSize: ''
+            iconName: sun
+          style:
+            accentColor: harbour
+            iconSolid: true
+            divider: true
+            alignmentHorizontal: start
+            iconBackground: true
+        - content:
+            title: Parental leave
+            titleSize: xs
+            description: >-
+              We offer up to 52 weeks of parental leave, 26 of which are fully paid. This
+              includes biological, adoptive, and foster parents. Partners can also receive
+              up to 4 weeks of paid leave.
+            descriptionSize: ''
+            iconName: baby
+          style:
+            accentColor: peachy
+            iconSolid: true
+            divider: true
+            alignmentHorizontal: start
+            iconBackground: true
+        - content:
+            title: Happy Birthday to you!
+            titleSize: xs
+            description: >-
+              Have your (birthday) cake and eat it too — all employees receive an additional
+              day of annual leave on their birthdays, to be taken when it suits you best.
+            descriptionSize: ''
+            iconName: cake
+          style:
+            accentColor: golden
+            iconSolid: true
+            divider: true
+            alignmentHorizontal: start
+            iconBackground: true
+        - content:
+            title: Flexible work
+            titleSize: xs
+            description: >-
+              We want to support you to do the best work you can, so we offer working hours
+              that suit you, as well as flexible arrangements and subsidies for working from
+              home.
+            descriptionSize: ''
+            iconName: map-pin
+          style:
+            accentColor: moss
+            iconSolid: true
+            divider: true
+            alignmentHorizontal: start
+            iconBackground: true
+        - content:
+            title: Comfortable setup
+            titleSize: xs
+            description: >-
+              We offer different options for how you work, to help you stay healthy. We have
+              adjustable standing desks and monitors, comfortable chairs, and even wobble
+              boards for those who want to keep a bit more active at work.
+            descriptionSize: ''
+            iconName: monitor
+          style:
+            accentColor: sunset
+            iconSolid: true
+            divider: true
+            alignmentHorizontal: start
+            iconBackground: true
+        - content:
+            title: All the tools you need
+            titleSize: xs
+            description: >-
+              We provide all the tools and software you need to get your job done. This
+              includes MacBook Pros and accessories, dual monitors, and a range of useful
+              software subscriptions.
+            descriptionSize: ''
+            iconName: wrench
+          style:
+            accentColor: harbour
+            iconSolid: true
+            divider: true
+            alignmentHorizontal: start
+            iconBackground: true
     style:
       alignmentHorizontal: center
       columns: '3'
@@ -208,17 +234,20 @@ pageSections:
         subtextSize: lg
         subtextWidth: ''
       cards:
-        - title: Feature title
-          description: Feature description placeholder text that will be replaced with
-            actual content.
-          iconName: zap
-          iconBackground: true
-          titleSize: ''
-          iconSolid: false
-          divider: false
-          alignmentHorizontal: center
-          accentColor: none
-          descriptionSize: ''
+        - content:
+            title: Feature title
+            titleSize: ''
+            description: >-
+              Feature description placeholder text that will be replaced with actual
+              content.
+            descriptionSize: ''
+            iconName: zap
+          style:
+            accentColor: none
+            iconSolid: false
+            divider: false
+            alignmentHorizontal: center
+            iconBackground: true
     style:
       alignmentHorizontal: center
       columns: '3'
@@ -238,9 +267,10 @@ pageSections:
         headingLevel: h2
         headingSize: lg
       subtext:
-        subtext: If you love the sound of what we're doing, but there's nothing here
-          that fits your unique skills, send your resume! We're happy to keep
-          your details on hand as new positions open in the future.
+        subtext: >-
+          If you love the sound of what we're doing, but there's nothing here that fits your
+          unique skills, send your resume! We're happy to keep your details on hand as new
+          positions open in the future.
         subtextSize: md
         subtextWidth: ''
       illustration:
