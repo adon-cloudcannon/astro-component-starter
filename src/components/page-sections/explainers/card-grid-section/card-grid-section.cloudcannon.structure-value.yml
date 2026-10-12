@@ -1,0 +1,55 @@
+# A grid of icon-and-copy cards.
+#
+# Split out of feature-grid, which carried four card shapes in one form: an
+# editor adding a careers perk was offered an illustration, an eyebrow and a
+# link out, none of which that card draws. This one has no picture at all.
+# feature-grid keeps the shapes that do: illustrated and signpost.
+label: Card Grid
+icon: grid_view
+description: Grid of short points, each with an icon, a title and a line.
+tabbed: true
+value:
+  _component: page-sections/explainers/card-grid-section
+  content:
+    sectionLabel: ""
+    heading:
+      eyebrow: BENEFITS
+      heading: What you get
+      headingLevel: h2
+      headingSize: lg
+    subtext:
+      subtext: ""
+      subtextSize: md
+      subtextWidth: ""
+    cards:
+      - title: Card title
+        description: A line about this point, a sentence or two long.
+        iconName: zap
+        iconSolid: true
+        titleSize: auto
+        descriptionSize: auto
+        divider: true
+        alignmentHorizontal: start
+        accentColor: golden
+  style:
+    alignmentHorizontal: center
+    columns: "3"
+    descriptionSize: md
+    backgroundColor: light-sand
+    pattern: none
+    fade: none
+    maxContentWidth: xl
+    paddingHorizontal: gutter
+    paddingVertical: 4xl
+    haze: false
+preview:
+  text:
+    - key: content.heading.heading
+    - Card Grid
+  icon: grid_view
+picker_preview:
+  text: Card Grid
+  subtext: Grid of short points, each with an icon, a title and a line.
+  icon: grid_view
+_inputs_from_glob:
+  - /src/components/page-sections/explainers/card-grid-section/card-grid-section.cloudcannon.inputs.yml

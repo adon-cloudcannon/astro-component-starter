@@ -1,0 +1,243 @@
+---
+import Heading from "@core-elements/heading/Heading.astro";
+import Icon from "@core-elements/icon/Icon.astro";
+import Text from "@core-elements/text/Text.astro";
+import Button from "@core-elements/button/Button.astro";
+import Card from "@wrappers/card/Card.astro";
+import Image from "@core-elements/image/Image.astro";
+import GridItem from "@wrappers/grid/GridItem.astro";
+
+const {
+  title = "",
+  headingLevel = "h3",
+  description = "",
+  iconName = "",
+  iconColor = "default",
+  iconBackground = true,
+  /**
+   * The plate behind the icon, filled rather than tinted.
+   *
+   * The design's benefit cards draw a disc of the card's own colour at full
+   * strength with the glyph knocked out of it, where the plate everywhere
+   * else is that colour at its 100 step. Off by default: every other grid on
+   * the site draws the tinted one.
+   */
+  iconSolid = false,
+  /**
+   * The colour of the card's rule.
+   *
+   * Enterprise's "Custom plans" keeps its accent there and nowhere else — one
+   * palette colour per card — and draws it solid, where Card's own accented
+   * border is the same colour at 18%.
+   */
+  accentColor = "none",
+  backgroundColor = "light-sand",
+  /**
+   * Left alone, the shape decides. `lg` is the 46 the design sets here: this
+   * project overrides the starter's heading scale, where the same name is 65,
+   * so the size has to be read off the page rather than off the token file.
+   */
+  titleSize,
+  /**
+   * The card's line, which the design sets at 19 rather than the 16 this was
+   * rendering. Six of the seven feature grids in the file put their card body
+   * at 19px, which is `lg` in this theme; the seventh, Agencies' "Scale
+   * changes nothing", sets 17 and can say so.
+   */
+  descriptionSize = "lg",
+  /**
+   * A hairline between the card's head and its line.
+   *
+   * Careers draws one across all nine of its benefit cards, the full inner
+   * width, in the dark sand this card rules with. It is
+   * off everywhere else, so it is asked for rather than inferred: a rule
+   * under a one-line title on a card with no body reads as a strikethrough.
+   */
+  divider = false,
+  alignmentHorizontal = "start",
+  class: className,
+  useDefaultEditableBinding: _useDefaultEditableBinding = false,
+  _component,
+  ...htmlAttributes
+} = Astro.props;
+
+// A card with neither a drawing nor an icon is plain copy, and the design sets
+// its title at the same 29 as the illustrated ones rather than the larger size
+// an icon card takes.
+/* `auto` is the editor's word for "let the card decide", and an older block
+   may still say "". Both mean the same here. */
+const chosen = (value?: string) => (value && value !== "auto" ? value : undefined);
+const headingSize = chosen(titleSize) ?? (iconName ? "md" : "sm");
+---
+
+<GridItem
+  class="card-grid-item"
+  {...htmlAttributes}
+>
+  <Card
+    class:list={[
+      "card-grid-card",
+      `align-${alignmentHorizontal}`,
+      accentColor !== "none" && "has-accent",
+      className,
+    ]}
+    accentColor={accentColor}
+    paddingHorizontal="lg"
+    paddingVertical="lg"
+    rounded
+    border
+    backgroundColor={backgroundColor}
+  >
+    <div class="card-grid-card-heading">
+      {iconName && (
+        <Icon
+          class="card-grid-icon"
+          name={iconName}
+          size="lg"
+          color={accentColor && accentColor !== "none" ? accentColor : iconColor}
+          background={iconSolid ? "solid" : false}
+          alignmentHorizontal="start"
+        />
+      )}
+      <Heading
+        class="card-grid-title"
+        level={headingLevel}
+        size={headingSize}
+        alignmentHorizontal={alignmentHorizontal}
+        data-prop="title"
+      >
+        {title}
+      </Heading>
+    </div>
+    {divider && description && <div class="card-grid-rule card-grid-divider"></div>}
+    <Text
+      class="card-grid-description"
+      alignmentHorizontal={alignmentHorizontal}
+      size={chosen(descriptionSize) ?? "lg"}
+      data-prop="description"
+      text={description}
+    />
+  </Card>
+</GridItem>
+
+<style is:global>
+  @layer page-sections {
+    /* The title sits level with the icon, not hung from its top.
+
+       The design centres the two against each other on every icon card it
+       draws: Careers' disc runs 36 to 96 inside the card and both a one-line
+       and a two-line title centre on 66. Hung from the top, a title that
+       wraps leaves the disc stranded against its first line. */
+    .card-grid-card-heading {
+      align-items: center;
+      display: flex;
+      gap: var(--spacing-sm);
+    }
+
+    .card-grid-card-heading .card-grid-icon {
+      flex-shrink: 0;
+    }
+
+
+    /* The design's disc is 60 across with a 35 glyph in it, and the disc is
+       drawn from the glyph — 0.36em of padding either side — so the size to
+       set is the glyph's. Left at the icon's own `lg` it came out 46, which
+       beside a 20px title reads as a bullet rather than as the card's mark.
+       This rule is in `page-sections`, so it out-ranks the size class the
+       icon sets on itself without having to out-specify it. */
+    .card-grid-card .card-grid-icon .background-solid {
+      font-size: 2.1875rem;
+    }
+
+    .card-grid-title {
+      flex: 1;
+      margin-block: 0;
+      min-width: 0;
+    }
+
+    .card-grid-description {
+    }
+  }
+
+  /* The centred arrangement: the icon over the copy rather than beside it.
+
+     Flat, because rules nested deeper than a couple of levels get dropped (see
+     CLAUDE.md). */
+  @layer page-sections {
+    .card-grid-card.align-center .card-grid-card-heading {
+      justify-content: center;
+    }
+
+    .card-grid-card.align-center .card-grid-title {
+      flex: 0 1 auto;
+    }
+
+
+
+
+
+  }
+
+  @layer page-sections {
+    /* The design draws this rule solid, one palette colour per card; Card's
+       own accented border is the same colour at 18%, which reads as no accent
+       at all from a step back. */
+    .card-grid .card-grid-card.has-accent .card-inner {
+      border-color: var(--card-accent);
+    }
+
+
+    /* The copy would otherwise hang from the top of a card that is taller
+       than it. `grid-auto-rows: 1fr` draws every card in the section at one
+       height, so the short ones have room under them; the design centres the
+       copy in that, which is what makes cards of one to three lines read as a
+       set. */
+    .card-grid-card.align-center .card-outer-content,
+    .card-grid-card.align-center .card-content {
+      block-size: 100%;
+    }
+
+    .card-grid-card.align-center .card-content {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+
+    /* Every gap here is set as --space-before, not as a margin.
+       margin-block-start written from a page-sections rule loses outright: the
+       flow layer sits in `utils`, which out-ranks this one, and writes the same
+       property from --space-before. The first pass set all five gaps as plain
+       margins and not one of them applied — what shipped was flow's own
+       default, which put the eyebrow 9px under the rule and the body 9px under
+       the heading (see CLAUDE.md). */
+
+
+
+
+    /* The design draws it 26 under the icon disc and 22 over the line, which
+       is this card's own rhythm. The rule runs
+       the card's inner width, so it needs nothing of its own to stretch. */
+    .card-grid-card .card-grid-divider {
+      background-color: var(--dark-sand);
+      block-size: var(--border-width-sm, 1px);
+      /* A 1px div has no width of its own, so in a centred card it collapsed
+         to nothing and measured as applied while drawing no rule at all. */
+      align-self: stretch;
+      inline-size: 100%;
+      --space-before: 1.625rem;
+    }
+
+    .card-grid-card .card-grid-divider + .card-grid-description {
+      --space-before: 1.375rem;
+    }
+
+
+
+
+
+    /* Same text link the testimonials use: Sunset, with the arrow beside the
+       label rather than inside it. */
+
+  }
+</style>

@@ -60,7 +60,7 @@ pageSections:
       maxContentWidth: xl
       paddingHorizontal: gutter
       paddingVertical: 4xl
-  - _component: page-sections/explainers/feature-grid
+  - _component: page-sections/explainers/card-grid-section
     content:
       sectionLabel: ''
       heading:
@@ -74,7 +74,7 @@ pageSections:
           and working with others who do the same.
         subtextSize: lg
         subtextWidth: lg
-      features:
+      cards:
         - title: Four-day work week at full pay
           description: We trust in the work you do, and we know that productivity isn't
             always measured by time at your desk. Our four-day work week (32
@@ -87,11 +87,6 @@ pageSections:
           divider: true
           alignmentHorizontal: start
           accentColor: golden
-          imageSource: ''
-          imageAlt: ''
-          eyebrow: ''
-          linkText: ''
-          link: ''
           descriptionSize: ''
         - title: Employee stock options
           description: When you have a stake in the product you're making, we all win. All
@@ -104,11 +99,6 @@ pageSections:
           divider: true
           alignmentHorizontal: start
           accentColor: sunset
-          imageSource: ''
-          imageAlt: ''
-          eyebrow: ''
-          linkText: ''
-          link: ''
           descriptionSize: ''
         - title: Transportation subsidy
           description: However you're coming in to work — by foot, bus, bike, scooter,
@@ -120,11 +110,6 @@ pageSections:
           divider: true
           alignmentHorizontal: start
           accentColor: moss
-          imageSource: ''
-          imageAlt: ''
-          eyebrow: ''
-          linkText: ''
-          link: ''
           descriptionSize: ''
         - title: Annual leave
           description: The longer you're with us, the more you can take time to relax.
@@ -137,11 +122,6 @@ pageSections:
           divider: true
           alignmentHorizontal: start
           accentColor: harbour
-          imageSource: ''
-          imageAlt: ''
-          eyebrow: ''
-          linkText: ''
-          link: ''
           descriptionSize: ''
         - title: Parental leave
           description: We offer up to 52 weeks of parental leave, 26 of which are fully
@@ -154,11 +134,6 @@ pageSections:
           divider: true
           alignmentHorizontal: start
           accentColor: peachy
-          imageSource: ''
-          imageAlt: ''
-          eyebrow: ''
-          linkText: ''
-          link: ''
           descriptionSize: ''
         - title: Happy Birthday to you!
           description: Have your (birthday) cake and eat it too — all employees receive an
@@ -171,11 +146,6 @@ pageSections:
           divider: true
           alignmentHorizontal: start
           accentColor: golden
-          imageSource: ''
-          imageAlt: ''
-          eyebrow: ''
-          linkText: ''
-          link: ''
           descriptionSize: ''
         - title: Flexible work
           description: We want to support you to do the best work you can, so we offer
@@ -188,11 +158,6 @@ pageSections:
           divider: true
           alignmentHorizontal: start
           accentColor: moss
-          imageSource: ''
-          imageAlt: ''
-          eyebrow: ''
-          linkText: ''
-          link: ''
           descriptionSize: ''
         - title: Comfortable setup
           description: We offer different options for how you work, to help you stay
@@ -206,11 +171,6 @@ pageSections:
           divider: true
           alignmentHorizontal: start
           accentColor: sunset
-          imageSource: ''
-          imageAlt: ''
-          eyebrow: ''
-          linkText: ''
-          link: ''
           descriptionSize: ''
         - title: All the tools you need
           description: We provide all the tools and software you need to get your job
@@ -223,11 +183,6 @@ pageSections:
           divider: true
           alignmentHorizontal: start
           accentColor: harbour
-          imageSource: ''
-          imageAlt: ''
-          eyebrow: ''
-          linkText: ''
-          link: ''
           descriptionSize: ''
     style:
       alignmentHorizontal: center
@@ -240,7 +195,7 @@ pageSections:
       paddingHorizontal: gutter
       paddingVertical: 4xl
       haze: false
-  - _component: page-sections/explainers/feature-grid
+  - _component: page-sections/explainers/card-grid-section
     content:
       sectionLabel: ''
       heading:
@@ -252,7 +207,18 @@ pageSections:
         subtext: None right now!
         subtextSize: lg
         subtextWidth: ''
-      features: []
+      cards:
+        - title: Feature title
+          description: Feature description placeholder text that will be replaced with
+            actual content.
+          iconName: zap
+          iconBackground: true
+          titleSize: ''
+          iconSolid: false
+          divider: false
+          alignmentHorizontal: center
+          accentColor: none
+          descriptionSize: ''
     style:
       alignmentHorizontal: center
       columns: '3'

@@ -1,0 +1,239 @@
+---
+import { bandPattern, bandHaze } from "@component-utils/bandStyle.mjs";
+import { nestedProps } from "@component-utils/nestedProps.mjs";
+import CustomSection from "@builders/custom-section/CustomSection.astro";
+import { subtextMeasure } from "@component-utils/subtextMeasure.mjs";
+import Heading from "@core-elements/heading/Heading.astro";
+import Text from "@core-elements/text/Text.astro";
+import CardGridCard from "./CardGridCard.astro";
+import Grid from "@wrappers/grid/Grid.astro";
+import { nextHeadingLevel } from "@component-utils/headingLevel";
+
+type CardProps = Record<string, unknown>;
+
+/* `content` and `style` are the editor's tabs, flattened straight back into
+   the names below. `at()` writes the frontmatter path a binding needs. */
+const { props, at } = nestedProps(Astro.props, {
+  /* How the grid is laid out and how big its cards' lines are set are all
+     settings rather than copy, so they sit in Style with the band's own
+     chrome. `alignmentHorizontal` here is the section's own; a card carries
+     its own copy of the name and is unaffected. */
+  extraStyleKeys: ["descriptionSize", "alignmentHorizontal", "columns"],
+  nest: {
+    heading: ["eyebrow", "heading", "headingLevel", "headingSize"],
+    subtext: ["subtext", "subtextSize", "subtextWidth"],
+  },
+});
+
+const {
+  eyebrow = "",
+  heading = "",
+  headingLevel = "h2",
+  headingSize = "lg",
+  subtext = "",
+  // The design sets a section's supporting line in one of two styles, Body 3
+  // at 19 or Subtitle 1 at 22. `md` is the 16 every section rendered before
+  // either was carried through, so nothing moves unless the design named it.
+  subtextSize = "md",
+  /**
+   * The measure the design sets the supporting line in, in pixels.
+   *
+   * Not the column it sits in: a centred subtext is drawn at about 580 in the
+   * 1040 column, and run the full width it reads as a different block.
+   */
+  subtextWidth,
+  cards = [],
+  /**
+   * The design runs these three across when they are one point each, and two
+   * across when each card is a destination of its own with its own art.
+   */
+  columns = 3,
+  /**
+   * How tall the design draws these cards, in pixels.
+   *
+   * A set height, not one that follows the copy: every grid in the file draws
+   * one height across the whole section — 247 on "Custom plans", 334 on the
+   * three illustrated ones — while the lines inside run from one to three.
+   */
+  sectionLabel,
+  maxContentWidth = "xl",
+  paddingHorizontal = "gutter",
+  paddingVertical = "4xl",
+  colorScheme = "inherit",
+  lockColorScheme = false,
+  backgroundColor = "light-sand",
+  /** The texture behind the band, by name. */
+  pattern = "none",
+  /** Which edge the texture fades out towards. */
+  fade = "none",
+  /** Whether the heading sits on a pool of the band’s own colour. */
+  haze = false,
+  alignmentHorizontal = "center",
+  /**
+   * The size of each card's line, for the whole grid. A card can still say
+   * otherwise: this sits before the spread.
+   */
+  descriptionSize = "lg",
+  class: className,
+  useDefaultEditableBinding = false,
+  _component,
+  ...htmlAttributes
+} = props;
+
+/* The measure the subtext is set in, as a length. */
+const subtextCap = subtextMeasure(subtextWidth);
+
+const itemHeadingLevel = nextHeadingLevel(headingLevel);
+
+/**
+ * The cards sit a shade off the band they are on. The design paints them
+ * `--sand` on a `--light-sand` page, which is `surface` against `base`; an
+ * icon-only grid keeps the flat card it has always had.
+ */
+/**
+ * A card a shade off the band, whichever way the band goes.
+ *
+ * On the cream pages that is --sand against --light-sand, which is `surface`
+ * against `base`. On a dark band `surface` is #333333 and the design draws
+ * #252423, which is `muted`: two steps off on the light theme and one step off
+ * here (see CLAUDE.md on the dark cards).
+ */
+const cardColor =
+  colorScheme === "dark" ? "muted" : alignmentHorizontal === "center" ? "surface" : "base";
+
+/* A card's own size fields are optional: left on Automatic the editor writes
+   `auto`, which has to read as "not set" rather than as a value. Older blocks
+   say "" for the same thing, so both go. */
+const inherit = <T extends Record<string, unknown>>(card: T): T => {
+  const out = { ...card };
+  for (const key of ["titleSize", "descriptionSize"]) {
+    if (out[key] === "" || out[key] === "auto" || out[key] === null) delete out[key];
+  }
+  return out;
+};
+---
+
+<CustomSection
+  class:list={["card-grid", className]}
+  label={sectionLabel}
+  maxContentWidth={maxContentWidth}
+  paddingHorizontal={paddingHorizontal}
+  paddingVertical={paddingVertical}
+  colorScheme={colorScheme}
+  lockColorScheme={lockColorScheme}
+  backgroundColor={backgroundColor}
+  background={bandPattern(pattern, fade)}
+  haze={bandHaze(haze)}
+  useDefaultEditableBinding={useDefaultEditableBinding}
+  {...htmlAttributes}
+>
+  {/* Only when there is one. A bound region with nothing behind it is an
+      error card in the Visual Editor and an empty heading on the page. */}
+  <Heading
+    eyebrow={eyebrow}
+    data-eyebrow-prop={at("eyebrow")}
+    level={headingLevel}
+    size={headingSize}
+    alignmentHorizontal={alignmentHorizontal}
+    data-prop={at("heading")}
+  >
+    {heading}
+  </Heading>
+  <Text
+    class="card-grid-subtext"
+    alignmentHorizontal={alignmentHorizontal}
+    style={
+      subtextCap
+        ? `max-inline-size: ${subtextCap}; margin-inline: auto; justify-self: center`
+        : undefined
+    }
+    size={subtextSize}
+    data-prop={at("subtext")}
+    text={subtext}
+  />
+  <Grid
+    gap="lg"
+    columns={columns}
+    style={
+      [
+      ]
+        .filter(Boolean)
+        .join("; ") || undefined
+    }
+    class:list={["card-grid-grid", `card-grid-${columns}-up`]}
+    data-children-prop={at("cards")}
+  >
+    {cards?.map((card: CardProps) => (
+      /* `inherit` drops the keys a card has left on Automatic. The editor
+         writes those as "", and an empty string spread over the section's own
+         value is not the same as not setting one: `??` does not catch it, so
+         the card would take an empty size rather than the grid's. */
+      <CardGridCard
+        data-id="page-sections/explainers/card-grid-section/card-grid-card"
+        data-component="page-sections/explainers/card-grid-section/card-grid-card"
+        data-editable="array-item"
+        alignmentHorizontal={alignmentHorizontal}
+        backgroundColor={cardColor}
+        descriptionSize={descriptionSize}
+        {...inherit(card)}
+        headingLevel={itemHeadingLevel}
+      />
+    ))}
+  </Grid>
+</CustomSection>
+
+<style is:global>
+  @layer page-sections {
+  }
+
+  /* A row of picture cards runs wider than the column the copy sits in: the
+     design's other content width, 1180. Redefining the token rather than
+     fighting CustomSection's own rule, which a page section cannot
+     out-specify (see CLAUDE.md).
+
+     Only the centred, illustrated variant. An icon grid keeps the column. */
+  @layer page-sections {
+    .card-grid:has(.card-grid-card.align-center) {
+      --content-width-xl: var(--content-width-wide);
+    }
+
+    /* On `.grid-inner`, which is the element that is actually the grid. Set on
+       the wrapper this did nothing at all: Grid writes --grid-spacing inline
+       on the inner div, and an inline custom property beats one inherited
+       from the parent. */
+    .card-grid .card-grid-grid > .grid-inner {
+      gap: 1.09375rem;
+    }
+
+    /* Two rows of cards are one height in the design, not one height per row:
+       "Custom plans" draws all six at 247 while their copy runs from one line
+       to three. */
+    .card-grid .card-grid-grid > .grid-inner {
+      grid-auto-rows: 1fr;
+    }
+
+    /* Two large cards sit further apart than three small ones: 503 and 509
+       with 42 between them, in the 1040 column. */
+    .card-grid .card-grid-2-up > .grid-inner {
+      gap: 2.625rem;
+    }
+
+    /* The rule around the card is the sand one, not the generic grey: the
+       design draws #EBE1C9, which is --dark-sand. */
+    /* :not(.has-accent), because an accented card rules itself in its own
+       colour. Equal specificity between the two would otherwise be settled by
+       whichever stylesheet Astro emitted last, which it settled the wrong way.
+
+       The sand rule is for the cream bands. A dark band draws its own edge —
+       #333333 on the perks cards — and the cream one on it reads as a border
+       nobody asked for. CustomSection puts data-theme on its inner
+       .outer-content, not on the section the classes are on. */
+    .card-grid .card-grid-card.align-center:not(.has-accent) .card-inner {
+      border-color: var(--dark-sand);
+    }
+
+    .card-grid [data-theme="dark"] .card-grid-card.align-center:not(.has-accent) .card-inner {
+      border-color: var(--color-border);
+    }
+  }
+</style>
