@@ -33,19 +33,126 @@ imageWidth:
 imageHeight:
   type: number
   comment: The mark's height, in design units.
+  # The palette as a dropdown, anchored so the other colour fields here share
+  # one copy. A key ending in `color` with no input of its own gets a hex
+  # picker from CloudCannon's naming convention, which is wrong twice over:
+  # the value written is a palette name, not a hex, and a free picker invites
+  # colours the theme does not have. The shades are the ones the design uses.
 imageColor:
-  type: text
+  type: select
   comment: The mark's colour, by palette name (light-sand, sunset...) or as a hex.
+  options: &palette-colours
+    picker_view: card
+    preview:
+      icon:
+        - key: swatch
+      icon_color:
+        - key: color
+      text:
+        - key: name
+    values:
+      - id: ""
+        name: None
+        swatch: check_box_outline_blank
+      - id: "pacific"
+        name: Pacific
+        swatch: square
+        color: "#034AD8"
+      - id: "pacific-300"
+        name: Pacific 300
+        swatch: square
+        color: "#6B93E6"
+      - id: "pacific-100"
+        name: Pacific 100
+        swatch: square
+        color: "#C2D3F7"
+      - id: "harbour"
+        name: Harbour
+        swatch: square
+        color: "#A6C1FA"
+      - id: "moss"
+        name: Moss
+        swatch: square
+        color: "#687E00"
+      - id: "moss-350"
+        name: Moss 350
+        swatch: square
+        color: "#9AAC4D"
+      - id: "golden"
+        name: Golden
+        swatch: square
+        color: "#FFAA00"
+      - id: "peachy"
+        name: Peachy
+        swatch: square
+        color: "#F39B7B"
+      - id: "sunset"
+        name: Sunset
+        swatch: square
+        color: "#D85A2C"
+      - id: "blush"
+        name: Blush
+        swatch: square
+        color: "#E7B0B9"
+      - id: "kiwi"
+        name: Kiwi
+        swatch: square
+        color: "#7C3442"
+      - id: "light-sand"
+        name: Light sand
+        swatch: square
+        color: "#FFFCF3"
+      - id: "sand"
+        name: Sand
+        swatch: square
+        color: "#FBF6E9"
+      - id: "dark-sand"
+        name: Dark sand
+        swatch: square
+        color: "#EBE1C9"
+      - id: "earth"
+        name: Earth
+        swatch: square
+        color: "#6B6157"
+      - id: "gray-550"
+        name: Gray 550
+        swatch: square
+        color: "#8A8A8A"
+      - id: "midnight"
+        name: Midnight
+        swatch: square
+        color: "#333333"
+      - id: "black"
+        name: Black
+        swatch: square
+        color: "#1D1B17"
+      - id: "white"
+        name: White
+        swatch: square
+        color: "#FFFFFF"
+      # Literals the design states outright rather than by token, kept so
+      # the dropdown loses nothing. `#1c1b17` is a unit off black and is
+      # probably meant to be it, but a stated value is not ours to restate.
+      - id: "#1c1b17"
+        name: Near black
+        swatch: square
+        color: "#1C1B17"
+      - id: "#ffecef"
+        name: Pale pink
+        swatch: square
+        color: "#FFECEF"
 color:
-  type: text
+  type: select
   comment: >-
     The sheet's colour by palette name or hex. Out-ranks the three tones
     below, which stay for the piles already built on them.
+  options: *palette-colours
 shadowColor:
-  type: text
+  type: select
   comment: >-
     The cast wedge's colour, by palette name or hex. It multiplies into the
     shape under it, so it is a tint rather than a grey.
+  options: *palette-colours
 tone:
   type: select
   comment: Which scratched sheet colours the shape.

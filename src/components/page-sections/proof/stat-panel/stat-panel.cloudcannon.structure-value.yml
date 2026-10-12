@@ -31,3 +31,9 @@ value:
   style:
     panelImage: ""
     panelColor: moss
+
+# Without this the inputs file beside it is never loaded, and every field on
+# the block falls back to CloudCannon guessing a type from its key — which is
+# how `panelColor` and the rest came out as hex colour pickers.
+_inputs_from_glob:
+  - /src/components/page-sections/proof/stat-panel/stat-panel.cloudcannon.inputs.yml

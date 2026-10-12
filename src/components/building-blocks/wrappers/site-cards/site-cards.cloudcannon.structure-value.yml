@@ -21,3 +21,9 @@ cards:
     built: Built 3 days ago
     image: ""
     imageAlt: ""
+
+# Without this the inputs file beside it is never loaded, and every field on
+# the block falls back to CloudCannon guessing a type from its key — which is
+# how `panelColor` and the rest came out as hex colour pickers.
+_inputs_from_glob:
+  - /src/components/building-blocks/wrappers/site-cards/site-cards.cloudcannon.inputs.yml

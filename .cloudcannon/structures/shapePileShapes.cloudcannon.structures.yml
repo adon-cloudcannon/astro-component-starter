@@ -21,6 +21,12 @@ shapePileShapes:
           - key: text
           - Shape
         icon: category
+      # The shape's picture and its three colours live in shape-pile's own
+      # inputs file. Without this they were declared nowhere the editor could
+      # see, so `imageColor` and `shadowColor` fell through to CloudCannon's
+      # naming convention and drew a hex colour picker.
+      _inputs_from_glob:
+        - /src/components/building-blocks/wrappers/shape-pile/shape-pile.cloudcannon.inputs.yml
       _inputs:
         text:
           type: text
