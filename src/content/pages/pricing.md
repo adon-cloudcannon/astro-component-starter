@@ -100,8 +100,8 @@ pageSections:
               included: true
             - text: Custom permissions
               included: true
-    style:
       cardColor: base
+    style:
       backgroundColor: light-sand
       paddingVertical: 2xl
 
@@ -251,5 +251,155 @@ pageSections:
       striped: false
     style:
       backgroundColor: sand
+      paddingVertical: 4xl
+
+  - _component: page-sections/conversion/cta-split
+    content:
+      sectionLabel: Partner program
+      heading:
+        heading: Are you an agency or freelancer?
+        headingLevel: h2
+        headingSize: lg
+      subtext:
+        subtext: Join the CloudCannon Partner Program and get access to the Lite
+          plan for your clients.
+        subtextSize: lg
+      buttonSections:
+        - _component: building-blocks/core-elements/button
+          text: Learn about our Partner Program
+          link: /partner-program/
+          variant: text
+          iconName: arrow-right
+          iconPosition: after
+          size: md
+      reverse: false
+    style:
+      backgroundColor: light-sand
+      paddingVertical: 4xl
+
+  - _component: page-sections/conversion/cta-center
+    content:
+      sectionLabel: Migration
+      heading:
+        heading: Migration support
+        headingLevel: h2
+        headingSize: lg
+      subtext:
+        subtext: Our migration team can get your site configured for your ideal
+          editing experience, starting at $3,000 per project (USD).
+        subtextSize: lg
+      alignmentHorizontal: center
+      buttonSections:
+        - _component: building-blocks/core-elements/button
+          text: Learn about our migration services
+          link: /migration/
+          variant: secondary
+          size: md
+    style:
+      backgroundColor: brand
+      paddingVertical: 4xl
+
+  - _component: page-sections/conversion/pricing-tiers
+    content:
+      sectionLabel: Add-ons
+      heading:
+        eyebrow: ADD-ONS
+        heading: Extend your plan
+        headingLevel: h2
+        headingSize: lg
+      subtext:
+        subtext: ''
+      tiers:
+        - name: Add user or site share
+          badgeText: Users
+          badgeColor: moss
+          description: Add additional users on your Lite, Standard or Team plan,
+            including client sharing.
+          price: $10
+          priceSuffix: /person (USD)
+          pricePosition: bottom
+        - name: Bandwidth
+          badgeText: Hosting
+          badgeColor: sunset
+          description: >-
+            Extend your bandwidth as needed with a 100GB bandwidth package.
+
+
+            Lite includes 20GB
+
+            Standard includes 110GB
+
+            Team includes 700GB
+          price: $15
+          priceSuffix: /100 GB (USD)
+          pricePosition: bottom
+        - name: Custom domains
+          badgeText: Hosting
+          badgeColor: sunset
+          description: >-
+            Add an additional domain or subdomain to your plan.
+
+
+            Lite includes 1 custom domain
+
+            Standard includes 5 custom domains
+
+            Team includes 10 custom domains
+          price: $2
+          priceSuffix: /month (USD)
+          pricePosition: bottom
+      cardColor: muted
+      cardAlignment: center
+    style:
+      backgroundColor: dark
+      pattern: pegboard
+      colorScheme: dark
+      lockColorScheme: true
+      paddingVertical: 4xl
+
+  - _component: page-sections/explainers/faq-section
+    content:
+      sectionLabel: FAQ
+      heading:
+        eyebrow: PRICING
+        heading: Frequently asked questions
+        headingLevel: h2
+        headingSize: lg
+      items:
+        - title: What happens at the end of my trial?
+          contentSections:
+            - _component: building-blocks/core-elements/text
+              text: Before the end of your trial, we'll send you an email asking
+                you to enter your credit card to continue using CloudCannon. If
+                no credit card is entered by the end of the trial, your account
+                will be put on hold. If you need more time to figure out if
+                CloudCannon is right for you, please contact our sales team and
+                we will happily extend your trial period.
+              size: md
+        - title: What counts as a custom domain?
+          contentSections:
+            - _component: building-blocks/core-elements/text
+              text: Any domain or subdomain you point at a CloudCannon site.
+              size: md
+        - title: How do I know how much bandwidth I'm using?
+          contentSections:
+            - _component: building-blocks/core-elements/text
+              text: Your usage is shown in your account dashboard, broken down
+                per site.
+              size: md
+        - title: When am I invoiced?
+          contentSections:
+            - _component: building-blocks/core-elements/text
+              text: Monthly plans are invoiced each month from the day you
+                started, and yearly plans once a year.
+              size: md
+        - title: Am I able to turn off overages?
+          contentSections:
+            - _component: building-blocks/core-elements/text
+              text: Yes. Contact our support team and we can cap your account
+                rather than billing for overages.
+              size: md
+    style:
+      backgroundColor: light-sand
       paddingVertical: 4xl
 ---

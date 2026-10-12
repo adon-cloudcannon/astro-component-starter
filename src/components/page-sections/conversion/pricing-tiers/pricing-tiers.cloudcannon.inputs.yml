@@ -16,6 +16,17 @@ style:
 
 content.accent:
   type: text
+content.cardAlignment:
+  type: select
+  comment: >-
+    Which way a card sets its copy. Centred is the add-on shape, where the
+    badge also moves to the card's top edge.
+  options:
+    values:
+      - id: start
+        name: Start
+      - id: center
+        name: Center
 content.cardColor:
   type: select
   comment: Which of the two sands the cards are.

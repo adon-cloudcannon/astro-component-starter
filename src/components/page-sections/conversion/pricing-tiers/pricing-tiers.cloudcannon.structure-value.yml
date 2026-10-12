@@ -5,6 +5,7 @@ tabbed: true
 value:
   _component: page-sections/conversion/pricing-tiers
   content:
+    cardAlignment: start
     sectionLabel: ""
     heading:
       eyebrow: Plans

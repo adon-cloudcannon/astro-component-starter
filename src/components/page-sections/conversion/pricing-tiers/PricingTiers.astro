@@ -50,6 +50,7 @@ const {
    * round. So it is stated per section rather than derived.
    */
   cardColor = "surface",
+  cardAlignment = "start",
   /**
    * Plants a garden around the tiers: grass at the foot of the first, a vine
    * up the next, flowers on the one after, and a cabbage tree out of the top
@@ -180,6 +181,8 @@ const annualSelected = defaultInterval === "annual";
           data-component="page-sections/conversion/pricing-tiers/pricing-tiers-item"
           data-editable="array-item"
           cardColor={cardColor}
+          cardAlignment={cardAlignment}
+          badgeColor={tier.badgeColor}
           {...tier}
           headingLevel={itemHeadingLevel}
           showAnnualPricing={showAnnualPricing}

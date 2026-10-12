@@ -35,6 +35,8 @@ const {
   showAnnualPricing = false,
   /** Which of the two sands this card is. Set for the whole grid. */
   cardColor = "surface",
+  cardAlignment = "start",
+  badgeColor = "",
   /**
    * A palette colour for this tier, mixed into the card at 12%.
    *
@@ -51,6 +53,13 @@ const {
 } = Astro.props;
 
 const sand = `var(--color-bg${cardColor === "base" ? "" : `-${cardColor}`})`;
+
+/* The card declares its own scheme, the way the bento's and the quote's cards
+   do. `data-theme` steers anything nested that reads a theme token — a
+   Button's arrow, a link's hover — but the site is light only, so it does not
+   flip the text colour by itself: the card states its own ink below. Without
+   both, a dark card drew near-black copy on near-black. */
+const cardScheme = cardColor === "muted" || cardColor === "dark" ? "dark" : undefined;
 
 const priceRows = [
   {
@@ -76,9 +85,18 @@ const priceRows = [
 
 <GridItem {...htmlAttributes}>
   <article
-    class:list={["pricing-tier", highlight && "highlight", `price-${pricePosition}`, className]}
+    class:list={[
+      "pricing-tier",
+      highlight && "highlight",
+      `price-${pricePosition}`,
+      `align-${cardAlignment}`,
+      badgeColor && "badge-above",
+      className,
+    ]}
+    data-theme={cardScheme}
     style={[
       height ? `--pricing-tier-height: ${Number(height)}px` : "",
+      badgeColor ? `--pricing-tier-badge: var(--${badgeColor})` : "",
       `--pricing-tier-bg: ${accent ? `color-mix(in srgb, ${accent.startsWith("#") ? accent : `var(--${accent})`} 12%, ${sand})` : sand}`,
     ].filter(Boolean).join("; ")}
   >
@@ -98,6 +116,7 @@ const priceRows = [
       class="pricing-tier-name"
       level={headingLevel}
       size="xs"
+      alignmentHorizontal={cardAlignment === "center" ? "center" : "start"}
       data-prop="name"
     >
       {name}
@@ -105,6 +124,7 @@ const priceRows = [
     <SimpleText
       class="pricing-tier-description"
       size="sm"
+      alignmentHorizontal={cardAlignment === "center" ? "center" : "start"}
       data-prop="description"
       text={description}
     />
@@ -186,6 +206,69 @@ const priceRows = [
       height: 100%;
       padding: var(--spacing-xl);
       position: relative;
+
+      /* A dark card states its own ink. The band's colour scheme stops at
+         the band: the fill here is the card's, so the copy on it has to be
+         the card's too. */
+      &[data-theme="dark"] {
+        --pricing-tier-ink: var(--light-sand);
+        --pricing-tier-quiet: var(--gray-400, #9a9a9a);
+        border-color: color-mix(in srgb, var(--light-sand) 12%, transparent);
+        color: var(--pricing-tier-ink);
+      }
+
+      &[data-theme="dark"] .pricing-tier-name .heading-inner,
+      &[data-theme="dark"] .pricing-tier-amount,
+      &[data-theme="dark"] .pricing-tier-suffix {
+        color: var(--pricing-tier-ink);
+      }
+
+      &[data-theme="dark"] .pricing-tier-description .simple-text-inner,
+      &[data-theme="dark"] .pricing-tier-feature {
+        color: var(--pricing-tier-quiet);
+      }
+
+      /* The add-on card: copy centred, and the category badge sitting on the
+         card's top edge rather than inline beside the name. Driven by
+         `badgeColor` being set, because a coloured badge is only ever the
+         add-on shape — the plan cards' badge is the neutral pill inline. */
+      &.align-center {
+        text-align: center;
+      }
+
+      &.align-center .pricing-tier-description,
+      &.align-center .pricing-tier-price {
+        justify-content: center;
+        text-align: center;
+      }
+
+      &.badge-above {
+        overflow: visible;
+      }
+
+      /* `inset-inline: 0` sets both edges; a `left: auto` after it leaves
+         `right: 0` standing and the badge hugs the right. Both edges stay at
+         0 and the margin does the centring. */
+      &.badge-above .pricing-tier-badge {
+        inset-inline: 0;
+        margin-inline: auto;
+        top: calc(-1 * var(--spacing-md));
+        width: fit-content;
+      }
+
+      &.badge-above .pricing-tier-badge .badge-inner {
+        background-color: var(--pricing-tier-badge);
+        border-color: transparent;
+        color: var(--white);
+      }
+
+      /* The price sits in a panel of its own, a shade off the card. */
+      &.align-center .pricing-tier-price {
+        background-color: color-mix(in srgb, var(--light-sand) 8%, transparent);
+        border-radius: var(--radius-card);
+        display: flex;
+        padding: var(--spacing-md) var(--spacing-lg);
+      }
 
       &.highlight {
         /* Inset ring doubles the border to 2px without shifting layout

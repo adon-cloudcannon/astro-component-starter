@@ -216,6 +216,19 @@ const mirror = rootMirror({ class: { [`align-${alignmentHorizontal}`]: true } })
 
 <style is:global>
   @layer page-sections {
+    /* A brand band paints its own text white on `.content`, and that reaches
+       inside the button: a secondary pill came out cream with a white label,
+       which is the band's colour winning over the variant's own. The pill is
+       light whatever the band is, so its label is dark whatever the band is.
+
+       `variant-secondary` sits on `.button-inner`, not on `.button`: a
+       selector written `.button.variant-secondary` matches nothing. */
+    .cta-center .button-inner.variant-secondary,
+    .cta-center .button-inner.variant-secondary:hover,
+    .cta-center .button-inner.variant-secondary:focus-visible {
+      color: var(--midnight);
+    }
+
     /* The line under the heading, at the gap the design draws.
 
        `Text` pins every `.text` to `--space-before-tight`, which beats both
