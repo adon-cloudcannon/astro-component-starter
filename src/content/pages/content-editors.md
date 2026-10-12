@@ -161,8 +161,6 @@ pageSections:
       heading:
         heading: Built for the work
         headingSize: lg
-      alignmentHorizontal: center
-      columns: "3"
       features:
         - title: Custom permissions
           description: Define roles and groups to match your organization structure.
@@ -180,6 +178,8 @@ pageSections:
           imageHeight: 162
           imageAlt: ''
     style:
+      alignmentHorizontal: center
+      columns: "3"
       backgroundColor: light-sand
   - _component: page-sections/conversion/cta-showcase
     content:

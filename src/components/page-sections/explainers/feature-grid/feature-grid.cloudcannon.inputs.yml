@@ -98,28 +98,10 @@ content.subtext.subtextWidth:
         name: Wide
       - id: xl
         name: Extra wide
-content.alignmentHorizontal:
-  type: select
-  comment: Alignment for the heading and supporting text.
-  options:
-    values:
-      - id: start
-        name: Start
-      - id: center
-        name: Center
 # Quoted. A select's values have to be text: unquoted these are YAML
 # integers, and the editor rejected the input outright with "this input must
 # have a text value" rather than falling back. Grid runs `Number()` over it
 # and the class interpolates the same either way, so nothing downstream cares.
-content.columns:
-  type: select
-  comment: Three small cards across, or two large ones with their own art.
-  options:
-    values:
-      - id: "3"
-        name: Three across
-      - id: "2"
-        name: Two across
 content.features:
   type: array
   label: Features
@@ -134,6 +116,24 @@ content.features:
 content.sectionLabel:
   type: text
   comment: Names the section in the editor and sets its anchor id.
+style.alignmentHorizontal:
+  type: select
+  comment: Alignment for the heading and supporting text.
+  options:
+    values:
+      - id: start
+        name: Start
+      - id: center
+        name: Center
+style.columns:
+  type: select
+  comment: Three small cards across, or two large ones with their own art.
+  options:
+    values:
+      - id: "3"
+        name: Three across
+      - id: "2"
+        name: Two across
 style.descriptionSize:
   type: select
   comment: >-

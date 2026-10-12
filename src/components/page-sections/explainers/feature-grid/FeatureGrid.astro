@@ -14,9 +14,11 @@ type FeatureProps = Record<string, unknown>;
 /* `content` and `style` are the editor's tabs, flattened straight back into
    the names below. `at()` writes the frontmatter path a binding needs. */
 const { props, at } = nestedProps(Astro.props, {
-  /* How big the cards' lines are set is a setting rather than copy, so it
-     sits in Style with the band's own chrome. */
-  extraStyleKeys: ["descriptionSize"],
+  /* How the grid is laid out and how big its cards' lines are set are all
+     settings rather than copy, so they sit in Style with the band's own
+     chrome. `alignmentHorizontal` here is the section's own; a card carries
+     its own copy of the name and is unaffected. */
+  extraStyleKeys: ["descriptionSize", "alignmentHorizontal", "columns"],
   nest: {
     heading: ["eyebrow", "heading", "headingLevel", "headingSize"],
     subtext: ["subtext", "subtextSize", "subtextWidth"],

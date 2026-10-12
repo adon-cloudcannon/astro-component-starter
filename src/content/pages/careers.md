@@ -74,11 +74,8 @@ pageSections:
           and working with others who do the same.
         subtextSize: lg
         subtextWidth: lg
-      alignmentHorizontal: center
-      columns: '3'
       features:
         - title: Four-day work week at full pay
-          titleSize: xs
           description: We trust in the work you do, and we know that productivity isn't
             always measured by time at your desk. Our four-day work week (32
             hours per week) means more time with your family and friends, and
@@ -86,83 +83,125 @@ pageSections:
           iconName: smile
           iconColor: golden
           iconBackground: true
+          titleSize: xs
           iconSolid: true
           divider: true
           alignmentHorizontal: start
           accentColor: golden
+          imageSource: ''
+          imageAlt: ''
+          eyebrow: ''
+          linkText: ''
+          link: ''
+          descriptionSize: ''
         - title: Employee stock options
-          titleSize: xs
           description: When you have a stake in the product you're making, we all win. All
             CloudCannon employees receive generous stock options, so we're all
             working towards the same goal.
           iconName: trending-up
           iconColor: sunset
           iconBackground: true
+          titleSize: xs
           iconSolid: true
           divider: true
           alignmentHorizontal: start
           accentColor: sunset
+          imageSource: ''
+          imageAlt: ''
+          eyebrow: ''
+          linkText: ''
+          link: ''
+          descriptionSize: ''
         - title: Transportation subsidy
-          titleSize: xs
           description: However you're coming in to work — by foot, bus, bike, scooter,
             skateboard, or car — we'll help subsidize your transportation costs.
           iconName: truck
           iconColor: moss
           iconBackground: true
+          titleSize: xs
           iconSolid: true
           divider: true
           alignmentHorizontal: start
           accentColor: moss
+          imageSource: ''
+          imageAlt: ''
+          eyebrow: ''
+          linkText: ''
+          link: ''
+          descriptionSize: ''
         - title: Annual leave
-          titleSize: xs
           description: The longer you're with us, the more you can take time to relax.
             With every year of employment, you'll gain an extra day of annual
             leave to add to your total, up to 25 days.
           iconName: sun
           iconColor: harbour
           iconBackground: true
+          titleSize: xs
           iconSolid: true
           divider: true
           alignmentHorizontal: start
           accentColor: harbour
+          imageSource: ''
+          imageAlt: ''
+          eyebrow: ''
+          linkText: ''
+          link: ''
+          descriptionSize: ''
         - title: Parental leave
-          titleSize: xs
           description: We offer up to 52 weeks of parental leave, 26 of which are fully
             paid. This includes biological, adoptive, and foster parents.
             Partners can also receive up to 4 weeks of paid leave.
           iconName: baby
           iconColor: peachy
           iconBackground: true
+          titleSize: xs
           iconSolid: true
           divider: true
           alignmentHorizontal: start
           accentColor: peachy
+          imageSource: ''
+          imageAlt: ''
+          eyebrow: ''
+          linkText: ''
+          link: ''
+          descriptionSize: ''
         - title: Happy Birthday to you!
-          titleSize: xs
           description: Have your (birthday) cake and eat it too — all employees receive an
             additional day of annual leave on their birthdays, to be taken when
             it suits you best.
           iconName: cake
           iconColor: golden
           iconBackground: true
+          titleSize: xs
           iconSolid: true
           divider: true
           alignmentHorizontal: start
           accentColor: golden
+          imageSource: ''
+          imageAlt: ''
+          eyebrow: ''
+          linkText: ''
+          link: ''
+          descriptionSize: ''
         - title: Flexible work
-          titleSize: xs
           description: We want to support you to do the best work you can, so we offer
             working hours that suit you, as well as flexible arrangements and
             subsidies for working from home.
           iconName: map-pin
           iconColor: moss
           iconBackground: true
+          titleSize: xs
           iconSolid: true
           divider: true
           alignmentHorizontal: start
           accentColor: moss
+          imageSource: ''
+          imageAlt: ''
+          eyebrow: ''
+          linkText: ''
+          link: ''
+          descriptionSize: ''
         - title: Comfortable setup
-          titleSize: xs
           description: We offer different options for how you work, to help you stay
             healthy. We have adjustable standing desks and monitors, comfortable
             chairs, and even wobble boards for those who want to keep a bit more
@@ -170,24 +209,39 @@ pageSections:
           iconName: monitor
           iconColor: sunset
           iconBackground: true
+          titleSize: xs
           iconSolid: true
           divider: true
           alignmentHorizontal: start
           accentColor: sunset
+          imageSource: ''
+          imageAlt: ''
+          eyebrow: ''
+          linkText: ''
+          link: ''
+          descriptionSize: ''
         - title: All the tools you need
-          titleSize: xs
           description: We provide all the tools and software you need to get your job
             done. This includes MacBook Pros and accessories, dual monitors, and
             a range of useful software subscriptions.
           iconName: wrench
           iconColor: harbour
           iconBackground: true
+          titleSize: xs
           iconSolid: true
           divider: true
           alignmentHorizontal: start
           accentColor: harbour
+          imageSource: ''
+          imageAlt: ''
+          eyebrow: ''
+          linkText: ''
+          link: ''
+          descriptionSize: ''
     style:
-      descriptionSize: sm
+      alignmentHorizontal: center
+      columns: '3'
+      descriptionSize: md
       backgroundColor: light-sand
       pattern: none
       fade: none
@@ -207,10 +261,10 @@ pageSections:
         subtext: None right now!
         subtextSize: lg
         subtextWidth: ''
-      alignmentHorizontal: center
-      columns: '3'
       features: []
     style:
+      alignmentHorizontal: center
+      columns: '3'
       descriptionSize: lg
       backgroundColor: dark
       pattern: pegboard

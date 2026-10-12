@@ -107,8 +107,6 @@ pageSections:
       heading:
         heading: What are the perks?
         headingSize: lg
-      alignmentHorizontal: center
-      columns: "3"
       features:
         - title: Partner dashboard
           description: Track site health, errors, usage and billing for every client from
@@ -143,6 +141,8 @@ pageSections:
           imageHeight: 173
           imageAlt: ''
     style:
+      alignmentHorizontal: center
+      columns: "3"
       backgroundColor: dark
   - _component: page-sections/conversion/pricing-tiers
     content:

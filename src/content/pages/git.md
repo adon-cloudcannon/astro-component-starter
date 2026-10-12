@@ -258,7 +258,6 @@ pageSections:
         subtext: Connect your repo, keep your tooling, and add a visual editor on top.
         subtextSize: lg
         subtextWidth: md
-      alignmentHorizontal: center
       features:
         - title: Git providers
           description: Connect to GitHub, GitLab, or Bitbucket
@@ -291,6 +290,7 @@ pageSections:
           imageHeight: 195
           imageAlt: ''
     style:
+      alignmentHorizontal: center
       backgroundColor: light-sand
   - _component: page-sections/conversion/cta-showcase
     content:

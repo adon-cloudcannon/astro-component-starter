@@ -15,8 +15,6 @@ value:
       subtext: One line that frames the points below.
       subtextSize: md
       subtextWidth: ""
-    alignmentHorizontal: center
-    columns: "3"
     features:
       - title: Fast
         description: Static HTML and CSS, so a page renders before any JavaScript runs.
@@ -34,6 +32,8 @@ value:
         iconColor: moss
         iconBackground: true
   style:
+    alignmentHorizontal: center
+    columns: "3"
     descriptionSize: lg
     backgroundColor: light-sand
     pattern: none

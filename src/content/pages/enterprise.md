@@ -113,7 +113,6 @@ pageSections:
           security, and more.
         subtextSize: lg
         subtextWidth: md
-      alignmentHorizontal: center
       features:
         - title: Site security
           description: SOC2 Type 2 certified for enterprise-grade security
@@ -146,6 +145,7 @@ pageSections:
           imageHeight: 195
           imageAlt: ''
     style:
+      alignmentHorizontal: center
       backgroundColor: light-sand
   - _component: page-sections/proof/story-carousel
     content:
@@ -205,8 +205,6 @@ pageSections:
           features that are right for you.
         subtextSize: lg
         subtextWidth: lg
-      alignmentHorizontal: center
-      columns: "3"
       features:
         - title: Onboarding services
           description: >-
@@ -238,6 +236,8 @@ pageSections:
           accentColor: moss
           imageAlt: ''
     style:
+      alignmentHorizontal: center
+      columns: "3"
       pattern: grid
       fade: bottom
       haze: true
