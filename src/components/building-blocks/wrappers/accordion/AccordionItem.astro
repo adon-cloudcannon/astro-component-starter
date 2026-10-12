@@ -8,6 +8,7 @@ const {
   useDefaultEditableBinding = false,
   isOpen = false,
   accordionName,
+  variant = "plain",
   class: className,
   _component,
   "data-children-prop": childrenDataProp,
@@ -28,7 +29,7 @@ const titleDataAttributes = effectiveTitleProp
 ---
 
 <details
-  class:list={["accordion-item", className]}
+  class:list={["accordion-item", `variant-${variant}`, className]}
   open={isOpen}
   name={accordionName}
   {...htmlAttributes}
@@ -40,11 +41,22 @@ const titleDataAttributes = effectiveTitleProp
     >
       {title}
     </span>
-    <Icon
-      name="chevron-down"
-      size="none"
-      class="accordion-item-icon"
-    />
+    {/* The card variant marks its state with a plus that becomes a minus in
+        a ring, which is what the design draws; the plain one keeps the
+        chevron that rotates. Both are rendered and one is shown, rather than
+        swapping the name at runtime, so there is no flash on toggle. */}
+    {variant === "card" ? (
+      <span class="accordion-item-mark" aria-hidden="true">
+        <Icon name="plus" size="none" class="accordion-item-mark-closed" />
+        <Icon name="minus" size="none" class="accordion-item-mark-open" />
+      </span>
+    ) : (
+      <Icon
+        name="chevron-down"
+        size="none"
+        class="accordion-item-icon"
+      />
+    )}
   </summary>
   <div
     class="accordion-item-detail flow"
@@ -63,6 +75,67 @@ const titleDataAttributes = effectiveTitleProp
 
 <style is:global>
   @layer components {
+    /* The card variant, measured off 4146:57067 and 4146:57076: each item is
+       its own surface with a sand rule, the question at 24, and a ringed mark
+       on the end. Open, a rule runs under the question and the answer sits
+       below it. */
+    .accordion-item.variant-card {
+      background-color: var(--color-bg);
+      border: var(--border-width-sm, 1px) solid var(--dark-sand);
+      border-radius: var(--radius-card);
+      padding: var(--spacing-lg) var(--spacing-xl);
+    }
+
+    .accordion-item.variant-card + .accordion-item.variant-card {
+      --space-before: var(--spacing-md);
+      margin-block-start: var(--spacing-md);
+    }
+
+    .accordion-item.variant-card .accordion-item-title {
+      align-items: center;
+      border-block-end: 0;
+      gap: var(--spacing-lg);
+      padding: 0;
+    }
+
+    .accordion-item.variant-card .accordion-item-title-text {
+      font-size: var(--font-size-heading-xs);
+      font-weight: var(--font-weight-semibold);
+    }
+
+    /* The rule belongs to the open state, under the question. */
+    .accordion-item.variant-card[open] .accordion-item-detail {
+      border-block-start: var(--border-width-sm, 1px) solid var(--dark-sand);
+      margin-block-start: var(--spacing-lg);
+      padding-block-start: var(--spacing-lg);
+    }
+
+    .accordion-item.variant-card .accordion-item-mark {
+      align-items: center;
+      block-size: 2.5rem;
+      border: var(--border-width-sm, 1px) solid var(--color-border);
+      border-radius: 999px;
+      display: inline-flex;
+      flex-shrink: 0;
+      inline-size: 2.5rem;
+      justify-content: center;
+    }
+
+    .accordion-item.variant-card .accordion-item-mark svg {
+      block-size: 1rem;
+      inline-size: 1rem;
+    }
+
+    /* One mark per state. */
+    .accordion-item.variant-card .accordion-item-mark-open,
+    .accordion-item.variant-card[open] .accordion-item-mark-closed {
+      display: none;
+    }
+
+    .accordion-item.variant-card[open] .accordion-item-mark-open {
+      display: inline-flex;
+    }
+
     .accordion-item {
       border-bottom: var(--border-width-sm) solid var(--color-border-subtle);
       container-type: inline-size;

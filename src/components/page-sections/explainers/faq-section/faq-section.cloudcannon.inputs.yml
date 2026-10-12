@@ -188,3 +188,14 @@ style.backgroundColor:
         - key: color
       text:
         - key: name
+style.accordionVariant:
+  type: select
+  comment: >-
+    How each question is drawn. Card is the design's: its own surface with a
+    rule and a ringed plus. Plain is a list with rules between the rows.
+  options:
+    values:
+      - id: card
+        name: Card
+      - id: plain
+        name: Plain

@@ -11,6 +11,7 @@ const {
   singleOpen = false,
   label,
   spaceBefore = "default",
+  variant = "plain",
   class: className,
   useDefaultEditableBinding = false,
   "data-children-prop": childrenDataProp,
@@ -56,6 +57,7 @@ if (!_component && !hasItems && !hasSlotContent) return;
 
         return (
           <AccordionItem
+          variant={variant}
             isOpen={isFirst}
             accordionName={accordionName}
             useDefaultEditableBinding={!!effectiveChildrenProp}

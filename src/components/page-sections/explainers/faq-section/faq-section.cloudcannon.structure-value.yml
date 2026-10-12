@@ -27,6 +27,7 @@ value:
             text: You own the repository and the content. We stay on call for the first month.
             size: md
   style:
+    accordionVariant: card
     backgroundColor: light-sand
     pattern: none
     fade: none

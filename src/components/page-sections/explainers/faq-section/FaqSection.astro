@@ -30,6 +30,7 @@ const {
   fade = "none",
   /** Whether the heading sits on a pool of the band’s own colour. */
   haze = false,
+  accordionVariant = "card",
   class: className,
   useDefaultEditableBinding = false,
   _component,
@@ -60,6 +61,7 @@ const {
   />
 
   <Accordion
+    variant={accordionVariant}
     label={label}
     singleOpen={true}
     openFirst={false}
