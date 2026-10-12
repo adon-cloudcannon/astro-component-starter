@@ -1,4 +1,5 @@
 ---
+import { rootMirror } from "@component-utils/rootMirror.mjs";
 import { spaceBeforeAttr } from "@component-utils/spaceBefore.mjs";
 import { renderMarkdown } from "@component-utils/markdown";
 import { isNonEmptyString } from "@component-utils/isNonEmptyString";
@@ -26,14 +27,22 @@ const hasText = isNonEmptyString(text);
 const hasSlotContent = Astro.slots.has("default");
 
 if (!_component && !hasText && !hasSlotContent) return;
+
+/* The size is a class on this component's root, and a region's root is the one
+   element CloudCannon keeps: it swaps only the contents, so picking a new size
+   saved and did nothing until a reload. `.text-inner` is content from the
+   root's point of view, so the editor rewrites it; mirroring the class there
+   lets `editor-live-sync.js` copy it back up. */
+const sizeMirror = rootMirror({ class: size ? { [`size-${size}`]: true } : {} });
 ---
 
 <div
-  class:list={["text", "stackable", className]}
+  class:list={["text", "stackable", size && `size-${size}`, className]}
   {...htmlAttributes}
 >
   <div
-    class:list={["text-inner", size && `size-${size}`, `align-${alignmentHorizontal}`]}
+    class:list={["text-inner", `align-${alignmentHorizontal}`]}
+    {...sizeMirror}
     data-space-before={spaceBeforeAttr(spaceBefore)}
     {...textDataAttributes}
   >
@@ -46,31 +55,46 @@ if (!_component && !hasText && !hasSlotContent) return;
     .text {
       --space-before: var(--space-before-tight);
 
+      /* The size lives on the wrapper, not on `.text-inner`. `.text-inner`
+         carries `data-editable`, and CloudCannon keeps a region's root element
+         and swaps only its contents, so a class on it never changes in the
+         Visual Editor: picking a new size did nothing there while the built
+         page was correct. `--text-size` is a custom property, so it inherits
+         down to the inner and everything that reads it is unchanged. */
+      &.size-xs {
+        --text-size: var(--font-size-xs);
+      }
+
+      &.size-sm {
+        --text-size: var(--font-size-sm);
+      }
+
+      &.size-md {
+        --text-size: var(--font-size-md);
+      }
+
+      &.size-lg {
+        --text-size: var(--font-size-lg);
+      }
+
+      &.size-xl {
+        --text-size: var(--font-size-xl);
+      }
+
+      &.size-2xl {
+        --text-size: var(--font-size-2xl);
+      }
+
+      &.size-3xl {
+        --text-size: var(--font-size-3xl);
+      }
+
+      &.size-4xl {
+        --text-size: var(--font-size-4xl);
+      }
+
+
       > .text-inner {
-        &.size-xs {
-          --text-size: var(--font-size-xs);
-        }
-        &.size-sm {
-          --text-size: var(--font-size-sm);
-        }
-        &.size-md {
-          --text-size: var(--font-size-md);
-        }
-        &.size-lg {
-          --text-size: var(--font-size-lg);
-        }
-        &.size-xl {
-          --text-size: var(--font-size-xl);
-        }
-        &.size-2xl {
-          --text-size: var(--font-size-2xl);
-        }
-        &.size-3xl {
-          --text-size: var(--font-size-3xl);
-        }
-        &.size-4xl {
-          --text-size: var(--font-size-4xl);
-        }
 
         > p {
           font-size: var(--text-size, inherit);
