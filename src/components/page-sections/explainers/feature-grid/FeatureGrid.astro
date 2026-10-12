@@ -115,11 +115,12 @@ const artRow = Math.max(
 );
 
 /* A card's own size fields are optional: left on Automatic the editor writes
-   an empty string, which has to read as "not set" rather than as a value. */
+   `auto`, which has to read as "not set" rather than as a value. Older blocks
+   say "" for the same thing, so both go. */
 const inherit = <T extends Record<string, unknown>>(feature: T): T => {
   const out = { ...feature };
   for (const key of ["titleSize", "descriptionSize"]) {
-    if (out[key] === "" || out[key] === null) delete out[key];
+    if (out[key] === "" || out[key] === "auto" || out[key] === null) delete out[key];
   }
   return out;
 };

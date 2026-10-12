@@ -11,12 +11,12 @@ featureGridItems:
     - label: Feature
       icon: apps
       value:
+        eyebrow: ""
         title: Feature title
         description: Feature description placeholder text that will be replaced with actual content.
         iconName: zap
-        iconColor: golden
         iconBackground: true
-        titleSize: ""
+        titleSize: auto
         iconSolid: false
         divider: false
         alignmentHorizontal: "center"
@@ -24,10 +24,9 @@ featureGridItems:
         imageSource: ""
         imageHeight:
         imageAlt: ""
-        eyebrow: ""
         linkText: ""
         link: ""
-        descriptionSize: ""
+        descriptionSize: auto
       preview:
         text:
           - key: title
@@ -41,7 +40,7 @@ featureGridItems:
           type: text
           comment: >-
             Short label above the title. Setting one turns the card into a signpost: bigger title,
-            a rule under the art, and a link out.
+            a rule under the art, and a link out. Two cards on Visual Editing use it.
         title:
           type: text
           comment: Name of the feature.
@@ -53,7 +52,7 @@ featureGridItems:
             icon card's own size otherwise.
           options:
             values:
-              - id: ""
+              - id: auto
                 name: Automatic
               - id: xl
                 name: Header 2
@@ -72,7 +71,7 @@ featureGridItems:
             for the whole grid.
           options:
             values:
-              - id: ""
+              - id: auto
                 name: Automatic
               - id: sm
                 name: Small
@@ -107,66 +106,28 @@ featureGridItems:
                 - key: name
               image:
                 - template: src/icons/{id}.svg
-        iconColor:
-          type: select
-          comment: Color accent applied to the icon.
-          hidden: "!iconName"
-          options:
-            values:
-              - id: default
-                name: Default
-                swatch: check_box_outline_blank
-              - id: pacific
-                name: Pacific
-                swatch: square
-                color: "#034AD8"
-              - id: moss
-                name: Moss
-                swatch: square
-                color: "#687E00"
-              - id: golden
-                name: Golden
-                swatch: square
-                color: "#FFAA00"
-              - id: peachy
-                name: Peachy
-                swatch: square
-                color: "#F39B7B"
-              - id: sunset
-                name: Sunset
-                swatch: square
-                color: "#D85A2C"
-              - id: kiwi
-                name: Kiwi
-                swatch: square
-                color: "#7C3442"
-              - id: blush
-                name: Blush
-                swatch: square
-                color: "#E7B0B9"
-              - id: harbour
-                name: Harbour
-                swatch: square
-                color: "#A6C1FA"
-            picker_view: card
-            preview:
-              icon:
-                - key: swatch
-              icon_color:
-                - key: color
-              text:
-                - key: name
         iconBackground:
+          # Hidden rather than removed: the key stays in the value so an item
+          # still matches this structure, and the component no longer reads
+          # it. A card has two looks, not four, and that is the switch below.
+          hidden: true
           type: switch
-          comment: Draw a plate behind the icon.
-          hidden: "!iconName"
         iconSolid:
           type: switch
-          hidden: "!iconBackground"
+          hidden: "!iconName"
           comment: >-
             Fill that plate with the colour itself rather than tinting it, and round it to a disc.
             The glyph is knocked out in whatever reads on the colour. This is the shape Careers
             draws; everywhere else uses the tint.
+        alignmentHorizontal:
+          type: select
+          comment: Which way the card sets its copy.
+          options:
+            values:
+              - id: start
+                name: Start
+              - id: center
+                name: Center
         divider:
           type: switch
           comment: >-

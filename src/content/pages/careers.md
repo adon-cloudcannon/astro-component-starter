@@ -81,7 +81,6 @@ pageSections:
             hours per week) means more time with your family and friends, and
             more energy for the work we love.
           iconName: smile
-          iconColor: golden
           iconBackground: true
           titleSize: xs
           iconSolid: true
@@ -99,7 +98,6 @@ pageSections:
             CloudCannon employees receive generous stock options, so we're all
             working towards the same goal.
           iconName: trending-up
-          iconColor: sunset
           iconBackground: true
           titleSize: xs
           iconSolid: true
@@ -116,7 +114,6 @@ pageSections:
           description: However you're coming in to work — by foot, bus, bike, scooter,
             skateboard, or car — we'll help subsidize your transportation costs.
           iconName: truck
-          iconColor: moss
           iconBackground: true
           titleSize: xs
           iconSolid: true
@@ -134,7 +131,6 @@ pageSections:
             With every year of employment, you'll gain an extra day of annual
             leave to add to your total, up to 25 days.
           iconName: sun
-          iconColor: harbour
           iconBackground: true
           titleSize: xs
           iconSolid: true
@@ -152,7 +148,6 @@ pageSections:
             paid. This includes biological, adoptive, and foster parents.
             Partners can also receive up to 4 weeks of paid leave.
           iconName: baby
-          iconColor: peachy
           iconBackground: true
           titleSize: xs
           iconSolid: true
@@ -170,7 +165,6 @@ pageSections:
             additional day of annual leave on their birthdays, to be taken when
             it suits you best.
           iconName: cake
-          iconColor: golden
           iconBackground: true
           titleSize: xs
           iconSolid: true
@@ -188,7 +182,6 @@ pageSections:
             working hours that suit you, as well as flexible arrangements and
             subsidies for working from home.
           iconName: map-pin
-          iconColor: moss
           iconBackground: true
           titleSize: xs
           iconSolid: true
@@ -207,7 +200,6 @@ pageSections:
             chairs, and even wobble boards for those who want to keep a bit more
             active at work.
           iconName: monitor
-          iconColor: sunset
           iconBackground: true
           titleSize: xs
           iconSolid: true
@@ -225,7 +217,6 @@ pageSections:
             done. This includes MacBook Pros and accessories, dual monitors, and
             a range of useful software subscriptions.
           iconName: wrench
-          iconColor: harbour
           iconBackground: true
           titleSize: xs
           iconSolid: true

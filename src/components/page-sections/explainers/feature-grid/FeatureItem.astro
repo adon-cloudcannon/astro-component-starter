@@ -91,7 +91,10 @@ const signpost = Boolean(eyebrow || linkText);
 // A card with neither a drawing nor an icon is plain copy, and the design sets
 // its title at the same 29 as the illustrated ones rather than the larger size
 // an icon card takes.
-const headingSize = titleSize || (signpost ? "lg" : imageSource || !iconName ? "sm" : "md");
+/* `auto` is the editor's word for "let the card decide", and an older block
+   may still say "". Both mean the same here. */
+const chosen = (value?: string) => (value && value !== "auto" ? value : undefined);
+const headingSize = chosen(titleSize) ?? (signpost ? "lg" : imageSource || !iconName ? "sm" : "md");
 ---
 
 <GridItem
@@ -130,8 +133,8 @@ const headingSize = titleSize || (signpost ? "lg" : imageSource || !iconName ? "
           class="feature-icon"
           name={iconName}
           size="lg"
-          color={iconColor}
-          background={iconBackground ? (iconSolid ? "solid" : true) : false}
+          color={accentColor && accentColor !== "none" ? accentColor : iconColor}
+          background={iconSolid ? "solid" : false}
           alignmentHorizontal="start"
         />
       )}
@@ -152,7 +155,7 @@ const headingSize = titleSize || (signpost ? "lg" : imageSource || !iconName ? "
     <Text
       class="feature-description"
       alignmentHorizontal={alignmentHorizontal}
-      size={descriptionSize}
+      size={chosen(descriptionSize) ?? "lg"}
       data-prop="description"
       text={description}
     />
@@ -192,6 +195,17 @@ const headingSize = titleSize || (signpost ? "lg" : imageSource || !iconName ? "
 
     .feature-item-heading .feature-icon {
       flex-shrink: 0;
+    }
+
+    /* A signpost has no icon, so this row holds only the eyebrow and the
+       title. Since the eyebrow became part of Heading it is a sibling of the
+       `<h_>` rather than inside it, and a flex row laid the two side by side:
+       the label sat to the left of the heading and the heading wrapped to
+       four lines. The row exists to put an icon beside a title, which a
+       signpost does not have. */
+    .feature-item.is-signpost .feature-item-heading {
+      align-items: start;
+      display: block;
     }
 
     /* The design's disc is 60 across with a 35 glyph in it, and the disc is
