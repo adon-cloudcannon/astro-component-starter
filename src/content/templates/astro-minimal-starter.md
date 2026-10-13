@@ -11,6 +11,7 @@ collections:
   - starter
 ssgs:
   - astro
+previewUrl: https://tiny-jackal.cloudvent.net/
 repoUrl: https://github.com/CloudCannon/astro-minimal-starter
 gallery:
   - image: https://cc-dam.imgix.net/astro-starter-cloudcannon-home.png

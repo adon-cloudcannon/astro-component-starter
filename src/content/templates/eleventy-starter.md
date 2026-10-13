@@ -11,6 +11,7 @@ collections:
   - starter
 ssgs:
   - 11ty
+previewUrl: https://large-leek.cloudvent.net/
 repoUrl: https://github.com/CloudCannon/eleventy-starter
 gallery:
   - image: https://cc-dam.imgix.net/eleventy-starter-home.png

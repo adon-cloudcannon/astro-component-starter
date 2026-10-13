@@ -5,6 +5,7 @@
  * The body is the template's own markdown, which `npm run templates:readmes`
  * fills from the repository's README.
  */
+import { accentInk } from "@component-utils/accentInk.mjs";
 import { breadcrumbListJsonLd } from "@component-utils/breadcrumbTrail";
 import Badge from "@core-elements/badge/Badge.astro";
 import Button from "@core-elements/button/Button.astro";
@@ -142,18 +143,25 @@ const breadcrumbJsonLd = breadcrumbListJsonLd(
         >
           {description}
         </SimpleText>
+        {/* A div, not a p: Badge renders a div, and the parser closes a
+            paragraph in front of one, which left the pills loose in the hero
+            with the flex row empty behind them. */}
         {badges.length > 0 && (
-          <p class="template-page-badges">
+          <div class="template-page-badges">
             {badges.map((pill) => (
               <Badge
                 class="template-page-badge"
-                style={pill.accent ? `--template-page-pill: var(--${pill.accent})` : undefined}
+                style={
+                  pill.accent
+                    ? `--template-page-pill: var(--${pill.accent}); --template-page-ink: ${accentInk(pill.accent)}`
+                    : undefined
+                }
                 text={pill.name ?? label(pill.id ?? "")}
                 showArrow={false}
                 variant="strong"
               />
             ))}
-          </p>
+          </div>
         )}
       </div>
       {previewUrl ? (
@@ -330,7 +338,8 @@ const breadcrumbJsonLd = breadcrumbListJsonLd(
 
     display: flex;
     flex-wrap: wrap;
-    gap: var(--spacing-sm);
+    /* The gap the listing page sets between the same pills. */
+    gap: 1.125rem;
     margin-block: var(--spacing-xl) 0;
   }
 
@@ -340,7 +349,7 @@ const breadcrumbJsonLd = breadcrumbListJsonLd(
   .template-page-badge > .badge-inner {
     background-color: var(--template-page-pill, var(--midnight));
     border-color: transparent;
-    color: var(--white);
+    color: var(--template-page-ink, var(--white));
   }
 
   .template-page-shot img {

@@ -2,6 +2,7 @@
 import { getCollection } from "astro:content";
 import { bandPattern, bandHaze } from "@component-utils/bandStyle.mjs";
 import { nestedProps } from "@component-utils/nestedProps.mjs";
+import { accentInk } from "@component-utils/accentInk.mjs";
 import { slugifyLabel } from "@component-utils/slugify";
 import CustomSection from "@builders/custom-section/CustomSection.astro";
 import Button from "@core-elements/button/Button.astro";
@@ -100,7 +101,11 @@ const pillCss = pillList
         {pillList.map((pill: { id: string; name?: string; accent?: string }, index: number) => (
           <label
             class="template-grid-pill"
-            style={pill.accent ? `--template-pill-accent: var(--${pill.accent})` : undefined}
+            style={
+              pill.accent
+                ? `--template-pill-accent: var(--${pill.accent}); --template-pill-ink: ${accentInk(pill.accent)}`
+                : undefined
+            }
           >
             <input
               type="radio"
@@ -225,7 +230,7 @@ const pillCss = pillList
 
     .template-grid .template-grid-pill input:checked + span {
       background-color: var(--template-pill-accent, var(--color-bg-brand));
-      color: var(--white);
+      color: var(--template-pill-ink, var(--white));
     }
 
     .template-grid .template-grid-pill input:focus-visible + span {
