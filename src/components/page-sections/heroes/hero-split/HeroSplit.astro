@@ -4,6 +4,7 @@ import { nestedProps } from "@component-utils/nestedProps.mjs";
 import CustomSection from "@builders/custom-section/CustomSection.astro";
 import { subtextMeasure } from "@component-utils/subtextMeasure.mjs";
 import Heading from "@core-elements/heading/Heading.astro";
+import RenderBlock from "@component-utils/renderBlock.astro";
 import Image from "@core-elements/image/Image.astro";
 import List from "@core-elements/list/List.astro";
 import Text from "@core-elements/text/Text.astro";
@@ -50,6 +51,14 @@ const {
    * 1040 column, and run the full width it reads as a different block.
    */
   subtextWidth,
+  /**
+   * Blocks to fill the media half with instead of a picture.
+   *
+   * A hero whose other half is built rather than photographed — the pile of
+   * tool tiles on Open source tools — has no `imageSource` to give. Set,
+   * these render and the image is skipped.
+   */
+  mediaSections = [],
   imageSource = "",
   imageAlt = "",
   imageAspectRatio = "none",
@@ -207,6 +216,12 @@ const imagePositionVertical = imageBleed ? "top" : "center";
       />
     </Fragment>
     <Fragment slot="second">
+      {mediaSections?.length ? (
+        <RenderBlock
+          contentSections={mediaSections}
+          useDefaultEditableBinding={useDefaultEditableBinding}
+        />
+      ) : (
       <Image
         source={imageSource}
         alt={imageAlt}
@@ -220,6 +235,7 @@ const imagePositionVertical = imageBleed ? "top" : "center";
         data-prop-alt={at("imageAlt")}
         priority={true}
       />
+      )}
     </Fragment>
   </Split>
 </CustomSection>

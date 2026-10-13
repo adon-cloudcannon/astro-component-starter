@@ -5,6 +5,7 @@ tabbed: true
 value:
   _component: page-sections/heroes/hero-split
   content:
+    mediaSections: []
     sectionLabel: ""
     heading:
       heading: A clear promise in one line

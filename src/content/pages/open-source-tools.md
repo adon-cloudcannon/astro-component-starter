@@ -16,9 +16,111 @@ pageSections:
           open source tooling we built ourselves, as well as others we find helpful.
         subtextSize: lg
         subtextWidth: ''
-      image:
-        imageSource: ''
-        imageAlt: ''
+      mediaSections:
+        - _component: building-blocks/wrappers/shape-pile
+          designWidth: 524
+          designHeight: 443
+          fall: true
+          radius: 19
+          shapes:
+          - text: ''
+            tone: sunset
+            color: sunset
+            x: 239
+            'y': 6
+            width: 160
+            height: 160
+            rotation: 0
+            round: false
+            image: /src/assets/images/marketing/tools/tool-rosey.png
+            imageAlt: Rosey
+            imageWidth: 70
+            imageHeight: 73
+            imageColor: white
+          - text: ''
+            tone: moss
+            color: moss
+            x: 47
+            'y': 135
+            width: 138
+            height: 138
+            rotation: 0
+            round: true
+            image: /src/assets/images/marketing/tools/tool-handyman.png
+            imageAlt: Tools
+            imageWidth: 62
+            imageHeight: 62
+            imageColor: white
+          - text: ''
+            tone: harbour
+            color: harbour
+            x: 185
+            'y': 165
+            width: 132
+            height: 132
+            rotation: 0
+            round: true
+            image: /src/assets/images/marketing/tools/tool-sparkles.png
+            imageAlt: Agent skills
+            imageWidth: 58
+            imageHeight: 58
+            imageColor: black
+          - text: ''
+            tone: blush
+            color: blush
+            x: 321
+            'y': 166
+            width: 159
+            height: 136
+            rotation: 0
+            round: false
+            image: /src/assets/images/marketing/tools/tool-bookshelf.png
+            imageAlt: Pagebreak
+            imageWidth: 45
+            imageHeight: 70
+            imageColor: black
+          - text: ''
+            tone: pacific
+            color: pacific
+            x: 0
+            'y': 273
+            width: 184
+            height: 170
+            rotation: 0
+            round: false
+            image: /src/assets/images/marketing/tools/tool-acorn.png
+            imageAlt: Reseed
+            imageWidth: 70
+            imageHeight: 79
+            imageColor: white
+          - text: ''
+            tone: black
+            color: black
+            x: 184
+            'y': 301
+            width: 185
+            height: 142
+            rotation: 0
+            round: false
+            image: /src/assets/images/marketing/tools/tool-trough.png
+            imageAlt: Flatlake
+            imageWidth: 80
+            imageHeight: 53
+            imageColor: white
+          - text: ''
+            tone: golden
+            color: golden
+            x: 369
+            'y': 300
+            width: 155
+            height: 143
+            rotation: 0
+            round: false
+            image: /src/assets/images/marketing/tools/tool-compass.png
+            imageAlt: Pagefind
+            imageWidth: 84
+            imageHeight: 55
+            imageColor: black
       buttonSections: []
       note: []
     style:
@@ -117,6 +219,7 @@ pageSections:
           style:
             accentColor: none
             panelColor: sunset
+            panelImageColor: light-sand
             panelImage: /src/assets/images/marketing/tools/tool-rosey.png
             iconPanel: true
             iconSolid: true
@@ -137,6 +240,7 @@ pageSections:
           style:
             accentColor: none
             panelColor: pacific
+            panelImageColor: light-sand
             panelImage: /src/assets/images/marketing/tools/tool-acorn.png
             iconPanel: true
             iconSolid: true

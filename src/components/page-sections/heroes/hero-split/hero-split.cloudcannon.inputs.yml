@@ -142,6 +142,14 @@ style.reverse:
 content.image.imageRounded:
   type: switch
   comment: Rounds the image's corners.
+content.mediaSections:
+  type: array
+  label: Media
+  comment: >-
+    Fills the other half with built blocks instead of a picture — a pile of
+    shapes, a browser frame. Empty falls back to the image above.
+  options:
+    structures: _structures.ctaSplitMedia
 content.note:
   type: array
   comment: Small print beneath the buttons, such as trial or pricing reassurances.
