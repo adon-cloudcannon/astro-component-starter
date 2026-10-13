@@ -209,6 +209,5 @@ pageSections:
       fade: none
       maxContentWidth: xl
       paddingHorizontal: gutter
-      paddingVertical: 4xl
       haze: false
 ---

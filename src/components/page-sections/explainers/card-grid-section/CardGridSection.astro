@@ -58,6 +58,15 @@ const {
   sectionLabel,
   maxContentWidth = "xl",
   paddingHorizontal = "gutter",
+  /**
+   * The band's own padding at one edge, overriding `paddingVertical`.
+   *
+   * The design ends a band of cards further from the next band than it
+   * starts it from the last — 119 under the cards against 92 over the
+   * heading, on all three of the dark card bands measured.
+   */
+  paddingVerticalStart = "",
+  paddingVerticalEnd = "",
   paddingVertical = "4xl",
   colorScheme = "inherit",
   lockColorScheme = false,
@@ -134,6 +143,8 @@ const inherit = <T extends Record<string, unknown>>(card: T): T => {
   maxContentWidth={maxContentWidth}
   paddingHorizontal={paddingHorizontal}
   paddingVertical={paddingVertical}
+  paddingVerticalStart={paddingVerticalStart}
+  paddingVerticalEnd={paddingVerticalEnd}
   colorScheme={colorScheme}
   lockColorScheme={lockColorScheme}
   backgroundColor={backgroundColor}

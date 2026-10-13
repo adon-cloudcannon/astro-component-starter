@@ -185,6 +185,8 @@ pageSections:
       maxContentWidth: xl
       paddingHorizontal: gutter
       paddingVertical: 4xl
+      paddingVerticalStart: 5xl
+      paddingVerticalEnd: 6xl
       colorScheme: dark
       lockColorScheme: true
       haze: false

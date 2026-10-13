@@ -183,6 +183,8 @@ quietly broken in the editor.
 - A heading and the copy under it sit 24 apart rather than 8. `.text` carries the tight gap it wants after a sibling of its own kind, which left every band on the site hugging its heading where the design draws air.
 - A band's call to action stands 48 off its copy, measured on both the heroes and the closing banners. Scoped to a band's own flow, so a card's button keeps hugging the text it belongs to.
 - A card grid under a subtext gets more room above the cards, which is what the design draws when a band has copy as well as a heading.
+- A dark band of cards ends 112 above the next band rather than 80, and starts 96 under the last, which is what the design draws on all three of them. Card Grid Section and Pricing Tiers take **Top padding override** and **Bottom padding override** to say so.
+- The closing banner on Hosting, Pricing, Migration and Open source tools is back on its own vertical padding. Each set 4xl over the banner's 2xl, which ran the band about 65 taller than the design; Templates and Low maintenance never set it and were already right.
 - A solid icon disc in a light colour draws its glyph in the dark ink, on a dark band as well as a light one. The pairings named `--color-text-strong`, which follows the band, so a golden, harbour, peachy or blush disc on a dark band drew a white glyph on a pale ground.
 
 #### Accessibility

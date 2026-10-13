@@ -370,7 +370,6 @@ pageSections:
       fade: none
       maxContentWidth: xl
       paddingHorizontal: gutter
-      paddingVertical: 4xl
       haze: false
   - _component: page-sections/conversion/pricing-tiers
     content:
@@ -452,6 +451,8 @@ pageSections:
       maxContentWidth: xl
       paddingHorizontal: gutter
       paddingVertical: 4xl
+      paddingVerticalStart: 5xl
+      paddingVerticalEnd: 6xl
       haze: false
       colorScheme: dark
       lockColorScheme: true
