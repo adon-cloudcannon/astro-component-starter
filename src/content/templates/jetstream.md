@@ -30,7 +30,7 @@ gallery:
 
 Jetstream is a polished, high-performance marketing website template for Astro. Browse through a [live demo](https://crawling-submarine.cloudvent.net/).
 
-> **Note**
+> <strong class="callout-label callout-note">Note</strong>
 >
 > This template is built with [Astro 6](https://astro.build/) and the [Astro Component Starter](https://cloudcannon.com/templates/astro-component-starter/).
 

@@ -39,12 +39,16 @@ function readable(markdown) {
   return markdown
     .replace(/^#\s+.*\n+/, "")
     /* GitHub's alert marker, which plain markdown renders as a blockquote
-       reading "[!NOTE]". Written as a bold label instead: the blockquote is
-       drawn as a callout on the page, and the body keeps its links, which an
-       HTML block would swallow. */
+       reading "[!NOTE]". Written as a labelled span instead: the page colours
+       the callout from that class, and an inline tag leaves the markdown
+       around it alone — a block-level wrapper would swallow the links in the
+       body. */
     .replace(
       /^>\s*\[!(NOTE|TIP|IMPORTANT|WARNING|CAUTION)\]\s*$/gim,
-      (_match, kind) => `> **${kind[0] + kind.slice(1).toLowerCase()}**\n>`
+      (_match, kind) => {
+        const name = kind[0] + kind.slice(1).toLowerCase();
+        return `> <strong class="callout-label callout-${kind.toLowerCase()}">${name}</strong>\n>`;
+      }
     )
     .replace(/^\s*\[!\[[^\]]*\]\([^)]*\)\]\([^)]*\)\s*$/gm, "")
     .replace(/^\s*!\[[^\]]*\]\([^)]*\)\s*$/gm, "")

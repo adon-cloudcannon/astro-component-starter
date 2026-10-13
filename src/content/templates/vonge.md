@@ -76,6 +76,6 @@ Run the website:
 $ npm start
 ~~~
 
-> **Important**
+> <strong class="callout-label callout-important">Important</strong>
 >
 > When running locally, the pagination will not work. Deploy to CloudCannon to see successful pagination.

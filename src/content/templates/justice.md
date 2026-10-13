@@ -37,7 +37,7 @@ gallery:
       grey background
 ---
 
-> **Important**
+> <strong class="callout-label callout-important">Important</strong>
 >
 > This template is no longer actively maintained but remains available for reference and learning. For production sites, we recommend our [modern templates](https://cloudcannon.com/templates/).
 

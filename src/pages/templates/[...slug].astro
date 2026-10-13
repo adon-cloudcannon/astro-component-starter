@@ -2,10 +2,8 @@
 /**
  * One template's page.
  *
- * The body is the template's own markdown. The old site downloaded the
- * repository's README at build time and rendered that instead, which is where
- * the design's "Features" list comes from; nothing in the ported data carries
- * it, so a template with no body shows its chrome and its gallery.
+ * The body is the template's own markdown, which `npm run templates:readmes`
+ * fills from the repository's README.
  */
 import { breadcrumbListJsonLd } from "@component-utils/breadcrumbTrail";
 import Badge from "@core-elements/badge/Badge.astro";
@@ -50,7 +48,12 @@ const badgePill = pills.find((pill) => pill.id === badgeId);
 const badgeText = badgePill?.name ?? (badgeId ? label(badgeId) : "");
 const badgeAccent = badgePill?.accent;
 const ssgs = template.data.ssgs ?? [];
-const gallery = (template.data.gallery ?? []).filter((shot) => shot?.image);
+/* The generators' own wordmarks, which the design draws in the chooser. */
+const ssgLogos: Record<string, { src: string }> = Object.fromEntries(
+  Object.entries(
+    import.meta.glob("../../assets/images/marketing/ssgs/*.svg", { eager: true, query: "?url" })
+  ).map(([file, url]) => [file.split("/").pop()!.replace(".svg", ""), { src: (url as any).default }])
+);
 
 const breadcrumbJsonLd = breadcrumbListJsonLd(
   [{ label: "Templates", url: "/templates/" }, { label: title }],
@@ -158,8 +161,23 @@ const breadcrumbJsonLd = breadcrumbListJsonLd(
           <div class="template-page-panel">
             <p class="template-page-panel-label">Choose your SSG:</p>
             <ul class="template-page-ssgs">
-              {ssgs.map((ssg) => (
-                <li class="template-page-ssg">{label(ssg)}</li>
+              {ssgs.map((ssg, index) => (
+                /* The first is the one the page is showing. Every template
+                   here has one generator, so this is a statement of which,
+                   not a control — the list is ready for the day a template
+                   ships for two. */
+                <li class="template-page-ssg" aria-current={index === 0 ? "true" : undefined}>
+                  {ssgLogos[ssg] ? (
+                    <img
+                      class="template-page-ssg-mark"
+                      src={ssgLogos[ssg].src}
+                      alt={label(ssg)}
+                      loading="lazy"
+                    />
+                  ) : (
+                    <span class="template-page-ssg-name">{label(ssg)}</span>
+                  )}
+                </li>
               ))}
             </ul>
             <Button
@@ -199,18 +217,6 @@ const breadcrumbJsonLd = breadcrumbListJsonLd(
 
       <div class="template-page-content prose">
         <Content />
-        {gallery.length > 0 && (
-          <div class="template-page-gallery">
-            {gallery.map((shot) => (
-              <Image
-                class="template-page-gallery-shot"
-                source={shot.image}
-                alt={shot.alt ?? ""}
-                rounded
-              />
-            ))}
-          </div>
-        )}
       </div>
     </div>
   </CustomSection>
@@ -350,60 +356,108 @@ const breadcrumbJsonLd = breadcrumbListJsonLd(
     padding: 0;
   }
 
-  /* The design draws this as the one generator the page is showing, picked
-     from a list: a bordered pill with the mark of a chosen radio beside the
-     name, not a button. */
+  /* The generator the page is showing, drawn as the chosen one of a list:
+     the mark of a radio beside the wordmark, across the sidebar. */
   .template-page-ssg {
     align-items: center;
-    border: var(--border-width-md) solid var(--pacific);
-    border-radius: var(--radius-card);
+    border: var(--border-width-sm) solid var(--color-border-strong);
+    border-radius: var(--radius-sm);
     color: var(--color-text-strong);
     display: flex;
     font-size: var(--font-size-md);
     font-weight: var(--font-weight-semibold);
     gap: var(--spacing-md);
-    inline-size: fit-content;
-    padding: var(--spacing-md) var(--spacing-lg);
+    padding: var(--spacing-sm) var(--spacing-md);
+  }
+
+  .template-page-ssg[aria-current] {
+    border-color: var(--pacific);
+    border-width: var(--border-width-md);
   }
 
   .template-page-ssg::before {
     aspect-ratio: 1;
-    border: var(--border-width-md) solid var(--pacific);
+    border: var(--border-width-md) solid var(--color-border-strong);
     border-radius: 50%;
     content: "";
-    inline-size: 1rem;
+    flex-shrink: 0;
+    inline-size: 0.875rem;
   }
 
-  /* A README's own asides. GitHub's `> [!NOTE]` marker is rewritten to a
-     bold label when the README is pulled in, so what arrives here is an
-     ordinary blockquote with its first line naming it. */
+  .template-page-ssg[aria-current]::before {
+    background-color: var(--pacific);
+    border-color: var(--pacific);
+    box-shadow: inset 0 0 0 2px var(--white);
+  }
+
+  .template-page-ssg-mark {
+    block-size: 1.125rem;
+    inline-size: auto;
+    max-inline-size: 100%;
+    object-fit: contain;
+    object-position: left center;
+  }
+
+  /* A README is written for GitHub, where the headings carry a whole page.
+     Here they are one column of one, and the design sets them at 29. */
+  .template-page-content h2 {
+    font-size: var(--font-size-heading-sm);
+    margin-block: var(--spacing-3xl) var(--spacing-lg);
+  }
+
+  .template-page-content h3 {
+    font-size: var(--font-size-heading-xs);
+    margin-block: var(--spacing-xl) var(--spacing-md);
+  }
+
+  /* A README's own asides. GitHub's `> [!NOTE]` marker is rewritten when the
+     README is pulled in, leaving a blockquote whose label carries the kind as
+     a class; the colours below are GitHub's own, in this palette's words.
+     The base layer indents a blockquote, which is right for a quote inside
+     running text and wrong for a panel that is its own block. */
   .template-page-content blockquote {
     --callout-accent: var(--pacific);
 
     background-color: color-mix(in srgb, var(--callout-accent) 12%, transparent);
     border: var(--border-width-sm) solid var(--callout-accent);
-    border-inline-start-width: var(--border-width-sm);
     border-radius: var(--radius-card);
     color: var(--color-text-strong);
     margin-block: var(--spacing-xl);
-    padding: var(--spacing-lg) var(--spacing-xl);
+    margin-inline: 0;
+    padding: var(--spacing-md) var(--spacing-lg);
   }
 
-  .template-page-content blockquote > p:first-child > strong:only-child {
+  .template-page-content blockquote > p:first-child {
+    margin-block-start: 0;
+  }
+
+  .template-page-content blockquote > p:last-child {
+    margin-block-end: 0;
+  }
+
+  .template-page-content .callout-label {
     color: var(--callout-accent);
     font-size: var(--font-size-lg);
   }
 
-  .template-page-gallery {
-    display: grid;
-    gap: var(--spacing-lg);
-    margin-block-start: var(--spacing-3xl);
+  /* GitHub draws note blue, tip green, important purple, warning amber and
+     caution red. Blush is this palette's nearest to a purple. */
+  .template-page-content blockquote:has(.callout-tip) {
+    --callout-accent: var(--moss);
   }
 
-  .template-page-gallery-shot img {
-    block-size: auto;
-    inline-size: 100%;
+  .template-page-content blockquote:has(.callout-important) {
+    --callout-accent: var(--blush);
   }
+
+  .template-page-content blockquote:has(.callout-warning) {
+    --callout-accent: var(--golden);
+  }
+
+  .template-page-content blockquote:has(.callout-caution) {
+    --callout-accent: var(--sunset);
+  }
+
 
   @media (width < 900px) {
     .template-page-head,
