@@ -198,6 +198,7 @@ quietly broken in the editor.
 - A centred card stacks its icon over the title rather than beside it, which is what the design draws, and its plate is the design's disc: a lift of the card, round, sized off the glyph.
 - One colour themes a card grid's card: its rule, its mark and its link. The link was never coloured and the mark read the accent on its own; a card that carries a panel keeps the site's blue under it, since its colour is the panel.
 - A comparison table rules its plan columns apart from the first body row down and leaves the header open, which is what the design draws on both tables that use it. Carried up into the header the rules read as four boxes rather than one row of plans.
+- A comparison table draws a rule between every pair of columns. The feature-name cell is a `th`, so the selector that meant to skip it skipped the first plan as well and drew one rule where the design draws three.
 - A card's link is set at 16 rather than 13, which is what the design draws on both grids that carry one.
 
 #### Accessibility

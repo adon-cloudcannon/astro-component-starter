@@ -371,10 +371,12 @@ const slidesPrice = (plan: Plan) =>
       color: var(--pacific);
     }
 
-    /* A rule between the plan columns, which is what separates three columns
-       of ticks into three readable plans. Not on the first cell: the feature
-       names are a column of labels, not a plan. */
-    .comparison-table tbody td + td + td {
+    /* A rule between every pair of columns, which is what separates columns
+       of ticks into readable plans. Not on the first cell: the feature names
+       are a column of labels, not a plan — and that cell is a `th`, so
+       `td + td` skipped the first plan as well and drew one rule where the
+       design draws three. */
+    .comparison-table tbody tr > *:not(:first-child) {
       border-inline-start: var(--border-width-sm) solid var(--dark-sand);
     }
 
