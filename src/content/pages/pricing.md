@@ -13,9 +13,8 @@ pageSections:
         headingLevel: h1
         headingSize: xl
       subtext:
-        subtext: >-
-          Every plan includes unlimited sites and Git syncing, so teams of any size can
-          start building straight away.
+        subtext: Every plan includes unlimited sites and Git syncing, so teams of any
+          size can start building straight away.
         subtextSize: lg
         subtextWidth: md
       showBreadcrumbs: false
@@ -44,7 +43,7 @@ pageSections:
       showAnnualPricing: true
       monthlyLabel: Monthly
       annualLabel: Yearly
-      annualBadge: ''
+      annualBadge:
       defaultInterval: annual
       tiers:
         - name: Standard
@@ -104,7 +103,8 @@ pageSections:
           priceSuffix: ''
           annualPrice: ''
           annualPriceSuffix: ''
-          description: For large organizations with advanced compliance and security requirements.
+          description: For large organizations with advanced compliance and security
+            requirements.
           features:
             - text: Unlimited sites
               included: true
@@ -143,9 +143,6 @@ pageSections:
         headingLevel: h2
         headingSize: lg
       subtext: ''
-      showAnnualPricing: true
-      monthlyLabel: Monthly
-      annualLabel: Yearly
       plans:
         - name: Standard
           price: $55/mo
@@ -173,120 +170,123 @@ pageSections:
             - Custom user allowance
         - feature: Unlimited Sites
           values:
-            - 'yes'
-            - 'yes'
-            - 'yes'
+            - yes
+            - yes
+            - yes
         - feature: Custom Git syncing
           values:
-            - 'no'
-            - 'no'
-            - 'yes'
+            - no
+            - no
+            - yes
         - feature: Automatic site optimizations
           values:
-            - 'yes'
-            - 'yes'
-            - 'yes'
+            - yes
+            - yes
+            - yes
         - feature: Client Sharing
           values:
-            - 'yes'
-            - 'yes'
-            - 'yes'
+            - yes
+            - yes
+            - yes
         - feature: Custom permissions
           values:
-            - 'no'
+            - no
             - 10 Custom groups
             - Unlimited custom groups
         - feature: Content scheduling
           values:
-            - 'yes'
+            - yes
             - Advanced content scheduling
             - Advanced content scheduling
         - feature: DAM
           values:
-            - 'yes'
-            - 'yes'
+            - yes
+            - yes
             - Custom DAM
         - feature: Git LFS
           values:
-            - 'yes'
-            - 'yes'
-            - 'yes'
+            - yes
+            - yes
+            - yes
         - feature: Build Deploys
           values:
-            - 'yes'
-            - 'yes'
-            - 'yes'
+            - yes
+            - yes
+            - yes
         - feature: Authentication
           values:
-            - 'yes'
-            - 'yes'
+            - yes
+            - yes
             - SSO/SAML authentication
         - feature: Advanced forms
           values:
-            - 'no'
-            - 'yes'
-            - 'yes'
+            - no
+            - yes
+            - yes
         - feature: Custom forms
           values:
-            - 'no'
-            - 'no'
-            - 'yes'
+            - no
+            - no
+            - yes
         - feature: Advanced Site Mounting
           values:
-            - 'no'
-            - 'yes'
-            - 'yes'
+            - no
+            - yes
+            - yes
         - feature: Custom Site Mounting
           values:
-            - 'no'
-            - 'no'
-            - 'yes'
+            - no
+            - no
+            - yes
         - feature: Globalization workflows
           values:
-            - 'yes'
-            - 'yes'
-            - 'yes'
+            - yes
+            - yes
+            - yes
         - feature: Custom branding
           values:
-            - 'yes'
-            - 'yes'
-            - 'yes'
+            - yes
+            - yes
+            - yes
         - feature: Testing domains
           values:
-            - 'yes'
+            - yes
             - Custom testing domains
             - Custom testing domains
         - feature: Advanced branching workflows
           values:
-            - 'no'
-            - 'yes'
-            - 'yes'
+            - no
+            - yes
+            - yes
         - feature: Deploy Previews
           values:
-            - 'no'
-            - 'yes'
-            - 'yes'
+            - no
+            - yes
+            - yes
         - feature: Single sign-on
           values:
-            - 'no'
-            - 'no'
-            - 'yes'
+            - no
+            - no
+            - yes
         - feature: Uptime SLA
           values:
-            - 'no'
-            - 'no'
-            - 'yes'
+            - no
+            - no
+            - yes
         - feature: Custom edge rules
           values:
-            - 'no'
-            - 'no'
-            - 'yes'
+            - no
+            - no
+            - yes
         - feature: Professional services
           values:
-            - 'no'
-            - 'no'
+            - no
+            - no
             - 3 hours / month
       striped: false
+      showAnnualPricing: true
+      monthlyLabel: Monthly
+      annualLabel: Yearly
     style:
       backgroundColor: sand
       pattern: none
@@ -303,9 +303,8 @@ pageSections:
         headingLevel: h2
         headingSize: lg
       subtext:
-        subtext: >-
-          Join the CloudCannon Partner Program and get access to the Lite plan for your
-          clients.
+        subtext: Join the CloudCannon Partner Program and get access to the Lite plan
+          for your clients.
         subtextSize: lg
         subtextWidth: ''
       mediaSections:
@@ -345,21 +344,26 @@ pageSections:
         heading: Migration support
         headingLevel: h2
         headingSize: lg
-      subtext: >-
-        Our migration team can get your site configured for your ideal editing experience,
-        starting at $3,000 per project (USD).
+      linkText: Learn about our migration services
+      link: /migration/
+      imageSource: /src/assets/images/marketing/ferns-rocks-2-3806-72621-mirrored.png
+      imageAlt: ''
+      subtext: Our migration team can get your site configured for your ideal editing
+        experience, starting at $3,000 per project (USD).
       subtextSize: lg
       alignmentHorizontal: center
       scratch: pacific
       buttonVariant: secondary
-      linkText: Learn about our migration services
-      link: /migration/
       imageSourceStart: /src/assets/images/marketing/ferns-corner-3806-72622.png
       imageAltStart: ''
-      imageSource: /src/assets/images/marketing/ferns-rocks-2-3806-72621-mirrored.png
-      imageAlt: ''
     style:
+      backgroundColor: pacific
+      pattern: none
+      fade: none
+      maxContentWidth: xl
+      paddingHorizontal: gutter
       paddingVertical: 4xl
+      haze: false
   - _component: page-sections/conversion/pricing-tiers
     content:
       cardAlignment: center
@@ -384,9 +388,8 @@ pageSections:
           priceSuffix: /person (USD)
           annualPrice: ''
           annualPriceSuffix: /year
-          description: >-
-            Add additional users on your Lite, Standard or Team plan, including client
-            sharing.
+          description: Add additional users on your Lite, Standard or Team plan, including
+            client sharing.
           features: []
           buttonText: ''
           buttonLink: ''
@@ -437,7 +440,7 @@ pageSections:
     style:
       backgroundColor: dark
       pattern: pegboard
-      fade: none
+      fade: bottom
       maxContentWidth: xl
       paddingHorizontal: gutter
       paddingVertical: 4xl
@@ -456,12 +459,12 @@ pageSections:
         - title: What happens at the end of my trial?
           contentSections:
             - _component: building-blocks/core-elements/text
-              text: >-
-                Before the end of your trial, we'll send you an email asking you to enter
-                your credit card to continue using CloudCannon. If no credit card is entered
-                by the end of the trial, your account will be put on hold. If you need more
-                time to figure out if CloudCannon is right for you, please contact our sales
-                team and we will happily extend your trial period.
+              text: Before the end of your trial, we'll send you an email asking you to enter
+                your credit card to continue using CloudCannon. If no credit
+                card is entered by the end of the trial, your account will be
+                put on hold. If you need more time to figure out if CloudCannon
+                is right for you, please contact our sales team and we will
+                happily extend your trial period.
               alignmentHorizontal: start
               size: md
         - title: What counts as a custom domain?
@@ -479,16 +482,14 @@ pageSections:
         - title: When am I invoiced?
           contentSections:
             - _component: building-blocks/core-elements/text
-              text: >-
-                Monthly plans are invoiced each month from the day you started, and yearly
+              text: Monthly plans are invoiced each month from the day you started, and yearly
                 plans once a year.
               alignmentHorizontal: start
               size: md
         - title: Am I able to turn off overages?
           contentSections:
             - _component: building-blocks/core-elements/text
-              text: >-
-                Yes. Contact our support team and we can cap your account rather than
+              text: Yes. Contact our support team and we can cap your account rather than
                 billing for overages.
               alignmentHorizontal: start
               size: md
