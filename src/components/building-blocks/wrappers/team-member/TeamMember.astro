@@ -321,6 +321,16 @@ const mirror = rootMirror({ "data-variant": variant });
       z-index: var(--layer-1);
     }
 
+    /* The badge is light sand whatever the band is, so it states its own ink
+       rather than taking the band's. On a dark band the name came through
+       near-white on cream — the same colour as the badge it sits on — and
+       the role at a pale grey you could just about read. Same rule as the
+       dark pricing card in reverse: a card that fixes its own surface has to
+       fix the text on it too. */
+    .team-member .team-member-badge {
+      color: var(--earth);
+    }
+
     .team-member .team-member-name {
       display: block;
       font-size: var(--team-member-name);
@@ -329,7 +339,7 @@ const mirror = rootMirror({ "data-variant": variant });
     }
 
     .team-member .team-member-role {
-      color: var(--color-text-muted);
+      color: inherit;
       display: block;
       font-family: var(--font-mono);
       font-size: var(--team-member-role);
