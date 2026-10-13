@@ -542,6 +542,15 @@ const figures = slides
       width: fit-content;
     }
 
+    /* A pill on the card's top edge is the card's label rather than a note
+       beside its name, and the design draws it at 18 in a 100 x 43 pill —
+       the size the offer card's pill is. The inline one keeps its own size,
+       which is already a step over what the design sets (see above). */
+    .pricing-tier.align-center .pricing-tier-head > .pricing-tier-badge > .badge-inner {
+      font-size: 1.125rem;
+      padding: 0.5rem 1.625rem;
+    }
+
     /* On .badge-inner, which is the element that is actually drawn: the
        background, the border and the radius all live there, so painting the
        wrapper left the shipped surface and its grey edge showing underneath
