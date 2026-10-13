@@ -90,7 +90,7 @@ const titleDataAttributes = effectiveTitleProp
          #fffcf3 and the card read as nothing at all. The design draws white on
          cream; a band that wants something else sets the token. */
       background-color: var(--accordion-card-bg, var(--white));
-      border: var(--border-width-sm, 1px) solid var(--dark-sand);
+      border: var(--border-width-sm) solid var(--dark-sand);
       border-radius: var(--radius-card);
       padding: var(--spacing-lg) var(--spacing-xl);
     }
@@ -145,7 +145,7 @@ const titleDataAttributes = effectiveTitleProp
     /* Not gated on `[open]`: these flipped in and out instantly while the row
        animated, which is the jump. The row clips them when it is closed. */
     .accordion-item.variant-card .accordion-item-detail {
-      border-block-start: var(--border-width-sm, 1px) solid var(--dark-sand);
+      border-block-start: var(--border-width-sm) solid var(--dark-sand);
       margin-block-start: var(--spacing-lg);
       padding-block-start: var(--spacing-lg);
     }
@@ -153,12 +153,13 @@ const titleDataAttributes = effectiveTitleProp
     .accordion-item.variant-card .accordion-item-mark {
       align-items: center;
       block-size: 2.5rem;
-      border: var(--border-width-sm, 1px) solid var(--color-border);
+      border: var(--border-width-sm) solid var(--color-border);
       border-radius: 999px;
       display: inline-flex;
       flex-shrink: 0;
       inline-size: 2.5rem;
       justify-content: center;
+      transition: border-color var(--animation-normal) var(--ease-out);
     }
 
     .accordion-item.variant-card .accordion-item-mark svg {
