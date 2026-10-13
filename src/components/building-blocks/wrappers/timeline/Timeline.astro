@@ -117,7 +117,7 @@ if (!_component && !hasEntries && !hasSlotContent) return;
           <TimelineItem
             layout={layout}
             headingSize={isRail ? "sm" : "xs"}
-            bodySize={isRail ? "md" : "sm"}
+            bodySize={isRail ? "lg" : "sm"}
             useDefaultEditableBinding={!!effectiveChildrenProp}
             data-editable={effectiveChildrenProp ? "array-item" : undefined}
             data-id={effectiveChildrenProp ? "building-blocks/wrappers/timeline/timeline-item" : undefined}
@@ -611,6 +611,25 @@ if (!_component && !hasEntries && !hasSlotContent) return;
      Flat, because rules nested deeper than a couple of levels get dropped (see
      CLAUDE.md), and these have to beat the split rules above by order. */
   @layer components {
+    /* The rail's own type, which both designs that use it agree on: the
+       title is Header 5 at 29.1/600 and the line under it Body 3 at 19,
+       with about 20 between them.
+
+       The size has to be restated here rather than left to the `sm` the
+       rail already passes the Heading: `.timeline-title` pins
+       `font-size` and `.timeline-title .heading-inner` inherits it, so the
+       prop was measured as applied and drew 20 regardless. */
+    .timeline:has(> .timeline-rail) .timeline-title {
+      font-size: var(--font-size-heading-sm);
+      line-height: var(--line-height-heading-sm);
+    }
+
+    .timeline:has(> .timeline-rail) .timeline-body {
+      --space-before: var(--space-before-snug);
+
+      margin-block-start: var(--space-before-snug);
+    }
+
     .timeline:has(> .timeline-rail) .timeline-rail::before {
       inset-block: var(--timeline-split-marker) var(--timeline-split-marker);
       inset-inline-start: calc(var(--timeline-split-marker) / 2);
