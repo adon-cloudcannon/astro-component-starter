@@ -165,16 +165,17 @@ pageSections:
           - _component: building-blocks/core-elements/heading
             text: Migrations starting at $3,000 USD/project
             level: h3
-            size: xs
+            size: sm
+          # One markdown field, which is what the design draws: "Includes:"
+          # and the three lines under it are a single 19px text node.
           - _component: building-blocks/core-elements/text
-            text: '**Includes:**'
-            size: sm
-          - _component: building-blocks/core-elements/list
-            items:
-              - text: A tailored editing experience
-              - text: Training and education
-              - text: Lighthouse performance optimized
-            size: sm
+            text: |-
+              **Includes:**
+
+              - A tailored editing experience
+              - Training and education
+              - Lighthouse performance optimized
+            size: lg
       reverse: false
     style:
       backgroundColor: light-sand

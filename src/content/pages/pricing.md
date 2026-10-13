@@ -170,11 +170,11 @@ pageSections:
           - _component: building-blocks/core-elements/text
             text: A pay-as-you go plan for smaller clients. Unlimited sites and basic
               features included.
-            size: sm
+            size: lg
           - _component: building-blocks/core-elements/heading
             text: $10/month (USD)
             level: p
-            size: xs
+            size: md
       reverse: false
     style:
       backgroundColor: light-sand

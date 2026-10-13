@@ -141,9 +141,42 @@ const hasBadge = isNonEmptyString(badgeText);
        rather than naming a second token keeps any pill colour at the same
        weight. */
     .offer-card .offer-card-badge > .badge-inner {
+      --offer-card-badge-size: 1.125rem;
+
       background-color: color-mix(in srgb, var(--offer-card-badge, var(--harbour)) 45%, var(--white));
       border-color: transparent;
       color: var(--pacific);
+      /* 18, which is what the design sets. Badge's own scale stops at 14.5,
+         and at that size the pill read as a tag rather than the label the
+         design draws. */
+      font-size: var(--offer-card-badge-size);
+    }
+
+    /* The card's own copy runs tight: the design sets "Includes:" and the
+       list it introduces as one 19px text node, so what separates them is a
+       line gap, not the base layer's paragraph margin. The rules go on the
+       markdown's own children — the block renders into `.text-inner`, so a
+       rule on the content wrapper's direct children never reaches them. */
+    .offer-card .offer-card-content > * + * {
+      --space-before: var(--spacing-sm);
+
+      margin-block-start: var(--spacing-sm);
+    }
+
+    .offer-card .offer-card-content :is(p, ul, ol) {
+      margin-block: 0;
+    }
+
+    .offer-card .offer-card-content :is(p, ul, ol) + :is(p, ul, ol) {
+      margin-block-start: var(--spacing-sm);
+    }
+
+    .offer-card .offer-card-content :is(ul, ol) {
+      padding-inline-start: var(--spacing-lg);
+    }
+
+    .offer-card .offer-card-content li::marker {
+      color: var(--color-text-muted);
     }
 
     /* 420, not the usual 640: this sits in the media half of a showcase
