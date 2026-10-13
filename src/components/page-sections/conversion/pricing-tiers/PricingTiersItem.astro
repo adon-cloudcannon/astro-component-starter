@@ -551,6 +551,20 @@ const figures = slides
       padding: 0.5rem 1.625rem;
     }
 
+    /* That pill hangs in the card's own padding, so the name under it needs
+       more room than a card without one: the design sets the name 49 below
+       the card's edge where a card otherwise pads 32, and gives the line
+       under the name 34 rather than the 4 a tight caption takes. */
+    .pricing-tier.align-center:has(> .pricing-tier-head > .pricing-tier-badge) {
+      padding-block-start: var(--spacing-2xl);
+    }
+
+    .pricing-tier.align-center:has(> .pricing-tier-head > .pricing-tier-badge)
+      .pricing-tier-description
+      .simple-text-content {
+      margin-block-start: var(--spacing-lg);
+    }
+
     /* On .badge-inner, which is the element that is actually drawn: the
        background, the border and the radius all live there, so painting the
        wrapper left the shipped surface and its grey edge showing underneath

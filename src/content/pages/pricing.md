@@ -332,10 +332,9 @@ pageSections:
             text: A pay-as-you go plan for smaller clients. Unlimited sites and basic
               features included.
             size: lg
-          - _component: building-blocks/core-elements/heading
-            text: $10/month (USD)
-            level: p
-            size: md
+          - _component: building-blocks/core-elements/text
+            text: <span class="text-display">$10</span>/month (USD)
+            size: lg
       reverse: false
     style:
       backgroundColor: light-sand

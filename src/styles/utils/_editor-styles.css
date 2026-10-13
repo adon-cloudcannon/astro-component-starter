@@ -1,0 +1,20 @@
+/*
+ * The classes an editor can apply from the rich-text toolbar, painted on the
+ * built page. The same set is declared in public/css/editor-styles.css, which
+ * is what CloudCannon reads to fill its dropdown and to paint its preview;
+ * the two have to agree or a style looks one way in the editor and another
+ * on the site.
+ *
+ * In `utils` because the markup is inside a component's own prose, and a
+ * component rule would otherwise out-specify a span the editor dropped in.
+ */
+@layer utils {
+  /* The large number in a price line: the design sets "$10" at 40 against
+     the 19 of the "/month (USD)" beside it, and the nearest step on this
+     theme's heading scale is 42. */
+  .text-display {
+    font-size: var(--font-size-heading-md);
+    font-weight: var(--font-weight-semibold);
+    line-height: var(--line-height-heading-lg, 1.1);
+  }
+}

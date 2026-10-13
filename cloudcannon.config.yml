@@ -89,6 +89,7 @@ collections_config:
         type: text
     _editables:
       content:
+        styles: /css/editor-styles.css
         format: p h2 h3 h4 h5 h6
         bold: true
         italic: true
@@ -316,6 +317,13 @@ data_config:
     path: .cloudcannon/data/icons.yml
   autocomplete_tokens:
     path: .cloudcannon/data/autocomplete-tokens.yml
+
+# The styles an editor can reach from the rich-text toolbar's dropdown. The
+# file is read by CloudCannon to fill the dropdown and paint its preview; the
+# same classes are painted on the built page by styles/utils/_editor-styles.css.
+_editables:
+  content:
+    styles: /css/editor-styles.css
 
 _structures_from_glob:
   - /.cloudcannon/structures/*.cloudcannon.structures.yml

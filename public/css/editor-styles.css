@@ -1,0 +1,15 @@
+/* The styles CloudCannon offers in the rich-text toolbar's dropdown.
+ *
+ * A rule written `element.class` is offered as a style; a bare element or a
+ * bare class paints the editor's preview and is not offered (see the
+ * _editables `styles` reference). Everything here is painted on the built
+ * page too, by styles/utils/_editor-styles.css, so what an editor picks and
+ * what ships are the same thing.
+ */
+
+/* Can be applied to inline content */
+span.text-display {
+  font-size: 2.625rem;
+  font-weight: 600;
+  line-height: 1.1;
+}
