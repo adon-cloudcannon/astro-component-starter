@@ -523,6 +523,14 @@ const breadcrumbJsonLd = breadcrumbListJsonLd(
     padding: var(--callout-pad-block, 1.75rem) var(--callout-pad-inline, 2.25rem);
   }
 
+  /* A README's code is quoted from a terminal or a file, and a good deal of
+     it is drawn rather than written — directory trees, aligned comments. The
+     base layer wraps a highlighted block to avoid a scrollbar, which folds
+     those into nonsense; the block scrolls instead. */
+  .template-page-content .astro-code code {
+    white-space: pre;
+  }
+
   /* A README's own asides. GitHub's `> [!NOTE]` marker is rewritten when the
      README is pulled in, leaving a blockquote whose label carries the kind as
      a class; the colours below are GitHub's own, in this palette's words.
