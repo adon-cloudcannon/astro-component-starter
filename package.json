@@ -3,7 +3,14 @@
   "type": "module",
   "version": "2.0.0",
   "description": "An Astro component starter for building visually editable marketing sites with CloudCannon's visual editing",
-  "keywords": ["cloudcannon", "astro", "starter", "template", "visual-editing", "components"],
+  "keywords": [
+    "cloudcannon",
+    "astro",
+    "starter",
+    "template",
+    "visual-editing",
+    "components"
+  ],
   "private": true,
   "author": "CloudCannon",
   "license": "MIT",
@@ -66,7 +73,8 @@
     "format:fix": "prettier --write .",
     "deps:sync": "rm -rf node_modules && npm install --os=linux --cpu=x64 --libc=glibc --ignore-scripts --no-audit && npm ci",
     "deps:check": "npm ci --dry-run",
-    "lint:nesting": "node scripts/cms/lint-nesting.mjs"
+    "lint:nesting": "node scripts/cms/lint-nesting.mjs",
+    "templates:readmes": "node scripts/content/fetch-template-readmes.mjs"
   },
   "dependencies": {
     "@astrojs/mdx": "^8.0.2",

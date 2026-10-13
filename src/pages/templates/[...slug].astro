@@ -39,10 +39,10 @@ const { title, description, image, imageAlt, previewUrl, repoUrl } = template.da
    the same words and the same colour, so the two read as one thing. Both come
    from the listing's own block rather than from a copy kept here. */
 const listing = await getEntry("pages", "templates");
-const pills: { id?: string; name?: string; accent?: string }[] =
-  (listing?.data?.pageSections ?? [])
-    .find((block: any) => String(block?._component ?? "").endsWith("/template-grid"))
-    ?.content?.pills ?? [];
+const grid = ((listing?.data?.pageSections ?? []) as any[]).find((block) =>
+  String(block?._component ?? "").endsWith("/template-grid")
+);
+const pills: { id?: string; name?: string; accent?: string }[] = grid?.content?.pills ?? [];
 
 const label = (id: string) => id.charAt(0).toUpperCase() + id.slice(1);
 const badgeId = (template.data.collections ?? [])[0];
@@ -80,9 +80,11 @@ const breadcrumbJsonLd = breadcrumbListJsonLd(
     <div class="template-page-head">
       <div class="template-page-intro flow">
         <p class="template-page-eyebrow">Templates</p>
+        {/* `lg` is the 46 the design sets: "Jetstream" measures 213 wide
+            there, against 202 at this size and 292 one step up. */}
         <Heading
           level="h1"
-          size="2xl"
+          size="lg"
           class="template-page-title"
         >
           {title}
@@ -117,7 +119,6 @@ const breadcrumbJsonLd = breadcrumbListJsonLd(
               loading="lazy"
               referrerpolicy="no-referrer"
               sandbox="allow-scripts allow-same-origin"
-              scrolling="no"
               tabindex="-1"
             />
           </div>
@@ -128,7 +129,6 @@ const breadcrumbJsonLd = breadcrumbListJsonLd(
               loading="lazy"
               referrerpolicy="no-referrer"
               sandbox="allow-scripts allow-same-origin"
-              scrolling="no"
               tabindex="-1"
               aria-hidden="true"
             />
@@ -372,6 +372,26 @@ const breadcrumbJsonLd = breadcrumbListJsonLd(
     border-radius: 50%;
     content: "";
     inline-size: 1rem;
+  }
+
+  /* A README's own asides. GitHub's `> [!NOTE]` marker is rewritten to a
+     bold label when the README is pulled in, so what arrives here is an
+     ordinary blockquote with its first line naming it. */
+  .template-page-content blockquote {
+    --callout-accent: var(--pacific);
+
+    background-color: color-mix(in srgb, var(--callout-accent) 12%, transparent);
+    border: var(--border-width-sm) solid var(--callout-accent);
+    border-inline-start-width: var(--border-width-sm);
+    border-radius: var(--radius-card);
+    color: var(--color-text-strong);
+    margin-block: var(--spacing-xl);
+    padding: var(--spacing-lg) var(--spacing-xl);
+  }
+
+  .template-page-content blockquote > p:first-child > strong:only-child {
+    color: var(--callout-accent);
+    font-size: var(--font-size-lg);
   }
 
   .template-page-gallery {
