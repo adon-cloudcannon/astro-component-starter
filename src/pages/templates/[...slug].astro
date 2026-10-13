@@ -43,10 +43,11 @@ const grid = ((listing?.data?.pageSections ?? []) as any[]).find((block) =>
 const pills: { id?: string; name?: string; accent?: string }[] = grid?.content?.pills ?? [];
 
 const label = (id: string) => SSG_NAMES[id] ?? id.charAt(0).toUpperCase() + id.slice(1);
-const badgeId = (template.data.collections ?? [])[0];
-const badgePill = pills.find((pill) => pill.id === badgeId);
-const badgeText = badgePill?.name ?? (badgeId ? label(badgeId) : "");
-const badgeAccent = badgePill?.accent;
+
+/* Every collection the template is in, not just the first: five of them carry
+   two. In the listing's pill order rather than the template's own, so two
+   templates in the same pair read the same way round. */
+const badges = pills.filter((pill) => (template.data.collections ?? []).includes(pill.id ?? ""));
 const ssgs = template.data.ssgs ?? [];
 /**
  * What each generator is called, where its own spelling is not its id.
@@ -141,14 +142,18 @@ const breadcrumbJsonLd = breadcrumbListJsonLd(
         >
           {description}
         </SimpleText>
-        {badgeText && (
-          <Badge
-            class="template-page-badge"
-            style={badgeAccent ? `--template-page-pill: var(--${badgeAccent})` : undefined}
-            text={badgeText}
-            showArrow={false}
-            variant="strong"
-          />
+        {badges.length > 0 && (
+          <p class="template-page-badges">
+            {badges.map((pill) => (
+              <Badge
+                class="template-page-badge"
+                style={pill.accent ? `--template-page-pill: var(--${pill.accent})` : undefined}
+                text={pill.name ?? label(pill.id ?? "")}
+                showArrow={false}
+                variant="strong"
+              />
+            ))}
+          </p>
         )}
       </div>
       {previewUrl ? (
@@ -320,8 +325,13 @@ const breadcrumbJsonLd = breadcrumbListJsonLd(
     --space-before: var(--spacing-lg);
   }
 
-  .template-page-badge {
+  .template-page-badges {
     --space-before: var(--spacing-xl);
+
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--spacing-sm);
+    margin-block: var(--spacing-xl) 0;
   }
 
   /* The pill takes the colour the listing page filters that collection in.
