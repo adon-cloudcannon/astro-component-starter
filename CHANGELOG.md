@@ -195,7 +195,8 @@ quietly broken in the editor.
 - A card panel's logo is sized so an upright mark is not half the size of a wide one: the box is wider than it is tall and the mark is contained in it, so at 4rem tall the upright marks came out small beside the wide ones.
 - A card grid's **Icon background** draws the plate it asks for. The prop was read and then thrown away: the icon was told to draw a plate only when **Solid icon** was on, so a card that asked for the tinted one got no plate at all.
 - A centred card stacks its icon over the title rather than beside it, which is what the design draws, and its plate is the design's disc: a lift of the card, round, sized off the glyph.
-- A centred card's link takes the card's icon colour, so the icon, the title and the link read as one card. Cards coloured by their border instead keep the brand blue.
+- One colour themes a card grid's card: its rule, its mark and its link. The link was never coloured and the mark read the accent on its own; a card that carries a panel keeps the site's blue under it, since its colour is the panel.
+- A card's link is set at 16 rather than 13, which is what the design draws on both grids that carry one.
 
 #### Accessibility
 

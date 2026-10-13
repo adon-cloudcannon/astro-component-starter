@@ -112,6 +112,14 @@ const {
    may still say "". Both mean the same here. */
 const chosen = (value?: string) => (value && value !== "auto" ? value : undefined);
 const drawnHeadingSize = chosen(headingSize) ?? (iconName ? "md" : "sm");
+
+/* One colour themes the card — its rule, its mark and its link — and the
+   accent is that colour where a card sets one. A panelled card is the
+   exception: its colour is the panel it carries, loud and its own, so the
+   link under it stays the site's blue the way the design draws the
+   open-source tools. */
+const cardColour = accentColor && accentColor !== "none" ? accentColor : iconColor;
+const linkColour = iconPanel ? "default" : cardColour;
 ---
 
 <GridItem
@@ -173,7 +181,7 @@ const drawnHeadingSize = chosen(headingSize) ?? (iconName ? "md" : "sm");
           class="card-grid-icon"
           name={iconName}
           size="lg"
-          color={accentColor && accentColor !== "none" ? accentColor : iconColor}
+          color={cardColour}
           background={iconSolid ? "solid" : iconBackground}
           alignmentHorizontal={alignmentHorizontal === "center" ? "center" : "start"}
         />
@@ -204,11 +212,10 @@ const drawnHeadingSize = chosen(headingSize) ?? (iconName ? "md" : "sm");
     {divider && linkText && <div class="card-grid-rule card-grid-foot-rule"></div>}
     {linkText && (
       /* The site's arrow link, which is the Button rather than an anchor of
-         this card's own — see CLAUDE.md.
-
-         `textColor` matches the card's icon where the card is themed by one
-         colour, and stays the brand blue where the colour is the card's
-         border instead — the open-source tools, which set no icon colour. */
+         this card's own — see CLAUDE.md. The button's own `sm` is 13 and the
+         design sets this at 16 on both grids that carry one: "Learn more"
+         measures 85 there and 84 at 16, "Explore guides and resources" 215
+         against 213. */
       <Button
         class="card-grid-link"
         text={linkText}
@@ -216,8 +223,8 @@ const drawnHeadingSize = chosen(headingSize) ?? (iconName ? "md" : "sm");
         iconName="arrow-right"
         iconPosition="after"
         variant="text"
-        size="sm"
-        textColor={accentColor === "none" && iconColor !== "default" ? iconColor : "default"}
+        size="md"
+        textColor={linkColour}
         data-prop={at("linkText")}
       />
     )}

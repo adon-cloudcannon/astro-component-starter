@@ -177,7 +177,7 @@ pageSections:
             linkText: Explore guides and resources
             link: https://cloudcannon.com/documentation/
           style:
-            accentColor: none
+            accentColor: harbour
             iconColor: harbour
             iconSolid: false
             divider: false
@@ -193,7 +193,7 @@ pageSections:
             linkText: Read the latest news
             link: /blog/
           style:
-            accentColor: none
+            accentColor: sunset
             iconColor: sunset
             iconSolid: false
             divider: false
@@ -209,7 +209,7 @@ pageSections:
             linkText: Review the latest updates
             link: https://cloudcannon.com/changelog/
           style:
-            accentColor: none
+            accentColor: golden
             iconColor: golden
             iconSolid: false
             divider: false
