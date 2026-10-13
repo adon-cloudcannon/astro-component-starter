@@ -201,26 +201,6 @@ if (!_component && !hasEntries && !hasSlotContent) return;
         padding: 0;
       }
 
-      /* The vertical list's marker. Bare, it is the dot in its own box so
-         nothing moves; with an icon it becomes the filled disc the split and
-         the rail draw, in the entry's own colour. */
-      .timeline-marker {
-        align-items: center;
-        display: flex;
-        flex: none;
-        justify-content: center;
-      }
-
-      .timeline-marker.has-icon {
-        --timeline-marker-size: 2.75rem;
-
-        background-color: var(--timeline-accent, var(--color-bg-brand));
-        border-radius: var(--radius-full);
-        block-size: var(--timeline-marker-size);
-        color: var(--timeline-accent-ink, var(--light-sand));
-        inline-size: var(--timeline-marker-size);
-      }
-
       .timeline-dot {
         background-color: var(--color-bg-brand);
         border-radius: var(--radius-full);

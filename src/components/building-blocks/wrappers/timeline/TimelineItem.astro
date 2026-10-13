@@ -166,24 +166,10 @@ const dateBinding =
     !isSplit &&
     !grouped && (
       <div class="timeline-content">
-        {/* The same marker the split and the rail draw: a filled disc with
-            the entry's glyph in it where one is named, and the plain dot
-            where none is. The vertical list drew the dot either way, so an
-            entry with an icon simply lost it. */}
         <span
-          class:list={["timeline-marker", isNonEmptyString(iconName) && "has-icon"]}
-          style={accentStyle}
+          class="timeline-dot"
           aria-hidden="true"
-        >
-          {isNonEmptyString(iconName) ? (
-            <Icon
-              name={iconName}
-              size="md"
-            />
-          ) : (
-            <span class="timeline-dot" />
-          )}
-        </span>
+        />
         {hasTitle && (
           <Heading
             class="timeline-title"

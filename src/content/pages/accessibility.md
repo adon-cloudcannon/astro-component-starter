@@ -38,7 +38,7 @@ pageSections:
         headingSize: lg
       subtext:
         subtext: ''
-      layout: vertical
+      layout: rail
       entries:
         - date: ''
           title: Our commitment to accessibility
