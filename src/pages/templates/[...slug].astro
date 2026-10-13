@@ -16,7 +16,7 @@ import SimpleText from "@core-elements/simple-text/SimpleText.astro";
 import breadcrumbsData from "@data/breadcrumbs.json";
 import Page from "@layouts/Page.astro";
 import CustomSection from "@page-sections/builders/custom-section/CustomSection.astro";
-import { getCollection, render, type CollectionEntry } from "astro:content";
+import { getCollection, getEntry, render, type CollectionEntry } from "astro:content";
 
 export async function getStaticPaths() {
   const templates = await getCollection("templates", ({ data }) => !data.draft);
@@ -35,11 +35,20 @@ const { template } = Astro.props;
 const { Content } = await render(template);
 const { title, description, image, imageAlt, previewUrl, repoUrl } = template.data;
 
-/* The label a collection id carries on the listing page, derived rather than
-   read from it: the two agree today, and reaching into another page's blocks
-   to fetch a word would tie this route to that page's shape. */
-const label = (id: string) => id.charAt(0).toUpperCase() + id.slice(1).replace(/-/g, "-");
-const badge = (template.data.collections ?? [])[0];
+/* The pill a template carries here is the one the listing page filters by, in
+   the same words and the same colour, so the two read as one thing. Both come
+   from the listing's own block rather than from a copy kept here. */
+const listing = await getEntry("pages", "templates");
+const pills: { id?: string; name?: string; accent?: string }[] =
+  (listing?.data?.pageSections ?? [])
+    .find((block: any) => String(block?._component ?? "").endsWith("/template-grid"))
+    ?.content?.pills ?? [];
+
+const label = (id: string) => id.charAt(0).toUpperCase() + id.slice(1);
+const badgeId = (template.data.collections ?? [])[0];
+const badgePill = pills.find((pill) => pill.id === badgeId);
+const badgeText = badgePill?.name ?? (badgeId ? label(badgeId) : "");
+const badgeAccent = badgePill?.accent;
 const ssgs = template.data.ssgs ?? [];
 const gallery = (template.data.gallery ?? []).filter((shot) => shot?.image);
 
@@ -84,21 +93,55 @@ const breadcrumbJsonLd = breadcrumbListJsonLd(
         >
           {description}
         </SimpleText>
-        {badge && (
+        {badgeText && (
           <Badge
             class="template-page-badge"
-            text={label(badge)}
+            style={badgeAccent ? `--template-page-pill: var(--${badgeAccent})` : undefined}
+            text={badgeText}
             showArrow={false}
             variant="strong"
           />
         )}
       </div>
-      <Image
-        class="template-page-shot"
-        source={image}
-        alt={imageAlt ?? `${title} screenshot`}
-        rounded
-      />
+      {previewUrl ? (
+        /* The live site, not a screenshot: each frame lays the page out at
+           twice its box and is scaled to half, so the desktop one renders a
+           real 1040-wide viewport and the phone one a real 390, rather than a
+           squeezed version of this column. Hard-coded here because it is the
+           one page that shows a template running. */
+        <div class="template-page-preview">
+          <div class="template-page-frame template-page-frame-desktop">
+            <iframe
+              src={previewUrl}
+              title={`${title} previewed on a desktop screen`}
+              loading="lazy"
+              referrerpolicy="no-referrer"
+              sandbox="allow-scripts allow-same-origin"
+              scrolling="no"
+              tabindex="-1"
+            />
+          </div>
+          <div class="template-page-frame template-page-frame-phone">
+            <iframe
+              src={previewUrl}
+              title={`${title} previewed on a phone`}
+              loading="lazy"
+              referrerpolicy="no-referrer"
+              sandbox="allow-scripts allow-same-origin"
+              scrolling="no"
+              tabindex="-1"
+              aria-hidden="true"
+            />
+          </div>
+        </div>
+      ) : (
+        <Image
+          class="template-page-shot"
+          source={image}
+          alt={imageAlt ?? `${title} screenshot`}
+          rounded
+        />
+      )}
     </div>
   </CustomSection>
 
@@ -205,9 +248,61 @@ const breadcrumbJsonLd = breadcrumbListJsonLd(
     --space-before: var(--spacing-xl);
   }
 
+  /* The pill takes the colour the listing page filters that collection in.
+     The design draws it black, which says nothing about which collection it
+     is; the listing already gives each one a colour. */
+  .template-page-badge > .badge-inner {
+    background-color: var(--template-page-pill, var(--midnight));
+    border-color: transparent;
+    color: var(--white);
+  }
+
   .template-page-shot img {
     block-size: auto;
     inline-size: 100%;
+  }
+
+  /* The phone overlaps the desktop's lower-right corner, which is how the
+     design draws the pair. */
+  .template-page-preview {
+    position: relative;
+  }
+
+  .template-page-frame {
+    background-color: var(--white);
+    border: var(--border-width-md) solid var(--color-border-strong);
+    border-radius: var(--radius-card);
+    overflow: hidden;
+  }
+
+  /* The frame is laid out at 1 / --template-page-scale of its box and scaled
+     back down, so the page inside sees a real viewport of that width. An
+     iframe sized to the box would hand the site a 520-wide viewport and it
+     would answer with its phone layout. */
+  .template-page-frame iframe {
+    block-size: calc(100% / var(--template-page-scale));
+    border: 0;
+    display: block;
+    inline-size: calc(100% / var(--template-page-scale));
+    transform: scale(var(--template-page-scale));
+    transform-origin: 0 0;
+  }
+
+  .template-page-frame-desktop {
+    --template-page-scale: 0.5;
+
+    aspect-ratio: 520 / 360;
+    inline-size: 100%;
+  }
+
+  .template-page-frame-phone {
+    --template-page-scale: 0.4;
+
+    aspect-ratio: 147 / 323;
+    inline-size: 28%;
+    inset-block-start: 22%;
+    inset-inline-end: -4%;
+    position: absolute;
   }
 
   /* The sidebar holds its place while the body scrolls past it, which is what
@@ -238,7 +333,7 @@ const breadcrumbJsonLd = breadcrumbListJsonLd(
   }
 
   .template-page-panel-label {
-    color: var(--color-text-muted);
+    color: var(--sunset);
     font-size: var(--font-size-xs);
     font-weight: var(--font-weight-semibold);
     letter-spacing: 0.2em;
@@ -255,12 +350,28 @@ const breadcrumbJsonLd = breadcrumbListJsonLd(
     padding: 0;
   }
 
+  /* The design draws this as the one generator the page is showing, picked
+     from a list: a bordered pill with the mark of a chosen radio beside the
+     name, not a button. */
   .template-page-ssg {
-    border: var(--border-width-sm) solid var(--color-border-strong);
+    align-items: center;
+    border: var(--border-width-md) solid var(--pacific);
     border-radius: var(--radius-card);
+    color: var(--color-text-strong);
+    display: flex;
+    font-size: var(--font-size-md);
     font-weight: var(--font-weight-semibold);
+    gap: var(--spacing-md);
+    inline-size: fit-content;
     padding: var(--spacing-md) var(--spacing-lg);
-    text-align: center;
+  }
+
+  .template-page-ssg::before {
+    aspect-ratio: 1;
+    border: var(--border-width-md) solid var(--pacific);
+    border-radius: 50%;
+    content: "";
+    inline-size: 1rem;
   }
 
   .template-page-gallery {
