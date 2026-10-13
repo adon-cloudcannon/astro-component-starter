@@ -13,6 +13,7 @@ pricingComparisonPlans:
       value:
         name: ""
         price: ""
+        annualPrice: ""
         highlight: false
         buttonText: ""
         buttonLink: ""
@@ -30,6 +31,11 @@ pricingComparisonPlans:
         price:
           type: text
           comment: Price line under the name (e.g. "$49/mo" or "Custom"). Leave empty to hide.
+        annualPrice:
+          type: text
+          comment: >-
+            The same line at the yearly rate. Set both and the figure slides between them as the
+            billing switch is thrown; leave this empty and the price never changes.
         highlight:
           type: switch
           comment: >-

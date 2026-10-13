@@ -143,19 +143,25 @@ pageSections:
         headingLevel: h2
         headingSize: lg
       subtext: ''
+      showAnnualPricing: true
+      monthlyLabel: Monthly
+      annualLabel: Yearly
       plans:
         - name: Standard
-          price: $49/mo
+          price: $55/mo
+          annualPrice: $49/mo
           highlight: true
           buttonText: Start 21-day trial
           buttonLink: /start/
         - name: Team
-          price: $300/mo
+          price: $350/mo
+          annualPrice: $300/mo
           highlight: false
           buttonText: Start 21-day trial
           buttonLink: /start/
         - name: Enterprise
           price: Custom
+          annualPrice: ''
           highlight: false
           buttonText: Book a call with us
           buttonLink: /contact/

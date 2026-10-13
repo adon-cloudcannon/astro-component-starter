@@ -1,15 +1,18 @@
 ---
 import { bandPattern, bandHaze } from "@component-utils/bandStyle.mjs";
 import { nestedProps } from "@component-utils/nestedProps.mjs";
+import BillingSwitch from "@page-sections/conversion/pricing-tiers/BillingSwitch.astro";
 import CustomSection from "@builders/custom-section/CustomSection.astro";
 import Button from "@core-elements/button/Button.astro";
 import Heading from "@core-elements/heading/Heading.astro";
 import Icon from "@core-elements/icon/Icon.astro";
 import Text from "@core-elements/text/Text.astro";
+import { isNonEmptyString } from "@component-utils/isNonEmptyString";
 
 type Plan = {
   name?: string;
   price?: string;
+  annualPrice?: string;
   highlight?: boolean;
   buttonText?: string;
   buttonLink?: string;
@@ -31,6 +34,17 @@ const {
   plans = [],
   rows = [],
   striped = true,
+  /**
+   * Draws a second monthly/yearly control over the table.
+   *
+   * It is a label for the switch the plan cards own, not one of its own, so
+   * the two stay in step and a reader deep in the table does not have to
+   * scroll back up. On a page with no plan cards there is nothing to point
+   * at, so leave it off.
+   */
+  showAnnualPricing = false,
+  monthlyLabel = "Monthly",
+  annualLabel = "Yearly",
   sectionLabel,
   maxContentWidth = "xl",
   paddingHorizontal = "gutter",
@@ -77,6 +91,11 @@ const markFor = (value: string) => {
 };
 
 const hasTable = planList.length > 0 && rows?.length > 0;
+
+// A plan priced both ways slides between its two figures; one figure stays a
+// plain cell.
+const slidesPrice = (plan: Plan) =>
+  showAnnualPricing && isNonEmptyString(plan.price) && isNonEmptyString(plan.annualPrice);
 ---
 
 <CustomSection
@@ -99,6 +118,14 @@ const hasTable = planList.length > 0 && rows?.length > 0;
     data-prop={at("subtext")}
     text={subtext}
   />
+
+  {hasTable && showAnnualPricing && (
+    <BillingSwitch
+      class="pricing-comparison-billing"
+      monthlyLabel={monthlyLabel}
+      annualLabel={annualLabel}
+    />
+  )}
 
   {hasTable && (
     <div class:list={["pricing-comparison-frame", striped && "striped"]}>
@@ -153,14 +180,33 @@ const hasTable = planList.length > 0 && rows?.length > 0;
                   >
                     {plan.name}
                   </span>
-                  {plan.price && (
-                    <span
-                      class="pricing-comparison-price"
-                      data-editable="text"
-                      data-prop="price"
-                    >
-                      {plan.price}
+                  {slidesPrice(plan) ? (
+                    <span class="pricing-comparison-price billing-figures">
+                      <span
+                        class="billing-figure is-monthly"
+                        data-editable="text"
+                        data-prop="price"
+                      >
+                        {plan.price}
+                      </span>
+                      <span
+                        class="billing-figure is-annual"
+                        data-editable="text"
+                        data-prop="annualPrice"
+                      >
+                        {plan.annualPrice}
+                      </span>
                     </span>
+                  ) : (
+                    plan.price && (
+                      <span
+                        class="pricing-comparison-price"
+                        data-editable="text"
+                        data-prop="price"
+                      >
+                        {plan.price}
+                      </span>
+                    )
                   )}
                   {plan.buttonText && (
                     <Button
@@ -259,9 +305,16 @@ const hasTable = planList.length > 0 && rows?.length > 0;
     /* A rule between the plan columns, which is what separates three columns
        of ticks into three readable plans. Not on the first cell: the feature
        names are a column of labels, not a plan. */
-    .pricing-comparison thead th + th,
     .pricing-comparison tbody td + td + td {
-      border-inline-start: var(--border-width-sm, 1px) solid var(--dark-sand);
+      border-inline-start: var(--border-width-sm) solid var(--dark-sand);
+    }
+
+    /* Same reason as the header's floor: a collapsed border does not travel
+       with a sticky cell, so the column rules are drawn inside it. */
+    .pricing-comparison thead th + th {
+      box-shadow:
+        inset 0 calc(-1 * var(--border-width-md)) 0 var(--color-border-strong),
+        inset var(--border-width-sm) 0 0 var(--dark-sand);
     }
 
     .pricing-comparison {
@@ -269,7 +322,7 @@ const hasTable = planList.length > 0 && rows?.length > 0;
          is used on the sticky feature column so it matches on screen and
          stays opaque when the table pans underneath. */
       --pricing-stripe: color-mix(in srgb, var(--gray-500) 10%, transparent);
-      --pricing-stripe-solid: color-mix(in srgb, var(--gray-500) 10%, var(--color-bg));
+      --pricing-stripe-solid: color-mix(in srgb, var(--gray-500) 10%, var(--band-color));
       .pricing-comparison-frame {
         --space-before: var(--space-before-loose);
       }
@@ -284,8 +337,13 @@ const hasTable = planList.length > 0 && rows?.length > 0;
         text-transform: uppercase;
       }
 
+      /* Not a scroll container at this width, so the header row sticks to
+         the window rather than to a box that never scrolls vertically:
+         `overflow-x: auto` computes `overflow-y: auto` too, and a scrollport
+         that fits its content never offsets anything inside it. Panning is
+         turned back on below 640, where the table stops fitting. */
       .pricing-comparison-scroller {
-        overflow-x: auto;
+        overflow: visible;
 
         &:focus-visible {
           outline: var(--focus-ring-width) var(--focus-ring-style) var(--color-focus-ring);
@@ -302,23 +360,66 @@ const hasTable = planList.length > 0 && rows?.length > 0;
       thead th {
         background: none;
         border: 0;
-        border-bottom: var(--border-width-md) solid var(--color-border-strong);
         padding: var(--spacing-md);
         text-align: center;
         vertical-align: bottom;
       }
 
+      /* The row rides the page so the plan a tick belongs to is still named
+         forty rows down. Both the plan cells and the corner, or the corner
+         scrolls away and the row is left floating.
+
+         The rules are shadows rather than borders: under
+         `border-collapse: collapse` a border belongs to the table, not the
+         cell, so it stays behind when a sticky cell moves and the header
+         travels with no floor under it. */
+      thead th,
+      .pricing-comparison-corner {
+        background-color: var(--band-color);
+        box-shadow: inset 0 calc(-1 * var(--border-width-md)) 0 var(--color-border-strong);
+        position: sticky;
+        /* Under the main nav, which is sticky at the top of the window
+           itself: at 0 the plan names and prices pinned behind it and only
+           the buttons showed. Below its layer too, so the nav still wins. */
+        top: var(--main-nav-height);
+        z-index: 1;
+      }
+
+      .pricing-comparison-frame.striped thead th,
+      .pricing-comparison-frame.striped .pricing-comparison-corner {
+        background-color: var(--band-color);
+      }
+
+      /* Both lines of the header are Header styles in the design, bold and
+         in the strong ink: the name is 20/700 and the figure under it 14/700,
+         against the 14.5/400 muted body the rest of the table is set in. Read
+         as body they sat level with the row labels under them and the header
+         stopped reading as a header. */
       .pricing-comparison-plan {
+        color: var(--color-text-strong);
         display: block;
-        font-size: var(--font-size-md);
+        font-size: var(--font-size-heading-xs);
         font-weight: var(--font-weight-bold);
       }
 
       .pricing-comparison-price {
-        color: var(--color-text-muted);
+        color: var(--color-text-strong);
         display: block;
         font-size: var(--font-size-sm);
-        font-weight: var(--font-weight-normal);
+        font-weight: var(--font-weight-bold);
+      }
+
+      /* `display` has to be restated here: the rule above it is a class
+         deeper, so a price cell kept `block`, `grid-area` meant nothing and
+         the two figures sat side by side instead of stacking. */
+      .pricing-comparison-price.billing-figures {
+        display: grid;
+      }
+
+      .pricing-comparison-billing {
+        --space-before: var(--spacing-xl);
+
+        margin-block-start: var(--spacing-xl);
       }
 
       tbody th,
@@ -375,10 +476,18 @@ const hasTable = planList.length > 0 && rows?.length > 0;
 
         .pricing-comparison-scroller {
           mask-image: linear-gradient(90deg, #000 calc(100% - var(--spacing-xl)), transparent);
+          overflow-x: auto;
+        }
+
+        /* The row cannot stick to the window from inside a scroll container,
+           and the narrow table is a scroll container again. */
+        thead th,
+        .pricing-comparison-corner {
+          position: static;
         }
 
         tbody th[scope="row"] {
-          background-color: var(--color-bg);
+          background-color: var(--band-color);
           border-inline-end: var(--border-width-sm) solid var(--color-border);
           inset-inline-start: 0;
           position: sticky;

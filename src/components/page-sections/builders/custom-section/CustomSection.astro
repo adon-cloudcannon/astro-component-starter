@@ -730,6 +730,37 @@ const arrayDataAttributes =
       }
     }
 
+    /* The band's own colour, published so anything inside the section can
+       paint in it. A child that needs to be opaque over the band — a sticky
+       table header, a pinned column — otherwise has only `--color-bg`, which
+       is the page's base and not the band's: on a sand band it drew a
+       light-sand panel a shade off everything around it. Taken from the class
+       the background layer already carries rather than an inline style, which
+       a section root may not have. */
+    .custom-section {
+      --band-color: var(--color-bg);
+    }
+
+    .custom-section:has(> .outer-content > .background.bg-surface) {
+      --band-color: var(--color-bg-surface);
+    }
+
+    .custom-section:has(> .outer-content > .background.bg-muted) {
+      --band-color: var(--color-bg-muted);
+    }
+
+    .custom-section:has(> .outer-content > .background.bg-accent) {
+      --band-color: var(--color-bg-accent);
+    }
+
+    .custom-section:has(> .outer-content > .background.bg-brand) {
+      --band-color: var(--color-bg-brand);
+    }
+
+    .custom-section:has(> .outer-content > .background.bg-highlight) {
+      --band-color: var(--color-bg-highlight);
+    }
+
     /* Parallax scrolling is a common vestibular trigger — fall back to a
        regular background image. */
     @media (prefers-reduced-motion: reduce) {

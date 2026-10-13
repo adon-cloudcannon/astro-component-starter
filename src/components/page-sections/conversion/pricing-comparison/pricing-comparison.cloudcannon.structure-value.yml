@@ -15,16 +15,19 @@ value:
     plans:
       - name: Starter
         price: $19/mo
+        annualPrice: ""
         highlight: false
         buttonText: Choose Starter
         buttonLink: "#"
       - name: Team
         price: $49/mo
+        annualPrice: ""
         highlight: true
         buttonText: Choose Team
         buttonLink: "#"
       - name: Enterprise
         price: Custom
+        annualPrice: ""
         highlight: false
         buttonText: Talk to sales
         buttonLink: "#"
@@ -60,6 +63,9 @@ value:
           - Priority email
           - Dedicated manager
     striped: true
+    showAnnualPricing: false
+    monthlyLabel: Monthly
+    annualLabel: Yearly
   style:
     backgroundColor: light-sand
     pattern: none

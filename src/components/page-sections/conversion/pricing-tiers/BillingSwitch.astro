@@ -1,0 +1,223 @@
+---
+import { BILLING_INPUT_ID, BILLING_INPUT_ATTRIBUTE } from "@component-utils/billingControl.mjs";
+import { isNonEmptyString } from "@component-utils/isNonEmptyString";
+import Toggle from "@forms/toggle/Toggle.astro";
+
+/**
+ * The page's monthly/yearly control, drawn as a segmented pill.
+ *
+ * `owns` renders the one `<input>` the page has; every other instance is a
+ * second label for it, which is what keeps two controls on one page in step
+ * without script. The plan cards own it and the comparison table borrows it.
+ */
+const {
+  owns = false,
+  monthlyLabel = "Monthly",
+  annualLabel = "Yearly",
+  badge = "",
+  badgeProp,
+  checked = false,
+  class: className,
+} = Astro.props;
+
+const badgeMarkup = isNonEmptyString(badge) ? badge : null;
+---
+
+<div class:list={["billing-switch", className]}>
+  {owns ? (
+    <Toggle
+      class="billing-switch-toggle"
+      id={BILLING_INPUT_ID}
+      name={BILLING_INPUT_ID}
+      value="annual"
+      offLabel={monthlyLabel}
+      label={annualLabel}
+      checked={checked}
+      inputAttributes={{ [BILLING_INPUT_ATTRIBUTE]: "" }}
+    >
+      {annualLabel}
+      {badgeMarkup && (
+        <>
+          {" "}
+          <span
+            class="billing-switch-saving"
+            data-prop={badgeProp}
+          >
+            ({badgeMarkup})
+          </span>
+        </>
+      )}
+    </Toggle>
+  ) : (
+    /* No input of its own: this one points at the input the plan cards
+       render, so throwing either control moves both. */
+    <label
+      class="toggle-container"
+      for={BILLING_INPUT_ID}
+    >
+      <span class="toggle-off-label">{monthlyLabel}</span>
+      <span class="toggle-label">
+        {annualLabel}
+        {badgeMarkup && (
+          <>
+            {" "}
+            <span class="billing-switch-saving">({badgeMarkup})</span>
+          </>
+        )}
+      </span>
+    </label>
+  )}
+</div>
+
+<style is:global>
+  @layer page-sections {
+    /* A segmented pill, not a switch. The design draws two labels in one sand
+       track with the live one filled Pacific, which reads as "pick one of two"
+       where a switch reads as "turn a thing on". Toggle's own markup is kept —
+       the input still carries `toggle-input` — and only its chrome is
+       restyled from here, where `page-sections` out-ranks `components`. */
+    .billing-switch {
+      display: flex;
+      justify-content: center;
+    }
+
+    .billing-switch > .billing-switch-toggle {
+      width: auto;
+    }
+
+    /* Two equal tracks, so the fill behind them is half the pill and lands
+       on a segment by travelling its own width. Sized off the labels
+       instead, Monthly and Yearly differ by a few pixels and the fill
+       stops short of one of them. */
+    .billing-switch .toggle-container {
+      --billing-switch-pad: 4px;
+
+      align-items: center;
+      background-color: var(--sand);
+      border: var(--border-width-sm) solid var(--dark-sand);
+      border-radius: 999px;
+      cursor: pointer;
+      display: inline-grid;
+      gap: 0;
+      grid-auto-columns: 1fr;
+      grid-auto-flow: column;
+      padding: var(--billing-switch-pad);
+      position: relative;
+    }
+
+    /* The fill is one element that moves, not a colour that appears on
+       whichever label is live. */
+    .billing-switch .toggle-container::before {
+      background-color: var(--pacific);
+      border-radius: 999px;
+      content: "";
+      inline-size: calc((100% - var(--billing-switch-pad) * 2) / 2);
+      inset-block: var(--billing-switch-pad);
+      inset-inline-start: var(--billing-switch-pad);
+      position: absolute;
+      transition: translate var(--animation-normal) var(--ease-out);
+    }
+
+    :root:has([data-billing-switch]:checked) .billing-switch .toggle-container::before {
+      translate: 100% 0;
+    }
+
+    /* The switch itself is the control; the labels are the UI. */
+    .billing-switch .toggle-switch {
+      display: none;
+    }
+
+    .billing-switch .toggle-off-label,
+    .billing-switch .toggle-label {
+      border-radius: 999px;
+      color: var(--color-text-strong);
+      cursor: pointer;
+      font-weight: var(--font-weight-semibold);
+      line-height: 1;
+      opacity: 1;
+      padding: 0.875rem 1.5rem;
+      position: relative;
+      text-align: center;
+      transition: color var(--animation-normal) var(--ease-out);
+      white-space: nowrap;
+    }
+
+    /* Unchecked is Monthly, checked is the annual label. */
+    .billing-switch .toggle-off-label {
+      color: var(--white);
+    }
+
+    :root:has([data-billing-switch]:checked) .billing-switch .toggle-off-label {
+      color: var(--color-text-strong);
+    }
+
+    :root:has([data-billing-switch]:checked) .billing-switch .toggle-label {
+      color: var(--white);
+    }
+
+    .billing-switch .toggle-container:has(.toggle-input:focus-visible) .toggle-off-label,
+    .billing-switch .toggle-container:has(.toggle-input:focus-visible) .toggle-label {
+      outline: var(--focus-ring-width) var(--focus-ring-style) var(--color-focus-ring);
+      outline-offset: 2px;
+    }
+
+    .billing-switch .billing-switch-saving {
+      color: var(--color-success);
+      font-weight: var(--font-weight-semibold);
+    }
+
+    /* What the switch drives. The two figures share one cell, so a price
+       keeps the width of the longer of its two numbers and nothing beside it
+       moves. `visibility` is what takes the resting one out of the
+       accessibility tree; it interpolates to the end of its own transition,
+       so the figure is still painted while it leaves. */
+    .billing-figures {
+      display: grid;
+      /* Centred, not aligned to the cell's start: the cell is as wide as the
+         longer of the two figures, so a shorter one left in place sat off to
+         one side and the number appeared to shift as the switch was thrown. */
+      justify-items: center;
+    }
+
+    .billing-figure {
+      grid-area: 1 / 1;
+      transition:
+        opacity var(--animation-normal) var(--ease-out),
+        translate var(--animation-normal) var(--ease-out),
+        visibility var(--animation-normal) var(--ease-out);
+    }
+
+    /* Monthly rests in place and annual waits below it, so throwing the
+       control runs both upwards: the live figure leaves through the top and
+       its replacement arrives from under the baseline. */
+    .billing-figure.is-annual {
+      opacity: 0;
+      translate: 0 0.45em;
+      visibility: hidden;
+    }
+
+    :root:has([data-billing-switch]:checked) .billing-figure.is-monthly {
+      opacity: 0;
+      translate: 0 -0.45em;
+      visibility: hidden;
+    }
+
+    :root:has([data-billing-switch]:checked) .billing-figure.is-annual {
+      opacity: 1;
+      translate: 0 0;
+      visibility: visible;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .billing-switch .toggle-container::before {
+        transition: none;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .billing-figure {
+        transition: none;
+      }
+    }
+  }
+</style>

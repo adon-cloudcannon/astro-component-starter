@@ -1,14 +1,12 @@
 ---
 import { bandPattern, bandHaze } from "@component-utils/bandStyle.mjs";
 import { nestedProps } from "@component-utils/nestedProps.mjs";
-import { isNonEmptyString } from "@component-utils/isNonEmptyString";
-import { slugifyLabel } from "@component-utils/slugify";
 import CustomSection from "@builders/custom-section/CustomSection.astro";
 import { subtextMeasure } from "@component-utils/subtextMeasure.mjs";
 import TierGarden from "@wrappers/tier-garden/TierGarden.astro";
 import Heading from "@core-elements/heading/Heading.astro";
 import Text from "@core-elements/text/Text.astro";
-import Toggle from "@forms/toggle/Toggle.astro";
+import BillingSwitch from "@page-sections/conversion/pricing-tiers/BillingSwitch.astro";
 import PricingTiersItem from "@page-sections/conversion/pricing-tiers/PricingTiersItem.astro";
 import Grid from "@wrappers/grid/Grid.astro";
 import { nextHeadingLevel } from "@component-utils/headingLevel";
@@ -96,10 +94,6 @@ const subtextCap = subtextMeasure(subtextWidth);
 
 const itemHeadingLevel = nextHeadingLevel(headingLevel);
 
-// A radio group's name must be unique per section on the page, so a section
-// with nothing to name it still needs a generated suffix.
-const billingLabel = sectionLabel || heading;
-const billingName = `pricing-billing-${billingLabel ? slugifyLabel(billingLabel) : crypto.randomUUID()}`;
 const annualSelected = defaultInterval === "annual";
 ---
 
@@ -142,29 +136,15 @@ const annualSelected = defaultInterval === "annual";
     text={subtext}
   />
   {showAnnualPricing && (
-    <div class="pricing-tiers-billing">
-      <Toggle
-        class="pricing-tiers-billing-toggle"
-        name={billingName}
-        value="annual"
-        offLabel={monthlyLabel}
-        label={annualLabel}
-        checked={annualSelected}
-      >
-        {annualLabel}
-        {isNonEmptyString(annualBadge) && (
-          <>
-            {" "}
-            <span
-              class="pricing-tiers-billing-saving"
-              data-prop={at("annualBadge")}
-            >
-              ({annualBadge})
-            </span>
-          </>
-        )}
-      </Toggle>
-    </div>
+    <BillingSwitch
+      class="pricing-tiers-billing"
+      owns
+      monthlyLabel={monthlyLabel}
+      annualLabel={annualLabel}
+      badge={annualBadge}
+      badgeProp={at("annualBadge")}
+      checked={annualSelected}
+    />
   )}
   <div class="pricing-tiers-bed">
     {garden && <TierGarden cards=".pricing-tier" />}
@@ -239,99 +219,6 @@ const annualSelected = defaultInterval === "annual";
       }
     }
 
-    /* A segmented pill, not a switch. The design draws two labels in one sand
-       track with the live one filled Pacific, which reads as "pick one of two"
-       where a switch reads as "turn a thing on". Toggle's own markup is kept —
-       the input still carries `toggle-input`, which is what the price rows
-       key off — and only its chrome is restyled from here, where
-       `page-sections` out-ranks `components`. */
-    .pricing-tiers-billing {
-      display: flex;
-      justify-content: center;
-
-      > .pricing-tiers-billing-toggle {
-        width: auto;
-      }
-
-      /* Two equal tracks, so the fill behind them is half the pill and lands
-         on a segment by travelling its own width. Sized off the labels
-         instead, Monthly and Yearly differ by a few pixels and the fill
-         stops short of one of them. */
-      .toggle-container {
-        --pricing-toggle-pad: 4px;
-
-        align-items: center;
-        background-color: var(--sand);
-        border: var(--border-width-sm) solid var(--dark-sand);
-        border-radius: 999px;
-        display: inline-grid;
-        gap: 0;
-        grid-auto-columns: 1fr;
-        grid-auto-flow: column;
-        padding: var(--pricing-toggle-pad);
-        position: relative;
-      }
-
-      /* The fill is one element that moves, not a colour that appears on
-         whichever label is live. */
-      .toggle-container::before {
-        background-color: var(--pacific);
-        border-radius: 999px;
-        content: "";
-        inline-size: calc((100% - var(--pricing-toggle-pad) * 2) / 2);
-        inset-block: var(--pricing-toggle-pad);
-        inset-inline-start: var(--pricing-toggle-pad);
-        position: absolute;
-        transition: translate var(--animation-normal) var(--ease-out);
-      }
-
-      .toggle-container:has(.toggle-input:checked)::before {
-        translate: 100% 0;
-      }
-
-      /* The switch itself is the control; the labels are the UI. */
-      .toggle-switch {
-        display: none;
-      }
-
-      .toggle-off-label,
-      .toggle-label {
-        border-radius: 999px;
-        color: var(--color-text-strong);
-        cursor: pointer;
-        font-weight: var(--font-weight-semibold);
-        line-height: 1;
-        opacity: 1;
-        padding: 0.875rem 1.5rem;
-        position: relative;
-        text-align: center;
-        transition: color var(--animation-normal) var(--ease-out);
-        white-space: nowrap;
-      }
-
-      /* Unchecked is Monthly, checked is the annual label. */
-      .toggle-container:not(:has(.toggle-input:checked)) .toggle-off-label,
-      .toggle-container:has(.toggle-input:checked) .toggle-label {
-        color: var(--white);
-      }
-
-      @media (prefers-reduced-motion: reduce) {
-        .toggle-container::before {
-          transition: none;
-        }
-      }
-
-      .toggle-container:has(.toggle-input:focus-visible) .toggle-off-label,
-      .toggle-container:has(.toggle-input:focus-visible) .toggle-label {
-        outline: 2px solid var(--pacific);
-        outline-offset: 2px;
-      }
-
-      .pricing-tiers-billing-saving {
-        color: var(--color-success);
-        font-weight: var(--font-weight-semibold);
-      }
-    }
   }
 
   @layer page-sections {

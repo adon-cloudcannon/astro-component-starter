@@ -69,6 +69,21 @@ content.rows:
 content.striped:
   type: switch
   comment: Shade alternate rows to help the eye track across the table.
+content.showAnnualPricing:
+  type: switch
+  label: Second billing switch
+  comment: >-
+    Draws a Monthly/Yearly control over the table so a reader does not have to
+    scroll back to the plan cards. It moves the cards' own switch rather than
+    keeping a setting of its own, so leave it off on a page with no plan cards.
+content.monthlyLabel:
+  type: text
+  comment: Label on the monthly side of the switch.
+  hidden: "!showAnnualPricing"
+content.annualLabel:
+  type: text
+  comment: Label on the yearly side of the switch.
+  hidden: "!showAnnualPricing"
 
 # --- section wrapper inputs (CustomSection) ---
 # Configures the CustomSection wrapper, not this section's own content. Inline
