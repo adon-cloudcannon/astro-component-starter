@@ -47,6 +47,15 @@ const {
   imageAltStart = "",
   linkText = "",
   link = "",
+  /**
+   * A second action beside the first, drawn as a text link.
+   *
+   * One banner in the design carries two — a pill and "Explore our
+   * documentation" — and the rest carry one, so this stays a pair of its own
+   * rather than turning the single link into an array on all six pages.
+   */
+  secondaryLinkText = "",
+  secondaryLink = "",
   imageSource = "",
   imageAlt = "",
   sectionLabel,
@@ -148,16 +157,31 @@ const mirror = rootMirror({
       text={subtext}
     />
   )}
-  {linkText && (
-    <Button
-      class="cta-banner-link"
-      variant={buttonVariant}
-      iconName={buttonVariant === "text" ? "move-right" : undefined}
-      iconPosition={buttonVariant === "text" ? "after" : undefined}
-      text={linkText}
-      link={link}
-      data-prop={at("linkText")}
-    />
+  {(linkText || secondaryLinkText) && (
+    <div class="cta-banner-actions">
+      {linkText && (
+        <Button
+          class="cta-banner-link"
+          variant={buttonVariant}
+          iconName={buttonVariant === "text" ? "move-right" : undefined}
+          iconPosition={buttonVariant === "text" ? "after" : undefined}
+          text={linkText}
+          link={link}
+          data-prop={at("linkText")}
+        />
+      )}
+      {secondaryLinkText && (
+        <Button
+          class="cta-banner-link-secondary"
+          variant="text"
+          iconName="move-right"
+          iconPosition="after"
+          text={secondaryLinkText}
+          link={secondaryLink}
+          data-prop={at("secondaryLinkText")}
+        />
+      )}
+    </div>
   )}
   {imageSourceStart && (
     <Image
@@ -196,8 +220,11 @@ const mirror = rootMirror({
       justify-content: center;
     }
 
+    /* Mirrors the end art's reach below: `0` is the content column's edge,
+       which left the drawing a gutter short of the band's corner while its
+       opposite number sat flush. */
     .cta-banner .cta-banner-art-start {
-      inset-inline-start: 0;
+      inset-inline-start: calc(50% - 50vw);
       inset-inline-end: auto;
     }
 
@@ -233,9 +260,24 @@ const mirror = rootMirror({
       z-index: var(--layer-1);
     }
 
-    /* The copy sits tight over a text link, in a band 217 tall. A pill in a
-       tall band takes the flow layer's 48 instead. */
-    .cta-banner .cta-banner-link:has(> .variant-text) {
+    .cta-banner .cta-banner-actions {
+      --space-before: var(--space-before-loose);
+
+      align-items: center;
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--spacing-lg);
+      position: relative;
+      z-index: var(--layer-1);
+    }
+
+    .cta-banner.align-center .cta-banner-actions {
+      justify-content: center;
+    }
+
+    /* The copy sits tight over a lone text link, in a band 217 tall. A pill,
+       or a pill beside a link, stands off it by the design's 48. */
+    .cta-banner .cta-banner-actions:has(> .cta-banner-link:only-child > .variant-text) {
       --space-before: var(--spacing-md);
     }
 

@@ -392,6 +392,16 @@ const arrayDataAttributes =
             );
           }
 
+          /* The design's second column, 1180: rows of cards and wide tables
+             sit in it while the copy stays in the 1040. */
+          &.max-width-wide {
+            --section-max-width: var(--content-width-wide);
+
+            max-width: calc(
+              var(--content-width-wide) + var(--section-pad-x, 0px) * 2
+            );
+          }
+
           &.max-width-2xl {
             --section-max-width: var(--content-width-2xl);
 

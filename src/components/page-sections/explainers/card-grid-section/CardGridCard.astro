@@ -300,9 +300,13 @@ const drawnHeadingSize = chosen(headingSize) ?? (iconName ? "md" : "sm");
       inline-size: 4rem;
     }
 
+    /* The box is wider than it is tall and the mark is contained in it, so a
+       wide logo is bound by the width and an upright one by the height. At 4rem
+       tall the upright ones came out half the size of the wide ones; the design
+       draws them all between 65 and 75. */
     .card-grid-panel .card-grid-panel-mark.is-mask {
       background-color: var(--card-grid-mark-ink, var(--color-text-strong));
-      block-size: 4rem;
+      block-size: 5rem;
       display: block;
       inline-size: 5.5rem;
       mask-image: var(--card-grid-mark);

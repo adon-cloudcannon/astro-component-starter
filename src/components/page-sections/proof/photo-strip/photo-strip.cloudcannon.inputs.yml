@@ -36,16 +36,16 @@ content.sectionLabel:
   type: text
   comment: Accessible name for the section, used by screen readers.
 style.maxContentWidth:
-  hidden: true
-  # Set from the design, not by an editor.
   type: select
   comment: How wide the band's content runs.
   options:
     values:
-      - id: xl
-        name: Full
       - id: lg
         name: Compact
+      - id: xl
+        name: Default
+      - id: wide
+        name: Wide
 style.paddingHorizontal:
   hidden: true
   # Set from the design, not by an editor.

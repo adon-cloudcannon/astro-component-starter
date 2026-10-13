@@ -130,7 +130,7 @@ pageSections:
       maxContentWidth: xl
       paddingHorizontal: gutter
       paddingVertical: 4xl
-      haze: false
+      haze: true
   - _component: page-sections/explainers/card-grid-section
     content:
       sectionLabel: Ours
@@ -270,7 +270,7 @@ pageSections:
     style:
       backgroundColor: light-sand
       pattern: pegboard
-      fade: none
+      fade: bottom
       maxContentWidth: xl
       paddingHorizontal: gutter
       paddingVertical: 4xl
@@ -444,7 +444,7 @@ pageSections:
     style:
       backgroundColor: sand
       pattern: grid
-      fade: none
+      fade: bottom
       maxContentWidth: xl
       paddingHorizontal: gutter
       paddingVertical: 4xl
@@ -459,6 +459,8 @@ pageSections:
       subtext: ''
       linkText: Reach out
       link: /contact/
+      secondaryLinkText: Explore our documentation
+      secondaryLink: /documentation/
       alignmentHorizontal: center
       scratch: pacific
       buttonVariant: secondary

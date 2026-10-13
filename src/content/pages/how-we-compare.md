@@ -138,7 +138,7 @@ pageSections:
       backgroundColor: light-sand
       pattern: none
       fade: none
-      maxContentWidth: xl
+      maxContentWidth: wide
       paddingHorizontal: gutter
       paddingVertical: 4xl
       paddingVerticalStart: none

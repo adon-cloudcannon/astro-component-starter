@@ -12,6 +12,8 @@ value:
       headingSize: lg
     linkText: ""
     link: ""
+    secondaryLinkText: ""
+    secondaryLink: ""
     imageSource: ""
     imageAlt: ""
   style:

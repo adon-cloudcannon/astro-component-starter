@@ -104,6 +104,8 @@ quietly broken in the editor.
 - Cards can lock their colour scheme against the visitor's theme toggle, as Custom Section already could.
 - Image `decorative`, Button `aria-pressed`, Textarea **Rows**, Testimonial **Avatar size**, Hero Split **Rounded image**, and Social Links **Landmark name**.
 - Hero Center **Title width** and CTA Banner **Subtext width**, the same four measures the other sections cap their copy with. The design breaks a hero title well inside the content column, and without a cap a short title ran as one long line.
+- CTA Banner takes a second link beside the first, drawn as a text link. One banner in the design carries a pill and "Explore our documentation"; the rest carry one.
+- **Wide** joins the band's content width: the design's second column, 1180, which it uses for rows of cards and wide tables while the copy stays in the 1040.
 - h2 and h3 headings get a linkable id from their text.
 - Tag pages show a Home › Blog › tag breadcrumb trail.
 - Every page has a "Skip to main content" link.
@@ -112,6 +114,8 @@ quietly broken in the editor.
 ### Changed
 
 #### Page sections
+
+- A band's content width reads Compact, Default and Wide. "Full" was the 1040 column, which stopped being the widest when Wide was added.
 
 - **Heads-up:** page sections are grouped by the job they do: heroes, explainers (was features and info-blocks), proof (was social-proof and testimonials), conversion (was CTAs, pricing and contact), collections (was blog, galleries and team), and builders. The group is part of each section's path, so existing pages need a find-and-replace, e.g. `page-sections/ctas/cta-center` becomes `page-sections/conversion/cta-center`. The `@features` import alias is now `@explainers`.
 - **Heads-up:** Team Grid's start/center layout option is gone. It now uses Card Grid's layout, and a new Team Grid starts with three people.
@@ -186,6 +190,8 @@ quietly broken in the editor.
 - A dark band of cards ends 112 above the next band rather than 80, and starts 96 under the last, which is what the design draws on all three of them. Card Grid Section and Pricing Tiers take **Top padding override** and **Bottom padding override** to say so.
 - The closing banner on Hosting, Pricing, Migration and Open source tools is back on its own vertical padding. Each set 4xl over the banner's 2xl, which ran the band about 65 taller than the design; Templates and Low maintenance never set it and were already right.
 - A solid icon disc in a light colour draws its glyph in the dark ink, on a dark band as well as a light one. The pairings named `--color-text-strong`, which follows the band, so a golden, harbour, peachy or blush disc on a dark band drew a white glyph on a pale ground.
+- The drawing at a banner's starting corner reaches the corner. Its opposite number stretched to the window edge and this one stopped at the content column, leaving it a gutter short.
+- A card panel's logo is sized so an upright mark is not half the size of a wide one: the box is wider than it is tall and the mark is contained in it, so at 4rem tall the upright marks came out small beside the wide ones.
 
 #### Accessibility
 

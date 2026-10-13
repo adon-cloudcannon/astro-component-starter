@@ -45,10 +45,12 @@ style.maxContentWidth:
   comment: How wide the band's content runs.
   options:
     values:
-      - id: xl
-        name: Full
       - id: lg
         name: Compact
+      - id: xl
+        name: Default
+      - id: wide
+        name: Wide
 style.paddingHorizontal:
   type: select
   comment: The space either side of the content.
