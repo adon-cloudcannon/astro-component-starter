@@ -59,7 +59,7 @@ pageSections:
             - Improving the overall screen reader experience throughout the application.
         - date: ''
           title: Share your feedback
-          iconName: message-square
+          iconName: message-square-warning
           accentColor: sunset
           body: Your experience matters to us. Should you encounter any accessibility
             challenges or have suggestions for improvement, we invite you to reach out to
