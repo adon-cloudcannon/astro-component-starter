@@ -467,33 +467,33 @@ pageSections:
                 is right for you, please contact our sales team and we will
                 happily extend your trial period.
               alignmentHorizontal: start
-              size: md
+              size: lg
         - title: What counts as a custom domain?
           contentSections:
             - _component: building-blocks/core-elements/text
               text: Any domain or subdomain you point at a CloudCannon site.
               alignmentHorizontal: start
-              size: md
+              size: lg
         - title: How do I know how much bandwidth I'm using?
           contentSections:
             - _component: building-blocks/core-elements/text
               text: Your usage is shown in your account dashboard, broken down per site.
               alignmentHorizontal: start
-              size: md
+              size: lg
         - title: When am I invoiced?
           contentSections:
             - _component: building-blocks/core-elements/text
               text: Monthly plans are invoiced each month from the day you started, and yearly
                 plans once a year.
               alignmentHorizontal: start
-              size: md
+              size: lg
         - title: Am I able to turn off overages?
           contentSections:
             - _component: building-blocks/core-elements/text
               text: Yes. Contact our support team and we can cap your account rather than
                 billing for overages.
               alignmentHorizontal: start
-              size: md
+              size: lg
     style:
       accordionVariant: card
       backgroundColor: light-sand

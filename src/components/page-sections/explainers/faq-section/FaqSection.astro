@@ -60,7 +60,11 @@ const {
     data-prop={at("heading")}
   />
 
+  {/* The design leaves about 52 between the heading's foot and the first
+      card, against flow's own 24, which read as the cards being tucked
+      under the heading. */}
   <Accordion
+    spaceBefore="loose"
     variant={accordionVariant}
     label={label}
     singleOpen={true}

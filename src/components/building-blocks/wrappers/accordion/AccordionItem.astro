@@ -136,8 +136,12 @@ const titleDataAttributes = effectiveTitleProp
       border-color: var(--earth);
     }
 
+    /* 29.1/600 in the strong ink, which is Header 5 and exactly what the
+       design sets the question in. `heading-xs` is 20 and read as a bolded
+       line of body copy rather than a question. */
     .accordion-item.variant-card .accordion-item-title-text {
-      font-size: var(--font-size-heading-xs);
+      color: var(--color-text-strong);
+      font-size: var(--font-size-heading-sm);
       font-weight: var(--font-weight-semibold);
     }
 
