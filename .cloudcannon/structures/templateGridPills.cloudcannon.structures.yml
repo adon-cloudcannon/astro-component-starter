@@ -1,0 +1,43 @@
+# templateGridPills, for the Template Grid's own filter row.
+#
+# Must live here. `_structures_from_glob` in cloudcannon.config.yml only picks
+# up this folder, so a `_structures` block written inside a component's
+# structure-value file reaches nothing and every field falls back to
+# CloudCannon guessing a type from its key.
+templateGridPills:
+  values:
+    - label: Grouping
+      icon: label
+      value:
+        id: ""
+        name: ""
+        accent: pacific
+      preview:
+        text:
+          - key: name
+          - Grouping
+        subtext:
+          - key: id
+        icon: label
+      _inputs:
+        id:
+          type: text
+          comment: >-
+            The grouping's own name, matched against each template's
+            Collections list. Lowercase, hyphenated — "editor-friendly".
+        name:
+          type: text
+          comment: The label drawn on the pill.
+        accent:
+          type: select
+          comment: The pill's colour when it is the one selected.
+          options:
+            values:
+              - id: pacific
+                name: Pacific
+              - id: golden
+                name: Golden
+              - id: moss
+                name: Moss
+              - id: sunset
+                name: Sunset

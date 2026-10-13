@@ -1,0 +1,326 @@
+---
+import { getCollection } from "astro:content";
+import { bandPattern, bandHaze } from "@component-utils/bandStyle.mjs";
+import { nestedProps } from "@component-utils/nestedProps.mjs";
+import { slugifyLabel } from "@component-utils/slugify";
+import CustomSection from "@builders/custom-section/CustomSection.astro";
+import Button from "@core-elements/button/Button.astro";
+import Image from "@core-elements/image/Image.astro";
+import Text from "@core-elements/text/Text.astro";
+
+/**
+ * Every template in the collection, as a grid of cards.
+ *
+ * Not a list an editor fills in: the cards are the `templates` collection,
+ * so adding a template is adding a file rather than adding a block and
+ * repeating its name. What this section configures is the chrome — the
+ * pills over the grid and the copy under them.
+ */
+const { props, at } = nestedProps(Astro.props);
+
+const {
+  eyebrow = "Explore by collection",
+  subtext = "",
+  /** Which grouping each pill names, in the order they are drawn. */
+  pills = [],
+  columns = 3,
+  linkText = "Learn more",
+  /** The name a `collection-toolbar` finds this grid by. */
+  collection = "templates",
+  sectionLabel,
+  maxContentWidth = "xl",
+  paddingHorizontal = "gutter",
+  paddingVertical = "4xl",
+  paddingVerticalStart = "",
+  colorScheme = "inherit",
+  lockColorScheme = false,
+  backgroundColor = "light-sand",
+  /** The texture behind the band, by name. */
+  pattern = "none",
+  /** Which edge the texture fades out towards. */
+  fade = "none",
+  /** Whether the heading sits on a pool of the band’s own colour. */
+  haze = false,
+  class: className,
+  useDefaultEditableBinding = false,
+  _component,
+  ...htmlAttributes
+} = props;
+
+const entries = (await getCollection("templates", ({ data }) => !data.draft)).sort(
+  (a, b) => (a.data.order ?? 9) - (b.data.order ?? 9) || a.data.title.localeCompare(b.data.title),
+);
+
+const pillList = (pills ?? []).filter((pill: { id?: string }) => pill?.id);
+const groupName = `template-pills-${slugifyLabel(sectionLabel || collection || "templates")}`;
+
+/* One rule per pill, written from the data rather than by hand: a pill's id
+   is an author's word and CSS cannot match it from a radio's value. The set
+   is small and bounded by what the page declares. */
+const pillCss = pillList
+  .map(
+    (pill: { id: string }) => `.${collection}-pills:has(#${groupName}-${pill.id}:checked) ~ .template-grid-cards .template-grid-card:not([data-collections~="${pill.id}"]) { display: none; }`,
+  )
+  .join("\n");
+---
+
+<CustomSection
+  class:list={["template-grid", className]}
+  label={sectionLabel}
+  maxContentWidth={maxContentWidth}
+  paddingHorizontal={paddingHorizontal}
+  paddingVertical={paddingVertical}
+  paddingVerticalStart={paddingVerticalStart}
+  colorScheme={colorScheme}
+  lockColorScheme={lockColorScheme}
+  backgroundColor={backgroundColor}
+  background={bandPattern(pattern, fade)}
+  haze={bandHaze(haze)}
+  useDefaultEditableBinding={useDefaultEditableBinding}
+  {...htmlAttributes}
+>
+  {pillList.length > 0 && (
+    <div class:list={["template-grid-topics", `${collection}-pills`]}>
+      {eyebrow && (
+        <p
+          class="template-grid-eyebrow"
+          data-prop={at("eyebrow")}
+        >
+          {eyebrow}
+        </p>
+      )}
+      {/* Radios, so which grouping is showing is a choice of one the browser
+          keeps and `:has()` can read — the same no-script filter the FAQ
+          browser's topics use. */}
+      <div
+        class="template-grid-pills"
+        role="radiogroup"
+        aria-label={eyebrow || "Collections"}
+      >
+        {pillList.map((pill: { id: string; name?: string; accent?: string }, index: number) => (
+          <label
+            class="template-grid-pill"
+            style={pill.accent ? `--template-pill-accent: var(--${pill.accent})` : undefined}
+          >
+            <input
+              type="radio"
+              id={`${groupName}-${pill.id}`}
+              name={groupName}
+              value={pill.id}
+              checked={index === 0}
+            />
+            <span>{pill.name ?? pill.id}</span>
+          </label>
+        ))}
+      </div>
+    </div>
+  )}
+
+  <Text
+    class="template-grid-subtext"
+    alignmentHorizontal="center"
+    size="md"
+    data-prop={at("subtext")}
+    text={subtext}
+  />
+
+  <div
+    class="template-grid-cards"
+    data-collection={collection || undefined}
+    style={`--template-grid-columns: ${Number(columns) || 3}`}
+  >
+    {entries.map((entry) => (
+      <article
+        class="template-grid-card"
+        data-collections={(entry.data.collections ?? []).join(" ")}
+        data-ssgs={(entry.data.ssgs ?? []).join(" ")}
+      >
+        <a
+          class="template-grid-hit"
+          href={`/templates/${entry.id}/`}
+          aria-label={entry.data.title}
+        />
+        <Image
+          class="template-grid-shot"
+          source={entry.data.image}
+          alt={entry.data.imageAlt ?? ""}
+          aspectRatio="none"
+        />
+        <div class="template-grid-body flow">
+          <h3 class="template-grid-title">{entry.data.title}</h3>
+          <p class="template-grid-line">{entry.data.description}</p>
+        </div>
+        <div class="template-grid-foot">
+          <Button
+            class="template-grid-link"
+            text={linkText}
+            link={`/templates/${entry.id}/`}
+            iconName="arrow-right"
+            iconPosition="after"
+            variant="text"
+            size="sm"
+          />
+        </div>
+      </article>
+    ))}
+  </div>
+</CustomSection>
+
+<style is:global>
+  @layer page-sections {
+    .template-grid .template-grid-topics {
+      --template-grid-topics-space: 2.5rem;
+      --space-before: var(--template-grid-topics-space);
+
+      margin-block-start: var(--template-grid-topics-space);
+      text-align: center;
+    }
+
+    .template-grid .template-grid-eyebrow {
+      color: var(--sunset);
+      font-size: var(--font-size-xs);
+      font-weight: var(--font-weight-semibold);
+      letter-spacing: 0.2em;
+      margin: 0;
+      text-transform: uppercase;
+    }
+
+    .template-grid .template-grid-pills {
+      --template-pill-gap: 1.125rem;
+
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--template-pill-gap);
+      justify-content: center;
+      margin-block-start: var(--spacing-lg);
+    }
+
+    .template-grid .template-grid-pill {
+      cursor: pointer;
+    }
+
+    /* The radio is the state and the span is the pill. Hidden with a zero box
+       rather than `display: none`, which would take it out of the tab order
+       and off the accessibility tree. */
+    .template-grid .template-grid-pill input {
+      block-size: 0;
+      inline-size: 0;
+      opacity: 0;
+      position: absolute;
+    }
+
+    .template-grid .template-grid-pill span {
+      border: var(--border-width-sm) solid var(--template-pill-accent, var(--color-border-strong));
+      border-radius: 999px;
+      color: var(--color-text-strong);
+      display: inline-block;
+      font-size: var(--font-size-md);
+      font-weight: var(--font-weight-semibold);
+      line-height: 1;
+      padding: 0.625rem 1.25rem;
+      transition:
+        background-color var(--animation-normal) var(--ease-out),
+        color var(--animation-normal) var(--ease-out);
+    }
+
+    .template-grid .template-grid-pill input:checked + span {
+      background-color: var(--template-pill-accent, var(--color-bg-brand));
+      color: var(--white);
+    }
+
+    .template-grid .template-grid-pill input:focus-visible + span {
+      outline: var(--focus-ring-width) var(--focus-ring-style) var(--color-focus-ring);
+      outline-offset: 2px;
+    }
+
+    .template-grid .template-grid-subtext {
+      margin-inline: auto;
+      max-inline-size: 36rem;
+    }
+
+    .template-grid .template-grid-cards {
+      --space-before: var(--spacing-3xl);
+
+      display: grid;
+      gap: var(--spacing-lg);
+      grid-template-columns: repeat(var(--template-grid-columns, 3), minmax(0, 1fr));
+      margin-block-start: var(--spacing-3xl);
+    }
+
+    @container (width < 900px) {
+      .template-grid .template-grid-cards {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
+
+    @container (width < 600px) {
+      .template-grid .template-grid-cards {
+        grid-template-columns: minmax(0, 1fr);
+      }
+    }
+
+    /* A card is a shade off its band with the site's sand rule, and the whole
+       of it answers the pointer: the hit is a stretched link so the card is
+       one target without nesting the title inside an anchor. */
+    .template-grid .template-grid-card {
+      background-color: var(--color-bg-surface);
+      border: var(--border-width-sm) solid var(--dark-sand);
+      border-radius: var(--radius-card);
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+      position: relative;
+      transition: border-color var(--animation-normal) var(--ease-out);
+    }
+
+    .template-grid .template-grid-card:hover,
+    .template-grid .template-grid-card:focus-within {
+      border-color: var(--earth);
+    }
+
+    .template-grid .template-grid-hit {
+      inset: 0;
+      position: absolute;
+      z-index: 1;
+    }
+
+    .template-grid .template-grid-shot img {
+      aspect-ratio: 16 / 10;
+      display: block;
+      inline-size: 100%;
+      object-fit: cover;
+    }
+
+    .template-grid .template-grid-body {
+      flex: 1 1 auto;
+      padding: var(--spacing-lg) var(--spacing-xl) 0;
+    }
+
+    .template-grid .template-grid-title {
+      font-size: var(--font-size-heading-xs);
+      font-weight: var(--font-weight-semibold);
+      margin: 0;
+    }
+
+    .template-grid .template-grid-line {
+      --space-before: var(--spacing-sm);
+
+      color: var(--color-text-muted);
+      font-size: var(--font-size-sm);
+      margin-block: var(--spacing-sm) 0;
+    }
+
+    /* The link sits under a rule at the card's foot, which is what the design
+       draws, and above the hit so it keeps its own hover. */
+    .template-grid .template-grid-foot {
+      border-block-start: var(--border-width-sm) solid var(--dark-sand);
+      margin-block-start: var(--spacing-lg);
+      margin-inline: var(--spacing-xl);
+      padding-block: var(--spacing-md);
+      position: relative;
+      z-index: 2;
+    }
+  }
+</style>
+
+<style is:global set:html={pillCss}></style>

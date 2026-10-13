@@ -1,0 +1,36 @@
+label: Template Grid
+icon: grid_view
+description: Every template in the collection, with pills to filter by grouping.
+tabbed: true
+value:
+  _component: page-sections/collections/template-grid
+  content:
+    sectionLabel: ""
+    eyebrow: Explore by collection
+    subtext: ""
+    collection: templates
+    linkText: Learn more
+    pills: []
+  style:
+    columns: 3
+    maxContentWidth: xl
+    paddingHorizontal: gutter
+    paddingVertical: 4xl
+    paddingVerticalStart: ""
+    colorScheme: inherit
+    lockColorScheme: false
+    backgroundColor: light-sand
+    pattern: none
+    fade: none
+    haze: false
+
+preview:
+  image: public/component-previews/page-sections/collections/template-grid.svg
+  gallery:
+    image: public/component-previews/page-sections/collections/template-grid.svg
+    fit: cover
+picker_preview:
+  image: public/component-previews/page-sections/collections/template-grid.svg
+  gallery:
+    image: public/component-previews/page-sections/collections/template-grid.svg
+    fit: cover

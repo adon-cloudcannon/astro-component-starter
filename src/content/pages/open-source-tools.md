@@ -15,7 +15,7 @@ pageSections:
         subtext: We won't upsell you on tools you don't need. On this page, you can find
           open source tooling we built ourselves, as well as others we find helpful.
         subtextSize: lg
-        subtextWidth: 462
+        subtextWidth: ''
       image:
         imageSource: ''
         imageAlt: ''

@@ -49,129 +49,37 @@ pageSections:
       backgroundColor: light-sand
       paddingVerticalStart: none
       paddingVerticalEnd: 2xl
-  - _component: page-sections/collections/card-collection
+  - _component: page-sections/collections/template-grid
     content:
+      sectionLabel: Templates
+      eyebrow: EXPLORE BY COLLECTION
+      subtext: Choose a template that's optimized for editing in CloudCannon, and get
+        started with a single click.
       collection: templates
-      heading:
-        eyebrow: EXPLORE BY COLLECTION
-        heading: ''
-      subtext: >-
-        Choose a template that's optimized for editing in CloudCannon, and get a
-        head start on your next project.
-      columns: 3
-      items:
-        - image: /src/assets/images/marketing/template-jetstream.jpg
-          imageAlt: The Jetstream template's home page
-          link: /templates/jetstream/
-          contentSections:
-            - _component: building-blocks/core-elements/heading
-              text: Jetstream
-              level: h3
-              size: xs
-            - _component: building-blocks/core-elements/simple-text
-              text: A flexible Astro template built with Astro 6 and Astro Component Starter
-                components.
-              size: sm
-            - _component: building-blocks/core-elements/button
-              text: Learn more
-              variant: text
-              iconName: move-right
-              iconPosition: after
-              size: sm
-        - image: /src/assets/images/marketing/template-astro-component-starter.jpg
-          imageAlt: The Astro Component Starter template's home page
-          link: /templates/astro-component-starter/
-          contentSections:
-            - _component: building-blocks/core-elements/heading
-              text: Astro Component Starter
-              level: h3
-              size: xs
-            - _component: building-blocks/core-elements/simple-text
-              text: The Astro Component Starter is easy to customize and simple to maintain.
-              size: sm
-            - _component: building-blocks/core-elements/button
-              text: Learn more
-              variant: text
-              iconName: move-right
-              iconPosition: after
-              size: sm
-        - image: /src/assets/images/marketing/template-astro-minimal.jpg
-          imageAlt: The Astro Minimal Starter template's home page
-          link: /templates/astro-minimal-starter/
-          contentSections:
-            - _component: building-blocks/core-elements/heading
-              text: Astro Minimal Starter
-              level: h3
-              size: xs
-            - _component: building-blocks/core-elements/simple-text
-              text: >-
-                The Astro Starter provides developers with everything they need
-                to quickly get going.
-              size: sm
-            - _component: building-blocks/core-elements/button
-              text: Learn more
-              variant: text
-              iconName: move-right
-              iconPosition: after
-              size: sm
-        - image: /src/assets/images/marketing/template-sendit.jpg
-          imageAlt: The Sendit template's home page
-          link: /templates/sendit/
-          contentSections:
-            - _component: building-blocks/core-elements/heading
-              text: Sendit
-              level: h3
-              size: xs
-            - _component: building-blocks/core-elements/simple-text
-              text: A starting point for developers looking to build a multilingual website.
-              size: sm
-            - _component: building-blocks/core-elements/button
-              text: Learn more
-              variant: text
-              iconName: move-right
-              iconPosition: after
-              size: sm
-        - image: /src/assets/images/marketing/template-venture.jpg
-          imageAlt: The Venture template's home page
-          link: /templates/venture/
-          contentSections:
-            - _component: building-blocks/core-elements/heading
-              text: Venture
-              level: h3
-              size: xs
-            - _component: building-blocks/core-elements/simple-text
-              text: The Hugo Starter serves as an ideal template for developers who want to
-                move fast.
-              size: sm
-            - _component: building-blocks/core-elements/button
-              text: Learn more
-              variant: text
-              iconName: move-right
-              iconPosition: after
-              size: sm
-        - image: /src/assets/images/marketing/template-essentia.jpg
-          imageAlt: The Essentia template's home page
-          link: /templates/essentia/
-          contentSections:
-            - _component: building-blocks/core-elements/heading
-              text: Essentia
-              level: h3
-              size: xs
-            - _component: building-blocks/core-elements/simple-text
-              text: The Eleventy Starter provides developers with everything they need to get
-                started.
-              size: sm
-            - _component: building-blocks/core-elements/button
-              text: Learn more
-              variant: text
-              iconName: move-right
-              iconPosition: after
-              size: sm
+      linkText: Learn more
+      pills:
+        - id: featured
+          name: Featured
+          accent: pacific
+        - id: starter
+          name: Starter
+          accent: golden
+        - id: editor-friendly
+          name: Editor-friendly
+          accent: moss
+        - id: partner
+          name: Partner
+          accent: sunset
     style:
+      columns: 3
       backgroundColor: light-sand
-      pattern: grid
-      fade: bottom
+      pattern: none
+      fade: none
+      maxContentWidth: xl
+      paddingHorizontal: gutter
       paddingVertical: 4xl
+      paddingVerticalStart: none
+      haze: false
   - _component: page-sections/conversion/cta-banner
     content:
       scratch: pacific

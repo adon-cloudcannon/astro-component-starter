@@ -117,6 +117,34 @@ const blogPostSchema = z.object({
   keywords: z.array(z.string()).optional(),
 });
 
+/**
+ * A template in the gallery.
+ *
+ * Ported from the old site's `templates` collection, with its old-site
+ * chrome dropped: `sidebar_content_top`/`_bottom` become named sidebar
+ * blocks, and `starter`/`partner`/`priority` become the `collections` the
+ * list page's pills filter on.
+ */
+const templateSchema = z.object({
+  title: z.string(),
+  description: z.string(),
+  image: z.string(),
+  imageAlt: z.string().optional(),
+  order: z.number().optional(),
+  collections: z.array(z.string()).optional(),
+  ssgs: z.array(z.string()).optional(),
+  previewUrl: z.string().optional(),
+  repoUrl: z.string().optional(),
+  gallery: z.array(z.object({ image: z.string(), alt: z.string().optional() })).optional(),
+  sidebar: z.array(z.object({ label: z.string().optional(), body: z.string() })).optional(),
+  draft: z.boolean().optional(),
+});
+
+const templatesCollection = defineCollection({
+  loader: glob({ pattern: "**/*.md", base: "./src/content/templates" }),
+  schema: templateSchema,
+});
+
 const blogCollection = defineCollection({
   loader: glob({ pattern: "**/*.mdx", base: "./src/content/blog" }),
   schema: blogPostSchema,
@@ -124,6 +152,7 @@ const blogCollection = defineCollection({
 
 export const collections = {
   pages: pagesCollection,
+  templates: templatesCollection,
   "docs-pages": docsPagesCollection,
   "docs-components": docsComponentsCollection,
   "docs-component-examples": docsComponentExamplesCollection,
