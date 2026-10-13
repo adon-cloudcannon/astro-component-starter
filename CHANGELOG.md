@@ -197,6 +197,7 @@ quietly broken in the editor.
 - A card grid's **Icon background** draws the plate it asks for. The prop was read and then thrown away: the icon was told to draw a plate only when **Solid icon** was on, so a card that asked for the tinted one got no plate at all.
 - A centred card stacks its icon over the title rather than beside it, which is what the design draws, and its plate is the design's disc: a lift of the card, round, sized off the glyph.
 - One colour themes a card grid's card: its rule, its mark and its link. The link was never coloured and the mark read the accent on its own; a card that carries a panel keeps the site's blue under it, since its colour is the panel.
+- A comparison table rules its plan columns apart from the first body row down and leaves the header open, which is what the design draws on both tables that use it. Carried up into the header the rules read as four boxes rather than one row of plans.
 - A card's link is set at 16 rather than 13, which is what the design draws on both grids that carry one.
 
 #### Accessibility

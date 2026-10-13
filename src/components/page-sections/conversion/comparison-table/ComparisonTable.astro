@@ -378,12 +378,12 @@ const slidesPrice = (plan: Plan) =>
       border-inline-start: var(--border-width-sm) solid var(--dark-sand);
     }
 
-    /* Same reason as the header's floor: a collapsed border does not travel
-       with a sticky cell, so the column rules are drawn inside it. */
+    /* The floor only. The design rules the plan columns apart from the first
+       body row down and leaves the header open, on this table and on the
+       pricing one; carried up into the header the rules read as four boxes
+       rather than one row of plans. */
     .comparison-table thead th + th {
-      box-shadow:
-        inset 0 calc(-1 * var(--border-width-md)) 0 var(--color-border-strong),
-        inset var(--border-width-sm) 0 0 var(--dark-sand);
+      box-shadow: inset 0 calc(-1 * var(--border-width-md)) 0 var(--color-border-strong);
     }
 
     .comparison-table {
