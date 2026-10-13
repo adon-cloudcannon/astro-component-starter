@@ -17,6 +17,7 @@ import { rootMirror } from "@component-utils/rootMirror.mjs";
  */
 import CustomSection from "@builders/custom-section/CustomSection.astro";
 import Heading from "@core-elements/heading/Heading.astro";
+import Text from "@core-elements/text/Text.astro";
 import Image from "@core-elements/image/Image.astro";
 import Button from "@core-elements/button/Button.astro";
 
@@ -30,6 +31,12 @@ const {
   heading = "",
   headingLevel = "h2",
   headingSize = "lg",
+  subtext = "",
+  subtextSize = "lg",
+  alignmentHorizontal = "start",
+  buttonVariant = "text",
+  imageSourceStart = "",
+  imageAltStart = "",
   linkText = "",
   link = "",
   imageSource = "",
@@ -96,6 +103,7 @@ const mirror = rootMirror({
   class:list={[
     "cta-banner",
     { scratched: scratch },
+    `align-${alignmentHorizontal}`,
     className,
   ]}
   style={scratch
@@ -116,24 +124,42 @@ const mirror = rootMirror({
   <Heading
     level={headingLevel}
     size={headingSize}
-    alignmentHorizontal="start"
+    alignmentHorizontal={alignmentHorizontal}
     data-prop={at("heading")}
     text={heading}
   />
+  {subtext && (
+    <Text
+      class="cta-banner-subtext"
+      alignmentHorizontal={alignmentHorizontal}
+      size={subtextSize}
+      data-prop={at("subtext")}
+      text={subtext}
+    />
+  )}
   {linkText && (
     <Button
       class="cta-banner-link"
-      variant="text"
-      iconName="move-right"
-      iconPosition="after"
+      variant={buttonVariant}
+      iconName={buttonVariant === "text" ? "move-right" : undefined}
+      iconPosition={buttonVariant === "text" ? "after" : undefined}
       text={linkText}
       link={link}
       data-prop={at("linkText")}
     />
   )}
+  {imageSourceStart && (
+    <Image
+      class="cta-banner-art cta-banner-art-start"
+      source={imageSourceStart}
+      alt={imageAltStart}
+      data-prop-src={at("imageSourceStart")}
+      data-prop-alt={at("imageAltStart")}
+    />
+  )}
   {imageSource && (
     <Image
-      class="cta-banner-art"
+      class="cta-banner-art cta-banner-art-end"
       source={imageSource}
       alt={imageAlt}
       data-prop-src={at("imageSource")}
@@ -146,6 +172,41 @@ const mirror = rootMirror({
   /* Flat, because rules nested deeper than a couple of levels get dropped (see
      CLAUDE.md). */
   @layer page-sections {
+    /* Centred, the band is the pricing page's migration strip: the copy runs
+       down the middle and the art sits in both bottom corners rather than one.
+       `align-start` is the shape Low Maintenance and Templates already draw,
+       so it is left exactly as it was. */
+    .cta-banner.align-center .content {
+      align-items: center;
+      text-align: center;
+    }
+
+    .cta-banner.align-center .cta-banner-link {
+      justify-content: center;
+    }
+
+    .cta-banner .cta-banner-art-start {
+      inset-inline-start: 0;
+      inset-inline-end: auto;
+    }
+
+    /* The pill is light whatever the band is, so its label is dark whatever
+       the band is. A scratched band locks a dark scheme, which flips the
+       surface token and drew a dark pill with a light label. The variant
+       class sits on `.button-inner`, not on `.button`. */
+    .cta-banner .button-inner.variant-secondary,
+    .cta-banner .button-inner.variant-secondary:hover,
+    .cta-banner .button-inner.variant-secondary:focus-visible {
+      background-color: var(--light-sand);
+      border-color: transparent;
+      color: var(--midnight);
+    }
+
+    .cta-banner.align-center .cta-banner-subtext {
+      margin-inline: auto;
+      max-inline-size: 38rem;
+    }
+
     /* The band clips, which is how the design draws it: the frame is set to
        clip its contents and the drawing is 227 tall inside 217, so it is cut
        off at the foot rather than hanging past it. Left to overhang it read as

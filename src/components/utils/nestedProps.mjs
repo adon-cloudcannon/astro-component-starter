@@ -54,7 +54,17 @@ export function nestedProps(astroProps, options = {}) {
     : options;
 
   const { content, style, ...rest } = astroProps;
-  const grouped = content !== undefined || style !== undefined;
+
+  /* Only an object is a tab. `style` is also a real HTML attribute, and a
+     component that passes one — cta-banner hands CustomSection a
+     `--scratch-fill` — had it swallowed as the Style tab and dropped: all
+     three scratched banners on the site drew no sheet, so white copy sat on
+     cream. A string here goes back into `rest` and reaches the element. */
+  const isTab = (value) => value !== null && typeof value === "object" && !Array.isArray(value);
+  const grouped = isTab(content) || isTab(style);
+
+  if (!isTab(style) && style !== undefined) rest.style = style;
+  if (!isTab(content) && content !== undefined) rest.content = content;
   const styleKeys = extraStyleKeys.length
     ? new Set([...STYLE_KEYS, ...extraStyleKeys])
     : STYLE_KEYS;
@@ -76,7 +86,7 @@ export function nestedProps(astroProps, options = {}) {
   };
 
   const props = grouped
-    ? { ...rest, ...flatten(content), ...flatten(style) }
+    ? { ...rest, ...flatten(isTab(content) ? content : undefined), ...flatten(isTab(style) ? style : undefined) }
     : astroProps;
 
   /* Which sub-object a prop belongs to, from the declaration rather than from

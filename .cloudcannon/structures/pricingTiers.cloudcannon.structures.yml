@@ -24,7 +24,7 @@ pricingTiers:
         buttonLink: "#"
         highlight: false
         badgeText: ""
-        badgeColor: \"\"
+        badgeColor: ''
         accent: ""
         height:
         pricePosition: "top"
