@@ -68,6 +68,36 @@ const ssgLogos: Record<string, { src: string }> = Object.fromEntries(
   ).map(([file, url]) => [file.split("/").pop()!.replace(".svg", ""), { src: (url as any).default }])
 );
 
+/**
+ * The template before and after this one.
+ *
+ * Within a collection first, in the order the listing page draws it, and then
+ * on into the collection beside it — so walking next from the last Featured
+ * template lands on the first Starter one, and the walk wraps at either end
+ * rather than stopping.
+ */
+const everyTemplate = (await getCollection("templates", ({ data }) => !data.draft)).sort(
+  (a, b) =>
+    (a.data.order ?? 9) - (b.data.order ?? 9) || a.data.title.localeCompare(b.data.title)
+);
+
+const pillOrder = pills.map((pill) => pill.id).filter(Boolean) as string[];
+const collectionOf = (entry: CollectionEntry<"templates">) =>
+  (entry.data.collections ?? []).find((id) => pillOrder.includes(id)) ?? pillOrder[0] ?? "";
+
+/* Flattened in collection order, so a step past the end of one is a step into
+   the next without any of the edges being a special case. */
+const walk = pillOrder
+  .map((id) => everyTemplate.filter((entry) => collectionOf(entry) === id))
+  .filter((group) => group.length > 0)
+  .flat();
+
+const here = walk.findIndex((entry) => entry.id === template.id);
+const step = (by: number) =>
+  walk.length > 1 && here !== -1 ? walk[(here + by + walk.length) % walk.length] : undefined;
+const previous = step(-1);
+const next = step(1);
+
 const breadcrumbJsonLd = breadcrumbListJsonLd(
   [{ label: "Templates", url: "/templates/" }, { label: title }],
   { homeLabel: breadcrumbsData.homeLabel, base: Astro.site ?? Astro.url }
@@ -170,6 +200,7 @@ const breadcrumbJsonLd = breadcrumbListJsonLd(
   >
     <div class="template-page-columns">
       <aside class="template-page-aside">
+        <div class="template-page-aside-inner">
         {ssgs.length > 0 && (
           <div class="template-page-panel">
             <p class="template-page-panel-label">Choose your SSG:</p>
@@ -225,6 +256,7 @@ const breadcrumbJsonLd = breadcrumbListJsonLd(
             />
           )}
         </div>
+        </div>
       </aside>
 
       <div class="template-page-content prose">
@@ -232,6 +264,32 @@ const breadcrumbJsonLd = breadcrumbListJsonLd(
       </div>
     </div>
   </CustomSection>
+
+  {(previous || next) && (
+    <CustomSection
+      class="template-page-walk"
+      label="More templates"
+      maxContentWidth="xl"
+      paddingHorizontal="gutter"
+      paddingVertical="3xl"
+      backgroundColor="pacific"
+    >
+      <div class="template-page-walk-pair">
+        {previous && (
+          <a class="template-page-walk-link is-previous" href={`/templates/${previous.id}/`}>
+            <span class="template-page-walk-arrow" aria-hidden="true">←</span>
+            <span class="template-page-walk-name">{previous.data.title}</span>
+          </a>
+        )}
+        {next && (
+          <a class="template-page-walk-link is-next" href={`/templates/${next.id}/`}>
+            <span class="template-page-walk-name">{next.data.title}</span>
+            <span class="template-page-walk-arrow" aria-hidden="true">→</span>
+          </a>
+        )}
+      </div>
+    </CustomSection>
+  )}
 </Page>
 
 <style is:global>
@@ -332,8 +390,19 @@ const breadcrumbJsonLd = breadcrumbListJsonLd(
     grid-template-columns: minmax(0, 17.5rem) minmax(0, 1fr);
   }
 
+  /* The design runs the sidebar as its own column of sand, ruled off the
+     body and reaching past the content column to the band's edge. */
   .template-page-aside {
-    align-self: start;
+    align-self: stretch;
+    background-color: var(--sand);
+    border-inline-end: var(--border-width-sm) solid var(--dark-sand);
+    margin-block: calc(var(--spacing-4xl) * -1);
+    margin-inline-start: calc(50% - 50vw);
+    padding-block: var(--spacing-4xl);
+    padding-inline: calc(50vw - 50%) var(--spacing-2xl);
+  }
+
+  .template-page-aside-inner {
     position: sticky;
     top: calc(var(--main-nav-height) + var(--spacing-xl));
   }
@@ -433,6 +502,27 @@ const breadcrumbJsonLd = breadcrumbListJsonLd(
     margin-block: var(--spacing-xl) var(--spacing-md);
   }
 
+  /* Under h3, not over it. Left to the base scale a README's h4 came out
+     larger than the h3 above it, which reads as the outline running
+     backwards. */
+  .template-page-content h4,
+  .template-page-content h5,
+  .template-page-content h6 {
+    font-size: var(--font-size-lg);
+    margin-block: var(--spacing-lg) var(--spacing-sm);
+  }
+
+  /* The opening paragraph sits in a box of its own, which is how the design
+     draws the line that introduces the template. Only when the body opens
+     with one: a README that opens on a heading has no such line. */
+  .template-page-content > p:first-child {
+    background-color: var(--light-sand);
+    border: var(--border-width-sm) solid var(--dark-sand);
+    border-radius: var(--radius-card);
+    margin-block: 0 var(--spacing-xl);
+    padding: var(--callout-pad-block, 1.75rem) var(--callout-pad-inline, 2.25rem);
+  }
+
   /* A README's own asides. GitHub's `> [!NOTE]` marker is rewritten when the
      README is pulled in, leaving a blockquote whose label carries the kind as
      a class; the colours below are GitHub's own, in this palette's words.
@@ -515,6 +605,82 @@ const breadcrumbJsonLd = breadcrumbListJsonLd(
   }
 
 
+  /* Two halves of one band, ruled apart, each holding a card that names
+     where it goes. */
+  .template-page-walk-pair {
+    display: grid;
+    gap: 0;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .template-page-walk-link {
+    align-items: center;
+    border: var(--border-width-sm) solid var(--white);
+    border-radius: var(--radius-card);
+    color: var(--white);
+    display: grid;
+    font-size: var(--font-size-xl);
+    gap: 0;
+    min-block-size: 7.5rem;
+    text-decoration: none;
+    transition: background-color var(--animation-normal) var(--ease-out);
+  }
+
+  .template-page-walk-link:hover,
+  .template-page-walk-link:focus-visible {
+    background-color: color-mix(in srgb, var(--white) 14%, transparent);
+  }
+
+  .template-page-walk-link.is-previous {
+    /* Placed, not auto-flowed: the divider below sits in the first cell, and
+       auto-placement sent each card to the next free one. */
+    grid-column: 1;
+    grid-row: 1;
+    grid-template-columns: auto minmax(0, 1fr);
+    margin-inline-end: var(--spacing-3xl);
+    text-align: end;
+  }
+
+  .template-page-walk-link.is-next {
+    grid-column: 2;
+    grid-row: 1;
+    grid-template-columns: minmax(0, 1fr) auto;
+    margin-inline-start: var(--spacing-3xl);
+  }
+
+  /* The rule between the arrow and the name is the card's own border
+     continued, which is what the design draws. */
+  .template-page-walk-arrow {
+    align-self: stretch;
+    display: grid;
+    font-size: var(--font-size-heading-xs);
+    padding-inline: var(--spacing-xl);
+    place-items: center;
+  }
+
+  .is-previous .template-page-walk-arrow {
+    border-inline-end: var(--border-width-sm) solid var(--white);
+  }
+
+  .is-next .template-page-walk-arrow {
+    border-inline-start: var(--border-width-sm) solid var(--white);
+  }
+
+  .template-page-walk-name {
+    padding: var(--spacing-lg) var(--spacing-xl);
+  }
+
+  /* The band's own divider, down the middle between the two. */
+  .template-page-walk-pair::before {
+    background-color: color-mix(in srgb, var(--white) 45%, transparent);
+    content: "";
+    grid-column: 1;
+    grid-row: 1;
+    inline-size: var(--border-width-sm);
+    justify-self: end;
+    margin-block: calc(var(--spacing-3xl) * -1);
+  }
+
   @media (width < 900px) {
     .template-page-head,
     .template-page-columns {
@@ -522,7 +688,34 @@ const breadcrumbJsonLd = breadcrumbListJsonLd(
     }
 
     .template-page-aside {
+      border-inline-end: 0;
+      margin-block: 0;
+      margin-inline-start: 0;
+      padding-inline: 0;
+    }
+
+    .template-page-aside-inner {
       position: static;
+    }
+
+    .template-page-walk-pair {
+      grid-template-columns: minmax(0, 1fr);
+      gap: var(--spacing-lg);
+    }
+
+    .template-page-walk-link.is-previous,
+    .template-page-walk-link.is-next {
+      grid-column: 1;
+      grid-row: auto;
+    }
+
+    .template-page-walk-link.is-previous,
+    .template-page-walk-link.is-next {
+      margin-inline: 0;
+    }
+
+    .template-page-walk-pair::before {
+      content: none;
     }
   }
 </style>
