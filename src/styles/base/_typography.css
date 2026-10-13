@@ -190,6 +190,7 @@
 }
 
 /* >>> design system heading weights: generated, do not edit by hand */
+@layer base {
 
   h1 { font-weight: 600; } /* Header 1, SemiBold */
   h2 { font-weight: 600; } /* Header 2, SemiBold */
@@ -198,4 +199,5 @@
   h5 { font-weight: 600; } /* Header 5, SemiBold */
   h6 { font-weight: 700; } /* Header 6, Bold */
 
+}
 /* <<< design system heading weights */

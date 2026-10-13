@@ -306,9 +306,13 @@ const pillCss = pillList
       padding: var(--spacing-lg) var(--spacing-xl) 0;
     }
 
+    /* The design sets the name in the regular weight, not a heading's: 22,
+       where "Jetstream" measures 99 wide there and 100 here. It was drawn at
+       20 in the 700 this theme calls semibold, which reads as a heading
+       rather than as the card's name. */
     .template-grid .template-grid-title {
-      font-size: var(--font-size-heading-xs);
-      font-weight: var(--font-weight-semibold);
+      font-size: 1.375rem;
+      font-weight: var(--font-weight-normal);
       margin: 0;
     }
 
@@ -316,7 +320,9 @@ const pillCss = pillList
       --space-before: var(--spacing-sm);
 
       color: var(--color-text-muted);
-      font-size: var(--font-size-sm);
+      /* The design's lines sit 20 to 22 apart, which is this size rather
+         than the 14.5 it was set at. */
+      font-size: var(--font-size-md);
       margin-block: var(--spacing-sm) 0;
     }
 

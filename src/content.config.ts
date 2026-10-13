@@ -145,6 +145,34 @@ const templatesCollection = defineCollection({
   schema: templateSchema,
 });
 
+/* The expert directory, ported from the old site. The body is the agency's
+   own longer description; `work` is the case studies it shows on its page. */
+const expertSchema = z.object({
+  title: z.string(),
+  description: z.string(),
+  order: z.number().optional(),
+  image: z.string().optional(),
+  imageAlt: z.string().optional(),
+  logo: z.string().optional(),
+  location: z.string().optional(),
+  regions: z.array(z.string()).optional(),
+  ssgs: z.array(z.string()).optional(),
+  siteUrl: z.string().optional(),
+  linkedinUrl: z.string().optional(),
+  twitterUrl: z.string().optional(),
+  facebookUrl: z.string().optional(),
+  instagramUrl: z.string().optional(),
+  work: z
+    .array(z.object({ title: z.string(), image: z.string().optional(), body: z.string().optional() }))
+    .optional(),
+  draft: z.boolean().optional(),
+});
+
+const expertsCollection = defineCollection({
+  loader: glob({ pattern: "**/*.md", base: "./src/content/experts" }),
+  schema: expertSchema,
+});
+
 const blogCollection = defineCollection({
   loader: glob({ pattern: "**/*.mdx", base: "./src/content/blog" }),
   schema: blogPostSchema,
@@ -153,6 +181,7 @@ const blogCollection = defineCollection({
 export const collections = {
   pages: pagesCollection,
   templates: templatesCollection,
+  experts: expertsCollection,
   "docs-pages": docsPagesCollection,
   "docs-components": docsComponentsCollection,
   "docs-component-examples": docsComponentExamplesCollection,
