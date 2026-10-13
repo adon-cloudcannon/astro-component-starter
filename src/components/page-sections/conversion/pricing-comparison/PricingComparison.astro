@@ -276,6 +276,11 @@ const slidesPrice = (plan: Plan) =>
        under it, not a heading for the band. The plan columns are ruled from
        each other, and the action sits under its own price. */
     .pricing-comparison-corner {
+      /* The same padding the plan cells carry, so the heading's foot lands
+         level with the buttons beside it. On the cell's own 1px it sat hard
+         against the row's rule with its descenders over the line, while the
+         buttons stopped 16 short of it. */
+      padding: var(--spacing-md);
       vertical-align: bottom;
     }
 
