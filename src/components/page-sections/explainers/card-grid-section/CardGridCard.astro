@@ -131,6 +131,9 @@ const linkColour = iconPanel ? "default" : cardColour;
   {...htmlAttributes}
 >
   <Card
+    {/* The colour goes on the card rather than on a child: `.card-inner`
+        draws the border and inherits it from here. */}
+    style={cardColour && cardColour !== "default" ? `--card-grid-colour: var(--${cardColour})` : undefined}
     class:list={[
       "card-grid-card",
       iconPanel && "has-panel",
@@ -409,6 +412,26 @@ const linkColour = iconPanel ? "default" : cardColour;
        at all from a step back. */
     .card-grid .card-grid-card.has-accent .card-inner {
       border-color: var(--card-accent);
+    }
+
+    /* The card lights its rule in its own colour under the pointer, the same
+       gesture the testimonial cards make. A card with no colour of its own
+       still answers, in the strong edge. */
+    .card-grid .card-grid-card .card-inner {
+      transition: border-color var(--animation-normal) var(--ease-out);
+    }
+
+    /* Set on the card, not on the rule it paints: the border comes from
+       whichever rule won for that card, and every one of them reads
+       `--card-grid-edge` first. */
+    .card-grid .card-grid-card:hover,
+    .card-grid .card-grid-card:focus-within {
+      --card-grid-edge: var(--card-grid-colour, var(--color-border-strong));
+    }
+
+    .card-grid .card-grid-card:hover .card-inner,
+    .card-grid .card-grid-card:focus-within .card-inner {
+      border-color: var(--card-grid-edge);
     }
 
 

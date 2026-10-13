@@ -262,12 +262,16 @@ const inherit = <T extends Record<string, unknown>>(card: T): T => {
        #333333 on the perks cards — and the cream one on it reads as a border
        nobody asked for. CustomSection puts data-theme on its inner
        .outer-content, not on the section the classes are on. */
+    /* Both read `--card-grid-edge` first, which is how the card hands its
+       hover colour down: these two out-specify any rule the card could
+       reasonably write, and a custom property crosses that without either
+       side having to win. */
     .card-grid .card-grid-card.align-center:not(.has-accent) .card-inner {
-      border-color: var(--dark-sand);
+      border-color: var(--card-grid-edge, var(--dark-sand));
     }
 
     .card-grid [data-theme="dark"] .card-grid-card.align-center:not(.has-accent) .card-inner {
-      border-color: var(--color-border);
+      border-color: var(--card-grid-edge, var(--color-border));
     }
   }
 </style>
