@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 720" width="1280" height="720" role="img" aria-labelledby="t-offer-card">
+  <title id="t-offer-card">Offer card component preview</title>
+  <style>
+    @media (prefers-color-scheme: dark) {
+      svg {
+        --pv-paper: #151515;
+        --pv-panel: #1D1D1B;
+        --pv-surface: #232320;
+        --pv-line: #2E2D29;
+        --pv-glyph: #45443E;
+        --pv-body: #3A3934;
+        --pv-subject: #6E6A62;
+        --pv-ink: #F5F3EE;
+        --pv-on-ink: #6B6B6B;
+      }
+    }
+  </style>
+  <rect x="0" y="0" width="1280" height="720" fill="var(--pv-paper, #FFFFFF)"/>
+  <g transform="translate(0 179)">
+    <rect x="260" y="96" width="320" height="200" rx="24" fill="var(--pv-panel, #F7F6F3)" stroke="var(--pv-line, #E4E1DA)" stroke-width="2"/>
+    <rect x="540" y="60" width="480" height="260" rx="20" fill="var(--pv-paper, #FFFFFF)" stroke="var(--pv-line, #E4E1DA)" stroke-width="2"/>
+    <rect x="700" y="42" width="160" height="36" rx="18" fill="var(--pv-ink, #151515)"/>
+    <rect x="580" y="112" width="300" height="26" rx="13" fill="var(--pv-subject, #A8A398)"/>
+    <rect x="580" y="166" width="380" height="12" rx="6" fill="var(--pv-body, #DAD7D0)"/>
+    <rect x="580" y="190" width="340" height="12" rx="6" fill="var(--pv-body, #DAD7D0)"/>
+    <rect x="580" y="240" width="180" height="40" rx="20" fill="var(--pv-subject, #A8A398)"/>
+  </g>
+</svg>

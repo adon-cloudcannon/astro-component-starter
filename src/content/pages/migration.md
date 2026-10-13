@@ -141,6 +141,49 @@ pageSections:
       colorScheme: dark
       lockColorScheme: true
       haze: false
+  - _component: page-sections/conversion/cta-showcase
+    content:
+      sectionLabel: Pricing
+      heading:
+        heading: A new website is about more than just shuffling your content
+        headingLevel: h2
+        headingSize: lg
+      subtext:
+        subtext: We understand how important a high performing website is, both to user
+          experience and your business growth. It's important to us that we get your
+          website Lighthouse scores as high as possible as part of our migration process.
+        subtextSize: lg
+        subtextWidth: 462
+      illustration:
+        _component: building-blocks/wrappers/offer-card
+        imageSource: /src/assets/images/marketing/thumbsup-01-1.png
+        imageAlt: ''
+        badgeText: Pricing
+        badgeColor: harbour
+        cardColor: white
+        contentSections:
+          - _component: building-blocks/core-elements/heading
+            text: Migrations starting at $3,000 USD/project
+            level: h3
+            size: xs
+          - _component: building-blocks/core-elements/text
+            text: '**Includes:**'
+            size: sm
+          - _component: building-blocks/core-elements/list
+            items:
+              - text: A tailored editing experience
+              - text: Training and education
+              - text: Lighthouse performance optimized
+            size: sm
+      reverse: false
+    style:
+      backgroundColor: light-sand
+      pattern: none
+      fade: none
+      maxContentWidth: xl
+      paddingHorizontal: gutter
+      paddingVertical: 4xl
+      haze: false
   - _component: page-sections/conversion/cta-banner
     content:
       sectionLabel: Contact

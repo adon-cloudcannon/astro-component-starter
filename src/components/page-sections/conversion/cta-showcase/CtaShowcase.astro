@@ -147,6 +147,10 @@ const MEDIA_LAYOUT: Record<string, { panel: false | string; overflow: number }> 
   "building-blocks/wrappers/agent-terminal": { panel: false, overflow: 0 },
   "building-blocks/wrappers/polaroid-camera": { panel: "white", overflow: 0 },
   "building-blocks/wrappers/character-chat": { panel: "color-bg", overflow: 0 },
+  /* The card is a fixed width hard right and the drawing takes what is left,
+     so the media half carries its own shape and sits straight on the band —
+     the design draws it on #FFFCF3 with nothing behind it either time. */
+  "building-blocks/wrappers/offer-card": { panel: false, overflow: 0 },
 };
 const DEFAULT_LAYOUT = { panel: "white" as const, overflow: 0 };
 

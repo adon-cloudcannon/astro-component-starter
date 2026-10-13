@@ -4,6 +4,10 @@
 # one picks the band's shape with it. A plain picture or a video is not in this
 # list on purpose: that is what the generic CTA Split is for, and that one
 # takes a layout.
+#
+# Being interactive is not what they have in common — the offer card is not —
+# so the input that picks one is labelled Media rather than anything about
+# behaviour.
 ctaShowcaseMedia:
   id_key: _component
   style: modal
@@ -12,3 +16,4 @@ ctaShowcaseMedia:
     - /src/components/building-blocks/wrappers/polaroid-camera/polaroid-camera.cloudcannon.structure-value.yml
     - /src/components/building-blocks/wrappers/agent-terminal/agent-terminal.cloudcannon.structure-value.yml
     - /src/components/building-blocks/wrappers/character-chat/character-chat.cloudcannon.structure-value.yml
+    - /src/components/building-blocks/wrappers/offer-card/offer-card.cloudcannon.structure-value.yml

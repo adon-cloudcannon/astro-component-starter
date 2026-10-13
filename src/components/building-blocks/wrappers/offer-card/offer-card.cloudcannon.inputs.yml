@@ -1,0 +1,48 @@
+imageSource:
+  type: image
+  label: Drawing
+  comment: >-
+    Sits to the left of the card and hangs off its edge. It takes whatever the
+    card leaves, so there is no size to set.
+imageAlt:
+  type: text
+  label: Drawing alt text
+  comment: Leave empty where the drawing is decorative.
+badgeText:
+  type: text
+  label: Pill
+  comment: Sits on the card's top edge. Leave empty for no pill.
+badgeColor:
+  type: select
+  label: Pill colour
+  hidden: "!badgeText"
+  options:
+    values:
+      - id: harbour
+        name: Harbour
+      - id: pacific
+        name: Pacific
+      - id: golden
+        name: Golden
+      - id: moss
+        name: Moss
+      - id: sunset
+        name: Sunset
+cardColor:
+  type: select
+  label: Card colour
+  comment: The card's own surface, a shade off the band it sits on.
+  options:
+    values:
+      - id: white
+        name: White
+      - id: color-bg
+        name: Light sand
+      - id: sand
+        name: Sand
+contentSections:
+  type: array
+  label: Card contents
+  comment: What goes inside the card — a name, a line, a price, a list.
+  options:
+    structures: _structures.cardSections

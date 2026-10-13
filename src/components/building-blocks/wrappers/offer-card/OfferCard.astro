@@ -1,0 +1,153 @@
+---
+import RenderBlock from "@component-utils/renderBlock.astro";
+import Badge from "@core-elements/badge/Badge.astro";
+import Image from "@core-elements/image/Image.astro";
+import { isNonEmptyString } from "@component-utils/isNonEmptyString";
+
+/**
+ * A drawing beside a bordered card with a pill on the card's top edge.
+ *
+ * The design draws it twice — the Partner Program teaser on Pricing and the
+ * migration price on Migration — at the same measurements both times: a
+ * 1280x515 band with a 363x304 card against the column's right edge. So the
+ * card is a fixed width hard right and the drawing takes whatever is left of
+ * the column, rather than the two being a ratio an author sets. That is the
+ * whole reason this lives in CTA Showcase and not in the generic split.
+ */
+const {
+  imageSource = "",
+  imageAlt = "",
+  badgeText = "",
+  badgeColor = "harbour",
+  cardColor = "white",
+  contentSections = [],
+  class: className,
+  useDefaultEditableBinding = false,
+  _component,
+  ...htmlAttributes
+} = Astro.props;
+
+const hasBadge = isNonEmptyString(badgeText);
+---
+
+<div
+  class:list={["offer-card", className]}
+  {...htmlAttributes}
+>
+  {isNonEmptyString(imageSource) && (
+    <div class="offer-card-art">
+      <Image
+        source={imageSource}
+        alt={imageAlt}
+        decorative={!imageAlt}
+        aspectRatio="none"
+      />
+    </div>
+  )}
+
+  <div
+    class="offer-card-panel"
+    style={`--offer-card-bg: var(--${cardColor === "base" ? "color-bg" : cardColor})`}
+  >
+    {hasBadge && (
+      <Badge
+        class="offer-card-badge"
+        variant="neutral"
+        size="md"
+        text={badgeText}
+        data-prop="badgeText"
+        style={`--offer-card-badge: var(--${badgeColor})`}
+      />
+    )}
+    <div
+      class="offer-card-content flow"
+      data-editable={useDefaultEditableBinding ? "array" : undefined}
+      data-prop={useDefaultEditableBinding ? "contentSections" : undefined}
+    >
+      <RenderBlock
+        contentSections={contentSections}
+        useDefaultEditableBinding={useDefaultEditableBinding}
+      />
+    </div>
+  </div>
+</div>
+
+<style is:global>
+  @layer components {
+    /* `auto` on the right, so the card keeps its measured width whatever the
+       band is, and the drawing takes the rest. The design's two instances put
+       the card at 363 against the column's right edge both times. */
+    .offer-card {
+      --offer-card-width: 22.6875rem;
+
+      align-items: end;
+      display: grid;
+      grid-template-columns: 1fr var(--offer-card-width);
+    }
+
+    /* The drawing hangs off the card's left edge rather than stopping at it,
+       which is what the design draws: the creature's arm crosses the rule. */
+    .offer-card .offer-card-art {
+      grid-column: 1;
+      grid-row: 1;
+      justify-self: end;
+      margin-inline-end: calc(-1 * var(--spacing-xl));
+      position: relative;
+      z-index: 1;
+    }
+
+    .offer-card .offer-card-art img {
+      display: block;
+      height: auto;
+      max-inline-size: 100%;
+    }
+
+    .offer-card .offer-card-panel {
+      background-color: var(--offer-card-bg, var(--white));
+      border: var(--border-width-sm) solid var(--color-text-strong);
+      border-radius: var(--radius-card);
+      grid-column: 2;
+      grid-row: 1;
+      padding: var(--spacing-xl);
+      position: relative;
+    }
+
+    /* On the card's top edge, centred, the way every badged card on the site
+       sits. `inset-inline: 0` sets both edges and the margin does the
+       centring — a `left: auto` after it would leave `right: 0` standing. */
+    .offer-card .offer-card-badge {
+      inset-block-start: calc(-1 * var(--spacing-md));
+      inset-inline: 0;
+      margin-inline: auto;
+      position: absolute;
+      width: fit-content;
+    }
+
+    /* The paint is on `.badge-inner`, which is the element that draws. */
+    .offer-card .offer-card-badge > .badge-inner {
+      background-color: var(--offer-card-badge, var(--harbour));
+      border-color: transparent;
+      color: var(--color-text-strong);
+    }
+
+    /* 420, not the usual 640: this sits in the media half of a showcase
+       band, which is about 616 at a 1280 window — a 640 breakpoint matched
+       there and stacked the card under the drawing on every screen. */
+    @container (width < 420px) {
+      .offer-card {
+        grid-template-columns: 1fr;
+      }
+
+      .offer-card .offer-card-art,
+      .offer-card .offer-card-panel {
+        grid-column: 1;
+      }
+
+      .offer-card .offer-card-art {
+        grid-row: 2;
+        justify-self: center;
+        margin-inline-end: 0;
+      }
+    }
+  }
+</style>

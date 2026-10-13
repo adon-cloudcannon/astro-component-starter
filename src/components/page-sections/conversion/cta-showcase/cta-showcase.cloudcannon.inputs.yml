@@ -120,11 +120,13 @@ illustration:
     structures: _structures.ctaShowcaseMedia
 content.illustration:
   type: object
-  label: Interactive illustration
+  label: Media
   comment: >-
     Which one fills the other half: the truck whose hood opens, the camera that
-    prints, the terminal that types, or the two characters talking. The choice
-    sets the band's shape as well, since each was drawn to its own width.
+    prints, the terminal that types, the two characters talking, or the offer
+    card. The choice sets the band's shape as well, since each was drawn to its
+    own width. Not all of them are interactive, which is why this is not called
+    an interactive illustration any more.
   options:
     structures: _structures.ctaShowcaseMedia
 content.reverse:

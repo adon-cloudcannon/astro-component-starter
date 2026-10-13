@@ -135,168 +135,7 @@ pageSections:
       paddingVerticalStart: none
       paddingVertical: 2xl
       haze: false
-  - _component: page-sections/conversion/pricing-comparison
-    content:
-      sectionLabel: Feature comparison
-      heading:
-        eyebrow: ''
-        heading: Features
-        headingLevel: h2
-        headingSize: lg
-      subtext: ''
-      plans:
-        - name: Standard
-          price: $55/mo
-          annualPrice: $49/mo
-          highlight: true
-          buttonText: Start 21-day trial
-          buttonLink: /start/
-        - name: Team
-          price: $350/mo
-          annualPrice: $300/mo
-          highlight: false
-          buttonText: Start 21-day trial
-          buttonLink: /start/
-        - name: Enterprise
-          price: Custom
-          annualPrice: ''
-          highlight: false
-          buttonText: Book a call with us
-          buttonLink: /contact/
-      rows:
-        - feature: Users
-          values:
-            - 3 Users
-            - 15 Users
-            - Custom user allowance
-        - feature: Unlimited Sites
-          values:
-            - yes
-            - yes
-            - yes
-        - feature: Custom Git syncing
-          values:
-            - no
-            - no
-            - yes
-        - feature: Automatic site optimizations
-          values:
-            - yes
-            - yes
-            - yes
-        - feature: Client Sharing
-          values:
-            - yes
-            - yes
-            - yes
-        - feature: Custom permissions
-          values:
-            - no
-            - 10 Custom groups
-            - Unlimited custom groups
-        - feature: Content scheduling
-          values:
-            - yes
-            - Advanced content scheduling
-            - Advanced content scheduling
-        - feature: DAM
-          values:
-            - yes
-            - yes
-            - Custom DAM
-        - feature: Git LFS
-          values:
-            - yes
-            - yes
-            - yes
-        - feature: Build Deploys
-          values:
-            - yes
-            - yes
-            - yes
-        - feature: Authentication
-          values:
-            - yes
-            - yes
-            - SSO/SAML authentication
-        - feature: Advanced forms
-          values:
-            - no
-            - yes
-            - yes
-        - feature: Custom forms
-          values:
-            - no
-            - no
-            - yes
-        - feature: Advanced Site Mounting
-          values:
-            - no
-            - yes
-            - yes
-        - feature: Custom Site Mounting
-          values:
-            - no
-            - no
-            - yes
-        - feature: Globalization workflows
-          values:
-            - yes
-            - yes
-            - yes
-        - feature: Custom branding
-          values:
-            - yes
-            - yes
-            - yes
-        - feature: Testing domains
-          values:
-            - yes
-            - Custom testing domains
-            - Custom testing domains
-        - feature: Advanced branching workflows
-          values:
-            - no
-            - yes
-            - yes
-        - feature: Deploy Previews
-          values:
-            - no
-            - yes
-            - yes
-        - feature: Single sign-on
-          values:
-            - no
-            - no
-            - yes
-        - feature: Uptime SLA
-          values:
-            - no
-            - no
-            - yes
-        - feature: Custom edge rules
-          values:
-            - no
-            - no
-            - yes
-        - feature: Professional services
-          values:
-            - no
-            - no
-            - 3 hours / month
-      striped: false
-      showAnnualPricing: true
-      monthlyLabel: Monthly
-      annualLabel: Yearly
-    style:
-      backgroundColor: sand
-      pattern: none
-      fade: none
-      maxContentWidth: xl
-      paddingHorizontal: gutter
-      paddingVertical: 4xl
-      haze: false
-  - _component: page-sections/conversion/cta-split
+  - _component: page-sections/conversion/cta-showcase
     content:
       sectionLabel: Partner program
       heading:
@@ -307,28 +146,35 @@ pageSections:
         subtext: Join the CloudCannon Partner Program and get access to the Lite plan
           for your clients.
         subtextSize: lg
-        subtextWidth: ''
-      mediaSections:
-        - _component: building-blocks/core-elements/image
-          source: /src/assets/images/component-docs/dunedin-cliff.jpg
-          alt: Sea cliffs above a bay
-          decorative: false
-          rounded: true
-          aspectRatio: none
-          positionVertical: center
-          positionHorizontal: center
-          priority: false
+        subtextWidth: 462
       buttonSections:
         - _component: building-blocks/core-elements/button
           text: Learn about our Partner Program
           link: /partner-program/
           iconName: arrow-right
-          iconColor: default
-          textColor: default
           iconPosition: after
-          hideText: false
           variant: text
           size: md
+      illustration:
+        _component: building-blocks/wrappers/offer-card
+        imageSource: /src/assets/images/marketing/thumbsup-01-1.png
+        imageAlt: ''
+        badgeText: Partner program exclusive
+        badgeColor: harbour
+        cardColor: white
+        contentSections:
+          - _component: building-blocks/core-elements/heading
+            text: Lite
+            level: h3
+            size: sm
+          - _component: building-blocks/core-elements/text
+            text: A pay-as-you go plan for smaller clients. Unlimited sites and basic
+              features included.
+            size: sm
+          - _component: building-blocks/core-elements/heading
+            text: $10/month (USD)
+            level: p
+            size: xs
       reverse: false
     style:
       backgroundColor: light-sand
