@@ -52,6 +52,22 @@
     --space-before: var(--space-before-default);
   }
 
+  /* A heading and the copy under it: `.text` defaults to tight, which is the
+     gap it wants after a sibling of its own kind, and left every band on the
+     site at 8 where the design draws 24. */
+  :where(.heading, .heading-block) + :where(.text, .simple-text) {
+    --space-before: var(--space-before-default);
+  }
+
+  /* A band's call to action stands off its copy — 48 in the design, measured
+     on both the heroes and the closing banners. Scoped to a band's own flow
+     so a card's button keeps hugging the text it belongs to. */
+  :where(.custom-section > .outer-content > .content)
+    > :where(.text, .simple-text)
+    + :where(.button-group, .button) {
+    --space-before: var(--space-before-loose);
+  }
+
   /* The spaceBefore prop, carried as a data attribute so the `style`
      attribute stays free for consumers (a spread `style` would clobber an
      inline custom property). The attribute goes on a DIRECT CHILD of the

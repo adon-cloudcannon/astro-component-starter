@@ -12,7 +12,7 @@ import ButtonGroup from "@wrappers/button-group/ButtonGroup.astro";
    the names below. `at()` writes the frontmatter path a binding needs. */
 const { props, at } = nestedProps(Astro.props, {
   nest: {
-    heading: ["eyebrow", "heading", "headingLevel", "headingSize"],
+    heading: ["eyebrow", "heading", "headingLevel", "headingSize", "headingWidth"],
     subtext: ["subtext", "subtextSize", "subtextWidth"],
   },
 });
@@ -22,6 +22,14 @@ const {
   heading = "",
   headingLevel = "h1",
   headingSize = "2xl",
+  /**
+   * The measure the title is set in.
+   *
+   * The design breaks a hero title well inside the 1040 column — Hosting's
+   * runs 850 unbroken and is drawn on two lines of 398 and 436 — so without a
+   * cap the heading reads as one long line the design never draws.
+   */
+  headingWidth = "",
   subtext = "",
   /** Body 4, 3 or Subtitle 1. The design sets Large on this hero. */
   subtextSize = "lg",
@@ -59,6 +67,7 @@ const {
   ...htmlAttributes
 } = props;
 
+const headingCap = subtextMeasure(headingWidth);
 const subtextCap = subtextMeasure(subtextWidth);
 ---
 
@@ -82,6 +91,7 @@ const subtextCap = subtextMeasure(subtextWidth);
     level={headingLevel}
     size={headingSize}
     alignmentHorizontal="center"
+    style={headingCap ? `max-inline-size: ${headingCap}; margin-inline: auto` : undefined}
     data-prop={at("heading")}
   >
     {heading}

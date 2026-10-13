@@ -1,6 +1,7 @@
 ---
 import { bandPattern, bandHaze } from "@component-utils/bandStyle.mjs";
 import { nestedProps } from "@component-utils/nestedProps.mjs";
+import { subtextMeasure } from "@component-utils/subtextMeasure.mjs";
 import { rootMirror } from "@component-utils/rootMirror.mjs";
 /**
  * A short, full-width band: a heading, a link, and a drawing in the corner.
@@ -33,6 +34,13 @@ const {
   headingSize = "lg",
   subtext = "",
   subtextSize = "lg",
+  /**
+   * The measure the supporting line is set in.
+   *
+   * The band's own 608 is what most of the design's banners are drawn at;
+   * Hosting's runs to 760, and at 608 it takes a fourth line.
+   */
+  subtextWidth = "",
   alignmentHorizontal = "start",
   buttonVariant = "text",
   imageSourceStart = "",
@@ -67,6 +75,8 @@ const {
   _component,
   ...htmlAttributes
 } = props;
+
+const subtextCap = subtextMeasure(subtextWidth);
 
 /**
  * The ink on a scratched band, from the sheet it is scratched in.
@@ -132,6 +142,7 @@ const mirror = rootMirror({
     <Text
       class="cta-banner-subtext"
       alignmentHorizontal={alignmentHorizontal}
+      style={subtextCap ? `max-inline-size: ${subtextCap}` : undefined}
       size={subtextSize}
       data-prop={at("subtext")}
       text={subtext}
@@ -222,8 +233,9 @@ const mirror = rootMirror({
       z-index: var(--layer-1);
     }
 
-    /* The copy sits tight: 46 over a link, in a band 217 tall. */
-    .cta-banner .cta-banner-link {
+    /* The copy sits tight over a text link, in a band 217 tall. A pill in a
+       tall band takes the flow layer's 48 instead. */
+    .cta-banner .cta-banner-link:has(> .variant-text) {
       --space-before: var(--spacing-md);
     }
 

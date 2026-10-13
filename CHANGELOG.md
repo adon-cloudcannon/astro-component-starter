@@ -103,6 +103,7 @@ quietly broken in the editor.
 - Toggle: an `offLabel` for a two-sided switch ("Monthly [switch] Annual"), and `inputAttributes` for attributes on the input itself.
 - Cards can lock their colour scheme against the visitor's theme toggle, as Custom Section already could.
 - Image `decorative`, Button `aria-pressed`, Textarea **Rows**, Testimonial **Avatar size**, Hero Split **Rounded image**, and Social Links **Landmark name**.
+- Hero Center **Title width** and CTA Banner **Subtext width**, the same four measures the other sections cap their copy with. The design breaks a hero title well inside the content column, and without a cap a short title ran as one long line.
 - h2 and h3 headings get a linkable id from their text.
 - Tag pages show a Home › Blog › tag breadcrumb trail.
 - Every page has a "Skip to main content" link.
@@ -176,6 +177,13 @@ quietly broken in the editor.
 - Unused dependencies (`@astrojs/node`, `ajv`, `jszip`, `shiki`, the `@rollup/rollup-*` pins), `ConsentManager.acceptAnalytics()` and `rejectOptional()`, and the legacy `href` nav-button fallback.
 
 ### Fixed
+
+#### Spacing and colour
+
+- A heading and the copy under it sit 24 apart rather than 8. `.text` carries the tight gap it wants after a sibling of its own kind, which left every band on the site hugging its heading where the design draws air.
+- A band's call to action stands 48 off its copy, measured on both the heroes and the closing banners. Scoped to a band's own flow, so a card's button keeps hugging the text it belongs to.
+- A card grid under a subtext gets more room above the cards, which is what the design draws when a band has copy as well as a heading.
+- A solid icon disc in a light colour draws its glyph in the dark ink, on a dark band as well as a light one. The pairings named `--color-text-strong`, which follows the band, so a golden, harbour, peachy or blush disc on a dark band drew a white glyph on a pale ground.
 
 #### Accessibility
 

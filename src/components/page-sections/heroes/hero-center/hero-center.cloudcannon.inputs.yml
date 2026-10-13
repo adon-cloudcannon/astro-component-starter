@@ -43,6 +43,22 @@ content.heading.headingSize:
         name: Header 5
       - id: xs
         name: Header 6
+content.heading.headingWidth:
+  type: select
+  label: Title width
+  comment: How wide the title is allowed to run before it wraps.
+  options:
+    values:
+      - id: ""
+        name: Full width
+      - id: sm
+        name: Narrow
+      - id: md
+        name: Medium
+      - id: lg
+        name: Wide
+      - id: xl
+        name: Extra wide
 content.heading.headingLevel:
   type: select
   comment: Heading level for the title. Use h1 once per page, on the first section.

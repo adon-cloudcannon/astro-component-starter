@@ -12,6 +12,7 @@ pageSections:
         heading: Lightning-fast website hosting
         headingLevel: h1
         headingSize: xl
+        headingWidth: md
       subtext:
         subtext: Deliver websites that feel instant for every visitor with CloudCannon's
           stellar hosting performance.
@@ -81,7 +82,7 @@ pageSections:
               subtext: >-
                 Rest assured your data is safe with the highest levels of protection and verification via SAML and SSO.
               subtextSize: sm
-            iconName: lock
+            iconName: lock-keyhole
           style:
             accentColor: sunset
             iconSolid: true
@@ -141,7 +142,7 @@ pageSections:
               subtext: >-
                 Add your redirects and configure push state routing in a single text file — no server configuration necessary!
               subtextSize: sm
-            iconName: route
+            iconName: split
           style:
             accentColor: golden
             iconSolid: true
@@ -171,7 +172,7 @@ pageSections:
               subtext: >-
                 Manage form submissions without server-side code, and forward directly to your email.
               subtextSize: sm
-            iconName: mail
+            iconName: mails
           style:
             accentColor: sunset
             iconSolid: true
@@ -196,7 +197,7 @@ pageSections:
     style:
       backgroundColor: dark
       pattern: pegboard
-      fade: none
+      fade: bottom
       maxContentWidth: xl
       paddingHorizontal: gutter
       paddingVertical: 4xl
@@ -215,6 +216,7 @@ pageSections:
         resulting static site back to a branch — all you need to do is copy the static
         files to your server.
       subtextSize: lg
+      subtextWidth: xl
       linkText: Talk to us about hosting
       link: /contact/
       alignmentHorizontal: center

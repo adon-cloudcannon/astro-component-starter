@@ -51,6 +51,22 @@ content.heading.headingLevel:
     values:
       - h2
       - h3
+content.subtextWidth:
+  type: select
+  label: Subtext width
+  comment: How wide the supporting line runs before it wraps.
+  options:
+    values:
+      - id: ""
+        name: Default
+      - id: sm
+        name: Narrow
+      - id: md
+        name: Medium
+      - id: lg
+        name: Wide
+      - id: xl
+        name: Extra wide
 content.linkText:
   type: text
   comment: The link under the heading. Leave empty to hide it.

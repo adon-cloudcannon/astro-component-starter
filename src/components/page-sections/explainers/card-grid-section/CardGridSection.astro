@@ -208,6 +208,14 @@ const inherit = <T extends Record<string, unknown>>(card: T): T => {
 
      Only the centred, illustrated variant. An icon grid keeps the column. */
   @layer page-sections {
+    /* The design gives the cards more air under a subtext than under a bare
+       heading — 86 against 60 — and `.grid`'s own loose is the second of
+       those. Only matches when there is a subtext: Text renders nothing when
+       it is empty. */
+    .card-grid .card-grid-subtext + .card-grid-grid {
+      --space-before: var(--spacing-4xl);
+    }
+
     .card-grid:has(.card-grid-card.align-center) {
       --content-width-xl: var(--content-width-wide);
     }

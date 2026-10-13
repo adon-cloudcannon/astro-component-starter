@@ -97,7 +97,13 @@ if (!icon) {
           /* Each pairing below names its own ink: a bare `.background-solid`
              ties with `.color-pacific` on specificity and loses on order, so
              a disc that only set the fill here drew a pacific glyph on a
-             pacific ground. */
+             pacific ground.
+
+             The dark inks are `--midnight` rather than `--color-text-strong`:
+             the disc is golden or harbour whatever band it sits on, but the
+             semantic token follows the band, so on a dark one every one of
+             those pairings resolved to white and drew a white glyph on a
+             pale disc. */
           --icon-accent: var(--white, #fff);
           --icon-accent-bg: var(--color-bg-surface);
 
@@ -129,22 +135,22 @@ if (!icon) {
         }
 
         &.background-solid.color-golden {
-          --icon-accent: var(--color-text-strong, #393939);
+          --icon-accent: var(--midnight);
           --icon-accent-bg: var(--golden);
         }
 
         &.background-solid.color-peachy {
-          --icon-accent: var(--color-text-strong, #393939);
+          --icon-accent: var(--midnight);
           --icon-accent-bg: var(--peachy);
         }
 
         &.background-solid.color-harbour {
-          --icon-accent: var(--color-text-strong, #393939);
+          --icon-accent: var(--midnight);
           --icon-accent-bg: var(--harbour);
         }
 
         &.background-solid.color-blush {
-          --icon-accent: var(--color-text-strong, #393939);
+          --icon-accent: var(--midnight);
           --icon-accent-bg: var(--blush);
         }
 
