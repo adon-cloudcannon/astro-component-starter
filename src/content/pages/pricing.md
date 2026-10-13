@@ -350,7 +350,7 @@ pageSections:
       link: /migration/
       imageSourceStart: /src/assets/images/marketing/ferns-corner-3806-72622.png
       imageAltStart: ''
-      imageSource: /src/assets/images/marketing/ferns-rocks-2-3806-72621.png
+      imageSource: /src/assets/images/marketing/ferns-rocks-2-3806-72621-mirrored.png
       imageAlt: ''
     style:
       paddingVertical: 4xl
