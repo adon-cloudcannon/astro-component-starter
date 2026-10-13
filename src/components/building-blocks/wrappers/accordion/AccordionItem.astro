@@ -58,18 +58,23 @@ const titleDataAttributes = effectiveTitleProp
       />
     )}
   </summary>
-  <div
-    class="accordion-item-detail flow"
-    {...arrayDataAttributes}
-  >
-    <slot>
-      {contentSections && (
-        <RenderBlock
-          contentSections={contentSections}
-          useDefaultEditableBinding={!!effectiveChildrenProp}
-        />
-      )}
-    </slot>
+  {/* The grid row collapses to nothing, so the row's item must have no box of
+      its own: a border or padding on it survives the collapse and snaps away
+      at the end. All of that is on `.accordion-item-detail` inside. */}
+  <div class="accordion-item-panel">
+    <div
+      class="accordion-item-detail flow"
+      {...arrayDataAttributes}
+    >
+      <slot>
+        {contentSections && (
+          <RenderBlock
+            contentSections={contentSections}
+            useDefaultEditableBinding={!!effectiveChildrenProp}
+          />
+        )}
+      </slot>
+    </div>
   </div>
 </details>
 
@@ -115,13 +120,19 @@ const titleDataAttributes = effectiveTitleProp
       transition: border-color var(--animation-normal) var(--ease-out);
     }
 
+    /* Pointer only, plus a real keyboard ring. `:focus-within` held the
+       card lit after a click, because clicking a summary leaves it focused:
+       open it, close it, move the mouse away and the item still read as
+       selected. `:focus-visible` does not match a mouse click, so the
+       keyboard still gets its indicator and the pointer does not leave one
+       behind. */
     .accordion-item.variant-card:hover,
-    .accordion-item.variant-card:focus-within {
+    .accordion-item.variant-card:has(> .accordion-item-title:focus-visible) {
       border-color: var(--earth);
     }
 
     .accordion-item.variant-card:hover .accordion-item-mark,
-    .accordion-item.variant-card:focus-within .accordion-item-mark {
+    .accordion-item.variant-card:has(> .accordion-item-title:focus-visible) .accordion-item-mark {
       border-color: var(--earth);
     }
 
@@ -131,7 +142,9 @@ const titleDataAttributes = effectiveTitleProp
     }
 
     /* The rule belongs to the open state, under the question. */
-    .accordion-item.variant-card[open] .accordion-item-detail {
+    /* Not gated on `[open]`: these flipped in and out instantly while the row
+       animated, which is the jump. The row clips them when it is closed. */
+    .accordion-item.variant-card .accordion-item-detail {
       border-block-start: var(--border-width-sm, 1px) solid var(--dark-sand);
       margin-block-start: var(--spacing-lg);
       padding-block-start: var(--spacing-lg);
@@ -201,40 +214,47 @@ const titleDataAttributes = effectiveTitleProp
       }
     }
 
-    .accordion-item[open] {
-      > .accordion-item-title .accordion-item-icon {
-        transform: rotate(180deg);
-      }
-
-      &::details-content {
-        animation: grow-out var(--animation-normal) var(--ease-out);
-      }
+    .accordion-item[open] > .accordion-item-title .accordion-item-icon {
+      transform: rotate(180deg);
     }
 
-    @supports (interpolate-size: allow-keywords) and selector(::details-content) {
-      /* Scoped here, not on :root — `interpolate-size` is inherited, and
-         `::details-content` inherits from its originating element, so this is
-         all the height-to-auto transition below needs. */
-      .accordion-item {
-        interpolate-size: allow-keywords;
-      }
+    /* Opening and closing both animate, from a grid row rather than a height.
+       `0fr` to `1fr` interpolates on its own, so nothing has to know the
+       content's height — which is what `height: 0` to `auto` needed
+       `interpolate-size` for, and that is Chromium-only.
 
+       `content-visibility` is the other half: the UA hides a closed details
+       outright, so without a discrete transition the content disappeared the
+       instant `open` went and only the leftover box slid up. It stays visible
+       for the collapse and flips at the end. */
+    @supports selector(::details-content) {
       .accordion-item::details-content {
-        height: 0;
+        display: grid;
+        grid-template-rows: 0fr;
         overflow: clip;
         transition:
-          height var(--animation-normal) var(--ease-out),
+          grid-template-rows var(--animation-normal) var(--ease-out),
           content-visibility var(--animation-normal) var(--ease-out) allow-discrete;
       }
 
       .accordion-item[open]::details-content {
-        height: auto;
+        grid-template-rows: 1fr;
       }
 
-      .accordion-item[open] {
-        &::details-content {
-          animation: none;
-        }
+      /* A grid item floors at its content height unless told otherwise, which
+         would hold the row open at full height and animate nothing. `overflow`
+         also gives the panel its own formatting context, so the detail's top
+         margin is clipped with it rather than collapsing through and holding
+         the item open. */
+      .accordion-item > .accordion-item-panel {
+        min-block-size: 0;
+        overflow: hidden;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .accordion-item::details-content {
+        transition: none;
       }
     }
   }
