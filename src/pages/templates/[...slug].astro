@@ -430,6 +430,11 @@ const breadcrumbJsonLd = breadcrumbListJsonLd(
      running text and wrong for a panel that is its own block. */
   .template-page-content blockquote {
     --callout-accent: var(--pacific);
+    /* Measured off the design's own panel: 28 over the disc, 41 either side.
+       Named here because neither is a step on the spacing scale, which goes
+       24 then 32 and 32 then 48. */
+    --callout-pad-block: 1.75rem;
+    --callout-pad-inline: 2.5625rem;
 
     background-color: color-mix(in srgb, var(--callout-accent) 12%, transparent);
     border: var(--border-width-sm) solid var(--callout-accent);
@@ -437,12 +442,12 @@ const breadcrumbJsonLd = breadcrumbListJsonLd(
     color: var(--color-text-strong);
     margin-block: var(--spacing-xl);
     margin-inline: 0;
-    padding: var(--spacing-md) var(--spacing-lg);
+    padding: var(--callout-pad-block) var(--callout-pad-inline);
   }
 
   .template-page-content blockquote > p:first-child {
     margin-block-start: 0;
-    margin-block-end: var(--spacing-sm);
+    margin-block-end: var(--spacing-md);
   }
 
   .template-page-content blockquote > p:last-child {
@@ -454,7 +459,7 @@ const breadcrumbJsonLd = breadcrumbListJsonLd(
     color: var(--callout-accent);
     display: flex;
     font-size: var(--font-size-lg);
-    gap: var(--spacing-sm);
+    gap: var(--spacing-md);
   }
 
   /* The disc is the element's own background and the mark sits on it as an
@@ -470,7 +475,8 @@ const breadcrumbJsonLd = breadcrumbListJsonLd(
     border-radius: 50%;
     content: "";
     flex-shrink: 0;
-    inline-size: 1.5rem;
+    /* The design's disc, which is bigger than the label's own line box. */
+    inline-size: 1.875rem;
   }
 
   /* GitHub draws note blue, tip green, important purple, warning amber and
