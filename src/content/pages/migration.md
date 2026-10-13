@@ -156,8 +156,8 @@ pageSections:
         subtextWidth: 462
       illustration:
         _component: building-blocks/wrappers/offer-card
-        imageSource: /src/assets/images/marketing/thumbsup-01-1.png
-        imageAlt: ''
+        imageSource: /src/assets/images/marketing/thumbsup-kea-mirrored.png
+        imageAlt: A kea in a cap giving a thumbs up
         badgeText: Pricing
         badgeColor: harbour
         cardColor: white

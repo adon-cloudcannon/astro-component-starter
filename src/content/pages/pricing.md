@@ -157,8 +157,8 @@ pageSections:
           size: md
       illustration:
         _component: building-blocks/wrappers/offer-card
-        imageSource: /src/assets/images/marketing/thumbsup-01-1.png
-        imageAlt: ''
+        imageSource: /src/assets/images/marketing/thumbsup-tuatara.png
+        imageAlt: A tuatara in a cap giving a thumbs up
         badgeText: Partner program exclusive
         badgeColor: harbour
         cardColor: white

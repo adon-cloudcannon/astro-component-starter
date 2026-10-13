@@ -85,21 +85,31 @@ const hasBadge = isNonEmptyString(badgeText);
       grid-template-columns: 1fr var(--offer-card-width);
     }
 
-    /* The drawing hangs off the card's left edge rather than stopping at it,
-       which is what the design draws: the creature's arm crosses the rule. */
+    /* The drawing runs under the card rather than stopping at its edge: the
+       design's creature disappears behind the rule, which is what lets the
+       two sit as close as they do. On top it covered the card's first line
+       instead. Grid items only take part in z-order once they are
+       positioned, so both carry `position` as well as the index. */
     .offer-card .offer-card-art {
       grid-column: 1;
       grid-row: 1;
       justify-self: end;
       margin-inline-end: calc(-1 * var(--spacing-xl));
       position: relative;
-      z-index: 1;
+      z-index: 0;
     }
 
+    /* Capped, or the drawing sets the row's height and towers over the card
+       it is meant to stand beside: the design draws it 292 against a 304
+       card, so the two are about the same height. A length, not a
+       percentage — `max-block-size: 100%` against a row the drawing itself
+       is sizing resolves to nothing. */
     .offer-card .offer-card-art img {
       display: block;
       height: auto;
+      max-block-size: var(--offer-card-art-height, 18.25rem);
       max-inline-size: 100%;
+      width: auto;
     }
 
     .offer-card .offer-card-panel {
@@ -110,6 +120,7 @@ const hasBadge = isNonEmptyString(badgeText);
       grid-row: 1;
       padding: var(--spacing-xl);
       position: relative;
+      z-index: 1;
     }
 
     /* On the card's top edge, centred, the way every badged card on the site
@@ -123,11 +134,16 @@ const hasBadge = isNonEmptyString(badgeText);
       width: fit-content;
     }
 
-    /* The paint is on `.badge-inner`, which is the element that draws. */
+    /* The paint is on `.badge-inner`, which is the element that draws.
+       Mixed to 45% over white rather than taken flat: the design's pill reads
+       rgb(216,228,251) where Harbour itself is rgb(166,193,250), so the flat
+       colour came out a good deal heavier than the band it sits on. Mixing
+       rather than naming a second token keeps any pill colour at the same
+       weight. */
     .offer-card .offer-card-badge > .badge-inner {
-      background-color: var(--offer-card-badge, var(--harbour));
+      background-color: color-mix(in srgb, var(--offer-card-badge, var(--harbour)) 45%, var(--white));
       border-color: transparent;
-      color: var(--color-text-strong);
+      color: var(--pacific);
     }
 
     /* 420, not the usual 640: this sits in the media half of a showcase
