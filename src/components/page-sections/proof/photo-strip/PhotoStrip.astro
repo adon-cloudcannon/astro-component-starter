@@ -126,5 +126,24 @@ const pictures = (Array.isArray(images) ? images : []).filter((image) => image?.
       inline-size: 100%;
       object-fit: cover;
     }
+
+    /* A tile with a plate holds a cut-out rather than a photograph: the plate
+       is the ground and the picture sits on it, trimmed to the tile. */
+    .photo-strip-image:has(.photo-strip-plate) {
+      position: relative;
+    }
+
+    /* `.scratched` positions itself through this token rather than a plain
+       property, because utils out-ranks page-sections and a host could not
+       out-specify it (see styles/utils/_scratched.css). */
+    .photo-strip-plate {
+      --scratch-position: absolute;
+
+      inset: 0;
+    }
+
+    .photo-strip-image:has(.photo-strip-plate) .image {
+      position: relative;
+    }
   }
 </style>

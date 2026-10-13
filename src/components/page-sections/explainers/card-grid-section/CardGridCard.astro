@@ -174,8 +174,8 @@ const drawnHeadingSize = chosen(headingSize) ?? (iconName ? "md" : "sm");
           name={iconName}
           size="lg"
           color={accentColor && accentColor !== "none" ? accentColor : iconColor}
-          background={iconSolid ? "solid" : false}
-          alignmentHorizontal="start"
+          background={iconSolid ? "solid" : iconBackground}
+          alignmentHorizontal={alignmentHorizontal === "center" ? "center" : "start"}
         />
       )}
       <Heading
@@ -204,8 +204,11 @@ const drawnHeadingSize = chosen(headingSize) ?? (iconName ? "md" : "sm");
     {divider && linkText && <div class="card-grid-rule card-grid-foot-rule"></div>}
     {linkText && (
       /* The site's arrow link, which is the Button rather than an anchor of
-         this card's own — see CLAUDE.md. It takes the card's accent so the
-         three read as a set, the way the design draws them. */
+         this card's own — see CLAUDE.md.
+
+         `textColor` matches the card's icon where the card is themed by one
+         colour, and stays the brand blue where the colour is the card's
+         border instead — the open-source tools, which set no icon colour. */
       <Button
         class="card-grid-link"
         text={linkText}
@@ -214,6 +217,7 @@ const drawnHeadingSize = chosen(headingSize) ?? (iconName ? "md" : "sm");
         iconPosition="after"
         variant="text"
         size="sm"
+        textColor={accentColor === "none" && iconColor !== "default" ? iconColor : "default"}
         data-prop={at("linkText")}
       />
     )}
@@ -365,6 +369,8 @@ const drawnHeadingSize = chosen(headingSize) ?? (iconName ? "md" : "sm");
      CLAUDE.md). */
   @layer page-sections {
     .card-grid-card.align-center .card-grid-card-heading {
+      flex-direction: column;
+      gap: var(--spacing-md);
       justify-content: center;
     }
 
@@ -372,8 +378,20 @@ const drawnHeadingSize = chosen(headingSize) ?? (iconName ? "md" : "sm");
       flex: 0 1 auto;
     }
 
+    .card-grid-card.align-center .card-grid-link {
+      align-self: center;
+    }
 
-
+    /* Stacked over the title, the plate is the design's disc: a lift of the
+       card rather than a tint of the glyph's colour, round, and sized off the
+       glyph the way the solid one is — 0.64em either side of a 34px mark is
+       the 78 the design draws. */
+    .card-grid-card.align-center .card-grid-icon .background {
+      background-color: color-mix(in srgb, var(--color-text) 10%, transparent);
+      border-radius: 50%;
+      font-size: 2.125rem;
+      padding: 0.64em;
+    }
 
 
   }

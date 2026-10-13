@@ -105,6 +105,7 @@ quietly broken in the editor.
 - Image `decorative`, Button `aria-pressed`, Textarea **Rows**, Testimonial **Avatar size**, Hero Split **Rounded image**, and Social Links **Landmark name**.
 - Hero Center **Title width** and CTA Banner **Subtext width**, the same four measures the other sections cap their copy with. The design breaks a hero title well inside the content column, and without a cap a short title ran as one long line.
 - CTA Banner takes a second link beside the first, drawn as a text link. One banner in the design carries a pill and "Explore our documentation"; the rest carry one.
+- Photo Strip takes a scratched plate per picture, by palette name, so a strip of cut-out portraits reads the way `team-member` draws one. Left out, the picture fills the tile on its own.
 - **Wide** joins the band's content width: the design's second column, 1180, which it uses for rows of cards and wide tables while the copy stays in the 1040.
 - h2 and h3 headings get a linkable id from their text.
 - Tag pages show a Home › Blog › tag breadcrumb trail.
@@ -192,6 +193,9 @@ quietly broken in the editor.
 - A solid icon disc in a light colour draws its glyph in the dark ink, on a dark band as well as a light one. The pairings named `--color-text-strong`, which follows the band, so a golden, harbour, peachy or blush disc on a dark band drew a white glyph on a pale ground.
 - The drawing at a banner's starting corner reaches the corner. Its opposite number stretched to the window edge and this one stopped at the content column, leaving it a gutter short.
 - A card panel's logo is sized so an upright mark is not half the size of a wide one: the box is wider than it is tall and the mark is contained in it, so at 4rem tall the upright marks came out small beside the wide ones.
+- A card grid's **Icon background** draws the plate it asks for. The prop was read and then thrown away: the icon was told to draw a plate only when **Solid icon** was on, so a card that asked for the tinted one got no plate at all.
+- A centred card stacks its icon over the title rather than beside it, which is what the design draws, and its plate is the design's disc: a lift of the card, round, sized off the glyph.
+- A centred card's link takes the card's icon colour, so the icon, the title and the link read as one card. Cards coloured by their border instead keep the brand blue.
 
 #### Accessibility
 

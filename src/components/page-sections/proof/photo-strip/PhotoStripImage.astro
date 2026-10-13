@@ -10,13 +10,40 @@ import Image from "@core-elements/image/Image.astro";
 const {
   source = "",
   alt = "",
+  /**
+   * A scratched plate behind the picture, by palette name.
+   *
+   * The strip the design draws of the team is cut-out portraits on coloured
+   * grounds, one colour each, the same panel `team-member` draws them on.
+   * Left out, the picture fills the tile on its own, which is the strip of
+   * photographs on Our Story.
+   */
+  backgroundColor = "none",
   class: className,
   _component,
   ...htmlAttributes
 } = Astro.props;
+
+const plate =
+  backgroundColor && backgroundColor !== "none"
+    ? backgroundColor.startsWith("#")
+      ? backgroundColor
+      : `var(--${backgroundColor})`
+    : undefined;
 ---
 
 <figure class:list={["photo-strip-image", className]} {...htmlAttributes}>
+  {/* On a child, never on the figure: the figure is the array item's root,
+      which CloudCannon keeps while it swaps the contents, so a colour set
+      from a prop there goes stale in the editor (see CLAUDE.md). `:has()`
+      hoists what the tile needs back up. */}
+  {plate && (
+    <div
+      class="photo-strip-plate scratched"
+      style={`--scratch-fill: ${plate}`}
+      aria-hidden="true"
+    />
+  )}
   <Image
     source={source}
     alt={alt}

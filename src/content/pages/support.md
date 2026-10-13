@@ -115,6 +115,43 @@ pageSections:
       paddingVertical: 4xl
       paddingVerticalStart: none
       haze: false
+  - _component: page-sections/proof/photo-strip
+    content:
+      images:
+        - _component: page-sections/proof/photo-strip/photo-strip-image
+          source: /src/assets/images/marketing/screenshot-2026-06-09-at-7-38-38-pm-background-r-3806-69478.png
+          alt: Mike Neumegen, Co-founder & CEO at CloudCannon
+          backgroundColor: peachy
+        - _component: page-sections/proof/photo-strip/photo-strip-image
+          source: /src/assets/images/marketing/george-profile-1.png
+          alt: George Phillips, Co-founder & CTO at CloudCannon
+          backgroundColor: moss
+        - _component: page-sections/proof/photo-strip/photo-strip-image
+          source: /src/assets/images/marketing/chris-profile-1.png
+          alt: Chris Wingate, CRO at CloudCannon
+          backgroundColor: golden
+        - _component: page-sections/proof/photo-strip/photo-strip-image
+          source: /src/assets/images/marketing/container-5-3806-69485-2.png
+          alt: Olivia Nicholson, Head of Content at CloudCannon
+          backgroundColor: pacific
+        - _component: page-sections/proof/photo-strip/photo-strip-image
+          source: /src/assets/images/marketing/container-9-3806-69524-1.png
+          alt: Tom Richardson, Solutions Architect at CloudCannon
+          backgroundColor: sunset
+        - _component: page-sections/proof/photo-strip/photo-strip-image
+          source: /src/assets/images/marketing/container-7-3806-69515-2.png
+          alt: Sam Whitfield, Product Design at CloudCannon
+          backgroundColor: harbour
+      imageWidth: 226
+      aspectRatio: 226 / 230
+    style:
+      backgroundColor: light-sand
+      pattern: none
+      fade: none
+      maxContentWidth: xl
+      paddingHorizontal: gutter
+      paddingVertical: md
+      haze: false
   - _component: page-sections/explainers/card-grid-section
     content:
       sectionLabel: Other resources
@@ -181,7 +218,7 @@ pageSections:
     style:
       backgroundColor: dark
       pattern: pegboard
-      fade: none
+      fade: bottom
       maxContentWidth: xl
       paddingHorizontal: gutter
       paddingVertical: 4xl
