@@ -68,6 +68,33 @@ const {
    * under a one-line title on a card with no body reads as a strikethrough.
    */
   divider = false,
+  /**
+   * Draws the icon on a scratched panel across the card's top instead of
+   * beside the title.
+   *
+   * The open-source tools the design lists are drawn this way: a 374x198
+   * panel in the tool's own colour with its mark large and dark on it, then
+   * the copy under. Beside the title the same card reads as a feature rather
+   * than as a thing with a face.
+   */
+  iconPanel = false,
+  /**
+   * The mark drawn on the panel, where a tool has one of its own.
+   *
+   * The open-source tools are brand marks rather than icons — an acorn, a
+   * compass, a bucket — so the panel takes a file. Falls back to `iconName`
+   * where there is none.
+   */
+  panelImage = "",
+  /** What the mark is masked to. The design draws every one near-black. */
+  panelImageColor = "color-text-strong",
+  /**
+   * The panel's own colour.
+   *
+   * Separate from `accentColor`, which also rules the card: the design gives
+   * each tool a loud panel and every card the same quiet sand border.
+   */
+  panelColor = "harbour",
   /** Label for the link out of the card. Empty draws no link. */
   linkText = "",
   link = "",
@@ -98,19 +125,50 @@ const drawnHeadingSize = chosen(headingSize) ?? (iconName ? "md" : "sm");
   <Card
     class:list={[
       "card-grid-card",
+      iconPanel && "has-panel",
       `align-${alignmentHorizontal}`,
       accentColor !== "none" && "has-accent",
       className,
     ]}
     accentColor={accentColor}
-    paddingHorizontal="lg"
-    paddingVertical="lg"
+    {/* A panelled card pads its own children instead: the padding utilities
+        sit in `utils`, which out-ranks `page-sections`, so a rule here could
+        not take it off the content and the panel stopped short of the card's
+        edges. */}
+    paddingHorizontal={iconPanel ? "none" : "lg"}
+    paddingVertical={iconPanel ? "none" : "lg"}
     rounded
     border
     backgroundColor={backgroundColor}
   >
+    {iconPanel && (iconName || panelImage) && (
+      /* `.scratched` is the shared sheet: it paints `--scratch-fill` and
+         generates the scratches in `--scratch-ink`, so no texture has to be
+         loaded or exported. */
+      <div
+        class="card-grid-panel scratched"
+        style={`--scratch-fill: var(--${panelColor})`}
+        aria-hidden="true"
+      >
+        {panelImage ? (
+          /* A mask rather than an `<img>`: the marks are single-colour files
+             with their fill baked in, so an image of one is black wherever
+             the design wants the panel's own ink (see CLAUDE.md). */
+          <span
+            class="card-grid-panel-mark is-mask"
+            style={`--card-grid-mark: url("${panelImage}"); --card-grid-mark-ink: var(--${panelImageColor})`}
+          />
+        ) : (
+          <Icon
+            class="card-grid-panel-mark"
+            name={iconName}
+            size="none"
+          />
+        )}
+      </div>
+    )}
     <div class="card-grid-card-heading">
-      {iconName && (
+      {!iconPanel && iconName && (
         <Icon
           class="card-grid-icon"
           name={iconName}
@@ -164,6 +222,54 @@ const drawnHeadingSize = chosen(headingSize) ?? (iconName ? "md" : "sm");
        draws: Careers' disc runs 36 to 96 inside the card and both a one-line
        and a two-line title centre on 66. Hung from the top, a title that
        wraps leaves the disc stranded against its first line. */
+    /* The panel runs the card's full width at its top, so the card's own
+       padding has to come off it: `Card` pads every child, and the design
+       draws the panel edge to edge with the copy inset under it. 198 of a
+       420 card is the design's proportion, carried as a ratio so it holds
+       at any card width. */
+    /* The sand rule, like every other cream card on these pages: the design
+       draws #EBE1C9 where the generic border token is a neutral grey. */
+    .card-grid-card.has-panel > .card-inner {
+      border-color: var(--dark-sand);
+    }
+
+    .card-grid-panel {
+      align-items: center;
+      aspect-ratio: 374 / 198;
+      display: flex;
+      justify-content: center;
+    }
+
+    .card-grid-panel .card-grid-panel-mark svg {
+      block-size: 4rem;
+      color: var(--color-text-strong);
+      inline-size: 4rem;
+    }
+
+    .card-grid-panel .card-grid-panel-mark.is-mask {
+      background-color: var(--card-grid-mark-ink, var(--color-text-strong));
+      block-size: 4rem;
+      display: block;
+      inline-size: 5.5rem;
+      mask-image: var(--card-grid-mark);
+      mask-position: center;
+      mask-repeat: no-repeat;
+      mask-size: contain;
+    }
+
+    /* Everything after the panel takes the padding the card gave up. */
+    .card-grid-card.has-panel .card-content > :not(.card-grid-panel) {
+      margin-inline: var(--spacing-xl);
+    }
+
+    .card-grid-card.has-panel .card-content > .card-grid-card-heading {
+      margin-block-start: var(--spacing-lg);
+    }
+
+    .card-grid-card.has-panel .card-content > .card-grid-link {
+      margin-block-end: var(--spacing-lg);
+    }
+
     .card-grid-card-heading {
       align-items: center;
       display: flex;

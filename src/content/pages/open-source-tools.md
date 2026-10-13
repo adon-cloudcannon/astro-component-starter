@@ -54,7 +54,10 @@ pageSections:
             linkText: Learn more
             link: https://github.com/CloudCannon/agent-skills
           style:
-            accentColor: harbour
+            accentColor: none
+            panelColor: harbour
+            panelImage: /src/assets/images/marketing/tools/tool-sparkles.png
+            iconPanel: true
             iconSolid: true
             divider: true
             alignmentHorizontal: start
@@ -71,7 +74,10 @@ pageSections:
             linkText: Learn more
             link: https://pagefind.app/
           style:
-            accentColor: golden
+            accentColor: none
+            panelColor: golden
+            panelImage: /src/assets/images/marketing/tools/tool-compass.png
+            iconPanel: true
             iconSolid: true
             divider: true
             alignmentHorizontal: start
@@ -88,7 +94,11 @@ pageSections:
             linkText: Learn more
             link: https://flatlake.app/
           style:
-            accentColor: dark-sand
+            accentColor: none
+            panelColor: black
+            panelImageColor: light-sand
+            panelImage: /src/assets/images/marketing/tools/tool-trough.png
+            iconPanel: true
             iconSolid: true
             divider: true
             alignmentHorizontal: start
@@ -105,7 +115,10 @@ pageSections:
             linkText: Learn more
             link: https://rosey.app/
           style:
-            accentColor: sunset
+            accentColor: none
+            panelColor: sunset
+            panelImage: /src/assets/images/marketing/tools/tool-rosey.png
+            iconPanel: true
             iconSolid: true
             divider: true
             alignmentHorizontal: start
@@ -122,7 +135,10 @@ pageSections:
             linkText: Learn more
             link: https://github.com/CloudCannon/reseed
           style:
-            accentColor: pacific
+            accentColor: none
+            panelColor: pacific
+            panelImage: /src/assets/images/marketing/tools/tool-acorn.png
+            iconPanel: true
             iconSolid: true
             divider: true
             alignmentHorizontal: start
@@ -139,7 +155,10 @@ pageSections:
             linkText: Learn more
             link: https://github.com/CloudCannon/pagebreak
           style:
-            accentColor: blush
+            accentColor: none
+            panelColor: blush
+            panelImage: /src/assets/images/marketing/tools/tool-bookshelf.png
+            iconPanel: true
             iconSolid: true
             divider: true
             alignmentHorizontal: start
@@ -177,7 +196,7 @@ pageSections:
               subtextSize: sm
             iconName: table
           style:
-            accentColor: golden
+            accentColor: blush
             iconSolid: true
             divider: true
             alignmentHorizontal: start
@@ -192,7 +211,7 @@ pageSections:
 
                 divRIOTS
               subtextSize: sm
-            iconName: minimize
+            iconName: shrink
           style:
             accentColor: sunset
             iconSolid: true
@@ -226,7 +245,7 @@ pageSections:
 
                 Elio Grieco
               subtextSize: sm
-            iconName: calendar
+            iconName: calendar-days
           style:
             accentColor: harbour
             iconSolid: true
@@ -294,7 +313,7 @@ pageSections:
 
                 Andreas Lind
               subtextSize: sm
-            iconName: align-justify
+            iconName: text-align-end
           style:
             accentColor: sunset
             iconSolid: true

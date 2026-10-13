@@ -30,6 +30,10 @@ cardGridCards:
           link: ""
         style:
           accentColor: golden
+          iconPanel: false
+          panelColor: harbour
+          panelImage: ""
+          panelImageColor: color-text-strong
           iconSolid: true
           divider: true
           alignmentHorizontal: start
@@ -130,6 +134,46 @@ cardGridCards:
           # A card has two looks, not four, and that is the switch below.
           hidden: true
           type: switch
+        style.panelColor:
+          type: select
+          label: Panel colour
+          comment: The panel's own colour, separate from the card's rule.
+          hidden: "!style.iconPanel"
+          options:
+            values:
+              - id: harbour
+                name: Harbour
+              - id: pacific
+                name: Pacific
+              - id: golden
+                name: Golden
+              - id: moss
+                name: Moss
+              - id: sunset
+                name: Sunset
+              - id: blush
+                name: Blush
+              - id: black
+                name: Near-black
+        style.panelImage:
+          type: image
+          label: Panel mark
+          comment: >-
+            A mark drawn on the panel where a tool has one of its own. It is
+            masked, so the file's own colour does not matter. Empty falls back
+            to the icon.
+          hidden: "!style.iconPanel"
+        style.panelImageColor:
+          type: text
+          label: Panel mark colour
+          comment: A palette or semantic colour name the mark is masked to.
+          hidden: "!style.panelImage"
+        style.iconPanel:
+          type: switch
+          label: Mark on a panel
+          comment: >-
+            Draws the mark large on a scratched panel across the card's top,
+            in the card's accent colour, instead of beside the title.
         style.iconSolid:
           type: switch
           hidden: "!iconName"
