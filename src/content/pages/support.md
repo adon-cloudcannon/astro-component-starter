@@ -21,7 +21,7 @@ pageSections:
     style:
       backgroundColor: light-sand
       pattern: grid
-      fade: none
+      fade: bottom
       maxContentWidth: xl
       paddingHorizontal: gutter
       paddingVertical: 4xl

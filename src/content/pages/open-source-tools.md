@@ -10,7 +10,7 @@ pageSections:
         eyebrow: ''
         heading: Open-source tools
         headingLevel: h1
-        headingSize: xl
+        headingSize: lg
       subtext:
         subtext: We won't upsell you on tools you don't need. On this page, you can find
           open source tooling we built ourselves, as well as others we find helpful.
