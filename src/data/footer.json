@@ -37,7 +37,7 @@
         { "name": "Documentation", "path": "/documentation/" },
         { "name": "Tutorials", "path": "/tutorials/" },
         { "name": "Community", "path": "/community/" },
-        { "name": "Experts directory", "path": "/experts-directory/" },
+        { "name": "Experts directory", "path": "/experts/" },
         { "name": "Support", "path": "/support/" },
         { "name": "Case studies", "path": "/case-studies/" },
         { "name": "Blog", "path": "/blog/" }

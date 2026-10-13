@@ -1,0 +1,126 @@
+# The cards are the `experts` collection, edited there rather than here. What
+# this section configures is the copy above them and how wide they run.
+content.subtext:
+  type: markdown
+  comment: A line above the grid.
+content.linkText:
+  type: text
+  comment: The label on each card's link out.
+style.columns:
+  type: select
+  comment: How many cards sit across the row.
+  options:
+    values:
+      - id: 2
+        name: Two
+      - id: 3
+        name: Three
+      - id: 4
+        name: Four
+
+# --- section wrapper inputs (CustomSection) ---
+# Configures the CustomSection wrapper, not this section's own content. Inline
+# per component so a project can trim the size/padding lists in place.
+# `new:component` slices from this marker down — keep the marker line verbatim.
+content.sectionLabel:
+  type: text
+  comment: Names the section in the editor and sets its anchor id.
+style.maxContentWidth:
+  type: select
+  comment: The width the content runs to.
+  options:
+    values:
+      - id: xl
+        name: Full
+      - id: md
+        name: Compact
+style.paddingHorizontal:
+  type: select
+  comment: The space either side of the content.
+  options:
+    values:
+      - id: gutter
+        name: Default page gutter
+      - id: none
+        name: None
+style.paddingVertical:
+  type: select
+  comment: The space above and below the content.
+  options:
+    values:
+      - id: 4xl
+        name: Default
+      - id: md
+        name: Compact
+style.paddingVerticalStart:
+  type: select
+  label: Vertical padding (top)
+  comment: Overrides the top of the vertical padding on its own. Empty follows Vertical padding.
+  options:
+    values:
+      - id: none
+        name: None
+      - id: md
+        name: Compact
+      - id: 2xl
+        name: Medium
+      - id: 4xl
+        name: Default
+style.colorScheme:
+  hidden: true
+  type: select
+  comment: Light or dark scheme for the section. Inherit follows the page.
+  options:
+    values:
+      - id: inherit
+        name: Inherit
+      - id: light
+        name: Light
+      - id: dark
+        name: Dark
+style.lockColorScheme:
+  hidden: true
+  type: switch
+  comment: Keeps this section's scheme when the page theme changes.
+style.backgroundColor:
+  type: select
+  label: Band colour
+  comment: The colour behind the whole section.
+  options:
+    values:
+      - id: light-sand
+        name: Light sand
+      - id: sand
+        name: Sand
+      - id: dark-sand
+        name: Dark sand
+      - id: dark
+        name: Dark
+style.pattern:
+  type: select
+  label: Texture
+  comment: The texture behind the band, by name.
+  options:
+    values:
+      - id: none
+        name: None
+      - id: grid
+        name: Grid
+      - id: pegboard
+        name: Peg board
+style.fade:
+  type: select
+  label: Texture fade
+  comment: Which edge the texture fades out towards. Only applies where there is one.
+  options:
+    values:
+      - id: none
+        name: None
+      - id: top
+        name: Fade out at the top
+      - id: bottom
+        name: Fade out at the bottom
+style.haze:
+  type: switch
+  label: Haze behind the heading
+  comment: Pools the band's own colour behind the copy so it stays readable over a texture.

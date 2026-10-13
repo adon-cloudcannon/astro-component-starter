@@ -1,0 +1,22 @@
+label: Expert Grid
+icon: groups
+description: Every agency in the expert directory, as a grid of cards.
+tabbed: true
+value:
+  _component: page-sections/collections/expert-grid
+  content:
+    sectionLabel: ""
+    subtext: ""
+    linkText: Learn more
+  style:
+    columns: 3
+    maxContentWidth: xl
+    paddingHorizontal: gutter
+    paddingVertical: 4xl
+    paddingVerticalStart: ""
+    colorScheme: inherit
+    lockColorScheme: false
+    backgroundColor: light-sand
+    pattern: none
+    fade: none
+    haze: false

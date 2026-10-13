@@ -4,7 +4,7 @@ description: >-
   Your Dev Team as a Service. Tap into an existing dev team and scale on services your
   business needs.
 order: 2
-image: https://cc-dam.imgix.net/Screenshot 2023-03-16 at 10.53.54 AM (1).png
+image: https://cc-dam.imgix.net/Screenshot%202023-03-16%20at%2010.53.54%20AM%20%281%29.png
 imageAlt: Fetchly Labs website
 logo: /images/logos/experts/group-4.svg
 location: Austin, TX, USA

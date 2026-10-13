@@ -1,0 +1,250 @@
+---
+/**
+ * Every expert in the directory, as a grid of cards.
+ *
+ * Not a list an editor fills in: the cards are the `experts` collection, so
+ * adding an agency is adding a file. What this section configures is the
+ * copy above the grid and how wide it runs.
+ */
+import { getCollection } from "astro:content";
+import { bandPattern, bandHaze } from "@component-utils/bandStyle.mjs";
+import { nestedProps } from "@component-utils/nestedProps.mjs";
+import CustomSection from "@builders/custom-section/CustomSection.astro";
+import Button from "@core-elements/button/Button.astro";
+import Image from "@core-elements/image/Image.astro";
+import Text from "@core-elements/text/Text.astro";
+
+const { props, at } = nestedProps(Astro.props);
+
+const {
+  subtext = "",
+  columns = 3,
+  linkText = "Learn more",
+  sectionLabel,
+  maxContentWidth = "xl",
+  paddingHorizontal = "gutter",
+  paddingVertical = "4xl",
+  paddingVerticalStart = "",
+  colorScheme = "inherit",
+  lockColorScheme = false,
+  backgroundColor = "light-sand",
+  /** The texture behind the band, by name. */
+  pattern = "none",
+  /** Which edge the texture fades out towards. */
+  fade = "none",
+  /** Whether the heading sits on a pool of the band’s own colour. */
+  haze = false,
+  class: className,
+  useDefaultEditableBinding = false,
+  _component,
+  ...htmlAttributes
+} = props;
+
+const entries = (await getCollection("experts", ({ data }) => !data.draft)).sort(
+  (a, b) => (a.data.order ?? 99) - (b.data.order ?? 99) || a.data.title.localeCompare(b.data.title)
+);
+
+/* The generators' marks, drawn as masks so the chip's own ink colours them:
+   the files carry each brand's colours and the design draws them white on a
+   dark chip. */
+const ssgMarks: Record<string, { src: string }> = Object.fromEntries(
+  Object.entries(
+    import.meta.glob("../../../../assets/images/marketing/ssgs/*.svg", {
+      eager: true,
+      query: "?url",
+    })
+  ).map(([file, url]) => [
+    file.split("/").pop()!.replace(".svg", ""),
+    { src: (url as any).default },
+  ])
+);
+---
+
+<CustomSection
+  class:list={["expert-grid", className]}
+  label={sectionLabel}
+  maxContentWidth={maxContentWidth}
+  paddingHorizontal={paddingHorizontal}
+  paddingVertical={paddingVertical}
+  paddingVerticalStart={paddingVerticalStart}
+  colorScheme={colorScheme}
+  lockColorScheme={lockColorScheme}
+  backgroundColor={backgroundColor}
+  background={bandPattern(pattern, fade)}
+  haze={bandHaze(haze)}
+  useDefaultEditableBinding={useDefaultEditableBinding}
+  {...htmlAttributes}
+>
+  <Text
+    class="expert-grid-subtext"
+    alignmentHorizontal="center"
+    size="md"
+    data-prop={at("subtext")}
+    text={subtext}
+  />
+
+  <div
+    class="expert-grid-cards"
+    style={`--expert-grid-columns: ${Number(columns) || 3}`}
+  >
+    {entries.map((entry) => (
+      <article class="expert-grid-card">
+        <a
+          class="expert-grid-hit"
+          href={`/experts/${entry.id}/`}
+          aria-label={entry.data.title}
+        />
+        <Image
+          class="expert-grid-shot"
+          source={entry.data.image}
+          alt={entry.data.imageAlt ?? ""}
+          aspectRatio="none"
+        />
+        <div class="expert-grid-body">
+          <h3 class="expert-grid-title">{entry.data.title}</h3>
+          <p class="expert-grid-line">{entry.data.description}</p>
+          {(entry.data.ssgs ?? []).some((ssg) => ssgMarks[ssg]) && (
+            <p class="expert-grid-ssgs">
+              {(entry.data.ssgs ?? [])
+                .filter((ssg) => ssgMarks[ssg])
+                .map((ssg) => (
+                  <span
+                    class="expert-grid-ssg"
+                    style={`--expert-grid-mark: url("${ssgMarks[ssg].src}")`}
+                    title={ssg}
+                  />
+                ))}
+            </p>
+          )}
+        </div>
+        <div class="expert-grid-foot">
+          <Button
+            class="expert-grid-link"
+            text={linkText}
+            link={`/experts/${entry.id}/`}
+            iconName="arrow-right"
+            iconPosition="after"
+            variant="text"
+            size="md"
+          />
+        </div>
+      </article>
+    ))}
+  </div>
+</CustomSection>
+
+<style is:global>
+  @layer page-sections {
+    .expert-grid .expert-grid-subtext {
+      margin-inline: auto;
+      max-inline-size: 36rem;
+    }
+
+    .expert-grid .expert-grid-cards {
+      --space-before: var(--spacing-3xl);
+
+      display: grid;
+      gap: var(--spacing-lg);
+      grid-template-columns: repeat(var(--expert-grid-columns, 3), minmax(0, 1fr));
+      margin-block-start: var(--spacing-3xl);
+    }
+
+    @container (width < 900px) {
+      .expert-grid .expert-grid-cards {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
+
+    @container (width < 600px) {
+      .expert-grid .expert-grid-cards {
+        grid-template-columns: minmax(0, 1fr);
+      }
+    }
+
+    /* The whole card answers the pointer: the hit is a stretched link, so the
+       card is one target without the name sitting inside an anchor. */
+    .expert-grid .expert-grid-card {
+      background-color: var(--color-bg-surface);
+      border: var(--border-width-sm) solid var(--dark-sand);
+      border-radius: var(--radius-card);
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+      position: relative;
+      transition: border-color var(--animation-normal) var(--ease-out);
+    }
+
+    .expert-grid .expert-grid-card:hover,
+    .expert-grid .expert-grid-card:focus-within {
+      border-color: var(--earth);
+    }
+
+    .expert-grid .expert-grid-hit {
+      inset: 0;
+      position: absolute;
+      z-index: 1;
+    }
+
+    .expert-grid .expert-grid-shot img {
+      aspect-ratio: 16 / 10;
+      display: block;
+      inline-size: 100%;
+      object-fit: cover;
+      object-position: top center;
+    }
+
+    .expert-grid .expert-grid-body {
+      flex: 1 1 auto;
+      padding: var(--spacing-lg) var(--spacing-xl) 0;
+    }
+
+    /* The agency's name, in the regular weight the design sets a card name
+       in — the same 22 the template cards carry. */
+    .expert-grid .expert-grid-title {
+      font-size: 1.375rem;
+      font-weight: var(--font-weight-normal);
+      margin: 0;
+    }
+
+    .expert-grid .expert-grid-line {
+      color: var(--color-text-muted);
+      font-size: var(--font-size-md);
+      margin-block: var(--spacing-sm) 0;
+    }
+
+    /* The generators the agency works in, on one dark chip, which is how the
+       design draws them. */
+    .expert-grid .expert-grid-ssgs {
+      align-items: center;
+      background-color: var(--midnight);
+      border-radius: 999px;
+      display: flex;
+      gap: var(--spacing-md);
+      inline-size: fit-content;
+      margin-block: var(--spacing-lg) 0;
+      padding: var(--spacing-sm) var(--spacing-md);
+    }
+
+    /* A mask rather than an image: the files carry each brand's own colours
+       and the chip draws them all in one ink. */
+    .expert-grid .expert-grid-ssg {
+      background-color: var(--light-sand);
+      block-size: 1.125rem;
+      display: block;
+      inline-size: 1.125rem;
+      mask-image: var(--expert-grid-mark);
+      mask-position: center;
+      mask-repeat: no-repeat;
+      mask-size: contain;
+    }
+
+    .expert-grid .expert-grid-foot {
+      border-block-start: var(--border-width-sm) solid var(--dark-sand);
+      margin-block-start: var(--spacing-lg);
+      margin-inline: var(--spacing-xl);
+      padding-block: var(--spacing-md);
+      position: relative;
+      z-index: 2;
+    }
+  }
+</style>

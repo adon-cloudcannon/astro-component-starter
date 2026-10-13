@@ -1,0 +1,276 @@
+---
+/**
+ * One agency's page in the expert directory.
+ *
+ * The body is the agency's own longer description, and `work` is the client
+ * projects it shows underneath — one panel each, the way the design draws
+ * them.
+ */
+import { breadcrumbListJsonLd } from "@component-utils/breadcrumbTrail";
+import Button from "@core-elements/button/Button.astro";
+import Heading from "@core-elements/heading/Heading.astro";
+import Image from "@core-elements/image/Image.astro";
+import SimpleText from "@core-elements/simple-text/SimpleText.astro";
+import Text from "@core-elements/text/Text.astro";
+import breadcrumbsData from "@data/breadcrumbs.json";
+import Page from "@layouts/Page.astro";
+import CustomSection from "@page-sections/builders/custom-section/CustomSection.astro";
+import { getCollection, render, type CollectionEntry } from "astro:content";
+
+export async function getStaticPaths() {
+  const experts = await getCollection("experts", ({ data }) => !data.draft);
+
+  return experts.map((expert: CollectionEntry<"experts">) => ({
+    params: { slug: expert.id },
+    props: { expert },
+  }));
+}
+
+interface Props {
+  expert: CollectionEntry<"experts">;
+}
+
+const { expert } = Astro.props;
+const { Content } = await render(expert);
+const { title, description, image, imageAlt, location, siteUrl } = expert.data;
+
+const work = (expert.data.work ?? []).filter((item) => item?.title);
+
+/* The agency's own links, in the order the design lists them. */
+const links = [
+  { label: "Visit website", href: siteUrl },
+  { label: "LinkedIn", href: expert.data.linkedinUrl },
+  { label: "X", href: expert.data.twitterUrl },
+  { label: "Facebook", href: expert.data.facebookUrl },
+  { label: "Instagram", href: expert.data.instagramUrl },
+].filter((link) => link.href);
+
+/* The panels behind the client work, cycled so neighbouring ones differ. */
+const PANEL_COLOURS = ["sunset", "pacific", "moss", "harbour", "peachy"];
+
+const breadcrumbJsonLd = breadcrumbListJsonLd(
+  [{ label: "Expert directory", url: "/experts/" }, { label: title }],
+  { homeLabel: breadcrumbsData.homeLabel, base: Astro.site ?? Astro.url }
+);
+---
+
+<Page
+  title={title}
+  description={description}
+  image={image}
+  type="article"
+>
+  <script
+    type="application/ld+json"
+    set:html={JSON.stringify(breadcrumbJsonLd).replace(/</g, "\\u003c")}
+  ></script>
+
+  <CustomSection
+    class="expert-page-hero"
+    maxContentWidth="xl"
+    paddingHorizontal="gutter"
+    paddingVertical="4xl"
+    backgroundColor="dark"
+    background={{ type: "pattern", pattern: "grid" }}
+  >
+    <div class="expert-page-head">
+      <div class="expert-page-intro">
+        <p class="expert-page-eyebrow">Experts</p>
+        <Heading
+          level="h1"
+          size="lg"
+          class="expert-page-title"
+        >
+          {title}
+        </Heading>
+        <SimpleText
+          size="lg"
+          class="expert-page-line"
+        >
+          {description}
+        </SimpleText>
+        {location && <p class="expert-page-location">{location}</p>}
+      </div>
+      {image && (
+        <Image
+          class="expert-page-shot"
+          source={image}
+          alt={imageAlt ?? `${title} website`}
+          rounded
+        />
+      )}
+    </div>
+  </CustomSection>
+
+  <CustomSection
+    class="expert-page-body"
+    maxContentWidth="lg"
+    paddingHorizontal="gutter"
+    paddingVertical="4xl"
+    backgroundColor="light-sand"
+  >
+    <div class="expert-page-copy prose">
+      <Content />
+    </div>
+    {links.length > 0 && (
+      <div class="expert-page-links">
+        {links.map((link) => (
+          <Button
+            text={link.label}
+            link={link.href}
+            iconName="arrow-right"
+            iconPosition="after"
+            variant="text"
+            size="md"
+          />
+        ))}
+      </div>
+    )}
+  </CustomSection>
+
+  {work.length > 0 && (
+    <CustomSection
+      class="expert-page-work"
+      label="Client work"
+      maxContentWidth="xl"
+      paddingHorizontal="gutter"
+      paddingVertical="4xl"
+      backgroundColor="light-sand"
+      paddingVerticalStart="none"
+    >
+      {work.map((item, index) => (
+        <article
+          class="expert-page-project"
+          style={`--expert-page-panel: var(--${PANEL_COLOURS[index % PANEL_COLOURS.length]})`}
+        >
+          <div class="expert-page-project-copy">
+            <Heading
+              level="h2"
+              size="sm"
+              class="expert-page-project-title"
+            >
+              {item.title}
+            </Heading>
+            <Text
+              class="expert-page-project-body"
+              size="md"
+              text={item.body ?? ""}
+            />
+          </div>
+          {item.image && (
+            <div class="expert-page-project-panel scratched" aria-hidden="true">
+              <Image
+                class="expert-page-project-shot"
+                source={item.image}
+                alt=""
+                rounded
+              />
+            </div>
+          )}
+        </article>
+      ))}
+    </CustomSection>
+  )}
+</Page>
+
+<style is:global>
+  /* Copy beside the agency's own site, which is what the design draws. */
+  .expert-page-head {
+    align-items: center;
+    display: grid;
+    gap: var(--spacing-3xl);
+    grid-template-columns: minmax(0, 0.85fr) minmax(0, 1fr);
+  }
+
+  .expert-page-eyebrow {
+    color: var(--sunset);
+    font-size: var(--font-size-xs);
+    font-weight: var(--font-weight-semibold);
+    letter-spacing: 0.2em;
+    margin: 0;
+    text-transform: uppercase;
+  }
+
+  .expert-page-title {
+    --space-before: var(--spacing-lg);
+  }
+
+  .expert-page-line {
+    --space-before: var(--spacing-lg);
+  }
+
+  .expert-page-location {
+    color: var(--color-text-muted);
+    font-size: var(--font-size-md);
+    margin-block: var(--spacing-lg) 0;
+  }
+
+  .expert-page-shot img {
+    block-size: auto;
+    inline-size: 100%;
+  }
+
+  /* The agency's own words, set the way a README is on a template page. */
+  .expert-page-copy p,
+  .expert-page-copy ul,
+  .expert-page-copy ol,
+  .expert-page-copy li {
+    font-size: var(--font-size-lg);
+  }
+
+  .expert-page-copy > p:first-child {
+    background-color: var(--light-sand);
+    border: var(--border-width-sm) solid var(--dark-sand);
+    border-radius: var(--radius-card);
+    margin-block: 0 var(--spacing-xl);
+    padding: 1.75rem 2.25rem;
+  }
+
+  .expert-page-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--spacing-xl);
+    margin-block-start: var(--spacing-2xl);
+  }
+
+  /* A project is copy over its picture, and the picture sits on a scratched
+     sheet of its own colour — the design gives each one a different one. */
+  .expert-page-project {
+    margin-block-start: var(--spacing-4xl);
+  }
+
+  .expert-page-project-copy {
+    margin-inline: auto;
+    max-inline-size: var(--content-width-lg);
+  }
+
+  .expert-page-project-body {
+    --space-before: var(--spacing-md);
+  }
+
+  .expert-page-project-panel {
+    --scratch-fill: var(--expert-page-panel, var(--sunset));
+
+    border-radius: var(--radius-card);
+    margin-block-start: var(--spacing-2xl);
+    padding: var(--spacing-3xl) var(--spacing-3xl) 0;
+  }
+
+  .expert-page-project-shot img {
+    block-size: auto;
+    border-start-start-radius: var(--radius-card);
+    border-start-end-radius: var(--radius-card);
+    display: block;
+    inline-size: 100%;
+  }
+
+  @media (width < 900px) {
+    .expert-page-head {
+      grid-template-columns: minmax(0, 1fr);
+    }
+
+    .expert-page-project-panel {
+      padding: var(--spacing-xl) var(--spacing-xl) 0;
+    }
+  }
+</style>
