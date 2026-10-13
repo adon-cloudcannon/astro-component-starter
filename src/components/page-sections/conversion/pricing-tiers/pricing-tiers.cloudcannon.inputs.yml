@@ -27,17 +27,6 @@ content.cardAlignment:
         name: Start
       - id: center
         name: Center
-content.cardColor:
-  type: select
-  comment: Which of the two sands the cards are.
-  options:
-    values:
-      - id: surface
-        name: Sand
-      - id: base
-        name: Light sand
-      - id: muted
-        name: Dark sand
 # The heading, its eyebrow, its level and its size are one decision.
 content.heading:
   type: object
@@ -178,6 +167,20 @@ content.tiers:
 content.sectionLabel:
   type: text
   comment: Names the section in the editor and sets its anchor id.
+style.cardColor:
+  type: select
+  label: Card colour
+  comment: The card's own surface, a shade off the band it sits on.
+  options:
+    values:
+      - id: white
+        name: White
+      - id: surface
+        name: Sand
+      - id: base
+        name: Light sand
+      - id: muted
+        name: Dark sand
 style.maxContentWidth:
   type: select
   comment: How wide the band's content runs.

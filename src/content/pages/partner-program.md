@@ -214,7 +214,6 @@ pageSections:
       backgroundColor: light-sand
   - _component: page-sections/conversion/pricing-tiers
     content:
-      cardColor: base
       heading:
         heading: Pricing plans designed for your clients
         headingSize: lg
@@ -278,6 +277,7 @@ pageSections:
           pricePosition: bottom
           height: 454
     style:
+      cardColor: base
       backgroundColor: sand
   - _component: page-sections/conversion/cta-showcase
     content:

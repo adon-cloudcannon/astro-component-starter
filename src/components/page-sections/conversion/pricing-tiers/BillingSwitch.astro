@@ -93,7 +93,11 @@ const badgeMarkup = isNonEmptyString(badge) ? badge : null;
       --billing-switch-pad: 4px;
 
       align-items: center;
-      background-color: var(--sand);
+      /* Light sand, not sand: the design draws the track #FFFCF3, which on
+         the pricing band is the band's own colour, so the rule around it is
+         the only thing that marks the pill out. Filled sand it read as a
+         panel the design does not draw. */
+      background-color: var(--color-bg);
       border: var(--border-width-sm) solid var(--dark-sand);
       border-radius: 999px;
       cursor: pointer;
@@ -130,7 +134,10 @@ const badgeMarkup = isNonEmptyString(badge) ? badge : null;
     .billing-switch .toggle-off-label,
     .billing-switch .toggle-label {
       border-radius: 999px;
-      color: var(--color-text-strong);
+      /* Earth at 16/600, which is what the design sets the resting label in;
+         the live one goes white. Read as the strong ink it was near-black
+         beside a Pacific pill. */
+      color: var(--color-text);
       cursor: pointer;
       font-weight: var(--font-weight-semibold);
       line-height: 1;
@@ -148,7 +155,7 @@ const badgeMarkup = isNonEmptyString(badge) ? badge : null;
     }
 
     :root:has([data-billing-switch]:checked) .billing-switch .toggle-off-label {
-      color: var(--color-text-strong);
+      color: var(--color-text);
     }
 
     :root:has([data-billing-switch]:checked) .billing-switch .toggle-label {

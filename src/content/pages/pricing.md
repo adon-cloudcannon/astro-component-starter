@@ -125,8 +125,8 @@ pageSections:
           badgeColor: ''
           accent: ''
           pricePosition: top
-      cardColor: base
     style:
+      cardColor: white
       backgroundColor: light-sand
       pattern: none
       fade: none
@@ -436,8 +436,8 @@ pageSections:
           badgeColor: sunset
           accent: ''
           pricePosition: bottom
-      cardColor: muted
     style:
+      cardColor: muted
       backgroundColor: dark
       pattern: pegboard
       fade: bottom

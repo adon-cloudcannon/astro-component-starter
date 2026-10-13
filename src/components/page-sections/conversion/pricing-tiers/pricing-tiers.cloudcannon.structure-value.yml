@@ -84,6 +84,7 @@ value:
         highlight: false
         badgeText: ""
   style:
+    cardColor: surface
     backgroundColor: light-sand
     pattern: none
     fade: none

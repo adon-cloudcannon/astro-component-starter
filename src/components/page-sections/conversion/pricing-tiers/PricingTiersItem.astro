@@ -52,7 +52,17 @@ const {
   ...htmlAttributes
 } = Astro.props;
 
-const sand = `var(--color-bg${cardColor === "base" ? "" : `-${cardColor}`})`;
+/* The design draws the plan cards #FFFFFF on a #FFFCF3 band, which no
+   `--color-bg-*` holds: white is lighter than the lightest of them, and read
+   as `base` the card came out the band's own colour with only its rule to
+   separate it. */
+const CARD_SURFACES: Record<string, string> = {
+  white: "var(--white)",
+  base: "var(--color-bg)",
+  surface: "var(--color-bg-surface)",
+  muted: "var(--color-bg-muted)",
+};
+const sand = CARD_SURFACES[cardColor] ?? CARD_SURFACES.surface;
 
 /* The card declares its own scheme, the way the bento's and the quote's cards
    do. `data-theme` steers anything nested that reads a theme token — a
@@ -105,41 +115,52 @@ const figures = slides
       highlight && "highlight",
       `price-${pricePosition}`,
       `align-${cardAlignment}`,
-      badgeColor && "badge-above",
       className,
     ]}
     data-theme={cardScheme}
     style={[
       height ? `--pricing-tier-height: ${Number(height)}px` : "",
-      badgeColor ? `--pricing-tier-badge: var(--${badgeColor})` : "",
+      badgeColor
+        ? `--pricing-tier-badge: var(--${badgeColor}); --pricing-tier-badge-ink: var(--white)`
+        : "",
       `--pricing-tier-bg: ${accent ? `color-mix(in srgb, ${accent.startsWith("#") ? accent : `var(--${accent})`} 12%, ${sand})` : sand}`,
     ].filter(Boolean).join("; ")}
   >
-    {/* Not gated on `highlight`: the design badges the recommended plan and
-        rules all three cards the same, where highlight also draws a heavier
-        ring around the card.
+    {/* The badge sits in a row with the name rather than floating over the
+        card, so a name long enough to reach it pushes it down instead of
+        running underneath it. A centred card lifts it out of the row and
+        onto the top edge, which is the only placement that reads as centred:
+        beside a centred name it sits off to one side of nothing.
 
-        `md` rather than the design's own size: the file sets this label at
-        10px, which is legible in Figma at 100% and is not on a real screen.
-        One step up is 14 and still reads as a badge beside a 29px name. */}
-    {badgeText && (
-      <Badge
-        class="pricing-tier-badge"
-        variant="neutral"
-        size="md"
-        text={badgeText}
-        data-prop="badgeText"
-      />
-    )}
-    <Heading
-      class="pricing-tier-name"
-      level={headingLevel}
-      size="xs"
-      alignmentHorizontal={cardAlignment === "center" ? "center" : "start"}
-      data-prop="name"
-    >
-      {name}
-    </Heading>
+        Not gated on `highlight`: the design badges the recommended plan and
+        rules all three cards the same, where highlight also draws a heavier
+        ring around the card. */}
+    <div class="pricing-tier-head">
+      {/* Before the name, because the badge floats and a float only shortens
+          the lines that come after it in the source.
+
+          `md` rather than the design's own size: the file sets this label at
+          10px, which is legible in Figma at 100% and is not on a real screen.
+          One step up is 14 and still reads as a badge beside a 29px name. */}
+      {badgeText && (
+        <Badge
+          class="pricing-tier-badge"
+          variant="neutral"
+          size="md"
+          text={badgeText}
+          data-prop="badgeText"
+        />
+      )}
+      <Heading
+        class="pricing-tier-name"
+        level={headingLevel}
+        size="xs"
+        alignmentHorizontal={cardAlignment === "center" ? "center" : "start"}
+        data-prop="name"
+      >
+        {name}
+      </Heading>
+    </div>
     <SimpleText
       class="pricing-tier-description"
       size="sm"
@@ -286,26 +307,6 @@ const figures = slides
         text-align: center;
       }
 
-      &.badge-above {
-        overflow: visible;
-      }
-
-      /* `inset-inline: 0` sets both edges; a `left: auto` after it leaves
-         `right: 0` standing and the badge hugs the right. Both edges stay at
-         0 and the margin does the centring. */
-      &.badge-above .pricing-tier-badge {
-        inset-inline: 0;
-        margin-inline: auto;
-        top: calc(-1 * var(--spacing-md));
-        width: fit-content;
-      }
-
-      &.badge-above .pricing-tier-badge .badge-inner {
-        background-color: var(--pricing-tier-badge);
-        border-color: transparent;
-        color: var(--white);
-      }
-
       /* A floor under the gap the price's `auto` margin opens. On its own the
          auto only gives what is left over, so the card with the shortest copy
          had 93px above its figure and the one with the longest had none at
@@ -333,12 +334,6 @@ const figures = slides
           var(--shadow-md);
       }
 
-      .pricing-tier-badge {
-        left: var(--spacing-xl);
-        position: absolute;
-        top: calc(-1 * var(--spacing-md));
-      }
-
       .pricing-tier-name .heading-inner {
         margin: 0;
       }
@@ -352,6 +347,10 @@ const figures = slides
         align-items: baseline;
         display: flex;
         gap: var(--spacing-xs);
+        /* The base layer's paragraph margin, cleared: margins do not collapse
+           in a flex column, so it stacked on the button's own and the gap
+           under the figure came out double the one the design draws. */
+        margin-block-end: 0;
         margin-top: var(--spacing-lg);
 
         &.pricing-tier-price-annual {
@@ -402,13 +401,24 @@ const figures = slides
          the list is what runs to the card's foot. `price-bottom` puts the
          price last and the action after it, so there it does hang off the
          foot and the rule stays with the list. */
+      /* The gap is a margin on the button rather than padding inside it, so
+         it can differ by what it follows. Carried as padding it was the same
+         24 either way, which lands differently: a figure leaves a band of
+         descender space under it, so the button read far off the price,
+         while a tier with no figure — Enterprise — had its button straight
+         under the copy. The design draws about 15 under a price and 35 under
+         a line of copy. */
       .pricing-tier-button {
         display: flex;
-        padding-block-start: var(--spacing-lg);
+        margin-block-start: var(--spacing-xl);
 
         > .button-inner {
           flex: 1;
         }
+      }
+
+      .pricing-tier-price + .pricing-tier-button {
+        margin-block-start: var(--spacing-md);
       }
 
       /* Pacific, not the neutral rule a tertiary draws: beside the filled
@@ -494,20 +504,53 @@ const figures = slides
       border-color: var(--dark-sand);
     }
 
-    .pricing-tier .pricing-tier-badge {
-      inset-block-start: 2.125rem;
-      inset-inline-end: 2rem;
-      inset-inline-start: auto;
+    /* The name and its badge share a row. `flex-wrap` is the whole point: a
+       name that will not fit beside the badge drops it to its own line, where
+       the badge floating over the card had the name running underneath it. */
+    /* The badge holds the corner and the name wraps to the left of it. A
+       float rather than a flex row: in a row the name is narrowed for every
+       line, so "Standard for growing content teams" came out a word at a
+       time down a column half the card wide. A float only shortens the lines
+       beside it, so the name wraps under the badge and the rest of it runs
+       the card's full measure. */
+    .pricing-tier-head {
+      display: block;
+    }
+
+    .pricing-tier-head > .pricing-tier-badge {
+      float: inline-end;
+      margin-inline-start: var(--spacing-sm);
+      position: static;
+    }
+
+    /* Centred, the badge leaves the row and straddles the card's top edge.
+       `inset-inline: 0` sets both edges; a `left: auto` after it leaves
+       `right: 0` standing and the badge hugs the right. Both edges stay at 0
+       and the margin does the centring. */
+    .pricing-tier.align-center {
+      overflow: visible;
+    }
+
+    .pricing-tier.align-center .pricing-tier-head > .pricing-tier-badge {
+      float: none;
+      inset-block-start: calc(-1 * var(--spacing-md));
+      inset-inline: 0;
+      margin-inline: auto;
+      position: absolute;
+      width: fit-content;
     }
 
     /* On .badge-inner, which is the element that is actually drawn: the
        background, the border and the radius all live there, so painting the
        wrapper left the shipped surface and its grey edge showing underneath
        (see CLAUDE.md on measuring the leaf). */
+    /* The fill is whatever the card was given, defaulting to the design's
+       own Recommended pill: harbour behind Pacific. A chosen colour is a
+       strong one, so its label goes white. */
     .pricing-tier .pricing-tier-badge > .badge-inner {
-      background-color: var(--harbour);
+      background-color: var(--pricing-tier-badge, var(--harbour));
       border-color: transparent;
-      color: var(--pacific);
+      color: var(--pricing-tier-badge-ink, var(--pacific));
       /* 13, not the file's 10. The design's label is legible in Figma at
          100% and is not on a real screen — it came back as "at the top,
          small, can't read". The pill is still the design's: harbour behind
