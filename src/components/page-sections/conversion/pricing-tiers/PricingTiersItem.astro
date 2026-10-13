@@ -507,23 +507,34 @@ const figures = slides
     /* The name and its badge share a row. `flex-wrap` is the whole point: a
        name that will not fit beside the badge drops it to its own line, where
        the badge floating over the card had the name running underneath it. */
-    /* The badge always straddles the card's top edge, centred, whichever way
-       the copy is aligned. One placement rather than two: beside the name it
-       is something a long name has to be kept clear of, and the card then
-       reads differently depending on a setting that is about the copy.
-
-       `inset-inline: 0` sets both edges; a `left: auto` after it leaves
-       `right: 0` standing and the badge hugs the right. Both edges stay at 0
-       and the margin does the centring. */
-    .pricing-tier {
-      overflow: visible;
-    }
-
+    /* The badge holds the card's top-right corner and the name wraps to the
+       left of it. A float rather than a flex row: in a row the name is
+       narrowed for every line, so "Standard for growing content teams" came
+       out a word at a time down a column half the card wide. A float only
+       shortens the lines beside it, so the name wraps under the badge and
+       the rest of it runs the card's full measure. */
     .pricing-tier-head {
       display: block;
     }
 
     .pricing-tier-head > .pricing-tier-badge {
+      float: inline-end;
+      margin-inline-start: var(--spacing-sm);
+      position: static;
+    }
+
+    /* Centred, the badge leaves the flow and straddles the card's top edge:
+       beside a centred name it would sit off to one side of nothing.
+
+       `inset-inline: 0` sets both edges; a `left: auto` after it leaves
+       `right: 0` standing and the badge hugs the right. Both edges stay at 0
+       and the margin does the centring. */
+    .pricing-tier.align-center {
+      overflow: visible;
+    }
+
+    .pricing-tier.align-center .pricing-tier-head > .pricing-tier-badge {
+      float: none;
       inset-block-start: calc(-1 * var(--spacing-md));
       inset-inline: 0;
       margin-inline: auto;
