@@ -88,7 +88,11 @@ const drawnHeadingSize = chosen(headingSize) ?? (iconName ? "md" : "sm");
 ---
 
 <GridItem
-  class="card-grid-item"
+  {/* Not `card-grid-item`: that is the class the `card-grid` building block
+      styles its own items with — a bordered, 12px-radius panel — and this
+      wrapper was picking it up by name alone. The card inside draws its own
+      18px border, so the two sat one inside the other at different radii. */}
+  class="card-grid-section-item"
   {...htmlAttributes}
 >
   <Card
