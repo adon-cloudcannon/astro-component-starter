@@ -541,6 +541,15 @@ const priceRows = [
       font-size: var(--font-size-lg);
     }
 
+    /* A dark card's figure is the card's ink, not the design's black. These
+       two rules go through `.pricing-tier-price` to beat the shipped size
+       rule, which also puts them above the dark-card block higher up — so the
+       add-on cards drew a near-black figure on a near-black panel. */
+    .pricing-tier[data-theme="dark"] .pricing-tier-price > .pricing-tier-amount,
+    .pricing-tier[data-theme="dark"] .pricing-tier-price > .pricing-tier-suffix {
+      color: var(--white);
+    }
+
 
   }
 </style>

@@ -227,7 +227,10 @@ const mirror = rootMirror({
       --space-before: var(--spacing-md);
     }
 
-    .cta-banner .cta-banner-link .button-inner {
+    /* Only the text link runs to the column's edge. Unscoped this flattened
+       the pill variant too: the label filled the button edge to edge with no
+       room either side, which read as the button being unable to stretch. */
+    .cta-banner .cta-banner-link .button-inner.variant-text {
       padding-inline: 0;
     }
 
