@@ -1,3 +1,33 @@
+/**
+ * The cells Fragment Mono does not fill.
+ *
+ * It is loaded as latin only, so box drawing, arrows and the maths signs are
+ * not in it. Appending a monospace family to `--font-mono` would never be
+ * reached — the Arial that ends that stack has those glyphs and stops the
+ * walk — so this face is consulted FIRST and only for those ranges, leaving
+ * every other character to Fragment Mono.
+ *
+ * `size-adjust` puts the borrowed glyphs on Fragment Mono's own cell: Menlo
+ * advances 0.602em against its 0.618, and a directory tree drawn half a cell
+ * out per line is the thing this exists to fix. The percentage is exact for
+ * the first local that resolves and close for the others.
+ */
+@font-face {
+  font-family: "mono-drawing";
+  /* Full and PostScript names, not family names: that is what `local()`
+     matches, so `local("Menlo")` finds nothing while `local("Menlo-Regular")`
+     finds it. One per platform, in the order they are likely to exist. */
+  src:
+    local("Menlo-Regular"),
+    local("Consolas"),
+    local("DejaVu Sans Mono Book"),
+    local("LiberationMono"),
+    local("Courier New");
+  size-adjust: 102.7%;
+  unicode-range: U+0370-03FF, U+2190-21FF, U+2200-22FF, U+2500-257F, U+2580-259F,
+    U+25A0-25FF, U+2713-2718;
+}
+
 @layer base {
   body {
     font-family: var(--font-body);
@@ -105,7 +135,7 @@
     kbd,
     samp,
     pre {
-      font-family: var(--font-mono);
+      font-family: "mono-drawing", var(--font-mono);
     }
 
     code {
