@@ -238,7 +238,12 @@ const pillCss = pillList
       outline-offset: 2px;
     }
 
+    /* `.text` hands the next block the tight 8 it wants after a sibling of
+       its own kind, and what sits above this is a row of pills: the design
+       leaves 29 between them. */
     .template-grid .template-grid-subtext {
+      --space-before: var(--spacing-lg);
+
       margin-inline: auto;
       max-inline-size: 36rem;
     }
