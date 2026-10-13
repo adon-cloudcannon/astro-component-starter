@@ -150,6 +150,11 @@ const hasBadge = isNonEmptyString(badgeText);
          and at that size the pill read as a tag rather than the label the
          design draws. */
       font-size: var(--offer-card-badge-size);
+      /* The design's pill is 110 x 40 around a 56-wide label. Left at the
+         badge's own padding it came out 91 x 37, and a label that fills its
+         pill that much more closely reads as larger type rather than as a
+         tighter pill. */
+      padding: 0.375rem 1.625rem;
     }
 
     /* The card's own copy runs tight: the design sets "Includes:" and the
