@@ -68,6 +68,9 @@ const {
    * under a one-line title on a card with no body reads as a strikethrough.
    */
   divider = false,
+  /** Label for the link out of the card. Empty draws no link. */
+  linkText = "",
+  link = "",
   alignmentHorizontal = "start",
   class: className,
   useDefaultEditableBinding: _useDefaultEditableBinding = false,
@@ -131,6 +134,21 @@ const drawnHeadingSize = chosen(headingSize) ?? (iconName ? "md" : "sm");
       data-prop={at("subtext")}
       text={subtext}
     />
+    {linkText && (
+      /* The site's arrow link, which is the Button rather than an anchor of
+         this card's own — see CLAUDE.md. It takes the card's accent so the
+         three read as a set, the way the design draws them. */
+      <Button
+        class="card-grid-link"
+        text={linkText}
+        link={link}
+        iconName="arrow-right"
+        iconPosition="after"
+        variant="text"
+        size="sm"
+        data-prop={at("linkText")}
+      />
+    )}
   </Card>
 </GridItem>
 

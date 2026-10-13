@@ -26,6 +26,8 @@ cardGridCards:
             subtext: A line about this point, a sentence or two long.
             subtextSize: auto
           iconName: zap
+          linkText: ""
+          link: ""
         style:
           accentColor: golden
           iconSolid: true
@@ -105,6 +107,13 @@ cardGridCards:
                 name: Large
               - id: xl
                 name: Extra Large
+        content.linkText:
+          type: text
+          comment: Label for the link out of the card. Leave empty for no link.
+        content.link:
+          type: url
+          comment: Where the link goes.
+          hidden: "!content.linkText"
         content.iconName:
           type: select
           comment: The card's icon. Sourced from [Lucide](https://lucide.dev/icons/).
