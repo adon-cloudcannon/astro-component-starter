@@ -89,15 +89,26 @@ const titleDataAttributes = effectiveTitleProp
          own colour, so on the cream pages the card and the band were both
          #fffcf3 and the card read as nothing at all. The design draws white on
          cream; a band that wants something else sets the token. */
+      /* 44 top and bottom, 56 either side, measured off the export rather
+         than the node boxes: card 1 rules at y=5120 and y=5247, its question
+         frame opens at y=5165, and the card's own left edge is at x=119 with
+         the question at x=177. Both are off the spacing scale, so they are
+         named here rather than rounded to a step that is 8 out. */
+      --accordion-card-padding-block: 2.75rem;
+      --accordion-card-padding-inline: 3.5rem;
+
       background-color: var(--accordion-card-bg, var(--white));
       border: var(--border-width-sm) solid var(--dark-sand);
       border-radius: var(--radius-card);
-      padding: var(--spacing-lg) var(--spacing-xl);
+      padding: var(--accordion-card-padding-block) var(--accordion-card-padding-inline);
     }
 
+    /* 20 between cards, which the export rules at 5248..5267. `spacing-md`
+       is 16 and `lg` is 24; `space-before-snug` is the 1.25rem that is
+       actually it. */
     .accordion-item.variant-card + .accordion-item.variant-card {
-      --space-before: var(--spacing-md);
-      margin-block-start: var(--spacing-md);
+      --space-before: var(--space-before-snug);
+      margin-block-start: var(--space-before-snug);
     }
 
     .accordion-item.variant-card .accordion-item-title {
@@ -156,12 +167,15 @@ const titleDataAttributes = effectiveTitleProp
 
     .accordion-item.variant-card .accordion-item-mark {
       align-items: center;
-      block-size: 2.5rem;
+      /* 44, which is what the design's ring measures. It is taller than the
+         question's own line box and overhangs it, which is why the card
+         comes out a few px over the design's 128. */
+      block-size: 2.75rem;
       border: var(--border-width-sm) solid var(--color-border);
       border-radius: 999px;
       display: inline-flex;
       flex-shrink: 0;
-      inline-size: 2.5rem;
+      inline-size: 2.75rem;
       justify-content: center;
       transition: border-color var(--animation-normal) var(--ease-out);
     }
