@@ -42,13 +42,26 @@ const grid = ((listing?.data?.pageSections ?? []) as any[]).find((block) =>
 );
 const pills: { id?: string; name?: string; accent?: string }[] = grid?.content?.pills ?? [];
 
-const label = (id: string) => id.charAt(0).toUpperCase() + id.slice(1);
+const label = (id: string) => SSG_NAMES[id] ?? id.charAt(0).toUpperCase() + id.slice(1);
 const badgeId = (template.data.collections ?? [])[0];
 const badgePill = pills.find((pill) => pill.id === badgeId);
 const badgeText = badgePill?.name ?? (badgeId ? label(badgeId) : "");
 const badgeAccent = badgePill?.accent;
 const ssgs = template.data.ssgs ?? [];
-/* The generators' own wordmarks, which the design draws in the chooser. */
+/**
+ * What each generator is called, where its own spelling is not its id.
+ *
+ * The marks beside these are the generators' icons rather than their
+ * wordmarks: an icon exists for every one of them, a wordmark does not, and
+ * the name is ours to set either way.
+ */
+const SSG_NAMES: Record<string, string> = {
+  "11ty": "Eleventy",
+  nextjs: "Next.js",
+  nuxtjs: "Nuxt",
+  sveltekit: "SvelteKit",
+};
+
 const ssgLogos: Record<string, { src: string }> = Object.fromEntries(
   Object.entries(
     import.meta.glob("../../assets/images/marketing/ssgs/*.svg", { eager: true, query: "?url" })
@@ -167,16 +180,15 @@ const breadcrumbJsonLd = breadcrumbListJsonLd(
                    not a control — the list is ready for the day a template
                    ships for two. */
                 <li class="template-page-ssg" aria-current={index === 0 ? "true" : undefined}>
-                  {ssgLogos[ssg] ? (
+                  {ssgLogos[ssg] && (
                     <img
                       class="template-page-ssg-mark"
                       src={ssgLogos[ssg].src}
-                      alt={label(ssg)}
+                      alt=""
                       loading="lazy"
                     />
-                  ) : (
-                    <span class="template-page-ssg-name">{label(ssg)}</span>
                   )}
+                  <span class="template-page-ssg-name">{label(ssg)}</span>
                 </li>
               ))}
             </ul>
@@ -390,12 +402,13 @@ const breadcrumbJsonLd = breadcrumbListJsonLd(
     box-shadow: inset 0 0 0 2px var(--white);
   }
 
+  /* Square-ish box whatever the mark's own ratio: these come from eight
+     projects and range from 0.84 to 1.35 wide for their height. */
   .template-page-ssg-mark {
-    block-size: 1.125rem;
-    inline-size: auto;
-    max-inline-size: 100%;
+    block-size: 1.25rem;
+    flex-shrink: 0;
+    inline-size: 1.25rem;
     object-fit: contain;
-    object-position: left center;
   }
 
   /* A README is written for GitHub, where the headings carry a whole page.
@@ -429,6 +442,7 @@ const breadcrumbJsonLd = breadcrumbListJsonLd(
 
   .template-page-content blockquote > p:first-child {
     margin-block-start: 0;
+    margin-block-end: var(--spacing-sm);
   }
 
   .template-page-content blockquote > p:last-child {
@@ -436,8 +450,27 @@ const breadcrumbJsonLd = breadcrumbListJsonLd(
   }
 
   .template-page-content .callout-label {
+    align-items: center;
     color: var(--callout-accent);
+    display: flex;
     font-size: var(--font-size-lg);
+    gap: var(--spacing-sm);
+  }
+
+  /* The disc is the element's own background and the mark sits on it as an
+     image, so one element draws both and the colour stays the callout's. A
+     mask would have cut the disc away with it. */
+  .template-page-content .callout-label::before {
+    aspect-ratio: 1;
+    background-color: var(--callout-accent);
+    background-image: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2024%2024%22%20fill%3D%22%23fff%22%3E%3Ccircle%20cx%3D%2212%22%20cy%3D%226.2%22%20r%3D%221.7%22%2F%3E%3Crect%20x%3D%2210.3%22%20y%3D%2210%22%20width%3D%223.4%22%20height%3D%229.4%22%20rx%3D%221.7%22%2F%3E%3C%2Fsvg%3E");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: 62%;
+    border-radius: 50%;
+    content: "";
+    flex-shrink: 0;
+    inline-size: 1.5rem;
   }
 
   /* GitHub draws note blue, tip green, important purple, warning amber and
