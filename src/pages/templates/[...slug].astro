@@ -653,7 +653,9 @@ const breadcrumbJsonLd = breadcrumbListJsonLd(
   .template-page-walk-arrow {
     align-self: stretch;
     display: grid;
-    font-size: var(--font-size-heading-xs);
+    /* The design draws the arrow about 38 across, which is the glyph at this
+       step rather than the 20 it was carrying. */
+    font-size: var(--font-size-heading-md);
     padding-inline: var(--spacing-xl);
     place-items: center;
   }
