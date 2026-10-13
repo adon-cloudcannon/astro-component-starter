@@ -657,8 +657,11 @@ if (!_component && !hasEntries && !hasSlotContent) return;
        track's own width plus justify-self. */
     .timeline:has(> .timeline-rail) .timeline-rail {
       /* 7rem, because the design draws 158 between one title and the next and
-         an entry is about 45 tall. No token lands on it. */
-      gap: 7rem;
+         an entry is about 45 tall. No token lands on it. Named, because the
+         connector below has to span exactly one of these. */
+      --timeline-rail-gap: 7rem;
+
+      gap: var(--timeline-rail-gap);
       justify-self: center;
       inline-size: 100%;
       max-inline-size: 27rem;
@@ -668,6 +671,35 @@ if (!_component && !hasEntries && !hasSlotContent) return;
        19 with 29 between the pair and the next title. */
     .timeline:has(> .timeline-rail) .timeline-entry {
       gap: var(--spacing-lg);
+      position: relative;
+    }
+
+    /* The connector is drawn per entry rather than once down the list, so it
+       can stop at the last marker. Drawn on the list it spans the whole
+       thing and insets a marker's height from each end, which only lands on
+       the last marker when the last entry happens to be a marker tall: on
+       Git's one-line entries it looked right, and under a three-line one it
+       ran 165 past the dot.
+
+       Each entry carries the span from its own marker's centre to the next
+       one's, which is its own height plus one gap. The last draws none. */
+    .timeline:has(> .timeline-rail) .timeline-rail::before {
+      content: none;
+    }
+
+    .timeline:has(> .timeline-rail) .timeline-entry::before {
+      background-color: var(--color-border);
+      block-size: calc(100% + var(--timeline-rail-gap));
+      content: "";
+      inline-size: var(--border-width-sm);
+      inset-block-start: calc(var(--timeline-split-marker) / 2);
+      inset-inline-start: calc(var(--timeline-split-marker) / 2);
+      position: absolute;
+      transform: translateX(-50%);
+    }
+
+    .timeline:has(> .timeline-rail) .timeline-entry:last-child::before {
+      content: none;
     }
   }
 
