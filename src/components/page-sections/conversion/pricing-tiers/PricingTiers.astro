@@ -194,6 +194,21 @@ const annualSelected = defaultInterval === "annual";
 
 <style is:global>
   @layer page-sections {
+    /* The design leaves a clear gap between the band's header and the row of
+       cards — about 90 from the heading's foot, against the grid's own
+       `loose`, which read as the cards being tucked under the heading. */
+    .pricing-tiers .pricing-tiers-grid {
+      --space-before: var(--spacing-3xl);
+      margin-block-start: var(--spacing-3xl);
+    }
+
+    /* The billing control sits between them when there is one, so it carries
+       the gap instead and the grid goes back to its own rhythm. */
+    .pricing-tiers:has(.pricing-tiers-billing) .pricing-tiers-grid {
+      --space-before: var(--spacing-xl);
+      margin-block-start: var(--spacing-xl);
+    }
+
     /* The bed the garden is drawn in. It holds the grid's own box so the
        planting can be placed against the cards, and nothing else: the grid
        keeps its own width and breakout. */

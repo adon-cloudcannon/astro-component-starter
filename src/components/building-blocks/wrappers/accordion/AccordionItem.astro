@@ -80,7 +80,11 @@ const titleDataAttributes = effectiveTitleProp
        on the end. Open, a rule runs under the question and the answer sits
        below it. */
     .accordion-item.variant-card {
-      background-color: var(--color-bg);
+      /* Lighter than the band, not the same as it. `--color-bg` is the band's
+         own colour, so on the cream pages the card and the band were both
+         #fffcf3 and the card read as nothing at all. The design draws white on
+         cream; a band that wants something else sets the token. */
+      background-color: var(--accordion-card-bg, var(--white));
       border: var(--border-width-sm, 1px) solid var(--dark-sand);
       border-radius: var(--radius-card);
       padding: var(--spacing-lg) var(--spacing-xl);

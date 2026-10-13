@@ -381,11 +381,9 @@ pageSections:
           description: >-
             Add additional users on your Lite, Standard or Team plan, including client
             sharing.
-          features:
-            - text: Included feature
-              included: true
-          buttonText: Get started
-          buttonLink: '#'
+          features: []
+          buttonText: ''
+          buttonLink: ''
           highlight: false
           badgeText: Users
           badgeColor: moss
@@ -402,11 +400,9 @@ pageSections:
             Lite includes 20GB
             Standard includes 110GB
             Team includes 700GB
-          features:
-            - text: Included feature
-              included: true
-          buttonText: Get started
-          buttonLink: '#'
+          features: []
+          buttonText: ''
+          buttonLink: ''
           highlight: false
           badgeText: Hosting
           badgeColor: sunset
@@ -423,11 +419,9 @@ pageSections:
             Lite includes 1 custom domain
             Standard includes 5 custom domains
             Team includes 10 custom domains
-          features:
-            - text: Included feature
-              included: true
-          buttonText: Get started
-          buttonLink: '#'
+          features: []
+          buttonText: ''
+          buttonLink: ''
           highlight: false
           badgeText: Hosting
           badgeColor: sunset
