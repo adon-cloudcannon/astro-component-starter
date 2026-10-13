@@ -253,14 +253,40 @@ const annualSelected = defaultInterval === "annual";
         width: auto;
       }
 
+      /* Two equal tracks, so the fill behind them is half the pill and lands
+         on a segment by travelling its own width. Sized off the labels
+         instead, Monthly and Yearly differ by a few pixels and the fill
+         stops short of one of them. */
       .toggle-container {
+        --pricing-toggle-pad: 4px;
+
         align-items: center;
         background-color: var(--sand);
-        border: var(--border-width-sm, 1px) solid var(--dark-sand);
+        border: var(--border-width-sm) solid var(--dark-sand);
         border-radius: 999px;
-        display: inline-flex;
+        display: inline-grid;
         gap: 0;
-        padding: 4px;
+        grid-auto-columns: 1fr;
+        grid-auto-flow: column;
+        padding: var(--pricing-toggle-pad);
+        position: relative;
+      }
+
+      /* The fill is one element that moves, not a colour that appears on
+         whichever label is live. */
+      .toggle-container::before {
+        background-color: var(--pacific);
+        border-radius: 999px;
+        content: "";
+        inline-size: calc((100% - var(--pricing-toggle-pad) * 2) / 2);
+        inset-block: var(--pricing-toggle-pad);
+        inset-inline-start: var(--pricing-toggle-pad);
+        position: absolute;
+        transition: translate var(--animation-normal) var(--ease-out);
+      }
+
+      .toggle-container:has(.toggle-input:checked)::before {
+        translate: 100% 0;
       }
 
       /* The switch itself is the control; the labels are the UI. */
@@ -277,14 +303,22 @@ const annualSelected = defaultInterval === "annual";
         line-height: 1;
         opacity: 1;
         padding: 0.875rem 1.5rem;
-        transition: background-color 0.15s ease, color 0.15s ease;
+        position: relative;
+        text-align: center;
+        transition: color var(--animation-normal) var(--ease-out);
+        white-space: nowrap;
       }
 
       /* Unchecked is Monthly, checked is the annual label. */
       .toggle-container:not(:has(.toggle-input:checked)) .toggle-off-label,
       .toggle-container:has(.toggle-input:checked) .toggle-label {
-        background-color: var(--pacific);
         color: var(--white);
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        .toggle-container::before {
+          transition: none;
+        }
       }
 
       .toggle-container:has(.toggle-input:focus-visible) .toggle-off-label,

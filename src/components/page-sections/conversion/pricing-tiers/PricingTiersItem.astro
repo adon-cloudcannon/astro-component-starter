@@ -81,6 +81,21 @@ const priceRows = [
       ]
     : []),
 ];
+
+const shownRows = priceRows.filter((row) => isNonEmptyString(row.amount));
+
+/* A tier that prices both ways slides between the two figures in one row,
+   rather than hiding a second row. Both numbers share a grid cell, so the
+   cell is as wide as the longer of them and the suffix beside it does not
+   step across as the control is thrown. Below two figures there is nothing
+   to slide, so the single row is left exactly as it was. */
+const slides = shownRows.length > 1;
+const figures = slides
+  ? [
+      { part: "amount", monthly: price, annual: annualPrice },
+      { part: "suffix", monthly: priceSuffix, annual: annualPriceSuffix },
+    ].filter((f) => isNonEmptyString(f.monthly) || isNonEmptyString(f.annual))
+  : [];
 ---
 
 <GridItem {...htmlAttributes}>
@@ -132,7 +147,32 @@ const priceRows = [
       data-prop="description"
       text={description}
     />
-    {priceRows.filter((row) => isNonEmptyString(row.amount)).map((row) => (
+    {slides && (
+      <p
+        class="pricing-tier-price pricing-tier-price-both"
+        aria-live="polite"
+      >
+        {figures.map((figure) => (
+          <span class:list={[`pricing-tier-${figure.part}`, "pricing-tier-figures"]}>
+            <span
+              class="pricing-tier-figure is-monthly"
+              data-editable="text"
+              data-prop={figure.part === "amount" ? "price" : "priceSuffix"}
+            >
+              {figure.monthly}
+            </span>
+            <span
+              class="pricing-tier-figure is-annual"
+              data-editable="text"
+              data-prop={figure.part === "amount" ? "annualPrice" : "annualPriceSuffix"}
+            >
+              {figure.annual}
+            </span>
+          </span>
+        ))}
+      </p>
+    )}
+    {!slides && shownRows.map((row) => (
       <p
         class:list={[
           "pricing-tier-price",
@@ -402,6 +442,50 @@ const priceRows = [
 
       .pricing-tier .pricing-tier-price-annual {
         display: flex;
+      }
+    }
+
+    /* The two figures share one cell, so the row keeps the width of the
+       longer number and nothing beside it moves. `visibility` is what takes
+       the resting one out of the accessibility tree; it interpolates to the
+       end of its transition, so the figure is still painted while it leaves
+       and only disappears once it has gone. */
+    .pricing-tier-figures {
+      display: grid;
+    }
+
+    .pricing-tier-figure {
+      grid-area: 1 / 1;
+      transition:
+        opacity var(--animation-normal) var(--ease-out),
+        translate var(--animation-normal) var(--ease-out),
+        visibility var(--animation-normal) var(--ease-out);
+    }
+
+    /* Monthly rests in place and annual waits below it, so throwing the
+       control runs both upwards: the live figure leaves through the top and
+       its replacement arrives from under the baseline. */
+    .pricing-tier-figure.is-annual {
+      opacity: 0;
+      translate: 0 0.45em;
+      visibility: hidden;
+    }
+
+    .pricing-tiers:has(.pricing-tiers-billing .toggle-input:checked) .pricing-tier-figure.is-monthly {
+      opacity: 0;
+      translate: 0 -0.45em;
+      visibility: hidden;
+    }
+
+    .pricing-tiers:has(.pricing-tiers-billing .toggle-input:checked) .pricing-tier-figure.is-annual {
+      opacity: 1;
+      translate: 0 0;
+      visibility: visible;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .pricing-tier-figure {
+        transition: none;
       }
     }
   }

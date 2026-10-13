@@ -48,7 +48,7 @@ pageSections:
       defaultInterval: annual
       tiers:
         - name: Standard
-          price: $49
+          price: $55
           priceSuffix: /month
           annualPrice: $49
           annualPriceSuffix: /month
@@ -74,7 +74,7 @@ pageSections:
           accent: ''
           pricePosition: top
         - name: Team
-          price: $300
+          price: $350
           priceSuffix: /month
           annualPrice: $300
           annualPriceSuffix: /month
