@@ -5,7 +5,9 @@ tabbed: true
 value:
   _component: page-sections/conversion/pricing-tiers
   content:
+    alignmentHorizontal: center
     cardAlignment: start
+    garden: false
     sectionLabel: ""
     heading:
       eyebrow: Plans
@@ -91,6 +93,7 @@ value:
     maxContentWidth: xl
     paddingHorizontal: gutter
     paddingVertical: 4xl
+    paddingVerticalStart: ""
     haze: false
 preview:
   text:

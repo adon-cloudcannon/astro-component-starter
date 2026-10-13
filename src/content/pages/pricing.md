@@ -132,6 +132,7 @@ pageSections:
       fade: none
       maxContentWidth: xl
       paddingHorizontal: gutter
+      paddingVerticalStart: none
       paddingVertical: 2xl
       haze: false
   - _component: page-sections/conversion/pricing-comparison

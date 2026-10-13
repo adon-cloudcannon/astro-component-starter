@@ -94,6 +94,10 @@ const {
  * flip it is the thing we do not ship.
  */
 const BANDS = {
+  // Not in any section's own dropdown: the design draws #FFFFFF on a card
+  // rather than a band, and nothing on the site bands white yet. It is here
+  // so a page that needs one has it, and so `--band-color` can answer for it.
+  white: { token: "white", scheme: "light" },         // #FFFFFF
   "light-sand": { token: "base", scheme: "light" },   // #FFFCF3
   sand: { token: "surface", scheme: "light" },        // #FBF6E9
   "dark-sand": { token: "muted", scheme: "light" },   // #EBE1C9
@@ -124,6 +128,7 @@ const hazePools = haze === true ? [{}] : Array.isArray(haze) ? haze : haze ? [ha
  * `base` is `--color-bg` rather than `--color-bg-base`, which is not a token.
  */
 const HAZE_COLOR = {
+  white: "var(--white)",
   base: "var(--color-bg)",
   surface: "var(--color-bg-surface)",
   muted: "var(--color-bg-muted)",
@@ -699,6 +704,10 @@ const arrayDataAttributes =
           --bg-mask: linear-gradient(to bottom, transparent, #000 20%, #000 80%, transparent);
         }
 
+        > .bg-white {
+          background-color: var(--white);
+        }
+
         > .bg-base {
           background-color: var(--color-bg);
         }
@@ -739,6 +748,10 @@ const arrayDataAttributes =
        a section root may not have. */
     .custom-section {
       --band-color: var(--color-bg);
+    }
+
+    .custom-section:has(> .outer-content > .background.bg-white) {
+      --band-color: var(--white);
     }
 
     .custom-section:has(> .outer-content > .background.bg-surface) {

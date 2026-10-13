@@ -14,8 +14,6 @@ style:
   options:
     subtype: object
 
-content.accent:
-  type: text
 content.cardAlignment:
   type: select
   comment: >-
@@ -208,6 +206,23 @@ style.paddingVertical:
         name: Default
       - id: md
         name: Compact
+style.paddingVerticalStart:
+  type: select
+  label: Vertical padding (top)
+  comment: >-
+    Overrides the top of the vertical padding on its own. Empty follows
+    Vertical padding. None is for a band whose first element is a control
+    rather than a heading.
+  options:
+    values:
+      - id: none
+        name: None
+      - id: md
+        name: Compact
+      - id: 2xl
+        name: Medium
+      - id: 4xl
+        name: Default
 style.colorScheme:
   hidden: true
   # Carried by the band colour. Every band the design draws names its own ink,
