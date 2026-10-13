@@ -133,6 +133,25 @@ style.paddingVertical:
         name: Default
       - id: md
         name: Compact
+style.paddingVerticalEnd:
+  type: select
+  label: Vertical padding (bottom)
+  comment: >-
+    Overrides the bottom of the vertical padding on its own. Empty follows
+    Vertical padding. Use it where the band below opens with a control rather
+    than a heading.
+  options:
+    values:
+      - id: none
+        name: None
+      - id: md
+        name: Compact
+      - id: 2xl
+        name: Medium
+      - id: 3xl
+        name: Large
+      - id: 4xl
+        name: Default
 style.colorScheme:
   hidden: true
   # Carried by the band colour. Every band the design draws names its own ink,

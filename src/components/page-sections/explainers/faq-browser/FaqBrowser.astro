@@ -1,0 +1,331 @@
+---
+import { bandPattern, bandHaze } from "@component-utils/bandStyle.mjs";
+import { nestedProps } from "@component-utils/nestedProps.mjs";
+import { faqTopics, faqItemsFor } from "@component-utils/faqs.mjs";
+import { slugifyLabel } from "@component-utils/slugify";
+import CustomSection from "@builders/custom-section/CustomSection.astro";
+import Accordion from "@wrappers/accordion/Accordion.astro";
+import Icon from "@core-elements/icon/Icon.astro";
+
+/* `content` and `style` are the editor's tabs, flattened straight back into
+   the names below. `at()` writes the frontmatter path a binding needs. */
+const { props, at } = nestedProps(Astro.props);
+
+const {
+  /** The line above the pills. */
+  eyebrow = "Explore by topic",
+  showSearch = true,
+  searchPlaceholder = "Search...",
+  searchLabel = "Search the questions",
+  /** Shown in place of the cards when a search matches nothing. */
+  emptyText = "No questions match that search.",
+  accordionVariant = "card",
+  sectionLabel,
+  maxContentWidth = "xl",
+  paddingHorizontal = "gutter",
+  paddingVertical = "4xl",
+  colorScheme = "inherit",
+  lockColorScheme = false,
+  backgroundColor = "light-sand",
+  /** The texture behind the band, by name. */
+  pattern = "none",
+  /** Which edge the texture fades out towards. */
+  fade = "none",
+  /** Whether the heading sits on a pool of the band’s own colour. */
+  haze = false,
+  class: className,
+  useDefaultEditableBinding = false,
+  _component,
+  ...htmlAttributes
+} = props;
+
+/**
+ * The pills' colours, in the order the design draws them: Pacific, Golden,
+ * Moss, Sunset, then round again.
+ */
+const PILL_ACCENTS = ["pacific", "golden", "moss", "sunset"];
+
+/* The whole data file, which is the point of this section: it is the page
+   that shows every topic, where a FAQ section shows one. */
+const topics = faqTopics().map((topic, index) => ({
+  name: topic.category,
+  id: slugifyLabel(topic.category),
+  items: faqItemsFor(topic.category) ?? [],
+  /* The design gives each pill its own colour in palette order rather than
+     filing one against each topic, so a new topic gets a colour by existing
+     rather than by being told. */
+  accent: PILL_ACCENTS[index % PILL_ACCENTS.length],
+}));
+
+const groupName = `faq-topic-${slugifyLabel(sectionLabel || eyebrow || "faq")}`;
+---
+
+<CustomSection
+  class:list={["faq-browser", className]}
+  label={sectionLabel}
+  maxContentWidth={maxContentWidth}
+  paddingHorizontal={paddingHorizontal}
+  paddingVertical={paddingVertical}
+  colorScheme={colorScheme}
+  lockColorScheme={lockColorScheme}
+  backgroundColor={backgroundColor}
+  background={bandPattern(pattern, fade)}
+  haze={bandHaze(haze)}
+  useDefaultEditableBinding={useDefaultEditableBinding}
+  {...htmlAttributes}
+>
+  {showSearch && (
+    <div class="faq-browser-search">
+      <Icon
+        name="search"
+        size="md"
+        class="faq-browser-search-icon"
+      />
+      <input
+        type="search"
+        class="faq-browser-search-input"
+        placeholder={searchPlaceholder}
+        aria-label={searchLabel}
+        autocomplete="off"
+      />
+    </div>
+  )}
+
+  {topics.length > 0 && (
+    <div class="faq-browser-topics">
+      {eyebrow && (
+        <p
+          class="faq-browser-eyebrow"
+          data-prop={at("eyebrow")}
+        >
+          {eyebrow}
+        </p>
+      )}
+      {/* Radios rather than buttons: which topic is showing is a choice of
+          one, the browser keeps it, and `:has()` can read it — so the pills
+          filter with no script at all. The search below does need one. */}
+      <div
+        class="faq-browser-pills"
+        role="radiogroup"
+        aria-label={eyebrow || "Topics"}
+      >
+        {topics.map((topic, index) => (
+          <label
+            class="faq-browser-pill"
+            style={`--faq-pill-accent: var(--${topic.accent})`}
+          >
+            <input
+              type="radio"
+              name={groupName}
+              value={topic.id}
+              checked={index === 0}
+            />
+            <span>{topic.name}</span>
+          </label>
+        ))}
+      </div>
+    </div>
+  )}
+
+  <div class="faq-browser-sets">
+    {topics.map((topic) => (
+      <div
+        class="faq-browser-set"
+        data-topic={topic.id}
+      >
+        <Accordion
+          spaceBefore="loose"
+          variant={accordionVariant}
+          label={topic.name}
+          singleOpen={false}
+          openFirst={false}
+          items={topic.items}
+        />
+      </div>
+    ))}
+    <p
+      class="faq-browser-empty"
+      hidden
+    >
+      {emptyText}
+    </p>
+  </div>
+</CustomSection>
+
+<style is:global>
+  @layer page-sections {
+    /* Measured off the export: the field rules at y=361 and y=413, so it is
+       53 tall against a 19px line, which leaves 12 above and below. Its 23px
+       mark sits at x=141 in a field that opens at x=120, with the placeholder
+       ink at x=182. None of the three is on the spacing scale, so they are
+       named here. */
+    .faq-browser .faq-browser-search {
+      --faq-search-padding-block: 0.75rem;
+      --faq-search-padding-inline: 1.3125rem;
+      --faq-search-gap: 1.1875rem;
+
+      align-items: center;
+      background-color: var(--white);
+      border: var(--border-width-sm) solid var(--dark-sand);
+      border-radius: var(--radius-card);
+      display: flex;
+      gap: var(--faq-search-gap);
+      padding: var(--faq-search-padding-block) var(--faq-search-padding-inline);
+    }
+
+    .faq-browser .faq-browser-search-icon {
+      color: var(--color-text-muted);
+      flex: 0 0 auto;
+    }
+
+    /* The field itself draws nothing: the row around it is the control, the
+       way the design draws it. A search input also carries the UA's own clear
+       button and inner spacing, which is what `appearance: none` is for. */
+    .faq-browser .faq-browser-search-input {
+      appearance: none;
+      background: none;
+      border: 0;
+      color: var(--color-text);
+      flex: 1 1 auto;
+      font-family: inherit;
+      font-size: var(--font-size-lg);
+      min-inline-size: 0;
+      outline: none;
+      padding: 0;
+    }
+
+    .faq-browser .faq-browser-search:focus-within {
+      border-color: var(--earth);
+    }
+
+    /* Measured off the export, where none of the three is on the spacing
+       scale: the field rules at 413 and the eyebrow opens at 454, the eyebrow
+       closes at 470 and the first pill rules at 499, and the pills rule at
+       536 against a first card at 594. */
+    .faq-browser .faq-browser-topics {
+      --faq-topics-space: 2.5rem;
+      --space-before: var(--faq-topics-space);
+
+      margin-block-start: var(--faq-topics-space);
+      text-align: center;
+    }
+
+    .faq-browser .faq-browser-eyebrow {
+      color: var(--sunset);
+      font-size: var(--font-size-xs);
+      font-weight: var(--font-weight-semibold);
+      letter-spacing: 0.2em;
+      margin: 0;
+      text-transform: uppercase;
+    }
+
+    .faq-browser .faq-browser-pills {
+      --faq-pill-gap: 1.125rem;
+
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--faq-pill-gap);
+      justify-content: center;
+      margin-block-start: var(--spacing-lg);
+    }
+
+    .faq-browser .faq-browser-pill {
+      cursor: pointer;
+    }
+
+    /* The radio is the state; the span is the pill. Hidden with `appearance`
+       and a zero box rather than `display: none`, which takes it out of the
+       tab order and off the accessibility tree. */
+    .faq-browser .faq-browser-pill input {
+      block-size: 0;
+      inline-size: 0;
+      opacity: 0;
+      position: absolute;
+    }
+
+    .faq-browser .faq-browser-pill span {
+      border: var(--border-width-sm) solid var(--faq-pill-accent);
+      border-radius: 999px;
+      color: var(--color-text-strong);
+      display: inline-block;
+      font-size: var(--font-size-md);
+      font-weight: var(--font-weight-semibold);
+      line-height: 1;
+      padding: 0.625rem 1.25rem;
+      transition:
+        background-color var(--animation-normal) var(--ease-out),
+        color var(--animation-normal) var(--ease-out);
+    }
+
+    .faq-browser .faq-browser-pill input:checked + span {
+      background-color: var(--faq-pill-accent);
+      color: var(--white);
+    }
+
+    .faq-browser .faq-browser-pill input:focus-visible + span {
+      outline: var(--focus-ring-width) var(--focus-ring-style) var(--color-focus-ring);
+      outline-offset: 2px;
+    }
+
+    /* One set at a time, chosen by the radio above, with no script: CSS
+       cannot match a radio's value against a set's name, but it can count,
+       and the two lists are written in the same order. Eight pairs is the
+       ceiling; a ninth topic would show nothing, which `faqTopics` is not
+       going to reach by accident.
+
+       Written out rather than generated so the rules are greppable and the
+       pruner can see them. */
+    .faq-browser .faq-browser-sets {
+      --faq-sets-space: 3.625rem;
+      --space-before: var(--faq-sets-space);
+
+      margin-block-start: var(--faq-sets-space);
+    }
+
+    .faq-browser .faq-browser-set {
+      display: none;
+    }
+
+    .faq-browser:has(.faq-browser-pill:nth-of-type(1) input:checked)
+      .faq-browser-set:nth-of-type(1),
+    .faq-browser:has(.faq-browser-pill:nth-of-type(2) input:checked)
+      .faq-browser-set:nth-of-type(2),
+    .faq-browser:has(.faq-browser-pill:nth-of-type(3) input:checked)
+      .faq-browser-set:nth-of-type(3),
+    .faq-browser:has(.faq-browser-pill:nth-of-type(4) input:checked)
+      .faq-browser-set:nth-of-type(4),
+    .faq-browser:has(.faq-browser-pill:nth-of-type(5) input:checked)
+      .faq-browser-set:nth-of-type(5),
+    .faq-browser:has(.faq-browser-pill:nth-of-type(6) input:checked)
+      .faq-browser-set:nth-of-type(6),
+    .faq-browser:has(.faq-browser-pill:nth-of-type(7) input:checked)
+      .faq-browser-set:nth-of-type(7),
+    .faq-browser:has(.faq-browser-pill:nth-of-type(8) input:checked)
+      .faq-browser-set:nth-of-type(8) {
+      display: block;
+    }
+
+    /* A searching browser shows every set at once — the question that matches
+       may be filed under any topic — and hides the cards that do not match. */
+    .faq-browser[data-searching] .faq-browser-set {
+      display: block;
+    }
+
+    .faq-browser[data-searching] .accordion-item[hidden] {
+      display: none;
+    }
+
+    .faq-browser .faq-browser-empty {
+      color: var(--color-text-muted);
+      font-size: var(--font-size-lg);
+      margin-block-start: var(--spacing-3xl);
+      text-align: center;
+    }
+  }
+</style>
+
+<script>
+  import { setupAllFaqBrowsers } from "./setup";
+
+  setupAllFaqBrowsers();
+</script>

@@ -24,6 +24,7 @@ value:
     maxContentWidth: xl
     paddingHorizontal: gutter
     paddingVertical: 2xl
+    paddingVerticalEnd: ""
     haze: false
 preview:
   text:

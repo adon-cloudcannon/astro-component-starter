@@ -44,6 +44,7 @@ import { setupAllForms, setupForm } from "./src/components/building-blocks/forms
 import { setupAllVideos } from "./src/components/building-blocks/core-elements/video/setup";
 import { setupAllCodeBlocks } from "./src/components/building-blocks/core-elements/code-block/setup";
 import { setupAllScrollSteppers } from "./src/components/building-blocks/wrappers/scroll-stepper/setup";
+import { setupAllFaqBrowsers } from "./src/components/page-sections/explainers/faq-browser/setup";
 import { setupAllTabs } from "./src/components/utils/tabs/setup";
 import { setupAllMainNavs } from "./src/components/navigation/main-nav/setup";
 import { setupAllSearch, setupSearch } from "./src/components/navigation/search/setup";
@@ -367,6 +368,7 @@ function initNewComponents(root) {
   setupAllTabs(root);
   setupAllCodeBlocks(root);
   setupAllScrollSteppers(root);
+  setupAllFaqBrowsers(root);
 }
 
 // CloudCannon tracks the page through real navigations; ClientRouter's in-place
@@ -503,6 +505,7 @@ setupAllVideos();
 setupAllTabs();
 setupAllCodeBlocks();
 setupAllScrollSteppers();
+setupAllFaqBrowsers();
 setupAllForms();
 
 // Everything already on the page, before the editor changes anything.

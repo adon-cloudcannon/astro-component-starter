@@ -1,0 +1,36 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 720" width="1280" height="720" role="img" aria-labelledby="t-faq-browser">
+  <title id="t-faq-browser">Faq browser component preview</title>
+  <style>
+    @media (prefers-color-scheme: dark) {
+      svg {
+        --pv-paper: #151515;
+        --pv-panel: #1D1D1B;
+        --pv-surface: #232320;
+        --pv-line: #2E2D29;
+        --pv-glyph: #45443E;
+        --pv-body: #3A3934;
+        --pv-subject: #6E6A62;
+        --pv-ink: #F5F3EE;
+        --pv-on-ink: #6B6B6B;
+      }
+    }
+  </style>
+  <rect x="0" y="0" width="1280" height="720" fill="var(--pv-paper, #FFFFFF)"/>
+  <g transform="translate(0 206)">
+    <rect x="160" y="0" width="960" height="56" rx="10" fill="var(--pv-paper, #FFFFFF)" stroke="var(--pv-line, #E4E1DA)" stroke-width="2"/>
+    <rect x="184" y="18" width="20" height="20" rx="10" fill="var(--pv-panel, #F7F6F3)" stroke="var(--pv-line, #E4E1DA)" stroke-width="2"/>
+    <rect x="220" y="22" width="150" height="12" rx="6" fill="var(--pv-body, #DAD7D0)"/>
+    <rect x="481" y="84" width="96" height="34" rx="17" fill="var(--pv-ink, #151515)"/>
+    <rect x="508" y="97" width="43" height="8" rx="4" fill="var(--pv-on-ink, #9A9A9A)"/>
+    <rect x="595" y="84" width="84" height="34" rx="17" fill="var(--pv-paper, #FFFFFF)" stroke="var(--pv-glyph, #CFCBC2)" stroke-width="2"/>
+    <rect x="618" y="97" width="38" height="8" rx="4" fill="var(--pv-body, #DAD7D0)"/>
+    <rect x="697" y="84" width="102" height="34" rx="17" fill="var(--pv-paper, #FFFFFF)" stroke="var(--pv-glyph, #CFCBC2)" stroke-width="2"/>
+    <rect x="725" y="97" width="46" height="8" rx="4" fill="var(--pv-body, #DAD7D0)"/>
+    <rect x="160" y="152" width="960" height="70" rx="10" fill="var(--pv-paper, #FFFFFF)" stroke="var(--pv-line, #E4E1DA)" stroke-width="2"/>
+    <rect x="187" y="174" width="288" height="26" rx="13" fill="var(--pv-subject, #A8A398)"/>
+    <rect x="1074" y="174" width="26" height="26" rx="13" fill="var(--pv-panel, #F7F6F3)" stroke="var(--pv-line, #E4E1DA)" stroke-width="2"/>
+    <rect x="160" y="238" width="960" height="70" rx="10" fill="var(--pv-paper, #FFFFFF)" stroke="var(--pv-line, #E4E1DA)" stroke-width="2"/>
+    <rect x="187" y="260" width="332" height="26" rx="13" fill="var(--pv-subject, #A8A398)"/>
+    <rect x="1074" y="260" width="26" height="26" rx="13" fill="var(--pv-panel, #F7F6F3)" stroke="var(--pv-line, #E4E1DA)" stroke-width="2"/>
+  </g>
+</svg>

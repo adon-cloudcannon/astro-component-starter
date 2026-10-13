@@ -1,0 +1,35 @@
+label: FAQ Browser
+icon: quiz
+description: Every FAQ topic in the data file, with pills to switch between them and a search.
+tabbed: true
+value:
+  _component: page-sections/explainers/faq-browser
+  content:
+    sectionLabel: ""
+    eyebrow: Explore by topic
+    showSearch: true
+    searchPlaceholder: Search...
+    searchLabel: Search the questions
+    emptyText: No questions match that search.
+  style:
+    accordionVariant: card
+    maxContentWidth: xl
+    paddingHorizontal: gutter
+    paddingVertical: 4xl
+    colorScheme: inherit
+    lockColorScheme: false
+    backgroundColor: light-sand
+    pattern: none
+    fade: none
+    haze: false
+
+preview:
+  image: public/component-previews/page-sections/explainers/faq-browser.svg
+  gallery:
+    image: public/component-previews/page-sections/explainers/faq-browser.svg
+    fit: cover
+picker_preview:
+  image: public/component-previews/page-sections/explainers/faq-browser.svg
+  gallery:
+    image: public/component-previews/page-sections/explainers/faq-browser.svg
+    fit: cover
