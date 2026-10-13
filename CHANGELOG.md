@@ -106,6 +106,7 @@ quietly broken in the editor.
 - Hero Center **Title width** and CTA Banner **Subtext width**, the same four measures the other sections cap their copy with. The design breaks a hero title well inside the content column, and without a cap a short title ran as one long line.
 - CTA Banner takes a second link beside the first, drawn as a text link. One banner in the design carries a pill and "Explore our documentation"; the rest carry one.
 - Photo Strip takes a scratched plate per picture, by palette name, so a strip of cut-out portraits reads the way `team-member` draws one. Left out, the picture fills the tile on its own.
+- A page for each template at `/templates/<name>/`: the title, its collection, the screenshot, a sidebar carrying the template's generators and its deploy, repository and preview links, and the gallery under its body.
 - **Wide** joins the band's content width: the design's second column, 1180, which it uses for rows of cards and wide tables while the copy stays in the 1040.
 - h2 and h3 headings get a linkable id from their text.
 - Tag pages show a Home › Blog › tag breadcrumb trail.

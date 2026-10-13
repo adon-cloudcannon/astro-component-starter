@@ -1,0 +1,287 @@
+---
+/**
+ * One template's page.
+ *
+ * The body is the template's own markdown. The old site downloaded the
+ * repository's README at build time and rendered that instead, which is where
+ * the design's "Features" list comes from; nothing in the ported data carries
+ * it, so a template with no body shows its chrome and its gallery.
+ */
+import { breadcrumbListJsonLd } from "@component-utils/breadcrumbTrail";
+import Badge from "@core-elements/badge/Badge.astro";
+import Button from "@core-elements/button/Button.astro";
+import Heading from "@core-elements/heading/Heading.astro";
+import Image from "@core-elements/image/Image.astro";
+import SimpleText from "@core-elements/simple-text/SimpleText.astro";
+import breadcrumbsData from "@data/breadcrumbs.json";
+import Page from "@layouts/Page.astro";
+import CustomSection from "@page-sections/builders/custom-section/CustomSection.astro";
+import { getCollection, render, type CollectionEntry } from "astro:content";
+
+export async function getStaticPaths() {
+  const templates = await getCollection("templates", ({ data }) => !data.draft);
+
+  return templates.map((template: CollectionEntry<"templates">) => ({
+    params: { slug: template.id },
+    props: { template },
+  }));
+}
+
+interface Props {
+  template: CollectionEntry<"templates">;
+}
+
+const { template } = Astro.props;
+const { Content } = await render(template);
+const { title, description, image, imageAlt, previewUrl, repoUrl } = template.data;
+
+/* The label a collection id carries on the listing page, derived rather than
+   read from it: the two agree today, and reaching into another page's blocks
+   to fetch a word would tie this route to that page's shape. */
+const label = (id: string) => id.charAt(0).toUpperCase() + id.slice(1).replace(/-/g, "-");
+const badge = (template.data.collections ?? [])[0];
+const ssgs = template.data.ssgs ?? [];
+const gallery = (template.data.gallery ?? []).filter((shot) => shot?.image);
+
+const breadcrumbJsonLd = breadcrumbListJsonLd(
+  [{ label: "Templates", url: "/templates/" }, { label: title }],
+  { homeLabel: breadcrumbsData.homeLabel, base: Astro.site ?? Astro.url }
+);
+---
+
+<Page
+  title={title}
+  description={description}
+  image={image}
+  type="article"
+>
+  <script
+    type="application/ld+json"
+    set:html={JSON.stringify(breadcrumbJsonLd).replace(/</g, "\\u003c")}
+  ></script>
+
+  <CustomSection
+    class="template-page-hero"
+    maxContentWidth="xl"
+    paddingHorizontal="gutter"
+    paddingVertical="4xl"
+    backgroundColor="light-sand"
+    background={{ type: "pattern", pattern: "grid" }}
+  >
+    <div class="template-page-head">
+      <div class="template-page-intro flow">
+        <p class="template-page-eyebrow">Templates</p>
+        <Heading
+          level="h1"
+          size="2xl"
+          class="template-page-title"
+        >
+          {title}
+        </Heading>
+        <SimpleText
+          size="lg"
+          class="template-page-line"
+        >
+          {description}
+        </SimpleText>
+        {badge && (
+          <Badge
+            class="template-page-badge"
+            text={label(badge)}
+            showArrow={false}
+            variant="strong"
+          />
+        )}
+      </div>
+      <Image
+        class="template-page-shot"
+        source={image}
+        alt={imageAlt ?? `${title} screenshot`}
+        rounded
+      />
+    </div>
+  </CustomSection>
+
+  <CustomSection
+    class="template-page-body"
+    maxContentWidth="xl"
+    paddingHorizontal="gutter"
+    paddingVertical="4xl"
+    backgroundColor="light-sand"
+  >
+    <div class="template-page-columns">
+      <aside class="template-page-aside">
+        {ssgs.length > 0 && (
+          <div class="template-page-panel">
+            <p class="template-page-panel-label">Choose your SSG:</p>
+            <ul class="template-page-ssgs">
+              {ssgs.map((ssg) => (
+                <li class="template-page-ssg">{label(ssg)}</li>
+              ))}
+            </ul>
+            <Button
+              class="template-page-deploy"
+              text="Deploy to CloudCannon"
+              link={`https://app.cloudcannon.com/register?repo=${encodeURIComponent(repoUrl ?? "")}`}
+              iconName="arrow-right"
+              iconPosition="after"
+              variant="text"
+              size="md"
+            />
+          </div>
+        )}
+        <div class="template-page-panel">
+          {repoUrl && (
+            <Button
+              text="View on GitHub"
+              link={repoUrl}
+              iconName="arrow-right"
+              iconPosition="after"
+              variant="text"
+              size="md"
+            />
+          )}
+          {previewUrl && (
+            <Button
+              text="Preview site"
+              link={previewUrl}
+              iconName="arrow-right"
+              iconPosition="after"
+              variant="text"
+              size="md"
+            />
+          )}
+        </div>
+      </aside>
+
+      <div class="template-page-content prose">
+        <Content />
+        {gallery.length > 0 && (
+          <div class="template-page-gallery">
+            {gallery.map((shot) => (
+              <Image
+                class="template-page-gallery-shot"
+                source={shot.image}
+                alt={shot.alt ?? ""}
+                rounded
+              />
+            ))}
+          </div>
+        )}
+      </div>
+    </div>
+  </CustomSection>
+</Page>
+
+<style is:global>
+  /* The hero is copy beside the screenshot, which runs wider than its half
+     and is cropped by the band — the shape the design draws for every
+     template. */
+  .template-page-head {
+    align-items: center;
+    display: grid;
+    gap: var(--spacing-3xl);
+    grid-template-columns: minmax(0, 0.8fr) minmax(0, 1fr);
+  }
+
+  .template-page-eyebrow {
+    color: var(--sunset);
+    font-size: var(--font-size-xs);
+    font-weight: var(--font-weight-semibold);
+    letter-spacing: 0.2em;
+    margin: 0;
+    text-transform: uppercase;
+  }
+
+  .template-page-title {
+    --space-before: var(--spacing-lg);
+  }
+
+  .template-page-line {
+    --space-before: var(--spacing-lg);
+  }
+
+  .template-page-badge {
+    --space-before: var(--spacing-xl);
+  }
+
+  .template-page-shot img {
+    block-size: auto;
+    inline-size: 100%;
+  }
+
+  /* The sidebar holds its place while the body scrolls past it, which is what
+     the design draws: the panels sit against the band's left edge all the way
+     down a README that runs several screens. */
+  .template-page-columns {
+    display: grid;
+    gap: var(--spacing-4xl);
+    grid-template-columns: minmax(0, 17.5rem) minmax(0, 1fr);
+  }
+
+  .template-page-aside {
+    align-self: start;
+    position: sticky;
+    top: calc(var(--main-nav-height) + var(--spacing-xl));
+  }
+
+  .template-page-panel {
+    border-block-end: var(--border-width-sm) solid var(--dark-sand);
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-md);
+    padding-block: var(--spacing-xl);
+  }
+
+  .template-page-panel:last-child {
+    border-block-end: 0;
+  }
+
+  .template-page-panel-label {
+    color: var(--color-text-muted);
+    font-size: var(--font-size-xs);
+    font-weight: var(--font-weight-semibold);
+    letter-spacing: 0.2em;
+    margin: 0;
+    text-transform: uppercase;
+  }
+
+  .template-page-ssgs {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-sm);
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  .template-page-ssg {
+    border: var(--border-width-sm) solid var(--color-border-strong);
+    border-radius: var(--radius-card);
+    font-weight: var(--font-weight-semibold);
+    padding: var(--spacing-md) var(--spacing-lg);
+    text-align: center;
+  }
+
+  .template-page-gallery {
+    display: grid;
+    gap: var(--spacing-lg);
+    margin-block-start: var(--spacing-3xl);
+  }
+
+  .template-page-gallery-shot img {
+    block-size: auto;
+    inline-size: 100%;
+  }
+
+  @media (width < 900px) {
+    .template-page-head,
+    .template-page-columns {
+      grid-template-columns: minmax(0, 1fr);
+    }
+
+    .template-page-aside {
+      position: static;
+    }
+  }
+</style>
