@@ -25,12 +25,13 @@ import TeamMember from "@wrappers/team-member/TeamMember.astro";
    the names below. `at()` writes the frontmatter path a binding needs. */
 const { props, at } = nestedProps(Astro.props, {
   nest: {
-    heading: ["heading", "headingLevel", "headingSize"],
+    heading: ["eyebrow", "heading", "headingLevel", "headingSize"],
     subtext: ["subtext", "subtextSize", "subtextWidth"],
   },
 });
 
 const {
+  eyebrow = "",
   heading = "",
   headingLevel = "h2",
   headingSize = "lg",
@@ -98,6 +99,8 @@ const mirror = rootMirror({ "data-member-end": reverse ? "" : null });
 
   <div class="cta-team-member-copy">
     <Heading
+      eyebrow={eyebrow}
+      data-eyebrow-prop={at("eyebrow")}
       level={headingLevel}
       size={headingSize}
       alignmentHorizontal="start"

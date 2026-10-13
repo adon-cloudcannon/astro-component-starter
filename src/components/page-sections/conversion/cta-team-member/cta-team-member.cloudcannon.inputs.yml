@@ -20,6 +20,9 @@ content.heading:
   label: Heading
   options:
     subtype: object
+content.heading.eyebrow:
+  type: text
+  comment: The small line above the heading.
 content.heading.heading:
   type: text
   comment: The section's heading.

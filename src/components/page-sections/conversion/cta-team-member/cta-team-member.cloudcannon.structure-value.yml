@@ -7,6 +7,7 @@ value:
   content:
     sectionLabel: ""
     heading:
+      eyebrow: ""
       heading: ""
       headingLevel: h2
       headingSize: lg
