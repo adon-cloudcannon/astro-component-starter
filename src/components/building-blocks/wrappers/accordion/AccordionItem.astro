@@ -102,6 +102,29 @@ const titleDataAttributes = effectiveTitleProp
       padding: 0;
     }
 
+    /* The whole card answers the pointer, not the words in it. The summary
+       carries the starter's own hover tint, which filled the row in the plain
+       variant and reads as the item; inside a card it is a patch behind the
+       text with the card's padding still cold around it. */
+    .accordion-item.variant-card .accordion-item-title:hover,
+    .accordion-item.variant-card .accordion-item-title:focus-visible {
+      background-color: transparent;
+    }
+
+    .accordion-item.variant-card {
+      transition: border-color var(--animation-normal) var(--ease-out);
+    }
+
+    .accordion-item.variant-card:hover,
+    .accordion-item.variant-card:focus-within {
+      border-color: var(--earth);
+    }
+
+    .accordion-item.variant-card:hover .accordion-item-mark,
+    .accordion-item.variant-card:focus-within .accordion-item-mark {
+      border-color: var(--earth);
+    }
+
     .accordion-item.variant-card .accordion-item-title-text {
       font-size: var(--font-size-heading-xs);
       font-weight: var(--font-weight-semibold);

@@ -266,6 +266,14 @@ const priceRows = [
         color: var(--white);
       }
 
+      /* A floor under the gap the price's `auto` margin opens. On its own the
+         auto only gives what is left over, so the card with the shortest copy
+         had 93px above its figure and the one with the longest had none at
+         all — the panel sat straight under the last line. */
+      &.align-center .pricing-tier-description {
+        margin-block-end: var(--spacing-xl);
+      }
+
       /* The price sits in a panel of its own, a shade off the card. */
       &.align-center .pricing-tier-price {
         background-color: color-mix(in srgb, var(--light-sand) 8%, transparent);
