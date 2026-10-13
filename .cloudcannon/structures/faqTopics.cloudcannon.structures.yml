@@ -1,0 +1,52 @@
+# faqTopics and faqEntries, for src/data/faqs.json.
+#
+# Must live here. `_structures_from_glob` in cloudcannon.config.yml only picks
+# up this folder, so a `_structures` block written inside the data schema
+# reaches nothing and every field falls back to CloudCannon guessing a type
+# from its key.
+faqTopics:
+  values:
+    - label: Topic
+      icon: label
+      value:
+        category: ""
+        items: []
+      preview:
+        text:
+          - key: category
+          - Topic
+        subtext:
+          - key: items
+        icon: label
+      _inputs:
+        category:
+          type: text
+          comment: >-
+            The topic's name. A FAQ section picks a topic by this name, and the
+            FAQ page draws one pill per topic.
+        items:
+          type: array
+          label: Questions
+          options:
+            structures: _structures.faqEntries
+faqEntries:
+  values:
+    - label: Question
+      icon: help
+      value:
+        title: ""
+        answer: ""
+      preview:
+        text:
+          - key: title
+          - Question
+        subtext:
+          - key: answer
+        icon: help
+      _inputs:
+        title:
+          type: text
+          comment: The question, shown on the card's own row.
+        answer:
+          type: markdown
+          comment: The answer, shown when the card is open.

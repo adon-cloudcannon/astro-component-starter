@@ -1,0 +1,51 @@
+{
+  "_schema": "faqs",
+  "sections": [
+    {
+      "category": "General",
+      "items": [
+        {
+          "title": "What is a Git-based CMS?",
+          "answer": "Your content lives in your Git repo as files, not in a database behind an API. CloudCannon reads those files and adds a visual editor on top. Editors see pages, components and fields, developers see commits and full Git history."
+        },
+        {
+          "title": "Do content editors need to know Git?",
+          "answer": "No. They can open a page, click the text, change it, share the link for review and publish. CloudCannon handles the commits, branches and pull requests underneath, so your repo history stays up to date without editors ever seeing it."
+        },
+        {
+          "title": "Which frameworks does CloudCannon support?",
+          "answer": "Astro, Eleventy, Hugo, Jekyll, or any other major static site generator."
+        },
+        {
+          "title": "Can I connect a site I've already built?",
+          "answer": "Yes. Point CloudCannon at your repo, give it your build command and it builds. From there you configure what editors can change in a config file that lives in the repo alongside everything else."
+        }
+      ]
+    },
+    {
+      "category": "Pricing",
+      "items": [
+        {
+          "title": "What happens at the end of my trial?",
+          "answer": "Before the end of your trial, we'll send you an email asking you to enter your credit card to continue using CloudCannon. If no credit card is entered by the end of the trial, your account will be put on hold. If you need more time to figure out if CloudCannon is right for you, please contact our sales team and we will happily extend your trial period."
+        },
+        {
+          "title": "What counts as a custom domain?",
+          "answer": "Any domain or subdomain you point at a CloudCannon site."
+        },
+        {
+          "title": "How do I know how much bandwidth I'm using?",
+          "answer": "Your usage is shown in your account dashboard, broken down per site."
+        },
+        {
+          "title": "When am I invoiced?",
+          "answer": "Monthly plans are invoiced each month from the day you started, and yearly plans once a year."
+        },
+        {
+          "title": "Am I able to turn off overages?",
+          "answer": "Yes. Contact our support team and we can cap your account rather than billing for overages."
+        }
+      ]
+    }
+  ]
+}

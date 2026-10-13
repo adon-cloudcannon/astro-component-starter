@@ -4,6 +4,7 @@ import { nestedProps } from "@component-utils/nestedProps.mjs";
 import CustomSection from "@builders/custom-section/CustomSection.astro";
 import Heading from "@core-elements/heading/Heading.astro";
 import Accordion from "@wrappers/accordion/Accordion.astro";
+import { faqItemsFor } from "@component-utils/faqs.mjs";
 
 /* `content` and `style` are the editor's tabs, flattened straight back into
    the names below. `at()` writes the frontmatter path a binding needs. */
@@ -16,6 +17,15 @@ const {
   headingLevel = "h2",
   headingSize = "lg",
   items = [],
+  /**
+   * A topic from `src/data/faqs.json`, whose questions this section shows.
+   *
+   * Set, the questions come from the data file and the section's own `items`
+   * are ignored — which is how one set of answers serves the pricing page,
+   * the FAQ page and anywhere else that asks the same questions. Empty, the
+   * section carries its own.
+   */
+  category = "",
   label = "About FAQ",
   sectionLabel,
   maxContentWidth = "xl",
@@ -36,6 +46,10 @@ const {
   _component,
   ...htmlAttributes
 } = props;
+
+const topicItems = faqItemsFor(category);
+const fromData = topicItems !== null;
+const shownItems = fromData ? topicItems : items;
 ---
 
 <CustomSection
@@ -69,7 +83,7 @@ const {
     label={label}
     singleOpen={true}
     openFirst={false}
-    items={items}
-    data-children-prop={at("items")}
+    items={shownItems}
+    {...(fromData ? {} : { "data-children-prop": at("items") })}
   />
 </CustomSection>

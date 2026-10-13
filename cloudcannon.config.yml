@@ -129,6 +129,27 @@ collections_config:
               bold: true
               italic: true
               link: true
+      faqs:
+        name: FAQs
+        path: .cloudcannon/schemas/faqs.json
+        remove_extra_inputs: false
+        preview:
+          text:
+            - FAQs
+        _inputs:
+          sections:
+            type: array
+            label: Topics
+            comment: >-
+              One group of questions per topic. The topic's name is what a FAQ
+              section picks by, and what the FAQ page draws its pills from.
+            options:
+              structures: _structures.faqTopics
+          sections[*].items:
+            type: array
+            label: Questions
+            options:
+              structures: _structures.faqEntries
       breadcrumbs:
         name: Breadcrumbs
         path: .cloudcannon/schemas/breadcrumbs.json
@@ -286,6 +307,11 @@ _inputs:
   logoAlternateSource:
     type: image
 data_config:
+  # The topics a FAQ section can pick from, read straight off the data file
+  # rather than a generated list: the select names `sections` and takes the
+  # `category` of each.
+  faqs:
+    path: src/data/faqs.json
   icons:
     path: .cloudcannon/data/icons.yml
   autocomplete_tokens:

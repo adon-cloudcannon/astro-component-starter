@@ -10,6 +10,7 @@ value:
       heading: Frequently Asked Questions
       headingLevel: h2
       headingSize: lg
+    category: ""
     items:
       - title: How long does a build take?
         contentSections:

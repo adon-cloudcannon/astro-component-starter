@@ -48,10 +48,21 @@ content.heading.headingLevel:
       - h1
       - h2
       - h3
+content.category:
+  type: select
+  label: Topic
+  comment: >-
+    Show the questions filed under a topic in the FAQs data file, so one set of
+    answers serves every page that asks them. Leave it empty to write this
+    section's own questions below instead.
+  options:
+    values: data.faqs.sections
+    value_key: category
 content.items:
   type: array
   label: FAQ Items
-  comment: Questions and answers in the accordion.
+  comment: Questions and answers in the accordion. Ignored when a Topic is set.
+  hidden: category
   options:
     structures: _structures.faqItems
 
