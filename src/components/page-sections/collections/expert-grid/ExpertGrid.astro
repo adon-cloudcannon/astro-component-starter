@@ -214,15 +214,22 @@ const ssgMarks: Record<string, { src: string }> = Object.fromEntries(
 
     /* The generators the agency works in, on one dark chip, which is how the
        design draws them. */
+    /* Wraps rather than running past the card: one agency works in nine
+       generators and a single row of nine does not fit a third of the
+       column. */
     .expert-grid .expert-grid-ssgs {
       align-items: center;
       background-color: var(--midnight);
-      border-radius: 999px;
+      border-radius: var(--radius-card);
       display: flex;
+      flex-wrap: wrap;
       gap: var(--spacing-md);
       inline-size: fit-content;
+      justify-content: center;
       margin-block: var(--spacing-lg) 0;
+      max-inline-size: 100%;
       padding: var(--spacing-sm) var(--spacing-md);
+      row-gap: var(--spacing-sm);
     }
 
     /* A mask rather than an image: the files carry each brand's own colours

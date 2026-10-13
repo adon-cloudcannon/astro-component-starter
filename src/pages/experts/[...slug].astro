@@ -69,12 +69,15 @@ const breadcrumbJsonLd = breadcrumbListJsonLd(
     class="expert-page-hero"
     maxContentWidth="xl"
     paddingHorizontal="gutter"
-    paddingVertical="4xl"
+    {/* The design's band is 480 tall against the 435 this was drawing. */}
+    paddingVertical="5xl"
     backgroundColor="dark"
     background={{ type: "pattern", pattern: "grid" }}
   >
     <div class="expert-page-head">
-      <div class="expert-page-intro">
+      {/* `flow`, or the `--space-before` each block below sets reaches
+          nothing: the flow layer only spaces the children of a flow parent. */}
+      <div class="expert-page-intro flow">
         <p class="expert-page-eyebrow">Experts</p>
         <Heading
           level="h1"

@@ -46,4 +46,51 @@ pageSections:
       pattern: none
       fade: none
       haze: false
+  - _component: page-sections/conversion/cta-team-member
+    content:
+      sectionLabel: Support
+      heading:
+        eyebrow: GOT QUESTIONS?
+        heading: Real humans on support, always
+        headingLevel: h2
+        headingSize: lg
+      subtext:
+        subtext: ''
+        subtextSize: lg
+      member:
+        _component: building-blocks/wrappers/team-member
+        name: Olivia Nicholson
+        role: Head of Content
+        imageSource: /src/assets/images/marketing/container-5-3806-73607-2.png
+        imageAlt: Olivia Nicholson, Head of Content at CloudCannon
+        backgroundColor: pacific
+        propSource: /src/assets/images/embellishments/telephone.png
+        propWidth: 47
+        propAlt: ''
+      buttonSections:
+        - _component: building-blocks/core-elements/button
+          text: Contact us
+          link: /contact/
+          variant: primary
+          size: md
+    style:
+      backgroundColor: dark
+      pattern: pegboard
+      fade: none
+      maxContentWidth: xl
+      paddingHorizontal: gutter
+      paddingVertical: 4xl
+      colorScheme: dark
+      lockColorScheme: true
+      haze: false
+  - _component: page-sections/conversion/cta-banner
+    content:
+      scratch: pacific
+      heading:
+        heading: Any questions about CloudCannon?
+        headingSize: lg
+      linkText: Check out our documentation or contact us with any questions you have
+      link: /support/
+      imageSource: /src/assets/images/marketing/rocks-corner-3806-70523.png
+      imageAlt: ''
 ---
