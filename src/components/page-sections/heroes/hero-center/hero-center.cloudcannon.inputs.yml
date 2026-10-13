@@ -103,6 +103,11 @@ content.buttonSections:
   comment: Call-to-action buttons.
   options:
     structures: _structures.buttonSections
+content.note:
+  type: array
+  comment: Small print beneath the buttons, such as trial or pricing reassurances.
+  options:
+    structures: _structures.listItems
 
 # --- section wrapper inputs (CustomSection) ---
 # Configures the CustomSection wrapper, not this section's own content. Inline

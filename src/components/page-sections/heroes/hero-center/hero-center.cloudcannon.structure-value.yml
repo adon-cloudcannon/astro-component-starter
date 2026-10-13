@@ -15,6 +15,7 @@ value:
       subtext: One or two sentences on who this is for and what they get.
       subtextSize: lg
       subtextWidth: \"\"
+    note: []
     buttonSections:
       - _component: building-blocks/core-elements/button
         text: Get started

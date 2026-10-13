@@ -5,6 +5,7 @@ import CustomSection from "@builders/custom-section/CustomSection.astro";
 import { subtextMeasure } from "@component-utils/subtextMeasure.mjs";
 import Heading from "@core-elements/heading/Heading.astro";
 import Text from "@core-elements/text/Text.astro";
+import List from "@core-elements/list/List.astro";
 import ButtonGroup from "@wrappers/button-group/ButtonGroup.astro";
 
 /* `content` and `style` are the editor's tabs, flattened straight back into
@@ -32,6 +33,13 @@ const {
    */
   subtextWidth = "",
   buttonSections = [],
+  /**
+   * The small print under the buttons — "No credit card", a trial length.
+   *
+   * Same shape as hero-split's: a list of `{ text, iconName, iconColor }`,
+   * drawn as one ticked row. Centred here rather than left.
+   */
+  note = [],
   sectionLabel,
   maxContentWidth = "xl",
   paddingHorizontal = "gutter",
@@ -90,5 +98,15 @@ const subtextCap = subtextMeasure(subtextWidth);
     buttonSections={buttonSections}
     alignmentHorizontal="center"
     data-children-prop={at("buttonSections")}
+  />
+  <List
+    class="note"
+    items={note}
+    listType="icon"
+    direction="horizontal"
+    size="sm"
+    spaceBefore="snug"
+    alignmentHorizontal="center"
+    data-children-prop={at("note")}
   />
 </CustomSection>
