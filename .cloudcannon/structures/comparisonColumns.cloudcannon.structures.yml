@@ -1,4 +1,4 @@
-# pricingComparisonPlans, lifted out of pricing-comparison.cloudcannon.structure-value.yml.
+# comparisonColumns, lifted out of comparison-table.cloudcannon.structure-value.yml.
 #
 # Must live here. `_structures_from_glob` in cloudcannon.config.yml only picks
 # up this folder, so a `_structures` block written inside a component's
@@ -6,7 +6,7 @@
 # to `values: []`, no item matched a structure, and every field in the item
 # fell back to CloudCannon guessing a type from its key. That is why a card's
 # Title Size drew a text box and its Icon Color a hex picker.
-pricingComparisonPlans:
+comparisonColumns:
   values:
     - label: Plan
       icon: sell
@@ -30,7 +30,12 @@ pricingComparisonPlans:
           comment: The plan's name, shown as the column header.
         price:
           type: text
-          comment: Price line under the name (e.g. "$49/mo" or "Custom"). Leave empty to hide.
+          label: Line
+          comment: >-
+            The line under the column's name — a price on a pricing table
+            ("$49/mo", "Custom"), a description on a comparison. Leave empty
+            to hide. The key is `price` because that is what it was built
+            for; what it holds is whatever belongs under the name.
         annualPrice:
           type: text
           comment: >-
@@ -47,7 +52,7 @@ pricingComparisonPlans:
         buttonLink:
           type: url
           comment: Where the button goes.
-pricingComparisonRows:
+comparisonRows:
   values:
     - label: Feature row
       icon: check_circle

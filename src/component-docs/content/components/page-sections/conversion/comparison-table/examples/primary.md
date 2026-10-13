@@ -2,7 +2,7 @@
 title: 'Three plans, one recommended'
 spacing: null
 blocks:
-  _component: 'page-sections/conversion/pricing-comparison'
+  _component: 'page-sections/conversion/comparison-table'
   eyebrow: 'Pricing'
   heading: 'Compare plans feature by feature'
   subtext: 'Everything in the table is included at no extra cost.'

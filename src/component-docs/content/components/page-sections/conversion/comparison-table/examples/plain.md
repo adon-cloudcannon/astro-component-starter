@@ -2,7 +2,7 @@
 title: 'Two products, no stripes or buttons'
 spacing: null
 blocks:
-  _component: 'page-sections/conversion/pricing-comparison'
+  _component: 'page-sections/conversion/comparison-table'
   heading: 'Compare the right product for your team'
   striped: false
   plans:

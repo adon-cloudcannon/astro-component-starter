@@ -1,9 +1,9 @@
-label: Pricing Comparison
+label: Comparison Table
 icon: table_chart
-description: Table that compares features across plans.
+description: Table that compares one thing against others, column by column.
 tabbed: true
 value:
-  _component: page-sections/conversion/pricing-comparison
+  _component: page-sections/conversion/comparison-table
   content:
     sectionLabel: ""
     heading:
@@ -62,6 +62,10 @@ value:
           - Email
           - Priority email
           - Dedicated manager
+    footnote: ""
+    columnLine: strong
+    highlightStyle: action
+    buttonPosition: header
     striped: true
     showAnnualPricing: false
     monthlyLabel: Monthly
@@ -79,12 +83,18 @@ preview:
     - Pricing Comparison
   subtext:
     - key: content.heading.heading
-  image: public/component-previews/page-sections/conversion/pricing-comparison.svg
+  image: public/component-previews/page-sections/conversion/comparison-table.svg
   icon: table_chart
+  gallery:
+    image: public/component-previews/page-sections/conversion/comparison-table.svg
+    fit: cover
 picker_preview:
   text: Pricing Comparison
   subtext: A feature-by-feature comparison table across plans.
-  image: public/component-previews/page-sections/conversion/pricing-comparison.svg
+  image: public/component-previews/page-sections/conversion/comparison-table.svg
   icon: table_chart
+  gallery:
+    image: public/component-previews/page-sections/conversion/comparison-table.svg
+    fit: cover
 _inputs_from_glob:
-  - /src/components/page-sections/conversion/pricing-comparison/pricing-comparison.cloudcannon.inputs.yml
+  - /src/components/page-sections/conversion/comparison-table/comparison-table.cloudcannon.inputs.yml

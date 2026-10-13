@@ -135,6 +135,167 @@ pageSections:
       paddingVerticalStart: none
       paddingVertical: 2xl
       haze: false
+  - _component: page-sections/conversion/comparison-table
+    content:
+      sectionLabel: Feature comparison
+      heading:
+        eyebrow: ''
+        heading: Features
+        headingLevel: h2
+        headingSize: lg
+      subtext: ''
+      plans:
+        - name: Standard
+          price: $55/mo
+          annualPrice: $49/mo
+          highlight: true
+          buttonText: Start 21-day trial
+          buttonLink: /start/
+        - name: Team
+          price: $350/mo
+          annualPrice: $300/mo
+          highlight: false
+          buttonText: Start 21-day trial
+          buttonLink: /start/
+        - name: Enterprise
+          price: Custom
+          annualPrice: ''
+          highlight: false
+          buttonText: Book a call with us
+          buttonLink: /contact/
+      rows:
+        - feature: Users
+          values:
+            - 3 Users
+            - 15 Users
+            - Custom user allowance
+        - feature: Unlimited Sites
+          values:
+            - yes
+            - yes
+            - yes
+        - feature: Custom Git syncing
+          values:
+            - no
+            - no
+            - yes
+        - feature: Automatic site optimizations
+          values:
+            - yes
+            - yes
+            - yes
+        - feature: Client Sharing
+          values:
+            - yes
+            - yes
+            - yes
+        - feature: Custom permissions
+          values:
+            - no
+            - 10 Custom groups
+            - Unlimited custom groups
+        - feature: Content scheduling
+          values:
+            - yes
+            - Advanced content scheduling
+            - Advanced content scheduling
+        - feature: DAM
+          values:
+            - yes
+            - yes
+            - Custom DAM
+        - feature: Git LFS
+          values:
+            - yes
+            - yes
+            - yes
+        - feature: Build Deploys
+          values:
+            - yes
+            - yes
+            - yes
+        - feature: Authentication
+          values:
+            - yes
+            - yes
+            - SSO/SAML authentication
+        - feature: Advanced forms
+          values:
+            - no
+            - yes
+            - yes
+        - feature: Custom forms
+          values:
+            - no
+            - no
+            - yes
+        - feature: Advanced Site Mounting
+          values:
+            - no
+            - yes
+            - yes
+        - feature: Custom Site Mounting
+          values:
+            - no
+            - no
+            - yes
+        - feature: Globalization workflows
+          values:
+            - yes
+            - yes
+            - yes
+        - feature: Custom branding
+          values:
+            - yes
+            - yes
+            - yes
+        - feature: Testing domains
+          values:
+            - yes
+            - Custom testing domains
+            - Custom testing domains
+        - feature: Advanced branching workflows
+          values:
+            - no
+            - yes
+            - yes
+        - feature: Deploy Previews
+          values:
+            - no
+            - yes
+            - yes
+        - feature: Single sign-on
+          values:
+            - no
+            - no
+            - yes
+        - feature: Uptime SLA
+          values:
+            - no
+            - no
+            - yes
+        - feature: Custom edge rules
+          values:
+            - no
+            - no
+            - yes
+        - feature: Professional services
+          values:
+            - no
+            - no
+            - 3 hours / month
+      striped: false
+      showAnnualPricing: true
+      monthlyLabel: Monthly
+      annualLabel: Yearly
+    style:
+      backgroundColor: sand
+      pattern: none
+      fade: none
+      maxContentWidth: xl
+      paddingHorizontal: gutter
+      paddingVertical: 4xl
+      haze: false
   - _component: page-sections/conversion/cta-showcase
     content:
       sectionLabel: Partner program

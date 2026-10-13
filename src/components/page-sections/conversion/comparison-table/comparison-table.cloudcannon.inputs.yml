@@ -59,13 +59,55 @@ content.plans:
   label: Plans
   comment: The columns of the table, left to right. One plan can be highlighted.
   options:
-    structures: _structures.pricingComparisonPlans
+    structures: _structures.comparisonColumns
+content.footnote:
+  type: text
+  label: Corner note
+  comment: >-
+    Small print in the table's corner, under the heading. The comparison
+    against other tools puts its "accurate as of" line here.
+content.columnLine:
+  type: select
+  label: Line under the name
+  comment: >-
+    A price reads bold in the strong ink; a description reads regular and
+    muted, a step smaller.
+  options:
+    values:
+      - id: strong
+        name: A price
+      - id: muted
+        name: A description
+content.highlightStyle:
+  type: select
+  label: How a highlighted column is marked
+  comment: >-
+    By its own call to action, or by filling the column. A fill reads as a
+    second zebra axis against a striped table, so it suits an unstriped one.
+  options:
+    values:
+      - id: action
+        name: By its call to action
+      - id: tint
+        name: A tinted column
+content.buttonPosition:
+  type: select
+  label: Where the actions sit
+  comment: >-
+    Each column's button under its name, or hanging off the foot of the
+    column after the last row.
+  options:
+    values:
+      - id: header
+        name: In the header
+      - id: foot
+        name: At the foot
 content.rows:
   type: array
   label: Feature rows
   comment: One row per feature, with one value per plan in plan order.
   options:
-    structures: _structures.pricingComparisonRows
+    structures: _structures.comparisonRows
 content.striped:
   type: switch
   comment: Shade alternate rows to help the eye track across the table.

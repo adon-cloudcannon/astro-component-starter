@@ -33,6 +33,40 @@ const {
   subtext = "",
   plans = [],
   rows = [],
+  /**
+   * A line of small print in the table's corner, under whatever heading is
+   * there.
+   *
+   * The comparison of CloudCannon against other tools puts its "accurate as
+   * of" note here rather than under the table, and has no heading at all —
+   * the corner is a slot, not a heading's seat.
+   */
+  footnote = "",
+  /**
+   * Where each column's action sits.
+   *
+   * The plan comparison puts its trial buttons in the header, under the
+   * price. The comparison against other tools hangs a "Deep dive" link off
+   * the foot of each column instead, after the last row.
+   */
+  buttonPosition = "header",
+  /**
+   * How the line under each column's name is set.
+   *
+   * `strong` is a price — 14.5 bold in the strong ink, which is what the
+   * plan comparison draws. `muted` is a description, 13 regular in the body
+   * colour, which is what the comparison against other tools draws. Same
+   * field either way; what differs is whether it is a figure or a sentence.
+   */
+  columnLine = "strong",
+  /**
+   * How a highlighted column is marked.
+   *
+   * `action` is the plan comparison's: the primary CTA in its header marks
+   * it and nothing else does. `tint` fills the column, which is what the
+   * comparison against other tools draws for CloudCannon's.
+   */
+  highlightStyle = "action",
   striped = true,
   /**
    * Draws a second monthly/yearly control over the table.
@@ -99,7 +133,7 @@ const slidesPrice = (plan: Plan) =>
 ---
 
 <CustomSection
-  class:list={["pricing-comparison", className]}
+  class:list={["comparison-table", `line-${columnLine}`, `highlight-${highlightStyle}`, className]}
   label={sectionLabel}
   maxContentWidth={maxContentWidth}
   paddingHorizontal={paddingHorizontal}
@@ -113,7 +147,7 @@ const slidesPrice = (plan: Plan) =>
   {...htmlAttributes}
 >
   <Text
-    class="section-subtext pricing-comparison-subtext"
+    class="section-subtext comparison-table-subtext"
     alignmentHorizontal="center"
     data-prop={at("subtext")}
     text={subtext}
@@ -121,22 +155,22 @@ const slidesPrice = (plan: Plan) =>
 
   {hasTable && showAnnualPricing && (
     <BillingSwitch
-      class="pricing-comparison-billing"
+      class="comparison-table-billing"
       monthlyLabel={monthlyLabel}
       annualLabel={annualLabel}
     />
   )}
 
   {hasTable && (
-    <div class:list={["pricing-comparison-frame", striped && "striped"]}>
+    <div class:list={["comparison-table-frame", striped && "striped"]}>
       <p
-        class="pricing-comparison-hint"
+        class="comparison-table-hint"
         aria-hidden="true"
       >
         Scroll →
       </p>
       <div
-        class="pricing-comparison-scroller"
+        class="comparison-table-scroller"
         role="region"
         tabindex="0"
         aria-label={heading || "Plan comparison"}
@@ -155,7 +189,7 @@ const slidesPrice = (plan: Plan) =>
                   centred above it: the design levels "Features" with the plan
                   names, because the left column labels the rows under it and
                   is not a heading for the whole band. */}
-              <td class="pricing-comparison-corner">
+              <td class="comparison-table-corner">
                 <Heading
                   eyebrow={eyebrow}
                   data-eyebrow-prop={at("eyebrow")}
@@ -166,6 +200,14 @@ const slidesPrice = (plan: Plan) =>
                 >
                   {heading}
                 </Heading>
+                {isNonEmptyString(footnote) && (
+                  <p
+                    class="comparison-table-footnote"
+                    data-prop={at("footnote")}
+                  >
+                    {footnote}
+                  </p>
+                )}
               </td>
               {planList.map((plan) => (
                 <th
@@ -174,14 +216,14 @@ const slidesPrice = (plan: Plan) =>
                   data-editable="array-item"
                 >
                   <span
-                    class="pricing-comparison-plan"
+                    class="comparison-table-plan"
                     data-editable="text"
                     data-prop="name"
                   >
                     {plan.name}
                   </span>
                   {slidesPrice(plan) ? (
-                    <span class="pricing-comparison-price billing-figures">
+                    <span class="comparison-table-price billing-figures">
                       <span
                         class="billing-figure is-monthly"
                         data-editable="text"
@@ -200,7 +242,7 @@ const slidesPrice = (plan: Plan) =>
                   ) : (
                     plan.price && (
                       <span
-                        class="pricing-comparison-price"
+                        class="comparison-table-price"
                         data-editable="text"
                         data-prop="price"
                       >
@@ -208,9 +250,9 @@ const slidesPrice = (plan: Plan) =>
                       </span>
                     )
                   )}
-                  {plan.buttonText && (
+                  {buttonPosition === "header" && plan.buttonText && (
                     <Button
-                      class="pricing-comparison-action"
+                      class="comparison-table-action"
                       text={plan.buttonText}
                       link={plan.buttonLink}
                       variant={plan.highlight ? "primary" : "tertiary"}
@@ -261,6 +303,28 @@ const slidesPrice = (plan: Plan) =>
               </tr>
             ))}
           </tbody>
+          {buttonPosition === "foot" && planList.some((plan) => plan.buttonText) && (
+            <tfoot>
+              <tr class="comparison-table-actions">
+                <td />
+                {planList.map((plan) => (
+                  <td class:list={[plan.highlight && "highlight"]}>
+                    {plan.buttonText && (
+                      <Button
+                        class="comparison-table-action"
+                        text={plan.buttonText}
+                        link={plan.buttonLink}
+                        iconName="arrow-right"
+                        iconPosition="after"
+                        variant="text"
+                        size="sm"
+                      />
+                    )}
+                  </td>
+                ))}
+              </tr>
+            </tfoot>
+          )}
         </table>
       </div>
     </div>
@@ -275,7 +339,7 @@ const slidesPrice = (plan: Plan) =>
        centred above the whole table: the left column is a label for the rows
        under it, not a heading for the band. The plan columns are ruled from
        each other, and the action sits under its own price. */
-    .pricing-comparison-corner {
+    .comparison-table-corner {
       /* The same padding the plan cells carry, so the heading's foot lands
          level with the buttons beside it. On the cell's own 1px it sat hard
          against the row's rule with its descenders over the line, while the
@@ -284,24 +348,24 @@ const slidesPrice = (plan: Plan) =>
       vertical-align: bottom;
     }
 
-    .pricing-comparison-corner .heading {
+    .comparison-table-corner .heading {
       --space-before: 0;
       margin-block: 0;
     }
 
-    .pricing-comparison-action {
+    .comparison-table-action {
       display: flex;
       justify-content: center;
       padding-block-start: var(--spacing-md);
     }
 
-    .pricing-comparison-action[data-outline] > .button-inner {
+    .comparison-table-action[data-outline] > .button-inner {
       border-color: var(--pacific);
       color: var(--pacific);
     }
 
-    .pricing-comparison-action[data-outline] > .button-inner:hover,
-    .pricing-comparison-action[data-outline] > .button-inner:focus-visible {
+    .comparison-table-action[data-outline] > .button-inner:hover,
+    .comparison-table-action[data-outline] > .button-inner:focus-visible {
       background-color: color-mix(in srgb, var(--pacific) 8%, transparent);
       border-color: var(--pacific);
       color: var(--pacific);
@@ -310,29 +374,29 @@ const slidesPrice = (plan: Plan) =>
     /* A rule between the plan columns, which is what separates three columns
        of ticks into three readable plans. Not on the first cell: the feature
        names are a column of labels, not a plan. */
-    .pricing-comparison tbody td + td + td {
+    .comparison-table tbody td + td + td {
       border-inline-start: var(--border-width-sm) solid var(--dark-sand);
     }
 
     /* Same reason as the header's floor: a collapsed border does not travel
        with a sticky cell, so the column rules are drawn inside it. */
-    .pricing-comparison thead th + th {
+    .comparison-table thead th + th {
       box-shadow:
         inset 0 calc(-1 * var(--border-width-md)) 0 var(--color-border-strong),
         inset var(--border-width-sm) 0 0 var(--dark-sand);
     }
 
-    .pricing-comparison {
+    .comparison-table {
       /* One transparent gray on even rows only. The same mix over --color-bg
          is used on the sticky feature column so it matches on screen and
          stays opaque when the table pans underneath. */
       --pricing-stripe: color-mix(in srgb, var(--gray-500) 10%, transparent);
       --pricing-stripe-solid: color-mix(in srgb, var(--gray-500) 10%, var(--band-color));
-      .pricing-comparison-frame {
+      .comparison-table-frame {
         --space-before: var(--space-before-loose);
       }
 
-      .pricing-comparison-hint {
+      .comparison-table-hint {
         color: var(--color-text-muted);
         display: none;
         font-size: var(--font-size-xs);
@@ -347,7 +411,7 @@ const slidesPrice = (plan: Plan) =>
          `overflow-x: auto` computes `overflow-y: auto` too, and a scrollport
          that fits its content never offsets anything inside it. Panning is
          turned back on below 640, where the table stops fitting. */
-      .pricing-comparison-scroller {
+      .comparison-table-scroller {
         overflow: visible;
 
         &:focus-visible {
@@ -379,7 +443,7 @@ const slidesPrice = (plan: Plan) =>
          cell, so it stays behind when a sticky cell moves and the header
          travels with no floor under it. */
       thead th,
-      .pricing-comparison-corner {
+      .comparison-table-corner {
         background-color: var(--band-color);
         box-shadow: inset 0 calc(-1 * var(--border-width-md)) 0 var(--color-border-strong);
         position: sticky;
@@ -390,8 +454,8 @@ const slidesPrice = (plan: Plan) =>
         z-index: 1;
       }
 
-      .pricing-comparison-frame.striped thead th,
-      .pricing-comparison-frame.striped .pricing-comparison-corner {
+      .comparison-table-frame.striped thead th,
+      .comparison-table-frame.striped .comparison-table-corner {
         background-color: var(--band-color);
       }
 
@@ -400,14 +464,33 @@ const slidesPrice = (plan: Plan) =>
          against the 14.5/400 muted body the rest of the table is set in. Read
          as body they sat level with the row labels under them and the header
          stopped reading as a header. */
-      .pricing-comparison-plan {
+      /* Small print, in the corner under whatever heading is there. */
+      .comparison-table-footnote {
+        color: var(--color-text-muted);
+        font-size: var(--font-size-xs);
+        font-style: italic;
+        margin: var(--spacing-sm) 0 0;
+        max-inline-size: 18ch;
+      }
+
+      .comparison-table-plan {
         color: var(--color-text-strong);
         display: block;
         font-size: var(--font-size-heading-xs);
         font-weight: var(--font-weight-bold);
       }
 
-      .pricing-comparison-price {
+      /* A description rather than a price: regular, muted, and a step down.
+         `&` because this sits inside the block's own nest — written out in
+         full it compiles to a `.comparison-table` inside a
+         `.comparison-table`, which matches nothing. */
+      &.line-muted .comparison-table-price {
+        color: var(--color-text-muted);
+        font-size: var(--font-size-xs);
+        font-weight: var(--font-weight-normal);
+      }
+
+      .comparison-table-price {
         color: var(--color-text-strong);
         display: block;
         font-size: var(--font-size-sm);
@@ -417,11 +500,11 @@ const slidesPrice = (plan: Plan) =>
       /* `display` has to be restated here: the rule above it is a class
          deeper, so a price cell kept `block`, `grid-area` meant nothing and
          the two figures sat side by side instead of stacking. */
-      .pricing-comparison-price.billing-figures {
+      .comparison-table-price.billing-figures {
         display: grid;
       }
 
-      .pricing-comparison-billing {
+      .comparison-table-billing {
         --space-before: var(--spacing-xl);
 
         margin-block-start: var(--spacing-xl);
@@ -456,8 +539,12 @@ const slidesPrice = (plan: Plan) =>
       }
 
       /* Highlighted plans are marked by the primary CTA, not a tinted column
-         — column fills read as a second zebra axis and fight the row stripe. */
-      .pricing-comparison-actions td {
+         — column fills read as a second zebra axis and fight the row stripe.
+         That is still the default, and `highlightStyle` is what asks for
+         the other: a table with its stripe off has nothing for a column fill
+         to fight, and the comparison against other tools marks its own
+         column exactly that way. */
+      .comparison-table-actions td {
         padding-top: var(--spacing-lg);
 
         .button {
@@ -465,21 +552,33 @@ const slidesPrice = (plan: Plan) =>
         }
       }
 
+      /* The tinted column, asked for rather than inferred. Harbour at 22% is
+         the pale blue the design draws, and the header cell rounds at the
+         top because the fill starts there. */
+      &.highlight-tint :is(th, td).highlight {
+        background-color: var(--harbour-100);
+      }
+
+      &.highlight-tint thead th.highlight {
+        border-start-end-radius: var(--radius-card);
+        border-start-start-radius: var(--radius-card);
+      }
+
       /* The striped class rides on the frame — a prop-driven class on a region
          root goes stale in the editor. */
-      .pricing-comparison-frame.striped tbody tr:nth-child(2n) th,
-      .pricing-comparison-frame.striped tbody tr:nth-child(2n) td {
+      .comparison-table-frame.striped tbody tr:nth-child(2n) th,
+      .comparison-table-frame.striped tbody tr:nth-child(2n) td {
         background-color: var(--pricing-stripe);
       }
 
       /* 640px = canonical mobile breakpoint — pans with the feature column
          pinned, matching the Table block. */
       @media (width < 640px) {
-        .pricing-comparison-hint {
+        .comparison-table-hint {
           display: block;
         }
 
-        .pricing-comparison-scroller {
+        .comparison-table-scroller {
           mask-image: linear-gradient(90deg, #000 calc(100% - var(--spacing-xl)), transparent);
           overflow-x: auto;
         }
@@ -487,7 +586,7 @@ const slidesPrice = (plan: Plan) =>
         /* The row cannot stick to the window from inside a scroll container,
            and the narrow table is a scroll container again. */
         thead th,
-        .pricing-comparison-corner {
+        .comparison-table-corner {
           position: static;
         }
 
@@ -498,7 +597,7 @@ const slidesPrice = (plan: Plan) =>
           position: sticky;
         }
 
-        .pricing-comparison-frame.striped tbody tr:nth-child(2n) th[scope="row"] {
+        .comparison-table-frame.striped tbody tr:nth-child(2n) th[scope="row"] {
           background-color: var(--pricing-stripe-solid);
         }
       }
