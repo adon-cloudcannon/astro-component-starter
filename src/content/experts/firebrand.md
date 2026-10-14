@@ -32,6 +32,7 @@ work:
 
       This structure allows AND Group to efficiently manage content at scale while providing
       an engaging and visually appealing experience for visitors.
+    link: https://andgroup.co.nz
   - title: Focus Technology
     image: https://cc-dam.imgix.net/focus-screen.png
     body: >-
@@ -47,6 +48,7 @@ work:
 
       The site’s content and structure are optimised for SEO, presenting information clearly
       and concisely while maximising discoverability across search engines.
+    link: https://focus.net.nz
 ---
 
 Firebrand is a full-service design, web development, and marketing agency offering a comprehensive suite of services to help our clients achieve their goals. Our team of specialists across UI, UX, web development, and digital marketing work together to create strategic, high-performing digital solutions.

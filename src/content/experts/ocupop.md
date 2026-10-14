@@ -27,10 +27,7 @@ work:
 
       From brand strategy and identity development to motion storytelling and web
       development, we’ve helped the brand reimagine the insurance industry.
-
-
-      <a target="_blank" rel="noopener" href="https://ourkettle.com/">View Kettle's website
-      &gt;</a>
+    link: https://ourkettle.com/
   - title: ReFED
     image: https://cc-dam.imgix.net/uploads/screenshot-2022-12-19-at-9-28-24-am.png
     body: >-
@@ -41,10 +38,7 @@ work:
       Ocupop has worked with ReFED since its inception to strategically solve design and
       engineering challenges, including the implementation of an extensive, fully-searchable
       research and policy database.
-
-
-      <a target="_blank" rel="noopener" href="https://refed.org">View ReFED's website
-      &gt;</a>
+    link: https://refed.org
   - title: The Digital Standard
     image: https://cc-dam.imgix.net/uploads/screenshot-2022-12-19-at-9-37-05-am.png
     body: >-
@@ -55,10 +49,7 @@ work:
       Our branding and web work clearly articulates the aims of the framework, illustrates
       its use in product evaluations and improvements, and integrates with GitHub to foster
       ongoing contributions.
-
-
-      <a target="_blank" rel="noopener" href="https://thedigitalstandard.org/">View The
-      Digital Standard's website &gt;</a>
+    link: https://thedigitalstandard.org/
 ---
 
 Ocupop has helped to define the strategic and visual language of the web and beyond since 2000. We’ve led projects for companies at all ends of the spectrum, from web giants and consumer brands to nonprofits and countless startups.

@@ -30,10 +30,7 @@ work:
 
       Work highlights: custom web design, custom "Lil Builders Party Kit" tool allows
       customers to create their own party experience & custom API checkout integration.
-
-
-      <a target="_blank" rel="noopener"
-      href="https://www.lowes.com/l/shop/build-a-birthday">View Lowe's website &gt;</a>
+    link: https://www.lowes.com/l/shop/build-a-birthday
   - title: Nightout
     image: https://cc-dam.imgix.net/uploads/screenshot-2022-12-14-at-3-16-05-pm.png
     body: >-
@@ -43,10 +40,7 @@ work:
 
       Work highlights: web & app redesign, powerful ElasticSearch functionality, admin tool
       for content curation, custom email tool (SES) & custom API checkout integration.
-
-
-      <a target="_blank" rel="noopener" href="http://nightout.com">View Nightout's website
-      &gt;</a>
+    link: http://nightout.com
 ---
 
 Fetchly is a web and mobile application development company headquartered in Austin, Texas.

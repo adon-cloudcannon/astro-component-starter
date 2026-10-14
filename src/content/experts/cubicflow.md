@@ -30,6 +30,7 @@ work:
 
 
       ​​​
+    link: https://panoply.io/
   - title: Life Flower
     image: https://cc-dam.imgix.net/uploads/screenshot-2022-12-07-at-10-13-21-am.png
     body: >-
@@ -39,10 +40,7 @@ work:
 
       We also created Life Flower’s design systems, branding, and Life Flower’s product
       packaging.
-
-
-      <a target="_blank" rel="noopener"
-      href="https://wholesale.lifeflowercare.com/shop/">View Life Flower's website &gt;</a>
+    link: https://wholesale.lifeflowercare.com/shop/
   - title: Shotbud
     image: https://cc-dam.imgix.net/uploads/screenshot-2022-12-07-at-10-16-45-am.png
     body: >-
@@ -51,10 +49,7 @@ work:
 
 
       We also created Shotbud’s design systems and branding.
-
-
-      <a target="_blank" rel="noopener" href="https://shotbud.com/">View Shotbud's website
-      &gt;</a>
+    link: https://shotbud.com/
 ---
 
 Cubicflow is your team’s frontend team—for apps, websites, design systems &amp; branding.

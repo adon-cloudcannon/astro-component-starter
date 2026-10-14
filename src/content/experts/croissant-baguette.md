@@ -42,10 +42,7 @@ work:
       tour programs across Australia. The app is inspired by Airbnb for the search and map
       function, and includes user dashboards. EdTripper scores a 99% on GTmetrix despite its
       complexity.
-
-
-      <a target="_blank" rel="noopener" href="https://edtripper.com/">View EdTripper's
-      website &gt;</a>
+    link: https://edtripper.com/
   - title: Kate Nixon
     image: https://cc-dam.imgix.net/uploads/screenshot-2022-12-14-at-3-23-56-pm.png
     body: >-
@@ -55,10 +52,7 @@ work:
 
       She’s recently re-launched her business with a range of sub-brands and needed a clean,
       welcoming, and modern website to accompany the new launch.
-
-
-      <a target="_blank" rel="noopener" href="https://katenixon.com/">View Kate Nixon's
-      website &gt;</a>
+    link: https://katenixon.com/
 ---
 
 On the front end, we can build you a customer-facing digital footprint that delights. From custom websites, both simple or complex, to web and mobile apps, our creations are beautiful, functional, tasteful and on-trend.

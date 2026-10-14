@@ -19,10 +19,7 @@ work:
 
 
       We delivered a product that continues to deliver 2 years after the initial launch.
-
-
-      <a target="_blank" rel="noopener" href="https://mypolytek.com/">View Polytek's website
-      &gt;</a>
+    link: https://mypolytek.com/
   - title: Brooke Joanna
     image: https://cc-dam.imgix.net/uploads/screenshot-2022-12-07-at-4-18-57-pm.png
     body: >-
@@ -31,10 +28,7 @@ work:
 
 
       We delivered an e-commerce site with a rich set of educational content.
-
-
-      <a target="_blank" rel="noopener" href="https://brookejoanna.com/">View Brooke
-      Joanna's website &gt;</a>
+    link: https://brookejoanna.com/
   - title: Revolutionary Earth
     image: https://cc-dam.imgix.net/uploads/screenshot-2022-12-07-at-4-20-08-pm.png
     body: >-
@@ -48,10 +42,7 @@ work:
 
       The delivered website is facilitating their organizational charter and expanding their
       reach.
-
-
-      <a target="_blank" rel="noopener" href="https://revolutionaryearth.org/">View
-      Revolutionary Earth's website &gt;</a>
+    link: https://revolutionaryearth.org/
 ---
 
 LiveAtom works with small businesses by amplifying their online presence through a mix of technical excellence and conventional marketing outreach.

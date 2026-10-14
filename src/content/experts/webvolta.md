@@ -19,26 +19,15 @@ work:
     body: >-
       New static site branding, design and development of static site, including integration
       with recruiting software via a small backend Rails app.
-
-
-      <a target="_blank" rel="noopener" href="https://www.staffingproxy.com/">View Staffing
-      Proxy's website &gt;</a>
+    link: https://www.staffingproxy.com/
   - title: Brushed Monkey
     image: https://cc-dam.imgix.net/uploads/screenshot-2022-12-06-at-4-44-44-pm.png
-    body: >-
-      Partial rebrand, new website design and development of static site.
-
-
-      <a target="_blank" rel="noopener" href="https://brushedmonkey.com/">View Brushed
-      Monkey's website &gt;</a>
+    body: Partial rebrand, new website design and development of static site.
+    link: https://brushedmonkey.com/
   - title: Rick's Coffee Bar
     image: https://cc-dam.imgix.net/uploads/screenshot-2022-12-06-at-4-20-08-pm.png
-    body: >-
-      Rapid late stage design and development of non-profit static site.
-
-
-      <a target="_blank" rel="noopener" href="https://www.rickscoffeebar.com/">View Rick's
-      Coffee Bar's website &gt;</a>
+    body: Rapid late stage design and development of non-profit static site.
+    link: https://www.rickscoffeebar.com/
 ---
 
 Our mission statement drives our company and keeps us focused on the things that truly matter. Every company means start-ups, industry leaders, or mom-and-pop shops.

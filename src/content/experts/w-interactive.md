@@ -17,28 +17,19 @@ work:
     body: >-
       A rich and engaging website experience designed for Bluthner, a high-end piano
       manufacturer based in Germany.
-
-
-      <a target="_blank" rel="noopener" href="https://bluthner.co.uk">View Bluthner Pianos'
-      website &gt;</a>
+    link: https://bluthner.co.uk
   - title: Springs Farm
     image: https://cc-dam.imgix.net/uploads/screenshot-2022-12-06-at-5-09-40-pm.png
     body: >-
       A simple, elegant and visually-rich website designed for a private sculpture park and
       equestrian centre in Berkshire, England.
-
-
-      <a target="_blank" rel="noopener" href="https://springs.farm">View Springs Farm's
-      website &gt;</a>
+    link: https://springs.farm
   - title: Wells Motor Cars
     image: https://cc-dam.imgix.net/uploads/screenshot-2022-12-07-at-9-40-40-am.png
     body: >-
       A bespoke website designed for the premium British sports car company Wells Motor
       Cars.
-
-
-      <a target="_blank" rel="noopener" href="https://wellsmotorcars.com">View Wells Motor
-      Cars' website &gt;</a>
+    link: https://wellsmotorcars.com
 ---
 
 W-Interactive is the design studio of Design Director and Developer Andrew Winter.

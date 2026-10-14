@@ -28,10 +28,7 @@ work:
       Features included: SEO optimised structure, new design, powerful landing pages for
       conversion, responsive and lazy loaded images for performance, full AA accessibility
       features, multiple layouts, training, and short-cut guide included.
-
-
-      <a target="_blank" rel="noopener" href="https://www.scientificservices.org/">View
-      Scientific Services' website &gt;</a>
+    link: https://www.scientificservices.org/
   - title: Naomi Jenkin Art
     image: https://cc-dam.imgix.net/uploads/screenshot-2022-12-07-at-9-51-33-am.png
     body: >-
@@ -42,10 +39,7 @@ work:
       Features included: SEO focused structure, minimal code to boost performance,
       responsive images with WEBP support, galleries (with filtering), carousels with
       light-boxes, cookie compliant and more.
-
-
-      <a target="_blank" rel="noopener" href="https://www.naomijenkinart.com/">View Naomi
-      Jenkin Art's website &gt;</a>
+    link: https://www.naomijenkinart.com/
   - title: Jewell Construction
     image: https://cc-dam.imgix.net/uploads/screenshot-2022-12-07-at-9-54-46-am.png
     body: >-
@@ -56,10 +50,7 @@ work:
       filtering), carousels, AA accessibility, fast performance, cookie compliant,
       responsive images with WEBP support, quote request form helps qualify enquiries, plus
       more.
-
-
-      <a target="_blank" rel="noopener" href="https://www.jewellconstruction.net/">View
-      Jewell Construction's website &gt;</a>
+    link: https://www.jewellconstruction.net/
 ---
 
 Hi, we’re Tim and Emma Bowerbank, freelance web developers based in Cornwall in the UK.

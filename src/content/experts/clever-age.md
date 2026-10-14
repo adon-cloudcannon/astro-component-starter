@@ -29,10 +29,7 @@ work:
       Clever Age used CloudCannon to develop a galaxy of content websites (linking to the
       main, corporate site) with very easy contributions from various websites owners. The
       result is astonishing!
-
-
-      <a href="https://fr.elis.com/en/group/about-us" title="Elis website" target="_blank"
-      rel="noopener">View website &gt;</a>
+    link: https://fr.elis.com/en/group/about-us
 ---
 
 We are passionate about the Web and we constantly seek to infuse our projects with a sense of exception. 

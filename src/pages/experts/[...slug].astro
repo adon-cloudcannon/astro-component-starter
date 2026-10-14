@@ -7,15 +7,21 @@
  * them.
  */
 import { breadcrumbListJsonLd } from "@component-utils/breadcrumbTrail";
+import { bandHaze } from "@component-utils/bandStyle.mjs";
 import Button from "@core-elements/button/Button.astro";
 import Heading from "@core-elements/heading/Heading.astro";
 import Image from "@core-elements/image/Image.astro";
 import SimpleText from "@core-elements/simple-text/SimpleText.astro";
 import Text from "@core-elements/text/Text.astro";
+import SsgMarks from "@component-utils/ssg-marks/SsgMarks.astro";
+import Carousel from "@wrappers/carousel/Carousel.astro";
+import CtaForm from "@page-sections/conversion/cta-form/CtaForm.astro";
 import breadcrumbsData from "@data/breadcrumbs.json";
 import Page from "@layouts/Page.astro";
 import CustomSection from "@page-sections/builders/custom-section/CustomSection.astro";
 import { getCollection, render, type CollectionEntry } from "astro:content";
+import ProseCodeCopy from "@component-utils/prose-code-copy/ProseCodeCopy.astro";
+import CodeAnnotations from "@component-utils/code-annotations/CodeAnnotations.astro";
 
 export async function getStaticPaths() {
   const experts = await getCollection("experts", ({ data }) => !data.draft);
@@ -36,6 +42,11 @@ const { title, description, image, imageAlt, location, siteUrl } = expert.data;
 
 const work = (expert.data.work ?? []).filter((item) => item?.title);
 
+/* The track only bleeds, and the neighbours only peek, where there are enough
+   projects to loop past: with two, Embla gives up the loop and clamps the last
+   snap, leaving a card stranded off-centre. */
+const peeking = work.length > 2;
+
 /* The agency's own links, in the order the design lists them. */
 const links = [
   { label: "Visit website", href: siteUrl },
@@ -45,8 +56,32 @@ const links = [
   { label: "Instagram", href: expert.data.instagramUrl },
 ].filter((link) => link.href);
 
-/* The panels behind the client work, cycled so neighbouring ones differ. */
-const PANEL_COLOURS = ["sunset", "pacific", "moss", "harbour", "peachy"];
+/* The track runs the width of the window so the neighbouring projects show,
+   while a card stays the width the design draws it. */
+const WORK_SLIDE_WIDTH =
+  "--slide-width: calc(min(60rem, 100vw - 2 * var(--spacing-gutter)) + var(--slide-gap))";
+
+/* The fields the design's contact form carries. */
+const CONTACT_FIELDS = [
+  { _component: "building-blocks/forms/input", label: "First name", name: "first-name", type: "text", required: true, autocomplete: "given-name", class: "cta-form-half" },
+  { _component: "building-blocks/forms/input", label: "Last name", name: "last-name", type: "text", required: true, autocomplete: "family-name", class: "cta-form-half" },
+  { _component: "building-blocks/forms/input", label: "Email", name: "email", type: "email", required: true, autocomplete: "email", class: "cta-form-half" },
+  { _component: "building-blocks/forms/input", label: "Company name", name: "company", type: "text", required: true, autocomplete: "organization", class: "cta-form-half" },
+  {
+    _component: "building-blocks/forms/select",
+    label: "How can we help?",
+    name: "help",
+    required: true,
+    options: [
+      { value: "developer-support", label: "Developer support" },
+      { value: "new-website", label: "A new website" },
+      { value: "migration", label: "A migration" },
+      { value: "something-else", label: "Something else" },
+    ],
+  },
+  { _component: "building-blocks/forms/textarea", label: "Project scope", name: "scope", required: true, rows: 5 },
+  { _component: "building-blocks/forms/submit", text: "Submit" },
+];
 
 const breadcrumbJsonLd = breadcrumbListJsonLd(
   [{ label: "Expert directory", url: "/experts/" }, { label: title }],
@@ -93,6 +128,10 @@ const breadcrumbJsonLd = breadcrumbListJsonLd(
           {description}
         </SimpleText>
         {location && <p class="expert-page-location">{location}</p>}
+        <SsgMarks
+          class="expert-page-ssgs"
+          ssgs={expert.data.ssgs}
+        />
       </div>
       {image && (
         <Image
@@ -135,45 +174,117 @@ const breadcrumbJsonLd = breadcrumbListJsonLd(
     <CustomSection
       class="expert-page-work"
       label="Client work"
-      maxContentWidth="xl"
-      paddingHorizontal="gutter"
+      maxContentWidth="2xl"
+      paddingHorizontal="lg"
       paddingVertical="4xl"
-      backgroundColor="light-sand"
-      paddingVerticalStart="none"
+      backgroundColor="dark"
+      background={{ type: "pattern", pattern: "grid", fixed: false, mask: "none", overlay: 0 }}
+      haze={bandHaze(true, { split: false })}
     >
-      {work.map((item, index) => (
-        <article
-          class="expert-page-project"
-          style={`--expert-page-panel: var(--${PANEL_COLOURS[index % PANEL_COLOURS.length]})`}
-        >
-          <div class="expert-page-project-copy">
-            <Heading
-              level="h2"
-              size="sm"
-              class="expert-page-project-title"
-            >
-              {item.title}
-            </Heading>
-            <Text
-              class="expert-page-project-body"
-              size="md"
-              text={item.body ?? ""}
-            />
-          </div>
-          {item.image && (
-            <div class="expert-page-project-panel scratched" aria-hidden="true">
-              <Image
-                class="expert-page-project-shot"
-                source={item.image}
-                alt=""
-                rounded
-              />
+      <p class="expert-page-work-eyebrow">{title}</p>
+      <Heading
+        level="h2"
+        size="lg"
+        alignmentHorizontal="center"
+        class="expert-page-work-heading"
+      >
+        Check out their work
+      </Heading>
+
+      <Carousel
+        class:list={["expert-work", peeking && "is-peeking"]}
+        label="Client work"
+        showArrows={work.length > 1}
+        showIndicators={work.length > 1}
+        loop={work.length > 1}
+        gap="xl"
+        style={peeking ? WORK_SLIDE_WIDTH : undefined}
+      >
+        {work.map((item) => (
+          <article
+            class="slide expert-work-slide"
+            role="group"
+            aria-roledescription="slide"
+          >
+            <div class="slide__content expert-work-card">
+              <div class="expert-work-copy">
+                <h3 class="expert-work-title">{item.title}</h3>
+                <Text
+                  class="expert-work-body"
+                  size="lg"
+                  text={item.body ?? ""}
+                />
+                {item.link && (
+                  <p class="expert-work-more">
+                    <a
+                      class="expert-work-link"
+                      href={item.link}
+                      target="_blank"
+                      rel="noopener"
+                    >
+                      See project <span aria-hidden="true">→</span>
+                    </a>
+                  </p>
+                )}
+              </div>
+              {item.image && (
+                <div class="expert-work-art">
+                  <Image
+                    source={item.image}
+                    alt=""
+                    decorative={true}
+                    aspectRatio="none"
+                  />
+                </div>
+              )}
             </div>
-          )}
-        </article>
-      ))}
+          </article>
+        ))}
+      </Carousel>
     </CustomSection>
   )}
+
+  {/* The design centres the heading on the band above the card, where the
+      form component would otherwise draw it inside. */}
+  <CustomSection
+    class="expert-page-contact"
+    label="Contact"
+    maxContentWidth="xl"
+    paddingHorizontal="gutter"
+    paddingVertical="4xl"
+    paddingVerticalEnd="none"
+    backgroundColor="dark-sand"
+  >
+    <Heading
+      level="h2"
+      size="lg"
+      alignmentHorizontal="center"
+    >
+      Contact {title}
+    </Heading>
+    <SimpleText
+      class="expert-page-contact-line"
+      size="lg"
+      alignmentHorizontal="center"
+    >
+      Love what you see? Need help with a project? Get in touch with {title}.
+    </SimpleText>
+  </CustomSection>
+
+  <CtaForm
+    heading=""
+    subtext=""
+    formAction={siteUrl ?? "/contact/"}
+    formBlocks={CONTACT_FIELDS}
+    backgroundColor="dark-sand"
+    maxContentWidth="xl"
+    paddingHorizontal="gutter"
+    paddingVertical="4xl"
+    paddingVerticalStart="2xl"
+  />
+
+  <ProseCodeCopy />
+  <CodeAnnotations />
 </Page>
 
 <style is:global>
@@ -208,6 +319,12 @@ const breadcrumbJsonLd = breadcrumbListJsonLd(
     margin-block: var(--spacing-lg) 0;
   }
 
+  /* The generators the agency works in, under its copy rather than only on
+     its card in the directory. */
+  .expert-page-ssgs {
+    margin-block-start: var(--spacing-xl);
+  }
+
   .expert-page-shot img {
     block-size: auto;
     inline-size: 100%;
@@ -236,35 +353,111 @@ const breadcrumbJsonLd = breadcrumbListJsonLd(
     margin-block-start: var(--spacing-2xl);
   }
 
-  /* A project is copy over its picture, and the picture sits on a scratched
-     sheet of its own colour — the design gives each one a different one. */
-  .expert-page-project {
-    margin-block-start: var(--spacing-4xl);
+  .expert-page-contact-line {
+    --space-before: var(--spacing-lg);
   }
 
-  .expert-page-project-copy {
-    margin-inline: auto;
-    max-inline-size: var(--content-width-lg);
+  .expert-page-work-eyebrow {
+    color: var(--sunset);
+    font-size: var(--font-size-xs);
+    font-weight: var(--font-weight-semibold);
+    letter-spacing: 0.2em;
+    margin: 0;
+    text-align: center;
+    text-transform: uppercase;
   }
 
-  .expert-page-project-body {
-    --space-before: var(--spacing-md);
+  .expert-page-work-heading {
+    --space-before: var(--spacing-lg);
+
+    margin-block-end: var(--spacing-3xl);
   }
 
-  .expert-page-project-panel {
-    --scratch-fill: var(--expert-page-panel, var(--sunset));
+  /* The track runs edge to edge of the window while the band around it stays
+     contained, so the projects either side of the current one show. */
+  .expert-work.carousel.is-peeking {
+    inline-size: auto;
+    margin-inline: calc(50% - 50vw);
+  }
 
+  /* Copy down the left, the project's picture filling the rest. */
+  .expert-work-card {
+    background-color: var(--color-bg-muted);
+    border: var(--border-width-sm) solid var(--color-border);
     border-radius: var(--radius-card);
-    margin-block-start: var(--spacing-2xl);
-    padding: var(--spacing-3xl) var(--spacing-3xl) 0;
+    display: grid;
+    gap: 0;
+    grid-template-columns: minmax(0, 376fr) minmax(0, 582fr);
+    overflow: hidden;
+    position: relative;
+    transition: border-color var(--animation-normal) var(--ease-out);
   }
 
-  .expert-page-project-shot img {
-    block-size: auto;
-    border-start-start-radius: var(--radius-card);
-    border-start-end-radius: var(--radius-card);
+  .expert-work-card:hover,
+  .expert-work-card:has(a:focus-visible) {
+    border-color: var(--earth);
+  }
+
+  .expert-work-copy {
+    display: flex;
+    flex-direction: column;
+    padding: var(--spacing-xl) 2.5rem;
+  }
+
+  /* 24 against the 19 of the copy under it: at a step apart the two read as
+     one block of text. */
+  .expert-work-title {
+    font-size: 1.5rem;
+    font-weight: var(--font-weight-normal);
+    line-height: var(--line-height-heading-sm);
+    /* A plain margin, not `--space-before`: the flow layer only spaces the
+       children of a flow parent, and this column is not one. */
+    margin-block: 0 var(--spacing-md);
+  }
+
+  /* Through to the leaf: Text writes its own colour and leading on the
+     paragraphs, so dimming the wrapper reaches nothing. */
+  .expert-work-body,
+  .expert-work-body p {
+    color: var(--color-text-muted);
+  }
+
+  .expert-work-body p {
+    line-height: 1.37;
+  }
+
+  .expert-work-body p + p {
+    margin-block-start: var(--spacing-md);
+  }
+
+  .expert-work-more {
+    margin-block: var(--spacing-xl) 0;
+  }
+
+  .expert-work-link {
+    color: var(--color-link);
+    font-size: var(--font-size-md);
+    text-decoration: none;
+  }
+
+  .expert-work-link:hover,
+  .expert-work-link:focus-visible {
+    text-decoration: underline;
+  }
+
+  /* The picture fills the card's full height; Image nests three boxes between
+     this one and the `img`, each needing the height passed down. */
+  .expert-work-art .image,
+  .expert-work-art .image-inner,
+  .expert-work-art picture {
+    block-size: 100%;
+  }
+
+  .expert-work-card .expert-work-art img {
+    block-size: 100%;
     display: block;
     inline-size: 100%;
+    object-fit: cover;
   }
 
   @media (width < 900px) {
@@ -272,8 +465,8 @@ const breadcrumbJsonLd = breadcrumbListJsonLd(
       grid-template-columns: minmax(0, 1fr);
     }
 
-    .expert-page-project-panel {
-      padding: var(--spacing-xl) var(--spacing-xl) 0;
+    .expert-work-card {
+      grid-template-columns: minmax(0, 1fr);
     }
   }
 </style>

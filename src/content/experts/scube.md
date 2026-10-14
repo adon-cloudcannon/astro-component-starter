@@ -24,10 +24,7 @@ work:
 
       We helped the client by creating a website with Jekyll, Bootstrap CSS and obtained
       wines from commerce7 platform by using commerce7 API.
-
-
-      <a target="_blank" rel="noopener" href="https://estcru.co/">View eStCru's website
-      &gt;</a>
+    link: https://estcru.co/
   - title: Breeze
     image: https://cc-dam.imgix.net/uploads/screenshot-2022-12-07-at-10-43-41-am.png
     body: >-
@@ -41,10 +38,7 @@ work:
 
       We created the site by using templates to allow the client to make their own changes
       within the CMS without the help of a developer coding.
-
-
-      <a target="_blank" rel="noopener" href="https://breeze.bar/">View Breeze's website
-      &gt;</a>
+    link: https://breeze.bar/
 ---
 
 SCube is a full-fledged full-service website agency that has continued growing and developing expertise in Jamstack space specially with Cloudcannon.

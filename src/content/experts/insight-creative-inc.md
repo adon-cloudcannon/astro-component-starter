@@ -27,10 +27,7 @@ work:
 
       We updated and modernized the look of A to Z Machine’s website and optimized the site
       to meet modern performance standards.
-
-
-      <a target="_blank" rel="noopener" href="https://www.atozmachine.com/">View A to Z
-      Machine's website &gt;</a>
+    link: https://www.atozmachine.com/
   - title: Baileys Harbor Schoolhouse Inn
     image: https://cc-dam.imgix.net/uploads/screenshot-2022-12-14-at-3-17-56-pm.png
     body: >-
@@ -40,10 +37,7 @@ work:
 
       We built a modern, secure and fast Hugo website that not only looks great but cut the
       total load time from over 6 seconds down to 0.6 seconds.
-
-
-      <a target="_blank" rel="noopener" href="https://baileysharborinn.com/">View Baileys
-      Harbor Schoolhouse Inn's website &gt;</a>
+    link: https://baileysharborinn.com/
   - title: Matthews Tire
     image: https://cc-dam.imgix.net/uploads/screenshot-2022-12-14-at-3-18-23-pm.png
     body: >-
@@ -53,10 +47,7 @@ work:
 
       We turned to Hugo to simplify our architecture and achieve blazing fast build times.
       This simple tech stack was built and strengthened for years of growth and scale.
-
-
-      <a target="_blank" rel="noopener" href="https://www.matthewstire.com/">View Matthews
-      Tire's website &gt;</a>
+    link: https://www.matthewstire.com/
 ---
 
 Insight Creative, Inc. offers all marketing services, including a large commercial video and photography studio, under one roof.

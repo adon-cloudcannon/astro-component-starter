@@ -16,28 +16,19 @@ work:
     body: >-
       We created a landing page for the client to inform and recruit new talent for future
       projects sourced by Unity.
-
-
-      <a target="_blank" rel="noopener" href="https://dtsxr.com/">View Digital Twin Studio's
-      website &gt;</a>
+    link: https://dtsxr.com/
   - title: Immunize Partnership
     image: https://cc-dam.imgix.net/uploads/screenshot-2022-12-14-at-3-01-22-pm.png
     body: >-
       We converted the site to Jekyll and built out web apps for the client to control
       various complex elements of their site.
-
-
-      <a target="_blank" rel="noopener" href="https://immunizeusa.org/">View Immunize
-      Partnership's website &gt;</a>
+    link: https://immunizeusa.org/
   - title: All Around Lawn Services
     image: https://cc-dam.imgix.net/uploads/screenshot-2022-12-14-at-3-02-08-pm.png
     body: >-
       We built a simple one-page site with web app, form, and site editor for the client to
       be able to manage their site easily and efficiently.
-
-
-      <a target="_blank" rel="noopener" href="https://allaroundlawnservice.com/">View All
-      Around Lawn Services' website &gt;</a>
+    link: https://allaroundlawnservice.com/
 ---
 
 Technology moves fast, but Accolades moves faster!
