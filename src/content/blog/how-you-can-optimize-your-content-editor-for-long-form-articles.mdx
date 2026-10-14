@@ -8,6 +8,8 @@ tags:
   - resources
 ---
 
+import Video from "@core-elements/video/Video.astro";
+
 While I love visual editing for building out new landing pages, and tweaking my layouts and microcopy, I also do quite a lot of long-form writing in the form of blog posts or longer articles. That's when I turn to CloudCannon's Content Editor, for its distraction-free writing environment.
 
 With the Content Editor I'm able to focus more on how I'm constructing an argument or expressing an opinion, and how one section of prose flows neatly into the next. This kind of approach can be especially valuable for long-form content where maintaining narrative structure is crucial.
@@ -70,6 +72,8 @@ If you’d like to further extend the functionality of the pages you’re writin
 
 Here’s a Spotify embed I’ve added to this blog post, with a simple Snippet:
 
+[Listen on Spotify](https://open.spotify.com/show/3BZQBms8YqvBWJdORzOtyS)
+
 Our own [documentation](https://cloudcannon.com/documentation/) team uses Snippets to bring a huge range of features to the articles and guides they write using the Content Editor, including customized code blocks with responsive annotations; and conditional content, which is either shown or hidden depending on the SSG a user has chosen.
 
 You can even make Snippets from existing web components. (We did this with Zach Leatherman's `<table-saw>` web component for a responsive table element —&nbsp;find out how [in Zach's article](https://cloudcannon.com/blog/new-web-component-for-responsive-html-tables/), and see his <a href="https://github.com/zachleat/table-saw/" target="_blank" rel="noopener">GitHub repo</a> for the component itself!)
@@ -77,6 +81,8 @@ You can even make Snippets from existing web components. (We did this with Zach 
 Once they’re set up, Snippets can be added to your content directly from the Content Editor, without users needing to touch any code. You can just click once to add a Snippet to your page, then define the Snippet’s parameters (for example, the unique section of a YouTube URL and the video's title).
 
 Here’s how it looks from the editor’s perspective:
+
+<Video type="youtube" videoId="ddzGhDDZSjc" title="Adding Snippets in the Content Editor" />
 
 ### Importing Snippets, Shortcodes and Components
 

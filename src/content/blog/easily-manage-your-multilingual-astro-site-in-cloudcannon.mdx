@@ -10,6 +10,9 @@ tags:
   - resources
 ---
 
+import Video from "@core-elements/video/Video.astro";
+import Alert from "@core-elements/alert/Alert.astro";
+
 If you’re using [Astro](/astro-cms/) with page components for a multilingual site, you’ve probably come across a few hurdles in your workflow. Typically a content team might be maintaining separate pages for each language, so any changes you make would need to be manually replicated across all of your pages. Depending on your CMS, you may also have found that your translators can’t easily see their content in context as they’re translating.
 
 If this sounds familiar, check out CloudCannon’s new [Astro Rosey starter](https://github.com/CloudCannon/rosey-astro-starter), which uses our open-source tool [Rosey](https://rosey.app/) and CloudCannon’s component-based approach to building and editing sites. This starter brings the following benefits for Astro users:
@@ -29,7 +32,11 @@ Rosey is an open-source tool for managing translations on static websites. Rosey
 
 The Rosey workflow involves tagging your HTML elements with the information needed to translate them. After your site builds in its primary language, Rosey ingests your final site and extracts tagged elements for translation. Once these have been translated, Rosey combines your original site with each set of translated content, resulting in a final multilingual website. This differs from many translation workflows that bake multilingual support into the templating.
 
+<Alert variant="note" text="Rosey works with all <a href=&quot;/technologies/&quot;><u>static site generators supported by CloudCannon</u></a>, merging your original site and your translations into one multilingual website. For more information and detailed documentation, see <a href=&quot;https://rosey.app/&quot;><u>rosey.app</u></a>." />
+
 Find out more about how to use the Astro Rosey Starter:
+
+<Video type="youtube" videoId="u5WittUT3Ts" title="Easily manage your multilingual Astro site in CloudCannon" />
 
 This starter comes with a translation workflow set up in CloudCannon's CMS with Rosey, to provide UI for non-technical editors and translators to control a site's content and translations.
 

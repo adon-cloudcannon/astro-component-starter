@@ -10,6 +10,9 @@ tags:
   - resources
 ---
 
+import Video from "@core-elements/video/Video.astro";
+import Alert from "@core-elements/alert/Alert.astro";
+
 In our previous tutorials, we explored how to set up basic blog editing in CloudCannon's Content Editor for an Astro theme. We refactored our Collections, performed some small tidy-ups along the way, and implemented the ability to add components throughout your Markdown body content using CloudCannon’s Snippets feature.
 
 Today, we’re taking the next step in our journey with the <a href="https://github.com/themefisher/bigspring-light-astro" target="_blank" rel="noopener">BigSpring Light Astro theme</a> by implementing <a href="https://github.com/CloudCannon/bookshop" target="_blank" rel="noopener">Bookshop</a> for live editing. This powerful tool handles component importing into your page’s body content, and also connects your front matter fields directly to the HTML on your page, enabling real-time visual previews of your changes.
@@ -22,6 +25,8 @@ Bookshop serves two primary functions in our Astro site:
 2. It establishes connections between front matter fields and HTML elements, enabling live previewing of changes.
 
 Instead of having to save, rebuild, and refresh to see your changes, Bookshop allows you to preview your modifications instantly in CloudCannon's Visual Editor. For non-developers, this can be a huge efficiency (and confidence) boost when making content changes to a website.
+
+<Video type="youtube" videoId="5dXw2jaj2so" title="Getting started with CloudCannon and Astro: Bookshop, components, and live editing" />
 
 *Want to learn more about CloudCannon and Bookshop? Check out* [*CloudCannon’s documentation*](https://cloudcannon.com/documentation/) *and the* [*Astro Bookshop Guide*](https://cloudcannon.com/documentation/guides/bookshop-astro-guide/) *for additional resources.*
 
@@ -72,3 +77,5 @@ Content editors now have the ability to reorder, add, or remove components throu
 ## **Next steps**
 
 In our next tutorial, we’ll expand on our work by refactoring the rest of the site’s pages to use our newly created components. We’ll also explore creating new pages with these components, further leveraging the power of Bookshop and CloudCannon.
+
+<Alert variant="note" text="Thanks to Themefisher for creating and sharing BigSpring Light! Check out Themefisher’s other <a href=&quot;https://themefisher.com/astro-themes&quot; target=&quot;_blank&quot; rel=&quot;noopener noreferrer&quot;><u>Astro themes</u></a>, which can all be adapted for live visual editing in CloudCannon ✨" />

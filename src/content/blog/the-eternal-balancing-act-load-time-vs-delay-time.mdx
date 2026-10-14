@@ -11,6 +11,8 @@ tags:
   - resources
 ---
 
+import Icon from "@core-elements/icon/Icon.astro";
+
 As frontend developers, we're constantly juggling various factors to create fast, responsive, and engaging web experiences. Two critical aspects of this balancing act are load time and delay time, especially when it comes to Google's Lighthouse scores and the Largest Contentful Paint (LCP) metric. In this article, we'll explore the tension between these two factors and how to optimize them for better performance.
 
 ## Understanding load time vs. delay time
@@ -34,25 +36,25 @@ LCP is a crucial metric that measures the render time of the largest content ele
 
 Here's where the balancing act comes into play. To improve LCP, we might be tempted to load all resources, including all JavaScript, as quickly as possible. However, this approach can lead to:
 
-&nbsp;&nbsp;**Increased network congestion.** Flooding the network with requests for multiple resources simultaneously can create bottlenecks.
+<Icon name="database" size="sm" />&nbsp;&nbsp;**Increased network congestion.** Flooding the network with requests for multiple resources simultaneously can create bottlenecks.
 
-&nbsp;&nbsp;**Higher server load.** Rapid, concurrent requests can strain server resources, potentially slowing down response times.
+<Icon name="server" size="sm" />&nbsp;&nbsp;**Higher server load.** Rapid, concurrent requests can strain server resources, potentially slowing down response times.
 
-&nbsp;&nbsp;**Potential layout shifts.** As resources load at different speeds, the page layout may shift, leading to a poor user experience and negatively impacting Cumulative Layout Shift (CLS).
+<Icon name="chevrons-right" size="sm" />&nbsp;&nbsp;**Potential layout shifts.** As resources load at different speeds, the page layout may shift, leading to a poor user experience and negatively impacting Cumulative Layout Shift (CLS).
 
-&nbsp;&nbsp;**Wasted resources.** Loading non-critical resources early can waste bandwidth and processing power, especially on mobile devices.
+<Icon name="cpu" size="sm" />&nbsp;&nbsp;**Wasted resources.** Loading non-critical resources early can waste bandwidth and processing power, especially on mobile devices.
 
 ---
 
 On the other hand, strategically delaying the load of certain resources can have some benefits:
 
-&nbsp;&nbsp;**Improve overall page performance.** By prioritizing critical content, the perceived load time can be significantly reduced.
+<Icon name="bolt" size="sm" />&nbsp;&nbsp;**Improve overall page performance.** By prioritizing critical content, the perceived load time can be significantly reduced.
 
-&nbsp;&nbsp;**Reduce bandwidth usage.** Lazy loading and on-demand resource fetching can decrease the initial page payload size.
+<Icon name="sliders-vertical" size="sm" />&nbsp;&nbsp;**Reduce bandwidth usage.** Lazy loading and on-demand resource fetching can decrease the initial page payload size.
 
-&nbsp;&nbsp;**Provide a smoother user experience.** Gradually loading content can create a more fluid feel as the user interacts with the page.
+<Icon name="user" size="sm" />&nbsp;&nbsp;**Provide a smoother user experience.** Gradually loading content can create a more fluid feel as the user interacts with the page.
 
-&nbsp;&nbsp;**Optimize resource usage.** Delaying non-critical resources allows the browser to focus on rendering the most important content first.
+<Icon name="sparkles" size="sm" />&nbsp;&nbsp;**Optimize resource usage.** Delaying non-critical resources allows the browser to focus on rendering the most important content first.
 
 ## Strategies for balancing load and delay
 

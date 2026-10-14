@@ -11,9 +11,14 @@ tags:
   - features
 ---
 
+import Video from "@core-elements/video/Video.astro";
+import Alert from "@core-elements/alert/Alert.astro";
+
 We're excited to announce our latest Open Beta release, which introduces several significant improvements to CloudCannon. This beta focuses on streamlining your publishing workflow, enhancing domain management, and improving the editing experience in the Source Editor.
 
 Thanks to our [Partners](/partner-program/) who tested during the Private Beta phase, reported on their experiences with our new features, and requested additional features!
+
+<Alert variant="note" text="Want more details? Check out our <a href=&quot;https://cloudcannon.com/documentation/articles/beta/&quot;><u>Beta Documentation</u></a>. We'd love your feedback on these new features as we work to make CloudCannon even better for your content management needs!" />
 
 In brief, once you've opted into the Beta, you'll have immediate access to:
 
@@ -30,6 +35,8 @@ In brief, once you've opted into the Beta, you'll have immediate access to:
 
 One of our most requested features is now available! You can now resolve publishing conflicts directly within CloudCannon without needing to use your local developer environment or Git provider.
 
+<Video type="youtube" videoId="1MzBV7odMUU" title="Merge Conflict Resolution" />
+
 When updating your site from a publish branch, CloudCannon will now detect any conflicts between your current branch and the incoming changes. The Publishing page will display all files with conflicts, allowing you to open them in the Source Editor where you'll see clear highlighting of the differences between versions. You can choose to use either version or manually combine them for a perfect resolution.
 
 *This feature is available to Owners, Developers, and Technical Editors, as well as custom permission groups with appropriate access.*
@@ -45,6 +52,8 @@ This text-based differential view highlights additions, deletions, and modificat
 ## **Enhanced Source Editor**
 
 Our Source Editor has received a significant upgrade with a new engine that provides improved syntax highlighting, especially for files with YAML front matter and markdown content.
+
+<Video type="youtube" videoId="cchMvCNluGM" title="CloudCannon's enhanced Source Editor" />
 
 The Source Editor now features conflict highlighting for better visualization of differences, multi-cursor editing with `CMD+D`/`CTRL+D` for simultaneous editing of repeated text, search and select via regular expressions, and a new default theme (`basic_dark`) for better readability.
 

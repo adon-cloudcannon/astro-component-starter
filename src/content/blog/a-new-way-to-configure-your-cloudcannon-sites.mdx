@@ -10,11 +10,16 @@ tags:
   - features
 ---
 
+import Image from "@core-elements/image/Image.astro";
+import Video from "@core-elements/video/Video.astro";
+
 We’ve just released a new way to create and edit your [CloudCannon configuration files](https://cloudcannon.com/documentation/guides/getting-started/configuring-your-cms/) within CloudCannon itself — enabling all users to clearly see what’s possible in our *very detailed* global configuration options.
 
 Developers on CloudCannon can now view and edit their config files at a glance — as well as learning more about the options that are available to them.
 
 Here’s our Engineering Lead, Ross Phillips, on what the new configuration view brings to CloudCannon users:
+
+<Video type="youtube" videoId="Xlxr0j6nhyE" title="Static Feedback #7 — A new way to configure your CloudCannon sites" />
 
 ## How to configure the ideal editing experience for your static site
 
@@ -42,18 +47,26 @@ In short, the new interface is for everyone — we’ve created it to help all C
 
 ### ​​​… you can set site-wide editing interfaces, and override them within specific collections as needed?
 
+<Image source="https://cc-dam.imgix.net/global-editing-interfaces-config-gui.png" alt="Config interface showing Inputs" />
+
 Under **Global editing interfaces** you can set which of the Visual, Content, and Data Editors are enabled, and in which order. You can also customize the appearance and behaviour of your **Inputs** in data editing interfaces, including adding Instance Values, as well as Labels or Comments to assist your content team.
 
 Because some elements of CloudCannon’s config operate as a cascade, you can always override these global settings with more specific settings for defined groups of files (collections).
 
 ### … you can sort your collections based on custom keys in their front matter?
 
+<Image source="https://cc-dam.imgix.net/config-gui-sort-final.png" alt="Config interface in CloudCannon" />
+
 We’re all about flexibility for site users — and the way developers present and sort site files can make a huge difference to how quickly a content team works. Maybe you’d like to sort the way your blog posts appear within the CMS: ordered by author name, descending? Or organize your pages by lead score? It’s up to you — define your default sorting and add customized **Sort** **Options** under **Collection Display**.
 
 ### … you can add Editables to create much richer input options for the Content Editor
 
+<Image source="https://cc-dam.imgix.net/config-gui-editables.png" alt="Editable options in CloudCannon config interface" />
+
 Most writers will have a personally preferred set of rich text editing controls, or will need specific options enabled. Under **Global editing interfaces &gt; Editables** you can set **text** editables for richer text editing; **content / block** editables for managing blocks of text; and **image** editables for orientation, image size, mime type, and paths.
 
 ### … you can choose your preferred syntax highlighting in the Source Editor?
+
+<Image source="https://cc-dam.imgix.net/source-editor-config-gui.png" alt="Source Editor configuration interface" />
 
 By default your Source Editor will display code with `monokai` highlighting, but there are 38 different color schemes to choose from — see **Global site configuration &gt; Source Editor** for more!

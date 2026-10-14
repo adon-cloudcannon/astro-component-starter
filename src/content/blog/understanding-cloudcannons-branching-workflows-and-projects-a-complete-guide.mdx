@@ -13,6 +13,8 @@ tags:
 legacyUrl: /blog/understanding-cloudcannons-branching-workflows-and-projects-a-complete-guide/
 ---
 
+import Icon from "@core-elements/icon/Icon.astro";
+
 Let's dive into CloudCannon's most powerful features: <a href="https://cloudcannon.com/documentation/articles/connect-a-publish-branch/" target="_blank" rel="noopener">branching workflows</a> and [Projects](https://cloudcannon.com/documentation/articles/create-a-project/). Whether you're managing a complex website or working with a team, understanding how branching works in CloudCannon can make your content management process much smoother.
 
 ## The basics: Publish Branches and Branch Sites
@@ -61,11 +63,11 @@ This can be super helpful when you have long-lived branches, when multiple team 
 
 ## Pro tips for branch management
 
- **Branch cleanup**: By default, CloudCannon can automatically delete your branch sites after publishing. This keeps things tidy, especially if you create branches for specific changes.
+<Icon name="sparkles" size="sm" /> **Branch cleanup**: By default, CloudCannon can automatically delete your branch sites after publishing. This keeps things tidy, especially if you create branches for specific changes.
 
- **Custom commit messages**: You can set up templates to help maintain consistent communication across your team as you publish.
+<Icon name="square-pen" size="sm" /> **Custom commit messages**: You can set up templates to help maintain consistent communication across your team as you publish.
 
- **Disable publishing**: Need to prevent a branch from publishing? No problem! You can disconnect it from your Publish Branch anytime through your Site Settings.
+<Icon name="circle-x" size="sm" /> **Disable publishing**: Need to prevent a branch from publishing? No problem! You can disconnect it from your Publish Branch anytime through your Site Settings.
 
 ## Projects
 
@@ -101,3 +103,5 @@ Whether you're running a simple blog or managing a complex enterprise site, Clou
 Remember, the best workflow is the one that works for your team. Don't be afraid to experiment and find what fits your process best.
 
 ## Glossary
+
+<table><thead><tr><th><p>CloudCannon term</p></th><th><p>What it means</p></th></tr></thead><tbody><tr><td><p><em>Publish Branch</em></p></td><td><p>The site you're publishing your changes to. This can be your live website.</p></td></tr><tr><td><p><em>Staging site</em></p></td><td><p>A private copy of your live website, used for testing and quality control of any changes you’ve made. Branched sites should typically publish to your Staging site for final checks before you go live.</p></td></tr><tr><td><p><em>Branch site</em></p></td><td><p>A private copy of your website, ready for you to add or edit anything. By default, all branched sites are private, and only accessible to members of your Organization.</p></td></tr><tr><td><p><em>Branching</em></p></td><td><p>The process of copying a website.</p></td></tr><tr><td><p><em>Project</em></p></td><td><p>A method of organizing your Sites. More than a ‘folder’ for your sites, Projects formalize the process of copying and publishing your sites, and enable more efficient publishing workflows for your team.</p></td></tr><tr><td><p><em>Saving</em></p></td><td><p>How your changes are recorded to your site. CloudCannon will remember a lot of changes at once, even without saving, but your changes need to be saved before they’re published. (And if you work in a team, it’s generally good practice to save your changes as you work!)</p></td></tr><tr><td><p><em>Publishing</em></p></td><td><p>The process by which you make your changes ‘live’. Depending on how your publishing workflow is set up, clicking ‘Publish’ can publish your changes directly to your staging site, or directly to your live site.</p></td></tr><tr><td><p><em>Pull Request</em></p></td><td><p>A formal request for a team member to approve your changes.</p></td></tr><tr><td><p><em>Organization</em></p></td><td><p>Your team! By default, only Organization members can see private (branched or staging) sites created within CloudCannon. You can define the roles and permissions of each team member.</p></td></tr></tbody></table>

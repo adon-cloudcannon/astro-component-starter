@@ -10,6 +10,8 @@ tags:
   - resources
 ---
 
+import Video from "@core-elements/video/Video.astro";
+
 We've just launched the [Astro Component Starter](/blog/introducing-the-astro-component-starter/), a modular design system that gives developers a solid foundation of accessible, performance-tuned components for building sites on CloudCannon. The natural next question was: what does a complete site look like when you build on that foundation?
 
 [Jetstream](/templates/jetstream/) is the answer. It's a marketing and business template — our first complete template built on the Component Starter — and it's available now.
@@ -35,6 +37,8 @@ The Team Collection uses the Data Editor — simple fields for structured inform
 ## Design and rebranding
 
 Our designer Vic Roberts created Jetstream's design in Figma, working from the base Figma design system she'd already made for the Component Starter. She exported her design tokens for me, and from there it was a matter of applying styles from the Figma components to the built components.
+
+<Video type="youtube" videoId="f3BvcPna0eY" title="Styling fonts and colors on Jetstream" />
 
 Jetstream's palette is more extensive than the starter's defaults — we use around ten shades each of pink and purple — so I've added additional colour variables, which the system accommodated easily.
 
@@ -63,6 +67,8 @@ Because the Astro Component Starter comes with all of the CloudCannon configurat
 One thing that I hope stands out about Jetstream is just how much thought has gone into the experience for non-technical editors. It's a developer showcase, but I’ve also tried to build it for editors using CloudCannon who might not even need to know what a component is.
 
 That means anticipating questions. When you're building for people at every level of technical experience, you naturally design for the most introductory level so it doesn't get in anyone's way. Jetstream includes descriptions on Collections and Inputs — short explanations of what a Collection is for, why you'd choose a particular component, or how to extend something. It's probably a small detail, but it makes a real difference when someone encounters the template for the first time.
+
+<Video type="youtube" videoId="OuMCcrheAbY" title="Visual editing on Jetstream" />
 
 Everything in Jetstream uses Editable Regions in the Visual Editor. On component-based pages, editors click directly on elements to update them. In the blog, posts are source-editable in the visual editor through Astro's content prop, so even markdown content can be edited in its full rendered context. For a lot of people, that immediate feedback loop — change something, see the result, undo if it doesn't work — matters more than documentation.
 

@@ -12,6 +12,8 @@ tags:
   - resources
 ---
 
+import Alert from "@core-elements/alert/Alert.astro";
+
 There’s no shortage of static site generators (SSGs) to choose from, though I’ve limited the below list to five major SSGs covering a wide range of uses, from marketing sites, portfolios and blogs to documentation hubs with hundreds of thousands of pages.
 
 Because I use CloudCannon to manage content on the sites I create, and because our product developers have been so busy over the last year, I’ve been able to put a much wider range of SSGs through their paces than I’d thought would be possible, working both locally and through CloudCannon’s web interface.
@@ -30,6 +32,8 @@ Let’s take a look at my top SSG picks for 2025, in no particular order.
 
 In the distant past of 2022, [we'd picked Astro as “one to watch”](https://cloudcannon.com/blog/ssg-history-8-islands/#astro), and it’s certainly lived up to our hopes. The Astro project has grown quite dramatically over the last three years, and shows no sign of slowing down. Its team of experienced core maintainers continues to grow, and with the releases of <a href="https://astro.build/blog/astro-4/#new-view-transition-apis" target="_blank" rel="noopener">view transition APIs</a>, the <a href="https://astro.build/blog/content-layer-deep-dive/" target="_blank" rel="noopener">Content Layer API</a>, the <a href="https://astro.build/blog/starlight-028/" target="_blank" rel="noopener">Starlight docs theme</a>, and the <a href="https://astro.build/blog/astro-5/" target="_blank" rel="noopener">5.0 release</a>, it's clear there's a strong future ahead for the framework.
 
+<Alert variant="note" text="Why is the 5.0 release exciting? It features Server Islands for deferred rendering of dynamic content and merges static and hybrid output modes, allowing developers to easily combine static and dynamic pages with minimal configuration. The release also includes a new type-safe environment variable management system that helps developers organize and control their environment variables across client and server contexts." />
+
 **Why choose Astro?**
 
 With partial hydration or islands architecture at its core, Astro extracts UI into smaller, isolated components on the page, and replaces unused JavaScript with lightweight HTML, giving site users faster loads and lower time-to-interactive (TTI).
@@ -47,6 +51,8 @@ Eleventy is a static site generator close to my heart, partially because in a wo
 After more than a year of work, and 22 pre-releases, <a href="https://github.com/11ty/eleventy/releases/tag/v3.0.0" target="_blank" rel="noopener">Eleventy's 3.0 release</a> arrived in October 2024, bringing with it full support for ESM in all Eleventy projects: configuration, data files, 11ty.js templates and more. 3.0 also brings support pnpm, yarn and Deno, <a href="https://www.11ty.dev/docs/config/" target="_blank" rel="noopener">async config</a>, and <a href="https://www.11ty.dev/docs/virtual-templates/" target="_blank" rel="noopener">virtual templates</a>, as well as a range of performance improvements.
 
 In addition to this huge release, the news that <a href="https://www.11ty.dev/blog/eleventy-font-awesome/" target="_blank" rel="noopener">Eleventy and Zach have joined forces with Font Awesome</a> promises to extend the lifespan of the 11ty project, as well as hinting at some "very big things" on the horizon for next year.
+
+<Alert variant="note" text="This year Zach also released a new <a href=&quot;https://www.11ty.dev/docs/migrate/wordpress/#use-@11ty/import&quot;><u>data export tool</u></a> for those wanting to move from WordPress to Eleventy — great timing!" />
 
 **Why choose Eleventy?**
 

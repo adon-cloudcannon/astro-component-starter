@@ -8,6 +8,8 @@ tags:
   - tutorials
 ---
 
+import Video from "@core-elements/video/Video.astro";
+
 Visual editing is table stakes for a modern content management workflow. Using CloudCannon, it’s straightforward to add visual editing to your project using the same workflow your development team already loves.
 
 Visual editing empowers editors to feel confident when building content inside of the CMS and having that content look identical when it is pushed to production.
@@ -119,6 +121,8 @@ The simplest of these is the&nbsp;[text component](https://github.com/zachleat-c
 When we make changes to the HTML content in a `text` component in the CloudCannon interface, the visual rendering of the component will be updated in real time in the visual editor.
 
 If you’d like to see a preview of how the visual editing experience looks and behaves,&nbsp;[skip to&nbsp;`0:46`&nbsp;in this video on YouTube](https://youtu.be/AsWt6BTjzyk?feature=shared&amp;t=46)&nbsp;(or watch below).
+
+<Video type="youtube" videoId="AsWt6BTjzyk" title=" Live Editing an Eleventy Project in CloudCannon with Bookshop " />
 
 You can mix and combine these Bookshop components together to create a post on the blog and the values for each of the component instances are serialized as&nbsp;`content_blocks`&nbsp;in the template’s front matter (view&nbsp;[a sample post](https://github.com/zachleat-cc/demo-cloudcannon-microblog/blob/main/src/posts/2023-11-20.md?plain=1)).
 

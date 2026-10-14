@@ -10,11 +10,15 @@ tags:
   - features
 ---
 
+import Video from "@core-elements/video/Video.astro";
+
 For content teams working with static sites, the gap between what you see and what you edit has always been frustratingly wide. They update a markdown file, commit their changes, wait for the build, and *then* see if their heading looks right. CloudCannon’s visual editing has helped close that gap for years, and our upgraded Editable Regions improve the experience further.
 
 ## What editable regions can do for your workflow
 
 Editable Regions transform CloudCannon’s Visual Editor from a preview tool into a proper editing environment. When an editor is looking at their site in CloudCannon, yellow boxes appear around editable content — click into them, and they’re editing directly on the page. No context-switching between content files, sidebars, and the rendered output. No mental translation from code to design.
+
+<Video type="youtube" videoId="HxPW350OJtc" />
 
 For developers, implementing Editable Regions is straightforward, provided that your content and layouts are sufficiently separated. Add a couple of HTML attributes to any DOM element in your templates, or insert a web component, and that content becomes visually editable. Here’s what it looks like in practice:
 
@@ -52,5 +56,7 @@ CloudCannon’s approach to visual editing respects the structure of your static
 ## Setting up Editable Regions
 
 Setting up Editable Regions is straightforward once you understand the basic patterns to follow. The video below demonstrates how to add the necessary HTML attributes to your templates, starting with a simple text region and progressing through more complex scenarios. You'll see how to make headings, paragraphs, images, and arrays editable, and watch those yellow editing boxes appear in CloudCannon's Visual Editor as each region is configured. By the end, you'll have a clear sense of how to transform your static site templates into a fully visual editing experience.
+
+<Video type="youtube" videoId="RMbPsyJ5Gms" />
 
 Our documentation includes a <a href="https://cloudcannon.com/documentation/guides/set-up-visual-editing/" target="_blank" rel="noopener">complete setup guide for visual editing</a>, along with <a href="https://cloudcannon.com/documentation/articles/editable-regions-reference/" target="_blank" rel="noopener">reference documentation covering all available HTML attributes for configuration</a>.

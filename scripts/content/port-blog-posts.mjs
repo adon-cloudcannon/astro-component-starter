@@ -41,6 +41,27 @@ function bookshopArgs(text) {
 const attr = (name, value) =>
   value === undefined || value === "" ? "" : ` ${name}="${String(value).replace(/"/g, "&quot;")}"`;
 
+/** Heroicons names the old site used, in this project's Lucide set. */
+const ICONS = {
+  "information-circle": "info",
+  "light-bulb": "lightbulb",
+  "pencil-square": "square-pen",
+  photo: "image",
+  "code-bracket": "code",
+  window: "app-window",
+  "user-group": "users",
+  "circle-stack": "database",
+  "server-stack": "server",
+  "cpu-chip": "cpu",
+  "queue-list": "list",
+  "x-circle": "circle-x",
+  "chevron-double-right": "chevrons-right",
+  "clipboard-document-check": "clipboard-check",
+  "wrench-screwdriver": "wrench",
+  "adjustments-vertical": "sliders-vertical",
+  "device-phone-mobile": "smartphone",
+};
+
 /** The id at the end of a Vimeo player URL. */
 const vimeoId = (url = "") => (String(url).match(/(\d{6,})/) ?? [])[1] ?? "";
 
@@ -54,7 +75,7 @@ function convertBody(body) {
   /* A captured block feeding a code component becomes a fenced block, which
      is what markdown has for the job and what MDX leaves alone. */
   out = out.replace(
-    /\{%-?\s*capture\s+(\w+)\s*-?%\}([\s\S]*?)\{%-?\s*endcapture\s*-?%\}\s*\{%-?\s*bookshop\s+"markdown\/complex-code-block"([^%]*)%\}/g,
+    /\{%-?\s*capture\s+(\w+)\s*-?%\}([\s\S]*?)\{%-?\s*endcapture\s*-?%\}\s*\{%-?\s*bookshop\s+['\"]?markdown\/complex-code-block['\"]?([^%]*)%\}/g,
     (_m, _name, code, rest) => {
       const language = bookshopArgs(rest).language ?? "";
       return "```" + language + "\n" + code.trim() + "\n```";
@@ -75,34 +96,81 @@ function convertBody(body) {
   hold(/```[\s\S]*?```/g);
   hold(/`[^`\n]*`/g);
 
-  out = out.replace(/\{%-?\s*bookshop\s+"markdown\/image"([^%]*)%\}/g, (_m, rest) => {
+  out = out.replace(/\{%-?\s*bookshop\s+['\"]?markdown\/image['\"]?([^%]*)%\}/g, (_m, rest) => {
     const a = bookshopArgs(rest);
     notes.push("image");
     return `<Image${attr("source", a.src)}${attr("alt", a.alt)} />`;
   });
 
-  out = out.replace(/\{%-?\s*bookshop\s+"markdown\/youtube"([^%]*)%\}/g, (_m, rest) => {
+  out = out.replace(/\{%-?\s*bookshop\s+['\"]?markdown\/youtube['\"]?([^%]*)%\}/g, (_m, rest) => {
     const a = bookshopArgs(rest);
     notes.push("video");
     return `<Video type="youtube"${attr("videoId", a.id)}${attr("title", a.title)} />`;
   });
 
-  out = out.replace(/\{%-?\s*bookshop\s+"markdown\/vimeo"([^%]*)%\}/g, (_m, rest) => {
+  out = out.replace(/\{%-?\s*bookshop\s+['\"]?markdown\/vimeo['\"]?([^%]*)%\}/g, (_m, rest) => {
     const a = bookshopArgs(rest);
     notes.push("video");
     return `<Video type="vimeo"${attr("videoId", vimeoId(a.video))}${attr("title", a.title)} />`;
   });
 
-  out = out.replace(/\{%-?\s*bookshop\s+"markdown\/annotation"([^%]*)%\}/g, (_m, rest) => {
+  out = out.replace(/\{%-?\s*bookshop\s+['\"]?markdown\/annotation['\"]?([^%]*)%\}/g, (_m, rest) => {
     const a = bookshopArgs(rest);
     notes.push("alert");
     return `<Alert variant="info"${attr("title", a.number)}${attr("text", a.annotation_content)} />`;
   });
 
-  out = out.replace(/\{%-?\s*bookshop\s+"markdown\/button-repeat"([^%]*)%\}/g, (_m, rest) => {
+  out = out.replace(/\{%-?\s*bookshop\s+['\"]?markdown\/button-repeat['\"]?([^%]*)%\}/g, (_m, rest) => {
     const a = bookshopArgs(rest);
     notes.push("button");
     return `<Button${attr("text", a.text)}${attr("link", a.link)} variant="primary" />`;
+  });
+
+  /* A table the old site wrapped for small screens. The markup inside is
+     already a table, so it comes straight out: the quotes within it are
+     escaped for YAML and have to be put back. */
+  out = out.replace(
+    /\{%-?\s*bookshop\s+['"]?markdown\/tablesaw['"]?[^"]*"((?:[^"\\]|\\.)*)"\s*-?%\}/g,
+    (_m, html) => "\n" + html.replace(/\\"/g, '"').replace(/\\n/g, "\n").trim() + "\n"
+  );
+
+  /* Both of the old site's callouts are this project's Alert. */
+  for (const [name, variant] of [["notice-banner", "info"], ["callout-box", "note"]]) {
+    out = out.replace(
+      new RegExp(`\\{%-?\\s*bookshop\\s+['"]?markdown/${name}['"]?[^"]*"((?:[^"\\\\]|\\\\.)*)"\\s*-?%\\}`, "g"),
+      (_m, text) => {
+        notes.push("alert");
+        const body = text
+          .replace(/\\"/g, '"')
+          .replace(/<\/?lb\s*\/?>/g, " ")
+          .replace(/\s+/g, " ")
+          .trim();
+        return `<Alert variant="${variant}"${attr("text", body)} />`;
+      }
+    );
+  }
+
+  /* An inline icon, drawn from Heroicons on the old site and from Lucide
+     here. The names that differ are mapped; the rest carry over. */
+  out = out.replace(/\{%-?\s*bookshop\s+['"]?markdown\/inline-icon['"]?([^%]*)%\}/g, (_m, rest) => {
+    const a = bookshopArgs(rest);
+    const name = ICONS[String(a.icon_path ?? "").split("/").pop()] ?? String(a.icon_path ?? "").split("/").pop();
+    if (!name) return "";
+    notes.push("icon");
+    return `<Icon name="${name}" size="sm" />`;
+  });
+
+  /* An anchor the post links to from its own text. */
+  out = out.replace(/\{%-?\s*bookshop\s+['"]?markdown\/anchor['"]?([^%]*)%\}/g, (_m, rest) => {
+    const a = bookshopArgs(rest);
+    return a.name ? `<span id="${a.name}" />` : "";
+  });
+
+  /* An embed this site would gate behind consent anyway, so it becomes the
+     link it points at. */
+  out = out.replace(/\{%-?\s*bookshop\s+['"]?markdown\/spotify['"]?([^%]*)%\}/g, (_m, rest) => {
+    const a = bookshopArgs(rest);
+    return a.src ? `[Listen on Spotify](https://open.spotify.com/${a.src})` : "";
   });
 
   /* A `style` or `script` left in the prose is a sample being shown, not
@@ -207,6 +275,7 @@ for (const file of files) {
   if (notes.includes("video")) imports.push('import Video from "@core-elements/video/Video.astro";');
   if (notes.includes("alert")) imports.push('import Alert from "@core-elements/alert/Alert.astro";');
   if (notes.includes("button")) imports.push('import Button from "@core-elements/button/Button.astro";');
+  if (notes.includes("icon")) imports.push('import Icon from "@core-elements/icon/Icon.astro";');
 
   const front = yaml.dump(data, { lineWidth: 92, noRefs: true }).trimEnd();
   const out = `---\n${front}\n---\n\n${imports.length ? imports.join("\n") + "\n\n" : ""}${body}\n`;

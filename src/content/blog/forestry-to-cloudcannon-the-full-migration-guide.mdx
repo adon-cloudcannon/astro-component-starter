@@ -29,23 +29,33 @@ Forestry had a feature set that made it a great platform for empowering content 
 
 Both Forestry.io and CloudCannon are Git-based CMSs and support the major Git providers and Git LFS. In addition to committing content changes back to the Git repository, CloudCannon also supports workflows for content editors to branch, merge, and open Pull Requests allowing for tight collaboration with developers.
 
+<table><thead><tr><th>Forestry.io</th><th>CloudCannon</th></tr></thead><tbody><tr><td>GitHub, GitLab, Bitbucket, Manual</td><td>GitHub, GitLab, Self-hosted GitLab, Bitbucket</td></tr></tbody></table>
+
 ### SSG support
 
 Forestry had native support for Hugo and Jekyll, while also supporting any SSG through manual configuration. CloudCannon has native support for Hugo, Jekyll, Eleventy and plugins for all other major SSGs.
+
+<table><thead><tr><th>Forestry.io</th><th>CloudCannon</th></tr></thead><tbody><tr><td>Hugo, Jekyll, others through manual configuration</td><td>Hugo, Jekyll, Eleventy, others through manual configuration</td></tr></tbody></table>
 
 ### Content editing files support
 
 The majority of content on Forestry was powered by Markdown and front matter. CloudCannon also works with these file formats and adds native support for HTML as an alternative.
 
+<table><thead><tr><th>Forestry.io</th><th>CloudCannon</th></tr></thead><tbody><tr><td>Markdown, JSON, YAML, TOML</td><td>HTML, Markdown, JSON, YAML, TOML, CSV, TSV</td></tr></tbody></table>
+
 ### <br />Front matter inputs
 
 Fields or front matter inputs are the building blocks for structured content. Developers create components from these inputs which content editors can piece together to create complex pages.
+
+<table><thead><tr><th>Forestry.io</th><th>CloudCannon</th></tr></thead><tbody><tr><td>Text, Text Area, Number, Toggle, Select, Datetime, Color picker, Tag field, Sortable list, File upload, Multi file upload, Field group, Repeatable field group, Include template, Block</td><td>Text, Text Area, Email, Code block, Check box, Switch, Color, Number, Range, URL, HTML, Markdown, Datetime, Date, Time, File, Image, Document, Select, Multiselect, Object, Array, Facebook, Twitter, Instagram, GitHub, Pinterest</td></tr></tbody></table>
 
 ### Previews
 
 Content editors need to see their changes on the live website before publishing. Forestry had the concept of previews which ran an SSG build in the background with the modified files to generate a live version of the site.
 
 CloudCannon supports a Visual Editor which replaces the need to generate previews. The editing interface the content editors see is exactly what will display on the live website. In addition, preview domains are automatically generated at build time. CloudCannon is also a Jamstack CDN hosting provider. You can set up your staging, production, and any other testing websites all on the same platform.
+
+<table><thead><tr><th>Forestry.io</th><th>CloudCannon</th></tr></thead><tbody><tr><td>Preview URL is temporary.</td><td>Visual editing. Permanent staging/previewing URL.</td></tr></tbody></table>
 
 ### Content Editing
 
@@ -67,9 +77,13 @@ Alternatively, CloudCannon's Source Editor lets developers make quick source cha
 
 With a Git-based CMS, storing assets is a major consideration. For a small website, you can store all your website files and assets in a single repository. For larger websites, you’ll quickly reach the upper storage limit of around 1-4GB if you try to store assets in the repository. Both CloudCannon and Forestry have plenty of options for keeping your assets out of the repository, including Git LFS support.
 
+<table><thead><tr><th>Forestry.io</th><th>CloudCannon</th></tr></thead><tbody><tr><td>Git, Cloudinary, AWS S3, Netlify Large Media</td><td>Git, Cloudinary, AWS S3, Tenovos</td></tr></tbody></table>
+
 ### User roles
 
 Controlling access to content on an account or individual site level is important to ensuring everyone has enough access to do their job. Forestry and CloudCannon offer similar levels of user permission granularity and both offer the concept of Organizations which allow admins to give a group of users access across multiple sites. Fine grained permissions are coming to CloudCannon over the coming months and will enable you to create your own roles with completely custom permission sets.
+
+<table><thead><tr><th>Forestry.io</th><th>CloudCannon</th></tr></thead><tbody><tr><td>Admin, Developer, Editor, Site level sharing</td><td>Owner, Developer, Technical Editor, Editor, Site level sharing</td></tr></tbody></table>
 
 ### Remote admin
 
@@ -142,6 +156,8 @@ CloudCannon has similar functionality with different terminology. There are thre
 * [Inputs](https://cloudcannon.com/documentation/articles/how-to-choose-what-input-is-used-in-the-data-editor/) — Configure a wide range of options on your fields throughout your site. Use this to customize the editing experience of front matter and data files. Set the type, label, comment, and other options for a field that corresponds with a front matter field. Similar in scope to Forestry's 'Fields'.
 * [Defaults files](https://cloudcannon.com/documentation/articles/defining-the-default-contents-of-new-files/) — A template (markdown or HTML) that’s used to populate new files with your desired content model. Similar in scope to Forestry's 'Front Matter Templates'.
 * [Structures](https://cloudcannon.com/documentation/articles/defining-what-adds-to-an-array-with-array-structures/#structures) — Define your own components, each with their own content model. Content editors use these components to build, rearrange, and reorganize even the most complex pages. Conveniently, each Forestry "Field" has a corresponding input on CloudCannon:
+
+<table><thead><tr><th>Forestry.io</th><th>CloudCannon</th></tr></thead><tbody><tr><td>Text</td><td><a href="https://cloudcannon.com/documentation/articles/using-text-inputs-to-edit-your-data/#text">Text</a></td></tr><tr><td>Textarea</td><td><a href="https://cloudcannon.com/documentation/articles/using-text-inputs-to-edit-your-data/#textarea">Textarea</a></td></tr><tr><td>Number</td><td><a href="https://cloudcannon.com/documentation/articles/using-number-inputs-to-edit-your-data/#number">Number</a></td></tr><tr><td>Toggle</td><td><a href="https://cloudcannon.com/documentation/articles/using-checkbox-inputs-to-edit-your-data/#switch">Switch</a></td></tr><tr><td>Select</td><td><a href="https://cloudcannon.com/documentation/articles/using-select-inputs-to-edit-your-data/#select">Select</a></td></tr><tr><td>Datetime</td><td><a href="https://cloudcannon.com/documentation/articles/using-date-and-time-inputs-to-edit-your-data/#datetime">Datetime</a></td></tr><tr><td>Color Picker</td><td><a href="https://cloudcannon.com/documentation/articles/using-color-inputs-to-edit-your-data/">Color</a></td></tr><tr><td>Tags Field</td><td><a href="https://cloudcannon.com/documentation/articles/using-select-inputs-to-edit-your-data/#multiselect">Multiselect</a></td></tr><tr><td>Sortable List Field</td><td><a href="https://cloudcannon.com/documentation/articles/using-arrays-to-edit-your-data/#array">Array</a></td></tr><tr><td>File Upload</td><td><a href="https://cloudcannon.com/documentation/articles/using-upload-inputs-to-edit-your-data/#file">File</a></td></tr><tr><td>Multi-File Upload</td><td><a href="https://cloudcannon.com/documentation/articles/using-arrays-to-edit-your-data/#array">Array</a> + <a href="https://cloudcannon.com/documentation/articles/using-upload-inputs-to-edit-your-data/#file">File</a></td></tr><tr><td>Field Group</td><td><a href="https://cloudcannon.com/documentation/articles/editing-objects-in-your-data/#object">Object</a></td></tr><tr><td>Repeatable Field Group</td><td><a href="https://cloudcannon.com/documentation/articles/using-arrays-to-edit-your-data/#complex-and-nested-values">Complex Array</a></td></tr><tr><td>Blocks</td><td><a href="https://cloudcannon.com/documentation/articles/defining-what-adds-to-an-array-with-array-structures/#structures">Structures</a></td></tr></tbody></table>
 
 Furthermore, we’ve created an open-source framework called [Bookshop](https://github.com/CloudCannon/bookshop) to speed up development and reduce maintenance for component-based websites. It natively supports the templating engines of Jekyll, Hugo, and 11ty so it’s a small learning curve if you’re already using these SSGs. The real magic comes with its tight integration with CloudCannon which enables visual editing of content populated from front matter. If you’re getting started with CloudCannon, we’d highly recommend adding Bookshop to your workflow.
 

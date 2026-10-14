@@ -11,6 +11,8 @@ tags:
   - resources
 ---
 
+import Video from "@core-elements/video/Video.astro";
+
 Websites are becoming increasingly visual. We're adding more and more image content to our sites: HTTP Archive reports that in October 2023, the median desktop page weight contained 1016 KB of image content (868 KB on mobile). To save bandwidth costs for both visitors and the folks that pay the hosting bills — these images should be optimized!
 
 <a href="https://www.11ty.dev/docs/plugins/image/" target="_blank" rel="noopener">Eleventy’s Image</a> utility is one good way to optimize images efficiently. It's a low-level utility (it doesn’t require Eleventy) and can perform build time transformations of your vector and raster images and it will also generate the `<picture>` or `<img>` markup too — no one likes writing overly complex picture syntax.
@@ -18,6 +20,8 @@ Websites are becoming increasingly visual. We're adding more and more image cont
 Eleventy Image also generates an assortment of output images at differing sizes and formats to provide the best visual experience to accommodate a wide variety of devices and viewport sizes.
 
 Similarly, in a CloudCannon project it's very easy to add an image upload component to your site to give technical and non-technical editors an easy way to add image content to your web site. You can see both of these pieces put together in this very quick and focused <a href="https://github.com/zachleat/demo-cloudcannon-image-optimization" target="_blank" rel="noopener">sample project</a>.
+
+<Video type="youtube" videoId="Dsd831CSazA" title="Stop worrying about huge image uploads with Eleventy Image and CloudCannon" />
 
 ## Optimizing large raster images
 

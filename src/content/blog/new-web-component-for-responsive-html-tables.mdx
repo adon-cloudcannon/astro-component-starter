@@ -11,6 +11,8 @@ tags:
   - resources
 ---
 
+import Video from "@core-elements/video/Video.astro";
+
 When you're adding a large table to your website, a common problem that you'll see is content either getting clipped or overflowing horizontally. It can happen when you have a small viewport of that table and the table attempts to render on that small view.
 
 We have a nice, easy solution for this — a new web component called `<table-saw>`, which detects your viewport and renders the table accordingly. The full repo is available at <a href="https://github.com/zachleat/table-saw/" target="_blank" rel="noopener">https://github.com/zachleat/table-saw/</a>; you can also check out a container query example of this on <a href="https://zachleat.github.io/table-saw/demo.html" target="_blank" rel="noopener">https://zachleat.github.io/table-saw/demo.html</a>
@@ -18,6 +20,8 @@ We have a nice, easy solution for this — a new web component called `<table-sa
 As you’ll see in the demo, if we resize this container, it will re-render the table in a two column layout, repeating the table headers and pairing them up with every single cell in the body of the table.
 
 We’ve already deployed it live to the <a href="https://cloudcannon.com" target="_blank" rel="noopener">CloudCannon website</a>. Depending on your viewport size, you’ll see either the original tables rendering or a two-column layout; we’ve set a specific breakpoint for that swap.
+
+<Video type="youtube" videoId="tKrJTc2DgbY" />
 
 Within the CloudCannon CMS, any content author can easily add this responsive table to their own page or blog post, just by adding a <a href="https://cloudcannon.com/documentation/articles/editing-with-eleventy-shortcodes/" target="_blank" rel="noopener">Snippet</a> (a.k.a. an Eleventy shortcode). This will lets editors build tables with a familiar table layout, with inline editing of the headers and data cells.
 

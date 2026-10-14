@@ -11,6 +11,8 @@ tags:
   - opinion
 ---
 
+import Video from "@core-elements/video/Video.astro";
+
 If Jamstack has taught me anything, it’s that websites work best when they’re generated from folders full of flat files. Even when they’re massive websites, with a network of smaller interconnected sites sharing content between themselves.
 
 At last week’s <a href="https://conf.11ty.dev/" target="_blank" rel="noopener">International 11ty Symposium on Making Websites Real Good</a> — the first conference organized for the ever-improving Eleventy static site generator, which [CloudCannon](/eleventy-cms/ "Eleventy CMS") is delighted to sponsor — Liam Bigelow and I presented on how multiple websites can sync to one build image, and thus share any number of files (crucially, both source and content) between them.
@@ -46,6 +48,8 @@ If you’d like to see an example of how such an approach might work, check out 
 
 Here’s how it all works together:
 
+<Video type="youtube" videoId="kNI_LcbvtNk" title="Managing Content Management" />
+
 In our talk, above, we chained together Site Mounting and Flatlake to create what I think of as “one publishing solution that rules them all” — a way to manage any number of static sites from a single CMS interface, with a single place for all design assets, a single place for all website editing components, and a static API that shares site content — all generated *before* the user requests anything.
 
 This means that any number of static sites can:
@@ -69,6 +73,8 @@ Another speaker at the conference, Paul Everitt of <a href="https://www.jetbrain
 Let’s do it. Let’s tell people. Let’s build those big projects. And if there’s a stumbling block somewhere, let’s get Jamstacky and use the same approach we use on our sites themselves: static first.
 
 ---
+
+<span id="diversion" />
 
 *A little diversion: I once worked as part of the web content team for a reasonably large university, with something like 20,000 students, and 4,000 academic faculty and general staff. Our office managed something like 300 websites, for everything from departments, divisions and research groups to graduate student project pages, hosted conferences, and residential colleges.*
 
