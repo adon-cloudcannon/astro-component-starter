@@ -1,5 +1,6 @@
 ---
 import { spaceBeforeAttr } from "@component-utils/spaceBefore.mjs";
+import { codeAnnotations } from "@component-utils/codeAnnotations.mjs";
 import Tab from "@component-utils/tabs/Tab.astro";
 import TabPanel from "@component-utils/tabs/TabPanel.astro";
 import Tabs from "@component-utils/tabs/Tabs.astro";
@@ -61,6 +62,7 @@ if (import.meta.env.SSR) {
       try {
         return await codeToHtml(source, {
           defaultColor: false,
+          transformers: [codeAnnotations()],
           lang: (tab.language || tab.label || "text").trim().toLowerCase() || "text",
           structure: "inline",
           themes: {
@@ -107,6 +109,10 @@ function renderCodeLines(html: string, numbered: boolean): string {
 >
   <div
     class:list={["code-block-inner", wrap && "is-wrapped"]}
+    {/* Code reads as code on either band: the block keeps its own dark
+        surface rather than following the one it sits on, the way a fenced
+        block in markdown does. */}
+    data-theme="dark"
     data-space-before={spaceBeforeAttr(spaceBefore)}
     data-copy-button={copyButton ? "true" : undefined}
     data-copy-label={copyLabel}
@@ -190,7 +196,7 @@ function renderCodeLines(html: string, numbered: boolean): string {
   @layer components {
     .code-block {
       > .code-block-inner {
-        background-color: var(--color-bg);
+        background-color: var(--color-bg-code-surface);
         border: var(--border-width-sm) solid var(--color-border);
         border-radius: var(--radius-sm);
         color: var(--color-text);
@@ -364,15 +370,9 @@ function renderCodeLines(html: string, numbered: boolean): string {
         white-space: pre;
       }
 
-      [data-theme="light"] & code span {
-        color: color-mix(
-          in srgb,
-          var(--shiki-light, var(--color-text)) 82%,
-          var(--color-text-muted)
-        );
-      }
-
-      [data-theme="dark"] & code span {
+      /* The block is dark on either band, so it takes the dark theme's tokens
+         outright rather than switching with the page. */
+      & code span {
         color: var(--shiki-dark, currentcolor);
       }
 

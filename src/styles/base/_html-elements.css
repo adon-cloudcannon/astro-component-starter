@@ -33,11 +33,21 @@
       font-size: var(--font-size-md);
     }
 
+    /* A code sample keeps its own dark surface whatever band it sits on, which
+       is the one the Code Block component draws. Shiki writes each token's
+       colour as a custom property; the dark one is the one taken. */
     .astro-code {
+      background-color: var(--color-bg-code-surface);
       border-radius: var(--radius-sm);
+      color: var(--color-text-on-code);
       padding: var(--spacing-lg);
+
       code {
         white-space: pre-wrap;
+      }
+
+      code span {
+        color: var(--shiki-dark, currentcolor);
       }
     }
 

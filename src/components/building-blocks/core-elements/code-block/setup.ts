@@ -1,3 +1,5 @@
+import { createCopyControl, type CopyControl } from "@component-utils/copyButton";
+
 function copyFallback(text: string): boolean {
   const textarea = document.createElement("textarea");
 
@@ -14,7 +16,9 @@ function copyFallback(text: string): boolean {
   return copied;
 }
 
-async function copyText(text: string): Promise<boolean> {
+const controls = new WeakMap<HTMLButtonElement, CopyControl>();
+
+export async function copyText(text: string): Promise<boolean> {
   try {
     if (navigator.clipboard?.writeText) {
       await navigator.clipboard.writeText(text);
@@ -29,20 +33,12 @@ async function copyText(text: string): Promise<boolean> {
 }
 
 function createCopyButton(container: HTMLElement): HTMLButtonElement {
-  const root = document.createElement("span");
-  const button = document.createElement("button");
-  const label = document.createElement("span");
+  const control = createCopyControl("code-block-copy");
 
-  root.className = "button code-block-copy";
-  button.className = "button-inner variant-ghost size-sm";
-  button.type = "button";
-  label.className = "label-text";
-  label.textContent = container.dataset.copyLabel || "Copy";
-  button.append(label);
-  root.append(button);
-  container.querySelector(".code-block-header")?.append(root);
+  container.querySelector(".code-block-header")?.append(control.root);
+  controls.set(control.button, control);
 
-  return button;
+  return control.button;
 }
 
 export function setupCodeBlock(block: HTMLElement): void {
@@ -53,29 +49,15 @@ export function setupCodeBlock(block: HTMLElement): void {
   const button =
     container.querySelector<HTMLButtonElement>(".code-block-copy .button-inner") ??
     createCopyButton(container);
-  const buttonRoot = button.closest<HTMLElement>(".code-block-copy");
-  const label = button?.querySelector<HTMLElement>(".label-text");
-  const status = block.querySelector<HTMLElement>(".code-block-status");
+  const control = controls.get(button);
 
-  if (!status) return;
-
-  if (!buttonRoot || !label || button.dataset.copyInitialized === "true") return;
+  if (!control || button.dataset.copyInitialized === "true") return;
   button.dataset.copyInitialized = "true";
 
   button.addEventListener("click", async () => {
     const code = block.querySelector<HTMLElement>(".code-block-panel:not([hidden]) code");
-    const copied = await copyText(code?.textContent || "");
-    const nextLabel = copied ? container.dataset.copiedLabel : container.dataset.copyFailedLabel;
-    const labelWidth = label.getBoundingClientRect().width;
 
-    label.style.inlineSize = `${labelWidth}px`;
-    label.textContent = nextLabel || buttonRoot.dataset.copyLabel || "Copy";
-    status.textContent = copied ? "Code copied to clipboard." : "Unable to copy code.";
-
-    window.setTimeout(() => {
-      label.textContent = container.dataset.copyLabel || "Copy";
-      label.style.inlineSize = "";
-    }, 1500);
+    control.report(await copyText(code?.textContent || ""));
   });
 }
 

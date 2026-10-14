@@ -25,6 +25,10 @@
   --color-bg-inverse: var(--black);
 
   --color-bg-code: color-mix(in srgb, var(--black) 8%, transparent);
+  /* A fenced block and the Code Block component share one surface, and it does
+     not follow the band: code is read as code on either. */
+  --color-bg-code-surface: var(--black);
+  --color-text-on-code: var(--light-sand);
 
   /* The ink a background pattern is drawn in.
 

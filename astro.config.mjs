@@ -9,6 +9,7 @@ import mdx from "@astrojs/mdx";
 import pruneCss from "./scripts/build/pruneCss.mjs";
 import pruneOgCache from "./scripts/build/pruneOgCache.mjs";
 import { siteFonts } from "./site-fonts.mjs";
+import { codeAnnotations } from "./src/components/utils/codeAnnotations.mjs";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
@@ -56,6 +57,23 @@ export default defineConfig({
   },
   image: {
     domains: [],
+  },
+  markdown: {
+    /* Two themes written as custom properties rather than one baked into an
+       inline style, which is what lets a fenced block take the same surface
+       and the same colours the Code Block component draws. */
+    shikiConfig: {
+      themes: { light: "github-light", dark: "github-dark" },
+      defaultColor: false,
+      transformers: [codeAnnotations()],
+    },
+  },
+  /* A link the pointer rests on is fetched before it is clicked, so the page
+     it leads to is already in hand. `hover` only, so a page full of cards does
+     not fetch every one of them on sight. */
+  prefetch: {
+    prefetchAll: true,
+    defaultStrategy: "hover",
   },
   integrations: [
     editableRegions(),

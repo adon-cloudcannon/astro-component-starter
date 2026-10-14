@@ -4,6 +4,10 @@ const { component_examples = [], title = "", size = "md" } = Astro.props;
 import Button from "@core-elements/button/Button.astro";
 import Segments from "@forms/segments/Segments.astro";
 import { Code } from "astro:components";
+
+/* The same pair the markdown pipeline uses, so a sample here takes the site's
+   own code surface rather than the theme's baked-in background. */
+const CODE_THEMES = { light: "github-light", dark: "github-dark" } as const;
 import "./styles.css";
 import { componentKeyFromPath } from "@component-utils/componentKey.mjs";
 import { slugifyLabel } from "@component-utils/slugify";
@@ -112,6 +116,8 @@ const formattedCodeCache = await Promise.all(
             <Code
               lang="astro"
               code={formattedCode.astro}
+              themes={CODE_THEMES}
+              defaultColor={false}
               style="height: 100%; padding: var(--spacing-sm);"
             />
           </div>
@@ -138,6 +144,8 @@ const formattedCodeCache = await Promise.all(
             <Code
               lang="yaml"
               code={formattedCode.yaml}
+              themes={CODE_THEMES}
+              defaultColor={false}
               style="height: 100%; padding: var(--spacing-sm);"
             />
           </div>

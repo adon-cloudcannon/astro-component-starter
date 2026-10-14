@@ -28,6 +28,10 @@
   --color-bg-inverse: var(--light-sand);
 
   --color-bg-code: color-mix(in srgb, var(--white) 8%, transparent);
+  /* A fenced block and the Code Block component share one surface, and it does
+     not follow the band: code is read as code on either. */
+  --color-bg-code-surface: var(--black);
+  --color-text-on-code: var(--light-sand);
 
   /* See the note in _light.css. The grid ink is the same expression, and is the band's own cream rather than
      a warm brown, because on black the rule lifts instead of sinking: the

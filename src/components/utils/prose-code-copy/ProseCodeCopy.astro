@@ -1,0 +1,31 @@
+---
+/**
+ * Mounts the copy button on every fenced code block inside a body of prose.
+ *
+ * Included by the pages that render markdown bodies; `CodeBlock` carries its
+ * own button and is skipped.
+ */
+---
+
+<script>
+  import { setupProseCodeCopy } from "./setup";
+
+  setupProseCodeCopy();
+  document.addEventListener("astro:page-load", () => setupProseCodeCopy());
+</script>
+
+<style is:global>
+  @layer components {
+    .prose-code {
+      position: relative;
+    }
+
+    /* Set in from the edge by the same step the Code Block component's header
+       is, so the two buttons line up down a page that carries both. */
+    .prose-code .prose-code-copy {
+      inset-block-start: var(--spacing-md);
+      inset-inline-end: var(--spacing-md);
+      position: absolute;
+    }
+  }
+</style>

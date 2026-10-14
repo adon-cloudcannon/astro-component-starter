@@ -1,0 +1,57 @@
+@layer utils {
+  /**
+   * The copy control on a code sample, wherever it is drawn.
+   *
+   * The Code Block component builds one in its header and a fenced block in
+   * prose gets one in its corner. Both sit on the same dark code surface, so
+   * both are drawn here rather than by either component — this layer is also
+   * what lets it override the ghost button's own colours.
+   */
+  .code-block-copy,
+  .prose-code-copy {
+    opacity: 0.55;
+    transition: opacity var(--animation-fast) var(--ease-out);
+  }
+
+  .code-block-copy:hover,
+  .code-block-copy:focus-within,
+  .prose-code-copy:hover,
+  .prose-code-copy:focus-within,
+  .prose-code:hover .prose-code-copy,
+  .prose-code:focus-within .prose-code-copy {
+    opacity: 1;
+  }
+
+  .code-block-copy > .button-inner,
+  .prose-code-copy > .button-inner {
+    background-color: transparent;
+    border-radius: var(--radius-sm);
+    color: var(--color-text-on-code);
+    padding: var(--spacing-xs);
+  }
+
+  .code-block-copy > .button-inner:hover,
+  .prose-code-copy > .button-inner:hover {
+    background-color: var(--color-state-hover-on-media);
+  }
+
+  /* Two glyphs, one shown at a time. */
+  .copy-glyph {
+    block-size: 1rem;
+    display: block;
+    inline-size: 1rem;
+  }
+
+  .copy-glyph.is-done,
+  [data-copied] .copy-glyph:not(.is-done) {
+    display: none;
+  }
+
+  [data-copied] .copy-glyph.is-done {
+    display: block;
+  }
+
+  [data-copied="true"] .copy-glyph.is-done {
+    color: var(--positive);
+  }
+}

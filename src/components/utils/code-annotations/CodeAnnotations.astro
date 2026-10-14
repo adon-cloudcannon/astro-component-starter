@@ -1,0 +1,67 @@
+---
+/**
+ * Wires the numbered chips in code samples to the notes that answer them.
+ *
+ * A sample marks a line with `^^^1^^^` and a note claims the number with
+ * `data-annotation="1"`; the highlighter turns the marker into a chip (see
+ * `codeAnnotations.mjs`) and this makes the pair work.
+ */
+---
+
+<script>
+  import { setupCodeAnnotations } from "./setup";
+
+  setupCodeAnnotations();
+  document.addEventListener("astro:page-load", () => setupCodeAnnotations());
+</script>
+
+<style is:global>
+  @layer components {
+    /* The chip sits at the end of the line it marks, in the code's own ink. */
+    .code-annotation {
+      --code-annotation-size: 1.25rem;
+
+      appearance: none;
+      background-color: color-mix(in srgb, var(--color-text-on-code) 22%, transparent);
+      block-size: var(--code-annotation-size);
+      border: 0;
+      border-radius: var(--radius-xs);
+      color: var(--color-text-on-code);
+      cursor: pointer;
+      display: inline-grid;
+      font-family: var(--font-mono);
+      font-size: var(--font-size-xs);
+      inline-size: var(--code-annotation-size);
+      margin-inline-start: var(--spacing-sm);
+      place-items: center;
+      text-shadow: none;
+      transition:
+        background-color var(--animation-fast) var(--ease-out),
+        color var(--animation-fast) var(--ease-out);
+      vertical-align: text-bottom;
+    }
+
+    .code-annotation:hover,
+    .code-annotation.is-peer {
+      background-color: color-mix(in srgb, var(--color-text-on-code) 42%, transparent);
+    }
+
+    .code-annotation.is-current {
+      background-color: var(--color-bg-brand);
+      color: var(--white);
+    }
+
+    /* A marker whose note never came across still reads as a number, but it
+       is not something to press. */
+    .code-annotation[data-annotation-orphan] {
+      cursor: default;
+      pointer-events: none;
+    }
+
+    /* The note the chip points at, while it is the one being answered. */
+    [data-annotation].is-current {
+      outline: var(--border-width-lg) solid var(--color-bg-brand);
+      outline-offset: var(--spacing-xs);
+    }
+  }
+</style>
