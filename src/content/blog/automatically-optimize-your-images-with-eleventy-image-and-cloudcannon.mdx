@@ -4,14 +4,23 @@ description: >-
   Websites are becoming increasingly visual and we're adding more and more image content to
   our sites — but these images need to be optimized.
 date: '2023-11-15T00:00:00+13:00'
-author: Zach Leatherman
+authors:
+  - Zach Leatherman
 image: https://cc-dam.imgix.net/Image optimisation (1).png
 tags:
   - features
   - resources
+cta:
+  heading: Launch your website today
+  subtext: >-
+    Give your content team full autonomy on your developer-approved tech stack with
+    CloudCannon.
+  linkText: Get started free!
+  link: https://app.cloudcannon.com/register?trial=cc_standard
 ---
 
 import Video from "@core-elements/video/Video.astro";
+import CodeBlock from "@core-elements/code-block/CodeBlock.astro";
 
 Websites are becoming increasingly visual. We're adding more and more image content to our sites: HTTP Archive reports that in October 2023, the median desktop page weight contained 1016 KB of image content (868 KB on mobile). To save bandwidth costs for both visitors and the folks that pay the hosting bills — these images should be optimized!
 
@@ -72,33 +81,7 @@ And if we go back to the <a href="https://github.com/zachleat/demo-cloudcannon-i
 In `eleventy.config.js` we have our image shortcode here that calls Eleventy Image:
 
 <div>
-```javascript
-const path = require("node:path");
-const Image = require("@11ty/eleventy-img");
-
-module.exports = function(eleventyConfig) {
-  eleventyConfig.addShortcode("image", async (srcFilePath, alt, sizes) => {
-    // Make the image relative to the input directory
-    let inputFilePath = path.join(eleventyConfig.dir.input, srcFilePath);
-
-    let metadata = await Image(inputFilePath, {
-      widths: [400, 800, 1600],
-      formats: ["avif", "webp", "svg", "jpeg"],
-      outputDir: "./_site/optimized/",
-      urlPath: "/optimized/",
-      svgShortCiruit: "size",
-      // svgCompressionSize: "br",
-    });
-
-    return Image.generateHTML(metadata, {
-      alt,
-      sizes,
-      loading: "eager",
-      decoding: "async",
-    });
-  });
-};
-```
+<CodeBlock tabs={[{"language":"javascript","filename":"eleventy.config.js","code":"const path = require(\"node:path\");\nconst Image = require(\"@11ty/eleventy-img\");\n\nmodule.exports = function(eleventyConfig) {\n  eleventyConfig.addShortcode(\"image\", async (srcFilePath, alt, sizes) => {\n    // Make the image relative to the input directory\n    let inputFilePath = path.join(eleventyConfig.dir.input, srcFilePath);\n\n    let metadata = await Image(inputFilePath, {\n      widths: [400, 800, 1600],\n      formats: [\"avif\", \"webp\", \"svg\", \"jpeg\"],\n      outputDir: \"./_site/optimized/\",\n      urlPath: \"/optimized/\",\n      svgShortCiruit: \"size\",\n      // svgCompressionSize: \"br\",\n    });\n\n    return Image.generateHTML(metadata, {\n      alt,\n      sizes,\n      loading: \"eager\",\n      decoding: \"async\",\n    });\n  });\n};"}]} />
 
 </div>
 

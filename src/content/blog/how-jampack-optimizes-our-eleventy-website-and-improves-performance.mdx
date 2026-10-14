@@ -2,11 +2,21 @@
 title: How Jampack optimizes our Eleventy website and improves performance
 description: "Jampack is a post-processing tool that takes the output of any static site generator\_and optimizes it for user experience."
 date: '2023-04-15T05:07:00+12:00'
-author: David Large
+authors:
+  - David Large
 image: https://cc-dam.imgix.net/Jampack-CC (2).png
 tags:
   - resources
+cta:
+  heading: Launch and optimize your website today
+  subtext: >-
+    Give your content team full autonomy on your developer-approved tech stack with
+    CloudCannon.
+  linkText: Get started free!
+  link: https://app.cloudcannon.com/register?trial=cc_standard
 ---
+
+import Image from "@core-elements/image/Image.astro";
 
 I’ve written previously about the performance outcomes of <a href="https://cloudcannon.com/blog/cloudcannon-com-is-now-built-with-eleventy/" target="_blank" rel="noopener">transitioning cloudcannon.com to Eleventy</a>, which include perfect Lighthouse scores and excellent Core Web Vitals scores. We’re now several weeks into the flow of building our site pages, as well as drafting, editing, and publishing blog posts on Eleventy with CloudCannon as our CMS, and it’s been, as we expected, a joy to work with. But I’ve also wanted to dig a little deeper into each of the tools we used to achieve our performance gains, and to share how we configured these tools. So let’s get started, shall we?
 
@@ -73,6 +83,8 @@ This component, when added to a page by editors using CloudCannon’s Visual Edi
 </div>
 
 It’s a really simple step, but it gives me and our team of editors a lot of control: we’re able to precisely determine which parts of a page should be more heavily optimized, and which should be lazy-loaded.
+
+<Image source="https://cc-dam.imgix.net/Fold-component-block+%282%29.png" />
 
 As you can see above, we generally set the fold at the end of the first ‘container’ component on each page. (We've set our Bookshop components to be shown or hidden, depending on mobile, tablet, or desktop breakpoints; to make sure that Jampack optimizes above the fold for all device types, we set the fold under all device-specific versions of that top component.)
 

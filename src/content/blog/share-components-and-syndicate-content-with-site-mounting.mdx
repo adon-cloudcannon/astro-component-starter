@@ -4,13 +4,23 @@ description: >-
   Reuse site files across multiple sites, and  manage a single static content hub aggregated
   from a suite of static sites with site mounting.
 date: '2023-11-09T05:00:00+13:00'
-author: George Phillips
+authors:
+  - George Phillips
 image: https://cc-dam.imgix.net/site-mounting-hero.png
 tags:
   - features
+cta:
+  heading: Launch your website today
+  subtext: >-
+    Give your content team full autonomy on your developer-approved tech stack with
+    CloudCannon.
+  linkText: Get started free!
+  link: https://app.cloudcannon.com/register?trial=cc_standard
 ---
 
+import Image from "@core-elements/image/Image.astro";
 import Video from "@core-elements/video/Video.astro";
+import Alert from "@core-elements/alert/Alert.astro";
 
 We’ve just added a super-early Christmas present for CloudCannon users: Site Mounting, available right now for all CloudCannon developers on Standard, Team, and Enterprise plans.
 
@@ -19,6 +29,8 @@ By enabling Site Mounting with source files, you can easily reuse (’mount’) 
 Site Mounting is a brand-new feature to help users who manage multiple sites with common components — or anyone who has (until now) been relying on Git submodules, build hooks, or custom APIs controlling rebuild cascades to manage their site dependencies.
 
 For CloudCannon developers on Team and Enterprise plans, Site Mounting also unlocks the ability to mount the build output of a site in addition to its source files. In effect, you’re now able to set up a pre-generated headless API without GraphQL, where you can aggregate content from multiple sites into a single content lake that *you* control — and from that single hub, you can publish to any number of separate sites.
+
+<Alert variant="info" iconName="info" text="See how Site Mounting might be used in practice with <a href=&quot;/blog/how-to-manage-hundreds-of-connected-websites-with-a-git-based-headless-cms/&quot;><u>hundreds of connected sites</u></a> sharing the same layout and theme." />
 
 ## Publish (in your) Own Repo, Site Mount Everywhere
 
@@ -53,6 +65,10 @@ Most importantly to us, it’s possible to do all of this while keeping absolute
 ## How to start using **Site Mounting**
 
 All CloudCannon developers on Standard, Team, and Enterprise plans have access to the Site Mounting feature immediately. Check out our new <a href="https://cloudcannon.com/documentation/articles/site-mounting/" target="_blank" rel="noopener">Site Mounting documentation</a> section to help you get started.
+
+Under your **Site Settings**, select **Site Mountings**. Here, you’ll be able to select a remote site and path to mount to your current site. In this screenshot, you’ll see that I’ve mounted a remote site named ‘Design System Components’ to my local site, selected the “Source files” artifact, and specifically connected my `/components` directory in the mounted site to the `/layouts/partials/components` directory in my current site.
+
+<Image source="https://cc-dam.imgix.net/blog-site-mounting-screenshot-detail.png" />
 
 That’s all the setup I need to share my central site components from one CloudCannon site to another. Now, any time I update my central components in the remote site, every single site that mounts those components will rebuild automatically — CloudCannon handles all of the logic. I could even have dozens of different sites using different subsets of the same central components, and because I control every step, I’m able to select precisely which sites mount which components.
 

@@ -4,13 +4,20 @@ description: >-
   Learn how to enhance your Astro site on CloudCannon by implementing Snippets for complex
   components, reorganizing Collections, and optimizing image paths.
 date: '2025-02-21T05:00:00+13:00'
-author: Tom Richardson
+authors:
+  - Tom Richardson
 image: https://cc-dam.imgix.net/blog-getting-started-astro-part-2-r.png
 tags:
   - resources
+cta:
+  heading: Add visual editing to your Astro site today
+  subtext: Try our 21-day trial to see how CloudCannon makes editing your Astro site easier.
+  linkText: Get started free!
+  link: https://app.cloudcannon.com/register?trial=cc_standard
 ---
 
 import Video from "@core-elements/video/Video.astro";
+import Alert from "@core-elements/alert/Alert.astro";
 
 In [my previous article](/blog/getting-started-with-cloudcannon-and-astro-wysiwyg-blogging/) and video, we explored the initial setup of an Astro site using CloudCannon, working with the <a href="https://github.com/themefisher/bigspring-light-astro" target="_blank" rel="noopener">BigSpring Light Astro theme</a> and configuring the WYSIWYG Content Editor. We set up schemas for blog posts and learned how to manage content through CloudCannon’s intuitive interface. Now, let’s take our implementation further by adding advanced features and improving our site’s structure.
 
@@ -69,5 +76,7 @@ In upcoming videos and articles, I’ll cover:
 * Creating reusable components and implementing live editing for landing pages
 * Setting up optimized images with `srcset`
 * Configuring advanced input types for objects and arrays
+
+<Alert variant="info" iconName="info" text="When you’re ready to set up live visual editing with a component-based page-building workflow, check out our <a href=&quot;https://cloudcannon.com/documentation/guides/bookshop-astro-guide/&quot;><u>Astro / Bookshop guide</u></a> for more information and full details." />
 
 This refactoring and enhancement work builds upon our initial setup to create a more robust and user-friendly Astro theme in CloudCannon. By combining the power of Git-based content management with features like Snippets and organized Collections, we’re creating a more efficient workflow for both developers and content editors.

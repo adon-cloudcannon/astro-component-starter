@@ -4,13 +4,22 @@ description: >-
   Jetstream is a marketing and business template — our first complete template built on the
   Astro Component Starter — and it's available now.
 date: '2026-03-11T04:00:00+13:00'
-author: Alysha Jo Nolan
+authors:
+  - Alysha Jo Nolan
 image: https://cc-dam.imgix.net/blog-jetstream.png
 tags:
   - resources
+cta:
+  heading: Test Jetstream today
+  subtext: >-
+    Give your content team full autonomy on your developer-approved tech stack with
+    CloudCannon and Astro.
+  linkText: Get started
+  link: /templates/jetstream/
 ---
 
 import Video from "@core-elements/video/Video.astro";
+import Alert from "@core-elements/alert/Alert.astro";
 
 We've just launched the [Astro Component Starter](/blog/introducing-the-astro-component-starter/), a modular design system that gives developers a solid foundation of accessible, performance-tuned components for building sites on CloudCannon. The natural next question was: what does a complete site look like when you build on that foundation?
 
@@ -26,13 +35,19 @@ The Pages Collection uses component-based editing using CloudCannon’s Visual E
 
 <img alt="Visual editing in Jetstream" loading="lazy" src="https://cc-dam.imgix.net/blog-jetstream-visual.png" />
 
+<Alert variant="info" iconName="lightbulb" text="**Make it your own:** Create new page components with different layouts, color options, and styling rules. Your editors will be able to build their own pages, with the styling rules you've set." />
+
 The Blog Collection uses Markdown editing in CloudCannon’s Content Editor by default, with an optional visual preview in the Visual Editor. Writers aren't limited to the Content Editor; they can see their posts rendered in context. I really like this approach, because sometimes a blog post that reads well in the Content Editor looks quite different at the width it'll actually be published at. Having the option to preview your post even before you save and build your site means you can catch those issues that much sooner.
 
 <img alt="Content editing in Jetstream template" loading="lazy" src="https://cc-dam.imgix.net/blog-jetstream-content.png" />
 
+<Alert variant="info" iconName="lightbulb" text="**Make it your own:** <a href=&quot;https://cloudcannon.com/documentation/developer-articles/configure-your-rich-text-editors/&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;>Configure your rich text editor</a> to add more Markdown styling options, or add new MDX Snippets to the blog." />
+
 The Team Collection uses the Data Editor — simple fields for structured information like names, roles, and photos. What's particularly nice is how the Team Grid component can pulls data directly from this Collection. Using this component you’ll see your team members appear in the Visual Editor based on the ordering you've set — and you can customise which people appear rather than being locked to the full list.
 
 <img alt="Data editing in Jetstream template" loading="lazy" src="https://cc-dam.imgix.net/blog-jetstream-data.png" />
+
+<Alert variant="info" iconName="lightbulb" text="**Make it your own:** Repurpose the Team Collection as an ‘Authors’ Collection that feeds into the blog, and use the Team Grid component manually to show a different group of people entirely." />
 
 ## Design and rebranding
 
@@ -41,6 +56,8 @@ Our designer Vic Roberts created Jetstream's design in Figma, working from the b
 <Video type="youtube" videoId="f3BvcPna0eY" title="Styling fonts and colors on Jetstream" />
 
 Jetstream's palette is more extensive than the starter's defaults — we use around ten shades each of pink and purple — so I've added additional colour variables, which the system accommodated easily.
+
+<Alert variant="info" iconName="paintbrush" text="If you wanted to rebrand Jetstream for your own use, you'd map your brand colours onto those variables and everything would flow through. The only area that might need a little more design input is the gradients — Jetstream uses a few, and you'd want your replacement colours to blend well together. But removing the gradient options entirely is straightforward if they don't work with your palette." />
 
 We’ll make Vic’s design system public in the coming weeks! Keep an eye on the <a href="https://community.cloudcannon.com/" target="_blank" rel="noopener">CloudCannon Community</a> for more details.
 

@@ -7,12 +7,19 @@ const docsViewerSizeSchema = z.enum(["sm", "md", "lg", "xl"]);
 
 const pageSchema = z.object({
   title: z.string(),
+  /* What this page is called when another page refers to it: a breadcrumb, a
+     back link, the archives built off it. The blog's own title is a line of
+     copy, which reads wrong in a trail. */
+  shortTitle: z.string().optional(),
   description: z.string().optional(),
   keywords: z.array(z.string()).optional(),
   image: z.string().optional(),
   canonical: z.string().optional(),
   noindex: z.boolean().optional(),
   pageSections: z.array(contentBlockSchema),
+  /* The blog's listing names the posts it leads with, by slug, in the order
+     it wants them. Only that page uses it. */
+  featured: z.array(z.string()).optional(),
 });
 
 const docsPageSchema = z.object({
@@ -112,6 +119,9 @@ const blogPostSchema = z.object({
   description: z.string(),
   date: z.coerce.date(),
   author: z.string().default("Anonymous"),
+  /* The ported posts name everyone who wrote them; `author` stays for a post
+     written with one. Read both through `postAuthors`. */
+  authors: z.array(z.string()).optional(),
   image: z.string().optional(),
   tags: z.array(z.string()).default([]),
   keywords: z.array(z.string()).optional(),
@@ -120,6 +130,16 @@ const blogPostSchema = z.object({
      URL so the links into it still land. */
   draft: z.boolean().optional(),
   legacyUrl: z.string().optional(),
+  /* The banner the post closes on. Each one carries its own: an Astro post
+     closes on Astro, a WordPress comparison on moving off WordPress. */
+  cta: z
+    .object({
+      heading: z.string(),
+      subtext: z.string().optional(),
+      linkText: z.string().optional(),
+      link: z.string().optional(),
+    })
+    .optional(),
 });
 
 /**
@@ -180,9 +200,34 @@ const expertSchema = z.object({
   facebookUrl: z.string().optional(),
   instagramUrl: z.string().optional(),
   work: z
-    .array(z.object({ title: z.string(), image: z.string().optional(), body: z.string().optional() }))
+    .array(
+      z.object({
+        title: z.string(),
+        image: z.string().optional(),
+        body: z.string().optional(),
+        /* The project's own site. It was written into the body on the old
+           site; the card draws it as its own link. */
+        link: z.string().optional(),
+      })
+    )
     .optional(),
   draft: z.boolean().optional(),
+});
+
+/* The people who write the posts. The body is their bio, which the old site
+   had nowhere, so it is written here. A post names its writers by `name`. */
+const authorSchema = z.object({
+  name: z.string(),
+  image: z.string().optional(),
+  imageAlt: z.string().optional(),
+  role: z.string().optional(),
+  twitterUrl: z.string().optional(),
+  linkedinUrl: z.string().optional(),
+});
+
+const authorsCollection = defineCollection({
+  loader: glob({ pattern: "**/*.md", base: "./src/content/authors" }),
+  schema: authorSchema,
 });
 
 const expertsCollection = defineCollection({
@@ -202,6 +247,7 @@ export const collections = {
   pages: pagesCollection,
   templates: templatesCollection,
   experts: expertsCollection,
+  authors: authorsCollection,
   "docs-pages": docsPagesCollection,
   "docs-components": docsComponentsCollection,
   "docs-component-examples": docsComponentExamplesCollection,

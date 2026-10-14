@@ -4,12 +4,20 @@ description: >-
   If you’ve been looking for an alternative to TinaCMS or Tina Cloud for your static sites,
   CloudCannon is here to help.
 date: '2024-09-20T05:00:00+12:00'
-author: CloudCannon
+authors:
+  - CloudCannon
 image: https://cc-dam.imgix.net/blog-tina-cms-alternative.png
 tags:
   - agencies
   - resources
   - tutorials
+cta:
+  heading: Launch your website today
+  subtext: >-
+    Give your content team full autonomy on your developer-approved tech stack with
+    CloudCannon.
+  linkText: Get started free!
+  link: https://app.cloudcannon.com/register?trial=cc_standard
 ---
 
 import Image from "@core-elements/image/Image.astro";
@@ -66,6 +74,8 @@ CloudCannon supports two-way Git syncing with GitHub, GitLab, and Bitbucket. Onc
 
 From here, select the repository and branch that is connected to your site on TinaCMS. If you want to test CloudCannon out without impacting the content or setup of your live TinaCMS site, select “Create New” in your branch setup to create a new branch. You can always merge it to your production branch at a later date.
 
+<Alert variant="info" iconName="info" text="See our <a href=&quot;https://cloudcannon.com/documentation/guides/&quot;><u>SSG-specific Guides</u></a> for more detailed steps and advice on setting up your site." />
+
 ### 2\. Set up your SSG
 
 Based on your file structure, CloudCannon will attempt to detect your SSG and configuration data. Review this configuration and make any necessary changes for your project.
@@ -93,6 +103,8 @@ Some SSGs don’t have strong conventions around folder structure. Where CloudCa
 **Set up correct paths for media and DAM files**
 
 By default on CloudCannon, files are uploaded to a folder called `/uploads/` in your source directory; when a DAM is selected, files will be uploaded to `/dam_uploads/` by default. To keep things structured, you may override this with configuration to your own paths and even add your own variables like `{date:year}`, `{date:month}`, `[collection]`, or `{categories|slugify}` to keep things organized.
+
+<Alert variant="info" iconName="info" text="Find out more about <a href=&quot;https://cloudcannon.com/documentation/articles/adjusting-the-uploads-path/&quot;><u>upload path options</u></a> in our documentation." />
 
 CloudCannon configuration works as a&nbsp;[cascade](https://cloudcannon.com/documentation/articles/using-the-configuration-cascade/). You can set global defaults and override them for specific collections or files, which gives you complete control over how each file is edited.
 
@@ -165,6 +177,8 @@ paths:
   # The path to site layout files, relative to source
   layouts: _layouts
 ```
+
+<Alert variant="info" iconName="info" text="See our documentation for full details on <a href=&quot;https://cloudcannon.com/documentation/articles/what-are-inputs/&quot;><u>Inputs</u></a> and <a href=&quot;https://cloudcannon.com/documentation/articles/what-is-the-cloudcannon-configuration-file/&quot;><u>CloudCannon configuration</u></a>, and a full list of all the options available to you." />
 
 Once your CloudCannon config file is complete, you’re all set! Now let’s move on to making this site really sing, for everyone on your team.
 

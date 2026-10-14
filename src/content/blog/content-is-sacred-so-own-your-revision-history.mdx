@@ -4,11 +4,21 @@ description: >-
   If content truly is sacred to the most widely used CMS in the world, wouldn't it use Git?
   If content is important to you, it's time to consider a Git-based CMS.
 date: '2024-10-18T05:00:00+13:00'
-author: David Large
+authors:
+  - David Large
 image: https://cc-dam.imgix.net/content-is-sacred.png
 tags:
   - opinion
+cta:
+  heading: Want to escape the WordPress drama?
+  subtext: >-
+    Control your own content: work with autonomy on your developer-approved tech stack with
+    CloudCannon.
+  linkText: Get started free
+  link: https://app.cloudcannon.com/register?trial=cc_standard
 ---
+
+import Alert from "@core-elements/alert/Alert.astro";
 
 We’ve had a few weeks to observe the ongoing drama affecting the WordPress community. I won't recap it here; just keeping up is a full-time job. (See Ivan Mehta's <a href="https://techcrunch.com/2024/10/15/wordpress-vs-wp-engine-drama-explained/" target="_blank" rel="noopener">ongoing updates at TechCrunch</a> if you'd like to catch up.). And as fascinating as this has been to watch from a reasonably safe distance (I migrated my last sites from WordPress a couple of years ago), I'm certain we haven't seen the end of it.
 
@@ -35,6 +45,8 @@ I can’t help wondering — [as Joost van der Schee already has](https://www.us
 Git is, after all, the most widely-used version control system in the world. Surely, if content truly is sacred, it would be a natural choice for the most widely used CMS in the world to use it? Indeed, several solutions on this front have popped up in the last couple weeks, and there are a range of plugins promising Git-based content backups — if, of course, users aren’t blocked from accessing or updating their plugins!
 
 <a href="https://versionpress.com/" target="_blank" rel="noopener">VersionPress</a>, for example, seems to be a reasonable addition to enable Git-based content backups, while [WP Pusher](https://wppusher.com/) and <a href="https://wordpress.org/plugins/gitium/" target="_blank" rel="noopener">Gitium</a> can handle plugin and theme backups and continuous deployment.
+
+<Alert variant="info" iconName="lightbulb" text="While I'm recommending tools, I'd be remiss not to mention <a href=&quot;https://github.com/lonekorean/wordpress-export-to-markdown&quot;><u>an exporting tool to get your content out of WordPress once and for all</a></u>. Export your WordPress site to XML, transfer it to Markdown files with front matter, and bring your Markdown to <a href=&quot;/hugo-cms/&quot;><u>Hugo</u></a>, <a href=&quot;/eleventy-cms/&quot;><u>Eleventy</u></a>, or any other SSG that handles it by default." />
 
 My position here is probably pretty clear. [Git-based CMSs like CloudCannon](/git-cms/) build version control into the very fabric of their systems, unlike a traditional database-driven CMS like WordPress, where content history can be limited or difficult to access. (*Or, in the worst-case scenario, deliberately blocked by competing multi-million dollar concerns.*)
 

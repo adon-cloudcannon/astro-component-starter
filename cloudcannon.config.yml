@@ -103,6 +103,51 @@ collections_config:
         undo: true
         redo: true
         removeformat: true
+  authors:
+    path: src/content/authors
+    glob:
+      - "**/*.md"
+    disable_url: true
+    icon: person
+    _enabled_editors:
+      - content
+    add_options:
+      - name: Add New Author
+        icon: person
+    create:
+      path: "[relative_base_path]/{name|slugify|lowercase}.md"
+    _inputs:
+      name:
+        type: text
+        comment: The name a post credits them by, exactly as its `authors` list spells it.
+      image:
+        type: image
+        comment: Their portrait, shown beside their name.
+        options:
+          paths:
+            uploads: src/assets/images
+          resize_style: cover
+          width: 200
+          height: 200
+      imageAlt:
+        type: text
+        comment: Alternative text for the portrait.
+      role:
+        type: text
+        comment: Their job title.
+      twitterUrl:
+        type: url
+      linkedinUrl:
+        type: url
+    _editables:
+      content:
+        format: p
+        bold: true
+        italic: true
+        link: true
+        undo: true
+        redo: true
+        removeformat: true
   data:
     path: src/data
     glob:

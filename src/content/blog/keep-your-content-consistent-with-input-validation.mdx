@@ -6,17 +6,28 @@ description: >-
   controls, file size restrictions, and custom error messages to maintain data integrity and
   improve content quality.
 date: '2025-07-03T14:00:00+12:00'
-author: George Phillips
+authors:
+  - George Phillips
 image: https://cc-dam.imgix.net/blog-input-validation-r.png
 tags:
   - features
+cta:
+  heading: Launch your website today
+  subtext: >-
+    Give your content team full autonomy on your developer-approved tech stack with
+    CloudCannon.
+  linkText: Get started free!
+  link: https://app.cloudcannon.com/register?trial=cc_standard
 ---
 
 import Video from "@core-elements/video/Video.astro";
+import Alert from "@core-elements/alert/Alert.astro";
 
 Your content team has accidentally published a 400-character meta description that gets brutally chopped off by Google. Or someone’s uploaded 17 images to what was supposed to be a "featured trio" gallery, blowing your design rules out of the water. We've been there. Let’s stop it happening again.
 
 One of your most requested features has officially landed: with input validation, you get to be the rule-maker. Set the boundaries that make sense for your projects, your content teams, and your sanity. (And all validation happens before any content is saved in CloudCannon, which means any issues will be caught before they make it to your live site.)
+
+<Alert variant="info" iconName="info" text="Find out more about how input validation works in our [<u>documentation</u>](https://cloudcannon.com/documentation/articles/inputs-reference/#input-validation)." />
 
 ## **How it works**
 
@@ -25,6 +36,8 @@ The new validation system integrates seamlessly into your existing CloudCannon w
 <Video type="youtube" videoId="JoOUV6O1v7k" title="Input validation on CloudCannon" />
 
 Components in your live preview will continue to render regardless of validation status — it’s up to your components to handle invalid input gracefully. They might show placeholders, warnings, or other indicators when required data is missing or invalid.
+
+<Alert variant="danger" iconName="triangle-alert" text="**I’m seeing a new error message — what happened?** If you have set `min`/`max` values of number inputs *and* any existing values for those inputs are outside this range, your users will see a new error message. To address this issue, you can either correct the input value or adjust your preset `min` / `max` value." />
 
 ## **Validation rules you can set**
 

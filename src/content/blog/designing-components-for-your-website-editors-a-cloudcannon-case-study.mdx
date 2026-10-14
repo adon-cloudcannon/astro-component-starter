@@ -2,13 +2,25 @@
 title: 'Designing components for your website editors: a CloudCannon case study'
 description: "How to design page components for content editors and website visitors —\_including free design files for you to adapt, remix, and reuse on your own site."
 date: '2024-10-29T05:00:00+13:00'
-author: Victoria Roberts
+authors:
+  - Victoria Roberts
 image: https://cc-dam.imgix.net/blog-design-component-r.png
 tags:
   - resources
+cta:
+  heading: The design journey doesn’t have to end here
+  subtext: >-
+    Want some help designing your page components? Get in touch with our solutions team to
+    discuss your project.
+  linkText: Find out more
+  link: /web-services/
 ---
 
+import Alert from "@core-elements/alert/Alert.astro";
+
 In CloudCannon’s [Visual Editor](/website-editing/), reusable components are the fundamental building block of a page. As a designer I spend a lot of my time trying to get these components *right* — not just visually, for site visitors, but also at the editing level, for website teams and content editors. With a suite of well designed and implemented components, website editors can be more confident in their work, and can edit and build new pages more efficiently. With this in mind, I thought I’d walk you through the design of a single hero component, which you’re welcome to use and adapt for your own site.
+
+<Alert variant="info" iconName="smile" text="I’m happy to help design components for your website — feel free to <u><a href=&quot;/web-services/&quot;>get in touch</a></u> to find out more!" />
 
 This case study explores our approach to creating a user-friendly, flexible, and visually appealing hero section that meets the needs of both content editors and end-users. We’ll be aiming for something like the following:
 
@@ -41,6 +53,8 @@ To provide a seamless editing experience, we’ll carefully select appropriate i
 * **Images:** For the hero background image, we’ll add an image field that allows for easy uploading or selection from existing media.
 * **Text:** Headline and subheading fields use text inputs, providing flexibility for different content formats and lengths.
 * **Button:** We’ll create a button row here, so editors can add multiple buttons from pre-defined styles. This way we can allow for a primary call to action (e.g. “Book a call”) and a secondary call to action (e.g. “Find out more”), depending on the user’s intent. For each style we’ll add fields for the button’s text, and link, as well as add a couple further styling options.
+
+<Alert variant="info" iconName="book-open" text="There are many more <a href=&quot;/documentation/articles/what-are-inputs/&quot;><u>input types available on CloudCannon</u></a> — you can choose what works for you!!" />
 
 ### Visual examples
 

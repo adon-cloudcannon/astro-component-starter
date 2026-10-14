@@ -4,13 +4,22 @@ description: >-
   Coming soon to CloudCannon: live data reloading and configuration editing, a streamlined
   headless mode, simplified build processes, and easier Site creation.
 date: '2024-09-14T05:00:00+12:00'
-author: George Phillips
+authors:
+  - George Phillips
 image: https://cc-dam.imgix.net/blog-private-beta-unified.png
 tags:
   - features
+cta:
+  heading: Want to find out more?
+  subtext: >-
+    Read our new Beta documentation for more details on the upcoming features, as well as
+    our detailed migration guide.
+  linkText: Read more
+  link: https://beta.cloudcannon.com/documentation/articles/beta/
 ---
 
 import Video from "@core-elements/video/Video.astro";
+import Alert from "@core-elements/alert/Alert.astro";
 
 I’m really excited to (pre)announce a range of upcoming features that will make CloudCannon more powerful, flexible, and user-friendly — for everyone from single Site owners to Enterprise users with complex publishing workflows and partner agency developers making client websites.
 
@@ -29,11 +38,15 @@ We’ve heard from our users that waiting for builds can take too much time, and
 
 <Video type="vimeo" videoId="1009060410" title="CloudCannon's live data reloading and configuration editing" />
 
+<Alert variant="info" iconName="info" text="Find out more about live data reloading and configuration editing at our <u><a href=&quot;https://beta.cloudcannon.com/documentation/articles/beta/&quot;>Beta documentation</a></u>." />
+
 ## New Headless Mode
 
 With our new Headless Mode, we’ve streamlined CloudCannon's interface for your Sites that build and host externally, whether they're static or not. You’ll still be free to create exactly what you or your clients need — fully hosted static websites with visual editing, server-side rendering (SSR) or other server-side functions, or fully hosted APIs — while still offering CloudCannon’s top-tier editing experience. You can switch to Headless mode to disable hosting and builds if you don’t need them.
 
 (We believe that most content websites should be static — for efficiency in page speed, reduced compute time, and more efficient use of server resources. But we also believe that developers should have as much freedom as possible: some projects might call for 100% static content, while others may more closely resemble web apps with custom authentication and user personalization.)
+
+<Alert variant="info" iconName="info" text="Find out more about <u><a href=&quot;https://beta.cloudcannon.com/documentation/guides/unified-configuration-migration-guide/#moving-to-headless-mode&quot;>moving to Headless Mode</a></u>." />
 
 ## **Unifying configuration across SSGs**
 

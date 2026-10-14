@@ -4,11 +4,21 @@ description: >-
   Learn two approaches for managing multilingual content in CloudCannon: separate content
   directories or automatic page generation with tools like Rosey.
 date: '2025-07-01T05:00:00+12:00'
-author: Tom Richardson
+authors:
+  - Tom Richardson
 image: https://cc-dam.imgix.net/blog-rosey-i18n.png
 tags:
   - resources
+cta:
+  heading: Launch your website today
+  subtext: >-
+    Give your content team full autonomy on your developer-approved tech stack with
+    CloudCannon.
+  linkText: Get started free!
+  link: https://app.cloudcannon.com/register?trial=cc_standard
 ---
+
+import Alert from "@core-elements/alert/Alert.astro";
 
 So you want to manage content for your website in more than one language, or more accurately, in more than one [locale](https://www.smartling.com/blog/what-is-a-locale)? A CMS like CloudCannon will excel at this, but there are some choices to be made first in how you set up your site.
 
@@ -59,6 +69,8 @@ Imagine an example where you have a site with 10 different locales, and your edi
 ### 2\. Automatically generating pages from translation files
 
 This is where <a href="https://rosey.app/" target="_blank" rel="noopener">Rosey</a> comes in.
+
+<Alert variant="info" iconName="info" text="We’ll talk primarily about Rosey here, but this is also how i18n used to work in CloudCannon before it was replaced by Rosey, our own open-source replacement for i18n." />
 
 The Rosey workflow involves tagging your HTML elements with the information needed to translate them. After your site builds in its primary language, Rosey ingests your final site and extracts tagged elements for translation. Once these have been translated, Rosey combines your original site with each set of translated content, resulting in a final multilingual website.
 

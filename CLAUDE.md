@@ -33,10 +33,11 @@ Astro component starter: brandable base components for informational websites, v
 
 ### Nothing is updating
 
-Two staleness traps, both silent:
+Three staleness traps, all silent:
 
 - **A CSS edit isn't showing.** The Astro dev daemon can serve stale `is:global` styles: `npx astro dev stop`, then restart.
 - **The editor is showing old content.** `npm run editor` serves `dist/`, not the dev server — rebuild and restart it after every change.
+- **A new frontmatter key reads as `undefined`.** The content layer caches parsed frontmatter in `.astro/data-store.json`, and a schema change in `src/content.config.ts` does not invalidate it — a dev restart alone is not enough. Zod strips the key, so the page renders as if the content were never written. `rm .astro/data-store.json`, then restart.
 
 ## Detailed workflow guides
 
