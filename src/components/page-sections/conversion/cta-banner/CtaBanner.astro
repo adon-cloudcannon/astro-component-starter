@@ -102,7 +102,7 @@ const subtextCap = subtextMeasure(subtextWidth);
     <Text
       class="cta-banner-subtext"
       alignmentHorizontal={alignmentHorizontal}
-      style={subtextCap ? `max-inline-size: ${subtextCap}` : undefined}
+      style={subtextCap ? `--cta-banner-subtext-measure: ${subtextCap}` : undefined}
       size={subtextSize}
       data-prop={at("subtext")}
       text={subtext}
@@ -167,9 +167,19 @@ const subtextCap = subtextMeasure(subtextWidth);
       color: var(--midnight);
     }
 
+    /* Its own measure, set per band. A centred line is centred in the whole
+       column rather than in what the drawings leave of it, so the measure
+       comes down to the free part instead. */
+    .cta-banner .cta-banner-subtext {
+      max-inline-size: var(--cta-banner-subtext-measure, none);
+    }
+
     .cta-banner.align-center .cta-banner-subtext {
       margin-inline: auto;
-      max-inline-size: 38rem;
+      max-inline-size: min(
+        var(--cta-banner-subtext-measure, 38rem),
+        calc(100% - var(--cta-banner-art-reach-start, 0rem) - var(--cta-banner-art-reach-end, 0rem))
+      );
     }
 
     /* The band clips, which is how the design draws it: the frame is set to
@@ -259,6 +269,57 @@ const subtextCap = subtextMeasure(subtextWidth);
       z-index: 0;
     }
 
+    /* The drawing is laid over the copy's column rather than beside it, so
+       nothing in the flow knows it is there: a heading long enough to reach
+       the corner ran under the rock instead of wrapping. The copy keeps
+       clear of whichever corner carries one.
+
+       How much clear is not the drawing's width. The drawing is pinned to
+       the window's edge and the column is centred and capped, so on a wide
+       page the drawing sits outside the column entirely and the copy should
+       keep all of it — reserving its width there stopped the heading a third
+       of the band short of the rock. What it reaches into the column is its
+       width less the space between the column's edge and the window's, which
+       is `50vw - 50%`, and `max()` drops it to nothing once that is wider
+       than the drawing.
+
+       The width itself comes from the height cap below and the art's aspect:
+       the two the design uses land at 254 and 280. The wider of them, so a
+       band carrying either keeps clear of it.
+
+       A margin rather than padding: the supporting line carries its own
+       measure, and padding would come out of that rather than off the
+       column. */
+    .cta-banner {
+      --cta-banner-art-width: 17.5rem;
+    }
+
+    .cta-banner:has(.cta-banner-art-end) {
+      --cta-banner-art-reach-end: max(0px, var(--cta-banner-art-width) + 50% - 50vw);
+    }
+
+    .cta-banner:has(.cta-banner-art-start) {
+      --cta-banner-art-reach-start: max(0px, var(--cta-banner-art-width) + 50% - 50vw);
+    }
+
+    /* Fills each line rather than evening them out. The base typography
+       balances every heading, which is right for a heading with the page to
+       itself: here the drawing takes the end of the line, so balancing paid
+       for the space twice — the copy stopped short of the rock and then
+       halved what was left of it. */
+    .cta-banner .heading {
+      text-wrap: pretty;
+    }
+
+    .cta-banner :is(.heading, .cta-banner-subtext, .cta-banner-actions) {
+      margin-inline: var(--cta-banner-art-reach-start, 0px) var(--cta-banner-art-reach-end, 0px);
+    }
+
+    /* The group is `width: 100%`, which a margin cannot shrink. */
+    .cta-banner .cta-banner-actions {
+      inline-size: auto;
+    }
+
     .cta-banner .cta-banner-art img {
       block-size: auto;
       inline-size: auto;
@@ -272,6 +333,10 @@ const subtextCap = subtextMeasure(subtextWidth);
     @media (width < 48rem) {
       .cta-banner .cta-banner-art {
         display: none;
+      }
+
+      .cta-banner {
+        --cta-banner-art-width: 0px;
       }
     }
   }
