@@ -5,9 +5,6 @@ tabbed: true
 value:
   _component: page-sections/conversion/pricing-tiers
   content:
-    alignmentHorizontal: center
-    cardAlignment: start
-    garden: false
     sectionLabel: ""
     heading:
       eyebrow: Plans
@@ -86,6 +83,9 @@ value:
         highlight: false
         badgeText: ""
   style:
+    garden: false
+    alignmentHorizontal: center
+    cardAlignment: start
     cardColor: surface
     backgroundColor: light-sand
     pattern: none

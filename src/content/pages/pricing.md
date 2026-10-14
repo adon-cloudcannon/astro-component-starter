@@ -26,10 +26,10 @@ pageSections:
       maxContentWidth: xl
       paddingHorizontal: gutter
       paddingVertical: 4xl
+      paddingVerticalEnd: ''
       haze: false
   - _component: page-sections/conversion/pricing-tiers
     content:
-      cardAlignment: start
       sectionLabel: Plans
       heading:
         eyebrow: ''
@@ -126,14 +126,18 @@ pageSections:
           accent: ''
           pricePosition: top
     style:
+      alignmentHorizontal: center
+      cardAlignment: start
+      garden: false
       cardColor: white
       backgroundColor: light-sand
       pattern: none
       fade: none
       maxContentWidth: xl
       paddingHorizontal: gutter
-      paddingVerticalStart: none
       paddingVertical: 2xl
+      paddingVerticalStart: none
+      paddingVerticalEnd: ''
       haze: false
   - _component: page-sections/conversion/comparison-table
     content:
@@ -284,6 +288,10 @@ pageSections:
             - no
             - no
             - 3 hours / month
+      footnote: ''
+      columnLine: strong
+      highlightStyle: action
+      buttonPosition: header
       striped: false
       showAnnualPricing: true
       monthlyLabel: Monthly
@@ -296,7 +304,7 @@ pageSections:
       paddingHorizontal: gutter
       paddingVertical: 4xl
       haze: false
-  - _component: page-sections/conversion/cta-showcase
+  - _component: page-sections/conversion/cta-split
     content:
       sectionLabel: Partner program
       heading:
@@ -307,34 +315,28 @@ pageSections:
         subtext: Join the CloudCannon Partner Program and get access to the Lite plan
           for your clients.
         subtextSize: lg
-        subtextWidth: 462
+        subtextWidth: ''
+      mediaSections:
+        - _component: building-blocks/core-elements/image
+          source: /src/assets/images/component-docs/dunedin-cliff.jpg
+          alt: Sea cliffs above a bay
+          decorative: false
+          rounded: true
+          aspectRatio: none
+          positionVertical: center
+          positionHorizontal: center
+          priority: false
       buttonSections:
         - _component: building-blocks/core-elements/button
           text: Learn about our Partner Program
           link: /partner-program/
           iconName: arrow-right
+          iconColor: default
+          textColor: default
           iconPosition: after
+          hideText: false
           variant: text
           size: md
-      illustration:
-        _component: building-blocks/wrappers/offer-card
-        imageSource: /src/assets/images/marketing/thumbsup-tuatara.png
-        imageAlt: A tuatara in a cap giving a thumbs up
-        badgeText: Partner program exclusive
-        badgeColor: harbour
-        cardColor: white
-        contentSections:
-          - _component: building-blocks/core-elements/heading
-            text: Lite
-            level: h3
-            size: sm
-          - _component: building-blocks/core-elements/text
-            text: A pay-as-you go plan for smaller clients. Unlimited sites and basic
-              features included.
-            size: lg
-          - _component: building-blocks/core-elements/text
-            text: <span class="text-display">$10</span>/month (USD)
-            size: lg
       reverse: false
     style:
       backgroundColor: light-sand
@@ -353,6 +355,8 @@ pageSections:
         headingSize: lg
       linkText: Learn about our migration services
       link: /migration/
+      secondaryLinkText: ''
+      secondaryLink: ''
       imageSource: /src/assets/images/marketing/ferns-rocks-2-3806-72621-mirrored.png
       imageAlt: ''
       subtext: Our migration team can get your site configured for your ideal editing
@@ -369,10 +373,10 @@ pageSections:
       fade: none
       maxContentWidth: xl
       paddingHorizontal: gutter
+      paddingVertical: 4xl
       haze: false
   - _component: page-sections/conversion/pricing-tiers
     content:
-      cardAlignment: center
       sectionLabel: Add-ons
       heading:
         eyebrow: ADD-ONS
@@ -443,6 +447,9 @@ pageSections:
           accent: ''
           pricePosition: bottom
     style:
+      alignmentHorizontal: center
+      cardAlignment: center
+      garden: false
       cardColor: muted
       backgroundColor: dark
       pattern: pegboard
@@ -450,8 +457,8 @@ pageSections:
       maxContentWidth: xl
       paddingHorizontal: gutter
       paddingVertical: 4xl
-      paddingVerticalStart: 5xl
-      paddingVerticalEnd: 6xl
+      paddingVerticalStart: ''
+      paddingVerticalEnd: ''
       haze: false
       colorScheme: dark
       lockColorScheme: true
@@ -464,6 +471,27 @@ pageSections:
         headingSize: lg
         eyebrow: PRICING
       category: Pricing
+      items:
+        - title: How long does a build take?
+          contentSections:
+            - _component: building-blocks/core-elements/text
+              text: Most sites go live inside a week once the content is ready.
+              alignmentHorizontal: start
+              size: md
+        - title: Can our team edit the site themselves?
+          contentSections:
+            - _component: building-blocks/core-elements/text
+              text: Yes. Every section is editable on the page, with guardrails so the design
+                holds.
+              alignmentHorizontal: start
+              size: md
+        - title: What happens after launch?
+          contentSections:
+            - _component: building-blocks/core-elements/text
+              text: You own the repository and the content. We stay on call for the first
+                month.
+              alignmentHorizontal: start
+              size: md
     style:
       accordionVariant: card
       backgroundColor: light-sand

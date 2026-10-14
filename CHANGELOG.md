@@ -107,7 +107,22 @@ quietly broken in the editor.
 - CTA Banner takes a second link beside the first, drawn as a text link. One banner in the design carries a pill and "Explore our documentation"; the rest carry one.
 - Photo Strip takes a scratched plate per picture, by palette name, so a strip of cut-out portraits reads the way `team-member` draws one. Left out, the picture fills the tile on its own.
 - A page for each template at `/templates/<name>/`: the title, its collection, the screenshot, a sidebar carrying the template's generators and its deploy, repository and preview links, and the gallery under its body. The hero shows the template running rather than a screenshot, in a desktop frame with a phone over its corner. It ends with the template before and after it, walked within a collection first and on into the one beside it, wrapping at either end. A starter's page carries a different sidebar: what you'll get, its bonus features, and what is built with it.
+- An agency's page carries the generators it works in under its copy, draws its client work as a carousel — the project's name, what they did, the screenshot and a link to the live site — and closes on a form for getting in touch with that agency.
+- A **Book a demo** page at `/book-a-demo/`, which the nav and footer already linked to: the demo video, the banner for booking with an expert, and a customer's quote.
+- A contact page at `/contact/`, which the footer, nine pages and every agency's page already linked to: the form, and the same **Other resources** row the support page closes on.
 - The expert directory at `/experts/`, with a page for each agency at `/experts/<name>/`: the thirteen from the old site, their longer description, the generators they work in, their links, and the client work they show. A new **Expert Grid** section draws the directory. The generator chip wraps rather than running past its card, and Jekyll, Hugo and Eleventy use monochrome glyphs, since the chip masks every mark to one ink and those three carried their detail as a colour.
+- A post closes the way the design closes it: the writers' card, then the post's own banner, then further reading. The banner is the post's own, carried over from the old site, so an Astro post closes on Astro and a WordPress comparison on moving off WordPress. Further reading leads with posts in the same category, newest first, topped up with recent ones where a category is thin.
+- An `authors` collection at `src/content/authors/`, editable in CloudCannon: a name, a portrait and a bio, which is the file's own body. `npm run blog:port` writes the frontmatter from the old site and leaves bios alone, so a re-port never loses one.
+- The hero on a post pools the band's own colour behind the title, the way every other hero on the site does.
+- A post's own page opens on the design's dark, ruled band: the category pill and the date beside it, the title, the writers behind their portraits, and the post's picture filling the right half. The tag pills that ran under the body are gone; the design does not draw them. The picture no longer repeats above the body, and the opening paragraph becomes the ruled intro box the design draws.
+- The blog listing closes on the same CTA the rest of the site does, on its own pages and on each tag archive. The sections in `blog.md` now split around the listing: the first runs above it, the rest close the page.
+- A post names everyone who wrote it: `authors` is a list, and `author` stays for a post written with one. Four of the ported posts carry two names.
+- Each blog category is drawn in its own palette colour, Resources in Sunset and Companies in Kiwi as the design has them, and the rest chosen to stay apart. A category with no colour of its own falls back to Earth rather than disappearing. Adding one is a row in `postCategory.mjs`.
+- A code sample is drawn the same way wherever it appears: one dark surface and one set of token colours, whether it is a fenced block in markdown, a **Code Block** component, or a sample in the component reference. A fenced block took the highlighter's own baked-in background while the component followed the band it sat on, so two samples in one post could not match.
+- Numbered notes against lines of code. A sample marks a line with `^^^1^^^` and a note claims the same number with `data-annotation="1"`; the marker is pulled out before the highlighter sees it, so it never colours a token and never lands on the clipboard, and comes back as a chip at the end of its line. Pressing a chip marks the note that answers it, and resting on a note marks the lines it answers. Carried over from the old site, which drew the same chips.
+- A copy button on the fenced code blocks in a post, a template's README and an agency's page, which until now only the Code Block component carried. Both are the same control: one icon, quiet until the pointer or the keyboard reaches it, set in from the same edge, and turning to a tick when the code is on the clipboard.
+- Links are prefetched when the pointer rests on them, so the page is already in hand by the time it is clicked.
+- The blog listing leads with a carousel of the posts named in its own frontmatter: a `featured` list of slugs, in the order they should show. The track runs the width of the window so the posts either side of the current one show, while a slide stays the width the design draws it.
 - The 246 posts from the old site, under the URLs they already had. Their embedded components come across as this project's own: an image becomes **Image**, a YouTube or Vimeo embed becomes **Video**, an annotation becomes **Alert**, and a code component becomes a fenced block. `npm run blog:port` runs it again.
 - `npm run templates:readmes` pulls each template's README out of its repository and stores it as that template's body. The old site downloaded them at build time, which made every build need the network and left the text where nobody could edit it.
 - A **Large text** style in the rich-text toolbar, for a number that is set larger than the line it sits in — the `$10` in `$10/month (USD)`. The styles CloudCannon offers come from `public/css/editor-styles.css`; `src/styles/utils/_editor-styles.css` paints the same classes on the built page, and the two have to agree.
@@ -119,6 +134,15 @@ quietly broken in the editor.
 
 ### Changed
 
+#### Blog
+
+- Author pages at `/blog/author/<name>/`, reached from a writer's name on a card, in a slide, or in a post's hero.
+- A centred carousel never centred its first or last slide: the carousel trims the snaps that would scroll past either end, which with two slides strands one off to the side. Trimming is what a start-aligned gallery wants, so only a centred one opts out. A carousel whose slides all fit on screen also hides its arrows and dots rather than offering controls that move nothing.
+- A card marks itself on hover with its category's colour on its edge, the way the template and expert cards do, rather than growing. The post is reached from the picture, the title and the line at the foot, which leaves the category and each writer free to link to their own archives.
+- The cards on the blog listing are the ones the design draws: the picture is a sixteen-by-nine band rather than half the card, the category is a coloured pill, everyone who wrote the post appears beside a disc, and the link under the rule is read as text rather than a brand-coloured call to action. The post's description and date are gone from the card; the design leads with the story.
+- The listing sits in the design's second column rather than the widest one.
+- The demo blog posts the starter shipped with are gone from this site; the 246 ported posts are the blog.
+
 #### Page sections
 
 - A band's content width reads Compact, Default and Wide. "Full" was the 1040 column, which stopped being the widest when Wide was added.
@@ -126,6 +150,7 @@ quietly broken in the editor.
 - **Heads-up:** page sections are grouped by the job they do: heroes, explainers (was features and info-blocks), proof (was social-proof and testimonials), conversion (was CTAs, pricing and contact), collections (was blog, galleries and team), and builders. The group is part of each section's path, so existing pages need a find-and-replace, e.g. `page-sections/ctas/cta-center` becomes `page-sections/conversion/cta-center`. The `@features` import alias is now `@explainers`.
 - **Heads-up:** Team Grid's start/center layout option is gone. It now uses Card Grid's layout, and a new Team Grid starts with three people.
 - Page-section editing panels put content fields first, with the shared settings (width, padding, colour scheme, background) in a collapsed group.
+- Pricing Tiers moves Header alignment, Card alignment and Plant a garden to its Style tab, beside the other fields that decide how the band is laid out. Existing pages need those three keys moved from `content:` to `style:`.
 
 #### Framework and dependencies
 
@@ -187,6 +212,26 @@ quietly broken in the editor.
 - Unused dependencies (`@astrojs/node`, `ajv`, `jszip`, `shiki`, the `@rollup/rollup-*` pins), `ConsentManager.acceptAnalytics()` and `rejectOptional()`, and the legacy `href` nav-button fallback.
 
 ### Fixed
+
+#### Blog
+
+- Spacing inside a post came from whatever block sat above: a heading after a panel, a table or a picture got no gap at all, where one after a paragraph got the paragraph's. Every gap is now written on the start of the block below it, so a heading is the same distance down whatever precedes it.
+- A picture written as plain HTML in a post ran at the width of the copy, where one placed as an **Image** ran wider.
+- A post filed under more than one category showed only the first, so a post tagged Features read as Companies on the Features archive. Every category now shows, in its own colour, and the one being browsed leads. 29 of the 246 posts carry more than one.
+- A tag archive was titled, headed and traced by the raw tag, so it read "company" rather than "Companies".
+- The blog's own title is a line of copy, which read wrong in a breadcrumb and in the title of every archive built off it. A page can now carry a `shortTitle` for those, and the blog's is "Blog".
+- A listing's heading never replaced, so every tag archive and page 2 carried the blog's own h1: the helper looked for a flat `heading` where a section written in the editor nests it under `content`.
+- A post's page read `author`, which the port stopped writing when posts gained a list of writers, so every one of them credited "Anonymous".
+- A picture written with markdown's own `![](…)` syntax ran at the width of the copy where one written as plain HTML ran wider, because markdown wraps it in a paragraph. 142 of them across the posts.
+- The link at the foot of a card sat wherever the title left it, so a row of cards had its three links at three heights. Card gives its content box the height of the whole card, which with a picture above it overflows and is clipped, so nothing inside could reach the floor. The writers still follow the title, which is where the design keeps them.
+- A post's body was set in 16 against the design's 19, in a 741 measure against 680, and its markdown headings took the page ramp, which set a heading inside a post at 65 against the design's 29.
+- A comparison table in a post was wider than a phone and the overflow was clipped rather than scrolled, so the last column could not be reached at all. The old site wrapped these in a web component; the table now scrolls on its own, and runs to the wider measure a picture does.
+- The old site's annotated code block came across as a plain fence, losing the file it names. The four that name one are **Code Block** components again, with the language, the file name and the copy button the old one drew.
+- A callout came across without the icon or the tone it chose: the port read its text and discarded `icon_path` and `color`. Heroicons names map to this project's Lucide set the way the inline icons do, and a callout's colour picks the Alert's variant.
+- The port dropped 45 of the 67 callouts the old posts carry: its pattern for them required the text in double quotes, and the ones written in single quotes — the ones holding HTML — matched nothing. It now reads them with the same argument parser every other component uses.
+- An argument holding a `%`, which a URL does when it escapes a bracket, ended the port's match early and dropped the component. Two pictures came back.
+- The old site's two-column block had no conversion at all, so two posts carried the raw Liquid tag as text.
+- A ported post whose old permalink ended in a double slash lost its slug and came across with no URL at all. The port now ignores empty path segments.
 
 #### Spacing and colour
 

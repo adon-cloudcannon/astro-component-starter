@@ -14,7 +14,7 @@ style:
   options:
     subtype: object
 
-content.cardAlignment:
+style.cardAlignment:
   type: select
   comment: >-
     Which way a card sets its copy. Centred is the add-on shape, where the
@@ -82,7 +82,7 @@ content.subtext.subtext:
     underline: false
     bulletedlist: false
     numberedlist: false
-content.alignmentHorizontal:
+style.alignmentHorizontal:
   type: select
   comment: Whether the header is centred over the tiers or runs from the left.
   options:
@@ -143,7 +143,7 @@ content.defaultInterval:
         name: Monthly
       - id: annual
         name: Annual
-content.garden:
+style.garden:
   type: switch
   label: Plant a garden
   comment: >-

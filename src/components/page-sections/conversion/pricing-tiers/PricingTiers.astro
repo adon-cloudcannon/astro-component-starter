@@ -20,6 +20,8 @@ const { props, at } = nestedProps(Astro.props, {
     heading: ["eyebrow", "heading", "headingLevel", "headingSize"],
     subtext: ["subtext", "subtextSize", "subtextWidth"],
   },
+  /* How the section and its cards are set out, not what they say. */
+  extraStyleKeys: ["alignmentHorizontal", "cardAlignment", "garden"],
 });
 
 const {

@@ -155,8 +155,6 @@ pageSections:
           dedicated support, and more exposure to new leads.
         subtextSize: lg
         subtextWidth: md
-      alignmentHorizontal: start
-      garden: true
       tiers:
         - name: Bronze
           description: 0-19 points
@@ -211,6 +209,8 @@ pageSections:
           height: 454
           accent: harbour
     style:
+      alignmentHorizontal: start
+      garden: true
       backgroundColor: light-sand
   - _component: page-sections/conversion/pricing-tiers
     content:
@@ -222,7 +222,6 @@ pageSections:
           workflow.
         subtextSize: lg
         subtextWidth: sm
-      alignmentHorizontal: center
       tiers:
         - name: Lite
           description: A pay-as-you-go plan for smaller clients
@@ -277,6 +276,7 @@ pageSections:
           pricePosition: bottom
           height: 454
     style:
+      alignmentHorizontal: center
       cardColor: base
       backgroundColor: sand
   - _component: page-sections/conversion/cta-showcase
