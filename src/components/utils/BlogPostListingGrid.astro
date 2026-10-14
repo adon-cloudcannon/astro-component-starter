@@ -1,20 +1,17 @@
 ---
-import Heading from "@core-elements/heading/Heading.astro";
-import Image from "@core-elements/image/Image.astro";
 import Pagination from "@core-elements/pagination/Pagination.astro";
 import SimpleText from "@core-elements/simple-text/SimpleText.astro";
 import Breadcrumbs from "@navigation/breadcrumbs/Breadcrumbs.astro";
-import Card from "@wrappers/card/Card.astro";
 import Grid from "@wrappers/grid/Grid.astro";
 import GridItem from "@wrappers/grid/GridItem.astro";
-import { formatPostDate } from "@component-utils/formatPostDate";
+import BlogPostCard from "@component-utils/BlogPostCard.astro";
 
 /** Paginated page object from `paginate()` (includes `data`, `url`, etc.). */
 interface Props {
   page: any;
   emptyMessage: string;
-  /** BCP 47 tag for the post dates. */
-  locale?: string;
+  /** The category being browsed, so each card shows that one. */
+  activeTag?: string;
   /** Renders a Home › Blog › tag breadcrumb trail above the grid; grid uses a tighter top margin. */
   tagBreadcrumb?: {
     allPostsHref: string;
@@ -23,7 +20,7 @@ interface Props {
   };
 }
 
-const { page, emptyMessage, locale = "en-US", tagBreadcrumb } = Astro.props;
+const { page, emptyMessage, tagBreadcrumb, activeTag = "" } = Astro.props;
 ---
 
 {/* The leading gap stays an inline margin: whichever element comes first here
@@ -49,55 +46,14 @@ const { page, emptyMessage, locale = "en-US", tagBreadcrumb } = Astro.props;
       spaceBefore="default"
       style={tagBreadcrumb ? undefined : "margin-top: var(--space-before-loose);"}
     >
-      {page.data.map((post: any) => {
-        const pubDate = formatPostDate(post.data.date, locale);
-
-        const slug = post.id?.replace(/\.mdx?$/, "") || post.slug;
-
-        return (
-          <GridItem>
-            <Card
-              link={`/blog/${slug}`}
-              rounded={true}
-              border={true}
-              paddingVertical="lg"
-              paddingHorizontal="lg"
-            >
-              {post.data.image && (
-                <Image
-                  slot="before"
-                  source={post.data.image}
-                  decorative={true}
-                  aspectRatio="landscape"
-                  sizes="(max-width: 400px) 100vw, 400px"
-                  widths={[320, 400, 640, 800]}
-                  width={800}
-                />
-              )}
-              {post.data.tags?.[0] && (
-                <p class="blog-card-tag">{post.data.tags[0]}</p>
-              )}
-              <Heading
-                level="h2"
-                size="sm"
-                class="blog-card-title"
-              >
-                {post.data.title}
-              </Heading>
-              <SimpleText
-                size="sm"
-                class="blog-card-line"
-              >
-                {post.data.description}
-              </SimpleText>
-              <p class="blog-card-byline">
-                {post.data.author || "Anonymous"} <span>·</span> {pubDate}
-              </p>
-              <p class="blog-card-more">Read story <span aria-hidden="true">→</span></p>
-            </Card>
-          </GridItem>
-        );
-      })}
+      {page.data.map((post: any) => (
+        <GridItem>
+          <BlogPostCard
+            post={post}
+            activeTag={activeTag}
+          />
+        </GridItem>
+      ))}
     </Grid>
     <Pagination
       page={page}
@@ -113,51 +69,3 @@ const { page, emptyMessage, locale = "en-US", tagBreadcrumb } = Astro.props;
     {emptyMessage}
   </SimpleText>
 )}
-
-<style is:global>
-  @layer components {
-    /* The category the post carries, drawn as the design's pill. */
-    .blog-card-tag {
-      background-color: color-mix(in srgb, var(--sunset) 22%, transparent);
-      border-radius: 999px;
-      color: var(--color-text-strong);
-      font-size: var(--font-size-xs);
-      font-weight: var(--font-weight-semibold);
-      inline-size: fit-content;
-      letter-spacing: 0.12em;
-      margin: 0 0 var(--spacing-md);
-      padding: var(--spacing-xs) var(--spacing-md);
-      text-transform: uppercase;
-    }
-
-    .blog-card-title {
-      margin-block: 0 var(--spacing-sm);
-    }
-
-    .blog-card-line {
-      color: var(--color-text-muted);
-      margin-block: 0;
-    }
-
-    /* Who wrote it and when, under the line rather than over the title: the
-       design leads with the story. */
-    .blog-card-byline {
-      color: var(--color-text-muted);
-      font-size: var(--font-size-sm);
-      margin-block: var(--spacing-lg) 0;
-    }
-
-    .blog-card-byline span {
-      opacity: 0.6;
-    }
-
-    .blog-card-more {
-      border-block-start: var(--border-width-sm) solid var(--color-border);
-      color: var(--color-brand, var(--pacific));
-      font-size: var(--font-size-md);
-      font-weight: var(--font-weight-semibold);
-      margin-block: var(--spacing-lg) 0;
-      padding-block-start: var(--spacing-md);
-    }
-  }
-</style>

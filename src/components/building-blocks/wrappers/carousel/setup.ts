@@ -91,6 +91,11 @@ export function setupCarousel(carousel: CarouselElement): void {
       slidesToScroll,
       align,
       watchDrag,
+      /* Embla trims the snaps that would scroll past either end, which for a
+         centred track means the first and last slides are never centred — a
+         two-slide carousel strands one off to the side. Trimming is what a
+         start-aligned gallery wants, so only a centred one opts out. */
+      containScroll: align === "center" ? false : "trimSnaps",
       duration: 20,
       startIndex,
       skipSnaps: false,
@@ -138,13 +143,41 @@ export function setupCarousel(carousel: CarouselElement): void {
   if (prevButton) prevButton.style.borderRadius = "var(--radius-full)";
   if (nextButton) nextButton.style.borderRadius = "var(--radius-full)";
 
+  /**
+   * Whether there is enough off screen to be worth travelling to.
+   *
+   * A row that overruns its track by less than half a slide has nowhere to go:
+   * its one snap shunts everything sideways and reveals a sliver. The design
+   * lets the last card run off the edge on purpose — that is a hint that the
+   * row continues, not a thing to scroll to.
+   */
+  const hasSomewhereToGo = () => {
+    const nodes = embla.slideNodes();
+
+    if (nodes.length < 2) return false;
+
+    const widths = nodes.map((node) => node.getBoundingClientRect().width);
+    const total = widths.reduce((sum, width) => sum + width, 0);
+
+    return total - viewport.clientWidth > Math.max(...widths) / 2;
+  };
+
   const updateButtons = () => {
     if (prevButton) prevButton.disabled = !embla.canScrollPrev();
     if (nextButton) nextButton.disabled = !embla.canScrollNext();
+
+    /* Every slide already on screen: the arrows and dots would be chrome over
+       a static row. Embla's own count of the places it can stop is the test —
+       a track that overruns on a phone may not on a desktop. */
+    const idle = !hasSomewhereToGo();
+
+    if (controlsWrapper) controlsWrapper.hidden = idle;
+    inner.toggleAttribute("data-carousel-idle", idle);
   };
 
   updateButtons();
   embla.on("select", updateButtons);
+  embla.on("reInit", updateButtons);
   if (prevButton)
     prevButton.addEventListener("click", () => {
       markUserDrivenNavigation();

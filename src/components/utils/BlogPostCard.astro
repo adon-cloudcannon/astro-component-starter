@@ -1,0 +1,281 @@
+---
+/**
+ * One post, as the design's card: the picture, its category, the title, who
+ * wrote it, and the link under a rule.
+ *
+ * Shared by the listing and the further reading at the foot of a post, so the
+ * two cannot drift apart.
+ */
+import Card from "@wrappers/card/Card.astro";
+import Image from "@core-elements/image/Image.astro";
+import { accentInk } from "@component-utils/accentInk.mjs";
+import { postAuthors } from "@component-utils/postAuthors.mjs";
+import { postCategories } from "@component-utils/postCategory.mjs";
+import { slugifyLabel } from "@component-utils/slugify";
+import { loadAuthorsByName } from "@component-utils/blogAuthors";
+
+interface Props {
+  post: any;
+  /** The heading level the title takes where the card sits. */
+  level?: "h2" | "h3";
+  /** The category being browsed, where the card sits on an archive of one. */
+  activeTag?: string;
+}
+
+const { post, level = "h2", activeTag = "" } = Astro.props;
+const Title = level;
+const slug = post.id?.replace(/\.mdx?$/, "") || post.slug;
+const categories = postCategories(post.data.tags, activeTag);
+const category = categories[0] ?? null;
+const writers = postAuthors(post.data);
+const byName = await loadAuthorsByName();
+const href = `/blog/${slug}/`;
+---
+
+<Card
+  class="blog-card"
+  rounded={true}
+  border={true}
+  paddingVertical="none"
+  paddingHorizontal="none"
+  style={
+    category
+      ? `--blog-card-accent: var(--${category.accent}); --blog-card-accent-ink: ${accentInk(category.accent)}`
+      : undefined
+  }
+>
+  {post.data.image && (
+    <a
+      slot="before"
+      class="blog-card-shot-link"
+      href={href}
+      tabindex="-1"
+      aria-hidden="true"
+    >
+      <Image
+        class="blog-card-shot"
+        source={post.data.image}
+        decorative={true}
+        aspectRatio="none"
+        sizes="(max-width: 400px) 100vw, 400px"
+        widths={[320, 400, 640, 800]}
+        width={800}
+      />
+    </a>
+  )}
+  <div class="blog-card-body">
+    {categories.length > 0 && (
+      <p class="blog-card-tags">
+        {categories.map((entry: { tag: string; label: string; accent: string }) => (
+          <a
+            class="blog-card-tag"
+            href={`/blog/tag/${slugifyLabel(entry.tag)}/`}
+            style={`--blog-card-accent: var(--${entry.accent}); --blog-card-accent-ink: ${accentInk(entry.accent)}`}
+          >
+            {entry.label}
+          </a>
+        ))}
+      </p>
+    )}
+    <Title class="blog-card-title">
+      <a
+        class="blog-card-title-link"
+        href={href}
+      >
+        {post.data.title}
+      </a>
+    </Title>
+    {writers.length > 0 && (
+      <p class="blog-card-byline">
+        {writers.map((name: string) => (
+          <a
+            class="blog-card-writer"
+            href={`/blog/author/${slugifyLabel(name)}/`}
+          >
+            {byName.get(name)?.data.image ? (
+              <img
+                class="blog-card-avatar"
+                src={byName.get(name)!.data.image}
+                alt=""
+                width="20"
+                height="20"
+                loading="lazy"
+              />
+            ) : (
+              <span
+                class="blog-card-avatar"
+                aria-hidden="true"
+              />
+            )}
+            {name}
+          </a>
+        ))}
+      </p>
+    )}
+    <p class="blog-card-more">
+      <a
+        class="blog-card-more-link"
+        href={href}
+      >
+        Read story <span aria-hidden="true">→</span>
+      </a>
+    </p>
+  </div>
+</Card>
+
+<style is:global>
+  @layer components {
+    /* The design's card: a 16:9 picture across the top, then the category,
+       the title, and the writers and their link held to the foot so a row of
+       cards lines up whatever the titles do. */
+    .blog-card {
+      --blog-card-pad: 1.25rem;
+
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* The fill belongs on the bordered, rounded box rather than the wrapper
+       around it. */
+    .blog-card .card-inner {
+      background-color: var(--color-bg-muted);
+      transition: border-color var(--animation-normal) var(--ease-out);
+    }
+
+    /* The card is not one link: the category and each writer go somewhere of
+       their own, so the post is reached from the picture, the title and the
+       line at the foot. The whole card still marks itself in the category's
+       colour under the pointer, the way the template and expert cards do —
+       only part of it is clickable, but all of it answers. */
+    .blog-card.card > .card-inner:hover,
+    .blog-card.card > .card-inner:has(a:focus-visible) {
+      --card-accent-border: var(--blog-card-accent, var(--color-border-strong));
+    }
+
+    .blog-card .blog-card-shot-link {
+      display: block;
+    }
+
+    .blog-card .blog-card-shot img {
+      aspect-ratio: 17 / 9;
+      display: block;
+      inline-size: 100%;
+      object-fit: cover;
+    }
+
+    /* The link at the foot sits on the floor of every card in a row. Card
+       gives its content box `height: 100%` of the whole card, which with a
+       picture above it overflows and is clipped — so the body never reaches
+       the floor and the `auto` margin below has no room to give. Here the
+       column below the picture takes the space that is actually left. */
+    .blog-card > .card-inner {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .blog-card .card-outer-content,
+    .blog-card .card-content {
+      block-size: auto;
+      display: flex;
+      flex: 1 1 auto;
+      flex-direction: column;
+      /* Card centres this box with auto inline margins, which in a column
+         shrink-wraps it to its content and breaks the title a letter a line. */
+      inline-size: 100%;
+      min-block-size: 0;
+    }
+
+    .blog-card .blog-card-body {
+      display: flex;
+      flex: 1 1 auto;
+      flex-direction: column;
+      padding: var(--spacing-lg) var(--blog-card-pad) var(--blog-card-pad);
+    }
+
+    .blog-card .blog-card-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--spacing-sm);
+      margin: 0;
+    }
+
+    /* The post's category, in its own palette colour. */
+    .blog-card .blog-card-tag {
+      display: inline-block;
+      text-decoration: none;
+      background-color: var(--blog-card-accent, var(--earth));
+      border-radius: var(--radius-full);
+      color: var(--blog-card-accent-ink, var(--white));
+      font-size: var(--font-size-xs);
+      font-weight: var(--font-weight-semibold);
+      inline-size: fit-content;
+      letter-spacing: 0.12em;
+      padding: var(--spacing-xs) var(--spacing-md);
+      text-transform: uppercase;
+    }
+
+    .blog-card .blog-card-tag:hover,
+    .blog-card .blog-card-tag:focus-visible {
+      text-decoration: underline;
+    }
+
+    .blog-card .blog-card-title {
+      font-size: 1.375rem;
+      font-weight: var(--font-weight-normal);
+      line-height: var(--line-height-heading-sm);
+      margin-block: var(--spacing-lg) 0;
+    }
+
+    /* Everyone who wrote it, each behind a disc. `auto` above pins the row to
+       the foot of the card. */
+    /* The writers follow the title, where the design keeps them; the `auto`
+       below absorbs what is left so only the link is floored. */
+    .blog-card .blog-card-byline {
+      color: var(--color-text-muted);
+      display: flex;
+      flex-wrap: wrap;
+      font-size: var(--font-size-md);
+      gap: var(--spacing-sm) var(--spacing-lg);
+      margin-block: var(--spacing-lg) auto;
+    }
+
+    .blog-card .blog-card-title-link,
+    .blog-card .blog-card-writer,
+    .blog-card .blog-card-more-link {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .blog-card .blog-card-title-link:hover,
+    .blog-card .blog-card-title-link:focus-visible,
+    .blog-card .blog-card-writer:hover,
+    .blog-card .blog-card-writer:focus-visible,
+    .blog-card .blog-card-more-link:hover,
+    .blog-card .blog-card-more-link:focus-visible {
+      text-decoration: underline;
+    }
+
+    .blog-card .blog-card-writer {
+      align-items: center;
+      display: flex;
+      gap: var(--spacing-sm);
+    }
+
+    .blog-card .blog-card-avatar {
+      aspect-ratio: 1;
+      background-color: var(--gray-500);
+      border-radius: var(--radius-full);
+      display: block;
+      flex: none;
+      inline-size: 1.25rem;
+    }
+
+    .blog-card .blog-card-more {
+      border-block-start: var(--border-width-sm) solid var(--color-border);
+      color: var(--color-text-muted);
+      font-size: var(--font-size-md);
+      margin-block: var(--spacing-md) 0;
+      padding-block-start: var(--spacing-md);
+    }
+  }
+</style>

@@ -1,0 +1,102 @@
+---
+/**
+ * Everything one person has written.
+ *
+ * Posts name their writers by name; the authors collection keys off the same
+ * name, and its file id is the slug this page is reached by.
+ */
+import BlogPostListingGrid from "@component-utils/BlogPostListingGrid.astro";
+import Page from "@layouts/Page.astro";
+import RenderBlock from "@component-utils/renderBlock.astro";
+import CustomSection from "@page-sections/builders/custom-section/CustomSection.astro";
+import { postAuthors } from "@component-utils/postAuthors.mjs";
+import { slugifyLabel } from "@component-utils/slugify";
+import {
+  blogLabel,
+  getBlogPostsSortedByDate,
+  loadBlogPageContext,
+  withListingHeading,
+  withoutHeroBreadcrumbs,
+} from "../../../../utils/blog";
+
+type Paginate = (_data: any[], _opts: { pageSize: number; params: Record<string, string> }) => any;
+
+export interface Props {
+  page: { data: any[]; currentPage: number };
+}
+
+export async function getStaticPaths({ paginate }: { paginate: Paginate }) {
+  const blogPosts = await getBlogPostsSortedByDate();
+  const slugs = new Set<string>();
+
+  for (const post of blogPosts) {
+    for (const name of postAuthors(post.data)) {
+      const key = slugifyLabel(name);
+
+      if (key) slugs.add(key);
+    }
+  }
+
+  return [...slugs].flatMap((author) => {
+    const filtered = blogPosts.filter((post: any) =>
+      postAuthors(post.data).some((name: string) => slugifyLabel(name) === author)
+    );
+
+    return paginate(filtered, { pageSize: 12, params: { author } });
+  });
+}
+
+const { page } = Astro.props as Props;
+const authorSlug = Astro.params.author ?? "";
+
+const { blogPage, heroSections, closingSections } = await loadBlogPageContext();
+
+const baseTitle = blogLabel(blogPage);
+const displayName =
+  postAuthors(page.data[0]?.data ?? {}).find((name: string) => slugifyLabel(name) === authorSlug) ??
+  authorSlug;
+const listingTitle = `${baseTitle}: ${displayName}`;
+const pageTitle =
+  page.currentPage > 1 ? `${listingTitle} – Page ${page.currentPage}` : listingTitle;
+const baseDescription = `Every blog post written by ${displayName}, newest first.`;
+const pageDescription =
+  page.currentPage > 1
+    ? `${baseDescription} Page ${page.currentPage} of this archive.`
+    : baseDescription;
+
+const baseHeading = `Posts by ${displayName}`;
+const listingHeading =
+  page.currentPage > 1 ? `${baseHeading} – Page ${page.currentPage}` : baseHeading;
+---
+
+<Page
+  frontmatter={{
+    title: pageTitle,
+    description: pageDescription,
+    pageSections: withoutHeroBreadcrumbs(withListingHeading(heroSections, listingHeading)),
+  }}
+  disablePagefind
+>
+  <CustomSection
+    maxContentWidth="wide"
+    paddingHorizontal="lg"
+    paddingVertical="4xl"
+    colorScheme="inherit"
+    backgroundColor="dark"
+  >
+    <BlogPostListingGrid
+      page={page}
+      emptyMessage="No posts by this author."
+      tagBreadcrumb={{
+        allPostsHref: "/blog/",
+        allPostsLabel: baseTitle,
+        currentLabel: displayName,
+      }}
+    />
+  </CustomSection>
+
+  <RenderBlock
+    contentSections={closingSections}
+    useDefaultEditableBinding={false}
+  />
+</Page>

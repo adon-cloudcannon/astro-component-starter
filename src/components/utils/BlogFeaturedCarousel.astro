@@ -1,0 +1,302 @@
+---
+/**
+ * The posts the blog leads with, as a carousel.
+ *
+ * Which posts, and in what order, is the listing page's own frontmatter: a
+ * `featured` list of slugs. A slug that names nothing is skipped rather than
+ * breaking the page, since the list is edited by hand.
+ */
+import Carousel from "@wrappers/carousel/Carousel.astro";
+import Image from "@core-elements/image/Image.astro";
+import { accentInk } from "@component-utils/accentInk.mjs";
+import { postAuthors } from "@component-utils/postAuthors.mjs";
+import { postCategories } from "@component-utils/postCategory.mjs";
+import { slugifyLabel } from "@component-utils/slugify";
+import { loadAuthorsByName } from "@component-utils/blogAuthors";
+import { getCollection, type CollectionEntry } from "astro:content";
+
+interface Props {
+  /** Post slugs, in the order they should appear. */
+  featured?: string[];
+}
+
+const { featured = [] } = Astro.props;
+
+/* The track runs the width of the window so the neighbouring slides show, but
+   a slide stays the design's 960 whatever the window does. The carousel writes
+   `--slide-width` from `slideWidthPercent` and appends `style` after it, so a
+   declaration here is the way to override it. */
+const SLIDE_WIDTH = "--slide-width: calc(min(60rem, 100vw - 2 * var(--spacing-gutter)) + var(--slide-gap))";
+
+const posts = await getCollection("blog");
+const bySlug = new Map(posts.map((post) => [post.id.replace(/\.mdx?$/, ""), post]));
+const byName = await loadAuthorsByName();
+const slides = featured
+  .map((slug) => bySlug.get(slug))
+  .filter(Boolean) as CollectionEntry<"blog">[];
+---
+
+{slides.length > 0 && (
+  <Carousel
+    class="blog-featured"
+    label="Featured posts"
+    showArrows={true}
+    showIndicators={true}
+    loop={true}
+    gap="xl"
+    style={SLIDE_WIDTH}
+  >
+    {slides.map((post) => {
+      const slug = post.id.replace(/\.mdx?$/, "");
+      const categories = postCategories(post.data.tags);
+      const category = categories[0] ?? null;
+      const writers = postAuthors(post.data);
+      return (
+        <article
+          class="slide blog-featured-slide"
+          role="group"
+          aria-roledescription="slide"
+        >
+          <div
+            class="slide__content blog-featured-card"
+            style={
+              category
+                ? `--blog-card-accent: var(--${category.accent}); --blog-card-accent-ink: ${accentInk(category.accent)}`
+                : undefined
+            }
+          >
+            <div class="blog-featured-copy">
+              {categories.length > 0 && (
+                <p class="blog-featured-tags">
+                  {categories.map((entry: { tag: string; label: string; accent: string }) => (
+                    <a
+                      class="blog-featured-tag"
+                      href={`/blog/tag/${slugifyLabel(entry.tag)}/`}
+                      style={`--blog-card-accent: var(--${entry.accent}); --blog-card-accent-ink: ${accentInk(entry.accent)}`}
+                    >
+                      {entry.label}
+                    </a>
+                  ))}
+                </p>
+              )}
+              <h3 class="blog-featured-title">
+                <a
+                  class="blog-featured-link"
+                  href={`/blog/${slug}/`}
+                >
+                  {post.data.title}
+                </a>
+              </h3>
+              {writers.length > 0 && (
+                <p class="blog-featured-byline">
+                  {writers.map((name: string) => (
+                    <a
+                      class="blog-featured-writer"
+                      href={`/blog/author/${slugifyLabel(name)}/`}
+                    >
+                      {byName.get(name)?.data.image ? (
+                        <img
+                          class="blog-featured-avatar"
+                          src={byName.get(name)!.data.image}
+                          alt=""
+                          width="20"
+                          height="20"
+                          loading="lazy"
+                        />
+                      ) : (
+                        <span
+                          class="blog-featured-avatar"
+                          aria-hidden="true"
+                        />
+                      )}
+                      {name}
+                    </a>
+                  ))}
+                </p>
+              )}
+              <p class="blog-featured-more">
+                <a
+                  class="blog-featured-link"
+                  href={`/blog/${slug}/`}
+                >
+                  Read story <span aria-hidden="true">→</span>
+                </a>
+              </p>
+            </div>
+            {post.data.image && (
+              <a
+                class="blog-featured-art"
+                href={`/blog/${slug}/`}
+                tabindex="-1"
+                aria-hidden="true"
+              >
+                <Image
+                  source={post.data.image}
+                  alt=""
+                  decorative={true}
+                  aspectRatio="none"
+                />
+              </a>
+            )}
+          </div>
+        </article>
+      );
+    })}
+  </Carousel>
+)}
+
+<style is:global>
+  @layer components {
+    /* The track runs edge to edge of the window while the band around it stays
+       contained, so the slides either side of the current one show. */
+    .blog-featured.carousel {
+      /* `width: 100%` would hold the box at the column's width and only slide
+         it left; the margins have to do the stretching. */
+      inline-size: auto;
+      margin-inline: calc(50% - 50vw);
+    }
+
+    /* Copy down the left, the post's picture filling the rest, with the next
+       slide showing at the edge. */
+    .blog-featured-card {
+      --blog-featured-pad-x: 2.5rem;
+
+      background-color: var(--color-bg-muted);
+      border: var(--border-width-sm) solid var(--color-border);
+      border-radius: var(--radius-card);
+      display: grid;
+      gap: 0;
+      grid-template-columns: minmax(0, 376fr) minmax(0, 582fr);
+      overflow: hidden;
+      position: relative;
+      transition: border-color var(--animation-normal) var(--ease-out);
+    }
+
+    /* Hovered, the card takes its category's colour on its edge, as the cards
+       in the listing below do. */
+    .blog-featured-card:hover,
+    .blog-featured-card:has(a:focus-visible) {
+      border-color: var(--blog-card-accent, var(--color-border-strong));
+    }
+
+    .blog-featured-copy {
+      display: flex;
+      flex-direction: column;
+      padding: var(--spacing-xl) var(--blog-featured-pad-x);
+    }
+
+    .blog-featured-title {
+      font-size: var(--font-size-heading-sm);
+      font-weight: var(--font-weight-normal);
+      line-height: var(--line-height-heading-sm);
+      margin-block: var(--spacing-md) var(--spacing-lg);
+    }
+
+    /* The slide is not one link: the category and each writer go somewhere of
+       their own, so the post is reached from the picture, the title and the
+       line at the foot. */
+    .blog-featured-link,
+    .blog-featured-writer {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .blog-featured-link:hover,
+    .blog-featured-link:focus-visible,
+    .blog-featured-writer:hover,
+    .blog-featured-writer:focus-visible {
+      text-decoration: underline;
+    }
+
+    .blog-featured-art {
+      display: block;
+    }
+
+
+
+    .blog-featured-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--spacing-sm);
+      margin: 0;
+    }
+
+    /* The post's category, in its own palette colour, as the cards below draw it. */
+    .blog-featured-tag {
+      display: inline-block;
+      text-decoration: none;
+      background-color: var(--blog-card-accent, var(--earth));
+      border-radius: var(--radius-full);
+      color: var(--blog-card-accent-ink, var(--white));
+      font-size: var(--font-size-xs);
+      font-weight: var(--font-weight-semibold);
+      inline-size: fit-content;
+      letter-spacing: 0.12em;
+      padding: var(--spacing-xs) var(--spacing-md);
+      text-transform: uppercase;
+    }
+
+    .blog-featured-tag:hover,
+    .blog-featured-tag:focus-visible {
+      text-decoration: underline;
+    }
+
+    .blog-featured-byline {
+      color: var(--color-text-muted);
+      display: flex;
+      flex-wrap: wrap;
+      font-size: var(--font-size-md);
+      gap: var(--spacing-sm) var(--spacing-lg);
+      margin-block: auto 0;
+    }
+
+    .blog-featured-writer {
+      align-items: center;
+      display: flex;
+      gap: var(--spacing-sm);
+    }
+
+    .blog-featured-avatar {
+      aspect-ratio: 1;
+      background-color: var(--gray-500);
+      object-fit: cover;
+      border-radius: var(--radius-full);
+      display: block;
+      flex: none;
+      inline-size: 1.25rem;
+    }
+
+    .blog-featured-more {
+      border-block-start: var(--border-width-sm) solid var(--color-border);
+      color: var(--color-text-muted);
+      font-size: var(--font-size-md);
+      margin-block: var(--spacing-md) 0;
+      padding-block-start: var(--spacing-md);
+    }
+
+    /* The picture fills the card's full height, and Image nests three boxes
+       between this one and the `img` — each needs the height passed down or
+       the percentage resolves against `auto` and the picture keeps its own
+       ratio, leaving the card's foot bare. */
+    .blog-featured-art .image,
+    .blog-featured-art .image-inner,
+    .blog-featured-art picture {
+      block-size: 100%;
+    }
+
+    /* One class more than Image's own `.image-inner img { height: auto }`,
+       which otherwise wins on order and leaves the picture at its own ratio. */
+    .blog-featured-card .blog-featured-art img {
+      block-size: 100%;
+      display: block;
+      inline-size: 100%;
+      object-fit: cover;
+    }
+
+    @media (width < 800px) {
+      .blog-featured-card {
+        grid-template-columns: minmax(0, 1fr);
+      }
+    }
+  }
+</style>

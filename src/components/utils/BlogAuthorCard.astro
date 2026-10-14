@@ -1,0 +1,132 @@
+---
+/**
+ * Who wrote the post, in the ruled box the design closes the body with.
+ *
+ * The bio is the author's own body text in `src/content/authors/`; the old
+ * site had none, so a writer without one gets their name and portrait alone.
+ */
+import { loadAuthorsByName } from "@component-utils/blogAuthors";
+import { render } from "astro:content";
+import { slugifyLabel } from "@component-utils/slugify";
+import Button from "@core-elements/button/Button.astro";
+
+interface Props {
+  writers: string[];
+}
+
+const { writers } = Astro.props;
+const byName = await loadAuthorsByName();
+
+const cards = await Promise.all(
+  writers.map(async (name) => {
+    const author = byName.get(name);
+
+    return {
+      name,
+      image: author?.data.image ?? "",
+      imageAlt: author?.data.imageAlt ?? "",
+      Bio: author && author.body?.trim() ? (await render(author)).Content : null,
+    };
+  })
+);
+---
+
+{cards.length > 0 && (
+  <div class="blog-author-cards">
+    {cards.map(({ name, image, Bio }) => (
+      <article class="blog-author-card">
+        <p class="blog-author-eyebrow">About the author</p>
+        <p class="blog-author-name">
+          {image ? (
+            <img
+              class="blog-author-portrait"
+              src={image}
+              alt=""
+              width="40"
+              height="40"
+              loading="lazy"
+            />
+          ) : (
+            <span
+              class="blog-author-portrait"
+              aria-hidden="true"
+            />
+          )}
+          {name}
+        </p>
+        {Bio && (
+          <div class="blog-author-bio">
+            <Bio />
+          </div>
+        )}
+        <Button
+          class="blog-author-more"
+          text={`Read more by ${name}`}
+          link={`/blog/author/${slugifyLabel(name)}/`}
+          iconName="arrow-right"
+          iconPosition="after"
+          variant="text"
+          size="md"
+        />
+      </article>
+    ))}
+  </div>
+)}
+
+<style is:global>
+  @layer components {
+    .blog-author-cards {
+      display: grid;
+      gap: var(--spacing-lg);
+    }
+
+    .blog-author-card {
+      background-color: var(--color-bg-surface);
+      border: var(--border-width-sm) solid var(--color-border);
+      border-radius: var(--radius-card);
+      padding: var(--spacing-xl);
+    }
+
+    .blog-author-eyebrow {
+      color: var(--sunset);
+      font-family: var(--font-mono);
+      font-size: var(--font-size-sm);
+      letter-spacing: 0.12em;
+      margin: 0 0 var(--spacing-lg);
+      text-transform: uppercase;
+    }
+
+    .blog-author-more {
+      margin-block-start: var(--spacing-lg);
+    }
+
+    .blog-author-name {
+      align-items: center;
+      display: flex;
+      font-size: var(--font-size-lg);
+      font-weight: var(--font-weight-bold);
+      gap: var(--spacing-md);
+      margin: 0;
+    }
+
+    .blog-author-portrait {
+      aspect-ratio: 1;
+      background-color: var(--gray-500);
+      border-radius: var(--radius-full);
+      display: block;
+      flex: none;
+      inline-size: 2.5rem;
+      object-fit: cover;
+    }
+
+    .blog-author-bio {
+      color: var(--color-text-muted);
+      margin-block-start: var(--spacing-lg);
+    }
+
+    .blog-author-bio p {
+      font-size: var(--font-size-lg);
+      margin: 0;
+    }
+  }
+</style>

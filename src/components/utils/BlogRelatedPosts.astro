@@ -1,0 +1,97 @@
+---
+/**
+ * What to read next, at the foot of a post.
+ *
+ * Posts in the same category first, newest first; where a category is thin the
+ * row is topped up with the newest posts so it is always full.
+ */
+import CustomSection from "@page-sections/builders/custom-section/CustomSection.astro";
+import Heading from "@core-elements/heading/Heading.astro";
+import Grid from "@wrappers/grid/Grid.astro";
+import GridItem from "@wrappers/grid/GridItem.astro";
+import BlogPostCard from "@component-utils/BlogPostCard.astro";
+import { getBlogPostsSortedByDate } from "../../utils/blog";
+
+interface Props {
+  /** The post being read, which never appears in its own further reading. */
+  current: any;
+  count?: number;
+}
+
+const { current, count = 3 } = Astro.props;
+
+/* Not the band's usual pool, which centres: this one is mostly cards, so the
+   haze sits over the header at the top instead. */
+const HEADER_HAZE = [{ x: 0.5, y: "16%", rx: "42%", ry: "22%" }];
+
+const category = current.data.tags?.[0]?.trim().toLowerCase() ?? "";
+const others = (await getBlogPostsSortedByDate()).filter(
+  (post) => post.id !== current.id && !post.data.draft
+);
+const sameCategory = others.filter(
+  (post) => (post.data.tags?.[0]?.trim().toLowerCase() ?? "") === category
+);
+const picked = [...sameCategory, ...others]
+  .filter((post, index, all) => all.findIndex((p) => p.id === post.id) === index)
+  .slice(0, count);
+---
+
+{picked.length > 0 && (
+  <CustomSection
+    class="blog-related"
+    label="Further reading"
+    maxContentWidth="wide"
+    paddingHorizontal="lg"
+    paddingVertical="4xl"
+    backgroundColor="dark"
+    background={{ type: "pattern", pattern: "grid", fixed: false, mask: "none", overlay: 0 }}
+    haze={HEADER_HAZE}
+  >
+    <p class="blog-related-eyebrow">Further reading</p>
+    <Heading
+      level="h2"
+      size="lg"
+      alignmentHorizontal="center"
+      class="blog-related-heading"
+    >
+      You might also dig:
+    </Heading>
+    <Grid
+      columns={3}
+      gap="lg"
+      minItemWidth="320"
+      maxItemWidth="400"
+    >
+      {picked.map((post) => (
+        <GridItem>
+          <BlogPostCard
+            post={post}
+            level="h3"
+          />
+        </GridItem>
+      ))}
+    </Grid>
+  </CustomSection>
+)}
+
+<style is:global>
+  @layer page-sections {
+    .blog-related .blog-related-eyebrow {
+      color: var(--sunset);
+      font-size: var(--font-size-xs);
+      font-weight: var(--font-weight-semibold);
+      letter-spacing: 0.2em;
+      margin: 0;
+      text-align: center;
+      text-transform: uppercase;
+    }
+
+    /* The flow layer writes the top margin from `--space-before` and beats a
+       plain margin set here. */
+    .blog-related .blog-related-heading {
+      --space-before: var(--spacing-lg);
+
+      margin-block-end: var(--spacing-3xl);
+    }
+  }
+</style>

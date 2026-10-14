@@ -12,14 +12,51 @@ export async function getBlogPostsSortedByDate() {
  * index, its pages 2..n, and each tag archive — renders the same hero out of
  * `src/content/pages/blog.md`, so without this they all share one h1.
  */
+/** What the blog is called in a trail or an archive title, not its own copy. */
+export function blogLabel(blogPage: any): string {
+  return blogPage?.data?.shortTitle ?? blogPage?.data?.title ?? "Blog";
+}
+
+/** The heading the listing hero carries, whichever shape it is written in. */
+export function listingHeadingOf(heroSections: any[]): string | undefined {
+  for (const section of heroSections) {
+    const nested = section?.content?.heading?.heading;
+
+    if (typeof nested === "string") return nested;
+    if (typeof section?.heading === "string") return section.heading;
+  }
+
+  return undefined;
+}
+
 export function withListingHeading(heroSections: any[], heading: string) {
   let replaced = false;
 
   return heroSections.map((section) => {
-    if (replaced || typeof section?.heading !== "string") return section;
-    replaced = true;
+    if (replaced) return section;
 
-    return { ...section, heading };
+    /* A section written in the editor nests its copy under `content`, and the
+       heading again under `heading` — `{ content: { heading: { heading } } }`.
+       A flat `heading` is the shape a section built in code passes. */
+    if (typeof section?.content?.heading?.heading === "string") {
+      replaced = true;
+
+      return {
+        ...section,
+        content: {
+          ...section.content,
+          heading: { ...section.content.heading, heading },
+        },
+      };
+    }
+
+    if (typeof section?.heading === "string") {
+      replaced = true;
+
+      return { ...section, heading };
+    }
+
+    return section;
   });
 }
 
@@ -34,10 +71,15 @@ export function withoutHeroBreadcrumbs(heroSections: any[]) {
   );
 }
 
-/** CMS `pages` entry with id `blog` and its hero `pageSections`. */
+/**
+ * CMS `pages` entry with id `blog`, split into what runs above the listing and
+ * what closes the page. Every blog surface renders the same two ends around
+ * its own middle: the first section is the hero, the rest close.
+ */
 export async function loadBlogPageContext() {
   let blogPage: any;
   let heroSections: any[] = [];
+  let closingSections: any[] = [];
 
   try {
     const pages = await getCollection("pages");
@@ -45,11 +87,12 @@ export async function loadBlogPageContext() {
     blogPage = pages.find((p: any) => p.id === "blog");
 
     if (blogPage?.data?.pageSections) {
-      heroSections = blogPage.data.pageSections;
+      heroSections = blogPage.data.pageSections.slice(0, 1);
+      closingSections = blogPage.data.pageSections.slice(1);
     }
   } catch (e) {
     console.error("Failed to load blog page data:", e);
   }
 
-  return { blogPage, heroSections };
+  return { blogPage, heroSections, closingSections };
 }

@@ -1,9 +1,12 @@
 ---
 import BlogPostListingGrid from "@component-utils/BlogPostListingGrid.astro";
 import Page from "@layouts/Page.astro";
+import RenderBlock from "@component-utils/renderBlock.astro";
+import BlogFeaturedCarousel from "@component-utils/BlogFeaturedCarousel.astro";
 import CustomSection from "@page-sections/builders/custom-section/CustomSection.astro";
 import {
   getBlogPostsSortedByDate,
+  listingHeadingOf,
   loadBlogPageContext,
   withListingHeading,
 } from "../../utils/blog";
@@ -22,7 +25,7 @@ export async function getStaticPaths({ paginate }: { paginate: Paginate }) {
 
 const { page } = Astro.props as Props;
 
-const { blogPage, heroSections } = await loadBlogPageContext();
+const { blogPage, heroSections, closingSections } = await loadBlogPageContext();
 
 const basePageTitle = blogPage?.data?.title ?? "Blog";
 const pageTitle =
@@ -35,23 +38,43 @@ const pageDescription =
     ? `${baseDescription} Page ${page.currentPage} of the blog archive.`
     : baseDescription;
 
-const baseHeading = heroSections.find((s: any) => typeof s?.heading === "string")?.heading;
-const listingHeading =
-  page.currentPage > 1 ? `${baseHeading} – Page ${page.currentPage}` : baseHeading;
+const baseHeading = listingHeadingOf(heroSections);
+const listingHeading = baseHeading
+  ? page.currentPage > 1
+    ? `${baseHeading} – Page ${page.currentPage}`
+    : baseHeading
+  : undefined;
 ---
 
 <Page
   frontmatter={{
     title: pageTitle,
     description: pageDescription,
-    pageSections: baseHeading ? withListingHeading(heroSections, listingHeading) : heroSections,
+    pageSections: listingHeading ? withListingHeading(heroSections, listingHeading) : heroSections,
   }}
   disablePagefind={page.currentPage > 1}
 >
+  {page.currentPage === 1 && (blogPage?.data?.featured?.length ?? 0) > 0 && (
+    <CustomSection
+      class="blog-featured-band"
+      label="Featured posts"
+      maxContentWidth="2xl"
+      paddingHorizontal="lg"
+      paddingVertical="4xl"
+      paddingVerticalStart="none"
+      colorScheme="inherit"
+      backgroundColor="dark"
+      background={{ type: "pattern", pattern: "grid", fixed: false, mask: "none", overlay: 0 }}
+    >
+      <BlogFeaturedCarousel featured={blogPage.data.featured} />
+    </CustomSection>
+  )}
+
   <CustomSection
-    maxContentWidth="2xl"
+    maxContentWidth="wide"
     paddingHorizontal="lg"
     paddingVertical="4xl"
+    paddingVerticalStart={page.currentPage === 1 ? "none" : undefined}
     colorScheme="inherit"
     backgroundColor="dark"
   >
@@ -60,4 +83,11 @@ const listingHeading =
       emptyMessage="No blog posts yet. Check back soon!"
     />
   </CustomSection>
+
+  {/* Past the listing rather than with the hero, and outside Page's editable
+      array: the indices there would not line up with the sections it holds. */}
+  <RenderBlock
+    contentSections={closingSections}
+    useDefaultEditableBinding={false}
+  />
 </Page>

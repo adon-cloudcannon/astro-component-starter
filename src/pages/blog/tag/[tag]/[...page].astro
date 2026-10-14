@@ -1,9 +1,12 @@
 ---
 import BlogPostListingGrid from "@component-utils/BlogPostListingGrid.astro";
 import { slugifyLabel } from "@component-utils/slugify";
+import { categoryLabel } from "@component-utils/postCategory.mjs";
 import Page from "@layouts/Page.astro";
+import RenderBlock from "@component-utils/renderBlock.astro";
 import CustomSection from "@page-sections/builders/custom-section/CustomSection.astro";
 import {
+  blogLabel,
   getBlogPostsSortedByDate,
   loadBlogPageContext,
   withListingHeading,
@@ -41,22 +44,23 @@ export async function getStaticPaths({ paginate }: { paginate: Paginate }) {
 const { page } = Astro.props as Props;
 const tagSlug = Astro.params.tag ?? "";
 
-const { blogPage, heroSections } = await loadBlogPageContext();
+const { blogPage, heroSections, closingSections } = await loadBlogPageContext();
 
-const baseTitle = blogPage?.data?.title ?? "Blog";
+const baseTitle = blogLabel(blogPage);
 const displayTag =
   page.data[0]?.data.tags.find((t: string) => slugifyLabel(t.trim()) === tagSlug)?.trim() ??
   tagSlug;
-const tagListingTitle = `${baseTitle}: ${displayTag}`;
+const displayLabel = categoryLabel(displayTag);
+const tagListingTitle = `${baseTitle}: ${displayLabel}`;
 const pageTitle =
   page.currentPage > 1 ? `${tagListingTitle} – Page ${page.currentPage}` : tagListingTitle;
-const baseTagDescription = `Browse every blog post filed under the tag “${displayTag}”, sorted by date.`;
+const baseTagDescription = `Browse every blog post filed under ${displayLabel}, sorted by date.`;
 const pageDescription =
   page.currentPage > 1
     ? `${baseTagDescription} Page ${page.currentPage} of this archive.`
     : baseTagDescription;
 
-const baseTagHeading = `Posts tagged “${displayTag}”`;
+const baseTagHeading = `Posts in ${displayLabel}`;
 const listingHeading =
   page.currentPage > 1 ? `${baseTagHeading} – Page ${page.currentPage}` : baseTagHeading;
 ---
@@ -79,11 +83,19 @@ const listingHeading =
     <BlogPostListingGrid
       page={page}
       emptyMessage="No posts with this tag."
+      activeTag={displayTag}
       tagBreadcrumb={{
         allPostsHref: "/blog/",
         allPostsLabel: baseTitle,
-        currentLabel: displayTag,
+        currentLabel: displayLabel,
       }}
     />
   </CustomSection>
+
+  {/* Past the listing rather than with the hero, and outside Page's editable
+      array: the indices there would not line up with the sections it holds. */}
+  <RenderBlock
+    contentSections={closingSections}
+    useDefaultEditableBinding={false}
+  />
 </Page>

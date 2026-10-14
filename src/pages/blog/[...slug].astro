@@ -1,17 +1,24 @@
 ---
 import { breadcrumbListJsonLd } from "@component-utils/breadcrumbTrail";
 import { slugifyLabel } from "@component-utils/slugify";
-import Badge from "@core-elements/badge/Badge.astro";
 import Heading from "@core-elements/heading/Heading.astro";
 import Image from "@core-elements/image/Image.astro";
 import { ogCardPath } from "../../utils/og/paths";
-import SimpleText from "@core-elements/simple-text/SimpleText.astro";
 import breadcrumbsData from "@data/breadcrumbs.json";
 import Page from "@layouts/Page.astro";
 import CustomSection from "@page-sections/builders/custom-section/CustomSection.astro";
 import { getCollection, render, type CollectionEntry } from "astro:content";
-import { loadBlogPageContext } from "../../utils/blog";
-import { formatPostDate } from "@component-utils/formatPostDate";
+import { blogLabel, loadBlogPageContext } from "../../utils/blog";
+import { accentInk } from "@component-utils/accentInk.mjs";
+import { bandHaze } from "@component-utils/bandStyle.mjs";
+import { postAuthors } from "@component-utils/postAuthors.mjs";
+import { postCategories } from "@component-utils/postCategory.mjs";
+import { loadAuthorsByName } from "@component-utils/blogAuthors";
+import BlogAuthorCard from "@component-utils/BlogAuthorCard.astro";
+import BlogRelatedPosts from "@component-utils/BlogRelatedPosts.astro";
+import CtaBanner from "@page-sections/conversion/cta-banner/CtaBanner.astro";
+import ProseCodeCopy from "@component-utils/prose-code-copy/ProseCodeCopy.astro";
+import CodeAnnotations from "@component-utils/code-annotations/CodeAnnotations.astro";
 
 const componentImports = {
   ...import.meta.glob("../../components/building-blocks/**/*.astro", { eager: true }),
@@ -58,14 +65,26 @@ interface Props {
 const { post } = Astro.props;
 const { Content } = await render(post);
 const { blogPage } = await loadBlogPageContext();
-const blogListingLabel = blogPage?.data?.title ?? "Blog";
-const date = formatPostDate(post.data.date);
+const blogListingLabel = blogLabel(blogPage);
 const dateIso = post.data.date.toISOString().slice(0, 10);
-const category = post.data.tags[0]?.trim() ?? "";
-const categoryHref = category ? `/blog/tag/${slugifyLabel(category)}/` : "";
+
+/* The design stamps the date beside the category in the hero: day, month in
+   caps, year, set in the mono face. */
+const stampedDate = new Intl.DateTimeFormat("en-GB", {
+  day: "2-digit",
+  month: "short",
+  year: "numeric",
+})
+  .format(post.data.date)
+  .toUpperCase();
+
+const categories = postCategories(post.data.tags);
+const category = categories[0] ?? null;
+const writers = postAuthors(post.data);
+const byName = await loadAuthorsByName();
 const article = {
   publishedTime: post.data.date.toISOString(),
-  author: post.data.author,
+  author: writers,
   tags: post.data.tags,
 };
 
@@ -89,87 +108,81 @@ const breadcrumbJsonLd = breadcrumbListJsonLd(
     set:html={JSON.stringify(breadcrumbJsonLd).replace(/</g, "\\u003c")}
   ></script>
   <CustomSection
+    class="post-hero"
     maxContentWidth="xl"
     paddingHorizontal="lg"
     paddingVertical="4xl"
-    colorScheme="inherit"
-    backgroundColor="base"
-    class="post-container"
-    data-pagefind-filter="Type:Article"
+    backgroundColor="dark"
+    background={{ type: "pattern", pattern: "grid", fixed: false, mask: "none", overlay: 0 }}
+    haze={bandHaze(true, { split: true })}
+    style={
+      category
+        ? `--blog-card-accent: var(--${category.accent}); --blog-card-accent-ink: ${accentInk(category.accent)}`
+        : undefined
+    }
   >
-    <div>
-      <header class="post-header">
-        <a
-          class="post-back"
-          href="/blog/"
-        >
-          ← {blogListingLabel}
-        </a>
+    <div class="post-hero-head">
+      <div class="post-hero-copy">
+        <p class="post-hero-stamp">
+          {categories.map((entry: { tag: string; label: string; accent: string }) => (
+            <a
+              class="post-hero-tag"
+              href={`/blog/tag/${slugifyLabel(entry.tag)}/`}
+              style={`--blog-card-accent: var(--${entry.accent}); --blog-card-accent-ink: ${accentInk(entry.accent)}`}
+            >
+              {entry.label}
+            </a>
+          ))}
+          <time
+            class="post-hero-date"
+            datetime={dateIso}
+            data-pagefind-meta={`published:${dateIso}`}
+            data-pagefind-sort={`date:${dateIso}`}
+          >
+            {stampedDate}
+          </time>
+        </p>
 
         <Heading
           data-prop="title"
           data-pagefind-meta="title"
           level="h1"
-          size="2xl"
-          class="post-title"
+          size="lg"
+          class="post-hero-title"
         >
           {post.data.title}
         </Heading>
 
-        {post.data.description && (
-          <SimpleText
-            data-prop="description"
-            data-pagefind-meta="description"
-            data-pagefind-weight="3"
-            size="lg"
-            class="post-description"
-          >
-            {post.data.description}
-          </SimpleText>
-        )}
-
-        <SimpleText
-          size="sm"
-          class="post-meta"
-        >
-          {category && (
-            <>
+        {writers.length > 0 && (
+          <p class="post-hero-byline">
+            {writers.map((name: string) => (
               <a
-                class="post-meta-category"
-                href={categoryHref}
+                class="post-hero-writer"
+                href={`/blog/author/${slugifyLabel(name)}/`}
+                data-pagefind-filter="Author"
+                data-pagefind-meta="author"
               >
-                {category}
+                {byName.get(name)?.data.image ? (
+                  <img
+                    class="post-hero-portrait"
+                    src={byName.get(name)!.data.image}
+                    alt=""
+                    width="40"
+                    height="40"
+                    loading="eager"
+                  />
+                ) : (
+                  <span
+                    class="post-hero-portrait"
+                    aria-hidden="true"
+                  />
+                )}
+                {name}
               </a>
-              <span
-                class="post-meta-separator"
-                aria-hidden="true"
-              >
-                ·
-              </span>
-            </>
-          )}
-          <time
-            datetime={dateIso}
-            data-pagefind-meta={`published:${dateIso}`}
-            data-pagefind-sort={`date:${dateIso}`}
-          >
-            {date}
-          </time>
-          <span
-            class="post-meta-separator"
-            aria-hidden="true"
-          >
-            ·
-          </span>
-          <span
-            data-prop="author"
-            data-pagefind-filter="Author"
-            data-pagefind-meta="author"
-          >
-            {post.data.author}
-          </span>
-        </SimpleText>
-      </header>
+            ))}
+          </p>
+        )}
+      </div>
 
       {post.data.image && (
         <Image
@@ -178,13 +191,37 @@ const breadcrumbJsonLd = breadcrumbListJsonLd(
           rounded={true}
           data-prop-src="image"
           data-prop-alt="title"
-          class="post-image"
-          aspectRatio="widescreen"
+          class="post-hero-shot"
+          aspectRatio="none"
           positionVertical="center"
           imageElementAttributes={{
             "data-pagefind-meta": "image[src], image_alt[alt]",
           }}
         />
+      )}
+    </div>
+  </CustomSection>
+
+  <CustomSection
+    maxContentWidth="xl"
+    paddingHorizontal="lg"
+    paddingVertical="4xl"
+    paddingVerticalStart="2xl"
+    colorScheme="inherit"
+    backgroundColor="base"
+    class="post-container"
+    data-pagefind-filter="Type:Article"
+  >
+    <div>
+      {post.data.description && (
+        <p
+          class="visually-hidden"
+          data-prop="description"
+          data-pagefind-meta="description"
+          data-pagefind-weight="3"
+        >
+          {post.data.description}
+        </p>
       )}
 
       <div
@@ -194,80 +231,129 @@ const breadcrumbJsonLd = breadcrumbListJsonLd(
       >
         <Content components={mdxComponents} />
       </div>
-      {post.data.tags.length > 0 && (
-        <div
-          class="post-tags"
-          data-editable="array"
-          data-prop="tags"
-          data-direction="row"
-        >
-          {post.data.tags.map((tag) => (
-            <Badge
-              text={tag.trim()}
-              link={`/blog/tag/${slugifyLabel(tag.trim())}/`}
-              showArrow={false}
-              variant="plain"
-              size="sm"
-              data-pagefind-filter="Tag"
-              data-editable="array-item"
-              data-id={tag.trim()}
-            />
-          ))}
-        </div>
-      )}
+      <BlogAuthorCard writers={writers} />
     </div>
   </CustomSection>
+
+  {post.data.cta?.heading && (
+    <CtaBanner
+      sectionLabel="Closing CTA"
+      heading={post.data.cta.heading}
+      headingLevel="h2"
+      headingSize="lg"
+      subtext={post.data.cta.subtext ?? ""}
+      subtextSize="lg"
+      subtextWidth="xl"
+      linkText={post.data.cta.linkText ?? "Get started free"}
+      link={post.data.cta.link ?? "/start/"}
+      alignmentHorizontal="center"
+      buttonVariant="primary"
+      imageSource="/src/assets/images/marketing/ferns-rocks-2-3806-72621-mirrored.png"
+      imageAlt=""
+      imageSourceStart="/src/assets/images/marketing/ferns-corner-3806-72622.png"
+      imageAltStart=""
+      maxContentWidth="xl"
+      paddingHorizontal="gutter"
+      paddingVertical="4xl"
+      backgroundColor="dark"
+    />
+  )}
+
+  <BlogRelatedPosts current={post} />
+  <ProseCodeCopy />
+  <CodeAnnotations />
 </Page>
 
 <style is:global>
-  .post-container.custom-section > .outer-content > .content {
-    padding-bottom: 0 !important;
+  /* The design's hero: the post's copy down the left of a dark, ruled band,
+     its picture filling the rest. */
+  .post-hero-head {
+    align-items: center;
+    display: grid;
+    gap: var(--spacing-2xl);
+    grid-template-columns: minmax(0, 480fr) minmax(0, 560fr);
   }
 
-  .post-header {
-    margin-inline: auto;
-    max-width: 70ch;
+  .post-hero-stamp {
+    align-items: center;
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--spacing-md) var(--spacing-xl);
+    margin: 0;
   }
 
-  .post-back {
-    color: var(--color-text-muted);
-    font-size: var(--font-size-sm);
+  .post-hero-tag {
+    background-color: var(--blog-card-accent, var(--earth));
+    border-radius: var(--radius-full);
+    color: var(--blog-card-accent-ink, var(--white));
+    font-size: var(--font-size-xs);
     font-weight: var(--font-weight-semibold);
+    letter-spacing: 0.12em;
+    padding: var(--spacing-xs) var(--spacing-md);
     text-decoration: none;
-    transition: color var(--animation-fast) var(--ease-out);
+    text-transform: uppercase;
   }
 
-  .post-back:hover {
+  .post-hero-tag:hover,
+  .post-hero-tag:focus-visible {
+    text-decoration: underline;
+  }
+
+  .post-hero-date {
+    color: var(--color-text-muted);
+    font-family: var(--font-mono);
+    font-size: var(--font-size-sm);
+    letter-spacing: 0.12em;
+  }
+
+  .post-hero-title {
+    margin-block: var(--spacing-lg) 0;
+  }
+
+  .post-hero-byline {
     color: var(--color-text);
+    display: flex;
+    flex-wrap: wrap;
+    font-size: var(--font-size-xl);
+    gap: var(--spacing-md) var(--spacing-xl);
+    margin-block: var(--spacing-lg) 0;
   }
 
-  .post-title {
-    margin-top: var(--spacing-lg);
-  }
-
-  .post-description {
-    color: var(--color-text-muted);
-    margin-top: var(--spacing-md);
-  }
-
-  .post-meta {
-    color: var(--color-text-muted);
-    margin-top: var(--spacing-lg);
-  }
-
-  .post-meta .post-meta-separator {
-    color: var(--color-border);
-    padding-inline: var(--spacing-sm);
-  }
-
-  .post-meta .post-meta-category {
+  .post-hero-writer {
+    align-items: center;
     color: inherit;
+    display: flex;
+    gap: var(--spacing-md);
     text-decoration: none;
-    transition: color var(--animation-fast) var(--ease-out);
   }
 
-  .post-meta .post-meta-category:hover {
-    color: var(--color-text);
+  .post-hero-writer:hover,
+  .post-hero-writer:focus-visible {
+    text-decoration: underline;
+  }
+
+  .post-hero-portrait {
+    aspect-ratio: 1;
+    background-color: var(--gray-500);
+    border-radius: var(--radius-full);
+    display: block;
+    flex: none;
+    inline-size: 2.5rem;
+    object-fit: cover;
+  }
+
+  .post-hero-shot img {
+    aspect-ratio: 7 / 4;
+    block-size: auto;
+    display: block;
+    inline-size: 100%;
+    object-fit: cover;
+  }
+
+  @media (width < 900px) {
+    .post-hero-head {
+      grid-template-columns: minmax(0, 1fr);
+    }
   }
 
   .post-tags {
@@ -279,14 +365,21 @@ const breadcrumbJsonLd = breadcrumbListJsonLd(
     max-width: 70ch;
   }
 
+  /* The design's two measures: the reading column, and the wider one a
+     picture, a video or a code block runs to. */
   .post {
+    --post-measure: 42.5rem;
+    --post-media: 57.5rem;
+    /* The design's leading for a post, tighter than the 1.6 the prose layer
+       gives a 16px column. */
+    --post-leading: 1.37;
+
     display: grid;
     grid-template-columns:
       minmax(0, 1fr)
-      minmax(0, 70ch)
+      minmax(0, var(--post-measure))
       minmax(0, 1fr);
     margin-inline: auto;
-    margin-top: var(--spacing-xl);
   }
 
   .post > * {
@@ -295,30 +388,119 @@ const breadcrumbJsonLd = breadcrumbListJsonLd(
 
   .post > .wide,
   .post > pre,
+  .post > img,
+  .post > table,
   .post > .image,
-  .post > .video {
+  .post > .video,
+  .post > p:has(> img:only-child) {
     grid-column: 1 / -1;
+    inline-size: min(100%, var(--post-media));
+    margin-inline: auto;
   }
 
-  .post > h1,
-  .post > h2,
+  /* The `base` layer sets prose to 16; the design sets a post in 19. It has to
+     be said on the children, since that is where the layer says it. */
+  .post p,
+  .post li,
+  .post ul,
+  .post ol,
+  .post blockquote {
+    font-size: var(--font-size-lg);
+    line-height: var(--post-leading);
+  }
+
+  /* Markdown's own headings. Left alone they take the page ramp, which sets a
+     section heading at 65 where the design sets one inside a post at 29. */
+  .post > h2 {
+    font-size: var(--font-size-heading-sm);
+    line-height: var(--line-height-heading-sm);
+  }
+
+  .post > h3 {
+    font-size: var(--font-size-heading-xs);
+    line-height: var(--line-height-heading-xs);
+  }
+
+  /* The design opens the body with the post's first paragraph in a ruled box,
+     the way a template page opens with its README's. */
+  .post > p:first-child {
+    border: var(--border-width-sm) solid var(--color-border);
+    border-radius: var(--radius-card);
+    padding: var(--spacing-xl) var(--spacing-2xl);
+  }
+
+  /* Every gap in a post is written on the start of the block below it, never
+     the end of the one above. The post is a grid, so its items never collapse
+     their margins: left to the block above, a heading after a panel, a table
+     or a picture gets no gap at all while one after a paragraph gets the
+     paragraph's. */
+  .post > * {
+    margin-block-end: 0;
+  }
+
+  .post > * + * {
+    margin-block-start: var(--spacing-lg);
+  }
+
+  .post > .wide + *,
+  .post > pre + *,
+  .post > img + *,
+  .post > table + *,
+  .post > .image + *,
+  .post > .video + *,
+  .post > p:has(> img:only-child) + * {
+    margin-block-start: var(--spacing-xl);
+  }
+
+  .post > .wide,
+  .post > pre,
+  .post > img,
+  .post > table,
+  .post > .image,
+  .post > .video,
+  .post > p:has(> img:only-child),
   .post > h3,
   .post > h4,
   .post > h5,
   .post > h6 {
-    margin-bottom: 0;
-    margin-top: 1rem;
-
-    &:first-child {
-      margin-top: 0;
-    }
+    margin-block-start: var(--spacing-2xl);
   }
 
-  .post > .astro-code {
-    margin-block: var(--spacing-xl);
+  .post > h1,
+  .post > h2 {
+    margin-block-start: var(--spacing-3xl);
   }
 
-  .post-image {
-    margin-top: var(--spacing-xl);
+  .post > :first-child {
+    margin-block-start: 0;
+  }
+
+  /* A comparison table is wider than a phone. The old site wrapped these in a
+     web component to make them scroll; `display: block` does the same without
+     one, and the zero minimum is what lets a grid item shrink below its own
+     content. Left alone the overflow is clipped by the body rather than
+     scrolled, and the last column cannot be reached at all. */
+  /* Markdown's own image syntax wraps the picture in a paragraph, where a
+     picture written as plain HTML lands in the body directly. Both are a
+     picture and both run to the wider measure. */
+  .post > p:has(> img:only-child) {
+    margin-inline: auto;
+  }
+
+  .post > p:has(> img:only-child) > img {
+    display: block;
+    inline-size: 100%;
+  }
+
+  .post > table {
+    display: block;
+    min-inline-size: 0;
+    overflow-x: auto;
+  }
+
+  .post-container .blog-author-cards {
+    margin-block-start: var(--spacing-3xl);
+    margin-inline: auto;
+    max-inline-size: var(--post-measure, 42.5rem);
   }
 </style>

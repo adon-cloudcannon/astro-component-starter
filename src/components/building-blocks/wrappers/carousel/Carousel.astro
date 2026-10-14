@@ -204,6 +204,13 @@ if (!_component && !hasSlides && !hasSlotContent) return;
           width: 100%;
         }
 
+        /* Nothing off screen to reach, so the row does not answer a drag (see
+           setup.ts). Without this it still shunts sideways by the few pixels
+           it overruns by. */
+        &[data-carousel-idle] > .viewport > .track {
+          transform: none !important;
+        }
+
         &[data-autoscroll] > .viewport {
           -webkit-mask-image: linear-gradient(
             to right,
