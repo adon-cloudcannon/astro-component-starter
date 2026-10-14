@@ -86,9 +86,6 @@ pageSections:
         heading: Schedule a meeting with one of our experts
         headingLevel: h2
         headingSize: lg
-      image:
-        imageSource: /src/assets/images/marketing/ferns-rocks-2-3806-72621-mirrored.png
-        imageAlt: ''
       buttonSections:
         - _component: building-blocks/core-elements/button
           text: Book a personalized demo
@@ -100,6 +97,9 @@ pageSections:
           hideText: false
           variant: text
           size: md
+      imageRight:
+        imageRightSource: /src/assets/images/marketing/ferns-rocks-2-3806-72621-mirrored.png
+        imageRightAlt: ''
     style:
       scratched: true
       backgroundColor: pacific

@@ -88,9 +88,6 @@ pageSections:
       heading:
         heading: Any questions about CloudCannon?
         headingSize: lg
-      image:
-        imageSource: /src/assets/images/marketing/rocks-corner-3806-70523.png
-        imageAlt: ''
       buttonSections:
         - _component: building-blocks/core-elements/button
           text: Check out our documentation or contact us with any questions you have
@@ -102,6 +99,9 @@ pageSections:
           hideText: false
           variant: text
           size: md
+      imageRight:
+        imageRightSource: /src/assets/images/marketing/rocks-corner-3806-70523.png
+        imageRightAlt: ''
     style:
       scratched: true
 ---

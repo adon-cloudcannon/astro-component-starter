@@ -458,12 +458,6 @@ pageSections:
         headingSize: lg
       subtext: ''
       alignmentHorizontal: center
-      image:
-        imageSource: /src/assets/images/marketing/ferns-rocks-2-3806-72621-mirrored.png
-        imageAlt: ''
-      imageStart:
-        imageSourceStart: /src/assets/images/marketing/ferns-corner-3806-72622.png
-        imageAltStart: ''
       buttonSections:
         - _component: building-blocks/core-elements/button
           text: Reach out
@@ -485,6 +479,12 @@ pageSections:
           hideText: false
           variant: text
           size: md
+      imageLeft:
+        imageLeftSource: /src/assets/images/marketing/ferns-corner-3806-72622.png
+        imageLeftAlt: ''
+      imageRight:
+        imageRightSource: /src/assets/images/marketing/ferns-rocks-2-3806-72621-mirrored.png
+        imageRightAlt: ''
     style:
       scratched: true
       backgroundColor: pacific

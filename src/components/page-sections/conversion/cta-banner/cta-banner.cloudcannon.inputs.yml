@@ -71,33 +71,34 @@ content.buttonSections:
   options:
     structures: _structures.buttonSections
 
-content.image:
+# The two corners a drawing can hang off, in the order they are drawn.
+content.imageLeft:
   type: object
-  label: Picture
+  label: Left picture
   options:
     subtype: object
-content.image.imageSource:
+content.imageLeft.imageLeftSource:
   type: image
   label: File
-  comment: A drawing in the bottom-right corner, hanging over the foot of the band.
-content.image.imageAlt:
-  type: text
-  label: Alt text
-  comment: Alt text for the drawing.
-
-content.imageStart:
-  type: object
-  label: Picture (left)
-  options:
-    subtype: object
-content.imageStart.imageSourceStart:
-  type: image
-  label: File
-  comment: A second drawing, in the bottom-left corner.
-content.imageStart.imageAltStart:
+  comment: A drawing in the bottom-left corner, hanging over the foot of the band.
+content.imageLeft.imageLeftAlt:
   type: text
   label: Alt text
   comment: Alt text for the left-hand drawing.
+
+content.imageRight:
+  type: object
+  label: Right picture
+  options:
+    subtype: object
+content.imageRight.imageRightSource:
+  type: image
+  label: File
+  comment: A drawing in the bottom-right corner, hanging over the foot of the band.
+content.imageRight.imageRightAlt:
+  type: text
+  label: Alt text
+  comment: Alt text for the right-hand drawing.
 content.sectionLabel:
   type: text
   comment: Names the section in the editor and sets its anchor id.

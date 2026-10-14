@@ -11,12 +11,12 @@ value:
       headingLevel: h2
       headingSize: lg
     buttonSections: []
-    image:
-      imageSource: ""
-      imageAlt: ""
-    imageStart:
-      imageSourceStart: ""
-      imageAltStart: ""
+    imageLeft:
+      imageLeftSource: ""
+      imageLeftAlt: ""
+    imageRight:
+      imageRightSource: ""
+      imageRightAlt: ""
   style:
     backgroundColor: pacific
     scratched: true
