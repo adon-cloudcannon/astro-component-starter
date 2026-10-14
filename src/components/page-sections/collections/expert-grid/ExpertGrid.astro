@@ -13,6 +13,7 @@ import CustomSection from "@builders/custom-section/CustomSection.astro";
 import Button from "@core-elements/button/Button.astro";
 import Image from "@core-elements/image/Image.astro";
 import Text from "@core-elements/text/Text.astro";
+import { ssgName } from "@component-utils/ssgNames.mjs";
 
 const { props, at } = nestedProps(Astro.props);
 
@@ -111,7 +112,9 @@ const ssgMarks: Record<string, { src: string }> = Object.fromEntries(
                   <span
                     class="expert-grid-ssg"
                     style={`--expert-grid-mark: url("${ssgMarks[ssg].src}")`}
-                    title={ssg}
+                    role="img"
+                    aria-label={ssgName(ssg)}
+                    title={ssgName(ssg)}
                   />
                 ))}
             </p>
@@ -214,29 +217,31 @@ const ssgMarks: Record<string, { src: string }> = Object.fromEntries(
 
     /* The generators the agency works in, on one dark chip, which is how the
        design draws them. */
-    /* Wraps rather than running past the card: one agency works in nine
-       generators and a single row of nine does not fit a third of the
-       column. */
+    /* One disc per generator rather than the design's single chip: nine of
+       them do not fit a third of the column on one line, and separate discs
+       wrap without the row becoming a shape of its own. */
     .expert-grid .expert-grid-ssgs {
-      align-items: center;
-      background-color: var(--midnight);
-      border-radius: var(--radius-card);
       display: flex;
       flex-wrap: wrap;
-      gap: var(--spacing-md);
-      inline-size: fit-content;
-      justify-content: center;
+      gap: var(--spacing-sm);
       margin-block: var(--spacing-lg) 0;
-      max-inline-size: 100%;
-      padding: var(--spacing-sm) var(--spacing-md);
-      row-gap: var(--spacing-sm);
     }
 
-    /* A mask rather than an image: the files carry each brand's own colours
-       and the chip draws them all in one ink. */
+    /* The mark is a mask so one ink draws every brand, and the disc is the
+       element's own background around it. */
     .expert-grid .expert-grid-ssg {
+      aspect-ratio: 1;
+      background-color: var(--midnight);
+      border-radius: 50%;
+      display: grid;
+      inline-size: 2.25rem;
+      place-items: center;
+    }
+
+    .expert-grid .expert-grid-ssg::before {
       background-color: var(--light-sand);
       block-size: 1.125rem;
+      content: "";
       display: block;
       inline-size: 1.125rem;
       mask-image: var(--expert-grid-mark);
