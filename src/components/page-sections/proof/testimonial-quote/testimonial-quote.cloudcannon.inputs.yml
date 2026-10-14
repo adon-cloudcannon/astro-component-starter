@@ -290,6 +290,9 @@ style.backgroundColor:
       text:
         - key: name
 style.paddingVerticalStart:
+  hidden: true
+  # Set by hand where a band has to meet the one above it. One field for
+  # both ends is the editor's control; this overrides one of them.
   type: select
   comment: >-
     Overrides the padding above the card. Useful where the band above already

@@ -152,6 +152,8 @@ quietly broken in the editor.
 - Page-section editing panels put content fields first, with the shared settings (width, padding, colour scheme, background) in a collapsed group.
 - Pricing Tiers moves Header alignment, Card alignment and Plant a garden to its Style tab, beside the other fields that decide how the band is laid out. Existing pages need those three keys moved from `content:` to `style:`.
 - Comparison Table moves Striped to its Style tab, for the same reason. Existing pages need that key moved from `content:` to `style:`.
+- Page Header moves Alignment to its Style tab, for the same reason. Existing pages need that key moved from `content:` to `style:`.
+- Vertical padding (top) is no longer offered in the editor. It overrides one end of a band's vertical padding, which is a thing to set by hand where two bands meet, not a second padding control beside the first.
 
 #### Framework and dependencies
 
@@ -298,6 +300,7 @@ unusable or wrong.
 
 - List fields that showed "not configured", options the editor offered but the component ignored, and options the component supported but the editor never offered, across many components. `lint:cms` now fails on each of these.
 - Controls that only appeared after saving (alternate-theme logos, grid alignment) show up on a freshly added block.
+- Custom Section ignored its own Texture and Texture fade: it reads a whole background instead, so the two settings fell through onto the section element as HTML attributes and the band drew nothing. The Book a demo page gets its peg board back.
 - Comparison Table's corner note and corner heading sat inside the row that owns the plan columns, and a region reads its prop path relative to the nearest region above it, so the path was looked for inside the plans array and never found: the editor drew a box no cursor could enter, and the side panel updated nothing. The corner now has a row of its own, spanning both, which leaves it outside that row and changes nothing about where it sits. Both can be typed into on the page, and both follow the side panel as you type.
 - A component whose list was emptied in the editor renders instead of failing the build.
 - Following a link inside the Visual Editor does a full page load, so the editor knows which page is open.

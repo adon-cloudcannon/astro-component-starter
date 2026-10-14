@@ -51,6 +51,19 @@ style.paddingVertical:
         name: Default
       - id: md
         name: Compact
+style.paddingVerticalStart:
+  hidden: true
+  # Set by hand where a band has to meet the one above it. Declared only so
+  # that a section carrying it does not draw a field for it.
+  type: select
+  label: Vertical padding (top)
+  comment: Overrides the top of the vertical padding on its own. Empty follows Vertical padding.
+  options:
+    values:
+      - id: ""
+        name: Follow vertical padding
+      - id: none
+        name: None
 style.colorScheme:
   hidden: true
   # Carried by the band colour. Every band the design draws names its own ink,
