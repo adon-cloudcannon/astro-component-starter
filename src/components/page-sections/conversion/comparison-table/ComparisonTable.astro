@@ -189,26 +189,21 @@ const slidesPrice = (plan: Plan) =>
                   centred above it: the design levels "Features" with the plan
                   names, because the left column labels the rows under it and
                   is not a heading for the whole band. */}
+              {/* Nothing in this cell is bound: a region reads its prop path
+                  relative to the nearest region above it, which here is the
+                  row holding the plans, so `content.heading` would be looked
+                  for inside that array and never found. These two are edited
+                  in the side panel. */}
               <td class="comparison-table-corner">
                 <Heading
                   eyebrow={eyebrow}
-                  data-eyebrow-prop={at("eyebrow")}
                   level={headingLevel}
                   size={headingSize}
                   alignmentHorizontal="start"
-                  data-prop={at("heading")}
                 >
                   {heading}
                 </Heading>
-                {/* Always drawn, empty or not: the editor can only update a
-                    region that is already on the page, so a corner note typed
-                    into an absent element goes nowhere. */}
-                <p
-                  class="comparison-table-footnote"
-                  data-editable="text"
-                  data-prop={at("footnote")}
-                  set:text={footnote}
-                />
+                {isNonEmptyString(footnote) && <p class="comparison-table-footnote">{footnote}</p>}
               </td>
               {planList.map((plan) => (
                 <th
@@ -468,10 +463,6 @@ const slidesPrice = (plan: Plan) =>
          as body they sat level with the row labels under them and the header
          stopped reading as a header. */
       /* Small print, in the corner under whatever heading is there. */
-      .comparison-table-footnote:empty {
-        display: none;
-      }
-
       .comparison-table-footnote {
         color: var(--color-text-muted);
         font-size: var(--font-size-xs);
