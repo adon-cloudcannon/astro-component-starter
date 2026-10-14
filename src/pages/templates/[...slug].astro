@@ -17,6 +17,8 @@ import breadcrumbsData from "@data/breadcrumbs.json";
 import Page from "@layouts/Page.astro";
 import CustomSection from "@page-sections/builders/custom-section/CustomSection.astro";
 import { getCollection, getEntry, render, type CollectionEntry } from "astro:content";
+import ProseCodeCopy from "@component-utils/prose-code-copy/ProseCodeCopy.astro";
+import CodeAnnotations from "@component-utils/code-annotations/CodeAnnotations.astro";
 
 export async function getStaticPaths() {
   const templates = await getCollection("templates", ({ data }) => !data.draft);
@@ -365,6 +367,8 @@ const breadcrumbJsonLd = breadcrumbListJsonLd(
       </div>
     </CustomSection>
   )}
+  <ProseCodeCopy />
+  <CodeAnnotations />
 </Page>
 
 <style is:global>

@@ -5,6 +5,8 @@ import Page from "@layouts/Page.astro";
 import CustomSection from "@page-sections/builders/custom-section/CustomSection.astro";
 import { ogCardPath } from "../utils/og/paths";
 import { getCollection, render, type CollectionEntry } from "astro:content";
+import ProseCodeCopy from "@component-utils/prose-code-copy/ProseCodeCopy.astro";
+import CodeAnnotations from "@component-utils/code-annotations/CodeAnnotations.astro";
 
 export interface Props {
   page: CollectionEntry<"pages">;
@@ -49,4 +51,6 @@ const hasBody = Boolean(page.body?.trim());
       </div>
     </CustomSection>
   )}
+  <ProseCodeCopy />
+  <CodeAnnotations />
 </Page>
