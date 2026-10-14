@@ -177,6 +177,41 @@ const slidesPrice = (plan: Plan) =>
       >
         <table>
           <thead>
+            {/* The heading sits in the table's corner cell rather than
+                centred above it: the design levels "Features" with the plan
+                names, because the left column labels the rows under it and
+                is not a heading for the whole band.
+
+                It gets a row of its own, spanning both, so that it is not
+                inside the row below: a region reads its prop path relative
+                to the nearest region above it, and inside the row that binds
+                the plans `content.heading` would be looked for in that array
+                and never found. The row it sits in carries no height of its
+                own, so the cell still bottoms out level with the plan names
+                beside it. */}
+            <tr>
+              <td
+                class="comparison-table-corner"
+                rowspan="2"
+              >
+                <Heading
+                  eyebrow={eyebrow}
+                  data-eyebrow-prop={at("eyebrow")}
+                  level={headingLevel}
+                  size={headingSize}
+                  alignmentHorizontal="start"
+                  data-prop={at("heading")}
+                >
+                  {heading}
+                </Heading>
+                <p
+                  class="comparison-table-footnote"
+                  data-editable="text"
+                  data-prop={at("footnote")}
+                  set:text={footnote}
+                />
+              </td>
+            </tr>
             {/* The only place `plans` is bound — the body and footer cells
                   are copies of the same items, and duplicate bindings compete
                   for the same rows on the canvas. */}
@@ -185,26 +220,6 @@ const slidesPrice = (plan: Plan) =>
               data-prop={at("plans")}
               data-direction="row"
             >
-              {/* The heading sits in the table's corner cell rather than
-                  centred above it: the design levels "Features" with the plan
-                  names, because the left column labels the rows under it and
-                  is not a heading for the whole band. */}
-              {/* Nothing in this cell is bound: a region reads its prop path
-                  relative to the nearest region above it, which here is the
-                  row holding the plans, so `content.heading` would be looked
-                  for inside that array and never found. These two are edited
-                  in the side panel. */}
-              <td class="comparison-table-corner">
-                <Heading
-                  eyebrow={eyebrow}
-                  level={headingLevel}
-                  size={headingSize}
-                  alignmentHorizontal="start"
-                >
-                  {heading}
-                </Heading>
-                {isNonEmptyString(footnote) && <p class="comparison-table-footnote">{footnote}</p>}
-              </td>
               {planList.map((plan) => (
                 <th
                   scope="col"
@@ -462,6 +477,12 @@ const slidesPrice = (plan: Plan) =>
          against the 14.5/400 muted body the rest of the table is set in. Read
          as body they sat level with the row labels under them and the header
          stopped reading as a header. */
+      /* Empty until someone writes one, and an empty element still draws its
+         margin. */
+      .comparison-table-footnote:empty {
+        display: none;
+      }
+
       /* Small print, in the corner under whatever heading is there. */
       .comparison-table-footnote {
         color: var(--color-text-muted);

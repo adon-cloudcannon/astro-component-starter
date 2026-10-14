@@ -297,7 +297,7 @@ unusable or wrong.
 
 - List fields that showed "not configured", options the editor offered but the component ignored, and options the component supported but the editor never offered, across many components. `lint:cms` now fails on each of these.
 - Controls that only appeared after saving (alternate-theme logos, grid alignment) show up on a freshly added block.
-- Comparison Table's corner note and corner heading sat inside the row that owns the plan columns, and a region reads its prop path relative to the nearest region above it, so the path was looked for inside the plans array and never found. The editor drew an empty box no cursor could enter. Both are edited in the side panel instead, where they update the preview as you type.
+- Comparison Table's corner note and corner heading sat inside the row that owns the plan columns, and a region reads its prop path relative to the nearest region above it, so the path was looked for inside the plans array and never found: the editor drew a box no cursor could enter, and the side panel updated nothing. The corner now has a row of its own, spanning both, which leaves it outside that row and changes nothing about where it sits. Both can be typed into on the page, and both follow the side panel as you type.
 - A component whose list was emptied in the editor renders instead of failing the build.
 - Following a link inside the Visual Editor does a full page load, so the editor knows which page is open.
 - Carousels, modals, tabs, galleries and code blocks work in the component library inside the Visual Editor.
