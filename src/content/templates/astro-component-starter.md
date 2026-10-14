@@ -6,6 +6,12 @@ description: >-
 image: https://cc-dam.imgix.net/astro-component-starter.cc_.png
 imageAlt: Astro Component Starter screenshot
 order: 1
+starter: true
+spec:
+  - label: Framework
+    value: Astro
+  - label: CMS
+    value: CloudCannon
 collections:
   - featured
   - starter

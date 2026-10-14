@@ -7,6 +7,12 @@ description: >-
 image: https://cc-dam.imgix.net/hugo-starter-1.png
 imageAlt: Screenshot of CloudCannon's Hugo Starter
 order: 4
+starter: true
+spec:
+  - label: Framework
+    value: Hugo
+  - label: CMS
+    value: CloudCannon
 collections:
   - starter
 ssgs:

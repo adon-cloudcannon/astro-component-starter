@@ -135,6 +135,18 @@ const templateSchema = z.object({
   ssgs: z.array(z.string()).optional(),
   previewUrl: z.string().optional(),
   repoUrl: z.string().optional(),
+  /* A starter's page is a different page: its sidebar lists what you get and
+     what is built with it, where a template's offers a generator and a
+     deploy. */
+  starter: z.boolean().optional(),
+  spec: z.array(z.object({ label: z.string(), value: z.string() })).optional(),
+  bonus: z
+    .object({
+      label: z.string().optional(),
+      links: z.array(z.object({ text: z.string(), link: z.string().optional() })).optional(),
+    })
+    .optional(),
+  buildWith: z.array(z.object({ text: z.string(), link: z.string().optional() })).optional(),
   gallery: z.array(z.object({ image: z.string(), alt: z.string().optional() })).optional(),
   sidebar: z.array(z.object({ label: z.string().optional(), body: z.string() })).optional(),
   draft: z.boolean().optional(),

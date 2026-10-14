@@ -7,6 +7,12 @@ description: >-
 image: https://cc-dam.imgix.net/eleventy-starter-home.png
 imageAlt: Screenshot of the Eleventy Starter template for CloudCannon
 order: 5
+starter: true
+spec:
+  - label: Framework
+    value: Eleventy
+  - label: CMS
+    value: CloudCannon
 collections:
   - starter
 ssgs:

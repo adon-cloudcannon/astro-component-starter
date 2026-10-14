@@ -6,6 +6,12 @@ description: >-
 image: https://cc-dam.imgix.net/wireframe-multilingual-flip.png
 imageAlt: Astro Multilingual Bookshop Starter
 order: 3
+starter: true
+spec:
+  - label: Framework
+    value: Astro
+  - label: CMS
+    value: CloudCannon
 collections:
   - starter
 ssgs:

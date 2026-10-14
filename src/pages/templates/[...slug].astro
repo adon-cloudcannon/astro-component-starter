@@ -35,6 +35,13 @@ const { template } = Astro.props;
 const { Content } = await render(template);
 const { title, description, image, imageAlt, previewUrl, repoUrl } = template.data;
 
+/* A starter's sidebar is a different sidebar: what you get and what is built
+   with it, where a template's offers a generator and a deploy. */
+const isStarter = template.data.starter === true;
+const spec = template.data.spec ?? [];
+const bonus = template.data.bonus;
+const buildWith = template.data.buildWith ?? [];
+
 /* The pill a template carries here is the one the listing page filters by, in
    the same words and the same colour, so the two read as one thing. Both come
    from the listing's own block rather than from a copy kept here. */
@@ -203,7 +210,64 @@ const breadcrumbJsonLd = breadcrumbListJsonLd(
     <div class="template-page-columns">
       <aside class="template-page-aside">
         <div class="template-page-aside-inner">
-        {ssgs.length > 0 && (
+        {isStarter && spec.length > 0 && (
+          <div class="template-page-panel">
+            <p class="template-page-panel-label">What you'll get</p>
+            <dl class="template-page-spec">
+              {spec.map((item) => (
+                <div class="template-page-spec-row">
+                  <dt>{item.label}:</dt>
+                  <dd>{item.value}</dd>
+                </div>
+              ))}
+            </dl>
+            {previewUrl && (
+              <Button
+                text="Preview site"
+                link={previewUrl}
+                iconName="arrow-right"
+                iconPosition="after"
+                variant="text"
+                size="md"
+              />
+            )}
+          </div>
+        )}
+
+        {isStarter && (bonus?.links?.length ?? 0) > 0 && (
+          <div class="template-page-panel">
+            <p class="template-page-panel-label">Bonus features</p>
+            {bonus?.label && <p class="template-page-panel-line">{bonus.label}</p>}
+            <ul class="template-page-link-list">
+              {(bonus?.links ?? []).map((link) => (
+                <li>{link.link ? <a href={link.link}>{link.text}</a> : link.text}</li>
+              ))}
+            </ul>
+            {repoUrl && (
+              <Button
+                text="View on GitHub"
+                link={repoUrl}
+                iconName="arrow-right"
+                iconPosition="after"
+                variant="text"
+                size="md"
+              />
+            )}
+          </div>
+        )}
+
+        {isStarter && buildWith.length > 0 && (
+          <div class="template-page-panel">
+            <p class="template-page-panel-label">Build with starter</p>
+            <ul class="template-page-link-list">
+              {buildWith.map((link) => (
+                <li>{link.link ? <a href={link.link}>{link.text}</a> : link.text}</li>
+              ))}
+            </ul>
+          </div>
+        )}
+
+        {!isStarter && ssgs.length > 0 && (
           <div class="template-page-panel">
             <p class="template-page-panel-label">Choose your SSG:</p>
             <ul class="template-page-ssgs">
@@ -236,6 +300,7 @@ const breadcrumbJsonLd = breadcrumbListJsonLd(
             />
           </div>
         )}
+        {!isStarter && (
         <div class="template-page-panel">
           {repoUrl && (
             <Button
@@ -258,6 +323,7 @@ const breadcrumbJsonLd = breadcrumbListJsonLd(
             />
           )}
         </div>
+        )}
         </div>
       </aside>
 
@@ -434,6 +500,46 @@ const breadcrumbJsonLd = breadcrumbListJsonLd(
     letter-spacing: 0.2em;
     margin: 0;
     text-transform: uppercase;
+  }
+
+  /* A starter's spec: each line is a label and its answer, run together the
+     way the design sets them. */
+  .template-page-spec {
+    margin: 0;
+  }
+
+  .template-page-spec-row {
+    margin-block-end: var(--spacing-md);
+  }
+
+  .template-page-spec dt,
+  .template-page-spec dd {
+    display: inline;
+    margin: 0;
+  }
+
+  .template-page-spec dt {
+    font-weight: var(--font-weight-semibold);
+  }
+
+  .template-page-spec dd {
+    color: var(--color-text-muted);
+    /* The two run together as one line, so the space between them has to be
+       drawn: there is no whitespace between a dt and its dd in the markup. */
+    margin-inline-start: 0.35em;
+  }
+
+  .template-page-panel-line {
+    font-weight: var(--font-weight-semibold);
+    margin: 0;
+  }
+
+  .template-page-link-list {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-sm);
+    margin: 0;
+    padding-inline-start: var(--spacing-lg);
   }
 
   .template-page-ssgs {

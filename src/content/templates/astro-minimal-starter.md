@@ -7,6 +7,12 @@ description: >-
 image: https://cc-dam.imgix.net/astro-starter-cloudcannon-home.png
 imageAlt: Screenshot of the Astro Starter template for CloudCannon
 order: 2
+starter: true
+spec:
+  - label: Framework
+    value: Astro
+  - label: CMS
+    value: CloudCannon
 collections:
   - starter
 ssgs:
