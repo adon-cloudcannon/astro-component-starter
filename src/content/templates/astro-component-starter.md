@@ -10,8 +10,19 @@ starter: true
 spec:
   - label: Framework
     value: Astro
+  - label: Use case
+    value: Components, Pagebuilding
+  - label: CSS
+    value: Vanilla CSS
   - label: CMS
     value: CloudCannon
+bonus:
+  label: Visual editing with Editable Regions
+  links:
+    - text: Documented components
+      link: https://astro-component-starter.cc/component-docs/
+    - text: Component builder
+      link: https://astro-component-starter.cc/component-docs/component-builder/
 collections:
   - featured
   - starter

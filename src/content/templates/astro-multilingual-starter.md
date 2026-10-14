@@ -9,7 +9,11 @@ order: 3
 starter: true
 spec:
   - label: Framework
-    value: Astro
+    value: Astro, Rosey
+  - label: Use case
+    value: Boilerplate, Business, Documentation, Education, Multilingual
+  - label: CSS
+    value: Tailwind CSS
   - label: CMS
     value: CloudCannon
 collections:

@@ -11,6 +11,10 @@ starter: true
 spec:
   - label: Framework
     value: Hugo
+  - label: Use case
+    value: Boilerplate
+  - label: CSS
+    value: Tailwind CSS
   - label: CMS
     value: CloudCannon
 collections:

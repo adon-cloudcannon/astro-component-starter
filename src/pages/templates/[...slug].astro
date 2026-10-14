@@ -234,25 +234,32 @@ const breadcrumbJsonLd = breadcrumbListJsonLd(
           </div>
         )}
 
-        {isStarter && (bonus?.links?.length ?? 0) > 0 && (
+        {isStarter && (bonus?.label || (bonus?.links?.length ?? 0) > 0) && (
           <div class="template-page-panel">
             <p class="template-page-panel-label">Bonus features</p>
             {bonus?.label && <p class="template-page-panel-line">{bonus.label}</p>}
-            <ul class="template-page-link-list">
-              {(bonus?.links ?? []).map((link) => (
-                <li>{link.link ? <a href={link.link}>{link.text}</a> : link.text}</li>
-              ))}
-            </ul>
-            {repoUrl && (
-              <Button
-                text="View on GitHub"
-                link={repoUrl}
-                iconName="arrow-right"
-                iconPosition="after"
-                variant="text"
-                size="md"
-              />
+            {(bonus?.links?.length ?? 0) > 0 && (
+              <ul class="template-page-link-list">
+                {(bonus?.links ?? []).map((link) => (
+                  <li>{link.link ? <a href={link.link}>{link.text}</a> : link.text}</li>
+                ))}
+              </ul>
             )}
+          </div>
+        )}
+
+        {/* Its own panel: hung off the bonus features, a starter with none —
+            Hugo and the multilingual one — lost its repository link. */}
+        {isStarter && repoUrl && (
+          <div class="template-page-panel">
+            <Button
+              text="View on GitHub"
+              link={repoUrl}
+              iconName="arrow-right"
+              iconPosition="after"
+              variant="text"
+              size="md"
+            />
           </div>
         )}
 

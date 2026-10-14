@@ -11,8 +11,14 @@ starter: true
 spec:
   - label: Framework
     value: Astro
+  - label: Use case
+    value: Boilerplate
+  - label: CSS
+    value: Tailwind CSS
   - label: CMS
     value: CloudCannon
+bonus:
+  label: Visual editing with Editable Regions
 collections:
   - starter
 ssgs:
