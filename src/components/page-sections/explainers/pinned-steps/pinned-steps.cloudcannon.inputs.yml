@@ -401,9 +401,16 @@ content.progressColor:
 content.copyColor:
   type: select
   comment: >-
-    A palette colour painted behind the copy half of the band, from the page's
-    edge to the middle, top to bottom. Empty leaves the copy on the band's own
-    colour.
+    A palette colour painted behind the copy half of the slides, from the
+    page's edge to the middle. It covers the slides, not the heading above
+    them. Empty leaves the copy on the band's own colour.
+  options: *palette-colours
+content.mediaColor:
+  type: select
+  comment: >-
+    A palette colour painted behind the media half of the slides, from the
+    middle to the page's edge. Set with Copy colour it paints the whole of the
+    slides; on its own it stops the band's texture on that side only.
   options: *palette-colours
 content.stepScroll:
   type: number

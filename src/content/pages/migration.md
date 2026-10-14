@@ -118,6 +118,8 @@ pageSections:
       numbered: true
       progressColor: sunset
       progressTrackColor: muted
+      copyColor: black
+      mediaColor: black
       alignmentHorizontal: start
       reverse: true
       steps:

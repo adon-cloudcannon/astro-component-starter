@@ -167,6 +167,8 @@ pageSections:
         headingSize: lg
       subtext:
         subtext: ''
+      copyColor: black
+      mediaColor: black
       alignmentHorizontal: center
       steps:
         - contentSections:

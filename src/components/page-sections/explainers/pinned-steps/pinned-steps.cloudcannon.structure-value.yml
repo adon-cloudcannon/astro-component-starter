@@ -36,6 +36,7 @@ value:
     reverse: false
     mediaWidth: half
     copyColor: ""
+    mediaColor: ""
     showProgress: true
   style:
     backgroundColor: light-sand

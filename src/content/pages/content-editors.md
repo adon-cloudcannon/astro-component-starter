@@ -75,6 +75,8 @@ pageSections:
         headingSize: lg
       subtext:
         subtext: ''
+      copyColor: black
+      mediaColor: black
       alignmentHorizontal: start
       steps:
         - contentSections:
@@ -87,7 +89,11 @@ pageSections:
                 Change a headline, swap an image, or build a whole new page from
                 components your developers already built.
               size: lg
-          mediaSections: []
+          mediaSections:
+            - _component: building-blocks/core-elements/image
+              source: /src/assets/images/marketing/editor-update-right-away.png
+              alt: ''
+              decorative: true
         - contentSections:
             - _component: building-blocks/core-elements/heading
               text: Preview before anyone else sees it

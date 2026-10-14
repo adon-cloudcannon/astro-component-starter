@@ -139,6 +139,7 @@ pageSections:
         heading: ''
       subtext:
         subtext: ''
+      copyColor: black
       steps:
         - contentSections:
             - _component: building-blocks/core-elements/heading
