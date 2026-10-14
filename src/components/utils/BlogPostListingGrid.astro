@@ -42,6 +42,7 @@ const { page, emptyMessage, locale = "en-US", tagBreadcrumb } = Astro.props;
       />
     )}
     <Grid
+      columns={3}
       gap="lg"
       minItemWidth="320"
       maxItemWidth="400"
@@ -73,25 +74,26 @@ const { page, emptyMessage, locale = "en-US", tagBreadcrumb } = Astro.props;
                   width={800}
                 />
               )}
-              <SimpleText
-                size="sm"
-                style="color: var(--color-text-muted); margin-bottom: var(--spacing-xs);"
-              >
-                {pubDate} • {post.data.author || "Anonymous"}
-              </SimpleText>
+              {post.data.tags?.[0] && (
+                <p class="blog-card-tag">{post.data.tags[0]}</p>
+              )}
               <Heading
                 level="h2"
-                size="md"
-                style="margin-bottom: var(--spacing-md); margin-top: var(--spacing-sm);"
+                size="sm"
+                class="blog-card-title"
               >
                 {post.data.title}
               </Heading>
               <SimpleText
                 size="sm"
-                style="color: var(--color-text-muted); margin-top: 0;"
+                class="blog-card-line"
               >
                 {post.data.description}
               </SimpleText>
+              <p class="blog-card-byline">
+                {post.data.author || "Anonymous"} <span>·</span> {pubDate}
+              </p>
+              <p class="blog-card-more">Read story <span aria-hidden="true">→</span></p>
             </Card>
           </GridItem>
         );
@@ -111,3 +113,51 @@ const { page, emptyMessage, locale = "en-US", tagBreadcrumb } = Astro.props;
     {emptyMessage}
   </SimpleText>
 )}
+
+<style is:global>
+  @layer components {
+    /* The category the post carries, drawn as the design's pill. */
+    .blog-card-tag {
+      background-color: color-mix(in srgb, var(--sunset) 22%, transparent);
+      border-radius: 999px;
+      color: var(--color-text-strong);
+      font-size: var(--font-size-xs);
+      font-weight: var(--font-weight-semibold);
+      inline-size: fit-content;
+      letter-spacing: 0.12em;
+      margin: 0 0 var(--spacing-md);
+      padding: var(--spacing-xs) var(--spacing-md);
+      text-transform: uppercase;
+    }
+
+    .blog-card-title {
+      margin-block: 0 var(--spacing-sm);
+    }
+
+    .blog-card-line {
+      color: var(--color-text-muted);
+      margin-block: 0;
+    }
+
+    /* Who wrote it and when, under the line rather than over the title: the
+       design leads with the story. */
+    .blog-card-byline {
+      color: var(--color-text-muted);
+      font-size: var(--font-size-sm);
+      margin-block: var(--spacing-lg) 0;
+    }
+
+    .blog-card-byline span {
+      opacity: 0.6;
+    }
+
+    .blog-card-more {
+      border-block-start: var(--border-width-sm) solid var(--color-border);
+      color: var(--color-brand, var(--pacific));
+      font-size: var(--font-size-md);
+      font-weight: var(--font-weight-semibold);
+      margin-block: var(--spacing-lg) 0;
+      padding-block-start: var(--spacing-md);
+    }
+  }
+</style>
