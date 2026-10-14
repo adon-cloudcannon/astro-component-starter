@@ -13,7 +13,7 @@ import Video from "@core-elements/video/Video.astro";
 const { props, at } = nestedProps(Astro.props);
 
 const {
-  label,
+  sectionLabel,
   contentSections,
   maxContentWidth,
   paddingHorizontal,
@@ -106,18 +106,18 @@ const BANDS = {
   // Not in any section's own dropdown: the design draws #FFFFFF on a card
   // rather than a band, and nothing on the site bands white yet. It is here
   // so a page that needs one has it, and so `--band-color` can answer for it.
-  white: { token: "white", scheme: "light" },         // #FFFFFF
-  "light-sand": { token: "base", scheme: "light" },   // #FFFCF3
-  sand: { token: "surface", scheme: "light" },        // #FBF6E9
-  "dark-sand": { token: "muted", scheme: "light" },   // #EBE1C9
-  dark: { token: "base", scheme: "dark" },            // #1D1B17
+  white: { token: "white", scheme: "light" }, // #FFFFFF
+  "light-sand": { token: "base", scheme: "light" }, // #FFFCF3
+  sand: { token: "surface", scheme: "light" }, // #FBF6E9
+  "dark-sand": { token: "muted", scheme: "light" }, // #EBE1C9
+  dark: { token: "base", scheme: "dark" }, // #1D1B17
   // Light, not dark, which looks wrong and is not. A brand band colours its
   // own text from `--color-text-on-brand`, which is white under either scheme,
   // so the scheme decides everything *except* the thing it looks like it
   // decides. The three Pacific bands already on the site run light and are
   // right; a dark one would re-theme their buttons, cards and rules for no
   // visible gain.
-  pacific: { token: "brand", scheme: "light" },       // #034AD8
+  pacific: { token: "brand", scheme: "light" }, // #034AD8
 };
 const band = BANDS[backgroundColor];
 const bandToken = band ? band.token : backgroundColor;
@@ -162,8 +162,8 @@ const patternShape = bgType === "pattern" && pattern ? pattern : null;
 const patternImageUrl =
   bgType === "pattern" && !patternShape && imageSource ? resolveImageSource(imageSource) : null;
 
-if (!htmlAttributes.id && label) {
-  htmlAttributes.id = slugifyLabel(label);
+if (!htmlAttributes.id && sectionLabel) {
+  htmlAttributes.id = slugifyLabel(sectionLabel);
 }
 
 const hasContentSections = contentSections !== undefined;
@@ -237,9 +237,7 @@ const arrayDataAttributes =
         }}
       />
     )}
-    {bandToken && (
-      <div class:list={["background", bandToken && `bg-${bandToken}`]} />
-    )}
+    {bandToken && <div class:list={["background", bandToken && `bg-${bandToken}`]} />}
     {hazePools.map((pool) => (
       <div
         class="background-haze"
@@ -249,7 +247,9 @@ const arrayDataAttributes =
           ...(pool?.rx ? { "--haze-rx": pool.rx } : {}),
           ...(pool?.y ? { "--haze-y": pool.y } : {}),
           ...(pool?.ry ? { "--haze-ry": pool.ry } : {}),
-          ...(maxContentWidth ? { "--haze-track": `min(100%, var(--content-width-${maxContentWidth}))` } : {}),
+          ...(maxContentWidth
+            ? { "--haze-track": `min(100%, var(--content-width-${maxContentWidth}))` }
+            : {}),
           ...(hazeColor ? { "--haze-color": hazeColor } : {}),
         }}
       />
@@ -271,10 +271,14 @@ const arrayDataAttributes =
         paddingVertical && `pad-y-${paddingVertical}`,
         maxContentWidth && `max-width-${maxContentWidth}`,
       ]}
-      style={[
-        paddingVerticalStart ? `padding-block-start: var(--spacing-${paddingVerticalStart})` : "",
-        paddingVerticalEnd ? `padding-block-end: var(--spacing-${paddingVerticalEnd})` : "",
-      ].filter(Boolean).join("; ") || undefined}
+      style={
+        [
+          paddingVerticalStart ? `padding-block-start: var(--spacing-${paddingVerticalStart})` : "",
+          paddingVerticalEnd ? `padding-block-end: var(--spacing-${paddingVerticalEnd})` : "",
+        ]
+          .filter(Boolean)
+          .join("; ") || undefined
+      }
       {...arrayDataAttributes}
     >
       <slot>
@@ -342,10 +346,7 @@ const arrayDataAttributes =
              full width and the gutter is all there is. */
           --section-bleed: max(
             calc(
-              (
-                  var(--section-inline-size) -
-                    var(--section-max-width, var(--section-inline-size))
-                ) /
+              (var(--section-inline-size) - var(--section-max-width, var(--section-inline-size))) /
                 2
             ),
             var(--section-pad-x, 0px)
@@ -364,41 +365,31 @@ const arrayDataAttributes =
           &.max-width-xs {
             --section-max-width: var(--content-width-xs);
 
-            max-width: calc(
-              var(--content-width-xs) + var(--section-pad-x, 0px) * 2
-            );
+            max-width: calc(var(--content-width-xs) + var(--section-pad-x, 0px) * 2);
           }
 
           &.max-width-sm {
             --section-max-width: var(--content-width-sm);
 
-            max-width: calc(
-              var(--content-width-sm) + var(--section-pad-x, 0px) * 2
-            );
+            max-width: calc(var(--content-width-sm) + var(--section-pad-x, 0px) * 2);
           }
 
           &.max-width-md {
             --section-max-width: var(--content-width-md);
 
-            max-width: calc(
-              var(--content-width-md) + var(--section-pad-x, 0px) * 2
-            );
+            max-width: calc(var(--content-width-md) + var(--section-pad-x, 0px) * 2);
           }
 
           &.max-width-lg {
             --section-max-width: var(--content-width-lg);
 
-            max-width: calc(
-              var(--content-width-lg) + var(--section-pad-x, 0px) * 2
-            );
+            max-width: calc(var(--content-width-lg) + var(--section-pad-x, 0px) * 2);
           }
 
           &.max-width-xl {
             --section-max-width: var(--content-width-xl);
 
-            max-width: calc(
-              var(--content-width-xl) + var(--section-pad-x, 0px) * 2
-            );
+            max-width: calc(var(--content-width-xl) + var(--section-pad-x, 0px) * 2);
           }
 
           /* The design's second column, 1180: rows of cards and wide tables
@@ -406,25 +397,19 @@ const arrayDataAttributes =
           &.max-width-wide {
             --section-max-width: var(--content-width-wide);
 
-            max-width: calc(
-              var(--content-width-wide) + var(--section-pad-x, 0px) * 2
-            );
+            max-width: calc(var(--content-width-wide) + var(--section-pad-x, 0px) * 2);
           }
 
           &.max-width-2xl {
             --section-max-width: var(--content-width-2xl);
 
-            max-width: calc(
-              var(--content-width-2xl) + var(--section-pad-x, 0px) * 2
-            );
+            max-width: calc(var(--content-width-2xl) + var(--section-pad-x, 0px) * 2);
           }
 
           &.max-width-3xl {
             --section-max-width: var(--content-width-3xl);
 
-            max-width: calc(
-              var(--content-width-3xl) + var(--section-pad-x, 0px) * 2
-            );
+            max-width: calc(var(--content-width-3xl) + var(--section-pad-x, 0px) * 2);
           }
 
           &.pad-x-xs {
@@ -572,10 +557,7 @@ const arrayDataAttributes =
              disappears rather than degrading. */
           background-image: radial-gradient(
             ellipse var(--haze-rx, 50%) var(--haze-ry, 80%) at
-              calc(
-                50% - var(--haze-track, 100%) / 2 + var(--haze-track, 100%) *
-                  var(--haze-x, 0.5)
-              )
+              calc(50% - var(--haze-track, 100%) / 2 + var(--haze-track, 100%) * var(--haze-x, 0.5))
               var(--haze-y, 50%),
             var(--haze-color, var(--color-bg)) 0%,
             color-mix(in srgb, var(--haze-color, var(--color-bg)) 80%, transparent) 38%,

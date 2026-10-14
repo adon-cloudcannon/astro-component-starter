@@ -5,7 +5,7 @@ tabbed: true
 value:
   _component: page-sections/builders/custom-section
   content:
-    label: ''
+    sectionLabel: ''
     contentSections: []
     rounded: false
   style:
@@ -20,7 +20,7 @@ preview:
   text:
     - Custom Section
   subtext:
-    - key: content.label
+    - key: content.sectionLabel
   image: public/component-previews/page-sections/builders/custom-section.svg
   icon: width_full
 picker_preview:

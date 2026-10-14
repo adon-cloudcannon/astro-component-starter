@@ -153,6 +153,7 @@ quietly broken in the editor.
 - Pricing Tiers moves Header alignment, Card alignment and Plant a garden to its Style tab, beside the other fields that decide how the band is laid out. Existing pages need those three keys moved from `content:` to `style:`.
 - Comparison Table moves Striped to its Style tab, for the same reason. Existing pages need that key moved from `content:` to `style:`.
 - Page Header moves Alignment to its Style tab, for the same reason. Existing pages need that key moved from `content:` to `style:`.
+- **Heads-up:** Custom Section's Label is now Section Label, the name every other page section uses for the same field. Existing pages need the key renamed from `label:` to `sectionLabel:`.
 - Vertical padding (top) is no longer offered in the editor. It overrides one end of a band's vertical padding, which is a thing to set by hand where two bands meet, not a second padding control beside the first.
 
 #### Framework and dependencies

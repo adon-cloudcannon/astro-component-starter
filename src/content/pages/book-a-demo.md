@@ -29,7 +29,7 @@ pageSections:
       haze: true
   - _component: page-sections/builders/custom-section
     content:
-      label: ''
+      sectionLabel: Book a time
       contentSections:
         - _component: building-blocks/core-elements/embed
           html: <iframe src="https://meetings.hubspot.com/christopher-wingate?embed=true"
@@ -48,7 +48,7 @@ pageSections:
       paddingVerticalStart: none
   - _component: page-sections/builders/custom-section
     content:
-      label: ''
+      sectionLabel: Demo
       contentSections:
         - _component: building-blocks/core-elements/heading
           eyebrow: Demo

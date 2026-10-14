@@ -14,7 +14,7 @@ style:
   options:
     subtype: object
 
-content.label:
+content.sectionLabel:
   type: text
   comment: Names the section in the editor and sets its anchor id.
 content.contentSections:

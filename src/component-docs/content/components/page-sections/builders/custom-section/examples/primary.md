@@ -10,7 +10,7 @@ blocks:
     - _component: building-blocks/core-elements/heading
       text: This is a Heading inside a Custom Section.
       level: h2
-  label: ''
+  sectionLabel: ''
   maxContentWidth: 2xl
   colorScheme: inherit
   rounded: false
