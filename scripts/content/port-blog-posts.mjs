@@ -43,17 +43,19 @@ const attr = (name, value) =>
 
 /** Heroicons names the old site used, in this project's Lucide set. */
 const ICONS = {
+  /* Heroicons' bolt is a lightning bolt; Lucide's is a hex nut. */
+  bolt: "zap",
+  "code-bracket": "code-xml",
+  "queue-list": "list-ordered",
   "information-circle": "info",
   "light-bulb": "lightbulb",
   "pencil-square": "square-pen",
   photo: "image",
-  "code-bracket": "code",
   window: "app-window",
   "user-group": "users",
   "circle-stack": "database",
   "server-stack": "server",
   "cpu-chip": "cpu",
-  "queue-list": "list",
   "x-circle": "circle-x",
   "chevron-double-right": "chevrons-right",
   "clipboard-document-check": "clipboard-check",
