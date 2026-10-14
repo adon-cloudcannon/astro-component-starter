@@ -1,4 +1,5 @@
 ---
+import { bandPattern } from "@component-utils/bandStyle.mjs";
 import { nestedProps } from "@component-utils/nestedProps.mjs";
 import { overlayColor } from "@component-utils/overlayColor";
 import Component from "@component-utils/renderBlock.astro";
@@ -31,6 +32,12 @@ const {
   lockColorScheme = false,
   backgroundColor = "light-sand",
   background,
+  /* The editor's two texture controls. A component that composes this one
+     passes a whole `background` instead, and that wins. Left out of the
+     props they spread onto the section element as attributes and the band
+     drew nothing. */
+  pattern: patternName = "",
+  fade = "none",
   /**
    * A soft pool of the band's own colour behind the content, so a heading
    * stays readable where an illustration or a pattern runs underneath. The
@@ -57,6 +64,8 @@ const {
   ...htmlAttributes
 } = props;
 
+const resolvedBackground = background ?? bandPattern(patternName, fade);
+
 const {
   type: bgType = "image",
   positionVertical = "top",
@@ -70,7 +79,7 @@ const {
   patternSize = "natural",
   pattern = "",
   mask = bgType === "pattern" ? "frame" : "none",
-} = background || {};
+} = resolvedBackground || {};
 
 // One layer per pool. A section can carry several: the AI Ready hero pools
 // behind its heading and again behind its illustration, and `true` on its own
