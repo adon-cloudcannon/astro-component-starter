@@ -28,8 +28,7 @@ const { props, at } = nestedProps(Astro.props, {
     heading: ["heading", "headingLevel", "headingSize"],
     link: ["linkText", "link"],
     secondaryLink: ["secondaryLinkText", "secondaryLink"],
-    imageLeft: ["imageLeftSource", "imageLeftAlt"],
-    imageRight: ["imageRightSource", "imageRightAlt"],
+    images: ["left", "right"],
   },
 });
 
@@ -48,12 +47,11 @@ const {
   subtextWidth = "",
   alignmentHorizontal = "start",
   buttonSections = [],
-  /* The corners the design hangs a drawing off, left then right, which is
-     the order they are drawn in and the order the panel offers them. */
-  imageLeftSource = "",
-  imageLeftAlt = "",
-  imageRightSource = "",
-  imageRightAlt = "",
+  /* The corners the design hangs a drawing off. Decorative, every one of
+     them: they are a flourish off the band's edge, and the copy beside them
+     says what the band is for. */
+  left: imageLeft = "",
+  right: imageRight = "",
   sectionLabel,
   maxContentWidth = "xl",
   paddingHorizontal = "gutter",
@@ -116,22 +114,20 @@ const subtextCap = subtextMeasure(subtextWidth);
     alignmentHorizontal={alignmentHorizontal}
     data-children-prop={at("buttonSections")}
   />
-  {imageLeftSource && (
+  {imageLeft && (
     <Image
       class="cta-banner-art cta-banner-art-start"
-      source={imageLeftSource}
-      alt={imageLeftAlt}
-      data-prop-src={at("imageLeftSource")}
-      data-prop-alt={at("imageLeftAlt")}
+      source={imageLeft}
+      decorative={true}
+      data-prop-src={at("left")}
     />
   )}
-  {imageRightSource && (
+  {imageRight && (
     <Image
       class="cta-banner-art cta-banner-art-end"
-      source={imageRightSource}
-      alt={imageRightAlt}
-      data-prop-src={at("imageRightSource")}
-      data-prop-alt={at("imageRightAlt")}
+      source={imageRight}
+      decorative={true}
+      data-prop-src={at("right")}
     />
   )}
 </CustomSection>

@@ -96,9 +96,8 @@ pageSections:
           hideText: false
           variant: text
           size: md
-      imageRight:
-        imageRightSource: /src/assets/images/marketing/rocks-corner-3806-70523.png
-        imageRightAlt: ''
+      images:
+        right: /src/assets/images/marketing/rocks-corner-3806-70523.png
     style:
       scratched: true
 ---

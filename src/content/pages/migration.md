@@ -208,12 +208,9 @@ pageSections:
           hideText: false
           variant: text
           size: md
-      imageLeft:
-        imageLeftSource: ''
-        imageLeftAlt: ''
-      imageRight:
-        imageRightSource: /src/assets/images/marketing/ferns-rocks-2-3806-72621-mirrored.png
-        imageRightAlt: ''
+      images:
+        left: ''
+        right: /src/assets/images/marketing/ferns-rocks-2-3806-72621-mirrored.png
     style:
       scratched: true
       backgroundColor: pacific
