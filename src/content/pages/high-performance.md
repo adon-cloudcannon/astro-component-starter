@@ -61,7 +61,8 @@ pageSections:
               size: lg
           mediaSections:
             - _component: building-blocks/wrappers/stat-overlay
-              panelScratch: moss
+              panelColor: moss
+              panelScratched: true
               panelFit: fill
               panelImage: ''
               imageSource: ''
@@ -78,7 +79,8 @@ pageSections:
               size: lg
           mediaSections:
             - _component: building-blocks/wrappers/stat-overlay
-              panelScratch: harbour
+              panelColor: harbour
+              panelScratched: true
               panelFit: fill
               panelImage: ''
               imageSource: ''
@@ -97,9 +99,9 @@ pageSections:
               size: lg
           mediaSections:
             - _component: building-blocks/wrappers/stat-overlay
-              panelScratch: kiwi
+              panelColor: kiwi
+              panelScratched: true
               panelImage: ''
-              panelColor: '#FFFFFF'
               panelFit: fill
               imageSource: /src/assets/images/marketing/partner-dashboard-1.png
               imageAlt: ''

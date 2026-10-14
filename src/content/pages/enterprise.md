@@ -82,7 +82,8 @@ pageSections:
           variant: primary
       imageSource: /src/assets/images/marketing/image-48.png
       imageAlt: The PaperCut Grows site, built on CloudCannon
-      panelScratch: moss
+      panelColor: moss
+      panelScratched: true
       statsPosition: end
       statsAlign: start
       stats:

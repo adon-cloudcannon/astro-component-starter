@@ -28,7 +28,8 @@ value:
         size: md
     imageSource: ""
     imageWidth: intrinsic
-    imageScratch: ""
+    imageBackgroundColor: ""
+    imageScratched: false
     imageAlt: ""
   style:
     backgroundColor: light-sand

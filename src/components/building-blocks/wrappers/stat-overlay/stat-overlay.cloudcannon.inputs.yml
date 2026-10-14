@@ -133,11 +133,12 @@ panelColor:
         name: White
         swatch: square
         color: "#FFFFFF"
-panelScratch:
-  type: text
+panelScratched:
+  type: switch
+  label: Scratched
   comment: >-
-    Draws the panel's scratched sheet in this colour instead of loading an
-    export. A palette name or a hex.
+    Scratches through the panel's colour, the way the design's panels are.
+    The colour is the one above; the scratches show the page through it.
 panelScratchInk:
   type: text
   comment: >-

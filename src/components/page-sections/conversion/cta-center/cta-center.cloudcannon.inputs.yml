@@ -324,12 +324,16 @@ content.imageWidth:
         name: Its own size
       - id: full
         name: Full column
-content.imageScratch:
+content.imageBackgroundColor:
   type: text
   label: Picture backing
   comment: >-
-    A scratched panel behind the picture, by palette name (kiwi, pacific,
-    moss...) or as a hex. Empty draws no panel.
+    A panel behind the picture, by palette name (kiwi, pacific, moss...) or
+    as a hex. Empty draws no panel.
+content.imageScratched:
+  type: switch
+  label: Picture backing scratched
+  comment: Scratches through that panel, so the page shows through it.
 content.imageAlt:
   type: text
   comment: Alt text for that picture.

@@ -62,14 +62,14 @@ const {
    */
   imageWidth = "intrinsic",
   /**
-   * A scratched panel behind the picture, in this colour.
+   * A panel behind the picture, in this palette colour.
    *
-   * A palette name or a literal hex, the same shape `cta-banner` takes for
-   * its band. Empty draws no panel, which is what every other instance does.
-   * The sheet is painted by the `.scratched` utility rather than loaded, so
-   * it costs nothing and takes any colour.
+   * The design lays the composite on a coloured sheet on three pages and on
+   * nothing on the rest, so the colour is what turns the panel on.
    */
-  imageScratch = "",
+  imageBackgroundColor = "",
+  /** Scratches through that panel, the way the design's panels are. */
+  imageScratched = false,
   /**
    * Which way the band sets its words.
    *
@@ -192,10 +192,14 @@ const mirror = rootMirror({ class: { [`align-${alignmentHorizontal}`]: true } })
   />
   {imageSource && (
     <div
-      class:list={["cta-center-media", imageScratch && "scratched"]}
+      class:list={[
+        "cta-center-media",
+        imageBackgroundColor && "has-panel",
+        imageBackgroundColor && imageScratched && "scratched",
+      ]}
       style={
-        imageScratch
-          ? `--scratch-fill: ${String(imageScratch).startsWith("#") ? imageScratch : `var(--${imageScratch})`}`
+        imageBackgroundColor
+          ? `--cta-center-media-color: ${String(imageBackgroundColor).startsWith("#") ? imageBackgroundColor : `var(--${imageBackgroundColor})`}; --scratch-fill: var(--cta-center-media-color)`
           : undefined
       }
     >
@@ -276,7 +280,8 @@ const mirror = rootMirror({ class: { [`align-${alignmentHorizontal}`]: true } })
        `overflow: hidden` because the panel is rounded and the picture is
        square where the two meet: without it the picture's bottom corners sit
        outside the panel's. */
-    .cta-center .cta-center-media.scratched {
+    .cta-center .cta-center-media.has-panel {
+      background-color: var(--cta-center-media-color);
       border-radius: var(--radius-card);
       overflow: hidden;
       padding: 46px 46px 0;
@@ -285,7 +290,7 @@ const mirror = rootMirror({ class: { [`align-${alignmentHorizontal}`]: true } })
     /* All four corners, not the two being changed: a single-corner radius
        leaves the others carrying whatever they had, and `Image` rounds all
        four. */
-    .cta-center .cta-center-media.scratched .cta-center-image img {
+    .cta-center .cta-center-media.has-panel .cta-center-image img {
       border-end-end-radius: 0;
       border-end-start-radius: 0;
       border-start-end-radius: var(--radius-card);

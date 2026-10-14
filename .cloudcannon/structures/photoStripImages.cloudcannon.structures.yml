@@ -11,9 +11,21 @@ photoStripImages:
         source: ""
         alt: ""
         backgroundColor: none
+        scratched: true
       preview:
         text:
           - key: alt
           - Photo
         image:
           - key: source
+      _inputs:
+        backgroundColor:
+          type: text
+          label: Plate colour
+          comment: >-
+            A coloured plate behind the cut-out, by palette name. "none"
+            leaves the picture on its own.
+        scratched:
+          type: switch
+          label: Scratched
+          comment: Scratches through the plate, so the page shows through it.

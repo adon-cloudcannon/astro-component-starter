@@ -52,14 +52,8 @@ const {
   imageWidth = 62,
   panelImage = "",
   panelColor = "",
-  /**
-   * Draw the panel's scratched sheet instead of loading one.
-   *
-   * A palette name or a hex. Every exported sheet was a flat colour with the
-   * whole texture in its alpha channel, so a new colour meant a new file;
-   * `.scratched` generates the texture and takes the colour from here.
-   */
-  panelScratch = "",
+  /** Scratches through the panel's colour, the way the design's panels are. */
+  panelScratched = false,
   /** What a scratch shows. Defaults to the fill lifted toward white. */
   panelScratchInk = "",
   stats = [],
@@ -106,11 +100,11 @@ const colour = (value: string) => (value.startsWith("#") ? value : `var(--${valu
 const mirror = rootMirror({
   class: {
     ...Object.fromEntries(["cover", "contain", "fill"].map((fit) => [`fit-${fit}`, panelFit === fit])),
-    scratched: Boolean(panelScratch),
+    scratched: Boolean(panelScratched),
   },
   style: {
     "--stat-panel-ground": panelColor ? colour(panelColor) : null,
-    "--scratch-fill": panelScratch ? colour(panelScratch) : null,
+    "--scratch-fill": panelColor ? colour(panelColor) : null,
     "--scratch-ink": panelScratchInk ? colour(panelScratchInk) : null,
     "--stat-panel-ratio-w": String(Number(ratioWidth) || 1160),
     "--stat-panel-ratio-h": String(Number(ratioHeight) || 679),
@@ -119,12 +113,12 @@ const mirror = rootMirror({
 ---
 
 <div
-  class:list={["stat-panel-panel", `fit-${panelFit}`, { scratched: panelScratch }, className]}
+  class:list={["stat-panel-panel", `fit-${panelFit}`, { scratched: panelScratched }, className]}
   style={[
     /* A palette name, or a literal the design states outright: High
        Performance lays its sheet over #FFFFFF rather than over a token. */
     panelColor ? `--stat-panel-ground: ${colour(panelColor)}` : "",
-    panelScratch ? `--scratch-fill: ${colour(panelScratch)}` : "",
+    panelColor ? `--scratch-fill: ${colour(panelColor)}` : "",
     panelScratchInk ? `--scratch-ink: ${colour(panelScratchInk)}` : "",
   `--stat-panel-ratio-w: ${Number(ratioWidth) || 1160}`,
   `--stat-panel-ratio-h: ${Number(ratioHeight) || 679}`,

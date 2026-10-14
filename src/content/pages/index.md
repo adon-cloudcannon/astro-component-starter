@@ -128,7 +128,7 @@ pageSections:
           size: md
       imageSource: /src/assets/images/marketing/food-bank-volunteers-produce-1-3806-69798.png
       imageWidth: intrinsic
-      imageScratch: ''
+      imageBackgroundColor: ''
       imageAlt: ''
     style:
       backgroundColor: light-sand

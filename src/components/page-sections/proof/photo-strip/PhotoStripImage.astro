@@ -19,6 +19,8 @@ const {
    * photographs on Our Story.
    */
   backgroundColor = "none",
+  /** Scratches through the plate, the way the design's grounds are. */
+  scratched = true,
   class: className,
   _component,
   ...htmlAttributes
@@ -39,8 +41,8 @@ const plate =
       hoists what the tile needs back up. */}
   {plate && (
     <div
-      class="photo-strip-plate scratched"
-      style={`--scratch-fill: ${plate}`}
+      class:list={["photo-strip-plate", scratched && "scratched"]}
+      style={`--scratch-fill: ${plate}; background-color: ${plate}`}
       aria-hidden="true"
     />
   )}

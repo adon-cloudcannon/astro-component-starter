@@ -245,7 +245,8 @@ pageSections:
           text: Get skills repo
           variant: primary
       imageWidth: full
-      imageScratch: kiwi
+      imageBackgroundColor: kiwi
+      imageScratched: true
       imageSource: /src/assets/images/marketing/own-content-combined.png
       imageAlt: A commit history beside a card listing content, code and commits
     style:

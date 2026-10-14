@@ -66,7 +66,7 @@ const {
   panelImage = "",
   panelColor = "",
   /** Draws the panel's scratched sheet in this colour instead of loading one. */
-  panelScratch = "",
+  panelScratched = false,
   panelScratchInk = "",
   stats = [],
   /** Which side of the panel the stats sit on. */
@@ -148,7 +148,7 @@ const hasHeader = Boolean(eyebrow || heading || subtext || buttonSections?.lengt
     imageAnchor={imageAnchor}
     panelImage={panelImage}
     panelColor={panelColor}
-    panelScratch={panelScratch}
+    panelScratched={panelScratched}
     panelScratchInk={panelScratchInk}
     stats={stats}
     statsPosition={statsPosition}
