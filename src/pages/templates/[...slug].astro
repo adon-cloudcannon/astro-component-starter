@@ -477,10 +477,14 @@ const breadcrumbJsonLd = breadcrumbListJsonLd(
     align-self: stretch;
     background-color: var(--sand);
     border-inline-end: var(--border-width-sm) solid var(--dark-sand);
+    /* Half the window, less half this column. Written without a percentage
+       because the scroller inside reuses it: a percentage would resolve
+       against whichever box it landed in, and the two boxes differ. */
+    --aside-bleed: calc(50vw - 8.75rem);
+
     margin-block: calc(var(--spacing-4xl) * -1);
-    margin-inline-start: calc(50% - 50vw);
+    margin-inline-start: calc(var(--aside-bleed) * -1);
     padding-block: var(--spacing-4xl);
-    padding-inline: calc(50vw - 50%) var(--spacing-2xl);
   }
 
   /* Pinned, and no taller than what is left of the window: a starter's
@@ -493,6 +497,10 @@ const breadcrumbJsonLd = breadcrumbListJsonLd(
     position: sticky;
     scrollbar-gutter: stable;
     top: calc(var(--main-nav-height) + var(--spacing-xl));
+    /* The inset belongs to the scroller rather than to the column around it:
+       padding on the column sits outside this box, and a wheel over that sand
+       scrolled the page instead of the panel. */
+    padding-inline: var(--aside-bleed) var(--spacing-2xl);
   }
 
   .template-page-panel {
@@ -829,6 +837,9 @@ const breadcrumbJsonLd = breadcrumbListJsonLd(
       border-inline-end: 0;
       margin-block: 0;
       margin-inline-start: 0;
+    }
+
+    .template-page-aside-inner {
       padding-inline: 0;
     }
 
