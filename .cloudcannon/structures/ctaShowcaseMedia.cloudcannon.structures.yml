@@ -17,3 +17,4 @@ ctaShowcaseMedia:
     - /src/components/building-blocks/wrappers/agent-terminal/agent-terminal.cloudcannon.structure-value.yml
     - /src/components/building-blocks/wrappers/character-chat/character-chat.cloudcannon.structure-value.yml
     - /src/components/building-blocks/wrappers/offer-card/offer-card.cloudcannon.structure-value.yml
+    - /src/components/building-blocks/wrappers/shape-pile/shape-pile.cloudcannon.structure-value.yml

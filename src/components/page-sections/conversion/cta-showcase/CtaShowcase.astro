@@ -142,7 +142,16 @@ const block: ContentBlock | null =
  * camera is on white, the chat on the page's own cream against a Sand band.
  * So it goes with the shape, which is what it is part of.
  */
-const MEDIA_LAYOUT: Record<string, { panel: false | string; overflow: number }> = {
+const MEDIA_LAYOUT: Record<
+  string,
+  {
+    panel: false | string;
+    overflow: number;
+    fixed?: "copy" | "media";
+    gap?: string;
+    minSplit?: number;
+  }
+> = {
   "building-blocks/wrappers/image-reveal": { panel: false, overflow: 334 },
   "building-blocks/wrappers/agent-terminal": { panel: false, overflow: 0 },
   "building-blocks/wrappers/polaroid-camera": { panel: "white", overflow: 0 },
@@ -151,6 +160,23 @@ const MEDIA_LAYOUT: Record<string, { panel: false | string; overflow: number }> 
      so the media half carries its own shape and sits straight on the band —
      the design draws it on #FFFCF3 with nothing behind it either time. */
   "building-blocks/wrappers/offer-card": { panel: false, overflow: 0 },
+  /* The pile is the one that takes the fixed column rather than giving it to
+     the copy: it is drawn 664 against the design's 400 pane and reaches the
+     other 264 back over the copy, which only holds if the pane is the 400.
+     The reach itself is the CSS below, not a bleed — it runs inwards. */
+  "building-blocks/wrappers/shape-pile": {
+    panel: false,
+    overflow: 0,
+    fixed: "media",
+    /* The pile reaches over the copy, so the two sides are held apart by the
+       design's 48 rather than the 24 a picture in a column of its own
+       wants. */
+    gap: "2xl",
+    /* And they stop being two sides sooner than the rest: a picture in its
+       own column is fine beside a narrow copy, where the pile is laid over
+       it and would cover the heading. */
+    minSplit: 800,
+  },
 };
 const DEFAULT_LAYOUT = { panel: "white" as const, overflow: 0 };
 
@@ -201,13 +227,22 @@ const mirror = rootMirror({ "data-picture-first": reverse ? "" : null });
       fixed width travels with the picture. */}
   <Wrapper {...wrapperProps}>
     <Split
-      distributionMode={layout.panel ? "half" : reverse ? "flexible-fixed" : "fixed-flexible"}
+      distributionMode={
+        layout.panel
+          ? "half"
+          : layout.fixed === "media"
+            ? "flexible-fixed"
+            : reverse
+              ? "flexible-fixed"
+              : "fixed-flexible"
+      }
       fixedWidth={layout.panel ? undefined : "400"}
       data-bleed={bleedSide}
       style={bleedLimit ? { "--split-bleed-limit": bleedLimit } : undefined}
       alignmentVertical="center"
+      gap={layout.gap}
       reverse={reverse}
-      minSplitWidth={640}
+      minSplitWidth={layout.minSplit ?? 640}
     >
       <Fragment slot="first">
         <Heading
@@ -217,12 +252,10 @@ const mirror = rootMirror({ "data-picture-first": reverse ? "" : null });
         >
           {heading}
         </Heading>
-        <Text
-          style={
-            subtextCap
-              ? `max-inline-size: ${subtextCap}; margin-inline: auto; justify-self: center`
-              : undefined
-          }
+        <Text /* Its measure, not its place: the copy in this band runs from the
+              left, and the centring here only ever showed on a band whose
+              column was wider than the measure. */
+          style={subtextCap ? `max-inline-size: ${subtextCap}` : undefined}
           size={subtextSize}
           data-prop={at("subtext")}
           text={subtext}
@@ -262,6 +295,30 @@ const mirror = rootMirror({ "data-picture-first": reverse ? "" : null });
      Flat, because rules nested deeper than a couple of levels get dropped (see
      CLAUDE.md). */
   @layer page-sections {
+    /* The pile is drawn 664 wide and the media column is 400, so it reaches
+       264 back over the copy — a share of the column rather than a length,
+       because the column shrinks with the band and a fixed reach would eat
+       the heading. It stands on the band's foot and hangs over it, and the
+       headroom is what keeps the card that leans furthest back out of the
+       heading: the design's band is 527 tall with the 340 pile on its floor,
+       so 187 sits above it, of which the band's own padding is 80. */
+    .cta-showcase .shape-pile {
+      --cta-showcase-pile-reach: 66%;
+
+      align-self: end;
+      inline-size: calc(100% + var(--cta-showcase-pile-reach));
+      margin-block-end: calc(-1 * var(--spacing-4xl));
+      margin-block-start: 107px;
+      margin-inline-start: calc(-1 * var(--cta-showcase-pile-reach));
+    }
+
+    /* Stacked, there is no copy beside it to reach over. */
+    @media (width < 700px) {
+      .cta-showcase .shape-pile {
+        --cta-showcase-pile-reach: 0%;
+      }
+    }
+
     /* The panel the design floats on the dotted band. White rather than the
        page's light sand: the design states #FFFFFF, which on a sand band is a
        step up rather than the usual step down. */

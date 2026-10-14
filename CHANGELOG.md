@@ -150,6 +150,7 @@ quietly broken in the editor.
 - **Heads-up:** page sections are grouped by the job they do: heroes, explainers (was features and info-blocks), proof (was social-proof and testimonials), conversion (was CTAs, pricing and contact), collections (was blog, galleries and team), and builders. The group is part of each section's path, so existing pages need a find-and-replace, e.g. `page-sections/ctas/cta-center` becomes `page-sections/conversion/cta-center`. The `@features` import alias is now `@explainers`.
 - **Heads-up:** Team Grid's start/center layout option is gone. It now uses Card Grid's layout, and a new Team Grid starts with three people.
 - Page-section editing panels put content fields first, with the shared settings (width, padding, colour scheme, background) in a collapsed group.
+- The falling pile of cards is a thing a CTA Showcase can hold, like the terminal and the camera beside it, rather than a list of shapes on a Feature Split. Low Maintenance's band is a Showcase now. Feature Split still takes a pile for the bands that pair one with a layout.
 - Pricing Tiers moves Header alignment, Card alignment and Plant a garden to its Style tab, beside the other fields that decide how the band is laid out. Existing pages need those three keys moved from `content:` to `style:`.
 - Comparison Table moves Striped to its Style tab, for the same reason. Existing pages need that key moved from `content:` to `style:`.
 - Page Header moves Alignment to its Style tab, for the same reason. Existing pages need that key moved from `content:` to `style:`.
