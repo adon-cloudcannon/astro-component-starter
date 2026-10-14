@@ -9,6 +9,7 @@ describe("external-media URL validation", () => {
     expect(
       isAllowedExternalMediaUrl("https://www.openstreetmap.org/export/embed.html?bbox=example")
     ).toBe(true);
+    expect(isAllowedExternalMediaUrl("https://meetings.hubspot.com/someone?embed=true")).toBe(true);
   });
 
   it("fails closed for untrusted, malformed, and non-HTTPS URLs", () => {
@@ -19,6 +20,8 @@ describe("external-media URL validation", () => {
     expect(isAllowedExternalMediaUrl("https://www.google.com/search?q=not-a-map")).toBe(false);
     expect(isAllowedExternalMediaUrl("https://player.vimeo.com/showcase/123")).toBe(false);
     expect(isAllowedExternalMediaUrl("https://www.openstreetmap.org/about")).toBe(false);
+    expect(isAllowedExternalMediaUrl("https://meetings.hubspot.com/a/b/c")).toBe(false);
+    expect(isAllowedExternalMediaUrl("https://meetings.hubspot.evil.com/someone")).toBe(false);
     expect(isAllowedExternalMediaUrl("https://user@example.com/embed")).toBe(false);
     expect(isAllowedExternalMediaUrl("not a URL")).toBe(false);
   });

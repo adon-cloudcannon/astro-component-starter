@@ -193,10 +193,21 @@ function externalMediaFallback(message: string): DocumentFragment {
   const button = document.createElement("button");
 
   paragraph.textContent = message;
+
+  /* The site's own button, not a bare one: this is built in script and still
+     has to match the control the components render beside it. */
+  const label = document.createElement("span");
+  const wrapper = document.createElement("span");
+
+  label.className = "label-text";
+  label.textContent = "Allow all external media";
   button.type = "button";
-  button.textContent = "Allow all external media";
+  button.className = "button-inner variant-primary size-md";
   button.setAttribute("data-external-media-enable", "");
-  content.append(paragraph, button);
+  button.append(label);
+  wrapper.className = "button external-media-allow";
+  wrapper.append(button);
+  content.append(paragraph, wrapper);
 
   return content;
 }

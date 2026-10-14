@@ -4,6 +4,9 @@ const allowedEmbedPaths: Record<string, RegExp> = {
   "maps.google.com": /^\/maps\/embed\/?$/,
   "www.google.com": /^\/maps\/embed\/?$/,
   "www.openstreetmap.org": /^\/export\/embed\.html$/,
+  /* The booking widget on /book-a-demo/. One path: the meeting a named person
+     offers, nothing else HubSpot serves. */
+  "meetings.hubspot.com": /^\/[a-z0-9-]+\/?$/,
 };
 
 export function isAllowedExternalMediaUrl(value: string): boolean {

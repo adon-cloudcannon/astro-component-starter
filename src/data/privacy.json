@@ -1,7 +1,7 @@
 {
   "_schema": "privacy",
   "enabled": true,
-  "policyRevision": 1,
+  "policyRevision": 2,
   "expiryDays": 180,
   "policyUrl": "/privacy/",
   "bannerHeading": "Your privacy, your choice",

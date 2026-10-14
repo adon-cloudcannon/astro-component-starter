@@ -43,6 +43,9 @@ import {
 import { setupAllForms, setupForm } from "./src/components/building-blocks/forms/form/setup";
 import { setupAllVideos } from "./src/components/building-blocks/core-elements/video/setup";
 import { setupAllCodeBlocks } from "./src/components/building-blocks/core-elements/code-block/setup";
+import { setupProseCodeCopy } from "./src/components/utils/prose-code-copy/setup";
+import { setupCodeAnnotations } from "./src/components/utils/code-annotations/setup";
+import { setupEmbeds } from "./src/components/building-blocks/core-elements/embed/setup";
 import { setupAllScrollSteppers } from "./src/components/building-blocks/wrappers/scroll-stepper/setup";
 import { setupAllFaqBrowsers } from "./src/components/page-sections/explainers/faq-browser/setup";
 import { setupAllTabs } from "./src/components/utils/tabs/setup";
@@ -367,6 +370,9 @@ function initNewComponents(root) {
   setupAllVideos(root);
   setupAllTabs(root);
   setupAllCodeBlocks(root);
+  setupProseCodeCopy(root);
+  setupCodeAnnotations(root);
+  setupEmbeds();
   setupAllScrollSteppers(root);
   setupAllFaqBrowsers(root);
 }
@@ -504,6 +510,9 @@ setupAllCollectionToolbars();
 setupAllVideos();
 setupAllTabs();
 setupAllCodeBlocks();
+setupProseCodeCopy();
+setupCodeAnnotations();
+setupEmbeds();
 setupAllScrollSteppers();
 setupAllFaqBrowsers();
 setupAllForms();

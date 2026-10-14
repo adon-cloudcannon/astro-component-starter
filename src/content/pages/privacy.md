@@ -30,7 +30,13 @@ The site stores your choices, the policy revision, and the time of your decision
 
 ## External media
 
-If you allow external media, this site may load content from **[list every provider actually used, such as YouTube, Vimeo, Google Maps, or OpenStreetMap]**. Those providers receive the network request needed to display their content and process it under their own terms and privacy policies. The choice applies to all external media on this site until you change it.
+If you allow external media, this site may load content from:
+
+- **YouTube**, in Privacy Enhanced Mode, for videos in blog posts. See [Google's privacy policy](https://policies.google.com/privacy).
+- **Vimeo**, for videos in blog posts and the demo video on Book a demo. See [Vimeo's privacy policy](https://vimeo.com/privacy).
+- **HubSpot**, for the booking calendar on Book a demo. Displaying the calendar also contacts other HubSpot services, which HubSpot uses to run and measure the booking widget. See [HubSpot's privacy policy](https://legal.hubspot.com/privacy-policy).
+
+Those providers receive the network request needed to display their content, which includes your IP address and information about your browser, and process it under their own terms and privacy policies. The choice applies to all external media on this site until you change it.
 
 ## Other information this site handles
 

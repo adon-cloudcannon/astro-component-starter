@@ -26,12 +26,15 @@ const {
     </template>
     <div class="external-media-placeholder">
       <p>External content is disabled until you allow external media across this site.</p>
-      <button
-        type="button"
-        data-external-media-enable
-      >
-        Allow all external media
-      </button>
+      <span class="button external-media-allow">
+        <button
+          class="button-inner variant-primary size-md"
+          type="button"
+          data-external-media-enable
+        >
+          <span class="label-text">Allow all external media</span>
+        </button>
+      </span>
     </div>
   </div>
 </div>
@@ -42,11 +45,10 @@ const {
       > .embed-content {
         > .external-media-placeholder {
           align-items: center;
-          background-color: var(--color-bg-surface);
           color: var(--color-text-muted);
           display: flex;
           flex-direction: column;
-          gap: var(--spacing-sm);
+          gap: var(--spacing-lg);
           height: 100%;
           justify-content: center;
           min-height: 10rem;
@@ -55,22 +57,6 @@ const {
 
           p {
             margin: 0;
-          }
-
-          button {
-            background-color: var(--color-bg-brand);
-            border: var(--border-width-sm) solid var(--color-bg-brand);
-            border-radius: var(--radius-xs);
-            color: var(--color-brand-on);
-            cursor: pointer;
-            font: inherit;
-            font-weight: var(--font-weight-semibold);
-            padding: var(--spacing-em-sm);
-
-            &:focus-visible {
-              outline: var(--focus-ring-width) var(--focus-ring-style) var(--color-focus-ring);
-              outline-offset: 2px;
-            }
           }
 
           &[data-external-media-mounted] {
@@ -104,3 +90,10 @@ const {
     }
   }
 </style>
+
+<script>
+  import { onPageLoad } from "@component-utils/onPageLoad";
+  import { setupEmbeds } from "./setup";
+
+  onPageLoad(() => setupEmbeds());
+</script>
