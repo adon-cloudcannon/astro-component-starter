@@ -10,14 +10,21 @@ value:
       heading: ""
       headingLevel: h2
       headingSize: lg
-    linkText: ""
-    link: ""
-    secondaryLinkText: ""
-    secondaryLink: ""
-    imageSource: ""
-    imageAlt: ""
+    link:
+      linkText: ""
+      link: ""
+    secondaryLink:
+      secondaryLinkText: ""
+      secondaryLink: ""
+    image:
+      imageSource: ""
+      imageAlt: ""
+    imageStart:
+      imageSourceStart: ""
+      imageAltStart: ""
   style:
     backgroundColor: pacific
+    scratched: true
     pattern: none
     fade: none
     maxContentWidth: xl

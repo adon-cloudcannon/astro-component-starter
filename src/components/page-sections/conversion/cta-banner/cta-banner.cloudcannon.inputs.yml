@@ -14,11 +14,6 @@ style:
   options:
     subtype: object
 
-content.scratch:
-  type: text
-  comment: >-
-    Draws the band's scratched sheet in this colour instead of loading an
-    export. A palette name or a hex.
 # The heading, its eyebrow, its level and its size are one decision.
 content.heading:
   type: object
@@ -67,24 +62,63 @@ content.subtextWidth:
         name: Wide
       - id: xl
         name: Extra wide
-content.linkText:
-  type: text
-  comment: The link under the heading. Leave empty to hide it.
+# A link is its words and its destination, and a picture is its file and its
+# alt text. Each pair is one decision, grouped the way the heading is.
 content.link:
+  type: object
+  label: Link
+  options:
+    subtype: object
+content.link.linkText:
+  type: text
+  label: Text
+  comment: The link under the heading. Leave empty to hide it.
+content.link.link:
   type: url
+  label: URL
   comment: Where the link points.
-content.secondaryLinkText:
-  type: text
-  comment: A second link beside the first, drawn as a text link. Leave empty to hide it.
+
 content.secondaryLink:
-  type: url
-  comment: Where the second link points.
-content.imageSource:
-  type: image
-  comment: A drawing in the bottom-right corner, hanging over the foot of the band.
-content.imageAlt:
+  type: object
+  label: Second link
+  options:
+    subtype: object
+content.secondaryLink.secondaryLinkText:
   type: text
+  label: Text
+  comment: A second link beside the first, drawn as a text link. Leave empty to hide it.
+content.secondaryLink.secondaryLink:
+  type: url
+  label: URL
+  comment: Where the second link points.
+
+content.image:
+  type: object
+  label: Picture
+  options:
+    subtype: object
+content.image.imageSource:
+  type: image
+  label: File
+  comment: A drawing in the bottom-right corner, hanging over the foot of the band.
+content.image.imageAlt:
+  type: text
+  label: Alt text
   comment: Alt text for the drawing.
+
+content.imageStart:
+  type: object
+  label: Picture (left)
+  options:
+    subtype: object
+content.imageStart.imageSourceStart:
+  type: image
+  label: File
+  comment: A second drawing, in the bottom-left corner.
+content.imageStart.imageAltStart:
+  type: text
+  label: Alt text
+  comment: Alt text for the left-hand drawing.
 content.sectionLabel:
   type: text
   comment: Names the section in the editor and sets its anchor id.
@@ -179,6 +213,12 @@ style.haze:
   comment: >-
     Pools the band's own colour behind the copy and blurs it, so the heading
     stays readable where the pattern runs under it.
+style.scratched:
+  type: switch
+  label: Scratched
+  comment: >-
+    Scratches through the band's colour, the way the design's banners are.
+    The colour is the one above; the scratches show the page through it.
 style.backgroundColor:
   type: select
   label: Background colour

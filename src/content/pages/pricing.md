@@ -353,21 +353,25 @@ pageSections:
         heading: Migration support
         headingLevel: h2
         headingSize: lg
-      linkText: Learn about our migration services
-      link: /migration/
-      secondaryLinkText: ''
-      secondaryLink: ''
-      imageSource: /src/assets/images/marketing/ferns-rocks-2-3806-72621-mirrored.png
-      imageAlt: ''
       subtext: Our migration team can get your site configured for your ideal editing
         experience, starting at $3,000 per project (USD).
       subtextSize: lg
       alignmentHorizontal: center
-      scratch: pacific
       buttonVariant: secondary
-      imageSourceStart: /src/assets/images/marketing/ferns-corner-3806-72622.png
-      imageAltStart: ''
+      link:
+        linkText: Learn about our migration services
+        link: /migration/
+      secondaryLink:
+        secondaryLinkText: ''
+        secondaryLink: ''
+      image:
+        imageSource: /src/assets/images/marketing/ferns-rocks-2-3806-72621-mirrored.png
+        imageAlt: ''
+      imageStart:
+        imageSourceStart: /src/assets/images/marketing/ferns-corner-3806-72622.png
+        imageAltStart: ''
     style:
+      scratched: true
       backgroundColor: pacific
       pattern: none
       fade: none

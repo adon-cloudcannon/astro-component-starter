@@ -86,14 +86,17 @@ pageSections:
         heading: Schedule a meeting with one of our experts
         headingLevel: h2
         headingSize: lg
-      linkText: Book a personalized demo
-      link: '#book'
-      secondaryLinkText: ''
-      secondaryLink: ''
-      imageSource: /src/assets/images/marketing/ferns-rocks-2-3806-72621-mirrored.png
-      imageAlt: ''
-      scratch: pacific
+      link:
+        linkText: Book a personalized demo
+        link: '#book'
+      secondaryLink:
+        secondaryLinkText: ''
+        secondaryLink: ''
+      image:
+        imageSource: /src/assets/images/marketing/ferns-rocks-2-3806-72621-mirrored.png
+        imageAlt: ''
     style:
+      scratched: true
       backgroundColor: pacific
       pattern: none
       fade: none

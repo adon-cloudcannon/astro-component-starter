@@ -457,18 +457,22 @@ pageSections:
         headingLevel: h2
         headingSize: lg
       subtext: ''
-      linkText: Reach out
-      link: /contact/
-      secondaryLinkText: Explore our documentation
-      secondaryLink: /documentation/
       alignmentHorizontal: center
-      scratch: pacific
       buttonVariant: secondary
-      imageSource: /src/assets/images/marketing/ferns-rocks-2-3806-72621-mirrored.png
-      imageAlt: ''
-      imageSourceStart: /src/assets/images/marketing/ferns-corner-3806-72622.png
-      imageAltStart: ''
+      link:
+        linkText: Reach out
+        link: /contact/
+      secondaryLink:
+        secondaryLinkText: Explore our documentation
+        secondaryLink: /documentation/
+      image:
+        imageSource: /src/assets/images/marketing/ferns-rocks-2-3806-72621-mirrored.png
+        imageAlt: ''
+      imageStart:
+        imageSourceStart: /src/assets/images/marketing/ferns-corner-3806-72622.png
+        imageAltStart: ''
     style:
+      scratched: true
       backgroundColor: pacific
       pattern: none
       fade: none

@@ -154,6 +154,8 @@ quietly broken in the editor.
 - Comparison Table moves Striped to its Style tab, for the same reason. Existing pages need that key moved from `content:` to `style:`.
 - Page Header moves Alignment to its Style tab, for the same reason. Existing pages need that key moved from `content:` to `style:`.
 - **Heads-up:** Custom Section's Label is now Section Label, the name every other page section uses for the same field. Existing pages need the key renamed from `label:` to `sectionLabel:`.
+- **Heads-up:** a scratched band is now a background choice rather than a field of its own: pick the colour with Background colour and tick Scratched beside it. CTA Banner's `scratch:` key is gone, so a page that set it needs `style.backgroundColor` plus `style.scratched: true`. Any band can carry the sheet now, not just this one.
+- CTA Banner's link and picture fields are grouped the way its heading is: Link holds its text and its URL, Second link the same, Picture its file and its alt text. Existing pages need those keys nested under `link:`, `secondaryLink:`, `image:` and `imageStart:`.
 - Vertical padding (top) is no longer offered in the editor. It overrides one end of a band's vertical padding, which is a thing to set by hand where two bands meet, not a second padding control beside the first.
 
 #### Framework and dependencies

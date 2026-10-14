@@ -2,7 +2,6 @@
 import { bandPattern, bandHaze } from "@component-utils/bandStyle.mjs";
 import { nestedProps } from "@component-utils/nestedProps.mjs";
 import { subtextMeasure } from "@component-utils/subtextMeasure.mjs";
-import { rootMirror } from "@component-utils/rootMirror.mjs";
 /**
  * A short, full-width band: a heading, a link, and a drawing in the corner.
  *
@@ -25,7 +24,13 @@ import Button from "@core-elements/button/Button.astro";
 /* `content` and `style` are the editor's tabs, flattened straight back into
    the names below. `at()` writes the frontmatter path a binding needs. */
 const { props, at } = nestedProps(Astro.props, {
-  nest: { heading: ["heading", "headingLevel", "headingSize"] },
+  nest: {
+    heading: ["heading", "headingLevel", "headingSize"],
+    link: ["linkText", "link"],
+    secondaryLink: ["secondaryLinkText", "secondaryLink"],
+    image: ["imageSource", "imageAlt"],
+    imageStart: ["imageSourceStart", "imageAltStart"],
+  },
 });
 
 const {
@@ -65,14 +70,8 @@ const {
   colorScheme = "inherit",
   lockColorScheme = true,
   backgroundColor = "pacific",
-  /**
-   * Draws the band's scratched sheet in this colour instead of loading one.
-   *
-   * The export was a flat #004AD7 with the whole texture in its alpha, which
-   * is Pacific. It also had to be backed with the page's cream, because the
-   * scratches were holes: painted, that whole dance goes away.
-   */
-  scratch = "",
+  /** Scratches through the band's colour, the way the design's banners are. */
+  scratched = false,
   /** The texture behind the band, by name. */
   pattern = "none",
   /** Which edge the texture fades out towards. */
@@ -86,55 +85,18 @@ const {
 } = props;
 
 const subtextCap = subtextMeasure(subtextWidth);
-
-/**
- * The ink on a scratched band, from the sheet it is scratched in.
- *
- * A scratch paints the band itself, so `backgroundColor` goes to `none` and
- * the builder has no token to read a scheme off. That left the scheme as a
- * field the page had to set by hand, and it is not a choice: the sheet is
- * either dark enough to need light text or it is not.
- *
- * Listed rather than computed, because a scratch may be any palette name or a
- * literal hex, and guessing at the luminance of a hex is how a settled text
- * link turns back into a pill.
- */
-const DARK_SCRATCH = new Set(["pacific", "kiwi", "moss", "sunset", "black", "midnight", "earth"]);
-const scratchScheme = DARK_SCRATCH.has(String(scratch).toLowerCase()) ? "dark" : "light";
-
-/* Mirrored onto the builder's `.content`: these land on the section's own
-   root, which is the element CloudCannon binds the region to and never
-   rewrites, so without this they are whatever the page was built with. */
-const mirror = rootMirror({
-  class: { scratched: Boolean(scratch) },
-  style: {
-    "--scratch-fill": scratch
-      ? scratch.startsWith("#")
-        ? scratch
-        : `var(--${scratch})`
-      : null,
-  },
-});
 ---
 
 <CustomSection
-  mirror={mirror}
-  class:list={[
-    "cta-banner",
-    { scratched: scratch },
-    `align-${alignmentHorizontal}`,
-    className,
-  ]}
-  style={scratch
-    ? `--scratch-fill: ${scratch.startsWith("#") ? scratch : `var(--${scratch})`}`
-    : undefined}
+  class:list={["cta-banner", `align-${alignmentHorizontal}`, className]}
+  scratched={scratched}
   sectionLabel={sectionLabel}
   maxContentWidth={maxContentWidth}
   paddingHorizontal={paddingHorizontal}
   paddingVertical={paddingVertical}
-  colorScheme={scratch ? scratchScheme : colorScheme}
-  lockColorScheme={scratch ? true : lockColorScheme}
-  backgroundColor={scratch ? "none" : backgroundColor}
+  colorScheme={colorScheme}
+  lockColorScheme={lockColorScheme}
+  backgroundColor={backgroundColor}
   background={bandPattern(pattern, fade)}
   haze={bandHaze(haze)}
   useDefaultEditableBinding={useDefaultEditableBinding}

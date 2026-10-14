@@ -194,18 +194,21 @@ pageSections:
         heading: Talk to us about a migration
         headingLevel: h2
         headingSize: lg
-      linkText: Contact us
-      link: /contact/
-      imageSource: /src/assets/images/marketing/ferns-rocks-2-3806-72621-mirrored.png
-      imageAlt: ''
       subtext: ''
       subtextSize: lg
       alignmentHorizontal: start
-      scratch: pacific
       buttonVariant: text
-      imageSourceStart: ''
-      imageAltStart: ''
+      link:
+        linkText: Contact us
+        link: /contact/
+      image:
+        imageSource: /src/assets/images/marketing/ferns-rocks-2-3806-72621-mirrored.png
+        imageAlt: ''
+      imageStart:
+        imageSourceStart: ''
+        imageAltStart: ''
     style:
+      scratched: true
       backgroundColor: pacific
       pattern: none
       fade: none

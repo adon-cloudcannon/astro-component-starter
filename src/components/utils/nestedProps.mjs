@@ -40,6 +40,7 @@ export const STYLE_KEYS = new Set([
   "haze",
   "lockColorScheme",
   "pattern",
+  "scratched",
   "panelBackgroundColor",
   "maxContentWidth",
   "paddingHorizontal",
@@ -86,7 +87,11 @@ export function nestedProps(astroProps, options = {}) {
   };
 
   const props = grouped
-    ? { ...rest, ...flatten(isTab(content) ? content : undefined), ...flatten(isTab(style) ? style : undefined) }
+    ? {
+        ...rest,
+        ...flatten(isTab(content) ? content : undefined),
+        ...flatten(isTab(style) ? style : undefined),
+      }
     : astroProps;
 
   /* Which sub-object a prop belongs to, from the declaration rather than from

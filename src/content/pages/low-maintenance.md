@@ -292,12 +292,15 @@ pageSections:
       backgroundColor: light-sand
   - _component: page-sections/conversion/cta-banner
     content:
-      scratch: pacific
       heading:
         heading: Wanna learn more about our product?
         headingSize: lg
-      linkText: Explore visual editing
-      link: /visual-editing/
-      imageSource: /src/assets/images/marketing/rocks-corner-3806-70523.png
-      imageAlt: ''
+      link:
+        linkText: Explore visual editing
+        link: /visual-editing/
+      image:
+        imageSource: /src/assets/images/marketing/rocks-corner-3806-70523.png
+        imageAlt: ''
+    style:
+      scratched: true
 ---

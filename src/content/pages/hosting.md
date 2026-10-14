@@ -219,16 +219,19 @@ pageSections:
         files to your server.
       subtextSize: lg
       subtextWidth: xl
-      linkText: Talk to us about hosting
-      link: /contact/
       alignmentHorizontal: center
-      scratch: pacific
       buttonVariant: secondary
-      imageSource: /src/assets/images/marketing/ferns-rocks-2-3806-72621-mirrored.png
-      imageAlt: ''
-      imageSourceStart: /src/assets/images/marketing/ferns-corner-3806-72622.png
-      imageAltStart: ''
+      link:
+        linkText: Talk to us about hosting
+        link: /contact/
+      image:
+        imageSource: /src/assets/images/marketing/ferns-rocks-2-3806-72621-mirrored.png
+        imageAlt: ''
+      imageStart:
+        imageSourceStart: /src/assets/images/marketing/ferns-corner-3806-72622.png
+        imageAltStart: ''
     style:
+      scratched: true
       backgroundColor: pacific
       pattern: none
       fade: none

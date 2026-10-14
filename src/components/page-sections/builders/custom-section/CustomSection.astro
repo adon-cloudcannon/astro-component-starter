@@ -38,6 +38,10 @@ const {
      drew nothing. */
   pattern: patternName = "",
   fade = "none",
+  /* Scratches through the band's own colour. The sheet is a util, and it
+     goes on the colour layer rather than the section: on the section its
+     strokes paint under that layer and vanish. */
+  scratched = false,
   /**
    * A soft pool of the band's own colour behind the content, so a heading
    * stays readable where an illustration or a pattern runs underneath. The
@@ -237,7 +241,16 @@ const arrayDataAttributes =
         }}
       />
     )}
-    {bandToken && <div class:list={["background", bandToken && `bg-${bandToken}`]} />}
+    {bandToken && (
+      <div
+        class:list={["background", bandToken && `bg-${bandToken}`, scratched && "scratched"]}
+        style={
+          scratched
+            ? { "--scratch-fill": "var(--band-color)", "--scratch-position": "absolute" }
+            : undefined
+        }
+      />
+    )}
     {hazePools.map((pool) => (
       <div
         class="background-haze"
