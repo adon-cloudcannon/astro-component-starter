@@ -1,0 +1,69 @@
+---
+title: 'Getting started with CloudCannon and Astro: Snippets and Collections'
+description: >-
+  Learn how to enhance your Astro site on CloudCannon by implementing Snippets for complex
+  components, reorganizing Collections, and optimizing image paths.
+date: '2025-02-21T05:00:00+13:00'
+author: Tom Richardson
+image: https://cc-dam.imgix.net/blog-getting-started-astro-part-2-r.png
+tags:
+  - resources
+---
+
+In [my previous article](/blog/getting-started-with-cloudcannon-and-astro-wysiwyg-blogging/) and video, we explored the initial setup of an Astro site using CloudCannon, working with the <a href="https://github.com/themefisher/bigspring-light-astro" target="_blank" rel="noopener">BigSpring Light Astro theme</a> and configuring the WYSIWYG Content Editor. We set up schemas for blog posts and learned how to manage content through CloudCannon’s intuitive interface. Now, let’s take our implementation further by adding advanced features and improving our site’s structure.
+
+We'll build on that foundation by implementing [Snippets](https://cloudcannon.com/documentation/articles/what-is-a-snippet/) for complex content components and reorganizing our [Collections](https://cloudcannon.com/documentation/articles/what-is-a-collection/) for better maintainability. We’ll also explore how to make your theme more flexible and editor-friendly while maintaining the power of Git-based content management.
+
+## **Setting up proper image paths**
+
+First, let’s fix our image paths configuration. Instead of using the default `public/uploads` directory, we’ll set our image path to `public/images` in the global site config. This change requires:
+
+1. Updating the path in the config file
+2. Moving existing images to the new directory
+3. Updating image references in content files
+
+To ensure consistent dependency management across the project, we also removed `package-lock.json` from our `.gitignore` file. This change helps guarantee that all developers working on the project use the same package versions.
+
+## **Refactoring Collections**
+
+To improve our content organization, we consolidated several individual Collections into a single `pages` Collection. This refactoring involved:
+
+1. Moving content files from separate Collections (contact, pricing, etc.) into the pages Collection
+2. Updating the schema in `config.ts` to accommodate all page types
+3. Creating a union type to handle both regular pages and the homepage
+4. Updating router implementations to reflect the new Collection structure
+
+The new structure makes the content more manageable while maintaining the flexibility to handle different page types.
+
+## **Implementing Snippets with Bookshop**
+
+To enable complex HTML components within markdown content, we replaced auto-import with Bookshop, CloudCannon’s component building system. Here’s how we set it up:
+
+1. Removed the auto-import integration
+2. Installed Bookshop and its dependencies
+3. Created the necessary Bookshop configuration
+4. Added a post-build script to generate Bookshop data
+5. Moved components to the source directory and added shortcodes as a subdirectory for better organization
+
+Because Astro requires MDX, we also converted relevant .md files to .mdx to support component usage within content files.
+
+## **Configuring Snippets in CloudCannon**
+
+To make Snippets editable in the CloudCannon interface, we added Snippet configurations to the CloudCannon config file. For example, we created a button Snippet with:
+
+* Smart button icon for visual identification
+* Configurable properties (`label`, `link`, `style`, `rel`)
+* Input types (`text`, `url`, `select`) for each property
+* Predefined options for `style` (`outline`, `primary`) and `rel` (`follow`, `nofollow`)
+
+This configuration allows content editors to easily add and customize buttons through the Content Editor, expanding upon the editing capabilities we set up in our previous tutorial.
+
+## **Next steps**
+
+In upcoming videos and articles, I’ll cover:
+
+* Creating reusable components and implementing live editing for landing pages
+* Setting up optimized images with `srcset`
+* Configuring advanced input types for objects and arrays
+
+This refactoring and enhancement work builds upon our initial setup to create a more robust and user-friendly Astro theme in CloudCannon. By combining the power of Git-based content management with features like Snippets and organized Collections, we’re creating a more efficient workflow for both developers and content editors.

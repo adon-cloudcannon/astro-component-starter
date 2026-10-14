@@ -1,0 +1,51 @@
+---
+title: Why we switched to the system font stack
+description: >-
+  Why we moved from a custom web font to the system font stack: faster load times, better
+  accessibility, and fuller Unicode coverage.
+date: '2026-03-09T00:00:00+13:00'
+author: Ryan Collins
+image: https://cc-dam.imgix.net/blog-system-font.png
+tags:
+  - features
+---
+
+A couple of weeks ago, a small bug report turned into a <a href="https://cloudcannon.com/documentation/changelog/2026/02/26/503-errors-resolved/" target="_blank" rel="noopener">typography upgrade</a> we’d been meaning to make for a while.
+
+Our support team received an issue flagging that bold and normal text were indistinguishable inside headers within CloudCannon. The fix was straightforward in theory — either install an additional weight of our custom font or switch to the system font stack. We’d been leaning toward the system font stack for some time, and this felt like the right moment to make the move.
+
+## All the font weights, out of the box
+
+Custom web fonts require deliberate choices about which weights to load. Load too few and you end up with exactly the kind of bold-vs-normal ambiguity we ran into. Load them all and you’re shipping a lot of font data your users may never need. System fonts sidestep this entirely — every weight is already there, ready to use, with no decisions required on our end.
+
+## Better performance, fewer loading artefacts
+
+Web fonts mean HTTP requests, waiting, and a flash of unstyled content that appears while a font file travels over the network and gets parsed by the browser. On a fast connection, this is a minor annoyance. On a slow or metered connection — the kind common in many parts of the world — it’s a real friction point.
+
+With system fonts, there's nothing to download. The font is already on the device. Pages render immediately, in the right typeface, every time.
+
+And this wasn’t entirely new territory for us. We switched our monospace font to a system stack a while ago, and the result was fewer rendering issues overall. That experience gave us confidence that extending the same approach to the rest of the UI was the right call.
+
+## Broader Unicode coverage for international users
+
+Custom fonts often have incomplete Unicode coverage. For users working with non-Latin scripts — Arabic, Chinese, Japanese, Korean, Devanagari, and many others — gaps in a custom font can mean garbled or missing characters. System fonts, maintained by OS vendors with global user bases in mind, typically offer far more comprehensive Unicode support. For our international customers, this is a meaningful improvement.
+
+## A more accessible, readable experience
+
+System fonts carry accessibility advantages that are difficult to replicate with custom typefaces.
+
+Many users rely on OS-level font settings to manage reading difficulties — increasing text size, enabling high contrast modes, or substituting fonts that work better for conditions like dyslexia. Custom web fonts can interfere with these adjustments, either by overriding user preferences or by rendering in ways that conflict with assistive technologies. System fonts, being native to the OS, tend to respect these settings naturally.
+
+There's also the matter of rendering quality. System fonts are hinted and optimised by the OS vendor specifically for screen rendering on that platform — meaning they render with maximum clarity at every size, on every display, for every user. Custom fonts, however well-designed, can't match that level of platform-specific tuning across every device and screen density your users might have.
+
+For users with low vision, the difference between a font that renders crisply at small sizes and one that doesn't can determine whether an interface is usable at all.
+
+Because system fonts are the typefaces people read in their email client, their file manager, their operating system's own dialogs. When an app uses them too, it feels like it belongs on the device rather than being layered on top of it. There’s something meaningful about seeing an interface rendered in a font you already know.
+
+That familiarity has practical implications for readability. People read faster and more accurately in typefaces they encounter regularly: a font that feels native is a font that gets out of the way.
+
+## In good company
+
+The trend toward system fonts has been building for years. GitHub made the switch. Notion made the switch. The reasoning is the same across the board: system fonts perform better, render more reliably, and feel more at home on the devices people use every day.
+
+For us, what started as a fix for a single header bug turned into a cleaner, faster, more accessible UI.

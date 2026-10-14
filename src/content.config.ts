@@ -115,6 +115,11 @@ const blogPostSchema = z.object({
   image: z.string().optional(),
   tags: z.array(z.string()).default([]),
   keywords: z.array(z.string()).optional(),
+  /* Carried over from the old site: a post that was never published stays
+     unpublished, and one whose URL was not its slugified title keeps that
+     URL so the links into it still land. */
+  draft: z.boolean().optional(),
+  legacyUrl: z.string().optional(),
 });
 
 /**
@@ -186,7 +191,10 @@ const expertsCollection = defineCollection({
 });
 
 const blogCollection = defineCollection({
-  loader: glob({ pattern: "**/*.mdx", base: "./src/content/blog" }),
+  /* `.md` as well as `.mdx`: the posts carried over from the old site are
+     prose with the odd image, and MDX reads a brace as an expression — a
+     third of them mention one in a code sample. */
+  loader: glob({ pattern: "**/*.{md,mdx}", base: "./src/content/blog" }),
   schema: blogPostSchema,
 });
 

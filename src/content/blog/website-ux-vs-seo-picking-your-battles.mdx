@@ -1,0 +1,118 @@
+---
+title: 'Website UX vs SEO: picking your battles'
+description: >-
+  How can website developers balance SEO-directed performance tweaks that are at odds with a
+  seamless user experience?
+date: '2024-08-24T05:00:00+12:00'
+author: David Large
+image: https://cc-dam.imgix.net/blog-ux-seo-2.png
+tags:
+  - opinion
+  - resources
+---
+
+If you’ve built more than a couple of websites, you’ll know how important user experience (UX) and search engine optimization (SEO) are. These two factors can be at odds with each other, however, and as website owners and developers, we frequently find ourselves caught in a tug-of-war between competing concerns.
+
+On one side, we have the user-centric approach that prioritizes clean design, easy navigation, and valuable content. On the other, we face the pressure to implement various SEO-directed performance enhancements that can sometimes feel at odds with a seamless user experience. So how do we balance the need to cater to our human audience while also playing by Google’s ever-changing rules?
+
+In this article, we’ll explore the delicate balance between user experience and SEO-guided performance enhancements, examining where they align, where they conflict, and how we can navigate this complex terrain.
+
+## The UX/UI imperative: why prioritize user experience?
+
+Prioritizing user experience is crucial for website success. And for good reason! A well-designed UX can significantly increase user satisfaction, boost conversion rates, improve brand perception, reduce support costs, and enhance user retention.
+
+Key analytics metrics can provide valuable insights into the effectiveness of a website’s design. Bounce rate, time on site, page load speed, and task completion rate are all important indicators of user engagement and satisfaction. Improving these metrics through thoughtful user interface (UI) design can lead to better overall performance and potentially higher search rankings.
+
+“Thoughtful UI” is the key term here — everything in moderation. Too much emphasis on UI without considering performance measurement tools can introduce a range of potential challenges:
+
+### Neglecting search engine optimization
+
+### Compromising technical performance
+
+### Potential for feature creep and scope expansion
+
+Ultimately, focusing on UI isn’t just about creating visually appealing sites. It’s about understanding user needs, simplifying complex processes, and creating an environment where all users can achieve their goals.
+
+## Lighthouse: the SEO game
+
+In recent years, Google has increasingly emphasized user experience as a ranking factor, blurring the line between traditional text-based SEO and UX/UI design. This shift is exemplified by the introduction of [Core Web Vitals](/blog/watching-your-core-web-vitals-on-jamstack/ "Watching your Core Web Vitals on Jamstack") and the prominence of Google’s <a href="https://developer.chrome.com/docs/lighthouse/overview" title="Google Lighthouse Overview" target="_blank" rel="noopener">Lighthouse</a> tool in measuring website performance.
+
+Don’t get me wrong — Lighthouse is a great tool! But there are a few potential pitfalls to focusing more on Lighthouse scores than directly on user experience:
+
+### Optimizing for the test, not the user
+
+### Missing the bigger picture
+
+### Inflexibility and lack of adaptation
+
+## How to pick your battles: strategies for balancing UX and SEO
+
+The most common issue you’ll likely face is that SEO benefits from fast-loading pages, but rich media elements that can enhance user experience can slow down load times.
+
+When faced challenges like these, developers need to carefully pick their battles and prioritize the areas that will have the greatest impact on the overall user experience *and* business goals. Here’s how you might choose to approach these tradeoffs:
+
+### Focus on the critical UX and SEO factors first
+
+Identify the most important user pain points and high-impact SEO ranking factors. Prioritize addressing issues that significantly affect both user experience and search visibility:
+
+&nbsp;&nbsp;&nbsp;Page load speed —&nbsp;this is probably the single most impactful metric!
+
+&nbsp;&nbsp;&nbsp;Mobile optimization (as of August 2024, mobile devices account for more than 60% of web traffic)
+
+&nbsp;&nbsp;&nbsp;Know your users' goals, and how your site can meet them
+
+&nbsp;&nbsp;&nbsp;Focus on improving content quality to help your users
+
+### Seek overlapping solutions
+
+Look for opportunities where UX and SEO improvements can work together to benefit both user experience and search engine understanding:
+
+&nbsp;&nbsp;&nbsp;Enhance content structure and site accessibility
+
+&nbsp;&nbsp;&nbsp;Implement lazy loading where possible
+
+&nbsp;&nbsp;&nbsp;Optimize images ([Jampack](/blog/how-jampack-optimizes-our-eleventy-website-and-improves-performance/ "How Jampack optimizes our Eleventy website and improves performance") helps us do this on our site, as does [imgix](/integrations/imgix/ "CloudCannon's imgix Integration"))
+
+&nbsp;&nbsp;&nbsp;Create responsive designs that render well, regardless of display size
+
+### Weigh the relative impact
+
+Evaluate the potential gains (or losses) in user experience versus search rankings for each decision:
+
+&nbsp;&nbsp;&nbsp;If a UX change will substantially improve the user journey but only marginally impact SEO, it may be worth prioritizing the user-centric approach.
+
+&nbsp;&nbsp;&nbsp;Likewise, if a huge performance gain can be implemented at the cost of a minor UX inconvenience, it might be a good move.
+
+There’s no hard and fast answer here, unfortunately — you’ll have to weigh up the costs and benefits to your own site.
+
+### Use data to guide decisions
+
+Leverage Lighthouse scores, A/B testing results, user feedback, and other performance metrics to make informed tradeoffs:
+
+&nbsp;&nbsp;&nbsp;A/B testing in particular can help fine-tune the balance between UX and SEO. By testing different versions of pages and measuring their impact on both user behavior (e.g., bounce rates, time on page) and SEO metrics (e.g., rankings, organic traffic), website owners can make informed decisions about design and content choices. We've even written up a helpful [tutorial on A/B testing](/tutorials/ab-testing-for-static-websites/ "A/B Testing for Static Websites") to get you started!
+
+### Maintain flexibility and continuous optimization
+
+Remember, any changes you make to balance UX and SEO balance will not be a one-time fix:
+
+&nbsp;&nbsp;&nbsp;Regularly monitor performance with tools like Lighthouse and <a href="https://developer.chrome.com/docs/crux" title="Chrome User Experience Report" target="_blank" rel="noopener">CrUX</a>, which reports on how Chrome users experience the web
+
+&nbsp;&nbsp;&nbsp;Gather user insights from interviews and analytics data
+
+&nbsp;&nbsp;&nbsp;Be willing to adjust your strategies as search algorithms and user expectations evolve
+
+It’s also worth keeping in mind that while search engine visibility is crucial, a website that fails to meet the needs and expectations of its target audience will struggle to succeed in the long run, regardless of its SEO performance. The key is to continuously iterate based on both performance data and user feedback, aiming for harmony between UX excellence and SEO effectiveness.
+
+## Best practices for web developers, marketers, and designers
+
+In an ideal world, designers would understand the technical constraints and SEO implications of their proposals, and performance experts would consider the user experience impact of their optimizations. This kind of cross-functional collaboration helps prevent siloed decision-making, and ensures that the final product meets the needs of both users and search engines.
+
+Finally — and this probably isn’t news to anyone — ongoing education and adaptation to algorithm and performance tool updates is crucial. Of course, it’s highly unlikely that anyone *ever* gets in web development or design and thinks, “I’ve learned everything I need!” I’d recommend following resources like CrUX and the <a href="https://uxdesign.cc/" title="UX Collective" target="_blank" rel="noopener">UX Collective</a> for UX trends. And if you’re lucky enough to work with a designer, keep those conversations flowing!
+
+## Remember that success is iterative
+
+Balancing the needs of your users with that of your marketing department is tricky, but user-centric approach can serve both goals. Performance measurement tools can give insights into the areas where UX and SEO intersect, allowing you to make data-driven decisions that satisfy both human visitors and search engine algorithms.
+
+There’s no one key definition of success here. In fact, it’s not even *your* success you should be thinking about. A good baseline aim would be to remove anything that blocks users from achieving their goals — which is why it’s so important to know what your users actually want.
+
+But however you define success for your team, it’s going to be the result of an ongoing process that requires continuous learning, adaptation, and a willingness to experiment as search engine algorithms evolve and user preferences change. And if you’ve embraced a user-first philosophy, your site is already successful.

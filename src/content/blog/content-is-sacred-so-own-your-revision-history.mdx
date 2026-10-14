@@ -1,0 +1,69 @@
+---
+title: "Content is sacred —\_so own your revision history"
+description: >-
+  If content truly is sacred to the most widely used CMS in the world, wouldn't it use Git?
+  If content is important to you, it's time to consider a Git-based CMS.
+date: '2024-10-18T05:00:00+13:00'
+author: David Large
+image: https://cc-dam.imgix.net/content-is-sacred.png
+tags:
+  - opinion
+---
+
+We’ve had a few weeks to observe the ongoing drama affecting the WordPress community. I won't recap it here; just keeping up is a full-time job. (See Ivan Mehta's <a href="https://techcrunch.com/2024/10/15/wordpress-vs-wp-engine-drama-explained/" target="_blank" rel="noopener">ongoing updates at TechCrunch</a> if you'd like to catch up.). And as fascinating as this has been to watch from a reasonably safe distance (I migrated my last sites from WordPress a couple of years ago), I'm certain we haven't seen the end of it.
+
+## **Is this the wakeup call WordPress (and the web) needs?**
+
+I'm equally sure that this isn’t the whole story. It’s just the bits we know, the pieces we’ve been told. There will almost certainly have been numerous back-channel discussions, increasingly less polite requests for payment, and possibly even more silent service disruptions that have brought these Automattic and WP Engine to this point. It’s only now that tensions have escalated that the disputes have been made public.
+
+There are also, quite obviously, huge sums of money at stake here, in the range of tens to hundreds of millions of dollars of annual revenue. According, there’s serious competition: Automattic and WP Engine compete for users seeking managed WordPress installs and hosting, and both base their business model on the open-source WordPress software. The big issue is that only one of those commercial enterprises has a (likely controlling) vote on the future of the open-source software, as well as the news feeds and servers that all WordPress users connect to.
+
+It doesn’t inspire confidence that a developer’s existing maintenance burden is increased by large companies arguing over licensing money and the ‘right way’ to leverage open source software. It’s even more of a concern that multiple users’ sites were broken, failed to update, and that WP Engine users were blocked from accessing themes and plugins — particularly because their access to WordPress servers was deliberately denied. (And don't get me started on WordPress <s>executing Order 66</s> invoking point 18 and <a href="https://x.com/wp_acf/status/1845169499064107049" target="_blank" rel="noopener">forking the Advanced Custom Plugins project <em>while taking its slug and install/review count</em></a>, or <a href="https://wordpress.org/news/2024/09/wp-engine/" target="_blank" rel="noopener">complaining that WP Engine doesn't contribute enough</a> while <a href="https://www.theregister.com/2024/10/15/wordpress_bans_wpengine_from_events/" target="_blank" rel="noopener">banning them from sponsoring or participating in community events</a>.)
+
+But let’s focus on the tipping point. (Or at least, the very first reason we were given publicly — follow the money and you’ll go down the rabbit hole of trademark disputes, anticompetitive behavior, rampant egos, and spurious licensing requests.)
+
+## **Let’s talk about revision history**
+
+The apparent inflection point for Mullenweg — the core argument with which he first tried to rally the WordPress community — was WP Engine disabling revision history for their users. That’s less than ideal for obvious reasons, and WP Engine presumably saves a lot of money by disabling this revision history entirely, though users can individually <a href="https://wpengine.com/support/platform-settings/#Post_Revisions" target="_blank" rel="noopener">request that 3 to 5 revisions</a> are enabled.
+
+It’s probably news to some people that WordPress actually has a revision storage system at all — for each page or post, multiple revisions can be stored. The exact number of revisions depends on how your site is configured; by default there’s no limit to the number of revisions that are saved. (Automattic’s Jetpack also lets users enable, disable, limit and delete their WordPress revisions.)
+
+But no matter which service you use for your WordPress site, and no matter how many revisions you have access to, **your revision history is only as strong as your last backup**. And because WordPress is database-driven, your content and its revision history is locked up in a proprietary format.
+
+I can’t help wondering — [as Joost van der Schee already has](https://www.usecue.com/blog/wp-engine-disabled-revisions/) — why is everyone ignoring Git? Haven’t we solved the problem of revision history already?
+
+Git is, after all, the most widely-used version control system in the world. Surely, if content truly is sacred, it would be a natural choice for the most widely used CMS in the world to use it? Indeed, several solutions on this front have popped up in the last couple weeks, and there are a range of plugins promising Git-based content backups — if, of course, users aren’t blocked from accessing or updating their plugins!
+
+<a href="https://versionpress.com/" target="_blank" rel="noopener">VersionPress</a>, for example, seems to be a reasonable addition to enable Git-based content backups, while [WP Pusher](https://wppusher.com/) and <a href="https://wordpress.org/plugins/gitium/" target="_blank" rel="noopener">Gitium</a> can handle plugin and theme backups and continuous deployment.
+
+My position here is probably pretty clear. [Git-based CMSs like CloudCannon](/git-cms/) build version control into the very fabric of their systems, unlike a traditional database-driven CMS like WordPress, where content history can be limited or difficult to access. (*Or, in the worst-case scenario, deliberately blocked by competing multi-million dollar concerns.*)
+
+## **True data portability and ownership**
+
+Git-based CMSs store all content in users' Git repositories, providing a comprehensive and granular version history of every change. This approach offers several benefits, including a complete audit trail of all content modifications, the ability to easily revert to previous versions if needed, and simplified collaboration through branching and merging.
+
+And when content is stored in Git, users have full ownership and control over their data. Content is not locked into a proprietary database format. Users can easily migrate between different hosting providers or platforms. And developers can, if they choose, work locally (or even offline) and sync their changes when they’ve reconnected.
+
+This level of data portability ensures that content creators are not tied to any single platform or service provider, fostering a more open and flexible web ecosystem.
+
+## **Enhanced security and reliability**
+
+Git-based systems can offer improved security and reliability. Git’s decentralized nature makes it more resilient to data loss. And CMSs that don’t rely on databases have a reduced attack surface (as do static sites). It’s also much easier to implement backup and disaster recovery strategies.
+
+Static site generators, which often work hand-in-hand with Git-based CMSs, can deliver exceptional performance gains over legacy CMSs. Pages can load significantly faster due to pre-rendered content. Server resource requirements are greatly reduced, and high-traffic sites can see much better scalability under heavy traffic loads.
+
+## **Developer-friendly workflows**
+
+When developers are involved in websites, they find that Git-based systems align well with modern dev practices — they can seamlessly integrate with CI/CD pipelines, and testing and staging of content changes is much easier. Finally, for developers already using Git, it’s easy to apply the same mental model to websites and their content.
+
+And while WordPress is known for its extensive plugin ecosystem, Git-based CMSs offer their own flexibility, including the freedom to choose from a wide range of static site generators, the ability to use modern frontend frameworks and tools, and the choice of choosing a headless approach for enhanced editing and publishing experiences.
+
+## **Moving the web forward**
+
+As we reflect on the WordPress drama — and wait to see what happens next — it's clear that there's no one-size-fits-all solution for web content management. However, [Git-based CMSs](/git-cms/) represent a compelling alternative that addresses many of the concerns raised (and threats made) by both Automattic and WP Engine.
+
+Could Automattic and/or WP Engine turn to Git, and gain a significant advantage over both competitors and other providers of the same open source software? Maybe — and that’d be a heck of a shakeup for the web.
+
+But until that happens, if it ever does, a sizable proportion of the web won’t see [the same benefits *that already exist* in CMSs like CloudCannon](/tutorials/wordpress-feature-comparison/) — open standards, prioritizing data ownership, and aligning with modern development practices.
+
+Git-based content management systems already offer [a path away from WordPress](/alternative-to-wordpress/) that respects the needs of both developers and content creators, where content really is sacred, and isn’t locked away in a proprietary database. It's worth considering how the approaches of the Git-based CMS can contribute to a more open, performant, and user-centric web.

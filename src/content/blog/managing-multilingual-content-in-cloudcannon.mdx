@@ -1,0 +1,139 @@
+---
+title: Managing multilingual content in CloudCannon
+description: >-
+  Learn two approaches for managing multilingual content in CloudCannon: separate content
+  directories or automatic page generation with tools like Rosey.
+date: '2025-07-01T05:00:00+12:00'
+author: Tom Richardson
+image: https://cc-dam.imgix.net/blog-rosey-i18n.png
+tags:
+  - resources
+---
+
+So you want to manage content for your website in more than one language, or more accurately, in more than one [locale](https://www.smartling.com/blog/what-is-a-locale)? A CMS like CloudCannon will excel at this, but there are some choices to be made first in how you set up your site.
+
+In the following explanations and examples, we will assume a base language of English — in other words, your original site is in English (`en`) — and one translation, French (`fr`). This could of course be expanded out to as many locales as you need, but in the interest of simplicity we'll keep it to a single translation for the majority of this post.
+
+## Two strategies for managing multilingual content
+
+Broadly speaking, you can either organize translations into separate content directories for each language, or use an automated approach that generates multilingual pages from translation files. Each approach has distinct advantages depending on your site's complexity, the number of locales you need to support, and how frequently you make non-textual changes to your content.
+
+### 1\. Creating separate folders for each language
+
+The first, and probably easiest to understand, is to create separate content directories for each locale. You will likely have your original content living in a directory named something like `src/content`, depending on what SSG you are using, and what your individual setup looks like. You can then simply create a subdirectory in that content folder for your French content, eg. `src/content/fr/`. Most likely the file structure will mirror your original content exactly, but nested in a directory.
+
+Your directory structure might end up looking something like:
+
+```
+src/
+  content/
+    index.md
+    about.md
+    blog/
+      index.md
+      a-blog-post.md
+    fr/
+      index.md
+      about.md
+      blog/
+        index.md
+        a-blog-post.md
+```
+
+The result will be that your original (`en`) pages will be served without any URL prefix, or in other words served at the root of your domain, while all of your translated (`fr`) pages will be served with the prefix of `fr`. So your English homepage is built at your base URL `https://my-site.com/` and your English `about` page at `https://my-site.com/about/`. Your French homepage is built at `https://my-site.com/fr/` and your French `about` page is built at `https://my-site.com/fr/about/`.
+
+![](https://cc-dam.imgix.net/translation-by-directory-approach-s.png)
+
+In short, you have your pages as they were before you decided to add another locale, and then you nest any other locales in a directory of their own.
+
+This is easy to understand, both for developers and non-technical editors. It works well when you don't have many different locales to maintain, and when the content changes you are likely to make to your pages are mainly text-content changes.
+
+Hugo, a popular and well established SSG, <a href="https://gohugo.io/content-management/multilingual/#translation-by-content-directory" target="_blank" rel="noopener">recommends using an approach like this</a>. Astro, one of the fastest growing SSGs and frameworks, <a href="https://docs.astro.build/en/guides/internationalization/#create-localized-folders" target="_blank" rel="noopener">also recommends a similar approach</a>.
+
+#### When managing multiple folders becomes difficult
+
+If you have a lot of locales to maintain, and if you have a lot of styling controls on your pages (as can often be the case in a CMS like CloudCannon) this approach *can* become a bit tedious.
+
+Imagine an example where you have a site with 10 different locales, and your editors want to change a button component on one of your site's pages (the classic contrived button example, but hopefully nice and easy to understand). If the change to the button is purely text content, then you would go through and change the text content for each language. No problem — you'll need to do this with whichever approach you choose. However, if the background and text color inputs for the button need changed as well, and you want that change reflected across all the locales you support, suddenly the amount of changes needed to make this content update across all the locales has gone from 10 changes, to 30 (one text change, and two styling changes for each locale).
+
+### 2\. Automatically generating pages from translation files
+
+This is where <a href="https://rosey.app/" target="_blank" rel="noopener">Rosey</a> comes in.
+
+The Rosey workflow involves tagging your HTML elements with the information needed to translate them. After your site builds in its primary language, Rosey ingests your final site and extracts tagged elements for translation. Once these have been translated, Rosey combines your original site with each set of translated content, resulting in a final multilingual website.
+
+![](https://cc-dam.imgix.net/generating%20pages-from-translation-rs.png)
+
+In other words, Rosey takes your original locale, and a set of JSON data files containing translations, and generates all of the pages needed for each locale as part of the build process.
+
+This differs to many translation workflows that bake multilingual support into the templating, and provides many benefits:
+
+* Only one copy of your source content needs to be maintained. This eliminates the need to replicate any non-text changes across your different locales.
+* Components can be developed in isolation, without needing access to data files or framework-specific translation logic.
+* Layouts and components can translate hard-coded text without having to abstract it into data files or front matter.
+* Translations can be shared across websites and static site generators.
+
+Rosey works by looking for tagged translatable elements in the HTML of your page —&nbsp;specifically the `data-rosey` tag. This probably looks familiar if you've used i18n before, where you would tag your HTML elements with `data-i18n` tags.
+
+```html
+<p data-rosey="your-cool-translation">This is a paragraph</p>
+```
+
+Each of these tags then has a value that corresponds to a key in your translation data files.
+
+`rosey/locales/fr.json`
+
+```json
+{
+  "your-cool-translation": {
+    "original": "This is a paragraph",
+    "value": "Ceci est un paragraphe"
+  }
+}
+```
+
+In the JSON data file for each locale, each key corresponds to an object that contains an original phrase, and a translated phrase. You maintain one data file for each locale. Rosey then takes those data files, your original pages containing `data-rosey` tags, and creates a version of each page in each different locale with the tagged content swapped out with it's corresponding translation. Rosey uses the keys in each data file, and the tags in your HTML content to keep track of where each translation needs to go on the translated pages it generates.
+
+This approach can be a bit harder to wrap your head around, but it can be a big time saver if you are making changes across a lot of different locales that aren't text changes. You only need to maintain the translations themselves in the data files, and any layout or style changes will be handled by Rosey automatically. Using the button example from before, you wouldn't need to worry about replicating the background color and text color changes across all your locales.
+
+## Important limitations to consider
+
+### When you need different layouts per language
+
+The Rosey approach — translation by file generation — falls down a little if you *do* want to maintain separate layouts/components across your different locales. Imagine you want a left-right block to appear on one of your original locale pages, but not at all on the corresponding translated locale page — you would probably be better suited to using a 'translation by content directory' approach. This would allow you to maintain completely different content for each locale, at the expense of *having* to maintain all that different content independently for each locale.
+
+### Automatic redirects
+
+A handy feature that comes out of the box with Rosey is an automatically generated redirect page to the site visitor's default browser locale. So someone that browses the internet using `fr-FR` will be redirected to your `/fr/` pages, while someone browsing in `en-US` will be redirected to `/en/`.
+
+![](https://cc-dam.imgix.net/redirection-via-rosey-s.png)
+
+One thing to note with this feature is you must have all of your locale's URLs prefixed with their locale code — even your original version locale. So if your original site's homepage was at `https://my-site.com/` before, it would become `https://my-site.com/en/`. The redirect page occupies the root of the url at `https://my-site.com/`. You can opt out of this with Rosey if you would rather keep your original locale un-prefixed. Unfortunately, you would lose the default redirect that comes with Rosey, although you can of course still implement your own redirect in other ways, eg. a Cloudflare worker.
+
+**Note:** If you do wish to use default redirects with Rosey, you would need a Staging → Production workflow in CloudCannon, which would require a CloudCannon plan with at least two sites, and publishing workflow capabilities.
+
+### Managing translated URLs and language switchers
+
+Both approaches allow you to use translated URLs for your pages. For example, you may want your about pages to be served at `/about/` and `/fr/a-propos/`. This makes locale switchers more difficult to implement, as you need a way to keep track of which URLs correspond with each other. The recommended approach is to create an array in each page's front matter that lists all of the page's different translated URLs with their locale code. Your locale switcher can then use this list of locales to know which URL to go to when a user switches locales. It can become tedious for editors (and devs) to keep track of each page's different URL translations, especially with lots of locales, so proceed with caution here. Translating your URLs is only recommended if it is really important to your usecase, and if your editors don't mind manually selecting which pages go with each other.
+
+For example, you may have an about page at `/about/`, a French version at `/fr/about/`, and a Spanish version at `/es/about/`. This is very straightforward to implement your locale switcher that will take you to the different locales for each page. You simply grab the current page's URL, and prefix that URL with the locale code you want to link to.
+
+If you instead have translated URLs, your original about page will be at `/about/`, your French version will be at `/fr/a-propos/`, and your Spanish version at `/es/acerde-de/`. With this setup you need your original about page to have a piece of front matter like:
+
+```yaml
+translated_urls:
+  - locale: fr
+    url: a-propos
+  - locale: es
+    url: acerde-de
+```
+
+Then in the logic for your locale switcher, you can access the page's front matter, and check which URL you need to link to based on which locale your user wants to go to.
+
+When using a 'translation by page generation' approach you would maintain this in only one location — your original version. When using a 'translation by content directory' approach this will be more tedious, as each locale will have its own front matter array to maintain.
+
+## Deciding which approach works best
+
+Hopefully this helps demystify how translating your site would look like in CloudCannon.
+
+There is no clear line between when you should use a 'translation by content directory' approach versus a 'translation by page generation' approach like Rosey or i18n, and you should weigh up the pros and cons of each in order to make your own decision.

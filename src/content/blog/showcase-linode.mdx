@@ -1,0 +1,93 @@
+---
+title: Expansive developer documentation with Hugo
+description: >-
+  Linode is a popular cloud infrastructure platform who run their documentation site on
+  static site generator, Hugo.
+date: '2021-11-22T13:00:00+13:00'
+author: CloudCannon
+image: https://cc-dam.imgix.net/blog/uploads/linode-desktop.png
+tags:
+  - resources
+legacyUrl: /blog/showcase-linode/
+---
+
+import Image from "@core-elements/image/Image.astro";
+
+Linode is a popular cloud infrastructure platform who run their documentation site on static site generator, Hugo. In this showcase, we'll see how it's put together.
+
+## Sidebar
+
+There are over 14,000 pages on the Linode documentation side. Designing and developing the sidebar hierarchy to handle this amount of content is a huge undertaking, and for the most part, it works nicely. However, some of the menus can get lengthy. The one below has six levels 😱.
+
+<Image source="https://cc-dam.imgix.net/blog/uploads/linode-docs.jpg" alt="Linode landing page" />
+
+With such a large amount of content and topics to cover, they're somewhat limited in options. I was intrigued by how they implemented something so complex in Hugo. Unsurprisingly, they drop into JavaScript to build the menu using a JS framework called [Alpine.js](https://github.com/alpinejs/alpine). While JavaScript using JavaScript here is fine, there are a few things to be cautious of:
+
+* A small portion of people (probably around 0.2%) have JavaScript disabled and can't use this navigation. I don't know if you've ever tried to browse the web without JavaScript, but in today's world, it's pretty broken. Linode has made the trade-off of making implementation easier by not supporting these users which is a good idea in this case. The JavaScript version of this navigation is hard enough to navigate in some places. Can you imagine how the non-JavaScript version would function?
+
+* While some search engines can understand and parse JavaScript generated content and structure, it's handled differently from parsing well-structured content in the HTML. People used to think Google did two waves of parsing - a fast one of the HTML and a slower one with JavaScript that's run later. However, [this has since been dispelled](https://www.seroundtable.com/google-no-two-waves-indexing-29225.html). What we do know is search engines use navigation to help discover new pages. All sites should have a sitemap, doubly so when the navigation is generated with JavaScript. Doing this ensures all the pages on a site are found by the search engine as quickly as possible. I couldn't find a sitemap for the documentation pages. Linode has invested a significant amount of time and resources in creating the content for this site. It would be such a shame if it didn't rank well due to something so simple.
+
+React-based static site generators [Next.js](https://nextjs.org/) and [Gatsby](https://www.gatsbyjs.com/) are a compelling choice for this situation because of a feature called [server side rendering](https://www.gatsbyjs.com/docs/glossary/server-side-rendering/). On build, they generate HTML from JavaScript modules giving you the best of both worlds - static HTML for search engines and browsers with JavaScript turned off and client-side JavaScript for enhanced interactions.
+
+## Archetypes
+
+Linode needs a way to ensure new content is well structured and consistent with so many content types. That's precisely what [Hugo's Archetypes](https://gohugo.io/content-management/archetypes/) do. Archetypes are a content template that has front matter and content. They're essentially the same as a regular markdown file with a few extra features, such as the ability to have use Hugo templating in the front matter. Running `hugo new` to create a new content file will use the appropriate archetype and put the content writer on an excellent path to consistency.
+
+Linode uses five archetypes for their documentation site. Let's take a look at [default.md](https://github.com/linode/docs/blob/develop/archetypes/default.md) to see how it works:
+
+```md
+---
+slug: {{ path.Base .File.Dir }}
+title: "{{ replace (path.Base .File.Dir) "-" " " | title }}"
+date: {{ .Date }}
+draft: true
+---
+```
+
+This is a good demonstration of how powerful Archetypes are. The slug is initialized to the directory the file is in. The same goes for the title but replacing hyphens with spaces, and the date is set to now. You the full power of Hugo's templating languages here, which gives you complete control over how new content is initialized.
+
+## Page bundles
+
+The theme of this showcase is how to manage large amounts of content. Working with large quantities of content also means working with large amounts of assets.
+
+When organizing assets on a Jekyll site, I'll usually create a directory for assets. For small sites, all the assets live in this one directory. For larger sites, I'll try to create subdirectories for each blog post or content page. The problem comes when content gets chopped, changed, and deleted. With this loose connection between content and assets, I often end up with many orphaned assets I'm not sure are used anywhere on the site.
+
+Hugo has an interesting feature called [Page Bundles](https://gohugo.io/content-management/page-bundles/) which can make this a little less daunting. The way it works is content and assets live together like this:
+
+```md
+content/
+├── posts
+│   ├── big-announcement
+│   │   ├── cat.jpg
+│   │   ├── dog.png
+│   │   └── index.md
+|   ├── huge-announcement
+│   │   ├── pinapple.jpg
+│   │   ├── apple.jpg
+|   |   ├── carrot.jpg
+│   │   └── index.md
+```
+
+If you want to add or remove content or assets, it becomes obvious where to do this and the dependencies involved.
+
+## Importing external content
+
+The docs have a blog section that lists and categorizes posts from their blog. It doesn't feel like a good spot for blog content. They already have a different blog, so why pull the content into here? While the idea is dubious, the implementation is pretty cool.
+
+<Image source="https://cc-dam.imgix.net/blog/uploads/linode-blog.jpg" alt="Linode blog page" />
+
+A painful way of doing this is every time a new post is published, you also publish a reference to it in the docs. Doing it this way would enviability get out of sync and be a headache to maintain. The solution Linode has come up with is to use [Algolia](https://www.algolia.com/). On this site, not only is Algolia used to power search, but it also powers the navigation and the entire Blog section. When the page loads, a query is sent to Algolia to get the number of items in each content type. The results of this query populate the navigation and the counts you see. Clicking into a blog category shows a list of posts. Again, while it looks like this content is part of the site, it's actually an Algolia query to fetch the content. All the documentation site needs from Algolia is the title, short description, hero image, and a link to the post.
+
+<Image source="https://cc-dam.imgix.net/blog/uploads/linode-categories.jpg" alt="Linode blog Linode category page" />
+
+The blog can live on its own on a separate platform. When new content is added or deleted, Algolia is updated, also updating the documentation site. Super elegant.
+
+One improvement that would be worth exploring is whether this content can be rendered in the source HTML rather than generated on page load. The initial query is about 100KB of gzipped data. On my internet connection, it's unnoticeable, but on a slower connection, there could be a delay between page load and seeing the nav or the blog posts. Algolia also charges per 1000 searches, so they're potentially spending a sizable amount just to render the initial state of the doc pages.
+
+Hugo can [query an external data source](https://gohugo.io/templates/data-templates/#data-driven-content) as part of a build. Using this feature would allow Linode to still have the power and flexibility of Algolia without having to do any queries on page load. It would also mean doing one query per build rather than once per page load. The downside of doing this is the potential for content to get stale, which can be addressed by scheduling a periodic build every hour (or whatever your tolerance is).
+
+## Wrap up
+
+The Linode documentation is an excellent example of managing large amounts of content with a static site generator. Hugo is the correct choice for such a large site due to its speedy build times. Kudos to the Linode team for making their documentation site [source code public](https://github.com/linode/docs) so we can all learn and contribute to making it even better.
+
+If you're interested in using Hugo for your own documentation site, take a look at this [Hugo tutorial](/tutorials/hugo-beginner-tutorial/), to get started.

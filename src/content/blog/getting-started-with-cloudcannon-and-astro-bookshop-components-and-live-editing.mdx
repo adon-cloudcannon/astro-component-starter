@@ -1,0 +1,74 @@
+---
+title: 'Getting started with CloudCannon and Astro: Bookshop, components, and live editing'
+description: >-
+  Implement Bookshop in your Astro website for live visual editing in CloudCannon. This
+  tutorial guides you through component refactoring and configuration.
+date: '2025-04-15T05:00:00+12:00'
+author: Tom Richardson
+image: https://cc-dam.imgix.net/blog-getting-started-astro-part-3.png
+tags:
+  - resources
+---
+
+In our previous tutorials, we explored how to set up basic blog editing in CloudCannon's Content Editor for an Astro theme. We refactored our Collections, performed some small tidy-ups along the way, and implemented the ability to add components throughout your Markdown body content using CloudCannon’s Snippets feature.
+
+Today, we’re taking the next step in our journey with the <a href="https://github.com/themefisher/bigspring-light-astro" target="_blank" rel="noopener">BigSpring Light Astro theme</a> by implementing <a href="https://github.com/CloudCannon/bookshop" target="_blank" rel="noopener">Bookshop</a> for live editing. This powerful tool handles component importing into your page’s body content, and also connects your front matter fields directly to the HTML on your page, enabling real-time visual previews of your changes.
+
+## **What does Bookshop do?**
+
+Bookshop serves two primary functions in our Astro site:
+
+1. It automatically handles the importing of components into content pages (replacing the auto-import we were using previously).
+2. It establishes connections between front matter fields and HTML elements, enabling live previewing of changes.
+
+Instead of having to save, rebuild, and refresh to see your changes, Bookshop allows you to preview your modifications instantly in CloudCannon's Visual Editor. For non-developers, this can be a huge efficiency (and confidence) boost when making content changes to a website.
+
+*Want to learn more about CloudCannon and Bookshop? Check out* [*CloudCannon’s documentation*](https://cloudcannon.com/documentation/) *and the* [*Astro Bookshop Guide*](https://cloudcannon.com/documentation/guides/bookshop-astro-guide/) *for additional resources.*
+
+## **Implementation steps**
+
+Here’s what we covered in this video tutorial:
+
+**1\. Setting up the foundational structure**
+
+* Recapped the Bookshop setup work we did from the last video, which we used for importing Snippets
+* Updated Bookshop to the latest version
+* Created a shared page helper (in `source/shared/astro/page.astro`)
+* Created a new page layout for our component-based pages
+
+**2\. Refactoring components**
+
+We methodically worked through our homepage, converting each section into a Bookshop component:
+
+* Banner
+* Features
+* Services
+* Workflow
+* Call to action
+
+For each component, we:
+
+* Created the component files (`*.astro` and `*.bookshop.yaml`)
+* Extracted the HTML from the original page
+* Moved the relevant front matter into the component structure on the content page
+* Implemented image recipes for responsive images
+
+**3\. Enhancing the editing experience**
+
+To improve the content editing experience in CloudCannon, we:
+
+* Added icons to components for easier identification
+* Set up blueprints for the initial values each component should have when adding them to a page in CloudCannon
+* Configured appropriate input types for each field (text areas, markdown editors, etc.)
+* Set up global input configurations for common fields like “content” and “button”
+* Created structures for adding complex values (like an object) to `type: array` inputs
+
+## **The result**
+
+With these changes implemented, our site now offers a component-based structure that’s easy to maintain and extend, and a significantly improved editing experience with properly configured input fields.
+
+Content editors now have the ability to reorder, add, or remove components through a visual interface, with live previewing of all changes in the CloudCannon Visual Editor.
+
+## **Next steps**
+
+In our next tutorial, we’ll expand on our work by refactoring the rest of the site’s pages to use our newly created components. We’ll also explore creating new pages with these components, further leveraging the power of Bookshop and CloudCannon.

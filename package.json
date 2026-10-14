@@ -74,7 +74,8 @@
     "deps:sync": "rm -rf node_modules && npm install --os=linux --cpu=x64 --libc=glibc --ignore-scripts --no-audit && npm ci",
     "deps:check": "npm ci --dry-run",
     "lint:nesting": "node scripts/cms/lint-nesting.mjs",
-    "templates:readmes": "node scripts/content/fetch-template-readmes.mjs"
+    "templates:readmes": "node scripts/content/fetch-template-readmes.mjs",
+    "blog:port": "node scripts/content/port-blog-posts.mjs"
   },
   "dependencies": {
     "@astrojs/mdx": "^8.0.2",

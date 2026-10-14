@@ -1,0 +1,83 @@
+---
+title: Building static sites that scale
+description: >-
+  With CMS solutions like CloudCannon offering publishing workflows that can handle hundreds
+  of connected sites, it's clear that static sites can scale.
+date: '2024-05-17T05:00:00+12:00'
+author: David Large
+image: https://cc-dam.imgix.net/blog-static-sites-that-scale.png
+tags:
+  - features
+  - opinion
+---
+
+If Jamstack has taught me anything, it’s that websites work best when they’re generated from folders full of flat files. Even when they’re massive websites, with a network of smaller interconnected sites sharing content between themselves.
+
+At last week’s <a href="https://conf.11ty.dev/" target="_blank" rel="noopener">International 11ty Symposium on Making Websites Real Good</a> — the first conference organized for the ever-improving Eleventy static site generator, which [CloudCannon](/eleventy-cms/ "Eleventy CMS") is delighted to sponsor — Liam Bigelow and I presented on how multiple websites can sync to one build image, and thus share any number of files (crucially, both source and content) between them.
+
+As Richard MacManus wrote for The New Stack just after the conference, <a href="https://thenewstack.io/static-sites-do-scale-eleventy-vs-next-js-at-11ty-event/" target="_blank" rel="noopener">Static Sites Do Scale</a>. And as static site generators like Eleventy grow, and lean in to their niche, I’m confident that we’ll see more and more sites reaping the benefits of the static-first approach — especially when we can offer solutions like this.
+
+## Static doesn’t have to be complicated
+
+What we presented was, I think, a pretty compelling solution for users like large companies, universities and colleges[\*](#diversion), or news organizations. It’s hard to argue that any of these use-cases wouldn’t benefit from static sites, but it’s equally understandable why for a while, the static approach might have looked too complicated.
+
+To summarize those concerns, in brief:
+
+&nbsp;
+
+* “Static sites are stand-alone bundles of files, meaning any design changes to one site would have to be manually duplicated across each site.”
+  * **The solution:** [Site Mounting](https://cloudcannon.com/documentation/articles/site-mounting/ "Site Mounting"), which lets sites share layout and design files.
+
+    &nbsp;
+
+* “Static sites don’t (or can’t) share content between themselves, meaning functions like news feeds from multiple sites simply couldn’t work.”
+  * **The solution:** <a href="https://flatlake.app/" title="Flatlake" target="_blank" rel="noopener">Flatlake</a>, which generates static JSON files that can be queried as an API.
+
+    &nbsp;
+
+* “Static sites are difficult to edit.”
+  * **The solution:** CloudCannon’s [Visual Editing](https://cloudcannon.com/documentation/articles/the-visual-editor/ "Visual Editing"), which lets users edit Markdown files via a layer that looks exactly like your final webpage. Adding Site Mounting to the mix also lets editors work from a common repo of page components, which are shared from a single source of truth.
+
+    &nbsp;
+
+The real answer here, conceptually, is leaning towards the approach that all static site generators take: doing all of the work before the user needs anything. (Adding Flatlake might add milliseconds to a build step, but we can account for *a lot* of potential user requests in that time, and make our sites feel more and more 'dynamic' — for lack of a better term — along the way.)
+
+If you’d like to see an example of how such an approach might work, check out the sample organization we made for our conference talk — <a href="https://realbig.company/" title="Real Big Company" target="_blank" rel="noopener">Real Big Company™</a> — and its network of sites, each sharing a common design and editing components from a single source, and syndicating their content back to their parent site. (And for more details on how everything is wired up, check out <a href="https://github.com/Real-Big-Company" title="Real Big Company's GitHub repo" target="_blank" rel="noopener">Real Big’s GitHub repo</a>.)
+
+Here’s how it all works together:
+
+In our talk, above, we chained together Site Mounting and Flatlake to create what I think of as “one publishing solution that rules them all” — a way to manage any number of static sites from a single CMS interface, with a single place for all design assets, a single place for all website editing components, and a static API that shares site content — all generated *before* the user requests anything.
+
+This means that any number of static sites can:
+
+1. Pull in their layout files from a common repo for design consistency,
+2. Share newly created editing and page-building components as soon as they’re developed, and
+3. Syndicate their content to a shared data lake, to share items like news articles and reports to any connected site.
+
+If this isn’t the best of both worlds — of all possible worlds — it’s pretty darn close to it.
+
+And with CloudCannon’s established stance on vendor lock-in (your site’s source and content should always belong to you, and should never be locked away in a database you can’t control), it really feels like we’re offering something that borders on magical.
+
+In the initial pitch for our talk, I called it a “classically Jamstacky approach” to content management for large organizations, and the more I think about it, the more “classically Jamstacky” it feels: static-first, with added complexity and tooling only when it makes sense. It’s the minimal-viable-toolset approach, and the only caveat is that our ‘minimal’ tooling is becoming incredibly powerful and versatile.
+
+## SSGs are incredibly efficient for large projects
+
+Another speaker at the conference, Paul Everitt of <a href="https://www.jetbrains.com/" title="JetBrains" target="_blank" rel="noopener">JetBrains</a>, also spoke on using Eleventy with what he calls “<a href="https://conf.11ty.dev/2024/11ty-and-large-project-tooling/" title="11ty and Large-Project Tooling" target="_blank" rel="noopener">large-project tooling</a>” — component-driven development, unit testing, and validation of Markdown frontmatter. Paul also pointed out the potential misapprehensions some users may have about SSGs like Eleventy:
+
+> People might have this idea that Eleventy is for personal blogs. Let’s change that. Let’s tell people that you can do big projects.
+
+Let’s do it. Let’s tell people. Let’s build those big projects. And if there’s a stumbling block somewhere, let’s get Jamstacky and use the same approach we use on our sites themselves: static first.
+
+---
+
+*A little diversion: I once worked as part of the web content team for a reasonably large university, with something like 20,000 students, and 4,000 academic faculty and general staff. Our office managed something like 300 websites, for everything from departments, divisions and research groups to graduate student project pages, hosted conferences, and residential colleges.*
+
+*Our audience was huge — current and prospective students, staff, alumni, and potential donors. Given the audience was important that the same information was available to everyone — the same exam schedules, the same campus announcements, the same research reports, calls for papers, and staff notices.*
+
+*Sometimes this worked well. There was a steady stream of content update tickets coming through to us, and we worked incredibly hard — and fast — to update the sites.*
+
+*But there were a few wrinkles. Our audience used a surprisingly wide range of devices, and didn’t all have high-speed internet connections, meaning the experience of browsing the site was painfully slow for some users. We couldn’t easily roll out design changes. And as editors, we were locked into a single editing interface, on a CMS that hadn’t seen a supported update in something like seventeen years.*
+
+*In this role, I often felt a little like I was an actor in one of those black-and-white infomercial ‘before’ scenes: “If only there was a better way!”*
+
+*Turns out there is.* [^](#static-doesn’t-have-to-be-complicated)

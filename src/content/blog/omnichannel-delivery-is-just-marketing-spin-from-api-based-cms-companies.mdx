@@ -1,0 +1,68 @@
+---
+title: Omnichannel delivery is just marketing spin from API-based CMS companies
+description: >-
+  Discover how Git-based CMS solutions offer advantages over traditional and API-based
+  alternatives by unifying content and code management, ensuring version control, and
+  empowering both developers and content teams.
+date: '2025-02-25T05:00:00+13:00'
+author: George Phillips
+image: https://cc-dam.imgix.net/blog-omnichannel-delivery-red-herring.png
+tags:
+  - opinion
+---
+
+API-based headless CMS solutions promised to revolutionize content management, but they've only replaced one form of complexity with another, fundamentally flawed one.
+
+For much of the internet's history, content management systems (CMS) have been tightly coupled with the presentation layer — the part of the system that renders and serves websites. While functional, this setup introduced many challenges: increased security risks, difficulties in scaling, and limited portability for both code and content. Why? Because these systems rely on a database to store content, which the CMS and presentation layer both access.
+
+When it’s time to make a change to the site, editors and developers save their changes to the database, and the database makes changes to the website.
+
+![Diagram of a workflow in a traditional CMS](https://cc-dam.imgix.net/traditional-cms-workflow-simplified.png)
+
+To address some of these challenges, many CMS providers began moving away from traditional coupled architecture, embracing a 'headless' approach.
+
+This architectural shift has proven to be more of an incremental shuffle than a true leap forward.
+
+## The API-based approach: a half-step forward
+
+Most headless CMS providers adopt an API-based model, which partially addresses the issues of traditional systems. Instead of a direct database connection to the presentation layer, the CMS is relocated to a separate system that the website accesses via APIs. This helped solve some of the complications that legacy systems encountered, like security and scaling. But it firmly separated the roles and workflows of developers and content editors.
+
+![Diagram showing editing in an API-based CMS](https://cc-dam.imgix.net/api-based-cms-editing-simplified-r.png)
+
+API-based CMS providers often tout “omnichannel delivery” as one of their key advantages, promoting the idea that they help serve content across multiple platforms. **Realistically, few companies need the exact same text or assets to be displayed on their website and their billboard at the same time.** And while the potential to do so might initially sound appealing, it can add unnecessary complexity.
+
+A much more common use case for omnichannel delivery, for example, wanting to replicate shared content like news articles across various locations on a website, is a solved problem, and still doesn’t justify the complexity introduced by API-based systems.
+
+Put simply, any API you choose to use should *follow* your content, rather than deriving content itself via a database.
+
+### Added complexity = added problems
+
+By separating content management from content delivery through APIs, these CMS providers promised to solve the fundamental problems of traditional CMS platforms. But adding complexity to a problem isn’t always a solution. In fact, **decoupling content from code in this way comes with significant drawbacks.**
+
+Tracking changes to both code and content would now require two separate version histories, which introduces alignment and coordination problems. Developers using an API-based CMS and Git to track their code changes would not be able to move freely between their code’s multiple branches without considering which version of the content API should be connected to each branch. Meanwhile, the content remains stored in a vendor-locked database, which is itself a new point of potential failure.
+
+![Diagram showing editing and development workflows in an API-based CMS](https://cc-dam.imgix.net/api-based-cms-workflow-simplified.png)
+
+**If your content and code histories are disconnected, you can’t easily track changes or roll back your site to a specific point in time.** This creates huge challenges for building and editing multiple environments, auditing content changes, and ensuring consistency across versions of a website.
+
+By contrast, if you give both your content and your code a core home (a single place to store and edit them before they are ‘built’ as a website), you can deal with just one unified version history. Which is where Git comes into its own!
+
+## The Git-based CMS: a developer-friendly alternative
+
+Git has revolutionized how developers share and collaborate on code, both privately and publicly. It’s a system that works — so why not use it for content as well? By storing content alongside code in Git, we can eliminate the need for a separate database *and* solve many of the problems inherent in both traditional and API-based CMS solutions.
+
+This approach retains the decoupling of content and presentation, meeting the requirements of a headless CMS, but with a crucial advantage: **content and code truly coexist in a compatible format**. No more struggling to synchronize the two. If omnichannel delivery is truly necessary, existing Git workflows make it straightforward to share code — and content — across projects. (A tool like <a href="https://flatlake.app/" target="_blank" rel="noopener">Flatlake</a>, for example, means that you can still use an API on Git-based content.)
+
+![Diagram showing editing and development workflows in a Git-based CMS](https://cc-dam.imgix.net/git-based-cms-editing-simplified.png)
+
+Another major benefit is ownership. Unlike API-based CMS providers, who might impose tricky contractual terms on your content, a Git-based approach ensures **your content remains entirely yours**. You’re free to build custom tooling, create bespoke workflows, and truly own your data.
+
+## Empowering non-developers without compromise
+
+One remaining challenge is accessibility for non-developers. Website teams are often comprised of users with a range of specialities: writers, designers, editors, and developers.
+
+To bridge the gap between developers and everyone else, a Git-based system must provide an intuitive interface where non-technical users can collaborate effectively. This interface should enable user-friendly edits without requiring knowledge of the underlying code. Creating and iterating on the user interface — effectively interpreting the massive power of Git for all users — has been a huge focus for us at CloudCannon, and it’s something we’ll continue to champion for our users.
+
+By combining content and code in Git on CloudCannon, developers can leverage their local workflows to offer live previews, instant updates, and tailored solutions. [Non-developers can contribute commits and pull requests through a familiar UI](/blog/understanding-cloudcannons-branching-workflows-and-projects-a-complete-guide/) (without having to deeply understand Git concepts), making them part of the collaborative process that has long been a cornerstone of modern software development.
+
+**With Git-based content management, we’re not just building a better CMS.** We’re creating a system that empowers entire teams to collaborate, innovate, and truly own their digital assets.

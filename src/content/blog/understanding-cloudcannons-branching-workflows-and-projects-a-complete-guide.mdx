@@ -1,0 +1,103 @@
+---
+title: 'Understanding CloudCannon''s branching workflows and Projects: a complete guide'
+description: >-
+  Learn how CloudCannon's branching workflows and Projects features help teams manage
+  website changes through Publish Branches, branch sites, and flexible publishing options.
+  Perfect for content teams of any size.
+date: '2025-02-05T05:00:00+13:00'
+author: David Large
+image: https://cc-dam.imgix.net/blog-understanding-branching-projects.png
+tags:
+  - features
+  - resources
+legacyUrl: /blog/understanding-cloudcannons-branching-workflows-and-projects-a-complete-guide/
+---
+
+Let's dive into CloudCannon's most powerful features: <a href="https://cloudcannon.com/documentation/articles/connect-a-publish-branch/" target="_blank" rel="noopener">branching workflows</a> and [Projects](https://cloudcannon.com/documentation/articles/create-a-project/). Whether you're managing a complex website or working with a team, understanding how branching works in CloudCannon can make your content management process much smoother.
+
+## The basics: Publish Branches and Branch Sites
+
+Branching your sites is like having a sandbox where you can play around with changes before they go live. In CloudCannon terms, you have:
+
+* A **Publish Branch** — this could be your live site, the version that the whole world can see. Some developers like to call this the ‘production branch’ or ‘main’.
+* **Branch Sites** — private copies of your live site, where you can make and test changes before they're ready for primetime. These copied sites can be deleted once you’ve published your changes.
+
+Confused about any other CloudCannon terms? Check out our simple [glossary](#glossary), below.
+
+## How to publish: choose your adventure
+
+CloudCannon gives you a range of publishing modes, and each has its place depending on your team's needs.
+
+### The quick route: publishing immediately
+
+Perfect for when you need changes to go live fast. Your team can push changes directly from your branched site to your Publish Branch without any approval process. It's quick, it's simple, and it gets the job done.
+
+### The review route: pull requests
+
+If you need a bit more oversight, pull requests are your friend. This mode requires another team member to review and approve changes before they go live. It's great for catching potential issues before they hit production, handing over to different departments (e.g. making sure that your legal team approves!), and triggering external builds and workflows.
+
+If you're going the pull request route, here's how to make it smooth:
+
+1. Make your changes on the branch site
+2. Hit the Publish button
+3. Write a clear title and description (future you will thank present you!)
+4. Create the Pull Request
+
+Your reviewers can then see a complete list of changes under the Changes tab before deciding to publish or close the request.
+
+### The middle ground: a staging branch
+
+Finally, my personal favorite, and the option we recommend to all teams using CloudCannon. Using a staging branch means you can instantly publish your changes to a private version of your site, which you and your team can use as a final check for quality control. (This is the approach we use internally for cloudcannon.com, for both code and content changes to the site.)
+
+Note that a staging branch sits between your live site and your branch site(s) —&nbsp;so the staging site will be the designated Publish Branch for all of your branch sites. (And your live site will be the Publish Branch for your staging site!) If this sounds slightly complicated, check out the below [section on Projects](#projects).
+
+## Staying in sync with your Publish Branch
+
+Here's another cool feature: CloudCannon lets you know when your Publish Branch has updates. You'll see a notification icon (with a downward arrow) on your Publish button when there are changes available.
+
+![Annotated screenshot showing CloudCannon publish button with an update available from Publish Branch](https://cc-dam.imgix.net/publish-button-rs.png)
+
+This can be super helpful when you have long-lived branches, when multiple team members are working on different features, or when you need to make sure your changes play nicely with others.
+
+## Pro tips for branch management
+
+ **Branch cleanup**: By default, CloudCannon can automatically delete your branch sites after publishing. This keeps things tidy, especially if you create branches for specific changes.
+
+ **Custom commit messages**: You can set up templates to help maintain consistent communication across your team as you publish.
+
+ **Disable publishing**: Need to prevent a branch from publishing? No problem! You can disconnect it from your Publish Branch anytime through your Site Settings.
+
+## Projects
+
+If you really lean into the power of branching your website, or if you’re managing multiple sites within a larger organization, it’s possible that you’ll encounter a few problems trying to manage multiple sites. How can you keep track of everything?
+
+Enter CloudCannon Projects, which make your workflow smooth and organized by grouping sites from the same repository. Projects let you create new sites more efficiently, and also automatically generate a visualization of your publishing workflow.
+
+Here's a sample workflow, with a live site, a staging site, and branch site:
+
+![Annotated diagram of CloudCannon publishing workflow](https://cc-dam.imgix.net/publishing%20diagram-r.png)
+
+### Making life easier with Related Links
+
+Here's a pro tip that'll save your team tons of time: [Related Links](https://cloudcannon.com/documentation/articles/add-related-links-to-your-project/). Think of them as your project's speed dial. You can add quick links to analytics dashboards, documentation pages, frequently accessed collections, or directly to publishing workflows.
+
+![Diagram of CloudCannon related links](https://cc-dam.imgix.net/related-links.png)
+
+These shortcuts might seem small, but they can add up to significant time savings across your team. Setting up Related Links is simple: just head to your Project Settings, scroll to the Related Links section, and start adding links. Each one needs a display name and URL — that's it!
+
+### Customizing your Project
+
+Don't forget to make your Project page informative and useful. You can:
+
+* Give it a meaningful name that reflects the project's purpose
+* Add a display URL for quick access to the live site
+* Write a description to keep everyone on the same page
+* Set up Related Links
+
+## The power of flexibility
+
+Whether you're running a simple blog or managing a complex enterprise site, CloudCannon's Projects and branching workflows give you the control and flexibility you need. Start with what works for your team now, and know you can adjust as your needs evolve.
+
+Remember, the best workflow is the one that works for your team. Don't be afraid to experiment and find what fits your process best.
+
+## Glossary

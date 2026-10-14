@@ -1,0 +1,91 @@
+---
+title: 'Designing components for your website editors: a CloudCannon case study'
+description: "How to design page components for content editors and website visitors —\_including free design files for you to adapt, remix, and reuse on your own site."
+date: '2024-10-29T05:00:00+13:00'
+author: Victoria Roberts
+image: https://cc-dam.imgix.net/blog-design-component-r.png
+tags:
+  - resources
+---
+
+In CloudCannon’s [Visual Editor](/website-editing/), reusable components are the fundamental building block of a page. As a designer I spend a lot of my time trying to get these components *right* — not just visually, for site visitors, but also at the editing level, for website teams and content editors. With a suite of well designed and implemented components, website editors can be more confident in their work, and can edit and build new pages more efficiently. With this in mind, I thought I’d walk you through the design of a single hero component, which you’re welcome to use and adapt for your own site.
+
+This case study explores our approach to creating a user-friendly, flexible, and visually appealing hero section that meets the needs of both content editors and end-users. We’ll be aiming for something like the following:
+
+![A mockup of a new hero component](https://cc-dam.imgix.net/blog-design2-component-browser-r.png)
+
+## The challenge
+
+Our goal here is to create a hero page component that will be intuitive for content editors to customize while maintaining a high standard of design and functionality for website visitors. We need to strike a balance between simplicity and flexibility, ensuring that editors can easily make changes without compromising the overall user experience.
+
+## Design considerations for the editor
+
+### Component naming —&nbsp;what's a 'hero'?
+
+We’ll call the component a "Hero" for some pretty clear reasons, but let’s go through them anyway! A 'hero' section on a webpage is usually right at the top, and is the first thing a user sees. It needs to clearly sum up both the purpose of the page, and provide at least one clear action for the user —&nbsp;in this case, to book a table or explore a menu.
+
+When it comes to choosing a component in a page-building workflow, a component name needs to clearly convey its purpose. Having a straightforward naming convention helps editors quickly identify and locate the element they need to use or modify.
+
+![Mockup of a page component](https://cc-dam.imgix.net/blog-design2-component-name.png)
+
+### Field labels
+
+Clear and concise field labels are essential to guide editors through the customization process. We’ll use descriptive labels such as "Background image," "Heading," "Eyebrow headline," and "Button Text" to eliminate any ambiguity and streamline the editing workflow.
+
+![Mockup of page component with named field labels](https://cc-dam.imgix.net/blog-design2-component-naming.png)
+
+### Input types
+
+To provide a seamless editing experience, we’ll carefully select appropriate input types for each element:
+
+* **Images:** For the hero background image, we’ll add an image field that allows for easy uploading or selection from existing media.
+* **Text:** Headline and subheading fields use text inputs, providing flexibility for different content formats and lengths.
+* **Button:** We’ll create a button row here, so editors can add multiple buttons from pre-defined styles. This way we can allow for a primary call to action (e.g. “Book a call”) and a secondary call to action (e.g. “Find out more”), depending on the user’s intent. For each style we’ll add fields for the button’s text, and link, as well as add a couple further styling options.
+
+### Visual examples
+
+To help editors understand the component's potential, I’ll provide them with a few visual examples of different hero section layouts. These examples will serve as inspiration and demonstrate how the elements in our component can be combined to create compelling hero sections.
+
+Here's how our component looks with the image and other content swapped around:
+
+![Page component example with content swapped left to right](https://cc-dam.imgix.net/blog-design2-component-lr.png)
+
+## Design considerations for the user
+
+Once an editor has finished putting together a page component, it's ready for the user —&nbsp;but in reality, I'm looking at design from both perspectives at once. Let's take a look at some of the things we need to think about when it comes to a user browsing a site:
+
+### Visual appeal and wireframes
+
+While focusing on the editor's experience, it’s important not to lose sight of the end-user. By first sketching designs and creating wireframes, we can ensure that our hero component is visually appealing and aligned with the overall design aesthetic of our (hypothetical 😁) website. Wireframes also let everyone give early feedback and request new features. (This is actually one of the first things I do, after talking to clients!)
+
+![A wireframe mockup of a page component](https://cc-dam.imgix.net/blog-design2-wireframe.png)
+
+### Accessibility
+
+Following accessibility guidelines is a top priority. We’ll implement proper heading structures, ensure sufficient color contrast (pictured below, mid-test), and add appropriate alt text fields for images to make the hero section accessible to as many editors and website visitors as possible.
+
+![Mockup of a contrast check on a page component](https://cc-dam.imgix.net/blog-design2-contrast-check.png)
+
+### Responsiveness
+
+We live in a multi-device world, so responsiveness is crucial. Our hero section should be able to adapt seamlessly to different screen sizes, ensuring a consistent and engaging experience across devices. My designs encompass a range of screen sizes, with display rules set at the development stage.
+
+![Responsive page component mockup with desktop and mobile sizes](https://cc-dam.imgix.net/blog-design2-responsive.png)
+
+## Ready for development!
+
+Our new hero section component is now fully designed, and ready for a developer to create, complete with all the spacing rules they'll need.
+
+![Page component mockup, ready for development](https://cc-dam.imgix.net/blog-design2-component-spacing.png)
+
+Once this component is added to a CloudCannon site, it will offer content editors a range of powerful yet easy-to-use features:
+
+* **Easily upload and replace the hero and background image:** Editors can quickly change the assets to match their current campaign or content focus.
+* **Quickly edit the headline, subheading, and button text:** With clearly labeled text fields, updating the hero section's copy is straightforward and intuitive.
+
+![Hero page component in editor view](https://cc-dam.imgix.net/blog-design2-editor-view-r2.png)
+
+* **Choose from pre-defined button styles or customize them further:** I've created offer a selection of button styles to maintain design consistency, but these can be customized further if needed.
+* **Preview changes in real-time before publishing:** On CloudCannon, editors can see exactly how their content modifications will look on their live site, allowing for quick iterations and refinements.
+
+If you'd like to look more closely at the design files for this component, I've created a <a href="https://www.figma.com/design/gcHAS4BO1jBQcf7iEYL85q/Hero-component?node-id=1-984&amp;t=zlsP8g0cPlTICZh6-1" title="Free design files for a hero page component" target="_blank" rel="noopener">public Figma page</a> with all of my design steps —&nbsp;feel free to remix and rework these designs for your own website!

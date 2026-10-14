@@ -1,0 +1,99 @@
+---
+title: 'The eternal balancing act: load time vs. delay time'
+description: >-
+  Two critical aspects of the frontend development balancing act are load time and delay
+  time. How can we optimize these factors for better website performance?
+date: '2024-10-17T05:00:00+13:00'
+author: David Large
+image: https://cc-dam.imgix.net/blog-balancing-load-delay-time-alt.png
+tags:
+  - opinion
+  - resources
+---
+
+As frontend developers, we're constantly juggling various factors to create fast, responsive, and engaging web experiences. Two critical aspects of this balancing act are load time and delay time, especially when it comes to Google's Lighthouse scores and the Largest Contentful Paint (LCP) metric. In this article, we'll explore the tension between these two factors and how to optimize them for better performance.
+
+## Understanding load time vs. delay time
+
+Before diving into the specifics, let's clarify what we mean by load time and delay time:
+
+* **Load time**: The time it takes for all resources on a page to load completely.
+* **Delay time**: The time spent on processing or optimizing resources before they're presented to the user.
+
+Both factors significantly impact user experience, but in different ways. A faster load time generally leads to a quicker initial render, while strategic delays can result in a more optimized and smooth experience once the content is displayed.
+
+## Google's Lighthouse scores
+
+Google's Lighthouse is an open-source tool for measuring web page quality, including performance. It provides scores and metrics that help developers identify areas for improvement. Key performance metrics measured by Lighthouse include First Contentful Paint (FCP), Time to Interactive (TTI), Total Blocking Time (TBT), Cumulative Layout Shift (CLS), and our focus today, Largest Contentful Paint (LCP).
+
+### Largest Contentful Paint (LCP)
+
+LCP is a crucial metric that measures the render time of the largest content element visible within the viewport. It's important because it represents when the main content of a page is likely loaded and visible to the user. Google considers an LCP of 2.5 seconds or less as "good."
+
+## The tension: load time vs. delay time
+
+Here's where the balancing act comes into play. To improve LCP, we might be tempted to load all resources, including all JavaScript, as quickly as possible. However, this approach can lead to:
+
+&nbsp;&nbsp;**Increased network congestion.** Flooding the network with requests for multiple resources simultaneously can create bottlenecks.
+
+&nbsp;&nbsp;**Higher server load.** Rapid, concurrent requests can strain server resources, potentially slowing down response times.
+
+&nbsp;&nbsp;**Potential layout shifts.** As resources load at different speeds, the page layout may shift, leading to a poor user experience and negatively impacting Cumulative Layout Shift (CLS).
+
+&nbsp;&nbsp;**Wasted resources.** Loading non-critical resources early can waste bandwidth and processing power, especially on mobile devices.
+
+---
+
+On the other hand, strategically delaying the load of certain resources can have some benefits:
+
+&nbsp;&nbsp;**Improve overall page performance.** By prioritizing critical content, the perceived load time can be significantly reduced.
+
+&nbsp;&nbsp;**Reduce bandwidth usage.** Lazy loading and on-demand resource fetching can decrease the initial page payload size.
+
+&nbsp;&nbsp;**Provide a smoother user experience.** Gradually loading content can create a more fluid feel as the user interacts with the page.
+
+&nbsp;&nbsp;**Optimize resource usage.** Delaying non-critical resources allows the browser to focus on rendering the most important content first.
+
+## Strategies for balancing load and delay
+
+The trouble is, while strategic delays can help, excessive delays can negatively impact LCP and other metrics. To find the right balance, consider these strategies:
+
+**Prioritize above-the-fold content**: Load critical, visible content as quickly as possible to improve perceived performance. For example, you might inline critical CSS and defer non-essential scripts, or split up larger JavaScript bundles into smaller chunks, loading only what's necessary for the initial render. ([We use Jampack to help with this process on cloudcannon.com](https://cloudcannon.com/blog/how-jampack-optimizes-our-eleventy-website-and-improves-performance/), and the new **`<the-fold></the-fold>`** mark is really helpful to determine where to draw the line.)
+
+**Implement intelligent lazy loading**: Use techniques like [Intersection Observer](https://developer.mozilla.org/en-US/docs/Web/API/Intersection_Observer_API) to load images and other media only when they're about to enter the viewport. Your images, too, should be using next-gen image formats, proper sizing, and compression. (A digital asset management system like imgix can help here!)
+
+**Leverage browser hints**: Use `preload`, `prefetch`, and `preconnect` directives to guide the browser in resource prioritization.
+
+**Implement progressive loading**: Use techniques like skeleton screens or low-quality image placeholders to give users immediate visual feedback while the full content loads.
+
+It should go without saying, but it’s important to schedule regular site testing using tools like Lighthouse and WebPageTest. Your site will grow and change as you add analytics tools and scripts for extra functionality — don’t forget to assess the impact of each addition.
+
+## Case study time!
+
+Let’s look at an example. If external scripts like Google Analytics are necessary to your site, but they delay your largest contentful paint, what should you do?
+
+Well, we can start by working out what’s most important. All else being equal, we have two clear paths:
+
+1. Defer Google Analytics and other tracking scripts slightly later in the page load, with the downside that we will miss any user action within that deferment window. It’s likely that the main data we would lose here is early bounces from the site, where a user closes the browser tab without taking any action.
+
+   As to how long should we defer — 500ms? 1s? —&nbsp;the best bet is usually to incrementally increase the time until your score increases, and not a moment longer. (It's fiddly, yes. We called it a balancing act for a reason!)
+
+2. Keep our analytics scripts loading as early as possible, and accept the LCP loss. We’d get full data on our site users, but we might also take a ranking hit if our scripts drastically affect our page speed score.
+
+We’d lean towards the first option: accepting the slight analytics data loss (while noting that change in our monthly analytics reports, of course).
+
+Why? Because losing data on early bounced users is a *known* factor — and in most cases SEO experts compare bounces on a rolling average. If we can explain the point at which the data shifted, we’ll simply set a new baseline for future comparisons.
+
+And while the degree to which LCP affects our site’s PageSpeed or Lighthouse score isn’t completely unknown, the results are more opaque. In general, we'd rather deliver a site that has no negative speed or performance factors affecting its ranking.
+
+Your mileage may vary, of course. If the LCP delay is minor, and those early analytics are particularly important to you, your balancing act will be different to ours!
+
+If you'd prefer to dig into things more deeply yourself, check out Arjen Karel's great article on <a href="https://www.corewebvitals.io/pagespeed/14-methods-to-defer-javascript" target="_blank" rel="noopener">how to defer or schedule JavaScript</a> for some helpful advice.
+
+## Being content on that balance beam
+
+Balancing load time and delay time is crucial for optimizing web performance, particularly for metrics like Largest Contentful Paint. But understanding the tension between the factors that affect a site’s LCP is only the first step.
+
+It’s equally important for all site owners — developers and editors — to be on the same page about what the most important parts of each page of your site actually are.
+
+When everyone agrees on what’s most important, it becomes easier to prioritize the loading of crucial elements. Designers can create layouts that showcase priority content; writers can focus on crafting engaging short-form content, and all stakeholders can make informed decisions about features and content that align with both user experience and business objectives.

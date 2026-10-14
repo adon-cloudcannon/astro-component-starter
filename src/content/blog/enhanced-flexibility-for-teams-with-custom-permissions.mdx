@@ -1,0 +1,96 @@
+---
+title: Enhanced flexibility for teams with Custom Permissions
+description: >-
+  CloudCannon is excited to announce the launch of our new Custom Permissions feature for
+  users on Team and Enterprise plans, giving you fine-grained control over permissions
+  within your organizations.
+date: '2024-05-31T05:00:00+12:00'
+author: George Phillips
+image: https://cc-dam.imgix.net/custom-permissions-blog-may.png
+tags:
+  - features
+---
+
+As your team grows, it's important to have a secure and flexible way to manage who can access and modify your websites, content, and underlying code. That’s why we’ve added **Custom Permissions** to our Team and Enterprise plans, allowing you to define granular access levels tailored to the unique needs of your team and projects.
+
+All CloudCannon users have access to [Default Permission Groups](https://cloudcannon.com/documentation/articles/what-are-default-permission-groups/ "What are Default Permission Groups?") — you’re likely familiar with the idea of your role as an Owner, Developer, Technical Editor, or Editor. Each of these Groups has a pre-defined set of permissions, so you can select the appropriate level of control for each team member.
+
+This approach captures most common roles, but if your team has specific access requirements or compliance and security constraints, we realize that default permission sets aren’t enough. (And try as we might, we can’t anticipate every potential role you might have in your organization!)
+
+With our new Custom Permissions, though, Owners on Team and Enterprise plans are able to create **Custom Permission Groups** to permit *any* action within your Organization&nbsp;— including viewing, editing, merging, branching, publishing and adding assets.
+
+If you'd like *all* the details, check out our exhaustive [Custom Permissions documentation](https://cloudcannon.com/documentation/articles/what-are-custom-permission-groups/ "What are Custom Permissions?")!
+
+## Custom Permissions features
+
+### Flexible permission scope
+
+Permissions can be scoped globally across your entire Organization, or limited to specific projects, sites, groups, or base domains — whatever makes sense for your setup. You can specify exactly which resources each group has permission to view, edit, create, or delete. No more ambiguity or unintended access.
+
+You can define exceptions within any group to allow for maximum flexibility. For example, give access to an entire project, with the specific exception of the production site.
+
+### Duplicating permissions
+
+Adding new permissions can be as easy as cloning an existing permission, and changing any detail. For example, if your editing team needs the same permissions with a Site scope across different site properties, you can create a single permission Group, then duplicate it — the only change you’d need to make is defining a specific site for each Group.
+
+### Increased security, more control
+
+With Custom Permissions, you have complete command over your organization's access levels. This powerful new feature ensures your critical web resources are secure while making permission management straightforward. Enterprise customers can contact CloudCannon's Success Team for support during your access review cycles.
+
+## Getting started
+
+To start taking advantage of Custom Permissions, Organization [Owners](https://cloudcannon.com/documentation/articles/what-are-default-permission-groups/#owners) can navigate to the *Team* page under *Org Settings*, create new Groups and define permissions, and begin assigning team members to those Groups. Here you can also set the scope for permissions, from global, to project, site, group, or base domain. Organization [Developers](https://cloudcannon.com/documentation/articles/what-are-default-permission-groups/#developers) can also add and remove team members.
+
+Everyone can also check which groups they belong to on the *My Permissions* page. We’ve made it as intuitive as possible to set up, and to maintain your Groups.
+
+There are any number of combinations to the new available permissions, but let's take a look at a few key examples to see how they might work in practice.
+
+### Grant or restrict access to files (e.g. pages or posts)
+
+![Using file globs to grant or restrict access to files](https://cc-dam.imgix.net/blog-example-1-site-file-write.png)
+
+A file glob is a pattern used to identify matching files. Using a file glob, you're now able to give users full access to a single page within a single site, or perhaps all files within a particular collection. Depending on the level of access that users are given —&nbsp;`read` or `write` —&nbsp;members of a custom group will be able to view that file, edit it, and save changes to it whenever they want.
+
+Preventing access to particular files that match your file glob works much the same way, only you'd define an exception to a rule. An editor might, for example, be able to edit and publish everything on a site apart from a company's quarterly financial reports, which could be restricted to key personnel. You may want also to restrict access to a website's technical configuration file.
+
+### Combining read and write permissions with a publishing restriction
+
+![Combining read and write permissions with a publishing restriction](https://cc-dam.imgix.net/blog-example-2-external-publishing.png)
+
+One thing we love about the new custom permission set is the ability for user roles to reflect users' work responsibilities. For some roles, this might include drafting new content, but not publishing it.
+
+We'd start by selecting the scope for this permission, targeted to a specific project or site. This way we can choose where the writer is allowed to create new content. We'd give them `write` access to their target, as well as `site:publish:pull-request:open`, which would enable them to open a PR to merge their branch, in essence requesting a content review from someone else in their team.
+
+Because we haven't given this user access to `site:publish:pull-request:merge`, the writer would not be permitted to merge their staging branch and publish to the live site.
+
+There's a huge variety of content-related permissions to choose from, but to give a sense of what else is possible, let's move on to technical and management permissions as well.
+
+### Handling domain migrations and site records
+
+![Scoping to base domains](https://cc-dam.imgix.net/blog-example-3-scoping-base-domains-r2.png)
+
+Balancing permissions and restrictions can let your users do the things they need to, while removing the possibility of accidental data loss.
+
+Let’s imagine you have a new developer on your team, handling all of your domain migrations, and managing your DNS records. But you don’t want this dev to accidentally release one of your base domains. (NB: This would only be possible after a Site is disconnected, but we can be doubly sure by setting explicit permissions.)
+
+In this scenario we'd give the developer `write` access to `base-domain` at a Global scope, and add an exception to `write` access to `base-domain:delete` at a Global scope. The developer can now view and update all settings and DNS records, but can’t release a base domain.
+
+### Group membership and management
+
+![Scoping to groups](https://cc-dam.imgix.net/blog-example-4-scoping-group-r.png)
+
+In addition to the above, you can also scope permissions to groups, which gives members permission to control their own groups. For example, you could create a 'Managers' permission group that lets managers view and edit their own groups, as well as add and remove members from their groups.
+
+You could also add an exception to this permission set, which would prevent managers from accidentally deleting a group.
+
+---
+
+Our [Permissions reference document](https://cloudcannon.com/documentation/articles/permissions-reference/) has every single permission available to Custom Permissions users. With around ninety permissions currently available, there are any number of permutations on the permissions (and exceptions) available — and you’re free to fine-tune your permissions and Groups at any time, to match exactly what your team and your organization needs.
+
+If you have any questions about how to set up the permissions you need, our support team is always <a href="mailto:success@cloudcannon.com?subject=A%20question%20about%20custom%20Permission%20Groups" rel="noreferrer">happy to hear from you</a>.
+
+---
+
+[*Custom Permissions*](/custom-permissions/ "Custom Permissions") *are available immediately for all Team and Enterprise plans.*
+
+*We're excited about the possibilities this opens up for teams to more effectively collaborate while maintaining proper access controls. Give it a try and let us know what you think! As always, our support team is here to assist with any questions.*

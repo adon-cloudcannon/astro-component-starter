@@ -1,0 +1,99 @@
+---
+title: Keep your content consistent with input validation
+description: >-
+  CloudCannon now offers powerful input validation rules for developers to ensure content
+  teams provide exactly the right data. Set text length limits, number ranges, array
+  controls, file size restrictions, and custom error messages to maintain data integrity and
+  improve content quality.
+date: '2025-07-03T14:00:00+12:00'
+author: George Phillips
+image: https://cc-dam.imgix.net/blog-input-validation-r.png
+tags:
+  - features
+---
+
+Your content team has accidentally published a 400-character meta description that gets brutally chopped off by Google. Or someone’s uploaded 17 images to what was supposed to be a "featured trio" gallery, blowing your design rules out of the water. We've been there. Let’s stop it happening again.
+
+One of your most requested features has officially landed: with input validation, you get to be the rule-maker. Set the boundaries that make sense for your projects, your content teams, and your sanity. (And all validation happens before any content is saved in CloudCannon, which means any issues will be caught before they make it to your live site.)
+
+## **How it works**
+
+The new validation system integrates seamlessly into your existing CloudCannon workflow. When editors try to save content that doesn’t meet your validation rules, the interface will clearly highlight what needs fixing and how to resolve it.
+
+Components in your live preview will continue to render regardless of validation status — it’s up to your components to handle invalid input gracefully. They might show placeholders, warnings, or other indicators when required data is missing or invalid.
+
+## **Validation rules you can set**
+
+The initial release includes the most commonly requested validation types:
+
+* **Text length validation** keeps content within bounds — perfect for SEO titles and meta descriptions that need to meet specific character limits.
+* **Number ranges** ensure numeric inputs stay within acceptable values, whether that's pricing, quantities, or measurements.
+* **Array controls** let you set minimum and maximum item counts for galleries, featured lists, and card collections. You can also enforce uniqueness to prevent duplicate entries.
+* **Date and time ranges** restrict when events can be scheduled or limit historical data to specific periods.
+* **File size limits** prevent oversized images from slowing down your site.
+* **Pattern matching** validates formats like email addresses, URLs with specific protocols, or custom patterns like product codes.
+* **Conditional validation** works intuitively with your existing input configuration. CloudCannon automatically skips validation for any inputs that are currently hidden or disabled — no additional setup required.
+* **Custom error messages** give you complete control over how validation errors are presented to your content teams. Every validation rule supports a corresponding `_message` key, so you can provide clear, contextual guidance instead of generic error messages. (Thanks to our community members for <a href="https://community.cloudcannon.com/t/upcoming-input-validation-feature/235" target="_blank" rel="noopener">feedback</a> that prompted this additional feature!)
+
+## **Real-world examples**
+
+Here’s how a few sample validation rules look in practice:
+
+### Keeping blog titles SEO-friendly with custom guidance
+
+```yaml
+title: 'How to optimize your website'
+
+_inputs:
+  title:
+    type: text
+    options:
+      max_length: 60
+      max_length_message: 'Keep your title under 60 characters for better readability'
+      min_length: 10
+      min_length_message: 'Title should be at least 10 characters for clarity'
+      required: true
+      required_message: 'A descriptive title is required for this post'
+```
+
+### Ensuring a featured products gallery has between 3 and 6 items with no duplicates
+
+```yaml
+featured_products:
+  - /products/laptop.md
+  - /products/phone.md
+  - /products/tablet.md
+
+_inputs:
+  featured_products:
+    type: array
+    options:
+      min_items: 3
+      max_items: 6
+      unique_on: '$'
+```
+
+### Validating email newsletter signup forms
+
+```yaml
+contact_email: editor@example.com
+
+_inputs:
+  contact_email:
+    type: email
+    options:
+      pattern: '[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}'
+      pattern_message: 'Please enter a valid email address'
+```
+
+---
+
+## **Building for your workflow**
+
+We’re always aiming for features that appeal to the sweet spot where developer control meets editor clarity. Here, you get to set the guardrails that keep your data squeaky clean, while your content team gets the kind of helpful nudges that actually make their job easier.
+
+It’s the kind of win-win that (hopefully) makes everyone’s day a little bit better.
+
+### **What’s coming next**
+
+While not part of the initial release, we’re also exploring JSON Schema validation for more complex scenarios. This would enable advanced object validation and intricate array rules — like ensuring only one item in a list is marked as "featured" while maintaining unique identifiers across all items. Let us know your thoughts <a href="https://community.cloudcannon.com/" target="_blank" rel="noopener">in the Community</a>!

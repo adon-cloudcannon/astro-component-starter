@@ -1,0 +1,60 @@
+---
+title: 'The rise of static-first websites: why major brands are making the switch'
+description: >-
+  New data from the 2024 Web Almanac reveals a striking 67% growth in static and hybrid
+  website architectures among the top 10,000 most-visited sites. So why are big sites making
+  the shift to static?
+date: '2024-11-12T05:00:00+13:00'
+author: David Large
+image: https://cc-dam.imgix.net/blog-web-almanac-rise-of-static-first.png
+tags:
+  - opinion
+  - resources
+---
+
+Your website performance directly impacts your bottom line — and we’re seeing major sites increasingly turning to a “static-first” approach for their web presence. New data from the <a href="https://almanac.httparchive.org/en/2024/" target="_blank" rel="noopener">2024 Web Almanac</a> reveals a striking **67% growth in static and hybrid website architectures among the top 10,000 most-visited sites**.
+
+I've had a few days to think this over, having helped edit <a href="https://almanac.httparchive.org/en/2024/jamstack" target="_blank" rel="noopener">the Jamstack chapter of the report</a>, and I’m certain that this isn’t just a technical trend — it’s a strategic business move. So why are big sites making the shift to static?
+
+## Three key business advantages of static
+
+### Cost efficiency
+
+Static-first websites typically require less developer intervention (site maintenance) and less server processing power, translating to lower hosting costs. Instead of generating pages on-demand for each visitor, content is pre-built and served from global content delivery networks. This approach can be incredibly cost-effective for high-traffic sites where traditional maintenance and server costs can spiral quickly.
+
+To give a real-world example of the potential savings and gains, [DX moved from a ‘no-code’ dynamic website to a completely static website on CloudCannon](/customers/dx/), increasing their lead generation by 400% *and* saving $150,000 in annual operating costs.
+
+![Quote from Abi Noda: &quot;Not only do we require much less overhead to keep things running with CloudCannon, but we're able to iterate much faster because our developers can a lot more productive.&quot;](https://cc-dam.imgix.net/blog-dx-abi-noda-quote.png)
+
+### Performance and user experience
+
+The Web Almanac’s data shows that **static-first sites consistently outperform their dynamic counterparts in** [**Core Web Vitals**](/blog/watching-your-core-web-vitals-on-jamstack/) — Google’s key metrics for user experience. This translates to real business benefits: faster loading times mean lower bounce rates, higher conversion rates, and better SEO rankings. And for every second saved in loading time, businesses typically see measurable improvements in user engagement.
+
+The Web Almanac’s report also notes some <a href="https://almanac.httparchive.org/en/2024/performance#conclusion" target="_blank" rel="noopener">specific performance challenges</a> across the web — and the static approach is well placed to address them. In no particular order:
+
+* Mobile devices suffer from slower processing power and network connections, creating an increasing performance divide with desktop experiences. **Static sites deliver pre-rendered, pre-optimized content that requires minimal client processing**, significantly reducing the performance gap between devices.
+* Third-party scripts for analytics, ads, and user tracking significantly degrade interactivity and load performance. **Static sites can analyze, optimize, and pre-load third-party resources during build time** rather than handling them at runtime.
+* Many sites still serve unoptimized images without proper dimensions, causing layout shifts and wasting bandwidth. **Static site generators can automatically optimize all images during build**, generating multiple formats and sizes with proper dimension attributes.
+* Server processing time for dynamic content creates delays in initial page load. **Static sites serve pre-built files directly from CDN edge locations with no server processing time**.
+* Popular sites often perform worse due to accumulated features and complexity. **Static builds can analyze the entire site at once, enabling systematic optimization and code reduction before deployment**.
+
+### Reliability and security
+
+It might seem obvious, but it’s worth (re)stating: pre-built pages are inherently more secure and stable than their dynamic counterparts. With fewer moving parts and no real-time server processing, there’s much less that can go wrong during high-traffic periods — and this can be crucial for major marketing campaigns, viral moments, or emergencies.
+
+Because static sites don’t rely on external plugins to add functionality, they’re much less vulnerable to attacks like cross-site scripting (XSS). In 2023, for example, <a href="https://patchstack.com/whitepaper/state-of-wordpress-security-in-2024/" target="_blank" rel="noopener">plugins were responsible for almost 97% of all new WordPress vulnerabilities</a>. (And there were almost 6,000 in total, more than half of which were XSS!)
+
+## Why the surge in enterprise adoption?
+
+The 67% growth in static/hybrid approaches among top sites isn’t happening by accident. Several business factors are likely driving this trend:
+
+1. SEO pressure: Google’s increasing emphasis on page performance metrics makes static-first approaches more attractive for maintaining search rankings. For businesses that depend on search engine ranking to generate leads, static is an obvious choice.
+2. Mobile-first reality: With mobile traffic dominating, the lighter weight of static sites provides a competitive advantage in markets with varying connection speeds.
+3. Environmental concerns: As businesses face pressure to reduce their digital carbon footprint, static sites’ lower server requirements offer an easy win for sustainability goals.
+4. Cost optimization: The lower operating costs of static-first approaches — both in terms of initial development and maintenance — are particularly attractive to enterprise businesses.
+
+## The business case for change
+
+For marketing teams considering their web strategy, the data makes a compelling case for at least exploring a static-first approach. The combination of lower costs, better performance, and improved reliability offers a clear competitive advantage. And as the Web Almanac team concludes, while the technical term “Jamstack” may be fading from use, its core principles of pre-building pages whenever possible are proving increasingly valuable. (And <a href="https://thefutureofjamstack.org/" target="_blank" rel="noopener">Jamstack has a bright future</a>!)
+
+Once more, this isn’t just about technology — it’s about delivering better customer experiences while optimizing costs. As more major sites make this shift to static, those sticking with traditional dynamic-first approaches (Drupal, WordPress, et al) may well find themselves at a growing disadvantage in both site performance and operating costs.

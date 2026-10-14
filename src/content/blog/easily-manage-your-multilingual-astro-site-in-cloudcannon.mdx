@@ -1,0 +1,44 @@
+---
+title: Easily manage your multilingual Astro site in CloudCannon
+description: >-
+  Introducing CloudCannon’s new starter for multilingual Astro sites, a translation workflow
+  that greatly reduces site maintenance overheads.
+date: '2024-08-09T05:00:00+12:00'
+author: Tom Richardson
+image: https://cc-dam.imgix.net/blog-rosey-astro-starter-r.png
+tags:
+  - resources
+---
+
+If you’re using [Astro](/astro-cms/) with page components for a multilingual site, you’ve probably come across a few hurdles in your workflow. Typically a content team might be maintaining separate pages for each language, so any changes you make would need to be manually replicated across all of your pages. Depending on your CMS, you may also have found that your translators can’t easily see their content in context as they’re translating.
+
+If this sounds familiar, check out CloudCannon’s new [Astro Rosey starter](https://github.com/CloudCannon/rosey-astro-starter), which uses our open-source tool [Rosey](https://rosey.app/) and CloudCannon’s component-based approach to building and editing sites. This starter brings the following benefits for Astro users:
+
+* Components can be developed in isolation without needing access to data files or framework-specific translation logic
+* Layouts and components can translate hard-coded text without having to abstract it into data files or front matter
+* Minimal refactoring of components required — simply add `data-rosey=""` tags to your existing HTML text elements
+* Translations can be shared across multiple websites (and static site generators)
+* Only one copy of your source content needs to be maintained, and translators can see this content highlighted on the page if they need additional context
+* Automatic redirects based on browser language settings.
+
+In this Astro starter we run custom `node fs` scripts in your site's postbuild file to generate inputs that a user can enter translations into. Rosey then uses the provided translations on a staging branch to generate a multilingual production site.
+
+## How does Rosey work?
+
+Rosey is an open-source tool for managing translations on static websites. Rosey aims to decouple your static site generator from your translation workflow, simplifying development of multilingual components and layouts.
+
+The Rosey workflow involves tagging your HTML elements with the information needed to translate them. After your site builds in its primary language, Rosey ingests your final site and extracts tagged elements for translation. Once these have been translated, Rosey combines your original site with each set of translated content, resulting in a final multilingual website. This differs from many translation workflows that bake multilingual support into the templating.
+
+Find out more about how to use the Astro Rosey Starter:
+
+This starter comes with a translation workflow set up in CloudCannon's CMS with Rosey, to provide UI for non-technical editors and translators to control a site's content and translations.
+
+## Getting started
+
+This template is aimed at helping developers build multilingual sites quickly, and provide a reference on how to migrate your existing SSG setup to use this workflow.
+
+Follow the instructions in the above video to create your own copy of the [Git repo](https://github.com/CloudCannon/rosey-astro-starter), configure your staging and production branches, and set up a publishing workflow within CloudCannon.
+
+You can also create your own components that editors can use in the CloudCannon CMS to build and maintain pages, with either `.jsx` or `.astro`. Add `data-rosey` tags to text content that you want to be included in the translations.
+
+To try to cut down on your setup time, this starter template also includes some commonly used features, including the Bookshop component development workflow, image optimization, preset SEO inputs, Tailwind CSS, and Font Awesome icons.

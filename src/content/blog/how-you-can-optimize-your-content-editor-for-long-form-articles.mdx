@@ -1,0 +1,102 @@
+---
+title: 'How you can optimize your Content Editor for long-form articles '
+description: "With CloudCannon's Content Editor you can focus on how to construct your writing —\_and extend your page's functionality with Snippets."
+date: '2024-07-05T05:00:00+12:00'
+author: David Large
+image: https://cc-dam.imgix.net/blog-success-content-editor.png
+tags:
+  - resources
+---
+
+While I love visual editing for building out new landing pages, and tweaking my layouts and microcopy, I also do quite a lot of long-form writing in the form of blog posts or longer articles. That's when I turn to CloudCannon's Content Editor, for its distraction-free writing environment.
+
+With the Content Editor I'm able to focus more on how I'm constructing an argument or expressing an opinion, and how one section of prose flows neatly into the next. This kind of approach can be especially valuable for long-form content where maintaining narrative structure is crucial.
+
+![Screenshot of CloudCannon's Content Editor](https://cc-dam.imgix.net/blog-content-editor-example.png "CloudCannon's Content Editor")
+
+Working in the Content Editor, pictured above, is designed to be intuitive, and the options available are chosen to mimic those of familiar word processing software. I’m able to start writing immediately without needing to remember any special commands or syntax. This is particularly beneficial for writers who may not have technical backgrounds, or for those who prefer to focus solely on their content.
+
+In the Content Editor, all of your formatting options are shown by easily recognizable icons or menu items. For example:
+
+* Bolding text involves clicking the 'B' icon. Easy!
+* Creating a heading is as simple as selecting text and choosing a heading level from a dropdown formatting menu.
+* Inserting links, images, or tables can be done by clicking on a menu item and adding further details in popup dialog boxes. This simplicity allows writers to apply complex formatting without using specific code or tags.
+
+## Customizing your toolbar
+
+The Content Editor is more than a blank page with a one-size-fits-all toolbar — your tools can be configured to match the way you write. You and your developer can [customize your toolbar](https://cloudcannon.com/documentation/articles/configure-your-rich-text-editors/#the-content-editor) by adding the features that you need, and removing those you don’t.
+
+There are lots of options to choose from! To make it easier to think about what you might need, I’ve separated them into several broad groups:
+
+### Text options
+
+![Text option buttons in CloudCannon](https://cc-dam.imgix.net/blog-content-editor-text%20&#40;1&#41;.png)
+
+Text options are applied to selected regions of your text — you’d use these to make a word bold or italic, for example, or to format a whole paragraph.
+
+### Style and alignment options
+
+![Styles and alignment option buttons in CloudCannon](https://cc-dam.imgix.net/blog-content-editor-styles%20&#40;1&#41;.png)
+
+With these options you can align or justify selected blocks of text, or apply custom formatting styles that you and your developer have defined.
+
+### List options
+
+![List option buttons in CloudCannon](https://cc-dam.imgix.net/blog-content-editor-list%20&#40;1&#41;.png)
+
+List options allow you to place items in bulleted or numbered lists, shift items within lists, and indent or outdent list items.
+
+### Block options
+
+![Block option buttons in CloudCannon](https://cc-dam.imgix.net/blog-content-editor-block%20&#40;1&#41;.png)
+
+Block options enable you to add media and full-width content elements like images, tables, custom embeds, and horizontal rules.
+
+### Action options
+
+![Action option buttons in CloudCannon](https://cc-dam.imgix.net/blog-content-editor-actions%20&#40;1&#41;.png)
+
+Action options include undo and redo, as well as the ability to remove or copy formatting. (For those of us with muscle memory for CTRL-Z or Command-Z, it’s a relief to know that undo and redo are technically always enabled, but you can choose if you’d also like to see a specific button for these functions.)
+
+### Image options
+
+If you enable images, you can add further options here, including image size attributes, preset image width or height values, and define any approved sources for your images. (You might, for example, set a rule that images can only be sourced from a specific digital asset manager.)
+
+Your developer can also [customize paths](https://cloudcannon.com/documentation/articles/rich-text-editor-reference/#paths) for your site’s assets (including file name rules), and can choose to [allow or remove custom markup](https://cloudcannon.com/documentation/articles/rich-text-editor-reference/#custom-markup) within the Content Editor.
+
+## Snippets
+
+If you’d like to further extend the functionality of the pages you’re writing in the Content Editor, you and your developer can choose to add [Snippets](https://cloudcannon.com/documentation/articles/what-is-a-snippet/) to your block options. Snippets can perform many functions within your page, including adding image galleries to adding custom page anchors, embedding YouTube videos or Spotify podcasts in blog posts, or showing or hiding conditional content. You can think of them as a pre-defined page element to complement your content.
+
+Here’s a Spotify embed I’ve added to this blog post, with a simple Snippet:
+
+Our own [documentation](https://cloudcannon.com/documentation/) team uses Snippets to bring a huge range of features to the articles and guides they write using the Content Editor, including customized code blocks with responsive annotations; and conditional content, which is either shown or hidden depending on the SSG a user has chosen.
+
+You can even make Snippets from existing web components. (We did this with Zach Leatherman's `<table-saw>` web component for a responsive table element —&nbsp;find out how [in Zach's article](https://cloudcannon.com/blog/new-web-component-for-responsive-html-tables/), and see his <a href="https://github.com/zachleat/table-saw/" target="_blank" rel="noopener">GitHub repo</a> for the component itself!)
+
+Once they’re set up, Snippets can be added to your content directly from the Content Editor, without users needing to touch any code. You can just click once to add a Snippet to your page, then define the Snippet’s parameters (for example, the unique section of a YouTube URL and the video's title).
+
+Here’s how it looks from the editor’s perspective:
+
+### Importing Snippets, Shortcodes and Components
+
+Your Snippets don’t have to be completely customized — if you’d like to bring in an existing library of Snippets from a static site generator (SSG) library, you can do that too. Other Snippet templates, like MDX components, can be used for a variety of SSGs.
+
+Snippet templates require little configuration to use effectively. CloudCannon supports the following Snippet templates:
+
+* [Docusaurus Components](https://cloudcannon.com/documentation/articles/snippets-using-docusaurus-components)
+* [Eleventy Shortcodes](https://cloudcannon.com/documentation/articles/snippets-using-eleventy-shortcodes/)
+* [Hugo Shortcodes](https://cloudcannon.com/documentation/articles/snippets-using-hugo-shortcodes/)
+* [MDX Components](https://cloudcannon.com/documentation/articles/snippets-using-mdx-components/)
+* [Python Markdown](https://cloudcannon.com/documentation/articles/snippets-using-python-markdown/)
+
+Configuring custom Snippets can be more complicated than using Snippet templates, but they do provide more flexibility. Just for fun, here are a few additional tasks that custom Snippets could achieve for you:
+
+* Time-delaying sections of content that only appear after a given time and date
+* Including an email or newsletter signup CTA in a blog post
+* Triggering animations when the snippet is scrolled past
+* Embedding cards to auto-discovered related pages
+* Collating inline citations, and enforcing a specifically styled output (e.g. APA, MLA, Chicago)
+* Including an inline [Pagefind](https://pagefind.app/) search form with hardcoded filters relevant to content on the page
+
+If you’d like some help setting up Snippet templates, or creating custom Snippets to achieve a particular goal for your site, our solutions specialists are happy to lend a hand — just reach out!

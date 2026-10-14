@@ -1,0 +1,86 @@
+---
+title: 'Managing digital assets in CloudCannon: a guide to smart asset storage'
+description: "Learn how CloudCannon's Digital Asset Management (DAM) integrations solve Git storage limits and slow build times —\_while providing advanced asset organization, transformations, and CDN delivery for your websites."
+date: '2025-02-07T05:00:00+13:00'
+author: David Large
+image: https://cc-dam.imgix.net/blog-dam-guide-r.png
+tags:
+  - features
+  - resources
+---
+
+Let's talk about one of the most crucial aspects of website management that often gets overlooked: digital asset management (DAM). If you’re running into storage limits with your Git repository or noticing slower build times, it might be time to level up your asset management game with CloudCannon’s DAM integrations.
+
+## Why you should care about DAM
+
+Git is great. But here’s the thing about Git repositories — they typically max out around 2GB of storage. If you’re working with lots of images, videos, or other media files, you can hit that limit pretty quickly. Plus, having all those assets in your repo can seriously slow down your builds. Not fun!
+
+## Enter CloudCannon's DAM integration
+
+CloudCannon has made it easy to connect with various digital asset management services. Currently, we support:
+
+* [Amazon S3](https://cloudcannon.com/documentation/articles/creating-an-s3-dam/)
+* [Azure Blob Storage](https://cloudcannon.com/documentation/articles/creating-an-azure-dam/)
+* [Cloudflare R2](https://cloudcannon.com/documentation/articles/creating-a-cloudflare-r2-dam/)
+* [Cloudinary](https://cloudcannon.com/documentation/articles/creating-a-cloudinary-dam/)
+* [DigitalOcean Spaces](https://cloudcannon.com/documentation/articles/creating-a-digitalocean-spaces-dam/)
+* [Google Cloud Storage](https://cloudcannon.com/documentation/articles/creating-a-google-cloud-storage-dam/)
+* [Tenovos](https://cloudcannon.com/documentation/articles/creating-a-tenovos-dam/)
+
+What’s great about these DAM services is that they do more than just store files. Many of them can add metadata to your assets, provide advanced sorting capabilities, perform on-the-fly image transformations, or serve your assets through a CDN for better performance.
+
+On cloudcannon.com, we use <a href="https://www.imgix.com/" target="_blank" rel="noopener">imgix</a>, an image and video processing tool that integrates with your Amazon S3 DAM and CloudCannon. This lets us improve our build times, use the same assets across a range of sites with different Git repositories, serve optimally sized assets depending on a user's device and network connection, and keep our assets private.
+
+## Getting started with DAM
+
+Setting up a DAM with CloudCannon is pretty straightforward. Here’s the basic flow:
+
+1. First, authenticate your DAM with your Organization:
+   * Head to Organization settings
+   * Navigate to Files / Assets
+   * Click "Authenticate a new DAM"
+   * Choose your provider and fill in the details
+2. Then, link it to your sites:
+   * Open your site settings
+   * Go to Files / Assets
+   * Select your authenticated DAM from the dropdown
+   * Click "Link DAM"
+
+Now, when you add an image in CloudCannon, you can choose to upload a new image to your DAM, or explore existing images within your DAM.
+
+Here's what it looks like to browse our DAM and add an existing image:
+
+## Pro tips for DAM management
+
+### 1\. Control upload sizes
+
+Want to prevent massive file uploads? You can set a maximum file size limit in bytes. For example, to cap uploads at 1GB, set it to 1,000,000,000 bytes. Your storage budget will thank you.
+
+### 2\. Custom upload paths
+
+One of my favorite features is the ability to customize where — and how — your assets get stored. You can set up smart paths like:
+
+```yaml
+paths:
+  dam_uploads: raw/{date|year}-{date|month}-{date|day}
+```
+
+This organizes uploads by date automatically — super handy for keeping things tidy!
+
+### 3\. Selective access
+
+Need different asset sources for different parts of your site? You can use the `allowed_sources` configuration to control which DAMs (and site files) are available in specific editing interfaces. It’s great for maintaining organized workflows.
+
+## Making your life easier
+
+Here are some practical tips for working with DAMs in CloudCannon:
+
+1. **Preview your assets**: After setting up your DAM, use the “Open preview” button in the Configuration tab to make sure everything's connected properly.
+2. **Lock down uploads**: If you need to prevent editors from uploading new assets, you can enable the “Uploads Locked” option. This is particularly useful for maintaining asset consistency.
+3. **Relative paths**: Consider enabling `uploads_use_relative_path` if you want your asset references to be relative to the content file they're used in. This can make your content more portable.
+
+## Final thoughts
+
+Moving your assets to a DAM might seem like a big step, but it’s really worth considering if you’re approaching Git storage limits, need better asset organization, want faster build times, or require advanced asset transformation features.
+
+CloudCannon’s integrations make the whole process pretty painless. If you haven’t tried it yet, I’d definitely recommend giving it a shot. And if you want to use a DAM provider that isn’t currently supported, don't hesitate to reach out to us — we’re always looking to expand our integrations!
