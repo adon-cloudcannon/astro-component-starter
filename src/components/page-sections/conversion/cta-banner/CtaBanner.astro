@@ -19,7 +19,7 @@ import CustomSection from "@builders/custom-section/CustomSection.astro";
 import Heading from "@core-elements/heading/Heading.astro";
 import Text from "@core-elements/text/Text.astro";
 import Image from "@core-elements/image/Image.astro";
-import Button from "@core-elements/button/Button.astro";
+import ButtonGroup from "@wrappers/button-group/ButtonGroup.astro";
 
 /* `content` and `style` are the editor's tabs, flattened straight back into
    the names below. `at()` writes the frontmatter path a binding needs. */
@@ -47,20 +47,9 @@ const {
    */
   subtextWidth = "",
   alignmentHorizontal = "start",
-  buttonVariant = "text",
   imageSourceStart = "",
   imageAltStart = "",
-  linkText = "",
-  link = "",
-  /**
-   * A second action beside the first, drawn as a text link.
-   *
-   * One banner in the design carries two — a pill and "Explore our
-   * documentation" — and the rest carry one, so this stays a pair of its own
-   * rather than turning the single link into an array on all six pages.
-   */
-  secondaryLinkText = "",
-  secondaryLink = "",
+  buttonSections = [],
   imageSource = "",
   imageAlt = "",
   sectionLabel,
@@ -119,32 +108,12 @@ const subtextCap = subtextMeasure(subtextWidth);
       text={subtext}
     />
   )}
-  {(linkText || secondaryLinkText) && (
-    <div class="cta-banner-actions">
-      {linkText && (
-        <Button
-          class="cta-banner-link"
-          variant={buttonVariant}
-          iconName={buttonVariant === "text" ? "move-right" : undefined}
-          iconPosition={buttonVariant === "text" ? "after" : undefined}
-          text={linkText}
-          link={link}
-          data-prop={at("linkText")}
-        />
-      )}
-      {secondaryLinkText && (
-        <Button
-          class="cta-banner-link-secondary"
-          variant="text"
-          iconName="move-right"
-          iconPosition="after"
-          text={secondaryLinkText}
-          link={secondaryLink}
-          data-prop={at("secondaryLinkText")}
-        />
-      )}
-    </div>
-  )}
+  <ButtonGroup
+    class="cta-banner-actions"
+    buttonSections={buttonSections}
+    alignmentHorizontal={alignmentHorizontal}
+    data-children-prop={at("buttonSections")}
+  />
   {imageSourceStart && (
     <Image
       class="cta-banner-art cta-banner-art-start"
@@ -176,10 +145,6 @@ const subtextCap = subtextMeasure(subtextWidth);
     .cta-banner.align-center .content {
       align-items: center;
       text-align: center;
-    }
-
-    .cta-banner.align-center .cta-banner-link {
-      justify-content: center;
     }
 
     /* Mirrors the end art's reach below: `0` is the content column's edge,
@@ -217,36 +182,29 @@ const subtextCap = subtextMeasure(subtextWidth);
     }
 
     .cta-banner .heading,
-    .cta-banner .cta-banner-link {
+    .cta-banner .cta-banner-actions {
       position: relative;
       z-index: var(--layer-1);
     }
 
     .cta-banner .cta-banner-actions {
       --space-before: var(--space-before-loose);
-
-      align-items: center;
-      display: flex;
-      flex-wrap: wrap;
-      gap: var(--spacing-lg);
-      position: relative;
-      z-index: var(--layer-1);
     }
 
-    .cta-banner.align-center .cta-banner-actions {
-      justify-content: center;
+    .cta-banner .cta-banner-actions > .button-group__items {
+      gap: var(--spacing-lg);
     }
 
     /* The copy sits tight over a lone text link, in a band 217 tall. A pill,
        or a pill beside a link, stands off it by the design's 48. */
-    .cta-banner .cta-banner-actions:has(> .cta-banner-link:only-child > .variant-text) {
+    .cta-banner .cta-banner-actions:has(.button:only-child > .variant-text) {
       --space-before: var(--spacing-md);
     }
 
     /* Only the text link runs to the column's edge. Unscoped this flattened
        the pill variant too: the label filled the button edge to edge with no
        room either side, which read as the button being unable to stretch. */
-    .cta-banner .cta-banner-link .button-inner.variant-text {
+    .cta-banner .cta-banner-actions .button-inner.variant-text {
       padding-inline: 0;
     }
 
@@ -261,22 +219,22 @@ const subtextCap = subtextMeasure(subtextWidth);
 
        Pinned rather than pointed somewhere else, because there is nowhere
        brighter to go from cream. The underline is what answers the pointer. */
-    .cta-banner .cta-banner-link:hover .button-inner,
-    .cta-banner .cta-banner-link:focus-visible .button-inner {
+    .cta-banner .cta-banner-actions .button:hover .button-inner,
+    .cta-banner .cta-banner-actions .button:focus-visible .button-inner {
       color: inherit;
     }
 
     /* The arrow brightens to meet it, so the whole link answers rather than
        half of it. */
-    .cta-banner .cta-banner-link:hover .icon,
-    .cta-banner .cta-banner-link:focus-visible .icon {
+    .cta-banner .cta-banner-actions .button:hover .icon,
+    .cta-banner .cta-banner-actions .button:focus-visible .icon {
       color: inherit;
     }
 
     /* Only the words are ruled. Ruled across the whole link the line runs
        under the arrow as well, which reads as struck out. */
-    .cta-banner .cta-banner-link:hover .label-text,
-    .cta-banner .cta-banner-link:focus-visible .label-text {
+    .cta-banner .cta-banner-actions .button:hover .label-text,
+    .cta-banner .cta-banner-actions .button:focus-visible .label-text {
       text-decoration: underline;
       text-underline-offset: 0.35em;
     }

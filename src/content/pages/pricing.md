@@ -357,19 +357,23 @@ pageSections:
         experience, starting at $3,000 per project (USD).
       subtextSize: lg
       alignmentHorizontal: center
-      buttonVariant: secondary
-      link:
-        linkText: Learn about our migration services
-        link: /migration/
-      secondaryLink:
-        secondaryLinkText: ''
-        secondaryLink: ''
       image:
         imageSource: /src/assets/images/marketing/ferns-rocks-2-3806-72621-mirrored.png
         imageAlt: ''
       imageStart:
         imageSourceStart: /src/assets/images/marketing/ferns-corner-3806-72622.png
         imageAltStart: ''
+      buttonSections:
+        - _component: building-blocks/core-elements/button
+          text: Learn about our migration services
+          link: /migration/
+          iconName: ''
+          iconColor: default
+          textColor: default
+          iconPosition: before
+          hideText: false
+          variant: secondary
+          size: md
     style:
       scratched: true
       backgroundColor: pacific

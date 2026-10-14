@@ -295,12 +295,20 @@ pageSections:
       heading:
         heading: Wanna learn more about our product?
         headingSize: lg
-      link:
-        linkText: Explore visual editing
-        link: /visual-editing/
       image:
         imageSource: /src/assets/images/marketing/rocks-corner-3806-70523.png
         imageAlt: ''
+      buttonSections:
+        - _component: building-blocks/core-elements/button
+          text: Explore visual editing
+          link: /visual-editing/
+          iconName: move-right
+          iconColor: default
+          textColor: default
+          iconPosition: after
+          hideText: false
+          variant: text
+          size: md
     style:
       scratched: true
 ---

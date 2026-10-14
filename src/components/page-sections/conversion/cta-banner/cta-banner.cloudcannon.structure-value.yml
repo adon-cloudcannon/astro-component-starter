@@ -10,12 +10,7 @@ value:
       heading: ""
       headingLevel: h2
       headingSize: lg
-    link:
-      linkText: ""
-      link: ""
-    secondaryLink:
-      secondaryLinkText: ""
-      secondaryLink: ""
+    buttonSections: []
     image:
       imageSource: ""
       imageAlt: ""

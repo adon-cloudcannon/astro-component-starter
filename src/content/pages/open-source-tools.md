@@ -458,19 +458,33 @@ pageSections:
         headingSize: lg
       subtext: ''
       alignmentHorizontal: center
-      buttonVariant: secondary
-      link:
-        linkText: Reach out
-        link: /contact/
-      secondaryLink:
-        secondaryLinkText: Explore our documentation
-        secondaryLink: /documentation/
       image:
         imageSource: /src/assets/images/marketing/ferns-rocks-2-3806-72621-mirrored.png
         imageAlt: ''
       imageStart:
         imageSourceStart: /src/assets/images/marketing/ferns-corner-3806-72622.png
         imageAltStart: ''
+      buttonSections:
+        - _component: building-blocks/core-elements/button
+          text: Reach out
+          link: /contact/
+          iconName: ''
+          iconColor: default
+          textColor: default
+          iconPosition: before
+          hideText: false
+          variant: secondary
+          size: md
+        - _component: building-blocks/core-elements/button
+          text: Explore our documentation
+          link: /documentation/
+          iconName: move-right
+          iconColor: default
+          textColor: default
+          iconPosition: after
+          hideText: false
+          variant: text
+          size: md
     style:
       scratched: true
       backgroundColor: pacific

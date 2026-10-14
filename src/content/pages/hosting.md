@@ -220,16 +220,23 @@ pageSections:
       subtextSize: lg
       subtextWidth: xl
       alignmentHorizontal: center
-      buttonVariant: secondary
-      link:
-        linkText: Talk to us about hosting
-        link: /contact/
       image:
         imageSource: /src/assets/images/marketing/ferns-rocks-2-3806-72621-mirrored.png
         imageAlt: ''
       imageStart:
         imageSourceStart: /src/assets/images/marketing/ferns-corner-3806-72622.png
         imageAltStart: ''
+      buttonSections:
+        - _component: building-blocks/core-elements/button
+          text: Talk to us about hosting
+          link: /contact/
+          iconName: ''
+          iconColor: default
+          textColor: default
+          iconPosition: before
+          hideText: false
+          variant: secondary
+          size: md
     style:
       scratched: true
       backgroundColor: pacific

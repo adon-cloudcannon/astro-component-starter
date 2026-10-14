@@ -197,16 +197,23 @@ pageSections:
       subtext: ''
       subtextSize: lg
       alignmentHorizontal: start
-      buttonVariant: text
-      link:
-        linkText: Contact us
-        link: /contact/
       image:
         imageSource: /src/assets/images/marketing/ferns-rocks-2-3806-72621-mirrored.png
         imageAlt: ''
       imageStart:
         imageSourceStart: ''
         imageAltStart: ''
+      buttonSections:
+        - _component: building-blocks/core-elements/button
+          text: Contact us
+          link: /contact/
+          iconName: move-right
+          iconColor: default
+          textColor: default
+          iconPosition: after
+          hideText: false
+          variant: text
+          size: md
     style:
       scratched: true
       backgroundColor: pacific

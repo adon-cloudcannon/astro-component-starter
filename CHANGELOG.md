@@ -155,7 +155,8 @@ quietly broken in the editor.
 - Page Header moves Alignment to its Style tab, for the same reason. Existing pages need that key moved from `content:` to `style:`.
 - **Heads-up:** Custom Section's Label is now Section Label, the name every other page section uses for the same field. Existing pages need the key renamed from `label:` to `sectionLabel:`.
 - **Heads-up:** a scratched band is now a background choice rather than a field of its own: pick the colour with Background colour and tick Scratched beside it. CTA Banner's `scratch:` key is gone, so a page that set it needs `style.backgroundColor` plus `style.scratched: true`. Any band can carry the sheet now, not just this one.
-- CTA Banner's link and picture fields are grouped the way its heading is: Link holds its text and its URL, Second link the same, Picture its file and its alt text. Existing pages need those keys nested under `link:`, `secondaryLink:`, `image:` and `imageStart:`.
+- **Heads-up:** CTA Banner's two links are an array of Buttons, the same field every hero and CTA already carries, so a band takes as many actions as it needs and each picks its own variant. `linkText`, `link`, `secondaryLinkText`, `secondaryLink` and `buttonVariant` are replaced by `buttonSections`.
+- CTA Banner's picture fields are grouped the way its heading is: Picture holds its file and its alt text. Existing pages need those keys nested under `image:` and `imageStart:`.
 - Vertical padding (top) is no longer offered in the editor. It overrides one end of a band's vertical padding, which is a thing to set by hand where two bands meet, not a second padding control beside the first.
 
 #### Framework and dependencies

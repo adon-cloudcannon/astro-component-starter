@@ -86,15 +86,20 @@ pageSections:
         heading: Schedule a meeting with one of our experts
         headingLevel: h2
         headingSize: lg
-      link:
-        linkText: Book a personalized demo
-        link: '#book'
-      secondaryLink:
-        secondaryLinkText: ''
-        secondaryLink: ''
       image:
         imageSource: /src/assets/images/marketing/ferns-rocks-2-3806-72621-mirrored.png
         imageAlt: ''
+      buttonSections:
+        - _component: building-blocks/core-elements/button
+          text: Book a personalized demo
+          link: '#book'
+          iconName: move-right
+          iconColor: default
+          textColor: default
+          iconPosition: after
+          hideText: false
+          variant: text
+          size: md
     style:
       scratched: true
       backgroundColor: pacific

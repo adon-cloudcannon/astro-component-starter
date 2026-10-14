@@ -62,35 +62,14 @@ content.subtextWidth:
         name: Wide
       - id: xl
         name: Extra wide
-# A link is its words and its destination, and a picture is its file and its
-# alt text. Each pair is one decision, grouped the way the heading is.
-content.link:
-  type: object
-  label: Link
+# The actions, as many as the band carries. Each is a Button, so each picks
+# its own variant: the design draws a pill, a text link, or one of each.
+content.buttonSections:
+  type: array
+  label: Buttons
+  comment: The actions under the heading. Leave empty for a band with none.
   options:
-    subtype: object
-content.link.linkText:
-  type: text
-  label: Text
-  comment: The link under the heading. Leave empty to hide it.
-content.link.link:
-  type: url
-  label: URL
-  comment: Where the link points.
-
-content.secondaryLink:
-  type: object
-  label: Second link
-  options:
-    subtype: object
-content.secondaryLink.secondaryLinkText:
-  type: text
-  label: Text
-  comment: A second link beside the first, drawn as a text link. Leave empty to hide it.
-content.secondaryLink.secondaryLink:
-  type: url
-  label: URL
-  comment: Where the second link points.
+    structures: _structures.buttonSections
 
 content.image:
   type: object
