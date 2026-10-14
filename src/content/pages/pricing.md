@@ -126,9 +126,9 @@ pageSections:
           accent: ''
           pricePosition: top
     style:
+      garden: false
       alignmentHorizontal: center
       cardAlignment: start
-      garden: false
       cardColor: white
       backgroundColor: light-sand
       pattern: none
@@ -447,9 +447,9 @@ pageSections:
           accent: ''
           pricePosition: bottom
     style:
+      garden: false
       alignmentHorizontal: center
       cardAlignment: center
-      garden: false
       cardColor: muted
       backgroundColor: dark
       pattern: pegboard

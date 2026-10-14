@@ -200,14 +200,15 @@ const slidesPrice = (plan: Plan) =>
                 >
                   {heading}
                 </Heading>
-                {isNonEmptyString(footnote) && (
-                  <p
-                    class="comparison-table-footnote"
-                    data-prop={at("footnote")}
-                  >
-                    {footnote}
-                  </p>
-                )}
+                {/* Always drawn, empty or not: the editor can only update a
+                    region that is already on the page, so a corner note typed
+                    into an absent element goes nowhere. */}
+                <p
+                  class="comparison-table-footnote"
+                  data-editable="text"
+                  data-prop={at("footnote")}
+                  set:text={footnote}
+                />
               </td>
               {planList.map((plan) => (
                 <th
@@ -467,6 +468,10 @@ const slidesPrice = (plan: Plan) =>
          as body they sat level with the row labels under them and the header
          stopped reading as a header. */
       /* Small print, in the corner under whatever heading is there. */
+      .comparison-table-footnote:empty {
+        display: none;
+      }
+
       .comparison-table-footnote {
         color: var(--color-text-muted);
         font-size: var(--font-size-xs);
