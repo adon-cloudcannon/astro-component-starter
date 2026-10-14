@@ -23,6 +23,8 @@ type Row = { feature?: string; values?: (string | null)[] };
    the names below. `at()` writes the frontmatter path a binding needs. */
 const { props, at } = nestedProps(Astro.props, {
   nest: { heading: ["eyebrow", "heading", "headingLevel", "headingSize"] },
+  /* How the table is shaded, not what it says. */
+  extraStyleKeys: ["striped"],
 });
 
 const {

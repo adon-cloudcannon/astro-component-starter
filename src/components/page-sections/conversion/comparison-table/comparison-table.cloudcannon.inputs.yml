@@ -108,7 +108,7 @@ content.rows:
   comment: One row per feature, with one value per plan in plan order.
   options:
     structures: _structures.comparisonRows
-content.striped:
+style.striped:
   type: switch
   comment: Shade alternate rows to help the eye track across the table.
 content.showAnnualPricing:

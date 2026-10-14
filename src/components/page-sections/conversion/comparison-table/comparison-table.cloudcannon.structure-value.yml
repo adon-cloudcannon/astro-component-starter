@@ -66,11 +66,11 @@ value:
     columnLine: strong
     highlightStyle: action
     buttonPosition: header
-    striped: true
     showAnnualPricing: false
     monthlyLabel: Monthly
     annualLabel: Yearly
   style:
+    striped: true
     backgroundColor: light-sand
     pattern: none
     fade: none

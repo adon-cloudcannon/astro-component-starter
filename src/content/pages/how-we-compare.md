@@ -53,7 +53,6 @@ pageSections:
       columnLine: muted
       highlightStyle: tint
       buttonPosition: foot
-      striped: false
       plans:
         - name: CloudCannon
           price: "Git-based CMS with visual editing, and static site generator support"
@@ -135,6 +134,7 @@ pageSections:
             - "Site plans from $15/mo per published site, billed annually, plus Workspace seats from $15 to $39/mo each"
             - "Free Starter tier. Growth from €99/month per space, Growth Plus €349/month, Enterprise is custom."
     style:
+      striped: false
       backgroundColor: light-sand
       pattern: none
       fade: none

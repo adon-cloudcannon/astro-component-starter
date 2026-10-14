@@ -151,6 +151,7 @@ quietly broken in the editor.
 - **Heads-up:** Team Grid's start/center layout option is gone. It now uses Card Grid's layout, and a new Team Grid starts with three people.
 - Page-section editing panels put content fields first, with the shared settings (width, padding, colour scheme, background) in a collapsed group.
 - Pricing Tiers moves Header alignment, Card alignment and Plant a garden to its Style tab, beside the other fields that decide how the band is laid out. Existing pages need those three keys moved from `content:` to `style:`.
+- Comparison Table moves Striped to its Style tab, for the same reason. Existing pages need that key moved from `content:` to `style:`.
 
 #### Framework and dependencies
 
