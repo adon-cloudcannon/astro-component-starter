@@ -16,8 +16,8 @@ value:
       subtextSize: md
       subtextWidth: ""
     showBreadcrumbs: true
-    alignmentHorizontal: start
   style:
+    alignmentHorizontal: start
     backgroundColor: light-sand
     pattern: none
     fade: none

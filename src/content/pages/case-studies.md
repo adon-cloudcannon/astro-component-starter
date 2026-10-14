@@ -10,7 +10,7 @@ pageSections:
       subtext:
         subtext: See how real teams build.
       showBreadcrumbs: true
-      alignmentHorizontal: start
     style:
+      alignmentHorizontal: start
       backgroundColor: light-sand
 ---

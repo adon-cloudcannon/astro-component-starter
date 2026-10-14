@@ -10,7 +10,7 @@ pageSections:
       subtext:
         subtext: Step-by-step guides.
       showBreadcrumbs: true
-      alignmentHorizontal: start
     style:
+      alignmentHorizontal: start
       backgroundColor: light-sand
 ---

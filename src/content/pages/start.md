@@ -10,7 +10,7 @@ pageSections:
       subtext:
         subtext: Start building with CloudCannon.
       showBreadcrumbs: true
-      alignmentHorizontal: start
     style:
+      alignmentHorizontal: start
       backgroundColor: light-sand
 ---

@@ -18,8 +18,8 @@ pageSections:
         subtextSize: lg
         subtextWidth: md
       showBreadcrumbs: false
-      alignmentHorizontal: center
     style:
+      alignmentHorizontal: center
       backgroundColor: light-sand
       pattern: grid
       fade: bottom
@@ -288,15 +288,15 @@ pageSections:
             - no
             - no
             - 3 hours / month
-      footnote: ''
+      footnote:
       columnLine: strong
       highlightStyle: action
       buttonPosition: header
-      striped: false
       showAnnualPricing: true
       monthlyLabel: Monthly
       annualLabel: Yearly
     style:
+      striped: false
       backgroundColor: sand
       pattern: none
       fade: none

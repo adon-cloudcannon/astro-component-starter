@@ -18,7 +18,6 @@ pageSections:
         subtextSize: lg
         subtextWidth: 580
       showBreadcrumbs: false
-      alignmentHorizontal: center
       buttonSections:
         - _component: building-blocks/core-elements/button
           text: Start your free trial
@@ -33,6 +32,7 @@ pageSections:
           variant: text
           size: md
     style:
+      alignmentHorizontal: center
       backgroundColor: light-sand
       pattern: grid
       fade: bottom

@@ -18,7 +18,6 @@ pageSections:
         subtextSize: xl
         subtextWidth: 740
       showBreadcrumbs: false
-      alignmentHorizontal: center
       buttonSections:
         - _component: building-blocks/core-elements/button
           text: Talk with us about migration
@@ -26,6 +25,7 @@ pageSections:
           variant: primary
           size: md
     style:
+      alignmentHorizontal: center
       backgroundColor: light-sand
       pattern: grid
       fade: bottom

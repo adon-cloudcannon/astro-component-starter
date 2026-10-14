@@ -89,7 +89,7 @@ content.subtext.subtextWidth:
 content.showBreadcrumbs:
   type: switch
   comment: Shows a breadcrumb trail above the title, built from the URL. Hidden on the home page.
-content.alignmentHorizontal:
+style.alignmentHorizontal:
   type: select
   comment: Alignment for the heading and supporting text.
   options:

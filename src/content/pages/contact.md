@@ -18,8 +18,8 @@ pageSections:
         subtextSize: lg
         subtextWidth: 740
       showBreadcrumbs: false
-      alignmentHorizontal: center
     style:
+      alignmentHorizontal: center
       backgroundColor: light-sand
       pattern: grid
       fade: bottom

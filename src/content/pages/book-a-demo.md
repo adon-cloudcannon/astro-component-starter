@@ -15,10 +15,10 @@ pageSections:
       subtext:
         subtext: Book in a time for a 30 minute personalized demo of CloudCannon.
         subtextSize: lg
-        subtextWidth: 740
+        subtextWidth: ''
       showBreadcrumbs: false
-      alignmentHorizontal: center
     style:
+      alignmentHorizontal: center
       backgroundColor: light-sand
       pattern: grid
       fade: bottom
@@ -26,18 +26,17 @@ pageSections:
       paddingHorizontal: gutter
       paddingVertical: 4xl
       paddingVerticalEnd: 2xl
-      haze: false
+      haze: true
   - _component: page-sections/builders/custom-section
     content:
-      sectionLabel: Book a time
+      label: ''
       contentSections:
         - _component: building-blocks/core-elements/embed
-          class: book-demo-scheduler
-          aspectRatio: widescreen
-          html: >-
-            <iframe
-            src="https://meetings.hubspot.com/christopher-wingate?embed=true"
+          html: <iframe src="https://meetings.hubspot.com/christopher-wingate?embed=true"
             title="Book a demo with CloudCannon" loading="lazy"></iframe>
+          aspectRatio: widescreen
+          class: book-demo-scheduler
+      rounded: false
     style:
       backgroundColor: light-sand
       pattern: none
@@ -45,11 +44,11 @@ pageSections:
       maxContentWidth: xl
       paddingHorizontal: gutter
       paddingVertical: 4xl
-      paddingVerticalStart: none
       haze: false
+      paddingVerticalStart: none
   - _component: page-sections/builders/custom-section
     content:
-      sectionLabel: Demo
+      label: ''
       contentSections:
         - _component: building-blocks/core-elements/heading
           eyebrow: Demo
@@ -57,10 +56,19 @@ pageSections:
           level: h2
           size: lg
           alignmentHorizontal: center
+          iconColor: default
+          iconPosition: before
         - _component: building-blocks/core-elements/video
           type: vimeo
-          videoId: "836411139"
           title: A five minute tour of CloudCannon
+          videoId: '836411139'
+          source: ''
+          autoplay: false
+          loop: false
+          captions: ''
+          captionsLanguage: en
+          thumbnail: ''
+      rounded: false
     style:
       backgroundColor: dark
       pattern: pegboard
@@ -68,36 +76,67 @@ pageSections:
       maxContentWidth: xl
       paddingHorizontal: gutter
       paddingVertical: 4xl
+      haze: false
       colorScheme: dark
       lockColorScheme: true
-      haze: false
   - _component: page-sections/conversion/cta-banner
     content:
-      scratch: pacific
+      sectionLabel: ''
       heading:
         heading: Schedule a meeting with one of our experts
+        headingLevel: h2
         headingSize: lg
       linkText: Book a personalized demo
       link: '#book'
+      secondaryLinkText: ''
+      secondaryLink: ''
       imageSource: /src/assets/images/marketing/ferns-rocks-2-3806-72621-mirrored.png
       imageAlt: ''
+      scratch: pacific
+    style:
+      backgroundColor: pacific
+      pattern: none
+      fade: none
+      maxContentWidth: xl
+      paddingHorizontal: gutter
+      paddingVertical: 2xl
+      haze: false
   - _component: page-sections/proof/testimonial-quote
     content:
+      sectionLabel: ''
+      heading:
+        eyebrow: ''
+        heading: ''
+        headingLevel: h2
+        headingSize: lg
+      subtext:
+        subtext: ''
+        subtextSize: md
+        subtextWidth: ''
       quotes:
         - text: I almost forgot that website maintenance was a thing.
-          logoSource: https://cc-dam.imgix.net/absoluttweb-logo-color.svg
-          logoAlt: Absoluttweb
           authorName: Sindre Gusdal
           authorDescription: General Manager ·
           company: Absoluttweb
+          authorImage: ''
+          authorImageAlt: ''
+          logoSource: https://cc-dam.imgix.net/absoluttweb-logo-color.svg
+          logoAlt: Absoluttweb
+          linkText: ''
+          link: ''
           accentColor: pacific
+          quoteMarks: true
     style:
-      backgroundColor: light-sand
-      pattern: pegboard
       variant: carousel
       quoteSize: lg
       tone: light
+      cardWidth: full
+      alignment: start
+      bordered: false
+      backgroundColor: light-sand
+      pattern: pegboard
+      fade: none
+      paddingVertical: 4xl
       maxContentWidth: xl
       paddingHorizontal: gutter
-      paddingVertical: 4xl
 ---
