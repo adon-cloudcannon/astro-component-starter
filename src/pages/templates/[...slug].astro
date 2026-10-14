@@ -483,8 +483,15 @@ const breadcrumbJsonLd = breadcrumbListJsonLd(
     padding-inline: calc(50vw - 50%) var(--spacing-2xl);
   }
 
+  /* Pinned, and no taller than what is left of the window: a starter's
+     sidebar runs about 690, so on a laptop the repository link sat below the
+     fold of a panel that cannot be scrolled to. It scrolls itself instead,
+     and only when it has to. */
   .template-page-aside-inner {
+    max-block-size: calc(100dvh - var(--main-nav-height) - var(--spacing-2xl));
+    overflow-y: auto;
     position: sticky;
+    scrollbar-gutter: stable;
     top: calc(var(--main-nav-height) + var(--spacing-xl));
   }
 
@@ -826,6 +833,8 @@ const breadcrumbJsonLd = breadcrumbListJsonLd(
     }
 
     .template-page-aside-inner {
+      max-block-size: none;
+      overflow-y: visible;
       position: static;
     }
 
