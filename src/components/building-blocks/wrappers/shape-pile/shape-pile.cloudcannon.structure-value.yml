@@ -1,5 +1,5 @@
 _component: building-blocks/wrappers/shape-pile
-arrangement: auto
+arrangement: stacked
 designWidth: 664
 designHeight: 340
 fall: true

@@ -81,13 +81,13 @@ const {
   /**
    * How the shapes are laid out.
    *
-   * `auto` stacks them from the floor up, each card sized by its own label,
+   * `stacked` builds them from the floor up, each card sized by its label,
    * which is what an editor adding a card wants: there is nothing to place.
    * `placed` is the hand-drawn collage — a card tucked into the gap between
    * two others, a shadow crossing from one to the next — and every shape in
    * it carries its own coordinates.
    */
-  arrangement = "auto",
+  arrangement = "stacked",
   /** The box the positions above are measured in. */
   designWidth = 664,
   designHeight = 340,
@@ -335,11 +335,21 @@ const arrayDataAttributes = effectiveChildrenProp
        hold the room nine would need. */
     .shape-pile.is-auto {
       align-content: flex-end;
-      aspect-ratio: auto;
+      /* Each card keeps its own height and stands on the row's floor. Left
+         to stretch, every card in a row took the tallest one's height and
+         the pile came out a grid — and the badge, which is a circle, came
+         out an oval. */
+      align-items: flex-end;
+      /* The design box is the floor, not a cap: a pile of three rests on it
+         the way the drawn ones do, and a pile that needs a fourth row grows
+         past it rather than climbing out through its head. */
+      min-block-size: fit-content;
       display: flex;
       flex-wrap: wrap;
       gap: var(--spacing-sm);
-      justify-content: center;
+      /* Stacked from the far side, so the rows fill towards the band's edge
+         and only a long one reaches back across the copy. */
+      justify-content: flex-end;
     }
 
     /* Sized by its own label, capped so one long line cannot take a whole
@@ -356,14 +366,24 @@ const arrayDataAttributes = effectiveChildrenProp
          advance, read off the design's own cards. */
       inline-size: clamp(9rem, calc(var(--pile-chars, 20) * 0.54em), 18rem);
       max-inline-size: 42%;
+      /* A card, not a strip: the drawn ones are 171 of the design's 340 and
+         a one-line label left these a third of that. The label sits at the
+         head of it rather than in the middle, which is what lets the bottom
+         row stand on the band's edge and be cut by it with its words still
+         above the cut — the same thing the drawn piles do. */
+      align-items: start;
+      min-block-size: 8rem;
       position: relative;
     }
 
     /* A badge is a badge whatever its label: sized by the label it would be
        a pill, because one character still floors at a card's width. */
     .shape-pile.is-auto > .shape-pile-shape.is-round {
+      align-items: center;
       aspect-ratio: 1;
       inline-size: 4.5rem;
+      /* The card minimum would make it an oval. */
+      min-block-size: 0;
     }
 
     .shape-pile.is-auto .shape-pile-text {

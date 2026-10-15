@@ -7,7 +7,7 @@ arrangement:
     carries its own position, size and angle.
   options:
     values:
-      - id: auto
+      - id: stacked
         name: Stacked
       - id: placed
         name: Placed by hand

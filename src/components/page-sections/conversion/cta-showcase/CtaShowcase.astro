@@ -305,9 +305,35 @@ const mirror = rootMirror({ "data-picture-first": reverse ? "" : null });
     .cta-showcase .shape-pile {
       --cta-showcase-pile-reach: 66%;
 
+      /* A stacked pile fills its rows from the band's edge, so it needs the
+         room a drawn one takes but not the reach: at 66 a row of three
+         started over the heading. */
+      &.is-auto {
+        --cta-showcase-pile-reach: 34%;
+
+        /* It stands on the band's floor like the drawn one, over the padding
+           rather than on it. Less far over: the drawn pile's foot is a band
+           of colour with nothing in it, where a stacked card carries its
+           label down to within 24 of its own foot. */
+        margin-block-end: calc(-1 * var(--spacing-2xl));
+      }
+
       align-self: end;
       inline-size: calc(100% + var(--cta-showcase-pile-reach));
       margin-inline-start: calc(-1 * var(--cta-showcase-pile-reach));
+    }
+
+    /* The pile's own column, made to hold it at the foot. A drawn pile is
+       placed by its headroom and a stacked one is not placed at all, so
+       without this it sat at the top of the column and the cards came to
+       rest in mid-air. */
+    .cta-showcase .pane:has(> .shape-pile.is-auto) {
+      /* The band centres its two columns, which leaves this one shorter than
+         the row and the floor somewhere in the middle of it. */
+      align-self: stretch;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
     }
 
     /* The headroom and the overhang belong to the drawn pile, whose height is
