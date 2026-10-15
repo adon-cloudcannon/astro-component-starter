@@ -47,15 +47,26 @@ const {
    */
   shapes = [],
   /**
+   * A drawn arrangement for the pile, by name, instead of shapes of its own.
+   *
+   * The Developers band and the Open source tools one are the same pile at
+   * two scales, which is two copies of 104 lines of coordinates to keep in
+   * step. Named, the one arrangement serves both.
+   */
+  pileVariant = "",
+  /**
    * The box the pile's own positions are measured in, and whether it drops
    * into place. Low Maintenance's pile is 664x340 and falls, which is where
    * the defaults come from; the Developers one is 481x402 and stands still.
    */
-  pileWidth = 664,
-  pileHeight = 340,
+  /* The pile's own box and radius, for a band that draws its shapes rather
+     than naming an arrangement. Left unset so a named one keeps the box it
+     was drawn in. */
+  pileWidth,
+  pileHeight,
   pileFall = true,
   /** The corner radius of a square shape in the pile, in pixels. */
-  pileRadius = 19,
+  pileRadius,
   /**
    * How far the pile reaches back across the copy column, as a share of the
    * media pane, and how far its head sits below the band's own top padding.
@@ -187,10 +198,11 @@ const mirror = rootMirror({ class: { "has-pile": shapes?.length > 0 } });
         cards={siteCards.cards}
         buttonLabel={siteCards.buttonLabel}
       />
-    ) : shapes?.length > 0 ? (
+    ) : shapes?.length > 0 || pileVariant ? (
       <ShapePile
         slot="second"
         class="feature-split-pile"
+        variant={pileVariant}
         style={`--pile-overhang: ${Number(pileOverhang) || 0}%; --pile-headroom: ${
           Number(pileHeadroom) || 0
         }px`}

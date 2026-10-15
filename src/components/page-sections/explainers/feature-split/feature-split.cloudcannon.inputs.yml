@@ -110,6 +110,18 @@ content.shapes:
     split.
   options:
     structures: _structures.shapePileShapes
+content.pileVariant:
+  type: select
+  comment: >-
+    A drawn arrangement for the pile, by name, instead of shapes of its own.
+  options:
+    values:
+      - id: ""
+        name: Shapes of my own
+      - id: maintenance
+        name: Maintenance pile
+      - id: open-source-tools
+        name: Open-source tools
 content.pileWidth:
   type: number
   comment: The width the pile's own positions are measured in. Rarely changed.
