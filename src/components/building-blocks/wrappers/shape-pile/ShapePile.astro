@@ -78,6 +78,16 @@ type Shape = {
 
 const {
   shapes = [],
+  /**
+   * How the shapes are laid out.
+   *
+   * `auto` stacks them from the floor up, each card sized by its own label,
+   * which is what an editor adding a card wants: there is nothing to place.
+   * `placed` is the hand-drawn collage — a card tucked into the gap between
+   * two others, a shadow crossing from one to the next — and every shape in
+   * it carries its own coordinates.
+   */
+  arrangement = "auto",
   /** The box the positions above are measured in. */
   designWidth = 664,
   designHeight = 340,
@@ -102,7 +112,28 @@ const {
   ...htmlAttributes
 } = Astro.props;
 
-const list: Shape[] = Array.isArray(shapes) ? shapes : [];
+const placed = arrangement === "placed";
+
+/**
+ * How many an auto pile draws.
+ *
+ * Nine is three rows of three in the design's 664-wide box with the label
+ * still readable. Past that the rows are thinner than the cards are tall and
+ * it stops reading as a pile of things and starts reading as a table.
+ */
+const MAX_AUTO = 9;
+
+/**
+ * The angles an auto pile leans at, in order.
+ *
+ * Stated rather than random: a build has to draw what the last one drew, and
+ * a card that picks a new angle on every save is a diff for nothing. Small,
+ * because the cards sit close and a steep one reads as a mistake.
+ */
+const AUTO_TILTS = [-2.5, 1.5, -1, 2.5, -1.5, 1, -2, 2, -0.5];
+
+const all: Shape[] = Array.isArray(shapes) ? shapes : [];
+const list: Shape[] = placed ? all : all.slice(0, MAX_AUTO);
 
 /* A palette name or a hex. Named colours go through the token so a theme
    change carries, which a copied hex would not. */
@@ -146,7 +177,7 @@ const hostStyleMap = Object.fromEntries(
     .split(";")
     .map((pair) => pair.split(":"))
     .filter(([name, value]) => name?.trim() && value !== undefined)
-    .map(([name, ...rest]) => [name.trim(), rest.join(":").trim()]),
+    .map(([name, ...rest]) => [name.trim(), rest.join(":").trim()])
 );
 
 const mirror = rootMirror({
@@ -162,15 +193,14 @@ const mirror = rootMirror({
 /* The pile is the array its shapes are items of. `data-children-prop` was
    being written onto the div as a plain attribute, which means nothing to the
    editor, so every shape was an array item with no array around it. */
-const effectiveChildrenProp =
-  childrenDataProp ?? (useDefaultEditableBinding ? "shapes" : null);
+const effectiveChildrenProp = childrenDataProp ?? (useDefaultEditableBinding ? "shapes" : null);
 const arrayDataAttributes = effectiveChildrenProp
   ? { "data-editable": "array", "data-prop": effectiveChildrenProp }
   : {};
 ---
 
 <div
-  class:list={["shape-pile", fall !== false && "falls", className]}
+  class:list={["shape-pile", !placed && "is-auto", fall !== false && "falls", className]}
   style={[
     `--pile-design-width: ${designWidth}`,
     `--pile-design-height: ${designHeight}`,
@@ -184,7 +214,11 @@ const arrayDataAttributes = effectiveChildrenProp
 >
   {/* Carries this component's own root attributes for the Visual Editor,
       which never rewrites a region root. See utils/rootMirror.mjs. */}
-  <span class="root-mirror" hidden {...mirror} />
+  <span
+    class="root-mirror"
+    hidden
+    {...mirror}
+  />
 
   {list.map((shape, index) => (
     <div
@@ -201,20 +235,34 @@ const arrayDataAttributes = effectiveChildrenProp
         shape.color ? `--scratch-fill: ${paint(shape.color)}` : "",
         shape.shadowColor ? `--pile-shadow-color: ${paint(shape.shadowColor)}` : "",
         shape.imageColor ? `--pile-mark-color: ${paint(shape.imageColor)}` : "",
-        `--pile-x: ${((Number(shape.x) || 0) / designWidth) * 100}%`,
-        `--pile-y: ${((Number(shape.y) || 0) / designHeight) * 100}%`,
-        `--pile-w: ${((Number(shape.width) || 0) / designWidth) * 100}%`,
-        `--pile-h: ${((Number(shape.height) || 0) / designHeight) * 100}%`,
-        `--pile-rot: ${Number(shape.rotation) || 0}deg`,
-        `--pile-font: ${Number(shape.fontSize) || 20}`,
-        /* The shape's own width in design units, which is what its label is
-           scaled against: the shape is the query container, not the pile. */
-        `--pile-units: ${Number(shape.width) || designWidth}`,
+        ...(placed
+          ? [
+              `--pile-x: ${((Number(shape.x) || 0) / designWidth) * 100}%`,
+              `--pile-y: ${((Number(shape.y) || 0) / designHeight) * 100}%`,
+              `--pile-w: ${((Number(shape.width) || 0) / designWidth) * 100}%`,
+              `--pile-h: ${((Number(shape.height) || 0) / designHeight) * 100}%`,
+              `--pile-font: ${Number(shape.fontSize) || 20}`,
+              /* The shape's own width in design units, which is what its label
+                 is scaled against: the shape is the query container, not the
+                 pile. */
+              `--pile-units: ${Number(shape.width) || designWidth}`,
+              /* Lowest first, which the coordinates already say. An auto pile
+                 is ranked in the browser instead: nothing here knows where a
+                 card lands until the rows have wrapped. */
+              `--pile-delay: ${(rank.get(index) ?? 0) * STAGGER_MS}ms`,
+            ]
+          : []),
+        /* How long the label is, which is what sizes an auto card.
+           Intrinsic sizing is not available to it: the scratched sheet makes
+           every card an inline-size container, and a containment root has no
+           intrinsic width to size to — the cards came out 0 wide and full
+           height. Counting the label is the measure that survives that. */
+        ...(placed ? [] : [`--pile-chars: ${String(shape.text ?? "").trim().length}`]),
+        `--pile-rot: ${placed ? Number(shape.rotation) || 0 : AUTO_TILTS[index % AUTO_TILTS.length]}deg`,
         /* It comes in at a steeper angle than it settles at, so the tilt is
            still moving when the position has stopped. */
-        `--pile-tilt: ${(Number(shape.rotation) || 0) - 9}deg`,
+        `--pile-tilt: ${(placed ? Number(shape.rotation) || 0 : AUTO_TILTS[index % AUTO_TILTS.length]) - 9}deg`,
         `--pile-rise: ${-RISE}px`,
-        `--pile-delay: ${(rank.get(index) ?? 0) * STAGGER_MS}ms`,
       ]
         .filter(Boolean)
         .join("; ")}
@@ -278,6 +326,49 @@ const arrayDataAttributes = effectiveChildrenProp
       container-type: inline-size;
       inline-size: 100%;
       position: relative;
+    }
+
+    /* An auto pile is a real layout rather than a coordinate space: the cards
+       build from the floor up and wrap into rows above it, so three fall as
+       one row across the bottom and nine as three rows. The box's own ratio
+       goes with it — the rows decide the height, and a pile of two should not
+       hold the room nine would need. */
+    .shape-pile.is-auto {
+      align-content: flex-end;
+      aspect-ratio: auto;
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--spacing-sm);
+      justify-content: center;
+    }
+
+    /* Sized by its own label, capped so one long line cannot take a whole
+       row to itself. In the placed arrangement every one of these is a
+       coordinate instead. */
+    .shape-pile.is-auto > .shape-pile-shape {
+      --scratch-position: relative;
+
+      block-size: auto;
+      /* Two words sit on one line and a sentence takes three, without either
+         one being measured: a card is as wide as its label is long, floored
+         so a two-word card is still a card and capped so a long one wraps
+         rather than taking the row to itself. 0.54em is this face's average
+         advance, read off the design's own cards. */
+      inline-size: clamp(9rem, calc(var(--pile-chars, 20) * 0.54em), 18rem);
+      max-inline-size: 42%;
+      position: relative;
+    }
+
+    /* A badge is a badge whatever its label: sized by the label it would be
+       a pill, because one character still floors at a card's width. */
+    .shape-pile.is-auto > .shape-pile-shape.is-round {
+      aspect-ratio: 1;
+      inline-size: 4.5rem;
+    }
+
+    .shape-pile.is-auto .shape-pile-text {
+      font-size: var(--font-size-md);
+      padding: var(--spacing-md);
     }
 
     .shape-pile-shape {

@@ -307,9 +307,17 @@ const mirror = rootMirror({ "data-picture-first": reverse ? "" : null });
 
       align-self: end;
       inline-size: calc(100% + var(--cta-showcase-pile-reach));
+      margin-inline-start: calc(-1 * var(--cta-showcase-pile-reach));
+    }
+
+    /* The headroom and the overhang belong to the drawn pile, whose height is
+       fixed: it stands on the band's floor and hangs over it by design. A
+       stacked pile grows a row at a time, and both of those were measured
+       against a height it no longer has — the band came up short and the top
+       row went out through its head. */
+    .cta-showcase .shape-pile:not(.is-auto) {
       margin-block-end: calc(-1 * var(--spacing-4xl));
       margin-block-start: 107px;
-      margin-inline-start: calc(-1 * var(--cta-showcase-pile-reach));
     }
 
     /* Stacked, there is no copy beside it to reach over. */

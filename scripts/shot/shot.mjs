@@ -20,17 +20,22 @@
  */
 import { chromium } from "playwright-core";
 
-const [url, out, width = "1280", height = "900", selector, evaluate] = process.argv.slice(2);
+const [url, out, width = "1280", height = "900", selector, evaluate, settle] =
+  process.argv.slice(2);
 
 if (!url || !out) {
-  console.error("usage: npm run shot -- <url> <out.png> [width] [height] [selector]");
+  console.error(
+    "usage: npm run shot -- <url> <out.png> [width] [height] [selector] [js] [settle-ms]"
+  );
   process.exit(1);
 }
 
 const browser = await chromium.launch({ channel: "chrome" });
 
 try {
-  const page = await browser.newPage({ viewport: { width: Number(width), height: Number(height) } });
+  const page = await browser.newPage({
+    viewport: { width: Number(width), height: Number(height) },
+  });
   await page.goto(url, { waitUntil: "networkidle" });
 
   if (selector) {
@@ -46,6 +51,12 @@ try {
     await page.evaluate(evaluate);
     await page.waitForTimeout(300);
   }
+
+  /* Longer, for anything that moves when it is scrolled to: a Shape Pile of
+     nine takes 1.4s to come to rest, and the shots of it caught cards still
+     in the air — which reads as a layout that has thrown them out of the
+     band rather than as an animation half-done. */
+  if (settle) await page.waitForTimeout(Number(settle));
 
   await page.screenshot({ path: out });
   console.log(`shot: ${out} at ${width}x${height}${selector ? ` on ${selector}` : ""}`);

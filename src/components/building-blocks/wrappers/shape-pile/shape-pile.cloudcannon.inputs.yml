@@ -1,3 +1,17 @@
+arrangement:
+  type: select
+  comment: >-
+    Stacked builds the pile from the floor up, each card sized by its own
+    label: add cards and they fall as one row, then wrap into rows above it,
+    up to nine. Placed is the hand-drawn arrangement, where every card
+    carries its own position, size and angle.
+  options:
+    values:
+      - id: auto
+        name: Stacked
+      - id: placed
+        name: Placed by hand
+
 shapes:
   type: array
   comment: The shapes in the pile, each with its own place, size and angle.
@@ -181,7 +195,7 @@ tone:
 x:
   type: number
   comment: Distance from the left of the pile, in design units.
-'y':
+"y":
   type: number
   comment: Distance from the top of the pile, in design units.
 width:

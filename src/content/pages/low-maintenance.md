@@ -115,6 +115,7 @@ pageSections:
         subtextWidth: sm
       illustration:
         _component: building-blocks/wrappers/shape-pile
+        arrangement: placed
         designWidth: 664
         designHeight: 340
         fall: true

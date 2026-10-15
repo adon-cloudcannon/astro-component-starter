@@ -151,6 +151,7 @@ quietly broken in the editor.
 - **Heads-up:** Team Grid's start/center layout option is gone. It now uses Card Grid's layout, and a new Team Grid starts with three people.
 - Page-section editing panels put content fields first, with the shared settings (width, padding, colour scheme, background) in a collapsed group.
 - The falling pile of cards is a thing a CTA Showcase can hold, like the terminal and the camera beside it, rather than a list of shapes on a Feature Split. Low Maintenance's band is a Showcase now. Feature Split still takes a pile for the bands that pair one with a layout.
+- A Shape Pile can arrange itself. Stacked, the new default, builds from the floor up and sizes each card by its own label: add three and they fall as one row, add more and they wrap into rows above it, up to nine. Placed is the old behaviour, where every card carries its own position, size and angle, and it is what the drawn piles on Low Maintenance, Developers and Open source tools keep using.
 - Pricing Tiers moves Header alignment, Card alignment and Plant a garden to its Style tab, beside the other fields that decide how the band is laid out. Existing pages need those three keys moved from `content:` to `style:`.
 - Comparison Table moves Striped to its Style tab, for the same reason. Existing pages need that key moved from `content:` to `style:`.
 - Page Header moves Alignment to its Style tab, for the same reason. Existing pages need that key moved from `content:` to `style:`.

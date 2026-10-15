@@ -18,6 +18,7 @@ pageSections:
         subtextWidth: ''
       mediaSections:
         - _component: building-blocks/wrappers/shape-pile
+          arrangement: placed
           designWidth: 524
           designHeight: 443
           fall: true

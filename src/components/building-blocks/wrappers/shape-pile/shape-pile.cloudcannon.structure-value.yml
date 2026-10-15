@@ -1,4 +1,5 @@
 _component: building-blocks/wrappers/shape-pile
+arrangement: auto
 designWidth: 664
 designHeight: 340
 fall: true
@@ -6,11 +7,11 @@ radius: 19
 shapes:
   - text: A thing you no longer worry about
     tone: golden
-    x: 0
-    "y": 208
-    width: 221
-    height: 132
-    rotation: 0
+  - text: And another
+    tone: coral
+  - text: And one more
+    tone: rust
+    lightText: true
 
 # Without this the inputs file beside it is never loaded, and every field on
 # the block falls back to CloudCannon guessing a type from its key — which is
