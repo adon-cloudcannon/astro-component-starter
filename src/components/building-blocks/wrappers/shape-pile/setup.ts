@@ -27,7 +27,7 @@ export function setupShapePile(pile: HTMLElement): void {
         pile.setAttribute("data-fallen", "");
       }
     },
-    { threshold: THRESHOLD }
+    { threshold: THRESHOLD },
   );
 
   observer.observe(pile);

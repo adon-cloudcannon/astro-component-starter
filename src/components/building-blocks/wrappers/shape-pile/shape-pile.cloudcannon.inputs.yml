@@ -1,18 +1,17 @@
-arrangement:
+variant:
   type: select
   comment: >-
-    Stacked drops each card into the next place in a drawn arrangement: the
-    first lands at the left of the floor, the second beside it, the fourth
-    on the shoulders of the first two, up to nine. Sizes, angles and the
-    shadows between them come with the places. Placed is for an arrangement
-    of your own, where every card carries its position, size and angle.
+    Which drawn arrangement this is. The shapes, the box they sit in and the
+    shadows between them come with it. Leave it empty to draw shapes of your
+    own instead.
   options:
     values:
-      - id: stacked
-        name: Stacked
-      - id: placed
-        name: Placed by hand
-
+      - id: ""
+        name: Shapes of my own
+      - id: maintenance
+        name: Maintenance pile
+      - id: open-source-tools
+        name: Open-source tools
 shapes:
   type: array
   comment: The shapes in the pile, each with its own place, size and angle.

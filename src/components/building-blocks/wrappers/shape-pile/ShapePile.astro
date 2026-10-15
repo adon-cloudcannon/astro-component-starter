@@ -1,6 +1,7 @@
 ---
 import { rootMirror } from "@component-utils/rootMirror.mjs";
 import { resolveImageSource } from "@component-utils/resolveImageSource";
+import { SHAPE_PILE_VARIANTS } from "./variants.mjs";
 /**
  * A pile of labelled shapes that fall into place.
  *
@@ -77,20 +78,20 @@ type Shape = {
 };
 
 const {
-  shapes = [],
   /**
-   * How the shapes are laid out.
+   * Which drawn arrangement this is.
    *
-   * `stacked` builds them from the floor up, each card sized by its label,
-   * which is what an editor adding a card wants: there is nothing to place.
-   * `placed` is the hand-drawn collage — a card tucked into the gap between
-   * two others, a shadow crossing from one to the next — and every shape in
-   * it carries its own coordinates.
+   * A pile is placed rather than laid out, so picking one is how an editor
+   * gets a pile: the shapes, the box they are measured in and the wedges
+   * between them come with the name. Left empty, the pile draws the shapes
+   * it is given, which is how a new arrangement is built before it has a
+   * name of its own.
    */
-  arrangement = "stacked",
+  variant = "",
+  shapes: ownShapes,
   /** The box the positions above are measured in. */
-  designWidth = 664,
-  designHeight = 340,
+  designWidth: ownDesignWidth,
+  designHeight: ownDesignHeight,
   /**
    * Whether the pile drops into place when it is scrolled to.
    *
@@ -100,7 +101,7 @@ const {
    */
   fall = true,
   /** The corner radius of a square shape, in pixels. */
-  radius = 19,
+  radius: ownRadius,
   class: className,
   /* Taken rather than spread: the root writes a style of its own, and an
      explicit attribute wins over `...htmlAttributes`, so a host's style was
@@ -112,144 +113,16 @@ const {
   ...htmlAttributes
 } = Astro.props;
 
-const placed = arrangement === "placed";
+/* The named arrangement, where there is one. Shapes stated on the block win
+   over it, so a pile can be built by hand before it is given a name. */
+const preset = SHAPE_PILE_VARIANTS[variant as keyof typeof SHAPE_PILE_VARIANTS];
+const shapes: Shape[] =
+  (Array.isArray(ownShapes) && ownShapes.length > 0 ? ownShapes : preset?.shapes) ?? [];
+const designWidth = Number(ownDesignWidth) || preset?.designWidth || 664;
+const designHeight = Number(ownDesignHeight) || preset?.designHeight || 340;
+const radius = Number(ownRadius) || preset?.radius || 19;
 
-/**
- * How many an auto pile draws.
- *
- * Nine is three rows of three in the design's 664-wide box with the label
- * still readable. Past that the rows are thinner than the cards are tall and
- * it stops reading as a pile of things and starts reading as a table.
- */
-const MAX_AUTO = 9;
-
-const all: Shape[] = Array.isArray(shapes) ? shapes : [];
-const list: Shape[] = placed ? all : all.slice(0, MAX_AUTO);
-
-/**
- * Where a stacked pile's cards land, in the order they are added.
- *
- * Drawn rather than worked out. A pile laid out by a rule comes out a grid,
- * because that is what a rule makes: every card the same height, every row
- * filled to the width, nothing tucked under anything. These are places —
- * each with its own size and lean, each overlapping the one it rests on —
- * so the first card always lands in the same spot at the foot, the second
- * beside it, and the fourth on the shoulders of the first two.
- *
- * Measured in the design's own 664 box, with `up` the distance from its
- * floor, so the box can grow a row at a time without any of them moving.
- *
- * `shadowFrom` is the slot whose card casts the wedge on this one, and it
- * is drawn only when that card is there: four cards cast one shadow, seven
- * cast three.
- */
-type Slot = {
-  x: number;
-  up: number;
-  width: number;
-  height: number;
-  rotation: number;
-  shadowFrom?: number;
-  shadow?: { x: number; y: number; width: number; height: number };
-};
-
-/** The floor of each row, measured from the box's own floor. */
-const ROW_UP = [0, 136, 272];
-
-/* Three to a row, each row inset from the one under it so the pile narrows
-   as it goes up, and each card leaning a little differently. The wedge on a
-   card is cast by the card that lands on it, which is the one three along. */
-const SLOTS: Slot[] = [
-  {
-    x: 0,
-    up: ROW_UP[0],
-    width: 212,
-    height: 148,
-    rotation: 0,
-    shadowFrom: 3,
-    shadow: { x: 32, y: 1, width: 212, height: 34 },
-  },
-  {
-    x: 226,
-    up: ROW_UP[0],
-    width: 212,
-    height: 164,
-    rotation: -1.5,
-    shadowFrom: 4,
-    shadow: { x: 22, y: 1, width: 212, height: 34 },
-  },
-  {
-    x: 452,
-    up: ROW_UP[0],
-    width: 212,
-    height: 148,
-    rotation: 1,
-    shadowFrom: 5,
-    shadow: { x: -40, y: 1, width: 212, height: 34 },
-  },
-
-  {
-    x: 32,
-    up: ROW_UP[1],
-    width: 200,
-    height: 140,
-    rotation: -2.5,
-    shadowFrom: 6,
-    shadow: { x: 40, y: 1, width: 190, height: 32 },
-  },
-  {
-    x: 248,
-    up: ROW_UP[1],
-    width: 200,
-    height: 152,
-    rotation: 1.5,
-    shadowFrom: 7,
-    shadow: { x: 24, y: 1, width: 190, height: 32 },
-  },
-  {
-    x: 464,
-    up: ROW_UP[1],
-    width: 200,
-    height: 140,
-    rotation: -1,
-    shadowFrom: 8,
-    shadow: { x: -36, y: 1, width: 190, height: 32 },
-  },
-
-  { x: 72, up: ROW_UP[2], width: 180, height: 132, rotation: 2 },
-  { x: 272, up: ROW_UP[2], width: 180, height: 144, rotation: -2 },
-  { x: 472, up: ROW_UP[2], width: 180, height: 132, rotation: 3 },
-];
-
-/** The rows a count fills, which is what the box has to be tall enough for. */
-const ROW_SIZE = 3;
-const rowsUsed = Math.min(Math.ceil(list.length / ROW_SIZE), ROW_UP.length);
-const stackedHeight = placed
-  ? designHeight
-  : ROW_UP[Math.max(0, rowsUsed - 1)] +
-    Math.max(...SLOTS.slice(0, list.length).map((slot) => slot.height), 0);
-
-/** The box every position below is a share of. */
-const boxWidth = designWidth;
-const boxHeight = placed ? designHeight : stackedHeight;
-
-/** A stacked card's place, which is its slot rather than anything it carries. */
-const slotOf = (index: number): Slot => SLOTS[index % SLOTS.length];
-
-/** The y a slot's top edge sits at, measured from the box's head. */
-const topOf = (slot: Slot) => boxHeight - slot.up - slot.height;
-
-/* The root's own prop-driven attributes, mirrored for the Visual Editor.
-   CloudCannon keeps a region's root element and swaps only its contents, so
-   these never change there without it. */
-const mirror = rootMirror({
-  class: { falls: fall !== false },
-  style: {
-    "--pile-design-width": String(designWidth),
-    "--pile-design-height": String(boxHeight),
-    "--pile-radius": `${Number(radius) || 19}px`,
-  },
-});
+const list: Shape[] = Array.isArray(shapes) ? shapes : [];
 
 /* A palette name or a hex. Named colours go through the token so a theme
    change carries, which a copied hex would not. */
@@ -261,14 +134,11 @@ const paint = (value?: string) =>
  * on another has to arrive after it, or it lands on nothing.
  *
  * Worked out from the geometry rather than carried in the data, so an editor
- * moving a shape — or adding one to a stacked pile — does not also have to
- * restate the order.
+ * moving a shape does not also have to restate the order.
  */
-const bottomOf = (shape: Shape, index: number) =>
-  placed ? (Number(shape.y) || 0) + (Number(shape.height) || 0) : boxHeight - slotOf(index).up;
-
+const bottomOf = (shape: Shape) => (Number(shape.y) || 0) + (Number(shape.height) || 0);
 const byLowest = list
-  .map((shape, index) => ({ index, bottom: bottomOf(shape, index) }))
+  .map((shape, index) => ({ index, bottom: bottomOf(shape) }))
   .sort((a, b) => b.bottom - a.bottom);
 const rank = new Map(byLowest.map((entry, position) => [entry.index, position]));
 
@@ -286,6 +156,29 @@ const landingOf = (index: number) =>
 /** Everything down, for a shadow that does not say what casts it. */
 const settled = Math.round((list.length - 1) * STAGGER_MS + FALL_MS);
 
+/* The root's own prop-driven attributes, mirrored for the Visual Editor.
+   CloudCannon keeps a region's root element and swaps only its contents, so
+   these never change there without it. */
+/* The host's own custom properties, as a map: the mirror takes `style` as one
+   so a component only replaces the properties it knows about. */
+const hostStyleMap = Object.fromEntries(
+  String(hostStyle)
+    .split(";")
+    .map((pair) => pair.split(":"))
+    .filter(([name, value]) => name?.trim() && value !== undefined)
+    .map(([name, ...rest]) => [name.trim(), rest.join(":").trim()])
+);
+
+const mirror = rootMirror({
+  class: { falls: fall !== false },
+  style: {
+    ...hostStyleMap,
+    "--pile-design-width": String(designWidth),
+    "--pile-design-height": String(designHeight),
+    "--pile-radius": `${Number(radius) || 19}px`,
+  },
+});
+
 /* The pile is the array its shapes are items of. `data-children-prop` was
    being written onto the div as a plain attribute, which means nothing to the
    editor, so every shape was an array item with no array around it. */
@@ -296,10 +189,10 @@ const arrayDataAttributes = effectiveChildrenProp
 ---
 
 <div
-  class:list={["shape-pile", !placed && "is-auto", fall !== false && "falls", className]}
+  class:list={["shape-pile", fall !== false && "falls", className]}
   style={[
-    `--pile-design-width: ${boxWidth}`,
-    `--pile-design-height: ${boxHeight}`,
+    `--pile-design-width: ${designWidth}`,
+    `--pile-design-height: ${designHeight}`,
     `--pile-radius: ${Number(radius) || 19}px`,
     hostStyle,
   ]
@@ -316,112 +209,79 @@ const arrayDataAttributes = effectiveChildrenProp
     {...mirror}
   />
 
-  {list.map((shape, index) => {
-    /* A placed card is where it says it is. A stacked one is in its slot,
-       which is also where its wedge and its turn in the fall come from. */
-    const slot = slotOf(index);
-    const geometry = placed
-      ? {
-          x: Number(shape.x) || 0,
-          y: Number(shape.y) || 0,
-          width: Number(shape.width) || 0,
-          height: Number(shape.height) || 0,
-          rotation: Number(shape.rotation) || 0,
-        }
-      : {
-          x: slot.x,
-          y: topOf(slot),
-          width: slot.width,
-          height: slot.height,
-          rotation: slot.rotation,
-        };
-
-    const wedge = placed
-      ? Number(shape.shadowWidth) > 0
-        ? {
-            x: Number(shape.shadowX) || 0,
-            y: Number(shape.shadowY) || 0,
-            width: Number(shape.shadowWidth),
-            height: Number(shape.shadowHeight) || 0,
-            from: Number(shape.shadowFrom) || 0,
-          }
-        : null
-      : slot.shadow && slot.shadowFrom !== undefined && slot.shadowFrom < list.length
-        ? { ...slot.shadow, from: slot.shadowFrom + 1 }
-        : null;
-
-    return (
-      <div
-        class:list={[
-          "shape-pile-shape",
-          "scratched",
-          `tone-${shape.tone || "golden"}`,
-          placed && shape.round && "is-round",
-          shape.lightText && "is-light-text",
-          shape.strong && "is-strong",
-        ]}
-        data-editable={effectiveChildrenProp ? "array-item" : undefined}
-        style={[
-          shape.color ? `--scratch-fill: ${paint(shape.color)}` : "",
-          shape.shadowColor ? `--pile-shadow-color: ${paint(shape.shadowColor)}` : "",
-          shape.imageColor ? `--pile-mark-color: ${paint(shape.imageColor)}` : "",
-          `--pile-x: ${(geometry.x / boxWidth) * 100}%`,
-          `--pile-y: ${(geometry.y / boxHeight) * 100}%`,
-          `--pile-w: ${(geometry.width / boxWidth) * 100}%`,
-          `--pile-h: ${(geometry.height / boxHeight) * 100}%`,
-          `--pile-font: ${Number(shape.fontSize) || 20}`,
-          /* The card's own width in design units, which is what its label is
-             scaled against: the card is the query container, not the pile. */
-          `--pile-units: ${geometry.width || boxWidth}`,
-          `--pile-rot: ${geometry.rotation}deg`,
-          /* It comes in at a steeper angle than it settles at, so the tilt is
-             still moving when the position has stopped. */
-          `--pile-tilt: ${geometry.rotation - 9}deg`,
-          `--pile-rise: ${-RISE}px`,
-          `--pile-delay: ${(rank.get(index) ?? 0) * STAGGER_MS}ms`,
-        ]
-          .filter(Boolean)
-          .join("; ")}
-      >
-        {shape.image ? (
-          /* A mask, not a picture: the marks are single-colour and the colour
-             belongs to the shape under them, so one file serves a white rose
-             on sunset and a dark bookshelf on blush. */
-          <span
-            class="shape-pile-mark logo-mark"
-            role={shape.imageAlt ? "img" : undefined}
-            aria-label={shape.imageAlt || undefined}
-            aria-hidden={shape.imageAlt ? undefined : "true"}
-            style={[
-              `--logo-mark-source: url("${resolveImageSource(shape.image)}")`,
-              `--mark-w: ${((Number(shape.imageWidth) || 0) / (geometry.width || 1)) * 100}%`,
-              `--mark-h: ${((Number(shape.imageHeight) || 0) / (geometry.height || 1)) * 100}%`,
-            ].join("; ")}
-          />
-        ) : (
-          <span
-            class="shape-pile-text"
-            data-prop="text"
-          >
-            {shape.text}
-          </span>
-        )}
-        {wedge && (
-          <span
-            class="shape-pile-shadow"
-            aria-hidden="true"
-            style={[
-              `--shadow-delay: ${wedge.from > 0 ? landingOf(wedge.from - 1) : settled}ms`,
-              `--shadow-x: ${(wedge.x / (geometry.width || 1)) * 100}%`,
-              `--shadow-y: ${(wedge.y / (geometry.height || 1)) * 100}%`,
-              `--shadow-w: ${(wedge.width / (geometry.width || 1)) * 100}%`,
-              `--shadow-h: ${(wedge.height / (geometry.height || 1)) * 100}%`,
-            ].join("; ")}
-          />
-        )}
-      </div>
-    );
-  })}
+  {list.map((shape, index) => (
+    <div
+      class:list={[
+        "shape-pile-shape",
+        "scratched",
+        `tone-${shape.tone || "golden"}`,
+        shape.round && "is-round",
+        shape.lightText && "is-light-text",
+        shape.strong && "is-strong",
+      ]}
+      data-editable={effectiveChildrenProp ? "array-item" : undefined}
+      style={[
+        shape.color ? `--scratch-fill: ${paint(shape.color)}` : "",
+        shape.shadowColor ? `--pile-shadow-color: ${paint(shape.shadowColor)}` : "",
+        shape.imageColor ? `--pile-mark-color: ${paint(shape.imageColor)}` : "",
+        `--pile-x: ${((Number(shape.x) || 0) / designWidth) * 100}%`,
+        `--pile-y: ${((Number(shape.y) || 0) / designHeight) * 100}%`,
+        `--pile-w: ${((Number(shape.width) || 0) / designWidth) * 100}%`,
+        `--pile-h: ${((Number(shape.height) || 0) / designHeight) * 100}%`,
+        `--pile-rot: ${Number(shape.rotation) || 0}deg`,
+        `--pile-font: ${Number(shape.fontSize) || 20}`,
+        /* The shape's own width in design units, which is what its label is
+           scaled against: the shape is the query container, not the pile. */
+        `--pile-units: ${Number(shape.width) || designWidth}`,
+        /* It comes in at a steeper angle than it settles at, so the tilt is
+           still moving when the position has stopped. */
+        `--pile-tilt: ${(Number(shape.rotation) || 0) - 9}deg`,
+        `--pile-rise: ${-RISE}px`,
+        `--pile-delay: ${(rank.get(index) ?? 0) * STAGGER_MS}ms`,
+      ]
+        .filter(Boolean)
+        .join("; ")}
+    >
+      {shape.image ? (
+        /* A mask, not a picture: the marks are single-colour and the colour
+           belongs to the shape under them, so one file serves a white rose on
+           sunset and a dark bookshelf on blush. */
+        <span
+          class="shape-pile-mark logo-mark"
+          role={shape.imageAlt ? "img" : undefined}
+          aria-label={shape.imageAlt || undefined}
+          aria-hidden={shape.imageAlt ? undefined : "true"}
+          style={[
+            `--logo-mark-source: url("${resolveImageSource(shape.image)}")`,
+            `--mark-w: ${((Number(shape.imageWidth) || 0) / (Number(shape.width) || 1)) * 100}%`,
+            `--mark-h: ${((Number(shape.imageHeight) || 0) / (Number(shape.height) || 1)) * 100}%`,
+          ].join("; ")}
+        />
+      ) : (
+        <span
+          class="shape-pile-text"
+          data-prop="text"
+        >
+          {shape.text}
+        </span>
+      )}
+      {Number(shape.shadowWidth) > 0 && (
+        <span
+          class="shape-pile-shadow"
+          aria-hidden="true"
+          style={[
+            `--shadow-delay: ${
+              Number(shape.shadowFrom) > 0 ? landingOf(Number(shape.shadowFrom) - 1) : settled
+            }ms`,
+            `--shadow-x: ${((Number(shape.shadowX) || 0) / (Number(shape.width) || 1)) * 100}%`,
+            `--shadow-y: ${((Number(shape.shadowY) || 0) / (Number(shape.height) || 1)) * 100}%`,
+            `--shadow-w: ${(Number(shape.shadowWidth) / (Number(shape.width) || 1)) * 100}%`,
+            `--shadow-h: ${((Number(shape.shadowHeight) || 0) / (Number(shape.height) || 1)) * 100}%`,
+          ].join("; ")}
+        />
+      )}
+    </div>
+  ))}
 </div>
 
 <script>
@@ -443,11 +303,6 @@ const arrayDataAttributes = effectiveChildrenProp
       position: relative;
     }
 
-    /* An auto pile is a real layout rather than a coordinate space: the cards
-       build from the floor up and wrap into rows above it, so three fall as
-       one row across the bottom and nine as three rows. The box's own ratio
-       goes with it — the rows decide the height, and a pile of two should not
-       hold the room nine would need. */
     .shape-pile-shape {
       align-items: center;
       /* Its own query container, stated here rather than inherited.

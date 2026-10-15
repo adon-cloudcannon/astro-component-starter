@@ -2,76 +2,117 @@
 _schema: default
 title: Low Maintenance
 description: No database. No 2 a.m. panic.
+keywords: []
 pageSections:
   - _component: page-sections/heroes/hero-split
     content:
+      mediaSections: []
+      sectionLabel: ''
       heading:
         heading: No database. No 2 a.m. panic.
+        headingLevel: h1
         headingSize: xl
       subtext:
         subtext: Skip the forced updates, security patches, and midnight outages. Your
           site keeps running while your team spends time building what's next.
         subtextSize: xl
+        subtextWidth: ''
       image:
         imageSource: /src/assets/images/marketing/hero-low-maintenance.png
         imageAlt: ''
+        imageAspectRatio: none
         imageOverflow: 107
+        imageBleed: false
+        imageRounded: true
       buttonSections:
         - _component: building-blocks/core-elements/button
           text: Start your free trial
+          link: ''
+          iconName: ''
+          iconColor: default
+          textColor: default
+          iconPosition: before
+          hideText: false
           variant: primary
+          size: md
         - _component: building-blocks/core-elements/button
           text: Book a demo
+          link: ''
           iconName: move-right
+          iconColor: default
+          textColor: default
           iconPosition: after
+          hideText: false
           variant: text
+          size: md
       note:
         - text: No credit card · 14-day free trial · No lock-in
           iconName: check
           iconColor: default
     style:
       pattern: pegboard
+      fade: none
       haze: true
       backgroundColor: sand
+      reverse: false
+      maxContentWidth: xl
+      paddingHorizontal: gutter
+      paddingVertical: 4xl
   - _component: page-sections/proof/logo-cloud
     content:
+      sectionLabel: ''
       heading: BUILT BY DEVS. RUN BY EDITORS.
       logos:
         - image: /src/assets/images/marketing/logos/twitch.svg
           alt: Twitch
+          url: ''
+          monochrome: true
           width: 75
           height: 17
-          monochrome: true
           aspect: 126 / 28
         - image: /src/assets/images/marketing/logos/hnry.svg
           alt: Hnry
+          url: ''
+          monochrome: true
           width: 87
           height: 31
-          monochrome: true
           aspect: 78 / 28
         - image: /src/assets/images/marketing/logos/Ocupop.png
           alt: Ocupop
+          url: ''
+          monochrome: true
           width: 137
           height: 37
+          aspect: ''
         - image: /src/assets/images/marketing/logos/DX.svg
           alt: DX Developer Experience Insights Platform
+          url: ''
+          monochrome: true
           width: 52
           height: 30
-          monochrome: true
           aspect: 49 / 28
         - image: /src/assets/images/marketing/logos/Papercut.svg
           alt: Papercut
+          url: ''
+          monochrome: true
           width: 100
           height: 31
-          monochrome: true
           aspect: 90 / 28
     style:
       backgroundColor: sand
       headingPlacement: inline
+      grayscale: true
+      scrolling: false
+      maxContentWidth: xl
+      paddingHorizontal: gutter
+      paddingVertical: 2xl
   - _component: page-sections/conversion/cta-center
     content:
+      sectionLabel: ''
       heading:
+        eyebrow: ''
         heading: Give editors a CMS, keep a static site
+        headingLevel: h2
         headingSize: lg
       subtext:
         subtext: At CloudCannon the editing interface sits as a layer on top of your
@@ -79,35 +120,74 @@ pageSections:
           static files, and neither one needs looking after.
         subtextSize: lg
         subtextWidth: xl
+      alignmentHorizontal: center
       buttonSections:
         - _component: building-blocks/core-elements/button
           text: Why should you cheese?
+          link: ''
+          iconName: ''
+          iconColor: default
+          textColor: default
+          iconPosition: before
+          hideText: false
           variant: primary
+          size: md
+      imageSource: ''
+      imageWidth: intrinsic
+      imageBackgroundColor: ''
+      imageScratched: false
+      imageAlt: ''
     style:
       backgroundColor: light-sand
+      pattern: none
+      fade: none
+      maxContentWidth: lg
+      paddingHorizontal: gutter
+      paddingVertical: 4xl
+      haze: false
   - _component: page-sections/proof/testimonial-quote
     content:
+      sectionLabel: ''
+      heading:
+        eyebrow: ''
+        heading: ''
+        headingLevel: h2
+        headingSize: lg
+      subtext:
+        subtext: ''
+        subtextSize: md
+        subtextWidth: ''
       quotes:
-        - text: >-
-            I almost **forgot that website maintenance was a thing.** That's
-            something you just don't need to do when you have this static tech
-            stack.
+        - text: I almost **forgot that website maintenance was a thing.** That's something
+            you just don't need to do when you have this static tech stack.
           authorName: Sindre Gusdal
           authorDescription: General Manager,
           company: Absoluttweb
           authorImage: /src/assets/images/marketing/ellipse-287.jpg
           authorImageAlt: Sindre Gusdal
+          logoSource: ''
+          logoAlt: ''
+          linkText: ''
+          link: ''
           accentColor: sunset
+          quoteMarks: true
     style:
-      backgroundColor: light-sand
       variant: static
       quoteSize: sm
       tone: light
       cardWidth: medium
+      alignment: start
+      bordered: false
+      backgroundColor: light-sand
+      pattern: none
+      fade: none
+      paddingVertical: 4xl
   - _component: page-sections/conversion/cta-showcase
     content:
+      sectionLabel: ''
       heading:
         heading: We don’t think a website should need this much looking after
+        headingLevel: h2
         headingSize: lg
       subtext:
         subtext: 'With a static site and Git you won’t need to worry about:'
@@ -115,171 +195,196 @@ pageSections:
         subtextWidth: sm
       illustration:
         _component: building-blocks/wrappers/shape-pile
-        arrangement: placed
-        designWidth: 664
-        designHeight: 340
+        variant: maintenance
         fall: true
-        radius: 19
-        shapes:
-          - text: Uptime monitoring and security scanning
-            tone: golden
-            x: 351
-            'y': 0
-            width: 224
-            height: 171
-            rotation: 0
-          - text: Database backups
-            tone: coral
-            x: 55
-            'y': 70
-            width: 224
-            height: 116
-            rotation: -14.8
-          - text: '!'
-            tone: rust
-            round: true
-            lightText: true
-            fontSize: 64
-            strong: true
-            x: 274
-            'y': 53
-            width: 78
-            height: 78
-            rotation: -14.8
-          - text: PHP and runtime version bumps
-            shadowX: 87
-            shadowY: 1
-            shadowWidth: 135
-            shadowHeight: 36
-            shadowFrom: 2
-            tone: golden
-            x: 0
-            'y': 208
-            width: 221
-            height: 132
-            rotation: 0
-          - text: Plugin updates, and the conflicts that follow them
-            shadowX: 147
-            shadowY: 1
-            shadowWidth: 297
-            shadowHeight: 38
-            shadowFrom: 1
-            tone: rust
-            lightText: true
-            x: 220
-            'y': 169
-            width: 221
-            height: 171
-            rotation: 0
-          - text: Emergency fixes at hours you’d rather be asleep
-            shadowX: -72
-            shadowY: 1
-            shadowWidth: 297
-            shadowHeight: 38
-            shadowFrom: 1
-            tone: coral
-            x: 440
-            'y': 169
-            width: 224
-            height: 171
-            rotation: 0
+      buttonSections:
+        - _component: building-blocks/core-elements/button
+          text: Get started
+          link: /
+          iconName: ''
+          iconColor: default
+          textColor: default
+          iconPosition: before
+          hideText: false
+          variant: primary
+          size: md
+      reverse: false
     style:
       backgroundColor: light-sand
       pattern: grid
+      fade: none
+      paddingVertical: 4xl
       haze: true
   - _component: page-sections/conversion/cta-center
     content:
+      sectionLabel: ''
       heading:
+        eyebrow: ''
         heading: Maintenance that doesn’t multiply
+        headingLevel: h2
         headingSize: lg
       subtext:
         subtext: Whether it's three client sites or three hundred, another site is
           another repo. The maintenance doesn't come with it.
         subtextSize: lg
         subtextWidth: md
+      alignmentHorizontal: center
+      buttonSections:
+        - _component: building-blocks/core-elements/button
+          text: Get started
+          link: /
+          iconName: ''
+          iconColor: default
+          textColor: default
+          iconPosition: before
+          hideText: false
+          variant: primary
+          size: md
+      imageSource: ''
+      imageWidth: intrinsic
+      imageBackgroundColor: ''
+      imageScratched: false
+      imageAlt: ''
     style:
       backgroundColor: dark
       pattern: grid
       fade: bottom
+      maxContentWidth: lg
+      paddingHorizontal: gutter
+      paddingVertical: 4xl
+      haze: false
   - _component: page-sections/explainers/pinned-steps
     content:
+      sectionLabel: ''
       heading:
         eyebrow: ''
         heading: ''
+        headingLevel: h2
+        headingSize: lg
       subtext:
         subtext: ''
+        subtextSize: md
+        subtextWidth: ''
+      alignmentHorizontal: center
       steps:
         - contentSections:
             - _component: building-blocks/core-elements/heading
+              eyebrow: ''
               text: A much smaller target
               level: h2
               size: sm
+              alignmentHorizontal: start
+              iconColor: default
+              iconPosition: before
             - _component: building-blocks/core-elements/text
-              text: >-
-                Most CMS vulnerabilities live in databases, plugins and
-                server-side code. A static site puts none of those in front of
-                visitors, so there’s very little left to attack. Your content
-                sits in your own repo, and the platform itself is SOC 2 Type 2
-                compliant.
+              text: Most CMS vulnerabilities live in databases, plugins and server-side code.
+                A static site puts none of those in front of visitors, so
+                there’s very little left to attack. Your content sits in your
+                own repo, and the platform itself is SOC 2 Type 2 compliant.
+              alignmentHorizontal: start
               size: lg
           mediaSections: []
         - contentSections:
             - _component: building-blocks/core-elements/heading
+              eyebrow: ''
               text: Upgrade only when it suits you
               level: h2
               size: sm
+              alignmentHorizontal: start
+              iconColor: default
+              iconPosition: before
             - _component: building-blocks/core-elements/text
-              text: >-
-                With CloudCannon you’ll have no forced version upgrades, no
-                plugin conflicts to untangle, no unplanned migrations. Things
-                change when you decide they should.
+              text: With CloudCannon you’ll have no forced version upgrades, no plugin
+                conflicts to untangle, no unplanned migrations. Things change
+                when you decide they should.
+              alignmentHorizontal: start
               size: lg
           mediaSections: []
         - contentSections:
             - _component: building-blocks/core-elements/heading
+              eyebrow: ''
               text: Launch a new site this afternoon
               level: h2
               size: sm
+              alignmentHorizontal: start
+              iconColor: default
+              iconPosition: before
             - _component: building-blocks/core-elements/text
               text: Reusable components and templates mean you're not starting from scratch
                 every time.
+              alignmentHorizontal: start
               size: lg
           mediaSections: []
       reverse: false
       mediaWidth: wide
+      copyColor: ''
+      mediaColor: ''
+      showProgress: true
       progressColor: pacific-300
       progressTrackColor: midnight
     style:
       backgroundColor: dark
+      pattern: none
+      fade: none
+      maxContentWidth: xl
+      paddingHorizontal: gutter
+      paddingVertical: 4xl
+      haze: false
   - _component: page-sections/proof/testimonial-quote
     content:
+      sectionLabel: ''
+      heading:
+        eyebrow: ''
+        heading: ''
+        headingLevel: h2
+        headingSize: lg
+      subtext:
+        subtext: ''
+        subtextSize: md
+        subtextWidth: ''
       quotes:
         - text: Absoluttweb went from days per new client site to **around an hour.**
-          quoteMarks: false
+          authorName: ''
+          authorDescription: ''
           company: Absoluttweb
+          authorImage: ''
+          authorImageAlt: ''
+          logoSource: ''
+          logoAlt: ''
           linkText: Read case study
+          link: ''
           accentColor: harbour
+          quoteMarks: false
     style:
-      backgroundColor: dark
-      pattern: pegboard
       variant: static
       quoteSize: lg
       tone: plain
       cardWidth: medium
+      alignment: start
+      bordered: false
+      backgroundColor: dark
+      pattern: pegboard
+      fade: none
+      paddingVertical: 4xl
   - _component: page-sections/conversion/cta-team-member
     content:
+      sectionLabel: ''
       heading:
+        eyebrow: ''
         heading: A CMS to build, not babysit
+        headingLevel: h2
         headingSize: lg
       subtext:
         subtext: Git underneath, a visual editor on top, with code and content running
           on one engine. Start free in minutes, or book a demo and we’ll walk
           you through the real thing.
         subtextSize: lg
+        subtextWidth: ''
       member:
         _component: building-blocks/wrappers/team-member
         name: Tom Richardson
         role: Solutions Architect
+        bio: ''
         imageSource: /src/assets/images/marketing/container-9-3806-70538.png
         imageAlt: Tom Richardson, Solutions Architect at CloudCannon
         backgroundColor: golden
@@ -289,18 +394,39 @@ pageSections:
       buttonSections:
         - _component: building-blocks/core-elements/button
           text: Start your free trial
+          link: ''
+          iconName: ''
+          iconColor: default
+          textColor: default
+          iconPosition: before
+          hideText: false
           variant: primary
+          size: md
         - _component: building-blocks/core-elements/button
           text: Book a demo
+          link: ''
           iconName: move-right
+          iconColor: default
+          textColor: default
           iconPosition: after
+          hideText: false
           variant: text
+          size: md
+      reverse: false
     style:
       backgroundColor: light-sand
+      pattern: none
+      fade: none
+      maxContentWidth: xl
+      paddingHorizontal: gutter
+      paddingVertical: 4xl
+      haze: false
   - _component: page-sections/conversion/cta-banner
     content:
+      sectionLabel: ''
       heading:
         heading: Wanna learn more about our product?
+        headingLevel: h2
         headingSize: lg
       buttonSections:
         - _component: building-blocks/core-elements/button
@@ -314,7 +440,15 @@ pageSections:
           variant: text
           size: md
       images:
+        left: ''
         right: /src/assets/images/marketing/rocks-corner-3806-70523.png
     style:
+      backgroundColor: pacific
       scratched: true
+      pattern: none
+      fade: none
+      maxContentWidth: xl
+      paddingHorizontal: gutter
+      paddingVertical: 2xl
+      haze: false
 ---
