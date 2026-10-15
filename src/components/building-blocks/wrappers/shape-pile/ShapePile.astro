@@ -135,6 +135,63 @@ const AUTO_TILTS = [-2.5, 1.5, -1, 2.5, -1.5, 1, -2, 2, -0.5];
 const all: Shape[] = Array.isArray(shapes) ? shapes : [];
 const list: Shape[] = placed ? all : all.slice(0, MAX_AUTO);
 
+/**
+ * A stacked pile's rows, widest at the floor.
+ *
+ * Left to wrap, the cards fill each row to the width and the pile comes out
+ * a grid: nine of them made three rows of three, with nothing about it that
+ * reads as a pile. The rows are worked out instead, each one holding one
+ * fewer than the row under it, which is the shape a pile of things has.
+ *
+ * The base is the smallest row that can carry the whole pile that way —
+ * three cards need one row, six need 3+2+1, nine need 4+3+2 — and four is
+ * as wide as it goes, because a fifth card in a row is narrower than it is
+ * tall by the time it has its label in it.
+ */
+const MAX_PER_ROW = 4;
+
+function pyramid(count: number): number[] {
+  if (count === 0) return [];
+
+  /* Three is the base a pile starts from, so a handful falls as one row
+     rather than as a row and a straggler on top of it. It widens only when
+     three cannot carry the pile: six is 3+2+1, seven is 4+3. */
+  let base = Math.min(3, count);
+  while ((base * (base + 1)) / 2 < count && base < MAX_PER_ROW) base += 1;
+
+  const rows: number[] = [];
+  let left = count;
+  let width = base;
+
+  while (left > 0) {
+    const take = Math.min(left, width);
+    rows.push(take);
+    left -= take;
+    /* Never below one, or a long pile stops being able to place a card. */
+    width = Math.max(1, width - 1);
+  }
+
+  return rows;
+}
+
+/* Bottom row filled first, then drawn in the other order so the DOM reads
+   top to bottom the way the pile is seen. Each card keeps its place in the
+   list, which is what its tilt and its turn in the fall are read from. */
+type Placed = { shape: Shape; index: number };
+
+const entries: Placed[] = list.map((shape, index) => ({ shape, index }));
+const rows: Placed[][] = [];
+let taken = 0;
+for (const size of pyramid(placed ? 0 : entries.length)) {
+  rows.unshift(entries.slice(taken, taken + size));
+  taken += size;
+}
+
+/* A placed pile is one lot of absolutely positioned cards with nothing
+   between them and the pile, or the coordinates would measure against a row
+   instead. */
+const drawn: Placed[][] = placed ? [entries] : rows;
+
 /* A palette name or a hex. Named colours go through the token so a theme
    change carries, which a copied hex would not. */
 const paint = (value?: string) =>
@@ -220,91 +277,95 @@ const arrayDataAttributes = effectiveChildrenProp
     {...mirror}
   />
 
-  {list.map((shape, index) => (
-    <div
-      class:list={[
-        "shape-pile-shape",
-        "scratched",
-        `tone-${shape.tone || "golden"}`,
-        shape.round && "is-round",
-        shape.lightText && "is-light-text",
-        shape.strong && "is-strong",
-      ]}
-      data-editable={effectiveChildrenProp ? "array-item" : undefined}
-      style={[
-        shape.color ? `--scratch-fill: ${paint(shape.color)}` : "",
-        shape.shadowColor ? `--pile-shadow-color: ${paint(shape.shadowColor)}` : "",
-        shape.imageColor ? `--pile-mark-color: ${paint(shape.imageColor)}` : "",
-        ...(placed
-          ? [
-              `--pile-x: ${((Number(shape.x) || 0) / designWidth) * 100}%`,
-              `--pile-y: ${((Number(shape.y) || 0) / designHeight) * 100}%`,
-              `--pile-w: ${((Number(shape.width) || 0) / designWidth) * 100}%`,
-              `--pile-h: ${((Number(shape.height) || 0) / designHeight) * 100}%`,
-              `--pile-font: ${Number(shape.fontSize) || 20}`,
-              /* The shape's own width in design units, which is what its label
+  {drawn.map((row) => (
+    <div class="shape-pile-row">
+      {row.map(({ shape, index }) => (
+        <div
+          class:list={[
+            "shape-pile-shape",
+            "scratched",
+            `tone-${shape.tone || "golden"}`,
+            shape.round && "is-round",
+            shape.lightText && "is-light-text",
+            shape.strong && "is-strong",
+          ]}
+          data-editable={effectiveChildrenProp ? "array-item" : undefined}
+          style={[
+            shape.color ? `--scratch-fill: ${paint(shape.color)}` : "",
+            shape.shadowColor ? `--pile-shadow-color: ${paint(shape.shadowColor)}` : "",
+            shape.imageColor ? `--pile-mark-color: ${paint(shape.imageColor)}` : "",
+            ...(placed
+              ? [
+                  `--pile-x: ${((Number(shape.x) || 0) / designWidth) * 100}%`,
+                  `--pile-y: ${((Number(shape.y) || 0) / designHeight) * 100}%`,
+                  `--pile-w: ${((Number(shape.width) || 0) / designWidth) * 100}%`,
+                  `--pile-h: ${((Number(shape.height) || 0) / designHeight) * 100}%`,
+                  `--pile-font: ${Number(shape.fontSize) || 20}`,
+                  /* The shape's own width in design units, which is what its label
                  is scaled against: the shape is the query container, not the
                  pile. */
-              `--pile-units: ${Number(shape.width) || designWidth}`,
-              /* Lowest first, which the coordinates already say. An auto pile
+                  `--pile-units: ${Number(shape.width) || designWidth}`,
+                  /* Lowest first, which the coordinates already say. An auto pile
                  is ranked in the browser instead: nothing here knows where a
                  card lands until the rows have wrapped. */
-              `--pile-delay: ${(rank.get(index) ?? 0) * STAGGER_MS}ms`,
-            ]
-          : []),
-        /* How long the label is, which is what sizes an auto card.
+                  `--pile-delay: ${(rank.get(index) ?? 0) * STAGGER_MS}ms`,
+                ]
+              : []),
+            /* How long the label is, which is what sizes an auto card.
            Intrinsic sizing is not available to it: the scratched sheet makes
            every card an inline-size container, and a containment root has no
            intrinsic width to size to — the cards came out 0 wide and full
            height. Counting the label is the measure that survives that. */
-        ...(placed ? [] : [`--pile-chars: ${String(shape.text ?? "").trim().length}`]),
-        `--pile-rot: ${placed ? Number(shape.rotation) || 0 : AUTO_TILTS[index % AUTO_TILTS.length]}deg`,
-        /* It comes in at a steeper angle than it settles at, so the tilt is
+            ...(placed ? [] : [`--pile-chars: ${String(shape.text ?? "").trim().length}`]),
+            `--pile-rot: ${placed ? Number(shape.rotation) || 0 : AUTO_TILTS[index % AUTO_TILTS.length]}deg`,
+            /* It comes in at a steeper angle than it settles at, so the tilt is
            still moving when the position has stopped. */
-        `--pile-tilt: ${(placed ? Number(shape.rotation) || 0 : AUTO_TILTS[index % AUTO_TILTS.length]) - 9}deg`,
-        `--pile-rise: ${-RISE}px`,
-      ]
-        .filter(Boolean)
-        .join("; ")}
-    >
-      {shape.image ? (
-        /* A mask, not a picture: the marks are single-colour and the colour
+            `--pile-tilt: ${(placed ? Number(shape.rotation) || 0 : AUTO_TILTS[index % AUTO_TILTS.length]) - 9}deg`,
+            `--pile-rise: ${-RISE}px`,
+          ]
+            .filter(Boolean)
+            .join("; ")}
+        >
+          {shape.image ? (
+            /* A mask, not a picture: the marks are single-colour and the colour
            belongs to the shape under them, so one file serves a white rose on
            sunset and a dark bookshelf on blush. */
-        <span
-          class="shape-pile-mark logo-mark"
-          role={shape.imageAlt ? "img" : undefined}
-          aria-label={shape.imageAlt || undefined}
-          aria-hidden={shape.imageAlt ? undefined : "true"}
-          style={[
-            `--logo-mark-source: url("${resolveImageSource(shape.image)}")`,
-            `--mark-w: ${((Number(shape.imageWidth) || 0) / (Number(shape.width) || 1)) * 100}%`,
-            `--mark-h: ${((Number(shape.imageHeight) || 0) / (Number(shape.height) || 1)) * 100}%`,
-          ].join("; ")}
-        />
-      ) : (
-        <span
-          class="shape-pile-text"
-          data-prop="text"
-        >
-          {shape.text}
-        </span>
-      )}
-      {Number(shape.shadowWidth) > 0 && (
-        <span
-          class="shape-pile-shadow"
-          aria-hidden="true"
-          style={[
-            `--shadow-delay: ${
-              Number(shape.shadowFrom) > 0 ? landingOf(Number(shape.shadowFrom) - 1) : settled
-            }ms`,
-            `--shadow-x: ${((Number(shape.shadowX) || 0) / (Number(shape.width) || 1)) * 100}%`,
-            `--shadow-y: ${((Number(shape.shadowY) || 0) / (Number(shape.height) || 1)) * 100}%`,
-            `--shadow-w: ${(Number(shape.shadowWidth) / (Number(shape.width) || 1)) * 100}%`,
-            `--shadow-h: ${((Number(shape.shadowHeight) || 0) / (Number(shape.height) || 1)) * 100}%`,
-          ].join("; ")}
-        />
-      )}
+            <span
+              class="shape-pile-mark logo-mark"
+              role={shape.imageAlt ? "img" : undefined}
+              aria-label={shape.imageAlt || undefined}
+              aria-hidden={shape.imageAlt ? undefined : "true"}
+              style={[
+                `--logo-mark-source: url("${resolveImageSource(shape.image)}")`,
+                `--mark-w: ${((Number(shape.imageWidth) || 0) / (Number(shape.width) || 1)) * 100}%`,
+                `--mark-h: ${((Number(shape.imageHeight) || 0) / (Number(shape.height) || 1)) * 100}%`,
+              ].join("; ")}
+            />
+          ) : (
+            <span
+              class="shape-pile-text"
+              data-prop="text"
+            >
+              {shape.text}
+            </span>
+          )}
+          {Number(shape.shadowWidth) > 0 && (
+            <span
+              class="shape-pile-shadow"
+              aria-hidden="true"
+              style={[
+                `--shadow-delay: ${
+                  Number(shape.shadowFrom) > 0 ? landingOf(Number(shape.shadowFrom) - 1) : settled
+                }ms`,
+                `--shadow-x: ${((Number(shape.shadowX) || 0) / (Number(shape.width) || 1)) * 100}%`,
+                `--shadow-y: ${((Number(shape.shadowY) || 0) / (Number(shape.height) || 1)) * 100}%`,
+                `--shadow-w: ${(Number(shape.shadowWidth) / (Number(shape.width) || 1)) * 100}%`,
+                `--shadow-h: ${((Number(shape.shadowHeight) || 0) / (Number(shape.height) || 1)) * 100}%`,
+              ].join("; ")}
+            />
+          )}
+        </div>
+      ))}
     </div>
   ))}
 </div>
@@ -333,29 +394,37 @@ const arrayDataAttributes = effectiveChildrenProp
        one row across the bottom and nine as three rows. The box's own ratio
        goes with it — the rows decide the height, and a pile of two should not
        hold the room nine would need. */
+    /* The rows are worked out rather than wrapped, so this only has to stack
+       them and hold them at the floor. The design box is that floor and not
+       a cap: a pile of three rests on it the way the drawn ones do, and a
+       pile that needs a fourth row grows past it. */
     .shape-pile.is-auto {
-      align-content: flex-end;
-      /* Each card keeps its own height and stands on the row's floor. Left
-         to stretch, every card in a row took the tallest one's height and
-         the pile came out a grid — and the badge, which is a circle, came
-         out an oval. */
-      align-items: flex-end;
-      /* The design box is the floor, not a cap: a pile of three rests on it
-         the way the drawn ones do, and a pile that needs a fourth row grows
-         past it rather than climbing out through its head. */
-      min-block-size: fit-content;
       display: flex;
-      flex-wrap: wrap;
+      flex-direction: column;
       gap: var(--spacing-sm);
-      /* Stacked from the far side, so the rows fill towards the band's edge
-         and only a long one reaches back across the copy. */
       justify-content: flex-end;
+      min-block-size: fit-content;
+    }
+
+    /* Centred over the row under it, so a short row sits on the shoulders of
+       a full one rather than off one end of it. */
+    .shape-pile.is-auto > .shape-pile-row {
+      align-items: flex-end;
+      display: flex;
+      gap: var(--spacing-sm);
+      justify-content: center;
+    }
+
+    /* A placed pile's cards measure their positions against the pile, so
+       nothing may come between the two. */
+    .shape-pile:not(.is-auto) > .shape-pile-row {
+      display: contents;
     }
 
     /* Sized by its own label, capped so one long line cannot take a whole
        row to itself. In the placed arrangement every one of these is a
        coordinate instead. */
-    .shape-pile.is-auto > .shape-pile-shape {
+    .shape-pile.is-auto .shape-pile-shape {
       --scratch-position: relative;
 
       block-size: auto;
@@ -378,7 +447,7 @@ const arrayDataAttributes = effectiveChildrenProp
 
     /* A badge is a badge whatever its label: sized by the label it would be
        a pill, because one character still floors at a card's width. */
-    .shape-pile.is-auto > .shape-pile-shape.is-round {
+    .shape-pile.is-auto .shape-pile-shape.is-round {
       align-items: center;
       aspect-ratio: 1;
       inline-size: 4.5rem;
