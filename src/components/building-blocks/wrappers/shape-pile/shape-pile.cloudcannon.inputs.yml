@@ -1,10 +1,11 @@
 arrangement:
   type: select
   comment: >-
-    Stacked builds the pile from the floor up, each card sized by its own
-    label: add cards and they fall as one row, then wrap into rows above it,
-    up to nine. Placed is the hand-drawn arrangement, where every card
-    carries its own position, size and angle.
+    Stacked drops each card into the next place in a drawn arrangement: the
+    first lands at the left of the floor, the second beside it, the fourth
+    on the shoulders of the first two, up to nine. Sizes, angles and the
+    shadows between them come with the places. Placed is for an arrangement
+    of your own, where every card carries its position, size and angle.
   options:
     values:
       - id: stacked
