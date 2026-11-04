@@ -32,6 +32,7 @@ collections_config:
       keywords[*]:
         type: text
   data:
+    name: Bravo Data
     path: src/data
     glob:
       - "**/*.json"
